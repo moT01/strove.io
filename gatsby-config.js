@@ -5,7 +5,6 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -13,8 +12,40 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-responsive-iframe',
+            options: {
+              wrapperStyle: 'margin-bottom: 1rem'
+            }
+          },
+          'gatsby-remark-prismjs',
+          // 'gatsby-remark-gitpod',
+          'gatsby-remark-autolink-headers',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1140,
+              quality: 90,
+              linkImagesToOriginal: false,
+              backgroundColor: '#1e1e1e'
+            }
+          }
+        ]
+      }
+    },
+    `gatsby-plugin-react-helmet`,
+    'gatsby-transformer-json',
+    'gatsby-plugin-emotion',
     `gatsby-plugin-sharp`,
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-catch-links',
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -24,7 +55,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
