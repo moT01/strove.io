@@ -27,6 +27,26 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+
+
+
+    // Passing paramaters (passed to apollo-link)
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "Colab",
+        fieldName: "colab",
+        // Url to query from
+        url: process.env.COLAB_ENDPOINT,
+        // HTTP headers
+        headers: {
+          // Learn about environment variables: https://gatsby.dev/env-vars
+          Authorization: `bearer ${process.env.COLAB_ACCESS_KEY}`,
+        },
+        // Additional options to pass to node-fetch
+        fetchOptions: {},
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
