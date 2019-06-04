@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `CoLab`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
@@ -13,46 +13,41 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: "gatsby-plugin-react-svg",
       options: {
-        plugins: [
-          {
-            resolve: "gatsby-plugin-react-svg",
-            options: {
-              rule: {
-                include: /icons/
-              }
-            }
-          },
-          {
-            resolve: 'gatsby-remark-responsive-iframe',
-            options: {
-              wrapperStyle: 'margin-bottom: 1rem'
-            }
-          },
-          'gatsby-remark-prismjs',
-          // 'gatsby-remark-gitpod',
-          'gatsby-remark-autolink-headers',
-          'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxWidth: 1140,
-              quality: 90,
-              linkImagesToOriginal: false,
-              backgroundColor: '#1e1e1e'
-            }
-          }
-        ]
-      }
+        rule: {
+          include: /logos/,
+        },
+      },
+    },
+    {
+      resolve: "gatsby-remark-responsive-iframe",
+      options: {
+        wrapperStyle: "margin-bottom: 1rem",
+      },
+    },
+    "gatsby-remark-prismjs",
+    "gatsby-remark-autolink-headers",
+    "gatsby-remark-copy-linked-files",
+    "gatsby-remark-smartypants",
+    {
+      resolve: "gatsby-remark-images",
+      options: {
+        maxWidth: 1140,
+        quality: 90,
+        linkImagesToOriginal: false,
+        backgroundColor: "#1e1e1e",
+      },
+    },
+    {
+      resolve: "gatsby-transformer-remark",
     },
     `gatsby-plugin-react-helmet`,
-    'gatsby-transformer-json',
-    'gatsby-plugin-emotion',
+    "gatsby-transformer-json",
+    "gatsby-plugin-emotion",
     `gatsby-plugin-sharp`,
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-catch-links',
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-catch-links",
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
