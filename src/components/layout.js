@@ -34,17 +34,16 @@ const Layout = ({ children }) => (
             alignItems: "center",
             textAlign: "center",
             margin: `0 auto`,
-            maxWidth: "100%",
-            padding: `0px 1.0875rem 1.45rem`,
+            maxWidth: "100vw",
             paddingTop: 0,
           }}
         >
           <main>{children}</main>
-          <footer>
+          {/* <footer>
             © {new Date().getFullYear()}, Built with
             {` `}
             <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
+          </footer> */}
         </div>
       </>
     )}

@@ -1,5 +1,5 @@
 {
-  "name": "Colab",
+  "name": "SiliSky",
   "private": true,
   "description": "One click to build the future",
   "version": "0.1.0",
@@ -10,6 +10,7 @@
     "babel-plugin-styled-components": "^1.10.0",
     "bowser": "^2.4.0",
     "gatsby": "^2.7.5",
+    "gatsby-background-image": "^0.7.0",
     "gatsby-image": "^2.1.2",
     "gatsby-plugin-canonical-urls": "^2.0.13",
     "gatsby-plugin-catch-links": "^2.0.15",
@@ -32,6 +33,7 @@
     "gatsby-transformer-json": "^2.1.11",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.21",
+    "intersection-observer": "^0.7.0",
     "prism-themes": "^1.1.0",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
