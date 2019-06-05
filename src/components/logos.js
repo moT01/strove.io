@@ -15,6 +15,7 @@ import {
 } from "../images/logos"
 import { Link } from "gatsby"
 import bg from "../images/backgroundClouds.png"
+import { SmallCloud, MediumCloud, BigCloud } from "../components/clouds.js"
 
 const Animation = keyframes`
     0% {
@@ -31,17 +32,13 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white url(${bg});
-  background-size: cover;
-  background-position: 0 0;
-  background-repeat: repeat-x;
   width: 100vw;
   height: 100vh;
   padding: 10px;
-  animation: ${Animation} 12s linear infinite;
 `
 
 const IconContainer = styled.div`
+  position: relative;
   transition: 0.3s ease background-color, 0.3s ease transform;
   display: flex;
   align-items: center;
@@ -93,6 +90,9 @@ const ScrollAtMobile = styled.div`
 
 const Logos = () => (
   <SectionWrapper>
+    <BigCloud />
+    <MediumCloud />
+    <SmallCloud />
     <ScrollAtMobile>
       <IconContainer>
         <Node width="126px" height="auto" />
