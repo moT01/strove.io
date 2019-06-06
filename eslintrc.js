@@ -21,7 +21,8 @@ module.exports = {
     'no-nested-ternary': 0,
     'no-plusplus': 0,
     'jsx-a11y/accessible-emoji': 0,
-    'linebreak-style': 0
+    'linebreak-style': 0,
+    'no-unused-expressions': 'off'
   },
   globals: {
     window: true,
