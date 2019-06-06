@@ -29,6 +29,11 @@ class IndexPage extends Component {
 
 export const query = graphql`
   query {
+    # test {
+    #   allSpecies {
+    #     name
+    #   }
+    # }
     silisky {
       users {
         email

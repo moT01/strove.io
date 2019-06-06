@@ -29,6 +29,17 @@ module.exports = {
     },
 
 
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        // This type will contain remote schema Query type
+        typeName: "SWAPI",
+        // This is the field under which it's accessible
+        fieldName: "test",
+        // URL to query from
+        url: "https://api.graphcms.com/simple/v1/swapi",
+      },
+    },
 
     // Passing paramaters (passed to apollo-link)
     {
@@ -37,15 +48,10 @@ module.exports = {
         typeName: "Silisky",
         fieldName: "silisky",
         // Url to query from
-        url: process.env.SILISKY_ENDPOINT,
-        // HTTP headers
-        // headers: {
-        //   // Learn about environment variables: https://gatsby.dev/env-vars
-        //   Authorization: `bearer ${process.env.COLAB_ACCESS_KEY}`,
-        // },
-        // Additional options to pass to node-fetch
-        fetchOptions: {},
+        // url: 'https://hr8ytytxmi.execute-api.eu-central-1.amazonaws.com/development/graphql'
+        url: 'https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql',
       },
     },
+
   ],
 }
