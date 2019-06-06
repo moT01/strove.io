@@ -1,4 +1,3 @@
-import React from "react"
 import styled, { keyframes } from "styled-components"
 
 const AnimateCloud = keyframes`
@@ -30,12 +29,11 @@ const AnimateSmallCloud = keyframes`
 const BigCloud = styled.div`
   & {
     position: absolute;
-    opacity: 0.4;
     width: 25vh;
     height: 11vh;
-    background: rgb(179, 209, 255);
+    background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 85vh;
+    top: 75vh;
     animation: ${AnimateCloud} 60s linear infinite;
     z-index: -1;
   }
@@ -43,10 +41,9 @@ const BigCloud = styled.div`
   &:after {
     content: "";
     position: absolute;
-    background: #b3d1ff;
+    background: rgb(214, 230, 255);
     z-index: -1;
   }
-
   &:after {
     width: 8vh;
     height: 8vh;
@@ -68,12 +65,11 @@ const BigCloud = styled.div`
 const MediumCloud = styled.div`
   & {
     position: absolute;
-    opacity: 0.4;
     width: 20vh;
     height: 9vh;
-    background: #b3d1ff;
+    background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 38vh;
+    top: 28vh;
     animation: ${AnimateMediumCloud} 53s linear infinite;
     z-index: -1;
   }
@@ -81,10 +77,9 @@ const MediumCloud = styled.div`
   &:after {
     content: "";
     position: absolute;
-    background: #b3d1ff;
+    background: rgb(214, 230, 255);
     z-index: -1;
   }
-
   &:after {
     width: 6.5vh;
     height: 6.5vh;
@@ -106,12 +101,11 @@ const MediumCloud = styled.div`
 const SmallCloud = styled.div`
   & {
     position: absolute;
-    opacity: 0.4;
     width: 15vh;
     height: 7vh;
-    background: #b3d1ff;
+    background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 30vh;
+    top: 20vh;
     animation: ${AnimateSmallCloud} 45s linear infinite;
     z-index: -1;
   }
@@ -119,10 +113,9 @@ const SmallCloud = styled.div`
   &:after {
     content: "";
     position: absolute;
-    background: #b3d1ff;
+    background: rgb(214, 230, 255);
     z-index: -1;
   }
-
   &:after {
     width: 5vh;
     height: 5vh;

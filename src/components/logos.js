@@ -1,33 +1,22 @@
 /* eslint-disable */
 import React from "react"
-import styled, { keyframes } from "styled-components"
+import styled from "styled-components"
 import {
   CSharp,
   Java,
-  Javascript,
   Python,
   Ruby,
   Typescript,
-  CLogo,
   Cpp,
   Go,
   Node,
 } from "../images/logos"
 import { Link } from "gatsby"
-import bg from "../images/backgroundClouds.png"
 import { SmallCloud, MediumCloud, BigCloud } from "../components/clouds.js"
-
-const Animation = keyframes`
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 100% 0;
-    }
-`
 
 const SectionWrapper = styled.div`
   flex: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,9 +67,6 @@ const ScrollAtMobile = styled.div`
   min-width: 100%;
   max-width: 90vw;
   max-height: 140px;
-  // border-width: 1px;
-  // border-color: grey;
-  // border-style: solid;
 
   @media (max-width: 960px) {
     justify-content: flex-start;
