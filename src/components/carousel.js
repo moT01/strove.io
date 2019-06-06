@@ -36,9 +36,16 @@ const IconContainer = styled.div`
   }
 `
 
-const logos = [Python, Ruby, Typescript, Cpp, Go, Node]
+const logos = [
+  <Node width="80px" height="auto" />,
+  <Python width="80px" height="auto" />,
+  <Ruby width="80px" height="auto" />,
+  <Typescript width="80px" height="auto" />,
+  <Cpp width="80px" height="auto" />,
+  <Go width="80px" height="auto" />,
+]
 
-const renderBubble = () => <IconContainer>{logos[0]}</IconContainer>
+const renderBubble = () => logos.map(x => <IconContainer>{x}</IconContainer>)
 
 class Carousel extends React.Component {
   constructor(props) {

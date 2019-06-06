@@ -74,12 +74,17 @@ const ScrollAtMobile = styled.div`
   }
 `
 
+// const ImageWrapper = props => <div height={props.height}>{props.children({ props. })}</div>
+
 const Logos = () => (
   <SectionWrapper>
     <BigCloud />
     <MediumCloud />
     <SmallCloud />
     <ScrollAtMobile>
+      {/* <ImageWrapper width height>
+        <Node width="126px" height="auto" />
+      </ImageWrapper> */}
       <IconContainer>
         <Node width="126px" height="auto" />
       </IconContainer>
