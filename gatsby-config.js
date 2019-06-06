@@ -37,7 +37,7 @@ module.exports = {
         typeName: "Colab",
         fieldName: "colab",
         // Url to query from
-        url: process.env.COLAB_ENDPOINT,
+        url: process.env.SILISKY_ENDPOINT,
         // HTTP headers
         headers: {
           // Learn about environment variables: https://gatsby.dev/env-vars
