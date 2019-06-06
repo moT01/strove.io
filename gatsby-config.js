@@ -34,8 +34,8 @@ module.exports = {
     {
       resolve: "gatsby-source-graphql",
       options: {
-        typeName: "Colab",
-        fieldName: "colab",
+        typeName: "Silisky",
+        fieldName: "silisky",
         // Url to query from
         url: process.env.SILISKY_ENDPOINT,
         // HTTP headers
