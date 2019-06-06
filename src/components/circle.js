@@ -18,7 +18,7 @@ const SubSectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
-  height: auto;
+  height: 100%;
 `
 const TextWrapper = styled.div`
   display: flex;
