@@ -21,3 +21,15 @@ class IndexPage extends React.Component {
 }
 /* eslint-enable */
 export default IndexPage
+
+export const query = graphql`
+  query {
+    silisky {
+      users {
+        email
+      }
+    }
+  }
+`
+
+export default IndexPage

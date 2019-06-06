@@ -61,8 +61,17 @@ module.exports = {
         // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    // Passing paramaters (passed to apollo-link)
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "Silisky",
+        fieldName: "silisky",
+        // Url to query from
+        // url: 'https://hr8ytytxmi.execute-api.eu-central-1.amazonaws.com/development/graphql'
+        url: 'https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql',
+      },
+    },
+
   ],
 }
