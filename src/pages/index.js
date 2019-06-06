@@ -29,7 +29,7 @@ class IndexPage extends Component {
 
 export const query = graphql`
   query {
-    Colab {
+    colab {
       users {
         email
       }

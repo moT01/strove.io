@@ -39,10 +39,10 @@ module.exports = {
         // Url to query from
         url: process.env.SILISKY_ENDPOINT,
         // HTTP headers
-        headers: {
-          // Learn about environment variables: https://gatsby.dev/env-vars
-          Authorization: `bearer ${process.env.COLAB_ACCESS_KEY}`,
-        },
+        // headers: {
+        //   // Learn about environment variables: https://gatsby.dev/env-vars
+        //   Authorization: `bearer ${process.env.COLAB_ACCESS_KEY}`,
+        // },
         // Additional options to pass to node-fetch
         fetchOptions: {},
       },
