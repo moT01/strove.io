@@ -1,6 +1,15 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import Carousel from "./carousel.js"
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
 const SectionWrapper = styled.div`
   flex: 1;
@@ -9,8 +18,10 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 93vh;
+  animation: ${FadeIn} 1s ease-out;
 `
+
 const SubSectionWrapper = styled.div`
   flex: 1;
   display: flex;
