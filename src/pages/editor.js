@@ -9,7 +9,7 @@ const StyledIframe = styled.iframe`
   display: block;
   background: #000;
   border: none;
-  min-height: 87vh;
+  min-height: 93vh;
   width: 100vw;
   margin: 0;
 `
