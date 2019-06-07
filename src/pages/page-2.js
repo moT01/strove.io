@@ -9,15 +9,15 @@ const StyledIframe = styled.iframe`
   display: block;
   background: #000;
   border: none;
-  min-height: 80vh;
+  min-height: 87vh;
   width: 100vw;
+  margin: 0;
 `
 
 const SecondPage = () => (
   <Layout>
     <SEO title="Page two" />
     <StyledIframe src="https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor" />
-    <Link to="/">Go back to the homepage</Link>
   </Layout>
 )
 
