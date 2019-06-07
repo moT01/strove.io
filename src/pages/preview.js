@@ -14,11 +14,11 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const SecondPage = () => (
+const Editor = () => (
   <Layout>
     <SEO title="Page two" />
     <StyledIframe src="https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor" />
   </Layout>
 )
 
-export default SecondPage
+export default Editor
