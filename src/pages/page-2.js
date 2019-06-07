@@ -9,6 +9,7 @@ const SecondPage = () => (
     <SEO title="Page two" />
     <h1>Hi from the second page</h1>
     <p>Welcome to page 2</p>
+    <iframe src="https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor" />
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 )
