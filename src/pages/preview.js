@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import styled from 'styled-components'
+import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -14,10 +14,14 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
+const testToken = "testToken"
+
 const Editor = () => (
   <Layout>
     <SEO title="Page two" />
-    <StyledIframe src="https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor" />
+    <StyledIframe
+      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken}`}
+    />
   </Layout>
 )
 
