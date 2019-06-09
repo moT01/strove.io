@@ -20,7 +20,7 @@ const Editor = () => (
   <Layout>
     <SEO title="Page two" />
     <StyledIframe
-      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken}`}
+      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`}
     />
   </Layout>
 )
