@@ -4,7 +4,8 @@ import React from "react"
 
 import styled from "styled-components"
 
-const REDIRECT_URI = "http://localhost:8000/"
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
+const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
 
 const LinkWrapper = styled.h3`
   margin: 0 100px 0 0;
@@ -63,9 +64,7 @@ const Header = ({ siteTitle }) => (
     </LinkWrapper>
     <LinkWrapper>
       <LoginButton
-        href={`https://github.com/login/oauth/authorize?client_id=${
-          process.env.GITHUB_CLIENT_ID
-        }&scope=user&redirect_uri=${REDIRECT_URI}`}
+        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
       >
         <LinkText>Login</LinkText>
       </LoginButton>
