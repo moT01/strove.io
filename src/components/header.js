@@ -5,7 +5,8 @@ import React from "react"
 import styled from "styled-components"
 
 const LinkWrapper = styled.h3`
-  margin: 0 100px 0 0;
+  margin: 10px 100px 0 0;
+  display: inline-block;
 `
 
 const Header = ({ siteTitle }) => (
