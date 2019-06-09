@@ -20,6 +20,12 @@ const LoginButton = styled.a`
   }
 `
 
+const LinkText = styled.span`
+  :hover {
+    color: black;
+  }
+`
+
 const Header = ({ siteTitle }) => (
   <header>
     <LinkWrapper>
@@ -30,7 +36,7 @@ const Header = ({ siteTitle }) => (
           textDecoration: `none`,
         }}
       >
-        {siteTitle}
+        <LinkText>{siteTitle}</LinkText>
       </Link>
     </LinkWrapper>
     <LinkWrapper>
@@ -41,7 +47,7 @@ const Header = ({ siteTitle }) => (
           textDecoration: `none`,
         }}
       >
-        Editor
+        <LinkText>Editor</LinkText>
       </Link>
     </LinkWrapper>
     <LinkWrapper>
@@ -52,7 +58,7 @@ const Header = ({ siteTitle }) => (
           textDecoration: `none`,
         }}
       >
-        Preview
+        <LinkText>Preview</LinkText>
       </Link>
     </LinkWrapper>
     <LinkWrapper>
@@ -61,7 +67,7 @@ const Header = ({ siteTitle }) => (
           process.env.GITHUB_CLIENT_ID
         }&scope=user&redirect_uri=${REDIRECT_URI}`}
       >
-        Login
+        <LinkText>Login</LinkText>
       </LoginButton>
     </LinkWrapper>
   </header>
