@@ -4,9 +4,20 @@ import React from "react"
 
 import styled from "styled-components"
 
+const REDIRECT_URI = "http://localhost:8000/"
+
 const LinkWrapper = styled.h3`
   margin: 10px 100px 0 0;
   display: inline-block;
+`
+
+const LoginButton = styled.a`
+  color: white;
+
+  :hover {
+    text-decoration: none;
+    color: black;
+  }
 `
 
 const Header = ({ siteTitle }) => (
@@ -43,6 +54,15 @@ const Header = ({ siteTitle }) => (
       >
         Preview
       </Link>
+    </LinkWrapper>
+    <LinkWrapper>
+      <LoginButton
+        href={`https://github.com/login/oauth/authorize?client_id=${
+          process.env.GITHUB_CLIENT_ID
+        }&scope=user&redirect_uri=${REDIRECT_URI}`}
+      >
+        Login
+      </LoginButton>
     </LinkWrapper>
   </header>
 )
