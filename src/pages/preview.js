@@ -18,7 +18,7 @@ const testToken = "testToken"
 
 const Editor = () => (
   <Layout>
-    <SEO title="Page two" />
+    <SEO title="Preview" />
     <StyledIframe
       src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`}
     />

@@ -10,7 +10,7 @@ import Circle from "../components/circle"
 
 class IndexPage extends React.Component {
   render() {
-    console.log('props', this.props)
+    console.log("props", this.props)
     return (
       <Layout>
         <SEO title="SiliSky" />
@@ -32,3 +32,5 @@ export const query = graphql`
     }
   }
 `
+
+export default IndexPage

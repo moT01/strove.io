@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 
 import {
   STATUS,
@@ -9,22 +9,34 @@ import {
   Container,
   Header,
 } from "gitstar-components"
+import styled from "styled-components"
 
-const REDIRECT_URI = "http://localhost:3000/"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
-class App extends Component {
+/* Todo: Change once app is up */
+const REDIRECT_URI = "http://localhost:8000/"
+
+const SectionWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 93vh;
+`
+
+class Login extends PureComponent {
   state = {
     status: STATUS.INITIAL,
     token: null,
   }
   render() {
     return (
-      <Container>
-        <Header>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Logo />
-            <Logotype />
-          </div>
+      <Layout>
+        <SEO title="Preview" />
+        <SectionWrapper>
           <a
             href={`https://github.com/login/oauth/authorize?client_id=${
               process.env.GITHUB_CLIENT_ID
@@ -32,10 +44,10 @@ class App extends Component {
           >
             Login
           </a>
-        </Header>
-      </Container>
+        </SectionWrapper>
+      </Layout>
     )
   }
 }
 
-export default App
+export default Login
