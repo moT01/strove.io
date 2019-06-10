@@ -1,7 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
-import { CSSTransition } from "react-transition-group"
+import { Transition } from "react-transition-group"
 
 const IconAnimation = keyframes`
   0%, 100% {
@@ -110,6 +110,31 @@ const logos = [
   },
 ]
 
+const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
+  <IconPosition
+    style={{
+      transform: `rotate(${angle * (poppedBubbleId + 1)}deg)`,
+      height: 0,
+    }}
+  >
+    <IconBearing
+      style={{
+        transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
+      }}
+    >
+      <IconContainer
+        style={{
+          width: `12vw`,
+          height: `12vw`,
+          opacity: `1`,
+        }}
+      >
+        {logos[poppedBubbleId].component}
+      </IconContainer>
+    </IconBearing>
+  </IconPosition>
+))
+
 const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
   bubbles.map((logo, index) => (
     <IconPosition
@@ -127,7 +152,7 @@ const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
 
 class Carousel extends React.Component {
   state = {
-    bubbles: [...logos],
+    bubbles: logos,
     angle: 0,
     poppedBubbleId: -10,
   }
@@ -164,6 +189,12 @@ class Carousel extends React.Component {
           angle={angle}
           bubbles={this.state.bubbles}
         />
+        {this.state.poppedBubbleId !== -10 && (
+          <PoppedBubble
+            angle={angle}
+            poppedBubbleId={this.state.poppedBubbleId}
+          />
+        )}
       </SectionWrapper>
     )
   }
