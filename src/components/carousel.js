@@ -1,7 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
 import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
-import { CSSTransition } from "react-transition-group"
+import { Transition } from "react-transition-group"
 
 const IconAnimation = keyframes`
   0%, 100% {
@@ -110,6 +110,31 @@ const logos = [
   },
 ]
 
+const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
+  <IconPosition
+    style={{
+      transform: `rotate(${angle * (poppedBubbleId + 1)}deg)`,
+      height: 0,
+    }}
+  >
+    <IconBearing
+      style={{
+        transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
+      }}
+    >
+      <IconContainer
+        style={{
+          width: `12vw`,
+          height: `12vw`,
+          opacity: `1`,
+        }}
+      >
+        {logos[poppedBubbleId].component}
+      </IconContainer>
+    </IconBearing>
+  </IconPosition>
+))
+
 const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
   bubbles.map((logo, index) => (
     <IconPosition
@@ -125,47 +150,34 @@ const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
   ))
 )
 
-class Carousel extends React.Component {
-  state = {
-    bubbles: [...logos],
-    angle: 0,
-    poppedBubbleId: -10,
-  }
+const Carousel = () => {
+  const [bubbles, setBubbles] = useState(logos)
+  const [angle, setAngle] = useState(360 / bubbles.length)
+  const [poppedBubbleId, setPoppedBubbleId] = useState(-10)
 
-  setAngle = bubbles => {
-    let angle = 360 / bubbles
-    this.setState({ angle: angle })
-  }
-
-  handleClick = bubble => {
-    let popId = this.state.poppedBubbleId
-    const newBubbles = [...this.state.bubbles]
+  const handleClick = bubble => {
+    let popId = poppedBubbleId
+    const newBubbles = [...bubbles]
     let newPopId = bubble.id
     if (popId !== -10) {
       newBubbles.splice(popId, 0, logos[popId])
     }
     newBubbles.splice(newPopId, 1)
-    this.setState({ bubbles: newBubbles, poppedBubbleId: newPopId }, () =>
-      this.setAngle(this.state.bubbles.length)
-    )
+
+    setPoppedBubbleId(newPopId)
+    setBubbles(newBubbles)
+    setAngle(360 / newBubbles.length)
   }
 
-  componentDidMount() {
-    this.setAngle(this.state.bubbles.length)
-  }
-
-  render() {
-    const { angle } = this.state
-    return (
-      <SectionWrapper>
-        {console.log(this.state.bubbles, angle)}
-        <Bubbles
-          handleClick={this.handleClick}
-          angle={angle}
-          bubbles={this.state.bubbles}
-        />
-      </SectionWrapper>
-    )
-  }
+  return (
+    <SectionWrapper>
+      {console.log(bubbles, angle)}
+      <Bubbles handleClick={handleClick} angle={angle} bubbles={bubbles} />
+      {poppedBubbleId !== -10 && (
+        <PoppedBubble angle={angle} poppedBubbleId={poppedBubbleId} />
+      )}
+    </SectionWrapper>
+  )
 }
+// }
 export default Carousel
