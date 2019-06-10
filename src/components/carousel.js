@@ -51,12 +51,16 @@ const IconContainer = styled.div`
   }
 `
 const IconPosition = styled.div`
+  transition: 500ms;
   position: absolute;
   transform-origin: center;
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  height: 65%;
+  height: 100%;
+  transform: scale(
+    ${({ state }) => (state === "entering" || state === "entered" ? 0.1 : 1)}
+  );
 `
 
 const IconBearing = styled.div`
@@ -68,7 +72,17 @@ const IconBearing = styled.div`
   justify-content: center;
 `
 
+const IconRotation = styled.div`
+  position: absolute;
+  transform-origin: center;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  height: 65%;
+`
+
 const SectionWrapper = styled.div`
+  transition: 500ms;
   position: relative;
   display: flex;
   width: 100%;
@@ -77,76 +91,95 @@ const SectionWrapper = styled.div`
   justify-content: center;
 `
 
+export const Animation = styled.div`
+  transition: 0.5s;
+  width: 20px;
+  height: 20px;
+  transform: translateX(
+    ${({ state }) => (state === "entering" || state === "entered" ? 20 : 0)}px
+  );
+  background: ${({ state }) => {
+    switch (state) {
+      case "entering":
+        return "red"
+      case "entered":
+        return "blue"
+      case "exiting":
+        return "green"
+      case "exited":
+        return "yellow"
+    }
+  }};
+`
+
 const logos = [
   {
-    component: <Node width="80%" height="auto" />,
+    component: <Node width="10vw" height="auto" />,
     name: "Node",
     id: 0,
   },
   {
-    component: <Python width="80%" height="auto" />,
+    component: <Python width="10vw" height="auto" />,
     name: "Python",
     id: 1,
   },
   {
-    component: <Ruby width="80%" height="auto" />,
+    component: <Ruby width="10vw" height="auto" />,
     name: "Ruby",
     id: 2,
   },
   {
-    component: <Typescript width="70%" height="auto" />,
+    component: <Typescript width="8vw" height="auto" />,
     name: "Typescript",
     id: 3,
   },
   {
-    component: <Cpp width="80%" height="auto" />,
+    component: <Cpp width="10vw" height="auto" />,
     name: "Cpp",
     id: 4,
   },
   {
-    component: <Go width="70%" height="auto" />,
+    component: <Go width="8vw" height="auto" />,
     name: "Go",
     id: 5,
   },
 ]
 
-const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
-  <IconPosition
+const PoppedBubble = React.memo(({ angle, poppedBubbleId, state, animate }) => (
+  <IconRotation
     style={{
       transform: `rotate(${angle * (poppedBubbleId + 1)}deg)`,
-      height: 0,
+      // height: 0,
     }}
   >
-    <IconBearing
-      style={{
-        transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
-      }}
-    >
-      <IconContainer
-        style={{
-          width: `12vw`,
-          height: `12vw`,
-          opacity: `1`,
-        }}
-      >
-        {logos[poppedBubbleId].component}
-      </IconContainer>
-    </IconBearing>
-  </IconPosition>
+    <Transition in={animate} timeout={500}>
+      <IconPosition state={state}>
+        <IconBearing
+          style={{
+            transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
+          }}
+        >
+          <IconContainer>{logos[poppedBubbleId].component}</IconContainer>
+        </IconBearing>
+      </IconPosition>
+    </Transition>
+  </IconRotation>
 ))
 
-const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
+const Bubbles = React.memo(({ angle, handleClick, bubbles, state }) =>
   bubbles.map((logo, index) => (
-    <IconPosition
+    <IconRotation
       key={logo.name}
       style={{ transform: `rotate(${angle * index}deg)` }}
     >
-      <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
-        <IconContainer onClick={() => handleClick(logo)}>
-          {logo.component}
-        </IconContainer>
-      </IconBearing>
-    </IconPosition>
+      <IconPosition>
+        <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
+          <IconContainer onClick={() => handleClick(logo)}>
+            {logo.component}
+          </IconContainer>
+        </IconBearing>
+      </IconPosition>
+    </IconRotation>
   ))
 )
 
@@ -154,6 +187,7 @@ const Carousel = () => {
   const [bubbles, setBubbles] = useState(logos)
   const [angle, setAngle] = useState(360 / bubbles.length)
   const [poppedBubbleId, setPoppedBubbleId] = useState(-10)
+  const [animate, setAnimate] = useState(false)
 
   const handleClick = bubble => {
     let popId = poppedBubbleId
@@ -167,6 +201,7 @@ const Carousel = () => {
     setPoppedBubbleId(newPopId)
     setBubbles(newBubbles)
     setAngle(360 / newBubbles.length)
+    setAnimate(!animate)
   }
 
   return (
@@ -174,10 +209,18 @@ const Carousel = () => {
       {console.log(bubbles, angle)}
       <Bubbles handleClick={handleClick} angle={angle} bubbles={bubbles} />
       {poppedBubbleId !== -10 && (
-        <PoppedBubble angle={angle} poppedBubbleId={poppedBubbleId} />
+        <Transition in={animate} timeout={500}>
+          {state => (
+            <PoppedBubble
+              angle={angle}
+              poppedBubbleId={poppedBubbleId}
+              state={state}
+              animate={animate}
+            />
+          )}
+        </Transition>
       )}
     </SectionWrapper>
   )
 }
-// }
 export default Carousel
