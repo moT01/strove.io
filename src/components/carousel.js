@@ -1,6 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
+import { CSSTransition } from "react-transition-group"
 
 const IconAnimation = keyframes`
   0%, 100% {
@@ -126,22 +127,17 @@ const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
 
 class Carousel extends React.Component {
   state = {
-    bubbles: logos,
+    bubbles: [...logos],
     angle: 0,
     poppedBubbleId: -10,
   }
 
-  calculateAngle = bubbles => {
-    let angle = 360 / bubbles
-    return angle
-  }
-
   setAngle = bubbles => {
-    let angle = this.calculateAngle(bubbles)
+    let angle = 360 / bubbles
     this.setState({ angle: angle })
   }
 
-  popBubble = bubble => {
+  handleClick = bubble => {
     let popId = this.state.poppedBubbleId
     const newBubbles = [...this.state.bubbles]
     let newPopId = bubble.id
@@ -149,13 +145,9 @@ class Carousel extends React.Component {
       newBubbles.splice(popId, 0, logos[popId])
     }
     newBubbles.splice(newPopId, 1)
-    this.setState({ bubbles: newBubbles, poppedBubbleId: newPopId })
-  }
-
-  handleClick = prop => {
-    this.popBubble(prop)
-    this.setAngle(this.state.bubbles.length)
-    console.log(prop.name, prop.id)
+    this.setState({ bubbles: newBubbles, poppedBubbleId: newPopId }, () =>
+      this.setAngle(this.state.bubbles.length)
+    )
   }
 
   componentDidMount() {
@@ -166,12 +158,12 @@ class Carousel extends React.Component {
     const { angle } = this.state
     return (
       <SectionWrapper>
+        {console.log(this.state.bubbles, angle)}
         <Bubbles
           handleClick={this.handleClick}
           angle={angle}
           bubbles={this.state.bubbles}
         />
-        {console.log(this.state.bubbles, this.state.angle)}
       </SectionWrapper>
     )
   }
