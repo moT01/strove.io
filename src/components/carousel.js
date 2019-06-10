@@ -1,6 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
+import { CSSTransition } from "react-transition-group"
 
 const IconAnimation = keyframes`
   0%, 100% {
@@ -109,9 +110,12 @@ const logos = [
   },
 ]
 
-const Bubbles = React.memo(({ angle, handleClick }) =>
-  logos.map((logo, index) => (
-    <IconPosition style={{ transform: `rotate(${angle * index}deg)` }}>
+const Bubbles = React.memo(({ angle, handleClick, bubbles }) =>
+  bubbles.map((logo, index) => (
+    <IconPosition
+      key={logo.name}
+      style={{ transform: `rotate(${angle * index}deg)` }}
+    >
       <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
         <IconContainer onClick={() => handleClick(logo)}>
           {logo.component}
@@ -123,48 +127,27 @@ const Bubbles = React.memo(({ angle, handleClick }) =>
 
 class Carousel extends React.Component {
   state = {
-    bubbles: logos,
+    bubbles: [...logos],
     angle: 0,
     poppedBubbleId: -10,
   }
 
-  calculateAngle = bubbles => {
-    let angle = 360 / bubbles
-    return angle
-  }
-
   setAngle = bubbles => {
-    let angle = this.calculateAngle(bubbles)
+    let angle = 360 / bubbles
     this.setState({ angle: angle })
   }
 
-  setNewAngle = () => {
-    let newAngle = this.calculateAngle(this.state.bubbles.length)
-    this.setState({ angle: newAngle })
-  }
-
-  // popBubble = bubble => {
-  //   let popId = this.state.poppedBubbleId
-  //   const oldBubbles = this.state.bubbles
-  //   let newPopId = bubble.id
-  //   console.log("------------------TCL: Carousel -> oldBubbles", oldBubbles)
-  //   console.log("old pop bubble id", popId)
-  //   let newBubbles =
-  //     popId !== -10 ? oldBubbles.splice(popId, 0, logos[popId]) : oldBubbles
-
-  //   console.log("TCL: Carousel -> newBubbles after unpop", newBubbles)
-
-  //   newBubbles.splice(newPopId, 1)
-  //   console.log("TCL: Carousel -> newBubbles after splice", newBubbles)
-  //   console.log("TCL: Carousel -> newPopId", newPopId)
-
-  //   this.setState({ bubbles: newBubbles, poppedBubbleId: newPopId })
-  // }
-
-  handleClick = prop => {
-    // this.popBubble(prop)
-    this.setNewAngle()
-    console.log(prop.name, prop.id)
+  handleClick = bubble => {
+    let popId = this.state.poppedBubbleId
+    const newBubbles = [...this.state.bubbles]
+    let newPopId = bubble.id
+    if (popId !== -10) {
+      newBubbles.splice(popId, 0, logos[popId])
+    }
+    newBubbles.splice(newPopId, 1)
+    this.setState({ bubbles: newBubbles, poppedBubbleId: newPopId }, () =>
+      this.setAngle(this.state.bubbles.length)
+    )
   }
 
   componentDidMount() {
@@ -175,8 +158,12 @@ class Carousel extends React.Component {
     const { angle } = this.state
     return (
       <SectionWrapper>
-        <Bubbles handleClick={this.handleClick} angle={angle} />
-        {console.log(this.state.bubbles, this.state.angle)}
+        {console.log(this.state.bubbles, angle)}
+        <Bubbles
+          handleClick={this.handleClick}
+          angle={angle}
+          bubbles={this.state.bubbles}
+        />
       </SectionWrapper>
     )
   }
