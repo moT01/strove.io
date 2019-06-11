@@ -64,7 +64,7 @@ const Header = ({ siteTitle }) => (
     </LinkWrapper>
     <LinkWrapper>
       <LoginButton
-        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
+        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email&redirect_uri=${REDIRECT_URI}`}
       >
         <LinkText>Login</LinkText>
       </LoginButton>
