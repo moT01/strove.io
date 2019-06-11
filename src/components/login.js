@@ -19,14 +19,6 @@ const STATUS = {
   AUTHENTICATED: "authenticated",
 }
 
-import { ApolloProvider } from "react-apollo"
-
-// import Avatar from "./Avatar";
-
-const client = new ApolloClient({
-  uri: process.env.SILISKY_ENDPOINT,
-})
-
 class Login extends PureComponent {
   state = {
     status: STATUS.INITIAL,

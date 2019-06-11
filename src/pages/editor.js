@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import gql from "gql-tag"
+import { Query } from "react-apollo"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -14,11 +16,22 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
+const QUERY = gql`
+  {
+    users {
+      email
+    }
+  }
+`
+
 const testToken = "testToken"
 
 const Editor = () => (
   <Layout>
     <SEO title="Page two" />
+    <Query query={QUERY}>
+      {({ data, loading, error }) => <h1>{data.users[0].email}</h1>}
+    </Query>
     <StyledIframe
       src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken}`}
     />

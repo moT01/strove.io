@@ -1,5 +1,3 @@
-import apollo from "./apolloWrapper"
-
 /**
  * Implement Gatsby's Browser APIs in this file.
  *
@@ -15,4 +13,4 @@ export const onClientEntry = () => {
   }
 }
 
-export const apolloWrapper = apollo
+export { wrapRootElement } from "./apolloWrapper"
