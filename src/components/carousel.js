@@ -179,24 +179,26 @@ const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
   </IconRotation>
 ))
 
-const Bubbles = React.memo(({ angle, handleClick, handleHover, bubbles }) =>
-  bubbles.map((logo, index) => (
-    <IconRotation
-      key={logo.name}
-      style={{ transform: `rotate(${angle * index}deg)` }}
-    >
-      <IconPosition>
-        <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
-          <IconContainer
-            onClick={() => handleClick(logo)}
-            onMouseOver={() => handleHover(logo)}
-          >
-            {logo.component}
-          </IconContainer>
-        </IconBearing>
-      </IconPosition>
-    </IconRotation>
-  ))
+const Bubbles = React.memo(
+  ({ angle, handleLogoClick, handleHoverOut, bubbles }) =>
+    bubbles.map((logo, index) => (
+      <IconRotation
+        key={logo.name}
+        style={{ transform: `rotate(${angle * index}deg)` }}
+      >
+        <IconPosition>
+          <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
+            <IconContainer
+              onClick={() => handleLogoClick(logo)}
+              onMouseEnter={() => handleLogoClick(logo)}
+              onMouseLeave={() => handleHoverOut()}
+            >
+              {logo.component}
+            </IconContainer>
+          </IconBearing>
+        </IconPosition>
+      </IconRotation>
+    ))
 )
 
 const Carousel = props => {
@@ -224,8 +226,8 @@ const Carousel = props => {
   return (
     <SectionWrapper>
       <Bubbles
-        handleClick={handleClick}
-        handleHover={props.handleHover}
+        handleLogoClick={props.handleLogoClick}
+        handleHoverOut={props.handleHoverOut}
         angle={angle}
         bubbles={bubbles}
       />
