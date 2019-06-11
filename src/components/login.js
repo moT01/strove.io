@@ -53,8 +53,9 @@ class LoginComponent extends PureComponent {
 
   componentDidMount() {
     const { location } = this.props
-    // const code = location.match(/?code=(.*)/) && location.match(/?code=(.*)/)[1]
-    const code = location
+    const code =
+      location.search.match(/code=(.*)/) &&
+      location.search.match(/code=(.*)/)[1]
     console.log("code", code)
     const storedToken = localStorage.getItem("githubToken")
     if (true) {
