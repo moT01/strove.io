@@ -1,5 +1,6 @@
 import { Link } from "gatsby"
 import React from "react"
+import Login from "./login"
 
 import styled from "styled-components"
 
@@ -62,11 +63,12 @@ const Header = ({ siteTitle }) => (
       </Link>
     </LinkWrapper>
     <LinkWrapper>
-      <LoginButton
+      <Login />
+      {/* <LoginButton
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
       >
         <LinkText>Login</LinkText>
-      </LoginButton>
+      </LoginButton> */}
     </LinkWrapper>
   </header>
 )
