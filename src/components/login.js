@@ -35,6 +35,7 @@ const LoginButton = styled.a`
 
   :hover {
     color: black;
+    text-decoration: none;
   }
 `
 
