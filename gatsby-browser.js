@@ -1,3 +1,5 @@
+import apollo from "./apolloWrapper"
+
 /**
  * Implement Gatsby's Browser APIs in this file.
  *
@@ -12,3 +14,5 @@ export const onClientEntry = () => {
     console.log(`# IntersectionObserver is polyfilled!`)
   }
 }
+
+export const apolloWrapper = apollo
