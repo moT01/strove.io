@@ -41,17 +41,40 @@ const TextWrapper = styled.div`
 `
 
 class Circle extends React.Component {
+  state = {
+    selection: "clouds",
+    color: "gray",
+  }
+  handleClick = logo => {
+    // setSelection(logo.name)
+    this.setState({ selection: logo.name })
+    this.setState({ color: logo.color })
+  }
+  handleHoverOut = logo => {
+    this.setState({ selection: "clouds" })
+    this.setState({ color: "gray" })
+  }
   render() {
     return (
       <SectionWrapper>
         <SubSectionWrapper>
           <TextWrapper>
-            <h1>Silisky</h1>
-            <h2>Code in clouds. One environment for everyone</h2>
+            <h1>SiliSky</h1>
+            <h2>
+              Code in{" "}
+              <span style={{ color: `${this.state.color}` }}>
+                {this.state.selection}
+              </span>
+            </h2>
+            <h3>One environment for everyone</h3>
           </TextWrapper>
         </SubSectionWrapper>
         <SubSectionWrapper>
-          <Carousel />
+          <Carousel
+            handleHoverOut={this.handleHoverOut}
+            handleHover={this.handleClick}
+            handleClick={this.handleClick}
+          />
         </SubSectionWrapper>
       </SectionWrapper>
     )

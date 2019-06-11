@@ -1,7 +1,11 @@
 import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
 import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
-import { Transition, CSSTransition } from "react-transition-group"
+// import {
+//   Transition,
+//   CSSTransition,
+//   TransitionGroup,
+// } from "react-transition-group"
 
 const IconAnimation = keyframes`
   0%, 100% {
@@ -51,7 +55,7 @@ const IconContainer = styled.div`
   }
 `
 const IconPosition = styled.div`
-  transition: 500ms;
+  transition: 10000ms;
   position: absolute;
   transform-origin: center;
   display: flex;
@@ -59,18 +63,26 @@ const IconPosition = styled.div`
   justify-content: flex-end;
   height: 100%;
 
-  &.move-enter {
+  /* &.move-enter {
     transform: translateY(0%);
   }
-  &.move-enter-acitve {
+  &.move-enter.move-enter-active {
     transform: translateY(50%);
+    transition: transform 5000ms linear;
+  }
+  &.move-enter-done {
+    transform: translateY() 50%;
   }
   &.move-exit {
     transform: translateY(50%);
   }
-  &.move-exit-acitve {
+  &.move-exit.move-exit-active {
     transform: translateY(0%);
+    transition: transform 5000ms linear;
   }
+  &.move-exit-done {
+    transform: translateY(0%);
+  } */
 `
 
 const IconBearing = styled.div`
@@ -92,7 +104,6 @@ const IconRotation = styled.div`
 `
 
 const SectionWrapper = styled.div`
-  transition: 500ms;
   position: relative;
   display: flex;
   width: 100%;
@@ -105,61 +116,70 @@ const logos = [
   {
     component: <Node width="10vw" height="auto" />,
     name: "Node",
+    color: "lightgreen",
     id: 0,
   },
   {
     component: <Python width="10vw" height="auto" />,
     name: "Python",
+    color: "yellow",
     id: 1,
   },
   {
     component: <Ruby width="10vw" height="auto" />,
     name: "Ruby",
+    color: "red",
     id: 2,
   },
   {
     component: <Typescript width="8vw" height="auto" />,
     name: "Typescript",
+    color: "blue",
     id: 3,
   },
   {
     component: <Cpp width="10vw" height="auto" />,
-    name: "Cpp",
+    name: "C++",
+    color: "lightblue",
     id: 4,
   },
   {
     component: <Go width="8vw" height="auto" />,
     name: "Go",
+    color: "#0072ce",
     id: 5,
   },
 ]
 
-const PoppedBubble = React.memo(({ angle, poppedBubbleId, animate }) => (
+const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
   <IconRotation
     style={{
       transform: `rotate(${angle * (poppedBubbleId + 1)}deg)`,
     }}
   >
-    <CSSTransition
-      in={animate}
-      timeout={500}
-      classNames="move"
-      transitionAppear="true"
-    >
-      <IconPosition>
-        <IconBearing
-          style={{
-            transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
-          }}
-        >
-          <IconContainer>{logos[poppedBubbleId].component}</IconContainer>
-        </IconBearing>
-      </IconPosition>
-    </CSSTransition>
+    {/* <TransitionGroup>
+      <CSSTransition
+        // in={animate}
+        key={poppedBubbleId}
+        timeout={10000}
+        classNames="move"
+        // transitionAppear="true"
+      > */}
+    <IconPosition>
+      <IconBearing
+        style={{
+          transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
+        }}
+      >
+        <IconContainer>{logos[poppedBubbleId].component}</IconContainer>
+      </IconBearing>
+    </IconPosition>
+    {/* </CSSTransition>
+    </TransitionGroup> */}
   </IconRotation>
 ))
 
-const Bubbles = React.memo(({ angle, handleClick, bubbles, state }) =>
+const Bubbles = React.memo(({ angle, handleClick, handleHover, bubbles }) =>
   bubbles.map((logo, index) => (
     <IconRotation
       key={logo.name}
@@ -167,7 +187,10 @@ const Bubbles = React.memo(({ angle, handleClick, bubbles, state }) =>
     >
       <IconPosition>
         <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
-          <IconContainer onClick={() => handleClick(logo)}>
+          <IconContainer
+            onClick={() => handleClick(logo)}
+            onMouseOver={() => handleHover(logo)}
+          >
             {logo.component}
           </IconContainer>
         </IconBearing>
@@ -176,49 +199,41 @@ const Bubbles = React.memo(({ angle, handleClick, bubbles, state }) =>
   ))
 )
 
-const Carousel = () => {
+const Carousel = props => {
   const [bubbles, setBubbles] = useState(logos)
   const [angle, setAngle] = useState(360 / bubbles.length)
   const [poppedBubbleId, setPoppedBubbleId] = useState(-10)
-  const [animate, setAnimate] = useState(false)
+  const [animate, setAnimate] = useState(true)
+  const [selection, setSelection] = useState("")
 
   const handleClick = bubble => {
     let popId = poppedBubbleId
-    const newBubbles = [...bubbles]
+    // const newBubbles = [...bubbles]
     let newPopId = bubble.id
-    if (popId !== -10) {
-      newBubbles.splice(popId, 0, logos[popId])
-    }
-    newBubbles.splice(newPopId, 1)
+    // if (popId !== -10) {
+    //   newBubbles.splice(popId, 0, logos[popId])
+    // }
+    // newBubbles.splice(newPopId, 1)
 
     setPoppedBubbleId(newPopId)
-    setBubbles(newBubbles)
-    setAngle(360 / newBubbles.length)
-    setAnimate(!animate)
+    // setBubbles(newBubbles)
+    // setAngle(360 / newBubbles.length)
+    // setAnimate(!animate)
   }
 
   return (
-    // <CSSTransition
-    //   in={animate}
-    //   timeout={500}
-    //   classNames="move"
-    //   transitionAppear="true"
-    // >
     <SectionWrapper>
-      {console.log(bubbles, angle)}
-
-      <Bubbles handleClick={handleClick} angle={angle} bubbles={bubbles} />
-      {poppedBubbleId !== -10 && (
-        <CSSTransition in={animate} timeout={500}>
-          <PoppedBubble
-            angle={angle}
-            poppedBubbleId={poppedBubbleId}
-            animate={animate}
-          />
-        </CSSTransition>
-      )}
+      <Bubbles
+        handleClick={handleClick}
+        handleHover={props.handleHover}
+        angle={angle}
+        bubbles={bubbles}
+      />
+      {/* {poppedBubbleId !== -10 && (
+        <PoppedBubble angle={angle} poppedBubbleId={poppedBubbleId} />
+      )} */}
+      {/* <h1>{selection}</h1> */}
     </SectionWrapper>
-    // {/* </CSSTransition> */}
   )
 }
 export default Carousel
