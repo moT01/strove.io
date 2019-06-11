@@ -9,6 +9,7 @@ import {
 } from "gitstar-components"
 import gql from "graphql-tag"
 import { Location } from "@reach/router"
+import styled from "styled-components"
 
 import ApolloClient from "apollo-boost"
 import fetch from "isomorphic-fetch"
@@ -27,6 +28,21 @@ const STATUS = {
   FINISHED_LOADING: "finished_loading",
   AUTHENTICATED: "authenticated",
 }
+
+const LoginButton = styled.a`
+  color: white;
+  text-decoration: none;
+
+  :hover {
+    color: black;
+  }
+`
+
+const LinkText = styled.span`
+  :hover {
+    color: black;
+  }
+`
 
 class LoginComponent extends PureComponent {
   state = {
@@ -88,14 +104,11 @@ class LoginComponent extends PureComponent {
 
   render() {
     return (
-      <a
-        // style={{
-        //   display: this.state.status === STATUS.INITIAL ? "inline" : "none",
-        // }}
+      <LoginButton
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
       >
-        Login with Github
-      </a>
+        <LinkText>Login</LinkText>
+      </LoginButton>
     )
   }
 }
