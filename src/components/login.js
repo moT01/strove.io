@@ -19,6 +19,14 @@ const STATUS = {
   AUTHENTICATED: "authenticated",
 }
 
+import { ApolloProvider } from "react-apollo"
+
+// import Avatar from "./Avatar";
+
+const client = new ApolloClient({
+  uri: process.env.SILISKY_ENDPOINT,
+})
+
 class Login extends PureComponent {
   state = {
     status: STATUS.INITIAL,
@@ -26,7 +34,7 @@ class Login extends PureComponent {
   }
 
   componentDidMount() {
-    const storedToken = localStorage.getItem("github_token")
+    const storedToken = localStorage.getItem("githubToken")
     if (storedToken) {
       this.setState({
         token: storedToken,
@@ -40,6 +48,7 @@ class Login extends PureComponent {
       window.location.href.match(/?code=(.*)/)[1]
     if (code) {
       this.setState({ status: STATUS.LOADING })
+
       fetch(`${AUTH_API_URI}${code}`)
         .then(response => response.json())
         .then(({ token }) => {
