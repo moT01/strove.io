@@ -24,6 +24,7 @@ const SectionWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   padding: 10px;
+  overflow-x: hidden;
 `
 
 const IconContainer = styled.div`
@@ -39,8 +40,8 @@ const IconContainer = styled.div`
   border-radius: 8px;
   opacity: 0.9;
 
-  width: 128px;
-  height: 128px;
+  width: 10vw;
+  height: 10vw;
 
   &:hover {
     transform: scale(1.5);
@@ -66,15 +67,13 @@ const ScrollAtMobile = styled.div`
   justify-content: space-around;
   min-width: 100%;
   max-width: 90vw;
-  max-height: 140px;
+  max-height: 12vw;
 
   @media (max-width: 960px) {
     justify-content: flex-start;
     overflow-x: scroll;
   }
 `
-
-// const ImageWrapper = props => <div height={props.height}>{props.children({ props. })}</div>
 
 const Logos = () => (
   <SectionWrapper>
@@ -83,31 +82,31 @@ const Logos = () => (
     <SmallCloud />
     <ScrollAtMobile>
       {/* <ImageWrapper width height>
-        <Node width="126px" height="auto" />
+        <Node width="100%" height="auto" />
       </ImageWrapper> */}
       <IconContainer>
-        <Node width="126px" height="auto" />
+        <Node width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Python width="126px" height="auto" />
+        <Python width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Ruby width="126px" height="auto" />
+        <Ruby width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Typescript width="126px" height="auto" />
+        <Typescript width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Cpp width="126px" height="auto" />
+        <Cpp width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Go width="126px" height="auto" />
+        <Go width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Java width="126px" height="auto" />
+        <Java width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <CSharp width="126px" height="auto" />
+        <CSharp width="100%" height="auto" />
       </IconContainer>
     </ScrollAtMobile>
     <Link to="/page-2/" style={{ marginTop: "15px" }}>
