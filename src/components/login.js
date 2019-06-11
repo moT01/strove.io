@@ -8,6 +8,7 @@ import {
   Header,
 } from "gitstar-components"
 import gql from "graphql-tag"
+import { Location } from "@reach/router"
 
 import ApolloClient from "apollo-boost"
 import fetch from "isomorphic-fetch"
@@ -27,7 +28,7 @@ const STATUS = {
   AUTHENTICATED: "authenticated",
 }
 
-class Login extends PureComponent {
+class LoginComponent extends PureComponent {
   state = {
     status: STATUS.INITIAL,
     token: null,
@@ -98,5 +99,11 @@ class Login extends PureComponent {
     )
   }
 }
+
+const Login = () => (
+  <Location>
+    {({ location }) => <LoginComponent location={location} />}
+  </Location>
+)
 
 export default Login
