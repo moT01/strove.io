@@ -39,6 +39,27 @@ const TextWrapper = styled.div`
   justify-content: center;
   text-align: justify;
 `
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  height: auto;
+  align-items: center;
+  justify-content: space-between;
+`
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  width: 40%;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  color: #000000;
+  border-radius: 5px;
+`
 
 class Circle extends React.Component {
   state = {
@@ -48,7 +69,6 @@ class Circle extends React.Component {
     selectedColor: "",
   }
   handleLogoClick = logo => {
-    // setSelection(logo.name)
     this.setState({ selected: logo.name })
     this.setState({ selectedColor: logo.color })
   }
@@ -85,12 +105,26 @@ class Circle extends React.Component {
             </h2>
             <h3>One environment for everyone</h3>
           </TextWrapper>
+          <ButtonsWrapper>
+            <Button style={{ backgroundColor: `${this.state.selectedColor}` }}>
+              Open Editor
+            </Button>
+            <Button
+              style={{
+                borderColor: `${this.state.selectedColor}`,
+                color: `${this.state.selectedColor}`,
+              }}
+            >
+              See examples
+            </Button>
+          </ButtonsWrapper>
         </SubSectionWrapper>
         <SubSectionWrapper>
           <Carousel
             handleHoverOut={this.handleHoverOut}
             handleLogoClick={this.handleLogoClick}
             handleHoverIn={this.handleHoverIn}
+            selected={this.selected}
           />
         </SubSectionWrapper>
       </SectionWrapper>

@@ -81,9 +81,6 @@ const Logos = () => (
     <MediumCloud />
     <SmallCloud />
     <ScrollAtMobile>
-      {/* <ImageWrapper width height>
-        <Node width="100%" height="auto" />
-      </ImageWrapper> */}
       <IconContainer>
         <Node width="100%" height="auto" />
       </IconContainer>

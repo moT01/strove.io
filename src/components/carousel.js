@@ -9,10 +9,10 @@ import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
 
 const IconAnimation = keyframes`
   0%, 100% {
-    transform: scale(1.3)
+    transform: scale(1.1)
   }
   50% {
-    transform: scale(1.4)
+    transform: scale(1.2)
   }
 `
 
@@ -20,7 +20,7 @@ const HoverIcon = keyframes`
   0% {
   }
   100% {
-    transform: scale(1.3)
+    transform: scale(1.1)
   }
 `
 
@@ -54,6 +54,33 @@ const IconContainer = styled.div`
     }
   }
 `
+const SelectIcon = keyframes`
+0% {
+ transform: scale(1.15)
+}
+100%{
+  transform: scale(1.5)
+}
+`
+
+const SelectedIconContainer = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  opacity: 1;
+  z-index: 4;
+
+  width: 10vw;
+  height: 10vw;
+
+  animation: ${SelectIcon} 500ms ease;
+
+  transform: scale(1.5);
+`
+
 const IconPosition = styled.div`
   transition: 10000ms;
   position: absolute;
@@ -180,7 +207,14 @@ const logos = [
 // ))
 
 const Bubbles = React.memo(
-  ({ angle, handleLogoClick, handleHoverIn, handleHoverOut, bubbles }) =>
+  ({
+    angle,
+    handleClick,
+    handleHoverIn,
+    handleHoverOut,
+    bubbles,
+    selectedBubble,
+  }) =>
     bubbles.map((logo, index) => (
       <IconRotation
         key={logo.name}
@@ -188,13 +222,25 @@ const Bubbles = React.memo(
       >
         <IconPosition>
           <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
-            <IconContainer
-              onClick={() => handleLogoClick(logo)}
-              onMouseEnter={() => handleHoverIn(logo)}
-              onMouseLeave={() => handleHoverOut()}
-            >
-              {logo.component}
-            </IconContainer>
+            {selectedBubble !== logo.name ? (
+              <IconContainer
+                onClick={() => handleClick(logo)}
+                onMouseEnter={() => handleHoverIn(logo)}
+                onMouseLeave={() => handleHoverOut()}
+              >
+                {logo.component}
+                {console.log("Is anything selected?", selectedBubble)}
+              </IconContainer>
+            ) : (
+              <SelectedIconContainer
+                onClick={() => handleClick(logo)}
+                onMouseEnter={() => handleHoverIn(logo)}
+                onMouseLeave={() => handleHoverOut()}
+              >
+                {logo.component}
+                {console.log("I am the chosen one", selectedBubble)}
+              </SelectedIconContainer>
+            )}
           </IconBearing>
         </IconPosition>
       </IconRotation>
@@ -204,6 +250,7 @@ const Bubbles = React.memo(
 const Carousel = props => {
   const [bubbles, setBubbles] = useState(logos)
   const [angle, setAngle] = useState(360 / bubbles.length)
+  const [selectedBubble, setSelectedBubble] = useState(props.selected)
   // const [poppedBubbleId, setPoppedBubbleId] = useState(-10)
   // const [animate, setAnimate] = useState(true)
   // const [selection, setSelection] = useState("")
@@ -223,14 +270,19 @@ const Carousel = props => {
   //   setAnimate(!animate)
   // }
   /*eslint-enable*/
+  const handleClick = logo => {
+    props.handleLogoClick(logo)
+    setSelectedBubble(logo.name)
+  }
   return (
     <SectionWrapper>
       <Bubbles
-        handleLogoClick={props.handleLogoClick}
         handleHoverOut={props.handleHoverOut}
         handleHoverIn={props.handleHoverIn}
+        handleClick={handleClick}
         angle={angle}
         bubbles={bubbles}
+        selectedBubble={selectedBubble}
       />
       {/* {poppedBubbleId !== -10 && (
         <PoppedBubble angle={angle} poppedBubbleId={poppedBubbleId} />
