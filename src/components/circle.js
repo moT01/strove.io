@@ -44,13 +44,20 @@ class Circle extends React.Component {
   state = {
     selection: "clouds",
     color: "gray",
+    selected: "",
+    selectedColor: "",
   }
   handleLogoClick = logo => {
     // setSelection(logo.name)
+    this.setState({ selected: logo.name })
+    this.setState({ selectedColor: logo.color })
+  }
+  handleHoverIn = logo => {
     this.setState({ selection: logo.name })
     this.setState({ color: logo.color })
   }
-  handleHoverOut = logo => {
+
+  handleHoverOut = () => {
     this.setState({ selection: "clouds" })
     this.setState({ color: "gray" })
   }
@@ -62,8 +69,18 @@ class Circle extends React.Component {
             <h1>SiliSky</h1>
             <h2>
               Code in{" "}
-              <span style={{ color: `${this.state.color}` }}>
-                {this.state.selection}
+              <span
+                style={{
+                  color: `${
+                    this.state.selectedColor
+                      ? this.state.selectedColor
+                      : this.state.color
+                  }`,
+                }}
+              >
+                {this.state.selected
+                  ? this.state.selected
+                  : this.state.selection}
               </span>
             </h2>
             <h3>One environment for everyone</h3>
@@ -73,6 +90,7 @@ class Circle extends React.Component {
           <Carousel
             handleHoverOut={this.handleHoverOut}
             handleLogoClick={this.handleLogoClick}
+            handleHoverIn={this.handleHoverIn}
           />
         </SubSectionWrapper>
       </SectionWrapper>

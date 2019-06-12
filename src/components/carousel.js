@@ -151,36 +151,36 @@ const logos = [
   },
 ]
 
-const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
-  <IconRotation
-    style={{
-      transform: `rotate(${angle * (poppedBubbleId + 1)}deg)`,
-    }}
-  >
-    {/* <TransitionGroup>
-      <CSSTransition
-        // in={animate}
-        key={poppedBubbleId}
-        timeout={10000}
-        classNames="move"
-        // transitionAppear="true"
-      > */}
-    <IconPosition>
-      <IconBearing
-        style={{
-          transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
-        }}
-      >
-        <IconContainer>{logos[poppedBubbleId].component}</IconContainer>
-      </IconBearing>
-    </IconPosition>
-    {/* </CSSTransition>
-    </TransitionGroup> */}
-  </IconRotation>
-))
+// const PoppedBubble = React.memo(({ angle, poppedBubbleId }) => (
+//   <IconRotation
+//     style={{
+//       transform: `rotate(${angle * (poppedBubbleId + 1)}deg)`,
+//     }}
+//   >
+//     <TransitionGroup>
+//       <CSSTransition
+//         // in={animate}
+//         key={poppedBubbleId}
+//         timeout={10000}
+//         classNames="move"
+//         // transitionAppear="true"
+//       >
+//     <IconPosition>
+//       <IconBearing
+//         style={{
+//           transform: `rotate(${-angle * (poppedBubbleId + 1)}deg)`,
+//         }}
+//       >
+//         <IconContainer>{logos[poppedBubbleId].component}</IconContainer>
+//       </IconBearing>
+//     </IconPosition>
+//     </CSSTransition>
+//     </TransitionGroup>
+//   </IconRotation>
+// ))
 
 const Bubbles = React.memo(
-  ({ angle, handleLogoClick, handleHoverOut, bubbles }) =>
+  ({ angle, handleLogoClick, handleHoverIn, handleHoverOut, bubbles }) =>
     bubbles.map((logo, index) => (
       <IconRotation
         key={logo.name}
@@ -190,7 +190,7 @@ const Bubbles = React.memo(
           <IconBearing style={{ transform: `rotate(${-angle * index}deg)` }}>
             <IconContainer
               onClick={() => handleLogoClick(logo)}
-              onMouseEnter={() => handleLogoClick(logo)}
+              onMouseEnter={() => handleHoverIn(logo)}
               onMouseLeave={() => handleHoverOut()}
             >
               {logo.component}
@@ -200,34 +200,35 @@ const Bubbles = React.memo(
       </IconRotation>
     ))
 )
-
+/*eslint-disable*/
 const Carousel = props => {
   const [bubbles, setBubbles] = useState(logos)
   const [angle, setAngle] = useState(360 / bubbles.length)
-  const [poppedBubbleId, setPoppedBubbleId] = useState(-10)
-  const [animate, setAnimate] = useState(true)
-  const [selection, setSelection] = useState("")
+  // const [poppedBubbleId, setPoppedBubbleId] = useState(-10)
+  // const [animate, setAnimate] = useState(true)
+  // const [selection, setSelection] = useState("")
 
-  const handleClick = bubble => {
-    let popId = poppedBubbleId
-    // const newBubbles = [...bubbles]
-    let newPopId = bubble.id
-    // if (popId !== -10) {
-    //   newBubbles.splice(popId, 0, logos[popId])
-    // }
-    // newBubbles.splice(newPopId, 1)
+  // const handleClick = bubble => {
+  //   let popId = poppedBubbleId
+  //   const newBubbles = [...bubbles]
+  //   let newPopId = bubble.id
+  //   if (popId !== -10) {
+  //     newBubbles.splice(popId, 0, logos[popId])
+  //   }
+  //   newBubbles.splice(newPopId, 1)
 
-    setPoppedBubbleId(newPopId)
-    // setBubbles(newBubbles)
-    // setAngle(360 / newBubbles.length)
-    // setAnimate(!animate)
-  }
-
+  //   setPoppedBubbleId(newPopId)
+  //   setBubbles(newBubbles)
+  //   setAngle(360 / newBubbles.length)
+  //   setAnimate(!animate)
+  // }
+  /*eslint-enable*/
   return (
     <SectionWrapper>
       <Bubbles
         handleLogoClick={props.handleLogoClick}
         handleHoverOut={props.handleHoverOut}
+        handleHoverIn={props.handleHoverIn}
         angle={angle}
         bubbles={bubbles}
       />
