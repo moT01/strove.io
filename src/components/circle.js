@@ -45,7 +45,7 @@ class Circle extends React.Component {
     selection: "clouds",
     color: "gray",
   }
-  handleClick = logo => {
+  handleLogoClick = logo => {
     // setSelection(logo.name)
     this.setState({ selection: logo.name })
     this.setState({ color: logo.color })
@@ -72,8 +72,7 @@ class Circle extends React.Component {
         <SubSectionWrapper>
           <Carousel
             handleHoverOut={this.handleHoverOut}
-            handleHover={this.handleClick}
-            handleClick={this.handleClick}
+            handleLogoClick={this.handleLogoClick}
           />
         </SubSectionWrapper>
       </SectionWrapper>
