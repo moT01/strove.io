@@ -63,6 +63,13 @@ class LoginComponent extends PureComponent {
         mutation GithubAuth($code: String!) {
           githubAuth(code: $code) {
             email
+            name
+            fullName
+            photoUrl
+            githubUrl
+            githubToken
+            scopes
+            siliskyToken
           }
         }
       `
