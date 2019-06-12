@@ -143,31 +143,31 @@ const logos = [
   {
     component: <Node width="10vw" height="auto" />,
     name: "Node",
-    color: "lightgreen",
+    color: "#337D50",
     id: 0,
   },
   {
     component: <Python width="10vw" height="auto" />,
     name: "Python",
-    color: "yellow",
+    color: "#2D6D9E",
     id: 1,
   },
   {
-    component: <Ruby width="10vw" height="auto" />,
+    component: <Ruby width="8vw" height="auto" />,
     name: "Ruby",
-    color: "red",
+    color: "	#9E1A19",
     id: 2,
   },
   {
     component: <Typescript width="8vw" height="auto" />,
     name: "Typescript",
-    color: "blue",
+    color: "#1D82D2",
     id: 3,
   },
   {
     component: <Cpp width="10vw" height="auto" />,
     name: "C++",
-    color: "lightblue",
+    color: "#194F9D",
     id: 4,
   },
   {

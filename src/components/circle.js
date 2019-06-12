@@ -11,6 +11,10 @@ const FadeIn = keyframes`
   }
 `
 
+const ShowText = keyframes`
+
+`
+
 const SectionWrapper = styled.div`
   flex: 1;
   display: flex;
@@ -31,6 +35,7 @@ const SubSectionWrapper = styled.div`
   width: 50%;
   height: 100%;
 `
+
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -39,6 +44,7 @@ const TextWrapper = styled.div`
   justify-content: center;
   text-align: justify;
 `
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -47,18 +53,23 @@ const ButtonsWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 `
+
 const Button = styled.button`
   display: flex;
   flex-direction: row;
-  height: 10vh;
+  height: 6vh;
   width: 40%;
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
   border-width: 1px;
   border-style: solid;
-  color: #000000;
-  border-radius: 5px;
+  color: grey;
+  border-radius: 1vh;
+  border-color: ${props => (props.theme ? props.theme : `gray`)};
+  box-shadow: 0 1.5vh 1.5vh -1.5vh ${props => (props.theme ? props.theme : `gray`)};
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease,
+    border-color 0.5s ease;
 `
 
 class Circle extends React.Component {
@@ -106,12 +117,18 @@ class Circle extends React.Component {
             <h3>One environment for everyone</h3>
           </TextWrapper>
           <ButtonsWrapper>
-            <Button style={{ backgroundColor: `${this.state.selectedColor}` }}>
+            <Button
+              theme={this.state.selectedColor}
+              style={{
+                backgroundColor: `${this.state.selectedColor}`,
+                color: `${this.state.selectedColor ? `#ffffff` : "gray"}`,
+              }}
+            >
               Open Editor
             </Button>
             <Button
+              theme={this.state.selectedColor}
               style={{
-                borderColor: `${this.state.selectedColor}`,
                 color: `${this.state.selectedColor}`,
               }}
             >
