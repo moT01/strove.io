@@ -72,7 +72,7 @@ class LoginComponent extends PureComponent {
             data: { githubAuth },
           } = await client.mutate({
             mutation: GITHUB_LOGIN,
-            variables: code,
+            variables: { code },
           })
           console.log("githubAuth", githubAuth)
         } catch (e) {
@@ -107,7 +107,7 @@ class LoginComponent extends PureComponent {
   render() {
     return (
       <LoginButton
-        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
+        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo,repo&redirect_uri=${REDIRECT_URI}`}
       >
         <LinkText>Login</LinkText>
       </LoginButton>
