@@ -35,6 +35,22 @@ const CodeArea = styled.div`
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+
+  > span {
+    display: block;
+  }
+
+  @media screen and (max-width: 320px) {
+    .code-area {
+      font-size: 5vw;
+      min-width: auto;
+      width: 95%;
+      margin: auto;
+      padding: 5px;
+      padding-left: 10px;
+      line-height: 6.5vw;
+    }
+  }
 `
 
 const ErrorMessage = styled.span`
@@ -42,71 +58,48 @@ const ErrorMessage = styled.span`
   font-style: italic;
 `
 
+const ErrorBody = styled.div`
+  background: #081421;
+  height: 100vh;
+  color: #d3d7de;
+  font-family: "Courier new";
+  font-size: 18px;
+  line-height: 1.5em;
+  cursor: default;
+
+  a {
+    color: #fff;
+  }
+`
+
 const Error = () => (
-  //   <style>
-  //     body {
-  //       background: #081421;
-  //       color: #d3d7de;
-  //       font-family: "Courier new";
-  //       font-size: 18px;
-  //       line-height: 1.5em;
-  //     cursor: default;
-  //     }
-  //     a {
-  //       color: #fff;
-  //     }
-
-  //     .code-area {
-  //         position: absolute;
-  //        width: 320px;
-  //       min-width: 320px;
-  //         top: 50%;
-  //         left: 50%;
-  //         -webkit-transform: translate(-50%, -50%);
-  //         transform: translate(-50%, -50%);
-  //     }
-
-  //     .code-area > span {
-  //         display: block;
-  //     }
-
-  //     @media screen and (max-width: 320px) {
-  //         .code-area {
-  //         font-size: 5vw;
-  //         min-width: auto;
-  //             width: 95%;
-  //         margin: auto;
-  //         padding: 5px;
-  //         padding-left: 10px;
-  //         line-height: 6.5vw;
-  //         }
-  //     }
-  //   </style>
-  // </head>
-  <CodeArea>
-    <ErrorMessage>
-      /* Preview not found. Check console in editor - something probably
-      crashed! */
-    </ErrorMessage>
-    <span>
-      <span style={{ color: "#d65562" }}>if</span>
-      <span style={{ color: "#4ca8ef" }}>!</span>
-      <span style={{ fontStyle: "italic", color: "#bdbdbd" }}>found</span>
-    </span>
-    <span>
-      <span style={{ paddingLeft: "15px", color: "#2796ec" }}>
-        <i style={{ width: "10px", display: "inline-block" }} />
-        throw
+  <ErrorBody>
+    <CodeArea>
+      <ErrorMessage>
+        /* Preview not found. Check console in editor - something probably
+        crashed! */
+      </ErrorMessage>
+      <span>
+        <span style={{ color: "#d65562" }}>if</span>
+        <span style={{ fontStyle: "italic", color: "#bdbdbd" }}> (</span>
+        <span style={{ color: "#4ca8ef" }}>!found</span>
+        <span style={{ color: "#bdbdbd" }}>)</span>
       </span>
       <span>
-        <span style={{ color: "#a6a61f" }}>"(╯°□°)╯︵ ┻━┻"</span>
+        <span style={{ paddingLeft: "15px", color: "#2796ec" }}>
+          <i style={{ width: "10px", display: "inline-block" }} />
+          throw
+        </span>
+        <span>
+          <span style={{ color: "#a6a61f" }}>"(╯°□°)╯︵ ┻━┻"</span>
+        </span>
+        <span style={{ display: "block" }}>{"}"}</span>
+        <span style={{ color: "#777", fontStyle: "italic" }}>
+          // <a href="http://localhost:8000/editor">Go back!</a>
+        </span>
       </span>
-      <span style={{ display: "block" }}>{"}"}</span>
-      <span style={{ color: "#777", fontStyle: "italic" }}>
-        // <a href="http://localhost:8000/editor">Go back!</a>
-      </span>
-    </span>
-  </CodeArea>
+    </CodeArea>
+  </ErrorBody>
 )
 
 const testToken = "testToken"
