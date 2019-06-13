@@ -15,18 +15,6 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-function useHookWithRefCallback() {
-  const [node, setRef] = useState(null)
-
-  useEffect(() => {
-    if (node) {
-      // Your Hook now has a reference to the ref element.
-    }
-  }, [node])
-
-  return [setRef]
-}
-
 const CodeArea = styled.div`
   position: absolute;
   max-width: 640px;
@@ -119,17 +107,17 @@ const Preview = () => {
   const isIframeReachable = async () => {
     const adress = "http://35.239.27.5:9991/"
     const reachable = await isReachable(adress)
-    if (!reachable) {
+    if (reachable) {
       // setPreviewOn(false)
       // document.getElementsByTagName(
       //   "IFRAME"
       // )[0].contentDocument.body.innerHTML = Error
 
-      return () => setPreviewOn(true)
+      setPreviewOn(true)
     }
   }
 
-  useEffect(() => isIframeReachable())
+  useEffect(() => isIframeReachable(), [])
 
   // const [ref] = useHookWithRefCallback()
 
@@ -159,7 +147,7 @@ const Preview = () => {
         // <div>Sorry</div>
         <StyledIframe
           // ref={ref}
-          src={`<div>Preview</div>`}
+          src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview`}
         />
       )}
     </>
