@@ -109,17 +109,18 @@ const Error = `
 const testToken = "testToken"
 
 const Preview = () => {
-  const iframe = useRef(null)
-
-  const [count, setCount] = useState(0)
+  const [previewOn, setPreviewOn] = useState(false)
 
   const isIframeReachable = async () => {
     const adress = "http://35.239.27.5:9991/"
     const reachable = await isReachable(adress)
     if (!reachable) {
-      document.getElementsByTagName(
-        "IFRAME"
-      )[0].contentDocument.body.innerHTML = Error
+      // setPreviewOn(false)
+      // document.getElementsByTagName(
+      //   "IFRAME"
+      // )[0].contentDocument.body.innerHTML = Error
+
+      return () => setPreviewOn(true)
     }
   }
 
@@ -145,11 +146,16 @@ const Preview = () => {
 
   return (
     <>
+      {console.log("previewOn", previewOn)}
       <SEO title="Preview" />
-      <StyledIframe
-        // ref={ref}
-        src={`<div>Preview</div>`}
-      />
+      {!previewOn ? (
+        <div>Sorry</div>
+      ) : (
+        <StyledIframe
+          // ref={ref}
+          src={`<div>Preview</div>`}
+        />
+      )}
     </>
   )
 }
