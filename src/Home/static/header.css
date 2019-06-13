@@ -1,0 +1,65 @@
+#header {
+  background-color: #fff;
+  position: relative;
+  z-index: 10;
+  height: 64px;
+}
+#logo {
+  overflow: hidden;
+  padding-left: 40px;
+  float: left;
+  line-height: 64px;
+  text-decoration: none;
+  height: 64px;
+}
+#logo img {
+  display: inline;
+  vertical-align: middle;
+  margin-right: 16px;
+  width: 32px;
+}
+#logo span {
+  color: #314659;
+  outline: none;
+  font-size: 14px;
+  line-height: 28px;
+}
+.header-meta {
+  padding-right: 40px;
+}
+#menu {
+  float: right;
+  overflow: hidden;
+  height: 64px;
+}
+#menu .ant-menu {
+  line-height: 60px;
+}
+#menu .ant-menu-horizontal {
+  border-bottom: none;
+}
+#menu .ant-menu-horizontal > .ant-menu-item {
+  border-top: 2px solid transparent;
+}
+#menu .ant-menu-horizontal > .ant-menu-item:hover {
+  border-top: 2px solid;
+  border-bottom: 2px solid transparent;
+}
+#menu .ant-menu-horizontal > .ant-menu-item-selected {
+  border-top: 2px solid;
+  border-bottom: 2px solid transparent;
+}
+#menu .ant-menu-horizontal > .ant-menu-item-selected a {
+  color: #314659;
+}
+#preview {
+  padding-top: 17px;
+  float: right;
+  margin-left: 32px;
+}
+#preview button {
+  border-radius: 32px;
+}
+#preview-button .ant-btn {
+  color: #314659;
+}
