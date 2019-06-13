@@ -8,6 +8,7 @@
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.11",
     "@reach/router": "^1.2.1",
+    "antd": "^3.19.3",
     "apollo-boost": "^0.4.2",
     "babel-plugin-styled-components": "^1.10.0",
     "bowser": "^2.4.0",
