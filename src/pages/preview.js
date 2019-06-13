@@ -9,20 +9,20 @@ const StyledIframe = styled.iframe`
   display: block;
   background: #000;
   border: none;
-  min-height: 87vh;
+  min-height: 100vh;
   width: 100vw;
   margin: 0;
 `
 
 const testToken = "testToken"
 
-const Editor = () => (
-  <Layout>
+const Preview = () => (
+  <>
     <SEO title="Preview" />
     <StyledIframe
       src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`}
     />
-  </Layout>
+  </>
 )
 
-export default Editor
+export default Preview
