@@ -6,25 +6,28 @@ import styled from "styled-components"
 import SEO from "../components/seo"
 import "../components/layout.css"
 
+import Header from "../components/header"
+
 const TextWell = styled.div`
-  align-self: center;
+  ${"" /* align-self: center; */}
   color: black;
   height: auto;
-  width: 90vw;
-  margin: 5vw;
+  width: 60vw;
+  margin: 3vw 7.5vw 0 7.5vw;
   padding: 3vh;
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  text-align: justify;
+  text-align: left;
   text-justify: inter-word;
-  background-color: rgba(241, 241, 241, 0.95);
-  border: 1px solid slategrey;
+  background-color: white;
+  ${"" /* border: 1px solid slategrey; */}
 `
 
 const Legal = () => (
   <>
     <SEO title="Privacy Policy" />
+    <Header siteTitle="SiliSky" />
 
     <TextWell>
       <h1 style={{ alignSelf: "center" }}>Privacy Policy</h1>
@@ -344,7 +347,7 @@ const Legal = () => (
         </li>
         <h4>
           If at any time you would like to unsubscribe from receiving future
-          emails, you can email us at (hello@SiliSky.com)
+          emails, you can email us at contact@codengo.page
         </h4>
         <li>
           {" "}
@@ -358,10 +361,10 @@ const Legal = () => (
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
       </p>
-      <h5>(codesandbox.io</h5>
-      <h5>  Calslaan 5B</h5>
-      <h5> Enschede, Overijssel 7522 MH</h5>
-      <h5> Netherlands hello@codesandbox.io)</h5>
+      <h5>CodeNGo.net</h5>
+      <h5>(adres)</h5>
+      <h5>(adres)</h5>
+      <h5>contact@codengo.page</h5>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
   </>
