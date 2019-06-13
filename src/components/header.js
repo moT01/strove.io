@@ -1,23 +1,12 @@
 import { Link } from "gatsby"
 import React from "react"
-
 import styled from "styled-components"
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
+import Login from "./login"
 
 const LinkWrapper = styled.h3`
   margin: 0 100px 0 0;
   display: inline-block;
-`
-
-const LoginButton = styled.a`
-  color: white;
-  text-decoration: none;
-
-  :hover {
-    color: black;
-  }
 `
 
 const LinkText = styled.span`
@@ -62,11 +51,7 @@ const Header = ({ siteTitle }) => (
       </Link>
     </LinkWrapper>
     <LinkWrapper>
-      <LoginButton
-        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email&redirect_uri=${REDIRECT_URI}`}
-      >
-        <LinkText>Login</LinkText>
-      </LoginButton>
+      <Login />
     </LinkWrapper>
   </header>
 )
