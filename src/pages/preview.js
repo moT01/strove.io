@@ -91,10 +91,10 @@ const Error = () => (
           throw
         </span>
         <span>
-          <span style={{ color: "#a6a61f" }}>"(╯°□°)╯︵ ┻━┻"</span>
+          (<span style={{ color: "#a6a61f" }}>"(╯°□°)╯︵ ┻━┻"</span>)
         </span>
         <span style={{ display: "block" }}>{"}"}</span>
-        //
+
         <Link
           to="/preview"
           style={{
@@ -102,7 +102,9 @@ const Error = () => (
             textDecoration: `none`,
           }}
         >
-          <span style={{ color: "#777", fontStyle: "italic" }}> Go back!</span>
+          <span style={{ color: "#777", fontStyle: "italic" }}>
+            // Go back!
+          </span>
         </Link>
       </span>
     </CodeArea>
