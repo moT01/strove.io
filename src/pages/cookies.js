@@ -6,25 +6,28 @@ import styled from "styled-components"
 import SEO from "../components/seo"
 import "../components/layout.css"
 
+import Header from "../components/header"
+
 const TextWell = styled.div`
-  align-self: center;
+  ${"" /* align-self: center; */}
   color: black;
   height: auto;
-  width: 90vw;
-  margin: 5vw;
+  width: 60vw;
+  margin: 3vw 7.5vw 0 7.5vw;
   padding: 3vh;
   flex-direction: column;
   align-items: center;
   justify-items: center;
-  text-align: justify;
+  text-align: left;
   text-justify: inter-word;
-  background-color: rgba(241, 241, 241, 0.95);
-  border: 1px solid slategrey;
+  background-color: white;
+  ${"" /* border: 1px solid slategrey; */}
 `
 
 const Legal = () => (
   <>
-    <SEO title="Privacy Policy" />
+    <SEO title="Cookies" />
+    <Header siteTitle="SiliSky" />
 
     <TextWell>
       <h1 style={{ alignSelf: "center" }}> About Cookies</h1>
