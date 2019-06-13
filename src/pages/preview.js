@@ -102,18 +102,18 @@ const Error = () => (
 const testToken = "testToken"
 
 const Preview = () => {
-  const [previewOn, setPreviewOn] = useState(false)
+  const [previewOn, setPreviewOn] = useState(true)
 
   const isIframeReachable = async () => {
     const adress = "http://35.239.27.5:9991/"
     const reachable = await isReachable(adress)
-    if (reachable) {
+    if (!reachable) {
       // setPreviewOn(false)
       // document.getElementsByTagName(
       //   "IFRAME"
       // )[0].contentDocument.body.innerHTML = Error
 
-      setPreviewOn(true)
+      setPreviewOn(false)
     }
   }
 
