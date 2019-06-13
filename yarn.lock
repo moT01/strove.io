@@ -3713,6 +3713,13 @@ decompress@^4.0.0, decompress@^4.2.0:
     pify "^2.3.0"
     strip-dirs "^2.0.0"
 
+deep-eql@~2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/deep-eql/-/deep-eql-2.0.2.tgz#b1bac06e56f0a76777686d50c9feb75c2ed7679a"
+  integrity sha1-sbrAblbwp2d3aG1Qyf63XC7XZ5o=
+  dependencies:
+    type-detect "^3.0.0"
+
 deep-equal@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
@@ -10421,6 +10428,13 @@ raf@3.x, raf@^3.4.0, raf@^3.4.1, raf@~3.4.0:
   dependencies:
     performance-now "^2.1.0"
 
+raf@~3.3.0:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/raf/-/raf-3.3.2.tgz#0c13be0b5b49b46f76d6669248d527cf2b02fe27"
+  integrity sha1-DBO+C1tJtG921maSSNUnzysC/ic=
+  dependencies:
+    performance-now "^2.1.0"
+
 ramda@0.21.0:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
@@ -10894,7 +10908,19 @@ rc-trigger@^3.0.0-rc.2:
     rc-animate "^3.0.0-rc.1"
     rc-util "^4.4.0"
 
-rc-tween-one@^2.3.2, rc-tween-one@^2.4.0, rc-tween-one@^2.4.1:
+rc-tween-one@1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/rc-tween-one/-/rc-tween-one-1.5.5.tgz#37137e9d023d0d10ccb2004b735cb3b81e037d5d"
+  integrity sha512-0Wrsu/d1N6V3U+inteCaZ+yXHFtl48F9vHmbAsPn9PafdJQK+HSdspntaDT6yn/9drriZzb+ecrzXAs3Zv0pcg==
+  dependencies:
+    babel-runtime "6.x"
+    deep-eql "~2.0.1"
+    prop-types "^15.5.0"
+    raf "~3.3.0"
+    style-utils "~0.1.13"
+    tween-functions "~1.2.0"
+
+rc-tween-one@^2.3.2, rc-tween-one@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/rc-tween-one/-/rc-tween-one-2.4.1.tgz#04354c59b0cf2cf5fab583b27878b9d6af23dcc3"
   integrity sha512-sIHQtPIxN9sSc+rFG/niqQEZKsqo/kSNvLa3WM4imDTJ7HXOFU5MDeY8l0f+TwotbyyzTlpUCWo1mTQsj7b8XA==
@@ -12629,6 +12655,11 @@ style-to-object@^0.2.1:
   dependencies:
     css "2.2.4"
 
+style-utils@~0.1.13:
+  version "0.1.24"
+  resolved "https://registry.yarnpkg.com/style-utils/-/style-utils-0.1.24.tgz#fc0675d79a0b201bf86fc5d5a1dd202f838de544"
+  integrity sha512-MVZSKubpU/vIfpmOsi8/0ckWxb0WmGBmyNoEDGWZM9cM8n8sCL6DJftl3lEf8Uy5zKQ9+O1XdJxscWTDosCQpQ==
+
 style-utils@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/style-utils/-/style-utils-0.2.0.tgz#3d8614931b8ff6e1eea0545f1dbfaf271bb1aa7e"
@@ -13065,6 +13096,11 @@ type-check@~0.3.2:
   integrity sha1-WITKtRLPHTVeP7eE8wgEsrUg23I=
   dependencies:
     prelude-ls "~1.1.2"
+
+type-detect@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-3.0.0.tgz#46d0cc8553abb7b13a352b0d6dea2fd58f2d9b55"
+  integrity sha1-RtDMhVOrt7E6NSsNbeov1Y8tm1U=
 
 type-fest@^0.3.0:
   version "0.3.1"

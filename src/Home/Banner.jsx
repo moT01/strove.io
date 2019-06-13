@@ -1,9 +1,9 @@
-import React from "react";
-import GitHubButton from "react-github-button";
-import QueueAnim from "rc-queue-anim";
-import TweenOne from "rc-tween-one";
-import BannerSVGAnim from "./component/BannerSVGAnim";
-import styled, {keyframes} from 'styled-components'
+import React from "react"
+import GitHubButton from "react-github-button"
+import QueueAnim from "rc-queue-anim"
+import TweenOne from "rc-tween-one"
+import BannerSVGAnim from "./component/BannerSVGAnim"
+import styled, { keyframes } from "styled-components"
 
 const HoverIcon = keyframes`
   0% {
@@ -22,18 +22,18 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => props.primary ? '#0072ce' : '#ffffff'};
+  background-color: ${props => (props.primary ? "#0072ce" : "#ffffff")};
   border-width: 1px;
   border-style: solid;
-  color: ${props => props.primary ? '#ffffff' : '#0072ce'};
+  color: ${props => (props.primary ? "#ffffff" : "#0072ce")};
   border-radius: 1vh;
-  border-color: #0072ce ;
+  border-color: #0072ce;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 
-    &:hover{
-       transform: scale(1.1)
-    }
+  &:hover {
+    transform: scale(1.1);
+  }
 `
 
 const ButtonsWrapper = styled.div`
@@ -72,18 +72,18 @@ function Banner(props) {
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
         <ButtonsWrapper>
-        {/* <div key="button" className="button-wrapper"> */}
+          {/* <div key="button" className="button-wrapper"> */}
           {/* <a
             href="http://preview.pro.ant.design"
             target="_blank"
             rel="noopener noreferrer"
           > */}
-            <Button primary><p style={{margin: 0}}>Request demo</p></Button>
+          <Button primary>
+            <p style={{ margin: 0 }}>Request demo</p>
+          </Button>
           {/* </a> */}
           <Button>
-            <p style={{margin: 0}}>
-            Learn more
-            </p>
+            <p style={{ margin: 0 }}>Learn more</p>
           </Button>
           {/* <GitHubButton
             key="github-button"
@@ -91,7 +91,7 @@ function Banner(props) {
             namespace="ant-design"
             repo="ant-design-pro"
           /> */}
-        {/* </div> */}
+          {/* </div> */}
         </ButtonsWrapper>
       </QueueAnim>
       {!props.isMobile && (
@@ -100,7 +100,7 @@ function Banner(props) {
         </TweenOne>
       )}
     </div>
-  );
+  )
 }
 
-export default Banner;
+export default Banner

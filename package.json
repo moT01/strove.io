@@ -48,7 +48,7 @@
     "prop-types": "^15.7.2",
     "rc-queue-anim": "^1.6.12",
     "rc-scroll-anim": "^2.5.8",
-    "rc-tween-one": "^2.4.1",
+    "rc-tween-one": "1.5.5",
     "react": "^16.8.6",
     "react-addons-css-transition-group": "^15.6.2",
     "react-apollo": "^2.5.6",
