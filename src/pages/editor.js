@@ -29,12 +29,12 @@ const testToken = "testToken"
 const Editor = () => (
   <Layout>
     <SEO title="Page two" />
-    <Query query={QUERY}>
+    {/* <Query query={QUERY}>
       {({ data, loading, error }) => {
         if (loading || error) return null
         return <h1>{data.users[0].email}</h1>
       }}
-    </Query>
+    </Query> */}
     <StyledIframe
       src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken}`}
     />
