@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 // import { Link } from "gatsby"
 import styled from "styled-components"
 
@@ -16,13 +16,28 @@ const StyledIframe = styled.iframe`
 
 const testToken = "testToken"
 
-const Preview = () => (
-  <>
-    <SEO title="Preview" />
-    <StyledIframe
-      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`}
-    />
-  </>
-)
+const Preview = () => {
+  const iframe = useRef(null)
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    iframe.contentDocument.body.innerHTML = fetch(
+      "https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview"
+    ).then(function(response) {
+      // When the page is loaded convert it to text
+      return response.text()
+    })
+  })
+
+  return (
+    <>
+      <SEO title="Preview" />
+      <StyledIframe
+        ref={iframe}
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`}
+      />
+    </>
+  )
+}
 
 export default Preview
