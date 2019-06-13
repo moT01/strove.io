@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react"
-// import { Link } from "gatsby"
+import { Link } from "gatsby"
 import styled from "styled-components"
 import isReachable from "is-reachable"
 
@@ -29,7 +29,7 @@ function useHookWithRefCallback() {
 
 const CodeArea = styled.div`
   position: absolute;
-  width: 320px;
+  max-width: 640px;
   min-width: 320px;
   top: 50%;
   left: 50%;
@@ -81,9 +81,9 @@ const Error = () => (
       </ErrorMessage>
       <span>
         <span style={{ color: "#d65562" }}>if</span>
-        <span style={{ fontStyle: "italic", color: "#bdbdbd" }}> (</span>
-        <span style={{ color: "#4ca8ef" }}>!found</span>
-        <span style={{ color: "#bdbdbd" }}>)</span>
+        <span style={{ color: "#bdbdbd" }}> (</span>
+        <span style={{ color: "#4ca8ef" }}>!</span>
+        <span style={{ fontStyle: "italic", color: "#bdbdbd" }}>found)</span>
       </span>
       <span>
         <span style={{ paddingLeft: "15px", color: "#2796ec" }}>
@@ -94,9 +94,16 @@ const Error = () => (
           <span style={{ color: "#a6a61f" }}>"(╯°□°)╯︵ ┻━┻"</span>
         </span>
         <span style={{ display: "block" }}>{"}"}</span>
-        <span style={{ color: "#777", fontStyle: "italic" }}>
-          // <a href="http://localhost:8000/editor">Go back!</a>
-        </span>
+        //
+        <Link
+          to="/preview"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          <span style={{ color: "#777", fontStyle: "italic" }}> Go back!</span>
+        </Link>
       </span>
     </CodeArea>
   </ErrorBody>
