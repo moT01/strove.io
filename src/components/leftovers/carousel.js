@@ -1,11 +1,6 @@
 import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
-import { Python, Ruby, Typescript, Cpp, Go, Node } from "../images/logos"
-// import {
-//   Transition,
-//   CSSTransition,
-//   TransitionGroup,
-// } from "react-transition-group"
+import { Python, Ruby, Typescript, Cpp, Go, Node } from "../../images/logos"
 
 const IconAnimation = keyframes`
   0%, 100% {
