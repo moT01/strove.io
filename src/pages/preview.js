@@ -37,6 +37,11 @@ const CodeArea = styled.div`
   transform: translate(-50%, -50%);
 `
 
+const ErrorMessage = styled.span`
+  color: #777;
+  font-style: italic;
+`
+
 const Error = () => (
   //   <style>
   //     body {
@@ -79,25 +84,25 @@ const Error = () => (
   //   </style>
   // </head>
   <CodeArea>
-    <span style="color: #777;font-style:italic;">
+    <ErrorMessage>
       /* Preview not found. Check console in editor - something probably
       crashed! */
+    </ErrorMessage>
+    <span>
+      <span style={{ color: "#d65562" }}>if</span>
+      <span style={{ color: "#4ca8ef" }}>!</span>
+      <span style={{ fontStyle: "italic", color: "#bdbdbd" }}>found</span>
     </span>
     <span>
-      <span style="color:#d65562;">if</span>
-      <span style="color:#4ca8ef;">!</span>
-      <span style="font-style: italic;color:#bdbdbd;">found</span>
-    </span>
-    <span>
-      <span style="padding-left: 15px;color:#2796ec">
-        <i style="width: 10px;display:inline-block" />
+      <span style={{ paddingLeft: "15px", color: "#2796ec" }}>
+        <i style={{ width: "10px", display: "inline-block" }} />
         throw
       </span>
       <span>
-        (<span style="color: #a6a61f">"(╯°□°)╯︵ ┻━┻"</span>);
+        <span style={{ color: "#a6a61f" }}>"(╯°□°)╯︵ ┻━┻"</span>
       </span>
-      <span style="display:block">}</span>
-      <span style="color: #777;font-style:italic;">
+      <span style={{ display: "block" }}>{"}"}</span>
+      <span style={{ color: "#777", fontStyle: "italic" }}>
         // <a href="http://localhost:8000/editor">Go back!</a>
       </span>
     </span>
@@ -147,8 +152,9 @@ const Preview = () => {
       {console.log("previewOn", previewOn)}
       <SEO title="Preview" />
       {!previewOn ? (
-        <div>Sorry</div>
+        <Error />
       ) : (
+        // <div>Sorry</div>
         <StyledIframe
           // ref={ref}
           src={`<div>Preview</div>`}
