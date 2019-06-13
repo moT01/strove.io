@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,7 +10,7 @@ import Circle from "../components/circle"
 
 class IndexPage extends React.Component {
   render() {
-    console.log('props', this.props)
+    console.log("props", this.props)
     return (
       <Layout>
         <SEO title="SiliSky" />

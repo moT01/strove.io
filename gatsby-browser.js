@@ -12,3 +12,5 @@ export const onClientEntry = () => {
     console.log(`# IntersectionObserver is polyfilled!`)
   }
 }
+
+export { wrapRootElement } from "./apolloWrapper"

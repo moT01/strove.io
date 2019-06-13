@@ -7,6 +7,9 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.11",
+    "@reach/router": "^1.2.1",
+    "antd": "^3.19.3",
+    "apollo-boost": "^0.4.2",
     "babel-plugin-styled-components": "^1.10.0",
     "bowser": "^2.4.0",
     "dotenv": "^8.0.0",
@@ -35,13 +38,21 @@
     "gatsby-transformer-json": "^2.1.11",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.21",
+    "gitstar-components": "^1.0.5",
+    "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.7.0",
+    "isomorphic-fetch": "^2.2.1",
     "prism-themes": "^1.1.0",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-apollo": "^2.5.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-redux": "^7.1.0",
+    "react-transition-group": "^4.1.0",
+    "reselect": "^4.0.0",
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
@@ -54,6 +65,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
     "gatsby-cli": "^2.6.5",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "prettier": "^1.17.1"
   },
   "keywords": [

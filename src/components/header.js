@@ -1,38 +1,60 @@
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import styled from "styled-components"
+
+import Login from "./login"
+
+const LinkWrapper = styled.h3`
+  margin: 0 100px 0 0;
+  display: inline-block;
+`
+
+const LinkText = styled.span`
+  :hover {
+    color: black;
+  }
+`
 
 const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: "rgb(52,152,219)",
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
+  <header>
+    <LinkWrapper>
+      <Link
+        to="/"
+        style={{
+          color: `white`,
+          textDecoration: `none`,
+        }}
+      >
+        <LinkText>{siteTitle}</LinkText>
+      </Link>
+    </LinkWrapper>
+    <LinkWrapper>
+      <Link
+        to="/editor"
+        style={{
+          color: `white`,
+          textDecoration: `none`,
+        }}
+      >
+        <LinkText>Editor</LinkText>
+      </Link>
+    </LinkWrapper>
+    <LinkWrapper>
+      <Link
+        to="/preview"
+        style={{
+          color: `white`,
+          textDecoration: `none`,
+        }}
+      >
+        <LinkText>Preview</LinkText>
+      </Link>
+    </LinkWrapper>
+    <LinkWrapper>
+      <Login />
+    </LinkWrapper>
   </header>
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
 
 Header.defaultProps = {
   siteTitle: ``,

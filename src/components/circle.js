@@ -1,6 +1,15 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import Carousel from "./carousel.js"
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
 const SectionWrapper = styled.div`
   flex: 1;
@@ -9,8 +18,10 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 93vh;
+  animation: ${FadeIn} 1s ease-out;
 `
+
 const SubSectionWrapper = styled.div`
   flex: 1;
   display: flex;
@@ -18,7 +29,7 @@ const SubSectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
-  height: auto;
+  height: 100%;
 `
 const TextWrapper = styled.div`
   display: flex;
@@ -30,17 +41,39 @@ const TextWrapper = styled.div`
 `
 
 class Circle extends React.Component {
+  state = {
+    selection: "clouds",
+    color: "gray",
+  }
+  handleLogoClick = logo => {
+    // setSelection(logo.name)
+    this.setState({ selection: logo.name })
+    this.setState({ color: logo.color })
+  }
+  handleHoverOut = logo => {
+    this.setState({ selection: "clouds" })
+    this.setState({ color: "gray" })
+  }
   render() {
     return (
       <SectionWrapper>
         <SubSectionWrapper>
           <TextWrapper>
-            <h1>Silisky</h1>
-            <h2>Code in clouds. One environment for everyone</h2>
+            <h1>SiliSky</h1>
+            <h2>
+              Code in{" "}
+              <span style={{ color: `${this.state.color}` }}>
+                {this.state.selection}
+              </span>
+            </h2>
+            <h3>One environment for everyone</h3>
           </TextWrapper>
         </SubSectionWrapper>
         <SubSectionWrapper>
-          <Carousel />
+          <Carousel
+            handleHoverOut={this.handleHoverOut}
+            handleLogoClick={this.handleLogoClick}
+          />
         </SubSectionWrapper>
       </SectionWrapper>
     )
