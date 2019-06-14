@@ -16,9 +16,10 @@ const HoverIcon = keyframes`
 const Button = styled.button`
   display: flex;
   flex-direction: row;
-  height: 4vh;
-  width: 9vw;
+  height: auto;
+  width: 45%;
   margin: 5px;
+  padding: 0.5vh;
   align-items: center;
   justify-content: center;
   text-align: center;

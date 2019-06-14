@@ -10,7 +10,7 @@ const featuresCN = [
   {
     title: "优雅美观",
     content: "基于 Ant Design 体系精心设计",
-    src: "https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg",
+    src: "../images/svg/VriUmzNjDnjoFoFFZvuh.svg",
     color: "#13C2C2",
     shadowColor: "rgba(19,194,194,.12)",
   },
@@ -50,8 +50,8 @@ const featuresCN = [
     shadowColor: "rgba(114,46,209,.12)",
   },
   {
-    title: "最佳实践",
-    content: "良好的工程实践助你持续产出高质量代码",
+    title: "No setup required",
+    content: "SiliSky eliminates need for long configuration process",
     src: "https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg",
     color: "#FA8C16",
     shadowColor: "rgba(250,140,22,.12)",
@@ -221,7 +221,7 @@ class Page1 extends React.PureComponent {
             </Parallax>
           )}
           <h2>
-            What can <span>Pro</span> do for you{" "}
+            What <span>SiliSky</span> means{" "}
           </h2>
           <div className="title-line-wrapper page1-line">
             <div className="title-line" />
