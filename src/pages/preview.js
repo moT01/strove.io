@@ -3,7 +3,6 @@ import { Link } from "gatsby"
 import styled from "styled-components"
 import isReachable from "is-reachable"
 
-import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const StyledIframe = styled.iframe`
@@ -119,24 +118,6 @@ const Preview = () => {
 
   useEffect(() => isIframeReachable(), [])
 
-  // const [ref] = useHookWithRefCallback()
-
-  // useEffect(async () => {
-  //   // Update the document title using the browser API
-
-  //   const adress = "http://35.239.27.5:9991/"
-  //   const reachable = await isReachable(adress)
-  //   if (!reachable) {
-  //     setTimeout(() => (ref.contentDocument.body.innerHTML = Error), 3000)
-  //   }
-  //   // iframe.contentDocument.body.innerHTML = fetch(
-  //   //   "https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview"
-  //   // ).then(function(response) {
-  //   //   // When the page is loaded convert it to text
-  //   //   return response.text()
-  //   // })
-  // })
-
   return (
     <>
       {console.log("previewOn", previewOn)}
@@ -144,9 +125,7 @@ const Preview = () => {
       {!previewOn ? (
         <Error />
       ) : (
-        // <div>Sorry</div>
         <StyledIframe
-          // ref={ref}
           src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview`}
         />
       )}
