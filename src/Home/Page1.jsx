@@ -3,69 +3,73 @@ import PropTypes from "prop-types"
 import { OverPack, Parallax } from "rc-scroll-anim"
 import QueueAnim from "rc-queue-anim"
 import TweenOne from "rc-tween-one"
+import { SmallCloud, MediumCloud, BigCloud } from "../components/clouds"
 
 const { TweenOneGroup } = TweenOne
 
 const featuresCN = [
   {
-    title: "优雅美观",
-    content: "基于 Ant Design 体系精心设计",
-    src: "../images/svg/VriUmzNjDnjoFoFFZvuh.svg",
+    title: "Push straight to GitHub or Bitbucket",
+    content: "SiliSky is designed to work with every cloud",
+    src: "https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg",
     color: "#13C2C2",
     shadowColor: "rgba(19,194,194,.12)",
   },
   {
-    title: "常见设计模式",
-    content: "提炼自中后台应用的典型页面和场景",
+    title: "Work with VSCode",
+    content: "You can even use your favorite extensions",
     src: "https://gw.alipayobjects.com/zos/rmsportal/smwQOoxCjXVbNAKMqvWk.svg",
     color: "#2F54EB",
     shadowColor: "rgba(47,84,235,.12)",
   },
   {
-    title: "最新技术栈",
-    content: "使用 React/dva/antd 等前端前沿技术开发",
-    src: "https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg",
-    color: "#F5222D",
-    shadowColor: "rgba(245,34,45,.12)",
-  },
-  {
-    title: "响应式",
-    content: "针对不同屏幕大小设计",
+    title: "Code in all major programming languages",
+    content:
+      "You can even use a particular version of a language. Need Python 2.7.3 for chemistry? We got you covered!",
     src: "https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg",
     color: "#1AC44D",
     shadowColor: "rgba(26,196,77,.12)",
   },
   {
-    title: "主题",
-    content: "可配置的主题满足多样化的品牌诉求",
-    src: "https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg",
-    color: "#FAAD14",
-    shadowColor: "rgba(250,173,20,.12)",
-  },
-  {
-    title: "国际化",
-    content: "内建业界通用的国际化方案（敬请期待）",
+    title: "Access your code anywhere",
+    content: "Log in to your account from any computer and code in the cloud",
     src: "https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg",
     color: "#722ED1",
     shadowColor: "rgba(114,46,209,.12)",
   },
   {
-    title: "No setup required",
-    content: "SiliSky eliminates need for long configuration process",
+    title: "Don't lose time, one environment for the whole team",
+    content:
+      "Once a project has been set up, any member can access it without needing to configure everything again",
+    src: "https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg",
+    color: "#FAAD14",
+    shadowColor: "rgba(250,173,20,.12)",
+  },
+  {
+    title: "Build fullstack apps",
+    content: "Anything that works on linux works on SiliSky",
+    src: "https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg",
+    color: "#F5222D",
+    shadowColor: "rgba(245,34,45,.12)",
+  },
+  {
+    title: "It's open source",
+    content:
+      "Contribute! Silisky has been built with contributors in mind. This page is hosted on github as well",
     src: "https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg",
     color: "#FA8C16",
     shadowColor: "rgba(250,140,22,.12)",
   },
   {
-    title: "Mock 数据",
-    content: "实用的本地数据调试方案",
+    title: "Run projects straight in the browser",
+    content: "You don't need to download anything to get yourself started",
     src: "https://gw.alipayobjects.com/zos/rmsportal/aLQyKyUyssIUhHTZqCIb.svg",
     color: "#EB2F96",
     shadowColor: "rgba(235,45,150,.12)",
   },
   {
-    title: "UI 测试",
-    content: "自动化测试保障前端产品质量",
+    title: "Say goodbye to 'it works on my machine'",
+    content: "It's gonna work on every machine",
     src: "https://gw.alipayobjects.com/zos/rmsportal/RpJIQitGbSCHwLMimybX.svg",
     color: "#1890FF",
     shadowColor: "rgba(24,144,255,.12)",
@@ -211,18 +215,22 @@ class Page1 extends React.PureComponent {
             <Parallax
               className="page1-bg"
               animation={{
-                translateY: 200,
+                translateY: 300,
                 ease: "linear",
                 playScale: [0, 1.65],
               }}
+              style={{ top: "-30vh" }}
               location="page1-wrapper"
             >
               SiliSky
+              <SmallCloud />
+              <MediumCloud />
+              <BigCloud />
             </Parallax>
           )}
-          <h2>
+          {/* <h2>
             What <span>SiliSky</span> means{" "}
-          </h2>
+          </h2> */}
           <div className="title-line-wrapper page1-line">
             <div className="title-line" />
           </div>
