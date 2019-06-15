@@ -239,7 +239,6 @@ class Page1 extends React.PureComponent {
               style={{ top: "-30vh" }}
               location="page1-wrapper"
             >
-              SiliSky
               <SmallCloud />
               <MediumCloud />
               <BigCloud />
