@@ -150,7 +150,7 @@ const logos = [
   {
     component: <Ruby width="8vw" height="auto" />,
     name: "Ruby",
-    color: "	#9E1A19",
+    color: "#9E1A19",
     id: 2,
   },
   {

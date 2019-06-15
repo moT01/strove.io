@@ -11,10 +11,6 @@ const FadeIn = keyframes`
   }
 `
 
-const ShowText = keyframes`
-
-`
-
 const SectionWrapper = styled.div`
   flex: 1;
   display: flex;

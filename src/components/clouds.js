@@ -19,7 +19,7 @@ const AnimateMediumCloud = keyframes`
 
 const AnimateSmallCloud = keyframes`
   0% {
-    right: -5vw;
+    right: -15vw;
   }
   100% {
     right: 100vw;
@@ -33,7 +33,7 @@ const BigCloud = styled.div`
     height: 11vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 75vh;
+    top: 55vh;
     animation: ${AnimateCloud} 60s linear infinite;
     z-index: -1;
   }
@@ -69,7 +69,7 @@ const MediumCloud = styled.div`
     height: 9vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 28vh;
+    top: -20vh;
     animation: ${AnimateMediumCloud} 53s linear infinite;
     z-index: -1;
   }
@@ -105,7 +105,7 @@ const SmallCloud = styled.div`
     height: 7vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 20vh;
+    top: 1vh;
     animation: ${AnimateSmallCloud} 45s linear infinite;
     z-index: -1;
   }

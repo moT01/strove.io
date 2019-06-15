@@ -12,7 +12,7 @@ import {
   Node,
 } from "../images/logos"
 import { Link } from "gatsby"
-import { SmallCloud, MediumCloud, BigCloud } from "./leftovers/clouds.js"
+import { SmallCloud, MediumCloud, BigCloud } from "./clouds.js"
 
 const SectionWrapper = styled.div`
   flex: 1;

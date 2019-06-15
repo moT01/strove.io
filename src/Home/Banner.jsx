@@ -1,9 +1,50 @@
-import React from "react";
-import GitHubButton from "react-github-button";
-import QueueAnim from "rc-queue-anim";
-import TweenOne from "rc-tween-one";
-import { Button } from "antd";
-import BannerSVGAnim from "./component/BannerSVGAnim";
+import React from "react"
+import GitHubButton from "react-github-button"
+import QueueAnim from "rc-queue-anim"
+import TweenOne from "rc-tween-one"
+import BannerSVGAnim from "./component/BannerSVGAnim"
+import styled, { keyframes } from "styled-components"
+
+const HoverIcon = keyframes`
+  0% {
+  }
+  100% {
+    transform: scale(1.1)
+  }
+`
+
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 45%;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? "#0072ce" : "#ffffff")};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? "#ffffff" : "#0072ce")};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: space-around;
+`
 
 function Banner(props) {
   return (
@@ -31,24 +72,28 @@ function Banner(props) {
         </div>
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
-        <div key="button" className="button-wrapper">
-          <a
+        <ButtonsWrapper>
+          {/* <div key="button" className="button-wrapper"> */}
+          {/* <a
             href="http://preview.pro.ant.design"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            <Button type="primary">Button 1</Button>
-          </a>
-          <Button style={{ margin: "0 16px" }} type="primary" ghost>
-            Button 2
+          > */}
+          <Button primary>
+            <p style={{ margin: 0 }}>Request demo</p>
           </Button>
-          <GitHubButton
+          {/* </a> */}
+          <Button>
+            <p style={{ margin: 0 }}>Learn more</p>
+          </Button>
+          {/* <GitHubButton
             key="github-button"
             type="stargazers"
             namespace="ant-design"
             repo="ant-design-pro"
-          />
-        </div>
+          /> */}
+          {/* </div> */}
+        </ButtonsWrapper>
       </QueueAnim>
       {!props.isMobile && (
         <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
@@ -56,7 +101,7 @@ function Banner(props) {
         </TweenOne>
       )}
     </div>
-  );
+  )
 }
 
-export default Banner;
+export default Banner
