@@ -4,6 +4,8 @@ import { OverPack, Parallax } from "rc-scroll-anim"
 import QueueAnim from "rc-queue-anim"
 import TweenOne from "rc-tween-one"
 import { SmallCloud, MediumCloud, BigCloud } from "../components/clouds"
+import { Icon } from "antd"
+import VSCode from "../images/svg/visual-studio-code.svg"
 
 const { TweenOneGroup } = TweenOne
 
@@ -14,6 +16,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg",
     color: "#13C2C2",
     shadowColor: "rgba(19,194,194,.12)",
+    type: "cloud",
   },
   {
     title: "Work with VSCode",
@@ -29,6 +32,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg",
     color: "#1AC44D",
     shadowColor: "rgba(26,196,77,.12)",
+    type: "code",
   },
   {
     title: "Access your code anywhere",
@@ -36,6 +40,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg",
     color: "#722ED1",
     shadowColor: "rgba(114,46,209,.12)",
+    type: "global",
   },
   {
     title: "Don't lose time, one environment for the whole team",
@@ -44,6 +49,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg",
     color: "#FAAD14",
     shadowColor: "rgba(250,173,20,.12)",
+    type: "team",
   },
   {
     title: "Build fullstack apps",
@@ -51,6 +57,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg",
     color: "#F5222D",
     shadowColor: "rgba(245,34,45,.12)",
+    type: "appstore",
   },
   {
     title: "It's open source",
@@ -59,6 +66,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg",
     color: "#FA8C16",
     shadowColor: "rgba(250,140,22,.12)",
+    type: "github",
   },
   {
     title: "Run projects straight in the browser",
@@ -66,6 +74,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/aLQyKyUyssIUhHTZqCIb.svg",
     color: "#EB2F96",
     shadowColor: "rgba(235,45,150,.12)",
+    type: "ie",
   },
   {
     title: "Say goodbye to 'it works on my machine'",
@@ -73,6 +82,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/RpJIQitGbSCHwLMimybX.svg",
     color: "#1890FF",
     shadowColor: "rgba(24,144,255,.12)",
+    type: "desktop",
   },
 ]
 
@@ -182,11 +192,30 @@ class Page1 extends React.PureComponent {
                 }`,
               }}
             >
-              <img
-                src={item.src}
+              {item.type ? (
+                <Icon
+                  type={item.type}
+                  style={{
+                    fontSize: "32px",
+                    color: `${item.color}`,
+                    marginTop: "10px",
+                  }}
+                />
+              ) : (
+                <Icon
+                  component={VSCode}
+                  // style={{
+                  //   fontSize: "32px",
+                  //   color: `${item.color}`,
+                  //   marginTop: "10px",
+                  // }}
+                />
+              )}
+              {/* <img
+                src="https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg"
                 alt="img"
                 style={i === 4 ? { marginLeft: -15 } : {}}
-              />
+              /> */}
             </div>
             <h3>{item.title}</h3>
             <p>{item.content}</p>
