@@ -1,4 +1,3 @@
-
 import Typescript from "./typescript.svg"
 import Cpp from "./cpp.svg"
 import Go from "./go.svg"
@@ -9,6 +8,7 @@ import Javascript from "./javascript.svg"
 import Python from "./python.svg"
 import CSharp from "./csharp.svg"
 import Node from "./Node.svg"
+import VSCode from "./vscode.svg"
 
 export {
   Typescript,
@@ -20,5 +20,6 @@ export {
   Javascript,
   Python,
   CSharp,
-  Node
+  Node,
+  VSCode,
 }

@@ -5,7 +5,7 @@ import QueueAnim from "rc-queue-anim"
 import TweenOne from "rc-tween-one"
 import { SmallCloud, MediumCloud, BigCloud } from "../components/clouds"
 import { Icon } from "antd"
-import VSCode from "../images/svg/visual-studio-code.svg"
+import { VSCode } from "../images/logos"
 
 const { TweenOneGroup } = TweenOne
 
@@ -14,32 +14,32 @@ const featuresCN = [
     title: "Push straight to GitHub or Bitbucket",
     content: "SiliSky is designed to work with every cloud",
     src: "https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg",
-    color: "#13C2C2",
-    shadowColor: "rgba(19,194,194,.12)",
+    color: "#1AC44D",
+    shadowColor: "rgba(26,196,77,.12)",
     type: "cloud",
   },
   {
     title: "Work with VSCode",
     content: "You can even use your favorite extensions",
     src: "https://gw.alipayobjects.com/zos/rmsportal/smwQOoxCjXVbNAKMqvWk.svg",
-    color: "#2F54EB",
-    shadowColor: "rgba(47,84,235,.12)",
+    color: "#0072ce",
+    shadowColor: "rgba(0, 114, 206, 0.12)",
   },
   {
     title: "Code in all major programming languages",
     content:
       "You can even use a particular version of a language. Need Python 2.7.3 for chemistry? We got you covered!",
     src: "https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg",
-    color: "#1AC44D",
-    shadowColor: "rgba(26,196,77,.12)",
+    color: "#722ED1",
+    shadowColor: "rgba(114,46,209,.12)",
     type: "code",
   },
   {
     title: "Access your code anywhere",
     content: "Log in to your account from any computer and code in the cloud",
     src: "https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg",
-    color: "#722ED1",
-    shadowColor: "rgba(114,46,209,.12)",
+    color: "#13C2C2",
+    shadowColor: "rgba(19,194,194,.12)",
     type: "global",
   },
   {
@@ -202,20 +202,8 @@ class Page1 extends React.PureComponent {
                   }}
                 />
               ) : (
-                <Icon
-                  component={VSCode}
-                  // style={{
-                  //   fontSize: "32px",
-                  //   color: `${item.color}`,
-                  //   marginTop: "10px",
-                  // }}
-                />
+                <VSCode width="38px" height="auto" fill={item.color} />
               )}
-              {/* <img
-                src="https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg"
-                alt="img"
-                style={i === 4 ? { marginLeft: -15 } : {}}
-              /> */}
             </div>
             <h3>{item.title}</h3>
             <p>{item.content}</p>
