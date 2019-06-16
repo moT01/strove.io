@@ -113,26 +113,22 @@ const Preview = () => {
     // const adress = "http://35.239.27.5:9991/"
     // const reachable = await isReachable(adress)
     const result = await fetch(
-      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewReachable?token=${testToken}`
-    )
+      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`
+    ).then(res => res.json())
+
+    console.log("result", result)
 
     setPreviewOn(result)
   }
 
-  useEffectAsync(async () => {
-    // const adress = "http://35.239.27.5:9991/"
-    // const reachable = await isReachable(adress)
-    return await fetch(
-      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewReachable?token=${testToken}`
-    )
-  }, [])
+  useEffectAsync(isIframeReachable, [])
 
   return (
     <>
       {/* {console.log("previewOn", isIframeReacha())} */}
       {console.log("previewOn", previewOn)}
       <SEO title="Preview" />
-      {!previewOn ? (
+      {!previewOn.result ? (
         <Error />
       ) : (
         <StyledIframe
