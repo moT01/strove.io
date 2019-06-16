@@ -107,28 +107,24 @@ function useEffectAsync(effect, inputs) {
 }
 
 const Preview = () => {
-  const [previewOn, setPreviewOn] = useState({ result: true })
+  const [previewOn, setPreviewOn] = useState(true)
 
   const isIframeReachable = async () => {
-    // const adress = "http://35.239.27.5:9991/"
-    // const reachable = await isReachable(adress)
-    const result = await fetch(
+    const isPreviewOn = await fetch(
       `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewOn?token=${testToken}`
     ).then(res => res.json())
 
-    console.log("result", result)
+    console.log("isPreviewOn", isPreviewOn)
 
-    setPreviewOn(result)
+    setPreviewOn(isPreviewOn.result)
   }
 
   useEffectAsync(isIframeReachable, [])
 
   return (
     <>
-      {/* {console.log("previewOn", isIframeReacha())} */}
-      {console.log("previewOn", previewOn)}
       <SEO title="Preview" />
-      {!previewOn.result ? (
+      {!previewOn ? (
         <Error />
       ) : (
         <StyledIframe
