@@ -100,26 +100,36 @@ const Error = () => (
 
 const testToken = "testToken"
 
+function useEffectAsync(effect, inputs) {
+  useEffect(() => {
+    effect()
+  }, inputs)
+}
+
 const Preview = () => {
-  const [previewOn, setPreviewOn] = useState(true)
+  const [previewOn, setPreviewOn] = useState({ result: true })
 
   const isIframeReachable = async () => {
-    const adress = "http://35.239.27.5:9991/"
-    const reachable = await isReachable(adress)
-    if (!reachable) {
-      // setPreviewOn(false)
-      // document.getElementsByTagName(
-      //   "IFRAME"
-      // )[0].contentDocument.body.innerHTML = Error
+    // const adress = "http://35.239.27.5:9991/"
+    // const reachable = await isReachable(adress)
+    const result = await fetch(
+      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewReachable?token=${testToken}`
+    )
 
-      setPreviewOn(false)
-    }
+    setPreviewOn(result)
   }
 
-  useEffect(() => isIframeReachable(), [])
+  useEffectAsync(async () => {
+    // const adress = "http://35.239.27.5:9991/"
+    // const reachable = await isReachable(adress)
+    return await fetch(
+      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewReachable?token=${testToken}`
+    )
+  }, [])
 
   return (
     <>
+      {/* {console.log("previewOn", isIframeReacha())} */}
       {console.log("previewOn", previewOn)}
       <SEO title="Preview" />
       {!previewOn ? (
