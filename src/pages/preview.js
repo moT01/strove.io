@@ -113,7 +113,7 @@ const Preview = () => {
     // const adress = "http://35.239.27.5:9991/"
     // const reachable = await isReachable(adress)
     const result = await fetch(
-      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`
+      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewOn?token=${testToken}`
     ).then(res => res.json())
 
     console.log("result", result)
