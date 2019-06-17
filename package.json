@@ -42,7 +42,6 @@
     "gitstar-components": "^1.0.5",
     "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.7.0",
-    "is-reachable": "^3.1.0",
     "isomorphic-fetch": "^2.2.1",
     "prism-themes": "^1.1.0",
     "prismjs": "^1.16.0",
@@ -60,7 +59,7 @@
     "react-redux": "^7.1.0",
     "react-transition-group": "^4.1.0",
     "reselect": "^4.0.0",
-    "styled-components": "^4.2.1"
+    "styled-components": "5.0.0-beta.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
