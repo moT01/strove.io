@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import isReachable from "is-reachable"
 
 import SEO from "../components/seo"
 
@@ -83,7 +82,7 @@ const Error = () => (
         <span style={{ display: "block" }}>{"}"}</span>
 
         <Link
-          to="/preview"
+          to="/editor"
           style={{
             color: `white`,
             textDecoration: `none`,
@@ -100,26 +99,20 @@ const Error = () => (
 
 const testToken = "testToken"
 
-function useEffectAsync(effect, inputs) {
-  useEffect(() => {
-    effect()
-  }, inputs)
-}
-
 const Preview = () => {
   const [previewOn, setPreviewOn] = useState(true)
 
-  const isIframeReachable = async () => {
-    const isPreviewOn = await fetch(
-      `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewOn?token=${testToken}`
-    ).then(res => res.json())
+  useEffect(() => {
+    const isIframeReachable = async () => {
+      const isPreviewOn = await fetch(
+        `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewOn?token=${testToken}`
+      ).then(res => res.json())
 
-    console.log("isPreviewOn", isPreviewOn)
+      setPreviewOn(isPreviewOn.result)
+    }
 
-    setPreviewOn(isPreviewOn.result)
-  }
-
-  useEffectAsync(isIframeReachable, [])
+    isIframeReachable()
+  }, [])
 
   return (
     <>
@@ -128,7 +121,7 @@ const Preview = () => {
         <Error />
       ) : (
         <StyledIframe
-          src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview`}
+          src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken}`}
         />
       )}
     </>
