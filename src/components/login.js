@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 
 import ApolloClient from "apollo-boost"
 import fetch from "isomorphic-fetch"
+import { dispatch } from "rxjs/internal/observable/range"
 
 const client = new ApolloClient({
   uri: process.env.SILISKY_ENDPOINT,
@@ -76,6 +77,7 @@ const GitubLogo = props => (
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
   const [token, setToken] = useState()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const code =
@@ -107,6 +109,7 @@ const LoginComponent = ({ location }) => {
             variables: { code },
           })
           console.log("githubAuth", githubAuth)
+          dispatch({ type: "GET_USER", payload: githubAuth })
         } catch (e) {
           console.log(e)
         }
