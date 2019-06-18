@@ -21,23 +21,9 @@ const {
   },
 })
 
-const auth = async () => {
-  try {
-    const {
-      data: { githubAuth },
-    } = await client.mutate({
-      mutation: GITHUB_LOGIN,
-      variables: { code },
-    })
-    console.log("githubAuth", githubAuth)
-    dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-const fetch = ({
-  key,
+export const fetchData = ({
+  mutationName,
+  storeName,
   variables,
   context,
   fetchPolicy = "cache-first",
@@ -46,33 +32,21 @@ const fetch = ({
   isMutation = false,
 }) => {
   return async (dispatch, getState, { client }) => {
-    dispatch({ type: `FETCH/${KEY}/LOADING`, payload: true })
+    dispatch({ type: `FETCH/${storeName}/LOADING`, payload: true })
 
     try {
-      const {
-        data: { githubAuth },
-      } = await client.mutate({
-        mutation: GITHUB_LOGIN,
-        variables: { code },
+      const { data } = await client[isMutation ? "mutate" : "query"]({
+        query,
+        variables,
+        context,
+        fetchPolicy,
+        errorPolicy,
       })
-      console.log("githubAuth", githubAuth)
-      dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
-    } catch (e) {
-      console.log(e)
-    }
 
-    const request = await client[isMutation ? "mutate" : "query"]({
-      query,
-      variables,
-      context,
-      fetchPolicy,
-      errorPolicy,
-    })
-    const result = await request
-    dispatch({
-      type: DEFAULT_ACTION,
-      payload: result,
-    })
+      dispatch({ type: `FETCH/${storeName}/DATA`, payload: data[mutationName] })
+    } catch (e) {
+      dispatch({ type: `FETCH/${storeName}/ERROR`, payload: e })
+    }
   }
 }
 
