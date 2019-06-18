@@ -1,15 +1,8 @@
 import React, { PureComponent } from "react"
-import {
-  Loading,
-  Avatar,
-  Logo,
-  Logotype,
-  Container,
-  Header,
-} from "gitstar-components"
 import gql from "graphql-tag"
 import { Location } from "@reach/router"
 import styled from "styled-components"
+import { useDispatch } from "react-redux"
 
 import ApolloClient from "apollo-boost"
 import fetch from "isomorphic-fetch"

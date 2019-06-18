@@ -39,7 +39,6 @@
     "gatsby-transformer-json": "^2.1.11",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.21",
-    "gitstar-components": "^1.0.5",
     "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.7.0",
     "isomorphic-fetch": "^2.2.1",
