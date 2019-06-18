@@ -12,7 +12,6 @@ const {
     user: { data, loading, error },
   },
 } = createActions({
-  // GET_USER: user => ({ ...user }),
   FETCH: {
     USER: {
       DATA: data => data,
@@ -22,32 +21,20 @@ const {
   },
 })
 
-// const reducer = handleActions(
-//   {
-//     [combineActions(data, loading, error)]: (
-//       state,
-//       { payload: { amount } }
-//     ) => {
-//       return { ...state, counter: state.counter + amount };
-//     }
-//   },
-//   defaultState
-// );
-
-// const reducer = handleAction(
-//   data,
-//   (state, action) => ({ user: action.payload }),
-//   defaultState
-// )
-
 const reducer = handleActions(
   {
-    [data]: (state, { payload: data }) => ({
+    [data]: (state, { payload }) => ({
       ...state,
-      user: { loading: false, error: null, data },
+      user: { loading: false, error: null, data: payload },
     }),
-    [error]: (state, { payload: error }) => error,
-    [loading]: (state, { payload: error }) => loading,
+    [error]: (state, { payload }) => ({
+      ...state,
+      user: { loading: false, data: null, error: payload },
+    }),
+    [loading]: (state, { payload }) => ({
+      ...state,
+      user: { ...state.user, loadin: payload },
+    }),
     // [combineActions(increment, decrement)]: (
     //   state,
     //   { payload: { amount } }
