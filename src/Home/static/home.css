@@ -15,8 +15,8 @@ body {
   line-height: 1.5;
   color: #314659;
   font-size: 14px;
-  background: #fff;
-  transition: background 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: #fff;
+  transition: background-color 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   overflow-x: hidden;
 }
 .home-wrapper .ant-btn {
@@ -136,7 +136,7 @@ svg g {
   background: linear-gradient(to right, rgba(24, 144, 255, 0) 0%, #1890ff 100%);
 }
 .home-page {
-  margin: 50px auto;
+  margin: 0px auto;
 }
 .home-page h2 {
   text-align: center;
