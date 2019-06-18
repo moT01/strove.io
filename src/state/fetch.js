@@ -21,22 +21,60 @@ const {
   },
 })
 
-// const fetch = ({ key, variables, headers, query }) => {
-//   return async (dispatch, getState, { client }) => {
-//     dispatch({ type: `FETCH/${KEY}/LOADING`, payload: true })
-//     const request = await client.query({
-//       query: someQuery,
-//       variables: {
-//         input: bar,
-//       },
-//     })
-//     const result = await request
-//     dispatch({
-//       type: DEFAULT_ACTION,
-//       payload: result,
-//     })
-//   }
-// }
+const auth = async () => {
+  try {
+    const {
+      data: { githubAuth },
+    } = await client.mutate({
+      mutation: GITHUB_LOGIN,
+      variables: { code },
+    })
+    console.log("githubAuth", githubAuth)
+    dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+const fetch = ({
+  key,
+  variables,
+  context,
+  fetchPolicy = "cache-first",
+  errorPolicy = "none",
+  query,
+  isMutation = false,
+}) => {
+  return async (dispatch, getState, { client }) => {
+    dispatch({ type: `FETCH/${KEY}/LOADING`, payload: true })
+
+    try {
+      const {
+        data: { githubAuth },
+      } = await client.mutate({
+        mutation: GITHUB_LOGIN,
+        variables: { code },
+      })
+      console.log("githubAuth", githubAuth)
+      dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
+    } catch (e) {
+      console.log(e)
+    }
+
+    const request = await client[isMutation ? "mutate" : "query"]({
+      query,
+      variables,
+      context,
+      fetchPolicy,
+      errorPolicy,
+    })
+    const result = await request
+    dispatch({
+      type: DEFAULT_ACTION,
+      payload: result,
+    })
+  }
+}
 
 const reducer = handleActions(
   {
