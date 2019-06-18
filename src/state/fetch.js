@@ -21,35 +21,6 @@ const {
   },
 })
 
-export const fetchData = ({
-  mutationName,
-  storeName,
-  variables,
-  context,
-  fetchPolicy = "cache-first",
-  errorPolicy = "none",
-  query,
-  isMutation = false,
-}) => {
-  return async (dispatch, getState, { client }) => {
-    dispatch({ type: `FETCH/${storeName.toUpperCase()}/LOADING`, payload: true })
-
-    try {
-      const { data } = await client[isMutation ? "mutate" : "query"]({
-        query,
-        variables,
-        context,
-        fetchPolicy,
-        errorPolicy,
-      })
-
-      dispatch({ type: `FETCH/${storeName.toUpperCase()}/DATA`, payload: data[mutationName] })
-    } catch (e) {
-      dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
-    }
-  }
-}
-
 const reducer = handleActions(
   {
     [data]: (state, { payload }) => ({

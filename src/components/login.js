@@ -78,12 +78,10 @@ export const mutate = ({
   storeName,
   variables,
   context,
-  fetchPolicy = "cache-first",
-  errorPolicy = "none",
+  errorPolicy = "all",
   mutation,
 }) => {
   return async dispatch => {
-    console.log("efefbnejkfnekfjnfekj")
     dispatch({
       type: `FETCH/${storeName.toUpperCase()}/LOADING`,
       payload: true,
@@ -94,7 +92,7 @@ export const mutate = ({
         mutation,
         context,
         variables,
-        fetchPolicy,
+        fetchPolicy: "no-cache",
         errorPolicy,
       })
 
@@ -103,6 +101,7 @@ export const mutate = ({
         payload: data[mutationName],
       })
     } catch (e) {
+      console.log("fetch error: ", e)
       dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
     }
   }
