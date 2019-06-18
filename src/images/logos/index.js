@@ -9,6 +9,9 @@ import Python from "./python.svg"
 import CSharp from "./csharp.svg"
 import Node from "./Node.svg"
 import VSCode from "./vscode.svg"
+import Google from "./Google.svg"
+import Github from "./Github.svg"
+import Docker from "./Docker.svg"
 
 export {
   Typescript,
@@ -22,4 +25,7 @@ export {
   CSharp,
   Node,
   VSCode,
+  Google,
+  Github,
+  Docker,
 }

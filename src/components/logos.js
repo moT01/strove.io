@@ -1,18 +1,7 @@
 /* eslint-disable */
 import React from "react"
 import styled from "styled-components"
-import {
-  CSharp,
-  Java,
-  Python,
-  Ruby,
-  Typescript,
-  Cpp,
-  Go,
-  Node,
-} from "../images/logos"
-import { Link } from "gatsby"
-import { SmallCloud, MediumCloud, BigCloud } from "./clouds.js"
+import { Docker, Github, Google, VSCode } from "../images/logos"
 
 const SectionWrapper = styled.div`
   flex: 1;
@@ -21,9 +10,8 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  padding: 10px;
+  width: 70%;
+  height: auto;
   overflow-x: hidden;
 `
 
@@ -31,43 +19,36 @@ const IconContainer = styled.div`
   position: relative;
   transition: 0.3s ease background-color, 0.3s ease transform;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   cursor: pointer;
   margin: 5px;
-  padding: 8px;
-  background: rgba(52, 152, 219, 0.4);
   border-radius: 8px;
   opacity: 0.9;
 
-  width: 10vw;
-  height: 10vw;
+  width: 15%;
+  height: auto;
 
   &:hover {
-    transform: scale(1.5);
-    background: rgba(52, 152, 219, 0.7);
+    transform: scale(1.2);
     opacity: 1;
   }
 
   @media (max-width: 960px) {
     flex-shrink: 0;
-    width: 128px;
-    height: 128px;
-
-    svg {
-      width: 115px;
-      height: 115px;
-    }
+    width: 20%;
+    height: 20%;
   }
 `
 
 const ScrollAtMobile = styled.div`
   display: flex;
-  flex: 1;
-  justify-content: space-around;
-  min-width: 100%;
-  max-width: 90vw;
-  max-height: 12vw;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 70%;
+  max-width: 80vw;
 
   @media (max-width: 960px) {
     justify-content: flex-start;
@@ -77,38 +58,20 @@ const ScrollAtMobile = styled.div`
 
 const Logos = () => (
   <SectionWrapper>
-    <BigCloud />
-    <MediumCloud />
-    <SmallCloud />
     <ScrollAtMobile>
       <IconContainer>
-        <Node width="100%" height="auto" />
+        <Google width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Python width="100%" height="auto" />
+        <Docker width="100%" height="auto" />
       </IconContainer>
       <IconContainer>
-        <Ruby width="100%" height="auto" />
+        <VSCode width="100%" height="auto" fill="#303c42"/>
       </IconContainer>
       <IconContainer>
-        <Typescript width="100%" height="auto" />
-      </IconContainer>
-      <IconContainer>
-        <Cpp width="100%" height="auto" />
-      </IconContainer>
-      <IconContainer>
-        <Go width="100%" height="auto" />
-      </IconContainer>
-      <IconContainer>
-        <Java width="100%" height="auto" />
-      </IconContainer>
-      <IconContainer>
-        <CSharp width="100%" height="auto" />
+        <Github width="100%" height="auto" />
       </IconContainer>
     </ScrollAtMobile>
-    <Link to="/page-2/" style={{ marginTop: "15px" }}>
-      And many more!
-    </Link>
   </SectionWrapper>
 )
 /* eslint-enable */

@@ -34,7 +34,7 @@ svg g {
   transform-box: fill-box;
 }
 .banner-wrapper {
-  height: 526px;
+  height: 90vh;
   width: 100%;
   max-width: 1500px;
   margin: auto;
@@ -248,10 +248,13 @@ svg g {
 }
 .page2 {
   text-align: center;
-  height: 588px;
+  height: 388px;
 }
 .page2 .page2-content {
   will-change: transform;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .page2-line {
   margin: 148px auto 24px;
@@ -266,7 +269,10 @@ svg g {
   line-height: 28px;
 }
 .home-code {
-  width: 90%;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   max-width: 840px;
   border-radius: 4px;
   background: #f2f4f5;

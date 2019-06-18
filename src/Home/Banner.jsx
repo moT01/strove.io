@@ -5,14 +5,6 @@ import TweenOne from "rc-tween-one"
 import BannerSVGAnim from "./component/BannerSVGAnim"
 import styled, { keyframes } from "styled-components"
 
-const HoverIcon = keyframes`
-  0% {
-  }
-  100% {
-    transform: scale(1.1)
-  }
-`
-
 const Button = styled.button`
   display: flex;
   flex-direction: row;
