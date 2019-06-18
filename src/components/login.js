@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react"
+import React, { PureComponent, useState, useEffect } from "react"
 import gql from "graphql-tag"
 import { Location } from "@reach/router"
 import styled from "styled-components"
@@ -77,14 +77,11 @@ const GitubLogo = props => (
   </svg>
 )
 
-class LoginComponent extends PureComponent {
-  state = {
-    status: STATUS.INITIAL,
-    token: null,
-  }
+const LoginComponent = ({ location }) => {
+  const [status, setStatus] = useState(STATUS.INITIAL)
+  const [token, setToken] = useState()
 
-  componentDidMount() {
-    const { location } = this.props
+  useEffect(() => {
     const code =
       location.search.match(/code=(.*)/) &&
       location.search.match(/code=(.*)/)[1]
@@ -119,42 +116,20 @@ class LoginComponent extends PureComponent {
         }
       }
       auth()
-      this.setState({
-        // token: storedToken,
-        status: STATUS.AUTHENTICATED,
-      })
+      setStatus(STATUS.AUTHENTICATED)
     }
+  }, [])
 
-    // const code =
-    //   window.location.href.match(/?code=(.*)/) &&
-    //   window.location.href.match(/?code=(.*)/)[1]
-    // if (code) {
-    //   this.setState({ status: STATUS.LOADING })
-
-    //   fetch(`${AUTH_API_URI}${code}`)
-    //     .then(response => response.json())
-    //     .then(({ token }) => {
-    //       localStorage.setItem("github_token", token)
-    //       this.setState({
-    //         token,
-    //         status: STATUS.FINISHED_LOADING,
-    //       })
-    //     })
-    // }
-  }
-
-  render() {
-    return (
-      <LoginButton
-        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo,repo&redirect_uri=${REDIRECT_URI}`}
-      >
-        <span>Login </span>
-        <Inline>
-          <GitubLogo />
-        </Inline>
-      </LoginButton>
-    )
-  }
+  return (
+    <LoginButton
+      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo,repo&redirect_uri=${REDIRECT_URI}`}
+    >
+      <span>Login </span>
+      <Inline>
+        <GitubLogo />
+      </Inline>
+    </LoginButton>
+  )
 }
 
 const Login = () => (
