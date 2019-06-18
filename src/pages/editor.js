@@ -25,6 +25,7 @@ const QUERY = gql`
 `
 
 const testToken = "testToken"
+const id = "12345"
 
 const Editor = () => (
   <Layout>
@@ -36,7 +37,7 @@ const Editor = () => (
       }}
     </Query> */}
     <StyledIframe
-      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken}`}
+      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken},id=${id}`}
     />
   </Layout>
 )
