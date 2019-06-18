@@ -4,13 +4,7 @@ import { Location } from "@reach/router"
 import styled from "styled-components"
 import { useDispatch } from "react-redux"
 
-import ApolloClient from "apollo-boost"
-import fetch from "isomorphic-fetch"
-
-const client = new ApolloClient({
-  uri: process.env.SILISKY_ENDPOINT,
-  fetch,
-})
+import { mutate } from "../utils"
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -73,43 +67,8 @@ const GitubLogo = props => (
   </svg>
 )
 
-export const mutate = ({
-  mutationName,
-  storeName,
-  variables,
-  context,
-  errorPolicy = "all",
-  mutation,
-}) => {
-  return async dispatch => {
-    dispatch({
-      type: `FETCH/${storeName.toUpperCase()}/LOADING`,
-      payload: true,
-    })
-
-    try {
-      const { data } = await client.mutate({
-        mutation,
-        context,
-        variables,
-        fetchPolicy: "no-cache",
-        errorPolicy,
-      })
-
-      dispatch({
-        type: `FETCH/${storeName.toUpperCase()}/DATA`,
-        payload: data[mutationName],
-      })
-    } catch (e) {
-      console.log("fetch error: ", e)
-      dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
-    }
-  }
-}
-
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
-  const [token, setToken] = useState()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -143,21 +102,6 @@ const LoginComponent = ({ location }) => {
         })
       )
 
-      // const auth = async () => {
-      //   try {
-      //     const {
-      //       data: { githubAuth },
-      //     } = await client.mutate({
-      //       mutation: GITHUB_LOGIN,
-      //       variables: { code },
-      //     })
-      //     console.log("githubAuth", githubAuth)
-      //     dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
-      //   } catch (e) {
-      //     console.log(e)
-      //   }
-      // }
-      // auth()
       setStatus(STATUS.AUTHENTICATED)
     }
   }, [])
