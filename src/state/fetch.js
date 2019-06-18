@@ -21,6 +21,23 @@ const {
   },
 })
 
+// const fetch = ({ key, variables, headers, query }) => {
+//   return async (dispatch, getState, { client }) => {
+//     dispatch({ type: `FETCH/${KEY}/LOADING`, payload: true })
+//     const request = await client.query({
+//       query: someQuery,
+//       variables: {
+//         input: bar,
+//       },
+//     })
+//     const result = await request
+//     dispatch({
+//       type: DEFAULT_ACTION,
+//       payload: result,
+//     })
+//   }
+// }
+
 const reducer = handleActions(
   {
     [data]: (state, { payload }) => ({
