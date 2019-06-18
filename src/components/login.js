@@ -52,10 +52,6 @@ const LoginButton = styled.a`
   }
 `
 
-const LinkText = styled.span`
-  color: white;
-`
-
 const Inline = styled.div`
   display: inline-block;
 `
