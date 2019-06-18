@@ -9,4 +9,4 @@
 import wrapWithProvider from "./src/state/ReduxWrapper"
 export const wrapRootElement = wrapWithProvider
 
-export { wrapRootElement } from "./apolloWrapper"
+export { wrapRootElement } from "./wrapper

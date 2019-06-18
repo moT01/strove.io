@@ -13,4 +13,4 @@ export const onClientEntry = () => {
   }
 }
 
-export { wrapRootElement } from "./apolloWrapper"
+export { wrapRootElement } from "./wrapper"
