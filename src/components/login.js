@@ -109,7 +109,7 @@ const LoginComponent = ({ location }) => {
             variables: { code },
           })
           console.log("githubAuth", githubAuth)
-          dispatch({ type: "GET_USER", payload: githubAuth })
+          dispatch({ type: "GET/USER/DATA", payload: githubAuth })
         } catch (e) {
           console.log(e)
         }
