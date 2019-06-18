@@ -24,11 +24,19 @@ const createFetchReducers = ({
       }),
       [error]: (state, { payload }) => ({
         ...state,
-        [storeName]: { loading: false, data: null, error: payload },
+        [storeName]: {
+          loading: false,
+          data: null,
+          error: payload,
+        },
       }),
       [loading]: (state, { payload }) => ({
         ...state,
-        [storeName]: { ...state[storeName].user, loadin: payload },
+        [storeName]: {
+          loading: payload,
+          data: { ...state[storeName].data },
+          error: false,
+        },
       }),
     },
     defaultState
@@ -41,7 +49,7 @@ const createFetchModule = ({ storeName, defaultState }) => {
     },
   } = createActions({
     FETCH: {
-      USER: {
+      [storeName.toUpperCase()]: {
         DATA: data => data,
         LOADING: (isLoading = false) => isLoading,
         ERROR: error => error,
@@ -54,7 +62,7 @@ const createFetchModule = ({ storeName, defaultState }) => {
 
 const userModule = createFetchModule({
   storeName: "user",
-  defaultState: { user: {}, loading: false, error: null },
+  defaultState: { user: { loading: false, data: null, error: null } },
 })
 
 console.log("fefefeffeffefefefefe", userModule)
