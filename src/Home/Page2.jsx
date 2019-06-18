@@ -1,7 +1,7 @@
-import React from "react";
-import { OverPack } from "rc-scroll-anim";
-import QueueAnim from "rc-queue-anim";
-import { Button } from "antd";
+import React from "react"
+import { OverPack } from "rc-scroll-anim"
+import QueueAnim from "rc-queue-anim"
+import { Button } from "antd"
 
 function Page2() {
   return (
@@ -10,9 +10,7 @@ function Page2() {
         <div className="title-line-wrapper page2-line">
           <div className="title-line" />
         </div>
-        <h2>
-          Let’s <span>Pro</span>
-        </h2>
+        <h2>On the shoulders of giants</h2>
         <OverPack>
           <QueueAnim
             key="queue"
@@ -23,7 +21,7 @@ function Page2() {
             <p key="p" className="page-content">
               Work hard，party hardcore：
             </p>
-            <div key="code1" className="home-code">
+            {/* <div key="code1" className="home-code">
               <div>
                 $ <span>git clone</span>{" "}
                 git@github.com:ant-design/ant-design-pro.git --depth=1
@@ -55,12 +53,12 @@ function Page2() {
               >
                 <Button type="primary">下载 Pro</Button>
               </a>
-            </div>
+            </div> */}
           </QueueAnim>
         </OverPack>
       </div>
     </div>
-  );
+  )
 }
 
-export default Page2;
+export default Page2
