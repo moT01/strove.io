@@ -54,7 +54,7 @@ export const query = ({
         query,
         context,
         variables,
-        fetchPolicy: "no-cache",
+        fetchPolicy,
         errorPolicy,
       })
 
