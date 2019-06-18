@@ -1,3 +1,5 @@
+import { createActions, handleActions } from "redux-actions"
+
 import client from "../../client"
 
 export const mutate = ({
@@ -67,4 +69,57 @@ export const query = ({
       dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
     }
   }
+}
+
+const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
+  handleActions(
+    {
+      [data]: (state, { payload }) => ({
+        ...state,
+        [storeName]: {
+          loading: false,
+          error: null,
+          data: { ...state[storeName].data, ...payload },
+        },
+      }),
+      [error]: (state, { payload }) => ({
+        ...state,
+        [storeName]: {
+          loading: false,
+          data: null,
+          error: payload,
+        },
+      }),
+      [loading]: (state, { payload }) => ({
+        ...state,
+        [storeName]: {
+          loading: payload,
+          error: null,
+          data: { ...state[storeName].data },
+        },
+      }),
+    },
+    initState
+  )
+
+export const createFetchModule = ({ storeName, initialState }) => {
+  const {
+    fetch: {
+      user: { data, loading, error },
+    },
+  } = createActions({
+    FETCH: {
+      [storeName.toUpperCase()]: {
+        DATA: data => data,
+        LOADING: (isLoading = false) => isLoading,
+        ERROR: error => error,
+      },
+    },
+  })
+
+  const initState = initialState || {
+    [storeName]: { loading: false, data: null, error: null },
+  }
+
+  return createFetchReducers({ storeName, initState, data, loading, error })
 }
