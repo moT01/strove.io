@@ -8,14 +8,14 @@ import {
 const defaultState = { user: null }
 
 const {
-  get: {
+  fetch: {
     user: { data, loading, error },
   },
 } = createActions({
   // GET_USER: user => ({ ...user }),
-  GET: {
+  FETCH: {
     USER: {
-      DATA: user => ({ ...user }),
+      DATA: data => ({ ...data }),
       LOADING: (isLoading = false) => ({ isLoading }),
       ERROR: error => ({ ...error }),
     },
@@ -34,12 +34,24 @@ const {
 //   defaultState
 // );
 
-const reducer = handleAction(
-  data,
-  (state, action) => ({ user: action.payload }),
+// const reducer = handleAction(
+//   data,
+//   (state, action) => ({ user: action.payload }),
+//   defaultState
+// )
+
+const reducer = handleActions(
+  {
+    [data]: (state, { payload: data }) => ({ ...data }),
+    // [combineActions(increment, decrement)]: (
+    //   state,
+    //   { payload: { amount } }
+    // ) => {
+    //   return { ...state, counter: state.counter + amount };
+    // }
+  },
   defaultState
 )
-
 // const reducer = handleActions(
 //   getUser,
 //   (state, action) => ({ user: action.payload }),
