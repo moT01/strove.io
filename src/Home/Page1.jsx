@@ -16,7 +16,7 @@ const featuresCN = [
     src: "https://gw.alipayobjects.com/zos/rmsportal/aLQyKyUyssIUhHTZqCIb.svg",
     color: "#EB2F96",
     shadowColor: "rgba(235,45,150,.12)",
-    type: "ie",
+    type: "chrome",
   },
   {
     title: "Work with VSCode",
@@ -252,7 +252,9 @@ class Page1 extends React.PureComponent {
           <div className="title-line-wrapper page1-line">
             <div className="title-line" />
           </div>
-          <OverPack>{children}</OverPack>
+          {/* <OverPack> */}
+          <div>{children}</div>
+          {/* </OverPack> */}
         </div>
       </div>
     )
