@@ -1,18 +1,28 @@
-const initialState = {
-  isDarkMode: false,
-}
+import { createActions, handleActions, combineActions } from "redux-actions"
 
-const TOOGLE_DARKMODE = "TOGGLE_DARKMODE"
-export const toggleDarkMode = isDarkMode => ({
-  type: TOOGLE_DARKMODE,
-  isDarkMode,
+const defaultState = { user: null }
+
+const { getUser } = createActions({
+  GET_USER: user => ({ ...user }),
+  // FETCH: {
+  //   USER: {
+  //     DATA: user => ({ ...user }),
+  //     LOADING: (isLoading = false) => ({ isLoading }),
+  //     ERROR: error => ({ ...error })
+  //   }
+  // }
 })
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case TOOGLE_DARKMODE:
-      return { ...state, isDarkMode: action.isDarkMode }
-    default:
-      return state
-  }
-}
+const reducer = handleActions(
+  getUser,
+  (state, action) => ({ user: action.payload }),
+  // {
+  //   [combineActions(increment, decrement)]: (
+  //     state,
+  //     { payload: { amount } }
+  //   ) => {
+  //     return { ...state, counter: state.counter + amount };
+  //   }
+  // },
+  defaultState
+)
