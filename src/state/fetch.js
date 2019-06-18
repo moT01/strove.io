@@ -15,9 +15,9 @@ const {
   // GET_USER: user => ({ ...user }),
   FETCH: {
     USER: {
-      DATA: data => ({ ...data }),
-      LOADING: (isLoading = false) => ({ isLoading }),
-      ERROR: error => ({ ...error }),
+      DATA: data => data,
+      LOADING: (isLoading = false) => isLoading,
+      ERROR: error => error,
     },
   },
 })
@@ -42,7 +42,12 @@ const {
 
 const reducer = handleActions(
   {
-    [data]: (state, { payload: data }) => ({ ...data }),
+    [data]: (state, { payload: data }) => ({
+      ...state,
+      user: { loading: false, error: null, data },
+    }),
+    [error]: (state, { payload: error }) => error,
+    [loading]: (state, { payload: error }) => loading,
     // [combineActions(increment, decrement)]: (
     //   state,
     //   { payload: { amount } }
