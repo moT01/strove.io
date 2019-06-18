@@ -5,13 +5,7 @@ import {
   combineActions,
 } from "redux-actions"
 
-const createFetchReducers = ({
-  storeName,
-  defaultState,
-  data,
-  loading,
-  error,
-}) =>
+const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
   handleActions(
     {
       [data]: (state, { payload }) => ({
@@ -39,10 +33,10 @@ const createFetchReducers = ({
         },
       }),
     },
-    defaultState
+    initState
   )
 
-const createFetchModule = ({ storeName, defaultState }) => {
+const createFetchModule = ({ storeName, initialState }) => {
   const {
     fetch: {
       user: { data, loading, error },
@@ -57,49 +51,15 @@ const createFetchModule = ({ storeName, defaultState }) => {
     },
   })
 
-  return createFetchReducers({ storeName, defaultState, data, loading, error })
+  const initState = initialState || {
+    [storeName]: { loading: false, data: null, error: null },
+  }
+
+  return createFetchReducers({ storeName, initState, data, loading, error })
 }
 
 const userModule = createFetchModule({
   storeName: "user",
-  defaultState: { user: { loading: false, data: null, error: null } },
 })
-
-console.log("fefefeffeffefefefefe", userModule)
-// const {
-//   fetch: {
-//     user: { data, loading, error },
-//   },
-// } = createActions({
-//   FETCH: {
-//     USER: {
-//       DATA: data => data,
-//       LOADING: (isLoading = false) => isLoading,
-//       ERROR: error => error,
-//     },
-//   },
-// })
-
-// const reducer = handleActions(
-//   {
-//     [data]: (state, { payload }) => ({
-//       ...state,
-//       user: {
-//         loading: false,
-//         error: null,
-//         data: { ...state.user.data, ...payload },
-//       },
-//     }),
-//     [error]: (state, { payload }) => ({
-//       ...state,
-//       user: { loading: false, data: null, error: payload },
-//     }),
-//     [loading]: (state, { payload }) => ({
-//       ...state,
-//       user: { ...state.user, loadin: payload },
-//     }),
-//   },
-//   defaultState
-// )
 
 export default userModule
