@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux"
 
 import ApolloClient from "apollo-boost"
 import fetch from "isomorphic-fetch"
-import { dispatch } from "rxjs/internal/observable/range"
 
 const client = new ApolloClient({
   uri: process.env.SILISKY_ENDPOINT,
@@ -74,6 +73,41 @@ const GitubLogo = props => (
   </svg>
 )
 
+export const mutate = ({
+  mutationName,
+  storeName,
+  variables,
+  context,
+  fetchPolicy = "cache-first",
+  errorPolicy = "none",
+  mutation,
+}) => {
+  return async dispatch => {
+    console.log("efefbnejkfnekfjnfekj")
+    dispatch({
+      type: `FETCH/${storeName.toUpperCase()}/LOADING`,
+      payload: true,
+    })
+
+    try {
+      const { data } = await client.mutate({
+        mutation,
+        context,
+        variables,
+        fetchPolicy,
+        errorPolicy,
+      })
+
+      dispatch({
+        type: `FETCH/${storeName.toUpperCase()}/DATA`,
+        payload: data[mutationName],
+      })
+    } catch (e) {
+      dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
+    }
+  }
+}
+
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
   const [token, setToken] = useState()
@@ -100,21 +134,31 @@ const LoginComponent = ({ location }) => {
           }
         }
       `
-      const auth = async () => {
-        try {
-          const {
-            data: { githubAuth },
-          } = await client.mutate({
-            mutation: GITHUB_LOGIN,
-            variables: { code },
-          })
-          console.log("githubAuth", githubAuth)
-          dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
-        } catch (e) {
-          console.log(e)
-        }
-      }
-      auth()
+
+      dispatch(
+        mutate({
+          mutation: GITHUB_LOGIN,
+          variables: { code },
+          mutationName: "githubAuth",
+          storeName: "user",
+        })
+      )
+
+      // const auth = async () => {
+      //   try {
+      //     const {
+      //       data: { githubAuth },
+      //     } = await client.mutate({
+      //       mutation: GITHUB_LOGIN,
+      //       variables: { code },
+      //     })
+      //     console.log("githubAuth", githubAuth)
+      //     dispatch({ type: "FETCH/USER/DATA", payload: githubAuth })
+      //   } catch (e) {
+      //     console.log(e)
+      //   }
+      // }
+      // auth()
       setStatus(STATUS.AUTHENTICATED)
     }
   }, [])

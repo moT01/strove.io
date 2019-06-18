@@ -32,7 +32,7 @@ export const fetchData = ({
   isMutation = false,
 }) => {
   return async (dispatch, getState, { client }) => {
-    dispatch({ type: `FETCH/${storeName}/LOADING`, payload: true })
+    dispatch({ type: `FETCH/${storeName.toUpperCase()}/LOADING`, payload: true })
 
     try {
       const { data } = await client[isMutation ? "mutate" : "query"]({
@@ -43,9 +43,9 @@ export const fetchData = ({
         errorPolicy,
       })
 
-      dispatch({ type: `FETCH/${storeName}/DATA`, payload: data[mutationName] })
+      dispatch({ type: `FETCH/${storeName.toUpperCase()}/DATA`, payload: data[mutationName] })
     } catch (e) {
-      dispatch({ type: `FETCH/${storeName}/ERROR`, payload: e })
+      dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
     }
   }
 }
