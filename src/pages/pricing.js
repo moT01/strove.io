@@ -70,7 +70,7 @@ const Card = styled.div`
   height: 70vh;
   width: 40vw;
   @media (max-width: 1366px) {
-    width: 70vw;
+    width: 80vw;
     height: auto;
   }
 `
