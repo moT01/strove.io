@@ -1,6 +1,7 @@
 import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
+import { Location } from "@reach/router"
 
 import Login from "./login"
 
@@ -46,7 +47,7 @@ const HeaderSection = styled.div`
   background: #0072ce;
 `
 
-const Header = ({ siteTitle }) => (
+const HeaderComponent = ({ siteTitle, location }) => (
   <HeaderSection>
     <LinkWrapper>
       <LinkWrapper>
@@ -62,24 +63,15 @@ const Header = ({ siteTitle }) => (
       </LinkWrapper>
       <LinkWrapper>
         <Link
-          to="/editor"
+          to={location.pathname === "/editor" ? "/preview" : "/editor"}
           style={{
             color: `white`,
             textDecoration: `none`,
           }}
         >
-          <LinkText>Editor</LinkText>
-        </Link>
-      </LinkWrapper>
-      <LinkWrapper>
-        <Link
-          to="/preview"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          <LinkText>Preview</LinkText>
+          <LinkText>
+            {location.pathname === "/editor" ? "Preview" : "Editor"}
+          </LinkText>
         </Link>
       </LinkWrapper>
       <LinkWrapper>
@@ -100,8 +92,10 @@ const Header = ({ siteTitle }) => (
   </HeaderSection>
 )
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+const Header = props => (
+  <Location>
+    {({ location }) => <HeaderComponent {...props} location={location} />}
+  </Location>
+)
 
 export default Header
