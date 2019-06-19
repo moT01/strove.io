@@ -148,7 +148,6 @@ class PricingPage extends React.Component {
                   Plan aimed for developer teams and companies
                 </PlanDesc>
                 <Contact team>Contact Sales for pricing</Contact>
-                <PlanSubTitle team>Per month</PlanSubTitle>
 
                 <Feature team>Private and Public repositories</Feature>
                 <Feature team>
