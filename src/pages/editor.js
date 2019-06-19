@@ -29,7 +29,7 @@ const id = "12345"
 
 const Editor = () => (
   <Layout>
-    <SEO title="Page two" />
+    <SEO title="Editor" />
     {/* <Query query={QUERY}>
       {({ data, loading, error }) => {
         if (loading || error) return null

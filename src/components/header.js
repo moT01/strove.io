@@ -49,39 +49,50 @@ const HeaderSection = styled.div`
 const Header = ({ siteTitle }) => (
   <HeaderSection>
     <LinkWrapper>
-    <LinkWrapper>
-      <Link
-        to="/"
-        style={{
-          color: `white`,
-          textDecoration: `none`,
-        }}
-      >
-        <LinkText>{siteTitle}</LinkText>
-      </Link>
-    </LinkWrapper>
-    <LinkWrapper>
-      <Link
-        to="/editor"
-        style={{
-          color: `white`,
-          textDecoration: `none`,
-        }}
-      >
-        <LinkText>Editor</LinkText>
-      </Link>
-    </LinkWrapper>
-    <LinkWrapper>
-      <Link
-        to="/preview"
-        style={{
-          color: `white`,
-          textDecoration: `none`,
-        }}
-      >
-        <LinkText>Preview</LinkText>
-      </Link>
-    </LinkWrapper>
+      <LinkWrapper>
+        <Link
+          to="/"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          <LinkText>{siteTitle}</LinkText>
+        </Link>
+      </LinkWrapper>
+      <LinkWrapper>
+        <Link
+          to="/editor"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          <LinkText>Editor</LinkText>
+        </Link>
+      </LinkWrapper>
+      <LinkWrapper>
+        <Link
+          to="/preview"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          <LinkText>Preview</LinkText>
+        </Link>
+      </LinkWrapper>
+      <LinkWrapper>
+        <Link
+          to="/pricing"
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+          }}
+        >
+          <LinkText>Pricing</LinkText>
+        </Link>
+      </LinkWrapper>
     </LinkWrapper>
     <ZeldaWrapper>
       <Login />
