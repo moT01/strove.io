@@ -1,9 +1,18 @@
 /* eslint-disable */
 import React from "react"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
 import SEO from "../components/seo"
 import Layout from "../components/layout"
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
 const CardsWrapper = styled.div`
   display: flex;
@@ -11,6 +20,7 @@ const CardsWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 3vh;
+  animation: ${FadeIn} 1s ease-out;
 `
 
 const Button = styled.button`
@@ -148,7 +158,6 @@ class PricingPage extends React.Component {
                   Plan aimed for developer teams and companies
                 </PlanDesc>
                 <Contact team>Contact Sales for pricing</Contact>
-
                 <Feature team>Private and Public repositories</Feature>
                 <Feature team>
                   RAM, hard drive and speeed adjusted to teams needs
