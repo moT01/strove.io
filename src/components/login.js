@@ -2,9 +2,10 @@ import React, { PureComponent, useState, useEffect } from "react"
 import gql from "graphql-tag"
 import { Location } from "@reach/router"
 import styled from "styled-components"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { mutate } from "../utils"
+import { createSelector } from "reselect"
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -16,15 +17,33 @@ const STATUS = {
   AUTHENTICATED: "authenticated",
 }
 
+const Text = styled.span`
+  font-size: 3vh;
+  color: white;
+`
+
+const LinkWrapper = styled.h3`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 4vh;
+  margin: 0;
+`
+
 const LoginButton = styled.a`
   color: white;
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 
   span {
     color: white;
   }
 
-  ${GitubLogo} {
+  ${GithubLogo} {
     fill: white;
   }
 
@@ -36,7 +55,7 @@ const LoginButton = styled.a`
       color: black;
     }
 
-    ${GitubLogo} {
+    ${GithubLogo} {
       fill: black;
     }
   }
@@ -48,13 +67,20 @@ const LoginButton = styled.a`
 
 const Inline = styled.div`
   display: inline-block;
+  width: 4vh;
+  height: auto;
+  margin-left: 4px;
 `
 
-const GitubLogo = props => (
+const UserPhoto = styled.img`
+  width: 4vh;
+  height: auto;
+  margin-left: 4px;
+`
+
+const GithubLogo = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20pt"
-    height="20pt"
     viewBox="0 0 15 15"
     version="1.1"
     {...props}
@@ -67,9 +93,22 @@ const GitubLogo = props => (
   </svg>
 )
 
+const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
+
+const getUserPhoto = state =>
+  state.fetch.user.data && state.fetch.user.data.photoUrl
+
+const getUserData = createSelector(
+  [getUserName, getUserPhoto],
+  (username, userphoto) => ({ username, userphoto })
+)
+
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
   const dispatch = useDispatch()
+
+  const user = useSelector(getUserData)
+  console.log("user", user)
 
   useEffect(() => {
     const code =
@@ -106,15 +145,22 @@ const LoginComponent = ({ location }) => {
     }
   }, [])
 
-  return (
+  return !user.username ? (
     <LoginButton
       href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
     >
-      <span>Login </span>
+      <Text>Login </Text>
       <Inline>
-        <GitubLogo />
+        <GithubLogo width="100%" height="auto" />
       </Inline>
     </LoginButton>
+  ) : (
+    <LinkWrapper>
+      <Text>{user.username}</Text>
+      <Inline>
+        <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
+      </Inline>
+    </LinkWrapper>
   )
 }
 
