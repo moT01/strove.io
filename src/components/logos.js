@@ -27,7 +27,7 @@ const IconContainer = styled.div`
   border-radius: 8px;
   opacity: 0.9;
 
-  width: 15%;
+  width: 10%;
   height: auto;
 
   &:hover {
