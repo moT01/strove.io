@@ -1,9 +1,17 @@
 import React from "react"
-import GitHubButton from "react-github-button"
 import QueueAnim from "rc-queue-anim"
 import TweenOne from "rc-tween-one"
 import BannerSVGAnim from "./component/BannerSVGAnim"
 import styled, { keyframes } from "styled-components"
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
 const Button = styled.button`
   display: flex;
@@ -23,6 +31,7 @@ const Button = styled.button`
   border-color: #0072ce;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   transition: all 0.2s ease;
+  animation: ${FadeIn} 1s ease-out;
 
   &:hover {
     transform: scale(1.1);
@@ -65,26 +74,12 @@ function Banner(props) {
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
         <ButtonsWrapper>
-          {/* <div key="button" className="button-wrapper"> */}
-          {/* <a
-            href="http://preview.pro.ant.design"
-            target="_blank"
-            rel="noopener noreferrer"
-          > */}
           <Button primary>
             <p style={{ margin: 0 }}>Request demo</p>
           </Button>
-          {/* </a> */}
           <Button>
             <p style={{ margin: 0 }}>Learn more</p>
           </Button>
-          {/* <GitHubButton
-            key="github-button"
-            type="stargazers"
-            namespace="ant-design"
-            repo="ant-design-pro"
-          /> */}
-          {/* </div> */}
         </ButtonsWrapper>
       </QueueAnim>
       {!props.isMobile && (
