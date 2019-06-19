@@ -19,10 +19,19 @@ const STATUS = {
 
 const Text = styled.span`
   font-size: 3vh;
-
+  color: white;
   :hover {
     color: black;
   }
+`
+
+const LinkWrapper = styled.h3`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 4vh;
+  margin: 0;
 `
 
 const LoginButton = styled.a`
@@ -63,7 +72,13 @@ const Inline = styled.div`
   display: inline-block;
   width: 4vh;
   height: auto;
-  margin-left: 2px;
+  margin-left: 4px;
+`
+
+const UserPhoto = styled.img`
+  width: 4vh;
+  height: auto;
+  margin-left: 4px;
 `
 
 const GithubLogo = props => (
@@ -133,7 +148,7 @@ const LoginComponent = ({ location }) => {
     }
   }, [])
 
-  return (
+  return !user.username ? (
     <LoginButton
       href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
     >
@@ -142,6 +157,13 @@ const LoginComponent = ({ location }) => {
         <GithubLogo width="100%" height="auto" />
       </Inline>
     </LoginButton>
+  ) : (
+    <LinkWrapper>
+      <Text>{user.username}</Text>
+      <Inline>
+        <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
+      </Inline>
+    </LinkWrapper>
   )
 }
 
