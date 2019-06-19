@@ -29,15 +29,27 @@ const STATUS = {
   AUTHENTICATED: "authenticated",
 }
 
+const Text = styled.span`
+  font-size: 3vh;
+
+  :hover {
+    color: black;
+  }
+`
+
 const LoginButton = styled.a`
   color: white;
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 
   span {
     color: white;
   }
 
-  ${GitubLogo} {
+  ${GithubLogo} {
     fill: white;
   }
 
@@ -49,7 +61,7 @@ const LoginButton = styled.a`
       color: black;
     }
 
-    ${GitubLogo} {
+    ${GithubLogo} {
       fill: black;
     }
   }
@@ -65,13 +77,14 @@ const LinkText = styled.span`
 
 const Inline = styled.div`
   display: inline-block;
+  width: 4vh;
+  height: auto;
+  margin-left: 2px;
 `
 
-const GitubLogo = props => (
+const GithubLogo = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20pt"
-    height="20pt"
     viewBox="0 0 15 15"
     version="1.1"
     {...props}
@@ -155,9 +168,9 @@ class LoginComponent extends PureComponent {
       <LoginButton
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo,repo&redirect_uri=${REDIRECT_URI}`}
       >
-        <span>Login </span>
+        <Text>Login </Text>
         <Inline>
-          <GitubLogo />
+          <GithubLogo width="100%" height="auto"/>
         </Inline>
       </LoginButton>
     )
