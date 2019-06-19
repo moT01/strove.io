@@ -13,12 +13,7 @@ const LinkWrapper = styled.h3`
   margin: 0 3vw 0 0;
 `
 
-const ZeldaWrapper = styled.h3`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: 4vh;
+const ZeldaWrapper = styled(LinkWrapper)`
   margin: 0;
 `
 
@@ -32,6 +27,9 @@ const LinkText = styled.span`
   :hover {
     color: black;
   }
+  @media (max-width: 1366px) {
+    font-size: 2.5vh;
+  }
 `
 
 const HeaderSection = styled.div`
@@ -44,6 +42,12 @@ const HeaderSection = styled.div`
   padding-right: 7.5vw;
   height: 7vh;
   background: #0072ce;
+
+  @media (max-width: 1366px) {
+    height: 5vh;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+  }
 `
 
 const Header = ({ siteTitle }) => (
