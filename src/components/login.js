@@ -3,9 +3,10 @@ import gql from "graphql-tag"
 import { Location } from "@reach/router"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
+import { createSelector } from "reselect"
 
 import { mutate } from "../utils"
-import { createSelector } from "reselect"
+import { GITHUB_LOGIN } from "../queries"
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -114,24 +115,8 @@ const LoginComponent = ({ location }) => {
     const code =
       location.search.match(/code=(.*)/) &&
       location.search.match(/code=(.*)/)[1]
-    console.log("code", code)
     const storedToken = localStorage.getItem("githubToken")
-    if (true) {
-      const GITHUB_LOGIN = gql`
-        mutation GithubAuth($code: String!) {
-          githubAuth(code: $code) {
-            email
-            name
-            fullName
-            photoUrl
-            githubUrl
-            githubToken
-            scopes
-            siliskyToken
-          }
-        }
-      `
-
+    if (code) {
       dispatch(
         mutate({
           mutation: GITHUB_LOGIN,
