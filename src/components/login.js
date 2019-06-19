@@ -108,7 +108,7 @@ const LoginComponent = ({ location }) => {
 
   return (
     <LoginButton
-      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo,repo&redirect_uri=${REDIRECT_URI}`}
+      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
     >
       <span>Login </span>
       <Inline>
