@@ -49,6 +49,10 @@ const Button = styled.button`
   &:hover {
     transform: scale(1.1);
   }
+
+  @media (max-width: 1366px) {
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? "#ffffff" : "#0072ce")};
+  }
 `
 
 const Card = styled.div`
