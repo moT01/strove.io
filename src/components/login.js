@@ -2,9 +2,10 @@ import React, { PureComponent, useState, useEffect } from "react"
 import gql from "graphql-tag"
 import { Location } from "@reach/router"
 import styled from "styled-components"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { mutate } from "../utils"
+import { createSelector } from "reselect"
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -80,9 +81,22 @@ const GithubLogo = props => (
   </svg>
 )
 
+const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
+
+const getUserPhoto = state =>
+  state.fetch.user.data && state.fetch.user.data.photoUrl
+
+const getUserData = createSelector(
+  [getUserName, getUserPhoto],
+  (username, userphoto) => ({ username, userphoto })
+)
+
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
   const dispatch = useDispatch()
+
+  const user = useSelector(getUserData)
+  console.log("user", user)
 
   useEffect(() => {
     const code =
