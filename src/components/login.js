@@ -20,9 +20,6 @@ const STATUS = {
 const Text = styled.span`
   font-size: 3vh;
   color: white;
-  :hover {
-    color: black;
-  }
 `
 
 const LinkWrapper = styled.h3`
