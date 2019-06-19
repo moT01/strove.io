@@ -39,7 +39,6 @@
     "gatsby-transformer-json": "^2.1.11",
     "gatsby-transformer-remark": "^2.3.12",
     "gatsby-transformer-sharp": "^2.1.21",
-    "gitstar-components": "^1.0.5",
     "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.7.0",
     "isomorphic-fetch": "^2.2.1",
@@ -60,6 +59,8 @@
     "react-transition-group": "^4.1.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "5.0.0-beta.2"
   },

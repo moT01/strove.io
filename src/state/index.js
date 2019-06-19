@@ -1,4 +1,4 @@
 import { combineReducers } from "redux"
-import app from "./app"
+import fetch from "./fetch"
 
-export default combineReducers({ app })
+export default combineReducers({ fetch })

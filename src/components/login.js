@@ -1,23 +1,10 @@
-import React, { PureComponent } from "react"
-import {
-  Loading,
-  Avatar,
-  Logo,
-  Logotype,
-  Container,
-  Header,
-} from "gitstar-components"
+import React, { PureComponent, useState, useEffect } from "react"
 import gql from "graphql-tag"
 import { Location } from "@reach/router"
 import styled from "styled-components"
+import { useDispatch } from "react-redux"
 
-import ApolloClient from "apollo-boost"
-import fetch from "isomorphic-fetch"
-
-const client = new ApolloClient({
-  uri: process.env.SILISKY_ENDPOINT,
-  fetch,
-})
+import { mutate } from "../utils"
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -71,10 +58,6 @@ const LoginButton = styled.a`
   }
 `
 
-const LinkText = styled.span`
-  color: white;
-`
-
 const Inline = styled.div`
   display: inline-block;
   width: 4vh;
@@ -97,14 +80,11 @@ const GithubLogo = props => (
   </svg>
 )
 
-class LoginComponent extends PureComponent {
-  state = {
-    status: STATUS.INITIAL,
-    token: null,
-  }
+const LoginComponent = ({ location }) => {
+  const [status, setStatus] = useState(STATUS.INITIAL)
+  const dispatch = useDispatch()
 
-  componentDidMount() {
-    const { location } = this.props
+  useEffect(() => {
     const code =
       location.search.match(/code=(.*)/) &&
       location.search.match(/code=(.*)/)[1]
@@ -125,56 +105,30 @@ class LoginComponent extends PureComponent {
           }
         }
       `
-      const auth = async () => {
-        try {
-          const {
-            data: { githubAuth },
-          } = await client.mutate({
-            mutation: GITHUB_LOGIN,
-            variables: { code },
-          })
-          console.log("githubAuth", githubAuth)
-        } catch (e) {
-          console.log(e)
-        }
-      }
-      auth()
-      this.setState({
-        // token: storedToken,
-        status: STATUS.AUTHENTICATED,
-      })
+
+      dispatch(
+        mutate({
+          mutation: GITHUB_LOGIN,
+          variables: { code },
+          mutationName: "githubAuth",
+          storeName: "user",
+        })
+      )
+
+      setStatus(STATUS.AUTHENTICATED)
     }
+  }, [])
 
-    // const code =
-    //   window.location.href.match(/?code=(.*)/) &&
-    //   window.location.href.match(/?code=(.*)/)[1]
-    // if (code) {
-    //   this.setState({ status: STATUS.LOADING })
-
-    //   fetch(`${AUTH_API_URI}${code}`)
-    //     .then(response => response.json())
-    //     .then(({ token }) => {
-    //       localStorage.setItem("github_token", token)
-    //       this.setState({
-    //         token,
-    //         status: STATUS.FINISHED_LOADING,
-    //       })
-    //     })
-    // }
-  }
-
-  render() {
-    return (
-      <LoginButton
-        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo,repo&redirect_uri=${REDIRECT_URI}`}
-      >
-        <Text>Login </Text>
-        <Inline>
-          <GithubLogo width="100%" height="auto"/>
-        </Inline>
-      </LoginButton>
-    )
-  }
+  return (
+    <LoginButton
+      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
+    >
+      <Text>Login </Text>
+      <Inline>
+        <GithubLogo width="100%" height="auto" />
+      </Inline>
+    </LoginButton>
+  )
 }
 
 const Login = () => (
