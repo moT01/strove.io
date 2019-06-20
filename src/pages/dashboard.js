@@ -29,7 +29,8 @@ const workspaces = [
     name: "My first react/redux project",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
-    description: "I am a descritpion",
+    description:
+      "A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description",
     language: "html",
     branch: "master",
     isPrivate: false,
@@ -136,7 +137,7 @@ const Button = styled.button`
   color: ${props => (props.primary ? "#ffffff" : "#0072ce")};
   border-radius: 1vh;
   border-color: #0072ce;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
 
@@ -155,6 +156,9 @@ const Text = styled.p`
   font-size: 1.7vh;
   margin-left: 2%;
   margin-bottom: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 const ButtonText = styled(Text)`
   color: #ffffff;
@@ -190,7 +194,7 @@ const TextWrapper = styled(FlexWrapper)`
   flex-direction: row;
   margin-top: 0.3vh;
   margin-bottom: 0.3vh;
-  width: 50%;
+  width: 90%;
   height: auto;
   justify-content: flex-start;
 `
