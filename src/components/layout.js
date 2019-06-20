@@ -58,7 +58,8 @@ const LayoutComponent = ({ children, location }) => {
               mutation: ADD_GITHUB_PROJECT,
               context: {
                 headers: {
-                  "x-token": "",
+                  Authorization:
+
                 },
               },
               variables: { githubLink, machineId, name, description },
