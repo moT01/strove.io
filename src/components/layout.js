@@ -31,7 +31,7 @@ const LayoutComponent = ({ children, location }) => {
         const query = GET_REPO_INFO
         const context = {
           headers: {
-            Authorization: `Bearer 13e220fa444ef7196f643146fde066d5f801b5c5`,
+            Authorization: `Bearer `,
             "User-Agent": "node",
           },
         }
@@ -56,6 +56,11 @@ const LayoutComponent = ({ children, location }) => {
           dispatch(
             mutate({
               mutation: ADD_GITHUB_PROJECT,
+              context: {
+                headers: {
+                  "x-token": "",
+                },
+              },
               variables: { githubLink, machineId, name, description },
               mutationName: "addProject",
               storeName: "project",
