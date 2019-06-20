@@ -26,6 +26,7 @@ const QUERY = gql`
 
 const testToken = "testToken"
 const id = "12345"
+const port = "9090"
 
 const Editor = () => (
   <Layout>
@@ -37,7 +38,7 @@ const Editor = () => (
       }}
     </Query> */}
     <StyledIframe
-      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken},id=${id}`}
+      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken},id=${id},port=${port}`}
     />
   </Layout>
 )
