@@ -20,27 +20,18 @@ const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const machineID = `5d0ba955d0027b3e519b4c39`
+    const machineId = `5d0ba955d0027b3e519b4c39`
     const githubLink =
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
     console.log("TCL: LayoutComponent -> repoUrl", githubLink)
     console.log("TCL: LayoutComponent -> location", location)
     if (githubLink) {
-      // dispatch(
-      //   mutate({
-      //     mutation: ADD_GITHUB_PROJECT,
-      //     variables: { githubLink, machineID },
-      //     mutationName: "addGithubProject",
-      //     storeName: "user",
-      //   })
-      // )
-
       const query = async () => {
         const query = GET_REPO_INFO
         const context = {
           headers: {
-            Authorization: `Bearer `,
+            Authorization: `Bearer 13e220fa444ef7196f643146fde066d5f801b5c5`,
             "User-Agent": "node",
           },
         }
@@ -55,6 +46,21 @@ const LayoutComponent = ({ children, location }) => {
             variables,
             fetchPolicy: "no-cache",
           })
+
+          const {
+            description,
+            name /* add language and color in future */,
+          } = data.repository
+          console.log("TCL: query -> data", data)
+
+          dispatch(
+            mutate({
+              mutation: ADD_GITHUB_PROJECT,
+              variables: { githubLink, machineId, name, description },
+              mutationName: "addProject",
+              storeName: "project",
+            })
+          )
         } catch (e) {
           console.log("fetch error: ", e)
         }
