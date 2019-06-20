@@ -69,9 +69,19 @@ module.exports = {
         fieldName: "silisky",
         // Url to query from
         // url: 'https://hr8ytytxmi.execute-api.eu-central-1.amazonaws.com/development/graphql'
-        url: 'https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql',
+        url:
+          "https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql",
       },
     },
-
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "Github",
+        fieldName: "github",
+        // Url to query from
+        // url: 'https://hr8ytytxmi.execute-api.eu-central-1.amazonaws.com/development/graphql'
+        url: "https://api.github.com/graphql",
+      },
+    },
   ],
 }
