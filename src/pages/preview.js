@@ -102,30 +102,26 @@ const id = "12345"
 const port = "9898"
 
 const Preview = () => {
-  const [previewOn, setPreviewOn] = useState(true)
+  // const [previewOn, setPreviewOn] = useState(true)
 
-  useEffect(() => {
-    const isIframeReachable = async () => {
-      const isPreviewOn = await fetch(
-        `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewOn?token=${testToken}`
-      ).then(res => res.json())
+  // useEffect(() => {
+  //   const isIframeReachable = async () => {
+  //     const isPreviewOn = await fetch(
+  //       `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/isPreviewOn?token=${testToken}`
+  //     ).then(res => res.json())
 
-      setPreviewOn(isPreviewOn.result)
-    }
+  //     setPreviewOn(isPreviewOn.result)
+  //   }
 
-    isIframeReachable()
-  }, [])
+  //   isIframeReachable()
+  // }, [])
 
   return (
     <>
       <SEO title="Preview" />
-      {!previewOn ? (
-        <Error />
-      ) : (
-        <StyledIframe
-          src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken},id=${id},port=${port}`}
-        />
-      )}
+      <StyledIframe
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken},id=${id},port=${port}`}
+      />
     </>
   )
 }
