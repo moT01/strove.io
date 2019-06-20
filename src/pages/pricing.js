@@ -43,7 +43,7 @@ const Button = styled.button`
   color: ${props => (!props.team ? "#ffffff" : "#0072ce")};
   border-radius: 1vh;
   border-color: ${props => (props.team ? "#ffffff" : "#0072ce")};
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${props => (props.team ? "#ffffff" : "#0072ce")};
+  box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? "#ffffff" : "#0072ce")};
   transition: all 0.2s ease;
 
   &:hover {

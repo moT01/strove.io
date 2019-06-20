@@ -120,7 +120,6 @@ const Tile = styled.div`
     height: auto;
   }
 `
-
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -150,7 +149,6 @@ const ProjectTitle = styled.h1`
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
-
 const Text = styled.p`
   color: #0072ce;
   font-size: 1.7vh;
