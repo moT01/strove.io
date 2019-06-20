@@ -6,8 +6,17 @@ import { Provider } from "react-redux"
 import { createStore as reduxCreateStore, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly"
 import thunk from "redux-thunk"
+import { persistStore, persistReducer } from "redux-persist"
+import storage from "redux-persist/lib/storage" // defaults to localStorage for web
 
 import rootReducer from "./src/state"
+
+const persistConfig = {
+  key: "root",
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const client = new ApolloClient({
   uri: process.env.SILISKY_ENDPOINT,
@@ -16,7 +25,7 @@ const client = new ApolloClient({
 
 const createStore = () =>
   reduxCreateStore(
-    rootReducer,
+    persistedReducer,
     composeWithDevTools(
       applyMiddleware(thunk)
       // other store enhancers if any
