@@ -8,33 +8,13 @@ import fetch from "isomorphic-fetch"
 
 import Header from "./header"
 import "./layout.css"
-import ADD_GITHUB_PROJECT from "../queries/addGithubProject"
+import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from "../queries"
 import { mutate } from "../utils"
 
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
   fetch,
 })
-
-const query = async () => {
-  const mutation = ADD_GITHUB_PROJECT
-  const context = {
-    headers: {
-      Authorization: `Bearer`,
-      "User-Agent": "node",
-    },
-  }
-  try {
-    const { data } = await client.mutate({
-      mutation,
-      context,
-      variables,
-      fetchPolicy: "no-cache",
-    })
-  } catch (e) {
-    console.log("fetch error: ", e)
-  }
-}
 
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
@@ -43,17 +23,44 @@ const LayoutComponent = ({ children, location }) => {
     const machineID = `5d0ba955d0027b3e519b4c39`
     const githubLink =
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
+
     console.log("TCL: LayoutComponent -> repoUrl", githubLink)
     console.log("TCL: LayoutComponent -> location", location)
     if (githubLink) {
-      dispatch(
-        mutate({
-          mutation: ADD_GITHUB_PROJECT,
-          variables: { githubLink, machineID },
-          mutationName: "addGithubProject",
-          storeName: "user",
-        })
-      )
+      // dispatch(
+      //   mutate({
+      //     mutation: ADD_GITHUB_PROJECT,
+      //     variables: { githubLink, machineID },
+      //     mutationName: "addGithubProject",
+      //     storeName: "user",
+      //   })
+      // )
+
+      const query = async () => {
+        const query = GET_REPO_INFO
+        const context = {
+          headers: {
+            Authorization: `Bearer `,
+            "User-Agent": "node",
+          },
+        }
+        const repoUrlParts = githubLink.split("/")
+        const owner = repoUrlParts[3]
+        const name = repoUrlParts[4]
+        const variables = { owner, name }
+        try {
+          const { data } = await client.query({
+            query,
+            context,
+            variables,
+            fetchPolicy: "no-cache",
+          })
+        } catch (e) {
+          console.log("fetch error: ", e)
+        }
+      }
+      query()
+      console.log(query())
     }
   }, [])
 
