@@ -12,64 +12,73 @@ const workspaces = [
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "javascript",
     branch: "master",
+    isPrivate: true,
   },
   {
-    name: "Adam",
+    name: "Best app ever",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "ruby",
     branch: "master",
+    isPrivate: true,
   },
   {
-    name: "Piotrek",
+    name: "My first react/redux project",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    commits: "",
+    description:
+      "A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description",
+    language: "html",
     branch: "master",
+    isPrivate: false,
   },
   {
     name: "Król Świata Mateusz",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "html",
     branch: "master",
+    isPrivate: true,
   },
   {
     name: "Paweł",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "communist",
     branch: "master",
+    isPrivate: true,
   },
   {
     name: "Adam",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "german",
     branch: "master",
+    isPrivate: false,
   },
   {
     name: "Piotrek",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "javacript",
     branch: "master",
+    isPrivate: true,
   },
   {
-    name: "Król Świata Mateusz",
+    name: "How to hack Nasa using only html",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
-    commits: "",
+    language: "html",
     branch: "master",
+    isPrivate: false,
   },
 ]
 
@@ -95,7 +104,7 @@ const Tile = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #0072ce;
+  background-color: #ffffff;
   border-radius: 10px;
   border-color: #0072ce;
   border-width: 1px;
@@ -103,7 +112,7 @@ const Tile = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
-  height: 20vh;
+  height: 25vh;
   width: 50vw;
 
   @media (max-width: 1366px) {
@@ -111,16 +120,48 @@ const Tile = styled.div`
     height: auto;
   }
 `
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? "#0072ce" : "#ffffff")};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? "#ffffff" : "#0072ce")};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  transition: all 0.2s ease;
+  animation: ${FadeIn} 1s ease-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`
 const ProjectTitle = styled.h1`
   font-size: 3vh;
-  color: #ffffff;
-  margin-top: 0.3vh;
+  color: #0072ce;
+  margin: 0.3vh 0.3vh 0.3vh 0;
 `
 const Text = styled.p`
-  color: #ffffff;
+  color: #0072ce;
   font-size: 1.7vh;
-  margin-top: 0.7vh;
-  margin-bottom: 0.7vh;
+  margin-left: 2%;
+  margin-bottom: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+const ButtonText = styled(Text)`
+  color: #ffffff;
+  font-size: 2.2vh;
+  margin: 0;
 `
 const VerticalDivider = styled.div`
   display: flex;
@@ -136,14 +177,25 @@ const FlexWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
-const IconsWrapper = styled(FlexWrapper)`
-  flex-grow: 1;
+const RightSection = styled(FlexWrapper)`
+  width: 20%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.5%;
 `
 const InfoWrapper = styled(FlexWrapper)`
-  flex-grow: 8;
+  width: 80%;
   align-items: flex-start;
 `
-
+const TextWrapper = styled(FlexWrapper)`
+  flex-direction: row;
+  margin-top: 0.3vh;
+  margin-bottom: 0.3vh;
+  width: 90%;
+  height: auto;
+  justify-content: flex-start;
+`
 class Dashboard extends React.Component {
   render() {
     return (
@@ -153,23 +205,64 @@ class Dashboard extends React.Component {
           {workspaces.map(workspace => (
             <Tile>
               <VerticalDivider>
-                <IconsWrapper></IconsWrapper>
                 <InfoWrapper>
                   <ProjectTitle>{workspace.name}</ProjectTitle>
-                  <Text>Created: {workspace.createdAt}</Text>
-                  <Text>{workspace.description}</Text>
-                  <VerticalDivider>
+                  <TextWrapper>
+                    <Icon
+                      type="calendar"
+                      style={{
+                        fontSize: "1.7vh",
+                        color: `#0072ce`,
+                      }}
+                    />
+                    <Text>{workspace.createdAt}</Text>
+                  </TextWrapper>
+                  <TextWrapper>
+                    <Icon
+                      type="edit"
+                      style={{
+                        fontSize: "1.7vh",
+                        color: `#0072ce`,
+                      }}
+                    />
+                    <Text>{workspace.description}</Text>
+                  </TextWrapper>
+                  <TextWrapper>
                     <Icon
                       type="branches"
                       style={{
-                        fontSize: "15px",
-                        color: `#ffffff`,
+                        fontSize: "1.7vh",
+                        color: `#0072ce`,
                       }}
                     />
                     <Text> {workspace.branch}</Text>
-                  </VerticalDivider>
-                  <Text>Language</Text>
+                  </TextWrapper>
+                  <TextWrapper>
+                    <Icon
+                      type="code"
+                      style={{
+                        fontSize: "1.7vh",
+                        color: `#0072ce`,
+                      }}
+                    />
+                    <Text>{workspace.language}</Text>
+                  </TextWrapper>
+                  <TextWrapper>
+                    <Icon
+                      type={workspace.isPrivate ? "lock" : "unlock"}
+                      style={{
+                        fontSize: "1.7vh",
+                        color: `#0072ce`,
+                      }}
+                    />
+                    <Text>{workspace.isPrivate ? "Private" : "Public"}</Text>
+                  </TextWrapper>
                 </InfoWrapper>
+                <RightSection>
+                  <Button primary>
+                    <ButtonText>Start</ButtonText>
+                  </Button>
+                </RightSection>
               </VerticalDivider>
             </Tile>
           ))}
