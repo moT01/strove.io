@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
 import { StaticQuery, graphql } from "gatsby"
 import { Location } from "@reach/router"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { createSelector } from "reselect"
 
 import ApolloClient from "apollo-boost"
 import fetch from "isomorphic-fetch"
@@ -16,8 +17,19 @@ const client = new ApolloClient({
   fetch,
 })
 
+const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
+
+const getUserPhoto = state =>
+  state.fetch.user.data && state.fetch.user.data.photoUrl
+
+const getUserData = createSelector(
+  [getUserName, getUserPhoto],
+  (username, userphoto) => ({ username, userphoto })
+)
+
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
+  const user = useSelector(getUserData)
 
   useEffect(() => {
     const machineId = `5d0ba955d0027b3e519b4c39`
@@ -25,13 +37,13 @@ const LayoutComponent = ({ children, location }) => {
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
     console.log("TCL: LayoutComponent -> repoUrl", githubLink)
-    console.log("TCL: LayoutComponent -> location", location)
+    console.log("TCL: LayoutComponent -> user", user)
     if (githubLink) {
       const query = async () => {
         const query = GET_REPO_INFO
         const context = {
           headers: {
-            Authorization: `Bearer `,
+            Authorization: `Bearer ${user.githubToken}`,
             "User-Agent": "node",
           },
         }
@@ -58,8 +70,7 @@ const LayoutComponent = ({ children, location }) => {
               mutation: ADD_GITHUB_PROJECT,
               context: {
                 headers: {
-                  Authorization:
-
+                  Authorization: `Bearer ${user.siliskyToken}`,
                 },
               },
               variables: { githubLink, machineId, name, description },
