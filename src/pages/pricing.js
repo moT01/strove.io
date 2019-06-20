@@ -21,6 +21,10 @@ const CardsWrapper = styled.div`
   align-items: center;
   padding: 3vh;
   animation: ${FadeIn} 1s ease-out;
+
+  @media (max-width: 1366px) {
+    flex-direction: column;
+  }
 `
 
 const Button = styled.button`
@@ -45,6 +49,10 @@ const Button = styled.button`
   &:hover {
     transform: scale(1.1);
   }
+
+  @media (max-width: 1366px) {
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? "#ffffff" : "#0072ce")};
+  }
 `
 
 const Card = styled.div`
@@ -65,6 +73,10 @@ const Card = styled.div`
 
   height: 70vh;
   width: 40vw;
+  @media (max-width: 1366px) {
+    width: 80vw;
+    height: auto;
+  }
 `
 
 const PricingWrapper = styled.div`
@@ -75,6 +87,10 @@ const PricingWrapper = styled.div`
 
   width: 45%;
   height: 90%;
+  @media (max-width: 1366px) {
+    width: 90%;
+    height: auto;
+  }
 `
 const PricingSection = styled.div`
   display: flex;
@@ -84,6 +100,9 @@ const PricingSection = styled.div`
 
   width: 100%;
   height: 100%;
+  @media (max-width: 1366px) {
+    flex-direction: column;
+  }
 `
 
 const Feature = styled.p`

@@ -21,6 +21,9 @@ const STATUS = {
 const Text = styled.span`
   font-size: 3vh;
   color: white;
+  @media (max-width: 1366px) {
+    font-size: 2.5vh;
+  }
 `
 
 const LinkWrapper = styled.h3`
