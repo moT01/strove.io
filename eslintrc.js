@@ -33,17 +33,8 @@ module.exports = {
   },
   settings: {
     "import/resolver": {
-      "babel-module": {
-        alias: [
-          ["assets", "./assets"],
-          ["components", "./components"],
-          ["constants", "./constants"],
-          ["learnMocks", "./learnMocks"],
-          ["screens", "./screens"],
-          ["utils", "./utils"],
-          ["categories", "./categories"],
-          ["contexts", "./contexts"],
-        ],
+      "import/resolver": {
+        alias: [["components", "./src/components"], ["utils", "./src/utils"]],
         extensions: [".ts", ".js", ".jsx", ".json"],
       },
     },
