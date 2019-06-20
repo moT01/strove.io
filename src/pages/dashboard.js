@@ -14,22 +14,25 @@ const workspaces = [
     description: "I am a descritpion",
     language: "javascript",
     branch: "master",
+    isPrivate: true,
   },
   {
-    name: "Adam",
+    name: "Best app ever",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
     language: "ruby",
     branch: "master",
+    isPrivate: true,
   },
   {
-    name: "Piotrek",
+    name: "My first react/redux project",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
     language: "html",
     branch: "master",
+    isPrivate: false,
   },
   {
     name: "Król Świata Mateusz",
@@ -38,6 +41,7 @@ const workspaces = [
     description: "I am a descritpion",
     language: "html",
     branch: "master",
+    isPrivate: true,
   },
   {
     name: "Paweł",
@@ -46,6 +50,7 @@ const workspaces = [
     description: "I am a descritpion",
     language: "communist",
     branch: "master",
+    isPrivate: true,
   },
   {
     name: "Adam",
@@ -54,6 +59,7 @@ const workspaces = [
     description: "I am a descritpion",
     language: "german",
     branch: "master",
+    isPrivate: false,
   },
   {
     name: "Piotrek",
@@ -62,14 +68,16 @@ const workspaces = [
     description: "I am a descritpion",
     language: "javacript",
     branch: "master",
+    isPrivate: true,
   },
   {
-    name: "Król Świata Mateusz",
+    name: "How to hack Nasa using only html",
     createdAt: "2019-08-05",
     updatedAt: "2019-10-23",
     description: "I am a descritpion",
     language: "html",
     branch: "master",
+    isPrivate: false,
   },
 ]
 
@@ -95,7 +103,7 @@ const Tile = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #0072ce;
+  background-color: #ffffff;
   border-radius: 10px;
   border-color: #0072ce;
   border-width: 1px;
@@ -103,7 +111,7 @@ const Tile = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
-  height: 20vh;
+  height: 25vh;
   width: 50vw;
 
   @media (max-width: 1366px) {
@@ -138,18 +146,18 @@ const Button = styled.button`
 `
 const ProjectTitle = styled.h1`
   font-size: 3vh;
-  color: #ffffff;
+  color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
 const Text = styled.p`
-  color: #ffffff;
+  color: #0072ce;
   font-size: 1.7vh;
   margin-left: 2%;
   margin-bottom: 0;
 `
 const ButtonText = styled(Text)`
-  color: #0072ce;
+  color: #ffffff;
   font-size: 2.2vh;
   margin: 0;
 `
@@ -202,7 +210,7 @@ class Dashboard extends React.Component {
                       type="calendar"
                       style={{
                         fontSize: "1.7vh",
-                        color: `#ffffff`,
+                        color: `#0072ce`,
                       }}
                     />
                     <Text>{workspace.createdAt}</Text>
@@ -212,7 +220,7 @@ class Dashboard extends React.Component {
                       type="edit"
                       style={{
                         fontSize: "1.7vh",
-                        color: `#ffffff`,
+                        color: `#0072ce`,
                       }}
                     />
                     <Text>{workspace.description}</Text>
@@ -222,7 +230,7 @@ class Dashboard extends React.Component {
                       type="branches"
                       style={{
                         fontSize: "1.7vh",
-                        color: `#ffffff`,
+                        color: `#0072ce`,
                       }}
                     />
                     <Text> {workspace.branch}</Text>
@@ -232,14 +240,24 @@ class Dashboard extends React.Component {
                       type="code"
                       style={{
                         fontSize: "1.7vh",
-                        color: `#ffffff`,
+                        color: `#0072ce`,
                       }}
                     />
                     <Text>{workspace.language}</Text>
                   </TextWrapper>
+                  <TextWrapper>
+                    <Icon
+                      type={workspace.isPrivate ? "lock" : "unlock"}
+                      style={{
+                        fontSize: "1.7vh",
+                        color: `#0072ce`,
+                      }}
+                    />
+                    <Text>{workspace.isPrivate ? "Private" : "Public"}</Text>
+                  </TextWrapper>
                 </InfoWrapper>
                 <RightSection>
-                  <Button>
+                  <Button primary>
                     <ButtonText>Start</ButtonText>
                   </Button>
                 </RightSection>
