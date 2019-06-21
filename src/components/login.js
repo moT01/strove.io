@@ -8,10 +8,14 @@ import { createSelector } from "reselect"
 import { mutate } from "../utils"
 import { GITHUB_LOGIN } from "../queries"
 
+import Dropdown from "react-dropdown"
+import "react-dropdown/style.css"
+
+const options = ["one", "two", "three"]
+const defaultOption = options[0]
+
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
-console.log("TCL: GITHUB_CLIENT_ID", GITHUB_CLIENT_ID)
-console.log("TCL: REDIRECT_URI", REDIRECT_URI)
 
 const STATUS = {
   INITIAL: "initial",
@@ -111,6 +115,7 @@ const getUserData = createSelector(
 
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
+  const [show, setShow] = useState(false)
   const dispatch = useDispatch()
 
   const user = useSelector(getUserData)
@@ -150,6 +155,12 @@ const LoginComponent = ({ location }) => {
       <Inline>
         <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
       </Inline>
+      <Dropdown
+        options={options}
+        // onChange={this._onSelect}
+        value={defaultOption}
+        placeholder="Select an option"
+      ></Dropdown>
     </LinkWrapper>
   )
 }

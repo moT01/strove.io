@@ -2,7 +2,6 @@ import { Link } from "gatsby"
 import React from "react"
 import styled from "styled-components"
 import { Location } from "@reach/router"
-
 import Login from "./login"
 
 const LinkWrapper = styled.h3`

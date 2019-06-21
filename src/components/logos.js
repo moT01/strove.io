@@ -1,7 +1,32 @@
 /* eslint-disable */
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Docker, Github, Google, VSCode } from "../images/logos"
+
+const logosArr = [
+  {
+    component: <Google width="100%" height="auto" />,
+    name: "Google",
+    description: "Google cloud is cool and cloudy",
+  },
+  {
+    component: (
+      <VSCode style={{ fill: "#303c42" }} width="100%" height="auto" />
+    ),
+    name: "VSCode",
+    description: "VSCode for editor",
+  },
+  {
+    component: <Docker width="100%" height="auto" />,
+    name: "Docker",
+    description: "Docker isn't actually a whale",
+  },
+  {
+    component: <Github width="100%" height="auto" />,
+    name: "Github",
+    description: "Github integration state-of-the-art version control",
+  },
+]
 
 const SectionWrapper = styled.div`
   flex: 1;
@@ -23,7 +48,7 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  margin: 5px;
+  margin: 0 5px 0 5px;
   border-radius: 8px;
   opacity: 0.9;
 
@@ -31,7 +56,6 @@ const IconContainer = styled.div`
   height: auto;
 
   &:hover {
-    transform: scale(1.2);
     opacity: 1;
   }
 
@@ -44,6 +68,7 @@ const IconContainer = styled.div`
 
 const ScrollAtMobile = styled.div`
   display: flex;
+  height: auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -56,23 +81,23 @@ const ScrollAtMobile = styled.div`
   }
 `
 
-const Logos = () => (
-  <SectionWrapper>
-    <ScrollAtMobile>
-      <IconContainer>
-        <Google width="100%" height="auto" />
-      </IconContainer>
-      <IconContainer>
-        <Docker width="100%" height="auto" />
-      </IconContainer>
-      <IconContainer>
-        <VSCode width="100%" height="auto" fill="#303c42"/>
-      </IconContainer>
-      <IconContainer>
-        <Github width="100%" height="auto" />
-      </IconContainer>
-    </ScrollAtMobile>
-  </SectionWrapper>
-)
+const Logos = props => {
+  const [logos, setLogos] = useState(logosArr)
+
+  return (
+    <SectionWrapper>
+      <ScrollAtMobile>
+        {logos.map(logo => (
+          <IconContainer
+            onMouseEnter={() => props.handleHoverIn(logo.description)}
+            onMouseLeave={() => props.handleHoverOut()}
+          >
+            {logo.component}
+          </IconContainer>
+        ))}
+      </ScrollAtMobile>
+    </SectionWrapper>
+  )
+}
 /* eslint-enable */
 export default Logos

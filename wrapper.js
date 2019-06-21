@@ -24,6 +24,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const client = new ApolloClient({
   uri: process.env.SILISKY_ENDPOINT,
   fetch,
+  // fetchOptions: {
+  //   mode: "no-cors",
+  // },
 })
 
 const createStore = reduxCreateStore(
