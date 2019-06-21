@@ -22,9 +22,12 @@ const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
 const getUserPhoto = state =>
   state.fetch.user.data && state.fetch.user.data.photoUrl
 
+const getUserGithubToken = state =>
+  state.fetch.user.data && state.fetch.user.data.githubToken
+
 const getUserData = createSelector(
-  [getUserName, getUserPhoto],
-  (username, userphoto) => ({ username, userphoto })
+  [getUserName, getUserPhoto, getUserGithubToken],
+  (username, userphoto, githubToken) => ({ username, userphoto, githubToken })
 )
 
 const LayoutComponent = ({ children, location }) => {

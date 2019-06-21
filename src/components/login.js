@@ -10,6 +10,8 @@ import { GITHUB_LOGIN } from "../queries"
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
+console.log("TCL: GITHUB_CLIENT_ID", GITHUB_CLIENT_ID)
+console.log("TCL: REDIRECT_URI", REDIRECT_URI)
 
 const STATUS = {
   INITIAL: "initial",
