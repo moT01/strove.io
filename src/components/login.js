@@ -8,11 +8,13 @@ import { createSelector } from "reselect"
 import { mutate } from "../utils"
 import { GITHUB_LOGIN } from "../queries"
 
-import Dropdown from "react-dropdown"
-import "react-dropdown/style.css"
+import Dropdown from "../components/dropdown"
 
-const options = ["one", "two", "three"]
-const defaultOption = options[0]
+const options = [
+  { option: "Settings" },
+  { option: "Kill yoursef" },
+  { option: "Logout" },
+]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -39,6 +41,12 @@ const LinkWrapper = styled.h3`
   align-items: center;
   height: 4vh;
   margin: 0;
+`
+
+const ZeldaWrapper = styled(LinkWrapper)`
+  height: 4vh;
+  flex-direction: column;
+  overflow: visible;
 `
 
 const LoginButton = styled.a`
@@ -86,6 +94,7 @@ const UserPhoto = styled.img`
   width: 4vh;
   height: auto;
   margin-left: 4px;
+  border-radius: 5px;
 `
 
 const GithubLogo = props => (
@@ -115,7 +124,7 @@ const getUserData = createSelector(
 
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
-  const [show, setShow] = useState(false)
+  const [showDropdown, setShowDropdown] = useState(false)
   const dispatch = useDispatch()
 
   const user = useSelector(getUserData)
@@ -150,18 +159,15 @@ const LoginComponent = ({ location }) => {
       </Inline>
     </LoginButton>
   ) : (
-    <LinkWrapper>
-      <Text>{user.username}</Text>
-      <Inline>
-        <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
-      </Inline>
-      <Dropdown
-        options={options}
-        // onChange={this._onSelect}
-        value={defaultOption}
-        placeholder="Select an option"
-      ></Dropdown>
-    </LinkWrapper>
+    <ZeldaWrapper>
+      <LinkWrapper onClick={() => setShowDropdown(!showDropdown)}>
+        <Text>{user.username}</Text>
+        <Inline>
+          <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
+        </Inline>
+      </LinkWrapper>
+      {showDropdown && <Dropdown options={options} />}
+    </ZeldaWrapper>
   )
 }
 
