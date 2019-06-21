@@ -11,6 +11,7 @@ import { PersistGate } from "redux-persist/integration/react"
 import storage from "redux-persist/lib/storage" // defaults to localStorage for web
 import hardSet from "redux-persist/lib/stateReconciler/hardSet"
 import { createHttpLink } from "apollo-link-http"
+import { InMemoryCache } from "apollo-cache-inmemory"
 
 import rootReducer from "./src/state"
 
@@ -24,7 +25,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const client = new ApolloClient({
   link: createHttpLink({ uri: process.env.SILISKY_ENDPOINT }),
-  fetch,
+  cache: new InMemoryCache(),
+  // fetch,
 })
 
 const createStore = reduxCreateStore(
