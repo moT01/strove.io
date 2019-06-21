@@ -47,8 +47,6 @@ const LayoutComponent = ({ children, location }) => {
     const githubLink =
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
-    console.log("TCL: LayoutComponent -> repoUrl", githubLink)
-    console.log("TCL: LayoutComponent -> user", user)
     if (githubLink) {
       const query = async () => {
         const query = GET_REPO_INFO
@@ -74,7 +72,6 @@ const LayoutComponent = ({ children, location }) => {
             description,
             name /* add language and color in future */,
           } = data.repository
-          console.log("TCL: query -> data", data)
 
           dispatch(
             mutate({
@@ -94,7 +91,6 @@ const LayoutComponent = ({ children, location }) => {
         }
       }
       query()
-      console.log(query())
     }
   }, [])
 

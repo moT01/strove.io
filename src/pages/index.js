@@ -8,7 +8,6 @@ import AntDesign from "../Home"
 
 class IndexPage extends React.Component {
   render() {
-    console.log("props", this.props)
     return (
       <Layout>
         <SEO title="SiliSky" />
