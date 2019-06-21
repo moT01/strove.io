@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
+import onClickOutside from "react-onclickoutside"
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const MenuWrapper = styled.div`
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
-  background-color: ${props => (props.team ? "#ffffff" : "#0072ce")};
+  background-color: ${props => (props.invert ? "#ffffff" : "#0072ce")};
   align-self: flex-end;
   z-index: 3;
 `
@@ -25,25 +26,27 @@ const Option = styled.div`
   width: 100%;
   height: auto;
   font-size: 2vh;
-  color: ${props => (!props.team ? "#ffffff" : "#0072ce")};
+  color: ${props => (!props.invert ? "#ffffff" : "#0072ce")};
   border-bottom-left-radius: ${props => props.isLast && "8px"};
   border-bottom-right-radius: ${props => props.isLast && "8px"};
   :hover {
-    background-color: ${props => (!props.team ? "#ffffff" : "#0072ce")};
-    color: ${props => (props.team ? "#ffffff" : "#0072ce")};
+    background-color: ${props => (!props.invert ? "#ffffff" : "#0072ce")};
+    color: ${props => (props.invert ? "#ffffff" : "#0072ce")};
   }
 `
 
 const Dropdown = props => {
   const [options, setOptions] = useState(props.options)
 
+  Dropdown.handleClickOutside = () => props.handleDropdown()
+
   return (
-    <MenuWrapper team>
+    <MenuWrapper invert>
       {options.map(option =>
         option.option !== "Logout" ? (
-          <Option team>{option.option}</Option>
+          <Option invert>{option.option}</Option>
         ) : (
-          <Option isLast team>
+          <Option isLast invert>
             {option.option}
           </Option>
         )
@@ -52,4 +55,8 @@ const Dropdown = props => {
   )
 }
 
-export default Dropdown
+const clickOutsideConfig = {
+  handleClickOutside: () => Dropdown.handleClickOutside,
+}
+
+export default onClickOutside(Dropdown, clickOutsideConfig)

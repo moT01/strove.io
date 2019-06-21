@@ -9,6 +9,7 @@ import { mutate } from "../utils"
 import { GITHUB_LOGIN } from "../queries"
 
 import Dropdown from "../components/dropdown"
+import UserInfoHeader from "../components/userInfoHeader"
 
 const options = [
   { option: "Settings" },
@@ -127,6 +128,9 @@ const LoginComponent = ({ location }) => {
   const [showDropdown, setShowDropdown] = useState(false)
   const dispatch = useDispatch()
 
+  const handleDropdown = () => setShowDropdown(false)
+  const handleDropdownClick = () => setShowDropdown(!showDropdown)
+
   const user = useSelector(getUserData)
   console.log("user", user)
 
@@ -159,15 +163,24 @@ const LoginComponent = ({ location }) => {
       </Inline>
     </LoginButton>
   ) : (
-    <ZeldaWrapper>
-      <LinkWrapper onClick={() => setShowDropdown(!showDropdown)}>
-        <Text>{user.username}</Text>
-        <Inline>
-          <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
-        </Inline>
-      </LinkWrapper>
-      {showDropdown && <Dropdown options={options} />}
-    </ZeldaWrapper>
+    <UserInfoHeader
+      user={user}
+      options={options}
+      handleDropdown={handleDropdown}
+      showDropdown={showDropdown}
+      handleDropdownClick={handleDropdownClick}
+    />
+    // <ZeldaWrapper>
+    //   <LinkWrapper onClick={() => setShowDropdown(!showDropdown)}>
+    //     <Text>{user.username}</Text>
+    //     <Inline>
+    //       <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
+    //     </Inline>
+    //   </LinkWrapper>
+    //   {showDropdown && (
+    //     <Dropdown options={options} handleDropdown={handleDropdown} />
+    //   )}
+    // </ZeldaWrapper>
   )
 }
 
