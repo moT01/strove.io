@@ -84,7 +84,6 @@ const LayoutComponent = ({ children, location }) => {
       }
       query()
       console.log(query())
-      console.log("nothing")
     }
   }, [])
 
