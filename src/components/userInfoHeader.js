@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
 import onClickOutside from "react-onclickoutside"
+import { Link } from "gatsby"
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -19,6 +20,11 @@ const MenuWrapper = styled.div`
 const Text = styled.span`
   font-size: 3vh;
   color: white;
+
+  :hover {
+    color: white;
+  }
+
   @media (max-width: 1366px) {
     font-size: 2.5vh;
   }
@@ -79,10 +85,21 @@ const UserInfoHeader = props => {
   return (
     <ZeldaWrapper>
       <LinkWrapper onClick={() => props.handleDropdownClick()}>
-        <Text>{props.user.username}</Text>
-        <Inline>
-          <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
-        </Inline>
+        <Link
+          style={{
+            color: `white`,
+            textDecoration: `none`,
+            display: `flex`,
+            flexDirection: `row`,
+            justifyContent: `center`,
+            alignItems: `center`,
+          }}
+        >
+          <Text>{props.user.username}</Text>
+          <Inline>
+            <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
+          </Inline>
+        </Link>
       </LinkWrapper>
       {props.showDropdown && (
         <MenuWrapper invert>
