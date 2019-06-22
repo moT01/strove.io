@@ -4,9 +4,18 @@ import { Location } from "@reach/router"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "reselect"
+import { logout } from "./login/actions"
 
 import { mutate } from "../utils"
 import { GITHUB_LOGIN } from "../queries"
+
+import UserInfoHeader from "../components/userInfoHeader"
+
+const options = [
+  { option: "Settings" },
+  { option: "Kill yoursef" },
+  { option: "Logout", onClick: dispatch => dispatch(logout) },
+]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -33,6 +42,12 @@ const LinkWrapper = styled.h3`
   align-items: center;
   height: 4vh;
   margin: 0;
+`
+
+const ZeldaWrapper = styled(LinkWrapper)`
+  height: 4vh;
+  flex-direction: column;
+  overflow: visible;
 `
 
 const LoginButton = styled.a`
@@ -80,6 +95,7 @@ const UserPhoto = styled.img`
   width: 4vh;
   height: auto;
   margin-left: 4px;
+  border-radius: 5px;
 `
 
 const GithubLogo = props => (
@@ -109,7 +125,11 @@ const getUserData = createSelector(
 
 const LoginComponent = ({ location }) => {
   const [status, setStatus] = useState(STATUS.INITIAL)
+  const [showDropdown, setShowDropdown] = useState(false)
   const dispatch = useDispatch()
+
+  const handleDropdown = () => setShowDropdown(false)
+  const handleDropdownClick = () => setShowDropdown(!showDropdown)
 
   const user = useSelector(getUserData)
 
@@ -142,12 +162,24 @@ const LoginComponent = ({ location }) => {
       </Inline>
     </LoginButton>
   ) : (
-    <LinkWrapper>
-      <Text>{user.username}</Text>
-      <Inline>
-        <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
-      </Inline>
-    </LinkWrapper>
+    <UserInfoHeader
+      user={user}
+      options={options}
+      handleDropdown={handleDropdown}
+      showDropdown={showDropdown}
+      handleDropdownClick={handleDropdownClick}
+    />
+    // <ZeldaWrapper>
+    //   <LinkWrapper onClick={() => setShowDropdown(!showDropdown)}>
+    //     <Text>{user.username}</Text>
+    //     <Inline>
+    //       <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
+    //     </Inline>
+    //   </LinkWrapper>
+    //   {showDropdown && (
+    //     <Dropdown options={options} handleDropdown={handleDropdown} />
+    //   )}
+    // </ZeldaWrapper>
   )
 }
 

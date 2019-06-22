@@ -42,8 +42,11 @@ export default gql`
       name
       description
       isPrivate
+      createdAt
       githubLink
       machineId
+      editorPort
+      previewPort
     }
   }
 `

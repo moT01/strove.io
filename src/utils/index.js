@@ -74,6 +74,14 @@ export const query = ({
 const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
   handleActions(
     {
+      LOGOUT: state => ({
+        ...state,
+        user: {
+          data: null,
+          loading: false,
+          error: null,
+        },
+      }),
       [data]: (state, { payload }) => ({
         ...state,
         [storeName]: {

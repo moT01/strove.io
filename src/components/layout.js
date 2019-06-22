@@ -14,7 +14,7 @@ import { mutate } from "../utils"
 
 const client = new ApolloClient({
   uri: "https://api.github.com/graphql",
-  fetch,
+  // fetch,
 })
 
 const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
@@ -80,6 +80,7 @@ const LayoutComponent = ({ children, location }) => {
                 headers: {
                   Authorization: `Bearer ${user.siliskyToken}`,
                 },
+                // credentials: `include`,
               },
               variables: { githubLink, machineId, name, description },
               mutationName: "addProject",
