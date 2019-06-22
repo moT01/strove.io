@@ -95,8 +95,6 @@ const createStore = reduxCreateStore(
 
 const persistor = persistStore(createStore)
 
-// const createStore = () => reduxCreateStore(rootReducer)
-
 export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
