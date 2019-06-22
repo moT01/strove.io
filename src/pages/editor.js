@@ -25,22 +25,34 @@ const QUERY = gql`
   }
 `
 
-const getPort = () => "9090"
+const getProjectPort = () => "9090"
 
 const getMachineId = () => "5d0ba955d0027b3e519b4c39"
 
 const getUserToken = state =>
   state.fetch.user.data && state.fetch.user.data.siliskyToken
 
-const getUserData = createSelector(
-  [getUserName, getUserPhoto],
-  (username, userphoto) => ({ username, userphoto })
+const getToken = createSelector(
+  [getUserToken],
+  token => token
+)
+
+const getId = createSelector(
+  [getMachineId],
+  machineId => machineId
+)
+
+const getPort = createSelector(
+  [getProjectPort],
+  port => port
 )
 
 const Editor = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector(getUserData)
+  const token = useSelector(getToken)
+  const id = useSelector(getId)
+  const port = useSelector(getPort)
 
   return (
     <Layout>
@@ -52,7 +64,7 @@ const Editor = () => {
         }}
       </Query> */}
       <StyledIframe
-        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken},id=${id},port=${port}`}
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token},id=${id},port=${port}`}
       />
     </Layout>
   )
