@@ -2,8 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { useSelector } from "react-redux"
 import { createSelector } from "reselect"
-
 import Layout from "components/layout"
+
 import SEO from "components/seo"
 
 const StyledIframe = styled.iframe`

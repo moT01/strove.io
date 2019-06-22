@@ -1,17 +1,14 @@
 import React from "react"
 import { Router } from "@reach/router"
-import Layout from "../components/Layout"
 import PrivateRoute from "components/PrivateRoute"
-import Editor from "./editor"
-import Preview from "./preview"
+import Editor from "components/editor"
+import Preview from "components/preview"
 
 const App = () => (
-  <Layout>
-    <Router>
-      <PrivateRoute path="/app/editor" component={Editor} />
-      <PrivateRoute path="/app/preview" component={Preview} />
-    </Router>
-  </Layout>
+  <Router>
+    <PrivateRoute path="/app/editor" component={Editor} />
+    <PrivateRoute path="/app/preview" component={Preview} />
+  </Router>
 )
 
 export default App
