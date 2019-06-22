@@ -5613,6 +5613,13 @@ gatsby-plugin-catch-links@^2.0.15:
     "@babel/runtime" "^7.0.0"
     escape-string-regexp "^1.0.5"
 
+gatsby-plugin-create-client-paths@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-create-client-paths/-/gatsby-plugin-create-client-paths-2.1.1.tgz#d20b68c73268d191d3bcabc3f45bc526e51cd025"
+  integrity sha512-6srKmNrBucWFCC83MU5kCyhPAtuWUINaM5cMk9byERGFqFT02ppNdVqKE2PrridjIdSN6bVe/U+6Pgu95t1exA==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 gatsby-plugin-emotion@^4.0.7:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.1.0.tgz#475ec6eee3beab6be989d7e96c1d145ca3c9da7f"

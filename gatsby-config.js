@@ -5,6 +5,11 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    /* Used to create authenticated pages on the frontend */
+    {
+      resolve: `gatsby-plugin-create-client-paths`,
+      options: { prefixes: [`/app/*`] },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
