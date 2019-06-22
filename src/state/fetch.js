@@ -1,4 +1,4 @@
-import { createFetchModule } from "../utils"
+import { createFetchModule } from "utils"
 
 export default createFetchModule({
   storeName: "user",

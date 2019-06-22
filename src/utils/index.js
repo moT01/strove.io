@@ -29,9 +29,12 @@ export const mutate = ({
         type: `FETCH/${storeName.toUpperCase()}/DATA`,
         payload: data[mutationName],
       })
+
+      return data[mutationName]
     } catch (e) {
       console.log("fetch error: ", e)
       dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
+      return null
     }
   }
 }
@@ -64,9 +67,12 @@ export const query = ({
         type: `FETCH/${storeName.toUpperCase()}/DATA`,
         payload: data[queryName],
       })
+
+      return data[queryName]
     } catch (e) {
       console.log("fetch error: ", e)
       dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
+      return null
     }
   }
 }
