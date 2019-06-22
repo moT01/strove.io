@@ -25,7 +25,7 @@ const QUERY = gql`
   }
 `
 
-const getProjectPort = () => "38076"
+const getProjectPort = () => "23648"
 
 const getMachineId = () => "5d0ba955d0027b3e519b4c39"
 
@@ -64,7 +64,7 @@ const Editor = () => {
         }}
       </Query> */}
       <StyledIframe
-        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token},id=${id},port=${port}`}
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token}&id=${id}&port=${port}`}
       />
     </Layout>
   )

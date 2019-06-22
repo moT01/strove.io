@@ -99,7 +99,7 @@ const Error = () => (
   </ErrorBody>
 )
 
-const getProjectPort = () => "17196"
+const getProjectPort = () => "58852"
 
 const getMachineId = () => "5d0ba955d0027b3e519b4c39"
 
@@ -145,7 +145,7 @@ const Preview = () => {
     <>
       <SEO title="Preview" />
       <StyledIframe
-        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token},id=${id},port=${port}`}
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token}&id=${id}&port=${port}`}
       />
     </>
   )
