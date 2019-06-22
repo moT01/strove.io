@@ -50,43 +50,34 @@ const HeaderSection = styled.div`
   }
 `
 
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`
+
 const HeaderComponent = ({ siteTitle, location }) => (
   <HeaderSection>
     <LinkWrapper>
       <LinkWrapper>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+        <StyledLink to="/">
           <LinkText>{siteTitle}</LinkText>
-        </Link>
+        </StyledLink>
       </LinkWrapper>
       <LinkWrapper>
-        <Link
-          to={location.pathname === "/editor" ? "/preview" : "/editor"}
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
+        <StyledLink
+          to={
+            location.pathname === "/app/editor" ? "/app/preview" : "/app/editor"
+          }
         >
           <LinkText>
-            {location.pathname === "/editor" ? "Preview" : "Editor"}
+            {location.pathname === "/app/editor" ? "Preview" : "Editor"}
           </LinkText>
-        </Link>
+        </StyledLink>
       </LinkWrapper>
       <LinkWrapper>
-        <Link
-          to="/pricing"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
+        <StyledLink to="/pricing">
           <LinkText>Pricing</LinkText>
-        </Link>
+        </StyledLink>
       </LinkWrapper>
     </LinkWrapper>
     <ZeldaWrapper>
