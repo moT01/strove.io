@@ -120,6 +120,7 @@ export const createFetchModule = submodules => {
 
   const initState = {
     user: { loading: false, data: null, error: null },
+    projects: { loading: false, data: [], error: null },
   }
 
   // console.log(
@@ -128,9 +129,14 @@ export const createFetchModule = submodules => {
   // )
 
   const arrayToObject = array =>
-    array.reduce((obj, item) => {
-      return { ...obj, item }
-    }, {})
+    array.reduce(
+      (obj, item) => {
+        return { ...obj, item }
+      },
+      {
+        LOGOUT: (state, { payload }) => initState,
+      }
+    )
 
   return handleActions(
     arrayToObject(actions.map(action => createFetchReducers(action))),
