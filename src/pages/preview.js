@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { useDispatch, useSelector } from "react-redux"
+import { createSelector } from "reselect"
 
-import SEO from "../components/seo"
+import SEO from "components/seo"
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -97,11 +99,34 @@ const Error = () => (
   </ErrorBody>
 )
 
-const testToken = "testToken"
-const id = "12345"
-const port = "9898"
+const getProjectPort = () => "17196"
+
+const getMachineId = () => "5d0ba955d0027b3e519b4c39"
+
+const getUserToken = state =>
+  state.fetch.user.data && state.fetch.user.data.siliskyToken
+
+const getToken = createSelector(
+  [getUserToken],
+  token => token
+)
+
+const getId = createSelector(
+  [getMachineId],
+  machineId => machineId
+)
+
+const getPort = createSelector(
+  [getProjectPort],
+  port => port
+)
 
 const Preview = () => {
+  const dispatch = useDispatch()
+
+  const token = useSelector(getToken)
+  const id = useSelector(getId)
+  const port = useSelector(getPort)
   // const [previewOn, setPreviewOn] = useState(true)
 
   // useEffect(() => {
@@ -120,7 +145,7 @@ const Preview = () => {
     <>
       <SEO title="Preview" />
       <StyledIframe
-        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${testToken},id=${id},port=${port}`}
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token},id=${id},port=${port}`}
       />
     </>
   )
