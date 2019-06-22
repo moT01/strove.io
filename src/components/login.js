@@ -132,7 +132,6 @@ const LoginComponent = ({ location }) => {
   const handleDropdownClick = () => setShowDropdown(!showDropdown)
 
   const user = useSelector(getUserData)
-  console.log("user", user)
 
   useEffect(() => {
     const code =
