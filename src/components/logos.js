@@ -24,7 +24,7 @@ const logosArr = [
   {
     component: <Github width="100%" height="auto" />,
     name: "Github",
-    description: "Github integration state-of-the-art version control",
+    description: "Github integration for state-of-the-art version control",
   },
 ]
 

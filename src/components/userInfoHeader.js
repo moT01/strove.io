@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled, { keyframes } from "styled-components"
 import onClickOutside from "react-onclickoutside"
 import { Link } from "gatsby"
+import { useDispatch } from "react-redux"
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -79,6 +80,7 @@ const Option = styled.div`
 
 const UserInfoHeader = props => {
   const [options, setOptions] = useState(props.options)
+  const dispatch = useDispatch()
 
   UserInfoHeader.handleClickOutside = () => props.handleDropdown()
 
@@ -107,7 +109,7 @@ const UserInfoHeader = props => {
             option.option !== "Logout" ? (
               <Option invert>{option.option}</Option>
             ) : (
-              <Option isLast invert>
+              <Option isLast invert onClick={() => option.onClick(dispatch)}>
                 {option.option}
               </Option>
             )

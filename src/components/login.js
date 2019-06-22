@@ -4,17 +4,17 @@ import { Location } from "@reach/router"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
 import { createSelector } from "reselect"
+import { logout } from "./login/actions"
 
 import { mutate } from "../utils"
 import { GITHUB_LOGIN } from "../queries"
 
-import Dropdown from "../components/dropdown"
 import UserInfoHeader from "../components/userInfoHeader"
 
 const options = [
   { option: "Settings" },
   { option: "Kill yoursef" },
-  { option: "Logout" },
+  { option: "Logout", onClick: dispatch => dispatch(logout) },
 ]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
