@@ -77,109 +77,65 @@ export const query = ({
   }
 }
 
-const createFetchReducers = actions => {
-  const args = actions.map(
-    ({
-      storeName,
-      initState = {
-        [storeName]: { loading: false, data: null, error: null },
-      },
-      data,
-      loading,
-      error,
-    }) => ({
-      [data]: (state, { payload }) => ({
-        ...state,
-        [storeName]: {
-          loading: false,
-          error: null,
-          /* Spread for objects and arrays, assign value directly for primitive */
-          data: Array.isArray(payload)
-            ? [...payload]
-            : typeof payload === "object"
-            ? { ...state[storeName].data, ...payload }
-            : payload,
-        },
-      }),
-      [error]: (state, { payload }) => ({
-        ...state,
-        [storeName]: {
-          loading: false,
-          data: null,
-          error: payload,
-        },
-      }),
-      [loading]: (state, { payload }) => ({
-        ...state,
-        [storeName]: {
-          loading: payload,
-          error: null,
-          data: { ...state[storeName].data },
-        },
-      }),
-    })
-  )
-
-  console.log("args", args)
-}
-
-// const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
-//   handleActions(
-//     {
-//       LOGOUT: state => ({
-//         ...state,
-//         user: {
-//           data: null,
-//           loading: false,
-//           error: null,
-//         },
-//       }),
-//       [data]: (state, { payload }) => ({
-//         ...state,
-//         [storeName]: {
-//           loading: false,
-//           error: null,
-//           /* Spread for objects and arrays, assign value directly for primitive */
-//           data: Array.isArray(payload)
-//             ? [...payload]
-//             : typeof payload === "object"
-//             ? { ...state[storeName].data, ...payload }
-//             : payload,
-//         },
-//       }),
-//       [error]: (state, { payload }) => ({
-//         ...state,
-//         [storeName]: {
-//           loading: false,
-//           data: null,
-//           error: payload,
-//         },
-//       }),
-//       [loading]: (state, { payload }) => ({
-//         ...state,
-//         [storeName]: {
-//           loading: payload,
-//           error: null,
-//           data: { ...state[storeName].data },
-//         },
-//       }),
-//     },
-//     initState
-//   )
+const createFetchReducers = ({ storeName, data, loading, error }) => ({
+  [data]: (state, { payload }) => ({
+    ...state,
+    [storeName]: {
+      loading: false,
+      error: null,
+      /* Spread for objects and arrays, assign value directly for primitive */
+      data: Array.isArray(payload)
+        ? [...payload]
+        : typeof payload === "object"
+        ? { ...state[storeName].data, ...payload }
+        : payload,
+    },
+  }),
+  [error]: (state, { payload }) => ({
+    ...state,
+    [storeName]: {
+      loading: false,
+      data: null,
+      error: payload,
+    },
+  }),
+  [loading]: (state, { payload }) => ({
+    ...state,
+    [storeName]: {
+      loading: payload,
+      error: null,
+      data: { ...state[storeName].data },
+    },
+  }),
+})
 
 export const createFetchModule = submodules => {
   const actions = submodules.map(({ storeName, initialState }) => {
-    console.log("dvdfdvedvev", storeName, data)
-    const data = `FETCH/${storeName}/DATA`
-    const loading = `FETCH/${storeName}/LOADING`
-    const error = `FETCH/${storeName}/ERROR`
+    const data = `FETCH/${storeName.toUpperCase()}/DATA`
+    const loading = `FETCH/${storeName.toUpperCase()}/LOADING`
+    const error = `FETCH/${storeName.toUpperCase()}/ERROR`
 
-    return { data, loading, error, storeName, initialState }
+    return { data, loading, error, storeName }
   })
 
-  console.log("actions", actions)
+  const initState = {
+    user: { loading: false, data: null, error: null },
+  }
 
-  return createFetchReducers(actions)
+  // console.log(
+  //   "almostReducers",
+  //   actions.map(action => createFetchReducers(action))
+  // )
+
+  const arrayToObject = array =>
+    array.reduce((obj, item) => {
+      return { ...obj, item }
+    }, {})
+
+  return handleActions(
+    arrayToObject(actions.map(action => createFetchReducers(action))),
+    initState
+  )
 }
 /*
   This creates an opinionated way of handling fetch actions.
