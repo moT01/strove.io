@@ -1,11 +1,12 @@
-import React from "react"
-// import { Link } from "gatsby"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
+import { useDispatch, useSelector } from "react-redux"
+import { createSelector } from "reselect"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "components/layout"
+import SEO from "components/seo"
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -24,23 +25,37 @@ const QUERY = gql`
   }
 `
 
-const testToken = "testToken"
-const id = "5d0ba955d0027b3e519b4c39"
-const port = "9090"
+const getPort = () => "9090"
 
-const Editor = () => (
-  <Layout>
-    <SEO title="Editor" />
-    {/* <Query query={QUERY}>
-      {({ data, loading, error }) => {
-        if (loading || error) return null
-        return <h1>{data.users[0].email}</h1>
-      }}
-    </Query> */}
-    <StyledIframe
-      src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken},id=${id},port=${port}`}
-    />
-  </Layout>
+const getMachineId = () => "5d0ba955d0027b3e519b4c39"
+
+const getUserToken = state =>
+  state.fetch.user.data && state.fetch.user.data.siliskyToken
+
+const getUserData = createSelector(
+  [getUserName, getUserPhoto],
+  (username, userphoto) => ({ username, userphoto })
 )
+
+const Editor = () => {
+  const dispatch = useDispatch()
+
+  const user = useSelector(getUserData)
+
+  return (
+    <Layout>
+      <SEO title="Editor" />
+      {/* <Query query={QUERY}>
+        {({ data, loading, error }) => {
+          if (loading || error) return null
+          return <h1>{data.users[0].email}</h1>
+        }}
+      </Query> */}
+      <StyledIframe
+        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${testToken},id=${id},port=${port}`}
+      />
+    </Layout>
+  )
+}
 
 export default Editor
