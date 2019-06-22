@@ -101,7 +101,7 @@ const Error = () => (
 
 const getProjectPort = () => "58852"
 
-const getMachineId = () => "5d0ba955d0027b3e519b4c39"
+const getMachineId = () => "5d0e233ef9265ebc230bae22"
 
 const getUserToken = state =>
   state.fetch.user.data && state.fetch.user.data.siliskyToken
