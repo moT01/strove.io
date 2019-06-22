@@ -93,7 +93,12 @@ const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
         [storeName]: {
           loading: false,
           error: null,
-          data: { ...state[storeName].data, ...payload },
+          /* Spread for objects and arrays, assign value directly for primitive */
+          data: Array.isArray(payload)
+            ? [...payload]
+            : typeof payload === "object"
+            ? { ...state[storeName].data, ...payload }
+            : payload,
         },
       }),
       [error]: (state, { payload }) => ({
@@ -116,7 +121,13 @@ const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
     initState
   )
 
+/*
+  This creates an opinionated way of handling fetch actions.
+  It for user store it creates FETCH/USER/LOADING, FETCH/USER/ERROR and
+  FETCH/USER/DATA actions and handles data in both object, array and primitive shapes.
+*/
 export const createFetchModule = ({ storeName, initialState }) => {
+  /* For user it assigns FETCH/USER/DATA to data variable */
   const {
     fetch: {
       user: { data, loading, error },
