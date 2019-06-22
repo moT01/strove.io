@@ -1,4 +1,4 @@
-import { createActions, createAction, handleActions } from "redux-actions"
+import { createActions, handleActions } from "redux-actions"
 
 import client from "../../client"
 
@@ -77,120 +77,74 @@ export const query = ({
   }
 }
 
-const createFetchReducers = ({ storeName, data, loading, error }) => ({
-  [data]: (state, { payload }) => ({
-    ...state,
-    [storeName]: {
-      loading: false,
-      error: null,
-      /* Spread for objects and arrays, assign value directly for primitive */
-      data: Array.isArray(payload)
-        ? [...payload]
-        : typeof payload === "object"
-        ? { ...state[storeName].data, ...payload }
-        : payload,
-    },
-  }),
-  [error]: (state, { payload }) => ({
-    ...state,
-    [storeName]: {
-      loading: false,
-      data: null,
-      error: payload,
-    },
-  }),
-  [loading]: (state, { payload }) => ({
-    ...state,
-    [storeName]: {
-      loading: payload,
-      error: null,
-      data: { ...state[storeName].data },
-    },
-  }),
-})
-
-export const createFetchModule = submodules => {
-  const actions = submodules.map(({ storeName, initialState }) => {
-    // const data = createAction(
-    //   `FETCH/${storeName.toUpperCase()}/DATA`,
-    //   data => data
-    // )
-    // const loading = createAction(
-    //   `FETCH/${storeName.toUpperCase()}/LOADING`,
-    //   (data = true) => data
-    // )
-    // const error = createAction(
-    //   `FETCH/${storeName.toUpperCase()}/ERROR`,
-    //   data => data
-    // )
-
-    const {
-      fetch: {
-        [storeName]: { data, loading, error },
-      },
-    } = createActions({
-      FETCH: {
-        [storeName.toUpperCase()]: {
-          DATA: data => data,
-          LOADING: (isLoading = false) => isLoading,
-          ERROR: error => error,
+const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
+  handleActions(
+    {
+      LOGOUT: state => ({
+        ...state,
+        user: {
+          data: null,
+          loading: false,
+          error: null,
         },
-      },
-    })
-
-    return { data, loading, error, storeName }
-  })
-
-  const initState = {
-    user: { loading: false, data: null, error: null },
-    projects: { loading: false, data: [], error: null },
-  }
-
-  // console.log(
-  //   "almostReducers",
-  //   actions.map(action => createFetchReducers(action))
-  // )
-
-  const arrayToObject = array =>
-    array.reduce(
-      (obj, item) => {
-        return { ...obj, item }
-      },
-      {
-        LOGOUT: (state, { payload }) => initState,
-      }
-    )
-
-  return handleActions(
-    arrayToObject(actions.map(action => createFetchReducers(action))),
+      }),
+      [data]: (state, { payload }) => ({
+        ...state,
+        [storeName]: {
+          loading: false,
+          error: null,
+          /* Spread for objects and arrays, assign value directly for primitive */
+          data: Array.isArray(payload)
+            ? [...payload]
+            : typeof payload === "object"
+            ? { ...state[storeName].data, ...payload }
+            : payload,
+        },
+      }),
+      [error]: (state, { payload }) => ({
+        ...state,
+        [storeName]: {
+          loading: false,
+          data: null,
+          error: payload,
+        },
+      }),
+      [loading]: (state, { payload }) => ({
+        ...state,
+        [storeName]: {
+          loading: payload,
+          error: null,
+          data: { ...state[storeName].data },
+        },
+      }),
+    },
     initState
   )
-}
+
 /*
   This creates an opinionated way of handling fetch actions.
   It for user store it creates FETCH/USER/LOADING, FETCH/USER/ERROR and
   FETCH/USER/DATA actions and handles data in both object, array and primitive shapes.
 */
+export const createFetchModule = ({ storeName, initialState }) => {
+  /* For user it assigns FETCH/USER/DATA to data variable */
+  const {
+    fetch: {
+      user: { data, loading, error },
+    },
+  } = createActions({
+    FETCH: {
+      [storeName.toUpperCase()]: {
+        DATA: data => data,
+        LOADING: (isLoading = false) => isLoading,
+        ERROR: error => error,
+      },
+    },
+  })
 
-// export const createFetchModule = ({ storeName, initialState }) => {
-//   /* For user it assigns FETCH/USER/DATA to data variable */
-//   const {
-//     fetch: {
-//       user: { data, loading, error },
-//     },
-//   } = createActions({
-//     FETCH: {
-//       [storeName.toUpperCase()]: {
-//         DATA: data => data,
-//         LOADING: (isLoading = false) => isLoading,
-//         ERROR: error => error,
-//       },
-//     },
-//   })
+  const initState = initialState || {
+    [storeName]: { loading: false, data: null, error: null },
+  }
 
-//   const initState = initialState || {
-//     [storeName]: { loading: false, data: null, error: null },
-//   }
-
-//   return createFetchReducers({ storeName, initState, data, loading, error })
-// }
+  return createFetchReducers({ storeName, initState, data, loading, error })
+}
