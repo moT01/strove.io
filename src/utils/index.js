@@ -111,9 +111,9 @@ const createFetchReducers = ({ storeName, data, loading, error }) => ({
 
 export const createFetchModule = submodules => {
   const actions = submodules.map(({ storeName, initialState }) => {
-    const data = `FETCH/${storeName.toUpperCase()}/DATA`
-    const loading = `FETCH/${storeName.toUpperCase()}/LOADING`
-    const error = `FETCH/${storeName.toUpperCase()}/ERROR`
+    const data = createAction(`FETCH/${storeName.toUpperCase()}/DATA`)
+    const loading = createAction(`FETCH/${storeName.toUpperCase()}/LOADING`)
+    const error = createAction(`FETCH/${storeName.toUpperCase()}/ERROR`)
 
     return { data, loading, error, storeName }
   })
