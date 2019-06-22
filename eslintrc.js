@@ -36,9 +36,11 @@ module.exports = {
       "import/resolver": {
         alias: [
           ["components", "./src/components"],
-          ["utils", "./src/utils"],
           ["images", "./src/images"],
+          ["pages", "./src/pages"],
           ["queries", "./src/queries"],
+          ["state", "./src/state"],
+          ["utils", "./src/utils"],
         ],
         extensions: [".ts", ".js", ".jsx", ".json"],
       },
