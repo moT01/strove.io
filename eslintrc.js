@@ -41,6 +41,7 @@ module.exports = {
           ["queries", "./src/queries"],
           ["state", "./src/state"],
           ["utils", "./src/utils"],
+          ["constants", "./src/constants"],
         ],
         extensions: [".ts", ".js", ".jsx", ".json"],
       },

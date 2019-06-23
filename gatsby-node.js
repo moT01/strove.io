@@ -18,6 +18,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         queries: path.resolve(__dirname, "src/queries"),
         state: path.resolve(__dirname, "src/state"),
         utils: path.resolve(__dirname, "src/utils"),
+        constants: path.resolve(__dirname, "src/constants"),
       },
     },
   })

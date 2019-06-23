@@ -7,7 +7,8 @@
       "pages": ["src/pages"],
       "queries": ["src/queries"],
       "state": ["src/state"],
-      "utils": ["src/utils"]
+      "utils": ["src/utils"],
+      "constants": ["src/constants"]
     }
   },
   "search.exclude": {
