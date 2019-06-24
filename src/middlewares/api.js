@@ -1,11 +1,14 @@
-import { query, mutate } from 'utils'
+import { Query, Mutation } from 'utils'
 // import { FETCH_START } from 'state/api/constants'
 import client from '../../client'
 
 const apiMiddleware = ({ dispatch }) => next => action => {
+  console.log('action', action)
   next(action)
 
   if (action.type !== 'FETCH_START') return
+
+  console.log('action.type !== FETCH_START')
 
   const {
     name,
@@ -23,7 +26,7 @@ const apiMiddleware = ({ dispatch }) => next => action => {
 
   if (mutation) {
     dispatch(
-      mutate({
+      Mutation({
         storeKey,
         name,
         variables,
@@ -36,7 +39,7 @@ const apiMiddleware = ({ dispatch }) => next => action => {
     )
   } else {
     dispatch(
-      query({
+      Query({
         storeKey,
         name,
         variables,

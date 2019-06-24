@@ -10,7 +10,7 @@ import ApolloClient from 'apollo-boost'
 import Header from './header'
 import './layout.css'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from '../queries'
-import { mutate } from '../utils'
+// import { mutate } from '../utils'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
@@ -83,19 +83,35 @@ const LayoutComponent = ({ children, location }) => {
             name /* add language and color in future */,
           } = data.repository
 
-          dispatch(
-            mutate({
+          dispatch({
+            type: 'FETCH_START',
+            payload: {
+              name: 'addProject',
+              storeKey: 'projects',
+              variables: { githubLink, machineId, name, description },
               mutation: ADD_GITHUB_PROJECT,
               context: {
                 headers: {
-                  Authorization: `Bearer ${user.siliskyToken}`,
+                  Authorization: `Bearer ${user.githubToken}`,
+                  'User-Agent': 'node',
                 },
               },
-              variables: { githubLink, machineId, name, description },
-              mutationName: 'addProject',
-              storeName: 'project',
-            })
-          )
+            },
+          })
+
+          // dispatch(
+          //   mutate({
+          //     mutation: ADD_GITHUB_PROJECT,
+          //     context: {
+          //       headers: {
+          //         Authorization: `Bearer ${user.siliskyToken}`,
+          //       },
+          //     },
+          //     variables: { githubLink, machineId, name, description },
+          //     mutationName: 'addProject',
+          //     storeName: 'project',
+          //   })
+          // )
         } catch (e) {
           console.log('fetch error: ', e)
         }

@@ -6,7 +6,7 @@ import { createSelector } from 'reselect'
 import { logout } from './login/actions'
 import getOr from 'lodash/fp/getOr'
 
-import { mutate } from '../utils'
+// import { mutate } from '../utils'
 import { GITHUB_LOGIN } from '../queries'
 
 import UserInfoHeader from '../components/userInfoHeader'
@@ -126,14 +126,14 @@ const LoginComponent = ({ location }) => {
       location.search.match(/code=(.*)/) &&
       location.search.match(/code=(.*)/)[1]
     if (code) {
-      dispatch(
-        mutate({
-          mutation: GITHUB_LOGIN,
-          variables: { code },
-          mutationName: 'githubAuth',
-          storeName: 'user',
-        })
-      )
+      //   dispatch(
+      //     mutate({
+      //       mutation: GITHUB_LOGIN,
+      //       variables: { code },
+      //       mutationName: 'githubAuth',
+      //       storeName: 'user',
+      //     })
+      //   )
     }
   }, [])
 

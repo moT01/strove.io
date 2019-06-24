@@ -3,7 +3,7 @@ import * as C from 'state/api/constants'
 
 import client from '../../client'
 
-export const mutate = ({
+export const Mutation = ({
   name,
   storeKey,
   variables,
@@ -40,7 +40,7 @@ export const mutate = ({
   }
 }
 
-export const query = ({
+export const Query = ({
   name,
   storeKey,
   variables,
