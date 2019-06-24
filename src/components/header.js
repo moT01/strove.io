@@ -13,6 +13,12 @@ const LinkWrapper = styled.h3`
   margin: 0 3vw 0 0;
 `
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 3vw 0 0;
+`
+
 const ZeldaWrapper = styled(LinkWrapper)`
   margin: 0;
 `
@@ -57,7 +63,7 @@ const StyledLink = styled(Link)`
 
 const HeaderComponent = ({ siteTitle, location }) => (
   <HeaderSection>
-    <LinkWrapper>
+    <HeaderWrapper>
       <LinkWrapper>
         <StyledLink to="/">
           <LinkText>{siteTitle}</LinkText>
@@ -79,7 +85,7 @@ const HeaderComponent = ({ siteTitle, location }) => (
           <LinkText>Pricing</LinkText>
         </StyledLink>
       </LinkWrapper>
-    </LinkWrapper>
+    </HeaderWrapper>
     <ZeldaWrapper>
       <Login />
     </ZeldaWrapper>

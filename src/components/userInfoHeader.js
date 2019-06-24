@@ -79,7 +79,7 @@ const Option = styled.div`
 `
 
 const UserInfoHeader = props => {
-  const [options, setOptions] = useState(props.options)
+  const [options] = useState(props.options)
   const dispatch = useDispatch()
 
   UserInfoHeader.handleClickOutside = () => props.handleDropdown()

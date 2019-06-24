@@ -4,7 +4,7 @@ a {
 }
 a:focus {
   text-decoration: underline;
-  text-decoration-skip: ink;
+  text-decoration-skip: auto;
 }
 .home-wrapper {
   width: 100vw;
