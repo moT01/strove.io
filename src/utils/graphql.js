@@ -1,6 +1,6 @@
 import * as C from 'state/api/constants'
 
-import client from '../../client'
+import defaultClient from '../../client'
 
 export const mutation = ({
   name,
@@ -11,6 +11,7 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
+  client = defaultClient,
 }) => {
   return async dispatch => {
     dispatch({
@@ -56,6 +57,7 @@ export const query = ({
   query,
   onSuccess,
   onError,
+  client = defaultClient,
 }) => {
   return async dispatch => {
     dispatch({
