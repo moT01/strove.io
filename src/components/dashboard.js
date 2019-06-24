@@ -1,10 +1,15 @@
-/* eslint-disable */
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Layout from './layout'
+import SEO from './seo'
 import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import { query } from 'utils'
+import { GET_PROJECTS } from 'queries'
+
+import { selectors } from 'state'
 
 const workspaces = [
   {
@@ -196,81 +201,133 @@ const TextWrapper = styled(FlexWrapper)`
   height: auto;
   justify-content: flex-start;
 `
-class Dashboard extends React.Component {
-  render() {
-    return (
-      <Layout>
-        <SEO title="Dashboard" />
-        <TilesWrapper>
-          {workspaces.map(workspace => (
-            <Tile>
-              <VerticalDivider>
-                <InfoWrapper>
-                  <ProjectTitle>{workspace.name}</ProjectTitle>
-                  <TextWrapper>
-                    <Icon
-                      type="calendar"
-                      style={{
-                        fontSize: '1.7vh',
-                        color: `#0072ce`,
-                      }}
-                    />
-                    <Text>{workspace.createdAt}</Text>
-                  </TextWrapper>
-                  <TextWrapper>
-                    <Icon
-                      type="edit"
-                      style={{
-                        fontSize: '1.7vh',
-                        color: `#0072ce`,
-                      }}
-                    />
-                    <Text>{workspace.description}</Text>
-                  </TextWrapper>
-                  <TextWrapper>
-                    <Icon
-                      type="branches"
-                      style={{
-                        fontSize: '1.7vh',
-                        color: `#0072ce`,
-                      }}
-                    />
-                    <Text> {workspace.branch}</Text>
-                  </TextWrapper>
-                  <TextWrapper>
-                    <Icon
-                      type="code"
-                      style={{
-                        fontSize: '1.7vh',
-                        color: `#0072ce`,
-                      }}
-                    />
-                    <Text>{workspace.language}</Text>
-                  </TextWrapper>
-                  <TextWrapper>
-                    <Icon
-                      type={workspace.isPrivate ? 'lock' : 'unlock'}
-                      style={{
-                        fontSize: '1.7vh',
-                        color: `#0072ce`,
-                      }}
-                    />
-                    <Text>{workspace.isPrivate ? 'Private' : 'Public'}</Text>
-                  </TextWrapper>
-                </InfoWrapper>
-                <RightSection>
-                  <Button primary>
-                    <ButtonText>Start</ButtonText>
-                  </Button>
-                </RightSection>
-              </VerticalDivider>
-            </Tile>
-          ))}
-        </TilesWrapper>
-      </Layout>
-    )
-  }
+
+const getUserProjects = selectors.getData('projects', [])
+
+const getProjects = createSelector(
+  [getUserProjects],
+  projects => projects
+)
+
+const getUserToken = selectors.getData('user', {}, 'siliskyToken')
+
+const getProjectPort = () => '23648'
+
+const getMachineId = () => '5d0e233ef9265ebc230bae22'
+
+const getToken = createSelector(
+  [getUserToken],
+  token => token
+)
+
+const getId = createSelector(
+  [getMachineId],
+  machineId => machineId
+)
+
+const getPort = createSelector(
+  [getProjectPort],
+  port => port
+)
+
+const getUserData = createSelector(
+  [selectors.getUser],
+  user => user
+)
+
+const Dashboard = props => {
+  const token = useSelector(getToken)
+  const id = useSelector(getId)
+  const port = useSelector(getPort)
+  const user = useSelector(getUserData)
+
+  const projects = useSelector(getProjects)
+  console.log(projects)
+
+  useEffect(() => {
+    query({
+      name: 'projects',
+      query: GET_PROJECTS,
+      context: {
+        headers: {
+          Authorization: `Bearer ${user.siliskyToken}`,
+          'User-Agent': 'node',
+        },
+      },
+    })
+  }, [])
+
+  return (
+    <Layout>
+      <SEO title="Dashboard" />
+      <TilesWrapper>
+        {workspaces.map(workspace => (
+          <Tile key={workspace.name}>
+            <VerticalDivider>
+              <InfoWrapper>
+                <ProjectTitle>{workspace.name}</ProjectTitle>
+                <TextWrapper>
+                  <Icon
+                    type="calendar"
+                    style={{
+                      fontSize: '1.7vh',
+                      color: `#0072ce`,
+                    }}
+                  />
+                  <Text>{workspace.createdAt}</Text>
+                </TextWrapper>
+                <TextWrapper>
+                  <Icon
+                    type="edit"
+                    style={{
+                      fontSize: '1.7vh',
+                      color: `#0072ce`,
+                    }}
+                  />
+                  <Text>{workspace.description}</Text>
+                </TextWrapper>
+                <TextWrapper>
+                  <Icon
+                    type="branches"
+                    style={{
+                      fontSize: '1.7vh',
+                      color: `#0072ce`,
+                    }}
+                  />
+                  <Text> {workspace.branch}</Text>
+                </TextWrapper>
+                <TextWrapper>
+                  <Icon
+                    type="code"
+                    style={{
+                      fontSize: '1.7vh',
+                      color: `#0072ce`,
+                    }}
+                  />
+                  <Text>{workspace.language}</Text>
+                </TextWrapper>
+                <TextWrapper>
+                  <Icon
+                    type={workspace.isPrivate ? 'lock' : 'unlock'}
+                    style={{
+                      fontSize: '1.7vh',
+                      color: `#0072ce`,
+                    }}
+                  />
+                  <Text>{workspace.isPrivate ? 'Private' : 'Public'}</Text>
+                </TextWrapper>
+              </InfoWrapper>
+              <RightSection>
+                <Button primary>
+                  <ButtonText>Start</ButtonText>
+                </Button>
+              </RightSection>
+            </VerticalDivider>
+          </Tile>
+        ))}
+      </TilesWrapper>
+    </Layout>
+  )
 }
-/* eslint-enable */
 
 export default Dashboard
