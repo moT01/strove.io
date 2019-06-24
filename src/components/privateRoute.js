@@ -4,19 +4,24 @@ import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { selectors } from 'state'
 
-const getUserToken = selectors.getData('user', {}, 'siliskyToken')
+const getUserToken = selectors.getData('user', null, 'siliskyToken')
 
 const getToken = createSelector(
   [getUserToken],
   token => token
 )
 
-/* Based on https://github.com/gatsbyjs/gatsby/blob/master/examples/simple-auth/src/components/PrivateRoute.js */
-const PrivateRoute = ({ component: Component, location, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  location,
+  onAccessDenied,
+  ...rest
+}) => {
   const token = useSelector(getToken)
 
   if (!token && location.pathname !== `/`) {
     // If we’re not logged in, redirect to the home page.
+    onAccessDenied && onAccessDenied()
     navigate(`/`)
     return null
   }

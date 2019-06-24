@@ -129,8 +129,6 @@ const LoginComponent = ({ location }) => {
     }
   }, [])
 
-  console.log('user.username', !user.username, user.username)
-
   return !user.username ? (
     <LoginButton
       href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
