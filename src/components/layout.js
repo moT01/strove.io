@@ -23,14 +23,14 @@ const getUserSiliskyToken = getOr(undefined, [
   'api',
   'user',
   'data',
-  'getUserSiliskyToken',
+  'siliskyToken',
 ])
 
 const getUserGithubToken = getOr(undefined, [
   'api',
   'user',
   'data',
-  'getUserGithubToken',
+  'githubToken',
 ])
 
 const getUserData = createSelector(
@@ -53,7 +53,7 @@ const LayoutComponent = ({ children, location }) => {
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
     if (githubLink) {
-      const login = async () => {
+      const addProject = async () => {
         const query = GET_REPO_INFO
         const context = {
           headers: {
@@ -86,7 +86,7 @@ const LayoutComponent = ({ children, location }) => {
               mutation: ADD_GITHUB_PROJECT,
               context: {
                 headers: {
-                  Authorization: `Bearer ${user.githubToken}`,
+                  Authorization: `Bearer ${user.siliskyToken}`,
                   'User-Agent': 'node',
                 },
               },
@@ -96,7 +96,7 @@ const LayoutComponent = ({ children, location }) => {
           console.log('fetch error: ', e)
         }
       }
-      login()
+      addProject()
     }
   }, [])
 
