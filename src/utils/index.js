@@ -28,8 +28,7 @@ export const mutation = ({
 
       dispatch({
         type: C.FETCH_SUCCESS,
-        storeKey,
-        payload: { name, data: data[name] },
+        payload: { storeKey, data: data[name] },
       })
 
       console.log('dataaaaa', data)
@@ -69,8 +68,7 @@ export const query = ({
 
       dispatch({
         type: C.FETCH_SUCCESS,
-        storeKey,
-        payload: data[name],
+        payload: { data: data[name], storeKey },
       })
 
       return data[name]

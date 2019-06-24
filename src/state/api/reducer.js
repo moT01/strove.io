@@ -3,10 +3,10 @@ import * as C from './constants'
 
 export default handleActions(
   {
-    [C.FETCH_START]: (state, { payload: { name } = {} }) => ({
+    [C.FETCH_START]: (state, { payload: { storeKey } = {} }) => ({
       ...state,
-      [name]: {
-        ...(state[name] || {}),
+      [storeKey]: {
+        ...(state[storeKey] || {}),
         isLoading: true,
         error: undefined,
         message: undefined,
@@ -15,15 +15,15 @@ export default handleActions(
     }),
     [C.FETCH_SUCCESS]: (
       state,
-      { payload: { name, data, code, message } = {} }
+      { payload: { storeKey, data, code, message } = {} }
     ) => ({
       ...state,
-      [name]: {
-        ...(state[name] || {}),
+      [storeKey]: {
+        ...(state[storeKey] || {}),
         data: Array.isArray(data)
           ? [...data]
           : typeof data === 'object'
-          ? { ...state[name].data, ...data }
+          ? { ...state[storeKey].data, ...data }
           : data,
         isLoading: false,
         error: undefined,
@@ -33,11 +33,11 @@ export default handleActions(
     }),
     [C.FETCH_ERROR]: (
       state,
-      { payload: { name, error, message, code } = {} }
+      { payload: { storeKey, error, message, code } = {} }
     ) => ({
       ...state,
-      [name]: {
-        ...(state[name] || {}),
+      [storeKey]: {
+        ...(state[storeKey] || {}),
         isLoading: false,
         error,
         message,

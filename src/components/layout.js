@@ -33,17 +33,6 @@ const getUserGithubToken = getOr(undefined, [
   'getUserGithubToken',
 ])
 
-// const getUserName = state => state.api.user.data && state.api.user.data.name
-
-// const getUserPhoto = state =>
-//   state.api.user.data && state.api.user.data.photoUrl
-
-// const getUserSiliskyToken = state =>
-//   state.api.user.data && state.api.user.data.siliskyToken
-
-// const getUserGithubToken = state =>
-//   state.api.user.data && state.api.user.data.githubToken
-
 const getUserData = createSelector(
   [getUserName, getUserPhoto, getUserGithubToken, getUserSiliskyToken],
   (username, userphoto, githubToken, siliskyToken) => ({
@@ -103,20 +92,6 @@ const LayoutComponent = ({ children, location }) => {
               },
             })
           )
-
-          // dispatch(
-          //   mutate({
-          //     mutation: ADD_GITHUB_PROJECT,
-          //     context: {
-          //       headers: {
-          //         Authorization: `Bearer ${user.siliskyToken}`,
-          //       },
-          //     },
-          //     variables: { githubLink, machineId, name, description },
-          //     mutationName: 'addProject',
-          //     storeName: 'project',
-          //   })
-          // )
         } catch (e) {
           console.log('fetch error: ', e)
         }
