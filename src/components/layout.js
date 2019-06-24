@@ -10,7 +10,6 @@ import { mutation } from 'utils'
 import Header from './header'
 import './layout.css'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from '../queries'
-import { mutate } from '../utils'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',

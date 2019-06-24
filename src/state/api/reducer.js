@@ -44,6 +44,7 @@ export default handleActions(
         code,
       },
     }),
+    LOGOUT: () => undefined,
   },
   {
     user: {
