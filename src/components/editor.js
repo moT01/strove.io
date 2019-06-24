@@ -5,6 +5,7 @@ import { createSelector } from 'reselect'
 import Layout from 'components/layout'
 import getOr from 'lodash/fp/getOr'
 
+import { selectors } from 'state'
 import SEO from 'components/seo'
 
 const StyledIframe = styled.iframe`
@@ -16,12 +17,7 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const getUserToken = getOr(undefined, [
-  'api',
-  'user',
-  'data',
-  'getUserSiliskyToken',
-])
+const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
 const getProjectPort = () => '23648'
 
