@@ -26,12 +26,10 @@ export const mutation = ({
         errorPolicy,
       })
 
-      console.log('data', data)
-
       dispatch({
         type: C.FETCH_SUCCESS,
         storeKey,
-        payload: data[name],
+        payload: { name, data: data[name] },
       })
 
       console.log('dataaaaa', data)

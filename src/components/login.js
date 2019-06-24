@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { logout } from './login/actions'
 import getOr from 'lodash/fp/getOr'
+import { mutation } from 'utils'
 
 import { GITHUB_LOGIN } from '../queries'
 
@@ -117,13 +118,14 @@ const LoginComponent = ({ location }) => {
       location.search.match(/code=(.*)/) &&
       location.search.match(/code=(.*)/)[1]
     if (code) {
-      dispatch({
-        type: 'FETCH_START',
-        mutation: GITHUB_LOGIN,
-        variables: { code },
-        storeKey: 'user',
-        name: 'githubAuth',
-      })
+      dispatch(
+        mutation({
+          mutation: GITHUB_LOGIN,
+          variables: { code },
+          storeKey: 'user',
+          name: 'githubAuth',
+        })
+      )
     }
   }, [])
 

@@ -8,7 +8,6 @@ const link = createHttpLink({ uri: process.env.SILISKY_ENDPOINT })
 const cache = new InMemoryCache()
 
 export default new ApolloClient({
-  link,
+  uri: process.env.SILISKY_ENDPOINT,
   fetch,
-  cache,
 })
