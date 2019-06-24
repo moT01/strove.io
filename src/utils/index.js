@@ -26,6 +26,8 @@ export const Mutation = ({
         errorPolicy,
       })
 
+      console.log('data', data)
+
       dispatch({
         type: C.FETCH_SUCCESS,
         payload: data[name],

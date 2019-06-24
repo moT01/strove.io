@@ -9,66 +9,58 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { getMainDefinition } from 'apollo-utilities'
-import { ApolloLink, split } from 'apollo-link'
-import { HttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
+// import { InMemoryCache } from 'apollo-cache-inmemory'
+// import { getMainDefinition } from 'apollo-utilities'
+// import { ApolloLink, split } from 'apollo-link'
+// import { HttpLink } from 'apollo-link-http'
+// import { onError } from 'apollo-link-error'
 import { apiMiddleware } from './src/middlewares'
+import client from './client'
 
 import rootReducer from './src/state'
 
-const httpLink = new HttpLink({
-  uri: process.env.SILISKY_ENDPOINT,
-})
+// const httpLink = new HttpLink({
+//   uri: process.env.SILISKY_ENDPOINT,
+// })
 
-const terminatingLink = split(({ query }) => {
-  const { kind, operation } = getMainDefinition(query)
-  return kind === 'OperationDefinition' && operation === 'subscription'
-}, httpLink)
+// const terminatingLink = split(({ query }) => {
+//   const { kind, operation } = getMainDefinition(query)
+//   return kind === 'OperationDefinition' && operation === 'subscription'
+// }, httpLink)
 
-const authLink = new ApolloLink((operation, forward) => {
-  operation.setContext(({ headers = {} }) => {
-    const token = localStorage.getItem('token')
+// const authLink = new ApolloLink((operation, forward) => {
+//   operation.setContext(({ headers = {} }) => {
+//     const token = localStorage.getItem('token')
 
-    if (token) {
-      headers = { ...headers, Authorization: `Bearer ${token}` }
-    }
+//     if (token) {
+//       headers = { ...headers, Authorization: `Bearer ${token}` }
+//     }
 
-    return { headers }
-  })
+//     return { headers }
+//   })
 
-  return forward(operation)
-})
+//   return forward(operation)
+// })
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path }) => {
-      console.log('GraphQL error', message)
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors) {
+//     graphQLErrors.forEach(({ message, locations, path }) => {
+//       console.log('GraphQL error', message)
 
-      if (message === 'UNAUTHENTICATED') {
-        // signOut(client)
-      }
-    })
-  }
+//       if (message === 'UNAUTHENTICATED') {
+//         // signOut(client)
+//       }
+//     })
+//   }
 
-  if (networkError) {
-    console.log('Network error', networkError)
+//   if (networkError) {
+//     console.log('Network error', networkError)
 
-    if (networkError.statusCode === 401) {
-      // signOut(client)
-    }
-  }
-})
-
-const link = ApolloLink.from([authLink, errorLink, terminatingLink])
-
-const cache = new InMemoryCache()
-
-const client = new ApolloClient({
-  link,
-  cache,
-})
+//     if (networkError.statusCode === 401) {
+//       // signOut(client)
+//     }
+//   }
+// })
 
 const persistConfig = {
   key: 'root',
