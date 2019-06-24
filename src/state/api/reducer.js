@@ -31,7 +31,7 @@ export default handleActions(
         code,
       },
     }),
-    [C.FETCH_START]: (
+    [C.FETCH_ERROR]: (
       state,
       { payload: { name, error, message, code } = {} }
     ) => ({
