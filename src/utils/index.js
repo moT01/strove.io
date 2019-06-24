@@ -122,31 +122,3 @@ const createFetchReducers = ({ storeKey, initState, data, loading, error }) =>
     },
     initState
   )
-
-/*
-  This creates an opinionated way of handling fetch actions.
-  It for user store it creates FETCH/USER/LOADING, FETCH/USER/ERROR and
-  FETCH/USER/DATA actions and handles data in both object, array and primitive shapes.
-*/
-export const createFetchModule = ({ storeKey, initialState }) => {
-  /* For user it assigns FETCH/USER/DATA to data variable */
-  const {
-    fetch: {
-      user: { data, loading, error },
-    },
-  } = createActions({
-    FETCH: {
-      [storeKey]: {
-        DATA: data => data,
-        LOADING: (isLoading = false) => isLoading,
-        ERROR: error => error,
-      },
-    },
-  })
-
-  const initState = initialState || {
-    [storeKey]: { loading: false, data: null, error: null },
-  }
-
-  return createFetchReducers({ storeKey, initState, data, loading, error })
-}
