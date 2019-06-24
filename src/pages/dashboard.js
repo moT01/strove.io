@@ -1,83 +1,83 @@
 /* eslint-disable */
-import React from "react"
+import React from 'react'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import styled, { keyframes } from "styled-components"
-import { Icon } from "antd"
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import styled, { keyframes } from 'styled-components'
+import { Icon } from 'antd'
 
 const workspaces = [
   {
-    name: "Paweł",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "javascript",
-    branch: "master",
+    name: 'Paweł',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'javascript',
+    branch: 'master',
     isPrivate: true,
   },
   {
-    name: "Best app ever",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "ruby",
-    branch: "master",
+    name: 'Best app ever',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'ruby',
+    branch: 'master',
     isPrivate: true,
   },
   {
-    name: "My first react/redux project",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
+    name: 'My first react/redux project',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
     description:
-      "A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description",
-    language: "html",
-    branch: "master",
+      'A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description',
+    language: 'html',
+    branch: 'master',
     isPrivate: false,
   },
   {
-    name: "Król Świata Mateusz",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "html",
-    branch: "master",
+    name: 'Król Świata Mateusz',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'html',
+    branch: 'master',
     isPrivate: true,
   },
   {
-    name: "Paweł",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "communist",
-    branch: "master",
+    name: 'Paweł',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'communist',
+    branch: 'master',
     isPrivate: true,
   },
   {
-    name: "Adam",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "german",
-    branch: "master",
+    name: 'Adam',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'german',
+    branch: 'master',
     isPrivate: false,
   },
   {
-    name: "Piotrek",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "javacript",
-    branch: "master",
+    name: 'Piotrek',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'javacript',
+    branch: 'master',
     isPrivate: true,
   },
   {
-    name: "How to hack Nasa using only html",
-    createdAt: "2019-08-05",
-    updatedAt: "2019-10-23",
-    description: "I am a descritpion",
-    language: "html",
-    branch: "master",
+    name: 'How to hack Nasa using only html',
+    createdAt: '2019-08-05',
+    updatedAt: '2019-10-23',
+    description: 'I am a descritpion',
+    language: 'html',
+    branch: 'master',
     isPrivate: false,
   },
 ]
@@ -130,10 +130,10 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.primary ? "#0072ce" : "#ffffff")};
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (props.primary ? "#ffffff" : "#0072ce")};
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
@@ -211,7 +211,7 @@ class Dashboard extends React.Component {
                     <Icon
                       type="calendar"
                       style={{
-                        fontSize: "1.7vh",
+                        fontSize: '1.7vh',
                         color: `#0072ce`,
                       }}
                     />
@@ -221,7 +221,7 @@ class Dashboard extends React.Component {
                     <Icon
                       type="edit"
                       style={{
-                        fontSize: "1.7vh",
+                        fontSize: '1.7vh',
                         color: `#0072ce`,
                       }}
                     />
@@ -231,7 +231,7 @@ class Dashboard extends React.Component {
                     <Icon
                       type="branches"
                       style={{
-                        fontSize: "1.7vh",
+                        fontSize: '1.7vh',
                         color: `#0072ce`,
                       }}
                     />
@@ -241,7 +241,7 @@ class Dashboard extends React.Component {
                     <Icon
                       type="code"
                       style={{
-                        fontSize: "1.7vh",
+                        fontSize: '1.7vh',
                         color: `#0072ce`,
                       }}
                     />
@@ -249,13 +249,13 @@ class Dashboard extends React.Component {
                   </TextWrapper>
                   <TextWrapper>
                     <Icon
-                      type={workspace.isPrivate ? "lock" : "unlock"}
+                      type={workspace.isPrivate ? 'lock' : 'unlock'}
                       style={{
-                        fontSize: "1.7vh",
+                        fontSize: '1.7vh',
                         color: `#0072ce`,
                       }}
                     />
-                    <Text>{workspace.isPrivate ? "Private" : "Public"}</Text>
+                    <Text>{workspace.isPrivate ? 'Private' : 'Public'}</Text>
                   </TextWrapper>
                 </InfoWrapper>
                 <RightSection>

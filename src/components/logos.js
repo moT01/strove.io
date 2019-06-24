@@ -1,30 +1,30 @@
 /* eslint-disable */
-import React, { useState } from "react"
-import styled from "styled-components"
-import { Docker, Github, Google, VSCode } from "../images/logos"
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { Docker, Github, Google, VSCode } from '../images/logos'
 
 const logosArr = [
   {
     component: <Google width="100%" height="auto" />,
-    name: "Google",
-    description: "Google cloud is cool and cloudy",
+    name: 'Google',
+    description: 'Google cloud is cool and cloudy',
   },
   {
     component: (
-      <VSCode style={{ fill: "#303c42" }} width="100%" height="auto" />
+      <VSCode style={{ fill: '#303c42' }} width="100%" height="auto" />
     ),
-    name: "VSCode",
-    description: "VSCode for editor",
+    name: 'VSCode',
+    description: 'VSCode for editor',
   },
   {
     component: <Docker width="100%" height="auto" />,
-    name: "Docker",
+    name: 'Docker',
     description: "Docker isn't actually a whale",
   },
   {
     component: <Github width="100%" height="auto" />,
-    name: "Github",
-    description: "Github integration for state-of-the-art version control",
+    name: 'Github',
+    description: 'Github integration for state-of-the-art version control',
   },
 ]
 

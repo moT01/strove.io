@@ -1,10 +1,10 @@
-import React from "react"
-import { enquireScreen } from "enquire-js"
+import React from 'react'
+import { enquireScreen } from 'enquire-js'
 
-import Banner from "./Banner"
-import Page1 from "./Page1"
-import Page2 from "./Page2"
-import "./static/style"
+import Banner from './Banner'
+import Page1 from './Page1'
+import Page2 from './Page2'
+import './static/style'
 
 let isMobile
 

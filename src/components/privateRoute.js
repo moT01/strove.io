@@ -1,7 +1,7 @@
-import React from "react"
-import { navigate } from "gatsby"
-import { useSelector } from "react-redux"
-import { createSelector } from "reselect"
+import React from 'react'
+import { navigate } from 'gatsby'
+import { useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
 
 const getUserToken = state =>
   state.fetch.user.data && state.fetch.user.data.siliskyToken
@@ -15,7 +15,7 @@ const getToken = createSelector(
 const PrivateRoute = ({ component: Component, location, ...rest }) => {
   const token = useSelector(getToken)
 
-  console.log("location.pathname", location.pathname)
+  console.log('location.pathname', location.pathname)
 
   if (!token && location.pathname !== `/`) {
     // If we’re not logged in, redirect to the home page.

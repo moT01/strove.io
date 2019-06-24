@@ -1,13 +1,13 @@
-import { createActions, handleActions } from "redux-actions"
+import { createActions, handleActions } from 'redux-actions'
 
-import client from "../../client"
+import client from '../../client'
 
 export const mutate = ({
   mutationName,
   storeKey,
   variables,
   context,
-  errorPolicy = "all",
+  errorPolicy = 'all',
   mutation,
 }) => {
   return async dispatch => {
@@ -21,7 +21,7 @@ export const mutate = ({
         mutation,
         context,
         variables,
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
         errorPolicy,
       })
 
@@ -32,7 +32,7 @@ export const mutate = ({
 
       return data[mutationName]
     } catch (e) {
-      console.log("fetch error: ", e)
+      console.log('fetch error: ', e)
       dispatch({ type: `FETCH/${storeKey.toUpperCase()}/ERROR`, payload: e })
       return null
     }
@@ -44,8 +44,8 @@ export const query = ({
   storeKey,
   variables,
   context,
-  fetchPolicy = "cache-first",
-  errorPolicy = "all",
+  fetchPolicy = 'cache-first',
+  errorPolicy = 'all',
   query,
 }) => {
   return async dispatch => {
@@ -70,7 +70,7 @@ export const query = ({
 
       return data[queryName]
     } catch (e) {
-      console.log("fetch error: ", e)
+      console.log('fetch error: ', e)
       dispatch({ type: `FETCH/${storeKey.toUpperCase()}/ERROR`, payload: e })
       return null
     }
@@ -96,7 +96,7 @@ const createFetchReducers = ({ storeKey, initState, data, loading, error }) =>
           /* Spread for objects and arrays, assign value directly for primitive */
           data: Array.isArray(payload)
             ? [...payload]
-            : typeof payload === "object"
+            : typeof payload === 'object'
             ? { ...state[storeKey].data, ...payload }
             : payload,
         },

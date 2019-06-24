@@ -1,8 +1,8 @@
-import React from "react"
-import QueueAnim from "rc-queue-anim"
-import TweenOne from "rc-tween-one"
-import BannerSVGAnim from "./component/BannerSVGAnim"
-import styled, { keyframes } from "styled-components"
+import React from 'react'
+import QueueAnim from 'rc-queue-anim'
+import TweenOne from 'rc-tween-one'
+import BannerSVGAnim from './component/BannerSVGAnim'
+import styled, { keyframes } from 'styled-components'
 
 const FadeIn = keyframes`
   0% {
@@ -23,10 +23,10 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.primary ? "#0072ce" : "#ffffff")};
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (props.primary ? "#ffffff" : "#0072ce")};
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
@@ -63,12 +63,12 @@ function Banner(props) {
       )}
       <QueueAnim
         className="banner-title-wrapper"
-        type={props.isMobile ? "bottom" : "right"}
+        type={props.isMobile ? 'bottom' : 'right'}
       >
         <div key="line" className="title-line-wrapper">
           <div
             className="title-line"
-            style={{ transform: "translateX(-64px)" }}
+            style={{ transform: 'translateX(-64px)' }}
           />
         </div>
         <h1 key="h1">SiliSky</h1>

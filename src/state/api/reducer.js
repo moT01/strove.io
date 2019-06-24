@@ -1,5 +1,5 @@
-import { handleActions } from "redux-actions"
-import * as C from "./constants"
+import { handleActions } from 'redux-actions'
+import * as C from './constants'
 
 export default handleActions(
   {
@@ -22,7 +22,7 @@ export default handleActions(
         ...(state[name] || {}),
         data: Array.isArray(data)
           ? [...data]
-          : typeof data === "object"
+          : typeof data === 'object'
           ? { ...state[name].data, ...data }
           : data,
         isLoading: false,

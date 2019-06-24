@@ -1,25 +1,25 @@
-import React from "react";
-import { Row, Col, Icon, Menu, Button, Popover } from "antd";
+import React from 'react'
+import { Row, Col, Icon, Menu, Button, Popover } from 'antd'
 
-import { enquireScreen } from "enquire-js";
+import { enquireScreen } from 'enquire-js'
 
 const LOGO_URL =
-  "https://gw.alipayobjects.com/zos/rmsportal/gVAKqIsuJCepKNbgbSwE.svg";
+  'https://gw.alipayobjects.com/zos/rmsportal/gVAKqIsuJCepKNbgbSwE.svg'
 
 class Header extends React.Component {
   state = {
     menuVisible: false,
-    menuMode: "horizontal"
-  };
+    menuMode: 'horizontal',
+  }
 
   componentDidMount() {
     enquireScreen(b => {
-      this.setState({ menuMode: b ? "inline" : "horizontal" });
-    });
+      this.setState({ menuMode: b ? 'inline' : 'horizontal' })
+    })
   }
 
   render() {
-    const { menuMode, menuVisible } = this.state;
+    const { menuMode, menuVisible } = this.state
 
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
@@ -34,7 +34,7 @@ class Header extends React.Component {
         <Menu.Item key="components">
           <a>组件</a>
         </Menu.Item>
-        {menuMode === "inline" && (
+        {menuMode === 'inline' && (
           <Menu.Item key="preview">
             <a
               target="_blank"
@@ -46,11 +46,11 @@ class Header extends React.Component {
           </Menu.Item>
         )}
       </Menu>
-    );
+    )
 
     return (
       <div id="header" className="header">
-        {menuMode === "inline" ? (
+        {menuMode === 'inline' ? (
           <Popover
             overlayClassName="popover-menu"
             placement="bottomRight"
@@ -86,13 +86,13 @@ class Header extends React.Component {
                   <Button icon="eye-o">预览</Button>
                 </a>
               </div>
-              {menuMode === "horizontal" ? <div id="menu">{menu}</div> : null}
+              {menuMode === 'horizontal' ? <div id="menu">{menu}</div> : null}
             </div>
           </Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header

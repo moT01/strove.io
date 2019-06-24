@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react"
-import { Location } from "@reach/router"
-import styled from "styled-components"
-import { useDispatch, useSelector } from "react-redux"
-import { createSelector } from "reselect"
-import { logout } from "./login/actions"
+import React, { useState, useEffect } from 'react'
+import { Location } from '@reach/router'
+import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import { logout } from './login/actions'
 
-import { mutate } from "../utils"
-import { GITHUB_LOGIN } from "../queries"
+import { mutate } from '../utils'
+import { GITHUB_LOGIN } from '../queries'
 
-import UserInfoHeader from "../components/userInfoHeader"
+import UserInfoHeader from '../components/userInfoHeader'
 
 const options = [
-  { option: "Settings" },
-  { option: "Kill yoursef" },
-  { option: "Logout", onClick: dispatch => dispatch(logout) },
+  { option: 'Settings' },
+  { option: 'Kill yoursef' },
+  { option: 'Logout', onClick: dispatch => dispatch(logout) },
 ]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
@@ -118,8 +118,8 @@ const LoginComponent = ({ location }) => {
         mutate({
           mutation: GITHUB_LOGIN,
           variables: { code },
-          mutationName: "githubAuth",
-          storeName: "user",
+          mutationName: 'githubAuth',
+          storeName: 'user',
         })
       )
     }

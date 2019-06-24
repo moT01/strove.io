@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from 'styled-components'
 
 const AnimateCloud = keyframes`
   0% {
@@ -39,7 +39,7 @@ const BigCloud = styled.div`
   }
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     background: rgb(214, 230, 255);
     z-index: -1;
@@ -75,7 +75,7 @@ const MediumCloud = styled.div`
   }
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     background: rgb(214, 230, 255);
     z-index: -1;
@@ -111,7 +111,7 @@ const SmallCloud = styled.div`
   }
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     background: rgb(214, 230, 255);
     z-index: -1;

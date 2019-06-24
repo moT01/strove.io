@@ -1,13 +1,13 @@
-import React, { useState } from "react"
-import QueueAnim from "rc-queue-anim"
-import Logos from "components/logos.js"
+import React, { useState } from 'react'
+import QueueAnim from 'rc-queue-anim'
+import Logos from 'components/logos.js'
 
 function Page2() {
   const [selectedLogo, setSelectedLogo] = useState()
 
   const handleHoverIn = logo => setSelectedLogo(logo)
 
-  const handleHoverOut = () => setSelectedLogo("")
+  const handleHoverOut = () => setSelectedLogo('')
 
   return (
     <div className="home-page page2">

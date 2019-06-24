@@ -1,10 +1,10 @@
 /* eslint-disable */
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import AntDesign from "../Home"
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import AntDesign from '../Home'
 
 class IndexPage extends React.Component {
   render() {

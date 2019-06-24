@@ -1,8 +1,8 @@
-import React from "react"
-import { Router } from "@reach/router"
-import PrivateRoute from "components/PrivateRoute"
-import Editor from "components/editor"
-import Preview from "components/preview"
+import React from 'react'
+import { Router } from '@reach/router'
+import PrivateRoute from 'components/PrivateRoute'
+import Editor from 'components/editor'
+import Preview from 'components/preview'
 
 const App = () => (
   <Router>

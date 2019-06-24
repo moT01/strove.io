@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-import onClickOutside from "react-onclickoutside"
-import { useDispatch } from "react-redux"
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import onClickOutside from 'react-onclickoutside'
+import { useDispatch } from 'react-redux'
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const MenuWrapper = styled.div`
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
-  background-color: ${props => (props.invert ? "#ffffff" : "#0072ce")};
+  background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   align-self: flex-end;
   z-index: 3;
 `
@@ -68,12 +68,12 @@ const Option = styled.div`
   width: 100%;
   height: auto;
   font-size: 2vh;
-  color: ${props => (!props.invert ? "#ffffff" : "#0072ce")};
-  border-bottom-left-radius: ${props => props.isLast && "8px"};
-  border-bottom-right-radius: ${props => props.isLast && "8px"};
+  color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+  border-bottom-left-radius: ${props => props.isLast && '8px'};
+  border-bottom-right-radius: ${props => props.isLast && '8px'};
   :hover {
-    background-color: ${props => (!props.invert ? "#ffffff" : "#0072ce")};
-    color: ${props => (props.invert ? "#ffffff" : "#0072ce")};
+    background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   }
 `
 
@@ -105,7 +105,7 @@ const UserInfoHeader = props => {
       {props.showDropdown && (
         <MenuWrapper invert>
           {options.map(option =>
-            option.option !== "Logout" ? (
+            option.option !== 'Logout' ? (
               <Option invert>{option.option}</Option>
             ) : (
               <Option isLast invert onClick={() => option.onClick(dispatch)}>

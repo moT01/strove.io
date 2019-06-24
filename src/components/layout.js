@@ -1,18 +1,18 @@
-import React, { useEffect } from "react"
-import { StaticQuery, graphql } from "gatsby"
-import { Location } from "@reach/router"
-import { useDispatch, useSelector } from "react-redux"
-import { createSelector } from "reselect"
+import React, { useEffect } from 'react'
+import { StaticQuery, graphql } from 'gatsby'
+import { Location } from '@reach/router'
+import { useDispatch, useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
 
-import ApolloClient from "apollo-boost"
+import ApolloClient from 'apollo-boost'
 
-import Header from "./header"
-import "./layout.css"
-import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from "../queries"
-import { mutate } from "../utils"
+import Header from './header'
+import './layout.css'
+import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from '../queries'
+import { mutate } from '../utils'
 
 const client = new ApolloClient({
-  uri: "https://api.github.com/graphql",
+  uri: 'https://api.github.com/graphql',
 })
 
 const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
@@ -51,10 +51,10 @@ const LayoutComponent = ({ children, location }) => {
         const context = {
           headers: {
             Authorization: `Bearer ${user.githubToken}`,
-            "User-Agent": "node",
+            'User-Agent': 'node',
           },
         }
-        const repoUrlParts = githubLink.split("/")
+        const repoUrlParts = githubLink.split('/')
         const owner = repoUrlParts[3]
         const name = repoUrlParts[4]
         const variables = { owner, name }
@@ -63,7 +63,7 @@ const LayoutComponent = ({ children, location }) => {
             query,
             context,
             variables,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
           })
 
           const {
@@ -80,12 +80,12 @@ const LayoutComponent = ({ children, location }) => {
                 },
               },
               variables: { githubLink, machineId, name, description },
-              mutationName: "addProject",
-              storeName: "project",
+              mutationName: 'addProject',
+              storeName: 'project',
             })
           )
         } catch (e) {
-          console.log("fetch error: ", e)
+          console.log('fetch error: ', e)
         }
       }
       query()
@@ -108,13 +108,13 @@ const LayoutComponent = ({ children, location }) => {
           <Header siteTitle={data.site.siteMetadata.title} />
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              textAlign: "center",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              textAlign: 'center',
               margin: `0 auto`,
-              maxWidth: "100vw",
+              maxWidth: '100vw',
               paddingTop: 0,
             }}
           >

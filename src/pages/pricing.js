@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React from "react"
-import styled, { keyframes } from "styled-components"
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
-import SEO from "../components/seo"
-import Layout from "../components/layout"
+import SEO from '../components/seo'
+import Layout from '../components/layout'
 
 const FadeIn = keyframes`
   0% {
@@ -37,13 +37,13 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.team ? "#ffffff" : "#0072ce")};
+  background-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (!props.team ? "#ffffff" : "#0072ce")};
+  color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
-  border-color: ${props => (props.team ? "#ffffff" : "#0072ce")};
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? "#ffffff" : "#0072ce")};
+  border-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
+  box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
   transition: all 0.2s ease;
 
   &:hover {
@@ -51,7 +51,7 @@ const Button = styled.button`
   }
 
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? "#ffffff" : "#0072ce")};
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
   }
 `
 
@@ -60,9 +60,9 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.team ? "#0072ce" : "#ffffff")};
-  margin-left: ${props => (props.team ? "-3vw" : 0)};
-  margin-top: ${props => (props.team ? "9vh" : 0)};
+  background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
+  margin-left: ${props => (props.team ? '-3vw' : 0)};
+  margin-top: ${props => (props.team ? '9vh' : 0)};
   z-index: ${props => (props.team ? 1 : 2)};
   border-radius: 10px;
   border-color: #0072ce;
@@ -106,7 +106,7 @@ const PricingSection = styled.div`
 `
 
 const Feature = styled.p`
-  color: ${props => (!props.team ? "#0072ce" : "#ffffff")};
+  color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
   font-size: 1.7vh;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
@@ -114,7 +114,7 @@ const Feature = styled.p`
 const PlanTitle = styled.h1`
   margin: 10px;
   font-size: 4vh;
-  color: ${props => (!props.team ? "#0072ce" : "#ffffff")};
+  color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
 `
 const Contact = styled(PlanTitle)`
   font-size: 2.5vh;

@@ -1,9 +1,9 @@
-import axios from "axios"
-import { API } from "../actions/types"
-import { fetchStart, fetch, apiStart, apiEnd } from "state/api/actions"
-import { QUERY_START, MUTATION_START } from "src/constants/actions"
-import { query, mutate } from "utils"
-import client from "../../client"
+import axios from 'axios'
+import { API } from '../actions/types'
+import { fetchStart, fetch, apiStart, apiEnd } from 'state/api/actions'
+import { QUERY_START, MUTATION_START } from 'src/constants/actions'
+import { query, mutate } from 'utils'
+import client from '../../client'
 
 const apiMiddleware = ({ dispatch }) => next => action => {
   next(action)
@@ -15,8 +15,8 @@ const apiMiddleware = ({ dispatch }) => next => action => {
     storeKey = name,
     variables,
     context,
-    fetchPolicy = "cache-first",
-    errorPolicy = "all",
+    fetchPolicy = 'cache-first',
+    errorPolicy = 'all',
     query,
     mutation,
     client = client,

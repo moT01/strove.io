@@ -1,12 +1,12 @@
-import React from "react"
-import { Link } from "gatsby"
-import styled from "styled-components"
+import React from 'react'
+import { Link } from 'gatsby'
+import styled from 'styled-components'
 
 // import Layout from "../components/layout"
-import SEO from "../components/seo"
-import "../components/layout.css"
+import SEO from '../components/seo'
+import '../components/layout.css'
 
-import Header from "../components/header"
+import Header from '../components/header'
 
 const TextWell = styled.div`
   align-self: center;
@@ -21,7 +21,7 @@ const TextWell = styled.div`
   text-align: left;
   text-justify: inter-word;
   background-color: white;
-  ${"" /* border: 1px solid slategrey; */}
+  ${'' /* border: 1px solid slategrey; */}
 `
 
 const Legal = () => (
@@ -30,7 +30,7 @@ const Legal = () => (
     <Header siteTitle="SiliSky" />
 
     <TextWell>
-      <h1 style={{ alignSelf: "center" }}>Terms and Conditions</h1>
+      <h1 style={{ alignSelf: 'center' }}>Terms and Conditions</h1>
       <h6>Last Edited on 2019-06–06</h6>
       <p>
         These Terms and Conditions ("Terms", "Terms and Conditions") govern your
@@ -49,7 +49,7 @@ const Legal = () => (
       </p>
       <h2>Subscriptions</h2>
       <p>
-        {" "}
+        {' '}
         Some parts of the Service are billed on a subscription basis
         Subscription(s). You will be billed in advance on a recurring and
         periodic basis ("Billing Cycle"). Billing cycles are set on a monthly
@@ -63,32 +63,32 @@ const Legal = () => (
         support team.
       </p>
       <p>
-        {" "}
+        {' '}
         A valid payment method, including credit card, is required to process
         the payment for your Subscription. You shall provide (SiliSky) with
         accurate and complete billing information including full name, zip code,
         and a valid payment method information. By submitting such payment
         information, you automatically authorize (SiliSky) to charge all
         Subscription fees incurred through your account to any such payment
-        instruments.{" "}
+        instruments.{' '}
       </p>
       <p>
         Should automatic billing fail to occur for any reason, (SiliSky) will
         issue an electronic invoice indicating that you must proceed manually,
         within a certain deadline date, with the full payment corresponding to
         the billing period as indicated on the invoice.
-      </p>{" "}
+      </p>{' '}
       <h2>Fee Changes</h2>
       <p>
         SiliSky), in its sole discretion and at any time, may modify the
         Subscription fees for the Subscriptions. Any Subscription fee change
         will become effective at the end of the then-current Billing Cycle.
-      </p>{" "}
+      </p>{' '}
       <p>
         (SIliSky)will provide you with a reasonable prior notice of any change
         in Subscription fees to give you an opportunity to terminate your
         Subscription before such change becomes effective.
-      </p>{" "}
+      </p>{' '}
       <p>
         Your continued use of the Service after the Subscription fee change
         comes into effect constitutes your agreement to pay the modified
@@ -96,10 +96,10 @@ const Legal = () => (
       </p>
       <h2>Refunds</h2>
       <p>
-        {" "}
+        {' '}
         Certain refund requests for Subscriptions may be considered by (SiliSky)
         on a case-by-case basis and granted in sole discretion of (SiliSky)
-      </p>{" "}
+      </p>{' '}
       <h2>Content</h2>
       <p>
         Our Service allows you to post, link, store, share and otherwise make
@@ -108,7 +108,7 @@ const Legal = () => (
         Service, including its legality, reliability, and appropriateness.
       </p>
       <p>
-        {" "}
+        {' '}
         By posting Content to the Service, you grant us and other users of the
         Service the right and the license to use, modify, publicly perform,
         publicly display, reproduce, and distribute such Content on and through
@@ -124,7 +124,7 @@ const Legal = () => (
         (Prawdopodobnie Projekt/Sandbox) is unlicensed.
       </p>
       <p>
-        {" "}
+        {' '}
         You represent and warrant that: (i) the Content is yours (you own it) or
         you have the right to use it and grant us the rights and license as
         provided in these Terms, and (ii) the posting of your Content on or
@@ -133,24 +133,24 @@ const Legal = () => (
       </p>
       <h2>Accounts</h2>
       <p>
-        {" "}
+        {' '}
         When you create an account with us, you must provide us information that
         is accurate, complete, and current at all times. Failure to do so
         constitutes a breach of the Terms, which may result in immediate
         termination of your account on our Service.
       </p>
       <p>
-        {" "}
+        {' '}
         You are responsible for safeguarding the password that you use to access
         the Service and for any activities or actions under your password,
         whether your password is with our Service or a third-party service.
       </p>
       <p>
-        {" "}
+        {' '}
         You agree not to disclose your password to any third party. You must
         notify us immediately upon becoming aware of any breach of security or
         unauthorized use of your account.
-      </p>{" "}
+      </p>{' '}
       <h2>Links To Other Web Sites</h2>
       <p>
         Our Service may contain links to third-party web sites or services that
@@ -166,23 +166,23 @@ const Legal = () => (
         any such web sites or services.
       </p>
       <p>
-        {" "}
+        {' '}
         We strongly advise you to read the terms and conditions and privacy
         policies of any third-party web sites or services that you visit.
       </p>
       <h2>Termination</h2>
       <p>
-        {" "}
+        {' '}
         We may terminate or suspend your account immediately, without prior
         notice or liability, for any reason whatsoever, including without
         limitation if you breach the Terms.
       </p>
       <p>
-        {" "}
+        {' '}
         Upon termination, your right to use the Service will immediately cease.
         If you wish to terminate your account, you may simply discontinue using
         the Service.
-      </p>{" "}
+      </p>{' '}
       <h2>Limitation Of Liability</h2>
       <p>
         In no event shall (SiliSky), nor its directors, employees, partners,
@@ -200,7 +200,7 @@ const Legal = () => (
       </p>
       <h2>Disclaimer</h2>
       <p>
-        {" "}
+        {' '}
         Your use of the Service is at your sole risk. The Service is provided on
         an („AS IS" and "AS AVAILABLE" basis). The Service is provided without
         warranties of any kind, whether express or implied, including, but not
@@ -221,7 +221,7 @@ const Legal = () => (
         of (Netherlands), without regard to its conflict of law provisions.
       </p>
       <p>
-        {" "}
+        {' '}
         Our failure to enforce any right or provision of these Terms will not be
         considered a waiver of those rights. If any provision of these Terms is
         held to be invalid or unenforceable by a court, the remaining provisions
@@ -237,14 +237,14 @@ const Legal = () => (
         constitutes a material change will be determined at our sole discretion.
       </p>
       <p>
-        {" "}
+        {' '}
         By continuing to access or use our Service after those revisions become
         effective, you agree to be bound by the revised terms. If you do not
         agree to the new terms, please stop using the Service.
       </p>
       <h2>Contact</h2>
       <p>
-        {" "}
+        {' '}
         Us If you have any questions about these Terms, please contact us
         at contact@codengo.page
       </p>

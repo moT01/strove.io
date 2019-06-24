@@ -1,8 +1,8 @@
-import { Link } from "gatsby"
-import React from "react"
-import styled from "styled-components"
-import { Location } from "@reach/router"
-import Login from "./login"
+import { Link } from 'gatsby'
+import React from 'react'
+import styled from 'styled-components'
+import { Location } from '@reach/router'
+import Login from './login'
 
 const LinkWrapper = styled.h3`
   display: flex;
@@ -72,11 +72,11 @@ const HeaderComponent = ({ siteTitle, location }) => (
       <LinkWrapper>
         <StyledLink
           to={
-            location.pathname === "/app/editor" ? "/app/preview" : "/app/editor"
+            location.pathname === '/app/editor' ? '/app/preview' : '/app/editor'
           }
         >
           <LinkText>
-            {location.pathname === "/app/editor" ? "Preview" : "Editor"}
+            {location.pathname === '/app/editor' ? 'Preview' : 'Editor'}
           </LinkText>
         </StyledLink>
       </LinkWrapper>
