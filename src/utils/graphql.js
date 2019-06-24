@@ -27,7 +27,7 @@ export const mutation = ({
         errorPolicy,
       })
 
-      onSuccess && onSuccess()
+      onSuccess && onSuccess(data[name])
 
       dispatch({
         type: C.FETCH_SUCCESS,
@@ -38,7 +38,7 @@ export const mutation = ({
     } catch (e) {
       console.log('fetch error: ', e)
 
-      onFailure && onFailure()
+      onFailure && onFailure(e)
 
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
       return null
@@ -73,7 +73,7 @@ export const query = ({
         errorPolicy,
       })
 
-      onSuccess && onSuccess()
+      onSuccess && onSuccess(data[name])
 
       dispatch({
         type: C.FETCH_SUCCESS,
@@ -84,7 +84,7 @@ export const query = ({
     } catch (e) {
       console.log('fetch error: ', e)
 
-      onSuccess && onFailure()
+      onSuccess && onFailure(e)
 
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
       return null
