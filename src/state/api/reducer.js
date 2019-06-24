@@ -3,6 +3,7 @@ import * as C from './constants'
 
 const initialState = {
   user: {},
+  projects: { data: [] },
 }
 
 export default handleActions(
@@ -24,9 +25,9 @@ export default handleActions(
       ...state,
       [storeKey]: {
         ...(state[storeKey] || {}),
-        data: Array.isArray(data)
+        data: Array.isArray(state[storeKey].data)
           ? [...data]
-          : typeof data === 'object'
+          : typeof state[storeKey] === 'object'
           ? { ...state[storeKey].data, ...data }
           : data,
         isLoading: false,
