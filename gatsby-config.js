@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `SiliSky`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `Move your development to the cloud. Access and run code anywhere using powerful linux servers.`,
     author: `@gatsbyjs`,
   },
   plugins: [
@@ -18,7 +18,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-react-svg",
+      resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
           include: /logos/,
@@ -26,66 +26,61 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-remark-responsive-iframe",
+      resolve: 'gatsby-remark-responsive-iframe',
       options: {
-        wrapperStyle: "margin-bottom: 1rem",
+        wrapperStyle: 'margin-bottom: 1rem',
       },
     },
-    "gatsby-remark-prismjs",
-    "gatsby-remark-autolink-headers",
-    "gatsby-remark-copy-linked-files",
-    "gatsby-remark-smartypants",
+    'gatsby-remark-prismjs',
+    'gatsby-remark-autolink-headers',
+    'gatsby-remark-copy-linked-files',
+    'gatsby-remark-smartypants',
     {
-      resolve: "gatsby-remark-images",
+      resolve: 'gatsby-remark-images',
       options: {
         maxWidth: 1140,
         quality: 90,
         linkImagesToOriginal: false,
-        backgroundColor: "#1e1e1e",
+        backgroundColor: '#1e1e1e',
       },
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: 'gatsby-transformer-remark',
     },
     `gatsby-plugin-react-helmet`,
-    "gatsby-transformer-json",
-    "gatsby-plugin-emotion",
+    'gatsby-transformer-json',
+    'gatsby-plugin-emotion',
     `gatsby-plugin-sharp`,
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-catch-links",
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-catch-links',
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `SiliSky`,
+        short_name: `SiliSky`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#FFF`,
+        theme_color: `#194F9D`,
         display: `minimal-ui`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/SiliSky3.png`, // This path is relative to the root of the site.
       },
     },
-    // Passing paramaters (passed to apollo-link)
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
-        typeName: "Silisky",
-        fieldName: "silisky",
-        // Url to query from
-        // url: 'https://hr8ytytxmi.execute-api.eu-central-1.amazonaws.com/development/graphql'
+        typeName: 'SiliSky',
+        fieldName: 'SiliSky',
         url:
-          "https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql",
+          'https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql',
       },
     },
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
-        typeName: "Github",
-        fieldName: "github",
-        // Url to query from
-        // url: 'https://hr8ytytxmi.execute-api.eu-central-1.amazonaws.com/development/graphql'
-        url: "https://api.github.com/graphql",
+        typeName: 'Github',
+        fieldName: 'github',
+        url: 'https://api.github.com/graphql',
       },
     },
   ],
