@@ -10,7 +10,7 @@ export const mutation = ({
   errorPolicy = 'all',
   mutation,
   onSuccess,
-  onFailure,
+  onError,
 }) => {
   return async dispatch => {
     dispatch({
@@ -35,12 +35,12 @@ export const mutation = ({
       })
 
       return data[name]
-    } catch (e) {
-      console.log('fetch error: ', e)
+    } catch (error) {
+      console.log('fetch error: ', error)
 
-      onFailure && onFailure(e)
+      onError && onError(error)
 
-      dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
+      dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
       return null
     }
   }
@@ -55,13 +55,12 @@ export const query = ({
   errorPolicy = 'all',
   query,
   onSuccess,
-  onFailure,
+  onError,
 }) => {
   return async dispatch => {
     dispatch({
       type: C.FETCH_START,
-      storeKey,
-      payload: true,
+      payload: { storeKey },
     })
 
     try {
@@ -81,12 +80,12 @@ export const query = ({
       })
 
       return data[name]
-    } catch (e) {
-      console.log('fetch error: ', e)
+    } catch (error) {
+      console.log('fetch error: ', error)
 
-      onSuccess && onFailure(e)
+      onSuccess && onError(error)
 
-      dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
+      dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
       return null
     }
   }
