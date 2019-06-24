@@ -14,7 +14,7 @@ import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 // import { ApolloLink, split } from 'apollo-link'
 // import { HttpLink } from 'apollo-link-http'
 // import { onError } from 'apollo-link-error'
-import { apiMiddleware } from './src/middlewares'
+// import { apiMiddleware } from './src/middlewares'
 import client from './client'
 
 import rootReducer from './src/state'
@@ -79,7 +79,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const createStore = reduxCreateStore(
   persistedReducer,
   composeWithDevTools(
-    applyMiddleware(thunk, apiMiddleware)
+    applyMiddleware(thunk)
     // other store enhancers if any
   )
 )

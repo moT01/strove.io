@@ -6,11 +6,11 @@ import { createSelector } from 'reselect'
 import getOr from 'lodash/fp/getOr'
 
 import ApolloClient from 'apollo-boost'
-
+import { mutation } from 'utils'
 import Header from './header'
 import './layout.css'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from '../queries'
-// import { mutate } from '../utils'
+import { mutate } from '../utils'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
@@ -65,7 +65,7 @@ const LayoutComponent = ({ children, location }) => {
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
     if (githubLink) {
-      const query = async () => {
+      const login = async () => {
         const query = GET_REPO_INFO
         const context = {
           headers: {
@@ -90,9 +90,8 @@ const LayoutComponent = ({ children, location }) => {
             name /* add language and color in future */,
           } = data.repository
 
-          dispatch({
-            type: 'FETCH_START',
-            payload: {
+          dispatch(
+            mutation({
               name: 'addProject',
               storeKey: 'projects',
               variables: { githubLink, machineId, name, description },
@@ -103,8 +102,8 @@ const LayoutComponent = ({ children, location }) => {
                   'User-Agent': 'node',
                 },
               },
-            },
-          })
+            })
+          )
 
           // dispatch(
           //   mutate({
@@ -123,7 +122,7 @@ const LayoutComponent = ({ children, location }) => {
           console.log('fetch error: ', e)
         }
       }
-      query()
+      login()
     }
   }, [])
 

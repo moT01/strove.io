@@ -3,7 +3,7 @@ import * as C from 'state/api/constants'
 
 import client from '../../client'
 
-export const Mutation = ({
+export const mutation = ({
   name,
   storeKey,
   variables,
@@ -30,8 +30,11 @@ export const Mutation = ({
 
       dispatch({
         type: C.FETCH_SUCCESS,
+        storeKey,
         payload: data[name],
       })
+
+      console.log('dataaaaa', data)
 
       return data[name]
     } catch (e) {
@@ -42,7 +45,7 @@ export const Mutation = ({
   }
 }
 
-export const Query = ({
+export const query = ({
   name,
   storeKey,
   variables,
@@ -68,6 +71,7 @@ export const Query = ({
 
       dispatch({
         type: C.FETCH_SUCCESS,
+        storeKey,
         payload: data[name],
       })
 
