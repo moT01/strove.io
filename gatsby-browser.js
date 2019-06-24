@@ -12,4 +12,4 @@ export const onClientEntry = () => {
   }
 }
 
-export { wrapRootElement } from "./wrapper"
+export { wrapRootElement } from './wrapper'

@@ -6,19 +6,20 @@
 
 // You can delete this file if you're not using it
 
-const path = require("path")
+const path = require('path')
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        components: path.resolve(__dirname, "src/components"),
-        images: path.resolve(__dirname, "src/images"),
-        pages: path.resolve(__dirname, "src/pages"),
-        queries: path.resolve(__dirname, "src/queries"),
-        state: path.resolve(__dirname, "src/state"),
-        utils: path.resolve(__dirname, "src/utils"),
-        constants: path.resolve(__dirname, "src/constants"),
+        components: path.resolve(__dirname, 'src/components'),
+        images: path.resolve(__dirname, 'src/images'),
+        pages: path.resolve(__dirname, 'src/pages'),
+        queries: path.resolve(__dirname, 'src/queries'),
+        state: path.resolve(__dirname, 'src/state'),
+        utils: path.resolve(__dirname, 'src/utils'),
+        constants: path.resolve(__dirname, 'src/constants'),
+        middlewares: path.resolve(__dirname, 'src/middlewares'),
       },
     },
   })
