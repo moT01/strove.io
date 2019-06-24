@@ -1,14 +1,11 @@
 import { Query, Mutation } from 'utils'
-// import { FETCH_START } from 'state/api/constants'
-import client from '../../client'
+import { FETCH_START } from '../state/api/constants'
 
 const apiMiddleware = ({ dispatch }) => next => action => {
   console.log('action', action)
   next(action)
 
-  if (action.type !== 'FETCH_START') return
-
-  console.log('action.type !== FETCH_START')
+  if (action.type !== FETCH_START) return
 
   const {
     name,
@@ -52,32 +49,6 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       })
     )
   }
-
-  // dispatch(apiStart(label))
-
-  // axios
-  //   .request({
-  //     url,
-  //     method,
-  //     headers,
-  //     [dataOrParams]: data,
-  //   })
-  //   .then(({ data }) => {
-  //     dispatch(onSuccess(data))
-  //   })
-  //   .catch(error => {
-  //     dispatch(apiError(error))
-  //     dispatch(onFailure(error))
-
-  //     if (error.response && error.response.status === 403) {
-  //       dispatch(accessDenied(window.location.pathname))
-  //     }
-  //   })
-  //   .finally(() => {
-  //     if (label) {
-  //       dispatch(apiEnd(label))
-  //     }
-  //   })
 }
 
 export default apiMiddleware

@@ -16,8 +16,12 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const getUserToken = state =>
-  getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
+const getUserToken = getOr(undefined, [
+  'api',
+  'user',
+  'data',
+  'getUserSiliskyToken',
+])
 
 const getProjectPort = () => '23648'
 

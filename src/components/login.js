@@ -6,7 +6,6 @@ import { createSelector } from 'reselect'
 import { logout } from './login/actions'
 import getOr from 'lodash/fp/getOr'
 
-// import { mutate } from '../utils'
 import { GITHUB_LOGIN } from '../queries'
 
 import UserInfoHeader from '../components/userInfoHeader'
@@ -19,13 +18,6 @@ const options = [
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
-
-// const STATUS = {
-//   INITIAL: "initial",
-//   LOADING: "loading",
-//   FINISHED_LOADING: "finished_loading",
-//   AUTHENTICATED: "authenticated",
-// }
 
 const Text = styled.span`
   font-size: 3vh;
@@ -91,10 +83,9 @@ const Inline = styled.div`
   margin-left: 4px;
 `
 
-const getUserName = state => getOr(undefined, ['api', 'user', 'data', 'name'])
+const getUserName = getOr(undefined, ['api', 'user', 'data', 'name'])
 
-const getUserPhoto = state =>
-  getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
+const getUserPhoto = getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
 
 // const getUserSiliskyToken = state =>
 //   getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
@@ -126,16 +117,17 @@ const LoginComponent = ({ location }) => {
       location.search.match(/code=(.*)/) &&
       location.search.match(/code=(.*)/)[1]
     if (code) {
-      //   dispatch(
-      //     mutate({
-      //       mutation: GITHUB_LOGIN,
-      //       variables: { code },
-      //       mutationName: 'githubAuth',
-      //       storeName: 'user',
-      //     })
-      //   )
+      dispatch({
+        type: 'FETCH_START',
+        mutation: GITHUB_LOGIN,
+        variables: { code },
+        storeKey: 'user',
+        name: 'githubAuth',
+      })
     }
   }, [])
+
+  console.log('user.username', !user.username, user.username)
 
   return !user.username ? (
     <LoginButton

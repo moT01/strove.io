@@ -18,14 +18,21 @@ const client = new ApolloClient({
 
 const getUserName = state => getOr(undefined, ['api', 'user', 'data', 'name'])
 
-const getUserPhoto = state =>
-  getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
+const getUserPhoto = getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
 
-const getUserSiliskyToken = state =>
-  getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
+const getUserSiliskyToken = getOr(undefined, [
+  'api',
+  'user',
+  'data',
+  'getUserSiliskyToken',
+])
 
-const getUserGithubToken = state =>
-  getOr(undefined, ['api', 'user', 'data', 'getUserGithubToken'])
+const getUserGithubToken = getOr(undefined, [
+  'api',
+  'user',
+  'data',
+  'getUserGithubToken',
+])
 
 // const getUserName = state => state.api.user.data && state.api.user.data.name
 
