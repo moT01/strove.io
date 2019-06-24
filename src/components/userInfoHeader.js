@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import styled, { keyframes } from "styled-components"
+import styled from "styled-components"
 import onClickOutside from "react-onclickoutside"
 import { Link } from "gatsby"
 import { useDispatch } from "react-redux"

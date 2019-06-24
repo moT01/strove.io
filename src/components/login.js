@@ -1,5 +1,4 @@
-import React, { PureComponent, useState, useEffect } from "react"
-import gql from "graphql-tag"
+import React, { useState, useEffect } from "react"
 import { Location } from "@reach/router"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
@@ -44,12 +43,6 @@ const LinkWrapper = styled.h3`
   margin: 0;
 `
 
-const ZeldaWrapper = styled(LinkWrapper)`
-  height: 4vh;
-  flex-direction: column;
-  overflow: visible;
-`
-
 const LoginButton = styled.a`
   color: white;
   text-decoration: none;
@@ -89,13 +82,6 @@ const Inline = styled.div`
   width: 4vh;
   height: auto;
   margin-left: 4px;
-`
-
-const UserPhoto = styled.img`
-  width: 4vh;
-  height: auto;
-  margin-left: 4px;
-  border-radius: 5px;
 `
 
 const GithubLogo = props => (
@@ -169,17 +155,6 @@ const LoginComponent = ({ location }) => {
       showDropdown={showDropdown}
       handleDropdownClick={handleDropdownClick}
     />
-    // <ZeldaWrapper>
-    //   <LinkWrapper onClick={() => setShowDropdown(!showDropdown)}>
-    //     <Text>{user.username}</Text>
-    //     <Inline>
-    //       <UserPhoto src={user.userphoto} style={{ margin: `0` }} />
-    //     </Inline>
-    //   </LinkWrapper>
-    //   {showDropdown && (
-    //     <Dropdown options={options} handleDropdown={handleDropdown} />
-    //   )}
-    // </ZeldaWrapper>
   )
 }
 

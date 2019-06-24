@@ -1,6 +1,6 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { createSelector } from "reselect"
 
 const getUserToken = state =>
