@@ -12,16 +12,46 @@ const apiMiddleware = ({ dispatch }) => next => action => {
 
   const {
     name,
+    storeKey = name,
     variables,
     context,
-    fetchPolicy = !!mutation ? "no-cache" : "cache-first",
+    fetchPolicy = "cache-first",
     errorPolicy = "all",
     query,
     mutation,
     client = client,
-    onSuccess,
-    onFailure,
   } = action.payload
+
+  if (mutation) {
+    dispatch(
+      mutate({
+        storeKey,
+        name,
+        storeName,
+        variables,
+        context,
+        errorPolicy,
+        mutation,
+        onSuccess,
+        onFailure,
+      })
+    )
+  } else {
+    dispatch(
+      query({
+        storeKey,
+        name,
+        storeName,
+        variables,
+        context,
+        fetchPolicy,
+        errorPolicy,
+        query,
+        onSuccess,
+        onFailure,
+      })
+    )
+  }
 
   // dispatch(apiStart(label))
 

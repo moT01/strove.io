@@ -4,7 +4,7 @@ import client from "../../client"
 
 export const mutate = ({
   mutationName,
-  storeName,
+  storeKey,
   variables,
   context,
   errorPolicy = "all",
@@ -12,7 +12,7 @@ export const mutate = ({
 }) => {
   return async dispatch => {
     dispatch({
-      type: `FETCH/${storeName.toUpperCase()}/LOADING`,
+      type: `FETCH/${storeKey.toUpperCase()}/LOADING`,
       payload: true,
     })
 
@@ -26,14 +26,14 @@ export const mutate = ({
       })
 
       dispatch({
-        type: `FETCH/${storeName.toUpperCase()}/DATA`,
+        type: `FETCH/${storeKey.toUpperCase()}/DATA`,
         payload: data[mutationName],
       })
 
       return data[mutationName]
     } catch (e) {
       console.log("fetch error: ", e)
-      dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
+      dispatch({ type: `FETCH/${storeKey.toUpperCase()}/ERROR`, payload: e })
       return null
     }
   }
@@ -41,7 +41,7 @@ export const mutate = ({
 
 export const query = ({
   queryName,
-  storeName,
+  storeKey,
   variables,
   context,
   fetchPolicy = "cache-first",
@@ -50,7 +50,7 @@ export const query = ({
 }) => {
   return async dispatch => {
     dispatch({
-      type: `FETCH/${storeName.toUpperCase()}/LOADING`,
+      type: `FETCH/${storeKey.toUpperCase()}/LOADING`,
       payload: true,
     })
 
@@ -64,20 +64,20 @@ export const query = ({
       })
 
       dispatch({
-        type: `FETCH/${storeName.toUpperCase()}/DATA`,
+        type: `FETCH/${storeKey.toUpperCase()}/DATA`,
         payload: data[queryName],
       })
 
       return data[queryName]
     } catch (e) {
       console.log("fetch error: ", e)
-      dispatch({ type: `FETCH/${storeName.toUpperCase()}/ERROR`, payload: e })
+      dispatch({ type: `FETCH/${storeKey.toUpperCase()}/ERROR`, payload: e })
       return null
     }
   }
 }
 
-const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
+const createFetchReducers = ({ storeKey, initState, data, loading, error }) =>
   handleActions(
     {
       LOGOUT: state => ({
@@ -90,20 +90,20 @@ const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
       }),
       [data]: (state, { payload }) => ({
         ...state,
-        [storeName]: {
+        [storeKey]: {
           loading: false,
           error: null,
           /* Spread for objects and arrays, assign value directly for primitive */
           data: Array.isArray(payload)
             ? [...payload]
             : typeof payload === "object"
-            ? { ...state[storeName].data, ...payload }
+            ? { ...state[storeKey].data, ...payload }
             : payload,
         },
       }),
       [error]: (state, { payload }) => ({
         ...state,
-        [storeName]: {
+        [storeKey]: {
           loading: false,
           data: null,
           error: payload,
@@ -111,10 +111,10 @@ const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
       }),
       [loading]: (state, { payload }) => ({
         ...state,
-        [storeName]: {
+        [storeKey]: {
           loading: payload,
           error: null,
-          data: { ...state[storeName].data },
+          data: { ...state[storeKey].data },
         },
       }),
     },
@@ -126,7 +126,7 @@ const createFetchReducers = ({ storeName, initState, data, loading, error }) =>
   It for user store it creates FETCH/USER/LOADING, FETCH/USER/ERROR and
   FETCH/USER/DATA actions and handles data in both object, array and primitive shapes.
 */
-export const createFetchModule = ({ storeName, initialState }) => {
+export const createFetchModule = ({ storeKey, initialState }) => {
   /* For user it assigns FETCH/USER/DATA to data variable */
   const {
     fetch: {
@@ -134,7 +134,7 @@ export const createFetchModule = ({ storeName, initialState }) => {
     },
   } = createActions({
     FETCH: {
-      [storeName.toUpperCase()]: {
+      [storeKey.toUpperCase()]: {
         DATA: data => data,
         LOADING: (isLoading = false) => isLoading,
         ERROR: error => error,
@@ -143,8 +143,8 @@ export const createFetchModule = ({ storeName, initialState }) => {
   })
 
   const initState = initialState || {
-    [storeName]: { loading: false, data: null, error: null },
+    [storeKey]: { loading: false, data: null, error: null },
   }
 
-  return createFetchReducers({ storeName, initState, data, loading, error })
+  return createFetchReducers({ storeKey, initState, data, loading, error })
 }
