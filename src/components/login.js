@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { logout } from './login/actions'
+import getOr from 'lodash/fp/getOr'
 
 import { mutate } from '../utils'
 import { GITHUB_LOGIN } from '../queries'
@@ -90,10 +91,21 @@ const Inline = styled.div`
   margin-left: 4px;
 `
 
-const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
+const getUserName = state => getOr(undefined, ['api', 'user', 'data', 'name'])
 
 const getUserPhoto = state =>
-  state.fetch.user.data && state.fetch.user.data.photoUrl
+  getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
+
+// const getUserSiliskyToken = state =>
+//   getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
+
+// const getUserGithubToken = state =>
+//   getOr(undefined, ['api', 'user', 'data', 'getUserGithubToken'])
+
+// const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
+
+// const getUserPhoto = state =>
+//   state.fetch.user.data && state.fetch.user.data.photoUrl
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto],

@@ -3,6 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
+import getOr from 'lodash/fp/getOr'
 
 import ApolloClient from 'apollo-boost'
 
@@ -15,16 +16,27 @@ const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
-const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
+const getUserName = state => getOr(undefined, ['api', 'user', 'data', 'name'])
 
 const getUserPhoto = state =>
-  state.fetch.user.data && state.fetch.user.data.photoUrl
+  getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
 
 const getUserSiliskyToken = state =>
-  state.fetch.user.data && state.fetch.user.data.siliskyToken
+  getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
 
 const getUserGithubToken = state =>
-  state.fetch.user.data && state.fetch.user.data.githubToken
+  getOr(undefined, ['api', 'user', 'data', 'getUserGithubToken'])
+
+// const getUserName = state => state.api.user.data && state.api.user.data.name
+
+// const getUserPhoto = state =>
+//   state.api.user.data && state.api.user.data.photoUrl
+
+// const getUserSiliskyToken = state =>
+//   state.api.user.data && state.api.user.data.siliskyToken
+
+// const getUserGithubToken = state =>
+//   state.api.user.data && state.api.user.data.githubToken
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto, getUserGithubToken, getUserSiliskyToken],

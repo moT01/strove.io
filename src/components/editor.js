@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import Layout from 'components/layout'
+import getOr from 'lodash/fp/getOr'
 
 import SEO from 'components/seo'
 
@@ -15,12 +16,15 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
+const getUserToken = state =>
+  getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
+
 const getProjectPort = () => '23648'
 
 const getMachineId = () => '5d0e233ef9265ebc230bae22'
 
-const getUserToken = state =>
-  state.fetch.user.data && state.fetch.user.data.siliskyToken
+// const getUserToken = state =>
+//   state.fetch.user.data && state.fetch.user.data.siliskyToken
 
 const getToken = createSelector(
   [getUserToken],
