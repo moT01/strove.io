@@ -5,7 +5,7 @@ import client from '../../client'
 
 export const mutation = ({
   name,
-  storeKey,
+  storeKey = name,
   variables,
   context,
   errorPolicy = 'all',
@@ -14,7 +14,7 @@ export const mutation = ({
   return async dispatch => {
     dispatch({
       type: C.FETCH_START,
-      payload: true,
+      payload: { storeKey },
     })
 
     try {
@@ -31,12 +31,10 @@ export const mutation = ({
         payload: { storeKey, data: data[name] },
       })
 
-      console.log('dataaaaa', data)
-
       return data[name]
     } catch (e) {
       console.log('fetch error: ', e)
-      dispatch({ type: C.FETCH_ERROR, payload: e })
+      dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
       return null
     }
   }
@@ -44,7 +42,7 @@ export const mutation = ({
 
 export const query = ({
   name,
-  storeKey,
+  storeKey = name,
   variables,
   context,
   fetchPolicy = 'cache-first',
@@ -54,6 +52,7 @@ export const query = ({
   return async dispatch => {
     dispatch({
       type: C.FETCH_START,
+      storeKey,
       payload: true,
     })
 
@@ -74,7 +73,7 @@ export const query = ({
       return data[name]
     } catch (e) {
       console.log('fetch error: ', e)
-      dispatch({ type: C.FETCH_ERROR, payload: e })
+      dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
       return null
     }
   }

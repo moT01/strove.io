@@ -1,6 +1,10 @@
 import { handleActions } from 'redux-actions'
 import * as C from './constants'
 
+const initialState = {
+  user: {},
+}
+
 export default handleActions(
   {
     [C.FETCH_START]: (state, { payload: { storeKey } = {} }) => ({
@@ -44,15 +48,7 @@ export default handleActions(
         code,
       },
     }),
-    LOGOUT: () => undefined,
+    LOGOUT: () => initialState,
   },
-  {
-    user: {
-      isLoading: false,
-      data: undefined,
-      error: undefined,
-      message: undefined,
-      code: undefined,
-    },
-  }
+  initialState
 )
