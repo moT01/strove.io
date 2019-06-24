@@ -9,6 +9,8 @@ export const mutation = ({
   context,
   errorPolicy = 'all',
   mutation,
+  onSuccess,
+  onFailure,
 }) => {
   return async dispatch => {
     dispatch({
@@ -25,6 +27,8 @@ export const mutation = ({
         errorPolicy,
       })
 
+      onSuccess && onSuccess()
+
       dispatch({
         type: C.FETCH_SUCCESS,
         payload: { storeKey, data: data[name] },
@@ -33,6 +37,9 @@ export const mutation = ({
       return data[name]
     } catch (e) {
       console.log('fetch error: ', e)
+
+      onFailure && onFailure()
+
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
       return null
     }
@@ -47,6 +54,8 @@ export const query = ({
   fetchPolicy = 'cache-first',
   errorPolicy = 'all',
   query,
+  onSuccess,
+  onFailure,
 }) => {
   return async dispatch => {
     dispatch({
@@ -64,6 +73,8 @@ export const query = ({
         errorPolicy,
       })
 
+      onSuccess && onSuccess()
+
       dispatch({
         type: C.FETCH_SUCCESS,
         payload: { data: data[name], storeKey },
@@ -72,6 +83,9 @@ export const query = ({
       return data[name]
     } catch (e) {
       console.log('fetch error: ', e)
+
+      onSuccess && onFailure()
+
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: e })
       return null
     }
