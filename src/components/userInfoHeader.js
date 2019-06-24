@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import onClickOutside from "react-onclickoutside"
-import { Link } from "gatsby"
 import { useDispatch } from "react-redux"
 
 const MenuWrapper = styled.div`
@@ -87,7 +86,7 @@ const UserInfoHeader = props => {
   return (
     <ZeldaWrapper>
       <LinkWrapper onClick={() => props.handleDropdownClick()}>
-        <Link
+        <div
           style={{
             color: `white`,
             textDecoration: `none`,
@@ -101,7 +100,7 @@ const UserInfoHeader = props => {
           <Inline>
             <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
           </Inline>
-        </Link>
+        </div>
       </LinkWrapper>
       {props.showDropdown && (
         <MenuWrapper invert>

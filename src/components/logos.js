@@ -89,6 +89,7 @@ const Logos = props => {
       <ScrollAtMobile>
         {logos.map(logo => (
           <IconContainer
+            key={logo.name}
             onMouseEnter={() => props.handleHoverIn(logo.description)}
             onMouseLeave={() => props.handleHoverOut()}
           >

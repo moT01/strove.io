@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { Parallax } from "rc-scroll-anim"
 import QueueAnim from "rc-queue-anim"
 import TweenOne from "rc-tween-one"
@@ -98,9 +97,6 @@ const pointPos = [
 ]
 
 class Page1 extends React.PureComponent {
-  static propTypes = {
-    isMobile: PropTypes.bool.isRequired,
-  }
   constructor(props) {
     super(props)
     this.state = {

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import QueueAnim from "rc-queue-anim"
-import Logos from "../components/logos.js"
+import Logos from "components/logos.js"
 
 function Page2() {
   const [selectedLogo, setSelectedLogo] = useState()
