@@ -101,7 +101,6 @@ const getUserData = createSelector(
 )
 
 const LoginComponent = ({ location }) => {
-  const [setStatus] = useState(STATUS.INITIAL)
   const [showDropdown, setShowDropdown] = useState(false)
   const dispatch = useDispatch()
 
@@ -123,8 +122,6 @@ const LoginComponent = ({ location }) => {
           storeName: "user",
         })
       )
-
-      setStatus(STATUS.AUTHENTICATED)
     }
   }, [])
 
