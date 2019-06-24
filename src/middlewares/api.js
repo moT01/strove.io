@@ -1,14 +1,11 @@
-import axios from 'axios'
-import { API } from '../actions/types'
-import { fetchStart, fetch, apiStart, apiEnd } from 'state/api/actions'
-import { QUERY_START, MUTATION_START } from 'src/constants/actions'
 import { query, mutate } from 'utils'
+// import { FETCH_START } from 'state/api/constants'
 import client from '../../client'
 
 const apiMiddleware = ({ dispatch }) => next => action => {
   next(action)
 
-  if (action.type !== FETCH_START) return
+  if (action.type !== 'FETCH_START') return
 
   const {
     name,
@@ -19,6 +16,8 @@ const apiMiddleware = ({ dispatch }) => next => action => {
     errorPolicy = 'all',
     query,
     mutation,
+    onSuccess,
+    onFailure,
     client = client,
   } = action.payload
 
@@ -27,7 +26,6 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       mutate({
         storeKey,
         name,
-        storeName,
         variables,
         context,
         errorPolicy,
@@ -41,7 +39,6 @@ const apiMiddleware = ({ dispatch }) => next => action => {
       query({
         storeKey,
         name,
-        storeName,
         variables,
         context,
         fetchPolicy,

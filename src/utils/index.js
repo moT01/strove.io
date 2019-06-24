@@ -1,9 +1,10 @@
 import { createActions, handleActions } from 'redux-actions'
+import * as C from 'state/api/constants'
 
 import client from '../../client'
 
 export const mutate = ({
-  mutationName,
+  name,
   storeKey,
   variables,
   context,
@@ -12,7 +13,7 @@ export const mutate = ({
 }) => {
   return async dispatch => {
     dispatch({
-      type: `FETCH/${storeKey.toUpperCase()}/LOADING`,
+      type: C.FETCH_START,
       payload: true,
     })
 
@@ -26,21 +27,21 @@ export const mutate = ({
       })
 
       dispatch({
-        type: `FETCH/${storeKey.toUpperCase()}/DATA`,
-        payload: data[mutationName],
+        type: C.FETCH_SUCCESS,
+        payload: data[name],
       })
 
-      return data[mutationName]
+      return data[name]
     } catch (e) {
       console.log('fetch error: ', e)
-      dispatch({ type: `FETCH/${storeKey.toUpperCase()}/ERROR`, payload: e })
+      dispatch({ type: C.FETCH_ERROR, payload: e })
       return null
     }
   }
 }
 
 export const query = ({
-  queryName,
+  name,
   storeKey,
   variables,
   context,
@@ -50,7 +51,7 @@ export const query = ({
 }) => {
   return async dispatch => {
     dispatch({
-      type: `FETCH/${storeKey.toUpperCase()}/LOADING`,
+      type: C.FETCH_START,
       payload: true,
     })
 
@@ -64,14 +65,14 @@ export const query = ({
       })
 
       dispatch({
-        type: `FETCH/${storeKey.toUpperCase()}/DATA`,
-        payload: data[queryName],
+        type: C.FETCH_SUCCESS,
+        payload: data[name],
       })
 
-      return data[queryName]
+      return data[name]
     } catch (e) {
       console.log('fetch error: ', e)
-      dispatch({ type: `FETCH/${storeKey.toUpperCase()}/ERROR`, payload: e })
+      dispatch({ type: C.FETCH_ERROR, payload: e })
       return null
     }
   }
@@ -134,7 +135,7 @@ export const createFetchModule = ({ storeKey, initialState }) => {
     },
   } = createActions({
     FETCH: {
-      [storeKey.toUpperCase()]: {
+      [storeKey]: {
         DATA: data => data,
         LOADING: (isLoading = false) => isLoading,
         ERROR: error => error,

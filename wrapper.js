@@ -14,6 +14,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import { ApolloLink, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
+import { apiMiddleware } from './src/middlewares'
 
 import rootReducer from './src/state'
 
@@ -86,7 +87,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const createStore = reduxCreateStore(
   persistedReducer,
   composeWithDevTools(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, apiMiddleware)
     // other store enhancers if any
   )
 )
