@@ -29,6 +29,7 @@ export const mutation = ({
         errorPolicy,
       })
 
+      console.log('TCL: data', data)
       onSuccess && onSuccess(dataSelector(data))
 
       dispatch({

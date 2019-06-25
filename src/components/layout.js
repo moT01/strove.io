@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, navigate } from 'gatsby'
 import { Location } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -15,14 +15,29 @@ const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
+const getProjects = createSelector(
+  [selectors.getUserProjects],
+  projects => projects
+)
+
 const getUserData = createSelector(
   [selectors.getUser],
   user => user
 )
 
+const startProject = project => {
+  navigate('/app/editor/', {
+    state: {
+      machineId: project.machineId,
+      editorPort: project.editorPort,
+    },
+  })
+}
+
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(getUserData)
+  const projects = useSelector(getProjects)
 
   useEffect(() => {
     const githubLink =
@@ -66,6 +81,7 @@ const LayoutComponent = ({ children, location }) => {
                   'User-Agent': 'node',
                 },
               },
+              onSuccess: startProject,
             })
           )
         } catch (e) {
@@ -73,6 +89,7 @@ const LayoutComponent = ({ children, location }) => {
         }
       }
       addProject()
+      // startProject()
     }
   }, [])
 
