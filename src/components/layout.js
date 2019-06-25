@@ -25,7 +25,6 @@ const LayoutComponent = ({ children, location }) => {
   const user = useSelector(getUserData)
 
   useEffect(() => {
-    const machineId = `5d0ba955d0027b3e519b4c39`
     const githubLink =
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
@@ -59,7 +58,7 @@ const LayoutComponent = ({ children, location }) => {
             mutation({
               name: 'addProject',
               storeKey: 'myProjects',
-              variables: { githubLink, machineId, name, description },
+              variables: { githubLink, name, description },
               mutation: ADD_GITHUB_PROJECT,
               context: {
                 headers: {

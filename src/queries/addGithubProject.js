@@ -6,14 +6,12 @@ export default gql`
     $description: String
     $isPrivate: Boolean
     $githubLink: String!
-    $machineId: ID!
   ) {
     addProject(
       name: $name
       description: $description
       isPrivate: $isPrivate
       githubLink: $githubLink
-      machineId: $machineId
     ) {
       name
       description
