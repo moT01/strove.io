@@ -89,7 +89,6 @@ const LayoutComponent = ({ children, location }) => {
         }
       }
       addProject()
-      // startProject()
     }
   }, [])
 

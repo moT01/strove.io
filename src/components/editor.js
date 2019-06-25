@@ -19,24 +19,10 @@ const StyledIframe = styled.iframe`
 
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
-// const getProjectPort = () => '23648'
-
-// const getMachineId = () => '5d0e233ef9265ebc230bae22'
-
 const getToken = createSelector(
   [getUserToken],
   token => token
 )
-
-// const getId = createSelector(
-//   [getMachineId],
-//   machineId => machineId
-// )
-
-// const getPort = createSelector(
-//   [getProjectPort],
-//   port => port
-// )
 
 const EditorComponent = ({ location }) => {
   const token = useSelector(getToken)
