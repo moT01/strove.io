@@ -4,88 +4,12 @@ import Layout from './layout'
 import SEO from './seo'
 import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { createSelector } from 'reselect'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
 
 import { selectors } from 'state'
-
-const workspaces = [
-  {
-    name: 'Paweł',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'javascript',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'Best app ever',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'ruby',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'My first react/redux project',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description:
-      'A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description',
-    language: 'html',
-    branch: 'master',
-    isPrivate: false,
-  },
-  {
-    name: 'Król Świata Mateusz',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'html',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'Paweł',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'communist',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'Adam',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'german',
-    branch: 'master',
-    isPrivate: false,
-  },
-  {
-    name: 'Piotrek',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'javacript',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'How to hack Nasa using only html',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'html',
-    branch: 'master',
-    isPrivate: false,
-  },
-]
 
 const FadeIn = keyframes`
   0% {
@@ -202,7 +126,7 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
-const getUserProjects = selectors.getData('projects', [])
+const getUserProjects = selectors.getData('myProjects', [])
 
 const getProjects = createSelector(
   [getUserProjects],
@@ -236,33 +160,33 @@ const getUserData = createSelector(
 )
 
 const Dashboard = props => {
-  const token = useSelector(getToken)
-  const id = useSelector(getId)
-  const port = useSelector(getPort)
+  const dispatch = useDispatch()
   const user = useSelector(getUserData)
 
   const projects = useSelector(getProjects)
-  console.log(projects)
 
   useEffect(() => {
-    query({
-      name: 'projects',
-      query: GET_PROJECTS,
-      context: {
-        headers: {
-          Authorization: `Bearer ${user.siliskyToken}`,
-          'User-Agent': 'node',
+    dispatch(
+      query({
+        name: 'myProjects',
+        dataSelector: data => data.myProjects.edges,
+        query: GET_PROJECTS,
+        context: {
+          headers: {
+            Authorization: `Bearer ${user.siliskyToken}`,
+            'User-Agent': 'node',
+          },
         },
-      },
-    })
+      })
+    )
   }, [])
 
   return (
     <Layout>
       <SEO title="Dashboard" />
       <TilesWrapper>
-        {workspaces.map(workspace => (
-          <Tile key={workspace.name}>
+        {projects.map(workspace => (
+          <Tile key={workspace.id}>
             <VerticalDivider>
               <InfoWrapper>
                 <ProjectTitle>{workspace.name}</ProjectTitle>
