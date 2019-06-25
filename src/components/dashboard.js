@@ -11,81 +11,81 @@ import { GET_PROJECTS } from 'queries'
 
 import { selectors } from 'state'
 
-const workspaces = [
-  {
-    name: 'Paweł',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'javascript',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'Best app ever',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'ruby',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'My first react/redux project',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description:
-      'A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description',
-    language: 'html',
-    branch: 'master',
-    isPrivate: false,
-  },
-  {
-    name: 'Król Świata Mateusz',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'html',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'Paweł',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'communist',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'Adam',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'german',
-    branch: 'master',
-    isPrivate: false,
-  },
-  {
-    name: 'Piotrek',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'javacript',
-    branch: 'master',
-    isPrivate: true,
-  },
-  {
-    name: 'How to hack Nasa using only html',
-    createdAt: '2019-08-05',
-    updatedAt: '2019-10-23',
-    description: 'I am a descritpion',
-    language: 'html',
-    branch: 'master',
-    isPrivate: false,
-  },
-]
+// const workspaces = [
+//   {
+//     name: 'Paweł',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'javascript',
+//     branch: 'master',
+//     isPrivate: true,
+//   },
+//   {
+//     name: 'Best app ever',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'ruby',
+//     branch: 'master',
+//     isPrivate: true,
+//   },
+//   {
+//     name: 'My first react/redux project',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description:
+//       'A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description',
+//     language: 'html',
+//     branch: 'master',
+//     isPrivate: false,
+//   },
+//   {
+//     name: 'Król Świata Mateusz',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'html',
+//     branch: 'master',
+//     isPrivate: true,
+//   },
+//   {
+//     name: 'Paweł',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'communist',
+//     branch: 'master',
+//     isPrivate: true,
+//   },
+//   {
+//     name: 'Adam',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'german',
+//     branch: 'master',
+//     isPrivate: false,
+//   },
+//   {
+//     name: 'Piotrek',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'javacript',
+//     branch: 'master',
+//     isPrivate: true,
+//   },
+//   {
+//     name: 'How to hack Nasa using only html',
+//     createdAt: '2019-08-05',
+//     updatedAt: '2019-10-23',
+//     description: 'I am a descritpion',
+//     language: 'html',
+//     branch: 'master',
+//     isPrivate: false,
+//   },
+// ]
 
 const FadeIn = keyframes`
   0% {
@@ -202,7 +202,7 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
-const getUserProjects = selectors.getData('projects', [])
+const getUserProjects = selectors.getData('myProjects', [])
 
 const getProjects = createSelector(
   [getUserProjects],
@@ -265,7 +265,7 @@ const Dashboard = props => {
     <Layout>
       <SEO title="Dashboard" />
       <TilesWrapper>
-        {workspaces.map(workspace => (
+        {projects.map(workspace => (
           <Tile key={workspace.name}>
             <VerticalDivider>
               <InfoWrapper>

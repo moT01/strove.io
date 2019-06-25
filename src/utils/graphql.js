@@ -11,7 +11,7 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
-  dataSelector = name,
+  dataSelector = data => data[name],
   client = defaultClient,
 }) => {
   return async dispatch => {
@@ -58,7 +58,7 @@ export const query = ({
   query,
   onSuccess,
   onError,
-  dataSelector = name,
+  dataSelector = data => data[name],
   client = defaultClient,
 }) => {
   return async dispatch => {
