@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import Layout from 'components/layout'
+import { Location } from '@reach/router'
 
 import { selectors } from 'state'
 import SEO from 'components/seo'
@@ -18,29 +19,30 @@ const StyledIframe = styled.iframe`
 
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
-const getProjectPort = () => '23648'
+// const getProjectPort = () => '23648'
 
-const getMachineId = () => '5d0e233ef9265ebc230bae22'
+// const getMachineId = () => '5d0e233ef9265ebc230bae22'
 
 const getToken = createSelector(
   [getUserToken],
   token => token
 )
 
-const getId = createSelector(
-  [getMachineId],
-  machineId => machineId
-)
+// const getId = createSelector(
+//   [getMachineId],
+//   machineId => machineId
+// )
 
-const getPort = createSelector(
-  [getProjectPort],
-  port => port
-)
+// const getPort = createSelector(
+//   [getProjectPort],
+//   port => port
+// )
 
-const Editor = () => {
+const EditorComponent = ({ location }) => {
+  console.log('TCL: Editor -> location', location)
   const token = useSelector(getToken)
-  const id = useSelector(getId)
-  const port = useSelector(getPort)
+  const id = location.state.machindeId
+  const port = location.state.editorPort
 
   return (
     <Layout>
@@ -51,5 +53,17 @@ const Editor = () => {
     </Layout>
   )
 }
+
+const Editor = ({ children, ...props }) => (
+  <Location>
+    {({ location }) => (
+      <EditorComponent
+        {...props}
+        location={location}
+        children={children}
+      ></EditorComponent>
+    )}
+  </Location>
+)
 
 export default Editor

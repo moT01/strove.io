@@ -111,11 +111,9 @@ const LayoutComponent = ({ children, location }) => {
   )
 }
 
-const Layout = ({ children }) => (
+const Layout = props => (
   <Location>
-    {({ location }) => (
-      <LayoutComponent location={location} children={children} />
-    )}
+    {({ location }) => <LayoutComponent {...props} location={location} />}
   </Location>
 )
 
