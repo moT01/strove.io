@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'gatsby'
 
 import Layout from './layout'
 import SEO from './seo'
@@ -49,7 +50,7 @@ const Tile = styled.div`
     height: auto;
   }
 `
-const Button = styled.button`
+const Button = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
@@ -66,6 +67,7 @@ const Button = styled.button`
   border-radius: 1vh;
   border-color: #0072ce;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
 
@@ -91,6 +93,7 @@ const ButtonText = styled(Text)`
   color: #ffffff;
   font-size: 2.2vh;
   margin: 0;
+  text-decoration: none;
 `
 const VerticalDivider = styled.div`
   display: flex;
@@ -126,33 +129,27 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
-const getUserProjects = selectors.getData('myProjects', [])
-
 const getProjects = createSelector(
-  [getUserProjects],
+  [selectors.getUserProjects],
   projects => projects
 )
 
 const getUserToken = selectors.getData('user', null, 'siliskyToken')
-
-const getProjectPort = () => '23648'
-
-const getMachineId = () => '5d0e233ef9265ebc230bae22'
 
 const getToken = createSelector(
   [getUserToken],
   token => token
 )
 
-const getId = createSelector(
-  [getMachineId],
-  machineId => machineId
-)
+// const getId = createSelector(
+//   [getMachineId],
+//   machineId => machineId
+// )
 
-const getPort = createSelector(
-  [getProjectPort],
-  port => port
-)
+// const getProjects = createSelector(
+//   [selectors.getMyProjects],
+//   myProjects => myProjects
+// )
 
 const getUserData = createSelector(
   [selectors.getUser],
@@ -164,6 +161,15 @@ const Dashboard = props => {
   const user = useSelector(getUserData)
 
   const projects = useSelector(getProjects)
+
+  const handleClick = workspace => {
+    console.log(
+      workspace.id,
+      workspace.name,
+      workspace.machineId,
+      workspace.editorPort
+    )
+  }
 
   useEffect(() => {
     dispatch(
@@ -242,7 +248,15 @@ const Dashboard = props => {
                 </TextWrapper>
               </InfoWrapper>
               <RightSection>
-                <Button primary>
+                <Button
+                  to="/app/editor/"
+                  state={{
+                    machineId: workspace.machineId,
+                    editorPort: workspace.editorPort,
+                  }}
+                  primary
+                  onClick={() => handleClick(workspace)}
+                >
                   <ButtonText>Start</ButtonText>
                 </Button>
               </RightSection>
