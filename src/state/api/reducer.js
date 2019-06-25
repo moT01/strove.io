@@ -6,6 +6,8 @@ const initialState = {
   myProjects: { data: [] },
 }
 
+// action = { type: 'SELECT_PROJECT', payload: {} }
+//reducer.LOGOUT(previousState, action)
 export default handleActions(
   {
     [C.FETCH_START]: (state, { payload: { storeKey } = {} }) => ({

@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { createSelector } from 'reselect'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
+import * as C from '../state/currentProject/constants'
 
 import { selectors } from 'state'
 
@@ -141,16 +142,6 @@ const getToken = createSelector(
   token => token
 )
 
-// const getId = createSelector(
-//   [getMachineId],
-//   machineId => machineId
-// )
-
-// const getProjects = createSelector(
-//   [selectors.getMyProjects],
-//   myProjects => myProjects
-// )
-
 const getUserData = createSelector(
   [selectors.getUser],
   user => user
@@ -162,13 +153,11 @@ const Dashboard = props => {
 
   const projects = useSelector(getProjects)
 
-  const handleClick = workspace => {
-    console.log(
-      workspace.id,
-      workspace.name,
-      workspace.machineId,
-      workspace.editorPort
-    )
+  const handleClick = ({ editorPort, previewPort, machineId }) => {
+    dispatch({
+      type: C.SELECT_CURRENT_PROJECT,
+      payload: { editorPort, previewPort, machineId },
+    })
   }
 
   useEffect(() => {
@@ -255,7 +244,13 @@ const Dashboard = props => {
                     editorPort: workspace.editorPort,
                   }}
                   primary
-                  onClick={() => handleClick(workspace)}
+                  onClick={() =>
+                    handleClick({
+                      editorPort: workspace.editorPort,
+                      previewPort: workspace.previewPort,
+                      machineId: workspace.machineId,
+                    })
+                  }
                 >
                   <ButtonText>Start</ButtonText>
                 </Button>
