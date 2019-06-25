@@ -209,7 +209,7 @@ const getProjects = createSelector(
   projects => projects
 )
 
-const getUserToken = selectors.getData('user', {}, 'siliskyToken')
+const getUserToken = selectors.getData('user', null, 'siliskyToken')
 
 const getProjectPort = () => '23648'
 
