@@ -58,7 +58,7 @@ const LayoutComponent = ({ children, location }) => {
           dispatch(
             mutation({
               name: 'addProject',
-              storeKey: 'projects',
+              storeKey: 'myProjects',
               variables: { githubLink, machineId, name, description },
               mutation: ADD_GITHUB_PROJECT,
               context: {

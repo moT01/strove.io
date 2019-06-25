@@ -11,6 +11,7 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
+  dataSelector = name,
   client = defaultClient,
 }) => {
   return async dispatch => {
@@ -28,14 +29,14 @@ export const mutation = ({
         errorPolicy,
       })
 
-      onSuccess && onSuccess(data[name])
+      onSuccess && onSuccess(dataSelector(data))
 
       dispatch({
         type: C.FETCH_SUCCESS,
-        payload: { storeKey, data: data[name] },
+        payload: { storeKey, data: dataSelector(data) },
       })
 
-      return data[name]
+      return dataSelector(data)
     } catch (error) {
       console.log('fetch error: ', error)
 
@@ -74,8 +75,6 @@ export const query = ({
         fetchPolicy,
         errorPolicy,
       })
-
-      console.log(dataSelector(data))
 
       onSuccess && onSuccess(dataSelector(data))
 
