@@ -249,6 +249,7 @@ const Dashboard = props => {
     dispatch(
       query({
         name: 'myProjects',
+        dataSelector: data => data.myProjects.edges,
         query: GET_PROJECTS,
         context: {
           headers: {

@@ -57,6 +57,7 @@ export const query = ({
   query,
   onSuccess,
   onError,
+  dataSelector = name,
   client = defaultClient,
 }) => {
   return async dispatch => {
@@ -74,14 +75,16 @@ export const query = ({
         errorPolicy,
       })
 
-      onSuccess && onSuccess(data[name])
+      console.log(dataSelector(data))
+
+      onSuccess && onSuccess(dataSelector(data))
 
       dispatch({
         type: C.FETCH_SUCCESS,
-        payload: { data: data[name], storeKey },
+        payload: { data: dataSelector(data), storeKey },
       })
 
-      return data[name]
+      return dataSelector(data)
     } catch (error) {
       console.log('fetch error: ', error)
 
