@@ -4,7 +4,7 @@ import Layout from './layout'
 import SEO from './seo'
 import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { createSelector } from 'reselect'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
@@ -236,25 +236,28 @@ const getUserData = createSelector(
 )
 
 const Dashboard = props => {
+  const dispatch = useDispatch()
   const token = useSelector(getToken)
   const id = useSelector(getId)
   const port = useSelector(getPort)
   const user = useSelector(getUserData)
 
   const projects = useSelector(getProjects)
-  console.log(projects)
+  console.log(projects, 'user', user)
 
   useEffect(() => {
-    query({
-      name: 'projects',
-      query: GET_PROJECTS,
-      context: {
-        headers: {
-          Authorization: `Bearer ${user.siliskyToken}`,
-          'User-Agent': 'node',
+    dispatch(
+      query({
+        name: 'myProjects',
+        query: GET_PROJECTS,
+        context: {
+          headers: {
+            Authorization: `Bearer ${user.siliskyToken}`,
+            'User-Agent': 'node',
+          },
         },
-      },
-    })
+      })
+    )
   }, [])
 
   return (
