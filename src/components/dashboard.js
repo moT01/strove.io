@@ -11,82 +11,6 @@ import { GET_PROJECTS } from 'queries'
 
 import { selectors } from 'state'
 
-// const workspaces = [
-//   {
-//     name: 'Paweł',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'javascript',
-//     branch: 'master',
-//     isPrivate: true,
-//   },
-//   {
-//     name: 'Best app ever',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'ruby',
-//     branch: 'master',
-//     isPrivate: true,
-//   },
-//   {
-//     name: 'My first react/redux project',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description:
-//       'A very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very long description',
-//     language: 'html',
-//     branch: 'master',
-//     isPrivate: false,
-//   },
-//   {
-//     name: 'Król Świata Mateusz',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'html',
-//     branch: 'master',
-//     isPrivate: true,
-//   },
-//   {
-//     name: 'Paweł',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'communist',
-//     branch: 'master',
-//     isPrivate: true,
-//   },
-//   {
-//     name: 'Adam',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'german',
-//     branch: 'master',
-//     isPrivate: false,
-//   },
-//   {
-//     name: 'Piotrek',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'javacript',
-//     branch: 'master',
-//     isPrivate: true,
-//   },
-//   {
-//     name: 'How to hack Nasa using only html',
-//     createdAt: '2019-08-05',
-//     updatedAt: '2019-10-23',
-//     description: 'I am a descritpion',
-//     language: 'html',
-//     branch: 'master',
-//     isPrivate: false,
-//   },
-// ]
-
 const FadeIn = keyframes`
   0% {
     opacity: 0;
@@ -237,13 +161,9 @@ const getUserData = createSelector(
 
 const Dashboard = props => {
   const dispatch = useDispatch()
-  const token = useSelector(getToken)
-  const id = useSelector(getId)
-  const port = useSelector(getPort)
   const user = useSelector(getUserData)
 
   const projects = useSelector(getProjects)
-  console.log(projects, 'user', user)
 
   useEffect(() => {
     dispatch(
@@ -266,7 +186,7 @@ const Dashboard = props => {
       <SEO title="Dashboard" />
       <TilesWrapper>
         {projects.map(workspace => (
-          <Tile key={workspace.name}>
+          <Tile key={workspace.id}>
             <VerticalDivider>
               <InfoWrapper>
                 <ProjectTitle>{workspace.name}</ProjectTitle>

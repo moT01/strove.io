@@ -4,6 +4,7 @@ export default gql`
   {
     myProjects {
       edges {
+        id
         name
         description
         isPrivate
