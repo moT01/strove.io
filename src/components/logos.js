@@ -5,24 +5,24 @@ import { Docker, Github, Google, VSCode } from '../images/logos'
 
 const logosArr = [
   {
-    component: <Google width="100%" height="auto" />,
+    component: <Google width="100%" length="auto" />,
     name: 'Google',
     description: 'Google cloud is cool and cloudy',
   },
   {
     component: (
-      <VSCode style={{ fill: '#303c42' }} width="100%" height="auto" />
+      <VSCode style={{ fill: '#303c42' }} width="100%" length="auto" />
     ),
     name: 'VSCode',
     description: 'VSCode for editor',
   },
   {
-    component: <Docker width="100%" height="auto" />,
+    component: <Docker width="100%" length="auto" />,
     name: 'Docker',
     description: "Docker isn't actually a whale",
   },
   {
-    component: <Github width="100%" height="auto" />,
+    component: <Github width="100%" length="auto" />,
     name: 'Github',
     description: 'Github integration for state-of-the-art version control',
   },
