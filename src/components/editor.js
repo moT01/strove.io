@@ -41,8 +41,10 @@ const getToken = createSelector(
 const EditorComponent = ({ location }) => {
   console.log('TCL: Editor -> location', location)
   const token = useSelector(getToken)
-  const id = location.state.machindeId
+  const id = location.state.machineId
+  console.log('TCL: EditorComponent -> id', id)
   const port = location.state.editorPort
+  console.log('TCL: EditorComponent -> port', port)
 
   return (
     <Layout>
