@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-// import Layout from "../components/layout"
-import SEO from '../components/seo'
-import '../components/layout.css'
+// import Layout from "components/layout"
+import SEO from 'components/seo'
+import 'components/layout.css'
 
-import Header from '../components/header'
+import Header from 'components/header'
 
 const TextWell = styled.div`
   align-self: center;

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Docker, Github, Google, VSCode } from '../images/logos'
+import { Docker, Github, Google, VSCode } from 'images/logos'
 
 const logosArr = [
   {

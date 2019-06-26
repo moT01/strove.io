@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import styled, { keyframes } from "styled-components"
-import { Python, Ruby, Typescript, Cpp, Go, Node } from "../../images/logos"
+import React, { useState } from 'react'
+import styled, { keyframes } from 'styled-components'
+import { Python, Ruby, Typescript, Cpp, Go, Node } from 'images/logos'
 
 const IconAnimation = keyframes`
   0%, 100% {
@@ -137,38 +137,38 @@ const SectionWrapper = styled.div`
 const logos = [
   {
     component: <Node width="10vw" height="auto" />,
-    name: "Node",
-    color: "#337D50",
+    name: 'Node',
+    color: '#337D50',
     id: 0,
   },
   {
     component: <Python width="10vw" height="auto" />,
-    name: "Python",
-    color: "#2D6D9E",
+    name: 'Python',
+    color: '#2D6D9E',
     id: 1,
   },
   {
     component: <Ruby width="8vw" height="auto" />,
-    name: "Ruby",
-    color: "#9E1A19",
+    name: 'Ruby',
+    color: '#9E1A19',
     id: 2,
   },
   {
     component: <Typescript width="8vw" height="auto" />,
-    name: "Typescript",
-    color: "#1D82D2",
+    name: 'Typescript',
+    color: '#1D82D2',
     id: 3,
   },
   {
     component: <Cpp width="10vw" height="auto" />,
-    name: "C++",
-    color: "#194F9D",
+    name: 'C++',
+    color: '#194F9D',
     id: 4,
   },
   {
     component: <Go width="8vw" height="auto" />,
-    name: "Go",
-    color: "#0072ce",
+    name: 'Go',
+    color: '#0072ce',
     id: 5,
   },
 ]
@@ -224,7 +224,7 @@ const Bubbles = React.memo(
                 onMouseLeave={() => handleHoverOut()}
               >
                 {logo.component}
-                {console.log("Is anything selected?", selectedBubble)}
+                {console.log('Is anything selected?', selectedBubble)}
               </IconContainer>
             ) : (
               <SelectedIconContainer
@@ -233,7 +233,7 @@ const Bubbles = React.memo(
                 onMouseLeave={() => handleHoverOut()}
               >
                 {logo.component}
-                {console.log("I am the chosen one", selectedBubble)}
+                {console.log('I am the chosen one', selectedBubble)}
               </SelectedIconContainer>
             )}
           </IconBearing>

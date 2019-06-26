@@ -8,7 +8,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
-import * as C from '../state/currentProject/constants'
+import * as C from 'state/currentProject/constants'
 
 import { selectors } from 'state'
 

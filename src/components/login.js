@@ -9,7 +9,7 @@ import { selectors } from 'state'
 
 import { GITHUB_LOGIN } from 'queries'
 
-import UserInfoHeader from '../components/userInfoHeader'
+import UserInfoHeader from 'components/userInfoHeader'
 
 const options = [
   { option: 'Settings' },
