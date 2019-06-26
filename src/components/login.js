@@ -77,17 +77,6 @@ const getUserName = getOr(undefined, ['api', 'user', 'data', 'name'])
 
 const getUserPhoto = getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
 
-// const getUserSiliskyToken = state =>
-//   getOr(undefined, ['api', 'user', 'data', 'getUserSiliskyToken'])
-
-// const getUserGithubToken = state =>
-//   getOr(undefined, ['api', 'user', 'data', 'getUserGithubToken'])
-
-// const getUserName = state => state.fetch.user.data && state.fetch.user.data.name
-
-// const getUserPhoto = state =>
-//   state.fetch.user.data && state.fetch.user.data.photoUrl
-
 const getUserData = createSelector(
   [getUserName, getUserPhoto],
   (username, userphoto) => ({ username, userphoto })

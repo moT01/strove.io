@@ -6,7 +6,6 @@ import SEO from './seo'
 import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { createSelector } from 'reselect'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
 import * as C from '../state/currentProject/constants'
@@ -130,28 +129,12 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
-const getProjects = createSelector(
-  [selectors.getUserProjects],
-  projects => projects
-)
-
 const getUserToken = selectors.getData('user', null, 'siliskyToken')
-
-const getToken = createSelector(
-  [getUserToken],
-  token => token
-)
-
-const getUserData = createSelector(
-  [selectors.getUser],
-  user => user
-)
 
 const Dashboard = props => {
   const dispatch = useDispatch()
-  const user = useSelector(getUserData)
-
-  const projects = useSelector(getProjects)
+  const user = useSelector(getUserToken)
+  const projects = useSelector(selectors.getUserProjects)
 
   const handleClick = ({ editorPort, previewPort, machineId }) => {
     dispatch({
