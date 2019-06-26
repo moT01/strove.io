@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { Location } from '@reach/router'
 
-import { selectors } from 'state'
+import { projectSelectors, selectors } from 'state'
 import SEO from 'components/seo'
 
 const StyledIframe = styled.iframe`
@@ -23,10 +23,19 @@ const getToken = createSelector(
   token => token
 )
 
-const PreviewComponent = ({ location }) => {
+const getSelectedProject = projectSelectors.getProjectData
+
+const Preview = () => {
   const token = useSelector(getToken)
-  const id = location.state.machineId
-  const port = location.state.editorPort
+  const project = useSelector(getSelectedProject)
+  const id = project.machineId
+  const port = project.previewPort
+  console.log('TCL: Preview -> id', id)
+  console.log('TCL: Preview -> port', port)
+  console.log('TCL: PreviewComponent -> project', project)
+  console.log(
+    `https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token}&id=${id}&port=${port}`
+  )
 
   return (
     <>
@@ -38,16 +47,16 @@ const PreviewComponent = ({ location }) => {
   )
 }
 
-const Preview = ({ children, ...props }) => (
-  <Location>
-    {({ location }) => (
-      <PreviewComponent
-        {...props}
-        children={children}
-        location={location}
-      ></PreviewComponent>
-    )}
-  </Location>
-)
+// const Preview = ({ children, ...props }) => (
+//   <Location>
+//     {({ location }) => (
+//       <PreviewComponent
+//         {...props}
+//         children={children}
+//         location={location}
+//       ></PreviewComponent>
+//     )}
+//   </Location>
+// )
 
 export default Preview
