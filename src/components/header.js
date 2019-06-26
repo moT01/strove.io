@@ -70,14 +70,8 @@ const HeaderComponent = ({ siteTitle, location }) => (
         </StyledLink>
       </LinkWrapper>
       <LinkWrapper>
-        <StyledLink
-          to={
-            location.pathname === '/app/editor' ? '/app/preview' : '/app/editor'
-          }
-        >
-          <LinkText>
-            {location.pathname === '/app/editor' ? 'Preview' : 'Editor'}
-          </LinkText>
+        <StyledLink to="/app/dashboard">
+          <LinkText>Dashboard</LinkText>
         </StyledLink>
       </LinkWrapper>
       <LinkWrapper>
