@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
-import { Location } from '@reach/router'
 
-import { selectors } from 'state'
+import { projectSelectors, selectors } from 'state'
 import SEO from 'components/seo'
 
 const StyledIframe = styled.iframe`
@@ -18,15 +16,13 @@ const StyledIframe = styled.iframe`
 
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
-const getToken = createSelector(
-  [getUserToken],
-  token => token
-)
+const getSelectedProject = projectSelectors.getProjectData
 
-const PreviewComponent = ({ location }) => {
-  const token = useSelector(getToken)
-  const id = location.state.machineId
-  const port = location.state.editorPort
+const Preview = () => {
+  const token = useSelector(getUserToken)
+  const project = useSelector(getSelectedProject)
+  const id = project.machineId
+  const port = project.previewPort
 
   return (
     <>
@@ -37,17 +33,5 @@ const PreviewComponent = ({ location }) => {
     </>
   )
 }
-
-const Preview = ({ children, ...props }) => (
-  <Location>
-    {({ location }) => (
-      <PreviewComponent
-        {...props}
-        children={children}
-        location={location}
-      ></PreviewComponent>
-    )}
-  </Location>
-)
 
 export default Preview

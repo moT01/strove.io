@@ -4,7 +4,7 @@ import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
-import { VSCode } from '../images/logos'
+import { VSCode } from 'images/logos'
 
 const { TweenOneGroup } = TweenOne
 

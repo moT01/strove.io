@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { StaticQuery, graphql, navigate } from 'gatsby'
 import { Location } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
 
 import ApolloClient from 'apollo-boost'
 import { mutation } from 'utils'
@@ -15,16 +14,6 @@ const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
-const getProjects = createSelector(
-  [selectors.getUserProjects],
-  projects => projects
-)
-
-const getUserData = createSelector(
-  [selectors.getUser],
-  user => user
-)
-
 const startProject = project => {
   navigate('/app/editor/', {
     state: {
@@ -36,8 +25,8 @@ const startProject = project => {
 
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
-  const user = useSelector(getUserData)
-  const projects = useSelector(getProjects)
+  const user = useSelector(selectors.getUser)
+  const projects = useSelector(selectors.getUserProjects)
 
   useEffect(() => {
     const githubLink =
