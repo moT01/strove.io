@@ -133,7 +133,7 @@ const getUserToken = selectors.getData('user', null, 'siliskyToken')
 
 const Dashboard = props => {
   const dispatch = useDispatch()
-  const user = useSelector(getUserToken)
+  const token = useSelector(getUserToken)
   const projects = useSelector(selectors.getUserProjects)
 
   const handleClick = ({ editorPort, previewPort, machineId }) => {
@@ -151,7 +151,7 @@ const Dashboard = props => {
         query: GET_PROJECTS,
         context: {
           headers: {
-            Authorization: `Bearer ${user.siliskyToken}`,
+            Authorization: `Bearer ${token}`,
             'User-Agent': 'node',
           },
         },

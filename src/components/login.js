@@ -4,16 +4,15 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { logout } from './login/actions'
-import getOr from 'lodash/fp/getOr'
 import { mutation } from 'utils'
+import { selectors } from 'state'
 
-import { GITHUB_LOGIN } from '../queries'
+import { GITHUB_LOGIN } from 'queries'
 
 import UserInfoHeader from '../components/userInfoHeader'
 
 const options = [
   { option: 'Settings' },
-  { option: 'Kill yoursef' },
   { option: 'Logout', onClick: dispatch => dispatch(logout) },
 ]
 
@@ -73,9 +72,9 @@ const Inline = styled.div`
   margin-left: 4px;
 `
 
-const getUserName = getOr(undefined, ['api', 'user', 'data', 'name'])
+const getUserName = selectors.getData('user', null, 'name')
 
-const getUserPhoto = getOr(undefined, ['api', 'user', 'data', 'photoUrl'])
+const getUserPhoto = selectors.getData('user', null, 'photoUrl')
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto],
