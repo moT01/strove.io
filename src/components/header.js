@@ -26,6 +26,11 @@ const LinkWrapper = styled.h3`
 const IconWrapper = styled(LinkWrapper)`
   color: #fff;
   animation: ${FadeIn} 0.3s ease-out;
+  transition: color 0.3s;
+
+  :hover {
+    color: black;
+  }
 `
 
 const HeaderWrapper = styled.div`
@@ -44,6 +49,7 @@ const LinkText = styled.span`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  transition: color 0.3s;
 
   :hover {
     color: black;
