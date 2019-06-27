@@ -3,7 +3,7 @@ import * as C from './constants'
 
 const initialState = {
   user: {},
-  projects: { data: [] },
+  myProjects: { data: [] },
 }
 
 // action = { type: 'SELECT_PROJECT', payload: {} }

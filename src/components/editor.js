@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
 import Layout from 'components/layout'
 import { Location } from '@reach/router'
 
@@ -19,13 +18,8 @@ const StyledIframe = styled.iframe`
 
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
-const getToken = createSelector(
-  [getUserToken],
-  token => token
-)
-
 const EditorComponent = ({ location }) => {
-  const token = useSelector(getToken)
+  const token = useSelector(getUserToken)
   const id = location.state.machineId
   const port = location.state.editorPort
 

@@ -1,9 +1,7 @@
-/* eslint-disable */
 import React from 'react'
-import { graphql } from 'gatsby'
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Layout from 'components/layout'
+import SEO from 'components/seo'
 import AntDesign from '../Home'
 
 class IndexPage extends React.Component {
@@ -16,16 +14,5 @@ class IndexPage extends React.Component {
     )
   }
 }
-/* eslint-enable */
-
-// export const query = graphql`
-//   query {
-//     silisky {
-//       users {
-//         email
-//       }
-//     }
-//   }
-// `
 
 export default IndexPage
