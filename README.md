@@ -29,16 +29,3 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/samwhited)
-<!-- # Sponsors
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](#)]
-
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a> -->
