@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 
 import { projectSelectors, selectors } from 'state'
 import SEO from 'components/seo'
+import Loader from '../components/loader.js'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -23,12 +24,28 @@ const Preview = () => {
   const project = useSelector(getSelectedProject)
   const id = project.machineId
   const port = project.previewPort
+  const [loaderVisible, setLoaderVisible] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => setLoaderVisible(false), 2000)
+  }, [])
 
   return (
     <>
       <SEO title="Preview" />
+
+      {loaderVisible && (
+        <Loader
+          style={{
+            height: '100vh',
+            opacity: loaderVisible ? 1 : 0,
+            transition: 'opacity 0.5s',
+          }}
+        />
+      )}
       <StyledIframe
         src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token}&id=${id}&port=${port}`}
+        style={{ opacity: loaderVisible ? 0 : 1, transition: 'opacity 0.5s' }}
       />
     </>
   )
