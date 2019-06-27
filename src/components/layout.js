@@ -9,6 +9,7 @@ import Header from './header'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
 import { selectors } from 'state'
 import './layout.css'
+import Loader from '../components/loader.js'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
@@ -27,6 +28,7 @@ const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
   const projects = useSelector(selectors.getUserProjects)
+  const isLoading = useSelector(selectors.getLoading('myProjects'))
 
   useEffect(() => {
     const githubLink =
@@ -107,7 +109,7 @@ const LayoutComponent = ({ children, location }) => {
               paddingTop: 0,
             }}
           >
-            <main>{children}</main>
+            <main>{isLoading ? <Loader /> : children}</main>
           </div>
         </>
       )}
