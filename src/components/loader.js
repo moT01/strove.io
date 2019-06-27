@@ -14,6 +14,15 @@ const SpinToWin = keyframes`
   }
 `
 
+const AntiSpinToWin = keyframes`
+  0% {
+    transform: rotate(360deg)
+  }
+  100% {
+    transform: rotate(0deg)
+  }
+`
+
 const LoaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,22 +33,23 @@ const LoaderWrapper = styled.div`
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
-  width: 20vw;
+  width: 25vw;
   height: auto;
   animation: ${SpinToWin} 3s linear infinite;
 `
 
 const LogoContainer = styled.div`
-  width: 8vw;
+  width: 20vw;
   position: absolute;
   z-index: 4;
+  animation: ${AntiSpinToWin} 3s linear infinite;
 `
 
 const Loader = props => (
   <LoaderWrapper>
     {console.log('props', props)}
     <LoaderContainer>
-      <Cog fill="#0072ce" />
+      <Cog />
       <LogoContainer>
         <Silisky style={{ width: '100%', height: 'auto' }} />
       </LogoContainer>
@@ -48,21 +58,3 @@ const Loader = props => (
 )
 
 export default Loader
-
-export const fluidImage = graphql`
-  fragment fluidImage on File {
-    childImageSharp {
-      fluid(maxWidth: 1000, quality: 80) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-`
-
-export const pageQuery = graphql`
-  query {
-    imageTwo: file(relativePath: { eq: "siliskyLogoHollow.png" }) {
-      ...fluidImage
-    }
-  }
-`
