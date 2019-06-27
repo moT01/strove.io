@@ -9,7 +9,7 @@
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 <div align="center">
-<img src="./redmeAssets/programing.gif" width='1000px'>
+<img src="./redmeAssets/silisky3.gif" >
 </div>
 
 # Get started
@@ -17,7 +17,7 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 # Knwon issues
 
 # Contributors
-
+<div align='center'>
 <table>
 <tr>
 <td align="center"><a href="https://github.com/Urban35"><img src="https://avatars1.githubusercontent.com/u/29239301?s=460&v=4" width="150px;" alt="Dawid Urbnaek"/><br /><sub><b>Dawid Urbanek</b></sub></a></td>
@@ -26,6 +26,9 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 <td align="center"><a href="https://github.com/AceSpadeAble"><img src="https://avatars3.githubusercontent.com/u/33558885?s=460&v=4" width="150px;" alt="Paweł Wygoda"/><br /><sub><b>Pawel Wygoda</b></sub></a></td>
 </tr>
 </table>
+</div>
 
 
-[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/samwhited)
+
+# [buy us a coffe](https://play.google.com/store/apps/details?id=com.codengoclient)
+ <img src="./redmeAssets/coffe.png" width="50">
