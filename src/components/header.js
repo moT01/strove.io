@@ -44,15 +44,13 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  padding-left: 7.5vw;
-  padding-right: 7.5vw;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
   height: 7vh;
   background: #0072ce;
 
   @media (max-width: 1366px) {
     height: 5vh;
-    padding-left: 2.5vw;
-    padding-right: 2.5vw;
   }
 `
 
