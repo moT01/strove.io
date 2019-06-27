@@ -10,25 +10,38 @@ import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
 import { selectors } from 'state'
 import './layout.css'
 import Loader from '../components/loader.js'
+import * as C from 'state/currentProject/constants'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
-
-const startProject = project => {
-  navigate('/app/editor/', {
-    state: {
-      machineId: project.machineId,
-      editorPort: project.editorPort,
-    },
-  })
-}
 
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
   const projects = useSelector(selectors.getUserProjects)
   const isLoading = useSelector(selectors.getLoading('myProjects'))
+
+  const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
+    dispatch({
+      type: C.SELECT_CURRENT_PROJECT,
+      payload: { editorPort, previewPort, machineId },
+    })
+  }
+
+  const startProject = project => {
+    setCurrentProject({
+      editorPort: project.editorPort,
+      previewPort: project.previewPort,
+      machineId: project.machineId,
+    })
+    navigate('/app/editor/', {
+      state: {
+        machineId: project.machineId,
+        editorPort: project.editorPort,
+      },
+    })
+  }
 
   useEffect(() => {
     const githubLink =
