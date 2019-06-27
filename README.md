@@ -1,7 +1,9 @@
 # [SiliSky](https://www.silisky.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/inspiring-shaw-cb8237/deploys)
+<a href="https://discord.gg/P9DrxRz">
 <img alt="Discord" src="https://img.shields.io/discord/593787637291286529.svg?color=%230E1D23&label=discord&style=popout">
-<a href="https://spectrum.chat/<mycommunity>">
+</a>
+<a href="https://spectrum.chat/silisky">
   <img alt="Join the community on Spectrum" src="https://withspectrum.github.io/badge/badge.svg" />
 </a>
 
@@ -27,16 +29,3 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png)](https://www.buymeacoffee.com/samwhited)
-<!-- # Sponsors
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](#)]
-
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a>
-<a href="#" target="_blank"><img src="./redmeAssets/codengo.sponsor.png" width="80"></a>
-<a href="https://www.silisky.com/" target="_blank"><img src="./redmeAssets/silisky.sponsor.png" width="80"></a> -->
