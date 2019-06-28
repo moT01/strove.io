@@ -9,7 +9,7 @@
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 <div align="center">
-<img src="./redmeAssets/silisky3.gif" >
+<img src="./redmeAssets/silisky.gif" >
 </div>
 
 # Get started
@@ -29,6 +29,10 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 </div>
 
 
+# Donations
 
-# [buy us a coffe](https://play.google.com/store/apps/details?id=com.codengoclient)
- <img src="./redmeAssets/coffe.png" width="50">
+<div align='center'>
+
+ [<img src="./redmeAssets/coffee.jpg" width="350">](https://www.paypal.me/codengonet)
+
+</div>
