@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch } from 'react-redux'
+import { Link } from 'gatsby'
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -20,9 +21,10 @@ const MenuWrapper = styled.div`
 const Text = styled.span`
   font-size: 3vh;
   color: white;
+  transition: color 0.3s;
 
   :hover {
-    color: white;
+    color: black;
   }
 
   @media (max-width: 1366px) {
@@ -51,6 +53,10 @@ const LinkWrapper = styled.h3`
   align-items: center;
   height: 4vh;
   margin: 0;
+`
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
 `
 
 const ZeldaWrapper = styled(LinkWrapper)`
@@ -86,7 +92,7 @@ const UserInfoHeader = props => {
   return (
     <ZeldaWrapper>
       <LinkWrapper onClick={() => props.handleDropdownClick()}>
-        <div
+        <StyledLink
           style={{
             color: `white`,
             textDecoration: `none`,
@@ -100,7 +106,7 @@ const UserInfoHeader = props => {
           <Inline>
             <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
           </Inline>
-        </div>
+        </StyledLink>
       </LinkWrapper>
       {props.showDropdown && (
         <MenuWrapper invert>
