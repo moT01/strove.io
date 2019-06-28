@@ -25,7 +25,7 @@ const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 3vh;
+  padding: 2vh;
   margin: 5vh;
   animation: ${FadeIn} 1s ease-out;
 `
@@ -186,9 +186,13 @@ const Dashboard = props => {
                       color: `#0072ce`,
                     }}
                   />
-                  <Text>{workspace.description}</Text>
+                  <Text>
+                    {workspace.description
+                      ? workspace.description
+                      : 'This is the project description.. Tribute'}
+                  </Text>
                 </TextWrapper>
-                <TextWrapper>
+                {/* <TextWrapper>
                   <Icon
                     type="branches"
                     style={{
@@ -207,7 +211,7 @@ const Dashboard = props => {
                     }}
                   />
                   <Text>{workspace.language}</Text>
-                </TextWrapper>
+                </TextWrapper> */}
                 <TextWrapper>
                   <Icon
                     type={workspace.isPrivate ? 'lock' : 'unlock'}

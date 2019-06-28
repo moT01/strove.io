@@ -136,7 +136,7 @@
     display: block;
   }
   .nav-phone-icon:before {
-    content: "";
+    content: '';
     display: block;
     border-radius: 2px;
     width: 16px;
@@ -218,7 +218,7 @@
   }
   .banner-wrapper {
     width: 80%;
-    height: calc(80vh - 64px);
+    height: calc(85vh - 64px);
     overflow: hidden;
   }
   .banner-wrapper .banner-title-wrapper,
@@ -259,7 +259,7 @@
     padding: 0;
   }
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 680px) {
   .page1 {
     height: 2600px;
   }
