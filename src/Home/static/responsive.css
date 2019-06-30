@@ -57,7 +57,7 @@
     text-align: center;
   }
   .image-wrapper {
-    /* display: none; */
+    display: none;
   }
   .banner-wrapper {
     background-position: 40%;
@@ -217,15 +217,15 @@
     display: none;
   }
   .banner-wrapper {
-    width: 80%;
-    height: calc(85vh - 64px);
+    width: 100%;
+    height: auto;
     overflow: hidden;
   }
   .banner-wrapper .banner-title-wrapper,
   .banner-wrapper .banner-image-wrapper {
     display: block;
     position: initial;
-    width: 100%;
+    width: 80%;
     height: auto;
   }
   .banner-wrapper .banner-title-wrapper {
@@ -261,7 +261,7 @@
 }
 @media only screen and (max-width: 680px) {
   .page1 {
-    height: 2600px;
+    height: auto;
   }
   .page2 {
     height: 428px;
@@ -284,8 +284,8 @@
     font-size: 16px;
   }
   .banner-wrapper {
-    width: 80%;
-    height: calc(90vh - 64px);
+    width: 100%;
+    height: auto;
     overflow: hidden;
   }
   .home-code {

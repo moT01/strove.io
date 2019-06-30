@@ -249,7 +249,9 @@ class Page1 extends React.PureComponent {
             <div className="title-line" />
           </div>
           {/* <OverPack> */}
-          <div>{children}</div>
+          <div className="tiles-wrapper" style={{ width: '80vw' }}>
+            {children}
+          </div>
           {/* </OverPack> */}
         </div>
       </div>
