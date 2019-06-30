@@ -64,7 +64,7 @@ export const mutation = ({
 
       onError && onError(error)
 
-      onErrorAction && dispatch(onErrorAction(e))
+      onErrorAction && dispatch(onErrorAction(error))
 
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
       return null
@@ -136,7 +136,7 @@ export const query = ({
 
       onSuccess && onError(error)
 
-      onErrorAction && dispatch(onErrorAction(e))
+      onErrorAction && dispatch(onErrorAction(error))
 
       dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
       return null

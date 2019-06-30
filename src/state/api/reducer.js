@@ -20,6 +20,7 @@ export default handleActions(
         code: undefined,
       },
     }),
+    /* Append data to array, extend object, add primitive */
     [C.FETCH_SUCCESS]: (
       state,
       { payload: { storeKey, data, code, message } = {} }
@@ -49,6 +50,18 @@ export default handleActions(
         error,
         message,
         code,
+      },
+    }),
+    /* Remove item from array, clear data from object, remove primitives */
+    [C.REMOVE_ITEM]: (state, { payload: { storeKey, id } = {} }) => ({
+      ...state,
+      [storeKey]: {
+        ...(state[storeKey] || {}),
+        data: Array.isArray(state[storeKey].data)
+          ? state[storeKey].data.filter(item => item.id !== id)
+          : typeof state[storeKey].data === 'object'
+          ? {}
+          : null,
       },
     }),
     LOGOUT: () => initialState,
