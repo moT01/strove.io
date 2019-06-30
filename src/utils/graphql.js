@@ -122,7 +122,6 @@ export const query = ({
       })
 
       onSuccess && onSuccess(dataSelector(data))
-
       onSuccessAction && dispatch(onSuccessAction(dataSelector(data)))
 
       dispatch({
@@ -134,8 +133,7 @@ export const query = ({
     } catch (error) {
       console.log('fetch error: ', error)
 
-      onSuccess && onError(error)
-
+      onError && onError(error)
       onErrorAction && dispatch(onErrorAction(error))
 
       dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
