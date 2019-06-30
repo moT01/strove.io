@@ -148,7 +148,7 @@ class PricingPage extends React.Component {
                 <Price>$0</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Public repositories</Feature>
-                <Feature>HDD and RAM shared with other users</Feature>
+                <Feature>1,25 - 2 GB of Ram, 10GB of hard drive</Feature>
                 <Feature>No commercial use</Feature>
                 <Button>
                   <PlanSubTitle team>Choose free plan</PlanSubTitle>
@@ -157,10 +157,10 @@ class PricingPage extends React.Component {
               <PricingWrapper>
                 <PlanTitle>Pro</PlanTitle>
                 <PlanDesc>Plan for professionals</PlanDesc>
-                <Price>$25</Price>
+                <Price>$39.99</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Private and Public repositories</Feature>
-                <Feature>10 GBs of hard drive</Feature>
+                <Feature>4 GB of RAM, 10 GB of hard drive</Feature>
                 <Feature>Commerial use</Feature>
                 <Button>
                   <PlanSubTitle team>Choose Pro</PlanSubTitle>

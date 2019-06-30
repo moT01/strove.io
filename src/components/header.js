@@ -1,8 +1,18 @@
 import { Link } from 'gatsby'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import Login from './login'
+import { Icon } from 'antd'
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
+`
 
 const LinkWrapper = styled.h3`
   display: flex;
@@ -11,6 +21,16 @@ const LinkWrapper = styled.h3`
   align-items: center;
   height: 4vh;
   margin: 0 3vw 0 0;
+`
+
+const IconWrapper = styled(LinkWrapper)`
+  color: #fff;
+  animation: ${FadeIn} 0.3s ease-out;
+  transition: color 0.3s;
+
+  :hover {
+    color: black;
+  }
 `
 
 const HeaderWrapper = styled.div`
@@ -29,6 +49,7 @@ const LinkText = styled.span`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  transition: color 0.3s;
 
   :hover {
     color: black;
@@ -44,15 +65,13 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  padding-left: 7.5vw;
-  padding-right: 7.5vw;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
   height: 7vh;
   background: #0072ce;
 
   @media (max-width: 1366px) {
     height: 5vh;
-    padding-left: 2.5vw;
-    padding-right: 2.5vw;
   }
 `
 
@@ -63,6 +82,7 @@ const StyledLink = styled(Link)`
 
 const HeaderComponent = ({ siteTitle, location }) => (
   <HeaderSection>
+    {console.log('TCL: location', location)}
     <HeaderWrapper>
       <LinkWrapper>
         <StyledLink to="/">
@@ -79,6 +99,24 @@ const HeaderComponent = ({ siteTitle, location }) => (
           <LinkText>Pricing</LinkText>
         </StyledLink>
       </LinkWrapper>
+      {location.pathname === '/app/editor/' && (
+        <a
+          style={{ color: '#fff', textDecoration: 'none' }}
+          href="localhost:8000/app/preview/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* // openInNewTab(url) {
+        //   var win = window.open(url, '_blank');
+        //   win.focus();
+        // } */}
+          <IconWrapper
+          // onClick={() => window.open('localhost:8000/app/preview/', '_blank')}
+          >
+            <Icon type="desktop" style={{ fontSize: '3vh' }}></Icon>
+          </IconWrapper>
+        </a>
+      )}
     </HeaderWrapper>
     <ZeldaWrapper>
       <Login />
