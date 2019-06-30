@@ -11,10 +11,12 @@ import defaultClient from '../../client'
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy
  * @param {string} objectParam.mutation - Actual mutation
- * @param {string} objectParam.onSuccess - Function called with the result after mutation succeeds
- * @param {string} objectParam.onError - Function called with the error after mutation fails
- * @param {fun} objectParam.onSuccessAction - Function called with the result - returns action dispatch
- * @param {fun} objectParam.onSuccessError - Function called with the error - returns action dispatch
+ * @param {function} objectParam.onSuccess - Function called with the result after mutation succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
+ * @param {function} objectParam.onError - Function called with the error after mutation fails. Example: () => localStorage.removeItem('token')
+ * @param {function} objectParam.onSuccessAction - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
+ * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
+ * @param {string} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
+ * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
  */
 export const mutation = ({
   name,
@@ -77,10 +79,12 @@ export const mutation = ({
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy
  * @param {string} objectParam.query - Actual query
- * @param {string} objectParam.onSuccess - Function called with the result after mutation succeeds
- * @param {string} objectParam.onError - Function called with the error after mutation fails
- * @param {fun} objectParam.onSuccessAction - Function called with the result - returns action dispatch
- * @param {fun} objectParam.onSuccessError - Function called with the error - returns action dispatch
+ * @param {function} objectParam.onSuccess - Function called with the result after query succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
+ * @param {function} objectParam.onError - Function called with the error after query fails. Example: () => localStorage.removeItem('token')
+ * @param {function} objectParam.onSuccessAction - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
+ * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
+ * @param {string} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
+ * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
  */
 export const query = ({
   name,
