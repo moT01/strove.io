@@ -11,6 +11,8 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
+  onSuccessAction,
+  onErrorAction,
   dataSelector = data => data[name],
   client = defaultClient,
 }) => {
@@ -31,6 +33,8 @@ export const mutation = ({
 
       onSuccess && onSuccess(dataSelector(data))
 
+      onSuccessAction && dispatch(onSuccessAction(dataSelector(data)))
+
       dispatch({
         type: C.FETCH_SUCCESS,
         payload: { storeKey, data: dataSelector(data) },
@@ -41,6 +45,8 @@ export const mutation = ({
       console.log('fetch error: ', error)
 
       onError && onError(error)
+
+      onErrorAction && dispatch(onErrorAction(e))
 
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
       return null
@@ -58,6 +64,8 @@ export const query = ({
   query,
   onSuccess,
   onError,
+  onSuccessAction,
+  onErrorAction,
   dataSelector = data => data[name],
   client = defaultClient,
 }) => {
@@ -78,6 +86,8 @@ export const query = ({
 
       onSuccess && onSuccess(dataSelector(data))
 
+      onSuccessAction && dispatch(onSuccessAction(dataSelector(data)))
+
       dispatch({
         type: C.FETCH_SUCCESS,
         payload: { data: dataSelector(data), storeKey },
@@ -88,6 +98,8 @@ export const query = ({
       console.log('fetch error: ', error)
 
       onSuccess && onError(error)
+
+      onErrorAction && dispatch(onErrorAction(e))
 
       dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
       return null

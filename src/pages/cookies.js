@@ -9,7 +9,6 @@ import 'components/layout.css'
 import Header from 'components/header'
 
 const TextWell = styled.div`
-  ${'' /* align-self: center; */}
   color: black;
   height: auto;
   width: 60vw;
@@ -21,7 +20,6 @@ const TextWell = styled.div`
   text-align: left;
   text-justify: inter-word;
   background-color: white;
-  ${'' /* border: 1px solid slategrey; */}
 `
 
 const Legal = () => (
