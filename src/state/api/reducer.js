@@ -6,8 +6,6 @@ const initialState = {
   myProjects: { data: [] },
 }
 
-// action = { type: 'SELECT_PROJECT', payload: {} }
-//reducer.LOGOUT(previousState, action)
 export default handleActions(
   {
     [C.FETCH_START]: (state, { payload: { storeKey } = {} }) => ({
@@ -20,7 +18,21 @@ export default handleActions(
         code: undefined,
       },
     }),
-    /* Append data to array, extend object, add primitive */
+    /*
+      Append data to array, extend object, add primitive. For example given
+      the following initial state: myProjects: { data: [] } and action:
+      { type: 'FETCH_SUCCESS',
+        storeKey: 'myProjects',
+        data: { id: 123, githubLink: 'https://github.com/codengo-llc/silisky-client'}
+      } we get the following state:
+      {
+        api: {
+          myProjects: [
+            { id: 123, githubLink: 'https://github.com/codengo-llc/silisky-client'}
+          ]
+        }
+      }
+    */
     [C.FETCH_SUCCESS]: (
       state,
       { payload: { storeKey, data, code, message } = {} }
