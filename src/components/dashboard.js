@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
 import * as C from 'state/currentProject/constants'
+import * as Constants from 'state/api/constants'
 
 import { selectors } from 'state'
 
@@ -89,12 +90,6 @@ const Text = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
 `
-const ButtonText = styled(Text)`
-  color: #ffffff;
-  font-size: 2.2vh;
-  margin: 0;
-  text-decoration: none;
-`
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
@@ -136,11 +131,19 @@ const Dashboard = props => {
   const token = useSelector(getUserToken)
   const projects = useSelector(selectors.getUserProjects)
 
-  const handleClick = ({ editorPort, previewPort, machineId }) => {
+  const handleStartClick = ({ editorPort, previewPort, machineId }) => {
     dispatch({
       type: C.SELECT_CURRENT_PROJECT,
       payload: { editorPort, previewPort, machineId },
     })
+  }
+
+  const handleDeleteClick = ({ projectId }) => {
+    dispatch({
+      type: Constants.REMOVE_ITEM,
+      payload: { storeKey: 'myProjects', projectId },
+    })
+    console.log('TCL: handleDeleteClick -> projectId', projectId)
   }
 
   useEffect(() => {
@@ -232,14 +235,23 @@ const Dashboard = props => {
                   }}
                   primary
                   onClick={() =>
-                    handleClick({
+                    handleStartClick({
                       editorPort: workspace.editorPort,
                       previewPort: workspace.previewPort,
                       machineId: workspace.machineId,
                     })
                   }
                 >
-                  <ButtonText>Start</ButtonText>
+                  Start
+                </Button>
+                <Button
+                  onClick={() =>
+                    handleDeleteClick({
+                      projectId: workspace.id,
+                    })
+                  }
+                >
+                  Delete
                 </Button>
               </RightSection>
             </VerticalDivider>

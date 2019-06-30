@@ -16,3 +16,5 @@ export const fetchError = createAction(
   C.FETCH_ERROR,
   ({ error, name, code }) => ({ error, name, code })
 )
+
+export const removeItem = createAction(C.REMOVE_ITEM, ({ id }) => ({ id }))
