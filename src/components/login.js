@@ -101,6 +101,8 @@ const LoginComponent = ({ location }) => {
           variables: { code },
           storeKey: 'user',
           name: 'githubAuth',
+          onSuccess: ({ siliskyToken }) =>
+            localStorage.setItem('token', siliskyToken),
         })
       )
     }
