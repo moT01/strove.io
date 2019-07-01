@@ -19,7 +19,6 @@ const client = new ApolloClient({
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
-  const projects = useSelector(selectors.getUserProjects)
   const isLoading = useSelector(selectors.getLoading('myProjects'))
 
   const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
@@ -79,12 +78,6 @@ const LayoutComponent = ({ children, location }) => {
               storeKey: 'myProjects',
               variables: { githubLink, name, description },
               mutation: ADD_GITHUB_PROJECT,
-              context: {
-                headers: {
-                  Authorization: `Bearer ${user.siliskyToken}`,
-                  'User-Agent': 'node',
-                },
-              },
               onSuccess: startProject,
             })
           )

@@ -151,11 +151,8 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
-const getUserToken = selectors.getData('user', null, 'siliskyToken')
-
 const Dashboard = props => {
   const dispatch = useDispatch()
-  const token = useSelector(getUserToken)
   const projects = useSelector(selectors.getUserProjects)
 
   const handleStartClick = ({ editorPort, previewPort, machineId }) => {
@@ -172,12 +169,6 @@ const Dashboard = props => {
         mutation: DELETE_PROJECT,
         variables: { projectId: id, machineId },
         dataSelector: data => data,
-        context: {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'User-Agent': 'node',
-          },
-        },
         onSuccessAction: () => ({
           type: ApiC.REMOVE_ITEM,
           payload: { storeKey: 'myProjects', id },
@@ -192,12 +183,6 @@ const Dashboard = props => {
         name: 'myProjects',
         dataSelector: data => data.myProjects.edges,
         query: GET_PROJECTS,
-        context: {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'User-Agent': 'node',
-          },
-        },
       })
     )
   }, [])
