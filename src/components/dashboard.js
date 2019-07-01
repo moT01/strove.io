@@ -76,6 +76,33 @@ const Button = styled(Link)`
     transform: scale(1.1);
   }
 `
+
+const DeleteBurron = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  animation: ${FadeIn} 1s ease-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`
+
 const ProjectTitle = styled.h1`
   font-size: 3vh;
   color: #0072ce;
@@ -257,7 +284,7 @@ const Dashboard = props => {
                 >
                   Start
                 </Button>
-                <Button
+                <DeleteBurron
                   onClick={() =>
                     handleDeleteClick({
                       id: project.id,
@@ -266,7 +293,7 @@ const Dashboard = props => {
                   }
                 >
                   Delete
-                </Button>
+                </DeleteBurron>
               </RightSection>
             </VerticalDivider>
           </Tile>
