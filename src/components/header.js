@@ -80,9 +80,13 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
+const PreviewLink = styled.a`
+  color: '#fff';
+  textdecoration: 'none';
+`
+
 const HeaderComponent = ({ siteTitle, location }) => (
   <HeaderSection>
-    {console.log('TCL: location', location)}
     <HeaderWrapper>
       <LinkWrapper>
         <StyledLink to="/">
@@ -100,22 +104,16 @@ const HeaderComponent = ({ siteTitle, location }) => (
         </StyledLink>
       </LinkWrapper>
       {location.pathname === '/app/editor/' && (
-        <a
+        <PreviewLink
           style={{ color: '#fff', textDecoration: 'none' }}
           href="localhost:8000/app/preview/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* // openInNewTab(url) {
-        //   var win = window.open(url, '_blank');
-        //   win.focus();
-        // } */}
-          <IconWrapper
-          // onClick={() => window.open('localhost:8000/app/preview/', '_blank')}
-          >
+          <IconWrapper>
             <Icon type="desktop" style={{ fontSize: '3vh' }}></Icon>
           </IconWrapper>
-        </a>
+        </PreviewLink>
       )}
     </HeaderWrapper>
     <ZeldaWrapper>
