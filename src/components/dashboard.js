@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { query } from 'utils'
 import { GET_PROJECTS } from 'queries'
 import * as C from 'state/currentProject/constants'
-import * as Constants from 'state/api/constants'
+import * as ApiC from 'state/api/constants'
 
 import { selectors } from 'state'
 
@@ -138,12 +138,11 @@ const Dashboard = props => {
     })
   }
 
-  const handleDeleteClick = ({ projectId }) => {
+  const handleDeleteClick = ({ id }) => {
     dispatch({
-      type: Constants.REMOVE_ITEM,
-      payload: { storeKey: 'myProjects', projectId },
+      type: ApiC.REMOVE_ITEM,
+      payload: { storeKey: 'myProjects', id },
     })
-    console.log('TCL: handleDeleteClick -> projectId', projectId)
   }
 
   useEffect(() => {
@@ -247,7 +246,7 @@ const Dashboard = props => {
                 <Button
                   onClick={() =>
                     handleDeleteClick({
-                      projectId: workspace.id,
+                      id: workspace.id,
                     })
                   }
                 >
