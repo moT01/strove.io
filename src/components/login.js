@@ -13,7 +13,13 @@ import UserInfoHeader from 'components/userInfoHeader'
 
 const options = [
   { option: 'Settings' },
-  { option: 'Logout', onClick: dispatch => dispatch(logout) },
+  {
+    option: 'Logout',
+    onClick: dispatch => {
+      localStorage.removeItem('token')
+      dispatch(logout)
+    },
+  },
 ]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID

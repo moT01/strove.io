@@ -24,12 +24,14 @@ export const mutation = ({
   name,
   storeKey = name,
   variables,
-  context = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'User-Agent': 'node',
-    },
-  },
+  context = localStorage.getItem('token')
+    ? {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
+        },
+      }
+    : null,
   errorPolicy = 'all',
   mutation,
   onSuccess,
@@ -101,12 +103,14 @@ export const query = ({
   name,
   storeKey = name,
   variables,
-  context = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'User-Agent': 'node',
-    },
-  },
+  context = localStorage.getItem('token')
+    ? {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
+        },
+      }
+    : null,
   fetchPolicy = 'cache-first',
   errorPolicy = 'all',
   query,
