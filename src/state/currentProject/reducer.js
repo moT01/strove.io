@@ -1,21 +1,18 @@
 import { handleActions } from 'redux-actions'
 
-const initialState = {
-  currentProject: null,
-}
+const initialState = {}
 
 export default handleActions(
   {
     SELECT_CURRENT_PROJECT: (
       state,
-      { payload: { editorPort, previewPort, machineId } }
-    ) =>
-      console.log('editorPort', editorPort) || {
-        ...state,
-        editorPort,
-        previewPort,
-        machineId,
-      },
+      { payload: { editorPort, previewPort, machineId, isRunning } }
+    ) => ({
+      ...state,
+      editorPort,
+      previewPort,
+      machineId,
+    }),
   },
   initialState
 )
