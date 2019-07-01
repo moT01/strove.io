@@ -28,7 +28,9 @@ const EditorComponent = ({ location }) => {
   return (
     <Layout>
       <SEO title="Editor" />
-      {loaderVisible && <Loader />}
+      {loaderVisible && (
+        <Loader containerWidth={'100vw'} containerHeight={'93vh'} />
+      )}
       <StyledIframe
         onLoad={() => setLoaderVisible(false)}
         src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token}&id=${id}&port=${port}`}

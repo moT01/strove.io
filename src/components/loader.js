@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import { Cog } from '../images/svg'
-import { Silisky } from '../images/logos'
+import { Cog } from 'images/svg'
+import { Silisky } from 'images/logos'
 
 const SpinToWin = keyframes`
   0% {
@@ -28,8 +28,8 @@ const LoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 93vh;
-  width: 100vw;
+  height: ${({ height }) => height};
+  width: ${({ width }) => width};
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
@@ -45,9 +45,8 @@ const LogoContainer = styled.div`
   animation: ${AntiSpinToWin} 3s linear infinite;
 `
 
-const Loader = props => (
-  <LoaderWrapper>
-    {console.log('props', props)}
+const Loader = ({ containerWidth = '100vw', containerHeight = '93vh' }) => (
+  <LoaderWrapper width={containerWidth} height={containerHeight}>
     <LoaderContainer>
       <Cog />
       <LogoContainer>
