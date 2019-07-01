@@ -20,6 +20,7 @@ const MenuWrapper = styled.div`
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   align-self: flex-end;
   z-index: 3;
+  height: 100%;
 `
 const Text = styled.span`
   font-size: 3vh;
@@ -49,7 +50,7 @@ const UserPhoto = styled.img`
   border-radius: 5px;
 `
 
-const LinkWrapper = styled.h3`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -57,13 +58,13 @@ const LinkWrapper = styled.h3`
   height: 4vh;
   margin: 0;
 `
+
 const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
 `
 
-const ZeldaWrapper = styled(LinkWrapper)`
-  height: 4vh;
+const InfoWrapper = styled(Wrapper)`
   flex-direction: column;
   overflow: visible;
 `
@@ -87,17 +88,19 @@ const Option = styled.div`
 `
 
 const Loader = () => (
-  <ContentLoader
-    height="5vh"
-    width="12vh"
-    speed={2}
-    primaryColor="#eafff8"
-    secondaryColor="#1417d8"
-  >
-    <circle cx="66" cy="17" r="13" />
-    <rect x="6" y="6" rx="0" ry="0" width="36" height="6" />
-    <rect x="5" y="19" rx="0" ry="0" width="36" height="6" />
-  </ContentLoader>
+  <MenuWrapper>
+    <ContentLoader
+      height="5vh"
+      width="12vh"
+      speed={2}
+      primaryColor="#eafff8"
+      secondaryColor="#1417d8"
+    >
+      <circle cx="66" cy="17" r="13" />
+      <rect x="6" y="6" rx="0" ry="0" width="36" height="6" />
+      <rect x="5" y="19" rx="0" ry="0" width="36" height="6" />
+    </ContentLoader>
+  </MenuWrapper>
 )
 
 const UserInfoHeader = props => {
@@ -108,12 +111,12 @@ const UserInfoHeader = props => {
   UserInfoHeader.handleClickOutside = () => props.handleDropdown()
 
   return (
-    <ZeldaWrapper>
-      {isLoading ? (
+    <InfoWrapper>
+      {true ? (
         <Loader />
       ) : (
         <>
-          <LinkWrapper onClick={() => props.handleDropdownClick()}>
+          <Wrapper onClick={props.handleDropdownClick}>
             <StyledLink
               style={{
                 color: `white`,
@@ -129,7 +132,7 @@ const UserInfoHeader = props => {
                 <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
               </Inline>
             </StyledLink>
-          </LinkWrapper>
+          </Wrapper>
           {props.showDropdown && (
             <MenuWrapper invert>
               {options.map(option =>
@@ -149,7 +152,7 @@ const UserInfoHeader = props => {
           )}
         </>
       )}
-    </ZeldaWrapper>
+    </InfoWrapper>
   )
 }
 
