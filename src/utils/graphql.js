@@ -56,14 +56,15 @@ export const mutation = ({
         errorPolicy,
       })
 
-      onSuccess && onSuccess(dataSelector(data))
+      const result = dataSelector(data)
+      onSuccess && onSuccess(result)
 
       if (onSuccessAction) {
-        dispatch(onSuccessAction(dataSelector(data)))
+        dispatch(onSuccessAction(result))
       } else {
         dispatch({
           type: C.FETCH_SUCCESS,
-          payload: { storeKey, data: dataSelector(data) },
+          payload: { storeKey, data: result },
         })
       }
 
@@ -136,18 +137,20 @@ export const query = ({
         errorPolicy,
       })
 
-      onSuccess && onSuccess(dataSelector(data))
+      const result = dataSelector(data)
+
+      onSuccess && onSuccess(result)
 
       if (onSuccessAction) {
-        dispatch(onSuccessAction(dataSelector(data)))
+        dispatch(onSuccessAction(result))
       } else {
         dispatch({
           type: C.FETCH_SUCCESS,
-          payload: { storeKey, data: dataSelector(data) },
+          payload: { storeKey, data: result },
         })
       }
 
-      return dataSelector(data)
+      return result
     } catch (error) {
       console.log('fetch error: ', error)
 
