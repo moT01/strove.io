@@ -25,16 +25,14 @@ const EditorComponent = ({ location }) => {
   const port = location.state.editorPort
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  useEffect(() => {
-    setTimeout(()=>setLoaderVisible(false), 8000)}, [])
-
   return (
     <Layout>
       <SEO title="Editor" />
       {loaderVisible && <Loader />}
       <StyledIframe
+        onLoad={() => setLoaderVisible(false)}
         src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token}&id=${id}&port=${port}`}
-        style={{opacity: loaderVisible ? 0 : 1 }}
+        style={{ opacity: loaderVisible ? 0 : 1 }}
       />
     </Layout>
   )

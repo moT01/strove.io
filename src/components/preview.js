@@ -26,10 +26,6 @@ const Preview = () => {
   const port = project.previewPort
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  useEffect(() => {
-    setTimeout(() => setLoaderVisible(false), 2000)
-  }, [])
-
   return (
     <>
       <SEO title="Preview" />
@@ -44,6 +40,7 @@ const Preview = () => {
         />
       )}
       <StyledIframe
+        onLoad={() => setLoaderVisible(false)}
         src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token}&id=${id}&port=${port}`}
         style={{ opacity: loaderVisible ? 0 : 1, transition: 'opacity 0.5s' }}
       />
