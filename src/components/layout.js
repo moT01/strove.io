@@ -2,24 +2,35 @@ import React, { useEffect } from 'react'
 import { StaticQuery, graphql, navigate } from 'gatsby'
 import { Location } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
-
+import styled from 'styled-components'
 import ApolloClient from 'apollo-boost'
 import { mutation } from 'utils'
+
+import Loader from 'components/fullScreenLoader.js'
+import * as C from 'state/currentProject/constants'
 import Header from './header'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
 import { selectors } from 'state'
 import './layout.css'
-import Loader from 'components/fullScreenLoader.js'
-import * as C from 'state/currentProject/constants'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
+const MainContent = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 100vw;
+  padding-top: 0;
+`
+
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
-  const isLoading = useSelector(selectors.getLoading('myProjects'))
 
   const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
     dispatch({
@@ -103,20 +114,7 @@ const LayoutComponent = ({ children, location }) => {
       render={data => (
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              textAlign: 'center',
-              margin: `0 auto`,
-              maxWidth: '100vw',
-              paddingTop: 0,
-            }}
-          >
-            <main>{isLoading ? <Loader /> : children}</main>
-          </div>
+          <MainContent>{children}</MainContent>
         </>
       )}
     />
