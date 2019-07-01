@@ -116,7 +116,7 @@ const LoginComponent = ({ location }) => {
     }
   }, [])
 
-  if (isLoading) return <Loader />
+  if (true) return <Loader withWrapper={false} width="100%" />
 
   return !user.username ? (
     <LoginButton

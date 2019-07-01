@@ -28,22 +28,23 @@ const LoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${({ height }) => height};
   width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `
 
 const Loader = styled.div`
-  width: ${({ width }) => width};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: auto;
   animation: ${SpinToWin} 3s linear infinite;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `
 
 const LogoContainer = styled.div`
-  width: 20vw;
+  width: 100%;
   position: absolute;
   z-index: 4;
   animation: ${AntiSpinToWin} 3s linear infinite;
@@ -52,16 +53,26 @@ const LogoContainer = styled.div`
 const LoaderComponent = ({
   containerWidth = '100vw',
   containerHeight = '93vh',
-  loderWidth = '25vh',
-}) => (
-  <LoaderWrapper width={containerWidth} height={containerHeight}>
-    <Loader width={loderWidth}>
+  width = '100%',
+  height = '100%',
+  withWrapper = true,
+}) =>
+  withWrapper ? (
+    <LoaderWrapper width={containerWidth} height={containerHeight}>
+      <Loader width={width} height={height}>
+        <Cog />
+        <LogoContainer>
+          <Silisky style={{ width: '100%', height: 'auto' }} />
+        </LogoContainer>
+      </Loader>
+    </LoaderWrapper>
+  ) : (
+    <Loader width={width}>
       <Cog />
       <LogoContainer>
         <Silisky style={{ width: '100%', height: 'auto' }} />
       </LogoContainer>
     </Loader>
-  </LoaderWrapper>
-)
+  )
 
 export default LoaderComponent
