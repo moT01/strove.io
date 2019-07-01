@@ -47,7 +47,6 @@ const LogoContainer = styled.div`
 
 const Loader = props => (
   <LoaderWrapper>
-    {console.log('props', props)}
     <LoaderContainer>
       <Cog />
       <LogoContainer>

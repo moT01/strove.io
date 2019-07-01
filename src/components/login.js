@@ -3,14 +3,13 @@ import { Location } from '@reach/router'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
+import ContentLoader from 'react-content-loader'
+
+import { selectors } from 'state'
+import { GITHUB_LOGIN } from 'queries'
+import UserInfoHeader from 'components/userInfoHeader'
 import { logout } from './login/actions'
 import { mutation } from 'utils'
-import { selectors } from 'state'
-import Loader from 'components/Loader'
-
-import { GITHUB_LOGIN } from 'queries'
-
-import UserInfoHeader from 'components/userInfoHeader'
 
 const options = [
   { option: 'Settings' },
@@ -22,6 +21,28 @@ const options = [
     },
   },
 ]
+
+const Loader = () => (
+  <ContentLoader
+    height="200px"
+    width={200}
+    speed={2}
+    primaryColor="#f2faff"
+    secondaryColor="#5253fb"
+  >
+    <rect x="478" y="-44" rx="3" ry="3" width="350" height="6" />
+    <rect x="425" y="-47" rx="3" ry="3" width="380" height="6" />
+    <rect x="323" y="-29" rx="3" ry="3" width="201" height="6" />
+    <circle cx="623" cy="-43" r="27" />
+    <circle cx="626" cy="-43" r="23" />
+    <circle cx="146" cy="25" r="18" />
+    <circle cx="640" cy="-42" r="13" />
+    <circle cx="153" cy="14" r="0" />
+    <circle cx="628" cy="-53" r="34" />
+    <rect x="36" y="13" rx="3" ry="3" width="78" height="7" />
+    <rect x="37" y="28" rx="3" ry="3" width="78" height="7" />
+  </ContentLoader>
+)
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
@@ -116,7 +137,7 @@ const LoginComponent = ({ location }) => {
     }
   }, [])
 
-  if (true) return <Loader withWrapper={false} width="100%" />
+  if (true) return <Loader />
 
   return !user.username ? (
     <LoginButton

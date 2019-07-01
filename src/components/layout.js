@@ -57,7 +57,7 @@ const LayoutComponent = ({ children, location }) => {
     const githubLink =
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
 
-    if (githubLink) {
+    if (githubLink && !localStorage.getItem('token')) {
       const addProject = async () => {
         const query = GET_REPO_INFO
         const context = {
