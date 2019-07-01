@@ -9,7 +9,7 @@ import Header from './header'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
 import { selectors } from 'state'
 import './layout.css'
-import Loader from '../components/loader.js'
+import Loader from 'components/loader.js'
 import * as C from 'state/currentProject/constants'
 
 const client = new ApolloClient({

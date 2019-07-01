@@ -6,6 +6,7 @@ import { createSelector } from 'reselect'
 import { logout } from './login/actions'
 import { mutation } from 'utils'
 import { selectors } from 'state'
+import Loader from 'components/Loader'
 
 import { GITHUB_LOGIN } from 'queries'
 
@@ -90,6 +91,7 @@ const getUserData = createSelector(
 const LoginComponent = ({ location }) => {
   const [showDropdown, setShowDropdown] = useState(false)
   const dispatch = useDispatch()
+  const isLoading = useSelector(selectors.getLoading('user'))
 
   const handleDropdown = () => setShowDropdown(false)
   const handleDropdownClick = () => setShowDropdown(!showDropdown)
@@ -113,6 +115,8 @@ const LoginComponent = ({ location }) => {
       )
     }
   }, [])
+
+  if (isLoading) return <Loader />
 
   return !user.username ? (
     <LoginButton

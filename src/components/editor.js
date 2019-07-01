@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import Layout from 'components/layout'
 import { Location } from '@reach/router'
-import Loader from '../components/loader.js'
+import Loader from 'components/loader.js'
 
 import { selectors } from 'state'
 import SEO from 'components/seo'
@@ -28,9 +28,7 @@ const EditorComponent = ({ location }) => {
   return (
     <Layout>
       <SEO title="Editor" />
-      {loaderVisible && (
-        <Loader containerWidth={'100vw'} containerHeight={'93vh'} />
-      )}
+      {loaderVisible && <Loader />}
       <StyledIframe
         onLoad={() => setLoaderVisible(false)}
         src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token}&id=${id}&port=${port}`}
