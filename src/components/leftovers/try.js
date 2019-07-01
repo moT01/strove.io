@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
-import BackgroundImage from "gatsby-background-image"
-import { StaticQuery, graphql } from "gatsby"
+import React from 'react'
+import styled from 'styled-components'
+import BackgroundImage from 'gatsby-background-image'
+import { StaticQuery, graphql } from 'gatsby'
 
 const SectionWrapper = styled.div`
   flex: 1;

@@ -264,7 +264,7 @@
     height: auto;
   }
   .page2 {
-    height: 428px;
+    /* height: 428px; */
   }
   .page1-box-wrapper {
     display: block;
