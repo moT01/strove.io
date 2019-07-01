@@ -82,7 +82,7 @@ const StyledLink = styled(Link)`
 
 const PreviewLink = styled.a`
   color: '#fff';
-  textdecoration: 'none';
+  text-decoration: 'none';
 `
 
 const HeaderComponent = ({ siteTitle, location }) => (

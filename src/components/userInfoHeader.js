@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'gatsby'
+import ContentLoader from 'react-content-loader'
+
+import { selectors } from 'state'
 
 const MenuWrapper = styled.div`
   display: flex;
@@ -83,43 +86,68 @@ const Option = styled.div`
   }
 `
 
+const Loader = () => (
+  <ContentLoader
+    height="5vh"
+    width="12vh"
+    speed={2}
+    primaryColor="#eafff8"
+    secondaryColor="#1417d8"
+  >
+    <circle cx="66" cy="17" r="13" />
+    <rect x="6" y="6" rx="0" ry="0" width="36" height="6" />
+    <rect x="5" y="19" rx="0" ry="0" width="36" height="6" />
+  </ContentLoader>
+)
+
 const UserInfoHeader = props => {
   const [options] = useState(props.options)
   const dispatch = useDispatch()
+  const isLoading = useSelector(selectors.getLoading('user'))
 
   UserInfoHeader.handleClickOutside = () => props.handleDropdown()
 
   return (
     <ZeldaWrapper>
-      <LinkWrapper onClick={() => props.handleDropdownClick()}>
-        <StyledLink
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-            display: `flex`,
-            flexDirection: `row`,
-            justifyContent: `center`,
-            alignItems: `center`,
-          }}
-        >
-          <Text>{props.user.username}</Text>
-          <Inline>
-            <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
-          </Inline>
-        </StyledLink>
-      </LinkWrapper>
-      {props.showDropdown && (
-        <MenuWrapper invert>
-          {options.map(option =>
-            option.option !== 'Logout' ? (
-              <Option invert>{option.option}</Option>
-            ) : (
-              <Option isLast invert onClick={() => option.onClick(dispatch)}>
-                {option.option}
-              </Option>
-            )
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <LinkWrapper onClick={() => props.handleDropdownClick()}>
+            <StyledLink
+              style={{
+                color: `white`,
+                textDecoration: `none`,
+                display: `flex`,
+                flexDirection: `row`,
+                justifyContent: `center`,
+                alignItems: `center`,
+              }}
+            >
+              <Text>{props.user.username}</Text>
+              <Inline>
+                <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
+              </Inline>
+            </StyledLink>
+          </LinkWrapper>
+          {props.showDropdown && (
+            <MenuWrapper invert>
+              {options.map(option =>
+                option.option !== 'Logout' ? (
+                  <Option invert>{option.option}</Option>
+                ) : (
+                  <Option
+                    isLast
+                    invert
+                    onClick={() => option.onClick(dispatch)}
+                  >
+                    {option.option}
+                  </Option>
+                )
+              )}
+            </MenuWrapper>
           )}
-        </MenuWrapper>
+        </>
       )}
     </ZeldaWrapper>
   )
