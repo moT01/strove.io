@@ -31,7 +31,7 @@ export const mutation = ({
   onError,
   onSuccessAction,
   onErrorAction,
-  dataSelector = data => data[name],
+  dataSelector = data => data,
   client = defaultClient,
 }) => {
   return async dispatch => {
@@ -51,19 +51,20 @@ export const mutation = ({
 
       onSuccess && onSuccess(dataSelector(data))
 
-      onSuccessAction && dispatch(onSuccessAction(dataSelector(data)))
-
-      dispatch({
-        type: C.FETCH_SUCCESS,
-        payload: { storeKey, data: dataSelector(data) },
-      })
+      if (onSuccessAction) {
+        dispatch(onSuccessAction(dataSelector(data)))
+      } else {
+        dispatch({
+          type: C.FETCH_SUCCESS,
+          payload: { storeKey, data: dataSelector(data) },
+        })
+      }
 
       return dataSelector(data)
     } catch (error) {
       console.log('fetch error: ', error)
 
       onError && onError(error)
-
       onErrorAction && dispatch(onErrorAction(error))
 
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
@@ -103,7 +104,7 @@ export const query = ({
   onError,
   onSuccessAction,
   onErrorAction,
-  dataSelector = data => data[name],
+  dataSelector = data => data,
   client = defaultClient,
 }) => {
   return async dispatch => {
@@ -122,12 +123,15 @@ export const query = ({
       })
 
       onSuccess && onSuccess(dataSelector(data))
-      onSuccessAction && dispatch(onSuccessAction(dataSelector(data)))
 
-      dispatch({
-        type: C.FETCH_SUCCESS,
-        payload: { data: dataSelector(data), storeKey },
-      })
+      if (onSuccessAction) {
+        dispatch(onSuccessAction(dataSelector(data)))
+      } else {
+        dispatch({
+          type: C.FETCH_SUCCESS,
+          payload: { storeKey, data: dataSelector(data) },
+        })
+      }
 
       return dataSelector(data)
     } catch (error) {
