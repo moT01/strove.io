@@ -165,11 +165,11 @@ const Dashboard = props => {
     <Layout>
       <SEO title="Dashboard" />
       <TilesWrapper>
-        {projects.map(workspace => (
-          <Tile key={workspace.id}>
+        {projects.map(project => (
+          <Tile key={project.id}>
             <VerticalDivider>
               <InfoWrapper>
-                <ProjectTitle>{workspace.name}</ProjectTitle>
+                <ProjectTitle>{project.name}</ProjectTitle>
                 <TextWrapper>
                   <Icon
                     type="calendar"
@@ -178,7 +178,7 @@ const Dashboard = props => {
                       color: `#0072ce`,
                     }}
                   />
-                  <Text>{workspace.createdAt}</Text>
+                  <Text>{project.createdAt}</Text>
                 </TextWrapper>
                 <TextWrapper>
                   <Icon
@@ -189,8 +189,8 @@ const Dashboard = props => {
                     }}
                   />
                   <Text>
-                    {workspace.description
-                      ? workspace.description
+                    {project.description
+                      ? project.description
                       : 'This is the project description.. Tribute'}
                   </Text>
                 </TextWrapper>
@@ -202,7 +202,7 @@ const Dashboard = props => {
                       color: `#0072ce`,
                     }}
                   />
-                  <Text> {workspace.branch}</Text>
+                  <Text> {project.branch}</Text>
                 </TextWrapper>
                 <TextWrapper>
                   <Icon
@@ -212,32 +212,32 @@ const Dashboard = props => {
                       color: `#0072ce`,
                     }}
                   />
-                  <Text>{workspace.language}</Text>
+                  <Text>{project.language}</Text>
                 </TextWrapper> */}
                 <TextWrapper>
                   <Icon
-                    type={workspace.isPrivate ? 'lock' : 'unlock'}
+                    type={project.isPrivate ? 'lock' : 'unlock'}
                     style={{
                       fontSize: '1.7vh',
                       color: `#0072ce`,
                     }}
                   />
-                  <Text>{workspace.isPrivate ? 'Private' : 'Public'}</Text>
+                  <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
                 </TextWrapper>
               </InfoWrapper>
               <RightSection>
                 <Button
                   to="/app/editor/"
                   state={{
-                    machineId: workspace.machineId,
-                    editorPort: workspace.editorPort,
+                    machineId: project.machineId,
+                    editorPort: project.editorPort,
                   }}
                   primary
                   onClick={() =>
                     handleStartClick({
-                      editorPort: workspace.editorPort,
-                      previewPort: workspace.previewPort,
-                      machineId: workspace.machineId,
+                      editorPort: project.editorPort,
+                      previewPort: project.previewPort,
+                      machineId: project.machineId,
                     })
                   }
                 >
@@ -246,7 +246,7 @@ const Dashboard = props => {
                 <Button
                   onClick={() =>
                     handleDeleteClick({
-                      id: workspace.id,
+                      id: project.id,
                     })
                   }
                 >
