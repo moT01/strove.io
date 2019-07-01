@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'gatsby'
 import ContentLoader from 'react-content-loader'
 
 import { selectors } from 'state'
@@ -59,9 +58,13 @@ const Wrapper = styled.div`
   margin: 0;
 `
 
-const StyledLink = styled(Link)`
+const StyledDropdown = styled.div`
   color: white;
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `
 
 const InfoWrapper = styled(Wrapper)`
@@ -112,26 +115,17 @@ const UserInfoHeader = props => {
 
   return (
     <InfoWrapper>
-      {true ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <>
           <Wrapper onClick={props.handleDropdownClick}>
-            <StyledLink
-              style={{
-                color: `white`,
-                textDecoration: `none`,
-                display: `flex`,
-                flexDirection: `row`,
-                justifyContent: `center`,
-                alignItems: `center`,
-              }}
-            >
+            <StyledDropdown>
               <Text>{props.user.username}</Text>
               <Inline>
                 <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
               </Inline>
-            </StyledLink>
+            </StyledDropdown>
           </Wrapper>
           {props.showDropdown && (
             <MenuWrapper invert>
