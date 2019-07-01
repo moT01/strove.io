@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation DeleteProject($projectId: String!) {
-    deleteProject(projectId: $projectId)
+  mutation DeleteProject($projectId: ID!, $machineId: ID!) {
+    deleteProject(projectId: $projectId, machineId: $machineId)
   }
 `

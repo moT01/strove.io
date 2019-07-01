@@ -138,12 +138,12 @@ const Dashboard = props => {
     })
   }
 
-  const handleDeleteClick = ({ id }) => {
+  const handleDeleteClick = ({ id, machineId }) => {
     dispatch(
       mutation({
         name: 'deleteProject',
         mutation: DELETE_PROJECT,
-        variables: { projectId: id },
+        variables: { projectId: id, machineId },
         dataSelector: data => data,
         onSuccessAction: () => ({
           type: ApiC.REMOVE_ITEM,
@@ -255,6 +255,7 @@ const Dashboard = props => {
                   onClick={() =>
                     handleDeleteClick({
                       id: project.id,
+                      machineId: project.machineId,
                     })
                   }
                 >
