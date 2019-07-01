@@ -6,8 +6,8 @@ import SEO from './seo'
 import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { query } from 'utils'
-import { GET_PROJECTS } from 'queries'
+import { query, mutation } from 'utils'
+import { GET_PROJECTS, DELETE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 
@@ -139,10 +139,18 @@ const Dashboard = props => {
   }
 
   const handleDeleteClick = ({ id }) => {
-    dispatch({
-      type: ApiC.REMOVE_ITEM,
-      payload: { storeKey: 'myProjects', id },
-    })
+    dispatch(
+      mutation({
+        name: 'deleteProject',
+        mutation: DELETE_PROJECT,
+        variables: { projectId: id },
+        dataSelector: data => data,
+        onSuccessAction: () => ({
+          type: ApiC.REMOVE_ITEM,
+          payload: { storeKey: 'myProjects', id },
+        }),
+      })
+    )
   }
 
   useEffect(() => {
