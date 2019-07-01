@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import Layout from 'components/layout'
 import { Location } from '@reach/router'
-import Loader from 'components/loader.js'
+import Loader from 'components/fullScreenLoader.js'
 
 import { selectors } from 'state'
 import SEO from 'components/seo'
