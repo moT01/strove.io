@@ -19,8 +19,19 @@ const MenuWrapper = styled.div`
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   align-self: flex-end;
   z-index: 3;
-  height: 100%;
 `
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 10vw;
+  align-items: flex-end;
+  z-index: 3;
+  height: 100%;
+  overflow: visible;
+`
+
 const Text = styled.span`
   font-size: 3vh;
   color: white;
@@ -91,10 +102,10 @@ const Option = styled.div`
 `
 
 const Loader = () => (
-  <MenuWrapper>
+  <LoaderWrapper>
     <ContentLoader
       height="5vh"
-      width="12vh"
+      width={80}
       speed={2}
       primaryColor="#eafff8"
       secondaryColor="#1417d8"
@@ -103,7 +114,7 @@ const Loader = () => (
       <rect x="6" y="6" rx="0" ry="0" width="36" height="6" />
       <rect x="5" y="19" rx="0" ry="0" width="36" height="6" />
     </ContentLoader>
-  </MenuWrapper>
+  </LoaderWrapper>
 )
 
 const UserInfoHeader = props => {
