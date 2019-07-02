@@ -54,7 +54,7 @@ const LinkText = styled.span`
   :hover {
     color: black;
   }
-  @media (max-width: 1366px) {
+  @media (max-width: 1024px) {
     font-size: 4vw;
   }
 `
@@ -70,7 +70,7 @@ const HeaderSection = styled.div`
   height: 5vh;
   background: #0072ce;
 
-  @media (max-width: 1366px) {
+  @media (max-width: 1024px) {
     height: 5vh;
   }
 `

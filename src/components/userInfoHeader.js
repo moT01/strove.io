@@ -33,7 +33,7 @@ const Text = styled.span`
     color: black;
   }
 
-  @media (max-width: 1366px) {
+  @media (max-width: 1024px) {
     font-size: 4vw;
   }
 `
@@ -50,7 +50,7 @@ const UserPhoto = styled.img`
   height: auto;
   margin-left: 4px;
   border-radius: 5px;
-  @media (max-width: 1366px) {
+  @media (max-width: 1024px) {
     width: 3.5vh;
   }
 `
