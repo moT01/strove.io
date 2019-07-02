@@ -4,6 +4,7 @@ import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { withClientState } from 'apollo-link-state'
 import { ApolloLink, Observable } from 'apollo-link'
+import fetch from 'isomorphic-fetch'
 
 const cache = new InMemoryCache()
 
@@ -41,6 +42,7 @@ const requestLink = new ApolloLink(
 )
 
 export default new ApolloClient({
+  fetch,
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
