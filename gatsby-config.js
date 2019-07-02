@@ -72,5 +72,16 @@ module.exports = {
         icon: `src/images/silisky3.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-plugin-env-variables`,
+      options: {
+        whitelist: [
+          'SILISKY_ENDPOINT',
+          'GITHUB_CLIENT_ID',
+          'GITHUB_REDIRECT_URI',
+          'SILISKY_URL',
+        ],
+      },
+    },
   ],
 }
