@@ -1,3 +1,3 @@
-import Cog from '../logos/Cog.svg'
+import Cog from '../logos/cog.svg'
 
 export { Cog }
