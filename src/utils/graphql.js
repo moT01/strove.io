@@ -8,14 +8,14 @@ import defaultClient from '../../client'
  * for example to set localStorage.
  * @param {Object} objectParam mutation takes one param will all the details, like variables living inside
  * @param {string} objectParam.name - Name of the mutation, for example githubAuth
- * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessAction or onErrorAction are provided
+ * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorAction are provided
  * @param {string} objectParam.variables - Mutation variables
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy, defaults to all
  * @param {string} objectParam.mutation - Actual mutation
  * @param {function} objectParam.onSuccess - Function called with the result after mutation succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
  * @param {function} objectParam.onError - Function called with the error after mutation fails. Example: () => localStorage.removeItem('token')
- * @param {function} objectParam.onSuccessAction - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
+ * @param {function} objectParam.onSuccessDispatch - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
  * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
  * @param {function} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
  * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
@@ -29,7 +29,7 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
-  onSuccessAction,
+  onSuccessDispatch,
   onErrorAction,
   dataSelector = data => data[name],
   client = defaultClient,
@@ -50,10 +50,21 @@ export const mutation = ({
       })
 
       const result = dataSelector(data)
-      onSuccess && onSuccess(result)
 
-      if (onSuccessAction) {
-        dispatch(onSuccessAction(result))
+      if (onSuccess) {
+        if (Array.isArray(onSuccess)) {
+          onSuccess.forEach(func => func(result))
+        } else {
+          onSuccess(result)
+        }
+      }
+
+      if (onSuccessDispatch) {
+        if (Array.isArray(onSuccessDispatch)) {
+          onSuccessDispatch.forEach(action => dispatch(action(result)))
+        } else {
+          dispatch(onSuccessDispatch(result))
+        }
       } else {
         dispatch({
           type: C.FETCH_SUCCESS,
@@ -80,7 +91,7 @@ export const mutation = ({
  * for example to set localStorage.
  * @param {Object} objectParam mutation takes one param will all the details, like variables living inside
  * @param {string} objectParam.name - Name of the mutation, for example githubAuth
- * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessAction or onErrorAction are provided
+ * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorAction are provided
  * @param {string} objectParam.variables - Mutation variables
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation fetchPolicy, defaults to cache-first
@@ -88,7 +99,7 @@ export const mutation = ({
  * @param {string} objectParam.query - Actual query
  * @param {function} objectParam.onSuccess - Function called with the result after query succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
  * @param {function} objectParam.onError - Function called with the error after query fails. Example: () => localStorage.removeItem('token')
- * @param {function} objectParam.onSuccessAction - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
+ * @param {function} objectParam.onSuccessDispatch - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
  * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
  * @param {function} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
  * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
@@ -103,7 +114,7 @@ export const query = ({
   query,
   onSuccess,
   onError,
-  onSuccessAction,
+  onSuccessDispatch,
   onErrorAction,
   dataSelector = data => data[name],
   client = defaultClient,
@@ -125,10 +136,20 @@ export const query = ({
 
       const result = dataSelector(data)
 
-      onSuccess && onSuccess(result)
+      if (onSuccess) {
+        if (Array.isArray(onSuccess)) {
+          onSuccess.forEach(func => func(result))
+        } else {
+          onSuccess(result)
+        }
+      }
 
-      if (onSuccessAction) {
-        dispatch(onSuccessAction(result))
+      if (onSuccessDispatch) {
+        if (Array.isArray(onSuccessDispatch)) {
+          onSuccessDispatch.forEach(action => dispatch(action(result)))
+        } else {
+          dispatch(onSuccessDispatch(result))
+        }
       } else {
         dispatch({
           type: C.FETCH_SUCCESS,
