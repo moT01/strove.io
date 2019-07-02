@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import { Cog } from '../images/svg'
+import { Cog, CogWhite } from '../images/svg'
 import { Silisky } from '../images/logos'
 
 const SpinToWin = keyframes`
@@ -28,32 +28,36 @@ const LoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 95vh;
-  width: 100vw;
+  height: ${props => (props.isFullScreen ? '95vh' : '4vh')};
+  width: ${props => (props.isFullScreen ? '100vw' : '4vh')};
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
-  width: 25vw;
+  width: ${props => (props.isFullScreen ? '25vw' : '100%')};
   height: auto;
   animation: ${SpinToWin} 3s linear infinite;
 `
 
 const LogoContainer = styled.div`
-  width: 20vw;
+  width: ${props => (props.isFullScreen ? '20vw' : '4vh')};
   position: absolute;
   z-index: 4;
   animation: ${AntiSpinToWin} 3s linear infinite;
 `
 
-const Loader = props => (
-  <LoaderWrapper>
-    <LoaderContainer>
-      <Cog />
-      <LogoContainer>
-        <Silisky style={{ width: '100%', height: 'auto' }} />
-      </LogoContainer>
-    </LoaderContainer>
-  </LoaderWrapper>
-)
+const Loader = props => {
+  return (
+    <LoaderWrapper {...props}>
+      <LoaderContainer {...props}>
+        {props.isFullScreen ? <Cog /> : <CogWhite />}
+        {props.isFullScreen && (
+          <LogoContainer {...props}>
+            <Silisky style={{ width: '100%', height: 'auto' }} />
+          </LogoContainer>
+        )}
+      </LoaderContainer>
+    </LoaderWrapper>
+  )
+}
 
 export default Loader

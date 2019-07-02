@@ -1,3 +1,4 @@
-import Cog from "../logos/Cog.svg"
+import Cog from '../logos/Cog.svg'
+import CogWhite from '../logos/CogWhite.svg'
 
-export { Cog }
+export { Cog, CogWhite }

@@ -78,7 +78,7 @@ const Button = styled(Link)`
   }
 `
 
-const DeleteBurron = styled.button`
+const DeleteButton = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
@@ -189,7 +189,7 @@ const Dashboard = props => {
     )
   }, [])
 
-  if (isLoading) return <Loader />
+  if (isLoading) return <Loader isFullScreen={true} />
 
   return (
     <Layout>
@@ -273,7 +273,7 @@ const Dashboard = props => {
                 >
                   Start
                 </Button>
-                <DeleteBurron
+                <DeleteButton
                   onClick={() =>
                     handleDeleteClick({
                       id: project.id,
@@ -282,7 +282,7 @@ const Dashboard = props => {
                   }
                 >
                   Delete
-                </DeleteBurron>
+                </DeleteButton>
               </RightSection>
             </VerticalDivider>
           </Tile>

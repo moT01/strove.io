@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch, useSelector } from 'react-redux'
 import ContentLoader from 'react-content-loader'
+import Loader from '../components/fullScreenLoader'
 
 import { selectors } from 'state'
 
@@ -66,6 +67,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 4vh;
+  width: auto;
   margin: 0;
 `
 
@@ -101,23 +103,6 @@ const Option = styled.div`
   }
 `
 
-const Loader = () => (
-  <LoaderWrapper>
-    <ContentLoader
-      height={50}
-      width={80}
-      speed={2}
-      primaryColor="#eafff8"
-      secondaryColor="#1417d8"
-      style={{ width: '8vh', height: '5vh' }}
-    >
-      <circle cx="66" cy="17" r="13" />
-      <rect x="6" y="6" rx="0" ry="0" width="36" height="6" />
-      <rect x="5" y="19" rx="0" ry="0" width="36" height="6" />
-    </ContentLoader>
-  </LoaderWrapper>
-)
-
 const UserInfoHeader = props => {
   const [options] = useState(props.options)
   const dispatch = useDispatch()
@@ -128,7 +113,7 @@ const UserInfoHeader = props => {
   return (
     <InfoWrapper>
       {isLoading ? (
-        <Loader />
+        <Loader isFullscreen={false} />
       ) : (
         <>
           <Wrapper onClick={props.handleDropdownClick}>
