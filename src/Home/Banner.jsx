@@ -3,6 +3,10 @@ import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes } from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
+import { selectors } from '../state'
+import GetStarted from '../components/getStarted'
 
 const FadeIn = keyframes`
   0% {
@@ -32,6 +36,7 @@ const Button = styled.button`
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
@@ -47,7 +52,7 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
 `
 
-function Banner(props) {
+const Banner = props => {
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
@@ -74,11 +79,9 @@ function Banner(props) {
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
         <ButtonsWrapper>
-          <Button primary>
-            <p style={{ margin: 0 }}>Request demo</p>
-          </Button>
+          <GetStarted />
           <Button>
-            <p style={{ margin: 0 }}>Learn more</p>
+            <p style={{ margin: 0 }}>Request demo</p>
           </Button>
         </ButtonsWrapper>
       </QueueAnim>
