@@ -98,7 +98,7 @@ export const query = ({
   storeKey = name,
   variables,
   context,
-  fetchPolicy = 'cache-first',
+  fetchPolicy = 'no-cache',
   errorPolicy = 'all',
   query,
   onSuccess,
