@@ -163,7 +163,7 @@ svg g {
   align-items: center;
 }
 .page1 {
-  height: 960px;
+  height: auto;
 }
 .page1-line.title-line-wrapper {
   width: 312px;
@@ -256,6 +256,8 @@ svg g {
 }
 .page2 {
   text-align: center;
+  height: auto;
+  margin-bottom: 5vh;
 }
 .page2 .page2-content {
   will-change: transform;
