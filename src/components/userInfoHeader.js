@@ -11,7 +11,7 @@ const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: auto;
+  width: 10vw;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   border-radius: 10px;
   border-width: 1px;
@@ -20,6 +20,9 @@ const MenuWrapper = styled.div`
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   align-self: flex-end;
   z-index: 3;
+  @media (max-width: 1366px) {
+    width: auto;
+  }
 `
 
 const LoaderWrapper = styled.div`
@@ -43,7 +46,7 @@ const Text = styled.span`
   }
 
   @media (max-width: 1366px) {
-    font-size: 2.2vh;
+    font-size: 4vw;
   }
 `
 
@@ -97,7 +100,7 @@ const Option = styled.div`
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: 100%;
   height: auto;
-  font-size: 2vh;
+  font-size: 2.2vh;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '8px'};
   border-bottom-right-radius: ${props => props.isLast && '8px'};
@@ -106,6 +109,9 @@ const Option = styled.div`
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
     color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
+  }
+  @media (max-width: 1366px) {
+    font-size: 2vh;
   }
 `
 

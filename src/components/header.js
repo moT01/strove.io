@@ -55,7 +55,7 @@ const LinkText = styled.span`
     color: black;
   }
   @media (max-width: 1366px) {
-    font-size: 2.2vh;
+    font-size: 4vw;
   }
 `
 
