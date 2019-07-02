@@ -11,7 +11,7 @@ const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 10vw;
+  width: auto;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   border-radius: 10px;
   border-width: 1px;
@@ -83,6 +83,7 @@ const StyledDropdown = styled.div`
 const InfoWrapper = styled(Wrapper)`
   flex-direction: column;
   overflow: visible;
+  cursor: pointer;
 `
 
 const Option = styled.div`
@@ -97,9 +98,11 @@ const Option = styled.div`
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '8px'};
   border-bottom-right-radius: ${props => props.isLast && '8px'};
+
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
     color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    cursor: pointer;
   }
 `
 

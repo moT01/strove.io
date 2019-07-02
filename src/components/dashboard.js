@@ -72,6 +72,7 @@ const Button = styled(Link)`
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
@@ -98,6 +99,7 @@ const DeleteButton = styled.button`
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
