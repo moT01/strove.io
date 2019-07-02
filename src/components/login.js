@@ -22,7 +22,6 @@ const options = [
 ]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
 
 const Text = styled.span`
   transition: color 0.15s;
@@ -116,7 +115,7 @@ const LoginComponent = ({ location }) => {
 
   return !user.username && !isLoading ? (
     <LoginButton
-      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&redirect_uri=${REDIRECT_URI}`}
+      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`}
     >
       <Text>Login </Text>
       <Inline>
