@@ -10,8 +10,6 @@ import { query, mutation } from 'utils'
 import { GET_PROJECTS, DELETE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
-import Loader from 'components/fullScreenLoader.js'
-
 import { selectors } from 'state'
 
 const FadeIn = keyframes`
@@ -160,7 +158,6 @@ const StyledIcon = styled(Icon)`
 const Dashboard = props => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
-  const isLoading = useSelector(selectors.getLoading('myProjects'))
 
   const handleStartClick = ({ editorPort, previewPort, machineId }) => {
     dispatch({
@@ -193,8 +190,6 @@ const Dashboard = props => {
       })
     )
   }, [])
-
-  if (isLoading) return <Loader isFullScreen={true} color={'#0072ce'} />
 
   return (
     <Layout>

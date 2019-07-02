@@ -28,7 +28,7 @@ const EditorComponent = ({ location }) => {
   return (
     <Layout>
       <SEO title="Editor" />
-      {loaderVisible && <Loader isFullScreen={true} />}
+      {loaderVisible && <Loader isFullScreen={true} color="#0072ce" />}
       <StyledIframe
         onLoad={() => setLoaderVisible(false)}
         src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/editor?token=${token}&id=${id}&port=${port}`}

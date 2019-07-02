@@ -31,6 +31,7 @@ const MainContent = styled.main`
 const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
+  const isLoading = useSelector(selectors.getLoading('myProjects'))
 
   const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
     dispatch({
@@ -114,7 +115,11 @@ const LayoutComponent = ({ children, location }) => {
       render={data => (
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>{children}</MainContent>
+          {isLoading ? (
+            <Loader isFullScreen={true} color="#0072ce" />
+          ) : (
+            <MainContent>{children}</MainContent>
+          )}
         </>
       )}
     />
