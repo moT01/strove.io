@@ -69,7 +69,7 @@ module.exports = {
         background_color: `#FFF`,
         theme_color: `#194F9D`,
         display: `minimal-ui`,
-        icon: `src/images/SiliSky3.png`, // This path is relative to the root of the site.
+        icon: `src/images/silisky3.png`, // This path is relative to the root of the site.
       },
     },
   ],
