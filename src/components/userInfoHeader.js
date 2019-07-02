@@ -43,7 +43,7 @@ const Text = styled.span`
   }
 
   @media (max-width: 1366px) {
-    font-size: 2.5vh;
+    font-size: 2.2vh;
   }
 `
 
@@ -59,6 +59,9 @@ const UserPhoto = styled.img`
   height: auto;
   margin-left: 4px;
   border-radius: 5px;
+  @media (max-width: 1366px) {
+    width: 3.5vh;
+  }
 `
 
 const Wrapper = styled.div`
@@ -131,12 +134,15 @@ const UserInfoHeader = props => {
             <MenuWrapper invert>
               {options.map(option =>
                 option.option !== 'Logout' ? (
-                  <Option invert>{option.option}</Option>
+                  <Option key={option.option} invert>
+                    {option.option}
+                  </Option>
                 ) : (
                   <Option
                     isLast
                     invert
                     onClick={() => option.onClick(dispatch)}
+                    key={option.option}
                   >
                     {option.option}
                   </Option>

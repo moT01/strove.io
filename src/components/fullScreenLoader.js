@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import { Cog, CogWhite } from '../images/svg'
+import { Cog } from '../images/svg'
 import { Silisky } from '../images/logos'
 
 const SpinToWin = keyframes`
@@ -49,11 +49,7 @@ const Loader = props => {
   return (
     <LoaderWrapper {...props}>
       <LoaderContainer {...props}>
-        {props.isFullScreen ? (
-          <Cog fill={props.color} />
-        ) : (
-          <CogWhite fill={props.color} />
-        )}
+        <Cog fill={props.color} />
         {props.isFullScreen && (
           <LogoContainer {...props}>
             <Silisky style={{ width: '100%', height: 'auto' }} />
