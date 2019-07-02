@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router } from '@reach/router'
-import PrivateRoute from 'components/PrivateRoute'
+import PrivateRoute from 'components/privateRoute'
 import Editor from 'components/editor'
 import Preview from 'components/preview'
 import Dashboard from 'components/dashboard'
