@@ -175,10 +175,16 @@ const Dashboard = props => {
         mutation: DELETE_PROJECT,
         variables: { projectId: id, machineId },
         dataSelector: data => data,
-        onSuccessDispatch: () => ({
-          type: ApiC.REMOVE_ITEM,
-          payload: { storeKey: 'myProjects', id },
-        }),
+        onSuccessDispatch: [
+          () => ({
+            type: ApiC.REMOVE_ITEM,
+            payload: { storeKey: 'myProjects', id },
+          }),
+          () => ({
+            type: ApiC.FETCH_SUCCESS,
+            payload: { storeKey: 'deleteProject', data: true },
+          }),
+        ],
       })
     )
   }
