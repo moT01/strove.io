@@ -2,6 +2,12 @@ require('dotenv').config({
   path: process.env.NODE_ENV === 'development' ? `.env.development` : '.env',
 })
 
+console.log(
+  'ENV VARIABLES!',
+  process.env.NODE_ENV,
+  process.env.SILISKY_ENDPOINT
+)
+
 module.exports = {
   siteMetadata: {
     title: `SiliSky`,
