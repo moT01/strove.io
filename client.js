@@ -8,6 +8,17 @@ import fetch from 'isomorphic-fetch'
 
 const cache = new InMemoryCache()
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
+
 const request = operation => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -43,6 +54,7 @@ const requestLink = new ApolloLink(
 
 export default new ApolloClient({
   fetch,
+  defaultOptions,
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
