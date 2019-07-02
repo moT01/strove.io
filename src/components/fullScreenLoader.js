@@ -28,8 +28,8 @@ const LoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${props => (props.isFullScreen ? '95vh' : '4vh')};
-  width: ${props => (props.isFullScreen ? '100vw' : '4vh')};
+  height: ${props => (props.isFullScreen ? '95vh' : props.height)};
+  width: ${props => (props.isFullScreen ? '100vw' : props.height)};
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
@@ -49,7 +49,11 @@ const Loader = props => {
   return (
     <LoaderWrapper {...props}>
       <LoaderContainer {...props}>
-        {props.isFullScreen ? <Cog /> : <CogWhite />}
+        {props.isFullScreen ? (
+          <Cog fill={props.color} />
+        ) : (
+          <CogWhite fill={props.color} />
+        )}
         {props.isFullScreen && (
           <LogoContainer {...props}>
             <Silisky style={{ width: '100%', height: 'auto' }} />

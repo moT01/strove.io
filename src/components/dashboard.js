@@ -189,7 +189,7 @@ const Dashboard = props => {
     )
   }, [])
 
-  if (isLoading) return <Loader isFullScreen={true} />
+  if (isLoading) return <Loader isFullScreen={true} color={'#0072ce'} />
 
   return (
     <Layout>
