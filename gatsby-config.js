@@ -1,3 +1,4 @@
+/* Netlify uses .env file to store envs */
 require('dotenv').config({
   path: process.env.NODE_ENV === 'development' ? `.env.development` : '.env',
 })
