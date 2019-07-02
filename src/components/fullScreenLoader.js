@@ -1,7 +1,5 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 import { Cog } from '../images/svg'
 import { Silisky } from '../images/logos'
 

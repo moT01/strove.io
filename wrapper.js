@@ -1,6 +1,5 @@
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
 import { Provider } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'

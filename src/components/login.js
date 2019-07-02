@@ -3,7 +3,6 @@ import { Location } from '@reach/router'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
-import ContentLoader from 'react-content-loader'
 
 import { selectors } from 'state'
 import { GITHUB_LOGIN } from 'queries'

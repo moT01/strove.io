@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch, useSelector } from 'react-redux'
-import ContentLoader from 'react-content-loader'
 import Loader from '../components/fullScreenLoader'
 
 import { selectors } from 'state'
@@ -23,17 +22,6 @@ const MenuWrapper = styled.div`
   @media (max-width: 1366px) {
     width: auto;
   }
-`
-
-const LoaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 10vw;
-  align-items: flex-end;
-  z-index: 3;
-  height: 100%;
-  overflow: visible;
 `
 
 const Text = styled.span`
