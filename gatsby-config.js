@@ -2,17 +2,12 @@ require('dotenv').config({
   path: process.env.NODE_ENV === 'development' ? `.env.development` : '.env',
 })
 
-console.log(
-  'ENV VARIABLES!',
-  process.env.NODE_ENV,
-  process.env.SILISKY_ENDPOINT
-)
-
 module.exports = {
   siteMetadata: {
     title: `SiliSky`,
     description: `Move your development to the cloud. Access and run code anywhere using powerful linux servers.`,
     author: `@gatsbyjs`,
+    siteUrl: `${process.env.SILISKY_URL}`,
   },
   plugins: [
     /* Used to create authenticated pages on the frontend */
@@ -74,23 +69,6 @@ module.exports = {
         theme_color: `#194F9D`,
         display: `minimal-ui`,
         icon: `src/images/SiliSky3.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'SiliSky',
-        fieldName: 'SiliSky',
-        url:
-          'https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/graphql',
-      },
-    },
-    {
-      resolve: 'gatsby-source-graphql',
-      options: {
-        typeName: 'Github',
-        fieldName: 'github',
-        url: 'https://api.github.com/graphql',
       },
     },
   ],
