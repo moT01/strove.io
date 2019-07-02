@@ -23,6 +23,10 @@ const LinkWrapper = styled.h3`
   margin: 0 3vw 0 0;
 `
 
+const ZeldaWrapper = styled(LinkWrapper)`
+  margin: 0;
+`
+
 const IconWrapper = styled(LinkWrapper)`
   color: #fff;
   animation: ${FadeIn} 0.3s ease-out;
@@ -36,10 +40,6 @@ const IconWrapper = styled(LinkWrapper)`
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
-  margin: 0 3vw 0 0;
-`
-
-const ZeldaWrapper = styled(LinkWrapper)`
   margin: 0;
 `
 
@@ -55,7 +55,7 @@ const LinkText = styled.span`
     color: black;
   }
   @media (max-width: 1366px) {
-    font-size: 2.5vh;
+    font-size: 4vw;
   }
 `
 
