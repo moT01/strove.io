@@ -152,6 +152,11 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
+const StyledIcon = styled(Icon)`
+  font-size: 1.7vh;
+  color: #0072ce;
+`
+
 const Dashboard = props => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
@@ -201,23 +206,11 @@ const Dashboard = props => {
               <InfoWrapper>
                 <ProjectTitle>{project.name}</ProjectTitle>
                 <TextWrapper>
-                  <Icon
-                    type="calendar"
-                    style={{
-                      fontSize: '1.7vh',
-                      color: `#0072ce`,
-                    }}
-                  />
+                  <StyledIcon type="calendar" />
                   <Text>{project.createdAt}</Text>
                 </TextWrapper>
                 <TextWrapper>
-                  <Icon
-                    type="edit"
-                    style={{
-                      fontSize: '1.7vh',
-                      color: `#0072ce`,
-                    }}
-                  />
+                  <StyledIcon type="edit" />
                   <Text>
                     {project.description
                       ? project.description
@@ -225,33 +218,19 @@ const Dashboard = props => {
                   </Text>
                 </TextWrapper>
                 {/* <TextWrapper>
-                  <Icon
+                  <StyledIcon
                     type="branches"
-                    style={{
-                      fontSize: '1.7vh',
-                      color: `#0072ce`,
-                    }}
                   />
                   <Text> {project.branch}</Text>
                 </TextWrapper>
                 <TextWrapper>
-                  <Icon
+                  <StyledIcon
                     type="code"
-                    style={{
-                      fontSize: '1.7vh',
-                      color: `#0072ce`,
-                    }}
                   />
                   <Text>{project.language}</Text>
                 </TextWrapper> */}
                 <TextWrapper>
-                  <Icon
-                    type={project.isPrivate ? 'lock' : 'unlock'}
-                    style={{
-                      fontSize: '1.7vh',
-                      color: `#0072ce`,
-                    }}
-                  />
+                  <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
                   <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
                 </TextWrapper>
               </InfoWrapper>
