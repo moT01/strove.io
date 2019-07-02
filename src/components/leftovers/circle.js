@@ -1,6 +1,6 @@
-import React from "react"
-import styled, { keyframes } from "styled-components"
-import Carousel from "./carousel.js"
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
+import Carousel from './carousel.js'
 
 const FadeIn = keyframes`
   0% {
@@ -18,7 +18,7 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 93vh;
+  height: 95vh;
   animation: ${FadeIn} 1s ease-out;
 `
 
@@ -70,10 +70,10 @@ const Button = styled.button`
 
 class Circle extends React.Component {
   state = {
-    selection: "clouds",
-    color: "gray",
-    selected: "",
-    selectedColor: "",
+    selection: 'clouds',
+    color: 'gray',
+    selected: '',
+    selectedColor: '',
   }
   handleLogoClick = logo => {
     this.setState({ selected: logo.name })
@@ -85,8 +85,8 @@ class Circle extends React.Component {
   }
 
   handleHoverOut = () => {
-    this.setState({ selection: "clouds" })
-    this.setState({ color: "gray" })
+    this.setState({ selection: 'clouds' })
+    this.setState({ color: 'gray' })
   }
   render() {
     return (
@@ -95,7 +95,7 @@ class Circle extends React.Component {
           <TextWrapper>
             <h1>SiliSky</h1>
             <h2>
-              Code in{" "}
+              Code in{' '}
               <span
                 style={{
                   color: `${
@@ -117,7 +117,7 @@ class Circle extends React.Component {
               theme={this.state.selectedColor}
               style={{
                 backgroundColor: `${this.state.selectedColor}`,
-                color: `${this.state.selectedColor ? `#ffffff` : "gray"}`,
+                color: `${this.state.selectedColor ? `#ffffff` : 'gray'}`,
               }}
             >
               Open Editor

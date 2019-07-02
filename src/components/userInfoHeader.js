@@ -104,11 +104,12 @@ const Option = styled.div`
 const Loader = () => (
   <LoaderWrapper>
     <ContentLoader
-      height="5vh"
+      height={50}
       width={80}
       speed={2}
       primaryColor="#eafff8"
       secondaryColor="#1417d8"
+      style={{ width: '8vh', height: '5vh' }}
     >
       <circle cx="66" cy="17" r="13" />
       <rect x="6" y="6" rx="0" ry="0" width="36" height="6" />

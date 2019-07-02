@@ -67,7 +67,7 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 0.5vw;
   padding-right: 0.5vw;
-  height: 7vh;
+  height: 5vh;
   background: #0072ce;
 
   @media (max-width: 1366px) {
