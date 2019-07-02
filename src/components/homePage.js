@@ -60,7 +60,7 @@ const Button = styled.button`
 const HomepageComponent = () => {
   return (
     <Layout>
-      <SEO title="Preview" />
+      <SEO title="Homepage" />
       <PageWrapper>
         <GithubLinkWrapper>
           <Button primary>Start your project</Button>
