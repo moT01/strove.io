@@ -11,7 +11,7 @@
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 
 <div align="center">
-<img src="/src/images/redmeAssets/silisky.gif" >
+<img src="/src/images/readmeAssets/silisky.gif" >
 </div>
 
 # Get started
@@ -24,7 +24,7 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 
 <div align='center'>
 <table>
-<tr>
+<tr align="center">
 <td align="center"><a href="https://github.com/AdamZaczek"><img src="https://avatars2.githubusercontent.com/u/14284341?s=400&v=4" width="150px;" alt="Adam Żaczek"/><br /><sub><b>Adam Żaczek</b></sub></a></td>
 <td align="center"><a href="https://github.com/Urban35"><img src="https://avatars1.githubusercontent.com/u/29239301?s=460&v=4" width="150px;" alt="Dawid Urbnaek"/><br /><sub><b>Dawid Urbanek</b></sub></a></td>
 <td align="center"><a href="https://github.com/jaroszpiotr91"><img src="https://avatars3.githubusercontent.com/u/39913918?s=460&v=4" width="150px;" alt="Piotr Jarosz"/><br /><sub><b>Piotr Jarosz</b></sub></a></td>
