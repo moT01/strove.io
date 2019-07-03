@@ -240,10 +240,6 @@ const Dashboard = props => {
               <RightSection>
                 <Button
                   to="/app/editor/"
-                  state={{
-                    machineId: project.machineId,
-                    editorPort: project.editorPort,
-                  }}
                   primary
                   onClick={() =>
                     handleStartClick({
