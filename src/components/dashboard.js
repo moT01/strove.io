@@ -337,13 +337,6 @@ const Dashboard = () => {
               </GithubLinkForm>
             )}
           />
-          {/* <DeleteButton
-            primary
-            style={{ width: '20%' }}
-            onClick={() => console.log(repoError)}
-          >
-            Beep
-          </DeleteButton> */}
         </AddProjectWrapper>
         <TilesWrapper>
           {projects.map(project => (
