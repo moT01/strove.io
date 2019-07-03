@@ -3,9 +3,6 @@ import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes } from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
-import { selectors } from '../state'
 import GetStarted from '../components/getStarted'
 
 const FadeIn = keyframes`

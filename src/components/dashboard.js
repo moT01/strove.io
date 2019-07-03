@@ -127,6 +127,7 @@ const DeleteButton = styled.button`
     transform: scale(1.1);
   }
 `
+
 const GithubLinkInput = styled.input`
   width: 80%;
   border-width: 1px;
@@ -134,10 +135,9 @@ const GithubLinkInput = styled.input`
   color: #0072ce;
   border-radius: 1vh;
   border-color: #0072ce;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-align: center;
   font-size: 2vh;
-  margin-bottom: 2vh;
 `
 
 const GithubLinkForm = styled.form`
@@ -155,6 +155,7 @@ const ProjectTitle = styled.h1`
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
+
 const Text = styled.p`
   color: #0072ce;
   font-size: 1.7vh;
@@ -164,6 +165,13 @@ const Text = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
 `
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 1.3vh;
+  margin: 0;
+`
+
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
@@ -172,12 +180,14 @@ const VerticalDivider = styled.div`
   width: 100%;
   height: 100%;
 `
+
 const FlexWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `
+
 const RightSection = styled(FlexWrapper)`
   width: 20%;
   height: 100%;
@@ -185,10 +195,12 @@ const RightSection = styled(FlexWrapper)`
   justify-content: flex-start;
   padding: 0.5%;
 `
+
 const InfoWrapper = styled(FlexWrapper)`
   width: 80%;
   align-items: flex-start;
 `
+
 const TextWrapper = styled(FlexWrapper)`
   flex-direction: row;
   margin-top: 0.3vh;
@@ -203,7 +215,7 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
-const validate = (values, props /* only available when using withFormik */) => {
+const validate = values => {
   let errors = {}
 
   if (!values.githubLink) {
@@ -223,6 +235,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
   const user = useSelector(selectors.getUser)
+  const repoError = useSelector(selectors.getError('myProjects'))
 
   const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
     if (!editorPort) {
@@ -309,12 +322,28 @@ const Dashboard = () => {
                       : 'Paste repository link here'
                   }
                 />
+                {repoError &&
+                  repoError.message &&
+                  repoError.message.includes(
+                    'Could not resolve to a Repository'
+                  ) && (
+                    <ErrorMessage>
+                      Provided link leads to a private repository
+                    </ErrorMessage>
+                  )}
                 <DeleteButton primary type="submit" style={{ width: '20%' }}>
                   Add project
                 </DeleteButton>
               </GithubLinkForm>
             )}
           />
+          {/* <DeleteButton
+            primary
+            style={{ width: '20%' }}
+            onClick={() => console.log(repoError)}
+          >
+            Beep
+          </DeleteButton> */}
         </AddProjectWrapper>
         <TilesWrapper>
           {projects.map(project => (
