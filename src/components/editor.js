@@ -51,24 +51,22 @@ const EditorComponent = ({ location }) => {
     //   // ev.preventDefault()
     //   // return (ev.returnValue = 'Are you sure you want to close?')
     // })
-
-    const stop = () =>
-      dispatch(
-        mutation({
-          name: 'stopProject',
-          storeKey: 'stopProject',
-          mutation: STOP_PROJECT,
-          dataSelector: data => data,
-          variables: { projectId, machineId },
-          onSuccessDispatch: [
-            () => ({
-              type: C.STOP_PROJECT,
-            }),
-          ],
-        })
-      )
-
-    stop()
+    // const stop = () =>
+    //   dispatch(
+    //     mutation({
+    //       name: 'stopProject',
+    //       storeKey: 'stopProject',
+    //       mutation: STOP_PROJECT,
+    //       dataSelector: data => data,
+    //       variables: { projectId, machineId },
+    //       onSuccessDispatch: [
+    //         () => ({
+    //           type: C.STOP_CURRENT_PROJECT,
+    //         }),
+    //       ],
+    //     })
+    //   )
+    // stop()
   }, [])
 
   return (
