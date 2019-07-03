@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
+import { Formik } from 'formik'
 
 import Layout from './layout'
 import SEO from './seo'
@@ -11,6 +12,7 @@ import { GET_PROJECTS, DELETE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
+import createProject from '../utils'
 
 const FadeIn = keyframes`
   0% {
@@ -19,7 +21,20 @@ const FadeIn = keyframes`
   100% {
     opacity: 1;
   }
+
 `
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const PageWrapper = styled(Wrapper)`
+  width: 100vw;
+`
+
 const TilesWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,6 +44,7 @@ const TilesWrapper = styled.div`
   margin: 5vh;
   animation: ${FadeIn} 1s ease-out;
 `
+
 const Tile = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,6 +66,14 @@ const Tile = styled.div`
     height: auto;
   }
 `
+
+const AddProjectWrapper = styled(Tile)`
+  height: 15vh;
+  width: 50vw;
+
+  margin-top: 5vh;
+`
+
 const Button = styled(Link)`
   display: flex;
   flex-direction: row;
@@ -157,7 +181,23 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
-const Dashboard = props => {
+const validate = (values, props /* only available when using withFormik */) => {
+  let errors = {}
+
+  if (!values.githubLink) {
+    errors.githubLink = 'Required'
+  } else if (
+    !/.*github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
+      values.githubLink
+    )
+  ) {
+    errors.githubLink = 'Invalid repository link'
+  }
+
+  return errors
+}
+
+const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
 
@@ -202,25 +242,53 @@ const Dashboard = props => {
   return (
     <Layout>
       <SEO title="Dashboard" />
-      <TilesWrapper>
-        {projects.map(project => (
-          <Tile key={project.id}>
-            <VerticalDivider>
-              <InfoWrapper>
-                <ProjectTitle>{project.name}</ProjectTitle>
-                <TextWrapper>
-                  <StyledIcon type="calendar" />
-                  <Text>{project.createdAt}</Text>
-                </TextWrapper>
-                <TextWrapper>
-                  <StyledIcon type="edit" />
-                  <Text>
-                    {project.description
-                      ? project.description
-                      : 'This is the project description.. Tribute'}
-                  </Text>
-                </TextWrapper>
-                {/* <TextWrapper>
+      <PageWrapper>
+        <AddProjectWrapper>
+          <Formik
+            onSubmit={(values, actions) => {
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2))
+                actions.setSubmitting(false)
+              }, 1000)
+            }}
+            validate={validate}
+            render={props => (
+              <form onSubmit={props.handleSubmit}>
+                <input
+                  type="text"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.githubLink}
+                  name="githubLink"
+                />
+                {console.log('TCL: props', props)}
+                {props.errors.githubLink && (
+                  <div id="feedback">{props.errors.githubLink}</div>
+                )}
+                <button type="submit">Submit</button>
+              </form>
+            )}
+          />
+        </AddProjectWrapper>
+        <TilesWrapper>
+          {projects.map(project => (
+            <Tile key={project.id}>
+              <VerticalDivider>
+                <InfoWrapper>
+                  <ProjectTitle>{project.name}</ProjectTitle>
+                  <TextWrapper>
+                    <StyledIcon type="calendar" />
+                    <Text>{project.createdAt}</Text>
+                  </TextWrapper>
+                  <TextWrapper>
+                    <StyledIcon type="edit" />
+                    <Text>
+                      {project.description
+                        ? project.description
+                        : 'This is the project description.. Tribute'}
+                    </Text>
+                  </TextWrapper>
+                  {/* <TextWrapper>
                   <StyledIcon
                     type="branches"
                   />
@@ -250,16 +318,35 @@ const Dashboard = props => {
                     handleDeleteClick({
                       id: project.id,
                       machineId: project.machineId,
-                    })
-                  }
-                >
-                  Delete
-                </DeleteButton>
-              </RightSection>
-            </VerticalDivider>
-          </Tile>
-        ))}
-      </TilesWrapper>
+                      editorPort: project.editorPort,
+                    }}
+                    primary
+                    onClick={() =>
+                      handleStartClick({
+                        editorPort: project.editorPort,
+                        previewPort: project.previewPort,
+                        machineId: project.machineId,
+                      })
+                    }
+                  >
+                    Start
+                  </Button>
+                  <DeleteButton
+                    onClick={() =>
+                      handleDeleteClick({
+                        id: project.id,
+                        machineId: project.machineId,
+                      })
+                    }
+                  >
+                    Delete
+                  </DeleteButton>
+                </RightSection>
+              </VerticalDivider>
+            </Tile>
+          ))}
+        </TilesWrapper>
+      </PageWrapper>
     </Layout>
   )
 }
