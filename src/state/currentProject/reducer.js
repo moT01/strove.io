@@ -7,7 +7,7 @@ export default handleActions(
   {
     [C.SELECT_CURRENT_PROJECT]: (
       state,
-      { payload: { id, editorPort, previewPort, machineId, isRunning } }
+      { payload: { id, editorPort, previewPort, machineId } }
     ) => ({
       ...state,
       id,
@@ -15,7 +15,12 @@ export default handleActions(
       previewPort,
       machineId,
     }),
-    [C.STOP_CURRENT_PROJECT]: state => initialState,
+    [C.STOP_CURRENT_PROJECT]: (state, { payload: { id } }) => ({
+      id,
+      editorPort: null,
+      previewPort: null,
+      machineId: null,
+    }),
   },
   initialState
 )
