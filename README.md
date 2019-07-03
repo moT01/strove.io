@@ -18,7 +18,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 
 Add # + github url after silisky.com/ to get start coding right away, for example: silisky.com/#https://github.com/rt2zz/redux-persist
 
-# Knwon issues
+# Known issues
 
 # Contributors
 
