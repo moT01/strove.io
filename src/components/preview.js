@@ -29,7 +29,6 @@ const Preview = () => {
   return (
     <>
       <SEO title="Preview" />
-
       {loaderVisible && (
         <Loader
           isFullScreen={true}
