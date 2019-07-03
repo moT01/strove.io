@@ -4,6 +4,7 @@ import GET_REPO_INFO from './getRepoInfo'
 import GET_PROJECTS from './getProjects'
 import DELETE_PROJECT from './deleteProject'
 import STOP_PROJECT from './stopProject'
+import CONTINUE_PROJECT from './continueProject'
 
 export {
   ADD_GITHUB_PROJECT,
@@ -12,4 +13,5 @@ export {
   GET_PROJECTS,
   DELETE_PROJECT,
   STOP_PROJECT,
+  CONTINUE_PROJECT,
 }

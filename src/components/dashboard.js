@@ -8,7 +8,7 @@ import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { query, mutation } from 'utils'
-import { GET_PROJECTS, DELETE_PROJECT } from 'queries'
+import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
@@ -203,10 +203,26 @@ const Dashboard = () => {
   const user = useSelector(selectors.getUser)
 
   const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
-    dispatch({
-      type: C.SELECT_CURRENT_PROJECT,
-      payload: { id, editorPort, previewPort, machineId },
-    })
+    if (!editorPort) {
+      dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId: id, machineId },
+          onSuccessDispatch: [
+            ({ id, editorPort, previewPort, machineId }) => ({
+              type: C.SELECT_CURRENT_PROJECT,
+              payload: { id, editorPort, previewPort, machineId },
+            }),
+          ],
+        })
+      )
+    } else {
+      dispatch({
+        type: C.SELECT_CURRENT_PROJECT,
+        payload: { id, editorPort, previewPort, machineId },
+      })
+    }
   }
 
   const handleDeleteClick = ({ id, machineId }) => {
