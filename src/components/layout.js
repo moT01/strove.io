@@ -3,7 +3,9 @@ import { StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 
+import * as C from 'state/currentProject/constants'
 import Loader from 'components/fullScreenLoader.js'
 import Header from './header'
 import { selectors } from 'state'
@@ -25,7 +27,6 @@ const LayoutComponent = ({ children, location }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
   const isLoading = useSelector(selectors.getLoading('myProjects'))
-
 
   const setCurrentProject = ({ id, editorPort, previewPort, machineId }) => {
     dispatch({
