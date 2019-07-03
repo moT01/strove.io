@@ -33,25 +33,21 @@ const LayoutComponent = ({ children, location }) => {
   const user = useSelector(selectors.getUser)
   const isLoading = useSelector(selectors.getLoading('myProjects'))
 
-  const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
+  const setCurrentProject = ({ id, editorPort, previewPort, machineId }) => {
     dispatch({
       type: C.SELECT_CURRENT_PROJECT,
-      payload: { editorPort, previewPort, machineId },
+      payload: { id, editorPort, previewPort, machineId },
     })
   }
 
-  const startProject = project => {
+  const startProject = ({ id, editorPort, previewPort, machineId }) => {
     setCurrentProject({
-      editorPort: project.editorPort,
-      previewPort: project.previewPort,
-      machineId: project.machineId,
+      id,
+      editorPort,
+      previewPort,
+      machineId,
     })
-    navigate('/app/editor/', {
-      state: {
-        machineId: project.machineId,
-        editorPort: project.editorPort,
-      },
-    })
+    navigate('/app/editor/')
   }
 
   useEffect(() => {

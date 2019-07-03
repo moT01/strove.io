@@ -161,10 +161,10 @@ const Dashboard = props => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
 
-  const handleStartClick = ({ editorPort, previewPort, machineId }) => {
+  const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
     dispatch({
       type: C.SELECT_CURRENT_PROJECT,
-      payload: { editorPort, previewPort, machineId },
+      payload: { id, editorPort, previewPort, machineId },
     })
   }
 
@@ -241,13 +241,7 @@ const Dashboard = props => {
                 <Button
                   to="/app/editor/"
                   primary
-                  onClick={() =>
-                    handleStartClick({
-                      editorPort: project.editorPort,
-                      previewPort: project.previewPort,
-                      machineId: project.machineId,
-                    })
-                  }
+                  onClick={() => handleStartClick(project)}
                 >
                   Start
                 </Button>
