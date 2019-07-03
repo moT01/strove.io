@@ -9,7 +9,7 @@ import * as C from 'state/currentProject/constants'
 import Loader from 'components/fullScreenLoader.js'
 import Header from './header'
 import { selectors } from 'state'
-import { createProject } from '../utils'
+import { createProject } from 'utils'
 import './layout.css'
 
 const MainContent = styled.main`
