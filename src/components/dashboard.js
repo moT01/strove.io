@@ -12,7 +12,7 @@ import { GET_PROJECTS, DELETE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
-import createProject from '../utils'
+import { createProject } from 'utils'
 
 const FadeIn = keyframes`
   0% {
@@ -200,6 +200,7 @@ const validate = (values, props /* only available when using withFormik */) => {
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
+  const user = useSelector(selectors.getUser)
 
   const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
     dispatch({
@@ -246,10 +247,12 @@ const Dashboard = () => {
         <AddProjectWrapper>
           <Formik
             onSubmit={(values, actions) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                actions.setSubmitting(false)
-              }, 1000)
+              createProject({
+                githubLink: values.githubLink,
+                dispatch: dispatch,
+                user: user,
+              })
+              actions.setSubmitting(false)
             }}
             validate={validate}
             render={props => (
