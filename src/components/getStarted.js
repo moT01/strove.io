@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -84,7 +84,6 @@ const GetStarted = () => {
   const isLoading = useSelector(selectors.getLoading('user'))
   const user = useSelector(getUserData)
   const projects = useSelector(selectors.getUserProjects)
-  const [inputVisible, setInputVisible] = useState(false)
 
   const handleClick = () =>
     projects.length === 0
