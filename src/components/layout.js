@@ -1,22 +1,14 @@
 import React, { useEffect } from 'react'
-import { StaticQuery, graphql, navigate } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import ApolloClient from 'apollo-boost'
-import { mutation } from 'utils'
 
-import * as ApiC from 'state/api/constants'
 import Loader from 'components/fullScreenLoader.js'
 import Header from './header'
-import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
 import { selectors } from 'state'
 import { createProject } from '../utils'
 import './layout.css'
-
-const client = new ApolloClient({
-  uri: 'https://api.github.com/graphql',
-})
 
 const MainContent = styled.main`
   display: flex;

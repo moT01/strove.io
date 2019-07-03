@@ -197,7 +197,7 @@ const validate = (values, props /* only available when using withFormik */) => {
   return errors
 }
 
-const Dashboard = props => {
+const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
 

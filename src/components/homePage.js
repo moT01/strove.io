@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
-import Loader from './fullScreenLoader'
 import SEO from 'components/seo'
 import Layout from 'components/layout'
 

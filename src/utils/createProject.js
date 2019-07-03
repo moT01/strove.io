@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import ApolloClient from 'apollo-boost'
-import { StaticQuery, graphql, navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 
-import { query, mutation } from 'utils'
+import { mutation } from 'utils'
 import * as ApiC from 'state/api/constants'
-import { selectors } from 'state'
 import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
 import * as C from 'state/currentProject/constants'
 
