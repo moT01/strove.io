@@ -41,7 +41,7 @@ const TilesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 2vh;
-  margin: 5vh;
+  margin: 2vh;
   animation: ${FadeIn} 1s ease-out;
 `
 
@@ -127,6 +127,26 @@ const DeleteButton = styled.button`
     transform: scale(1.1);
   }
 `
+const GithubLinkInput = styled.input`
+  width: 80%;
+  border-width: 1px;
+  border-style: solid;
+  color: #0072ce;
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  text-align: center;
+`
+
+const GithubLinkForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 2vh 0 2vh 0;
+`
 
 const ProjectTitle = styled.h1`
   font-size: 3vh;
@@ -185,7 +205,7 @@ const validate = (values, props /* only available when using withFormik */) => {
   let errors = {}
 
   if (!values.githubLink) {
-    errors.githubLink = 'Required'
+    errors.githubLink = 'You need to provide repository link to add project'
   } else if (
     !/.*github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
       values.githubLink
@@ -261,7 +281,9 @@ const Dashboard = () => {
       <SEO title="Dashboard" />
       <PageWrapper>
         <AddProjectWrapper>
+          <ProjectTitle>Add project from github repository</ProjectTitle>
           <Formik
+            style={{ width: '100%', height: '100%' }}
             onSubmit={(values, actions) => {
               createProject({
                 githubLink: values.githubLink,
@@ -272,20 +294,23 @@ const Dashboard = () => {
             }}
             validate={validate}
             render={props => (
-              <form onSubmit={props.handleSubmit}>
-                <input
+              <GithubLinkForm onSubmit={props.handleSubmit}>
+                <GithubLinkInput
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.githubLink}
                   name="githubLink"
+                  placeholder={
+                    props.errors.githubLink
+                      ? props.errors.githubLink
+                      : 'Paste repository link here'
+                  }
                 />
-                {console.log('TCL: props', props)}
-                {props.errors.githubLink && (
-                  <div id="feedback">{props.errors.githubLink}</div>
-                )}
-                <button type="submit">Submit</button>
-              </form>
+                <DeleteButton primary type="submit" style={{ width: '20%' }}>
+                  Add project
+                </DeleteButton>
+              </GithubLinkForm>
             )}
           />
         </AddProjectWrapper>
