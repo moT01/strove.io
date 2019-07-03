@@ -31,8 +31,6 @@ const EditorComponent = ({ location }) => {
   const port = location.state.editorPort
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  use
-
   return (
     <Layout>
       <SEO title="Editor" />
