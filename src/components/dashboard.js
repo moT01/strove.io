@@ -136,6 +136,8 @@ const GithubLinkInput = styled.input`
   border-color: #0072ce;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   text-align: center;
+  font-size: 2vh;
+  margin-bottom: 2vh;
 `
 
 const GithubLinkForm = styled.form`
