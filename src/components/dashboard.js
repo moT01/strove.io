@@ -12,6 +12,7 @@ import { GET_PROJECTS, DELETE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
+import createProject from '../utils'
 
 const FadeIn = keyframes`
   0% {
@@ -43,6 +44,7 @@ const TilesWrapper = styled.div`
   margin: 5vh;
   animation: ${FadeIn} 1s ease-out;
 `
+
 const Tile = styled.div`
   display: flex;
   flex-direction: column;
