@@ -26,6 +26,24 @@ const LayoutComponent = ({ children, location }) => {
   const user = useSelector(selectors.getUser)
   const isLoading = useSelector(selectors.getLoading('myProjects'))
 
+
+  const setCurrentProject = ({ id, editorPort, previewPort, machineId }) => {
+    dispatch({
+      type: C.SELECT_CURRENT_PROJECT,
+      payload: { id, editorPort, previewPort, machineId },
+    })
+  }
+
+  const startProject = ({ id, editorPort, previewPort, machineId }) => {
+    setCurrentProject({
+      id,
+      editorPort,
+      previewPort,
+      machineId,
+    })
+    navigate('/app/editor/')
+  }
+
   useEffect(() => {
     const githubLink =
       location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]

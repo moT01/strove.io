@@ -201,10 +201,10 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
 
-  const handleStartClick = ({ editorPort, previewPort, machineId }) => {
+  const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
     dispatch({
       type: C.SELECT_CURRENT_PROJECT,
-      payload: { editorPort, previewPort, machineId },
+      payload: { id, editorPort, previewPort, machineId },
     })
   }
 
@@ -300,15 +300,23 @@ const Dashboard = () => {
                   />
                   <Text>{project.language}</Text>
                 </TextWrapper> */}
-                  <TextWrapper>
-                    <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
-                    <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
-                  </TextWrapper>
-                </InfoWrapper>
-                <RightSection>
-                  <Button
-                    to="/app/editor/"
-                    state={{
+                <TextWrapper>
+                  <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
+                  <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
+                </TextWrapper>
+              </InfoWrapper>
+              <RightSection>
+                <Button
+                  to="/app/editor/"
+                  primary
+                  onClick={() => handleStartClick(project)}
+                >
+                  Start
+                </Button>
+                <DeleteButton
+                  onClick={() =>
+                    handleDeleteClick({
+                      id: project.id,
                       machineId: project.machineId,
                       editorPort: project.editorPort,
                     }}
