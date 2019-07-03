@@ -35,22 +35,22 @@ const EditorComponent = ({ location }) => {
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {
-    // window.addEventListener('beforeunload', ev => {
-    //   dispatch(
-    //     mutation({
-    //       name: 'stopProject',
-    //       mutation: STOP_PROJECT,
-    //       variables: { projectId: id, machineId: id },
-    //       onSuccessDispatch: [
-    //         () => ({
-    //           type: C.STOP_PROJECT,
-    //         }),
-    //       ],
-    //     })
-    //   )
-    //   // ev.preventDefault()
-    //   // return (ev.returnValue = 'Are you sure you want to close?')
-    // })
+    window.addEventListener('beforeunload', ev => {
+      ev.preventDefault()
+      dispatch({
+        type: C.STOP_CURRENT_PROJECT,
+      })
+
+      if (navigator && navigator.sendBeacon) {
+        navigator.sendBeacon(
+          `${process.env.SILISKY_ENDPOINT}/beacon`,
+          JSON.stringify({ token, projectId, machineId })
+        )
+      }
+
+      // ev.preventDefault()
+      // return (ev.returnValue = 'Are you sure you want to close?')
+    })
     // const stop = () =>
     //   dispatch(
     //     mutation({
@@ -66,7 +66,6 @@ const EditorComponent = ({ location }) => {
     //       ],
     //     })
     //   )
-    // stop()
   }, [])
 
   return (
