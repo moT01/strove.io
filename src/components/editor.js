@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState /* useEffect */ } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Location } from '@reach/router'
@@ -6,11 +6,11 @@ import getOr from 'lodash/fp/getOr'
 
 import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
-import { STOP_PROJECT } from 'queries'
+// import { STOP_PROJECT } from 'queries'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import { mutation } from 'utils'
-import * as C from 'state/currentProject/constants'
+// import { mutation } from 'utils'
+// import * as C from 'state/currentProject/constants'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -34,40 +34,23 @@ const EditorComponent = ({ location }) => {
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', ev => {
-      ev.preventDefault()
-      dispatch({
-        type: C.STOP_CURRENT_PROJECT,
-        payload: { id: projectId },
-      })
+  /* ToDo: Uncomment after beacons are implemented */
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', ev => {
+  //     ev.preventDefault()
+  //     dispatch({
+  //       type: C.STOP_CURRENT_PROJECT,
+  //       payload: { id: projectId },
+  //     })
 
-      if (navigator && navigator.sendBeacon) {
-        navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/beacon`,
-          JSON.stringify({ token, projectId, machineId })
-        )
-      }
-
-      // ev.preventDefault()
-      // return (ev.returnValue = 'Are you sure you want to close?')
-    })
-    // const stop = () =>
-    //   dispatch(
-    //     mutation({
-    //       name: 'stopProject',
-    //       storeKey: 'stopProject',
-    //       mutation: STOP_PROJECT,
-    //       dataSelector: data => data,
-    //       variables: { projectId, machineId },
-    //       onSuccessDispatch: [
-    //         () => ({
-    //           type: C.STOP_CURRENT_PROJECT,
-    //         }),
-    //       ],
-    //     })
-    //   )
-  }, [])
+  //     if (navigator && navigator.sendBeacon) {
+  //       navigator.sendBeacon(
+  //         `${process.env.SILISKY_ENDPOINT}/beacon`,
+  //         JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
+  //       )
+  //     }
+  //   })
+  // }, [])
 
   return (
     <Layout>
