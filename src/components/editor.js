@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import Layout from 'components/layout'
@@ -17,6 +17,12 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
+// window.addEventListener("beforeunload", (ev) =>
+// {
+//     ev.preventDefault();
+//     return ev.returnValue = 'Are you sure you want to close?';
+// });
+
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
 const EditorComponent = ({ location }) => {
@@ -24,6 +30,8 @@ const EditorComponent = ({ location }) => {
   const id = location.state.machineId
   const port = location.state.editorPort
   const [loaderVisible, setLoaderVisible] = useState(true)
+
+  use
 
   return (
     <Layout>
