@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import ApolloClient from 'apollo-boost'
 import { mutation } from 'utils'
 
+import * as ApiC from 'state/api/constants'
 import Loader from 'components/fullScreenLoader.js'
 import * as C from 'state/currentProject/constants'
 import Header from './header'
@@ -95,6 +96,10 @@ const LayoutComponent = ({ children, location }) => {
           )
         } catch (e) {
           console.log('fetch error: ', e)
+          dispatch({
+            type: ApiC.FETCH_ERROR,
+            payload: { storeKey: 'myProjects', error: e },
+          })
         }
       }
       addProject()
