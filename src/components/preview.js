@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
+import getOr from 'lodash/fp/getOr'
 
 import { projectSelectors, selectors } from 'state'
 import SEO from 'components/seo'
@@ -15,15 +16,14 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
+const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
+const getPreviewPort = getOr(undefined, ['currentProject', 'previewPort'])
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
-
-const getSelectedProject = projectSelectors.getProjectData
 
 const Preview = () => {
   const token = useSelector(getUserToken)
-  const project = useSelector(getSelectedProject)
-  const id = project.machineId
-  const port = project.previewPort
+  const id = useSelector(getMachineId)
+  const port = useSelector(getPreviewPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   return (

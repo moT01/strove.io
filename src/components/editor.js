@@ -21,7 +21,6 @@ const StyledIframe = styled.iframe`
 
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getEditorPort = getOr(undefined, ['currentProject', 'editorPort'])
-const getPreviewPort = getOr(undefined, ['currentProject', 'previewPort'])
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
 const EditorComponent = ({ location }) => {
