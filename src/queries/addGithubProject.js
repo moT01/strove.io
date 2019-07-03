@@ -13,6 +13,7 @@ export default gql`
       isPrivate: $isPrivate
       githubLink: $githubLink
     ) {
+      id
       name
       description
       isPrivate
