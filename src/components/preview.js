@@ -41,7 +41,7 @@ const Preview = () => {
       )}
       <StyledIframe
         onLoad={() => setLoaderVisible(false)}
-        src={`https://dmb9kya1j9.execute-api.eu-central-1.amazonaws.com/development/preview?token=${token}&id=${id}&port=${port}`}
+        src={`${process.env.SILISKY_ENDPOINT}/preview?token=${token}&id=${id}&port=${port}`}
         style={{ opacity: loaderVisible ? 0 : 1, transition: 'opacity 0.5s' }}
       />
     </>

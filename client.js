@@ -94,7 +94,7 @@ export default new ApolloClient({
       cache,
     }),
     new HttpLink({
-      uri: process.env.SILISKY_ENDPOINT,
+      uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
     }),
   ]),
   cache,

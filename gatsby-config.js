@@ -77,6 +77,7 @@ module.exports = {
       options: {
         whitelist: [
           'SILISKY_ENDPOINT',
+          'SILISKY_GRAPHQL_ENDPOINT',
           'GITHUB_CLIENT_ID',
           'GITHUB_REDIRECT_URI',
           'SILISKY_URL',
