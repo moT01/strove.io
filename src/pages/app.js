@@ -4,7 +4,7 @@ import PrivateRoute from 'components/privateRoute'
 import Editor from 'components/editor'
 import Preview from 'components/preview'
 import Dashboard from 'components/dashboard'
-import Homepage from 'components/homepage'
+import Homepage from 'components/homePage'
 
 const App = () => (
   <Router>
