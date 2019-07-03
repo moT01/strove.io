@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import Layout from 'components/layout'
 import { Location } from '@reach/router'
-import Loader from 'components/fullScreenLoader.js'
 
+import Layout from 'components/layout'
+import Loader from 'components/fullScreenLoader.js'
+import { STOP_PROJECT } from 'queries'
 import { selectors } from 'state'
 import SEO from 'components/seo'
+import getOr from 'lodash/fp/getOr'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -17,21 +19,23 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-// window.addEventListener("beforeunload", (ev) =>
-// {
-//     ev.preventDefault();
-//     return ev.returnValue = 'Are you sure you want to close?';
-// });
-
+const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
+const getEditorPort = getOr(undefined, ['currentProject', 'editorPort'])
+const getPreviewPort = getOr(undefined, ['currentProject', 'previewPort'])
 const getUserToken = selectors.getData('user', {}, 'siliskyToken')
 
 const EditorComponent = ({ location }) => {
   const token = useSelector(getUserToken)
-  const id = location.state.machineId
-  const port = location.state.editorPort
+  const id = useSelector(getMachineId)
+  const port = useSelector(getEditorPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  use
+  useEffect(() => {
+    window.addEventListener('beforeunload', ev => {
+      ev.preventDefault()
+      return (ev.returnValue = 'Are you sure you want to close?')
+    })
+  }, [])
 
   return (
     <Layout>
