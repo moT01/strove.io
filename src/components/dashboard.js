@@ -300,34 +300,16 @@ const Dashboard = () => {
                   />
                   <Text>{project.language}</Text>
                 </TextWrapper> */}
-                <TextWrapper>
-                  <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
-                  <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
-                </TextWrapper>
-              </InfoWrapper>
-              <RightSection>
-                <Button
-                  to="/app/editor/"
-                  primary
-                  onClick={() => handleStartClick(project)}
-                >
-                  Start
-                </Button>
-                <DeleteButton
-                  onClick={() =>
-                    handleDeleteClick({
-                      id: project.id,
-                      machineId: project.machineId,
-                      editorPort: project.editorPort,
-                    }}
+                  <TextWrapper>
+                    <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
+                    <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
+                  </TextWrapper>
+                </InfoWrapper>
+                <RightSection>
+                  <Button
+                    to="/app/editor/"
                     primary
-                    onClick={() =>
-                      handleStartClick({
-                        editorPort: project.editorPort,
-                        previewPort: project.previewPort,
-                        machineId: project.machineId,
-                      })
-                    }
+                    onClick={() => handleStartClick(project)}
                   >
                     Start
                   </Button>
