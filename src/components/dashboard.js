@@ -68,10 +68,10 @@ const Tile = styled.div`
 `
 
 const AddProjectWrapper = styled(Tile)`
-  height: 15vh;
   width: 50vw;
-
   margin-top: 5vh;
+  height: 18vh;
+  margin-bottom: 0;
 `
 
 const Button = styled(Link)`
