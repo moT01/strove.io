@@ -70,7 +70,7 @@ const Tile = styled.div`
 const AddProjectWrapper = styled(Tile)`
   width: 50vw;
   margin-top: 5vh;
-  height: 18vh;
+  height: auto;
   margin-bottom: 0;
 `
 
@@ -79,6 +79,7 @@ const Button = styled(Link)`
   flex-direction: row;
   height: auto;
   width: 100%;
+  min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -106,6 +107,7 @@ const DeleteButton = styled.button`
   flex-direction: row;
   height: auto;
   width: 100%;
+  min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -147,7 +149,7 @@ const GithubLinkForm = styled.form`
   align-items: center;
   width: 100%;
   height: 100%;
-  margin: 2vh 0 2vh 0;
+  margin: 2vh 0 0;
 `
 
 const ProjectTitle = styled.h1`
