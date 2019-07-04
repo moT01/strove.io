@@ -410,18 +410,10 @@ const Dashboard = () => {
         isOpen={isModalVisible}
         onRequestClose={setModalVisible}
         style={modalStyles}
-        contentLabel="Are you sure you want to delete this project?"
+        contentLabel="Delete project?"
       >
-        <button
-          onClick={() => {
-            setModalVisible(false)
-          }}
-        >
-          close
-        </button>
-        <div>I am a modal</div>
+        <div>Are you sure you want to delete this project?</div>
         <form>
-          <input />
           <button
             onClick={() => {
               handleDeleteClick(projectToDelete)
@@ -431,7 +423,14 @@ const Dashboard = () => {
           >
             Confirm
           </button>
-          <button onClick={() => setProjectToDelete()}>Confirm</button>
+          <button
+            onClick={() => {
+              setProjectToDelete()
+              setModalVisible(false)
+            }}
+          >
+            close
+          </button>
         </form>
       </Modal>
     </Layout>
