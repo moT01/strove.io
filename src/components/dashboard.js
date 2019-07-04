@@ -92,6 +92,7 @@ const Button = styled(Link)`
   height: auto;
   width: 100%;
   min-width: 70px;
+  max-width: 150px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -120,6 +121,7 @@ const DeleteButton = styled.button`
   height: auto;
   width: 100%;
   min-width: 70px;
+  max-width: 150px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -408,30 +410,32 @@ const Dashboard = () => {
       </PageWrapper>
       <Modal
         isOpen={isModalVisible}
-        onRequestClose={setModalVisible}
+        onRequestClose={() => setModalVisible(false)}
         style={modalStyles}
         contentLabel="Delete project?"
       >
-        <div>Are you sure you want to delete this project?</div>
-        <form>
-          <button
-            onClick={() => {
-              handleDeleteClick(projectToDelete)
-              setProjectToDelete()
-              setModalVisible(false)
-            }}
-          >
-            Confirm
-          </button>
-          <button
-            onClick={() => {
-              setProjectToDelete()
-              setModalVisible(false)
-            }}
-          >
-            close
-          </button>
-        </form>
+        <div>
+          Are you sure you want to delete this project? This operation cannot be
+          undone.
+        </div>
+        <Button
+          primary
+          onClick={() => {
+            handleDeleteClick(projectToDelete)
+            setProjectToDelete(null)
+            setModalVisible(false)
+          }}
+        >
+          Confirm
+        </Button>
+        <Button
+          onClick={() => {
+            setProjectToDelete(null)
+            setModalVisible(false)
+          }}
+        >
+          close
+        </Button>
       </Modal>
     </Layout>
   )
