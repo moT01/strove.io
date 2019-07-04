@@ -5,7 +5,7 @@ import Modal from 'react-modal'
 
 import Layout from './layout'
 import SEO from './seo'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { query, mutation } from 'utils'
@@ -107,12 +107,21 @@ const Button = styled(Link)`
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${FadeIn} 1s ease-out;
   cursor: pointer;
 
-  &:hover {
-    transform: scale(1.1);
+  &:disabled {
+    opacity: 0.4;
   }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      animation: ${FadeIn} 1s ease-out;
+    `}
 `
 
 const DeleteButton = styled.button`
@@ -139,9 +148,19 @@ const DeleteButton = styled.button`
   animation: ${FadeIn} 1s ease-out;
   cursor: pointer;
 
-  &:hover {
-    transform: scale(1.1);
+  &:disabled {
+    opacity: 0.4;
   }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      animation: ${FadeIn} 1s ease-out;
+    `}
 `
 
 const GithubLinkInput = styled.input`
@@ -154,6 +173,7 @@ const GithubLinkInput = styled.input`
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-align: center;
   font-size: 2vh;
+  padding: 0.5vh 0;
 `
 
 const GithubLinkForm = styled.form`
@@ -340,6 +360,10 @@ const Dashboard = () => {
                       : 'Paste repository link here'
                   }
                 />
+                {console.log('props.errors', props.errors)}
+                {props.errors.githubLink && (
+                  <ErrorMessage>{props.errors.githubLink}</ErrorMessage>
+                )}
                 {repoError &&
                   repoError.message &&
                   repoError.message.includes(
@@ -349,7 +373,12 @@ const Dashboard = () => {
                       Provided link leads to a private repository
                     </ErrorMessage>
                   )}
-                <DeleteButton primary type="submit" style={{ width: '20%' }}>
+                <DeleteButton
+                  disabled={props.errors.githubLink}
+                  primary
+                  type="submit"
+                  style={{ width: '20%' }}
+                >
                   Add project
                 </DeleteButton>
               </GithubLinkForm>

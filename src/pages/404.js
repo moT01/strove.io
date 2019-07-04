@@ -78,7 +78,7 @@ const NotFound = () => (
           }}
         >
           <span style={{ color: '#777', fontStyle: 'italic' }}>
-            // Go back to index page!
+            // Go back to main page!
           </span>
         </Link>
       </span>
