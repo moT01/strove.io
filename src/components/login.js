@@ -76,9 +76,9 @@ const Inline = styled.div`
   margin-left: 4px;
 `
 
-const getUserName = selectors.getData('user', null, 'name')
+const getUserName = selectors.getApiData('user', null, 'name')
 
-const getUserPhoto = selectors.getData('user', null, 'photoUrl')
+const getUserPhoto = selectors.getApiData('user', null, 'photoUrl')
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto],

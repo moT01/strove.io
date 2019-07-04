@@ -18,7 +18,7 @@ const StyledIframe = styled.iframe`
 
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getPreviewPort = getOr(undefined, ['currentProject', 'previewPort'])
-const getUserToken = selectors.getData('user', {}, 'siliskyToken')
+const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
 
 const Preview = () => {
   const token = useSelector(getUserToken)
