@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { Formik } from 'formik'
+import Modal from 'react-modal'
 
 import Layout from './layout'
 import SEO from './seo'
@@ -13,6 +14,17 @@ import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
+
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+}
 
 const FadeIn = keyframes`
   0% {
@@ -237,6 +249,8 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
   const user = useSelector(selectors.getUser)
+  const [isModalVisible, setModalVisible] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState()
   const repoError = useSelector(selectors.getError('myProjects'))
 
   const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
@@ -383,14 +397,7 @@ const Dashboard = () => {
                   >
                     Start
                   </Button>
-                  <DeleteButton
-                    onClick={() =>
-                      handleDeleteClick({
-                        id: project.id,
-                        machineId: project.machineId,
-                      })
-                    }
-                  >
+                  <DeleteButton onClick={() => setModalVisible(true)}>
                     Delete
                   </DeleteButton>
                 </RightSection>
@@ -399,6 +406,34 @@ const Dashboard = () => {
           ))}
         </TilesWrapper>
       </PageWrapper>
+      <Modal
+        isOpen={isModalVisible}
+        onRequestClose={setModalVisible}
+        style={modalStyles}
+        contentLabel="Are you sure you want to delete this project?"
+      >
+        <button
+          onClick={() => {
+            setModalVisible(false)
+          }}
+        >
+          close
+        </button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button
+            onClick={() => {
+              handleDeleteClick(projectToDelete)
+              setProjectToDelete()
+              setModalVisible(false)
+            }}
+          >
+            Confirm
+          </button>
+          <button onClick={() => setProjectToDelete()}>Confirm</button>
+        </form>
+      </Modal>
     </Layout>
   )
 }
