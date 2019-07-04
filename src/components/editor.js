@@ -21,7 +21,7 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const getUserToken = selectors.getData('user', {}, 'siliskyToken')
+const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
 const getId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
