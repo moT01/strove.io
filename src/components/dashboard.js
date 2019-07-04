@@ -86,45 +86,7 @@ const AddProjectWrapper = styled(Tile)`
   margin-bottom: 0;
 `
 
-const Button = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-  min-width: 70px;
-  max-width: 150px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
-  border-width: 1px;
-  border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  cursor: pointer;
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      &:hover {
-        transform: scale(1.1);
-      }
-
-      animation: ${FadeIn} 1s ease-out;
-    `}
-`
-
-const DeleteButton = styled.button`
+const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
@@ -172,7 +134,7 @@ const GithubLinkInput = styled.input`
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-align: center;
-  font-size: 2vh;
+  font-size: 1rem;
   padding: 0.5vh 0;
 `
 
@@ -186,15 +148,15 @@ const GithubLinkForm = styled.form`
   margin: 2vh 0 0;
 `
 
-const ProjectTitle = styled.h1`
-  font-size: 3vh;
+const ProjectTitle = styled.h3`
+  font-size: 1.4rem;
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
 const Text = styled.p`
   color: #0072ce;
-  font-size: 1.7vh;
+  font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
   white-space: nowrap;
@@ -204,7 +166,7 @@ const Text = styled.p`
 
 const ErrorMessage = styled.p`
   color: red;
-  font-size: 1.3vh;
+  font-size: 0.9rem;
   margin: 0;
 `
 
@@ -354,11 +316,7 @@ const Dashboard = () => {
                   onBlur={props.handleBlur}
                   value={props.values.githubLink}
                   name="githubLink"
-                  placeholder={
-                    props.errors.githubLink
-                      ? props.errors.githubLink
-                      : 'Paste repository link here'
-                  }
+                  placeholder={'Paste repository link here'}
                 />
                 {console.log('props.errors', props.errors)}
                 {props.errors.githubLink && (
@@ -373,14 +331,14 @@ const Dashboard = () => {
                       Provided link leads to a private repository
                     </ErrorMessage>
                   )}
-                <DeleteButton
+                <Button
                   disabled={props.errors.githubLink}
                   primary
                   type="submit"
                   style={{ width: '20%' }}
                 >
                   Add project
-                </DeleteButton>
+                </Button>
               </GithubLinkForm>
             )}
           />
@@ -428,9 +386,7 @@ const Dashboard = () => {
                   >
                     Start
                   </Button>
-                  <DeleteButton onClick={() => setModalVisible(true)}>
-                    Delete
-                  </DeleteButton>
+                  <Button onClick={() => setModalVisible(true)}>Delete</Button>
                 </RightSection>
               </VerticalDivider>
             </Tile>
