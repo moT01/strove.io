@@ -331,7 +331,7 @@ const Dashboard = () => {
                     </ErrorMessage>
                   )}
                 <Button
-                  disabled={!props.githubLink || props.errors.githubLink}
+                  disabled={!props.values.githubLink || props.errors.githubLink}
                   primary
                   type="submit"
                   style={{ width: '20%' }}
