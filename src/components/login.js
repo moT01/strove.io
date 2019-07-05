@@ -22,6 +22,8 @@ const options = [
 ]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
+const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
+const REDIRECT_URI = process.env.REDIRECT_URI
 
 const Text = styled.span`
   transition: color 0.15s;
@@ -96,26 +98,27 @@ const LoginComponent = ({ location }) => {
   const user = useSelector(getUserData)
 
   useEffect(() => {
-    const code =
-      location.search.match(/code=(.*)/) &&
-      location.search.match(/code=(.*)/)[1]
-    if (code) {
-      dispatch(
-        mutation({
-          mutation: GITHUB_LOGIN,
-          variables: { code },
-          storeKey: 'user',
-          name: 'githubAuth',
-          onSuccess: ({ siliskyToken }) =>
-            localStorage.setItem('token', siliskyToken),
-        })
-      )
-    }
+    // const code =
+    //   location.search.match(/code=(.*)/) &&
+    //   location.search.match(/code=(.*)/)[1]
+    // if (code) {
+    //   dispatch(
+    //     mutation({
+    //       mutation: GITHUB_LOGIN,
+    //       variables: { code },
+    //       storeKey: 'user',
+    //       name: 'githubAuth',
+    //       onSuccess: ({ siliskyToken }) =>
+    //         localStorage.setItem('token', siliskyToken),
+    //     })
+    //   )
+    // }
   }, [])
 
   return !user.username && !isLoading ? (
     <LoginButton
-      href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`}
+      // href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`}
+      href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=farfromhome`}
     >
       <Text>Login </Text>
       <Inline>
