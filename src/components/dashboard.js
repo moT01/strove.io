@@ -216,11 +216,11 @@ const StyledIcon = styled(Icon)`
 const validate = values => {
   let errors = {}
 
-  if (!values.githubLink) {
-    errors.githubLink = 'You need to provide repository link to add project'
+  if (!values.githubLink || (values.githubLink && !values.githubLink.trim())) {
+    return
   } else if (
     !/.*github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
-      values.githubLink
+      values.githubLink.trim()
     )
   ) {
     errors.githubLink = 'Invalid repository link'
@@ -318,7 +318,6 @@ const Dashboard = () => {
                   name="githubLink"
                   placeholder={'Paste repository link here'}
                 />
-                {console.log('props.errors', props.errors)}
                 {props.errors.githubLink && (
                   <ErrorMessage>{props.errors.githubLink}</ErrorMessage>
                 )}
@@ -332,7 +331,7 @@ const Dashboard = () => {
                     </ErrorMessage>
                   )}
                 <Button
-                  disabled={props.errors.githubLink}
+                  disabled={!props.githubLink || props.errors.githubLink}
                   primary
                   type="submit"
                   style={{ width: '20%' }}
