@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Location } from '@reach/router'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import { selectors } from 'state'
@@ -89,7 +89,6 @@ const LoginComponent = ({ location }) => {
 
   const handleDropdown = () => setShowDropdown(false)
   const handleDropdownClick = () => setShowDropdown(!showDropdown)
-
   const user = useSelector(getUserData)
 
   return !user.username && !isLoading ? (

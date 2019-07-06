@@ -8,8 +8,6 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
-import { createSelector } from 'reselect'
-import { selectors } from 'state'
 import { GITHUB_LOGIN } from 'queries'
 import { mutation, window } from 'utils'
 
@@ -38,16 +36,15 @@ export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <ElementWithGitClone>{element}</ElementWithGitClone>
+        <GitCloneProvider>{element}</GitCloneProvider>
       </PersistGate>
     </Provider>
   </ApolloProvider>
 )
 
-const ElementWithGitClone = ({ children }) => {
+const GitCloneProvider = ({ children }) => {
   const dispatch = useDispatch()
 
-  console.log('window', window)
   useEffect(() => {
     const code =
       window &&
