@@ -52,8 +52,8 @@ const ElementWithGitClone = ({ children }) => {
     const code =
       window &&
       window.location &&
-      window.location.match(/code=(.*)/) &&
-      window.location.match(/code=(.*)/)[1]
+      window.location.hash.match(/code=(.*)/) &&
+      window.location.hash.match(/code=(.*)/)[1]
     if (code) {
       dispatch(
         mutation({
