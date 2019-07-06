@@ -31,7 +31,7 @@ const FadeIn = keyframes`
     opacity: 0;
   }
   100% {
-    opacity: 1;
+    opacity: 0.4;
   }
 
 `
@@ -108,7 +108,7 @@ const Button = styled.button`
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
-  cursor: pointer;
+  opacity: 0.9;
 
   &:disabled {
     opacity: 0.4;
@@ -117,11 +117,10 @@ const Button = styled.button`
   ${props =>
     !props.disabled &&
     css`
+      cursor: pointer;
       &:hover {
-        transform: scale(1.1);
+        opacity: 1;
       }
-
-      animation: ${FadeIn} 1s ease-out;
     `}
 `
 
