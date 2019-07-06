@@ -95,23 +95,23 @@ const LoginComponent = ({ location }) => {
 
   const user = useSelector(getUserData)
 
-  useEffect(() => {
-    const code =
-      location.search.match(/code=(.*)/) &&
-      location.search.match(/code=(.*)/)[1]
-    if (code) {
-      dispatch(
-        mutation({
-          mutation: GITHUB_LOGIN,
-          variables: { code },
-          storeKey: 'user',
-          name: 'githubAuth',
-          onSuccess: ({ siliskyToken }) =>
-            localStorage.setItem('token', siliskyToken),
-        })
-      )
-    }
-  }, [])
+  // useEffect(() => {
+  //   const code =
+  //     location.search.match(/code=(.*)/) &&
+  //     location.search.match(/code=(.*)/)[1]
+  //   if (code) {
+  //     dispatch(
+  //       mutation({
+  //         mutation: GITHUB_LOGIN,
+  //         variables: { code },
+  //         storeKey: 'user',
+  //         name: 'githubAuth',
+  //         onSuccess: ({ siliskyToken }) =>
+  //           localStorage.setItem('token', siliskyToken),
+  //       })
+  //     )
+  //   }
+  // }, [])
 
   return !user.username && !isLoading ? (
     <LoginButton
