@@ -43,15 +43,21 @@ const Button = styled.button`
   color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+  box-shadow: 0 1.1vh 1.1vh -1.5vh ${props =>
+    props.team ? '#ffffff' : '#0072ce'};
   transition: all 0.2s ease;
 
   &:hover {
-    transform: scale(1.1);
+        opacity: 1;
+        box-shadow: 0 1.3vh 1.3vh -1.3vh ${props =>
+          props.team ? '#ffffff' : '#0072ce'};
+        transform: translateY(-3px);
+      }
   }
 
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props =>
+      props.team ? '#ffffff' : '#0072ce'};
   }
 `
 
@@ -86,12 +92,14 @@ const PricingWrapper = styled.div`
   align-items: center;
 
   width: 45%;
-  height: 90%;
+  height: 80%;
+
   @media (max-width: 1366px) {
     width: 90%;
     height: auto;
   }
 `
+
 const PricingSection = styled.div`
   display: flex;
   flex-direction: row;

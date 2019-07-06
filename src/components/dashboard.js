@@ -145,7 +145,6 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        ${'' /* margin-bottom: 3px; */}
         box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
         transform: translateY(-1px);
       }
