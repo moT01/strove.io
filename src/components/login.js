@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Location } from '@reach/router'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 import { selectors } from 'state'
-import { GITHUB_LOGIN } from 'queries'
 import UserInfoHeader from 'components/userInfoHeader'
 import { logout } from './login/actions'
-import { mutation } from 'utils'
 
 const options = [
   { option: 'Settings' },
@@ -87,31 +85,12 @@ const getUserData = createSelector(
 
 const LoginComponent = ({ location }) => {
   const [showDropdown, setShowDropdown] = useState(false)
-  const dispatch = useDispatch()
   const isLoading = useSelector(selectors.getLoading('user'))
 
   const handleDropdown = () => setShowDropdown(false)
   const handleDropdownClick = () => setShowDropdown(!showDropdown)
 
   const user = useSelector(getUserData)
-
-  // useEffect(() => {
-  //   const code =
-  //     location.search.match(/code=(.*)/) &&
-  //     location.search.match(/code=(.*)/)[1]
-  //   if (code) {
-  //     dispatch(
-  //       mutation({
-  //         mutation: GITHUB_LOGIN,
-  //         variables: { code },
-  //         storeKey: 'user',
-  //         name: 'githubAuth',
-  //         onSuccess: ({ siliskyToken }) =>
-  //           localStorage.setItem('token', siliskyToken),
-  //       })
-  //     )
-  //   }
-  // }, [])
 
   return !user.username && !isLoading ? (
     <LoginButton
