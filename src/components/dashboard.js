@@ -46,6 +46,16 @@ const FullFadeIn = keyframes`
 
 `
 
+const ButtonFadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 0.9;
+}
+
+`
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -64,7 +74,7 @@ const TilesWrapper = styled.div`
   align-items: center;
   padding: 2vh;
   margin: 2vh;
-  animation: ${FadeIn} 1s ease-out;
+  animation: ${FullFadeIn} 1s ease-out;
 `
 
 const Tile = styled.div`
@@ -114,7 +124,7 @@ const Button = styled.button`
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
@@ -131,9 +141,13 @@ const Button = styled.button`
   ${props =>
     !props.disabled &&
     css`
+      animation: ${ButtonFadeIn} 1s ease-out;
       cursor: pointer;
       &:hover {
         opacity: 1;
+        ${'' /* margin-bottom: 3px; */}
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        transform: translateY(-1px);
       }
     `}
 `
