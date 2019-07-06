@@ -15,16 +15,16 @@ import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
 
-const modalStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-}
+// const modalStyles = {
+//   content: {
+//     top: '50%',
+//     left: '50%',
+//     right: 'auto',
+//     bottom: 'auto',
+//     marginRight: '-50%',
+//     transform: 'translate(-50%, -50%)',
+//   },
+// }
 
 const FadeIn = keyframes`
   0% {
@@ -32,6 +32,16 @@ const FadeIn = keyframes`
   }
   100% {
     opacity: 0.4;
+  }
+
+`
+
+const FullFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 
 `
@@ -110,6 +120,10 @@ const Button = styled.button`
   animation: ${FadeIn} 1s ease-out;
   opacity: 0.9;
 
+  :focus {
+    outline: 0;
+  }
+
   &:disabled {
     opacity: 0.4;
   }
@@ -122,6 +136,10 @@ const Button = styled.button`
         opacity: 1;
       }
     `}
+`
+
+const ModalButton = styled(Button)`
+  animation: ${FullFadeIn} 0.2s ease-out;
 `
 
 const GithubLinkInput = styled.input`
@@ -161,6 +179,12 @@ const Text = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+`
+
+const ModalText = styled(Text)`
+  white-space: normal;
+  text-overflow: wrap;
+  overflow: visible;
 `
 
 const ErrorMessage = styled.p`
@@ -210,6 +234,30 @@ const TextWrapper = styled(FlexWrapper)`
 const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
   color: #0072ce;
+`
+
+const StyledModal = styled(Modal)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-color: #0072ce;
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  height: auto;
+  width: 30vw;
+  top: 42.5vh;
+  left: 35vw;
+  position: fixed;
+  animation: ${FullFadeIn} 0.2s ease-out;
+
+  :focus {
+    outline: 0;
+  }
 `
 
 const validate = values => {
@@ -391,17 +439,16 @@ const Dashboard = () => {
           ))}
         </TilesWrapper>
       </PageWrapper>
-      <Modal
+      <StyledModal
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
-        style={modalStyles}
         contentLabel="Delete project?"
       >
-        <div>
+        <ModalText>
           Are you sure you want to delete this project? This operation cannot be
           undone.
-        </div>
-        <Button
+        </ModalText>
+        <ModalButton
           primary
           onClick={() => {
             handleDeleteClick(projectToDelete)
@@ -410,16 +457,16 @@ const Dashboard = () => {
           }}
         >
           Confirm
-        </Button>
-        <Button
+        </ModalButton>
+        <ModalButton
           onClick={() => {
             setProjectToDelete(null)
             setModalVisible(false)
           }}
         >
-          close
-        </Button>
-      </Modal>
+          Close
+        </ModalButton>
+      </StyledModal>
     </Layout>
   )
 }
