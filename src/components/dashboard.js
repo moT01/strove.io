@@ -452,6 +452,7 @@ const Dashboard = () => {
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
         contentLabel="Delete project?"
+        ariaHideApp={false}
       >
         <ModalText>
           Are you sure you want to delete this project? This operation cannot be
