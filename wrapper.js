@@ -79,14 +79,14 @@ const GitCloneProvider = ({ children }) => {
   const user = useSelector(selectors.getUser)
 
   useEffect(() => {
-    const githubLink =
+    const repoLink =
       window &&
       window.location &&
       window &&
       window.location.href.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-    githubLink && createProject({ githubLink, dispatch, user })
+      repoLink && createProject({ repoLink, dispatch, user })
   }, [])
 
   return children

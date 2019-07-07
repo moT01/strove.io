@@ -10,7 +10,7 @@ const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
-const createProject = async ({ githubLink, dispatch, user }) => {
+const createProject = async ({ repoLink, dispatch, user }) => {
   const query = GET_REPO_INFO
 
   const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
@@ -40,7 +40,7 @@ const createProject = async ({ githubLink, dispatch, user }) => {
       'User-Agent': 'node',
     },
   }
-  const repoUrlParts = githubLink.split('/')
+  const repoUrlParts = repoLink.split('/')
   const owner = repoUrlParts[3]
   const name = repoUrlParts[4]
   const variables = { owner, name }
@@ -61,7 +61,8 @@ const createProject = async ({ githubLink, dispatch, user }) => {
       mutation({
         name: 'addProject',
         storeKey: 'myProjects',
-        variables: { githubLink, name, description },
+        /* ToDo: Support Gitlab and Bitbucket as well */
+        variables: { githubLink: repoLink, name, description },
         mutation: ADD_GITHUB_PROJECT,
         onSuccess: startProject,
       })
