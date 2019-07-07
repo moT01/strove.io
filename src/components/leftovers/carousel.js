@@ -224,7 +224,6 @@ const Bubbles = React.memo(
                 onMouseLeave={() => handleHoverOut()}
               >
                 {logo.component}
-                {console.log('Is anything selected?', selectedBubble)}
               </IconContainer>
             ) : (
               <SelectedIconContainer
@@ -233,7 +232,6 @@ const Bubbles = React.memo(
                 onMouseLeave={() => handleHoverOut()}
               >
                 {logo.component}
-                {console.log('I am the chosen one', selectedBubble)}
               </SelectedIconContainer>
             )}
           </IconBearing>

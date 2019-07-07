@@ -458,7 +458,6 @@ const Dashboard = () => {
           Are you sure you want to delete this project? This operation cannot be
           undone.
         </ModalText>
-        {console.log('projectToDelete', projectToDelete)}
         <ModalButton
           primary
           onClick={() => {
