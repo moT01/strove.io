@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider, useDispatch, useSelector } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import thunk from 'redux-thunk'
@@ -10,6 +10,8 @@ import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import { GITHUB_LOGIN } from 'queries'
 import { mutation, window } from 'utils'
+import { createProject } from 'utils'
+import { selectors } from 'state'
 
 import client from './client'
 import rootReducer from './src/state'
@@ -36,7 +38,9 @@ export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <LoginProvider>{element}</LoginProvider>
+        <LoginProvider>
+          <GitCloneProvider>{element}</GitCloneProvider>
+        </LoginProvider>
       </PersistGate>
     </Provider>
   </ApolloProvider>
@@ -64,6 +68,25 @@ const LoginProvider = ({ children }) => {
         })
       )
     }
+  }, [])
+
+  return children
+}
+
+const GitCloneProvider = ({ children }) => {
+  const dispatch = useDispatch()
+
+  const user = useSelector(selectors.getUser)
+
+  useEffect(() => {
+    const githubLink =
+      window &&
+      window.location &&
+      window &&
+      window.location.href.match(/#(.*)/) &&
+      window.location.href.match(/#(.*)/)[1]
+
+    githubLink && createProject({ githubLink, dispatch, user })
   }, [])
 
   return children
