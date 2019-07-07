@@ -316,6 +316,7 @@ const Dashboard = () => {
         mutation: DELETE_PROJECT,
         variables: { projectId: id, machineId },
         dataSelector: data => data,
+        onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
           () => ({
             type: ApiC.REMOVE_ITEM,
@@ -434,7 +435,14 @@ const Dashboard = () => {
                   >
                     Start
                   </Button>
-                  <Button onClick={() => setModalVisible(true)}>Delete</Button>
+                  <Button
+                    onClick={() => {
+                      setModalVisible(true)
+                      setProjectToDelete(project)
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </RightSection>
               </VerticalDivider>
             </Tile>
@@ -450,11 +458,11 @@ const Dashboard = () => {
           Are you sure you want to delete this project? This operation cannot be
           undone.
         </ModalText>
+        {console.log('projectToDelete', projectToDelete)}
         <ModalButton
           primary
           onClick={() => {
             handleDeleteClick(projectToDelete)
-            setProjectToDelete(null)
             setModalVisible(false)
           }}
         >
