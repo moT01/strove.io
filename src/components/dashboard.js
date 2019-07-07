@@ -303,7 +303,7 @@ const Dashboard = () => {
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
-          variables: { projectId: id, machineId },
+          variables: { projectId: id },
           onSuccessDispatch: [
             ({ id, editorPort, previewPort, machineId }) => ({
               type: C.SELECT_CURRENT_PROJECT,
