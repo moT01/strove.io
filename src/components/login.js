@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Location } from '@reach/router'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -72,10 +71,6 @@ const MenuWrapper = styled.div`
   }
 `
 
-const Wrapper = styled.div`
-  background-color: inherit;
-`
-
 const Option = styled.a`
   display: flex;
   flex-direction: row;
@@ -139,7 +134,7 @@ const LoginDropdown = () => {
         selectedItem,
         highlightedIndex,
       }) => (
-        <div style={{ backgroundColor: 'inherit', border: 'none' }}>
+        <span>
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
 
           <div hidden={!isOpen} style={{ position: 'absolute' }}>
@@ -151,13 +146,13 @@ const LoginDropdown = () => {
               ))}
             </MenuWrapper>
           </div>
-        </div>
+        </span>
       )}
     </Downshift>
   )
 }
 
-const LoginComponent = ({ location }) => {
+const Login = props => {
   const [showDropdown, setShowDropdown] = useState(false)
   const isLoading = useSelector(selectors.getLoading('user'))
 
@@ -177,11 +172,5 @@ const LoginComponent = ({ location }) => {
     />
   )
 }
-
-const Login = () => (
-  <Location>
-    {({ location }) => <LoginComponent location={location} />}
-  </Location>
-)
 
 export default Login
