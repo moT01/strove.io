@@ -36,21 +36,22 @@ export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <GitCloneProvider>{element}</GitCloneProvider>
+        <LoginProvider>{element}</LoginProvider>
       </PersistGate>
     </Provider>
   </ApolloProvider>
 )
 
-const GitCloneProvider = ({ children }) => {
+const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const code =
       window &&
       window.location &&
-      window.location.hash.match(/code=(.*)/) &&
-      window.location.hash.match(/code=(.*)/)[1]
+      window.location.href.match(/code=(.*)/) &&
+      window.location.href.match(/code=(.*)/)[1]
+
     if (code) {
       dispatch(
         mutation({
