@@ -309,12 +309,12 @@ const Dashboard = () => {
     }
   }
 
-  const handleDeleteClick = ({ id, machineId }) => {
+  const handleDeleteClick = id => {
     dispatch(
       mutation({
         name: 'deleteProject',
         mutation: DELETE_PROJECT,
-        variables: { projectId: id, machineId },
+        variables: { projectId: id },
         dataSelector: data => data,
         onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
@@ -462,7 +462,7 @@ const Dashboard = () => {
         <ModalButton
           primary
           onClick={() => {
-            handleDeleteClick(projectToDelete)
+            handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
         >
