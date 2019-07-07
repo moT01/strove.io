@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation ContinueProject($projectId: ID!, $machineId: ID!) {
-    continueProject(projectId: $projectId, machineId: $machineId) {
+  mutation ContinueProject($projectId: ID!) {
+    continueProject(projectId: $projectId) {
       id
       name
       description
