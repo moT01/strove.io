@@ -56,7 +56,7 @@ const LoginProvider = ({ children }) => {
       window.location.href.match(/code=(.*)/) &&
       window.location.href.match(/code=(.*)/)[1]
 
-    if (code) {
+    if (code && !localStorage.getItem('token')) {
       dispatch(
         mutation({
           mutation: GITHUB_LOGIN,
@@ -86,7 +86,7 @@ const GitCloneProvider = ({ children }) => {
       window.location.href.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-      repoLink && createProject({ repoLink, dispatch, user })
+    repoLink && createProject({ repoLink, dispatch, user })
   }, [])
 
   return children
