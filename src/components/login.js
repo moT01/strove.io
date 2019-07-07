@@ -22,41 +22,7 @@ const options = [
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-  min-width: 70px;
-  max-width: 150px;
-  margin-right: 5vw;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
-  border-width: 1px;
-  border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  ${'' /* animation: ${FadeIn} 1s ease-out; */}
-  opacity: 0.9;
-  :focus {
-    outline: 0;
-  }
-
-  &:hover {
-    opacity: 1;
-    box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
-    transform: translateY(-1px);
-  }
-`
-
-const LoginButton = styled.a`
+const LoginButton = styled.button`
   color: white;
   text-decoration: none;
   display: flex;
@@ -64,6 +30,9 @@ const LoginButton = styled.a`
   justify-content: flex-start;
   align-items: center;
   margin-right: 3vw;
+  position: 'relative';
+  background: none;
+  border: none;
 
   span {
     color: white;
@@ -81,13 +50,6 @@ const LoginButton = styled.a`
   * {
     vertical-align: bottom;
   }
-`
-
-const Inline = styled.div`
-  display: inline-block;
-  width: 4vh;
-  height: auto;
-  margin-left: 4px;
 `
 
 const MenuWrapper = styled.div`
@@ -108,6 +70,10 @@ const MenuWrapper = styled.div`
   @media (max-width: 1366px) {
     width: auto;
   }
+`
+
+const Wrapper = styled.div`
+  background-color: inherit;
 `
 
 const Option = styled.a`
@@ -173,13 +139,8 @@ const LoginDropdown = () => {
         selectedItem,
         highlightedIndex,
       }) => (
-        <div>
-          <Button
-            style={{ position: 'relative' }}
-            {...getToggleButtonProps({})}
-          >
-            Login
-          </Button>
+        <div style={{ backgroundColor: 'inherit', border: 'none' }}>
+          <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
 
           <div hidden={!isOpen} style={{ position: 'absolute' }}>
             <MenuWrapper invert>
