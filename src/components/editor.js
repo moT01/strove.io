@@ -1,6 +1,6 @@
 import React, { useState /* useEffect */ } from 'react'
 import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector /* useDispatch */ } from 'react-redux'
 import { Location } from '@reach/router'
 import getOr from 'lodash/fp/getOr'
 

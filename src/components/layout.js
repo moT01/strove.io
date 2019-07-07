@@ -1,6 +1,5 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { Location } from '@reach/router'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 

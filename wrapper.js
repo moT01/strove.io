@@ -82,7 +82,6 @@ const GitCloneProvider = ({ children }) => {
     const repoLink =
       window &&
       window.location &&
-      window &&
       window.location.href.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
