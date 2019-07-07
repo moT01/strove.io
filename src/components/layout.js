@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import Loader from 'components/fullScreenLoader.js'
 import Header from './header'
 import { selectors } from 'state'
-import { createProject } from 'utils'
 import './layout.css'
 
 const MainContent = styled.main`
@@ -21,17 +20,8 @@ const MainContent = styled.main`
   padding-top: 0;
 `
 
-const LayoutComponent = ({ children, location }) => {
-  const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+const Layout = ({ children }) => {
   const isLoading = useSelector(selectors.getLoading('myProjects'))
-
-  useEffect(() => {
-    const githubLink =
-      location.hash.match(/#(.*)/) && location.hash.match(/#(.*)/)[1]
-
-    githubLink && createProject({ githubLink, dispatch, user })
-  }, [])
 
   return (
     <StaticQuery
@@ -57,11 +47,5 @@ const LayoutComponent = ({ children, location }) => {
     />
   )
 }
-
-const Layout = props => (
-  <Location>
-    {({ location }) => <LayoutComponent {...props} location={location} />}
-  </Location>
-)
 
 export default Layout
