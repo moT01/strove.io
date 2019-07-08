@@ -6,7 +6,10 @@ import Downshift from 'downshift'
 
 import { selectors } from 'state'
 import UserInfoHeader from 'components/userInfoHeader'
-import { logout } from './login/actions'
+
+const logout = {
+  type: 'LOGOUT',
+}
 
 const options = [
   { option: 'Settings' },
