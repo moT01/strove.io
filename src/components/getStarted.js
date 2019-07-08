@@ -34,11 +34,10 @@ const Button = styled.button`
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
   cursor: pointer;
-
   &:hover {
     transform: scale(1.1);
   }

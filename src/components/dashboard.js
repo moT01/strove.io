@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'gatsby'
 import { Formik } from 'formik'
 import Modal from 'react-modal'
 
@@ -15,24 +14,33 @@ import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
 
-const modalStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-}
-
 const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.4;
+  }
+
+`
+
+const FullFadeIn = keyframes`
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
+
+`
+
+const ButtonFadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 0.9;
+}
 
 `
 
@@ -54,7 +62,7 @@ const TilesWrapper = styled.div`
   align-items: center;
   padding: 2vh;
   margin: 2vh;
-  animation: ${FadeIn} 1s ease-out;
+  animation: ${FullFadeIn} 1s ease-out;
 `
 
 const Tile = styled.div`
@@ -104,11 +112,15 @@ const Button = styled.button`
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 1s ease-out;
-  cursor: pointer;
+  opacity: 0.9;
+
+  :focus {
+    outline: 0;
+  }
 
   &:disabled {
     opacity: 0.4;
@@ -117,12 +129,18 @@ const Button = styled.button`
   ${props =>
     !props.disabled &&
     css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
       &:hover {
-        transform: scale(1.1);
+        opacity: 1;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        transform: translateY(-1px);
       }
-
-      animation: ${FadeIn} 1s ease-out;
     `}
+`
+
+const ModalButton = styled(Button)`
+  animation: ${FullFadeIn} 0.2s ease-out;
 `
 
 const GithubLinkInput = styled.input`
@@ -162,6 +180,12 @@ const Text = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+`
+
+const ModalText = styled(Text)`
+  white-space: normal;
+  text-overflow: wrap;
+  overflow: visible;
 `
 
 const ErrorMessage = styled.p`
@@ -213,6 +237,30 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
+const StyledModal = styled(Modal)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-color: #0072ce;
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  height: auto;
+  width: 30vw;
+  top: 42.5vh;
+  left: 35vw;
+  position: fixed;
+  animation: ${FullFadeIn} 0.2s ease-out;
+
+  :focus {
+    outline: 0;
+  }
+`
+
 const validate = values => {
   let errors = {}
 
@@ -243,7 +291,7 @@ const Dashboard = () => {
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
-          variables: { projectId: id, machineId },
+          variables: { projectId: id },
           onSuccessDispatch: [
             ({ id, editorPort, previewPort, machineId }) => ({
               type: C.SELECT_CURRENT_PROJECT,
@@ -260,13 +308,14 @@ const Dashboard = () => {
     }
   }
 
-  const handleDeleteClick = ({ id, machineId }) => {
+  const handleDeleteClick = id => {
     dispatch(
       mutation({
         name: 'deleteProject',
         mutation: DELETE_PROJECT,
-        variables: { projectId: id, machineId },
+        variables: { projectId: id },
         dataSelector: data => data,
+        onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
           () => ({
             type: ApiC.REMOVE_ITEM,
@@ -385,42 +434,48 @@ const Dashboard = () => {
                   >
                     Start
                   </Button>
-                  <Button onClick={() => setModalVisible(true)}>Delete</Button>
+                  <Button
+                    onClick={() => {
+                      setModalVisible(true)
+                      setProjectToDelete(project)
+                    }}
+                  >
+                    Delete
+                  </Button>
                 </RightSection>
               </VerticalDivider>
             </Tile>
           ))}
         </TilesWrapper>
       </PageWrapper>
-      <Modal
+      <StyledModal
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
-        style={modalStyles}
         contentLabel="Delete project?"
+        ariaHideApp={false}
       >
-        <div>
+        <ModalText>
           Are you sure you want to delete this project? This operation cannot be
           undone.
-        </div>
-        <Button
+        </ModalText>
+        <ModalButton
           primary
           onClick={() => {
-            handleDeleteClick(projectToDelete)
-            setProjectToDelete(null)
+            handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
         >
           Confirm
-        </Button>
-        <Button
+        </ModalButton>
+        <ModalButton
           onClick={() => {
             setProjectToDelete(null)
             setModalVisible(false)
           }}
         >
-          close
-        </Button>
-      </Modal>
+          Close
+        </ModalButton>
+      </StyledModal>
     </Layout>
   )
 }
