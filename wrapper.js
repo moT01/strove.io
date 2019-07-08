@@ -50,11 +50,14 @@ const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const regexExp = new RegExp('code=(.*)(?=&state)', 'g')
     const code =
       window &&
       window.location &&
-      window.location.href.match(/code=(.*)/) &&
-      window.location.href.match(/code=(.*)/)[1]
+      window.location.href
+        .match(regexExp)
+        .toString()
+        .split('=')[1]
 
     if (code && !localStorage.getItem('token')) {
       dispatch(
