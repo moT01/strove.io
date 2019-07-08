@@ -113,12 +113,17 @@ const loginOptions = [
   {
     value: 'github',
     label: 'Github login',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`,
   },
   {
     value: 'bitbucker',
     label: 'Bitbucket login',
     href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
+  },
+  {
+    value: 'gitlab',
+    label: 'Gitlab login',
+    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`,
   },
 ]
 
