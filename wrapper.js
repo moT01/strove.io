@@ -50,12 +50,19 @@ const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const regexExp = new RegExp('code=(.*)(?=&state)', 'g')
     const code =
       window &&
       window.location &&
       window.location.href
-        .match(regexExp)
+        .match(/code=(.*)(?=&state)/g)
+        .toString()
+        .split('=')[1]
+
+    const state =
+      window &&
+      window.location &&
+      window.location.href
+        .match(/state=(.*)/g)
         .toString()
         .split('=')[1]
 
