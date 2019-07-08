@@ -1,6 +1,6 @@
 import React, { useState /* useEffect */ } from 'react'
 import styled from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector /* useDispatch */ } from 'react-redux'
 import { Location } from '@reach/router'
 import getOr from 'lodash/fp/getOr'
 
@@ -22,14 +22,14 @@ const StyledIframe = styled.iframe`
 `
 
 const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
-const getId = getOr(undefined, ['currentProject', 'id'])
+// const getId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
 const EditorComponent = ({ location }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const token = useSelector(getUserToken)
-  const projectId = useSelector(getId)
+  // const projectId = useSelector(getId)
   const machineId = useSelector(getMachineId)
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
