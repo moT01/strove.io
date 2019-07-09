@@ -13,6 +13,7 @@ import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
+import Templates from '../components/templates.js'
 
 const FadeIn = keyframes`
   0% {
@@ -260,18 +261,32 @@ const StyledModal = styled(Modal)`
     outline: 0;
   }
 `
+const SectionDivider = styled(FlexWrapper)`
+  width: 100%;
+  flex-direction: row;
+`
+
+const SectionDividerLine = styled.div`
+  width: 25%;
+  border-top: 1px solid #0072ce;
+`
+
+const SectionDividerText = styled(ProjectTitle)`
+  width: 50%;
+  margin: 0.5vh;
+`
 
 const validate = values => {
   let errors = {}
 
-  if (!values.githubLink || (values.githubLink && !values.githubLink.trim())) {
+  if (!values.repoLink || (values.repoLink && !values.repoLink.trim())) {
     return
   } else if (
     !/.*github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
-      values.githubLink.trim()
+      values.repoLink.trim()
     )
   ) {
-    errors.githubLink = 'Invalid repository link'
+    errors.repoLink = 'Invalid repository link'
   }
 
   return errors
@@ -350,7 +365,7 @@ const Dashboard = () => {
             style={{ width: '100%', height: '100%' }}
             onSubmit={(values, actions) => {
               createProject({
-                githubLink: values.githubLink,
+                repoLink: values.repoLink,
                 dispatch: dispatch,
                 user: user,
               })
@@ -363,12 +378,12 @@ const Dashboard = () => {
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.githubLink}
-                  name="githubLink"
+                  value={props.values.repoLink}
+                  name="repoLink"
                   placeholder={'Paste repository link here'}
                 />
-                {props.errors.githubLink && (
-                  <ErrorMessage>{props.errors.githubLink}</ErrorMessage>
+                {props.errors.repoLink && (
+                  <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
                 )}
                 {repoError &&
                   repoError.message &&
@@ -380,7 +395,7 @@ const Dashboard = () => {
                     </ErrorMessage>
                   )}
                 <Button
-                  disabled={!props.values.githubLink || props.errors.githubLink}
+                  disabled={!props.values.repoLink || props.errors.repoLink}
                   primary
                   type="submit"
                   style={{ width: '20%' }}
@@ -390,6 +405,14 @@ const Dashboard = () => {
               </GithubLinkForm>
             )}
           />
+          <SectionDivider>
+            <SectionDividerLine />
+            <SectionDividerText>
+              Or try out one of the templates
+            </SectionDividerText>
+            <SectionDividerLine />
+          </SectionDivider>
+          <Templates />
         </AddProjectWrapper>
         <TilesWrapper>
           {projects.map(project => (

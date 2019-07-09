@@ -9,7 +9,7 @@ export default gql`
         description
         isPrivate
         createdAt
-        githubLink
+        repoLink
         machineId
         editorPort
         previewPort

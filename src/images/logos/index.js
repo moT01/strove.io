@@ -15,6 +15,8 @@ import Docker from './docker.svg'
 import Silisky from './siliskyhollow.svg'
 import Bitbucket from './bitbucket.svg'
 import Gitlab from './gitlab.svg'
+import Php from './php.svg'
+import C from './c.svg'
 
 export {
   Typescript,
@@ -34,4 +36,6 @@ export {
   Silisky,
   Bitbucket,
   Gitlab,
+  Php,
+  C,
 }

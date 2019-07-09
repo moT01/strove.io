@@ -5,20 +5,20 @@ export default gql`
     $name: String!
     $description: String
     $isPrivate: Boolean
-    $githubLink: String!
+    $repoLink: String!
   ) {
     addProject(
       name: $name
       description: $description
       isPrivate: $isPrivate
-      githubLink: $githubLink
+      repoLink: $repoLink
     ) {
       id
       name
       description
       isPrivate
       createdAt
-      githubLink
+      repoLink
       machineId
       editorPort
       previewPort
