@@ -6,7 +6,11 @@ import Downshift from 'downshift'
 
 import { selectors } from 'state'
 import UserInfoHeader from 'components/userInfoHeader'
-import { Github, Bitbucket, Gitlab } from '../images/logos'
+import {
+  Github,
+  //  Bitbucket,
+  Gitlab,
+} from '../images/logos'
 
 const logout = {
   type: 'LOGOUT',
