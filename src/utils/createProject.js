@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 
 import { mutation } from 'utils'
 import * as ApiC from 'state/api/constants'
-import { ADD_GITHUB_PROJECT, GET_REPO_INFO } from 'queries'
+import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
 import * as C from 'state/currentProject/constants'
 
 const client = new ApolloClient({
@@ -62,8 +62,8 @@ const createProject = async ({ repoLink, dispatch, user }) => {
         name: 'addProject',
         storeKey: 'myProjects',
         /* ToDo: Support Gitlab and Bitbucket as well */
-        variables: { githubLink: repoLink, name, description },
-        mutation: ADD_GITHUB_PROJECT,
+        variables: { repoLink, name, description },
+        mutation: ADD_PROJECT,
         onSuccess: startProject,
       })
     )

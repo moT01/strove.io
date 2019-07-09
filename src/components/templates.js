@@ -1,0 +1,158 @@
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
+
+import {
+  CSharp,
+  Php,
+  Cpp,
+  Python,
+  Typescript,
+  Go,
+  Java,
+  Ruby,
+  Javascript,
+  C,
+} from '../images/logos'
+import { createProject } from 'utils'
+
+const templates = [
+  { name: 'Typescript', value: 'typescript', icon: <Typescript /> },
+  {
+    name: 'Ruby',
+    value: 'ruby',
+    icon: <Ruby />,
+    link: 'https://github.com/codengo-llc/ruby-starter',
+  },
+  { name: 'Javascript', value: 'javascript', icon: <Javascript /> },
+  {
+    name: 'C++',
+    value: 'cpp',
+    icon: <Cpp />,
+    link: 'https://github.com/codengo-llc/c-plus-plus-starter',
+  },
+  {
+    name: 'Python',
+    value: 'python',
+    icon: <Python />,
+    link: 'https://github.com/codengo-llc/python-starter',
+  },
+  // { name: 'Php', value: 'php', icon: <Php /> },
+  // { name: 'C', value: 'c', icon: <C /> },
+  { name: 'Go', value: 'go', icon: <Go /> },
+  {
+    name: 'C#',
+    valiue: 'csharp',
+    icon: <CSharp />,
+    link: 'https://github.com/codengo-llc/C-Sharp-starter',
+  },
+  {
+    name: 'Java',
+    value: 'java',
+    icon: <Java />,
+    link: 'https://github.com/codengo-llc/java-starter',
+  },
+]
+
+// Scala
+// R
+// rust
+// haskell
+// Elm
+// elixir
+
+const ComponentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+`
+
+const TemplatesWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  padding: 0.5vh;
+  justify-content: center;
+  align-items: center;
+`
+
+const TemplateContainer = styled.a`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-item: center;
+  width: 5.5vw;
+  height: 5.5vw;
+  margin: 0.25vh;
+  text-decoration: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`
+
+const TemplateText = styled.p`
+  color: #0072ce;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-bottom: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  min-width: 70px;
+  max-width: 150px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+
+  :focus {
+    outline: 0;
+  }
+
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+    transform: translateY(-1px);
+  }
+`
+
+const Templates = () => {
+  return (
+    <ComponentWrapper>
+      <TemplatesWrapper>
+        {templates.map(item => (
+          <TemplateContainer>
+            {item.icon}
+            <TemplateText>{item.name}</TemplateText>
+          </TemplateContainer>
+        ))}
+      </TemplatesWrapper>
+      <Button>More templates</Button>
+    </ComponentWrapper>
+  )
+}
+export default Templates
