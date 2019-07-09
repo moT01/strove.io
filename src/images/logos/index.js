@@ -13,6 +13,8 @@ import Google from './google.svg'
 import Github from './github.svg'
 import Docker from './docker.svg'
 import Silisky from './siliskyhollow.svg'
+import Bitbucket from './bitbucket.svg'
+import Gitlab from './gitlab.svg'
 
 export {
   Typescript,
@@ -30,4 +32,6 @@ export {
   Github,
   Docker,
   Silisky,
+  Bitbucket,
+  Gitlab,
 }
