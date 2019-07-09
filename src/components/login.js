@@ -40,6 +40,8 @@ const loginOptions = [
 ]
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
+const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
+const REDIRECT_URI = process.env.REDIRECT_URI
 
 const LoginButton = styled.button`
   font-size: 3vh;
@@ -142,6 +144,27 @@ const getUserData = createSelector(
   (username, userphoto) => ({ username, userphoto })
 )
 
+<<<<<<< HEAD
+=======
+const loginOptions = [
+  {
+    value: 'github',
+    label: 'Github login',
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`,
+  },
+  {
+    value: 'bitbucker',
+    label: 'Bitbucket login',
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
+  },
+  {
+    value: 'gitlab',
+    label: 'Gitlab login',
+    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`,
+  },
+]
+
+>>>>>>> b1b3e3a2d791c579bb3d9eef20ae3a3e74085afe
 const LoginDropdown = () => {
   const [value, setValue] = useState()
 

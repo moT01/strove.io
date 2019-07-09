@@ -7,7 +7,7 @@ import Loader from './fullScreenLoader'
 import { navigate } from '@reach/router'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-const REDIRECT_URI = process.env.GITHUB_REDIRECT_URI
+const REDIRECT_URI = process.env.REDIRECT_URI
 
 const FadeIn = keyframes`
   0% {
