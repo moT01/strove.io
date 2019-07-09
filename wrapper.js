@@ -57,7 +57,7 @@ const LoginProvider = ({ children }) => {
 
     code && (code = code.toString().split('=')[1])
 
-    const state =
+    let state =
       window && window.location && window.location.href.match(/state=(.*)/g)
 
     state && (state = state.toString().split('=')[1])
