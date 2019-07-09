@@ -79,7 +79,7 @@ module.exports = {
           'SILISKY_ENDPOINT',
           'SILISKY_GRAPHQL_ENDPOINT',
           'GITHUB_CLIENT_ID',
-          'GITHUB_REDIRECT_URI',
+          'REDIRECT_URI',
           'SILISKY_URL',
         ],
       },
