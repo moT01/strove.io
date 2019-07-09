@@ -1,29 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Formik } from 'formik'
-import Modal from 'react-modal'
+import React from 'react'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { query, mutation } from 'utils'
-import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
-import * as C from 'state/currentProject/constants'
-import * as ApiC from 'state/api/constants'
-import { selectors } from 'state'
-import { createProject } from 'utils'
 import { Typescript } from '../images/logos'
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
-  }
-
-`
 
 const FullFadeIn = keyframes`
   0% {
@@ -32,16 +13,6 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
-
-`
-
-const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
 
 `
 
@@ -88,85 +59,6 @@ const Tile = styled.div`
   }
 `
 
-const AddProjectWrapper = styled(Tile)`
-  width: 50vw;
-  margin-top: 5vh;
-  height: auto;
-  margin-bottom: 0;
-`
-
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-  min-width: 70px;
-  max-width: 150px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
-  border-width: 1px;
-  border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 1s ease-out;
-  opacity: 0.9;
-
-  :focus {
-    outline: 0;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
-        transform: translateY(-1px);
-      }
-    `}
-`
-
-const ModalButton = styled(Button)`
-  animation: ${FullFadeIn} 0.2s ease-out;
-`
-
-const GithubLinkInput = styled.input`
-  width: 80%;
-  border-width: 1px;
-  border-style: solid;
-  color: #0072ce;
-  border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-align: center;
-  font-size: 1rem;
-  padding: 0.5vh 0;
-`
-
-const GithubLinkForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 2vh 0 0;
-`
-
 const ProjectTitle = styled.h3`
   font-size: 1.4rem;
   color: #0072ce;
@@ -183,18 +75,6 @@ const Text = styled.p`
   overflow: hidden;
 `
 
-const ModalText = styled(Text)`
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-`
-
-const ErrorMessage = styled.p`
-  color: red;
-  font-size: 0.9rem;
-  margin: 0;
-`
-
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
@@ -209,14 +89,6 @@ const FlexWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
-
-const RightSection = styled(FlexWrapper)`
-  width: 20%;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0.5%;
 `
 
 const InfoWrapper = styled(FlexWrapper)`
@@ -238,30 +110,6 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
-const StyledModal = styled(Modal)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 10px;
-  border-color: #0072ce;
-  border-width: 1px;
-  border-style: solid;
-  padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  height: auto;
-  width: 30vw;
-  top: 42.5vh;
-  left: 35vw;
-  position: fixed;
-  animation: ${FullFadeIn} 0.2s ease-out;
-
-  :focus {
-    outline: 0;
-  }
-`
-
 const templates = [
   {
     name: 'Typescript + Node',
@@ -273,58 +121,6 @@ const templates = [
 ]
 
 const Dashboard = () => {
-  const dispatch = useDispatch()
-  const projects = useSelector(selectors.getUserProjects)
-  const user = useSelector(selectors.getUser)
-  const [isModalVisible, setModalVisible] = useState(false)
-  const [projectToDelete, setProjectToDelete] = useState()
-  const repoError = useSelector(selectors.getError('myProjects'))
-
-  const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
-    if (!editorPort) {
-      dispatch(
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: { projectId: id },
-          onSuccessDispatch: [
-            ({ id, editorPort, previewPort, machineId }) => ({
-              type: C.SELECT_CURRENT_PROJECT,
-              payload: { id, editorPort, previewPort, machineId },
-            }),
-          ],
-        })
-      )
-    } else {
-      dispatch({
-        type: C.SELECT_CURRENT_PROJECT,
-        payload: { id, editorPort, previewPort, machineId },
-      })
-    }
-  }
-
-  const handleDeleteClick = id => {
-    dispatch(
-      mutation({
-        name: 'deleteProject',
-        mutation: DELETE_PROJECT,
-        variables: { projectId: id },
-        dataSelector: data => data,
-        onSuccess: () => setProjectToDelete(null),
-        onSuccessDispatch: [
-          () => ({
-            type: ApiC.REMOVE_ITEM,
-            payload: { storeKey: 'myProjects', id },
-          }),
-          () => ({
-            type: ApiC.FETCH_SUCCESS,
-            payload: { storeKey: 'deleteProject', data: true },
-          }),
-        ],
-      })
-    )
-  }
-
   return (
     <Layout>
       <SEO title="Templates" />
@@ -337,58 +133,14 @@ const Dashboard = () => {
                   <ProjectTitle>{template.name}</ProjectTitle>
                   <TextWrapper>
                     <StyledIcon type="edit" />
-                    <Text>
-                      {template.description
-                        ? template.description
-                        : 'This is the project description. Tribute'}
-                    </Text>
+                    <Text>{template.description}</Text>
                   </TextWrapper>
-                  {/* <TextWrapper>
-                  <StyledIcon
-                    type="branches"
-                  />
-                  <Text> {project.branch}</Text>
-                </TextWrapper>
-                <TextWrapper>
-                  <StyledIcon
-                    type="code"
-                  />
-                  <Text>{project.language}</Text>
-                </TextWrapper> */}
                 </InfoWrapper>
               </VerticalDivider>
             </Tile>
           ))}
         </TilesWrapper>
       </PageWrapper>
-      <StyledModal
-        isOpen={isModalVisible}
-        onRequestClose={() => setModalVisible(false)}
-        contentLabel="Delete project?"
-        ariaHideApp={false}
-      >
-        <ModalText>
-          Are you sure you want to delete this project? This operation cannot be
-          undone.
-        </ModalText>
-        <ModalButton
-          primary
-          onClick={() => {
-            handleDeleteClick(projectToDelete.id)
-            setModalVisible(false)
-          }}
-        >
-          Confirm
-        </ModalButton>
-        <ModalButton
-          onClick={() => {
-            setProjectToDelete(null)
-            setModalVisible(false)
-          }}
-        >
-          Close
-        </ModalButton>
-      </StyledModal>
     </Layout>
   )
 }
