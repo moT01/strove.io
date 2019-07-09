@@ -50,21 +50,17 @@ const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const code =
+    let code =
       window &&
       window.location &&
-      window.location.href
-        .match(/code=(.*)(?=&state)/g)
-        .toString()
-        .split('=')[1]
+      window.location.href.match(/code=(.*)(?=&state)/g)
+
+    code && (code = code.toString().split('=')[1])
 
     const state =
-      window &&
-      window.location &&
-      window.location.href
-        .match(/state=(.*)/g)
-        .toString()
-        .split('=')[1]
+      window && window.location && window.location.href.match(/state=(.*)/g)
+
+    state && (state = state.toString().split('=')[1])
 
     if (code && !localStorage.getItem('token')) {
       dispatch(

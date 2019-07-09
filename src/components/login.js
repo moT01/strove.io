@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
-import ReactSVG from 'react-svg'
 
 import { selectors } from 'state'
 import UserInfoHeader from 'components/userInfoHeader'
-import { Github, Bitbucket } from '../images/logos'
+import { Github, Bitbucket, Gitlab } from '../images/logos'
 
 const logout = {
   type: 'LOGOUT',
@@ -28,14 +27,20 @@ const loginOptions = [
   {
     value: 'github',
     label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`,
     icon: <Github />,
   },
+  // {
+  //   value: 'bitbucket',
+  //   label: 'Bitbucket',
+  //   href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
+  //   icon: <Bitbucket />,
+  // },
   {
-    value: 'bitbucket',
-    label: 'Bitbucket',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
-    icon: <Bitbucket />,
+    value: 'gitlab',
+    label: 'Gitlab',
+    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`,
+    icon: <Gitlab />,
   },
 ]
 
@@ -51,7 +56,6 @@ const LoginButton = styled.button`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 3vw;
   position: 'relative';
   background: none;
   border: none;
@@ -90,7 +94,7 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: -5.5vw;
+  left: -2.5vw;
   position: absolute;
   @media (max-width: 1366px) {
     width: auto;
@@ -144,27 +148,6 @@ const getUserData = createSelector(
   (username, userphoto) => ({ username, userphoto })
 )
 
-<<<<<<< HEAD
-=======
-const loginOptions = [
-  {
-    value: 'github',
-    label: 'Github login',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`,
-  },
-  {
-    value: 'bitbucker',
-    label: 'Bitbucket login',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
-  },
-  {
-    value: 'gitlab',
-    label: 'Gitlab login',
-    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`,
-  },
-]
-
->>>>>>> b1b3e3a2d791c579bb3d9eef20ae3a3e74085afe
 const LoginDropdown = () => {
   const [value, setValue] = useState()
 

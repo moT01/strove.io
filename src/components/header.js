@@ -65,8 +65,8 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  padding-left: 0.5vw;
-  padding-right: 0.5vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
   height: 5vh;
   background: #0072ce;
 
