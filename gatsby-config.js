@@ -81,6 +81,7 @@ module.exports = {
           'GITHUB_CLIENT_ID',
           'REDIRECT_URI',
           'SILISKY_URL',
+          'GITLAB_CLIENT_ID',
         ],
       },
     },
