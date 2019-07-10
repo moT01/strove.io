@@ -5,7 +5,9 @@ import { Docker, Github, Google, VSCode } from 'images/logos'
 
 const logosArr = [
   {
-    component: <Google width="100%" length="auto" />,
+    component: (
+      <Google style={{ fill: '#303c42' }} width="100%" length="auto" />
+    ),
     name: 'Google',
     description: 'Google cloud is cool and cloudy',
   },
@@ -17,12 +19,16 @@ const logosArr = [
     description: 'VSCode for editor',
   },
   {
-    component: <Docker width="100%" length="auto" />,
+    component: (
+      <Docker style={{ fill: '#303c42' }} width="100%" length="auto" />
+    ),
     name: 'Docker',
     description: "Docker isn't actually a whale",
   },
   {
-    component: <Github width="100%" length="auto" />,
+    component: (
+      <Github style={{ fill: '#303c42' }} width="100%" length="auto" />
+    ),
     name: 'Github',
     description: 'Github integration for state-of-the-art version control',
   },
