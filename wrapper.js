@@ -8,7 +8,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
-import { GITHUB_LOGIN } from 'queries'
+import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation, window } from 'utils'
 import { createProject } from 'utils'
 import { selectors } from 'state'
@@ -63,16 +63,34 @@ const LoginProvider = ({ children }) => {
     state && (state = state.toString().split('=')[1])
 
     if (code && !localStorage.getItem('token')) {
-      dispatch(
-        mutation({
-          mutation: GITHUB_LOGIN,
-          variables: { code },
-          storeKey: 'user',
-          name: 'githubAuth',
-          onSuccess: ({ siliskyToken }) =>
-            localStorage.setItem('token', siliskyToken),
-        })
-      )
+      switch (state) {
+        case 'github':
+          dispatch(
+            mutation({
+              mutation: GITHUB_LOGIN,
+              variables: { code },
+              storeKey: 'user',
+              name: 'githubAuth',
+              onSuccess: ({ siliskyToken }) =>
+                localStorage.setItem('token', siliskyToken),
+            })
+          )
+          break
+        case 'gitlab':
+          dispatch(
+            mutation({
+              mutation: GITLAB_LOGIN,
+              variables: { code },
+              storeKey: 'user',
+              name: 'gitlabAuth',
+              onSuccess: ({ siliskyToken }) =>
+                localStorage.setItem('token', siliskyToken),
+            })
+          )
+          break
+        case 'bitbucket':
+          break
+      }
     }
   }, [])
 
