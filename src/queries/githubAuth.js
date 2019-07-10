@@ -9,6 +9,8 @@ export default gql`
       photoUrl
       githubUrl
       githubToken
+      gitlabUrl
+      gitlabToken
       scopes
       siliskyToken
     }
