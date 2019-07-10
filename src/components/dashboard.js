@@ -364,8 +364,9 @@ const Dashboard = () => {
           <Formik
             style={{ width: '100%', height: '100%' }}
             onSubmit={(values, actions) => {
+              const link = values.repoLink.replace(/.git$/, '')
               createProject({
-                repoLink: values.repoLink,
+                repoLink: link,
                 dispatch: dispatch,
                 user: user,
               })
