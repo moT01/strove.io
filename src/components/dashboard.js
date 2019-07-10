@@ -282,7 +282,7 @@ const validate = values => {
   if (!values.repoLink || (values.repoLink && !values.repoLink.trim())) {
     return
   } else if (
-    !/.*github.com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
+    !/.*(github|gitlab|bitbucket).com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
       values.repoLink.trim()
     )
   ) {
