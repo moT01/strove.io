@@ -44,7 +44,6 @@ const createProject = async ({ repoLink, dispatch, user }) => {
 
     switch (repoProvider.toString()) {
       case 'github':
-        console.log('github', user.githubToken)
         if (user.githubToken) {
           const context = {
             headers: {
