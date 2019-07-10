@@ -34,39 +34,69 @@ const createProject = async ({ repoLink, dispatch, user }) => {
     })
   }
 
-  const context = {
-    headers: {
-      Authorization: `Bearer ${user.githubToken}`,
-      'User-Agent': 'node',
-    },
-  }
   const repoUrlParts = repoLink.split('/')
+  const repoProvider = repoUrlParts[2].split('.')[0]
   const owner = repoUrlParts[3]
   const name = repoUrlParts[4]
   const variables = { owner, name }
   try {
-    const { data } = await client.query({
-      query,
-      context,
-      variables,
-      fetchPolicy: 'no-cache',
-    })
+    let repoData = null
 
-    const {
-      description,
-      name /* add language and color in future */,
-    } = data.repository
+    switch (repoProvider.toString()) {
+      case 'github':
+        console.log('github', user.githubToken)
+        if (user.githubToken) {
+          const context = {
+            headers: {
+              Authorization: `Bearer ${user.githubToken}`,
+              'User-Agent': 'node',
+            },
+          }
 
-    dispatch(
-      mutation({
-        name: 'addProject',
-        storeKey: 'myProjects',
-        /* ToDo: Support Gitlab and Bitbucket as well */
-        variables: { repoLink, name, description },
-        mutation: ADD_PROJECT,
-        onSuccess: startProject,
-      })
-    )
+          const { data } = await client.query({
+            query,
+            context,
+            variables,
+            fetchPolicy: 'no-cache',
+          })
+
+          repoData = data.repository
+        }
+        break
+      case 'gitlab':
+        if (user.gitlabToken) {
+          const res = await fetch(
+            `https://gitlab.com/api/v4/projects/${owner}%2F${name}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.gitlabToken}`,
+              },
+            }
+          )
+          repoData = await res.json()
+        }
+        break
+      case 'bitbucket':
+        break
+    }
+
+    if (repoData) {
+      const {
+        description,
+        name /* add language and color in future */,
+      } = repoData
+
+      dispatch(
+        mutation({
+          name: 'addProject',
+          storeKey: 'myProjects',
+          /* ToDo: Support Gitlab and Bitbucket as well */
+          variables: { repoLink, name, description },
+          mutation: ADD_PROJECT,
+          onSuccess: startProject,
+        })
+      )
+    }
   } catch (e) {
     console.log('fetch error: ', e)
     dispatch({
