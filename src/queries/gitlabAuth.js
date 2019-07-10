@@ -7,8 +7,11 @@ export default gql`
       name
       fullName
       photoUrl
+      githubUrl
+      githubToken
       gitlabUrl
       gitlabToken
+      scopes
       siliskyToken
     }
   }
