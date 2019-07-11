@@ -77,6 +77,8 @@ const createProject = async ({ repoLink, dispatch, user }) => {
         break
       case 'bitbucket':
         break
+      default:
+        break
     }
 
     if (repoData) {
