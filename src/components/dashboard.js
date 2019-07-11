@@ -14,6 +14,7 @@ import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
 import Templates from '../components/templates.js'
+import Loader from './fullScreenLoader'
 
 const FadeIn = keyframes`
   0% {
@@ -261,6 +262,7 @@ const StyledModal = styled(Modal)`
     outline: 0;
   }
 `
+
 const SectionDivider = styled(FlexWrapper)`
   width: 100%;
   flex-direction: row;
@@ -299,6 +301,7 @@ const Dashboard = () => {
   const [isModalVisible, setModalVisible] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const repoError = useSelector(selectors.getError('myProjects'))
+  const isDeleting = useSelector(selectors.getLoading('deleteProject'))
 
   const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
     if (!editorPort) {
@@ -461,14 +464,24 @@ const Dashboard = () => {
                   >
                     Start
                   </Button>
-                  <Button
-                    onClick={() => {
-                      setModalVisible(true)
-                      setProjectToDelete(project)
-                    }}
-                  >
-                    Delete
-                  </Button>
+                  {isDeleting ? (
+                    <Button disabled={isDeleting}>
+                      <Loader
+                        isFullScreen={false}
+                        color={'#0072ce'}
+                        height={'1.2rem'}
+                      />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        setModalVisible(true)
+                        setProjectToDelete(project)
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </RightSection>
               </VerticalDivider>
             </Tile>
