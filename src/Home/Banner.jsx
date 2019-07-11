@@ -61,7 +61,7 @@ const Banner = props => {
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
-        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+        <TweenOne className="banner-image-wrapper">
           <div className="home-banner-image">
             <img
               alt="banner"
@@ -86,10 +86,9 @@ const Banner = props => {
         <ButtonsWrapper>
           <GetStarted />
           <Button>
-            <StyledA href="mailto:no-one@snai1mai1.com?subject=Silisky demo">
+            <StyledA href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
               Request a demo
             </StyledA>
-            {/* < style={{ margin: 0 }}>/p> */}
           </Button>
         </ButtonsWrapper>
       </QueueAnim>
