@@ -345,6 +345,11 @@ const Dashboard = () => {
     )
   }
 
+  const closeModal = () => {
+    setProjectToDelete(null)
+    setModalVisible(false)
+  }
+
   useEffect(() => {
     dispatch(
       query({
@@ -362,13 +367,11 @@ const Dashboard = () => {
         <AddProjectWrapper>
           <ProjectTitle>Add project from github repository</ProjectTitle>
           <Formik
-            style={{ width: '100%', height: '100%' }}
             onSubmit={(values, actions) => {
-              const link = values.repoLink.replace(/.git$/, '')
               createProject({
-                repoLink: link,
-                dispatch: dispatch,
-                user: user,
+                repoLink: values.repoLink.replace(/.git$/, ''),
+                dispatch,
+                user,
               })
               actions.setSubmitting(false)
             }}
@@ -491,14 +494,7 @@ const Dashboard = () => {
         >
           Confirm
         </ModalButton>
-        <ModalButton
-          onClick={() => {
-            setProjectToDelete(null)
-            setModalVisible(false)
-          }}
-        >
-          Close
-        </ModalButton>
+        <ModalButton onClick={closeModal}>Close</ModalButton>
       </StyledModal>
     </Layout>
   )
