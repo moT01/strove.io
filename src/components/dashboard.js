@@ -12,14 +12,10 @@ import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
-<<<<<<< HEAD
-import Templates from '../components/templates.js'
-import Loader from './fullScreenLoader'
-=======
 import Templates from 'components/templates.js'
 import Layout from './layout'
 import SEO from './seo'
->>>>>>> origin/master
+import Loader from './fullScreenLoader'
 
 const FadeIn = keyframes`
   0% {
