@@ -83,11 +83,11 @@ const TemplatesWrapper = styled.div`
 
 const TemplateContainer = styled.a`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-item: center;
-  width: 5.5vw;
-  height: 5.5vw;
+  align-items: center;
+  height: auto;
   margin: 0.25vh;
   text-decoration: none;
   cursor: pointer;
@@ -101,6 +101,15 @@ const TemplateContainer = styled.a`
     width: 100%;
     height: 100%;
   }
+`
+
+const IconContainer = styled.div`
+  width: 5vw;
+  height: 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const TemplateText = styled.p`
@@ -165,7 +174,7 @@ const Templates = () => {
       <TemplatesWrapper>
         {templates.map(item => (
           <TemplateContainer onClick={() => handleClick(item)}>
-            {item.icon}
+            <IconContainer>{item.icon}</IconContainer>
             <TemplateText>{item.name}</TemplateText>
           </TemplateContainer>
         ))}
