@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import Modal from 'react-modal'
 import { navigate } from 'gatsby'
-
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { query, mutation } from 'utils'
 import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
