@@ -1,10 +1,9 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
   CSharp,
-  Php,
   Cpp,
   Python,
   Typescript,
@@ -12,55 +11,42 @@ import {
   Java,
   Ruby,
   Javascript,
-  C,
 } from '../images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
 
 const templates = [
-  { name: 'Typescript', value: 'typescript', icon: <Typescript /> },
+  { name: 'Typescript', icon: <Typescript /> },
   {
     name: 'Ruby',
-    value: 'ruby',
     icon: <Ruby />,
     link: 'https://github.com/codengo-llc/ruby-starter',
   },
   { name: 'Javascript', value: 'javascript', icon: <Javascript /> },
   {
     name: 'C++',
-    value: 'cpp',
     icon: <Cpp />,
     link: 'https://github.com/codengo-llc/c-plus-plus-starter',
   },
   {
     name: 'Python',
-    value: 'python',
     icon: <Python />,
     link: 'https://github.com/codengo-llc/python-starter',
   },
-  // { name: 'Php', value: 'php', icon: <Php /> },
-  // { name: 'C', value: 'c', icon: <C /> },
-  { name: 'Go', value: 'go', icon: <Go /> },
+  // { name: 'Php', icon: <Php /> },
+  // { name: 'C', icon: <C /> },
+  { name: 'Go', icon: <Go /> },
   {
     name: 'C#',
-    valiue: 'csharp',
     icon: <CSharp />,
     link: 'https://github.com/codengo-llc/C-Sharp-starter',
   },
   {
     name: 'Java',
-    value: 'java',
     icon: <Java />,
     link: 'https://github.com/codengo-llc/java-starter',
   },
 ]
-
-// Scala
-// R
-// rust
-// haskell
-// Elm
-// elixir
 
 const ComponentWrapper = styled.div`
   display: flex;
@@ -173,7 +159,7 @@ const Templates = () => {
     <ComponentWrapper>
       <TemplatesWrapper>
         {templates.map(item => (
-          <TemplateContainer onClick={() => handleClick(item)}>
+          <TemplateContainer key={item.name} onClick={() => handleClick(item)}>
             <IconContainer>{item.icon}</IconContainer>
             <TemplateText>{item.name}</TemplateText>
           </TemplateContainer>
