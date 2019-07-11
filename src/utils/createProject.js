@@ -13,17 +13,16 @@ const client = new ApolloClient({
 const createProject = async ({ repoLink, dispatch, user }) => {
   const query = GET_REPO_INFO
 
-  const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
-    console.log('editorPort', editorPort)
+  const setCurrentProject = ({ id, editorPort, previewPort, machineId }) =>
     dispatch({
       type: C.SELECT_CURRENT_PROJECT,
-      payload: { editorPort, previewPort, machineId },
+      payload: { id, editorPort, previewPort, machineId },
     })
-  }
 
   const startProject = project => {
     console.log('project', project)
     setCurrentProject({
+      id: project.id,
       editorPort: project.editorPort,
       previewPort: project.previewPort,
       machineId: project.machineId,
