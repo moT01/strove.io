@@ -61,7 +61,7 @@ const Banner = props => {
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
-        <TweenOne className="banner-image-wrapper">
+        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
           <div className="home-banner-image">
             <img
               alt="banner"
