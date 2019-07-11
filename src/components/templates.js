@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'gatsby'
 
 import {
   CSharp,
@@ -108,7 +109,7 @@ const TemplateText = styled.p`
   overflow: hidden;
 `
 
-const Button = styled.button`
+const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
@@ -165,7 +166,7 @@ const Templates = () => {
           </TemplateContainer>
         ))}
       </TemplatesWrapper>
-      <Button>More templates</Button>
+      <StyledLink to="templates">More templates</StyledLink>
     </ComponentWrapper>
   )
 }
