@@ -49,6 +49,14 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
 `
 
+const StyledA = styled.a`
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  line-height: 1.5;
+  font-size: 20px;
+`
+
 const Banner = props => {
   return (
     <div className="banner-wrapper">
@@ -78,7 +86,10 @@ const Banner = props => {
         <ButtonsWrapper>
           <GetStarted />
           <Button>
-            <p style={{ margin: 0 }}>Request demo</p>
+            <StyledA href="mailto:no-one@snai1mai1.com?subject=Silisky demo">
+              Request a demo
+            </StyledA>
+            {/* < style={{ margin: 0 }}>/p> */}
           </Button>
         </ButtonsWrapper>
       </QueueAnim>
