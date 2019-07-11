@@ -9,7 +9,6 @@ import Loader from 'components/fullScreenLoader.js'
 // import { STOP_PROJECT } from 'queries'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import { mutation } from 'utils'
 import * as C from 'state/currentProject/constants'
 
 const StyledIframe = styled.iframe`
