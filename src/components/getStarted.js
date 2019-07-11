@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
+import { navigate } from '@reach/router'
+import Modal from 'react-modal'
+
 import { selectors } from '../state'
 import Loader from './fullScreenLoader'
-import { navigate } from '@reach/router'
+import Templates from './templates'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
@@ -70,6 +73,30 @@ const LoginButton = styled.a`
   }
 `
 
+const StyledModal = styled(Modal)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-color: #0072ce;
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  height: auto;
+  width: auto;
+  top: 42.5vh;
+  left: 35vw;
+  position: fixed;
+  animation: ${FadeIn} 0.2s ease-out;
+
+  :focus {
+    outline: 0;
+  }
+`
+
 const getUserName = selectors.getApiData('user', null, 'name')
 
 const getUserPhoto = selectors.getApiData('user', null, 'photoUrl')
@@ -82,12 +109,15 @@ const getUserData = createSelector(
 const GetStarted = () => {
   const isLoading = useSelector(selectors.getLoading('user'))
   const user = useSelector(getUserData)
-  const projects = useSelector(selectors.getUserProjects)
+  const [isModalVisible, setModalVisible] = useState(false)
 
-  const handleClick = () =>
-    projects.length === 0
-      ? console.log('User has no projects')
-      : navigate('app/dashboard')
+  const projects = useSelector(selectors.getUserProjects)
+  const handleClick = () => setModalVisible(true)
+
+  const closeModal = () => setModalVisible(false)
+  // projects.length === 0
+  //   ? console.log('User has no projects')
+  //   : navigate('app/dashboard')
 
   return isLoading ? (
     <Button primary>
@@ -96,6 +126,13 @@ const GetStarted = () => {
   ) : user.username ? (
     <Button primary onClick={handleClick}>
       <p style={{ margin: 0 }}>Get started</p>
+      <StyledModal
+        isOpen={isModalVisible}
+        onRequestClose={() => setModalVisible(false)}
+        ariaHideApp={false}
+      >
+        <Templates />
+      </StyledModal>
     </Button>
   ) : (
     <LoginButton
