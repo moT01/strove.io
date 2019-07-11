@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useSelector, useDispatch } from 'react-redux'
 
 import {
   CSharp,
@@ -14,6 +15,7 @@ import {
   C,
 } from '../images/logos'
 import { createProject } from 'utils'
+import { selectors } from 'state'
 
 const templates = [
   { name: 'Typescript', value: 'typescript', icon: <Typescript /> },
@@ -88,6 +90,12 @@ const TemplateContainer = styled.a`
   height: 5.5vw;
   margin: 0.25vh;
   text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  :hover {
+    transform: translateY(-3px);
+  }
 
   svg {
     width: 100%;
@@ -141,11 +149,22 @@ const Button = styled.button`
 `
 
 const Templates = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(selectors.getUser)
+
+  const handleClick = item => {
+    createProject({
+      repoLink: item.link,
+      dispatch: dispatch,
+      user: user,
+    })
+  }
+
   return (
     <ComponentWrapper>
       <TemplatesWrapper>
         {templates.map(item => (
-          <TemplateContainer>
+          <TemplateContainer onClick={() => handleClick(item)}>
             {item.icon}
             <TemplateText>{item.name}</TemplateText>
           </TemplateContainer>

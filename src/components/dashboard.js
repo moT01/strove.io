@@ -413,7 +413,7 @@ const Dashboard = () => {
             </SectionDividerText>
             <SectionDividerLine />
           </SectionDivider>
-          <Templates />
+          <Templates user={user} />
         </AddProjectWrapper>
         <TilesWrapper>
           {projects.map(project => (

@@ -14,6 +14,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
   const query = GET_REPO_INFO
 
   const setCurrentProject = ({ editorPort, previewPort, machineId }) => {
+    console.log('editorPort', editorPort)
     dispatch({
       type: C.SELECT_CURRENT_PROJECT,
       payload: { editorPort, previewPort, machineId },
@@ -21,6 +22,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
   }
 
   const startProject = project => {
+    console.log('project', project)
     setCurrentProject({
       editorPort: project.editorPort,
       previewPort: project.previewPort,
@@ -33,7 +35,6 @@ const createProject = async ({ repoLink, dispatch, user }) => {
       },
     })
   }
-
   const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
   const owner = repoUrlParts[3]
