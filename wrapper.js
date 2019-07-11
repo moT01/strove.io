@@ -90,6 +90,8 @@ const LoginProvider = ({ children }) => {
           break
         case 'bitbucket':
           break
+        default:
+          break
       }
     }
   }, [])
