@@ -27,12 +27,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
       previewPort: project.previewPort,
       machineId: project.machineId,
     })
-    navigate('/app/editor/', {
-      state: {
-        machineId: project.machineId,
-        editorPort: project.editorPort,
-      },
-    })
+    navigate('/app/editor/')
   }
   const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
