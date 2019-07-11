@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 import Modal from 'react-modal'
 
 import { selectors } from '../state'

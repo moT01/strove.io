@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import BannerSVGAnim from './component/BannerSVGAnim'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
+import { useSelector } from 'react-redux'
+import Modal from 'react-modal'
+import { createSelector } from 'reselect'
+
+import { selectors } from 'state'
+import Loader from '../components/fullScreenLoader'
 import GetStarted from '../components/getStarted'
+import Templates from '../components/templates'
 
 const FadeIn = keyframes`
   0% {
@@ -14,11 +21,22 @@ const FadeIn = keyframes`
   }
 `
 
+const ButtonFadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 0.9;
+}
+
+`
+
 const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
   width: 45%;
+  min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -27,17 +45,34 @@ const Button = styled.button`
   background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
   border-width: 1px;
   border-style: solid;
+  font-size: 1.5rem;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${FadeIn} 1s ease-out;
-  cursor: pointer;
+  animation: ${FadeIn} 0.5s ease-out;
+  opacity: 0.9;
 
-  &:hover {
-    transform: scale(1.1);
+  :focus {
+    outline: 0;
   }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    `}
 `
 
 const ButtonsWrapper = styled.div`
@@ -49,7 +84,40 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
 `
 
+const StyledModal = styled(Modal)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  top: 25%;
+  left: 25%;
+  position: fixed;
+  animation: ${FadeIn} 0.2s ease-out;
+
+  :focus {
+    outline: 0;
+  }
+`
+
+const getUserName = selectors.getApiData('user', null, 'name')
+
+const getUserPhoto = selectors.getApiData('user', null, 'photoUrl')
+
+const getUserData = createSelector(
+  [getUserName, getUserPhoto],
+  (username, userphoto) => ({ username, userphoto })
+)
+
 const Banner = props => {
+  const isLoading = useSelector(selectors.getLoading('user'))
+  const user = useSelector(getUserData)
+  const [isModalVisible, setModalVisible] = useState(false)
+
+  const handleClick = () => setModalVisible(true)
+
+  const closeModal = () => setModalVisible(false)
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
@@ -76,10 +144,26 @@ const Banner = props => {
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
         <ButtonsWrapper>
-          <GetStarted />
-          <Button>
-            <p style={{ margin: 0 }}>Request demo</p>
+          {/* <GetStarted /> */}
+          <Button primary disabled={isLoading} onClick={handleClick}>
+            {isLoading ? (
+              <Loader
+                isFullScreen={false}
+                color={'#ffffff'}
+                height={'2.2rem'}
+              />
+            ) : (
+              'Get started'
+            )}
+            <StyledModal
+              isOpen={isModalVisible}
+              onRequestClose={() => setModalVisible(false)}
+              ariaHideApp={false}
+            >
+              <Templates />
+            </StyledModal>
           </Button>
+          <Button>Request demo</Button>
         </ButtonsWrapper>
       </QueueAnim>
       {!props.isMobile && (

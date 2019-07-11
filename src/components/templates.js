@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+import { Formik } from 'formik'
 
 import {
   CSharp,
@@ -47,6 +48,29 @@ const templates = [
     link: 'https://github.com/codengo-llc/java-starter',
   },
 ]
+
+const AddProjectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-color: #0072ce;
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  ${'' /* margin-top: 5vh; */}
+  margin-bottom: 0;
+  height: auto;
+  width: 50vw;
+
+  @media (max-width: 1366px) {
+    width: 80vw;
+    height: auto;
+  }
+`
 
 const ComponentWrapper = styled.div`
   display: flex;
@@ -143,9 +167,79 @@ const Button = styled.button`
   }
 `
 
+const Title = styled.h3`
+  font-size: 1.4rem;
+  color: #0072ce;
+  margin: 0.3vh 0.3vh 0.3vh 0;
+`
+
+const SectionDivider = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+`
+
+const SectionDividerLine = styled.div`
+  width: 25%;
+  border-top: 1px solid #0072ce;
+`
+
+const SectionDividerText = styled(Title)`
+  width: 50%;
+  margin: 0.5vh;
+`
+
+const GithubLinkInput = styled.input`
+  width: 80%;
+  border-width: 1px;
+  border-style: solid;
+  color: #0072ce;
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.5vh 0;
+`
+
+const GithubLinkForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 2vh 0 0;
+`
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.9rem;
+  margin: 0;
+`
+
 const Templates = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
+  const repoError = useSelector(selectors.getError('myProjects'))
+
+  const validate = values => {
+    let errors = {}
+
+    if (!values.repoLink || (values.repoLink && !values.repoLink.trim())) {
+      return
+    } else if (
+      !/.*(github|gitlab|bitbucket).com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
+        values.repoLink.trim()
+      )
+    ) {
+      errors.repoLink = 'Invalid repository link'
+    }
+
+    return errors
+  }
 
   const handleClick = item => {
     createProject({
@@ -156,17 +250,71 @@ const Templates = () => {
   }
 
   return (
-    <ComponentWrapper>
-      <TemplatesWrapper>
-        {templates.map(item => (
-          <TemplateContainer key={item.name} onClick={() => handleClick(item)}>
-            <IconContainer>{item.icon}</IconContainer>
-            <TemplateText>{item.name}</TemplateText>
-          </TemplateContainer>
-        ))}
-      </TemplatesWrapper>
-      <Button>More templates</Button>
-    </ComponentWrapper>
+    <AddProjectWrapper>
+      <Title>Add project from github repository</Title>
+      <Formik
+        onSubmit={(values, actions) => {
+          createProject({
+            repoLink: values.repoLink.replace(/.git$/, ''),
+            dispatch,
+            user,
+          })
+          actions.setSubmitting(false)
+        }}
+        validate={validate}
+        render={props => (
+          <GithubLinkForm onSubmit={props.handleSubmit}>
+            <GithubLinkInput
+              type="text"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              value={props.values.repoLink}
+              name="repoLink"
+              placeholder={'Paste repository link here'}
+            />
+            {props.errors.repoLink && (
+              <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
+            )}
+            {repoError &&
+              repoError.message &&
+              repoError.message.includes(
+                'Could not resolve to a Repository'
+              ) && (
+                <ErrorMessage>
+                  Provided link leads to a private repository
+                </ErrorMessage>
+              )}
+            <Button
+              disabled={!props.values.repoLink || props.errors.repoLink}
+              primary
+              type="submit"
+              style={{ width: '20%' }}
+            >
+              Add project
+            </Button>
+          </GithubLinkForm>
+        )}
+      />
+      <SectionDivider>
+        <SectionDividerLine />
+        <SectionDividerText>Or try out one of the templates</SectionDividerText>
+        <SectionDividerLine />
+      </SectionDivider>
+      <ComponentWrapper>
+        <TemplatesWrapper>
+          {templates.map(item => (
+            <TemplateContainer
+              key={item.name}
+              onClick={() => handleClick(item)}
+            >
+              <IconContainer>{item.icon}</IconContainer>
+              <TemplateText>{item.name}</TemplateText>
+            </TemplateContainer>
+          ))}
+        </TemplatesWrapper>
+        <Button>More templates</Button>
+      </ComponentWrapper>
+    </AddProjectWrapper>
   )
 }
 export default Templates
