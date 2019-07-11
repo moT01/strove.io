@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Formik } from 'formik'
 import Modal from 'react-modal'
+import { navigate } from 'gatsby'
 
-import Layout from './layout'
-import SEO from './seo'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -13,8 +12,14 @@ import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import { createProject } from 'utils'
+<<<<<<< HEAD
 import Templates from '../components/templates.js'
 import Loader from './fullScreenLoader'
+=======
+import Templates from 'components/templates.js'
+import Layout from './layout'
+import SEO from './seo'
+>>>>>>> origin/master
 
 const FadeIn = keyframes`
   0% {
@@ -310,6 +315,7 @@ const Dashboard = () => {
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId: id },
+          onSuccess: () => navigate('/app/editor/'),
           onSuccessDispatch: [
             ({ id, editorPort, previewPort, machineId }) => ({
               type: C.SELECT_CURRENT_PROJECT,
@@ -323,6 +329,7 @@ const Dashboard = () => {
         type: C.SELECT_CURRENT_PROJECT,
         payload: { id, editorPort, previewPort, machineId },
       })
+      navigate('/app/editor/')
     }
   }
 
