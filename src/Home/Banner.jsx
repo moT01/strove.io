@@ -43,7 +43,7 @@ const Button = styled.button`
   background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
   border-width: 1px;
   border-style: solid;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 1vh;
   border-color: #0072ce;
@@ -86,8 +86,7 @@ const StyledA = styled.a`
   margin: 0;
   text-decoration: none;
   color: inherit;
-  line-height: 1.5;
-  font-size: 20px;
+  font-size: 1.3rem;
 `
 
 const StyledModal = styled(Modal)`
