@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
 
@@ -48,6 +48,36 @@ const templates = [
     link: 'https://github.com/codengo-llc/java-starter',
   },
 ]
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.4;
+  }
+
+`
+
+const FullFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+
+`
+
+const ButtonFadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 0.9;
+}
+
+`
 
 const AddProjectWrapper = styled.div`
   display: flex;
@@ -153,18 +183,28 @@ const Button = styled.button`
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
   transition: all 0.2s ease;
+  animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
 
   :focus {
     outline: 0;
   }
 
-  cursor: pointer;
-  &:hover {
-    opacity: 1;
-    box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
-    transform: translateY(-1px);
+  &:disabled {
+    opacity: 0.4;
   }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        transform: translateY(-1px);
+      }
+    `}
 `
 
 const Title = styled.h3`

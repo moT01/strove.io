@@ -115,9 +115,10 @@ const Banner = props => {
   const user = useSelector(getUserData)
   const [isModalVisible, setModalVisible] = useState(false)
 
-  const handleClick = () => setModalVisible(true)
-
-  const closeModal = () => setModalVisible(false)
+  const closeModal = () => {
+    setModalVisible(!isModalVisible)
+    console.log('close me up, close me up inside', isModalVisible)
+  }
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
@@ -144,8 +145,11 @@ const Banner = props => {
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
         <ButtonsWrapper>
-          {/* <GetStarted /> */}
-          <Button primary disabled={isLoading} onClick={handleClick}>
+          <Button
+            primary
+            disabled={isLoading}
+            onClick={() => setModalVisible(!isModalVisible)}
+          >
             {isLoading ? (
               <Loader
                 isFullScreen={false}
@@ -155,14 +159,14 @@ const Banner = props => {
             ) : (
               'Get started'
             )}
-            <StyledModal
-              isOpen={isModalVisible}
-              onRequestClose={() => setModalVisible(false)}
-              ariaHideApp={false}
-            >
-              <Templates />
-            </StyledModal>
           </Button>
+          <StyledModal
+            isOpen={isModalVisible}
+            onRequestClose={closeModal}
+            ariaHideApp={false}
+          >
+            <Templates />
+          </StyledModal>
           <Button>Request demo</Button>
         </ButtonsWrapper>
       </QueueAnim>
