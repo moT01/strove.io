@@ -9,7 +9,6 @@ import Modal from 'react-modal'
 import { selectors } from 'state'
 import Loader from '../components/fullScreenLoader'
 import GetStarted from '../components/getStarted'
-// import Templates from '../components/templates'
 
 const FadeIn = keyframes`
   0% {

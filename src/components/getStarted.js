@@ -82,7 +82,6 @@ const AddProjectWrapper = styled.div`
   border-style: solid;
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  ${'' /* margin-top: 5vh; */}
   margin-bottom: 0;
   height: auto;
   width: 50vw;
@@ -251,6 +250,19 @@ const ErrorMessage = styled.p`
   margin: 0;
 `
 
+const StyledIcon = styled(Icon)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.7vh;
+  color: #0072ce;
+  cursor: pointer;
+
+  :focus {
+    outline: none;
+  }
+`
+
 const Templates = ({ closeModal }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
@@ -282,6 +294,7 @@ const Templates = ({ closeModal }) => {
 
   return (
     <AddProjectWrapper>
+      <StyledIcon type="close" onClick={closeModal} />
       <Title>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
