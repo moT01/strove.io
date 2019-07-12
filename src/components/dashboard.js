@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { Formik } from 'formik'
 import Modal from 'react-modal'
-
-import Layout from './layout'
-import SEO from './seo'
+import { navigate } from 'gatsby'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { query, mutation } from 'utils'
 import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
-import { createProject } from 'utils'
-import Templates from '../components/templates.js'
+import GetStarted from '../components/getStarted'
+import Layout from './layout'
+import SEO from './seo'
+import Loader from './fullScreenLoader'
 
 const FadeIn = keyframes`
   0% {
@@ -54,6 +54,7 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   width: 100vw;
+  padding-top: 5vh;
 `
 
 const TilesWrapper = styled.div`
@@ -63,7 +64,7 @@ const TilesWrapper = styled.div`
   align-items: center;
   padding: 2vh;
   margin: 2vh;
-  animation: ${FullFadeIn} 1s ease-out;
+  animation: ${FullFadeIn} 0.5s ease-out;
 `
 
 const Tile = styled.div`
@@ -88,13 +89,6 @@ const Tile = styled.div`
   }
 `
 
-const AddProjectWrapper = styled(Tile)`
-  width: 50vw;
-  margin-top: 5vh;
-  height: auto;
-  margin-bottom: 0;
-`
-
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -116,7 +110,7 @@ const Button = styled.button`
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${FadeIn} 1s ease-out;
+  animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
 
   :focus {
@@ -144,29 +138,6 @@ const ModalButton = styled(Button)`
   animation: ${FullFadeIn} 0.2s ease-out;
 `
 
-const GithubLinkInput = styled.input`
-  width: 80%;
-  border-width: 1px;
-  border-style: solid;
-  color: #0072ce;
-  border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-align: center;
-  font-size: 1rem;
-  padding: 0.5vh 0;
-`
-
-const GithubLinkForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 2vh 0 0;
-`
-
 const ProjectTitle = styled.h3`
   font-size: 1.4rem;
   color: #0072ce;
@@ -187,12 +158,6 @@ const ModalText = styled(Text)`
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
-`
-
-const ErrorMessage = styled.p`
-  color: red;
-  font-size: 0.9rem;
-  margin: 0;
 `
 
 const VerticalDivider = styled.div`
@@ -261,44 +226,13 @@ const StyledModal = styled(Modal)`
     outline: 0;
   }
 `
-const SectionDivider = styled(FlexWrapper)`
-  width: 100%;
-  flex-direction: row;
-`
-
-const SectionDividerLine = styled.div`
-  width: 25%;
-  border-top: 1px solid #0072ce;
-`
-
-const SectionDividerText = styled(ProjectTitle)`
-  width: 50%;
-  margin: 0.5vh;
-`
-
-const validate = values => {
-  let errors = {}
-
-  if (!values.repoLink || (values.repoLink && !values.repoLink.trim())) {
-    return
-  } else if (
-    !/.*(github|gitlab|bitbucket).com\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
-      values.repoLink.trim()
-    )
-  ) {
-    errors.repoLink = 'Invalid repository link'
-  }
-
-  return errors
-}
 
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
-  const user = useSelector(selectors.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const repoError = useSelector(selectors.getError('myProjects'))
+  const isDeleting = useSelector(selectors.getLoading('deleteProject'))
 
   const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
     if (!editorPort) {
@@ -307,6 +241,7 @@ const Dashboard = () => {
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId: id },
+          onSuccess: () => navigate('/app/editor/'),
           onSuccessDispatch: [
             ({ id, editorPort, previewPort, machineId }) => ({
               type: C.SELECT_CURRENT_PROJECT,
@@ -320,6 +255,7 @@ const Dashboard = () => {
         type: C.SELECT_CURRENT_PROJECT,
         payload: { id, editorPort, previewPort, machineId },
       })
+      navigate('/app/editor/')
     }
   }
 
@@ -364,60 +300,7 @@ const Dashboard = () => {
     <Layout>
       <SEO title="Dashboard" />
       <PageWrapper>
-        <AddProjectWrapper>
-          <ProjectTitle>Add project from github repository</ProjectTitle>
-          <Formik
-            onSubmit={(values, actions) => {
-              createProject({
-                repoLink: values.repoLink.replace(/.git$/, ''),
-                dispatch,
-                user,
-              })
-              actions.setSubmitting(false)
-            }}
-            validate={validate}
-            render={props => (
-              <GithubLinkForm onSubmit={props.handleSubmit}>
-                <GithubLinkInput
-                  type="text"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.repoLink}
-                  name="repoLink"
-                  placeholder={'Paste repository link here'}
-                />
-                {props.errors.repoLink && (
-                  <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
-                )}
-                {repoError &&
-                  repoError.message &&
-                  repoError.message.includes(
-                    'Could not resolve to a Repository'
-                  ) && (
-                    <ErrorMessage>
-                      Provided link leads to a private repository
-                    </ErrorMessage>
-                  )}
-                <Button
-                  disabled={!props.values.repoLink || props.errors.repoLink}
-                  primary
-                  type="submit"
-                  style={{ width: '20%' }}
-                >
-                  Add project
-                </Button>
-              </GithubLinkForm>
-            )}
-          />
-          <SectionDivider>
-            <SectionDividerLine />
-            <SectionDividerText>
-              Or try out one of the templates
-            </SectionDividerText>
-            <SectionDividerLine />
-          </SectionDivider>
-          <Templates user={user} />
-        </AddProjectWrapper>
+        <GetStarted />
         <TilesWrapper>
           {projects.map(project => (
             <Tile key={project.id}>
@@ -461,14 +344,24 @@ const Dashboard = () => {
                   >
                     Start
                   </Button>
-                  <Button
-                    onClick={() => {
-                      setModalVisible(true)
-                      setProjectToDelete(project)
-                    }}
-                  >
-                    Delete
-                  </Button>
+                  {isDeleting ? (
+                    <Button disabled={isDeleting}>
+                      <Loader
+                        isFullScreen={false}
+                        color={'#0072ce'}
+                        height={'1.2rem'}
+                      />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        setModalVisible(true)
+                        setProjectToDelete(project)
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </RightSection>
               </VerticalDivider>
             </Tile>
