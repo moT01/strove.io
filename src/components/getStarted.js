@@ -115,9 +115,6 @@ const GetStarted = () => {
   const handleClick = () => setModalVisible(true)
 
   const closeModal = () => setModalVisible(false)
-  // projects.length === 0
-  //   ? console.log('User has no projects')
-  //   : navigate('app/dashboard')
 
   return isLoading ? (
     <Button primary>
