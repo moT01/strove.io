@@ -1,6 +1,10 @@
 /* eslint-disable */
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import StripeCheckout from 'react-stripe-checkout'
+import { BUY_SUBSCRIPTION } from 'queries'
+import { useDispatch } from 'react-redux'
+import { mutation } from 'utils'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
@@ -111,6 +115,10 @@ const PricingSection = styled.div`
   @media (max-width: 1366px) {
     flex-direction: column;
   }
+
+  span {
+    width: 75%;
+  }
 `
 
 const Feature = styled.p`
@@ -141,68 +149,102 @@ const CardTitle = styled(PlanTitle)`
   font-size: 3vh;
 `
 
-class PricingPage extends React.Component {
-  render() {
-    return (
-      <Layout>
-        <SEO title="Pricing" />
-        <CardsWrapper>
-          <Card>
-            <CardTitle>Individuals</CardTitle>
-            <PricingSection>
-              <PricingWrapper>
-                <PlanTitle>Free</PlanTitle>
-                <PlanDesc>The basic plan for individual developers</PlanDesc>
-                <Price>$0</Price>
-                <PlanSubTitle>Per month</PlanSubTitle>
-                <Feature>Public repositories</Feature>
-                <Feature>1,25 - 2 GB of Ram, 10GB of hard drive</Feature>
-                <Feature>No commercial use</Feature>
-                <Button>
-                  <PlanSubTitle team>Choose free plan</PlanSubTitle>
-                </Button>
-              </PricingWrapper>
-              <PricingWrapper>
-                <PlanTitle>Pro</PlanTitle>
-                <PlanDesc>Plan for professionals</PlanDesc>
-                <Price>$39.99</Price>
-                <PlanSubTitle>Per month</PlanSubTitle>
-                <Feature>Private and Public repositories</Feature>
-                <Feature>4 GB of RAM, 10 GB of hard drive</Feature>
-                <Feature>Commerial use</Feature>
-                <Button>
-                  <PlanSubTitle team>Choose Pro</PlanSubTitle>
-                </Button>
-              </PricingWrapper>
-            </PricingSection>
-          </Card>
-          <Card team>
-            <CardTitle team>Teams</CardTitle>
-            <PricingSection>
-              <PricingWrapper>
-                <PlanTitle team>Enterprise</PlanTitle>
-                <PlanDesc team>
-                  Plan aimed for developer teams and companies
-                </PlanDesc>
-                <Contact team>Contact Sales for pricing</Contact>
-                <Feature team>Private and Public repositories</Feature>
-                <Feature team>
-                  RAM, hard drive and speeed adjusted to teams needs
-                </Feature>
-                <Feature team>Commercial use</Feature>
+const StripeButton = styled(Button)`
+  margin: 15px 0;
+  width: 100%;
+`
 
-                <Feature team>Priority support</Feature>
-
-                <Button team>
-                  <PlanSubTitle>Choose Enterprise</PlanSubTitle>
-                </Button>
-              </PricingWrapper>
-            </PricingSection>
-          </Card>
-        </CardsWrapper>
-      </Layout>
-    )
+const PricingPage = () => {
+  const dispatch = useDispatch()
+  const test = ({ id }) => {
+    console.log(id)
+    if (id) {
+      dispatch(
+        mutation({
+          name: 'buySubscription',
+          storeKey: 'user',
+          mutation: BUY_SUBSCRIPTION,
+          variables: { tokenId: id },
+          onSuccessDispatch: [
+            subscriptionId => ({
+              type: 'FETCH_SUCCESS',
+              payload: { data: subscriptionId, storeKey: 'user' },
+            }),
+          ],
+        })
+      )
+    }
   }
+
+  return (
+    <Layout>
+      <SEO title="Pricing" />
+      <CardsWrapper>
+        <Card>
+          <CardTitle>Individuals</CardTitle>
+          <PricingSection>
+            <PricingWrapper>
+              <PlanTitle>Free</PlanTitle>
+              <PlanDesc>The basic plan for individual developers</PlanDesc>
+              <Price>$0</Price>
+              <PlanSubTitle>Per month</PlanSubTitle>
+              <Feature>Public repositories</Feature>
+              <Feature>1,25 - 2 GB of Ram</Feature>
+              <Feature>No commercial use</Feature>
+              <Button>
+                <PlanSubTitle team>Choose free plan</PlanSubTitle>
+              </Button>
+            </PricingWrapper>
+            <PricingWrapper>
+              <PlanTitle>Pro</PlanTitle>
+              <PlanDesc>Plan for professionals</PlanDesc>
+              <Price>$39.99</Price>
+              <PlanSubTitle>Per month</PlanSubTitle>
+              <Feature>Private and Public repositories</Feature>
+              <Feature>4 GB of RAM</Feature>
+              <Feature>Commerial use</Feature>
+              <StripeCheckout
+                amount={3999}
+                description="SiliSky"
+                image="https://i.imgur.com/2IE6t8u.png"
+                locale="en"
+                name="SiliSky.com"
+                stripeKey="pk_test_gNgn4BT3QiO6ckPpwGruJTwW00qGF9RY7c"
+                token={test}
+              >
+                <StripeButton>
+                  <PlanSubTitle team>Choose Pro</PlanSubTitle>
+                </StripeButton>
+              </StripeCheckout>
+            </PricingWrapper>
+          </PricingSection>
+        </Card>
+        <Card team>
+          <CardTitle team>Teams</CardTitle>
+          <PricingSection>
+            <PricingWrapper>
+              <PlanTitle team>Enterprise</PlanTitle>
+              <PlanDesc team>
+                Plan aimed for developer teams and companies
+              </PlanDesc>
+              <Contact team>Contact Sales for pricing</Contact>
+              <Feature team>Private and Public repositories</Feature>
+              <Feature team>
+                RAM, hard drive and speeed adjusted to teams needs
+              </Feature>
+              <Feature team>Commercial use</Feature>
+
+              <Feature team>Priority support</Feature>
+
+              <Button team>
+                <PlanSubTitle>Choose Enterprise</PlanSubTitle>
+              </Button>
+            </PricingWrapper>
+          </PricingSection>
+        </Card>
+      </CardsWrapper>
+    </Layout>
+  )
 }
 /* eslint-enable */
 
