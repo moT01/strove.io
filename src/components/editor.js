@@ -3,13 +3,15 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Location } from '@reach/router'
 import getOr from 'lodash/fp/getOr'
+import { navigate } from 'gatsby'
 
 import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
-// import { STOP_PROJECT } from 'queries'
 import { selectors } from 'state'
 import SEO from 'components/seo'
 import * as C from 'state/currentProject/constants'
+import { CONTINUE_PROJECT } from 'queries'
+import { query, mutation } from 'utils'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -33,7 +35,25 @@ const EditorComponent = ({ location }) => {
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  /* ToDo: Uncomment after beacons are implemented */
+  useEffect(() => {
+    // This condition means project has been stopped
+    if (projectId && !machineId) {
+      dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId },
+          onSuccessDispatch: [
+            ({ id, editorPort, previewPort, machineId }) => ({
+              type: C.SELECT_CURRENT_PROJECT,
+              payload: { id, editorPort, previewPort, machineId },
+            }),
+          ],
+        })
+      )
+    }
+  }, [projectId, machineId])
+
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
       ev.preventDefault()
