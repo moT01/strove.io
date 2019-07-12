@@ -5,11 +5,10 @@ import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
-import { createSelector } from 'reselect'
 
 import { selectors } from 'state'
 import Loader from '../components/fullScreenLoader'
-import GetStarted from '../components/getStarted'
+// import GetStarted from '../components/getStarted'
 import Templates from '../components/templates'
 
 const FadeIn = keyframes`
@@ -101,24 +100,11 @@ const StyledModal = styled(Modal)`
   }
 `
 
-const getUserName = selectors.getApiData('user', null, 'name')
-
-const getUserPhoto = selectors.getApiData('user', null, 'photoUrl')
-
-const getUserData = createSelector(
-  [getUserName, getUserPhoto],
-  (username, userphoto) => ({ username, userphoto })
-)
-
 const Banner = props => {
   const isLoading = useSelector(selectors.getLoading('user'))
-  const user = useSelector(getUserData)
+  // const user = useSelector(selectors.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
 
-  const closeModal = () => {
-    setModalVisible(!isModalVisible)
-    console.log('close me up, close me up inside', isModalVisible)
-  }
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
@@ -148,7 +134,7 @@ const Banner = props => {
           <Button
             primary
             disabled={isLoading}
-            onClick={() => setModalVisible(!isModalVisible)}
+            onClick={() => setModalVisible(true)}
           >
             {isLoading ? (
               <Loader
@@ -162,7 +148,7 @@ const Banner = props => {
           </Button>
           <StyledModal
             isOpen={isModalVisible}
-            onRequestClose={closeModal}
+            onRequestClose={() => setModalVisible(false)}
             ariaHideApp={false}
           >
             <Templates />

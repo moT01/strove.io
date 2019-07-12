@@ -59,16 +59,6 @@ const FadeIn = keyframes`
 
 `
 
-const FullFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-
-`
-
 const ButtonFadeIn = keyframes`
 0% {
   opacity: 0;
@@ -91,7 +81,6 @@ const AddProjectWrapper = styled.div`
   border-style: solid;
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  ${'' /* margin-top: 5vh; */}
   margin-bottom: 0;
   height: auto;
   width: 50vw;
@@ -282,11 +271,13 @@ const Templates = () => {
   }
 
   const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
+    user.username
+      ? createProject({
+          repoLink: item.link,
+          dispatch: dispatch,
+          user: user,
+        })
+      : console.log(`User isn't logged in`)
   }
 
   return (
@@ -294,11 +285,13 @@ const Templates = () => {
       <Title>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
-          createProject({
-            repoLink: values.repoLink.replace(/.git$/, ''),
-            dispatch,
-            user,
-          })
+          user.username
+            ? createProject({
+                repoLink: values.repoLink.replace(/.git$/, ''),
+                dispatch,
+                user,
+              })
+            : console.log(`User isn't logged in`)
           actions.setSubmitting(false)
         }}
         validate={validate}
