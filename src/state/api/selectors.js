@@ -12,6 +12,6 @@ export const getMessage = dataKey => getOr('', ['api', dataKey, 'message'])
 
 export const getCode = dataKey => getOr('', ['api', dataKey, 'code'])
 
-export const getUser = getApiData('user')
+export const getUser = getApiData('user', null)
 
 export const getUserProjects = getApiData('myProjects', [])

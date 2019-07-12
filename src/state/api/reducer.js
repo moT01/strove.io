@@ -2,7 +2,7 @@ import { handleActions } from 'redux-actions'
 import * as C from './constants'
 
 const initialState = {
-  user: {},
+  user: null,
   myProjects: { data: [] },
 }
 
