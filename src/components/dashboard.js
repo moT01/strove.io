@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Modal from 'react-modal'
 import { navigate } from 'gatsby'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
@@ -14,6 +13,7 @@ import GetStarted from '../components/getStarted'
 import Layout from './layout'
 import SEO from './seo'
 import Loader from './fullScreenLoader'
+import Modal from 'components/modal'
 
 const FadeIn = keyframes`
   0% {
@@ -32,7 +32,6 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
-
 `
 
 const ButtonFadeIn = keyframes`
@@ -203,30 +202,6 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
-const StyledModal = styled(Modal)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 10px;
-  border-color: #0072ce;
-  border-width: 1px;
-  border-style: solid;
-  padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  height: auto;
-  width: 30vw;
-  top: 42.5vh;
-  left: 35vw;
-  position: fixed;
-  animation: ${FullFadeIn} 0.2s ease-out;
-
-  :focus {
-    outline: 0;
-  }
-`
-
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
@@ -368,7 +343,7 @@ const Dashboard = () => {
           ))}
         </TilesWrapper>
       </PageWrapper>
-      <StyledModal
+      <Modal
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
         contentLabel="Delete project?"
@@ -388,7 +363,7 @@ const Dashboard = () => {
           Confirm
         </ModalButton>
         <ModalButton onClick={closeModal}>Close</ModalButton>
-      </StyledModal>
+      </Modal>
     </Layout>
   )
 }
