@@ -28,23 +28,10 @@ const createStore = reduxCreateStore(
   persistedReducer,
   composeWithDevTools(
     applyMiddleware(thunk)
-    // other store enhancers if any
   )
 )
 
 const persistor = persistStore(createStore)
-
-export const wrapRootElement = ({ element }) => (
-  <ApolloProvider client={client}>
-    <Provider store={createStore}>
-      <PersistGate loading={null} persistor={persistor}>
-        <LoginProvider>
-          <GitCloneProvider>{element}</GitCloneProvider>
-        </LoginProvider>
-      </PersistGate>
-    </Provider>
-  </ApolloProvider>
-)
 
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -116,3 +103,15 @@ const GitCloneProvider = ({ children }) => {
 
   return children
 }
+
+export const wrapRootElement = ({ element }) => (
+  <ApolloProvider client={client}>
+    <Provider store={createStore}>
+      <PersistGate loading={null} persistor={persistor}>
+        <LoginProvider>
+          <GitCloneProvider>{element}</GitCloneProvider>
+        </LoginProvider>
+      </PersistGate>
+    </Provider>
+  </ApolloProvider>
+)
