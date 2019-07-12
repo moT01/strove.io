@@ -48,6 +48,9 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   width: 100vw;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 `
 
 const TilesWrapper = styled.div`
@@ -55,7 +58,6 @@ const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2vh;
   margin: 2vh;
   animation: ${FullFadeIn} 1s ease-out;
 `
@@ -74,7 +76,7 @@ const Tile = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
   height: 25vh;
-  width: 50vw;
+  width: 45vw;
 
   @media (max-width: 1366px) {
     width: 80vw;
@@ -184,6 +186,33 @@ const templates = [
     description:
       'A starter template for TypeScript and Node with a detailed README describing how to use the two together.',
   },
+  {
+    name: 'Node + React',
+    icon: <Typescript />,
+    link: 'https://github.com/Rosuav/full-stack-app',
+    description: 'Basic full-stack JavaScript app template.',
+  },
+  {
+    name: 'React express template',
+    icon: <Typescript />,
+    link: 'https://github.com/khaled/react-express-template',
+    description:
+      'Full stack web app starter template with React 15, React Router, ES6 (via Babel), CoffeeScript, Express/Node.js, Semantic-UI, Gulp and more.',
+  },
+  {
+    name: 'Thinkful Full Stack Template',
+    icon: <Typescript />,
+    link: 'https://github.com/Thinkful-Ed/full-stack-template.git',
+    description:
+      'Full stack web app starter template with React 15, React Router, ES6 (via Babel), CoffeeScript, Express/Node.js, Semantic-UI, Gulp and more.',
+  },
+  {
+    name: 'Giter8',
+    icon: <Typescript />,
+    link: 'https://github.com/tbje/full-stack.g8',
+    description:
+      'This is a minimal Giter8 template for Full Stack Scala with ScalaJS in the front & Akka HTTP in the back. Binding is done using Autowire and BooPickle.',
+  },
 ]
 
 const Dashboard = () => {
@@ -198,12 +227,37 @@ const Dashboard = () => {
     })
   }
 
+  const leftColumn = []
+  const rightColumn = []
+
+  templates.map((template, index) =>
+    index % 2 === 0 ? leftColumn.push(template) : rightColumn.push(template)
+  )
+
   return (
     <Layout>
       <SEO title="Templates" />
       <PageWrapper>
         <TilesWrapper>
-          {templates.map(template => (
+          {leftColumn.map(template => (
+            <Tile key={template.name}>
+              <VerticalDivider>
+                <InfoWrapper>
+                  <ProjectTitle>{template.name}</ProjectTitle>
+                  <TextWrapper>
+                    <StyledIcon type="edit" />
+                    <Text>{template.description}</Text>
+                  </TextWrapper>
+                </InfoWrapper>
+                <Button primary onClick={() => handleClick(template)}>
+                  Start
+                </Button>
+              </VerticalDivider>
+            </Tile>
+          ))}
+        </TilesWrapper>
+        <TilesWrapper>
+          {rightColumn.map(template => (
             <Tile key={template.name}>
               <VerticalDivider>
                 <InfoWrapper>
