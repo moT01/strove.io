@@ -6,6 +6,7 @@ import GET_PROJECTS from './getProjects'
 import DELETE_PROJECT from './deleteProject'
 import STOP_PROJECT from './stopProject'
 import CONTINUE_PROJECT from './continueProject'
+import BUY_SUBSCRIPTION from './buySubscription'
 
 export {
   ADD_PROJECT,
@@ -16,4 +17,5 @@ export {
   DELETE_PROJECT,
   STOP_PROJECT,
   CONTINUE_PROJECT,
+  BUY_SUBSCRIPTION,
 }
