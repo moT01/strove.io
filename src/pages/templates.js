@@ -1,10 +1,23 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import styled, { keyframes, css } from 'styled-components'
+import { Icon } from 'antd'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
-import styled, { keyframes } from 'styled-components'
-import { Icon } from 'antd'
 import { Typescript } from '../images/logos'
+import { createProject } from 'utils'
+import { selectors } from 'state'
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.4;
+  }
+
+`
 
 const FullFadeIn = keyframes`
   0% {
@@ -13,6 +26,16 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
+
+`
+
+const ButtonFadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 0.9;
+}
 
 `
 
@@ -70,9 +93,7 @@ const Text = styled.p`
   font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  text-align: left;
 `
 
 const VerticalDivider = styled.div`
@@ -110,6 +131,51 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  min-width: 70px;
+  max-width: 150px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  animation: ${FadeIn} 0.5s ease-out;
+  opacity: 0.9;
+
+  :focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        transform: translateY(-1px);
+      }
+    `}
+`
+
 const templates = [
   {
     name: 'Typescript + Node',
@@ -121,6 +187,17 @@ const templates = [
 ]
 
 const Dashboard = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(selectors.getUser)
+
+  const handleClick = item => {
+    createProject({
+      repoLink: item.link,
+      dispatch: dispatch,
+      user: user,
+    })
+  }
+
   return (
     <Layout>
       <SEO title="Templates" />
@@ -136,6 +213,9 @@ const Dashboard = () => {
                     <Text>{template.description}</Text>
                   </TextWrapper>
                 </InfoWrapper>
+                <Button primary onClick={() => handleClick(template)}>
+                  Start
+                </Button>
               </VerticalDivider>
             </Tile>
           ))}
