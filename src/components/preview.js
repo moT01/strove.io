@@ -32,8 +32,8 @@ const Preview = () => {
       {loaderVisible && (
         <Loader
           isFullScreen={true}
+          color={'#0072ce'}
           style={{
-            height: '100vh',
             opacity: loaderVisible ? 1 : 0,
             transition: 'opacity 0.5s',
           }}

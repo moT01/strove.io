@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'gatsby'
 
 import {
   CSharp,
@@ -14,6 +15,8 @@ import {
 } from '../images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
+import Layout from './layout'
+import SEO from './seo'
 
 const templates = [
   { name: 'Typescript', icon: <Typescript /> },
@@ -108,7 +111,7 @@ const TemplateText = styled.p`
   overflow: hidden;
 `
 
-const Button = styled.button`
+const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
@@ -156,17 +159,23 @@ const Templates = () => {
   }
 
   return (
-    <ComponentWrapper>
-      <TemplatesWrapper>
-        {templates.map(item => (
-          <TemplateContainer key={item.name} onClick={() => handleClick(item)}>
-            <IconContainer>{item.icon}</IconContainer>
-            <TemplateText>{item.name}</TemplateText>
-          </TemplateContainer>
-        ))}
-      </TemplatesWrapper>
-      <Button>More templates</Button>
-    </ComponentWrapper>
+    <Layout>
+      <SEO title="Templates" />
+      <ComponentWrapper>
+        <TemplatesWrapper>
+          {templates.map(item => (
+            <TemplateContainer
+              key={item.name}
+              onClick={() => handleClick(item)}
+            >
+              <IconContainer>{item.icon}</IconContainer>
+              <TemplateText>{item.name}</TemplateText>
+            </TemplateContainer>
+          ))}
+        </TemplatesWrapper>
+        <StyledLink to="templates">More templates</StyledLink>
+      </ComponentWrapper>
+    </Layout>
   )
 }
 export default Templates

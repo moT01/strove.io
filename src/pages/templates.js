@@ -1,10 +1,23 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import styled, { keyframes, css } from 'styled-components'
+import { Icon } from 'antd'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
-import styled, { keyframes } from 'styled-components'
-import { Icon } from 'antd'
 import { Typescript } from '../images/logos'
+import { createProject } from 'utils'
+import { selectors } from 'state'
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.4;
+  }
+
+`
 
 const FullFadeIn = keyframes`
   0% {
@@ -13,6 +26,16 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
+
+`
+
+const ButtonFadeIn = keyframes`
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 0.9;
+}
 
 `
 
@@ -25,6 +48,9 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   width: 100vw;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 `
 
 const TilesWrapper = styled.div`
@@ -32,7 +58,6 @@ const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2vh;
   margin: 2vh;
   animation: ${FullFadeIn} 1s ease-out;
 `
@@ -51,7 +76,7 @@ const Tile = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
   height: 25vh;
-  width: 50vw;
+  width: 45vw;
 
   @media (max-width: 1366px) {
     width: 80vw;
@@ -70,9 +95,7 @@ const Text = styled.p`
   font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  text-align: left;
 `
 
 const VerticalDivider = styled.div`
@@ -110,6 +133,51 @@ const StyledIcon = styled(Icon)`
   color: #0072ce;
 `
 
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  min-width: 70px;
+  max-width: 150px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  animation: ${FadeIn} 0.5s ease-out;
+  opacity: 0.9;
+
+  :focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        transform: translateY(-1px);
+      }
+    `}
+`
+
 const templates = [
   {
     name: 'Typescript + Node',
@@ -118,15 +186,60 @@ const templates = [
     description:
       'A starter template for TypeScript and Node with a detailed README describing how to use the two together.',
   },
+  {
+    name: 'Node + React',
+    icon: <Typescript />,
+    link: 'https://github.com/Rosuav/full-stack-app',
+    description: 'Basic full-stack JavaScript app template.',
+  },
+  {
+    name: 'React express template',
+    icon: <Typescript />,
+    link: 'https://github.com/khaled/react-express-template',
+    description:
+      'Full stack web app starter template with React 15, React Router, ES6 (via Babel), CoffeeScript, Express/Node.js, Semantic-UI, Gulp and more.',
+  },
+  {
+    name: 'Thinkful Full Stack Template',
+    icon: <Typescript />,
+    link: 'https://github.com/Thinkful-Ed/full-stack-template.git',
+    description:
+      'Full stack web app starter template with React 15, React Router, ES6 (via Babel), CoffeeScript, Express/Node.js, Semantic-UI, Gulp and more.',
+  },
+  {
+    name: 'Giter8',
+    icon: <Typescript />,
+    link: 'https://github.com/tbje/full-stack.g8',
+    description:
+      'This is a minimal Giter8 template for Full Stack Scala with ScalaJS in the front & Akka HTTP in the back. Binding is done using Autowire and BooPickle.',
+  },
 ]
 
 const Dashboard = () => {
+  const dispatch = useDispatch()
+  const user = useSelector(selectors.getUser)
+
+  const handleClick = item => {
+    createProject({
+      repoLink: item.link,
+      dispatch: dispatch,
+      user: user,
+    })
+  }
+
+  const leftColumn = []
+  const rightColumn = []
+
+  templates.map((template, index) =>
+    index % 2 === 0 ? leftColumn.push(template) : rightColumn.push(template)
+  )
+
   return (
     <Layout>
       <SEO title="Templates" />
       <PageWrapper>
         <TilesWrapper>
-          {templates.map(template => (
+          {leftColumn.map(template => (
             <Tile key={template.name}>
               <VerticalDivider>
                 <InfoWrapper>
@@ -136,6 +249,27 @@ const Dashboard = () => {
                     <Text>{template.description}</Text>
                   </TextWrapper>
                 </InfoWrapper>
+                <Button primary onClick={() => handleClick(template)}>
+                  Start
+                </Button>
+              </VerticalDivider>
+            </Tile>
+          ))}
+        </TilesWrapper>
+        <TilesWrapper>
+          {rightColumn.map(template => (
+            <Tile key={template.name}>
+              <VerticalDivider>
+                <InfoWrapper>
+                  <ProjectTitle>{template.name}</ProjectTitle>
+                  <TextWrapper>
+                    <StyledIcon type="edit" />
+                    <Text>{template.description}</Text>
+                  </TextWrapper>
+                </InfoWrapper>
+                <Button primary onClick={() => handleClick(template)}>
+                  Start
+                </Button>
               </VerticalDivider>
             </Tile>
           ))}

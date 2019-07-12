@@ -1,7 +1,8 @@
-import { Link } from 'gatsby'
 import React from 'react'
+import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
+
 import Login from './login'
 import { Icon } from 'antd'
 
