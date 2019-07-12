@@ -108,7 +108,6 @@ const StyledModal = styled(Modal)`
 
 const Banner = props => {
   const isLoading = useSelector(selectors.getLoading('user'))
-  // const user = useSelector(selectors.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
 
   const closeModal = () => setModalVisible(false)

@@ -321,11 +321,13 @@ const Templates = ({ closeModal }) => {
   }
 
   const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
+    user.name
+      ? createProject({
+          repoLink: item.link,
+          dispatch: dispatch,
+          user: user,
+        })
+      : console.log('User is not logged in')
   }
 
   return (
