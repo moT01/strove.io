@@ -31,7 +31,6 @@ class Home extends React.PureComponent {
           <Page1 isMobile={this.state.isMobile} />
           <Page2 />
         </div>
-        {/* <Footer /> */}
       </div>
     )
   }

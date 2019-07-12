@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
 import { Icon } from 'antd'
+import { Link } from 'gatsby'
 
 import {
   CSharp,
@@ -263,6 +264,41 @@ const StyledIcon = styled(Icon)`
   }
 `
 
+const StyledLink = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  min-width: 70px;
+  max-width: 150px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+
+  :focus {
+    outline: 0;
+  }
+
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+    transform: translateY(-1px);
+  }
+`
+
 const Templates = ({ closeModal }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
@@ -285,11 +321,13 @@ const Templates = ({ closeModal }) => {
   }
 
   const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
+    user.name
+      ? createProject({
+          repoLink: item.link,
+          dispatch: dispatch,
+          user: user,
+        })
+      : console.log('User is not logged in')
   }
 
   return (
@@ -356,7 +394,8 @@ const Templates = ({ closeModal }) => {
             </TemplateContainer>
           ))}
         </TemplatesWrapper>
-        <Button>More templates</Button>
+
+        <StyledLink to="templates">More templates</StyledLink>
       </ComponentWrapper>
     </AddProjectWrapper>
   )
