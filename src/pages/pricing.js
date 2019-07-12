@@ -156,7 +156,7 @@ const StripeButton = styled(Button)`
 
 const PricingPage = () => {
   const dispatch = useDispatch()
-  const test = ({ id }) => {
+  const queryToken = ({ id }) => {
     console.log(id)
     if (id) {
       dispatch(
@@ -209,8 +209,9 @@ const PricingPage = () => {
                 image="https://i.imgur.com/2IE6t8u.png"
                 locale="en"
                 name="SiliSky.com"
-                stripeKey="pk_test_gNgn4BT3QiO6ckPpwGruJTwW00qGF9RY7c"
-                token={test}
+                stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
+                token={queryToken}
+                allowRememberMe={false}
               >
                 <StripeButton>
                   <PlanSubTitle team>Choose Pro</PlanSubTitle>
