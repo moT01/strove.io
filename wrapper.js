@@ -12,9 +12,8 @@ import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation, window } from 'utils'
 import { createProject } from 'utils'
 import { selectors } from 'state'
-import Modal from 'react-modal'
-import styled, { keyframes } from 'styled-components'
 
+import Modal from 'components/modal'
 import client from './client'
 import rootReducer from './src/state'
 
@@ -32,40 +31,6 @@ const createStore = reduxCreateStore(
 )
 
 const persistor = persistStore(createStore)
-
-const FullFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-
-`
-
-const StyledModal = styled(Modal)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 10px;
-  border-color: #0072ce;
-  border-width: 1px;
-  border-style: solid;
-  padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  height: auto;
-  width: 30vw;
-  top: 42.5vh;
-  left: 35vw;
-  position: fixed;
-  animation: ${FullFadeIn} 0.2s ease-out;
-
-  :focus {
-    outline: 0;
-  }
-`
 
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -142,14 +107,14 @@ const GitCloneProvider = ({ children }) => {
   return (
     <>
       {children}
-      <StyledModal
+      <Modal
         isOpen={isLoginModalOpen}
         onRequestClose={() => setLoginModalOpen(false)}
         contentLabel="Login first"
         ariaHideApp={false}
       >
         Login with github
-      </StyledModal>
+      </Modal>
     </>
   )
 }
