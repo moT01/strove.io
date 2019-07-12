@@ -8,8 +8,8 @@ import Modal from 'react-modal'
 
 import { selectors } from 'state'
 import Loader from '../components/fullScreenLoader'
-// import GetStarted from '../components/getStarted'
-import Templates from '../components/templates'
+import GetStarted from '../components/getStarted'
+// import Templates from '../components/templates'
 
 const FadeIn = keyframes`
   0% {
@@ -105,6 +105,8 @@ const Banner = props => {
   // const user = useSelector(selectors.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
 
+  const closeModal = () => setModalVisible(false)
+
   return (
     <div className="banner-wrapper">
       {props.isMobile && (
@@ -148,10 +150,10 @@ const Banner = props => {
           </Button>
           <StyledModal
             isOpen={isModalVisible}
-            onRequestClose={() => setModalVisible(false)}
+            onRequestClose={closeModal}
             ariaHideApp={false}
           >
-            <Templates />
+            <GetStarted closeModal={closeModal} />
           </StyledModal>
           <Button>Request demo</Button>
         </ButtonsWrapper>

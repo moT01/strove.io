@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
+import { Icon } from 'antd'
 
 import {
   CSharp,
@@ -81,6 +82,7 @@ const AddProjectWrapper = styled.div`
   border-style: solid;
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  ${'' /* margin-top: 5vh; */}
   margin-bottom: 0;
   height: auto;
   width: 50vw;
@@ -249,7 +251,7 @@ const ErrorMessage = styled.p`
   margin: 0;
 `
 
-const Templates = () => {
+const Templates = ({ closeModal }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
   const repoError = useSelector(selectors.getError('myProjects'))
@@ -271,13 +273,11 @@ const Templates = () => {
   }
 
   const handleClick = item => {
-    user.username
-      ? createProject({
-          repoLink: item.link,
-          dispatch: dispatch,
-          user: user,
-        })
-      : console.log(`User isn't logged in`)
+    createProject({
+      repoLink: item.link,
+      dispatch: dispatch,
+      user: user,
+    })
   }
 
   return (
@@ -285,13 +285,11 @@ const Templates = () => {
       <Title>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
-          user.username
-            ? createProject({
-                repoLink: values.repoLink.replace(/.git$/, ''),
-                dispatch,
-                user,
-              })
-            : console.log(`User isn't logged in`)
+          createProject({
+            repoLink: values.repoLink.replace(/.git$/, ''),
+            dispatch,
+            user,
+          })
           actions.setSubmitting(false)
         }}
         validate={validate}

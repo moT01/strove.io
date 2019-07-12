@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import { navigate } from 'gatsby'
-
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { query, mutation } from 'utils'
 import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
-import Templates from 'components/templates.js'
+// import Templates from 'components/templates.js'
+import GetStarted from '../components/getStarted'
 import Layout from './layout'
 import SEO from './seo'
 import Loader from './fullScreenLoader'
@@ -300,7 +301,7 @@ const Dashboard = () => {
     <Layout>
       <SEO title="Dashboard" />
       <PageWrapper>
-        <Templates />
+        <GetStarted />
         <TilesWrapper>
           {projects.map(project => (
             <Tile key={project.id}>
