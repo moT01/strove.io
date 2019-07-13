@@ -15,6 +15,9 @@ import { selectors } from 'state'
 
 import Modal from 'components/modal'
 
+const getGithubToken = selectors.getApiData('user', null, 'githubToken')
+const getGitlabToken = selectors.getApiData('user', null, 'gitlabToken')
+
 const GitCloneProvider = ({ children }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false)
   const [isAuthorized, setAuthorized] = useState(false)
