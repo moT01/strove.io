@@ -16,20 +16,33 @@ import { selectors } from 'state'
 import Modal from 'components/modal'
 
 export default ({ children }) => {
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false)
-  const [isAuthorized, setAuthorized] = useState(false)
+  const [loginWithGithub, setLoginWithGithub] = useState(false)
+  const [loginWithGitlab, setLoginWithGitlab] = useState(false)
+  const [addGithubToLogin, setAddGithubToLogin] = useState(false)
+  const [addGitlabToLogin, setAddGitlabToLogin] = useState(false)
+
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
   const githubToken = user && user.githubToken
-  const getGitlabToken = user && user.gitlabToken
+  const gitlabToken = user && user.gitlabToken
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
     const repoProvider = repoUrlParts[2].split('.')[0]
 
-    if (repoLink && !user) {
-      setLoginModalOpen(true)
-    } else if (repoLink && user) {
+    const repoFromGithub = repoProvider === 'github'
+    const repoFromGitlab = repoProvider === 'gitlab'
+
+    /* ToDo: Handle private github repos */
+    if (!user && repoFromGithub) {
+      setLoginWithGithub(true)
+    } else if (!user && repoFromGitlab) {
+      setLoginWithGitlab(true)
+    } else if (user && repoFromGithub && !githubToken) {
+      setAddGithubToLogin(true)
+    } else if (user && repoFromGitlab && !gitlabToken) {
+      setAddGitlabToLogin(true)
+    } else {
       createProject({ repoLink, dispatch, user })
     }
   }
@@ -38,8 +51,8 @@ export default ({ children }) => {
     <>
       {children({ addProject })}
       <Modal
-        isOpen={isLoginModalOpen}
-        onRequestClose={() => setLoginModalOpen(false)}
+        isOpen={loginWithGithub}
+        onRequestClose={() => setLoginWithGithub(false)}
         contentLabel="Login first"
         ariaHideApp={false}
       >
@@ -53,7 +66,7 @@ export default ({ children }) => {
 // const AddProjectMessages = {
 //   'githubClone/noUser': <LoginWithGithub />,
 //   'gitlabClone/noUser': <LoginWithGitlab />,
-//   'githubClone/noGithubToken': <AddGithubPermissions />,
-//   'gitlabClone/noGitlabToken': <LoginWithGitlab />,
-//   'githubClone/privateRepo': <NoPrivatePermissions />
+//   'githubClone/noGithubToken': <AddGithubToLogin />,
+//   'gitlabClone/noGitlabToken': <AddGitlabToLogin />,
+//   'githubClone/privateRepo': <AddPrivatePermissions />
 // }
