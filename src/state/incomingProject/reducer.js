@@ -9,7 +9,6 @@ export default handleActions(
     [C.ADD_INCOMING_PROJECT]: ({ payload: { repoLink, repoProvider } }) => ({
       repoLink,
       repoProvider,
-      isAddingNewProject: true,
     }),
     [C.REMOVE_INCOMING_PROJECT]: () => initialState,
   },
