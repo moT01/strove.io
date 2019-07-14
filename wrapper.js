@@ -93,9 +93,7 @@ const GitCloneProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
 
-=======
 const WithGitClone = ({ children, addProject }) => {
->>>>>>> bbf6ae78dfa758d46cd0b47476f069876d7b074d
   useEffect(() => {
     const repoLink =
       window &&
