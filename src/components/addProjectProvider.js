@@ -15,16 +15,18 @@ import { selectors } from 'state'
 
 import Modal from 'components/modal'
 
-const getGithubToken = selectors.getApiData('user', null, 'githubToken')
-const getGitlabToken = selectors.getApiData('user', null, 'gitlabToken')
-
 export default ({ children }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false)
   const [isAuthorized, setAuthorized] = useState(false)
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
+  const githubToken = user && user.githubToken
+  const getGitlabToken = user && user.gitlabToken
 
   const addProject = repoLink => {
+    const repoUrlParts = repoLink.split('/')
+    const repoProvider = repoUrlParts[2].split('.')[0]
+
     if (repoLink && !user) {
       setLoginModalOpen(true)
     } else if (repoLink && user) {
@@ -50,6 +52,7 @@ export default ({ children }) => {
 // Gitclone cases
 // const AddProjectMessages = {
 //   'githubClone/noUser': <LoginWithGithub />,
+//   'gitlabClone/noUser': <LoginWithGitlab />,
 //   'githubClone/noGithubToken': <AddGithubPermissions />,
 //   'gitlabClone/noGitlabToken': <LoginWithGitlab />,
 //   'githubClone/privateRepo': <NoPrivatePermissions />
