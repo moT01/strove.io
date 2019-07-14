@@ -22,7 +22,7 @@ module.exports = {
     'no-plusplus': 0,
     'jsx-a11y/accessible-emoji': 0,
     'linebreak-style': 0,
-    'no-unused-expressions': 'off',
+    'no-unused-expressions': 1,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
   },
