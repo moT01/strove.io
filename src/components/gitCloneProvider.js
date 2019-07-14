@@ -19,7 +19,7 @@ const getGithubToken = selectors.getApiData('user', null, 'githubToken')
 const getGitlabToken = selectors.getApiData('user', null, 'gitlabToken')
 
 export default ({ children }) => {
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false)
+  const [isLoginModalOpen, setLoginModalOpen] = useState(true)
   const [isAuthorized, setAuthorized] = useState(false)
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
@@ -40,9 +40,9 @@ export default ({ children }) => {
         onRequestClose={() => setLoginModalOpen(false)}
         contentLabel="Login first"
         ariaHideApp={false}
-      >
-        Login with github
-      </Modal>
+        width="25vw"
+        height="15vh"
+      ></Modal>
     </>
   )
 }
@@ -50,6 +50,7 @@ export default ({ children }) => {
 // Gitclone cases
 // const AddProjectMessages = {
 //   'githubClone/noUser': <LoginWithGithub />,
+//   'gitlabClone/noUser': <LoginWithGitlab />,
 //   'githubClone/noGithubToken': <AddGithubPermissions />,
 //   'gitlabClone/noGitlabToken': <LoginWithGitlab />,
 //   'githubClone/privateRepo': <NoPrivatePermissions />

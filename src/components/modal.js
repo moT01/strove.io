@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 const FullFadeIn = keyframes`
   0% {
@@ -11,9 +11,16 @@ const FullFadeIn = keyframes`
   }
 `
 
-const myWidth = `50vw`
+const sizeProps = props =>
+  css`
+    ${props.width && `width: ${props.width}`};
+    ${props.width && `left: calc(50vw - ${props.width}/2)`};
+    ${props.height && `height: ${props.height}`};
+    ${props.height && `top: calc(50vh - ${props.height}/2)`};
+  `
 
 export default styled(Modal)`
+  ${sizeProps};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,10 +32,6 @@ export default styled(Modal)`
   border-style: solid;
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-  height: auto;
-  width: ${myWidth};
-  top: 42.5vh;
-  left: 35vw;
   position: fixed;
   animation: ${FullFadeIn} 0.2s ease-out;
 
