@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 import * as C from './constants'
 
-const initialState = {}
+const initialState = null
 
 export default handleActions(
   {

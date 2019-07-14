@@ -22,6 +22,7 @@ export default gql`
       machineId
       editorPort
       previewPort
+      additionalPorts
     }
   }
 `
