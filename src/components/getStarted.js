@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
-import { Icon } from 'antd'
 import { Link } from 'gatsby'
 
 import {
