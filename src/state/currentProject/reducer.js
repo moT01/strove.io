@@ -26,7 +26,7 @@ export default handleActions(
       repoProvider,
       additionalPorts,
     }),
-    [C.STOP_CURRENT_PROJECT]: state => initialState,
+    [C.STOP_CURRENT_PROJECT]: () => initialState,
   },
   initialState
 )
