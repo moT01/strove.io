@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
-import { mutation, window } from 'utils'
+import { mutation } from 'utils'
 
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
