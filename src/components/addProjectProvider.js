@@ -5,6 +5,7 @@ import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation } from 'utils'
 import { createProject } from 'utils'
 import { selectors } from 'state'
+import addProjectModals from 'components/addProjectModals'
 
 import Modal from 'components/modal'
 
@@ -45,8 +46,10 @@ export default ({ children }) => {
         onRequestClose={() => setModalContent()}
         contentLabel={modalContent}
         ariaHideApp={false}
+        width="40vw"
+        height="35vh"
       >
-        {modalContent}
+        {addProjectModals(modalContent)}
       </Modal>
     </>
   )
