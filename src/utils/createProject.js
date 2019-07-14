@@ -20,12 +20,12 @@ const createProject = async ({ repoLink, dispatch, user }) => {
     })
 
   const startProject = project => {
-    console.log('project', project)
     setCurrentProject({
       id: project.id,
       editorPort: project.editorPort,
       previewPort: project.previewPort,
       machineId: project.machineId,
+      additionalPorts: project.additionalPorts,
     })
     navigate('/app/editor/')
   }
