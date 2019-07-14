@@ -5,7 +5,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { query, mutation } from 'utils'
-import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
+import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
@@ -266,7 +266,7 @@ const Dashboard = () => {
       query({
         name: 'myProjects',
         dataSelector: data => data.myProjects.edges,
-        query: GET_PROJECTS,
+        query: MY_PROJECTS,
       })
     )
   }, [])
