@@ -5,6 +5,7 @@ import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
+import { Icon } from 'antd'
 
 import { selectors } from 'state'
 import Loader from '../components/fullScreenLoader'
@@ -91,9 +92,6 @@ const StyledA = styled.a`
 
 const StyledModal = styled(Modal)`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: auto;
   width: auto;
   top: 25%;
@@ -103,6 +101,19 @@ const StyledModal = styled(Modal)`
 
   :focus {
     outline: 0;
+  }
+`
+
+const StyledIcon = styled(Icon)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.7vh;
+  color: #0072ce;
+  cursor: pointer;
+
+  :focus {
+    outline: none;
   }
 `
 
@@ -158,6 +169,7 @@ const Banner = props => {
             onRequestClose={closeModal}
             ariaHideApp={false}
           >
+            <StyledIcon type="close" onClick={() => setModalVisible(false)} />
             <GetStarted closeModal={closeModal} />
           </StyledModal>
           <Button>
