@@ -73,5 +73,5 @@ export default ({ children }) => {
 //   'githubClone/privateRepo': <NoPrivatePermissions />
 //   'githubClone/noGithubToken': <AddGithubToLogin />,
 //   'gitlabClone/noGitlabToken': <AddGitlabToLogin />,
-//   'githubClone/privateRepo': <AddPrivatePermissions />
+//   'githubClone/privateRepo': <AddGithubPrivatePermissions />
 // }
