@@ -12,6 +12,7 @@ import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation, window } from 'utils'
 import { createProject } from 'utils'
 import { selectors } from 'state'
+import styled from 'styled-components'
 
 import Modal from 'components/modal'
 import client from './client'
@@ -86,7 +87,7 @@ const LoginProvider = ({ children }) => {
 }
 
 const GitCloneProvider = ({ children }) => {
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false)
+  const [isLoginModalOpen, setLoginModalOpen] = useState(true)
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
 
