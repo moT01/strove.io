@@ -57,7 +57,6 @@ const FadeIn = keyframes`
   100% {
     opacity: 0.4;
   }
-
 `
 
 const ButtonFadeIn = keyframes`
@@ -67,7 +66,6 @@ const ButtonFadeIn = keyframes`
 100% {
   opacity: 0.9;
 }
-
 `
 
 const AddProjectWrapper = styled.div`
@@ -83,7 +81,7 @@ const AddProjectWrapper = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin-bottom: 0;
-  height: auto;
+  height: 35h;
   width: 50vw;
 
   @media (max-width: 1366px) {
@@ -249,6 +247,7 @@ const ErrorMessage = styled.p`
   color: red;
   font-size: 0.9rem;
   margin: 0;
+  height: 0.9rem;
 `
 
 const StyledLink = styled(Link)`
@@ -273,12 +272,12 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   transition: all 0.2s ease;
   opacity: 0.9;
+  cursor: pointer;
 
   :focus {
     outline: 0;
   }
 
-  cursor: pointer;
   &:hover {
     opacity: 1;
     box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
@@ -286,7 +285,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Templates = ({ closeModal }) => {
+const Templates = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
   const repoError = useSelector(selectors.getError('myProjects'))
@@ -340,18 +339,20 @@ const Templates = ({ closeModal }) => {
               name="repoLink"
               placeholder={'https://github.com/evil-corp/worldDomination'}
             />
-            {props.errors.repoLink && (
-              <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
-            )}
-            {repoError &&
-              repoError.message &&
-              repoError.message.includes(
-                'Could not resolve to a Repository'
-              ) && (
-                <ErrorMessage>
-                  Provided link leads to a private repository
-                </ErrorMessage>
+            <ErrorMessage>
+              {props.errors.repoLink && (
+                <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
               )}
+              {repoError &&
+                repoError.message &&
+                repoError.message.includes(
+                  'Could not resolve to a Repository'
+                ) && (
+                  <ErrorMessage>
+                    Provided link leads to a private repository
+                  </ErrorMessage>
+                )}
+            </ErrorMessage>
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import styled, { keyframes } from 'styled-components'
 
@@ -10,6 +10,8 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
 `
+
+const myWidth = `50vw`
 
 export default styled(Modal)`
   display: flex;
@@ -24,7 +26,7 @@ export default styled(Modal)`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   height: auto;
-  width: 30vw;
+  width: ${myWidth};
   top: 42.5vh;
   left: 35vw;
   position: fixed;
