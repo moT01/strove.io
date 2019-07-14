@@ -87,11 +87,11 @@ const LoginProvider = ({ children }) => {
   return children
 }
 
-<<<<<<< HEAD
 const GitCloneProvider = ({ children }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(true)
   const dispatch = useDispatch()
   const user = useSelector(selectors.getUser)
+}
 
 const WithGitClone = ({ children, addProject }) => {
   useEffect(() => {
