@@ -18,7 +18,7 @@ import Modal from 'components/modal'
 const getGithubToken = selectors.getApiData('user', null, 'githubToken')
 const getGitlabToken = selectors.getApiData('user', null, 'gitlabToken')
 
-const GitCloneProvider = ({ children }) => {
+export default ({ children }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false)
   const [isAuthorized, setAuthorized] = useState(false)
   const dispatch = useDispatch()
@@ -46,3 +46,11 @@ const GitCloneProvider = ({ children }) => {
     </>
   )
 }
+
+// Gitclone cases
+// const AddProjectMessages = {
+//   'githubClone/noUser': <LoginWithGithub />,
+//   'githubClone/noGithubToken': <AddGithubPermissions />,
+//   'gitlabClone/noGitlabToken': <LoginWithGitlab />,
+//   'githubClone/privateRepo': <NoPrivatePermissions />
+// }
