@@ -14,7 +14,7 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 
 import Modal from 'components/modal'
-import GitCloneProvider from 'components/gitCloneProvider'
+import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
 
@@ -86,7 +86,7 @@ const LoginProvider = ({ children }) => {
   return children
 }
 
-const WithGitClone = ({ children, addProject }) => {
+const WithAddProject = ({ children, addProject }) => {
   useEffect(() => {
     const repoLink =
       window &&
@@ -94,7 +94,7 @@ const WithGitClone = ({ children, addProject }) => {
       window.location.href.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-    addProject(repoLink)
+    repoLink && addProject(repoLink)
   }, [])
 
   return children
@@ -105,11 +105,11 @@ export const wrapRootElement = ({ element }) => (
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
         <LoginProvider>
-          <GitCloneProvider>
+          <AddProjectProvider>
             {({ addProject }) => (
-              <WithGitClone addProject={addProject}>{element}</WithGitClone>
+              <WithAddProject addProject={addProject}>{element}</WithAddProject>
             )}
-          </GitCloneProvider>
+          </AddProjectProvider>
         </LoginProvider>
       </PersistGate>
     </Provider>
