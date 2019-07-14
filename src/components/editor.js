@@ -59,7 +59,6 @@ const EditorComponent = ({ location }) => {
       ev.preventDefault()
       dispatch({
         type: C.STOP_CURRENT_PROJECT,
-        payload: { id: projectId },
       })
 
       if (navigator && navigator.sendBeacon) {
