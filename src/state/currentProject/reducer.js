@@ -1,26 +1,32 @@
 import { handleActions } from 'redux-actions'
 import * as C from './constants'
 
-const initialState = {}
+const initialState = null
 
 export default handleActions(
   {
     [C.SELECT_CURRENT_PROJECT]: (
       state,
-      { payload: { id, editorPort, previewPort, machineId } }
+      {
+        payload: {
+          id,
+          editorPort,
+          machineId,
+          repoUrl,
+          repoProvider,
+          additionalPorts,
+        },
+      }
     ) => ({
       ...state,
       id,
       editorPort,
-      previewPort,
       machineId,
+      repoUrl,
+      repoProvider,
+      additionalPorts,
     }),
-    [C.STOP_CURRENT_PROJECT]: (state, { payload: { id } }) => ({
-      id,
-      editorPort: null,
-      previewPort: null,
-      machineId: null,
-    }),
+    [C.STOP_CURRENT_PROJECT]: () => initialState,
   },
   initialState
 )

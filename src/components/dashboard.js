@@ -5,8 +5,9 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { query, mutation } from 'utils'
-import { GET_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
+import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import * as C from 'state/currentProject/constants'
+import { selectCurrentProject } from 'state/currentProject/actions'
 import * as ApiC from 'state/api/constants'
 import { selectors } from 'state'
 import GetStarted from '../components/getStarted'
@@ -218,18 +219,13 @@ const Dashboard = () => {
           variables: { projectId: id },
           onSuccess: () => navigate('/app/editor/'),
           onSuccessDispatch: [
-            ({ id, editorPort, previewPort, machineId }) => ({
-              type: C.SELECT_CURRENT_PROJECT,
-              payload: { id, editorPort, previewPort, machineId },
-            }),
+            ({ id, editorPort, previewPort, machineId }) =>
+              selectCurrentProject({ id, editorPort, previewPort, machineId }),
           ],
         })
       )
     } else {
-      dispatch({
-        type: C.SELECT_CURRENT_PROJECT,
-        payload: { id, editorPort, previewPort, machineId },
-      })
+      dispatch(selectCurrentProject({ id, editorPort, previewPort, machineId }))
       navigate('/app/editor/')
     }
   }
@@ -266,7 +262,7 @@ const Dashboard = () => {
       query({
         name: 'myProjects',
         dataSelector: data => data.myProjects.edges,
-        query: GET_PROJECTS,
+        query: MY_PROJECTS,
       })
     )
   }, [])
