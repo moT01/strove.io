@@ -14,6 +14,7 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 
 import Modal from 'components/modal'
+import GitCloneProvider from 'components/gitCloneProvider'
 import client from './client'
 import rootReducer from './src/state'
 
@@ -85,11 +86,7 @@ const LoginProvider = ({ children }) => {
   return children
 }
 
-const GitCloneProvider = ({ children }) => {
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false)
-  const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
-
+const WithGitClone = ({ children, addProject }) => {
   useEffect(() => {
     const repoLink =
       window &&
@@ -97,26 +94,10 @@ const GitCloneProvider = ({ children }) => {
       window.location.href.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-    if (repoLink && !user) {
-      setLoginModalOpen(true)
-    } else if (repoLink && user) {
-      createProject({ repoLink, dispatch, user })
-    }
-  }, [user, isLoginModalOpen])
+    addProject(repoLink)
+  }, [])
 
-  return (
-    <>
-      {children}
-      <Modal
-        isOpen={isLoginModalOpen}
-        onRequestClose={() => setLoginModalOpen(false)}
-        contentLabel="Login first"
-        ariaHideApp={false}
-      >
-        Login with github
-      </Modal>
-    </>
-  )
+  return children
 }
 
 export const wrapRootElement = ({ element }) => (
@@ -124,7 +105,11 @@ export const wrapRootElement = ({ element }) => (
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
         <LoginProvider>
-          <GitCloneProvider>{element}</GitCloneProvider>
+          <GitCloneProvider>
+            {({ addProject }) => (
+              <WithGitClone addProject={addProject}>{element}</WithGitClone>
+            )}
+          </GitCloneProvider>
         </LoginProvider>
       </PersistGate>
     </Provider>
