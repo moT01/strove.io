@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
-import { Icon } from 'antd'
 import { Link } from 'gatsby'
 
 import {
@@ -245,23 +244,11 @@ const GithubLinkForm = styled.form`
   height: 100%;
   margin: 2vh 0 0;
 `
+
 const ErrorMessage = styled.p`
   color: red;
   font-size: 0.9rem;
   margin: 0;
-`
-
-const StyledIcon = styled(Icon)`
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.7vh;
-  color: #0072ce;
-  cursor: pointer;
-
-  :focus {
-    outline: none;
-  }
 `
 
 const StyledLink = styled(Link)`
@@ -332,7 +319,6 @@ const Templates = ({ closeModal }) => {
 
   return (
     <AddProjectWrapper>
-      <StyledIcon type="close" onClick={closeModal} />
       <Title>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
@@ -352,7 +338,7 @@ const Templates = ({ closeModal }) => {
               onBlur={props.handleBlur}
               value={props.values.repoLink}
               name="repoLink"
-              placeholder={'Paste repository link here'}
+              placeholder={'https://github.com/evil-corp/worldDomination'}
             />
             {props.errors.repoLink && (
               <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
