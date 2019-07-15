@@ -21,7 +21,6 @@ export default gql`
       repoLink
       machineId
       editorPort
-      previewPort
       additionalPorts
     }
   }
