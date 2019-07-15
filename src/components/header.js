@@ -104,6 +104,11 @@ const HeaderComponent = ({ siteTitle, location }) => (
           <LinkText>Pricing</LinkText>
         </StyledLink>
       </LinkWrapper>
+      <LinkWrapper>
+        <StyledLink to="/faq">
+          <LinkText>FAQ</LinkText>
+        </StyledLink>
+      </LinkWrapper>
       {location.pathname === '/app/editor/' && (
         <PreviewLink
           style={{ color: '#fff', textDecoration: 'none' }}
