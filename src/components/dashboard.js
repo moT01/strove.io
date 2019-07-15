@@ -210,7 +210,7 @@ const Dashboard = () => {
   const [projectToDelete, setProjectToDelete] = useState()
   const isDeleting = useSelector(selectors.getLoading('deleteProject'))
 
-  const handleStartClick = ({ id, editorPort, previewPort, machineId }) => {
+  const handleStartClick = ({ id, editorPort, machineId }) => {
     if (!editorPort) {
       dispatch(
         mutation({
@@ -219,13 +219,13 @@ const Dashboard = () => {
           variables: { projectId: id },
           onSuccess: () => navigate('/app/editor/'),
           onSuccessDispatch: [
-            ({ id, editorPort, previewPort, machineId }) =>
-              selectCurrentProject({ id, editorPort, previewPort, machineId }),
+            ({ id, editorPort, machineId }) =>
+              selectCurrentProject({ id, editorPort, machineId }),
           ],
         })
       )
     } else {
-      dispatch(selectCurrentProject({ id, editorPort, previewPort, machineId }))
+      dispatch(selectCurrentProject({ id, editorPort, machineId }))
       navigate('/app/editor/')
     }
   }
