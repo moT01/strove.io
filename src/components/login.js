@@ -53,7 +53,7 @@ const loginOptions = [
 ]
 
 const LoginButton = styled.button`
-  font-size: 3vh;
+  font-size: 1.5rem;
   color: white;
   text-decoration: none;
   display: flex;
@@ -64,6 +64,7 @@ const LoginButton = styled.button`
   background: none;
   border: none;
   text-decoration: none;
+  font-weight: 200;
 
   :focus {
     outline: 0;
@@ -120,6 +121,7 @@ const Option = styled.a`
   border-bottom-right-radius: ${props => props.isLast && '8px'};
   z-index: 4;
   text-decoration: none;
+  font-weight: 200;
 
   svg {
     fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
