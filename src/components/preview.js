@@ -14,13 +14,12 @@ const StyledIframe = styled.iframe`
   min-height: 100vh;
   width: 100vw;
   margin: 0;
+  transition: 'opacity 0.5s'
+  opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
 const getProjectId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
-// const getPreviewPort = getOr(undefined, ['currentProject', 'previewPort'])
-
-// getMachineId({ currentProject: { machineId: 123 } })
 const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
 
 const host = window && window.location && window.location.search
@@ -46,9 +45,8 @@ const Preview = () => {
       )}
       <StyledIframe
         onLoad={() => setLoaderVisible(false)}
-        // src={`${process.env.SILISKY_ENDPOINT}/preview?token=${token}&id=${id}&port=${port}`}
         src={`${process.env.SILISKY_ENDPOINT}/preview?token=${token}&machineId=${machineId}&host=${host}&projectId=${projectId}`}
-        style={{ opacity: loaderVisible ? 0 : 1, transition: 'opacity 0.5s' }}
+        loaderVisible={loaderVisible}
       />
     </>
   )
