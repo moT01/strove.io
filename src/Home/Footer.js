@@ -10,6 +10,10 @@ const FooterWrapper = styled.div`
   width: 100vw;
   height: 16vh;
   background-color: #0072ce;
+  @media (max-width: 767px) {
+    height: auto;
+    padding: 10px 0 10px 0;
+  }
 `
 
 const ColumnWrapper = styled(FooterWrapper)`
@@ -17,6 +21,9 @@ const ColumnWrapper = styled(FooterWrapper)`
   width: 80%;
   height: auto;
   align-items: flex-start;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `
 
 const Column = styled.div`
@@ -26,14 +33,25 @@ const Column = styled.div`
   align-items: flex-start;
 `
 
+const ColumnTitle = styled.h3`
+  font-size: 1.3rem;
+  font-weight: 200;
+  color: white;
+  margin: 5px 0 5px 0;
+`
+
 const StyledLink = styled(Link)`
-  font-size: 1rem;
   text-decoration: none;
   color: white;
 `
 
+const LinkText = styled.h3`
+  font-size: 0.9rem;
+  font-weight: 200;
+  margin: 0 0 2px 0;
+`
+
 const StyledAnchor = styled.a`
-  font-size: 1rem;
   text-decoration: none;
   color: white;
 `
@@ -43,22 +61,43 @@ const Footer = () => {
     <FooterWrapper>
       <ColumnWrapper>
         <Column>
-          <StyledLink to="/blog">Blog</StyledLink>
-          <StyledLink to="/cookies">Github</StyledLink>
-          <StyledLink to="/cookies">Twitter</StyledLink>
+          <ColumnTitle>Social</ColumnTitle>
+          <StyledLink to="/blog">
+            <LinkText>Blog</LinkText>
+          </StyledLink>
+          <StyledLink to="/cookies">
+            <LinkText>Github</LinkText>
+          </StyledLink>
+          <StyledLink to="/cookies">
+            <LinkText>Twitter</LinkText>
+          </StyledLink>
           <StyledAnchor href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-            Contact us
+            <LinkText>Contact us</LinkText>
           </StyledAnchor>
         </Column>
         <Column>
-          <StyledLink to="/documentation">Documentation</StyledLink>
-          <StyledLink to="/pricing">Pricing</StyledLink>
+          <ColumnTitle>About</ColumnTitle>
+          <StyledLink to="/documentation">
+            <LinkText>Documentation</LinkText>
+          </StyledLink>
+          <StyledLink to="/pricing">
+            <LinkText>Pricing</LinkText>
+          </StyledLink>
+          <StyledLink to="/faq">
+            <LinkText>FAQ</LinkText>
+          </StyledLink>
         </Column>
         <Column>
-          <StyledLink to="/faq">FAQ</StyledLink>
-          <StyledLink to="/cookies">Cookies</StyledLink>
-          <StyledLink to="/privacyPolicy">Privacy Policy</StyledLink>
-          <StyledLink to="/termsAndConditions">Terms and conditions</StyledLink>
+          <ColumnTitle>Terms of use</ColumnTitle>
+          <StyledLink to="/cookies">
+            <LinkText>Cookies</LinkText>
+          </StyledLink>
+          <StyledLink to="/privacyPolicy">
+            <LinkText>Privacy Policy</LinkText>
+          </StyledLink>
+          <StyledLink to="/termsAndConditions">
+            <LinkText>Terms and conditions</LinkText>
+          </StyledLink>
         </Column>
       </ColumnWrapper>
     </FooterWrapper>
