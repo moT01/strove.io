@@ -1,9 +1,10 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
+import { useScroll } from '../hooks'
 
 const TextWell = styled.div`
   ${'' /* align-self: center; */}
@@ -23,33 +24,39 @@ const TextWell = styled.div`
 const Paragraph = styled.p`
   text-indent: 50px;
   font-size: 20px;
+  height: 200px;
 `
 
 const Header = styled.h2``
 
 const FAQ = () => {
+  const [executeScroll, scrollHtmlAttributes] = useScroll()
+  useEffect(executeScroll, [])
+
   return (
     <Layout>
       <SEO title="FAQ" />
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
-        <Header>Why 4 repos?</Header>
+        <Header>#1 Why 4 repos?</Header>
         <Paragraph>Why not</Paragraph>
-        <Header>Is free?</Header>
+        <Header>#2 Is free?</Header>
         <Paragraph>Yes, no, yes... maybe</Paragraph>
-        <Header>Why does project load seceral seconds</Header>
+        <Header>#3 Why does project load seceral seconds</Header>
         <Paragraph>Because your internet conection is poor</Paragraph>
-        <Header>Why do i need to log in with Github/Gitlab</Header>
+        <Header {...scrollHtmlAttributes}>
+         4# Why do i need to log in with Github/Gitlab
+        </Header>
         <Paragraph>Yes</Paragraph>
-        <Header>Why SiliSky might not be for you.</Header>
+        <Header>#5 Why SiliSky might not be for you.</Header>
         <Paragraph>Because you are breath taking!</Paragraph>
-        <Header>How to manage env variables?</Header>
+        <Header>#6 How to manage env variables?</Header>
         <Paragraph>Hello</Paragraph>
-        <Header>Why is my project loading?</Header>
+        <Header>#7 Why is my project loading?</Header>
         <Paragraph>I don't know ask Adam</Paragraph>
-        <Header>I want seelsd?????? language version what to do</Header>
+        <Header>#8 I want seelsd?????? language version what to do</Header>
         <Paragraph>Hello, how are you?</Paragraph>
-        <Header>HOST 0.0.0.0</Header>
+        <Header>#9 HOST 0.0.0.0</Header>
         <Paragraph>Yyyyyyyyyyyy</Paragraph>
       </TextWell>
     </Layout>
