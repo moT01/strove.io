@@ -102,6 +102,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   display: flex;
   align-items: center;
+  height: 100%;
 `
 
 const PreviewLink = styled.a`
