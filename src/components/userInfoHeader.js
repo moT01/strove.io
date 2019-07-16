@@ -86,11 +86,11 @@ const Option = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  padding-right: 3px;
+  margin: ${props => (props.isLast ? `0` : `0 0 0.1vh`)};
   width: 100%;
   height: auto;
-  font-size: 2.2vh;
+  font-size: 1rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '8px'};
   border-bottom-right-radius: ${props => props.isLast && '8px'};
