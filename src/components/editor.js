@@ -54,21 +54,21 @@ const EditorComponent = ({ location }) => {
   //   }
   // }, [projectId, machineId])
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', ev => {
-      ev.preventDefault()
-      dispatch({
-        type: C.STOP_CURRENT_PROJECT,
-      })
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', ev => {
+  //     ev.preventDefault()
+  //     dispatch({
+  //       type: C.STOP_CURRENT_PROJECT,
+  //     })
 
-      if (navigator && navigator.sendBeacon) {
-        navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/beacon`,
-          JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
-        )
-      }
-    })
-  }, [])
+  //     if (navigator && navigator.sendBeacon) {
+  //       navigator.sendBeacon(
+  //         `${process.env.SILISKY_ENDPOINT}/beacon`,
+  //         JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
+  //       )
+  //     }
+  //   })
+  // }, [])
 
   return (
     <Layout>
