@@ -53,7 +53,7 @@ const loginOptions = [
 ]
 
 const LoginButton = styled.button`
-  font-size: 3vh;
+  font-size: 1.2rem;
   color: white;
   text-decoration: none;
   display: flex;
@@ -64,6 +64,7 @@ const LoginButton = styled.button`
   background: none;
   border: none;
   text-decoration: none;
+  font-weight: 200;
 
   :focus {
     outline: 0;
@@ -98,10 +99,10 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: -2.5vw;
+  left: -2vw;
   position: absolute;
-  @media (max-width: 1366px) {
-    width: auto;
+  @media (max-width: 1365px) {
+    left: -6vw;
   }
 `
 
@@ -112,14 +113,15 @@ const Option = styled.a`
   align-tems: center;
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
-  width: 8vw;
+  width: auto;
   height: auto;
-  font-size: 2.2vh;
+  font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '8px'};
   border-bottom-right-radius: ${props => props.isLast && '8px'};
   z-index: 4;
   text-decoration: none;
+  font-weight: 200;
 
   svg {
     fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -137,9 +139,6 @@ const Option = styled.a`
   :hover svg {
     fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
-  }
-  @media (max-width: 1366px) {
-    font-size: 2vh;
   }
 `
 
