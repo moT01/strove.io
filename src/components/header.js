@@ -46,7 +46,7 @@ const HeaderWrapper = styled.div`
 `
 
 const LinkText = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -56,9 +56,6 @@ const LinkText = styled.span`
 
   :hover {
     color: black;
-  }
-  @media (max-width: 1024px) {
-    font-size: 4vw;
   }
 `
 
@@ -70,12 +67,9 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: 4vh;
+  height: 3vh;
   background: #0072ce;
-
-  @media (max-width: 1024px) {
-    height: 4vh;
-  }
+  min-height: 1.3rem;
 `
 
 const StyledLink = styled(Link)`
