@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
 import { Link } from 'gatsby'
+import { isMobile } from 'react-device-detect'
 
 import {
   CSharp,
@@ -105,8 +106,18 @@ const TemplatesWrapper = styled.div`
   width: 100%;
   height: auto;
   padding: 0.5vh;
-  justify-content: center;
+  justify-content: ${props => (props.mobile ? 'flex-start' : 'center')};
   align-items: center;
+  overflow-x: ${props => (props.mobile ? 'scroll' : 'visible')};
+
+  ${props =>
+    props.mobile &&
+    css`
+      border: 1px solid #0072ce;
+      box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+      border-radius: 5px;
+      margin: 10px 0 10px 0;
+    `}
 `
 
 const TemplateContainer = styled.a`
@@ -132,8 +143,8 @@ const TemplateContainer = styled.a`
 `
 
 const IconContainer = styled.div`
-  width: 5vw;
-  height: 5vw;
+  width: ${props => (props.mobile ? '20vw' : '5vw')};
+  height: ${props => (props.mobile ? '20vw' : '5vw')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,9 +165,8 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 100%;
+  width: ${props => (props.mobile ? '100%' : '20%')};
   min-width: 70px;
-  max-width: 150px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -196,7 +206,7 @@ const Button = styled.button`
 `
 
 const Title = styled.h3`
-  font-size: 1.4rem;
+  font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
@@ -211,12 +221,12 @@ const SectionDivider = styled.div`
 `
 
 const SectionDividerLine = styled.div`
-  width: 25%;
+  flex: 1;
   border-top: 1px solid #0072ce;
 `
 
 const SectionDividerText = styled(Title)`
-  width: 50%;
+  flex: 2;
   margin: 0.5vh;
 `
 
@@ -254,9 +264,8 @@ const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 100%;
+  width: ${props => (props.mobile ? '100%' : '20%')};
   min-width: 70px;
-  max-width: 150px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -318,7 +327,7 @@ const Templates = () => {
 
   return (
     <AddProjectWrapper>
-      <Title>Add project from github repository</Title>
+      <Title mobile={isMobile}>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
           createProject({
@@ -337,7 +346,11 @@ const Templates = () => {
               onBlur={props.handleBlur}
               value={props.values.repoLink}
               name="repoLink"
-              placeholder={'https://github.com/evil-corp/worldDomination'}
+              placeholder={
+                isMobile
+                  ? 'Paste repo link here'
+                  : 'https://github.com/evil-corp/worldDomination'
+              }
             />
             <ErrorMessage>
               {props.errors.repoLink && (
@@ -356,8 +369,8 @@ const Templates = () => {
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
+              mobile={isMobile}
               type="submit"
-              style={{ width: '20%' }}
             >
               Add project
             </Button>
@@ -365,24 +378,28 @@ const Templates = () => {
         )}
       />
       <SectionDivider>
-        <SectionDividerLine />
-        <SectionDividerText>Or try out one of the templates</SectionDividerText>
-        <SectionDividerLine />
+        {!isMobile && <SectionDividerLine />}
+        <SectionDividerText mobile={isMobile}>
+          Or try out one of the templates
+        </SectionDividerText>
+        {!isMobile && <SectionDividerLine />}
       </SectionDivider>
       <ComponentWrapper>
-        <TemplatesWrapper>
+        <TemplatesWrapper mobile={isMobile}>
           {templates.map(item => (
             <TemplateContainer
               key={item.name}
               onClick={() => handleClick(item)}
             >
-              <IconContainer>{item.icon}</IconContainer>
+              <IconContainer mobile={isMobile}>{item.icon}</IconContainer>
               <TemplateText>{item.name}</TemplateText>
             </TemplateContainer>
           ))}
         </TemplatesWrapper>
 
-        <StyledLink to="templates">More templates</StyledLink>
+        <StyledLink mobile={isMobile} to="templates">
+          More templates
+        </StyledLink>
       </ComponentWrapper>
     </AddProjectWrapper>
   )

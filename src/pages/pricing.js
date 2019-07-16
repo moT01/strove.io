@@ -211,7 +211,7 @@ const PricingPage = () => {
               <Feature>1,25 - 2 GB of Ram</Feature>
               <Feature>No commercial use</Feature>
               <Button disabled>
-                <ButtonText team>Choose free plan</ButtonText>
+                <ButtonText team>Already subscribed</ButtonText>
               </Button>
             </PricingWrapper>
             <PricingWrapper>
