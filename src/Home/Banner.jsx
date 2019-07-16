@@ -6,6 +6,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
+import { isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
 import Loader from '../components/fullScreenLoader'
@@ -34,7 +35,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 45%;
+  width: ${props => (props.isMobile ? '90%' : '45%')};
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
@@ -76,7 +77,7 @@ const Button = styled.button`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
   width: 100%;
   height: auto;
   align-items: center;
@@ -148,9 +149,10 @@ const Banner = props => {
         </div>
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
-        <ButtonsWrapper>
+        <ButtonsWrapper isMobile>
           <Button
             primary
+            isMobile
             disabled={isLoading}
             onClick={() => setModalVisible(true)}
           >
@@ -172,7 +174,7 @@ const Banner = props => {
             <StyledIcon type="close" onClick={() => setModalVisible(false)} />
             <GetStarted closeModal={closeModal} />
           </StyledModal>
-          <Button>
+          <Button isMobile>
             <StyledA href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
               Request a demo
             </StyledA>
