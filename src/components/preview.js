@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import getOr from 'lodash/fp/getOr'
 
+import { window } from 'utils'
 import { selectors } from 'state'
 import SEO from 'components/seo'
 import Loader from 'components/fullScreenLoader.js'

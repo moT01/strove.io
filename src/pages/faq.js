@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
@@ -45,7 +44,7 @@ const FAQ = () => {
         <Header>#3 Why does project load seceral seconds</Header>
         <Paragraph>Because your internet conection is poor</Paragraph>
         <Header {...scrollHtmlAttributes}>
-         4# Why do i need to log in with Github/Gitlab
+          4# Why do i need to log in with Github/Gitlab
         </Header>
         <Paragraph>Yes</Paragraph>
         <Header>#5 Why SiliSky might not be for you.</Header>
@@ -62,6 +61,5 @@ const FAQ = () => {
     </Layout>
   )
 }
-/* eslint-enable */
 
 export default FAQ

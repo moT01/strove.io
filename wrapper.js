@@ -8,9 +8,10 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
+
 import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation } from 'utils'
-
+import { window } from 'utils'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
