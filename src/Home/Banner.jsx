@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import BannerSVGAnim from './component/BannerSVGAnim'
@@ -154,7 +154,7 @@ const Banner = props => {
             primary
             mobile={isMobile}
             disabled={isLoading}
-            onClick={() => setModalVisible(true)}
+            onClick={useCallback(() => setModalVisible(true))}
           >
             {isLoading ? (
               <Loader
@@ -171,7 +171,10 @@ const Banner = props => {
             onRequestClose={closeModal}
             ariaHideApp={false}
           >
-            <StyledIcon type="close" onClick={() => setModalVisible(false)} />
+            <StyledIcon
+              type="close"
+              onClick={useCallback(() => setModalVisible(false))}
+            />
             <GetStarted closeModal={closeModal} />
           </StyledModal>
           <Button mobile={isMobile}>

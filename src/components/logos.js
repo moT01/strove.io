@@ -97,7 +97,7 @@ const Logos = props => {
           <IconContainer
             key={logo.name}
             onMouseEnter={() => props.handleHoverIn(logo.description)}
-            onMouseLeave={() => props.handleHoverOut()}
+            onMouseLeave={props.handleHoverOut}
           >
             {logo.component}
           </IconContainer>

@@ -43,7 +43,7 @@ export default ({ children }) => {
       {children({ addProject })}
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => setModalContent()}
+        onRequestClose={setModalContent}
         contentLabel={modalContent}
         ariaHideApp={false}
         width="40vw"

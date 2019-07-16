@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Location } from '@reach/router'
@@ -54,28 +54,28 @@ const EditorComponent = ({ location }) => {
   //   }
   // }, [projectId, machineId])
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', ev => {
-      ev.preventDefault()
-      dispatch({
-        type: C.STOP_CURRENT_PROJECT,
-      })
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', ev => {
+  //     ev.preventDefault()
+  //     dispatch({
+  //       type: C.STOP_CURRENT_PROJECT,
+  //     })
 
-      if (navigator && navigator.sendBeacon) {
-        navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/beacon`,
-          JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
-        )
-      }
-    })
-  }, [])
+  //     if (navigator && navigator.sendBeacon) {
+  //       navigator.sendBeacon(
+  //         `${process.env.SILISKY_ENDPOINT}/beacon`,
+  //         JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
+  //       )
+  //     }
+  //   })
+  // }, [])
 
   return (
     <Layout>
       <SEO title="Editor" />
       {loaderVisible && <Loader isFullScreen={true} color="#0072ce" />}
       <StyledIframe
-        onLoad={() => setLoaderVisible(false)}
+        onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}`}
         style={{ opacity: loaderVisible ? 0 : 1 }}
       />
