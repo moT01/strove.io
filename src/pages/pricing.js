@@ -45,7 +45,7 @@ const Button = styled.button`
   border-width: 1px;
   border-style: solid;
   color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 4px;
   border-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
   box-shadow: 0 1.1vh 1.1vh -1.5vh ${props =>
     props.team ? '#ffffff' : '#0072ce'};
@@ -131,6 +131,7 @@ const PlanTitle = styled.h1`
   margin: 10px;
   font-size: 4vh;
   color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
+  font-weight: 500;
 `
 const Contact = styled(PlanTitle)`
   font-size: 2.5vh;
@@ -141,6 +142,9 @@ const Price = styled(PlanTitle)`
 `
 const PlanSubTitle = styled(PlanTitle)`
   font-size: 2vh;
+`
+const ButtonText = styled(PlanTitle)`
+  font-size: 1rem;
 `
 const PlanDesc = styled(Feature)`
   font-size: 1.5vh;
@@ -192,7 +196,7 @@ const PricingPage = () => {
               <Feature>1,25 - 2 GB of Ram</Feature>
               <Feature>No commercial use</Feature>
               <Button>
-                <PlanSubTitle team>Choose free plan</PlanSubTitle>
+                <ButtonText team>Choose free plan</ButtonText>
               </Button>
             </PricingWrapper>
             <PricingWrapper>
@@ -214,7 +218,7 @@ const PricingPage = () => {
                 allowRememberMe={false}
               >
                 <StripeButton>
-                  <PlanSubTitle team>Choose Pro</PlanSubTitle>
+                  <ButtonText team>Choose Pro</ButtonText>
                 </StripeButton>
               </StripeCheckout>
             </PricingWrapper>
@@ -238,7 +242,7 @@ const PricingPage = () => {
               <Feature team>Priority support</Feature>
 
               <Button team>
-                <PlanSubTitle>Choose Enterprise</PlanSubTitle>
+                <ButtonText>Choose Enterprise</ButtonText>
               </Button>
             </PricingWrapper>
           </PricingSection>
