@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
+import { isMobile } from 'react-device-detect'
 
 import Login from './login'
 import { Icon } from 'antd'
 import { selectors } from 'state'
+import { Silisky } from '../images/logos'
 
 const FadeIn = keyframes`
   0% {
@@ -26,6 +28,9 @@ const LinkWrapper = styled.h3`
   margin: 0 3vw 0 0;
   font-weight: 200;
   animation: ${FadeIn} 0.3s ease-out;
+  @media (max-width: 767px) {
+    height: 4vh;
+  }
 `
 
 const ZeldaWrapper = styled.div`
@@ -37,6 +42,9 @@ const ZeldaWrapper = styled.div`
   margin: 0;
   font-weight: 200;
   animation: ${FadeIn} 0.3s ease-out;
+  @media (max-width: 767px) {
+    height: 4vh;
+  }
 `
 
 const IconWrapper = styled(LinkWrapper)`
@@ -63,6 +71,10 @@ const LinkText = styled.span`
   align-items: center;
   transition: color 0.3s;
   font-weight: 200;
+  @media (max-width: 767px) {
+    height: 5vh;
+    font-size: 1.8rem;
+  }
 
   :hover {
     color: black;
@@ -80,11 +92,16 @@ const HeaderSection = styled.div`
   height: 3vh;
   background: #0072ce;
   min-height: 1.3rem;
+  @media (max-width: 767px) {
+    height: 5vh;
+  }
 `
 
 const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 `
 
 const PreviewLink = styled.a`
@@ -99,13 +116,21 @@ const HeaderComponent = ({ siteTitle, location }) => {
       <HeaderWrapper>
         <LinkWrapper>
           <StyledLink to="/">
-            <LinkText>{siteTitle}</LinkText>
+            {isMobile ? (
+              <Silisky style={{ height: '100%' }} fill="#ffffff" />
+            ) : (
+              <LinkText>{siteTitle}</LinkText>
+            )}
           </StyledLink>
         </LinkWrapper>
         {user && (
           <LinkWrapper>
             <StyledLink to="/app/dashboard">
-              <LinkText>Dashboard</LinkText>
+              {isMobile ? (
+                <Icon type="appstore" style={{ fontSize: '1.1rem' }} />
+              ) : (
+                <LinkText>Dashboard</LinkText>
+              )}
             </StyledLink>
           </LinkWrapper>
         )}

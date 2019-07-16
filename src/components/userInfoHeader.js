@@ -30,6 +30,9 @@ const Text = styled.h3`
   transition: color 0.3s;
   margin: 0;
   font-weight: 200;
+  @media (max-width: 767px) {
+    font-size: 1.4rem;
+  }
 
   :hover {
     color: black;
@@ -41,9 +44,9 @@ const Inline = styled.div`
   width: 2.7vh;
   height: 2.7vh;
   margin-left: 4px;
-  @media (max-width: 1366px) {
-    width: 3.2vh;
-    height: 3.2vh;
+  @media (max-width: 767px) {
+    width: 3.7vh;
+    height: 3.7vh;
   }
 `
 
@@ -52,9 +55,6 @@ const UserPhoto = styled.img`
   height: 100%;
   margin-left: 4px;
   border-radius: 5px;
-  ${'' /* @media (max-width: 1024px) {
-    width: 3.5vh;
-  } */}
 `
 
 const Wrapper = styled.div`
@@ -100,8 +100,8 @@ const Option = styled.div`
     color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
   }
-  @media (max-width: 1366px) {
-    font-size: 2vh;
+  @media (max-width: 767px) {
+    font-size: 1.5rem;
   }
 `
 
