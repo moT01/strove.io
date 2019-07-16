@@ -100,13 +100,15 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  background-color: ${props =>
+    (props.primary && '#0072ce') || (props.delete && 'red') || '#fff'};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  color: ${props =>
+    (props.primary && '#fff') || (props.delete && '#fff') || '#0072ce'};
   border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  border-color: ${props => (!props.delete ? '#0072ce' : '#000')};
+  box-shadow: 0 1vh 1vh -1.5vh ${props => (!props.delete ? '#0072ce' : '#000')};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -339,6 +341,8 @@ const Dashboard = () => {
         </TilesWrapper>
       </PageWrapper>
       <Modal
+        width="40vw"
+        height="35vh"
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
         contentLabel="Delete project?"
@@ -349,7 +353,7 @@ const Dashboard = () => {
           undone.
         </ModalText>
         <ModalButton
-          primary
+          delete
           onClick={() => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
