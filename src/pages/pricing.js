@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 import StripeCheckout from 'react-stripe-checkout'
 import { BUY_SUBSCRIPTION } from 'queries'
 import { useDispatch } from 'react-redux'
@@ -10,6 +10,15 @@ import SEO from 'components/seo'
 import Layout from 'components/layout'
 
 const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.4;
+  }
+`
+
+const ButtonFadeIn = keyframes`
   0% {
     opacity: 0;
   }
@@ -47,21 +56,27 @@ const Button = styled.button`
   color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
   border-radius: 4px;
   border-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
-  box-shadow: 0 1.1vh 1.1vh -1.5vh ${props =>
-    props.team ? '#ffffff' : '#0072ce'};
+  box-shadow: 0 1.1vh 1.1vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
   transition: all 0.2s ease;
 
-  &:hover {
-        opacity: 1;
-        box-shadow: 0 1.3vh 1.3vh -1.3vh ${props =>
-          props.team ? '#ffffff' : '#0072ce'};
-        transform: translateY(-3px);
-      }
+  &:disabled {
+    opacity: 0.4;
   }
 
+  ${props =>
+    !props.disabled &&
+    css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        box-shadow: 0 1.3vh 1.3vh -1.3vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+        transform: translateY(-3px);
+      }
+    `}
+
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props =>
-      props.team ? '#ffffff' : '#0072ce'};
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
   }
 `
 
@@ -195,7 +210,7 @@ const PricingPage = () => {
               <Feature>Public repositories</Feature>
               <Feature>1,25 - 2 GB of Ram</Feature>
               <Feature>No commercial use</Feature>
-              <Button>
+              <Button disabled>
                 <ButtonText team>Choose free plan</ButtonText>
               </Button>
             </PricingWrapper>
