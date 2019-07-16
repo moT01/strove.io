@@ -36,21 +36,33 @@ export default handleActions(
     [C.FETCH_SUCCESS]: (
       state,
       { payload: { storeKey, data, code, message } = {} }
-    ) => ({
-      ...state,
-      [storeKey]: {
-        ...(state[storeKey] || {}),
-        data: Array.isArray(state[storeKey].data)
-          ? [...state[storeKey].data, ...data]
-          : typeof state[storeKey].data === 'object'
-          ? { ...state[storeKey].data, ...data }
-          : data,
-        isLoading: false,
-        error: undefined,
-        message,
-        code,
-      },
-    }),
+    ) => {
+      let newData
+
+      if (
+        Array.isArray(state[storeKey].data) &&
+        Array.isArray(state[storeKey].data)
+      ) {
+        newData = [...state[storeKey].data, ...data]
+      } else if (Array.isArray(state[storeKey].data)) {
+        newData = [...state[storeKey].data, data]
+      } else if (typeof state[storeKey].data === 'object') {
+        newData = { ...state[storeKey].data, ...data }
+      } else {
+        newData = data
+      }
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          data: newData,
+          isLoading: false,
+          error: undefined,
+          message,
+          code,
+        },
+      }
+    },
     [C.FETCH_ERROR]: (
       state,
       { payload: { storeKey, error, message, code } = {} }
