@@ -9,7 +9,6 @@ import Loader from 'components/fullScreenLoader.js'
 
 const StyledIframe = styled.iframe`
   display: block;
-  background: #000;
   border: none;
   min-height: 100vh;
   width: 100vw;
