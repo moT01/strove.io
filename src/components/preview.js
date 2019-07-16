@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import getOr from 'lodash/fp/getOr'
@@ -36,7 +36,7 @@ const Preview = () => {
       {loaderVisible && (
         <Loader
           isFullScreen={true}
-          color={'#0072ce'}
+          color='#0072ce'
           style={{
             opacity: loaderVisible ? 1 : 0,
             transition: 'opacity 0.5s',
@@ -44,7 +44,7 @@ const Preview = () => {
         />
       )}
       <StyledIframe
-        onLoad={() => setLoaderVisible(false)}
+        onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/preview?token=${token}&machineId=${machineId}&host=${host}&projectId=${projectId}`}
         loaderVisible={loaderVisible}
       />
