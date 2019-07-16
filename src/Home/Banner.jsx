@@ -35,7 +35,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: ${props => (props.isMobile ? '90%' : '45%')};
+  width: ${props => (props.mobile ? '90%' : '45%')};
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
@@ -77,7 +77,7 @@ const Button = styled.button`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   width: 100%;
   height: auto;
   align-items: center;
@@ -149,10 +149,10 @@ const Banner = props => {
         </div>
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
-        <ButtonsWrapper isMobile>
+        <ButtonsWrapper mobile={isMobile}>
           <Button
             primary
-            isMobile
+            mobile={isMobile}
             disabled={isLoading}
             onClick={useCallback(() => setModalVisible(true))}
           >
@@ -177,7 +177,7 @@ const Banner = props => {
             />
             <GetStarted closeModal={closeModal} />
           </StyledModal>
-          <Button isMobile>
+          <Button mobile={isMobile}>
             <StyledA href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
               Request a demo
             </StyledA>
