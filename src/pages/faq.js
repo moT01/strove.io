@@ -1,9 +1,10 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
+import { useScroll } from '../hooks'
 
 const TextWell = styled.div`
   ${'' /* align-self: center; */}
@@ -23,11 +24,15 @@ const TextWell = styled.div`
 const Paragraph = styled.p`
   text-indent: 50px;
   font-size: 20px;
+  height: 200px;
 `
 
 const Header = styled.h2``
 
 const FAQ = () => {
+  const [executeScroll, scrollHtmlAttributes] = useScroll()
+  useEffect(executeScroll, [])
+
   return (
     <Layout>
       <SEO title="FAQ" />
@@ -39,7 +44,9 @@ const FAQ = () => {
         <Paragraph>Yes, no, yes... maybe</Paragraph>
         <Header>Why does project load seceral seconds</Header>
         <Paragraph>Because your internet conection is poor</Paragraph>
-        <Header>Why do i need to log in with Github/Gitlab</Header>
+        <Header {...scrollHtmlAttributes}>
+          Why do i need to log in with Github/Gitlab
+        </Header>
         <Paragraph>Yes</Paragraph>
         <Header>Why SiliSky might not be for you.</Header>
         <Paragraph>Because you are breath taking!</Paragraph>
