@@ -58,7 +58,7 @@ const Footer = () => {
           <StyledLink to="/faq">FAQ</StyledLink>
           <StyledLink to="/cookies">Cookies</StyledLink>
           <StyledLink to="/privacyPolicy">Privacy Policy</StyledLink>
-          <StyledLink to="/termsandConditions">Terms and conditions</StyledLink>
+          <StyledLink to="/termsAndConditions">Terms and conditions</StyledLink>
         </Column>
       </ColumnWrapper>
     </FooterWrapper>
