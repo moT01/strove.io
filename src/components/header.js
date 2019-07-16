@@ -1,10 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 
 import Login from './login'
 import { Icon } from 'antd'
+import { selectors } from 'state'
 
 const FadeIn = keyframes`
   0% {
@@ -23,10 +25,18 @@ const LinkWrapper = styled.h3`
   height: 2.5vh;
   margin: 0 3vw 0 0;
   font-weight: 200;
+  animation: ${FadeIn} 0.3s ease-out;
 `
 
-const ZeldaWrapper = styled(LinkWrapper)`
+const ZeldaWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 2.5vh;
   margin: 0;
+  font-weight: 200;
+  animation: ${FadeIn} 0.3s ease-out;
 `
 
 const IconWrapper = styled(LinkWrapper)`
@@ -82,51 +92,46 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
 `
 
-const HeaderComponent = ({ siteTitle, location }) => (
-  <HeaderSection>
-    <HeaderWrapper>
-      <LinkWrapper>
-        <StyledLink to="/">
-          <LinkText>{siteTitle}</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      <LinkWrapper>
-        <StyledLink to="/app/dashboard">
-          <LinkText>Dashboard</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      <LinkWrapper>
-        <StyledLink to="/pricing">
-          <LinkText>Pricing</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      <LinkWrapper>
-        <StyledLink to="/faq">
-          <LinkText>FAQ</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      {location.pathname === '/app/editor/' && (
-        <PreviewLink
-          style={{ color: '#fff', textDecoration: 'none' }}
-          href={
-            process.env.NODE_ENV === 'production'
-              ? 'silisky.com/app/preview/'
-              : 'localhost:8000/app/preview/'
-          }
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <IconWrapper>
-            <Icon type="desktop" style={{ fontSize: '3vh' }}></Icon>
-          </IconWrapper>
-        </PreviewLink>
-      )}
-    </HeaderWrapper>
-    <ZeldaWrapper>
-      <Login />
-    </ZeldaWrapper>
-  </HeaderSection>
-)
+const HeaderComponent = ({ siteTitle, location }) => {
+  const user = useSelector(selectors.getUser)
+  return (
+    <HeaderSection>
+      <HeaderWrapper>
+        <LinkWrapper>
+          <StyledLink to="/">
+            <LinkText>{siteTitle}</LinkText>
+          </StyledLink>
+        </LinkWrapper>
+        {user && (
+          <LinkWrapper>
+            <StyledLink to="/app/dashboard">
+              <LinkText>Dashboard</LinkText>
+            </StyledLink>
+          </LinkWrapper>
+        )}
+        {location.pathname === '/app/editor/' && (
+          <PreviewLink
+            style={{ color: '#fff', textDecoration: 'none' }}
+            href={
+              process.env.NODE_ENV === 'production'
+                ? 'silisky.com/app/preview/'
+                : 'localhost:8000/app/preview/'
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconWrapper>
+              <Icon type="desktop" style={{ fontSize: '3vh' }}></Icon>
+            </IconWrapper>
+          </PreviewLink>
+        )}
+      </HeaderWrapper>
+      <ZeldaWrapper>
+        <Login />
+      </ZeldaWrapper>
+    </HeaderSection>
+  )
+}
 
 const Header = props => (
   <Location>
