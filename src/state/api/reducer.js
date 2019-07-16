@@ -41,7 +41,7 @@ export default handleActions(
       [storeKey]: {
         ...(state[storeKey] || {}),
         data: Array.isArray(state[storeKey].data)
-          ? [...data]
+          ? [...state[storeKey].data, ...data]
           : typeof state[storeKey].data === 'object'
           ? { ...state[storeKey].data, ...data }
           : data,
