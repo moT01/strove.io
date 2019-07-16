@@ -20,8 +20,9 @@ const LinkWrapper = styled.h3`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 4vh;
+  height: 2.5vh;
   margin: 0 3vw 0 0;
+  font-weight: 200;
 `
 
 const ZeldaWrapper = styled(LinkWrapper)`
@@ -45,12 +46,13 @@ const HeaderWrapper = styled.div`
 `
 
 const LinkText = styled.span`
-  font-size: 3vh;
+  font-size: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
+  font-weight: 200;
 
   :hover {
     color: black;
@@ -68,11 +70,11 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: 5vh;
+  height: 4vh;
   background: #0072ce;
 
   @media (max-width: 1024px) {
-    height: 5vh;
+    height: 4vh;
   }
 `
 
