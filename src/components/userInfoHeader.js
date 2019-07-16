@@ -25,7 +25,7 @@ const MenuWrapper = styled.div`
 `
 
 const Text = styled.span`
-  font-size: 3vh;
+  font-size: 1.2rem;
   color: white;
   transition: color 0.3s;
 
@@ -34,24 +34,25 @@ const Text = styled.span`
   }
 
   @media (max-width: 1024px) {
-    font-size: 4vw;
+    font-size: 1rem;
   }
 `
 
 const Inline = styled.div`
   display: inline-block;
-  width: 4vh;
+  width: 2.8vh;
   height: auto;
   margin-left: 4px;
+  margin-top: 2px;
 `
 
 const UserPhoto = styled.img`
-  width: 4vh;
-  height: auto;
+  width: 100%;
+  height: 100%;
   margin-left: 4px;
   border-radius: 5px;
   @media (max-width: 1024px) {
-    width: 3.5vh;
+    width: 100%;
   }
 `
 
@@ -88,7 +89,7 @@ const Option = styled.div`
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: 100%;
   height: auto;
-  font-size: 2.2vh;
+  font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '8px'};
   border-bottom-right-radius: ${props => props.isLast && '8px'};
@@ -99,7 +100,7 @@ const Option = styled.div`
     cursor: pointer;
   }
   @media (max-width: 1366px) {
-    font-size: 2vh;
+    font-size: 1rem;
   }
 `
 
