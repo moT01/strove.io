@@ -28,8 +28,15 @@ const LinkWrapper = styled.h3`
   animation: ${FadeIn} 0.3s ease-out;
 `
 
-const ZeldaWrapper = styled(LinkWrapper)`
+const ZeldaWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 2.5vh;
   margin: 0;
+  font-weight: 200;
+  animation: ${FadeIn} 0.3s ease-out;
 `
 
 const IconWrapper = styled(LinkWrapper)`

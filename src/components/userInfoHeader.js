@@ -10,7 +10,7 @@ const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 10vw;
+  width: 8vw;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
   border-radius: 10px;
   border-width: 1px;
@@ -24,26 +24,27 @@ const MenuWrapper = styled.div`
   }
 `
 
-const Text = styled.span`
+const Text = styled.h3`
   font-size: 1.2rem;
   color: white;
   transition: color 0.3s;
+  margin: 0;
+  font-weight: 200;
 
   :hover {
     color: black;
-  }
-
-  @media (max-width: 1024px) {
-    font-size: 1rem;
   }
 `
 
 const Inline = styled.div`
   display: inline-block;
-  width: 2.8vh;
-  height: auto;
+  width: 2.7vh;
+  height: 2.7vh;
   margin-left: 4px;
-  margin-top: 2px;
+  @media (max-width: 1366px) {
+    width: 3.2vh;
+    height: 3.2vh;
+  }
 `
 
 const UserPhoto = styled.img`
@@ -51,9 +52,9 @@ const UserPhoto = styled.img`
   height: 100%;
   margin-left: 4px;
   border-radius: 5px;
-  @media (max-width: 1024px) {
-    width: 100%;
-  }
+  ${'' /* @media (max-width: 1024px) {
+    width: 3.5vh;
+  } */}
 `
 
 const Wrapper = styled.div`
@@ -61,7 +62,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 4vh;
+  height: 3vh;
   width: auto;
   margin: 0;
 `
@@ -89,7 +90,7 @@ const Option = styled.div`
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: 100%;
   height: auto;
-  font-size: 1.2rem;
+  font-size: 2.2vh;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '8px'};
   border-bottom-right-radius: ${props => props.isLast && '8px'};
@@ -100,7 +101,7 @@ const Option = styled.div`
     cursor: pointer;
   }
   @media (max-width: 1366px) {
-    font-size: 1rem;
+    font-size: 2vh;
   }
 `
 
