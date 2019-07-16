@@ -35,15 +35,11 @@ const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    let code =
-      window &&
-      window.location &&
-      window.location.href.match(/code=(.*)(?=&state)/g)
+    let code = window?.location?.href.match(/code=(.*)(?=&state)/g)
 
     code && (code = code.toString().split('=')[1])
 
-    let state =
-      window && window.location && window.location.href.match(/state=(.*)/g)
+    let state = window?.location?.href?.match(/state=(.*)/g)
 
     state && (state = state.toString().split('=')[1])
 

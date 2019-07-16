@@ -22,7 +22,7 @@ const getProjectId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
 
-const host = window && window.location && window.location.search
+const host = window?.location?.search
 
 const Preview = () => {
   const token = useSelector(getUserToken)
