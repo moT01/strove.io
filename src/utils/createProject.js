@@ -19,8 +19,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
       payload: { id, editorPort, machineId },
     })
 
-  const startProject = proj => {
-    const project = proj[0]
+  const startProject = project => {
     setCurrentProject({
       id: project.id,
       editorPort: project.editorPort,
@@ -86,7 +85,6 @@ const createProject = async ({ repoLink, dispatch, user }) => {
         mutation({
           name: 'addProject',
           storeKey: 'myProjects',
-          dataSelector: data => [data.addProject],
           /* ToDo: Support Gitlab and Bitbucket as well */
           variables: { repoLink, name, description },
           mutation: ADD_PROJECT,
