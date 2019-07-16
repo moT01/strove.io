@@ -11,7 +11,7 @@ const TextWell = styled.div`
   height: auto;
   width: 60vw;
   margin: 0vw 7.5vw 0 7.5vw;
-  padding: 3vh;
+  padding: 0vh;
   flex-direction: column;
   align-items: center;
   justify-items: center;
