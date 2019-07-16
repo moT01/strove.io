@@ -35,13 +35,15 @@ const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    let code = window?.location?.href.match(/code=(.*)(?=&state)/g)
+    const code = window?.location?.href
+      .match(/code=(.*)(?=&state)/g)
+      ?.toString()
+      .split('=')[1]
 
-    code && (code = code.toString().split('=')[1])
-
-    let state = window?.location?.href?.match(/state=(.*)/g)
-
-    state && (state = state.toString().split('=')[1])
+    const state = window?.location?.href
+      ?.match(/state=(.*)/g)
+      ?.toString()
+      .split('=')[1]
 
     if (code && !localStorage.getItem('token')) {
       switch (state) {
@@ -83,9 +85,7 @@ const LoginProvider = ({ children }) => {
 const WithAddProject = ({ children, addProject }) => {
   useEffect(() => {
     const repoLink =
-      window &&
-      window.location &&
-      window.location.href.match(/#(.*)/) &&
+      window?.location?.href?.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
     repoLink && addProject(repoLink)
