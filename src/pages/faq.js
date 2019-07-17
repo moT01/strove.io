@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import SEO from 'components/seo'
@@ -86,7 +86,9 @@ const FAQ = () => {
     window.location.replace('http://localhost:8000/faq#' + index)
   }
 
-  useEffect(executeScroll)
+  useEffect(() => {
+    topicId && executeScroll()
+  }, [topicId])
 
   return (
     <Layout>
@@ -94,7 +96,7 @@ const FAQ = () => {
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
         {topics.map((topic, index) => (
-          <TopicWrapper>
+          <TopicWrapper key={topic.header}>
             {index + 1 === +topicId ? (
               <>
                 <Header {...scrollHtmlAttributes}>{topic.header}</Header>
