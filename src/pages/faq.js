@@ -85,7 +85,7 @@ const FAQ = () => {
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
         {topics.map((topic, index) => (
           <TopicWrapper>
-            {index + 1 == topicId ? (
+            {index + 1 === +topicId ? (
               <Header {...scrollHtmlAttributes}>{topic.header}</Header>
             ) : (
               <Header>{topic.header}</Header>
