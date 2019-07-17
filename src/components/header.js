@@ -8,7 +8,7 @@ import { isMobileOnly } from 'react-device-detect'
 import Login from './login'
 import { Icon } from 'antd'
 import { selectors } from 'state'
-import { Silisky, Dashboard } from '../images/logos'
+import { Silisky, Dashboard, Desktop } from '../images/logos'
 
 const FadeIn = keyframes`
   0% {
@@ -144,7 +144,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             rel="noopener noreferrer"
           >
             <IconWrapper>
-              <Icon type="desktop" style={{ fontSize: '2.2vh' }}></Icon>
+              <Desktop style={{ height: '80%' }} fill="#fff"></Desktop>
             </IconWrapper>
           </PreviewLink>
         )}
