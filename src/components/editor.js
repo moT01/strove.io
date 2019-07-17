@@ -8,7 +8,7 @@ import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import * as C from 'state/currentProject/constants'
+// import * as C from 'state/currentProject/constants'
 // import { CONTINUE_PROJECT } from 'queries'
 // import { query, mutation } from 'utils'
 
