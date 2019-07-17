@@ -24,6 +24,12 @@ const Paragraph = styled.p`
   height: 200px;
 `
 
+const Button = styled.div`
+  height: 20px;
+  width: 20px;
+  border: 1px solid red;
+`
+
 const Header = styled.h2``
 
 const TopicWrapper = styled.div``
@@ -76,7 +82,11 @@ const FAQ = () => {
     window?.location?.href?.match(/#(.*)/) &&
     window.location.href.match(/#(.*)/)[1]
 
-  useEffect(executeScroll, [])
+  const reloadPageWithHash = index => {
+    window.location.replace('http://localhost:8000/faq#' + index)
+  }
+
+  useEffect(executeScroll)
 
   return (
     <Layout>
@@ -86,9 +96,19 @@ const FAQ = () => {
         {topics.map((topic, index) => (
           <TopicWrapper>
             {index + 1 === +topicId ? (
-              <Header {...scrollHtmlAttributes}>{topic.header}</Header>
+              <>
+                <Header {...scrollHtmlAttributes}>{topic.header}</Header>
+                <Button onClick={() => reloadPageWithHash(index + 1)}>
+                  Click
+                </Button>
+              </>
             ) : (
-              <Header>{topic.header}</Header>
+              <>
+                <Header>{topic.header}</Header>
+                <Button onClick={() => reloadPageWithHash(index + 1)}>
+                  Click
+                </Button>
+              </>
             )}
             <Paragraph>{topic.paragraph}</Paragraph>
           </TopicWrapper>
