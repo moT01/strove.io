@@ -18,6 +18,7 @@ export default ({ children }) => {
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
   const addProjectError = useSelector(getProjectError)
+  console.log('addProjectError', addProjectError)
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -37,7 +38,6 @@ export default ({ children }) => {
       setModalContent('AddGitlabToLogin')
     } else if (addProjectError) {
       setModalContent('AddGithubPrivatePermissions')
-      console.log('addProjectError', addProjectError)
     } else {
       createProject({ repoLink, dispatch, user })
     }
