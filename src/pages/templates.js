@@ -213,6 +213,49 @@ const templates = [
     description:
       'This is a minimal Giter8 template for Full Stack Scala with ScalaJS in the front & Akka HTTP in the back. Binding is done using Autowire and BooPickle.',
   },
+  {
+    name: 'Elixir-HelloWorld',
+    icon: <Typescript />,
+    link:
+      'https://github.com/codengo-llc/Elixir-HelloWorld#basic-elixir-project-created-with-silisky',
+    description: 'A basic Elixir Project Created With SiliSky.',
+  },
+  {
+    name: 'C-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/C-HelloWorld',
+    description: 'A basic C Project Created With SiliSky.',
+  },
+  {
+    name: 'R-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/R-HelloWorld',
+    description: 'A basic R Project Created With SiliSky.',
+  },
+  {
+    name: 'Scala-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Scala-HelloWorld',
+    description: 'A basic Scala Project Created With SiliSky.',
+  },
+  {
+    name: 'Haskell-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Haskell-HelloWorld',
+    description: 'A basic Haskell Project Created With SiliSky.',
+  },
+  {
+    name: 'Php-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Php-HelloWorld',
+    description: 'A basic Php Project Created With SiliSky.',
+  },
+  {
+    name: 'Rust-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Rust-HelloWorld',
+    description: 'A basic Rust Project Created With SiliSky.',
+  },
 ]
 
 const Dashboard = () => {
