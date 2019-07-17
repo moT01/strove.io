@@ -22,16 +22,19 @@ const AntiSpinToWin = keyframes`
 `
 
 const LoaderWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${props => (props.isFullScreen ? '100vh' : props.height)};
+  height: ${props => (props.isFullScreen ? '93vh' : props.height)};
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
+  z-index: 99;
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
   width: ${props => (props.isFullScreen ? '25vw' : '100%')};
+  top: ${props => props.isFullScreen && '3vh'};
   height: auto;
   animation: ${SpinToWin} 3s linear infinite;
 `
