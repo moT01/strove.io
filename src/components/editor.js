@@ -75,7 +75,7 @@ const EditorComponent = ({ location }) => {
       <SEO title="Editor" />
       {loaderVisible && <Loader isFullScreen={true} color="#0072ce" />}
       <StyledIframe
-        // onLoad={useCallback(() => setLoaderVisible(false))}
+        onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}`}
         style={{ opacity: loaderVisible ? 0 : 1 }}
       />
