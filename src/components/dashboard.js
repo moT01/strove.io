@@ -309,13 +309,23 @@ const Dashboard = () => {
                   </TextWrapper>
                 </InfoWrapper>
                 <RightSection>
-                  <Button
-                    to="/app/editor/"
-                    primary
-                    onClick={() => handleStartClick(project)}
-                  >
-                    Start
-                  </Button>
+                  {isDeleting ? (
+                    <Button primary disabled={isDeleting}>
+                      <Loader
+                        isFullScreen={false}
+                        color={'#ffffff'}
+                        height={'1.2rem'}
+                      />
+                    </Button>
+                  ) : (
+                    <Button
+                      to="/app/editor/"
+                      primary
+                      onClick={() => handleStartClick(project)}
+                    >
+                      Start
+                    </Button>
+                  )}
                   {isDeleting ? (
                     <Button disabled={isDeleting}>
                       <Loader
