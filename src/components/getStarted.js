@@ -19,7 +19,11 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 
 const templates = [
-  { name: 'Typescript', icon: <Typescript /> },
+  {
+    name: 'Typescript',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/TypeScript-HelloWorld',
+  },
   {
     name: 'Ruby',
     icon: <Ruby />,
@@ -36,9 +40,11 @@ const templates = [
     icon: <Python />,
     link: 'https://github.com/codengo-llc/python-starter',
   },
-  // { name: 'Php', icon: <Php /> },
-  // { name: 'C', icon: <C /> },
-  { name: 'Go', icon: <Go /> },
+  {
+    name: 'Go',
+    icon: <Go />,
+    link: 'https://github.com/codengo-llc/Go-HelloWorld',
+  },
   {
     name: 'C#',
     icon: <CSharp />,
