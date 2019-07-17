@@ -144,7 +144,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             rel="noopener noreferrer"
           >
             <IconWrapper>
-              <Icon type="desktop" style={{ fontSize: '3vh' }}></Icon>
+              <Icon type="desktop" style={{ fontSize: '2.2vh' }}></Icon>
             </IconWrapper>
           </PreviewLink>
         )}
