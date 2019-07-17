@@ -88,7 +88,9 @@ const WithAddProject = ({ children, addProject }) => {
       window?.location?.href?.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-    repoLink && addProject(repoLink)
+    repoLink &&
+      /.*(github|gitlab|bitbucket).com/i.test(repoLink) &&
+      addProject(repoLink)
   }, [])
 
   return children
