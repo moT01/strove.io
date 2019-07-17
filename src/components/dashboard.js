@@ -3,6 +3,7 @@ import { navigate } from 'gatsby'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import { isMobileOnly } from 'react-device-detect'
 
 import { query, mutation } from 'utils'
 import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -208,6 +209,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
   const [isModalVisible, setModalVisible] = useState(false)
+  const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const isDeleting = useSelector(selectors.getLoading('deleteProject'))
 
@@ -351,8 +353,8 @@ const Dashboard = () => {
         </TilesWrapper>
       </PageWrapper>
       <Modal
-        width="40vw"
-        height="35vh"
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
         contentLabel="Delete project?"
@@ -372,6 +374,30 @@ const Dashboard = () => {
           Confirm
         </ModalButton>
         <ModalButton onClick={closeModal}>Close</ModalButton>
+      </Modal>
+      <Modal
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={stopModal}
+        onRequestClose={() => setStopModal(false)}
+        contentLabel="Stop project?"
+        ariaHideApp={false}
+      >
+        <ModalText>
+          Before starting new project we have to stop your currently running
+          project. That means you may lose all unsaved progress. Are you sure
+          you want start new project?
+        </ModalText>
+        <ModalButton
+          delete
+          onClick={() => {
+            handleDeleteClick(projectToDelete.id)
+            setStopModal(false)
+          }}
+        >
+          Confirm
+        </ModalButton>
+        <ModalButton onClick={() => setStopModal(false)}>Close</ModalButton>
       </Modal>
     </Layout>
   )
