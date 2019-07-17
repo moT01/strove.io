@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/fullScreenLoader'
+import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 
@@ -41,13 +42,9 @@ const Text = styled.h3`
 
 const Inline = styled.div`
   display: inline-block;
-  width: 2.7vh;
-  height: 2.7vh;
+  width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   margin-left: 4px;
-  @media (max-width: 767px) {
-    width: 3.7vh;
-    height: 3.7vh;
-  }
 `
 
 const UserPhoto = styled.img`
@@ -121,7 +118,7 @@ const UserInfoHeader = props => {
           <Wrapper onClick={props.handleDropdownClick}>
             <StyledDropdown>
               <Text>{props.user.username}</Text>
-              <Inline>
+              <Inline mobile={isMobileOnly}>
                 <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
               </Inline>
             </StyledDropdown>
