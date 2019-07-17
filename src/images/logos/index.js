@@ -17,6 +17,7 @@ import Bitbucket from './bitbucket.svg'
 import Gitlab from './gitlab.svg'
 import Php from './php.svg'
 import C from './c.svg'
+import Dashboard from './dashboard.svg'
 
 export {
   Typescript,
@@ -38,4 +39,5 @@ export {
   Gitlab,
   Php,
   C,
+  Dashboard,
 }

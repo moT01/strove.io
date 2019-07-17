@@ -8,7 +8,7 @@ import { isMobile } from 'react-device-detect'
 import Login from './login'
 import { Icon } from 'antd'
 import { selectors } from 'state'
-import { Silisky } from '../images/logos'
+import { Silisky, Dashboard } from '../images/logos'
 
 const FadeIn = keyframes`
   0% {
@@ -19,18 +19,15 @@ const FadeIn = keyframes`
   }
 `
 
-const LinkWrapper = styled.h3`
+const LinkWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 2.5vh;
+  height: ${props => (props.mobile ? '100%' : '2.5vh')};
   margin: 0 3vw 0 0;
   font-weight: 200;
   animation: ${FadeIn} 0.3s ease-out;
-  @media (max-width: 767px) {
-    height: 4vh;
-  }
 `
 
 const ZeldaWrapper = styled.div`
@@ -38,7 +35,7 @@ const ZeldaWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 2.5vh;
+  height: ${props => (props.mobile ? '100%' : '2.5vh')};
   margin: 0;
   font-weight: 200;
   animation: ${FadeIn} 0.3s ease-out;
@@ -60,10 +57,12 @@ const IconWrapper = styled(LinkWrapper)`
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin: 0;
+  height: 100%;
 `
 
-const LinkText = styled.span`
+const LinkText = styled.h3`
   font-size: 1.2rem;
   display: flex;
   flex-direction: row;
@@ -71,6 +70,7 @@ const LinkText = styled.span`
   align-items: center;
   transition: color 0.3s;
   font-weight: 200;
+  margin: 0;
   @media (max-width: 767px) {
     height: 5vh;
     font-size: 1.8rem;
@@ -89,12 +89,9 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: 3vh;
+  height: ${props => (props.mobile ? '8vh' : '3vh')};
   background: #0072ce;
   min-height: 1.3rem;
-  @media (max-width: 767px) {
-    height: 5vh;
-  }
 `
 
 const StyledLink = styled(Link)`
@@ -113,9 +110,9 @@ const PreviewLink = styled.a`
 const HeaderComponent = ({ siteTitle, location }) => {
   const user = useSelector(selectors.getUser)
   return (
-    <HeaderSection>
-      <HeaderWrapper>
-        <LinkWrapper>
+    <HeaderSection mobile={isMobile}>
+      <HeaderWrapper mobile={isMobile}>
+        <LinkWrapper mobile={isMobile}>
           <StyledLink to="/">
             {isMobile ? (
               <Silisky style={{ height: '100%' }} fill="#ffffff" />
@@ -125,10 +122,10 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </StyledLink>
         </LinkWrapper>
         {user && (
-          <LinkWrapper>
+          <LinkWrapper mobile={isMobile}>
             <StyledLink to="/app/dashboard">
               {isMobile ? (
-                <Icon type="appstore" style={{ fontSize: '1.1rem' }} />
+                <Dashboard style={{ height: '70%' }} fill="#ffffff" />
               ) : (
                 <LinkText>Dashboard</LinkText>
               )}
