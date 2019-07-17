@@ -3,7 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
 import { Link } from 'gatsby'
-import { isMobile } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import {
   CSharp,
@@ -327,7 +327,7 @@ const Templates = () => {
 
   return (
     <AddProjectWrapper>
-      <Title mobile={isMobile}>Add project from github repository</Title>
+      <Title mobile={isMobileOnly}>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
           createProject({
@@ -347,7 +347,7 @@ const Templates = () => {
               value={props.values.repoLink}
               name="repoLink"
               placeholder={
-                isMobile
+                isMobileOnly
                   ? 'Paste repo link here'
                   : 'https://github.com/evil-corp/worldDomination'
               }
@@ -369,7 +369,7 @@ const Templates = () => {
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
-              mobile={isMobile}
+              mobile={isMobileOnly}
               type="submit"
             >
               Add project
@@ -378,26 +378,26 @@ const Templates = () => {
         )}
       />
       <SectionDivider>
-        {!isMobile && <SectionDividerLine />}
-        <SectionDividerText mobile={isMobile}>
+        {!isMobileOnly && <SectionDividerLine />}
+        <SectionDividerText mobile={isMobileOnly}>
           Or try out one of the templates
         </SectionDividerText>
-        {!isMobile && <SectionDividerLine />}
+        {!isMobileOnly && <SectionDividerLine />}
       </SectionDivider>
       <ComponentWrapper>
-        <TemplatesWrapper mobile={isMobile}>
+        <TemplatesWrapper mobile={isMobileOnly}>
           {templates.map(item => (
             <TemplateContainer
               key={item.name}
               onClick={() => handleClick(item)}
             >
-              <IconContainer mobile={isMobile}>{item.icon}</IconContainer>
+              <IconContainer mobile={isMobileOnly}>{item.icon}</IconContainer>
               <TemplateText>{item.name}</TemplateText>
             </TemplateContainer>
           ))}
         </TemplatesWrapper>
 
-        <StyledLink mobile={isMobile} to="templates">
+        <StyledLink mobile={isMobileOnly} to="templates">
           More templates
         </StyledLink>
       </ComponentWrapper>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
-import { isMobile } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import Login from './login'
 import { Icon } from 'antd'
@@ -110,11 +110,11 @@ const PreviewLink = styled.a`
 const HeaderComponent = ({ siteTitle, location }) => {
   const user = useSelector(selectors.getUser)
   return (
-    <HeaderSection mobile={isMobile}>
-      <HeaderWrapper mobile={isMobile}>
-        <LinkWrapper mobile={isMobile}>
+    <HeaderSection mobile={isMobileOnly}>
+      <HeaderWrapper mobile={isMobileOnly}>
+        <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
-            {isMobile ? (
+            {isMobileOnly ? (
               <Silisky style={{ height: '100%' }} fill="#ffffff" />
             ) : (
               <LinkText>{siteTitle}</LinkText>
@@ -122,9 +122,9 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </StyledLink>
         </LinkWrapper>
         {user && (
-          <LinkWrapper mobile={isMobile}>
+          <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
-              {isMobile ? (
+              {isMobileOnly ? (
                 <Dashboard style={{ height: '70%' }} fill="#ffffff" />
               ) : (
                 <LinkText>Dashboard</LinkText>
