@@ -18,6 +18,7 @@ import Gitlab from './gitlab.svg'
 import Php from './php.svg'
 import C from './c.svg'
 import Dashboard from './dashboard.svg'
+import Desktop from './desktop.svg'
 
 export {
   Typescript,
@@ -40,4 +41,5 @@ export {
   Php,
   C,
   Dashboard,
+  Desktop,
 }
