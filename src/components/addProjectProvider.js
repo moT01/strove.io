@@ -8,7 +8,7 @@ import { selectors } from 'state'
 import addProjectModals from 'components/addProjectModals'
 import Modal from 'components/modal'
 
-const getProjectError = selectors.getError('projects')
+const getProjectError = selectors.getError('myProjects')
 
 export default ({ children }) => {
   const [modalContent, setModalContent] = useState()
@@ -18,7 +18,6 @@ export default ({ children }) => {
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
   const addProjectError = useSelector(getProjectError)
-  console.log('addProjectError', addProjectError)
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -36,7 +35,10 @@ export default ({ children }) => {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
-    } else if (addProjectError) {
+    } else if (
+      addProjectError &&
+      addProjectError.message.includes('Could not resolve to a Repository')
+    ) {
       setModalContent('AddGithubPrivatePermissions')
     } else {
       createProject({ repoLink, dispatch, user })
