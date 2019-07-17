@@ -115,7 +115,10 @@ const HeaderComponent = ({ siteTitle, location }) => {
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
-              <Silisky style={{ height: '100%' }} fill="#ffffff" />
+              <Silisky
+                style={{ height: '100%', marginTop: '0.6rem' }}
+                fill="#ffffff"
+              />
             ) : (
               <LinkText>{siteTitle}</LinkText>
             )}
