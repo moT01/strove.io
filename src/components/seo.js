@@ -197,12 +197,7 @@ function SEO({ description, lang, meta, title }) {
         },
         { rel: 'shortcut icon', type: 'image/png', href: `${faviconIco}` },
       ]}
-    >
-      <meta
-        http-equiv="Content-Security-Policy"
-        content="upgrade-insecure-requests"
-      />
-    </Helmet>
+    />
   )
 }
 
