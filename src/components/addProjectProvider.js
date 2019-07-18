@@ -5,7 +5,7 @@ import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation } from 'utils'
 import { createProject } from 'utils'
 import { selectors } from 'state'
-import addProjectModals from 'components/addProjectModals'
+import AddProjectModals from 'components/addProjectModals'
 import Modal from 'components/modal'
 
 const getProjectError = selectors.getError('myProjects')
@@ -56,7 +56,7 @@ export default ({ children }) => {
         width="40vw"
         height="35vh"
       >
-        {addProjectModals(modalContent)}
+        <AddProjectModals modalContent={modalContent} />
       </Modal>
     </>
   )
