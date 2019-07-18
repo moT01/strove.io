@@ -54,10 +54,6 @@ function SEO({ description, lang, meta, title }) {
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
-          property: http-equiv="Content-Security-Policy"
-        content="upgrade-insecure-requests"
-        }
-        {
           name: `description`,
           content: metaDescription,
         },
