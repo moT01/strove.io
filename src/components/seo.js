@@ -54,6 +54,10 @@ function SEO({ description, lang, meta, title }) {
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
+          property: http-equiv="Content-Security-Policy"
+        content="upgrade-insecure-requests"
+        }
+        {
           name: `description`,
           content: metaDescription,
         },
@@ -197,7 +201,12 @@ function SEO({ description, lang, meta, title }) {
         },
         { rel: 'shortcut icon', type: 'image/png', href: `${faviconIco}` },
       ]}
-    />
+    >
+      <meta
+        http-equiv="Content-Security-Policy"
+        content="upgrade-insecure-requests"
+      />
+    </Helmet>
   )
 }
 
