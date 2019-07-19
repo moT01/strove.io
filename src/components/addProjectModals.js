@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
+import { Link } from 'gatsby'
 
 import { selectors } from 'state'
 
@@ -90,30 +91,60 @@ const Button = styled.button`
     `}
 `
 
+const StyledLink = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 45%;
+  min-width: 70px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  font-size: 0.9rem;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 1vh;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  animation: ${FadeIn} 0.5s ease-out;
+  opacity: 0.9;
+
+  :focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      animation: ${ButtonFadeIn} 1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        transform: translateY(-3px);
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+      }
+    `}
+`
+
 const AddProjectModals = ({ modalContent }) => {
   const repoLink = 'https://gitlab.com/AdamZaczek/codengo'
   const user = useSelector(selectors.getUser)
   const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
-  const privateRepo = false
-
-  if (modalContent === 'AddGithubPrivatePermissions') {
-    return (
-      <>
-        <Text>
-          We couldn't clone your repository. This may happen due to one of the
-          following reasons:
-        </Text>
-        <Button primary onClick={console.log('Log in')}>
-          Pricing
-        </Button>
-      </>
-    )
-  }
 
   return (
     <>
-      {privateRepo ? (
+      {modalContent === 'AddGithubPrivatePermissions' ? (
         <>
           <Text>
             We couldn't clone your repository. This may happen due to one of the
@@ -127,10 +158,13 @@ const AddProjectModals = ({ modalContent }) => {
             </li>
             <li>Repository from the provided link does not exist</li>
           </ul>
-          <Text>For more information check out pricing</Text>
-          <Button primary onClick={console.log('Log in')}>
+          <Text>
+            If you know this repository exists you can clone it using pro plan.
+            For more information check out pricing
+          </Text>
+          <StyledLink to="pricing" primary onClick={console.log('Log in')}>
             Pricing
-          </Button>
+          </StyledLink>
         </>
       ) : (
         <>
