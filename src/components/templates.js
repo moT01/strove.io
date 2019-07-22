@@ -133,7 +133,7 @@ const StyledLink = styled(Link)`
   border-width: 1px;
   border-style: solid;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
