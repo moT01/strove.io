@@ -6,7 +6,6 @@ import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 
 import Login from './login'
-import { Icon } from 'antd'
 import { selectors } from 'state'
 import { Silisky, Dashboard, Desktop } from '../images/logos'
 

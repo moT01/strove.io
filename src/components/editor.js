@@ -68,6 +68,7 @@ const EditorComponent = ({ location }) => {
     })
   }, [])
 
+  // set interval to ping api with information the project is still active so api doesn't stop the project
   useEffect(() => {
     const projectPing = setInterval(() => {
       dispatch(
@@ -77,7 +78,7 @@ const EditorComponent = ({ location }) => {
           variables: { projectId },
         })
       )
-    }, 10000)
+    }, 60000)
 
     return () => clearInterval(projectPing)
   }, [])

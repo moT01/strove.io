@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
+import { navigate } from 'gatsby'
 
 import { selectors } from 'state'
+import Modal from 'components/modal'
 
 const FadeIn = keyframes`
   0% {
@@ -90,28 +92,45 @@ const Button = styled.button`
     `}
 `
 
-const AddProjectModals = ({ modalContent }) => {
+const AddProjectModals = ({ modalInfo }) => {
   const repoLink = 'https://gitlab.com/AdamZaczek/codengo'
   const user = useSelector(selectors.getUser)
   const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
   const privateRepo = false
+  const [modalContent, setModalContent] = useState(modalInfo)
 
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
-      <>
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={setModalContent}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width="40vw"
+        height="35vh"
+      >
         <Text>
           We couldn't clone your repository. This may happen due to one of the
           following reasons:
         </Text>
-        <Button primary onClick={console.log('Log in')}>
+        <ul>
+          <li>The repository you are trying to clone is private</li>
+          <li>
+            You do not have access rights to the repository you are trying to
+            reach
+          </li>
+          <li>Repository from the provided link does not exist</li>
+        </ul>
+        <Text>For more information check out pricing</Text>
+        <Button primary onClick={() => navigate('/pricing')}>
           Pricing
         </Button>
-      </>
+      </Modal>
     )
   }
 
-  return (
+  /* return (
     <>
       {privateRepo ? (
         <>
@@ -145,7 +164,7 @@ const AddProjectModals = ({ modalContent }) => {
       )}{' '}
       <Button onClick={console.log('Close the modal')}>Close</Button>
     </>
-  )
+  ) */
 }
 
 export default AddProjectModals
