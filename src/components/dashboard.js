@@ -74,7 +74,7 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
@@ -108,7 +108,7 @@ const Button = styled.button`
   border-style: solid;
   color: ${props =>
     (props.primary && '#fff') || (props.delete && '#fff') || '#0072ce'};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: ${props => (!props.delete ? '#0072ce' : '#000')};
   box-shadow: 0 1vh 1vh -1.5vh ${props => (!props.delete ? '#0072ce' : '#000')};
   text-decoration: none;
