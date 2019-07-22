@@ -33,7 +33,6 @@ const EditorComponent = ({ location }) => {
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  // ToDo uncomment and update once API is ready for delayed project stopping
   useEffect(() => {
     // This condition means project has been stopped
     if (projectId && !machineId) {
@@ -67,6 +66,20 @@ const EditorComponent = ({ location }) => {
         )
       }
     })
+  }, [])
+
+  useEffect(() => {
+    const projectPing = setInterval(() => {
+      dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId },
+        })
+      )
+    }, 10000)
+
+    return () => clearInterval(projectPing)
   }, [])
 
   return (

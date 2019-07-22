@@ -291,7 +291,7 @@ const Dashboard = () => {
                 <InfoWrapper>
                   <ProjectTitle>{project.name}</ProjectTitle>
 
-                  {project.id === currentProject.id ? (
+                  {currentProject && project.id === currentProject.id ? (
                     <TextWrapper>
                       <CircleIcon active />
                       <Text>Active</Text>
