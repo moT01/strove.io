@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
-<<<<<<< HEAD
-import { navigate } from 'gatsby'
-=======
-import { Link } from 'gatsby'
->>>>>>> fbfccbdbe493e507fd220405e3d06d35e7ffaa2c
+import { navigate, Link } from 'gatsby'
 
 import { selectors } from 'state'
 import Modal from 'components/modal'
