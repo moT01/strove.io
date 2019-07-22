@@ -36,12 +36,19 @@ export const mutation = ({
   client = defaultClient,
 }) => {
   return async dispatch => {
-    dispatch({
-      type: C.FETCH_START,
-      payload: { storeKey },
-    })
-
-    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
+    onLoading && onLoading(storeKey)
+    if (onLoadingDispatch) {
+      if (Array.isArray(onLoadingDispatch)) {
+        onLoadingDispatch.forEach(action => dispatch(action(storeKey)))
+      } else {
+        dispatch(onLoadingDispatch(storeKey))
+      }
+    } else {
+      dispatch({
+        type: C.FETCH_START,
+        payload: { storeKey },
+      })
+    }
 
     try {
       const { data } = await client.mutate({
@@ -77,12 +84,21 @@ export const mutation = ({
 
       return dataSelector(data)
     } catch (error) {
-      console.log('fetch error: ', error)
-
       onError && onError(error)
-      onErrorDispatch && dispatch(onErrorDispatch(error))
 
-      dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
+      if (onErrorDispatch) {
+        if (Array.isArray(onErrorDispatch)) {
+          onSuccessDispatch.forEach(action => dispatch(action(error)))
+        } else {
+          dispatch(onSuccessDispatch(error))
+        }
+      } else {
+        dispatch({
+          type: C.FETCH_ERROR,
+          storeKey,
+          payload: { error, storeKey },
+        })
+      }
       return null
     }
   }
@@ -103,7 +119,7 @@ export const mutation = ({
  * @param {function} objectParam.onSuccess - Function called with the result after query succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
  * @param {function} objectParam.onError - Function called with the error after query fails. Example: () => localStorage.removeItem('token')
  * @param {function} objectParam.onSuccessDispatch - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
- * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
+ * @param {function} objectParam.onErrorDispatch - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
  * @param {function} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
  * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
  */
@@ -115,6 +131,7 @@ export const query = ({
   fetchPolicy = 'no-cache',
   errorPolicy = 'all',
   query,
+  onLoading,
   onSuccess,
   onError,
   onLoadingDispatch,
@@ -124,12 +141,19 @@ export const query = ({
   client = defaultClient,
 }) => {
   return async dispatch => {
-    dispatch({
-      type: C.FETCH_START,
-      payload: { storeKey },
-    })
-
-    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
+    onLoading && onLoading(storeKey)
+    if (onLoadingDispatch) {
+      if (Array.isArray(onLoadingDispatch)) {
+        onLoadingDispatch.forEach(action => dispatch(action(storeKey)))
+      } else {
+        dispatch(onLoadingDispatch(storeKey))
+      }
+    } else {
+      dispatch({
+        type: C.FETCH_START,
+        payload: { storeKey },
+      })
+    }
 
     try {
       const { data } = await client.query({
@@ -168,9 +192,19 @@ export const query = ({
       console.log('fetch error: ', error)
 
       onError && onError(error)
-      onErrorDispatch && dispatch(onErrorDispatch(error))
-
-      dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
+      if (onErrorDispatch) {
+        if (Array.isArray(onErrorDispatch)) {
+          onSuccessDispatch.forEach(action => dispatch(action(error)))
+        } else {
+          dispatch(onSuccessDispatch(error))
+        }
+      } else {
+        dispatch({
+          type: C.FETCH_ERROR,
+          storeKey,
+          payload: { error, storeKey },
+        })
+      }
       return null
     }
   }
