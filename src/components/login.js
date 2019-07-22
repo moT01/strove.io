@@ -93,7 +93,7 @@ const MenuWrapper = styled.div`
   justify-content: flex-start;
   width: auto;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
-  border-radius: 10px;
+  border-radius: 5px;
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
@@ -117,8 +117,8 @@ const Option = styled.a`
   height: auto;
   font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-  border-bottom-left-radius: ${props => props.isLast && '8px'};
-  border-bottom-right-radius: ${props => props.isLast && '8px'};
+  border-bottom-left-radius: ${props => props.isLast && '5px'};
+  border-bottom-right-radius: ${props => props.isLast && '5px'};
   z-index: 4;
   text-decoration: none;
   font-weight: 200;

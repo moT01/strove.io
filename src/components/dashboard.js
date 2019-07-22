@@ -9,7 +9,8 @@ import { query, mutation } from 'utils'
 import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import { selectCurrentProject } from 'state/currentProject/actions'
 import * as ApiC from 'state/api/constants'
-import { selectors } from 'state'
+import * as C from 'state/currentProject/constants'
+import { selectors, projectSelectors } from 'state'
 import GetStarted from '../components/getStarted'
 import Layout from './layout'
 import SEO from './seo'
@@ -73,7 +74,7 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
@@ -107,7 +108,7 @@ const Button = styled.button`
   border-style: solid;
   color: ${props =>
     (props.primary && '#fff') || (props.delete && '#fff') || '#0072ce'};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: ${props => (!props.delete ? '#0072ce' : '#000')};
   box-shadow: 0 1vh 1vh -1.5vh ${props => (!props.delete ? '#0072ce' : '#000')};
   text-decoration: none;
@@ -200,6 +201,13 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
+const CircleIcon = styled.div`
+  height: 1.5vh;
+  width: 1.5vh;
+  border-radius: 50%;
+  background: ${props => (props.active ? '#009900' : '#990000')};
+`
+
 const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
   color: #0072ce;
@@ -208,6 +216,7 @@ const StyledIcon = styled(Icon)`
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.getUserProjects)
+  const currentProject = useSelector(projectSelectors.getProjectData)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -281,6 +290,18 @@ const Dashboard = () => {
               <VerticalDivider>
                 <InfoWrapper>
                   <ProjectTitle>{project.name}</ProjectTitle>
+
+                  {currentProject && project.id === currentProject.id ? (
+                    <TextWrapper>
+                      <CircleIcon active />
+                      <Text>Active</Text>
+                    </TextWrapper>
+                  ) : (
+                    <TextWrapper>
+                      <CircleIcon />
+                      <Text>Inactive</Text>
+                    </TextWrapper>
+                  )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
                     <Text>{project.createdAt}</Text>

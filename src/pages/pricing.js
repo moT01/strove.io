@@ -89,7 +89,7 @@ const Card = styled.div`
   margin-left: ${props => (props.team ? '-3vw' : 0)};
   margin-top: ${props => (props.team ? '9vh' : 0)};
   z-index: ${props => (props.team ? 1 : 2)};
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
