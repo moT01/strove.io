@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import thunk from 'redux-thunk'
 
-import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
-import { mutation } from 'utils'
 import { createProject } from 'utils'
 import { selectors, incomingProjectSelectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
-import Modal from 'components/modal'
 import { actions } from 'state'
 
 const getProjectError = incomingProjectSelectors.getError()
@@ -55,14 +51,10 @@ export default ({ children }) => {
   return (
     <>
       {children({ addProject })}
-      {!!modalContent ? (
-        <AddProjectModals
-          modalContent={modalContent}
-          setModalContent={setModalContent}
-        />
-      ) : (
-        <> </>
-      )}
+      <AddProjectModals
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
     </>
   )
 }
