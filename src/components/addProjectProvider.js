@@ -6,8 +6,6 @@ import { selectors, incomingProjectSelectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
 
-const getProjectError = incomingProjectSelectors.getError()
-
 export default ({ children }) => {
   const [modalContent, setModalContent] = useState()
 
@@ -15,7 +13,8 @@ export default ({ children }) => {
   const user = useSelector(selectors.getUser)
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
-  const addProjectError = useSelector(getProjectError)
+  const addProjectError = useSelector(incomingProjectSelectors.getError)
+  console.log('addProjectError', addProjectError)
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -58,13 +57,3 @@ export default ({ children }) => {
     </>
   )
 }
-
-// Gitclone cases
-// const AddProjectMessages = {
-//   'githubClone/noUser': <LoginWithGithub />,
-//   'gitlabClone/noUser': <LoginWithGitlab />,
-//   'githubClone/noGithubToken': <AddGithubToLogin />,
-//   'gitlabClone/noGitlabToken': <AddGitlabToLogin />,
-//   'githubClone/privateRepo': <AddGithubPrivatePermissions />
-//   'error': <SomethingWentWrong />
-// }

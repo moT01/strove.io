@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import { isMobileOnly } from 'react-device-detect'
 
-import { selectors } from 'state'
 import Modal from 'components/modal'
 import { Github, Gitlab } from 'images/logos'
 
@@ -19,7 +17,6 @@ const FadeIn = keyframes`
   100% {
     opacity: 0.4;
   }
-
 `
 
 const ButtonFadeIn = keyframes`
@@ -29,19 +26,7 @@ const ButtonFadeIn = keyframes`
 100% {
   opacity: 0.9;
 }
-
 `
-
-const ModalWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-`
-
 const Text = styled.p`
   color: #0072ce;
   font-size: 1rem;
@@ -207,8 +192,6 @@ const StyledLink = styled(Link)`
 `
 
 const AddProjectModals = ({ modalContent, setModalContent }) => {
-  const user = useSelector(selectors.getUser)
-
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
       <Modal
