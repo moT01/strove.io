@@ -14,6 +14,7 @@ export default handleActions(
       repoProvider,
     }),
     [C.REMOVE_INCOMING_PROJECT]: () => initialState,
+    [C.CATCH_INCOMING_ERROR]: (state, { payload: { error } }) => ({ error }),
   },
   initialState
 )

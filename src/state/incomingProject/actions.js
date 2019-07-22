@@ -10,4 +10,9 @@ export const addIncomingProject = ({ repoLink, repoProvider }) => ({
   },
 })
 
+export const catchIncomingError = ({ error }) => ({
+  type: C.CATCH_INCOMING_ERROR,
+  payload: { error },
+})
+
 export const removeIncomingProject = () => ({ type: C.REMOVE_INCOMING_PROJECT })

@@ -158,14 +158,44 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
           We couldn't clone your repository. This may happen due to one of the
           following reasons:
         </Text>
-        <ul>
+        <StyledList>
           <li>The repository you are trying to clone is private</li>
           <li>
             You do not have access rights to the repository you are trying to
             reach
           </li>
           <li>Repository from the provided link does not exist</li>
-        </ul>
+        </StyledList>
+        <Text>For more information check out pricing</Text>
+        <StyledLink to="pricing" primary onClick={() => setModalContent(false)}>
+          Pricing
+        </StyledLink>
+      </Modal>
+    )
+  }
+
+  if (modalContent === 'LoginWithGithub') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(false)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width="30vw"
+        height="30vh"
+      >
+        <Text>
+          We couldn't clone your repository. This may happen due to one of the
+          following reasons:
+        </Text>
+        <StyledList>
+          <li>The repository you are trying to clone is private</li>
+          <li>
+            You do not have access rights to the repository you are trying to
+            reach
+          </li>
+          <li>Repository from the provided link does not exist</li>
+        </StyledList>
         <Text>For more information check out pricing</Text>
         <StyledLink to="pricing" primary onClick={() => setModalContent(false)}>
           Pricing
@@ -190,14 +220,14 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
               We couldn't clone your repository. This may happen due to one of
               the following reasons:
             </Text>
-            <ul>
+            <StyledList>
               <li>The repository you are trying to clone is private</li>
               <li>
                 You do not have access rights to the repository you are trying
                 to reach
               </li>
               <li>Repository from the provided link does not exist</li>
-            </ul>
+            </StyledList>
             <Text>For more information check out pricing</Text>
             <StyledLink
               to="pricing"
