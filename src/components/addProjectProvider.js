@@ -63,11 +63,14 @@ export default ({ children }) => {
         width="40vw"
         height="35vh"
       > */}
-      {console.log(modalContent)}
-      <AddProjectModals
-        modalContent={modalContent}
-        setModalContent={setModalContent}
-      />
+      {!!modalContent ? (
+        <AddProjectModals
+          modalContent={modalContent}
+          setModalContent={setModalContent}
+        />
+      ) : (
+        <> </>
+      )}
       {/* </Modal> */}
     </>
   )
