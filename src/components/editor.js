@@ -8,16 +8,9 @@ import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-<<<<<<< HEAD
-// import * as C from 'state/currentProject/constants'
-// import { CONTINUE_PROJECT } from 'queries'
-// import { query, mutation } from 'utils'
-=======
 import * as C from 'state/currentProject/constants'
 import { CONTINUE_PROJECT } from 'queries'
 import { mutation } from 'utils'
->>>>>>> 1da99eabfac84a7a3993eaf41783c832c2698d78
-
 const StyledIframe = styled.iframe`
   display: block;
   background: #000;
