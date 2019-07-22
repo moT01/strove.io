@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
+import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 import Modal from 'components/modal'
-import { Github, Gitlab } from '../images/logos'
+import { Github, Gitlab } from 'images/logos'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -215,8 +216,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width="30vw"
-        height="30vh"
+        width={isMobileOnly ? '100vw' : '30vw'}
+        height={isMobileOnly ? '100vh' : '30vh'}
       >
         <Text>
           We couldn't clone your repository. This may happen due to one of the
@@ -245,8 +246,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width="30vw"
-        height="15vh"
+        width={isMobileOnly ? '100vw' : '30vw'}
+        height={isMobileOnly ? '100vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Github account
@@ -270,8 +271,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width="30vw"
-        height="15vh"
+        width={isMobileOnly ? '100vw' : '30vw'}
+        height={isMobileOnly ? '100vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Gitlab account
@@ -295,8 +296,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width="30vw"
-        height="15vh"
+        width={isMobileOnly ? '100vw' : '30vw'}
+        height={isMobileOnly ? '100vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Github account. You
@@ -321,8 +322,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width="30vw"
-        height="15vh"
+        width={isMobileOnly ? '100vw' : '30vw'}
+        height={isMobileOnly ? '100vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Gitlab account. You
@@ -346,8 +347,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
       onRequestClose={() => setModalContent(false)}
       contentLabel={modalContent}
       ariaHideApp={false}
-      width="30vw"
-      height="15vh"
+      width={isMobileOnly ? '100vw' : '30vw'}
+      height={isMobileOnly ? '100vh' : '15vh'}
     >
       <Text>
         We have encountered an error while cloning your repositry. Please try
