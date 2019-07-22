@@ -55,14 +55,6 @@ export default ({ children }) => {
   return (
     <>
       {children({ addProject })}
-      {/* <Modal
-        isOpen={!!modalContent}
-        onRequestClose={setModalContent}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width="40vw"
-        height="35vh"
-      > */}
       {!!modalContent ? (
         <AddProjectModals
           modalContent={modalContent}
@@ -71,7 +63,6 @@ export default ({ children }) => {
       ) : (
         <> </>
       )}
-      {/* </Modal> */}
     </>
   )
 }
