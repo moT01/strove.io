@@ -43,6 +43,8 @@ export default ({ children }) => {
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
       setModalContent('AddGithubPrivatePermissions')
+    } else if (addProjectError) {
+      setModalContent('SomethingWentWrong')
     } else {
       createProject({ repoLink, dispatch, user })
     }
