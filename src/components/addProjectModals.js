@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
-import { navigate, Link } from 'gatsby'
+import { Link } from 'gatsby'
 
 import { selectors } from 'state'
 import Modal from 'components/modal'
@@ -40,7 +40,7 @@ const Text = styled.p`
   color: #0072ce;
   font-size: 1rem;
   margin-left: 2%;
-  margin-bottom: 0;
+  margin-bottom: 12px;
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
@@ -92,6 +92,10 @@ const Button = styled.button`
     `}
 `
 
+const StyledList = styled.ul`
+  margin-bottom: 0;
+`
+
 const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
@@ -137,82 +141,138 @@ const StyledLink = styled(Link)`
     `}
 `
 
-const AddProjectModals = ({ modalContent }) => {
-  const repoLink = 'https://gitlab.com/AdamZaczek/codengo'
+const AddProjectModals = ({ modalContent, setModalContent }) => {
   const user = useSelector(selectors.getUser)
-  const repoUrlParts = repoLink.split('/')
-  const repoProvider = repoUrlParts[2].split('.')[0]
-  const privateRepo = false
-  const [modalContent, setModalContent] = useState(modalInfo)
 
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={setModalContent}
+        onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width="40vw"
-        height="35vh"
+        width="30vw"
+        height="30vh"
       >
         <Text>
           We couldn't clone your repository. This may happen due to one of the
           following reasons:
         </Text>
-        <ul>
+        <StyledList>
           <li>The repository you are trying to clone is private</li>
           <li>
             You do not have access rights to the repository you are trying to
             reach
           </li>
           <li>Repository from the provided link does not exist</li>
-        </ul>
+        </StyledList>
         <Text>For more information check out pricing</Text>
-        <Button primary onClick={() => navigate('/pricing')}>
+        <StyledLink to="pricing" primary onClick={() => setModalContent(false)}>
           Pricing
-        </Button>
+        </StyledLink>
       </Modal>
     )
   }
 
-  /* return (
+  if (modalContent === 'LoginWithGithub') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(false)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width="30vw"
+        height="30vh"
+      >
+        <Text>
+          We couldn't clone your repository. This may happen due to one of the
+          following reasons:
+        </Text>
+        <StyledList>
+          <li>The repository you are trying to clone is private</li>
+          <li>
+            You do not have access rights to the repository you are trying to
+            reach
+          </li>
+          <li>Repository from the provided link does not exist</li>
+        </StyledList>
+        <Text>For more information check out pricing</Text>
+        <StyledLink to="pricing" primary onClick={() => setModalContent(false)}>
+          Pricing
+        </StyledLink>
+      </Modal>
+    )
+  }
+
+  return (
     <>
       {modalContent === 'AddGithubPrivatePermissions' ? (
         <>
-          <Text>
-            We couldn't clone your repository. This may happen due to one of the
-            following reasons:
-          </Text>
-          <ul>
-            <li>The repository you are trying to clone is private</li>
-            <li>
-              You do not have access rights to the repository you are trying to
-              reach
-            </li>
-            <li>Repository from the provided link does not exist</li>
-          </ul>
-          <Text>
-            If you know this repository exists you can clone it using pro plan.
-            For more information check out pricing
-          </Text>
-          <StyledLink to="pricing" primary onClick={console.log('Log in')}>
-            Pricing
-          </StyledLink>
+          <Modal
+            isOpen={!!modalContent}
+            onRequestClose={() => setModalContent(false)}
+            contentLabel={modalContent}
+            ariaHideApp={false}
+            width="30vw"
+            height="30vh"
+          >
+            <Text>
+              We couldn't clone your repository. This may happen due to one of
+              the following reasons:
+            </Text>
+            <StyledList>
+              <li>The repository you are trying to clone is private</li>
+              <li>
+                You do not have access rights to the repository you are trying
+                to reach
+              </li>
+              <li>Repository from the provided link does not exist</li>
+            </StyledList>
+            <Text>For more information check out pricing</Text>
+            <StyledLink
+              to="pricing"
+              primary
+              onClick={() => setModalContent(false)}
+            >
+              Pricing
+            </StyledLink>
+          </Modal>
         </>
       ) : (
         <>
-          <Text>
-            You are not logged in{user && ` with ${repoProvider}`}. To clone
-            repository from provided link you have to log in with {repoProvider}
-          </Text>
-          <Button primary onClick={console.log('Log in')}>
-            Log in with {repoProvider}
-          </Button>
+          <Modal
+            isOpen={!!modalContent}
+            onRequestClose={() => setModalContent(false)}
+            contentLabel={modalContent}
+            ariaHideApp={false}
+            width="30vw"
+            height="30vh"
+          >
+            <Text>
+              We couldn't clone your repository. This may happen due to one of
+              the following reasons:
+            </Text>
+            <StyledList>
+              <li>The repository you are trying to clone is private</li>
+              <li>
+                You do not have access rights to the repository you are trying
+                to reach
+              </li>
+              <li>Repository from the provided link does not exist</li>
+            </StyledList>
+            <Text>For more information check out pricing</Text>
+            <StyledLink
+              to="pricing"
+              primary
+              onClick={() => setModalContent(false)}
+            >
+              Pricing
+            </StyledLink>
+          </Modal>
         </>
-      )}{' '}
-      <Button onClick={console.log('Close the modal')}>Close</Button>
+      )}
     </>
-  ) */
+  )
 }
 
 export default AddProjectModals

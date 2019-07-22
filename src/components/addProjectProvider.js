@@ -5,12 +5,12 @@ import thunk from 'redux-thunk'
 import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation } from 'utils'
 import { createProject } from 'utils'
-import { selectors } from 'state'
+import { selectors, incomingProjectSelectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import Modal from 'components/modal'
 import { actions } from 'state'
 
-const getProjectError = selectors.getError('myProjects')
+const getProjectError = incomingProjectSelectors.getError()
 
 export default ({ children }) => {
   const [modalContent, setModalContent] = useState()
@@ -41,6 +41,7 @@ export default ({ children }) => {
       setModalContent('AddGitlabToLogin')
     } else if (
       addProjectError &&
+      addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
       setModalContent('AddGithubPrivatePermissions')
@@ -62,7 +63,11 @@ export default ({ children }) => {
         width="40vw"
         height="35vh"
       > */}
-      <AddProjectModals modalContent={modalContent} />
+      {console.log(modalContent)}
+      <AddProjectModals
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
       {/* </Modal> */}
     </>
   )
