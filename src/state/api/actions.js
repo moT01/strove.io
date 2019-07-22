@@ -1,5 +1,3 @@
-import { createAction } from 'redux-actions'
-
 import * as C from './constants'
 
 export const fetchStart = createAction(C.FETCH_START, ({ source, config }) => ({

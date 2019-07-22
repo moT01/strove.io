@@ -1,22 +1,22 @@
-/* eslint-disable */
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Docker, Github, Google, VSCode } from 'images/logos'
 
-const logosArr = [
+const logos = [
   {
     component: (
       <Google style={{ fill: '#303c42' }} width="100%" length="auto" />
     ),
     name: 'Google',
-    description: 'Google cloud is cool and cloudy',
+    description:
+      'Google Cloud allows us to host secure, consistent cloud environment',
   },
   {
     component: (
       <VSCode style={{ fill: '#303c42' }} width="100%" length="auto" />
     ),
     name: 'VSCode',
-    description: 'VSCode for editor',
+    description: 'VSCode is integrated out of the box.',
   },
   {
     component: (
@@ -30,7 +30,8 @@ const logosArr = [
       <Github style={{ fill: '#303c42' }} width="100%" length="auto" />
     ),
     name: 'Github',
-    description: 'Github integration for state-of-the-art version control',
+    description:
+      'Github and Gitlab integration for state-of-the-art version control',
   },
 ]
 
@@ -87,17 +88,15 @@ const ScrollAtMobile = styled.div`
   }
 `
 
-const Logos = props => {
-  const [logos, setLogos] = useState(logosArr)
-
+const Logos = ({ handleHoverIn, handleHoverOut }) => {
   return (
     <SectionWrapper>
       <ScrollAtMobile>
         {logos.map(logo => (
           <IconContainer
             key={logo.name}
-            onMouseEnter={() => props.handleHoverIn(logo.description)}
-            onMouseLeave={props.handleHoverOut}
+            onMouseEnter={() => handleHoverIn(logo.description)}
+            onMouseLeave={handleHoverOut}
           >
             {logo.component}
           </IconContainer>
@@ -106,5 +105,5 @@ const Logos = props => {
     </SectionWrapper>
   )
 }
-/* eslint-enable */
+
 export default Logos
