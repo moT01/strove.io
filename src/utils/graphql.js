@@ -27,6 +27,7 @@ export const mutation = ({
   context,
   errorPolicy = 'all',
   mutation,
+  onLoading,
   onSuccess,
   onError,
   onLoadingDispatch,
