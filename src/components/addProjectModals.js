@@ -61,7 +61,7 @@ const Button = styled.button`
   border-style: solid;
   font-size: 0.9rem;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;

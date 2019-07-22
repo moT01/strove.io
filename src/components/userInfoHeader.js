@@ -13,7 +13,7 @@ const MenuWrapper = styled.div`
   justify-content: flex-start;
   width: 8vw;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
-  border-radius: 10px;
+  border-radius: 5px;
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
@@ -89,8 +89,8 @@ const Option = styled.div`
   height: auto;
   font-size: 1rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-  border-bottom-left-radius: ${props => props.isLast && '8px'};
-  border-bottom-right-radius: ${props => props.isLast && '8px'};
+  border-bottom-left-radius: ${props => props.isLast && '5px'};
+  border-bottom-right-radius: ${props => props.isLast && '5px'};
 
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -112,7 +112,7 @@ const UserInfoHeader = props => {
   return (
     <InfoWrapper>
       {isLoading ? (
-        <Loader isFullscreen={false} height={'4vh'} color={'#ffffff'} />
+        <Loader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
       ) : (
         <>
           <Wrapper onClick={props.handleDropdownClick}>
