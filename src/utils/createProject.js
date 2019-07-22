@@ -90,6 +90,11 @@ const createProject = async ({ repoLink, dispatch, user }) => {
           variables: { repoLink, name, description },
           mutation: ADD_PROJECT,
           onSuccess: startProject,
+          onErrorDispatch: error =>
+            dispatch({
+              type: IncC.CATCH_INCOMING_ERROR,
+              payload: { error },
+            }),
         })
       )
     }
