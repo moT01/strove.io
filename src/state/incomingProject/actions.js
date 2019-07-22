@@ -10,6 +10,4 @@ export const addIncomingProject = ({ repoLink, repoProvider }) => ({
   },
 })
 
-export const removeIncomingProject = () => {
-  dispatch({ type: C.REMOVE_INCOMING_PROJECT })
-}
+export const removeIncomingProject = () => ({ type: C.REMOVE_INCOMING_PROJECT })

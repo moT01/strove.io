@@ -8,6 +8,7 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import Modal from 'components/modal'
+import { actions } from 'state'
 
 const getProjectError = selectors.getError('myProjects')
 
@@ -27,7 +28,9 @@ export default ({ children }) => {
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
 
-    /* ToDo: Handle private github repos */
+    dispatch(
+      actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
+    )
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
@@ -41,6 +44,8 @@ export default ({ children }) => {
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
       setModalContent('AddGithubPrivatePermissions')
+    } else if (addProjectError) {
+      setModalContent('SomethingWentWrong')
     } else {
       createProject({ repoLink, dispatch, user })
     }
@@ -70,4 +75,5 @@ export default ({ children }) => {
 //   'githubClone/noGithubToken': <AddGithubToLogin />,
 //   'gitlabClone/noGitlabToken': <AddGitlabToLogin />,
 //   'githubClone/privateRepo': <AddGithubPrivatePermissions />
+//   'error': <SomethingWentWrong />
 // }

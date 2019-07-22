@@ -6,7 +6,10 @@ const initialState = null
 export default handleActions(
   {
     /* We only want to change current project after it has been successfully cloned and selected */
-    [C.ADD_INCOMING_PROJECT]: ({ payload: { repoLink, repoProvider } }) => ({
+    [C.ADD_INCOMING_PROJECT]: (
+      state,
+      { payload: { repoLink, repoProvider } }
+    ) => ({
       repoLink,
       repoProvider,
     }),
