@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import thunk from 'redux-thunk'
+
 import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation } from 'utils'
 import { createProject } from 'utils'
@@ -48,16 +49,16 @@ export default ({ children }) => {
   return (
     <>
       {children({ addProject })}
-      <Modal
+      {/* <Modal
         isOpen={!!modalContent}
         onRequestClose={setModalContent}
         contentLabel={modalContent}
         ariaHideApp={false}
         width="40vw"
         height="35vh"
-      >
-        <AddProjectModals modalContent={modalContent} />
-      </Modal>
+      > */}
+      <AddProjectModals modalContent={modalContent} />
+      {/* </Modal> */}
     </>
   )
 }
