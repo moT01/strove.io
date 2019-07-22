@@ -29,7 +29,6 @@ const LoaderWrapper = styled.div`
   align-items: center;
   height: ${props => (props.isFullScreen ? '93vh' : props.height)};
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
-  ${'' /* z-index: 1; */}
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
@@ -42,7 +41,6 @@ const LoaderContainer = styled(LoaderWrapper)`
 const LogoContainer = styled.div`
   width: ${props => (props.isFullScreen ? '20vw' : '4vh')};
   position: absolute;
-  ${'' /* z-index: 1; */}
   animation: ${AntiSpinToWin} 3s linear infinite;
 `
 
