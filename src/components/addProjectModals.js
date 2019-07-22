@@ -5,6 +5,7 @@ import { Link } from 'gatsby'
 
 import { selectors } from 'state'
 import Modal from 'components/modal'
+import { Github, Gitlab } from '../images/logos'
 
 const FadeIn = keyframes`
   0% {
@@ -70,6 +71,18 @@ const Button = styled.button`
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
+
+  svg {
+    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    width: 2.2vh;
+    height: auto;
+    margin-left: 5px;
+  }
+
+  ${'' /* :hover svg {
+    fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    cursor: pointer;
+  } */}
 
   :focus {
     outline: 0;
@@ -143,6 +156,7 @@ const StyledLink = styled(Link)`
 
 const AddProjectModals = ({ modalContent, setModalContent }) => {
   const user = useSelector(selectors.getUser)
+  modalContent = 'LoginWithGithub'
 
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
@@ -185,21 +199,12 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         height="30vh"
       >
         <Text>
-          We couldn't clone your repository. This may happen due to one of the
-          following reasons:
+          To clone this repository you have to log in with a github account
         </Text>
-        <StyledList>
-          <li>The repository you are trying to clone is private</li>
-          <li>
-            You do not have access rights to the repository you are trying to
-            reach
-          </li>
-          <li>Repository from the provided link does not exist</li>
-        </StyledList>
-        <Text>For more information check out pricing</Text>
-        <StyledLink to="pricing" primary onClick={() => setModalContent(false)}>
-          Pricing
-        </StyledLink>
+        <Button primary onClick={() => setModalContent(false)}>
+          Login with Github
+          <Github />
+        </Button>
       </Modal>
     )
   }
