@@ -41,6 +41,7 @@ export default ({ children }) => {
       setModalContent('AddGitlabToLogin')
     } else if (
       addProjectError &&
+      addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
       setModalContent('AddGithubPrivatePermissions')
@@ -62,7 +63,11 @@ export default ({ children }) => {
         width="40vw"
         height="35vh"
       > */}
-      <AddProjectModals modalContent={modalContent} />
+      {console.log(modalContent)}
+      <AddProjectModals
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
       {/* </Modal> */}
     </>
   )
