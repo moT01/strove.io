@@ -29,6 +29,7 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
+  onLoadingDispatch,
   onSuccessDispatch,
   onErrorDispatch,
   dataSelector = data => data[name],
@@ -39,6 +40,8 @@ export const mutation = ({
       type: C.FETCH_START,
       payload: { storeKey },
     })
+
+    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
 
     try {
       const { data } = await client.mutate({
@@ -114,6 +117,7 @@ export const query = ({
   query,
   onSuccess,
   onError,
+  onLoadingDispatch,
   onSuccessDispatch,
   onErrorDispatch,
   dataSelector = data => data[name],
@@ -124,6 +128,8 @@ export const query = ({
       type: C.FETCH_START,
       payload: { storeKey },
     })
+
+    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
 
     try {
       const { data } = await client.query({
