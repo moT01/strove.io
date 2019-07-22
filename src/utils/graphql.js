@@ -36,12 +36,19 @@ export const mutation = ({
   client = defaultClient,
 }) => {
   return async dispatch => {
-    dispatch({
-      type: C.FETCH_START,
-      payload: { storeKey },
-    })
-
-    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
+    onLoading && onLoading(storeKey)
+    if (onLoadingDispatch) {
+      if (Array.isArray(onLoadingDispatch)) {
+        onLoadingDispatch.forEach(action => dispatch(action(storeKey)))
+      } else {
+        dispatch(onLoadingDispatch(storeKey))
+      }
+    } else {
+      dispatch({
+        type: C.FETCH_START,
+        payload: { storeKey },
+      })
+    }
 
     try {
       const { data } = await client.mutate({
@@ -85,6 +92,12 @@ export const mutation = ({
         } else {
           dispatch(onSuccessDispatch(error))
         }
+      } else {
+        dispatch({
+          type: C.FETCH_ERROR,
+          storeKey,
+          payload: { error, storeKey },
+        })
       }
       return null
     }
@@ -128,13 +141,19 @@ export const query = ({
   client = defaultClient,
 }) => {
   return async dispatch => {
-    dispatch({
-      type: C.FETCH_START,
-      payload: { storeKey },
-    })
-
-    onLoading && onLoading({ storeKey })
-    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
+    onLoading && onLoading(storeKey)
+    if (onLoadingDispatch) {
+      if (Array.isArray(onLoadingDispatch)) {
+        onLoadingDispatch.forEach(action => dispatch(action(storeKey)))
+      } else {
+        dispatch(onLoadingDispatch(storeKey))
+      }
+    } else {
+      dispatch({
+        type: C.FETCH_START,
+        payload: { storeKey },
+      })
+    }
 
     try {
       const { data } = await client.query({
@@ -173,9 +192,19 @@ export const query = ({
       console.log('fetch error: ', error)
 
       onError && onError(error)
-      onErrorDispatch && dispatch(onErrorDispatch(error))
-
-      dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
+      if (onErrorDispatch) {
+        if (Array.isArray(onErrorDispatch)) {
+          onSuccessDispatch.forEach(action => dispatch(action(error)))
+        } else {
+          dispatch(onSuccessDispatch(error))
+        }
+      } else {
+        dispatch({
+          type: C.FETCH_ERROR,
+          storeKey,
+          payload: { error, storeKey },
+        })
+      }
       return null
     }
   }
