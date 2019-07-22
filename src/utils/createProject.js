@@ -2,7 +2,6 @@ import ApolloClient from 'apollo-boost'
 import { navigate } from 'gatsby'
 
 import { mutation } from 'utils'
-import * as ApiC from 'state/api/constants'
 import * as IncC from 'state/incomingProject/constants'
 import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
 import * as C from 'state/currentProject/constants'

@@ -21,7 +21,6 @@ const logout = {
 }
 
 const options = [
-  { option: 'Settings' },
   {
     option: 'Logout',
     onClick: dispatch => {
@@ -110,7 +109,6 @@ const Option = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-tems: center;
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
@@ -193,7 +191,7 @@ const LoginDropdown = () => {
   )
 }
 
-const Login = props => {
+const Login = () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const isLoading = useSelector(selectors.getLoading('user'))
 
