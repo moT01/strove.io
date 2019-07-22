@@ -8,7 +8,7 @@ import defaultClient from '../../client'
  * for example to set localStorage.
  * @param {Object} objectParam mutation takes one param will all the details, like variables living inside
  * @param {string} objectParam.name - Name of the mutation, for example githubAuth
- * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorAction are provided
+ * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorDispatch are provided
  * @param {string} objectParam.variables - Mutation variables
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy, defaults to all
@@ -29,8 +29,9 @@ export const mutation = ({
   mutation,
   onSuccess,
   onError,
+  onLoadingDispatch,
   onSuccessDispatch,
-  onErrorAction,
+  onErrorDispatch,
   dataSelector = data => data[name],
   client = defaultClient,
 }) => {
@@ -39,6 +40,8 @@ export const mutation = ({
       type: C.FETCH_START,
       payload: { storeKey },
     })
+
+    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
 
     try {
       const { data } = await client.mutate({
@@ -77,7 +80,7 @@ export const mutation = ({
       console.log('fetch error: ', error)
 
       onError && onError(error)
-      onErrorAction && dispatch(onErrorAction(error))
+      onErrorDispatch && dispatch(onErrorDispatch(error))
 
       dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
       return null
@@ -91,7 +94,7 @@ export const mutation = ({
  * for example to set localStorage.
  * @param {Object} objectParam mutation takes one param will all the details, like variables living inside
  * @param {string} objectParam.name - Name of the mutation, for example githubAuth
- * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorAction are provided
+ * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorDispatch are provided
  * @param {string} objectParam.variables - Mutation variables
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation fetchPolicy, defaults to cache-first
@@ -114,8 +117,9 @@ export const query = ({
   query,
   onSuccess,
   onError,
+  onLoadingDispatch,
   onSuccessDispatch,
-  onErrorAction,
+  onErrorDispatch,
   dataSelector = data => data[name],
   client = defaultClient,
 }) => {
@@ -124,6 +128,8 @@ export const query = ({
       type: C.FETCH_START,
       payload: { storeKey },
     })
+
+    onLoadingDispatch && dispatch(onLoadingDispatch({ storeKey }))
 
     try {
       const { data } = await client.query({
@@ -162,7 +168,7 @@ export const query = ({
       console.log('fetch error: ', error)
 
       onError && onError(error)
-      onErrorAction && dispatch(onErrorAction(error))
+      onErrorDispatch && dispatch(onErrorDispatch(error))
 
       dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
       return null
