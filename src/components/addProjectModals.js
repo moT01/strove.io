@@ -109,8 +109,8 @@ const StyledAnchor = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 45%;
-  min-width: 70px;
+  min-width: 45%;
+  max-width: 300px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
