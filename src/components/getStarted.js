@@ -322,7 +322,7 @@ const Templates = () => {
   }
 
   const handleClick = item => {
-    user.name
+    user
       ? createProject({
           repoLink: item.link,
           dispatch: dispatch,

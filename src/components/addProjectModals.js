@@ -90,12 +90,26 @@ const Button = styled.button`
     `}
 `
 
-const AddProjectModals = () => {
+const AddProjectModals = ({ modalContent }) => {
   const repoLink = 'https://gitlab.com/AdamZaczek/codengo'
   const user = useSelector(selectors.getUser)
   const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
   const privateRepo = false
+
+  if (modalContent === 'AddGithubPrivatePermissions') {
+    return (
+      <>
+        <Text>
+          We couldn't clone your repository. This may happen due to one of the
+          following reasons:
+        </Text>
+        <Button primary onClick={console.log('Log in')}>
+          Pricing
+        </Button>
+      </>
+    )
+  }
 
   return (
     <>
