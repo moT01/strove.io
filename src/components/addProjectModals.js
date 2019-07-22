@@ -216,8 +216,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '100vw' : '30vw'}
-        height={isMobileOnly ? '100vh' : '30vh'}
+        width={isMobileOnly ? '70vw' : '30vw'}
+        height={isMobileOnly ? '70vh' : '30vh'}
       >
         <Text>
           We couldn't clone your repository. This may happen due to one of the
@@ -246,8 +246,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '100vw' : '30vw'}
-        height={isMobileOnly ? '100vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : '30vw'}
+        height={isMobileOnly ? '70vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Github account
@@ -271,8 +271,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '100vw' : '30vw'}
-        height={isMobileOnly ? '100vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : '30vw'}
+        height={isMobileOnly ? '70vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Gitlab account
@@ -296,8 +296,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '100vw' : '30vw'}
-        height={isMobileOnly ? '100vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : '30vw'}
+        height={isMobileOnly ? '70vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Github account. You
@@ -322,8 +322,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '100vw' : '30vw'}
-        height={isMobileOnly ? '100vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : '30vw'}
+        height={isMobileOnly ? '70vh' : '15vh'}
       >
         <Text>
           To clone this repository you have to log in with a Gitlab account. You
@@ -347,8 +347,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
       onRequestClose={() => setModalContent(false)}
       contentLabel={modalContent}
       ariaHideApp={false}
-      width={isMobileOnly ? '100vw' : '30vw'}
-      height={isMobileOnly ? '100vh' : '15vh'}
+      width={isMobileOnly ? '70vw' : '30vw'}
+      height={isMobileOnly ? '70vh' : '15vh'}
     >
       <Text>
         We have encountered an error while cloning your repositry. Please try
