@@ -5,9 +5,10 @@ import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
 import { mutation } from 'utils'
 import { createProject } from 'utils'
 import { selectors } from 'state'
-import addProjectModals from 'components/addProjectModals'
-
+import AddProjectModals from 'components/addProjectModals'
 import Modal from 'components/modal'
+
+const getProjectError = selectors.getError('myProjects')
 
 export default ({ children }) => {
   const [modalContent, setModalContent] = useState()
@@ -16,6 +17,7 @@ export default ({ children }) => {
   const user = useSelector(selectors.getUser)
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
+  const addProjectError = useSelector(getProjectError)
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -33,6 +35,11 @@ export default ({ children }) => {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
+    } else if (
+      addProjectError &&
+      addProjectError.message.includes('Could not resolve to a Repository')
+    ) {
+      setModalContent('AddGithubPrivatePermissions')
     } else {
       createProject({ repoLink, dispatch, user })
     }
@@ -49,7 +56,7 @@ export default ({ children }) => {
         width="40vw"
         height="35vh"
       >
-        {addProjectModals(modalContent)}
+        <AddProjectModals modalContent={modalContent} />
       </Modal>
     </>
   )
