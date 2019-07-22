@@ -23,7 +23,6 @@ const FadeIn = keyframes`
   100% {
     opacity: 0.4;
   }
-
 `
 
 const FullFadeIn = keyframes`
@@ -36,13 +35,12 @@ const FullFadeIn = keyframes`
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
-
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 
 const Wrapper = styled.div`

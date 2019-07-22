@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { Location } from '@reach/router'
 import getOr from 'lodash/fp/getOr'
 
 import Layout from 'components/layout'
@@ -25,7 +24,7 @@ const getId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
-const EditorComponent = ({ location }) => {
+const Editor = () => {
   const dispatch = useDispatch()
   const token = useSelector(getUserToken)
   const projectId = useSelector(getId)
@@ -68,7 +67,7 @@ const EditorComponent = ({ location }) => {
     })
   }, [])
 
-  // set interval to ping api with information the project is still active so api doesn't stop the project
+  // Let api know that project is still active so api doesn't stop it
   useEffect(() => {
     const projectPing = setInterval(() => {
       dispatch(
@@ -95,17 +94,5 @@ const EditorComponent = ({ location }) => {
     </Layout>
   )
 }
-
-const Editor = ({ children, ...props }) => (
-  <Location>
-    {({ location }) => (
-      <EditorComponent
-        {...props}
-        location={location}
-        children={children}
-      ></EditorComponent>
-    )}
-  </Location>
-)
 
 export default Editor
