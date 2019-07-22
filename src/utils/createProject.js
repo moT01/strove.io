@@ -3,6 +3,7 @@ import { navigate } from 'gatsby'
 
 import { mutation } from 'utils'
 import * as ApiC from 'state/api/constants'
+import * as IncC from 'state/incomingProject/constants'
 import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
 import * as C from 'state/currentProject/constants'
 
@@ -95,8 +96,8 @@ const createProject = async ({ repoLink, dispatch, user }) => {
   } catch (e) {
     console.log('fetch error: ', e)
     dispatch({
-      type: ApiC.FETCH_ERROR,
-      payload: { storeKey: 'myProjects', error: e },
+      type: IncC.CATCH_INCOMING_ERROR,
+      payload: { error: e },
     })
   }
 }
