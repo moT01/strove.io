@@ -1,18 +1,22 @@
 import * as C from './constants'
 
-export const fetchStart = ({ source, config }) => ({
+export const fetchStart = ({ storeKey, source, config }) => ({
   type: C.FETCH_START,
-  payload: { source, config },
+  payload: { storeKey, source, config },
 })
 
-export const fetchSuccess = ({ name, data, code, message }) => ({
-  type: C.FETCH_SUCCESS,
-  payload: { data, name, code, message },
-})
+export const fetchSuccess = ({ storeKey, data, code, message }) =>
+  console.log({ storeKey, data, code, message }) || {
+    type: C.FETCH_SUCCESS,
+    payload: { data, storeKey, code, message },
+  }
 
-export const fetchError = ({ error, name, code }) => ({
+export const fetchError = ({ storeKey, error, code }) => ({
   type: C.FETCH_ERROR,
-  payload: { error, name, code },
+  payload: { error, storeKey, code },
 })
 
-export const removeItem = ({ id }) => ({ type: C.REMOVE_ITEM, payload: { id } })
+export const removeItem = ({ id, storeKey }) => ({
+  type: C.REMOVE_ITEM,
+  payload: { id, storeKey },
+})
