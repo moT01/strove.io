@@ -19,7 +19,11 @@ import Layout from './layout'
 import SEO from './seo'
 
 const templates = [
-  { name: 'Typescript', icon: <Typescript /> },
+  {
+    name: 'Typescript',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/TypeScript-HelloWorld',
+  },
   {
     name: 'Ruby',
     icon: <Ruby />,
@@ -36,9 +40,11 @@ const templates = [
     icon: <Python />,
     link: 'https://github.com/codengo-llc/python-starter',
   },
-  // { name: 'Php', icon: <Php /> },
-  // { name: 'C', icon: <C /> },
-  { name: 'Go', icon: <Go /> },
+  {
+    name: 'Go',
+    icon: <Go />,
+    link: 'https://github.com/codengo-llc/Go-HelloWorld',
+  },
   {
     name: 'C#',
     icon: <CSharp />,
@@ -127,7 +133,7 @@ const StyledLink = styled(Link)`
   border-width: 1px;
   border-style: solid;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
@@ -148,7 +154,7 @@ const StyledLink = styled(Link)`
 
 const Templates = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
 
   const handleClick = item => {
     createProject({

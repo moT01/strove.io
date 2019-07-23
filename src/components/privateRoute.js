@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { selectors } from 'state'
 
-const getUserToken = selectors.getApiData('user', null, 'siliskyToken')
+const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
 
 const getToken = createSelector(
   [getUserToken],

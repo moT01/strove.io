@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import thunk from 'redux-thunk'
-import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
-import { mutation } from 'utils'
+
 import { createProject } from 'utils'
 import { selectors } from 'state'
-import addProjectModals from 'components/addProjectModals'
-
-import Modal from 'components/modal'
+import AddProjectModals from 'components/addProjectModals'
+import { actions } from 'state'
 
 export default ({ children }) => {
   const [modalContent, setModalContent] = useState()
 
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
+  const addProjectError = useSelector(selectors.incomingProject.getError)
+  console.log('addProjectError', addProjectError)
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -24,7 +23,9 @@ export default ({ children }) => {
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
 
-    /* ToDo: Handle private github repos */
+    dispatch(
+      actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
+    )
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
@@ -33,6 +34,14 @@ export default ({ children }) => {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
+    } else if (
+      addProjectError &&
+      addProjectError.message &&
+      addProjectError.message.includes('Could not resolve to a Repository')
+    ) {
+      setModalContent('AddGithubPrivatePermissions')
+    } else if (addProjectError) {
+      setModalContent('SomethingWentWrong')
     } else {
       createProject({ repoLink, dispatch, user })
     }
@@ -41,25 +50,10 @@ export default ({ children }) => {
   return (
     <>
       {children({ addProject })}
-      <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => setModalContent()}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width="40vw"
-        height="35vh"
-      >
-        {addProjectModals(modalContent)}
-      </Modal>
+      <AddProjectModals
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
     </>
   )
 }
-
-// Gitclone cases
-// const AddProjectMessages = {
-//   'githubClone/noUser': <LoginWithGithub />,
-//   'gitlabClone/noUser': <LoginWithGitlab />,
-//   'githubClone/noGithubToken': <AddGithubToLogin />,
-//   'gitlabClone/noGitlabToken': <AddGitlabToLogin />,
-//   'githubClone/privateRepo': <AddGithubPrivatePermissions />
-// }

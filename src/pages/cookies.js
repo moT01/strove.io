@@ -20,6 +20,7 @@ const TextWell = styled.div`
   text-align: left;
   text-justify: inter-word;
   background-color: white;
+  font-size: 20px;
 `
 
 const Legal = () => (
