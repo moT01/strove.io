@@ -235,6 +235,11 @@ const Dashboard = () => {
                 editorPort,
                 machineId,
               }),
+            ({ id }) =>
+              actions.api.fetchSuccess({
+                data: { currentProjectId: id },
+                storeKey: 'user',
+              }),
           ],
         })
       )
@@ -244,6 +249,12 @@ const Dashboard = () => {
           id,
           editorPort,
           machineId,
+        })
+      )
+      dispatch(
+        actions.api.fetchSuccess({
+          data: { currentProjectId: id },
+          storeKey: 'user',
         })
       )
       navigate('/app/editor/')
