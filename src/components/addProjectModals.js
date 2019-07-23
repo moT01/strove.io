@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
-import { isMobileOnly } from 'react-device-detect'
+import { isMobileOnly, isTablet } from 'react-device-detect'
 
 import Modal from 'components/modal'
 import { Github, Gitlab } from 'images/logos'
@@ -36,6 +36,15 @@ const Text = styled.p`
   text-overflow: wrap;
   overflow: visible;
   text-align: center;
+`
+
+const ModalWrapepr = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `
 
 const Button = styled.button`
@@ -143,7 +152,8 @@ const StyledAnchor = styled.a`
 `
 
 const StyledList = styled.ul`
-  margin-bottom: 0;
+  margin: 0 0 0 4vw;
+  color: #0072ce;
 `
 
 const StyledLink = styled(Link)`
@@ -199,25 +209,31 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : '30vw'}
+        width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
         height={isMobileOnly ? '70vh' : '30vh'}
       >
-        <Text>
-          We couldn't clone your repository. This may happen due to one of the
-          following reasons:
-        </Text>
-        <StyledList>
-          <li>The repository you are trying to clone is private</li>
-          <li>
-            You do not have access rights to the repository you are trying to
-            reach
-          </li>
-          <li>Repository from the provided link does not exist</li>
-        </StyledList>
-        <Text>For more information check out pricing</Text>
-        <StyledLink to="pricing" primary onClick={() => setModalContent(false)}>
-          Pricing
-        </StyledLink>
+        <ModalWrapepr>
+          <Text>
+            We couldn't clone your repository. This may happen due to one of the
+            following reasons:
+          </Text>
+          <StyledList>
+            <li>The repository you are trying to clone is private</li>
+            <li>
+              You do not have access rights to the repository you are trying to
+              reach
+            </li>
+            <li>Repository from the provided link does not exist</li>
+          </StyledList>
+          <Text>For more information check out pricing</Text>
+          <StyledLink
+            to="pricing"
+            primary
+            onClick={() => setModalContent(false)}
+          >
+            Pricing
+          </StyledLink>
+        </ModalWrapepr>
       </Modal>
     )
   }
@@ -229,20 +245,22 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : '30vw'}
-        height={isMobileOnly ? '70vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '25vh' : '15vh'}
       >
-        <Text>
-          To clone this repository you have to log in with a Github account
-        </Text>
-        <StyledAnchor
-          primary
-          href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-          onClick={() => setModalContent(false)}
-        >
-          Login with Github
-          <Github />
-        </StyledAnchor>
+        <ModalWrapepr>
+          <Text>
+            To clone this repository you have to log in with a Github account
+          </Text>
+          <StyledAnchor
+            primary
+            href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+            onClick={() => setModalContent(false)}
+          >
+            Login with Github
+            <Github />
+          </StyledAnchor>
+        </ModalWrapepr>
       </Modal>
     )
   }
@@ -254,20 +272,22 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : '30vw'}
-        height={isMobileOnly ? '70vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '25vh' : '15vh'}
       >
-        <Text>
-          To clone this repository you have to log in with a Gitlab account
-        </Text>
-        <StyledAnchor
-          primary
-          href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
-          onClick={() => setModalContent(false)}
-        >
-          Login with Gitlab
-          <Gitlab />
-        </StyledAnchor>
+        <ModalWrapepr>
+          <Text>
+            To clone this repository you have to log in with a Gitlab account
+          </Text>
+          <StyledAnchor
+            primary
+            href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
+            onClick={() => setModalContent(false)}
+          >
+            Login with Gitlab
+            <Gitlab />
+          </StyledAnchor>
+        </ModalWrapepr>
       </Modal>
     )
   }
@@ -279,21 +299,23 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : '30vw'}
-        height={isMobileOnly ? '70vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '32vh' : '15vh'}
       >
-        <Text>
-          To clone this repository you have to log in with a Github account. You
-          are logged in with a Gitlab account
-        </Text>
-        <StyledAnchor
-          primary
-          href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-          onClick={() => setModalContent(false)}
-        >
-          Login with Github
-          <Github />
-        </StyledAnchor>
+        <ModalWrapepr>
+          <Text>
+            To clone this repository you have to log in with a Github account.
+            You are logged in with a Gitlab account
+          </Text>
+          <StyledAnchor
+            primary
+            href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+            onClick={() => setModalContent(false)}
+          >
+            Login with Github
+            <Github />
+          </StyledAnchor>
+        </ModalWrapepr>
       </Modal>
     )
   }
@@ -305,21 +327,23 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
         onRequestClose={() => setModalContent(false)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : '30vw'}
-        height={isMobileOnly ? '70vh' : '15vh'}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '32vh' : '15vh'}
       >
-        <Text>
-          To clone this repository you have to log in with a Gitlab account. You
-          are logged in with a Github account
-        </Text>
-        <StyledAnchor
-          primary
-          href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
-          onClick={() => setModalContent(false)}
-        >
-          Login with Github
-          <Gitlab />
-        </StyledAnchor>
+        <ModalWrapepr>
+          <Text>
+            To clone this repository you have to log in with a Gitlab account.
+            You are logged in with a Github account
+          </Text>
+          <StyledAnchor
+            primary
+            href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
+            onClick={() => setModalContent(false)}
+          >
+            Login with Gitlab
+            <Gitlab />
+          </StyledAnchor>
+        </ModalWrapepr>
       </Modal>
     )
   }
@@ -330,16 +354,18 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
       onRequestClose={() => setModalContent(false)}
       contentLabel={modalContent}
       ariaHideApp={false}
-      width={isMobileOnly ? '70vw' : '30vw'}
-      height={isMobileOnly ? '70vh' : '15vh'}
+      width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+      height={isMobileOnly ? '28vh' : '15vh'}
     >
-      <Text>
-        We have encountered an error while cloning your repositry. Please try
-        again later.
-      </Text>
-      <Button primary onClick={() => setModalContent(false)}>
-        Ok
-      </Button>
+      <ModalWrapepr>
+        <Text>
+          We have encountered an error while cloning your repositry. Please try
+          again later.
+        </Text>
+        <Button primary onClick={() => setModalContent(false)}>
+          Ok
+        </Button>
+      </ModalWrapepr>
     </Modal>
   )
 }
