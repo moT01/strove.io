@@ -335,10 +335,10 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
     >
       <Text>
         We have encountered an error while cloning your repositry. Please try
-        again later
+        again later.
       </Text>
       <Button primary onClick={() => setModalContent(false)}>
-        Login with Github
+        Ok
       </Button>
     </Modal>
   )
