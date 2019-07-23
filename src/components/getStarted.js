@@ -302,8 +302,8 @@ const StyledLink = styled(Link)`
 
 const Templates = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
-  const repoError = useSelector(selectors.getError('myProjects'))
+  const user = useSelector(selectors.api.getUser)
+  const repoError = useSelector(selectors.api.getError('myProjects'))
 
   const validate = values => {
     let errors = {}

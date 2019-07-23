@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createProject } from 'utils'
-import { selectors, incomingProjectSelectors } from 'state'
+import { selectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
 
@@ -10,10 +10,10 @@ export default ({ children }) => {
   const [modalContent, setModalContent] = useState()
 
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
-  const addProjectError = useSelector(incomingProjectSelectors.getError)
+  const addProjectError = useSelector(selectors.incomingProject.getError)
   console.log('addProjectError', addProjectError)
 
   const addProject = repoLink => {

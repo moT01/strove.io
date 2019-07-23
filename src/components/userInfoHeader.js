@@ -105,7 +105,7 @@ const Option = styled.div`
 const UserInfoHeader = props => {
   const [options] = useState(props.options)
   const dispatch = useDispatch()
-  const isLoading = useSelector(selectors.getLoading('user'))
+  const isLoading = useSelector(selectors.api.getLoading('user'))
 
   UserInfoHeader.handleClickOutside = () => props.handleDropdown()
 

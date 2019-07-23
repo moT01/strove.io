@@ -260,7 +260,7 @@ const templates = [
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
 
   const handleClick = item => {
     createProject({

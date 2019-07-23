@@ -1,26 +1,22 @@
 import { combineReducers } from 'redux'
-import api from './api/reducer'
-import * as S from './api/selectors'
-import * as Sel from './currentProject/selectors'
-import * as IncS from './incomingProject/selectors'
-import * as incomingProjectActions from './incomingProject/actions'
-import currentProject from './currentProject/reducer'
-
+import api from './api'
+import currentProject from './currentProject'
 import incomingProject from './incomingProject'
 
-export const selectors = S
-
-export const projectSelectors = Sel
-
-export const incomingProjectSelectors = IncS
-
+export const selectors = {
+  api: api.selectors,
+  currentProject: currentProject.selectors,
+  incomingProject: incomingProject.selectors,
+}
 export const actions = {
-  incomingProject: incomingProjectActions,
+  api: api.actions,
+  currentProject: currentProject.actions,
+  incomingProject: incomingProject.actions,
 }
 
 const appReducer = combineReducers({
-  api,
-  currentProject,
+  api: api.reducer,
+  currentProject: currentProject.reducer,
   incomingProject: incomingProject.reducer,
 })
 

@@ -20,7 +20,7 @@ const StyledIframe = styled.iframe`
 
 const getProjectId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
-const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
+const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
 
 const host = window?.location?.search
 
@@ -36,7 +36,7 @@ const Preview = () => {
       {loaderVisible && (
         <Loader
           isFullScreen={true}
-          color='#0072ce'
+          color="#0072ce"
           style={{
             opacity: loaderVisible ? 1 : 0,
             transition: 'opacity 0.5s',
