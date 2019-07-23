@@ -36,21 +36,40 @@ export default handleActions(
     [C.FETCH_SUCCESS]: (
       state,
       { payload: { storeKey, data, code, message } = {} }
-    ) => ({
-      ...state,
-      [storeKey]: {
-        ...(state[storeKey] || {}),
-        data: Array.isArray(state[storeKey].data)
-          ? [...data]
-          : typeof state[storeKey].data === 'object'
-          ? { ...state[storeKey].data, ...data }
-          : data,
-        isLoading: false,
-        error: undefined,
-        message,
-        code,
-      },
-    }),
+    ) => {
+      let newData
+
+      /*
+        Default, opinionated behavior for reducers
+        If old data was an array and one one isn't, append new data to array (for example
+        when adding additional project to projects)
+        If old wata was an object extend object with new props (for example when user is already
+        logged in but more user data has beeen fetched)
+        For old data being an array or primitive and new data coming in array or primitive overwrite
+        old data with a new one (for example when re-fetching projects
+      */
+      if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
+        newData = [...state[storeKey].data, data]
+      } else if (
+        !Array.isArray(state[storeKey].data) &&
+        typeof state[storeKey].data === 'object'
+      ) {
+        newData = { ...state[storeKey].data, ...data }
+      } else {
+        newData = data
+      }
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          data: newData,
+          isLoading: false,
+          error: undefined,
+          message,
+          code,
+        },
+      }
+    },
     [C.FETCH_ERROR]: (
       state,
       { payload: { storeKey, error, message, code } = {} }
@@ -76,7 +95,6 @@ export default handleActions(
           : null,
       },
     }),
-    LOGOUT: () => initialState,
   },
   initialState
 )

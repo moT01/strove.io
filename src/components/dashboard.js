@@ -3,11 +3,13 @@ import { navigate } from 'gatsby'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import { isMobileOnly } from 'react-device-detect'
+import moment from 'moment'
 
 import { query, mutation } from 'utils'
 import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
-import { selectCurrentProject } from 'state/currentProject/actions'
-import * as ApiC from 'state/api/constants'
+import { actions } from 'state'
+import { C } from 'state'
 import { selectors } from 'state'
 import GetStarted from '../components/getStarted'
 import Layout from './layout'
@@ -22,7 +24,6 @@ const FadeIn = keyframes`
   100% {
     opacity: 0.4;
   }
-
 `
 
 const FullFadeIn = keyframes`
@@ -35,13 +36,12 @@ const FullFadeIn = keyframes`
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
-
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 
 const Wrapper = styled.div`
@@ -72,7 +72,7 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
@@ -100,13 +100,15 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  background-color: ${props =>
+    (props.primary && '#0072ce') || (props.delete && 'red') || '#fff'};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  color: ${props =>
+    (props.primary && '#fff') || (props.delete && '#fff') || '#0072ce'};
+  border-radius: 5px;
+  border-color: ${props => (!props.delete ? '#0072ce' : '#000')};
+  box-shadow: 0 1vh 1vh -1.5vh ${props => (!props.delete ? '#0072ce' : '#000')};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -197,6 +199,13 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
+const CircleIcon = styled.div`
+  height: 1.5vh;
+  width: 1.5vh;
+  border-radius: 50%;
+  background: ${props => (props.active ? '#009900' : '#990000')};
+`
+
 const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
   color: #0072ce;
@@ -204,10 +213,12 @@ const StyledIcon = styled(Icon)`
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const projects = useSelector(selectors.getUserProjects)
+  const projects = useSelector(selectors.api.getUserProjects)
+  const currentProject = useSelector(selectors.currentProject.getProjectData)
   const [isModalVisible, setModalVisible] = useState(false)
+  const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const isDeleting = useSelector(selectors.getLoading('deleteProject'))
+  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
 
   const handleStartClick = ({ id, editorPort, machineId }) => {
     if (!editorPort) {
@@ -219,12 +230,22 @@ const Dashboard = () => {
           onSuccess: () => navigate('/app/editor/'),
           onSuccessDispatch: [
             ({ id, editorPort, machineId }) =>
-              selectCurrentProject({ id, editorPort, machineId }),
+              actions.currentProject.selectCurrentProject({
+                id,
+                editorPort,
+                machineId,
+              }),
           ],
         })
       )
     } else {
-      dispatch(selectCurrentProject({ id, editorPort, machineId }))
+      dispatch(
+        actions.currentProject.selectCurrentProject({
+          id,
+          editorPort,
+          machineId,
+        })
+      )
       navigate('/app/editor/')
     }
   }
@@ -239,11 +260,11 @@ const Dashboard = () => {
         onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
           () => ({
-            type: ApiC.REMOVE_ITEM,
+            type: C.Api.REMOVE_ITEM,
             payload: { storeKey: 'myProjects', id },
           }),
           () => ({
-            type: ApiC.FETCH_SUCCESS,
+            type: C.Api.FETCH_SUCCESS,
             payload: { storeKey: 'deleteProject', data: true },
           }),
         ],
@@ -277,9 +298,26 @@ const Dashboard = () => {
               <VerticalDivider>
                 <InfoWrapper>
                   <ProjectTitle>{project.name}</ProjectTitle>
+
+                  {currentProject && project.id === currentProject.id ? (
+                    <TextWrapper>
+                      <CircleIcon active />
+                      <Text>Active</Text>
+                    </TextWrapper>
+                  ) : (
+                    <TextWrapper>
+                      <CircleIcon />
+                      <Text>Inactive</Text>
+                    </TextWrapper>
+                  )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
-                    <Text>{project.createdAt}</Text>
+                    {/* ToDo: Fix on api side so date.pare isnt necessary */}
+                    <Text>
+                      {moment(Date.parse(project.createdAt)).format(
+                        'DD/MM/YYYY'
+                      )}
+                    </Text>
                   </TextWrapper>
                   <TextWrapper>
                     <StyledIcon type="edit" />
@@ -307,13 +345,23 @@ const Dashboard = () => {
                   </TextWrapper>
                 </InfoWrapper>
                 <RightSection>
-                  <Button
-                    to="/app/editor/"
-                    primary
-                    onClick={() => handleStartClick(project)}
-                  >
-                    Start
-                  </Button>
+                  {isDeleting ? (
+                    <Button primary disabled={isDeleting}>
+                      <Loader
+                        isFullScreen={false}
+                        color={'#ffffff'}
+                        height={'1.2rem'}
+                      />
+                    </Button>
+                  ) : (
+                    <Button
+                      to="/app/editor/"
+                      primary
+                      onClick={() => handleStartClick(project)}
+                    >
+                      Start
+                    </Button>
+                  )}
                   {isDeleting ? (
                     <Button disabled={isDeleting}>
                       <Loader
@@ -339,6 +387,8 @@ const Dashboard = () => {
         </TilesWrapper>
       </PageWrapper>
       <Modal
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={isModalVisible}
         onRequestClose={() => setModalVisible(false)}
         contentLabel="Delete project?"
@@ -349,7 +399,7 @@ const Dashboard = () => {
           undone.
         </ModalText>
         <ModalButton
-          primary
+          delete
           onClick={() => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
@@ -358,6 +408,30 @@ const Dashboard = () => {
           Confirm
         </ModalButton>
         <ModalButton onClick={closeModal}>Close</ModalButton>
+      </Modal>
+      <Modal
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={stopModal}
+        onRequestClose={() => setStopModal(false)}
+        contentLabel="Stop project?"
+        ariaHideApp={false}
+      >
+        <ModalText>
+          Before starting new project we have to stop your currently running
+          project. That means you may lose all unsaved progress. Are you sure
+          you want start new project?
+        </ModalText>
+        <ModalButton
+          delete
+          onClick={() => {
+            handleDeleteClick(projectToDelete.id)
+            setStopModal(false)
+          }}
+        >
+          Confirm
+        </ModalButton>
+        <ModalButton onClick={() => setStopModal(false)}>Close</ModalButton>
       </Modal>
     </Layout>
   )

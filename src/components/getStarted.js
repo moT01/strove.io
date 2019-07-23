@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik } from 'formik'
 import { Link } from 'gatsby'
+import { isMobileOnly } from 'react-device-detect'
 
 import {
   CSharp,
@@ -18,7 +19,11 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 
 const templates = [
-  { name: 'Typescript', icon: <Typescript /> },
+  {
+    name: 'Typescript',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/TypeScript-HelloWorld',
+  },
   {
     name: 'Ruby',
     icon: <Ruby />,
@@ -35,9 +40,11 @@ const templates = [
     icon: <Python />,
     link: 'https://github.com/codengo-llc/python-starter',
   },
-  // { name: 'Php', icon: <Php /> },
-  // { name: 'C', icon: <C /> },
-  { name: 'Go', icon: <Go /> },
+  {
+    name: 'Go',
+    icon: <Go />,
+    link: 'https://github.com/codengo-llc/Go-HelloWorld',
+  },
   {
     name: 'C#',
     icon: <CSharp />,
@@ -74,7 +81,7 @@ const AddProjectWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
@@ -105,8 +112,18 @@ const TemplatesWrapper = styled.div`
   width: 100%;
   height: auto;
   padding: 0.5vh;
-  justify-content: center;
+  justify-content: ${props => (props.mobile ? 'flex-start' : 'center')};
   align-items: center;
+  overflow-x: ${props => (props.mobile ? 'scroll' : 'visible')};
+
+  ${props =>
+    props.mobile &&
+    css`
+      border: 1px solid #0072ce;
+      box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+      border-radius: 5px;
+      margin: 10px 0 10px 0;
+    `}
 `
 
 const TemplateContainer = styled.a`
@@ -132,8 +149,8 @@ const TemplateContainer = styled.a`
 `
 
 const IconContainer = styled.div`
-  width: 5vw;
-  height: 5vw;
+  width: ${props => (props.mobile ? '20vw' : '5vw')};
+  height: ${props => (props.mobile ? '20vw' : '5vw')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,9 +171,8 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 100%;
+  width: ${props => (props.mobile ? '100%' : '20%')};
   min-width: 70px;
-  max-width: 150px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -166,7 +182,7 @@ const Button = styled.button`
   border-width: 1px;
   border-style: solid;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
@@ -196,7 +212,7 @@ const Button = styled.button`
 `
 
 const Title = styled.h3`
-  font-size: 1.4rem;
+  font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
@@ -211,12 +227,12 @@ const SectionDivider = styled.div`
 `
 
 const SectionDividerLine = styled.div`
-  width: 25%;
+  flex: 1;
   border-top: 1px solid #0072ce;
 `
 
 const SectionDividerText = styled(Title)`
-  width: 50%;
+  flex: 2;
   margin: 0.5vh;
 `
 
@@ -225,7 +241,7 @@ const GithubLinkInput = styled.input`
   border-width: 1px;
   border-style: solid;
   color: #0072ce;
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-align: center;
@@ -254,9 +270,8 @@ const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 100%;
+  width: ${props => (props.mobile ? '100%' : '20%')};
   min-width: 70px;
-  max-width: 150px;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
@@ -266,7 +281,7 @@ const StyledLink = styled(Link)`
   border-width: 1px;
   border-style: solid;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
@@ -287,8 +302,8 @@ const StyledLink = styled(Link)`
 
 const Templates = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
-  const repoError = useSelector(selectors.getError('myProjects'))
+  const user = useSelector(selectors.api.getUser)
+  const repoError = useSelector(selectors.api.getError('myProjects'))
 
   const validate = values => {
     let errors = {}
@@ -307,7 +322,7 @@ const Templates = () => {
   }
 
   const handleClick = item => {
-    user.name
+    user
       ? createProject({
           repoLink: item.link,
           dispatch: dispatch,
@@ -318,7 +333,7 @@ const Templates = () => {
 
   return (
     <AddProjectWrapper>
-      <Title>Add project from github repository</Title>
+      <Title mobile={isMobileOnly}>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
           createProject({
@@ -337,7 +352,11 @@ const Templates = () => {
               onBlur={props.handleBlur}
               value={props.values.repoLink}
               name="repoLink"
-              placeholder={'https://github.com/evil-corp/worldDomination'}
+              placeholder={
+                isMobileOnly
+                  ? 'Paste repo link here'
+                  : 'https://github.com/evil-corp/worldDomination'
+              }
             />
             <ErrorMessage>
               {props.errors.repoLink && (
@@ -356,8 +375,8 @@ const Templates = () => {
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
+              mobile={isMobileOnly}
               type="submit"
-              style={{ width: '20%' }}
             >
               Add project
             </Button>
@@ -365,24 +384,28 @@ const Templates = () => {
         )}
       />
       <SectionDivider>
-        <SectionDividerLine />
-        <SectionDividerText>Or try out one of the templates</SectionDividerText>
-        <SectionDividerLine />
+        {!isMobileOnly && <SectionDividerLine />}
+        <SectionDividerText mobile={isMobileOnly}>
+          Or try out one of the templates
+        </SectionDividerText>
+        {!isMobileOnly && <SectionDividerLine />}
       </SectionDivider>
       <ComponentWrapper>
-        <TemplatesWrapper>
+        <TemplatesWrapper mobile={isMobileOnly}>
           {templates.map(item => (
             <TemplateContainer
               key={item.name}
               onClick={() => handleClick(item)}
             >
-              <IconContainer>{item.icon}</IconContainer>
+              <IconContainer mobile={isMobileOnly}>{item.icon}</IconContainer>
               <TemplateText>{item.name}</TemplateText>
             </TemplateContainer>
           ))}
         </TemplatesWrapper>
 
-        <StyledLink to="templates">More templates</StyledLink>
+        <StyledLink mobile={isMobileOnly} to="templates">
+          More templates
+        </StyledLink>
       </ComponentWrapper>
     </AddProjectWrapper>
   )

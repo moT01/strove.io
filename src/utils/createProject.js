@@ -2,9 +2,8 @@ import ApolloClient from 'apollo-boost'
 import { navigate } from 'gatsby'
 
 import { mutation } from 'utils'
-import * as ApiC from 'state/api/constants'
+import { C } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
-import * as C from 'state/currentProject/constants'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
@@ -15,7 +14,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
 
   const setCurrentProject = ({ id, editorPort, machineId }) =>
     dispatch({
-      type: C.SELECT_CURRENT_PROJECT,
+      type: C.currentProject.SELECT_CURRENT_PROJECT,
       payload: { id, editorPort, machineId },
     })
 
@@ -89,14 +88,19 @@ const createProject = async ({ repoLink, dispatch, user }) => {
           variables: { repoLink, name, description },
           mutation: ADD_PROJECT,
           onSuccess: startProject,
+          onErrorDispatch: error =>
+            dispatch({
+              type: C.incomingProject.CATCH_INCOMING_ERROR,
+              payload: { error },
+            }),
         })
       )
     }
   } catch (e) {
     console.log('fetch error: ', e)
     dispatch({
-      type: ApiC.FETCH_ERROR,
-      payload: { storeKey: 'myProjects', error: e },
+      type: C.incomingProject.CATCH_INCOMING_ERROR,
+      payload: { error: e },
     })
   }
 }

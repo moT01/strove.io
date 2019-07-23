@@ -20,7 +20,7 @@ const MainContent = styled.main`
 `
 
 const Layout = ({ children }) => {
-  const isLoading = useSelector(selectors.getLoading('myProjects'))
+  const isLoading = useSelector(selectors.api.getLoading('myProjects'))
 
   return (
     <StaticQuery

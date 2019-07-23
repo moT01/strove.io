@@ -1,10 +1,13 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
+import { isMobileOnly } from 'react-device-detect'
 
 import Login from './login'
-import { Icon } from 'antd'
+import { selectors } from 'state'
+import { Silisky, Dashboard, Desktop } from '../images/logos'
 
 const FadeIn = keyframes`
   0% {
@@ -15,18 +18,29 @@ const FadeIn = keyframes`
   }
 `
 
-const LinkWrapper = styled.h3`
+const LinkWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 2.5vh;
+  height: ${props => (props.mobile ? '100%' : '2.5vh')};
   margin: 0 3vw 0 0;
   font-weight: 200;
+  animation: ${FadeIn} 0.3s ease-out;
 `
 
-const ZeldaWrapper = styled(LinkWrapper)`
+const ZeldaWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: ${props => (props.mobile ? '100%' : '2.5vh')};
   margin: 0;
+  font-weight: 200;
+  animation: ${FadeIn} 0.3s ease-out;
+  @media (max-width: 767px) {
+    height: 4vh;
+  }
 `
 
 const IconWrapper = styled(LinkWrapper)`
@@ -42,10 +56,12 @@ const IconWrapper = styled(LinkWrapper)`
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin: 0;
+  height: 100%;
 `
 
-const LinkText = styled.span`
+const LinkText = styled.h3`
   font-size: 1.2rem;
   display: flex;
   flex-direction: row;
@@ -53,6 +69,11 @@ const LinkText = styled.span`
   align-items: center;
   transition: color 0.3s;
   font-weight: 200;
+  margin: 0;
+  @media (max-width: 767px) {
+    height: 5vh;
+    font-size: 1.8rem;
+  }
 
   :hover {
     color: black;
@@ -67,7 +88,7 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: 3vh;
+  height: ${props => (props.mobile ? '8vh' : '3vh')};
   background: #0072ce;
   min-height: 1.3rem;
 `
@@ -75,6 +96,9 @@ const HeaderSection = styled.div`
 const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
 `
 
 const PreviewLink = styled.a`
@@ -82,51 +106,57 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
 `
 
-const HeaderComponent = ({ siteTitle, location }) => (
-  <HeaderSection>
-    <HeaderWrapper>
-      <LinkWrapper>
-        <StyledLink to="/">
-          <LinkText>{siteTitle}</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      <LinkWrapper>
-        <StyledLink to="/app/dashboard">
-          <LinkText>Dashboard</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      <LinkWrapper>
-        <StyledLink to="/pricing">
-          <LinkText>Pricing</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      <LinkWrapper>
-        <StyledLink to="/faq">
-          <LinkText>FAQ</LinkText>
-        </StyledLink>
-      </LinkWrapper>
-      {location.pathname === '/app/editor/' && (
-        <PreviewLink
-          style={{ color: '#fff', textDecoration: 'none' }}
-          href={
-            process.env.NODE_ENV === 'production'
-              ? 'silisky.com/app/preview/'
-              : 'localhost:8000/app/preview/'
-          }
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <IconWrapper>
-            <Icon type="desktop" style={{ fontSize: '3vh' }}></Icon>
-          </IconWrapper>
-        </PreviewLink>
-      )}
-    </HeaderWrapper>
-    <ZeldaWrapper>
-      <Login />
-    </ZeldaWrapper>
-  </HeaderSection>
-)
+const HeaderComponent = ({ siteTitle, location }) => {
+  const user = useSelector(selectors.api.getUser)
+  return (
+    <HeaderSection mobile={isMobileOnly}>
+      <HeaderWrapper mobile={isMobileOnly}>
+        <LinkWrapper mobile={isMobileOnly}>
+          <StyledLink to="/">
+            {isMobileOnly ? (
+              <Silisky
+                style={{ height: '100%', marginTop: '0.6rem' }}
+                fill="#ffffff"
+              />
+            ) : (
+              <LinkText>{siteTitle}</LinkText>
+            )}
+          </StyledLink>
+        </LinkWrapper>
+        {user && (
+          <LinkWrapper mobile={isMobileOnly}>
+            <StyledLink to="/app/dashboard">
+              {isMobileOnly ? (
+                <Dashboard style={{ height: '70%' }} fill="#ffffff" />
+              ) : (
+                <LinkText>Dashboard</LinkText>
+              )}
+            </StyledLink>
+          </LinkWrapper>
+        )}
+        {location.pathname === '/app/editor/' && (
+          <PreviewLink
+            style={{ color: '#fff', textDecoration: 'none' }}
+            href={
+              process.env.NODE_ENV === 'production'
+                ? 'silisky.com/app/preview/'
+                : 'localhost:8000/app/preview/'
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconWrapper>
+              <Desktop style={{ height: '80%' }} fill="#fff"></Desktop>
+            </IconWrapper>
+          </PreviewLink>
+        )}
+      </HeaderWrapper>
+      <ZeldaWrapper>
+        <Login />
+      </ZeldaWrapper>
+    </HeaderSection>
+  )
+}
 
 const Header = props => (
   <Location>
