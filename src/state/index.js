@@ -14,6 +14,12 @@ export const actions = {
   incomingProject: incomingProject.actions,
 }
 
+export const C = {
+  api: api.C,
+  currentProject: currentProject.C,
+  incomingProject: incomingProject.C,
+}
+
 const appReducer = combineReducers({
   api: api.reducer,
   currentProject: currentProject.reducer,

@@ -9,7 +9,7 @@ import moment from 'moment'
 import { query, mutation } from 'utils'
 import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import { actions } from 'state'
-import * as ApiC from 'state/api/constants'
+import { C } from 'state'
 import { selectors } from 'state'
 import GetStarted from '../components/getStarted'
 import Layout from './layout'
@@ -260,11 +260,11 @@ const Dashboard = () => {
         onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
           () => ({
-            type: ApiC.REMOVE_ITEM,
+            type: C.Api.REMOVE_ITEM,
             payload: { storeKey: 'myProjects', id },
           }),
           () => ({
-            type: ApiC.FETCH_SUCCESS,
+            type: C.Api.FETCH_SUCCESS,
             payload: { storeKey: 'deleteProject', data: true },
           }),
         ],
