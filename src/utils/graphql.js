@@ -89,9 +89,9 @@ export const mutation = ({
 
       if (onErrorDispatch) {
         if (Array.isArray(onErrorDispatch)) {
-          onSuccessDispatch.forEach(action => dispatch(action(error)))
+          onErrorDispatch.forEach(action => dispatch(action(error)))
         } else {
-          dispatch(onSuccessDispatch(error))
+          dispatch(onErrorDispatch(error))
         }
       } else {
         dispatch({
