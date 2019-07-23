@@ -248,6 +248,10 @@ const GithubLinkInput = styled.input`
   text-align: center;
   font-size: 1rem;
   padding: 0.5vh 0;
+
+  :focus {
+    outline: none;
+  }
 `
 
 const GithubLinkForm = styled.form`
