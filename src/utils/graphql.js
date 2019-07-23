@@ -1,4 +1,4 @@
-import * as C from 'state/api/constants'
+import { C } from 'state/'
 
 import defaultClient from '../../client'
 
@@ -8,7 +8,7 @@ import defaultClient from '../../client'
  * for example to set localStorage.
  * @param {Object} objectParam mutation takes one param will all the details, like variables living inside
  * @param {string} objectParam.name - Name of the mutation, for example githubAuth
- * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorAction are provided
+ * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorDispatch are provided
  * @param {string} objectParam.variables - Mutation variables
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy, defaults to all
@@ -27,18 +27,29 @@ export const mutation = ({
   context,
   errorPolicy = 'all',
   mutation,
+  onLoading,
   onSuccess,
   onError,
+  onLoadingDispatch,
   onSuccessDispatch,
-  onErrorAction,
+  onErrorDispatch,
   dataSelector = data => data[name],
   client = defaultClient,
 }) => {
   return async dispatch => {
-    dispatch({
-      type: C.FETCH_START,
-      payload: { storeKey },
-    })
+    onLoading && onLoading(storeKey)
+    if (onLoadingDispatch) {
+      if (Array.isArray(onLoadingDispatch)) {
+        onLoadingDispatch.forEach(action => dispatch(action(storeKey)))
+      } else {
+        dispatch(onLoadingDispatch(storeKey))
+      }
+    } else {
+      dispatch({
+        type: C.api.FETCH_START,
+        payload: { storeKey },
+      })
+    }
 
     try {
       const { data } = await client.mutate({
@@ -67,19 +78,28 @@ export const mutation = ({
         }
       } else {
         dispatch({
-          type: C.FETCH_SUCCESS,
+          type: C.api.FETCH_SUCCESS,
           payload: { storeKey, data: result },
         })
       }
 
       return dataSelector(data)
     } catch (error) {
-      console.log('fetch error: ', error)
-
       onError && onError(error)
-      onErrorAction && dispatch(onErrorAction(error))
 
-      dispatch({ type: C.FETCH_ERROR, storeKey, payload: { error, storeKey } })
+      if (onErrorDispatch) {
+        if (Array.isArray(onErrorDispatch)) {
+          onErrorDispatch.forEach(action => dispatch(action(error)))
+        } else {
+          dispatch(onErrorDispatch(error))
+        }
+      } else {
+        dispatch({
+          type: C.api.FETCH_ERROR,
+          storeKey,
+          payload: { error, storeKey },
+        })
+      }
       return null
     }
   }
@@ -91,7 +111,7 @@ export const mutation = ({
  * for example to set localStorage.
  * @param {Object} objectParam mutation takes one param will all the details, like variables living inside
  * @param {string} objectParam.name - Name of the mutation, for example githubAuth
- * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorAction are provided
+ * @param {string} objectParam.storeKey - Key where mutation result will be stored unless a custom onSuccessDispatch or onErrorDispatch are provided
  * @param {string} objectParam.variables - Mutation variables
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation fetchPolicy, defaults to cache-first
@@ -100,7 +120,7 @@ export const mutation = ({
  * @param {function} objectParam.onSuccess - Function called with the result after query succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
  * @param {function} objectParam.onError - Function called with the error after query fails. Example: () => localStorage.removeItem('token')
  * @param {function} objectParam.onSuccessDispatch - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
- * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
+ * @param {function} objectParam.onErrorDispatch - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
  * @param {function} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
  * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
  */
@@ -112,18 +132,29 @@ export const query = ({
   fetchPolicy = 'no-cache',
   errorPolicy = 'all',
   query,
+  onLoading,
   onSuccess,
   onError,
+  onLoadingDispatch,
   onSuccessDispatch,
-  onErrorAction,
+  onErrorDispatch,
   dataSelector = data => data[name],
   client = defaultClient,
 }) => {
   return async dispatch => {
-    dispatch({
-      type: C.FETCH_START,
-      payload: { storeKey },
-    })
+    onLoading && onLoading(storeKey)
+    if (onLoadingDispatch) {
+      if (Array.isArray(onLoadingDispatch)) {
+        onLoadingDispatch.forEach(action => dispatch(action(storeKey)))
+      } else {
+        dispatch(onLoadingDispatch(storeKey))
+      }
+    } else {
+      dispatch({
+        type: C.api.FETCH_START,
+        payload: { storeKey },
+      })
+    }
 
     try {
       const { data } = await client.query({
@@ -152,7 +183,7 @@ export const query = ({
         }
       } else {
         dispatch({
-          type: C.FETCH_SUCCESS,
+          type: C.api.FETCH_SUCCESS,
           payload: { storeKey, data: result },
         })
       }
@@ -162,9 +193,19 @@ export const query = ({
       console.log('fetch error: ', error)
 
       onError && onError(error)
-      onErrorAction && dispatch(onErrorAction(error))
-
-      dispatch({ type: C.FETCH_ERROR, payload: { error, storeKey } })
+      if (onErrorDispatch) {
+        if (Array.isArray(onErrorDispatch)) {
+          onSuccessDispatch.forEach(action => dispatch(action(error)))
+        } else {
+          dispatch(onSuccessDispatch(error))
+        }
+      } else {
+        dispatch({
+          type: C.api.FETCH_ERROR,
+          storeKey,
+          payload: { error, storeKey },
+        })
+      }
       return null
     }
   }

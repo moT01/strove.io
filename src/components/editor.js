@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { Location } from '@reach/router'
 import getOr from 'lodash/fp/getOr'
 
 import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import * as C from 'state/currentProject/constants'
-// import { CONTINUE_PROJECT } from 'queries'
-// import { query, mutation } from 'utils'
-
+import { C } from 'state'
+import { CONTINUE_PROJECT } from 'queries'
+import { mutation } from 'utils'
 const StyledIframe = styled.iframe`
   display: block;
   background: #000;
   border: none;
-  min-height: 95vh;
+  min-height: 97vh;
   width: 100vw;
   margin: 0;
 `
 
-const getUserToken = selectors.getApiData('user', {}, 'siliskyToken')
+const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
 const getId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
-const EditorComponent = ({ location }) => {
+const Editor = () => {
   const dispatch = useDispatch()
   const token = useSelector(getUserToken)
   const projectId = useSelector(getId)
@@ -34,31 +32,30 @@ const EditorComponent = ({ location }) => {
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  // ToDo uncomment and update once API is ready for delayed project stopping
-  // useEffect(() => {
-  //   // This condition means project has been stopped
-  //   if (projectId && !machineId) {
-  //     dispatch(
-  //       mutation({
-  //         name: 'continueProject',
-  //         mutation: CONTINUE_PROJECT,
-  //         variables: { projectId },
-  //         onSuccessDispatch: [
-  //           ({ id, editorPort, previewPort, machineId }) => ({
-  //             type: C.SELECT_CURRENT_PROJECT,
-  //             payload: { id, editorPort, previewPort, machineId },
-  //           }),
-  //         ],
-  //       })
-  //     )
-  //   }
-  // }, [projectId, machineId])
+  useEffect(() => {
+    // This condition means project has been stopped
+    if (projectId && !machineId) {
+      dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId },
+          onSuccessDispatch: [
+            ({ id, editorPort, previewPort, machineId }) => ({
+              type: C.currentProject.SELECT_CURRENT_PROJECT,
+              payload: { id, editorPort, previewPort, machineId },
+            }),
+          ],
+        })
+      )
+    }
+  }, [projectId, machineId])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
       ev.preventDefault()
       dispatch({
-        type: C.STOP_CURRENT_PROJECT,
+        type: C.currentProject.STOP_CURRENT_PROJECT,
       })
 
       if (navigator && navigator.sendBeacon) {
@@ -70,29 +67,32 @@ const EditorComponent = ({ location }) => {
     })
   }, [])
 
+  // Let api know that project is still active so api doesn't stop it
+  useEffect(() => {
+    const projectPing = setInterval(() => {
+      dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId },
+        })
+      )
+    }, 60000)
+
+    return () => clearInterval(projectPing)
+  }, [])
+
   return (
     <Layout>
       <SEO title="Editor" />
       {loaderVisible && <Loader isFullScreen={true} color="#0072ce" />}
       <StyledIframe
-        onLoad={() => setLoaderVisible(false)}
+        onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}`}
         style={{ opacity: loaderVisible ? 0 : 1 }}
       />
     </Layout>
   )
 }
-
-const Editor = ({ children, ...props }) => (
-  <Location>
-    {({ location }) => (
-      <EditorComponent
-        {...props}
-        location={location}
-        children={children}
-      ></EditorComponent>
-    )}
-  </Location>
-)
 
 export default Editor
