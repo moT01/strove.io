@@ -4,6 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
+import moment from 'moment'
 
 import { query, mutation } from 'utils'
 import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -301,7 +302,12 @@ const Dashboard = () => {
                   )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
-                    <Text>{project.createdAt}</Text>
+                    {/* ToDo: Fix on api side so date.pare isnt necessary */}
+                    <Text>
+                      {moment(Date.parse(project.createdAt)).format(
+                        'DD/MM/YYYY'
+                      )}
+                    </Text>
                   </TextWrapper>
                   <TextWrapper>
                     <StyledIcon type="edit" />
