@@ -19,14 +19,9 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
-const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
+const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
 const getId = getOr(undefined, ['currentProject', 'id'])
-const getCurrentProjectId = selectors.api.getApiData(
-  'user',
-  null,
-  'currentProjectId'
-)
+const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
 const Editor = () => {
@@ -34,13 +29,12 @@ const Editor = () => {
   const token = useSelector(getUserToken)
   const projectId = useSelector(getId)
   const machineId = useSelector(getMachineId)
-  const currentProjectId = useSelector(getCurrentProjectId)
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {
     // This condition means project has been stopped
-    if (projectId !== currentProjectId) {
+    if (projectId && !machineId) {
       dispatch(
         mutation({
           name: 'continueProject',
@@ -55,7 +49,7 @@ const Editor = () => {
         })
       )
     }
-  }, [projectId])
+  }, [projectId, machineId])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
