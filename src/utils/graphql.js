@@ -1,4 +1,4 @@
-import * as C from 'state/api/constants'
+import { C } from 'state/'
 
 import defaultClient from '../../client'
 
@@ -46,7 +46,7 @@ export const mutation = ({
       }
     } else {
       dispatch({
-        type: C.FETCH_START,
+        type: C.api.FETCH_START,
         payload: { storeKey },
       })
     }
@@ -78,7 +78,7 @@ export const mutation = ({
         }
       } else {
         dispatch({
-          type: C.FETCH_SUCCESS,
+          type: C.api.FETCH_SUCCESS,
           payload: { storeKey, data: result },
         })
       }
@@ -95,7 +95,7 @@ export const mutation = ({
         }
       } else {
         dispatch({
-          type: C.FETCH_ERROR,
+          type: C.api.FETCH_ERROR,
           storeKey,
           payload: { error, storeKey },
         })
@@ -151,7 +151,7 @@ export const query = ({
       }
     } else {
       dispatch({
-        type: C.FETCH_START,
+        type: C.api.FETCH_START,
         payload: { storeKey },
       })
     }
@@ -183,7 +183,7 @@ export const query = ({
         }
       } else {
         dispatch({
-          type: C.FETCH_SUCCESS,
+          type: C.api.FETCH_SUCCESS,
           payload: { storeKey, data: result },
         })
       }
@@ -201,7 +201,7 @@ export const query = ({
         }
       } else {
         dispatch({
-          type: C.FETCH_ERROR,
+          type: C.api.FETCH_ERROR,
           storeKey,
           payload: { error, storeKey },
         })

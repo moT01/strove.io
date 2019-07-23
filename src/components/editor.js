@@ -7,7 +7,7 @@ import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import * as C from 'state/currentProject/constants'
+import { C } from 'state'
 import { CONTINUE_PROJECT } from 'queries'
 import { mutation } from 'utils'
 const StyledIframe = styled.iframe`
@@ -42,7 +42,7 @@ const Editor = () => {
           variables: { projectId },
           onSuccessDispatch: [
             ({ id, editorPort, previewPort, machineId }) => ({
-              type: C.SELECT_CURRENT_PROJECT,
+              type: C.currentProject.SELECT_CURRENT_PROJECT,
               payload: { id, editorPort, previewPort, machineId },
             }),
           ],
@@ -55,7 +55,7 @@ const Editor = () => {
     window.addEventListener('beforeunload', ev => {
       ev.preventDefault()
       dispatch({
-        type: C.STOP_CURRENT_PROJECT,
+        type: C.currentProject.STOP_CURRENT_PROJECT,
       })
 
       if (navigator && navigator.sendBeacon) {
