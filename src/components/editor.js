@@ -22,11 +22,11 @@ const StyledIframe = styled.iframe`
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
 const getId = getOr(undefined, ['currentProject', 'id'])
-const getCurrentProjectId = (getUserToken = selectors.api.getApiData(
+const getCurrentProjectId = selectors.api.getApiData(
   'user',
   null,
   'currentProjectId'
-))
+)
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
 const Editor = () => {
