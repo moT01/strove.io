@@ -107,7 +107,7 @@ const PreviewLink = styled.a`
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
   return (
     <HeaderSection mobile={isMobileOnly}>
       <HeaderWrapper mobile={isMobileOnly}>

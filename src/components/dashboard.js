@@ -8,9 +8,9 @@ import moment from 'moment'
 
 import { query, mutation } from 'utils'
 import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
-import { selectCurrentProject } from 'state/currentProject/actions'
+import { actions } from 'state'
 import * as ApiC from 'state/api/constants'
-import { selectors, projectSelectors } from 'state'
+import { selectors } from 'state'
 import GetStarted from '../components/getStarted'
 import Layout from './layout'
 import SEO from './seo'
@@ -213,12 +213,12 @@ const StyledIcon = styled(Icon)`
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const projects = useSelector(selectors.getUserProjects)
-  const currentProject = useSelector(projectSelectors.getProjectData)
+  const projects = useSelector(selectors.api.getUserProjects)
+  const currentProject = useSelector(selectors.currentProject.getProjectData)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const isDeleting = useSelector(selectors.getLoading('deleteProject'))
+  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
 
   const handleStartClick = ({ id, editorPort, machineId }) => {
     if (!editorPort) {
@@ -230,12 +230,22 @@ const Dashboard = () => {
           onSuccess: () => navigate('/app/editor/'),
           onSuccessDispatch: [
             ({ id, editorPort, machineId }) =>
-              selectCurrentProject({ id, editorPort, machineId }),
+              actions.currentProject.selectCurrentProject({
+                id,
+                editorPort,
+                machineId,
+              }),
           ],
         })
       )
     } else {
-      dispatch(selectCurrentProject({ id, editorPort, machineId }))
+      dispatch(
+        actions.currentProject.selectCurrentProject({
+          id,
+          editorPort,
+          machineId,
+        })
+      )
       navigate('/app/editor/')
     }
   }

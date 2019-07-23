@@ -20,12 +20,12 @@ const FadeIn = keyframes`
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 const Text = styled.p`
   color: #0072ce;

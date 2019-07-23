@@ -154,7 +154,7 @@ const StyledLink = styled(Link)`
 
 const Templates = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
 
   const handleClick = item => {
     createProject({

@@ -138,9 +138,9 @@ const Option = styled.a`
   }
 `
 
-const getUserName = selectors.getApiData('user', null, 'name')
+const getUserName = selectors.api.getApiData('user', null, 'name')
 
-const getUserPhoto = selectors.getApiData('user', null, 'photoUrl')
+const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto],
@@ -191,7 +191,7 @@ const LoginDropdown = () => {
 
 const Login = () => {
   const [showDropdown, setShowDropdown] = useState(false)
-  const isLoading = useSelector(selectors.getLoading('user'))
+  const isLoading = useSelector(selectors.api.getLoading('user'))
 
   const handleDropdown = () => setShowDropdown(false)
   const handleDropdownClick = () => setShowDropdown(!showDropdown)

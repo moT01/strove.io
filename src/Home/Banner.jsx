@@ -119,7 +119,7 @@ const StyledIcon = styled(Icon)`
 `
 
 const Banner = props => {
-  const isLoading = useSelector(selectors.getLoading('user'))
+  const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
 
   const closeModal = () => setModalVisible(false)
