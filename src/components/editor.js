@@ -60,7 +60,7 @@ const Editor = () => {
 
       if (navigator && navigator.sendBeacon) {
         navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/beacon`,
+          `${process.env.SILISKY_ENDPOINT}/stopProject`,
           JSON.stringify({ token, projectId, type: 'stopProject' })
         )
       }
@@ -79,7 +79,14 @@ const Editor = () => {
       )
     }, 60000)
 
-    return () => clearInterval(projectPing)
+    return async () => {
+      await fetch(`${process.env.SILISKY_ENDPOINT}/stopProject`, {
+        body: JSON.stringify({ token, projectId, type: 'stopProject' }),
+        method: 'POST',
+      })
+
+      clearInterval(projectPing)
+    }
   }, [])
 
   return (
