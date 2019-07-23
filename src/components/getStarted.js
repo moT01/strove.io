@@ -17,6 +17,7 @@ import {
 } from '../images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
+import AddProjectProvider from 'components/addProjectProvider'
 
 const templates = [
   {
@@ -300,7 +301,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Templates = () => {
+const Templates = ({ addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const repoError = useSelector(selectors.api.getError('myProjects'))
@@ -336,11 +337,11 @@ const Templates = () => {
       <Title mobile={isMobileOnly}>Add project from github repository</Title>
       <Formik
         onSubmit={(values, actions) => {
-          createProject({
-            repoLink: values.repoLink.replace(/.git$/, ''),
-            dispatch,
-            user,
-          })
+          addProject(
+            values.repoLink.replace(/.git$/, '')
+            // dispatch,
+            // user,
+          )
           actions.setSubmitting(false)
         }}
         validate={validate}
@@ -410,4 +411,9 @@ const Templates = () => {
     </AddProjectWrapper>
   )
 }
-export default Templates
+
+export default () => (
+  <AddProjectProvider>
+    {({ addProject }) => <Templates addProject={addProject} />}
+  </AddProjectProvider>
+)
