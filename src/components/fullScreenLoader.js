@@ -51,7 +51,7 @@ const Loader = props => {
         <Cog fill={props.color} />
         {props.isFullScreen && (
           <LogoContainer {...props}>
-            <Silisky style={{ width: '100%', height: 'auto' }} fill="#0474cc" />
+            <Silisky style={{ width: '100%', height: 'auto' }} fill="#0072ce" />
           </LogoContainer>
         )}
       </LoaderContainer>
