@@ -95,7 +95,6 @@ export default handleActions(
           : null,
       },
     }),
-    LOGOUT: () => initialState,
   },
   initialState
 )

@@ -17,4 +17,16 @@ export const actions = {
   incomingProject: incomingProjectActions,
 }
 
-export default combineReducers({ api, currentProject, incomingProject })
+const appReducer = combineReducers({
+  api,
+  currentProject,
+  incomingProject,
+})
+
+export default (state, action) => {
+  if (action.type === 'LOGOUT') {
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
