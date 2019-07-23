@@ -90,7 +90,7 @@ const Button = styled.button`
     `}
 `
 
-const StyledAnchor = styled.button`
+const StyledAnchor = styled.a`
   display: flex;
   flex-direction: row;
   height: auto;
