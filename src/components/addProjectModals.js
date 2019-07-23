@@ -192,6 +192,7 @@ const StyledLink = styled(Link)`
 `
 
 const AddProjectModals = ({ modalContent, setModalContent }) => {
+  modalContent = 'AddGithubPrivatePermissions'
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
       <Modal
