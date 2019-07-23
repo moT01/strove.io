@@ -33,7 +33,7 @@ const CardsWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 3vh;
-  animation: ${FadeIn} 1s ease-out;
+  animation: ${ButtonFadeIn} 0.3s ease-out;
 
   @media (max-width: 1366px) {
     flex-direction: column;
