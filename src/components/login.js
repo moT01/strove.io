@@ -16,16 +16,14 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
 
-const logout = {
-  type: 'LOGOUT',
-}
-
 const options = [
   {
     option: 'Logout',
     onClick: dispatch => {
       localStorage.removeItem('token')
-      dispatch(logout)
+      dispatch({
+        type: 'LOGOUT',
+      })
     },
   },
 ]

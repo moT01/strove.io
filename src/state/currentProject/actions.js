@@ -1,12 +1,10 @@
-import { createAction } from 'redux-actions'
-
 import * as C from './constants'
 
-export const selectCurrentProject = createAction(
-  C.SELECT_CURRENT_PROJECT,
-  ({ id, machineId, editorPort }) => ({
+export const selectCurrentProject = ({ id, machineId, editorPort }) => ({
+  type: C.SELECT_CURRENT_PROJECT,
+  payload: {
     id,
     machineId,
     editorPort,
-  })
-)
+  },
+})
