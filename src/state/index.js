@@ -5,7 +5,8 @@ import * as Sel from './currentProject/selectors'
 import * as IncS from './incomingProject/selectors'
 import * as incomingProjectActions from './incomingProject/actions'
 import currentProject from './currentProject/reducer'
-import incomingProject from './incomingProject/reducer'
+
+import incomingProject from './incomingProject'
 
 export const selectors = S
 
@@ -20,7 +21,7 @@ export const actions = {
 const appReducer = combineReducers({
   api,
   currentProject,
-  incomingProject,
+  incomingProject: incomingProject.reducer,
 })
 
 export default (state, action) => {
