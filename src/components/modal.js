@@ -26,7 +26,7 @@ export default styled(Modal)`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;

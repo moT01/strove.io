@@ -68,7 +68,7 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
@@ -149,7 +149,7 @@ const Button = styled.button`
   border-width: 1px;
   border-style: solid;
   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 1vh;
+  border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
   text-decoration: none;
@@ -213,11 +213,54 @@ const templates = [
     description:
       'This is a minimal Giter8 template for Full Stack Scala with ScalaJS in the front & Akka HTTP in the back. Binding is done using Autowire and BooPickle.',
   },
+  {
+    name: 'Elixir-HelloWorld',
+    icon: <Typescript />,
+    link:
+      'https://github.com/codengo-llc/Elixir-HelloWorld#basic-elixir-project-created-with-silisky',
+    description: 'A basic Elixir Project Created With SiliSky.',
+  },
+  {
+    name: 'C-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/C-HelloWorld',
+    description: 'A basic C Project Created With SiliSky.',
+  },
+  {
+    name: 'R-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/R-HelloWorld',
+    description: 'A basic R Project Created With SiliSky.',
+  },
+  {
+    name: 'Scala-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Scala-HelloWorld',
+    description: 'A basic Scala Project Created With SiliSky.',
+  },
+  {
+    name: 'Haskell-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Haskell-HelloWorld',
+    description: 'A basic Haskell Project Created With SiliSky.',
+  },
+  {
+    name: 'Php-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Php-HelloWorld',
+    description: 'A basic Php Project Created With SiliSky.',
+  },
+  {
+    name: 'Rust-HelloWorld',
+    icon: <Typescript />,
+    link: 'https://github.com/codengo-llc/Rust-HelloWorld',
+    description: 'A basic Rust Project Created With SiliSky.',
+  },
 ]
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.getUser)
+  const user = useSelector(selectors.api.getUser)
 
   const handleClick = item => {
     createProject({

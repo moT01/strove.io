@@ -16,17 +16,14 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
 
-const logout = {
-  type: 'LOGOUT',
-}
-
 const options = [
-  { option: 'Settings' },
   {
     option: 'Logout',
     onClick: dispatch => {
       localStorage.removeItem('token')
-      dispatch(logout)
+      dispatch({
+        type: 'LOGOUT',
+      })
     },
   },
 ]
@@ -93,7 +90,7 @@ const MenuWrapper = styled.div`
   justify-content: flex-start;
   width: auto;
   box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
-  border-radius: 10px;
+  border-radius: 5px;
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
@@ -110,15 +107,14 @@ const Option = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-tems: center;
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
   height: auto;
   font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-  border-bottom-left-radius: ${props => props.isLast && '8px'};
-  border-bottom-right-radius: ${props => props.isLast && '8px'};
+  border-bottom-left-radius: ${props => props.isLast && '5px'};
+  border-bottom-right-radius: ${props => props.isLast && '5px'};
   z-index: 4;
   text-decoration: none;
   font-weight: 200;
@@ -142,9 +138,9 @@ const Option = styled.a`
   }
 `
 
-const getUserName = selectors.getApiData('user', null, 'name')
+const getUserName = selectors.api.getApiData('user', null, 'name')
 
-const getUserPhoto = selectors.getApiData('user', null, 'photoUrl')
+const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto],
@@ -193,9 +189,9 @@ const LoginDropdown = () => {
   )
 }
 
-const Login = props => {
+const Login = () => {
   const [showDropdown, setShowDropdown] = useState(false)
-  const isLoading = useSelector(selectors.getLoading('user'))
+  const isLoading = useSelector(selectors.api.getLoading('user'))
 
   const handleDropdown = () => setShowDropdown(false)
   const handleDropdownClick = () => setShowDropdown(!showDropdown)
