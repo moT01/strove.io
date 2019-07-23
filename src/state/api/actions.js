@@ -5,11 +5,10 @@ export const fetchStart = ({ storeKey, source, config }) => ({
   payload: { storeKey, source, config },
 })
 
-export const fetchSuccess = ({ storeKey, data, code, message }) =>
-  {
-    type: C.FETCH_SUCCESS,
-    payload: { data, storeKey, code, message },
-  }
+export const fetchSuccess = ({ storeKey, data, code, message }) => ({
+  type: C.FETCH_SUCCESS,
+  payload: { data, storeKey, code, message },
+})
 
 export const fetchError = ({ storeKey, error, code }) => ({
   type: C.FETCH_ERROR,
