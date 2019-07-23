@@ -19,9 +19,14 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
-const getId = getOr(undefined, ['currentProject', 'id'])
 const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
+const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
+const getId = getOr(undefined, ['currentProject', 'id'])
+const getCurrentProjectId = (getUserToken = selectors.api.getApiData(
+  'user',
+  null,
+  'currentProjectId'
+))
 const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
 const Editor = () => {
@@ -29,27 +34,28 @@ const Editor = () => {
   const token = useSelector(getUserToken)
   const projectId = useSelector(getId)
   const machineId = useSelector(getMachineId)
+  const currentProjectId = useSelector(getCurrentProjectId)
   const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {
     // This condition means project has been stopped
-    if (projectId && !machineId) {
+    if (projectId !== currentProjectId) {
       dispatch(
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId },
           onSuccessDispatch: [
-            ({ id, editorPort, previewPort, machineId }) => ({
+            ({ id, editorPort }) => ({
               type: C.currentProject.SELECT_CURRENT_PROJECT,
-              payload: { id, editorPort, previewPort, machineId },
+              payload: { id, editorPort },
             }),
           ],
         })
       )
     }
-  }, [projectId, machineId])
+  }, [projectId])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
@@ -61,7 +67,7 @@ const Editor = () => {
       if (navigator && navigator.sendBeacon) {
         navigator.sendBeacon(
           `${process.env.SILISKY_ENDPOINT}/beacon`,
-          JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
+          JSON.stringify({ token, projectId, type: 'stopProject' })
         )
       }
     })
