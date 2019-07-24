@@ -8,7 +8,6 @@ import moment from 'moment'
 
 import { query, mutation } from 'utils'
 import {
-  MY_PROJECTS,
   DELETE_PROJECT,
   CONTINUE_PROJECT,
   GET_CURRENT_PROJECT,
@@ -327,14 +326,6 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(
       query({
-        name: 'myProjects',
-        dataSelector: data => data.myProjects.edges,
-        query: MY_PROJECTS,
-      })
-    )
-
-    dispatch(
-      query({
         name: 'me',
         storeKey: 'user',
         query: GET_CURRENT_PROJECT,
@@ -348,6 +339,7 @@ const Dashboard = () => {
       <PageWrapper>
         <GetStarted />
         <TilesWrapper>
+          <ProjectTitle>Projects count: {projects.length}/4</ProjectTitle>
           {projects.map(project => (
             <Tile key={project.id}>
               <VerticalDivider>
@@ -501,14 +493,14 @@ const Dashboard = () => {
         ariaHideApp={false}
       >
         <ModalText>
-          Before starting new project we have to stop your currently running
+          Before starting new project you have to stop your currently running
           project. That means you may lose all unsaved progress. Are you sure
-          you want start new project?
+          you want to stop your active project?
         </ModalText>
         <ModalButton
-          delete
+          primary
           onClick={() => {
-            handleDeleteClick(projectToDelete.id)
+            handleStopClick(currentProjectId)
             setStopModal(false)
           }}
         >

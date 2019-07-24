@@ -9,8 +9,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 
-import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
-import { mutation } from 'utils'
+import { GITHUB_LOGIN, GITLAB_LOGIN, MY_PROJECTS } from 'queries'
+import { mutation, query } from 'utils'
 import { window } from 'utils'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
@@ -77,6 +77,13 @@ const LoginProvider = ({ children }) => {
           break
       }
     }
+    dispatch(
+      query({
+        name: 'myProjects',
+        dataSelector: data => data.myProjects.edges,
+        query: MY_PROJECTS,
+      })
+    )
   }, [])
 
   return children
