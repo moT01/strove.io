@@ -23,11 +23,7 @@ const Paragraph = styled.p`
   font-size: 20px;
 `
 
-const Button = styled.div`
-  height: 20px;
-  width: 20px;
-  border: 1px solid red;
-`
+const Button = styled.div``
 
 const Header = styled.h2``
 
@@ -35,8 +31,17 @@ const TopicWrapper = styled.div``
 
 const topics = [
   {
-    header: 'Is free?',
-    paragraph: 'Yes, no, yes... maybe',
+    header: 'Can I work on mobile apps or Windows/MacOS apps?',
+    paragraph: `Yes and no. Here is an overview:
+Silisky runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Silisky as well.
+Mobile development using solutions such as React Native and Expo or native desktop development using solutions such as Electorn is possible.
+You won't be able to use Silisky if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
+    `,
+  },
+  {
+    header: 'Is Silisky free?',
+    paragraph:
+      'Yes, each user gets up to 2 GB of RAM and 4 public projects in the free plan. Universities',
   },
   {
     header: 'Can I have more than 4 repositories?',
@@ -45,7 +50,7 @@ const topics = [
   {
     header: 'Why does project load several seconds',
     paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
-1. A new Docker container is started on one of our virtual machines.
+1. A new Docker container is started on one of virtual machines.
 2. Silisky provides read and write access to the project folder.
 3. Silisky clones your repository from a chosen git provider.
 4. Init script from silisky.json is run if it's present.
@@ -55,12 +60,6 @@ const topics = [
     header: 'Why do i need to log in with Github/Gitlab',
     paragraph: 'Yes',
   },
-
-  {
-    header: 'Why SiliSky might not be for you.',
-    paragraph: 'Because you are breath taking!',
-  },
-
   {
     header: 'How to manage env variables?',
     paragraph: 'Hello',
@@ -106,18 +105,14 @@ const FAQ = () => {
                 <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
                   topic.header
                 }`}</Header>
-                <Button onClick={() => reloadPageWithHash(index + 1)}>
-                  Click
-                </Button>
+                <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
               </>
             ) : (
               <>
                 <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
                   topic.header
                 }`}</Header>
-                <Button onClick={() => reloadPageWithHash(index + 1)}>
-                  Click
-                </Button>
+                <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
               </>
             )}
             <Paragraph>
