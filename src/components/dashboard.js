@@ -303,6 +303,13 @@ const Dashboard = () => {
         mutation: STOP_PROJECT,
         dataSelector: data => data,
         variables: { projectId: id },
+        onSuccessDispatch: [
+          ({ id }) =>
+            actions.api.fetchSuccess({
+              data: { currentProjectId: id },
+              storeKey: 'user',
+            }),
+        ],
       })
     )
   }
