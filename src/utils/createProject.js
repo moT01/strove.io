@@ -96,11 +96,11 @@ const createProject = async ({ repoLink, dispatch, user }) => {
         })
       )
     }
-  } catch (e) {
-    console.log('fetch error: ', e)
+  } catch (error) {
+    console.log('fetch error: ', error)
     dispatch({
       type: C.incomingProject.CATCH_INCOMING_ERROR,
-      payload: { error: e },
+      payload: { error },
     })
   }
 }

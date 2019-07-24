@@ -41,9 +41,9 @@ const Editor = () => {
           mutation: CONTINUE_PROJECT,
           variables: { projectId },
           onSuccessDispatch: [
-            ({ id, editorPort, previewPort, machineId }) => ({
+            ({ id, editorPort }) => ({
               type: C.currentProject.SELECT_CURRENT_PROJECT,
-              payload: { id, editorPort, previewPort, machineId },
+              payload: { id, editorPort },
             }),
           ],
         })
@@ -60,15 +60,12 @@ const Editor = () => {
 
       if (navigator && navigator.sendBeacon) {
         navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/beacon`,
-          JSON.stringify({ token, projectId, machineId, type: 'stopProject' })
+          `${process.env.SILISKY_ENDPOINT}/stopProject`,
+          JSON.stringify({ token, projectId, type: 'stopProject' })
         )
       }
     })
-  }, [])
 
-  // Let api know that project is still active so api doesn't stop it
-  useEffect(() => {
     const projectPing = setInterval(() => {
       dispatch(
         mutation({
@@ -79,7 +76,13 @@ const Editor = () => {
       )
     }, 60000)
 
-    return () => clearInterval(projectPing)
+    return () => {
+      fetch(`${process.env.SILISKY_ENDPOINT}/stopProject`, {
+        body: JSON.stringify({ token, projectId, type: 'stopProject' }),
+        method: 'POST',
+      })
+      clearInterval(projectPing)
+    }
   }, [])
 
   return (
