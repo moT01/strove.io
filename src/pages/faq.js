@@ -21,14 +21,9 @@ const TextWell = styled.div`
 const Paragraph = styled.p`
   text-indent: 50px;
   font-size: 20px;
-  height: 200px;
 `
 
-const Button = styled.div`
-  height: 20px;
-  width: 20px;
-  border: 1px solid red;
-`
+const Button = styled.div``
 
 const Header = styled.h2``
 
@@ -36,42 +31,50 @@ const TopicWrapper = styled.div``
 
 const topics = [
   {
-    header: '1. Why 4 repos?',
-    paragraph: 'Why not',
+    header: 'Can I work on mobile apps or Windows/MacOS apps?',
+    paragraph: `Yes and no. Here is an overview:
+Silisky runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Silisky as well.
+Mobile development using solutions such as React Native and Expo or native desktop development using solutions such as Electorn is possible.
+You won't be able to use Silisky if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
+    `,
   },
   {
-    header: '2. Is free?',
-    paragraph: 'Yes, no, yes... maybe',
+    header: 'Is Silisky free?',
+    paragraph:
+      'Yes, each user gets up to 2 GB of RAM and 4 public projects in the free plan. Universities',
   },
   {
-    header: '3. Why does project load seceral seconds',
-    paragraph: 'Because your internet conection is poor',
+    header: 'Can I have more than 4 repositories?',
+    paragraph: `Yes, we have a pro plan prepared to very active developers working on multiple projects.`,
   },
   {
-    header: '4. Why do i need to log in with Github/Gitlab',
+    header: 'Why does project load several seconds',
+    paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
+1. A new Docker container is started on one of virtual machines.
+2. Silisky provides read and write access to the project folder.
+3. Silisky clones your repository from a chosen git provider.
+4. Init script from silisky.json is run if it's present.
+    `,
+  },
+  {
+    header: 'Why do i need to log in with Github/Gitlab',
     paragraph: 'Yes',
   },
-
   {
-    header: '5. Why SiliSky might not be for you.',
-    paragraph: 'Because you are breath taking!',
-  },
-
-  {
-    header: '6. How to manage env variables?',
+    header: 'How to manage env variables?',
     paragraph: 'Hello',
   },
   {
-    header: '7. Why is my project loading?',
+    header: 'Why is my project loading?',
     paragraph: 'I do not know ask Adam',
   },
 
   {
-    header: '8. I want seelsd?????? language version what to do',
+    header: 'I want seelsd?????? language version what to do',
     paragraph: ' Hello, how are you?',
   },
   {
-    header: '9. HOST 0.0.0.0',
+    header: 'HOST 0.0.0.0',
     paragraph: 'Yyyyyyyyyyyy',
   },
 ]
@@ -99,20 +102,24 @@ const FAQ = () => {
           <TopicWrapper key={topic.header}>
             {index + 1 === +topicId ? (
               <>
-                <Header {...scrollHtmlAttributes}>{topic.header}</Header>
-                <Button onClick={() => reloadPageWithHash(index + 1)}>
-                  Click
-                </Button>
+                <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
+                  topic.header
+                }`}</Header>
+                <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
               </>
             ) : (
               <>
-                <Header>{topic.header}</Header>
-                <Button onClick={() => reloadPageWithHash(index + 1)}>
-                  Click
-                </Button>
+                <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
+                  topic.header
+                }`}</Header>
+                <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
               </>
             )}
-            <Paragraph>{topic.paragraph}</Paragraph>
+            <Paragraph>
+              {topic.paragraph.split('\n').map((item, i) => (
+                <p key={i}>{item}</p>
+              ))}
+            </Paragraph>
           </TopicWrapper>
         ))}
       </TextWell>
