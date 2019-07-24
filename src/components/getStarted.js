@@ -338,7 +338,9 @@ const Templates = ({ addProject }) => {
 
   return (
     <AddProjectWrapper>
-      <Title mobile={isMobileOnly}>Add project from github repository</Title>
+      <Title mobile={isMobileOnly}>
+        Add project from Github or Gitlab repository
+      </Title>
       <Formik
         onSubmit={(values, actions) => {
           addProject(
