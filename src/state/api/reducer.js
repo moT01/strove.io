@@ -104,10 +104,10 @@ export default (state = initialState, action) => {
     }
 
     /*
-      If old item was an object extend object with new props (for example when user is already
-      logged in but more user data has beeen fetched)
-      For old data being an array or primitive and new data coming in array or primitive overwrite
-      old data with a new one (for example when re-fetching projects
+      Id is needed to update arrays.
+      UPDATE_ITEM handler works a lot like FETCH_SUCCESS case but allows updating perticular items,
+      It's also easier to express changes in state when both FETCH_SUCCESS and UPDATE_ITEM
+      actions are dispatched depending on use case.
     */
     case C.UPDATE_ITEM: {
       const { payload: { storeKey, id, data, message, code } = {} } = action
@@ -119,6 +119,10 @@ export default (state = initialState, action) => {
         )
       } else if (Array.isArray(state[storeKey].data)) {
         newData = state[storeKey].data.map(item => (item !== id ? item : data))
+      } else if (typeof state[storeKey].data === 'object') {
+        newData = { ...state[storeKey].data, ...data }
+      } else {
+        newData = data
       }
 
       return {
