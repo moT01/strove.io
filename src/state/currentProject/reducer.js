@@ -1,6 +1,8 @@
 import * as C from './constants'
 
-export default (state = null, action) => {
+const initialState = null
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case C.SELECT_CURRENT_PROJECT: {
       const {
@@ -23,7 +25,7 @@ export default (state = null, action) => {
     }
 
     case C.STOP_CURRENT_PROJECT:
-      return null
+      return initialState
     default:
       return state
   }
