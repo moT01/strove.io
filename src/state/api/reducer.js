@@ -1,4 +1,3 @@
-import { handleActions } from 'redux-actions'
 import * as C from './constants'
 
 const initialState = {
@@ -6,18 +5,23 @@ const initialState = {
   myProjects: { data: [] },
 }
 
-export default handleActions(
-  {
-    [C.FETCH_START]: (state, { payload: { storeKey } = {} }) => ({
-      ...state,
-      [storeKey]: {
-        ...(state[storeKey] || {}),
-        isLoading: true,
-        error: undefined,
-        message: undefined,
-        code: undefined,
-      },
-    }),
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case C.FETCH_START: {
+      const { payload: { storeKey } = {} } = action
+
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          isLoading: true,
+          error: undefined,
+          message: undefined,
+          code: undefined,
+        },
+      }
+    }
+
     /*
       Append data to array, extend object, add primitive. For example given
       the following initial state: myProjects: { data: [] } and action:
@@ -33,12 +37,8 @@ export default handleActions(
         }
       }
     */
-    [C.FETCH_SUCCESS]: (
-      state,
-      { payload: { storeKey, data, code, message } = {} }
-    ) => {
-      let newData
-
+    case C.FETCH_SUCCESS: {
+      const { payload: { storeKey, data, code, message } = {} } = action
       /*
         Default, opinionated behavior for reducers
         If old data was an array and one one isn't, append new data to array (for example
@@ -48,6 +48,7 @@ export default handleActions(
         For old data being an array or primitive and new data coming in array or primitive overwrite
         old data with a new one (for example when re-fetching projects
       */
+      let newData
       if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
         newData = [...state[storeKey].data, data]
       } else if (
@@ -69,32 +70,40 @@ export default handleActions(
           code,
         },
       }
-    },
-    [C.FETCH_ERROR]: (
-      state,
-      { payload: { storeKey, error, message, code } = {} }
-    ) => ({
-      ...state,
-      [storeKey]: {
-        ...(state[storeKey] || {}),
-        isLoading: false,
-        error,
-        message,
-        code,
-      },
-    }),
+    }
+
+    case C.FETCH_ERROR: {
+      const { payload: { storeKey, error, message, code } = {} } = action
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          isLoading: false,
+          error,
+          message,
+          code,
+        },
+      }
+    }
+
     /* Remove item from array, clear data from object, remove primitives */
-    [C.REMOVE_ITEM]: (state, { payload: { storeKey, id } = {} }) => ({
-      ...state,
-      [storeKey]: {
-        ...(state[storeKey] || {}),
-        data: Array.isArray(state[storeKey].data)
-          ? state[storeKey].data.filter(item => item.id !== id)
-          : typeof state[storeKey].data === 'object'
-          ? {}
-          : null,
-      },
-    }),
-  },
-  initialState
-)
+    case C.REMOVE_ITEM: {
+      const { payload: { storeKey, id } = {} } = action
+
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          data: Array.isArray(state[storeKey].data)
+            ? state[storeKey].data.filter(item => item.id !== id)
+            : typeof state[storeKey].data === 'object'
+            ? {}
+            : null,
+        },
+      }
+    }
+
+    default:
+      return state
+  }
+}

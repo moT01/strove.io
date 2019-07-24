@@ -176,7 +176,6 @@ const StripeButton = styled(Button)`
 const PricingPage = () => {
   const dispatch = useDispatch()
   const queryToken = ({ id }) => {
-    console.log(id)
     if (id) {
       dispatch(
         mutation({
