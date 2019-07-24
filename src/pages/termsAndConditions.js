@@ -2,10 +2,8 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-// import Layout from "components/layout"
 import SEO from 'components/seo'
 import 'components/layout.css'
-
 import Header from 'components/header'
 
 const TextWell = styled.div`
@@ -22,7 +20,6 @@ const TextWell = styled.div`
   text-justify: inter-word;
   background-color: white;
   font-size: 20px;
-  ${'' /* border: 1px solid slategrey; */}
 `
 
 const Legal = () => (
