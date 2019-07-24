@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { Cog } from '../images/svg'
-import { Silisky } from '../images/logos'
+import { Cog } from 'images/svg'
+import { Silisky } from 'images/logos'
 
 const SpinToWin = keyframes`
   0% {
