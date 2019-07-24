@@ -23,13 +23,17 @@ const TextWell = styled.div`
   font-size: 20px;
 `
 
+const StyledH2 = styled.h2`
+  align-self: center;
+`
+
 const Legal = () => (
   <>
     <SEO title="Cookies" />
     <Header siteTitle="SiliSky" />
 
     <TextWell>
-      <h1 style={{ alignSelf: 'center' }}> About Cookies</h1>
+      <StyledH2> About Cookies</StyledH2>
       <h6>Last Edited on 2019-06–06</h6>
       <h3>What are cookies?</h3>
       <p>

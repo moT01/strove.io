@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { ProjectFragment } from './fragments/project'
 
 export default gql`
   mutation AddProject(
@@ -13,15 +14,9 @@ export default gql`
       isPrivate: $isPrivate
       repoLink: $repoLink
     ) {
-      id
-      name
-      description
-      isPrivate
-      createdAt
-      repoLink
-      machineId
-      editorPort
-      additionalPorts
+      ...Project
     }
   }
+
+  ${ProjectFragment}
 `

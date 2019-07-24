@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import StripeCheckout from 'react-stripe-checkout'
@@ -8,15 +7,6 @@ import { mutation } from 'utils'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
-  }
-`
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -265,6 +255,5 @@ const PricingPage = () => {
     </Layout>
   )
 }
-/* eslint-enable */
 
 export default PricingPage
