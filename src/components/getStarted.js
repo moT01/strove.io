@@ -343,11 +343,7 @@ const Templates = ({ addProject }) => {
       </Title>
       <Formik
         onSubmit={(values, actions) => {
-          addProject(
-            values.repoLink.replace(/.git$/, '')
-            // dispatch,
-            // user,
-          )
+          addProject(values.repoLink.replace(/.git$/, ''))
           actions.setSubmitting(false)
         }}
         validate={validate}
