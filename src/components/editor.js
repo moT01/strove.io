@@ -65,10 +65,7 @@ const Editor = () => {
         )
       }
     })
-  }, [])
 
-  // Let api know that project is still active so api doesn't stop it
-  useEffect(() => {
     const projectPing = setInterval(() => {
       dispatch(
         mutation({
@@ -79,12 +76,11 @@ const Editor = () => {
       )
     }, 60000)
 
-    return async () => {
-      await fetch(`${process.env.SILISKY_ENDPOINT}/stopProject`, {
+    return () => {
+      fetch(`${process.env.SILISKY_ENDPOINT}/stopProject`, {
         body: JSON.stringify({ token, projectId, type: 'stopProject' }),
         method: 'POST',
       })
-
       clearInterval(projectPing)
     }
   }, [])
