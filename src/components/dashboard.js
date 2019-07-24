@@ -219,7 +219,6 @@ const StyledIcon = styled(Icon)`
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
-  const currentProject = useSelector(selectors.currentProject.getProjectData)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -330,7 +329,7 @@ const Dashboard = () => {
                 <InfoWrapper>
                   <ProjectTitle>{project.name}</ProjectTitle>
 
-                  {currentProject && project.id === currentProject.id ? (
+                  {currentProjectId && project.id === currentProjectId ? (
                     <TextWrapper>
                       <CircleIcon active />
                       <Text>Active</Text>
