@@ -12,6 +12,7 @@ import {
   DELETE_PROJECT,
   CONTINUE_PROJECT,
   GET_CURRENT_PROJECT,
+  STOP_PROJECT,
 } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
@@ -294,6 +295,25 @@ const Dashboard = () => {
     )
   }
 
+  const handleStopClick = id => {
+    console.log('id', id)
+    dispatch(
+      mutation({
+        name: 'stopProject',
+        mutation: STOP_PROJECT,
+        dataSelector: data => data,
+        variables: { projectId: id },
+        onSuccessDispatch: [
+          ({ id }) =>
+            actions.api.fetchSuccess({
+              data: { currentProjectId: id },
+              storeKey: 'user',
+            }),
+        ],
+      })
+    )
+  }
+
   const closeModal = () => {
     setProjectToDelete(null)
     setModalVisible(false)
@@ -411,6 +431,27 @@ const Dashboard = () => {
                     >
                       Delete
                     </Button>
+                  )}
+                  {currentProjectId && currentProjectId === project.id ? (
+                    isDeleting ? (
+                      <Button disabled={isDeleting}>
+                        <Loader
+                          isFullScreen={false}
+                          color={'#0072ce'}
+                          height={'1.2rem'}
+                        />
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          handleStopClick(project.id)
+                        }}
+                      >
+                        Stop
+                      </Button>
+                    )
+                  ) : (
+                    <div></div>
                   )}
                 </RightSection>
               </VerticalDivider>
