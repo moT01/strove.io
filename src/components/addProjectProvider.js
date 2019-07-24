@@ -11,9 +11,11 @@ export default ({ children }) => {
 
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
+  const projectsLimit = 4
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -41,6 +43,8 @@ export default ({ children }) => {
       setModalContent('AddGithubPrivatePermissions')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')
+    } else if (projects && projects.length === projectsLimit) {
+      setModalContent('ProjectsLimitExceeded')
     } else {
       createProject({ repoLink, dispatch, user })
     }
