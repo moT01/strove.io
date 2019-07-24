@@ -7,7 +7,12 @@ import { isMobileOnly } from 'react-device-detect'
 import moment from 'moment'
 
 import { query, mutation } from 'utils'
-import { MY_PROJECTS, DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
+import {
+  MY_PROJECTS,
+  DELETE_PROJECT,
+  CONTINUE_PROJECT,
+  GET_CURRENT_PROJECT,
+} from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
@@ -219,34 +224,52 @@ const Dashboard = () => {
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  const currentProjectId = useSelector(selectors.api.getApiData('user'))
+    .currentProjectId
 
   const handleStartClick = ({ id, editorPort, machineId }) => {
-    if (!editorPort) {
-      dispatch(
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: { projectId: id },
-          onSuccess: () => navigate('/app/editor/'),
-          onSuccessDispatch: [
-            ({ id, editorPort, machineId }) =>
-              actions.currentProject.selectCurrentProject({
-                id,
-                editorPort,
-                machineId,
-              }),
-          ],
-        })
-      )
+    if (!currentProjectId || currentProjectId === id) {
+      if (!editorPort) {
+        dispatch(
+          mutation({
+            name: 'continueProject',
+            mutation: CONTINUE_PROJECT,
+            variables: { projectId: id },
+            onSuccess: () => navigate('/app/editor/'),
+            onSuccessDispatch: [
+              ({ id, editorPort, machineId }) =>
+                actions.currentProject.selectCurrentProject({
+                  id,
+                  editorPort,
+                  machineId,
+                }),
+              ({ id }) =>
+                actions.api.fetchSuccess({
+                  data: { currentProjectId: id },
+                  storeKey: 'user',
+                }),
+            ],
+          })
+        )
+      } else {
+        dispatch(
+          actions.currentProject.selectCurrentProject({
+            id,
+            editorPort,
+            machineId,
+          })
+        )
+        dispatch(
+          actions.api.fetchSuccess({
+            data: { currentProjectId: id },
+            storeKey: 'user',
+          })
+        )
+        navigate('/app/editor/')
+      }
     } else {
-      dispatch(
-        actions.currentProject.selectCurrentProject({
-          id,
-          editorPort,
-          machineId,
-        })
-      )
-      navigate('/app/editor/')
+      setStopModal(true)
+      console.log(currentProjectId)
     }
   }
 
@@ -285,6 +308,14 @@ const Dashboard = () => {
         query: MY_PROJECTS,
       })
     )
+
+    dispatch(
+      query({
+        name: 'me',
+        storeKey: 'user',
+        query: GET_CURRENT_PROJECT,
+      })
+    )
   }, [])
 
   return (
@@ -319,14 +350,16 @@ const Dashboard = () => {
                       )}
                     </Text>
                   </TextWrapper>
-                  <TextWrapper>
-                    <StyledIcon type="edit" />
-                    <Text>
-                      {project.description
-                        ? project.description
-                        : 'This is the project description.. Tribute'}
-                    </Text>
-                  </TextWrapper>
+                  {project.description && (
+                    <TextWrapper>
+                      <StyledIcon type="edit" />
+                      <Text>
+                        {project.description
+                          ? project.description
+                          : 'This is the project description.. Tribute'}
+                      </Text>
+                    </TextWrapper>
+                  )}
                   {/* <TextWrapper>
                   <StyledIcon
                     type="branches"

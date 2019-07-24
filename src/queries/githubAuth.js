@@ -13,6 +13,7 @@ export default gql`
       gitlabToken
       scopes
       siliskyToken
+      currentProjectId
     }
   }
 `

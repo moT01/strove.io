@@ -1,20 +1,27 @@
-import { handleActions } from 'redux-actions'
 import * as C from './constants'
 
 const initialState = null
 
-export default handleActions(
-  {
-    /* We only want to change current project after it has been successfully cloned and selected */
-    [C.ADD_INCOMING_PROJECT]: (
-      state,
-      { payload: { repoLink, repoProvider } }
-    ) => ({
-      repoLink,
-      repoProvider,
-    }),
-    [C.REMOVE_INCOMING_PROJECT]: () => initialState,
-    [C.CATCH_INCOMING_ERROR]: (state, { payload: { error } }) => ({ error }),
-  },
-  initialState
-)
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case C.ADD_INCOMING_PROJECT: {
+      const { repoLink, repoProvider } = action.payload
+      return {
+        repoLink,
+        repoProvider,
+      }
+    }
+
+    case C.REMOVE_INCOMING_PROJECT: {
+      return initialState
+    }
+
+    case C.CATCH_INCOMING_ERROR: {
+      const { error } = action.payload
+      return { error }
+    }
+
+    default:
+      return state
+  }
+}
