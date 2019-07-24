@@ -1,19 +1,12 @@
 import gql from 'graphql-tag'
+import { UserFragment } from './fragments/user'
 
 export default gql`
   mutation GithubAuth($code: String!) {
     githubAuth(code: $code) {
-      email
-      name
-      fullName
-      photoUrl
-      githubUrl
-      githubToken
-      gitlabUrl
-      gitlabToken
-      scopes
-      siliskyToken
-      currentProjectId
+      ...UserFragment
     }
   }
+
+  ${UserFragment}
 `
