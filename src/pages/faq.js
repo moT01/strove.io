@@ -21,11 +21,18 @@ const TextWell = styled.div`
 const Paragraph = styled.p`
   text-indent: 50px;
   font-size: 20px;
+  display: inline-block;
 `
 
-const Button = styled.div``
+const Button = styled.div`
+  font-size: 22;
+  display: inline-block;
+`
 
-const Header = styled.h2``
+const Header = styled.h3`
+  font-size: 22;
+  display: inline-block;
+`
 
 const TopicWrapper = styled.div``
 
@@ -53,8 +60,7 @@ You won't be able to use Silisky if you rely on Windows or MacOS environments. T
 1. A new Docker container is started on one of virtual machines.
 2. Silisky provides read and write access to the project folder.
 3. Silisky clones your repository from a chosen git provider.
-4. Init script from silisky.json is run if it's present.
-    `,
+4. Init script from silisky.json is run if it's present.`,
   },
   {
     header: 'Why do i need to log in with Github/Gitlab',
@@ -100,26 +106,21 @@ const FAQ = () => {
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
         {topics.map((topic, index) => (
           <TopicWrapper key={topic.header}>
+            <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
             {index + 1 === +topicId ? (
-              <>
-                <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
-                  topic.header
-                }`}</Header>
-                <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
-              </>
+              <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
+                topic.header
+              }`}</Header>
             ) : (
-              <>
-                <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
-                  topic.header
-                }`}</Header>
-                <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
-              </>
+              <Header>{`${index + 1}. ${topic.header}`}</Header>
             )}
-            <Paragraph>
-              {topic.paragraph.split('\n').map((item, i) => (
-                <p key={i}>{item}</p>
-              ))}
-            </Paragraph>
+            {typeof topic.paragraph === 'string' ? (
+              topic.paragraph
+                .split('\n')
+                .map((item, i) => <Paragraph key={i}>{item}</Paragraph>)
+            ) : (
+              <Paragraph>{topic.paragraph}</Paragraph>
+            )}
           </TopicWrapper>
         ))}
       </TextWell>
