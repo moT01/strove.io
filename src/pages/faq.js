@@ -21,7 +21,6 @@ const TextWell = styled.div`
 const Paragraph = styled.p`
   text-indent: 50px;
   font-size: 20px;
-  height: 200px;
 `
 
 const Button = styled.div`
@@ -40,12 +39,17 @@ const topics = [
     paragraph: 'Yes, no, yes... maybe',
   },
   {
-    header: 'Why 4 repos?',
-    paragraph: 'Why not',
+    header: 'Can I have more than 4 repositories?',
+    paragraph: `Yes, we have a pro plan prepared to very active developers working on multiple projects.`,
   },
   {
-    header: 'Why does project load seceral seconds',
-    paragraph: 'Because your internet conection is poor',
+    header: 'Why does project load several seconds',
+    paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
+1. A new Docker container is started on one of our virtual machines.
+2. Silisky provides read and write access to the project folder.
+3. Silisky clones your repository from a chosen git provider.
+4. Init script from silisky.json is run if it's present.
+    `,
   },
   {
     header: 'Why do i need to log in with Github/Gitlab',
@@ -116,7 +120,11 @@ const FAQ = () => {
                 </Button>
               </>
             )}
-            <Paragraph>{topic.paragraph}</Paragraph>
+            <Paragraph>
+              {topic.paragraph.split('\n').map((item, i) => (
+                <p key={i}>{item}</p>
+              ))}
+            </Paragraph>
           </TopicWrapper>
         ))}
       </TextWell>
