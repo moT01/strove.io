@@ -1,19 +1,14 @@
 import gql from 'graphql-tag'
+import { ProjectFragment } from './fragments/project'
 
 export default gql`
   {
     myProjects {
       edges {
-        id
-        name
-        description
-        isPrivate
-        createdAt
-        repoLink
-        machineId
-        editorPort
-        additionalPorts
+        ...Project
       }
     }
   }
+
+  ${ProjectFragment}
 `

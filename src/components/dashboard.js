@@ -12,6 +12,7 @@ import {
   DELETE_PROJECT,
   CONTINUE_PROJECT,
   GET_CURRENT_PROJECT,
+  STOP_PROJECT,
 } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
@@ -223,6 +224,8 @@ const Dashboard = () => {
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
+  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
 
@@ -247,6 +250,7 @@ const Dashboard = () => {
                   data: { currentProjectId: id },
                   storeKey: 'user',
                 }),
+              () => actions.api.fetchSuccess({ storeKey: 'continueProject' }),
             ],
           })
         )
@@ -289,6 +293,27 @@ const Dashboard = () => {
             type: C.Api.FETCH_SUCCESS,
             payload: { storeKey: 'deleteProject', data: true },
           }),
+          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
+        ],
+      })
+    )
+  }
+
+  const handleStopClick = id => {
+    console.log('id', id)
+    dispatch(
+      mutation({
+        name: 'stopProject',
+        mutation: STOP_PROJECT,
+        dataSelector: data => data,
+        variables: { projectId: id },
+        onSuccessDispatch: [
+          () =>
+            actions.api.fetchSuccess({
+              data: { currentProjectId: null },
+              storeKey: 'user',
+            }),
+          () => actions.api.fetchSuccess({ storeKey: 'stopProject' }),
         ],
       })
     )
@@ -377,8 +402,11 @@ const Dashboard = () => {
                   </TextWrapper>
                 </InfoWrapper>
                 <RightSection>
-                  {isDeleting ? (
-                    <Button primary disabled={isDeleting}>
+                  {isDeleting || isContinuing || isStopping ? (
+                    <Button
+                      primary
+                      disabled={isDeleting || isContinuing || isStopping}
+                    >
                       <Loader
                         isFullScreen={false}
                         color={'#ffffff'}
@@ -394,8 +422,8 @@ const Dashboard = () => {
                       Start
                     </Button>
                   )}
-                  {isDeleting ? (
-                    <Button disabled={isDeleting}>
+                  {isDeleting || isContinuing || isStopping ? (
+                    <Button disabled={isDeleting || isContinuing || isStopping}>
                       <Loader
                         isFullScreen={false}
                         color={'#0072ce'}
@@ -411,6 +439,29 @@ const Dashboard = () => {
                     >
                       Delete
                     </Button>
+                  )}
+                  {currentProjectId && currentProjectId === project.id ? (
+                    isDeleting || isContinuing || isStopping ? (
+                      <Button
+                        disabled={isDeleting || isContinuing || isStopping}
+                      >
+                        <Loader
+                          isFullScreen={false}
+                          color={'#0072ce'}
+                          height={'1.2rem'}
+                        />
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          handleStopClick(project.id)
+                        }}
+                      >
+                        Stop
+                      </Button>
+                    )
+                  ) : (
+                    <div></div>
                   )}
                 </RightSection>
               </VerticalDivider>

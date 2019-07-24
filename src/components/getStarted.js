@@ -14,7 +14,7 @@ import {
   Java,
   Ruby,
   Javascript,
-} from '../images/logos'
+} from 'images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
@@ -338,14 +338,12 @@ const Templates = ({ addProject }) => {
 
   return (
     <AddProjectWrapper>
-      <Title mobile={isMobileOnly}>Add project from github repository</Title>
+      <Title mobile={isMobileOnly}>
+        Add project from Github or Gitlab repository
+      </Title>
       <Formik
         onSubmit={(values, actions) => {
-          addProject(
-            values.repoLink.replace(/.git$/, '')
-            // dispatch,
-            // user,
-          )
+          addProject(values.repoLink.replace(/.git$/, ''))
           actions.setSubmitting(false)
         }}
         validate={validate}
