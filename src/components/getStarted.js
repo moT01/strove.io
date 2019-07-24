@@ -14,7 +14,7 @@ import {
   Java,
   Ruby,
   Javascript,
-} from '../images/logos'
+} from 'images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'

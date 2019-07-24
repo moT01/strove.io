@@ -5,9 +5,9 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 
-import Login from './login'
 import { selectors } from 'state'
-import { Silisky, Dashboard, Desktop } from '../images/logos'
+import { Silisky, Dashboard, Desktop } from 'images/logos'
+import Login from './login'
 
 const FadeIn = keyframes`
   0% {
