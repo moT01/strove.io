@@ -5,7 +5,7 @@ import { Icon } from 'antd'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
-import { Typescript } from '../images/logos'
+import { Typescript } from 'images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
 
@@ -16,7 +16,6 @@ const FadeIn = keyframes`
   100% {
     opacity: 0.4;
   }
-
 `
 
 const FullFadeIn = keyframes`
@@ -26,17 +25,15 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
-
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
-
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 
 const Wrapper = styled.div`

@@ -12,7 +12,7 @@ import {
   Java,
   Ruby,
   Javascript,
-} from '../images/logos'
+} from 'images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
 import Layout from './layout'
