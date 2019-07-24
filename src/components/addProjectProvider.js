@@ -14,7 +14,6 @@ export default ({ children }) => {
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
-  console.log('addProjectError', addProjectError)
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
