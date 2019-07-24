@@ -4,7 +4,7 @@ import { UserFragment } from './fragments/user'
 export default gql`
   mutation GithubAuth($code: String!) {
     githubAuth(code: $code) {
-      ...UserFragment
+      ...User
     }
   }
 
