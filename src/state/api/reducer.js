@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
         Default, opinionated behavior for reducers
         If old data was an array and one one isn't, append new data to array (for example
         when adding additional project to projects)
-        If old wata was an object extend object with new props (for example when user is already
+        If old data was an object extend object with new props (for example when user is already
         logged in but more user data has beeen fetched)
         For old data being an array or primitive and new data coming in array or primitive overwrite
         old data with a new one (for example when re-fetching projects
@@ -99,6 +99,37 @@ export default (state = initialState, action) => {
             : typeof state[storeKey].data === 'object'
             ? {}
             : null,
+        },
+      }
+    }
+
+    /*
+      If old item was an object extend object with new props (for example when user is already
+      logged in but more user data has beeen fetched)
+      For old data being an array or primitive and new data coming in array or primitive overwrite
+      old data with a new one (for example when re-fetching projects
+    */
+    case C.UPDATE_ITEM: {
+      const { payload: { storeKey, id, data, message, code } = {} } = action
+
+      let newData
+      if (Array.isArray(state[storeKey].data) && typeof data === 'object') {
+        newData = state[storeKey].data.map(item =>
+          item.id !== id ? item : { ...item, ...data }
+        )
+      } else if (Array.isArray(state[storeKey].data)) {
+        newData = state[storeKey].data.map(item => (item !== id ? item : data))
+      }
+
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          data: newData,
+          isLoading: false,
+          error: undefined,
+          message,
+          code,
         },
       }
     }
