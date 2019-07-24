@@ -36,42 +36,42 @@ const TopicWrapper = styled.div``
 
 const topics = [
   {
-    header: '1. Why 4 repos?',
-    paragraph: 'Why not',
-  },
-  {
-    header: '2. Is free?',
+    header: 'Is free?',
     paragraph: 'Yes, no, yes... maybe',
   },
   {
-    header: '3. Why does project load seceral seconds',
+    header: 'Why 4 repos?',
+    paragraph: 'Why not',
+  },
+  {
+    header: 'Why does project load seceral seconds',
     paragraph: 'Because your internet conection is poor',
   },
   {
-    header: '4. Why do i need to log in with Github/Gitlab',
+    header: 'Why do i need to log in with Github/Gitlab',
     paragraph: 'Yes',
   },
 
   {
-    header: '5. Why SiliSky might not be for you.',
+    header: 'Why SiliSky might not be for you.',
     paragraph: 'Because you are breath taking!',
   },
 
   {
-    header: '6. How to manage env variables?',
+    header: 'How to manage env variables?',
     paragraph: 'Hello',
   },
   {
-    header: '7. Why is my project loading?',
+    header: 'Why is my project loading?',
     paragraph: 'I do not know ask Adam',
   },
 
   {
-    header: '8. I want seelsd?????? language version what to do',
+    header: 'I want seelsd?????? language version what to do',
     paragraph: ' Hello, how are you?',
   },
   {
-    header: '9. HOST 0.0.0.0',
+    header: 'HOST 0.0.0.0',
     paragraph: 'Yyyyyyyyyyyy',
   },
 ]
@@ -99,14 +99,18 @@ const FAQ = () => {
           <TopicWrapper key={topic.header}>
             {index + 1 === +topicId ? (
               <>
-                <Header {...scrollHtmlAttributes}>{topic.header}</Header>
+                <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
+                  topic.header
+                }`}</Header>
                 <Button onClick={() => reloadPageWithHash(index + 1)}>
                   Click
                 </Button>
               </>
             ) : (
               <>
-                <Header>{topic.header}</Header>
+                <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
+                  topic.header
+                }`}</Header>
                 <Button onClick={() => reloadPageWithHash(index + 1)}>
                   Click
                 </Button>
