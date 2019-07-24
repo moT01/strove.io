@@ -1,9 +1,7 @@
 # [SiliSky](https://www.silisky.com/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/inspiring-shaw-cb8237/deploys)
-<a href="https://discord.gg/P9DrxRz">
-<img alt="Discord" src="https://img.shields.io/discord/593787637291286529.svg?color=%230E1D23&label=discord&style=popout">
-</a>
+
 <a href="https://spectrum.chat/silisky">
 <img alt="Join the community on Spectrum" src="https://withspectrum.github.io/badge/badge.svg" />
 </a>
@@ -34,10 +32,36 @@ Add # + github url after silisky.com/ to get start coding right away, for exampl
 </table>
 </div>
 
+# Supported languages
+
+...like: Haskell, PHP, C, Elixir, C#, Java, Scala, Rust, Go, R, Ruby, Python, TypeScript, C++, Chicken and many more.
+
+<div align='center'>
+<table>
+<tr align="center">
+<td align="center"><img src="./readmeAssets/haskell.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/php.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/c.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/elixir.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/csharp.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/java.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/scala.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/rust.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/go.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/r.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/ruby.png" width="120x"></td>
+<td align="center"><img src="./readmeAssets/python.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/typescript.png" width="120px"></td>
+<td align="center"><img src="./readmeAssets/c++.png" width="120px"></td>
+
+</tr>
+</table>
+</div>
+
 # Donations
 
 <div align='center'>
 
-[<img src="/src/images/readmeAssets/coffee.jpg" width="350">](https://www.paypal.me/codengonet)
+[<img src="./readmeAssets/coffee.jpg" width="350">](https://www.paypal.me/codengonet)
 
 </div>
