@@ -219,6 +219,7 @@ const StyledIcon = styled(Icon)`
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
+  const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -227,6 +228,7 @@ const Dashboard = () => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
+  const projectsLimit = user.subscriptionId ? '12' : '4'
 
   const handleStartClick = ({ id, editorPort, machineId }) => {
     if (!currentProjectId || currentProjectId === id) {
