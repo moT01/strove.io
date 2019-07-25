@@ -326,15 +326,7 @@ const Templates = ({ addProject }) => {
     return errors
   }
 
-  const handleClick = item => {
-    user
-      ? createProject({
-          repoLink: item.link,
-          dispatch: dispatch,
-          user: user,
-        })
-      : console.log('User is not logged in')
-  }
+  const handleClick = item => addProject(item.link)
 
   return (
     <AddProjectWrapper>
