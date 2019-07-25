@@ -12,6 +12,7 @@ import {
   CONTINUE_PROJECT,
   GET_CURRENT_PROJECT,
   STOP_PROJECT,
+  MY_PROJECTS,
 } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
@@ -318,6 +319,13 @@ const Dashboard = () => {
         ],
       })
     )
+    dispatch(
+      query({
+        name: 'myProjects',
+        dataSelector: data => data.myProjects.edges,
+        query: MY_PROJECTS,
+      })
+    )
   }
 
   const closeModal = () => {
@@ -341,7 +349,9 @@ const Dashboard = () => {
       <PageWrapper>
         <GetStarted />
         <TilesWrapper>
-          <ProjectTitle>Projects count: {projects.length}/4</ProjectTitle>
+          <ProjectTitle>
+            Projects count: {projects.length}/{projectsLimit}
+          </ProjectTitle>
           {projects.map(project => (
             <Tile key={project.id}>
               <VerticalDivider>
