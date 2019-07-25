@@ -271,7 +271,6 @@ const Dashboard = () => {
       }
     } else {
       setStopModal(true)
-      console.log(currentProjectId)
     }
   }
 
@@ -299,7 +298,6 @@ const Dashboard = () => {
   }
 
   const handleStopClick = id => {
-    console.log('id', id)
     dispatch(
       mutation({
         name: 'stopProject',
