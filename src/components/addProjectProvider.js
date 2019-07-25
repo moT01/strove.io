@@ -7,7 +7,7 @@ import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
 
 export default ({ children }) => {
-  const [modalContent, setModalContent] = useState()
+  const [modalContent, setModalContent] = useState('AnotherActiveProject')
 
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -15,6 +15,8 @@ export default ({ children }) => {
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
+  const currentProjectId = useSelector(selectors.api.getApiData('user'))
+    .currentProjectId
   const projectsLimit = user.subscriptionId ? 12 : 4
 
   const addProject = repoLink => {
@@ -45,6 +47,8 @@ export default ({ children }) => {
       setModalContent('SomethingWentWrong')
     } else if (projects && projects.length === projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
+    } else if (currentProjectId) {
+      setModalContent('AnotherActiveProject')
     } else {
       createProject({ repoLink, dispatch, user })
     }

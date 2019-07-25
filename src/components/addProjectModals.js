@@ -408,6 +408,36 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     )
   }
 
+  if (modalContent === 'AnotherActiveProject') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(null)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '47vh' : '25vh'}
+      >
+        <ModalWrapepr>
+          <Text>
+            One of your projects is currently active. You have to stop it before
+            adding a new one. You can do that in your dashboard.
+          </Text>
+          <ButtonsWrapper mobile={device}>
+            <StyledLink
+              to="app/dashboard"
+              primary
+              onClick={() => setModalContent(null)}
+            >
+              Dashboard
+            </StyledLink>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
   return (
     <Modal
       isOpen={!!modalContent}
