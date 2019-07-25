@@ -15,7 +15,7 @@ export default ({ children }) => {
   const githubToken = user && user.githubToken
   const gitlabToken = user && user.gitlabToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
-  const projectsLimit = 4
+  const projectsLimit = user.subscriptionId ? '12' : '4'
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -54,6 +54,7 @@ export default ({ children }) => {
     <>
       {children({ addProject })}
       <AddProjectModals
+        projectsLimit={projectsLimit}
         modalContent={modalContent}
         setModalContent={setModalContent}
       />

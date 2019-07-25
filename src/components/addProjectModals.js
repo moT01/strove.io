@@ -213,7 +213,7 @@ const ButtonsWrapper = styled.div`
       : '45%'};
 `
 
-const AddProjectModals = ({ modalContent, setModalContent }) => {
+const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
 
   if (modalContent === 'AddGithubPrivatePermissions') {
@@ -389,7 +389,8 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
       >
         <ModalWrapepr>
           <Text>
-            You have exceeded your projects limit. You can create up to 4
+            You have exceeded your projects limit. You can create up to{' '}
+            {projectsLimit}
             projects. To increase the limit you can upgrade your account. To do
             so visit our pricing section.
           </Text>

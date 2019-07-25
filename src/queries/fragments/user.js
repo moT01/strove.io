@@ -13,5 +13,6 @@ export const UserFragment = gql`
     scopes
     siliskyToken
     currentProjectId
+    subscriptionId
   }
 `
