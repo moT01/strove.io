@@ -390,9 +390,8 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         <ModalWrapepr>
           <Text>
             You have exceeded your projects limit. You can create up to{' '}
-            {projectsLimit}
-            projects. To increase the limit you can upgrade your account. To do
-            so visit our pricing section.
+            {projectsLimit} projects. To increase the limit you can upgrade your
+            account. To do so visit our pricing section.
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledLink
