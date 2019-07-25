@@ -14,7 +14,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 ### [https://www.silisky.com/](https://www.silisky.com/)
 
 <div align="center">
-<img src="./src/images/readmeAssets/silisky.gif" >
+<img src="./src/images/readmeAssets/silisky.gif" width='900px'>
 </div>
 
 # Get started
@@ -67,6 +67,6 @@ We are supporting all major languages like: Haskell, PHP, C, Elixir, C#, Java, S
 
 <div align='center'>
 
-[<img src="./src/images/readmeAssets/coffee.jpg" width="350">](https://www.paypal.me/codengonet)
+[<img src="./src/images/readmeAssets/coffee.png" width="250">](https://www.paypal.me/codengonet)
 
 </div>
