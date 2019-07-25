@@ -17,6 +17,7 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 import Layout from './layout'
 import SEO from './seo'
+import AddProjectProvider from 'components/addProjectProvider'
 
 const templates = [
   {
@@ -152,17 +153,11 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Templates = () => {
+const Templates = ({ addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
 
-  const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
-  }
+  const handleClick = item => addProject(item.link)
 
   return (
     <Layout>
@@ -184,4 +179,8 @@ const Templates = () => {
     </Layout>
   )
 }
-export default Templates
+export default (
+  <AddProjectProvider>
+    {({ addProject }) => <Templates addProject={addProject} />}
+  </AddProjectProvider>
+)

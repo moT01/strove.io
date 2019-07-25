@@ -51,7 +51,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 45%;
+  width: 100%;
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
@@ -103,7 +103,7 @@ const StyledAnchor = styled.a`
   display: flex;
   flex-direction: row;
   height: auto;
-  min-width: 45%;
+  min-width: 100%;
   max-width: 300px;
   margin: 5px;
   padding: 0.5vh;
@@ -160,7 +160,7 @@ const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 45%;
+  width: 100%;
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
@@ -200,8 +200,22 @@ const StyledLink = styled(Link)`
       }
     `}
 `
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: ${props =>
+    props.mobile === 'mobile'
+      ? '85%'
+      : props.mobile === 'tablet'
+      ? '60%'
+      : '45%'};
+`
 
-const AddProjectModals = ({ modalContent, setModalContent }) => {
+const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
+  const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
+
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
       <Modal
@@ -226,14 +240,16 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
             <li>Repository from the provided link does not exist</li>
           </StyledList>
           <Text>For more information check out pricing</Text>
-          <StyledLink
-            to="pricing"
-            primary
-            onClick={() => setModalContent(null)}
-          >
-            Pricing
-          </StyledLink>
-          <Button onClick={() => setModalContent(null)}>Close</Button>
+          <ButtonsWrapper mobile={device}>
+            <StyledLink
+              to="pricing"
+              primary
+              onClick={() => setModalContent(null)}
+            >
+              Pricing
+            </StyledLink>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
     )
@@ -253,15 +269,17 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
           <Text>
             To clone this repository you have to log in with a Github account
           </Text>
-          <StyledAnchor
-            primary
-            href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-            onClick={() => setModalContent(null)}
-          >
-            Login with Github
-            <Github />
-          </StyledAnchor>
-          <Button onClick={() => setModalContent(null)}>Close</Button>
+          <ButtonsWrapper mobile={device}>
+            <StyledAnchor
+              primary
+              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+              onClick={() => setModalContent(null)}
+            >
+              Login with Github
+              <Github />
+            </StyledAnchor>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
     )
@@ -281,15 +299,17 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
           <Text>
             To clone this repository you have to log in with a Gitlab account
           </Text>
-          <StyledAnchor
-            primary
-            href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
-            onClick={() => setModalContent(null)}
-          >
-            Login with Gitlab
-            <Gitlab />
-          </StyledAnchor>
-          <Button onClick={() => setModalContent(null)}>Close</Button>
+          <ButtonsWrapper mobile={device}>
+            <StyledAnchor
+              primary
+              href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
+              onClick={() => setModalContent(null)}
+            >
+              Login with Gitlab
+              <Gitlab />
+            </StyledAnchor>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
     )
@@ -310,15 +330,17 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
             To clone this repository you have to log in with a Github account.
             You are logged in with a Gitlab account
           </Text>
-          <StyledAnchor
-            primary
-            href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-            onClick={() => setModalContent(null)}
-          >
-            Login with Github
-            <Github />
-          </StyledAnchor>
-          <Button onClick={() => setModalContent(null)}>Close</Button>
+          <ButtonsWrapper mobile={device}>
+            <StyledAnchor
+              primary
+              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+              onClick={() => setModalContent(null)}
+            >
+              Login with Github
+              <Github />
+            </StyledAnchor>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
     )
@@ -339,15 +361,17 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
             To clone this repository you have to log in with a Gitlab account.
             You are logged in with a Github account
           </Text>
-          <StyledAnchor
-            primary
-            href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
-            onClick={() => setModalContent(null)}
-          >
-            Login with Gitlab
-            <Gitlab />
-          </StyledAnchor>
-          <Button onClick={() => setModalContent(null)}>Close</Button>
+          <ButtonsWrapper mobile={device}>
+            <StyledAnchor
+              primary
+              href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
+              onClick={() => setModalContent(null)}
+            >
+              Login with Gitlab
+              <Gitlab />
+            </StyledAnchor>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
     )
@@ -365,18 +389,20 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
       >
         <ModalWrapepr>
           <Text>
-            You have exceeded your projects limit. You can create up to 4
-            projects. To increase the limit you can upgrade your account. To do
-            so visit our pricing section.
+            You have exceeded your projects limit. You can create up to{' '}
+            {projectsLimit} projects. To increase the limit you can upgrade your
+            account. To do so visit our pricing section.
           </Text>
-          <StyledLink
-            to="pricing"
-            primary
-            onClick={() => setModalContent(null)}
-          >
-            Pricing
-          </StyledLink>
-          <Button onClick={() => setModalContent(null)}>Close</Button>
+          <ButtonsWrapper mobile={device}>
+            <StyledLink
+              to="pricing"
+              primary
+              onClick={() => setModalContent(null)}
+            >
+              Pricing
+            </StyledLink>
+            <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
     )
@@ -396,9 +422,11 @@ const AddProjectModals = ({ modalContent, setModalContent }) => {
           We have encountered an error while cloning your repositry. Please try
           again later.
         </Text>
-        <Button primary onClick={() => setModalContent(null)}>
-          Ok
-        </Button>
+        <ButtonsWrapper mobile={device}>
+          <Button primary onClick={() => setModalContent(null)}>
+            Ok
+          </Button>
+        </ButtonsWrapper>
       </ModalWrapepr>
     </Modal>
   )
