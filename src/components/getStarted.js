@@ -327,13 +327,7 @@ const Templates = ({ addProject }) => {
   }
 
   const handleClick = item => {
-    user
-      ? createProject({
-          repoLink: item.link,
-          dispatch: dispatch,
-          user: user,
-        })
-      : console.log('User is not logged in')
+    user ? addProject(item.link) : console.log('User is not logged in')
   }
 
   return (
