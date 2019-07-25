@@ -7,7 +7,7 @@ import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
 
 export default ({ children }) => {
-  const [modalContent, setModalContent] = useState('AnotherActiveProject')
+  const [modalContent, setModalContent] = useState()
 
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
