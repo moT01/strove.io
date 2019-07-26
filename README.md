@@ -14,7 +14,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 ### [https://www.silisky.com/](https://www.silisky.com/)
 
 <div align="center">
-<img src="./src/images/readmeAssets/silisky.gif" width='900px'>
+<img src="./src/images/readmeAssets/siliskygif2.gif" width='900px'>
 </div>
 
 # Get started
