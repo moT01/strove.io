@@ -1,4 +1,9 @@
+<div align='center'>
+<img src="./src/images/readmeAssets/siliskylogo2.png" width="220px">
+
 # [SiliSky](https://www.silisky.com/)
+
+</div>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/inspiring-shaw-cb8237/deploys)
 <a href="https://spectrum.chat/silisky">
