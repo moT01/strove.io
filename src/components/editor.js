@@ -8,7 +8,7 @@ import Loader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
 import { C } from 'state'
-import { CONTINUE_PROJECT } from 'queries'
+import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation } from 'utils'
 const StyledIframe = styled.iframe`
   display: block;
@@ -52,35 +52,17 @@ const Editor = () => {
   }, [projectId, machineId])
 
   useEffect(() => {
-    window.addEventListener('beforeunload', ev => {
-      ev.preventDefault()
-      dispatch({
-        type: C.currentProject.STOP_CURRENT_PROJECT,
-      })
-
-      if (navigator && navigator.sendBeacon) {
-        navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/stopProject`,
-          JSON.stringify({ token, projectId, type: 'stopProject' })
-        )
-      }
-    })
-
     const projectPing = setInterval(() => {
       dispatch(
         mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
+          name: 'resetCron',
+          mutation: RESET_CRON,
           variables: { projectId },
         })
       )
-    }, 60000)
+    }, 59000)
 
     return () => {
-      fetch(`${process.env.SILISKY_ENDPOINT}/stopProject`, {
-        body: JSON.stringify({ token, projectId, type: 'stopProject' }),
-        method: 'POST',
-      })
       clearInterval(projectPing)
     }
   }, [])
