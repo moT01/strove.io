@@ -85,6 +85,7 @@ export const mutation = ({
 
       return dataSelector(data)
     } catch (error) {
+      console.log('Error', error)
       onError && onError(error)
 
       if (onErrorDispatch) {
