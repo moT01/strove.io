@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { ProjectFragment } from './project'
 
 export const UserFragment = gql`
   fragment User on User {
@@ -14,5 +15,10 @@ export const UserFragment = gql`
     siliskyToken
     currentProjectId
     subscriptionId
+    projects {
+      ...Project
+    }
   }
+
+  ${ProjectFragment}
 `
