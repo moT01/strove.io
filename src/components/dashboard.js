@@ -229,7 +229,7 @@ const Dashboard = () => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
-  const projectsLimit = user.subscriptionId ? '12' : '4'
+  const projectsLimit = user && user.subscriptionId ? '12' : '4'
 
   const handleStartClick = ({ id, editorPort, machineId }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -287,11 +287,11 @@ const Dashboard = () => {
         onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
           () => ({
-            type: C.Api.REMOVE_ITEM,
+            type: C.api.REMOVE_ITEM,
             payload: { storeKey: 'myProjects', id },
           }),
           () => ({
-            type: C.Api.FETCH_SUCCESS,
+            type: C.api.FETCH_SUCCESS,
             payload: { storeKey: 'deleteProject', data: true },
           }),
           () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
