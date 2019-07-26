@@ -46,7 +46,7 @@ We are supporting all major languages like: Haskell, PHP, C, Elixir, C#, Java, S
 <tr align="center">
 <td align="center"><img src="./src/images/readmeAssets/haskell.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/php.png" width="120px"></td>
-<td align="center"><img src="./src/images/readmeAssets/c.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/cv.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/elixir.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/csharp.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/java.png" width="120px"></td>
