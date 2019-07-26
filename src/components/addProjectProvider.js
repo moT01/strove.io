@@ -17,7 +17,7 @@ export default ({ children }) => {
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
-  const projectsLimit = user.subscriptionId ? 12 : 4
+  const projectsLimit = user && user.subscriptionId ? 12 : 4
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
