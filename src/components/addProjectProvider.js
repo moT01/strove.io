@@ -12,12 +12,12 @@ export default ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
-  const githubToken = user && user.githubToken
-  const gitlabToken = user && user.gitlabToken
+  const githubToken = user?.githubToken
+  const gitlabToken = user?.gitlabToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
-  const projectsLimit = user.subscriptionId ? 12 : 4
+  const projectsLimit = user?.subscriptionId ? 12 : 4
 
   const addProject = repoLink => {
     const repoUrlParts = repoLink.split('/')
