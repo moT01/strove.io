@@ -20,16 +20,16 @@ const StyledIframe = styled.iframe`
 `
 
 const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
-const getId = getOr(undefined, ['currentProject', 'id'])
-const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
-const getPort = getOr(undefined, ['currentProject', 'editorPort'])
 
 const Editor = () => {
   const dispatch = useDispatch()
+
+  const currentProject = useSelector(selectors.api.getCurrentProject)
+  const projectId = currentProject && currentProject.id
+  const machineId = currentProject && currentProject.machineId
+  const port = currentProject && currentProject.editorPort
+
   const token = useSelector(getUserToken)
-  const projectId = useSelector(getId)
-  const machineId = useSelector(getMachineId)
-  const port = useSelector(getPort)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {

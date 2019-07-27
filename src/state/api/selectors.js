@@ -15,3 +15,6 @@ export const getCode = dataKey => getOr('', ['api', dataKey, 'code'])
 export const getUser = getApiData('user', null)
 
 export const getUserProjects = getApiData('myProjects', [])
+
+export const getCurrentProject = state =>
+  getApiData('myProjects', [])(state).find(item => item.machineId)
