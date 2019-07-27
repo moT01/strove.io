@@ -41,9 +41,13 @@ const Editor = () => {
           mutation: CONTINUE_PROJECT,
           variables: { projectId },
           onSuccessDispatch: [
-            ({ id, editorPort }) => ({
-              type: C.currentProject.SELECT_CURRENT_PROJECT,
-              payload: { id, editorPort },
+            ({ id, editorPort, machineId }) => ({
+              type: C.UPDATE_ITEM,
+              payload: {
+                storeKey: 'myProjects',
+                id,
+                data: { editorPort, machineId },
+              },
             }),
           ],
         })
