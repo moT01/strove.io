@@ -6,10 +6,12 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import { useSelector } from 'react-redux'
 
 import { GITHUB_LOGIN, GITLAB_LOGIN, MY_PROJECTS } from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
+import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
@@ -23,6 +25,7 @@ const persistor = persistStore(createStore)
 
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
+  const user = useSelector(selectors.api.getUser)
 
   useEffect(() => {
     const code = window?.location?.href
@@ -67,14 +70,18 @@ const LoginProvider = ({ children }) => {
           break
       }
     }
-    dispatch(
-      query({
-        name: 'myProjects',
-        dataSelector: data => data.myProjects.edges,
-        query: MY_PROJECTS,
-      })
-    )
   }, [])
+
+  useEffect(() => {
+    user &&
+      dispatch(
+        query({
+          name: 'myProjects',
+          dataSelector: data => data.myProjects.edges,
+          query: MY_PROJECTS,
+        })
+      )
+  }, [user])
 
   return children
 }
