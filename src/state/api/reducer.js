@@ -1,3 +1,4 @@
+import { REHYDRATE } from 'redux-persist'
 import * as C from './constants'
 
 const initialState = {
@@ -59,6 +60,7 @@ export default (state = initialState, action) => {
       } else {
         newData = data
       }
+
       return {
         ...state,
         [storeKey]: {
@@ -136,6 +138,24 @@ export default (state = initialState, action) => {
           code,
         },
       }
+    }
+
+    case REHYDRATE: {
+      const {
+        payload: { api },
+      } = action
+      let newState = {}
+      Object.keys(api).forEach(storeKey => {
+        newState = {
+          ...newState,
+          [storeKey]: {
+            ...api[storeKey],
+            isLoading: false,
+            error: undefined,
+          },
+        }
+      })
+      return newState
     }
 
     default:
