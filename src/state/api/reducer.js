@@ -140,23 +140,23 @@ export default (state = initialState, action) => {
       }
     }
 
-    // case C.CLEAR_ERRORS_AND_LOADING: {
-    //   const {
-    //     payload: { api },
-    //   } = action
-    //   let newState = {}
-    //   Object.keys(api).forEach(storeKey => {
-    //     newState = {
-    //       ...newState,
-    //       [storeKey]: {
-    //         ...api[storeKey],
-    //         isLoading: false,
-    //         error: undefined,
-    //       },
-    //     }
-    //   })
-    //   return newState
-    // }
+    case REHYDRATE: {
+      const {
+        payload: { api },
+      } = action
+      let newState = {}
+      Object.keys(api).forEach(storeKey => {
+        newState = {
+          ...newState,
+          [storeKey]: {
+            ...api[storeKey],
+            isLoading: false,
+            error: undefined,
+          },
+        }
+      })
+      return newState
+    }
 
     default:
       return state
