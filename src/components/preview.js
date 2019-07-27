@@ -23,16 +23,15 @@ const StyledLoader = styled(Loader)`
   transition: 'opacity 0.5s';
 `
 
-const getProjectId = getOr(undefined, ['currentProject', 'id'])
-const getMachineId = getOr(undefined, ['currentProject', 'machineId'])
 const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
 
 const host = window?.location?.search
 
 const Preview = () => {
   const token = useSelector(getUserToken)
-  const machineId = useSelector(getMachineId)
-  const projectId = useSelector(getProjectId)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
+  const machineId = currentProject && currentProject.machineId
+  const projectId = currentProject && currentProject.id
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   return (
