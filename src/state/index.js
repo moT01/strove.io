@@ -1,9 +1,17 @@
 import { combineReducers } from 'redux'
-import { REHYDRATE } from 'redux-persist'
+import { persistReducer } from 'redux-persist'
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
+import storage from 'redux-persist/lib/storage'
 
 import api from './api'
 import currentProject from './currentProject'
 import incomingProject from './incomingProject'
+
+const persistConfig = {
+  key: 'api',
+  storage,
+  stateReconciler: autoMergeLevel2,
+}
 
 export const selectors = {
   api: api.selectors,
@@ -23,7 +31,7 @@ export const C = {
 }
 
 const appReducer = combineReducers({
-  api: api.reducer,
+  api: persistReducer(persistConfig, api.reducer),
   currentProject: currentProject.reducer,
   incomingProject: incomingProject.reducer,
 })
@@ -32,8 +40,6 @@ export default (state, action) => {
   if (action.type === 'LOGOUT') {
     state = undefined
   }
-
-  if (action.type === REHYDRATE) return state
 
   return appReducer(state, action)
 }

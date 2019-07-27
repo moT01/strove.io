@@ -16,16 +16,17 @@ import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: hardSet,
-}
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+//   stateReconciler: hardSet,
+//   whitelist: ['api'],
+// }
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const createStore = reduxCreateStore(
-  persistedReducer,
+  rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
 
