@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
+import { REHYDRATE } from 'redux-persist'
+
 import api from './api'
 import currentProject from './currentProject'
 import incomingProject from './incomingProject'
@@ -30,6 +32,8 @@ export default (state, action) => {
   if (action.type === 'LOGOUT') {
     state = undefined
   }
+
+  if (action.type === REHYDRATE) return state
 
   return appReducer(state, action)
 }
