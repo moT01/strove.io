@@ -142,6 +142,10 @@ export default (state = initialState, action) => {
 
     case REHYDRATE: {
       const { payload } = action
+      // Payload is null or undefined
+      if (!Boolean(payload)) {
+        return initialState
+      }
       let newState = {}
       Object.keys(payload).forEach(storeKey => {
         newState = {
@@ -154,6 +158,10 @@ export default (state = initialState, action) => {
         }
       })
       return newState
+    }
+
+    case C.LOGOUT: {
+      return initialState
     }
 
     default:
