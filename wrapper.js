@@ -47,6 +47,7 @@ const LoginProvider = ({ children }) => {
               variables: { code },
               storeKey: 'user',
               name: 'githubAuth',
+              context: null,
               onSuccess: ({ siliskyToken }) =>
                 localStorage.setItem('token', siliskyToken),
             })
@@ -59,6 +60,7 @@ const LoginProvider = ({ children }) => {
               variables: { code },
               storeKey: 'user',
               name: 'gitlabAuth',
+              context: null,
               onSuccess: ({ siliskyToken }) =>
                 localStorage.setItem('token', siliskyToken),
             })

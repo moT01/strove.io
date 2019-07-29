@@ -32,12 +32,11 @@ export const C = {
 
 const appReducer = combineReducers({
   api: persistReducer(persistConfig, api.reducer),
-  currentProject: currentProject.reducer,
   incomingProject: incomingProject.reducer,
 })
 
 export default (state, action) => {
-  if (action.type === 'LOGOUT') {
+  if (action.type === api.C.LOGOUT) {
     state = undefined
   }
 
