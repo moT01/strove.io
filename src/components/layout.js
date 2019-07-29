@@ -20,8 +20,6 @@ const MainContent = styled.main`
 `
 
 const Layout = ({ children }) => {
-  const isLoading = useSelector(selectors.api.getLoading('myProjects'))
-
   return (
     <StaticQuery
       query={graphql`
@@ -36,11 +34,7 @@ const Layout = ({ children }) => {
       render={data => (
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
-          {isLoading ? (
-            <Loader isFullScreen={true} color="#0072ce" />
-          ) : (
-            <MainContent>{children}</MainContent>
-          )}
+          <MainContent>{children}</MainContent>
         </>
       )}
     />
