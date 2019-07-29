@@ -160,6 +160,10 @@ export default (state = initialState, action) => {
       return newState
     }
 
+    case C.LOGOUT: {
+      return initialState
+    }
+
     default:
       return state
   }
