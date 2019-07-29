@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
 import { Silisky } from 'images/logos'
@@ -47,7 +47,6 @@ const LogoContainer = styled.div`
 const Text = styled.p`
   color: #0072ce;
   font-size: 1rem;
-  margin-left: 2%;
   margin-bottom: 0;
   margin-top: 15px;
   white-space: nowrap;
@@ -71,17 +70,20 @@ const Loader = props => {
   const [messagesArray, setMessagesArray] = useState([])
   const [message, setMessage] = useState('')
 
-  if (props.isAddProject) {
-    messagesArray = allMessages.isAddProject
-  }
+  useEffect(() => {
+    if (props.isAddProject) {
+      return setMessagesArray(allMessages.isAddProject)
+    }
 
-  if (props.isContinueProject) {
-    messagesArray = allMessages.isContinueProject
-  }
+    if (props.isContinueProject) {
+      return setMessagesArray(allMessages.isContinueProject)
+    }
 
-  if (props.isUseTemplate) {
-    messagesArray = allMessages.isUseTemplate
-  }
+    if (props.isUseTemplate) {
+      return (messagesArray = setMessagesArray(allMessages.isUseTemplate))
+    }
+    setMessage(messagesArray[0])
+  }, [])
 
   return (
     <LoaderWrapper {...props}>
@@ -92,11 +94,11 @@ const Loader = props => {
             <Silisky style={{ width: '100%', height: 'auto' }} fill="#0072ce" />
           </LogoContainer>
         )}
-        {console.log(props)}
+        {console.table(props)}
       </LoaderContainer>
       {(props.isAddProject ||
         props.isContinueProject ||
-        props.isUseTemplate) && <Text>messages</Text>}
+        props.isUseTemplate) && <Text>{message}</Text>}
     </LoaderWrapper>
   )
 }
