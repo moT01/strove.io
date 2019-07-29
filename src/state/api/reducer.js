@@ -143,7 +143,7 @@ export default (state = initialState, action) => {
     case REHYDRATE: {
       const { payload } = action
       // Payload is null or undefined
-      if (Boolean(payload)) {
+      if (!Boolean(payload)) {
         return initialState
       }
       let newState = {}
