@@ -371,9 +371,7 @@ const Dashboard = () => {
                     <StyledIcon type="calendar" />
                     {/* ToDo: Fix on api side so date.pare isnt necessary */}
                     <Text>
-                      {moment(Date.parse(project.createdAt)).format(
-                        'DD/MM/YYYY'
-                      )}
+                      {moment(+project.createdAt).format('DD/MM/YYYY')}
                     </Text>
                   </TextWrapper>
                   {project.description && (
