@@ -4,10 +4,8 @@ import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import thunk from 'redux-thunk'
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import storage from 'redux-persist/lib/storage'
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import { useSelector } from 'react-redux'
 
 import { GITHUB_LOGIN, GITLAB_LOGIN, MY_PROJECTS } from 'queries'
@@ -18,16 +16,8 @@ import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
 
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: hardSet,
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
 const createStore = reduxCreateStore(
-  persistedReducer,
+  rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
 
