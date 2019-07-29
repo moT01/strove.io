@@ -241,12 +241,14 @@ const Dashboard = () => {
             variables: { projectId: id },
             onSuccess: () => navigate('/app/editor/'),
             onSuccessDispatch: [
-              ({ id, editorPort, machineId }) =>
-                actions.currentProject.selectCurrentProject({
+              ({ id, editorPort, machineId }) => ({
+                type: C.api.UPDATE_ITEM,
+                payload: {
+                  storeKey: 'myProjects',
                   id,
-                  editorPort,
-                  machineId,
-                }),
+                  data: { editorPort, machineId },
+                },
+              }),
               ({ id }) =>
                 actions.api.fetchSuccess({
                   data: { currentProjectId: id },
@@ -257,13 +259,13 @@ const Dashboard = () => {
           })
         )
       } else {
-        dispatch(
-          actions.currentProject.selectCurrentProject({
-            id,
-            editorPort,
-            machineId,
-          })
-        )
+        // dispatch(
+        //   actions.currentProject.selectCurrentProject({
+        //     id,
+        //     editorPort,
+        //     machineId,
+        //   })
+        // )
         dispatch(
           actions.api.fetchSuccess({
             data: { currentProjectId: id },
