@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import getOr from 'lodash/fp/getOr'
 
 import Layout from 'components/layout'
 import Loader from 'components/fullScreenLoader.js'
@@ -70,7 +69,9 @@ const Editor = () => {
   return (
     <Layout>
       <SEO title="Editor" />
-      {loaderVisible && <Loader isFullScreen={true} color="#0072ce" />}
+      {loaderVisible && (
+        <Loader isFullScreen={true} isAddProject={true} color="#0072ce" />
+      )}
       <StyledIframe
         onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}`}
