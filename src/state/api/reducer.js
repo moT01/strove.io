@@ -111,34 +111,34 @@ export default (state = initialState, action) => {
       It's also easier to express changes in state when both FETCH_SUCCESS and UPDATE_ITEM
       actions are dispatched depending on use case.
     */
-    // case C.UPDATE_ITEM: {
-    //   const { payload: { storeKey, id, data, message, code } = {} } = action
+    case C.UPDATE_ITEM: {
+      const { payload: { storeKey, id, data, message, code } = {} } = action
 
-    //   let newData
-    //   if (Array.isArray(state[storeKey].data) && typeof data === 'object') {
-    //     newData = state[storeKey].data.map(item =>
-    //       item.id !== id ? item : { ...item, ...data }
-    //     )
-    //   } else if (Array.isArray(state[storeKey].data)) {
-    //     newData = state[storeKey].data.map(item => (item !== id ? item : data))
-    //   } else if (typeof state[storeKey].data === 'object') {
-    //     newData = { ...state[storeKey].data, ...data }
-    //   } else {
-    //     newData = data
-    //   }
+      let newData
+      if (Array.isArray(state[storeKey].data) && typeof data === 'object') {
+        newData = state[storeKey].data.map(item =>
+          item.id !== id ? item : { ...item, ...data }
+        )
+      } else if (Array.isArray(state[storeKey].data)) {
+        newData = state[storeKey].data.map(item => (item !== id ? item : data))
+      } else if (typeof state[storeKey].data === 'object') {
+        newData = { ...state[storeKey].data, ...data }
+      } else {
+        newData = data
+      }
 
-    //   return {
-    //     ...state,
-    //     [storeKey]: {
-    //       ...(state[storeKey] || {}),
-    //       data: newData,
-    //       isLoading: false,
-    //       error: undefined,
-    //       message,
-    //       code,
-    //     },
-    //   }
-    // }
+      return {
+        ...state,
+        [storeKey]: {
+          ...(state[storeKey] || {}),
+          data: newData,
+          isLoading: false,
+          error: undefined,
+          message,
+          code,
+        },
+      }
+    }
 
     case REHYDRATE: {
       const { payload } = action
