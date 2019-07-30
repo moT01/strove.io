@@ -90,7 +90,7 @@ const Loader = props => {
   useEffect(() => setMessage(messagesArray[counter]), [counter])
 
   // const setMessageToRender = () => setMessage()
-
+  // useEffect(() => countTime(), [])
   const countTime = () =>
     setInterval(
       () =>
