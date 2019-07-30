@@ -74,7 +74,7 @@ const Editor = () => {
     <Layout>
       <SEO title="Editor" />
       {loaderVisible && (
-        <Loader isFullScreen={true} isAddProject={true} color="#0072ce" />
+        <Loader isFullScreen={true} type="addProject" color="#0072ce" />
       )}
       <StyledIframe
         onLoad={useCallback(() => setLoaderVisible(false))}
