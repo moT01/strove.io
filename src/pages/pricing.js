@@ -170,15 +170,9 @@ const PricingPage = () => {
       dispatch(
         mutation({
           name: 'buySubscription',
-          storeKey: 'user',
+          storeKey: 'subscription',
           mutation: BUY_SUBSCRIPTION,
           variables: { tokenId: id },
-          onSuccessDispatch: [
-            subscriptionId => ({
-              type: 'FETCH_SUCCESS',
-              payload: { data: subscriptionId, storeKey: 'user' },
-            }),
-          ],
         })
       )
     }
