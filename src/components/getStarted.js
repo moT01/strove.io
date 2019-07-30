@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import { Link } from 'gatsby'
 import { isMobileOnly } from 'react-device-detect'
@@ -15,7 +15,6 @@ import {
   Ruby,
   Javascript,
 } from 'images/logos'
-import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 
@@ -68,12 +67,12 @@ const FadeIn = keyframes`
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 
 const AddProjectWrapper = styled.div`
@@ -306,8 +305,6 @@ const StyledLink = styled(Link)`
 `
 
 const Templates = ({ addProject }) => {
-  const dispatch = useDispatch()
-  const user = useSelector(selectors.api.getUser)
   const repoError = useSelector(selectors.api.getError('myProjects'))
 
   const validate = values => {
