@@ -12,19 +12,19 @@ const client = new ApolloClient({
 const createProject = async ({ repoLink, dispatch, user }) => {
   const query = GET_REPO_INFO
 
-  const setCurrentProject = ({ id, editorPort, machineId }) =>
-    dispatch({
-      type: C.currentProject.SELECT_CURRENT_PROJECT,
-      payload: { id, editorPort, machineId },
-    })
+  // const setCurrentProject = ({ id, editorPort, machineId }) =>
+  //   dispatch({
+  //     type: C.currentProject.SELECT_CURRENT_PROJECT,
+  //     payload: { id, editorPort, machineId },
+  //   })
 
   const startProject = project => {
-    setCurrentProject({
-      id: project.id,
-      editorPort: project.editorPort,
-      machineId: project.machineId,
-      additionalPorts: project.additionalPorts,
-    })
+    // setCurrentProject({
+    //   id: project.id,
+    //   editorPort: project.editorPort,
+    //   machineId: project.machineId,
+    //   additionalPorts: project.additionalPorts,
+    // })
     navigate('/app/editor/')
   }
   const repoUrlParts = repoLink.split('/')
