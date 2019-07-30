@@ -69,6 +69,7 @@ const allMessages = {
 const Loader = props => {
   const [messagesArray, setMessagesArray] = useState([])
   const [message, setMessage] = useState('')
+  const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     if (props.isAddProject) {
@@ -82,8 +83,22 @@ const Loader = props => {
     if (props.isUseTemplate) {
       return (messagesArray = setMessagesArray(allMessages.isUseTemplate))
     }
-    setMessage(messagesArray[0])
   }, [])
+
+  useEffect(() => setMessage(messagesArray[0]), [])
+
+  useEffect(() => setMessage(messagesArray[counter]), [counter])
+
+  // const setMessageToRender = () => setMessage()
+  // useEffect(() => countTime(), [])
+  const countTime = () =>
+    setInterval(
+      () =>
+        counter !== messagesArray.length
+          ? setCounter(counter + 1)
+          : clearInterval(),
+      1000
+    )
 
   return (
     <LoaderWrapper {...props}>
