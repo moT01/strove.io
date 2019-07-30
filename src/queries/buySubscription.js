@@ -15,7 +15,7 @@ export default gql`
       status
       tax_percent
       subscription_type
-      projects_count
+      projects_limit
       virtualMachineId
     }
   }
