@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
 import { Silisky } from 'images/logos'
-import useInterval from '../hooks'
+import { useInterval } from '../hooks'
 
 const SpinToWin = keyframes`
   0% {
@@ -69,23 +69,12 @@ const allMessages = {
 
 const Loader = ({ type = 'getMyProjects', ...props }) => {
   const [counter, setCounter] = useState(0)
+  const [delay, setDelay] = useState(1000)
 
-  const counterSetter = count => {
-    setCounter(count)
-    console.log('count', count)
-  }
-
-  const countTime = () => {
-    const interval = useInterval(
-      () =>
-        counter !== allMessages[type].length
-          ? counterSetter(counter)
-          : clearInterval(interval),
-      100
-    )
-  }
-
-  useEffect(() => countTime(), [])
+  useInterval(
+    () => setCounter(counter + 1),
+    counter !== allMessages[type].length - 1 ? delay : null
+  )
 
   return (
     <LoaderWrapper {...props}>
