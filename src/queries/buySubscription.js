@@ -4,7 +4,7 @@ export default gql`
   mutation AddProject($tokenId: String!) {
     buySubscription(tokenId: $tokenId) {
       id
-      subsciptionId
+      subscriptionId
       current_period_start
       current_period_end
       canceled_at
