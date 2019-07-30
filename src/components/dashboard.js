@@ -10,7 +10,6 @@ import { query, mutation } from 'utils'
 import {
   DELETE_PROJECT,
   CONTINUE_PROJECT,
-  GET_CURRENT_PROJECT,
   STOP_PROJECT,
   MY_PROJECTS,
 } from 'queries'
@@ -332,16 +331,6 @@ const Dashboard = () => {
     setProjectToDelete(null)
     setModalVisible(false)
   }
-
-  useEffect(() => {
-    dispatch(
-      query({
-        name: 'me',
-        storeKey: 'user',
-        query: GET_CURRENT_PROJECT,
-      })
-    )
-  }, [])
 
   return (
     <Layout>
