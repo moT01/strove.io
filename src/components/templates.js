@@ -30,7 +30,11 @@ const templates = [
     icon: <Ruby />,
     link: 'https://github.com/codengo-llc/ruby-starter',
   },
-  { name: 'Javascript', value: 'javascript', icon: <Javascript /> },
+  {
+    name: 'Javascript',
+    icon: <Javascript />,
+    link: 'https://github.com/codengo-llc/gatsby-starter',
+  },
   {
     name: 'C++',
     icon: <Cpp />,

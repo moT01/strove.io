@@ -1,12 +1,13 @@
 import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import StripeCheckout from 'react-stripe-checkout'
+
 import { BUY_SUBSCRIPTION } from 'queries'
 import { useDispatch } from 'react-redux'
 import { mutation } from 'utils'
-
 import SEO from 'components/seo'
 import Layout from 'components/layout'
+import { C } from 'state'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -172,7 +173,14 @@ const PricingPage = () => {
           name: 'buySubscription',
           storeKey: 'subscription',
           mutation: BUY_SUBSCRIPTION,
+          dataSelector: data => data,
           variables: { tokenId: id },
+          onSuccessDispatch: [
+            ({buySubscription}) => ({
+              type: C.api.UPDATE_ITEM,
+              payload: { storeKey: 'subscription', data: buySubscription },
+            }),
+          ],
         })
       )
     }
