@@ -26,6 +26,7 @@ const persistor = persistStore(createStore)
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const incomingProject = useSelector(selectors.incomingProject.getProjectData)
 
   useEffect(() => {
     const code = window?.location?.href
@@ -90,7 +91,7 @@ const LoginProvider = ({ children }) => {
 
 const WithAddProject = ({ children, addProject }) => {
   useEffect(() => {
-    const repoLink =
+    let repoLink =
       window?.location?.href?.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 

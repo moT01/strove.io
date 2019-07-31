@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
 import { Silisky } from 'images/logos'
+import { useInterval } from '../hooks'
 
 const SpinToWin = keyframes`
   0% {
@@ -55,50 +56,25 @@ const Text = styled.p`
 `
 
 const allMessages = {
-  isAddProject: [
+  addProject: [
     'Accessing repository',
     'Reserving resources',
     'Cloning repository',
     'Starting virtual machine',
     'Launching editor',
   ],
-  isContinueProject: [],
-  isUseTemplate: [],
+  continueProject: [],
+  getMyProjects: [],
 }
 
-const Loader = props => {
-  const [messagesArray, setMessagesArray] = useState([])
-  const [message, setMessage] = useState('')
+const Loader = ({ type = 'getMyProjects', ...props }) => {
   const [counter, setCounter] = useState(0)
+  const [delay, setDelay] = useState(1000)
 
-  useEffect(() => {
-    if (props.isAddProject) {
-      return setMessagesArray(allMessages.isAddProject)
-    }
-
-    if (props.isContinueProject) {
-      return setMessagesArray(allMessages.isContinueProject)
-    }
-
-    if (props.isUseTemplate) {
-      return (messagesArray = setMessagesArray(allMessages.isUseTemplate))
-    }
-  }, [])
-
-  useEffect(() => setMessage(messagesArray[0]), [])
-
-  useEffect(() => setMessage(messagesArray[counter]), [counter])
-
-  // const setMessageToRender = () => setMessage()
-  // useEffect(() => countTime(), [])
-  const countTime = () =>
-    setInterval(
-      () =>
-        counter !== messagesArray.length
-          ? setCounter(counter + 1)
-          : clearInterval(),
-      1000
-    )
+  useInterval(
+    () => setCounter(counter + 1),
+    counter !== allMessages[type].length - 1 ? delay : null
+  )
 
   return (
     <LoaderWrapper {...props}>
@@ -109,11 +85,8 @@ const Loader = props => {
             <Silisky style={{ width: '100%', height: 'auto' }} fill="#0072ce" />
           </LogoContainer>
         )}
-        {console.table(props)}
       </LoaderContainer>
-      {(props.isAddProject ||
-        props.isContinueProject ||
-        props.isUseTemplate) && <Text>{message}</Text>}
+      {props.isFullScreen && <Text>{allMessages[type][counter]}</Text>}
     </LoaderWrapper>
   )
 }
