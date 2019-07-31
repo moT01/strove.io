@@ -69,7 +69,7 @@ const allMessages = {
 
 const Loader = ({ type = 'getMyProjects', ...props }) => {
   const [counter, setCounter] = useState(0)
-  const [delay, setDelay] = useState(2000)
+  const [delay, setDelay] = useState(1500)
 
   useInterval(
     () => setCounter(counter + 1),
