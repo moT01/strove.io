@@ -73,7 +73,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
         mutation({
           name: 'addProject',
           storeKey: 'myProjects',
-          /* ToDo: Support Gitlab and Bitbucket as well */
+          /* ToDo: Support Bitbucket as well */
           variables: { repoLink, name, description },
           mutation: ADD_PROJECT,
           onSuccess: [

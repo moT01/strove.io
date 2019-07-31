@@ -1,11 +1,8 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import Loader from 'components/fullScreenLoader.js'
 import Header from './header'
-import { selectors } from 'state'
 import './layout.css'
 
 const MainContent = styled.main`
