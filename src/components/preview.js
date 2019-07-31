@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import getOr from 'lodash/fp/getOr'
@@ -47,4 +47,4 @@ const Preview = () => {
   )
 }
 
-export default Preview
+export default memo(Preview)
