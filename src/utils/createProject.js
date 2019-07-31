@@ -2,19 +2,20 @@ import ApolloClient from 'apollo-boost'
 import { navigate } from 'gatsby'
 
 import { mutation } from 'utils'
-import { C } from 'state'
+import { C, actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
+const startProject = () => {
+  navigate('/app/editor/')
+}
+
 const createProject = async ({ repoLink, dispatch, user }) => {
   const query = GET_REPO_INFO
 
-  const startProject = () => {
-    navigate('/app/editor/')
-  }
   const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
   const owner = repoUrlParts[3]
@@ -75,7 +76,10 @@ const createProject = async ({ repoLink, dispatch, user }) => {
           /* ToDo: Support Gitlab and Bitbucket as well */
           variables: { repoLink, name, description },
           mutation: ADD_PROJECT,
-          onSuccess: startProject,
+          onSuccess: [
+            startProject,
+            () => dispatch(actions.incomingProject.removeIncomingProject()),
+          ],
           onErrorDispatch: error =>
             dispatch({
               type: C.incomingProject.CATCH_INCOMING_ERROR,
