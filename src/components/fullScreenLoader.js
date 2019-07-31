@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
 import { Silisky } from 'images/logos'
@@ -91,4 +91,4 @@ const Loader = ({ type = 'getMyProjects', ...props }) => {
   )
 }
 
-export default Loader
+export default memo(Loader)

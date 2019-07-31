@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
@@ -164,4 +164,4 @@ const Header = props => (
   </Location>
 )
 
-export default Header
+export default memo(Header)
