@@ -48,8 +48,12 @@ const LoginProvider = ({ children }) => {
               storeKey: 'user',
               name: 'githubAuth',
               context: null,
-              onSuccess: ({ siliskyToken }) =>
-                localStorage.setItem('token', siliskyToken),
+              onSuccess: ({ siliskyToken }) => {
+                localStorage.setItem('token', siliskyToken)
+                // if (incomingProject) {
+                //   addProject(incomingProject.repo)
+                // }
+              },
             })
           )
           break

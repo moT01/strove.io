@@ -2,9 +2,12 @@ import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'
+import { useSelector } from 'redux'
 
 import Modal from 'components/modal'
 import { Github, Gitlab } from 'images/logos'
+import { window } from 'utils'
+import { selectors } from 'state'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -215,6 +218,7 @@ const ButtonsWrapper = styled.div`
 
 const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
+  // const incomingProject = useSelector(selectors.incomingProject.getProjectData)
 
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
@@ -272,7 +276,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github `}
               onClick={() => setModalContent(null)}
             >
               Login with Github
