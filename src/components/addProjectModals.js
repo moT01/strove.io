@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'
-import { useSelector } from 'redux'
 
 import Modal from 'components/modal'
 import { Github, Gitlab } from 'images/logos'
-import { selectors } from 'state'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -465,4 +463,4 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
   )
 }
 
-export default AddProjectModals
+export default memo(AddProjectModals)

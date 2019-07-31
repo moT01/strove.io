@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, memo } from 'react'
 import { navigate } from 'gatsby'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
@@ -511,4 +511,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default memo(Dashboard)
