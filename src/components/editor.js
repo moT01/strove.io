@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -18,7 +18,7 @@ const StyledIframe = styled.iframe`
   margin: 0;
 `
 
-const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
+const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
 
 const Editor = () => {
   const dispatch = useDispatch()
@@ -85,4 +85,4 @@ const Editor = () => {
   )
 }
 
-export default Editor
+export default memo(Editor)

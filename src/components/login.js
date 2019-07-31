@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -210,4 +210,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default memo(Login)

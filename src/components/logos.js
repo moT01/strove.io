@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Docker, Github, Google, VSCode } from 'images/logos'
 
@@ -106,4 +106,4 @@ const Logos = ({ handleHoverIn, handleHoverOut }) => {
   )
 }
 
-export default Logos
+export default memo(Logos)

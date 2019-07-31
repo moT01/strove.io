@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
@@ -403,8 +403,8 @@ const Templates = ({ addProject }) => {
   )
 }
 
-export default () => (
+export default memo(() => (
   <AddProjectProvider>
     {({ addProject }) => <Templates addProject={addProject} />}
   </AddProjectProvider>
-)
+))
