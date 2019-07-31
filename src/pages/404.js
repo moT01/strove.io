@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
@@ -94,4 +94,4 @@ const NotFoundPage = () => (
   </Layout>
 )
 
-export default NotFoundPage
+export default memo(NotFoundPage)

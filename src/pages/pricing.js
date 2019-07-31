@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import StripeCheckout from 'react-stripe-checkout'
 import { isMobileOnly, isTablet } from 'react-device-detect'
@@ -266,8 +266,10 @@ const StripeButton = styled(Button)`
 const PricingPage = () => {
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
-  const incomingProjectRepoLink = useSelector(selectors.incomingProject.getRepoLink)
-  const incomingProject= useSelector(selectors.incomingProject.getProjectData)
+  const incomingProjectRepoLink = useSelector(
+    selectors.incomingProject.getRepoLink
+  )
+  const incomingProject = useSelector(selectors.incomingProject.getProjectData)
 
   console.log('incomingProjectRepoLink', incomingProjectRepoLink)
   console.tab('incomingProject', incomingProject)
@@ -401,4 +403,4 @@ const PricingPage = () => {
   )
 }
 
-export default PricingPage
+export default memo(PricingPage)
