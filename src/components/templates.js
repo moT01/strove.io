@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'gatsby'
@@ -13,7 +13,6 @@ import {
   Ruby,
   Javascript,
 } from 'images/logos'
-import { createProject } from 'utils'
 import { selectors } from 'state'
 import Layout from './layout'
 import SEO from './seo'
@@ -183,7 +182,7 @@ const Templates = ({ addProject }) => {
     </Layout>
   )
 }
-export default (
+export default memo(
   <AddProjectProvider>
     {({ addProject }) => <Templates addProject={addProject} />}
   </AddProjectProvider>
