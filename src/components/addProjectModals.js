@@ -430,7 +430,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               primary
               onClick={() => setModalContent(null)}
             >
-              Dashboard
+              Ok
             </StyledLink>
             <Button onClick={() => setModalContent(null)}>Close</Button>
           </ButtonsWrapper>
@@ -450,7 +450,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     >
       <ModalWrapepr>
         <Text>
-          We have encountered an error while cloning your repositry. Please try
+          We have encountered an error while cloning your repository. Please try
           again later.
         </Text>
         <ButtonsWrapper mobile={device}>
