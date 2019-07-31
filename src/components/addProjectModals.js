@@ -6,7 +6,6 @@ import { useSelector } from 'redux'
 
 import Modal from 'components/modal'
 import { Github, Gitlab } from 'images/logos'
-import { window } from 'utils'
 import { selectors } from 'state'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
