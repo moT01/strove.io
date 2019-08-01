@@ -34,7 +34,7 @@ const loginOptions = [
   {
     value: 'github',
     label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`,
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github`,
     icon: <Github />,
   },
   // {
