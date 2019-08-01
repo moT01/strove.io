@@ -17,7 +17,7 @@ const StyledIframe = styled.iframe`
   min-height: 97vh;
   width: 100vw;
   margin: 0;
-  opacity: ${({ loaderVisible }) => (loaderVisible ? 1 : 0)};
+  opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
 const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
