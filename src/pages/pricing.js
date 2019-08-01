@@ -275,8 +275,8 @@ const PricingPage = () => {
   console.table('incomingProject', incomingProject)
 
   const githubHref = incomingProjectRepoLink
-    ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github#${incomingProjectRepoLink}`
-    : `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github`
+    ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github#${incomingProjectRepoLink}`
+    : `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github`
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const queryToken = ({ id }) => {

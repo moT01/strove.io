@@ -39,6 +39,37 @@ const LoginProvider = ({ children }) => {
       ?.toString()
       .split('=')[1]
 
+    if (code && user?.subscription?.status === 'active') {
+      switch (state) {
+        case 'github':
+          dispatch(
+            mutation({
+              mutation: GITHUB_LOGIN,
+              variables: { code },
+              storeKey: 'user',
+              name: 'githubAuth',
+              context: null,
+            })
+          )
+          break
+        case 'gitlab':
+          dispatch(
+            mutation({
+              mutation: GITLAB_LOGIN,
+              variables: { code },
+              storeKey: 'user',
+              name: 'gitlabAuth',
+              context: null,
+            })
+          )
+          break
+        case 'bitbucket':
+          break
+        default:
+          break
+      }
+    }
+
     if (code && !localStorage.getItem('token')) {
       switch (state) {
         case 'github':
@@ -49,8 +80,9 @@ const LoginProvider = ({ children }) => {
               storeKey: 'user',
               name: 'githubAuth',
               context: null,
-              onSuccess: ({ siliskyToken }) =>
-                localStorage.setItem('token', siliskyToken),
+              onSuccess: ({ siliskyToken }) => {
+                localStorage.setItem('token', siliskyToken)
+              },
             })
           )
           break
