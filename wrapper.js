@@ -21,7 +21,7 @@ const createStore = reduxCreateStore(
   composeWithDevTools(applyMiddleware(thunk))
 )
 
-const persistor = persistStore(createStore)
+export const persistor = persistStore(createStore)
 
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
