@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 import SEO from 'components/seo'
@@ -72,4 +72,4 @@ const ExampleBlogPost = () => {
   )
 }
 
-export default ExampleBlogPost
+export default memo(ExampleBlogPost)

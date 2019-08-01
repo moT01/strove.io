@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from 'react'
+import React, { memo } from 'react'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 import favicon16 from 'images/favicons/favicon-16.png'
@@ -207,4 +207,4 @@ SEO.defaultProps = {
   description: ``,
 }
 
-export default SEO
+export default memo(SEO)

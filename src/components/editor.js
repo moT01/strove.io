@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -9,6 +9,7 @@ import SEO from 'components/seo'
 import { C } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation } from 'utils'
+
 const StyledIframe = styled.iframe`
   display: block;
   background: #000;
@@ -16,9 +17,10 @@ const StyledIframe = styled.iframe`
   min-height: 97vh;
   width: 100vw;
   margin: 0;
+  opacity: ${({ loaderVisible }) => (loaderVisible ? 1 : 0)};
 `
 
-const getUserToken = selectors.api.getApiData('user', {}, 'siliskyToken')
+const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
 
 const Editor = () => {
   const dispatch = useDispatch()
@@ -77,12 +79,12 @@ const Editor = () => {
         <Loader isFullScreen={true} type="addProject" color="#0072ce" />
       )}
       <StyledIframe
+        loaderVisible={loaderVisible}
         onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}`}
-        style={{ opacity: loaderVisible ? 0 : 1 }}
       />
     </Layout>
   )
 }
 
-export default Editor
+export default memo(Editor)

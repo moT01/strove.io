@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 import styled from 'styled-components'
 
 import SEO from 'components/seo'
@@ -128,4 +128,4 @@ const FAQ = () => {
   )
 }
 
-export default FAQ
+export default memo(FAQ)

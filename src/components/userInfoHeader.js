@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch, useSelector } from 'react-redux'
@@ -153,4 +153,4 @@ const clickOutsideConfig = {
   handleClickOutside: () => UserInfoHeader.handleClickOutside,
 }
 
-export default onClickOutside(UserInfoHeader, clickOutsideConfig)
+export default memo(onClickOutside(UserInfoHeader, clickOutsideConfig))

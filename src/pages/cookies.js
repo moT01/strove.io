@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
@@ -122,4 +122,4 @@ const Legal = () => (
   </>
 )
 
-export default Legal
+export default memo(Legal)
