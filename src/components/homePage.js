@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import SEO from 'components/seo'
@@ -75,4 +75,4 @@ const Homepage = () => (
   </Location>
 )
 
-export default Homepage
+export default memo(Homepage)

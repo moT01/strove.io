@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
@@ -319,4 +319,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default memo(Dashboard)

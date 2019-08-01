@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { createProject } from 'utils'
@@ -6,7 +6,7 @@ import { selectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
 
-export default ({ children }) => {
+const AddProjectProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState()
 
   const dispatch = useDispatch()
@@ -66,3 +66,5 @@ export default ({ children }) => {
     </>
   )
 }
+
+export default memo(AddProjectProvider)
