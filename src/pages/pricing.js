@@ -270,7 +270,7 @@ const PricingPage = () => {
   const incomingProject= useSelector(selectors.incomingProject.getProjectData)
 
   console.log('incomingProjectRepoLink', incomingProjectRepoLink)
-  console.tab('incomingProject', incomingProject)
+  console.table('incomingProject', incomingProject)
 
   const githubHref = incomingProjectRepoLink
     ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github#${incomingProjectRepoLink}`
@@ -291,7 +291,7 @@ const PricingPage = () => {
           },
           onSuccessDispatch: [
             ({ buySubscription }) => ({
-              type: C.api.FETCH_SUCCESS,
+              type: C.api.UPDATE_ITEM,
               payload: { storeKey: 'subscription', data: buySubscription },
             }),
           ],
