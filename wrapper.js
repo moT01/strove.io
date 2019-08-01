@@ -28,6 +28,7 @@ const LoginProvider = ({ children }) => {
   const user = useSelector(selectors.api.getUser)
   const incomingProject = useSelector(selectors.incomingProject.getProjectData)
 
+  // Scopes update after buying subscription
   useEffect(() => {
     const code = window?.location?.href
       .match(/code=(.*)(?=&state)/g)
@@ -52,24 +53,24 @@ const LoginProvider = ({ children }) => {
             })
           )
           break
-        case 'gitlab':
-          dispatch(
-            mutation({
-              mutation: GITLAB_LOGIN,
-              variables: { code },
-              storeKey: 'user',
-              name: 'gitlabAuth',
-              context: null,
-            })
-          )
-          break
-        case 'bitbucket':
-          break
+        // case 'gitlab':
+        //   dispatch(
+        //     mutation({
+        //       mutation: GITLAB_LOGIN,
+        //       variables: { code },
+        //       storeKey: 'user',
+        //       name: 'gitlabAuth',
+        //       context: null,
+        //     })
+        //   )
+        //   break
+        // case 'bitbucket':
+        //   break
         default:
           break
       }
     }
-
+    // Regular login
     if (code && !localStorage.getItem('token')) {
       switch (state) {
         case 'github':
