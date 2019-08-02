@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
@@ -154,6 +154,8 @@ const WithAddProject = ({ children, addProject }) => {
 }
 
 export const wrapRootElement = ({ element }) => (
+  <>
+ 
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
@@ -167,4 +169,5 @@ export const wrapRootElement = ({ element }) => (
       </PersistGate>
     </Provider>
   </ApolloProvider>
+  </>
 )
