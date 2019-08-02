@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import ApolloClient from 'apollo-boost'
 
 import { createProject } from 'utils'
 import { selectors } from 'state'

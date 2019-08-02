@@ -4,6 +4,7 @@ import * as C from './constants'
 const initialState = {
   user: null,
   myProjects: { data: [] },
+  subscription: { data: {}}
 }
 
 export default (state = initialState, action) => {
@@ -49,6 +50,8 @@ export default (state = initialState, action) => {
         For old data being an array or primitive and new data coming in array or primitive overwrite
         old data with a new one (for example when re-fetching projects
       */
+
+      console.log('data', data, 'action', action)
       let newData
       if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
         newData = [...state[storeKey].data, data]
