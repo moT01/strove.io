@@ -37,7 +37,7 @@ const AddProjectProvider = ({ children }) => {
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
 
-    const repoInfo = await getRepoInfo({repoLink, dispatch, user}) 
+    const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
 
     console.log('Yeeeeeeet', isLoading)
 
@@ -64,11 +64,10 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('ProjectsLimitExceeded')
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
-    } else if (repoInfo?.isPrivate && subscriptionStatus !== 'active'){
+    } else if (repoInfo?.isPrivate && subscriptionStatus !== 'active') {
       setModalContent('PrivateRepo')
-    } 
-    else {
-      createProject({ repoLink, dispatch, user })
+    } else {
+      createProject({ repoLink, dispatch, user, addProject })
     }
   }
 
@@ -81,18 +80,14 @@ const AddProjectProvider = ({ children }) => {
         setModalContent={setModalContent}
       />
       <Modal
-  width={isMobileOnly ? '60vw' : '20vw'}
-  height={isMobileOnly ? '30vh' : '20vh'}
-  isOpen={isLoading || isDeleting}
-  contentLabel="Loading"
-  ariaHideApp={false}
->
-  <Loader
-                  isFullScreen={false}
-                  color={'#0072ce'}
-                  height={'15vh'}
-                />
-</Modal>
+        width={isMobileOnly ? '60vw' : '20vw'}
+        height={isMobileOnly ? '30vh' : '20vh'}
+        isOpen={isLoading || isDeleting}
+        contentLabel="Loading"
+        ariaHideApp={false}
+      >
+        <Loader isFullScreen={false} color={'#0072ce'} height={'15vh'} />
+      </Modal>
     </>
   )
 }
