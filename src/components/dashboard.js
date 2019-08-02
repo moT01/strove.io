@@ -260,13 +260,6 @@ const Dashboard = () => {
           })
         )
       } else {
-        // dispatch(
-        //   actions.currentProject.selectCurrentProject({
-        //     id,
-        //     editorPort,
-        //     machineId,
-        //   })
-        // )
         dispatch(
           actions.api.fetchSuccess({
             data: { currentProjectId: id },
