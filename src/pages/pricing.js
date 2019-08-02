@@ -274,9 +274,9 @@ const PricingPage = () => {
   console.log('incomingProjectRepoLink', incomingProjectRepoLink)
   console.table('incomingProject', incomingProject)
 
-  const githubHref = incomingProjectRepoLink
-    ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github#${incomingProjectRepoLink}`
-    : `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github`
+  // const githubHref = incomingProjectRepoLink
+  //   ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github#${incomingProjectRepoLink}`
+  //   : `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github`
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const queryToken = ({ id }) => {
@@ -288,11 +288,11 @@ const PricingPage = () => {
           mutation: BUY_SUBSCRIPTION,
           variables: { tokenId: id },
           onSuccess: data => {
+            console.log('TCL: queryToken -> data', data)
             setModalVisible(true)
-            console.log('Subscription', data)
           },
           onSuccessDispatch: [
-            ({ buySubscription }) => ({
+            buySubscription => ({
               type: C.api.UPDATE_ITEM,
               payload: { storeKey: 'subscription', data: buySubscription },
             }),
@@ -310,23 +310,21 @@ const PricingPage = () => {
         contentLabel={'Activate Pro plan'}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-        height={isMobileOnly ? '45vh' : '30vh'}
+        height={isMobileOnly ? '40vh' : '25vh'}
         zIndex={99}
       >
         <ModalWrapper>
-          <Text>
-            To take full advantage of pro plan and to be able to clone private
-            repositories you need to log in with private repo access permission
-          </Text>
+          <CardTitle>Congratulations!</CardTitle>
+          <Text>Your purchase has been succesfully completed.</Text>
           <ButtonsWrapper mobile={device}>
-            <StyledAnchor
+            {/* <StyledAnchor
               primary
               href={githubHref}
               onClick={() => setModalVisible(false)}
             >
               Login with Github
               <Github />
-            </StyledAnchor>
+            </StyledAnchor> */}
             <Button onClick={() => setModalVisible(false)}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>

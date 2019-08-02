@@ -227,8 +227,10 @@ const Dashboard = () => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
-    .currentProjectId
-  const projectsLimit = user && user.subscriptionId ? '12' : '4'
+    .currentProjectI
+  const subscription = useSelector(selectors.api.getApiData('subscription'))
+
+  const projectsLimit = subscription.projects_limit
 
   const handleStartClick = ({ id, editorPort, machineId }) => {
     if (!currentProjectId || currentProjectId === id) {
