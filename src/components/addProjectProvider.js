@@ -1,15 +1,21 @@
 import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ApolloClient from 'apollo-boost'
+import { isMobileOnly, isTablet } from 'react-device-detect'
 
 import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
 import getRepoInfo from 'utils/getRepoInfo'
+import Modal from 'components/modal'
+import Loader from 'components/fullScreenLoader'
 
 const AddProjectProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState()
+  const isLoading = useSelector(selectors.api.getLoading('myProjects'))
+  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  // const [modalVisible, setModalVisible] = useState(false)
 
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -22,7 +28,6 @@ const AddProjectProvider = ({ children }) => {
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const subscriptionStatus = subscription.status
-  // const subscriptionStatus = 'inactive'
   const projectsLimit = subscription.projects_limit
 
   const addProject = async repoLink => {
@@ -32,11 +37,9 @@ const AddProjectProvider = ({ children }) => {
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
 
-    const repoInfo = await getRepoInfo({repoLink, dispatch, user})
-    // const repoPrivate = repoInfo.isPrivate
+    const repoInfo = await getRepoInfo({repoLink, dispatch, user}) 
 
-    console.log('Yeeeeeeet repoInfo', repoInfo)
-    // console.log('Yeeeeeeet repoPrivate', repoInfo.isPrivate)    
+    console.log('Yeeeeeeet', isLoading)
 
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
@@ -77,6 +80,19 @@ const AddProjectProvider = ({ children }) => {
         modalContent={modalContent}
         setModalContent={setModalContent}
       />
+      <Modal
+  width={isMobileOnly ? '60vw' : '20vw'}
+  height={isMobileOnly ? '30vh' : '20vh'}
+  isOpen={isLoading || isDeleting}
+  contentLabel="Loading"
+  ariaHideApp={false}
+>
+  <Loader
+                  isFullScreen={false}
+                  color={'#0072ce'}
+                  height={'15vh'}
+                />
+</Modal>
     </>
   )
 }
