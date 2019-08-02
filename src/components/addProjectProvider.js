@@ -67,7 +67,7 @@ const AddProjectProvider = ({ children }) => {
     } else if (repoInfo?.isPrivate && subscriptionStatus !== 'active') {
       setModalContent('PrivateRepo')
     } else {
-      createProject({ repoLink, dispatch, user, addProject })
+      createProject({ repoLink, dispatch, user, setModalContent })
     }
   }
 

@@ -13,7 +13,13 @@ const startProject = () => {
   navigate('/app/editor/')
 }
 
-const createProject = async ({ repoLink, dispatch, user }) => {
+const createProject = async ({
+  repoLink,
+  dispatch,
+  user,
+  addProject,
+  setModalContent,
+}) => {
   const query = GET_REPO_INFO
 
   const repoUrlParts = repoLink.split('/')
@@ -94,6 +100,7 @@ const createProject = async ({ repoLink, dispatch, user }) => {
       type: C.incomingProject.CATCH_INCOMING_ERROR,
       payload: { error },
     })
+    setModalContent('NoAccess')
   }
 }
 
