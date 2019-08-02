@@ -225,31 +225,32 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
-        height={isMobileOnly ? '80vh' : '35vh'}
+        height={isMobileOnly ? '75vh' : '33vh'}
       >
         <ModalWrapepr>
           <Text>
             We couldn't clone your repository. This may happen due to one of the
-            following reasons:
+            two reasons:
           </Text>
           <StyledList>
-            <li>The repository you are trying to clone is private</li>
             <li>
               You do not have access rights to the repository you are trying to
               reach
             </li>
             <li>Repository from the provided link does not exist</li>
           </StyledList>
-          <Text>For more information check out pricing</Text>
+          <Text>Please investigate the reasons and try again later</Text>
           <ButtonsWrapper mobile={device}>
-            <StyledLink
+            {/* <StyledLink
               to="pricing"
               primary
               onClick={() => setModalContent(null)}
             >
               Pricing
-            </StyledLink>
-            <Button onClick={() => setModalContent(null)}>Close</Button>
+            </StyledLink> */}
+            <Button primary onClick={() => setModalContent(null)}>
+              Close
+            </Button>
           </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>
@@ -433,6 +434,38 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Ok
             </StyledLink>
             <Button onClick={() => setModalContent(null)}>Close</Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
+  if (modalContent === 'PrivateRepo') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(null)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
+        height={isMobileOnly ? '75vh' : '33vh'}
+      >
+        <ModalWrapepr>
+          <Text>
+            Free version doesn't support cloning private repositories. For more information visit our pricing section
+          </Text>
+         
+          <ButtonsWrapper mobile={device}>
+            <StyledLink
+              to="pricing"
+              primary
+              onClick={() => setModalContent(null)}
+            >
+              Pricing
+            </StyledLink>
+            <Button primary onClick={() => setModalContent(null)}>
+              Close
+            </Button>
           </ButtonsWrapper>
         </ModalWrapepr>
       </Modal>

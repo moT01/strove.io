@@ -15,6 +15,7 @@ import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
+import { C } from 'state'
 
 const createStore = reduxCreateStore(
   rootReducer,
@@ -39,6 +40,7 @@ const LoginProvider = ({ children }) => {
       ?.toString()
       .split('=')[1]
 
+    // Scopes update after buying subscription, may actually be redundant atm
     if (code && user?.subscription?.status === 'active') {
       switch (state) {
         case 'github':
@@ -52,24 +54,24 @@ const LoginProvider = ({ children }) => {
             })
           )
           break
-        case 'gitlab':
-          dispatch(
-            mutation({
-              mutation: GITLAB_LOGIN,
-              variables: { code },
-              storeKey: 'user',
-              name: 'gitlabAuth',
-              context: null,
-            })
-          )
-          break
-        case 'bitbucket':
-          break
+        // case 'gitlab':
+        //   dispatch(
+        //     mutation({
+        //       mutation: GITLAB_LOGIN,
+        //       variables: { code },
+        //       storeKey: 'user',
+        //       name: 'gitlabAuth',
+        //       context: null,
+        //     })
+        //   )
+        //   break
+        // case 'bitbucket':
+        //   break
         default:
           break
       }
     }
-
+    // Regular login
     if (code && !localStorage.getItem('token')) {
       switch (state) {
         case 'github':
@@ -80,9 +82,25 @@ const LoginProvider = ({ children }) => {
               storeKey: 'user',
               name: 'githubAuth',
               context: null,
-              onSuccess: ({ siliskyToken }) => {
+              onSuccess: ({siliskyToken}) => {
                 localStorage.setItem('token', siliskyToken)
               },
+              onSuccessDispatch: [
+                user => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'user',
+                    data: user,
+                  },
+                }),
+                ({subscription}) => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'subscription',
+                    data: subscription,
+                  },
+                }),
+              ],
             })
           )
           break
