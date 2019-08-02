@@ -22,6 +22,7 @@ const AddProjectProvider = ({ children }) => {
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const subscriptionStatus = subscription.status
+  // const subscriptionStatus = 'inactive'
   const projectsLimit = subscription.projects_limit
 
   const addProject = async repoLink => {
@@ -32,9 +33,10 @@ const AddProjectProvider = ({ children }) => {
     const repoFromGitlab = repoProvider === 'gitlab'
 
     const repoInfo = await getRepoInfo({repoLink, dispatch, user})
+    // const repoPrivate = repoInfo.isPrivate
 
     console.log('Yeeeeeeet repoInfo', repoInfo)
-    console.log('Yeeeeeeet repoPrivate', repoInfo.isPrivate)    
+    // console.log('Yeeeeeeet repoPrivate', repoInfo.isPrivate)    
 
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
@@ -59,7 +61,10 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('ProjectsLimitExceeded')
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
-    } else {
+    } else if (repoInfo?.isPrivate && subscriptionStatus !== 'active'){
+      setModalContent('PrivateRepo')
+    } 
+    else {
       createProject({ repoLink, dispatch, user })
     }
   }

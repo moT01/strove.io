@@ -440,6 +440,38 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     )
   }
 
+  if (modalContent === 'PrivateRepo') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(null)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
+        height={isMobileOnly ? '75vh' : '33vh'}
+      >
+        <ModalWrapepr>
+          <Text>
+            Free version doesn't support cloning private repositories. For more information visit our pricing section
+          </Text>
+         
+          <ButtonsWrapper mobile={device}>
+            <StyledLink
+              to="pricing"
+              primary
+              onClick={() => setModalContent(null)}
+            >
+              Pricing
+            </StyledLink>
+            <Button primary onClick={() => setModalContent(null)}>
+              Close
+            </Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
   return (
     <Modal
       isOpen={!!modalContent}
