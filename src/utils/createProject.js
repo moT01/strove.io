@@ -100,7 +100,7 @@ const createProject = async ({
       type: C.incomingProject.CATCH_INCOMING_ERROR,
       payload: { error },
     })
-    setModalContent('NoAccess')
+    setModalContent('UnableToClone')
   }
 }
 

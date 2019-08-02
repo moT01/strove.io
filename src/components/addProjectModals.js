@@ -452,9 +452,10 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
       >
         <ModalWrapepr>
           <Text>
-            Free version doesn't support cloning private repositories. For more information visit our pricing section
+            Free version doesn't support cloning private repositories. For more
+            information visit our pricing section
           </Text>
-         
+
           <ButtonsWrapper mobile={device}>
             <StyledLink
               to="pricing"
@@ -465,6 +466,33 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             </StyledLink>
             <Button primary onClick={() => setModalContent(null)}>
               Close
+            </Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
+  if (modalContent === 'UnableToClone') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(null)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '33vh' : '20vh'}
+      >
+        <ModalWrapepr>
+          <Text>
+            Unable to clone a repository. This repository most likely belongs to
+            an organization. The only way to overcome this is to ask one of
+            repository's organization owners to log in to Silisky and approve
+            it.
+          </Text>
+          <ButtonsWrapper mobile={device}>
+            <Button primary onClick={() => setModalContent(null)}>
+              Ok
             </Button>
           </ButtonsWrapper>
         </ModalWrapepr>
