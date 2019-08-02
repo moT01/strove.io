@@ -39,28 +39,43 @@ const createProject = async ({
               'User-Agent': 'node',
             },
           }
+          try {
+            const { data } = await client.query({
+              query,
+              context,
+              variables,
+              fetchPolicy: 'no-cache',
+            })
 
-          const { data } = await client.query({
-            query,
-            context,
-            variables,
-            fetchPolicy: 'no-cache',
-          })
-
-          repoData = data.repository
+            repoData = data.repository
+          } catch (error) {
+            dispatch({
+              type: C.incomingProject.CATCH_INCOMING_ERROR,
+              payload: { error },
+            })
+            setModalContent('UnableToClone')
+          }
         }
         break
       case 'gitlab':
         if (user.gitlabToken) {
-          const res = await fetch(
-            `https://gitlab.com/api/v4/projects/${owner}%2F${name}`,
-            {
-              headers: {
-                Authorization: `Bearer ${user.gitlabToken}`,
-              },
-            }
-          )
-          repoData = await res.json()
+          try {
+            const res = await fetch(
+              `https://gitlab.com/api/v4/projects/${owner}%2F${name}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${user.gitlabToken}`,
+                },
+              }
+            )
+            repoData = await res.json()
+          } catch (error) {
+            dispatch({
+              type: C.incomingProject.CATCH_INCOMING_ERROR,
+              payload: { error },
+            })
+            setModalContent('TryAgainLater')
+          }
         }
         break
       case 'bitbucket':
@@ -100,7 +115,7 @@ const createProject = async ({
       type: C.incomingProject.CATCH_INCOMING_ERROR,
       payload: { error },
     })
-    setModalContent('UnableToClone')
+    setModalContent('TryAgainLater')
   }
 }
 
