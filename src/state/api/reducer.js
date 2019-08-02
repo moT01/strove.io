@@ -4,7 +4,7 @@ import * as C from './constants'
 const initialState = {
   user: null,
   myProjects: { data: [] },
-  subscription: { data: {}}
+  subscription: { data: {} },
 }
 
 export default (state = initialState, action) => {
@@ -155,6 +155,8 @@ export default (state = initialState, action) => {
           ...newState,
           [storeKey]: {
             ...payload[storeKey],
+            /* Do not store currentProjectId */
+            currentProjectId: undefined,
             isLoading: false,
             error: undefined,
           },
