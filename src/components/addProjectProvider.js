@@ -6,6 +6,7 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
+import getRepoInfo from 'utils/getRepoInfo'
 
 const AddProjectProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState()
@@ -18,15 +19,22 @@ const AddProjectProvider = ({ children }) => {
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
+  const subscription = useSelector(selectors.api.getApiData('subscription'))
 
-  const projectsLimit = user && user.subscriptionId ? 12 : 4
+  const subscriptionStatus = subscription.status
+  const projectsLimit = subscription.projects_limit
 
-  const addProject = repoLink => {
+  const addProject = async repoLink => {
     const repoUrlParts = repoLink.split('/')
     const repoProvider = repoUrlParts[2].split('.')[0]
 
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
+
+    const repoInfo = await getRepoInfo({repoLink, dispatch, user})
+
+    console.log('Yeeeeeeet repoInfo', repoInfo)
+    console.log('Yeeeeeeet repoPrivate', repoInfo.isPrivate)    
 
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
