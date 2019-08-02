@@ -480,14 +480,14 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         onRequestClose={() => setModalContent(null)}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-        height={isMobileOnly ? '33vh' : '20vh'}
+        width={isMobileOnly ? '90vh' : isTablet ? '60vw' : '40vw'}
+        height={isMobileOnly ? '80vh' : '40vh'}
       >
         <ModalWrapepr>
           <Text>
             Unable to clone a repository. This repository most likely belongs to
-            an organization. The only way to overcome this is to ask one of
-            repository's organization owners to log in to Silisky and approve
+            an organization. The only way to overcome this issue is to ask one
+            of repository's organization owners to log in to Silisky and approve
             it.
           </Text>
           <ButtonsWrapper mobile={device}>
@@ -500,28 +500,32 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     )
   }
 
-  return (
-    <Modal
-      isOpen={!!modalContent}
-      onRequestClose={() => setModalContent(null)}
-      contentLabel={modalContent}
-      ariaHideApp={false}
-      width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-      height={isMobileOnly ? '33vh' : '20vh'}
-    >
-      <ModalWrapepr>
-        <Text>
-          We have encountered an error while cloning your repository. Please try
-          again later.
-        </Text>
-        <ButtonsWrapper mobile={device}>
-          <Button primary onClick={() => setModalContent(null)}>
-            Ok
-          </Button>
-        </ButtonsWrapper>
-      </ModalWrapepr>
-    </Modal>
-  )
+  if (modalContent === 'TryAgainLater') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => setModalContent(null)}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '33vh' : '20vh'}
+      >
+        <ModalWrapepr>
+          <Text>
+            We have encountered an error while cloning your repository. Please
+            try again later.
+          </Text>
+          <ButtonsWrapper mobile={device}>
+            <Button primary onClick={() => setModalContent(null)}>
+              Ok
+            </Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
+  return null
 }
 
 export default memo(AddProjectModals)
