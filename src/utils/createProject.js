@@ -101,6 +101,7 @@ const createProject = async ({
             startProject,
             () => dispatch(actions.incomingProject.removeIncomingProject()),
           ],
+          onError: () => setModalContent('TryAgainLater'),
           onErrorDispatch: [
             error =>
               dispatch({
