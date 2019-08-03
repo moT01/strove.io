@@ -110,8 +110,8 @@ const createProject = async ({
               }),
             () =>
               dispatch({
-                type: C.api.FETCH_SUCCESS,
-                payload: { storeKey: 'myProjects', data: [] },
+                type: C.api.FETCH_ERROR,
+                payload: { storeKey: 'myProjects' },
               }),
           ],
         })
