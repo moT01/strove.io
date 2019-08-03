@@ -270,13 +270,7 @@ const PricingPage = () => {
     selectors.incomingProject.getRepoLink
   )
   const incomingProject = useSelector(selectors.incomingProject.getProjectData)
-
-  console.log('incomingProjectRepoLink', incomingProjectRepoLink)
-  console.table('incomingProject', incomingProject)
-
-  // const githubHref = incomingProjectRepoLink
-  //   ? `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github#${incomingProjectRepoLink}`
-  //   : `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo,public_repo&state=github`
+  const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const queryToken = ({ id }) => {
@@ -355,20 +349,26 @@ const PricingPage = () => {
                 <Feature>Private and Public repositories</Feature>
                 <Feature>4 GB of RAM</Feature>
                 <Feature>Commerial use</Feature>
-                <StripeCheckout
-                  amount={3999}
-                  description="SiliSky"
-                  image="https://i.imgur.com/2IE6t8u.png"
-                  locale="en"
-                  name="SiliSky.com"
-                  stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
-                  token={queryToken}
-                  allowRememberMe={false}
-                >
-                  <StripeButton>
-                    <ButtonText team>Choose Pro</ButtonText>
-                  </StripeButton>
-                </StripeCheckout>
+                {subscription?.status !== 'active' ? (
+                  <StripeCheckout
+                    amount={3999}
+                    description="SiliSky"
+                    image="https://i.imgur.com/2IE6t8u.png"
+                    locale="en"
+                    name="SiliSky.com"
+                    stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
+                    token={queryToken}
+                    allowRememberMe={false}
+                  >
+                    <StripeButton>
+                      <ButtonText team>Choose Pro</ButtonText>
+                    </StripeButton>
+                  </StripeCheckout>
+                ) : (
+                  <Button disabled>
+                    <ButtonText team>Already subscribed</ButtonText>
+                  </Button>
+                )}
               </PricingWrapper>
             </PricingSection>
           </Card>
