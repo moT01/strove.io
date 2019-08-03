@@ -57,7 +57,7 @@ const Editor = () => {
   }, [projectId, machineId])
 
   useEffect(() => {
-    const projectPing = setInterval(() => {
+    const resetCron = () =>
       dispatch(
         mutation({
           name: 'resetCron',
@@ -65,7 +65,8 @@ const Editor = () => {
           variables: { projectId },
         })
       )
-    }, 59000)
+    resetCron()
+    const projectPing = setInterval(resetCron, 59000)
 
     return () => {
       clearInterval(projectPing)
