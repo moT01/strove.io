@@ -500,7 +500,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     )
   }
 
-  if (modalContent === 'TryAgainLater') {
+  if (modalContent?.includes('TryAgainLater')) {
     return (
       <Modal
         isOpen={!!modalContent}
@@ -512,8 +512,11 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
       >
         <ModalWrapepr>
           <Text>
-            We have encountered an error while cloning your repository. Please
-            try again later.
+            {modalContent === 'TryAgainLaterButGitlabIsToBlame'
+              ? `We have encountered an error while cloning your repository from Gitlab. Please
+          try again later.`
+              : `We have encountered an error while cloning your repository. Please
+          try again later.`}
           </Text>
           <ButtonsWrapper mobile={device}>
             <Button primary onClick={() => setModalContent(null)}>
