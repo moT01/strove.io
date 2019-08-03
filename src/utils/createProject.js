@@ -101,11 +101,18 @@ const createProject = async ({
             startProject,
             () => dispatch(actions.incomingProject.removeIncomingProject()),
           ],
-          onErrorDispatch: error =>
-            dispatch({
-              type: C.incomingProject.CATCH_INCOMING_ERROR,
-              payload: { error },
-            }),
+          onErrorDispatch: [
+            error =>
+              dispatch({
+                type: C.incomingProject.CATCH_INCOMING_ERROR,
+                payload: { error },
+              }),
+            () =>
+              dispatch({
+                type: C.api.FETCH_SUCCESS,
+                payload: { storeKey: 'myProjects', data: [] },
+              }),
+          ],
         })
       )
     }
