@@ -9,8 +9,8 @@ import { Icon } from 'antd'
 import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
-import Loader from '../components/fullScreenLoader'
-import GetStarted from '../components/getStarted'
+import Loader from 'components/fullScreenLoader'
+import GetStarted from 'components/getStarted'
 
 const FadeIn = keyframes`
   0% {
