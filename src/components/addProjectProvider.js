@@ -14,6 +14,8 @@ const AddProjectProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
+  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   // const [modalVisible, setModalVisible] = useState(false)
 
   const dispatch = useDispatch()
@@ -81,7 +83,7 @@ const AddProjectProvider = ({ children }) => {
       <Modal
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
-        isOpen={isLoading || isDeleting}
+        isOpen={isLoading || isDeleting || isStopping || isContinuing}
         contentLabel="Loading"
         ariaHideApp={false}
       >
