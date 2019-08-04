@@ -6,7 +6,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
-import { isMobile } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 import Loader from '../components/fullScreenLoader'
@@ -125,7 +125,7 @@ const Banner = props => {
 
   return (
     <div className="banner-wrapper">
-      {props.isMobile && (
+      {isMobileOnly && (
         <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
           <div className="home-banner-image">
             <img
@@ -138,7 +138,7 @@ const Banner = props => {
       )}
       <QueueAnim
         className="banner-title-wrapper"
-        type={props.isMobile ? 'bottom' : 'right'}
+        type={isMobileOnly ? 'bottom' : 'right'}
       >
         <div key="line" className="title-line-wrapper">
           <div
@@ -148,10 +148,10 @@ const Banner = props => {
         </div>
         <h1 key="h1">SiliSky</h1>
         <p key="content">Code in clouds. One evironment for everyone.</p>
-        <ButtonsWrapper mobile={isMobile}>
+        <ButtonsWrapper mobile={isMobileOnly}>
           <Button
             primary
-            mobile={isMobile}
+            mobile={isMobileOnly}
             disabled={isLoading}
             onClick={useCallback(() => setModalVisible(true))}
           >
@@ -176,14 +176,14 @@ const Banner = props => {
             />
             <GetStarted closeModal={closeModal} />
           </StyledModal>
-          <Button mobile={isMobile}>
+          <Button mobile={isMobileOnly}>
             <StyledA href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
               Request a demo
             </StyledA>
           </Button>
         </ButtonsWrapper>
       </QueueAnim>
-      {!props.isMobile && (
+      {!isMobileOnly && (
         <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
           <BannerSVGAnim />
         </TweenOne>
