@@ -5,6 +5,7 @@ import TweenOne from 'rc-tween-one'
 import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'images/logos'
+import { isMobileOnly } from 'react-device-detect'
 
 const { TweenOneGroup } = TweenOne
 
@@ -180,7 +181,7 @@ class Page1 extends React.PureComponent {
               }}
               resetStyleBool={false}
             >
-              {(this.props.isMobile || isHover) && pointChild}
+              {(isMobileOnly || isHover) && pointChild}
             </TweenOneGroup>
             <div
               className="page1-image"
@@ -226,7 +227,7 @@ class Page1 extends React.PureComponent {
     return (
       <div className="home-page page1">
         <div className="home-page-wrapper" id="page1-wrapper">
-          {!this.props.isMobile && (
+          {!isMobile && (
             <Parallax
               className="page1-bg"
               animation={{
