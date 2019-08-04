@@ -1,7 +1,6 @@
 import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import ApolloClient from 'apollo-boost'
-import { isMobileOnly, isTablet } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import { createProject } from 'utils'
 import { selectors } from 'state'
