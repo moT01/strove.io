@@ -101,6 +101,16 @@ const createProject = async ({
             startProject,
             () => dispatch(actions.incomingProject.removeIncomingProject()),
           ],
+          onSuccessDispatch: [
+            project =>
+              dispatch({
+                type: C.api.UPDATE_ITEM,
+                payload: {
+                  storeKey: 'user',
+                  data: { currentProjectId: project.id },
+                },
+              }),
+          ],
           onError: () => setModalContent('TryAgainLater'),
           onErrorDispatch: [
             error =>
