@@ -137,11 +137,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <PreviewLink
             style={{ color: '#fff', textDecoration: 'none' }}
-            href={
-              process.env.NODE_ENV === 'production'
-                ? 'silisky.com/app/preview/'
-                : 'localhost:8000/app/preview/'
-            }
+            href={'/app/preview/'}
             target="_blank"
             rel="noopener noreferrer"
           >
