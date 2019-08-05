@@ -51,7 +51,6 @@ export default (state = initialState, action) => {
         old data with a new one (for example when re-fetching projects
       */
 
-      console.log('data', data, 'action', action)
       let newData
       if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
         newData = [...state[storeKey].data, data]
