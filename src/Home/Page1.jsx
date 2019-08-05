@@ -227,7 +227,7 @@ class Page1 extends React.PureComponent {
     return (
       <div className="home-page page1">
         <div className="home-page-wrapper" id="page1-wrapper">
-          {!isMobile && (
+          {!isMobileOnly && (
             <Parallax
               className="page1-bg"
               animation={{
