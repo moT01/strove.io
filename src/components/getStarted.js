@@ -92,7 +92,7 @@ const AddProjectWrapper = styled.div`
   width: 50vw;
 
   @media (max-width: 1366px) {
-    width: 80vw;
+    width: 100vw;
     height: auto;
   }
 `
