@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'gatsby'
 
 import { selectors } from 'state'
-import { templates } from '../constants'
+import { templates } from 'constants'
 import AddProjectProvider from 'components/addProjectProvider'
 import Layout from './layout'
 import SEO from './seo'

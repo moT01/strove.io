@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
-import { templates } from '../constants'
+import { templates } from 'constants'
 import AddProjectProvider from 'components/addProjectProvider'
 
 const FadeIn = keyframes`
