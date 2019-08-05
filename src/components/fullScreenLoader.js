@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
 import { Silisky } from 'images/logos'
@@ -69,11 +69,10 @@ const allMessages = {
 
 const Loader = ({ type = 'getMyProjects', ...props }) => {
   const [counter, setCounter] = useState(0)
-  const [delay, setDelay] = useState(1500)
 
   useInterval(
     () => setCounter(counter + 1),
-    counter !== allMessages[type].length - 1 ? delay : null
+    counter !== allMessages[type].length - 1 ? 1500 : null
   )
 
   return (
