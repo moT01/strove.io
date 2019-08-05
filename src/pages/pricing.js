@@ -10,10 +10,7 @@ import SEO from 'components/seo'
 import Layout from 'components/layout'
 import { C } from 'state'
 import Modal from 'components/modal'
-import { Github } from 'images/logos'
 import { selectors } from 'state'
-
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -21,15 +18,6 @@ const ButtonFadeIn = keyframes`
   }
   100% {
     opacity: 1;
-  }
-`
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
   }
 `
 
@@ -84,58 +72,6 @@ const Button = styled.button`
   @media (max-width: 1366px) {
     box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
   }
-`
-
-const StyledAnchor = styled.a`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  min-width: 100%;
-  max-width: 300px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
-  border-width: 1px;
-  border-style: solid;
-  font-size: 0.9rem;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-
-  svg {
-    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-    width: 2.2vh;
-    height: auto;
-    margin-left: 5px;
-  }
-
-  :focus {
-    outline: 0;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
-      }
-    `}
 `
 
 const Card = styled.div`
@@ -266,10 +202,6 @@ const StripeButton = styled(Button)`
 const PricingPage = () => {
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
-  const incomingProjectRepoLink = useSelector(
-    selectors.incomingProject.getRepoLink
-  )
-  const incomingProject = useSelector(selectors.incomingProject.getProjectData)
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
