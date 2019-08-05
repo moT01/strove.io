@@ -173,6 +173,7 @@ const Banner = props => {
             isOpen={isModalVisible}
             onRequestClose={closeModal}
             ariaHideApp={false}
+            isMobile={isMobileOnly}
           >
             <StyledIcon
               type="close"
