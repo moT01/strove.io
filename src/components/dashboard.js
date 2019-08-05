@@ -219,7 +219,6 @@ const StyledIcon = styled(Icon)`
 const Dashboard = () => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
-  const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -232,7 +231,7 @@ const Dashboard = () => {
 
   const projectsLimit = subscription.projects_limit || 4
 
-  const handleStartClick = ({ id, editorPort, machineId }) => {
+  const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(
@@ -355,7 +354,6 @@ const Dashboard = () => {
                   )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
-                    {/* ToDo: Fix on api side so date.pare isnt necessary */}
                     <Text>
                       {moment(+project.createdAt).format('DD/MM/YYYY')}
                     </Text>

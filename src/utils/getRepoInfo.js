@@ -36,7 +36,6 @@ const getRepoInfo = async ({ repoLink, dispatch, user }) => {
           })
 
           repoData = data.repository
-          console.log('Yeeeeeeet', repoData)
           return repoData
         }
         break

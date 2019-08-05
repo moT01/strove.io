@@ -40,8 +40,6 @@ const AddProjectProvider = ({ children }) => {
 
     const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
 
-    console.log('Yeeeeeeet', isLoading)
-
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
     )

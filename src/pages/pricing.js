@@ -213,10 +213,7 @@ const PricingPage = () => {
           storeKey: 'subscription',
           mutation: BUY_SUBSCRIPTION,
           variables: { tokenId: id },
-          onSuccess: data => {
-            console.log('TCL: queryToken -> data', data)
-            setModalVisible(true)
-          },
+          onSuccess: data => setModalVisible(true),
           onSuccessDispatch: [
             buySubscription => ({
               type: C.api.UPDATE_ITEM,
