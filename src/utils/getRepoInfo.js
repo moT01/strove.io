@@ -1,14 +1,11 @@
 import ApolloClient from 'apollo-boost'
-import { navigate } from 'gatsby'
 
-import { mutation } from 'utils'
-import { C, actions } from 'state'
-import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
+import { C } from 'state'
+import { GET_REPO_INFO } from 'queries'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
-
 
 const getRepoInfo = async ({ repoLink, dispatch, user }) => {
   const query = GET_REPO_INFO
@@ -61,7 +58,6 @@ const getRepoInfo = async ({ repoLink, dispatch, user }) => {
       default:
         break
     }
-
   } catch (error) {
     console.log('fetch error: ', error)
     dispatch({
