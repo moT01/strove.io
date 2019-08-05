@@ -55,6 +55,11 @@ const Text = styled.p`
   overflow: hidden;
 `
 
+const StyledSilisky = styled(Silisky)`
+  width: '100%';
+  height: 'auto';
+`
+
 const allMessages = {
   addProject: [
     'Accessing repository',
@@ -81,7 +86,7 @@ const Loader = ({ type = 'getMyProjects', ...props }) => {
         <Cog fill={props.color} />
         {props.isFullScreen && (
           <LogoContainer {...props}>
-            <Silisky style={{ width: '100%', height: 'auto' }} fill="#0072ce" />
+            <StyledSilisky fill="#0072ce" />
           </LogoContainer>
         )}
       </LoaderContainer>
