@@ -182,7 +182,7 @@ const Banner = props => {
             <GetStarted closeModal={closeModal} />
           </StyledModal>
           <Button mobile={isMobileOnly}>
-            <StyledA href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+            <StyledA href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
               Request a demo
             </StyledA>
           </Button>
