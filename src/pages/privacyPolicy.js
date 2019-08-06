@@ -358,7 +358,7 @@ const Legal = () => (
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
       </p>
-      <h5>CodeNGo.net</h5>
+      <h5>CodeNGo</h5>
       <h5>Andrespol</h5>
       <h5>Rokicińska 121 street</h5>
       <h5>contact@codengo.page</h5>
