@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
+import { isMobileOnly, isTablet } from 'react-device-detect'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
@@ -45,9 +46,9 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   width: 100vw;
-  flex-direction: row;
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   justify-content: center;
-  align-items: flex-start;
+  align-items: ${props => (props.mobile ? 'center' : 'flex-start')};
 `
 
 const TilesWrapper = styled.div`
@@ -97,7 +98,7 @@ const Text = styled.p`
 
 const VerticalDivider = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   justify-content: flex-start;
   align-items: center;
   width: 100%;
@@ -271,17 +272,19 @@ const Dashboard = () => {
   const rightColumn = []
 
   templates.map((template, index) =>
-    index % 2 === 0 ? leftColumn.push(template) : rightColumn.push(template)
+    index % (isMobileOnly ? 1 : 2) === 0
+      ? leftColumn.push(template)
+      : rightColumn.push(template)
   )
 
   return (
     <Layout>
       <SEO title="Templates" />
-      <PageWrapper>
+      <PageWrapper mobile={isMobileOnly}>
         <TilesWrapper>
           {leftColumn.map(template => (
             <Tile key={template.name}>
-              <VerticalDivider>
+              <VerticalDivider mobile={isMobileOnly}>
                 <InfoWrapper>
                   <ProjectTitle>{template.name}</ProjectTitle>
                   <TextWrapper>
@@ -299,7 +302,7 @@ const Dashboard = () => {
         <TilesWrapper>
           {rightColumn.map(template => (
             <Tile key={template.name}>
-              <VerticalDivider>
+              <VerticalDivider mobile={isMobileOnly}>
                 <InfoWrapper>
                   <ProjectTitle>{template.name}</ProjectTitle>
                   <TextWrapper>
