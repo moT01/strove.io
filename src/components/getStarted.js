@@ -41,12 +41,12 @@ const AddProjectWrapper = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin-bottom: 0;
   height: 35h;
-  width: 50vw;
+  width: ${props => (props.mobile ? '90vw' : '50vw')};
 
-  @media (max-width: 1366px) {
+  /* @media (max-width: 1366px) {
     width: 100vw;
     height: auto;
-  }
+  } */
 `
 
 const ComponentWrapper = styled.div`
@@ -278,7 +278,7 @@ const Templates = ({ addProject }) => {
   const handleClick = item => addProject(item.link)
 
   return (
-    <AddProjectWrapper>
+    <AddProjectWrapper mobile={isMobileOnly}>
       <Title mobile={isMobileOnly}>
         Add project from Github or Gitlab repository
       </Title>
