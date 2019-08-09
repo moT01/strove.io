@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 import { query, mutation } from 'utils'
 import {
@@ -355,7 +355,7 @@ const Dashboard = () => {
                   <TextWrapper>
                     <StyledIcon type="calendar" />
                     <Text>
-                      {moment(+project.createdAt).format('DD/MM/YYYY')}
+                      {dayjs(+project.createdAt).format('DD/MM/YYYY')}
                     </Text>
                   </TextWrapper>
                   {project.description && (
