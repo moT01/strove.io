@@ -128,72 +128,75 @@ const Banner = props => {
   const closeModal = () => setModalVisible(false)
 
   return (
-    <div className="banner-wrapper">
-      {isMobileOnly && (
-        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-          <div className="home-banner-image">
-            <img
-              alt="banner"
-              src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
-              width="100%"
+    <>
+      <div className="banner-wrapper">
+        {isMobileOnly && (
+          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+            <div className="home-banner-image">
+              <img
+                alt="banner"
+                src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
+                width="100%"
+              />
+            </div>
+          </TweenOne>
+        )}
+        <QueueAnim
+          className="banner-title-wrapper"
+          type={isMobileOnly ? 'bottom' : 'right'}
+        >
+          <div key="line" className="title-line-wrapper">
+            <div
+              className="title-line"
+              style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-        </TweenOne>
-      )}
-      <QueueAnim
-        className="banner-title-wrapper"
-        type={isMobileOnly ? 'bottom' : 'right'}
+          <h1 key="h1">SiliSky</h1>
+          <p key="content">Code in clouds. One evironment for everyone.</p>
+          <ButtonsWrapper mobile={isMobileOnly}>
+            <Button
+              primary
+              mobile={isMobileOnly}
+              disabled={isLoading}
+              onClick={useCallback(() => setModalVisible(true))}
+            >
+              {isLoading ? (
+                <Loader
+                  isFullScreen={false}
+                  color={'#ffffff'}
+                  height={'2.2rem'}
+                />
+              ) : (
+                'Get started'
+              )}
+            </Button>
+
+            <Button mobile={isMobileOnly}>
+              <StyledA href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+                Request a demo
+              </StyledA>
+            </Button>
+          </ButtonsWrapper>
+        </QueueAnim>
+        {!isMobileOnly && (
+          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+            <BannerSVGAnim />
+          </TweenOne>
+        )}
+      </div>
+      <StyledModal
+        isOpen={isModalVisible}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+        isMobile={isMobileOnly}
       >
-        <div key="line" className="title-line-wrapper">
-          <div
-            className="title-line"
-            style={{ transform: 'translateX(-64px)' }}
-          />
-        </div>
-        <h1 key="h1">SiliSky</h1>
-        <p key="content">Code in clouds. One evironment for everyone.</p>
-        <ButtonsWrapper mobile={isMobileOnly}>
-          <Button
-            primary
-            mobile={isMobileOnly}
-            disabled={isLoading}
-            onClick={useCallback(() => setModalVisible(true))}
-          >
-            {isLoading ? (
-              <Loader
-                isFullScreen={false}
-                color={'#ffffff'}
-                height={'2.2rem'}
-              />
-            ) : (
-              'Get started'
-            )}
-          </Button>
-          <StyledModal
-            isOpen={isModalVisible}
-            onRequestClose={closeModal}
-            ariaHideApp={false}
-            isMobile={isMobileOnly}
-          >
-            <StyledIcon
-              type="close"
-              onClick={useCallback(() => setModalVisible(false))}
-            />
-            <GetStarted closeModal={closeModal} />
-          </StyledModal>
-          <Button mobile={isMobileOnly}>
-            <StyledA href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-              Request a demo
-            </StyledA>
-          </Button>
-        </ButtonsWrapper>
-      </QueueAnim>
-      {!isMobileOnly && (
-        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-          <BannerSVGAnim />
-        </TweenOne>
-      )}
-    </div>
+        <StyledIcon
+          type="close"
+          onClick={useCallback(() => setModalVisible(false))}
+        />
+        <GetStarted closeModal={closeModal} />
+      </StyledModal>
+    </>
   )
 }
 

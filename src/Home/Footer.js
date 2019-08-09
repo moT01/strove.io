@@ -61,8 +61,8 @@ const Footer = () => {
     <FooterWrapper>
       <ColumnWrapper>
         <Column>
-          {/* <ColumnTitle>Social</ColumnTitle>
-          <StyledLink to="/blog">
+          <ColumnTitle>Social</ColumnTitle>
+          {/* <StyledLink to="/blog">
             <LinkText>Blog</LinkText>
           </StyledLink>
           <StyledLink to="/cookies">
@@ -76,7 +76,7 @@ const Footer = () => {
           </StyledAnchor>
         </Column>
         <Column>
-          {/* <ColumnTitle>About</ColumnTitle> */}
+          <ColumnTitle>About</ColumnTitle>
           {/* <StyledLink to="/documentation">
             <LinkText>Documentation</LinkText>
           </StyledLink> */}

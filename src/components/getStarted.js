@@ -186,6 +186,7 @@ const SectionDividerLine = styled.div`
 const SectionDividerText = styled(Title)`
   flex: 2;
   margin: 0.5vh;
+  text-align: center;
 `
 
 const GithubLinkInput = styled.input`

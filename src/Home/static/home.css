@@ -138,7 +138,7 @@ svg g {
   background: linear-gradient(to right, rgba(24, 144, 255, 0) 0%, #1890ff 100%);
 }
 .home-page {
-  margin: 0px auto;
+  margin: 0px;
 }
 .home-page h2 {
   text-align: center;
@@ -151,7 +151,7 @@ svg g {
   font-weight: 600;
 }
 .home-page-wrapper {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   width: 100%;
   margin: auto;
   position: relative;
@@ -163,6 +163,7 @@ svg g {
 }
 .page1 {
   height: auto;
+  width: 100%;
 }
 .page1-line.title-line-wrapper {
   width: 312px;
