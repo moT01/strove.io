@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
+import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
-import { isMobileOnly } from 'react-device-detect'
+import { isMobileOnly, isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
 import Loader from 'components/fullScreenLoader'
@@ -138,7 +139,7 @@ const Banner = props => {
   return (
     <>
       <div className="banner-wrapper">
-        {isMobileOnly && (
+        {/* {isMobileOnly && (
           <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
             <div className="home-banner-image">
               <img
@@ -148,7 +149,7 @@ const Banner = props => {
               />
             </div>
           </TweenOne>
-        )}
+        )} */}
         <QueueAnim
           className="banner-title-wrapper"
           type={isMobileOnly ? 'bottom' : 'right'}
@@ -186,6 +187,11 @@ const Banner = props => {
             </Button>
           </ButtonsWrapper>
         </QueueAnim>
+        {/* {!isMobileOnly && (
+          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+            <BannerSVGAnim />
+          </TweenOne>
+        )} */}
       </div>
       <StyledModal
         isOpen={isModalVisible}
@@ -193,10 +199,12 @@ const Banner = props => {
         ariaHideApp={false}
         isMobile={isMobileOnly}
       >
-        <StyledIcon
-          type="close"
-          onClick={useCallback(() => setModalVisible(false))}
-        />
+        {!isMobile && (
+          <StyledIcon
+            type="close"
+            onClick={useCallback(() => setModalVisible(false))}
+          />
+        )}
         <GetStarted closeModal={closeModal} />
       </StyledModal>
     </>
