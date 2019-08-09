@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
-import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
@@ -95,16 +94,25 @@ const StyledModal = styled(Modal)`
   height: auto;
   width: auto;
   top: 25%;
-  /* ${({ isMobile }) =>
+  ${({ isMobile }) =>
     !isMobile &&
     css`
       left: 25%;
-    `} */
+    `}
   position: fixed;
   animation: ${FadeIn} 0.2s ease-out;
 
   :focus {
     outline: 0;
+  }
+
+  @media (max-width: 1366px) {
+    width: 80vw;
+    ${({ isMobile }) =>
+      !isMobile &&
+      css`
+        left: 10vw;
+      `}
   }
 `
 
@@ -178,11 +186,6 @@ const Banner = props => {
             </Button>
           </ButtonsWrapper>
         </QueueAnim>
-        {!isMobileOnly && (
-          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-            <BannerSVGAnim />
-          </TweenOne>
-        )}
       </div>
       <StyledModal
         isOpen={isModalVisible}
