@@ -95,11 +95,11 @@ const StyledModal = styled(Modal)`
   height: auto;
   width: auto;
   top: 25%;
-  ${({ isMobile }) =>
+  /* ${({ isMobile }) =>
     !isMobile &&
     css`
       left: 25%;
-    `}
+    `} */
   position: fixed;
   animation: ${FadeIn} 0.2s ease-out;
 
