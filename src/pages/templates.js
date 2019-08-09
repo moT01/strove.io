@@ -76,11 +76,6 @@ const Tile = styled.div`
   margin: 15px;
   height: auto;
   width: 45vw;
-
-  @media (max-width: 1366px) {
-    /* width: 80vw; */
-    height: auto;
-  }
 `
 
 const ProjectTitle = styled.h3`
