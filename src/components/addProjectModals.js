@@ -265,7 +265,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-        height={isMobileOnly ? '30vh' : '20vh'}
+        height="30vh"
       >
         <ModalWrapepr>
           <Text>
@@ -295,7 +295,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-        height={isMobileOnly ? '30vh' : '20vh'}
+        height="30vh"
       >
         <ModalWrapepr>
           <Text>
