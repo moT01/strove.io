@@ -9,6 +9,7 @@ import SEO from 'components/seo'
 import { Typescript } from 'images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
+import AddProjectProvider from 'components/addProjectProvider'
 
 const FadeIn = keyframes`
   0% {
@@ -73,11 +74,11 @@ const Tile = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
-  height: 25vh;
+  height: auto;
   width: 45vw;
 
   @media (max-width: 1366px) {
-    width: 80vw;
+    /* width: 80vw; */
     height: auto;
   }
 `
@@ -100,7 +101,7 @@ const VerticalDivider = styled.div`
   display: flex;
   flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
 `
@@ -256,17 +257,11 @@ const templates = [
   },
 ]
 
-const Dashboard = () => {
+const Dashboard = ({ addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
 
-  const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
-  }
+  const handleClick = item => addProject(item.link)
 
   const leftColumn = []
   const rightColumn = []
@@ -322,4 +317,8 @@ const Dashboard = () => {
   )
 }
 
-export default memo(Dashboard)
+export default memo(() => (
+  <AddProjectProvider>
+    {({ addProject }) => <Dashboard addProject={addProject} />}
+  </AddProjectProvider>
+))
