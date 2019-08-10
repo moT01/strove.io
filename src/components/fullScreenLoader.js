@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
-import { Silisky } from 'images/logos'
+import { Ficdev } from 'images/logos'
 import { useInterval } from '../hooks'
 
 const SpinToWin = keyframes`
@@ -55,7 +55,7 @@ const Text = styled.p`
   overflow: hidden;
 `
 
-const StyledSilisky = styled(Silisky)`
+const StyledLogo = styled(Ficdev)`
   width: '100%';
   height: 'auto';
 `
@@ -86,7 +86,7 @@ const Loader = ({ type = 'getMyProjects', ...props }) => {
         <Cog fill={props.color} />
         {props.isFullScreen && (
           <LogoContainer {...props}>
-            <StyledSilisky fill="#0072ce" />
+            <StyledLogo fill="#0072ce" />
           </LogoContainer>
         )}
       </LoaderContainer>
