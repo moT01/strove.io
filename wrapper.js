@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { useSelector } from 'react-redux'
+import moment from 'moment'
 
 import { GITHUB_LOGIN, GITLAB_LOGIN, MY_PROJECTS } from 'queries'
 import { mutation, query } from 'utils'
@@ -27,6 +28,37 @@ export const persistor = persistStore(createStore)
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+
+  const currentProjectSet = result => {
+    const currentProject = result.find(item => item.machineId)
+    const currentProjectID = currentProject ? currentProject.id : null
+    dispatch({
+      type: C.api.UPDATE_ITEM,
+      payload: {
+        storeKey: 'user',
+        data: { currentProjectId: currentProjectID },
+      },
+    })
+  }
+
+  const checkAwake = () => {
+    let then = moment().format('X')
+    setInterval(() => {
+      let now = moment().format('X')
+      if (now - then > 300) {
+        user &&
+          dispatch(
+            query({
+              name: 'myProjects',
+              dataSelector: data => data.myProjects.edges,
+              query: MY_PROJECTS,
+              onSuccess: currentProjectSet,
+            })
+          )
+      }
+      then = now
+    }, 2000)
+  }
 
   useEffect(() => {
     const code = window?.location?.href
@@ -122,6 +154,7 @@ const LoginProvider = ({ children }) => {
           break
       }
     }
+    checkAwake()
   }, [])
 
   useEffect(() => {
