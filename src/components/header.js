@@ -119,7 +119,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
                 fill="#ffffff"
               />
             ) : (
-              <LinkText>fic.dev</LinkText>
+              <LinkText>{siteTitle}</LinkText>
             )}
           </StyledLink>
         </LinkWrapper>
