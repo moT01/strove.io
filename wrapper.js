@@ -4,35 +4,29 @@ import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import thunk from 'redux-thunk'
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import storage from 'redux-persist/lib/storage'
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
+import { useSelector } from 'react-redux'
 
-import { GITHUB_LOGIN, GITLAB_LOGIN } from 'queries'
-import { mutation } from 'utils'
+import { GITHUB_LOGIN, GITLAB_LOGIN, MY_PROJECTS } from 'queries'
+import { mutation, query } from 'utils'
 import { window } from 'utils'
+import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: hardSet,
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+import { C } from 'state'
 
 const createStore = reduxCreateStore(
-  persistedReducer,
+  rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
 
-const persistor = persistStore(createStore)
+export const persistor = persistStore(createStore)
 
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
+  const user = useSelector(selectors.api.getUser)
 
   useEffect(() => {
     const code = window?.location?.href
@@ -45,6 +39,38 @@ const LoginProvider = ({ children }) => {
       ?.toString()
       .split('=')[1]
 
+    // Scopes update after buying subscription, may actually be redundant atm
+    if (code && user?.subscription?.status === 'active') {
+      switch (state) {
+        case 'github':
+          dispatch(
+            mutation({
+              mutation: GITHUB_LOGIN,
+              variables: { code },
+              storeKey: 'user',
+              name: 'githubAuth',
+              context: null,
+            })
+          )
+          break
+        // case 'gitlab':
+        //   dispatch(
+        //     mutation({
+        //       mutation: GITLAB_LOGIN,
+        //       variables: { code },
+        //       storeKey: 'user',
+        //       name: 'gitlabAuth',
+        //       context: null,
+        //     })
+        //   )
+        //   break
+        // case 'bitbucket':
+        //   break
+        default:
+          break
+      }
+    }
+    // Regular login
     if (code && !localStorage.getItem('token')) {
       switch (state) {
         case 'github':
@@ -54,8 +80,26 @@ const LoginProvider = ({ children }) => {
               variables: { code },
               storeKey: 'user',
               name: 'githubAuth',
-              onSuccess: ({ siliskyToken }) =>
-                localStorage.setItem('token', siliskyToken),
+              context: null,
+              onSuccess: ({ siliskyToken }) => {
+                localStorage.setItem('token', siliskyToken)
+              },
+              onSuccessDispatch: [
+                user => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'user',
+                    data: user,
+                  },
+                }),
+                ({ subscription }) => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'subscription',
+                    data: subscription,
+                  },
+                }),
+              ],
             })
           )
           break
@@ -66,6 +110,7 @@ const LoginProvider = ({ children }) => {
               variables: { code },
               storeKey: 'user',
               name: 'gitlabAuth',
+              context: null,
               onSuccess: ({ siliskyToken }) =>
                 localStorage.setItem('token', siliskyToken),
             })
@@ -79,12 +124,23 @@ const LoginProvider = ({ children }) => {
     }
   }, [])
 
+  useEffect(() => {
+    user &&
+      dispatch(
+        query({
+          name: 'myProjects',
+          dataSelector: data => data.myProjects.edges,
+          query: MY_PROJECTS,
+        })
+      )
+  }, [user])
+
   return children
 }
 
 const WithAddProject = ({ children, addProject }) => {
   useEffect(() => {
-    const repoLink =
+    let repoLink =
       window?.location?.href?.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
@@ -97,17 +153,21 @@ const WithAddProject = ({ children, addProject }) => {
 }
 
 export const wrapRootElement = ({ element }) => (
-  <ApolloProvider client={client}>
-    <Provider store={createStore}>
-      <PersistGate loading={null} persistor={persistor}>
-        <LoginProvider>
-          <AddProjectProvider>
-            {({ addProject }) => (
-              <WithAddProject addProject={addProject}>{element}</WithAddProject>
-            )}
-          </AddProjectProvider>
-        </LoginProvider>
-      </PersistGate>
-    </Provider>
-  </ApolloProvider>
+  <>
+    <ApolloProvider client={client}>
+      <Provider store={createStore}>
+        <PersistGate loading={null} persistor={persistor}>
+          <LoginProvider>
+            <AddProjectProvider>
+              {({ addProject }) => (
+                <WithAddProject addProject={addProject}>
+                  {element}
+                </WithAddProject>
+              )}
+            </AddProjectProvider>
+          </LoginProvider>
+        </PersistGate>
+      </Provider>
+    </ApolloProvider>
+  </>
 )

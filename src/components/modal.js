@@ -1,4 +1,4 @@
-// import React, { useState, useEffect } from 'react'
+import { memo } from 'react'
 import Modal from 'react-modal'
 import styled, { keyframes, css } from 'styled-components'
 
@@ -19,7 +19,7 @@ const sizeProps = props =>
     ${props.height && `top: calc(50vh - ${props.height}/2)`};
   `
 
-export default styled(Modal)`
+export default memo(styled(Modal)`
   ${sizeProps};
   display: flex;
   flex-direction: column;
@@ -38,4 +38,4 @@ export default styled(Modal)`
   :focus {
     outline: 0;
   }
-`
+`)

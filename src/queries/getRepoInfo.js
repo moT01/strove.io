@@ -6,6 +6,7 @@ export default gql`
     repository(owner: $owner, name: $name) {
       name
       description
+      isPrivate
       primaryLanguage {
         name
         color

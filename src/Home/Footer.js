@@ -62,7 +62,7 @@ const Footer = () => {
       <ColumnWrapper>
         <Column>
           <ColumnTitle>Social</ColumnTitle>
-          <StyledLink to="/blog">
+          {/* <StyledLink to="/blog">
             <LinkText>Blog</LinkText>
           </StyledLink>
           <StyledLink to="/cookies">
@@ -70,22 +70,22 @@ const Footer = () => {
           </StyledLink>
           <StyledLink to="/cookies">
             <LinkText>Twitter</LinkText>
-          </StyledLink>
-          <StyledAnchor href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+          </StyledLink> */}
+          <StyledAnchor href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
             <LinkText>Contact us</LinkText>
           </StyledAnchor>
         </Column>
         <Column>
           <ColumnTitle>About</ColumnTitle>
-          <StyledLink to="/documentation">
+          {/* <StyledLink to="/documentation">
             <LinkText>Documentation</LinkText>
-          </StyledLink>
+          </StyledLink> */}
           <StyledLink to="/pricing">
             <LinkText>Pricing</LinkText>
           </StyledLink>
-          <StyledLink to="/faq">
+          {/* <StyledLink to="/faq">
             <LinkText>FAQ</LinkText>
-          </StyledLink>
+          </StyledLink> */}
         </Column>
         <Column>
           <ColumnTitle>Terms of use</ColumnTitle>
