@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, memo } from 'react'
 import { navigate } from 'gatsby'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 import { query, mutation } from 'utils'
 import {
-  MY_PROJECTS,
   DELETE_PROJECT,
   CONTINUE_PROJECT,
-  GET_CURRENT_PROJECT,
   STOP_PROJECT,
+  MY_PROJECTS,
 } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
@@ -224,10 +223,15 @@ const Dashboard = () => {
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
+  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProjectId = useSelector(selectors.api.getApiData('user'))
     .currentProjectId
+  const subscription = useSelector(selectors.api.getApiData('subscription'))
 
-  const handleStartClick = ({ id, editorPort, machineId }) => {
+  const projectsLimit = subscription.projects_limit || 4
+
+  const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(
@@ -237,28 +241,24 @@ const Dashboard = () => {
             variables: { projectId: id },
             onSuccess: () => navigate('/app/editor/'),
             onSuccessDispatch: [
-              ({ id, editorPort, machineId }) =>
-                actions.currentProject.selectCurrentProject({
+              ({ id, editorPort, machineId }) => ({
+                type: C.api.UPDATE_ITEM,
+                payload: {
+                  storeKey: 'myProjects',
                   id,
-                  editorPort,
-                  machineId,
-                }),
+                  data: { editorPort, machineId },
+                },
+              }),
               ({ id }) =>
                 actions.api.fetchSuccess({
                   data: { currentProjectId: id },
                   storeKey: 'user',
                 }),
+              () => actions.api.fetchSuccess({ storeKey: 'continueProject' }),
             ],
           })
         )
       } else {
-        dispatch(
-          actions.currentProject.selectCurrentProject({
-            id,
-            editorPort,
-            machineId,
-          })
-        )
         dispatch(
           actions.api.fetchSuccess({
             data: { currentProjectId: id },
@@ -269,7 +269,6 @@ const Dashboard = () => {
       }
     } else {
       setStopModal(true)
-      console.log(currentProjectId)
     }
   }
 
@@ -283,20 +282,20 @@ const Dashboard = () => {
         onSuccess: () => setProjectToDelete(null),
         onSuccessDispatch: [
           () => ({
-            type: C.Api.REMOVE_ITEM,
+            type: C.api.REMOVE_ITEM,
             payload: { storeKey: 'myProjects', id },
           }),
           () => ({
-            type: C.Api.FETCH_SUCCESS,
+            type: C.api.FETCH_SUCCESS,
             payload: { storeKey: 'deleteProject', data: true },
           }),
+          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
         ],
       })
     )
   }
 
   const handleStopClick = id => {
-    console.log('id', id)
     dispatch(
       mutation({
         name: 'stopProject',
@@ -304,12 +303,20 @@ const Dashboard = () => {
         dataSelector: data => data,
         variables: { projectId: id },
         onSuccessDispatch: [
-          ({ id }) =>
+          () =>
             actions.api.fetchSuccess({
-              data: { currentProjectId: id },
+              data: { currentProjectId: null },
               storeKey: 'user',
             }),
+          () => actions.api.fetchSuccess({ storeKey: 'stopProject' }),
         ],
+      })
+    )
+    dispatch(
+      query({
+        name: 'myProjects',
+        dataSelector: data => data.myProjects.edges,
+        query: MY_PROJECTS,
       })
     )
   }
@@ -319,30 +326,15 @@ const Dashboard = () => {
     setModalVisible(false)
   }
 
-  useEffect(() => {
-    dispatch(
-      query({
-        name: 'myProjects',
-        dataSelector: data => data.myProjects.edges,
-        query: MY_PROJECTS,
-      })
-    )
-
-    dispatch(
-      query({
-        name: 'me',
-        storeKey: 'user',
-        query: GET_CURRENT_PROJECT,
-      })
-    )
-  }, [])
-
   return (
     <Layout>
       <SEO title="Dashboard" />
       <PageWrapper>
         <GetStarted />
         <TilesWrapper>
+          <ProjectTitle>
+            Projects count: {projects.length}/{projectsLimit}
+          </ProjectTitle>
           {projects.map(project => (
             <Tile key={project.id}>
               <VerticalDivider>
@@ -362,11 +354,8 @@ const Dashboard = () => {
                   )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
-                    {/* ToDo: Fix on api side so date.pare isnt necessary */}
                     <Text>
-                      {moment(Date.parse(project.createdAt)).format(
-                        'DD/MM/YYYY'
-                      )}
+                      {dayjs(+project.createdAt).format('DD/MM/YYYY')}
                     </Text>
                   </TextWrapper>
                   {project.description && (
@@ -397,8 +386,11 @@ const Dashboard = () => {
                   </TextWrapper>
                 </InfoWrapper>
                 <RightSection>
-                  {isDeleting ? (
-                    <Button primary disabled={isDeleting}>
+                  {isDeleting || isContinuing || isStopping ? (
+                    <Button
+                      primary
+                      disabled={isDeleting || isContinuing || isStopping}
+                    >
                       <Loader
                         isFullScreen={false}
                         color={'#ffffff'}
@@ -414,8 +406,8 @@ const Dashboard = () => {
                       Start
                     </Button>
                   )}
-                  {isDeleting ? (
-                    <Button disabled={isDeleting}>
+                  {isDeleting || isContinuing || isStopping ? (
+                    <Button disabled={isDeleting || isContinuing || isStopping}>
                       <Loader
                         isFullScreen={false}
                         color={'#0072ce'}
@@ -433,8 +425,10 @@ const Dashboard = () => {
                     </Button>
                   )}
                   {currentProjectId && currentProjectId === project.id ? (
-                    isDeleting ? (
-                      <Button disabled={isDeleting}>
+                    isDeleting || isContinuing || isStopping ? (
+                      <Button
+                        disabled={isDeleting || isContinuing || isStopping}
+                      >
                         <Loader
                           isFullScreen={false}
                           color={'#0072ce'}
@@ -491,14 +485,14 @@ const Dashboard = () => {
         ariaHideApp={false}
       >
         <ModalText>
-          Before starting new project we have to stop your currently running
+          Before starting new project you have to stop your currently running
           project. That means you may lose all unsaved progress. Are you sure
-          you want start new project?
+          you want to stop your active project?
         </ModalText>
         <ModalButton
-          delete
+          primary
           onClick={() => {
-            handleDeleteClick(projectToDelete.id)
+            handleStopClick(currentProjectId)
             setStopModal(false)
           }}
         >
@@ -510,4 +504,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default memo(Dashboard)

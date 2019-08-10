@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-// import Layout from "components/layout"
 import SEO from 'components/seo'
 import 'components/layout.css'
-
 import Header from 'components/header'
 
 const TextWell = styled.div`
@@ -351,7 +349,7 @@ const Legal = () => (
         <li>
           {' '}
           • Follow the instructions at the bottom of each email. and we will
-          promptly remove you from ALLcorrespondence.
+          promptly remove you from all correspondence.
         </li>
       </ul>
       <h2> Contacting Us</h2>
@@ -360,13 +358,13 @@ const Legal = () => (
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
       </p>
-      <h5>CodeNGo.net</h5>
-      <h5>(adres)</h5>
-      <h5>(adres)</h5>
+      <h5>CodeNGo</h5>
+      <h5>Andrespol</h5>
+      <h5>Rokicińska 121 street</h5>
       <h5>contact@codengo.page</h5>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
   </>
 )
 
-export default Legal
+export default memo(Legal)

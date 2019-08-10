@@ -19,3 +19,8 @@ export const removeItem = ({ id, storeKey }) => ({
   type: C.REMOVE_ITEM,
   payload: { id, storeKey },
 })
+
+export const updateItem = ({ storeKey, id, data, message, code }) => ({
+  type: C.UPDATE_ITEM,
+  payload: { storeKey, id, data, message, code },
+})

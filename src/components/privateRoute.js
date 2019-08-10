@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -29,4 +29,4 @@ const PrivateRoute = ({
   return <Component {...rest} />
 }
 
-export default PrivateRoute
+export default memo(PrivateRoute)

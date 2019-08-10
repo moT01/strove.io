@@ -1,62 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import { Link } from 'gatsby'
-import { isMobileOnly } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 
-import {
-  CSharp,
-  Cpp,
-  Python,
-  Typescript,
-  Go,
-  Java,
-  Ruby,
-  Javascript,
-} from 'images/logos'
-import { createProject } from 'utils'
 import { selectors } from 'state'
+import { templates } from 'constants'
 import AddProjectProvider from 'components/addProjectProvider'
-
-const templates = [
-  {
-    name: 'Typescript',
-    icon: <Typescript />,
-    link: 'https://github.com/codengo-llc/TypeScript-HelloWorld',
-  },
-  {
-    name: 'Ruby',
-    icon: <Ruby />,
-    link: 'https://github.com/codengo-llc/ruby-starter',
-  },
-  { name: 'Javascript', value: 'javascript', icon: <Javascript /> },
-  {
-    name: 'C++',
-    icon: <Cpp />,
-    link: 'https://github.com/codengo-llc/c-plus-plus-starter',
-  },
-  {
-    name: 'Python',
-    icon: <Python />,
-    link: 'https://github.com/codengo-llc/python-starter',
-  },
-  {
-    name: 'Go',
-    icon: <Go />,
-    link: 'https://github.com/codengo-llc/Go-HelloWorld',
-  },
-  {
-    name: 'C#',
-    icon: <CSharp />,
-    link: 'https://github.com/codengo-llc/C-Sharp-starter',
-  },
-  {
-    name: 'Java',
-    icon: <Java />,
-    link: 'https://github.com/codengo-llc/java-starter',
-  },
-]
 
 const FadeIn = keyframes`
   0% {
@@ -68,12 +19,12 @@ const FadeIn = keyframes`
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 
 const AddProjectWrapper = styled.div`
@@ -90,12 +41,12 @@ const AddProjectWrapper = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin-bottom: 0;
   height: 35h;
-  width: 50vw;
+  width: ${props => (props.mobile ? '90vw' : '50vw')};
 
-  @media (max-width: 1366px) {
-    width: 80vw;
+  /* @media (max-width: 1366px) {
+    width: 100vw;
     height: auto;
-  }
+  } */
 `
 
 const ComponentWrapper = styled.div`
@@ -216,6 +167,7 @@ const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
+  text-align: center;
 `
 
 const SectionDivider = styled.div`
@@ -235,6 +187,7 @@ const SectionDividerLine = styled.div`
 const SectionDividerText = styled(Title)`
   flex: 2;
   margin: 0.5vh;
+  text-align: center;
 `
 
 const GithubLinkInput = styled.input`
@@ -306,8 +259,6 @@ const StyledLink = styled(Link)`
 `
 
 const Templates = ({ addProject }) => {
-  const dispatch = useDispatch()
-  const user = useSelector(selectors.api.getUser)
   const repoError = useSelector(selectors.api.getError('myProjects'))
 
   const validate = values => {
@@ -326,28 +277,16 @@ const Templates = ({ addProject }) => {
     return errors
   }
 
-  const handleClick = item => {
-    user
-      ? createProject({
-          repoLink: item.link,
-          dispatch: dispatch,
-          user: user,
-        })
-      : console.log('User is not logged in')
-  }
+  const handleClick = item => addProject(item.link)
 
   return (
-    <AddProjectWrapper>
-      <Title mobile={isMobileOnly}>
+    <AddProjectWrapper mobile={isMobile}>
+      <Title mobile={isMobile}>
         Add project from Github or Gitlab repository
       </Title>
       <Formik
         onSubmit={(values, actions) => {
-          addProject(
-            values.repoLink.replace(/.git$/, '')
-            // dispatch,
-            // user,
-          )
+          addProject(values.repoLink.replace(/.git$/, ''))
           actions.setSubmitting(false)
         }}
         validate={validate}
@@ -360,7 +299,7 @@ const Templates = ({ addProject }) => {
               value={props.values.repoLink}
               name="repoLink"
               placeholder={
-                isMobileOnly
+                isMobile
                   ? 'Paste repo link here'
                   : 'https://github.com/evil-corp/worldDomination'
               }
@@ -382,7 +321,7 @@ const Templates = ({ addProject }) => {
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
-              mobile={isMobileOnly}
+              mobile={isMobile}
               type="submit"
             >
               Add project
@@ -391,26 +330,26 @@ const Templates = ({ addProject }) => {
         )}
       />
       <SectionDivider>
-        {!isMobileOnly && <SectionDividerLine />}
-        <SectionDividerText mobile={isMobileOnly}>
+        {!isMobile && <SectionDividerLine />}
+        <SectionDividerText mobile={isMobile}>
           Or try out one of the templates
         </SectionDividerText>
-        {!isMobileOnly && <SectionDividerLine />}
+        {!isMobile && <SectionDividerLine />}
       </SectionDivider>
       <ComponentWrapper>
-        <TemplatesWrapper mobile={isMobileOnly}>
+        <TemplatesWrapper mobile={isMobile}>
           {templates.map(item => (
             <TemplateContainer
               key={item.name}
               onClick={() => handleClick(item)}
             >
-              <IconContainer mobile={isMobileOnly}>{item.icon}</IconContainer>
+              <IconContainer mobile={isMobile}>{item.icon}</IconContainer>
               <TemplateText>{item.name}</TemplateText>
             </TemplateContainer>
           ))}
         </TemplatesWrapper>
 
-        <StyledLink mobile={isMobileOnly} to="templates">
+        <StyledLink mobile={isMobile} to="templates">
           More templates
         </StyledLink>
       </ComponentWrapper>
@@ -418,8 +357,8 @@ const Templates = ({ addProject }) => {
   )
 }
 
-export default () => (
+export default memo(() => (
   <AddProjectProvider>
     {({ addProject }) => <Templates addProject={addProject} />}
   </AddProjectProvider>
-)
+))

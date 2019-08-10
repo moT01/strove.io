@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
@@ -137,11 +137,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <PreviewLink
             style={{ color: '#fff', textDecoration: 'none' }}
-            href={
-              process.env.NODE_ENV === 'production'
-                ? 'silisky.com/app/preview/'
-                : 'localhost:8000/app/preview/'
-            }
+            href={'/app/preview/'}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -164,4 +160,4 @@ const Header = props => (
   </Location>
 )
 
-export default Header
+export default memo(Header)
