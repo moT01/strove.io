@@ -3,7 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import { Link } from 'gatsby'
-import { isMobileOnly } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
 import { templates } from 'constants'
@@ -41,12 +41,12 @@ const AddProjectWrapper = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin-bottom: 0;
   height: 35h;
-  width: 50vw;
+  width: ${props => (props.mobile ? '90vw' : '50vw')};
 
-  @media (max-width: 1366px) {
+  /* @media (max-width: 1366px) {
     width: 100vw;
     height: auto;
-  }
+  } */
 `
 
 const ComponentWrapper = styled.div`
@@ -280,8 +280,8 @@ const Templates = ({ addProject }) => {
   const handleClick = item => addProject(item.link)
 
   return (
-    <AddProjectWrapper>
-      <Title mobile={isMobileOnly}>
+    <AddProjectWrapper mobile={isMobile}>
+      <Title mobile={isMobile}>
         Add project from Github or Gitlab repository
       </Title>
       <Formik
@@ -299,7 +299,7 @@ const Templates = ({ addProject }) => {
               value={props.values.repoLink}
               name="repoLink"
               placeholder={
-                isMobileOnly
+                isMobile
                   ? 'Paste repo link here'
                   : 'https://github.com/evil-corp/worldDomination'
               }
@@ -321,7 +321,7 @@ const Templates = ({ addProject }) => {
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
-              mobile={isMobileOnly}
+              mobile={isMobile}
               type="submit"
             >
               Add project
@@ -330,26 +330,26 @@ const Templates = ({ addProject }) => {
         )}
       />
       <SectionDivider>
-        {!isMobileOnly && <SectionDividerLine />}
-        <SectionDividerText mobile={isMobileOnly}>
+        {!isMobile && <SectionDividerLine />}
+        <SectionDividerText mobile={isMobile}>
           Or try out one of the templates
         </SectionDividerText>
-        {!isMobileOnly && <SectionDividerLine />}
+        {!isMobile && <SectionDividerLine />}
       </SectionDivider>
       <ComponentWrapper>
-        <TemplatesWrapper mobile={isMobileOnly}>
+        <TemplatesWrapper mobile={isMobile}>
           {templates.map(item => (
             <TemplateContainer
               key={item.name}
               onClick={() => handleClick(item)}
             >
-              <IconContainer mobile={isMobileOnly}>{item.icon}</IconContainer>
+              <IconContainer mobile={isMobile}>{item.icon}</IconContainer>
               <TemplateText>{item.name}</TemplateText>
             </TemplateContainer>
           ))}
         </TemplatesWrapper>
 
-        <StyledLink mobile={isMobileOnly} to="templates">
+        <StyledLink mobile={isMobile} to="templates">
           More templates
         </StyledLink>
       </ComponentWrapper>
