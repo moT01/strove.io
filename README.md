@@ -1,7 +1,7 @@
 <div align='center'>
 <img src="./src/images/readmeAssets/siliskylogo2.png" width="220px">
 
-# [SiliSky](https://www.silisky.com/)
+# [fic.dev](https://www.fic.dev/)
 
 </div>
 
@@ -16,7 +16,7 @@
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 
-### [https://www.silisky.com/](https://www.silisky.com/)
+### [https://www.fic.dev/](https://www.fic.dev/)
 
 <div align="center">
 <img src="./src/images/readmeAssets/siliskygif2.gif" width='900px'>
@@ -24,7 +24,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 
 # Get started
 
-Add # + github url after silisky.com/ to get start coding right away, for example: silisky.com/#https://github.com/rt2zz/redux-persist
+Add # + github url after fic.dev to get start coding right away, for example: fic.dev/#https://github.com/rt2zz/redux-persist
 
 # Known issues
 
