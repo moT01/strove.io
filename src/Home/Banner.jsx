@@ -94,26 +94,17 @@ const StyledModal = styled(Modal)`
   display: flex;
   height: auto;
   width: auto;
-  top: 25%;
+  /* top: 25%;
   ${({ isMobile }) =>
     !isMobile &&
     css`
       left: 25%;
-    `}
+    `} */
   position: fixed;
   animation: ${FadeIn} 0.2s ease-out;
 
   :focus {
     outline: 0;
-  }
-
-  @media (max-width: 1366px) {
-    width: 80vw;
-    ${({ isMobile }) =>
-      !isMobile &&
-      css`
-        left: 10vw;
-      `}
   }
 `
 
