@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `SiliSky`,
+    title: `fic.dev`,
     description: `Move your development to the cloud. Access and run code anywhere using powerful linux servers.`,
     author: `@gatsbyjs`,
     siteUrl: `${process.env.SILISKY_URL}`,
@@ -63,8 +63,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `SiliSky`,
-        short_name: `SiliSky`,
+        name: `fic.dev`,
+        short_name: `fic.dev`,
         start_url: `/`,
         background_color: `#FFF`,
         theme_color: `#194F9D`,
