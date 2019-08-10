@@ -1,4 +1,9 @@
-# [SiliSky](https://www.silisky.com/)
+<div align='center'>
+<img src="./src/images/readmeAssets/siliskylogo2.png" width="220px">
+
+# [fic.dev](https://www.fic.dev/)
+
+</div>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/inspiring-shaw-cb8237/deploys)
 
@@ -8,7 +13,7 @@
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 
-### [https://www.silisky.com/](https://www.silisky.com/)
+### [https://www.fic.dev/](https://www.fic.dev/)
 
 <div align="center">
 <img src="./src/images/readmeAssets/siliskygif2.gif" width='900px'>
@@ -16,7 +21,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 
 # Get started
 
-Add # + github url after silisky.com/ to get start coding right away, for example: https://silisky.com/#https://github.com/rwieruch/minimal-react-webpack-babel-setup
+Add # + github url after fic.dev to get start coding right away, for example: fic.dev/#https://github.com/rt2zz/redux-persist
 
 # Found a bug?
 
