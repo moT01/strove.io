@@ -160,7 +160,7 @@ const Banner = props => {
               style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-          <h1 key="h1">SiliSky</h1>
+          <h1 key="h1">fic.dev</h1>
           <p key="content">Code in clouds. One evironment for everyone.</p>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
