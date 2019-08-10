@@ -15,41 +15,41 @@ export default [
   {
     name: 'Typescript',
     icon: <Typescript />,
-    link: 'https://github.com/silisky/TypeScript-HelloWorld',
+    link: 'https://github.com/ficdevelopers/TypeScript-HelloWorld',
   },
   {
     name: 'Ruby',
     icon: <Ruby />,
-    link: 'https://github.com/silisky/ruby-starter',
+    link: 'https://github.com/ficdevelopers/ruby-starter',
   },
   {
     name: 'Javascript',
     icon: <Javascript />,
-    link: 'https://github.com/silisky/gatsby-starter',
+    link: 'https://github.com/ficdevelopers/gatsby-starter',
   },
   {
     name: 'C++',
     icon: <Cpp />,
-    link: 'https://github.com/silisky/c-plus-plus-starter',
+    link: 'https://github.com/ficdevelopers/c-plus-plus-starter',
   },
   {
     name: 'Python',
     icon: <Python />,
-    link: 'https://github.com/silisky/python-starter',
+    link: 'https://github.com/ficdevelopers/python-starter',
   },
   {
     name: 'Go',
     icon: <Go />,
-    link: 'https://github.com/silisky/Go-HelloWorld',
+    link: 'https://github.com/ficdevelopers/Go-HelloWorld',
   },
   {
     name: 'C#',
     icon: <CSharp />,
-    link: 'https://github.com/silisky/C-Sharp-starter',
+    link: 'https://github.com/ficdevelopers/C-Sharp-starter',
   },
   {
     name: 'Java',
     icon: <Java />,
-    link: 'https://github.com/silisky/java-starter',
+    link: 'https://github.com/ficdevelopers/java-starter',
   },
 ]
