@@ -167,6 +167,7 @@ const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: #0072ce;
   margin: 0.3vh 0.3vh 0.3vh 0;
+  text-align: center;
 `
 
 const SectionDivider = styled.div`
@@ -186,6 +187,7 @@ const SectionDividerLine = styled.div`
 const SectionDividerText = styled(Title)`
   flex: 2;
   margin: 0.5vh;
+  text-align: center;
 `
 
 const GithubLinkInput = styled.input`
