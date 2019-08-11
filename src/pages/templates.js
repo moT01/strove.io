@@ -249,7 +249,7 @@ const templates = [
   },
 ]
 
-const Dashboard = ({ addProject }) => {
+const Templates = ({ addProject }) => {
   const handleClick = item => addProject(item.link)
 
   const leftColumn = []
@@ -308,6 +308,6 @@ const Dashboard = ({ addProject }) => {
 
 export default memo(() => (
   <AddProjectProvider>
-    {({ addProject }) => <Dashboard addProject={addProject} />}
+    {({ addProject }) => <Templates addProject={addProject} />}
   </AddProjectProvider>
 ))
