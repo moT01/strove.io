@@ -1,14 +1,11 @@
 import React, { memo } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
-import { isMobileOnly, isTablet } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
 import { Typescript } from 'images/logos'
-import { createProject } from 'utils'
-import { selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 
 const FadeIn = keyframes`
@@ -212,50 +209,47 @@ const templates = [
     icon: <Typescript />,
     link:
       'https://github.com/codengo-llc/Elixir-HelloWorld#basic-elixir-project-created-with-silisky',
-    description: 'A basic Elixir Project Created With SiliSky.',
+    description: 'A basic Elixir Project Created With Strove.',
   },
   {
     name: 'C-HelloWorld',
     icon: <Typescript />,
     link: 'https://github.com/codengo-llc/C-HelloWorld',
-    description: 'A basic C Project Created With SiliSky.',
+    description: 'A basic C Project Created With Strove.',
   },
   {
     name: 'R-HelloWorld',
     icon: <Typescript />,
     link: 'https://github.com/codengo-llc/R-HelloWorld',
-    description: 'A basic R Project Created With SiliSky.',
+    description: 'A basic R Project Created With Strove.',
   },
   {
     name: 'Scala-HelloWorld',
     icon: <Typescript />,
     link: 'https://github.com/codengo-llc/Scala-HelloWorld',
-    description: 'A basic Scala Project Created With SiliSky.',
+    description: 'A basic Scala Project Created With Strove.',
   },
   {
     name: 'Haskell-HelloWorld',
     icon: <Typescript />,
     link: 'https://github.com/codengo-llc/Haskell-HelloWorld',
-    description: 'A basic Haskell Project Created With SiliSky.',
+    description: 'A basic Haskell Project Created With Strove.',
   },
   {
     name: 'Php-HelloWorld',
     icon: <Typescript />,
     link: 'https://github.com/codengo-llc/Php-HelloWorld',
-    description: 'A basic Php Project Created With SiliSky.',
+    description: 'A basic Php Project Created With Strove.',
   },
   {
     name: 'Rust-HelloWorld',
     icon: <Typescript />,
     link: 'https://github.com/codengo-llc/Rust-HelloWorld',
-    description: 'A basic Rust Project Created With SiliSky.',
+    description: 'A basic Rust Project Created With Strove.',
   },
 ]
 
 const Dashboard = ({ addProject }) => {
-  const dispatch = useDispatch()
-  const user = useSelector(selectors.api.getUser)
-
   const handleClick = item => addProject(item.link)
 
   const leftColumn = []
