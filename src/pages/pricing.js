@@ -34,6 +34,11 @@ const CardsWrapper = styled.div`
   }
 `
 
+const StyledA = styled.a`
+  text-decoration: none;
+  margin: 0;
+`
+
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -317,7 +322,9 @@ const PricingPage = () => {
                 <Feature team>Commercial use</Feature>
                 <Feature team>Priority support</Feature>
                 <Button team>
-                  <ButtonText>Choose Enterprise</ButtonText>
+                  <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+                    <ButtonText>Choose Enterprise</ButtonText>
+                  </StyledA>
                 </Button>
               </PricingWrapper>
             </PricingSection>
