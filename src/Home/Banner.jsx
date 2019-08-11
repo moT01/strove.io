@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react'
 import QueueAnim from 'rc-queue-anim'
-import TweenOne from 'rc-tween-one'
-import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
