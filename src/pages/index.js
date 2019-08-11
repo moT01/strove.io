@@ -6,7 +6,7 @@ import AntDesign from '../Home'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="SiliSky" />
+    <SEO title="Strove" />
     <AntDesign />
   </Layout>
 )
