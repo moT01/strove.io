@@ -6,7 +6,7 @@ import { Link } from 'gatsby'
 import { isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
-import { templates } from 'constants'
+// import { templates } from 'constants'
 import AddProjectProvider from 'components/addProjectProvider'
 
 const FadeIn = keyframes`
@@ -55,66 +55,66 @@ const ComponentWrapper = styled.div`
   align-items: center;
 `
 
-const TemplatesWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: auto;
-  padding: 0.5vh;
-  justify-content: ${props => (props.mobile ? 'flex-start' : 'center')};
-  align-items: center;
-  overflow-x: ${props => (props.mobile ? 'scroll' : 'visible')};
+// const TemplatesWrapper = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+//   height: auto;
+//   padding: 0.5vh;
+//   justify-content: ${props => (props.mobile ? 'flex-start' : 'center')};
+//   align-items: center;
+//   overflow-x: ${props => (props.mobile ? 'scroll' : 'visible')};
 
-  ${props =>
-    props.mobile &&
-    css`
-      border: 1px solid #0072ce;
-      box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-      border-radius: 5px;
-      margin: 10px 0 10px 0;
-    `}
-`
+//   ${props =>
+//     props.mobile &&
+//     css`
+//       border: 1px solid #0072ce;
+//       box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+//       border-radius: 5px;
+//       margin: 10px 0 10px 0;
+//     `}
+// `
 
-const TemplateContainer = styled.a`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  margin: 0.25vh;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s;
+// const TemplateContainer = styled.a`
+//   display: flex;
+//   flex: 1;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   height: auto;
+//   margin: 0.25vh;
+//   text-decoration: none;
+//   cursor: pointer;
+//   transition: all 0.2s;
 
-  :hover {
-    transform: translateY(-3px);
-  }
+//   :hover {
+//     transform: translateY(-3px);
+//   }
 
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-`
+//   svg {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `
 
-const IconContainer = styled.div`
-  width: ${props => (props.mobile ? '20vw' : '5vw')};
-  height: ${props => (props.mobile ? '20vw' : '5vw')};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
+// const IconContainer = styled.div`
+//   width: ${props => (props.mobile ? '20vw' : '5vw')};
+//   height: ${props => (props.mobile ? '20vw' : '5vw')};
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// `
 
-const TemplateText = styled.p`
-  color: #0072ce;
-  font-size: 1rem;
-  margin-left: 2%;
-  margin-bottom: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`
+// const TemplateText = styled.p`
+//   color: #0072ce;
+//   font-size: 1rem;
+//   margin-left: 2%;
+//   margin-bottom: 0;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+// `
 
 const Button = styled.button`
   display: flex;
@@ -167,25 +167,25 @@ const Title = styled.h3`
   text-align: center;
 `
 
-const SectionDivider = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  flex-direction: row;
-`
+// const SectionDivider = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   flex-direction: row;
+// `
 
-const SectionDividerLine = styled.div`
-  flex: 1;
-  border-top: 1px solid #0072ce;
-`
+// const SectionDividerLine = styled.div`
+//   flex: 1;
+//   border-top: 1px solid #0072ce;
+// `
 
-const SectionDividerText = styled(Title)`
-  flex: 2;
-  margin: 0.5vh;
-  text-align: center;
-`
+// const SectionDividerText = styled(Title)`
+//   flex: 2;
+//   margin: 0.5vh;
+//   text-align: center;
+// `
 
 const GithubLinkInput = styled.input`
   width: 80%;
@@ -274,7 +274,7 @@ const Templates = ({ addProject }) => {
     return errors
   }
 
-  const handleClick = item => addProject(item.link)
+  // const handleClick = item => addProject(item.link)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
