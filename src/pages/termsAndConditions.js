@@ -25,7 +25,7 @@ const TextWell = styled.div`
 const Legal = () => (
   <>
     <SEO title="Terms And Conditions" />
-    <Header siteTitle="SiliSky" />
+    <Header siteTitle="Strove" />
 
     <TextWell>
       <h1 style={{ alignSelf: 'center' }}>Terms and Conditions</h1>

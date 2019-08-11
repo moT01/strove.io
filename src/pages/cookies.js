@@ -30,7 +30,7 @@ const StyledH2 = styled.h2`
 const Legal = () => (
   <>
     <SEO title="Cookies" />
-    <Header siteTitle="SiliSky" />
+    <Header siteTitle="Strove" />
 
     <TextWell>
       <StyledH2> About Cookies</StyledH2>

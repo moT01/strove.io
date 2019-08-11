@@ -24,7 +24,7 @@ const TextWell = styled.div`
 const Legal = () => (
   <>
     <SEO title="Privacy Policy" />
-    <Header siteTitle="SiliSky" />
+    <Header siteTitle="Strove" />
 
     <TextWell>
       <h1 style={{ alignSelf: 'center' }}>Privacy Policy</h1>
