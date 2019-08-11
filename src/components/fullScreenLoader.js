@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
-import { Stroveio } from 'images/logos'
+import { Strove } from 'images/logos'
 import { useInterval } from '../hooks'
 
 const SpinToWin = keyframes`
@@ -55,7 +55,7 @@ const Text = styled.p`
   overflow: hidden;
 `
 
-const StyledLogo = styled(Stroveio)`
+const StyledLogo = styled(Strove)`
   width: '100%';
   height: 'auto';
 `
