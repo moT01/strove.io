@@ -1,11 +1,11 @@
 <div align='center'>
-<img src="./src/images/readmeAssets/siliskylogo2.png" width="220px">
+<img src="./src/images/readmeAssets/strove2.png" width="220px">
 
-# [fic.dev](https://www.fic.dev/)
+# [Strove.io](https://www.strove.io/)
 
 </div>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/inspiring-shaw-cb8237/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
 
 <a href="https://discord.gg/P9DrxRz">
 <img alt="Discord" src="https://img.shields.io/discord/593787637291286529.svg?color=%230E1D23&label=discord&style=popout">
@@ -13,15 +13,15 @@
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 
-### [https://www.fic.dev/](https://www.fic.dev/)
+### [https://www.strove.io/](https://www.strove.io/)
 
 <div align="center">
-<img src="./src/images/readmeAssets/siliskygif2.gif" width='900px'>
+<img src="./src/images/readmeAssets/stroveGif2.gif" width='900px'>
 </div>
 
 # Get started
 
-Add # + github url after fic.dev to get start coding right away, for example: fic.dev/#https://github.com/rt2zz/redux-persist
+Add # + github url after strove.io to get start coding right away, for example: strove.io/#https://github.com/rt2zz/redux-persist
 
 # Found a bug?
 
@@ -43,7 +43,7 @@ Raise an issue! We'll take a look!
 
 # Supported languages
 
-Silisky supports all major languages including: Python, TypeScript, R, Haskell, Go, Javascript, PHP, C, Elixir, C#, Java, Scala, Rust, Ruby, C++, Chicken and many more.
+Strove supports all major languages including: Python, TypeScript, R, Haskell, Go, Javascript, PHP, C, Elixir, C#, Java, Scala, Rust, Ruby, C++, Chicken and many more.
 
 <div align='center'>
 <table>

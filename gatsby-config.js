@@ -64,7 +64,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Strove`,
-        short_name: `strove`,
+        short_name: `Strove`,
         start_url: `/`,
         background_color: `#FFF`,
         theme_color: `#194F9D`,
