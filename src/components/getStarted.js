@@ -40,13 +40,10 @@ const AddProjectWrapper = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin-bottom: 0;
-  height: 35h;
-  width: ${props => (props.mobile ? '90vw' : '50vw')};
-
-  /* @media (max-width: 1366px) {
-    width: 100vw;
-    height: auto;
-  } */
+  height: auto;
+  width: auto;
+  min-width: 50vw;
+  max-width: 100vw;
 `
 
 const ComponentWrapper = styled.div`
