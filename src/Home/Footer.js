@@ -71,7 +71,7 @@ const Footer = () => {
           <StyledLink to="/cookies">
             <LinkText>Twitter</LinkText>
           </StyledLink> */}
-          <StyledAnchor href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+          <StyledAnchor href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
             <LinkText>Contact us</LinkText>
           </StyledAnchor>
         </Column>
