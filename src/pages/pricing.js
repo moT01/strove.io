@@ -281,10 +281,10 @@ const PricingPage = () => {
                 {subscription?.status !== 'active' ? (
                   <StripeCheckout
                     amount={3999}
-                    description="SiliSky"
+                    description="Strove"
                     image="https://i.imgur.com/2IE6t8u.png"
                     locale="en"
-                    name="SiliSky.com"
+                    name="Strive.io"
                     stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
                     token={queryToken}
                     allowRememberMe={false}
@@ -312,12 +312,10 @@ const PricingPage = () => {
                 <Contact team>Contact Sales for pricing</Contact>
                 <Feature team>Private and Public repositories</Feature>
                 <Feature team>
-                  RAM, hard drive and speeed adjusted to teams needs
+                  RAM, hard drive and speed adjusted to teams needs
                 </Feature>
                 <Feature team>Commercial use</Feature>
-
                 <Feature team>Priority support</Feature>
-
                 <Button team>
                   <ButtonText>Choose Enterprise</ButtonText>
                 </Button>
