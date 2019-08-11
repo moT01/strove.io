@@ -11,16 +11,15 @@ const FullFadeIn = keyframes`
   }
 `
 
-const sizeProps = props =>
-  css`
-    ${props.width && `width: ${props.width}`};
-    ${props.width && `left: calc(50vw - ${props.width}/2)`};
-    ${props.height && `height: ${props.height}`};
-    ${props.height && `top: calc(50vh - ${props.height}/2)`};
-  `
+// const sizeProps = props =>
+//   css`
+//     ${props.width && `width: ${props.width}`};
+//     ${props.width && `left: calc(50vw - ${props.width}/2)`};
+//     ${props.height && `height: ${props.height}`};
+//     ${props.height && `top: calc(50vh - ${props.height}/2)`};
+//   `
 
 export default memo(styled(Modal)`
-  ${sizeProps};
   display: flex;
   flex-direction: column;
   justify-content: center;
