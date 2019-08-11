@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
-import { Link } from 'gatsby'
+// import { Link } from 'gatsby'
 import { isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
@@ -221,39 +221,39 @@ const ErrorMessage = styled.p`
   height: 0.9rem;
 `
 
-const StyledLink = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: ${props => (props.mobile ? '100%' : '20%')};
-  min-width: 70px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
-  border-width: 1px;
-  border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-  border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  opacity: 0.9;
-  cursor: pointer;
+// const StyledLink = styled(Link)`
+//   display: flex;
+//   flex-direction: row;
+//   height: auto;
+//   width: ${props => (props.mobile ? '100%' : '20%')};
+//   min-width: 70px;
+//   margin: 5px;
+//   padding: 0.5vh;
+//   align-items: center;
+//   justify-content: center;
+//   text-align: center;
+//   background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+//   border-width: 1px;
+//   border-style: solid;
+//   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+//   border-radius: 5px;
+//   border-color: #0072ce;
+//   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+//   text-decoration: none;
+//   transition: all 0.2s ease;
+//   opacity: 0.9;
+//   cursor: pointer;
 
-  :focus {
-    outline: 0;
-  }
+//   :focus {
+//     outline: 0;
+//   }
 
-  &:hover {
-    opacity: 1;
-    box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
-    transform: translateY(-1px);
-  }
-`
+//   &:hover {
+//     opacity: 1;
+//     box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+//     transform: translateY(-1px);
+//   }
+// `
 
 const Templates = ({ addProject }) => {
   const repoError = useSelector(selectors.api.getError('myProjects'))
