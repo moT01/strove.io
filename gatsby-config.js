@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `strove.io`,
+    title: `Strove`,
     description: `Move your development to the cloud. Access and run code anywhere using powerful linux servers.`,
     author: `@gatsbyjs`,
     siteUrl: `${process.env.SILISKY_URL}`,
@@ -63,8 +63,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `strove.io`,
-        short_name: `strove.io`,
+        name: `Strove`,
+        short_name: `strove`,
         start_url: `/`,
         background_color: `#FFF`,
         theme_color: `#194F9D`,
