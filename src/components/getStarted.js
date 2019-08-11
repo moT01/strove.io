@@ -326,15 +326,15 @@ const Templates = ({ addProject }) => {
           </GithubLinkForm>
         )}
       />
-      <SectionDivider>
+      {/* <SectionDivider>
         {!isMobile && <SectionDividerLine />}
         <SectionDividerText mobile={isMobile}>
           Or try out one of the templates
         </SectionDividerText>
         {!isMobile && <SectionDividerLine />}
-      </SectionDivider>
+      </SectionDivider> */}
       <ComponentWrapper>
-        <TemplatesWrapper mobile={isMobile}>
+        {/* <TemplatesWrapper mobile={isMobile}>
           {templates.map(item => (
             <TemplateContainer
               key={item.name}
@@ -344,11 +344,11 @@ const Templates = ({ addProject }) => {
               <TemplateText>{item.name}</TemplateText>
             </TemplateContainer>
           ))}
-        </TemplatesWrapper>
+        </TemplatesWrapper> */}
 
-        <StyledLink mobile={isMobile} to="templates">
+        {/* <StyledLink mobile={isMobile} to="templates">
           More templates
-        </StyledLink>
+        </StyledLink> */}
       </ComponentWrapper>
     </AddProjectWrapper>
   )
