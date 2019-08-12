@@ -82,6 +82,7 @@ module.exports = {
           'REDIRECT_URI',
           'SILISKY_URL',
           'GITLAB_CLIENT_ID',
+          'SILISKY_WEBSOCKET_ENDPOINT',
         ],
       },
     },
