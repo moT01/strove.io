@@ -1,13 +1,8 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
-import { withClientState } from 'apollo-link-state'
-import { ApolloLink, Observable } from 'apollo-link'
-import fetch from 'isomorphic-fetch'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import ws from 'ws'
 import { split } from 'apollo-link'
 
 const cache = new InMemoryCache()
