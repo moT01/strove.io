@@ -71,7 +71,7 @@ const Editor = () => {
     return () => {
       clearInterval(projectPing)
     }
-  }, [])
+  }, [projectId])
 
   return (
     <Layout>
