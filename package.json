@@ -53,6 +53,7 @@
     "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.7.0",
     "isomorphic-fetch": "^2.2.1",
+    "isomorphic-ws": "^4.0.1",
     "lodash": "^4.17.11",
     "prism-themes": "^1.1.0",
     "prismjs": "^1.16.0",
