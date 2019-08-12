@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Adam Żaczek, Mateusz Olek, Paweł Wygoda, Piotr Jarosz",
   "dependencies": {
+    "@apollo/react-hooks": "^3.0.0",
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.11",
     "@reach/router": "^1.2.1",
