@@ -8,9 +8,6 @@ import { ApolloLink, Observable } from 'apollo-link'
 import fetch from 'isomorphic-fetch'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import { Link } from 'gatsby'
-import window from 'utils/window'
-
 // const WebSocket = require('isomorphic-ws')
 
 const cache = new InMemoryCache()
@@ -26,32 +23,32 @@ const defaultOptions = {
   },
 }
 
-const httpLink = new HttpLink({
-  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
-})
-
-let link
-// https://stackoverflow.com/questions/20060320/what-is-the-best-way-to-detect-websocket-support-using-javascript
-if (window && ('WebSocket' in window || 'MozWebSocket' in window)) {
-  link = split(
-    ({ query }) => {
-      const definition = getMainDefinition(query)
-      return (
-        definition.kind === 'OperationDefinition' &&
-        definition.operation === 'subscription'
-      )
-    },
-    new WebSocketLink({
+const wsLink = process.browser
+  ? new WebSocketLink({
+      // if you instantiate in the server, the error will be thrown
       uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
       options: {
         reconnect: true,
       },
-    }),
-    httpLink
-  )
-} else {
-  link = httpLink
-}
+    })
+  : null
+
+const httpLink = new HttpLink({
+  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
+})
+
+const link = process.browser
+  ? split(
+      //only create the split in the browser
+      // split based on operation type
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(query)
+        return kind === 'OperationDefinition' && operation === 'subscription'
+      },
+      wsLink,
+      httpLink
+    )
+  : httpLink
 
 const requestLink = new ApolloLink(
   (operation, forward) =>
