@@ -8,8 +8,14 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
+import { useSubscription } from '@apollo/react-hooks'
 
-import { GITHUB_LOGIN, GITLAB_LOGIN, MY_PROJECTS } from 'queries'
+import {
+  GITHUB_LOGIN,
+  GITLAB_LOGIN,
+  MY_PROJECTS,
+  ACTIVE_PROJECT,
+} from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
 import { selectors } from 'state'
@@ -28,6 +34,21 @@ export const persistor = persistStore(createStore)
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+
+  // const activeProject = useSubscription(ACTIVE_PROJECT, {
+  //   client,
+  //   fetchPolicy: 'no-cache',
+  //   context: {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //       'User-Agent': 'node',
+  //     },
+  //   },
+  // })
+
+  // const syncActiveProject = () => {
+  //   console.log('Is it on?', activeProject)
+  // }
 
   const currentProjectSet = result => {
     const currentProject = result.find(item => item.machineId)
@@ -59,6 +80,10 @@ const LoginProvider = ({ children }) => {
       then = now
     }, 2000)
   }
+
+  // useEffect(() => {
+  //   syncActiveProject()
+  // }, [activeProject.loading])
 
   useEffect(() => {
     const code = window?.location?.href

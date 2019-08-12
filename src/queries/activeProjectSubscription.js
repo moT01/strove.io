@@ -3,7 +3,9 @@ import { ProjectFragment } from './fragments/project'
 
 export default gql`
   subscription {
-    ...Project
+    activeProject {
+      ...Project
+    }
   }
   ${ProjectFragment}
 `
