@@ -1,4 +1,5 @@
-import { ApolloClient, split } from 'apollo-client'
+import { ApolloClient } from 'apollo-client'
+import { split } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
@@ -7,7 +8,10 @@ import { ApolloLink, Observable } from 'apollo-link'
 import fetch from 'isomorphic-fetch'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import ws from 'ws'
+import { Link } from 'gatsby'
+import window from 'utils/window'
+
+// const WebSocket = require('isomorphic-ws')
 
 const cache = new InMemoryCache()
 
@@ -22,32 +26,32 @@ const defaultOptions = {
   },
 }
 
-// Create a WebSocket link:
-const wsLink = new WebSocketLink({
-  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
-  options: {
-    reconnect: true,
-  },
-  webSocketImpl: ws,
-})
-
 const httpLink = new HttpLink({
   uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
 })
 
-// using the ability to split links, you can send data to each link
-// depending on what kind of operation is being sent
-const link = split(
-  ({ query }) => {
-    const definition = getMainDefinition(query)
-    return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-    )
-  },
-  wsLink,
-  httpLink
-)
+let link
+// https://stackoverflow.com/questions/20060320/what-is-the-best-way-to-detect-websocket-support-using-javascript
+if (window && ('WebSocket' in window || 'MozWebSocket' in window)) {
+  link = split(
+    ({ query }) => {
+      const definition = getMainDefinition(query)
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      )
+    },
+    new WebSocketLink({
+      uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
+      options: {
+        reconnect: true,
+      },
+    }),
+    httpLink
+  )
+} else {
+  link = httpLink
+}
 
 const requestLink = new ApolloLink(
   (operation, forward) =>
