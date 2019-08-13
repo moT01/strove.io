@@ -64,13 +64,13 @@ const LoginProvider = ({ children }) => {
         data: { editorPort, machineId },
       },
     })
-    dispatch({
-      type: C.api.UPDATE_ITEM,
-      payload: {
-        storeKey: 'user',
-        data: { currentProjectId: stopId },
-      },
-    })
+    // dispatch({
+    //   type: C.api.UPDATE_ITEM,
+    //   payload: {
+    //     storeKey: 'user',
+    //     data: { currentProjectId: stopId },
+    //   },
+    // })
 
     machineId ? setProjectToStop(id) : setProjectToStop(null)
   }
