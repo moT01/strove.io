@@ -207,16 +207,17 @@ const LoginProvider = ({ children }) => {
     checkAwake()
   }, [])
 
-  // useEffect(() => {
-  //   user &&
-  //     dispatch(
-  //       query({
-  //         name: 'myProjects',
-  //         dataSelector: data => data.myProjects.edges,
-  //         query: MY_PROJECTS,
-  //       })
-  //     )
-  // }, [user])
+  useEffect(() => {
+    user &&
+      dispatch(
+        query({
+          name: 'myProjects',
+          dataSelector: data => data.myProjects.edges,
+          query: MY_PROJECTS,
+          onSuccess: currentProjectSet,
+        })
+      )
+  }, [user])
 
   return children
 }
