@@ -34,7 +34,6 @@ export const persistor = persistStore(createStore)
 const LoginProvider = ({ children }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
-  const projects = useSelector(selectors.api.getUserProjects)
   const [projectToStop, setProjectToStop] = useState(null)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
@@ -54,7 +53,6 @@ const LoginProvider = ({ children }) => {
     const machineId = activeProjectData ? activeProjectData.machineId : null
     const editorPort = activeProjectData ? activeProjectData.editorPort : null
     const id = activeProjectData ? activeProjectData.id : projectToStop
-    const stopId = activeProjectData ? activeProjectData.id : null
 
     dispatch({
       type: C.api.UPDATE_ITEM,
@@ -64,13 +62,6 @@ const LoginProvider = ({ children }) => {
         data: { editorPort, machineId },
       },
     })
-    // dispatch({
-    //   type: C.api.UPDATE_ITEM,
-    //   payload: {
-    //     storeKey: 'user',
-    //     data: { currentProjectId: stopId },
-    //   },
-    // })
 
     machineId ? setProjectToStop(id) : setProjectToStop(null)
   }
