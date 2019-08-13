@@ -56,11 +56,12 @@ const LoginProvider = ({ children }) => {
     const id = activeProjectData ? activeProjectData.id : projectToStop
     const stopId = activeProjectData ? activeProjectData.id : null
 
-    // console.log('Is it on?', activeProject)
-    // console.log('Data check', activeProjectData)
-    // console.log('TCL: syncActiveProject -> id', id)
-    // console.log('TCL: syncActiveProject -> editorPort', editorPort)
-    // console.log('TCL: syncActiveProject -> machineId', machineId)
+    console.log('Is it on?', activeProject)
+    console.log('Data check', activeProjectData)
+    console.log('TCL: syncActiveProject -> id', id)
+    console.log('TCL: syncActiveProject -> editorPort', editorPort)
+    console.log('TCL: syncActiveProject -> machineId', machineId)
+
     dispatch({
       type: C.api.UPDATE_ITEM,
       payload: {
@@ -112,7 +113,7 @@ const LoginProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    syncActiveProject()
+    user && syncActiveProject()
   }, [activeProject.data])
 
   useEffect(() => {
@@ -212,16 +213,16 @@ const LoginProvider = ({ children }) => {
     checkAwake()
   }, [])
 
-  useEffect(() => {
-    user &&
-      dispatch(
-        query({
-          name: 'myProjects',
-          dataSelector: data => data.myProjects.edges,
-          query: MY_PROJECTS,
-        })
-      )
-  }, [user])
+  // useEffect(() => {
+  //   user &&
+  //     dispatch(
+  //       query({
+  //         name: 'myProjects',
+  //         dataSelector: data => data.myProjects.edges,
+  //         query: MY_PROJECTS,
+  //       })
+  //     )
+  // }, [user])
 
   return children
 }
