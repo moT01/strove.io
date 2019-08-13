@@ -41,8 +41,7 @@ const Layout = ({ children }) => {
                   <div></div>
                 ) : (
                   <div>
-                    Your browser is not supported. Strove.io currenty supports
-                    only Google Chrome, Mozilla Firefox and Opera
+                    Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox or Opera
                   </div>
                 )
               }
