@@ -321,10 +321,10 @@ const PricingPage = () => {
                 </Feature>
                 <Feature team>Commercial use</Feature>
                 <Feature team>Priority support</Feature>
-                <Button team onClick={() => console.log('Yeeeet')}>
-                  {/* <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?"> */}
+                <Button team>
+                  <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
                   <ButtonText>Choose Enterprise</ButtonText>
-                  {/* </StyledA> */}
+                  </StyledA>
                 </Button>
               </PricingWrapper>
             </PricingSection>
