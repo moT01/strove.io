@@ -214,7 +214,6 @@ const LoginProvider = ({ children }) => {
           name: 'myProjects',
           dataSelector: data => data.myProjects.edges,
           query: MY_PROJECTS,
-          onSuccess: currentProjectSet,
         })
       )
   }, [user])
