@@ -56,12 +56,6 @@ const LoginProvider = ({ children }) => {
     const id = activeProjectData ? activeProjectData.id : projectToStop
     const stopId = activeProjectData ? activeProjectData.id : null
 
-    console.log('Is it on?', activeProject)
-    console.log('Data check', activeProjectData)
-    console.log('TCL: syncActiveProject -> id', id)
-    console.log('TCL: syncActiveProject -> editorPort', editorPort)
-    console.log('TCL: syncActiveProject -> machineId', machineId)
-
     dispatch({
       type: C.api.UPDATE_ITEM,
       payload: {
