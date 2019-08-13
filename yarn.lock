@@ -4232,6 +4232,11 @@ detab@^2.0.0:
   dependencies:
     repeat-string "^1.5.4"
 
+detect-browser@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/detect-browser/-/detect-browser-4.6.0.tgz#39e2118150e5b4e9ec9546e3f489b2108bb554ab"
+  integrity sha512-JUPne6M/4CJLCQUZRfR+3GNoDFcChgSnlw7AEn+WTVkdxl+2UjzrMKpzN3bXdSIwwQjs45sduKMqpXWB77wQpQ==
+
 detect-indent@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
@@ -11261,6 +11266,11 @@ react-content-loader@^4.2.1:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-4.2.2.tgz#8b014eab0f0218888b8f064f0373b41f2203c8be"
   integrity sha512-8zn2OmjP/BhsW0spc5/nsYFsS3ybqwkoZypFl7PU92Jt1cJAjOo8Y7kfo/+ja4c/88UNLBTLfMcnlE+4Diq/5w==
+
+react-detect-browser@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-detect-browser/-/react-detect-browser-1.0.0.tgz#dbf08bae3f42892340ed1a6d1ad0d4376c3bf84a"
+  integrity sha512-lFcquI0daSQUs3WVsXJ6jeVm45Y9T2LDxLfC1nhUk+H+FfQgOw8lQ+Tc6aIlM3rvj/es9bLdXoq2LSM9tXeY4w==
 
 react-dev-utils@^4.2.3:
   version "4.2.3"
