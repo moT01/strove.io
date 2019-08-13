@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
+import DetectBrowser from 'react-detect-browser'
 
 import Header from './header'
 import './layout.css'
@@ -31,7 +32,22 @@ const Layout = ({ children }) => {
       render={data => (
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>{children}</MainContent>
+          <MainContent>
+            <DetectBrowser>
+              {({ browser }) =>
+                (browser && browser.name === 'chrome') ||
+                (browser && browser.name === 'firefox') ||
+                (browser && browser.name === 'opera') ? (
+                  <div></div>
+                ) : (
+                  <div>
+                    Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox or Opera
+                  </div>
+                )
+              }
+            </DetectBrowser>
+            {children}
+          </MainContent>
         </>
       )}
     />
