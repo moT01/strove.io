@@ -87,7 +87,7 @@ const Card = styled.div`
   background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
   margin-top: ${props => (props.team ? '9vh' : 0)};
-  z-index: ${props => (props.team ? -1 : 0)};
+  z-index: auto;
   border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
@@ -321,10 +321,10 @@ const PricingPage = () => {
                 </Feature>
                 <Feature team>Commercial use</Feature>
                 <Feature team>Priority support</Feature>
-                <Button team>
-                  <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-                    <ButtonText>Choose Enterprise</ButtonText>
-                  </StyledA>
+                <Button team onClick={() => console.log('Yeeeet')}>
+                  {/* <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?"> */}
+                  <ButtonText>Choose Enterprise</ButtonText>
+                  {/* </StyledA> */}
                 </Button>
               </PricingWrapper>
             </PricingSection>
