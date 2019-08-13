@@ -33,21 +33,22 @@ const Layout = ({ children }) => {
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
           <MainContent>
-          
-          <DetectBrowser>
-            {({ browser }) =>
-              (browser && browser.name === 'chrome') ||
-              (browser && browser.name === 'firefox') ? (
-                <div></div>
-              ) : (
-                <div>
-                  Your browser is not supported. Strove.io currenty supports
-                  only Google Chrome nad Mozilla Firefox
-                </div>
-              )
-            }
-          </DetectBrowser>
-          {children}</MainContent>
+            <DetectBrowser>
+              {({ browser }) =>
+                (browser && browser.name === 'chrome') ||
+                (browser && browser.name === 'firefox') ||
+                (browser && browser.name === 'opera') ? (
+                  <div></div>
+                ) : (
+                  <div>
+                    Your browser is not supported. Strove.io currenty supports
+                    only Google Chrome nad Mozilla Firefox
+                  </div>
+                )
+              }
+            </DetectBrowser>
+            {children}
+          </MainContent>
         </>
       )}
     />
