@@ -112,9 +112,7 @@ const Option = styled.a`
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
-  height: auto;
-  /* position: absolute;
-  top: 25px; */
+  height: 32px;
   font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '5px'};
