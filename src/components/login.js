@@ -99,7 +99,7 @@ const MenuWrapper = styled.div`
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
   left: -2vw;
-  position: absolute;
+  position: relative;
   @media (max-width: 1365px) {
     left: -6vw;
   }
@@ -112,7 +112,7 @@ const Option = styled.a`
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
-  height: auto;
+  height: 32px;
   font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '5px'};

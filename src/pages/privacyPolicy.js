@@ -45,7 +45,6 @@ const Legal = () => (
         blog, website or app?
       </h2>
       <p>
-        {' '}
         When ordering or registering on our site, as appropriate, you may be
         asked to enter your name, email address, credit card information or
         other details to help you with your experience.
@@ -57,7 +56,6 @@ const Legal = () => (
       </p>
       <h2>How do we use your information?</h2>
       <p>
-        {' '}
         We may use the information we collect from you when you register, make a
         purchase, sign up for our newsletter, respond to a survey or marketing
         communication, surf the website, or use certain other site features in
@@ -66,13 +64,11 @@ const Legal = () => (
       <ul>
         <li>To improve our website in order to better serve you.</li>
         <li>
-          {' '}
           To allow us to better service you in responding to your customer
           service requests.
         </li>
         <li> To quickly process your transactions.</li>
         <li>
-          {' '}
           To send periodic emails regarding your order or other products and
           services.
         </li>
@@ -86,7 +82,6 @@ const Legal = () => (
         We do not use vulnerability scanning and/or scanning to PCI standards.
       </p>
       <p>
-        {' '}
         An external PCI compliant payment gateway handles all CC transactions.
       </p>
       <p> We do not use Malware Scanning. </p>
@@ -98,19 +93,16 @@ const Legal = () => (
         is encrypted via Secure Socket Layer (SSL) technology.
       </p>
       <p>
-        {' '}
         We implement a variety of security measures when a user places an order
         enters, submits, or accesses their information to maintain the safety of
         your personal information.
       </p>
       <p>
-        {' '}
         All transactions are processed through a gateway provider and are not
         stored or processed on our servers.
-      </p>{' '}
+      </p>
       <h2> Do we use 'cookies'?</h2>
       <p>
-        {' '}
         Yes. Cookies are small files that a site or its service provider
         transfers to your computer's hard drive through your Web browser (if you
         allow) that enables the site's or service provider's systems to
@@ -126,7 +118,6 @@ const Legal = () => (
       <ul>
         <li>Understand and save user's preferences for future visits.</li>
         <li>
-          {' '}
           Compile aggregate data about site traffic and site interactions in
           order to offer better site experiences and tools in the future. We may
           also use trusted third-party services that track this information on
@@ -141,7 +132,6 @@ const Legal = () => (
         cookies.
       </p>
       <p>
-        {' '}
         If you turn cookies off, Some of the features that make your site
         experience more efficient may not function properly.It won't affect the
         user's experience that make your site experience more efficient and may
@@ -149,7 +139,6 @@ const Legal = () => (
       </p>
       <h2>Third-party disclosure</h2>
       <p>
-        {' '}
         We do not sell, trade, or otherwise transfer to outside parties your
         Personally Identifiable Information unless we provide users with advance
         notice. This does not include website hosting partners and other parties
@@ -157,10 +146,9 @@ const Legal = () => (
         serving our users, so long as those parties agree to keep this
         information confidential. We may also release information when it's
         release is appropriate to comply with the law, enforce our site
-        policies, or protect ours or other"} rights, property or safety.
+        policies, or protect ours or other" rights, property or safety.
       </p>
       <p>
-        {' '}
         However, non-personally identifiable visitor information may be provided
         to other parties for marketing, advertising, or other uses.{' '}
       </p>
@@ -182,13 +170,12 @@ const Legal = () => (
       </p>
       <p>We use Google AdSense Advertising on our website.</p>
       <p>
-        {' '}
         Google, as a third-party vendor, uses cookies to serve ads on our site.
         Google's use of the DART cookie enables it to serve ads to our users
         based on previous visits to our site and other sites on the Internet.
         Users may opt-out of the use of the DART cookie by visiting the Google
         Ad and Content Network privacy policy.
-      </p>{' '}
+      </p>
       <h2>We have implemented the following:</h2>
       <ul>
         <li>Remarketing with Google AdSense</li>
@@ -200,7 +187,7 @@ const Legal = () => (
         (such as the DoubleClick cookie) or other third-party identifiers
         together to compile data regarding user interactions with ad impressions
         and other ad service functions as they relate to our website.
-      </p>{' '}
+      </p>
       <h2>Opting out: </h2>
       <p>
         Users can set preferences for how Google advertises to you using the
@@ -210,7 +197,6 @@ const Legal = () => (
       </p>
       <h2> California Online Privacy Protection Act</h2>
       <p>
-        {' '}
         CalOPPA is the first state law in the nation to require commercial
         websites and online services to post a privacy policy. The law's reach
         stretches well beyond California to require any person or company in the
@@ -229,14 +215,13 @@ const Legal = () => (
         our website.
       </p>
       <p>
-        {' '}
         Our Privacy Policy link includes the word 'Privacy' and can easily be
         found on the page specified above.
-      </p>{' '}
+      </p>
       <p> You will be notified of any Privacy Policy changes:</p>
       <ul>
         <li> On our Privacy Policy Page</li>
-      </ul>{' '}
+      </ul>
       <h4>Can change your personal information:</h4>
       <ul>
         <li> By emailing us </li>
@@ -244,7 +229,6 @@ const Legal = () => (
       </ul>
       <h2>How does our site handle Do Not Track signals?</h2>
       <p>
-        {' '}
         We honor Do Not Track signals and Do Not Track, plant cookies, or use
         advertising when a Do Not Track (DNT) browser mechanism is in place.
       </p>
@@ -255,7 +239,6 @@ const Legal = () => (
       </p>
       <h2>COPPA (Children Online Privacy Protection Act)</h2>
       <p>
-        {' '}
         When it comes to the collection of personal information from children
         under the age of 13 years old, the Children's Online Privacy Protection
         Act (COPPA) puts parents in control. The Federal Trade Commission,
@@ -264,11 +247,9 @@ const Legal = () => (
         to protect children's privacy and safety online.
       </p>
       <p>
-        {' '}
         We do not specifically market to children under the age of 13 years old.
       </p>
       <p>
-        {' '}
         Do we let third-parties, including ad networks or plug-ins collect PII
         from children under 13?{' '}
       </p>
@@ -301,7 +282,6 @@ const Legal = () => (
       </p>
       <h2> CAN SPAM Act</h2>
       <p>
-        {' '}
         The CAN-SPAM Act is a law that sets the rules for commercial email,
         establishes requirements for commercial messages, gives recipients the
         right to have emails stopped from being sent to them, and spells out
@@ -329,7 +309,6 @@ const Legal = () => (
           • Identify the message as an advertisement in some reasonable way.
         </li>
         <li>
-          {' '}
           • Include the physical address of our business or site headquarters.{' '}
         </li>
         <li>
@@ -338,7 +317,6 @@ const Legal = () => (
         </li>
         <li> • Honor opt-out/unsubscribe requests quickly.</li>
         <li>
-          {' '}
           Allow users to unsubscribe by using the link at the bottom of each
           email
         </li>
@@ -347,14 +325,12 @@ const Legal = () => (
           emails, you can email us at contact@codengo.page
         </h4>
         <li>
-          {' '}
           • Follow the instructions at the bottom of each email. and we will
           promptly remove you from all correspondence.
         </li>
       </ul>
       <h2> Contacting Us</h2>
       <p>
-        {' '}
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
       </p>

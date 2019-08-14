@@ -34,7 +34,6 @@ const Text = styled.h3`
   @media (max-width: 767px) {
     font-size: 1.4rem;
   }
-
   :hover {
     color: black;
   }
@@ -87,11 +86,12 @@ const Option = styled.div`
   margin: ${props => (props.isLast ? `0` : `0 0 0.1vh`)};
   width: 100%;
   height: auto;
+  min-height: 30px;
+
   font-size: 1rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '5px'};
   border-bottom-right-radius: ${props => props.isLast && '5px'};
-
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
     color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
