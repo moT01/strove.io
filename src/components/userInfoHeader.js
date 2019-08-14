@@ -62,6 +62,7 @@ const Wrapper = styled.div`
   height: 3vh;
   width: auto;
   margin: 0;
+  position: relative;
 `
 
 const StyledDropdown = styled.div`
@@ -87,10 +88,13 @@ const Option = styled.div`
   margin: ${props => (props.isLast ? `0` : `0 0 0.1vh`)};
   width: 100%;
   height: auto;
+  min-height: 30px;
   font-size: 1rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '5px'};
   border-bottom-right-radius: ${props => props.isLast && '5px'};
+  z-index: 2;
+  position: absolute;
 
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -125,22 +129,16 @@ const UserInfoHeader = props => {
           </Wrapper>
           {props.showDropdown && (
             <MenuWrapper invert>
-              {options.map(option =>
-                option.option !== 'Logout' ? (
-                  <Option key={option.option} invert>
-                    {option.option}
-                  </Option>
-                ) : (
-                  <Option
-                    isLast
-                    invert
-                    onClick={() => option.onClick(dispatch)}
-                    key={option.option}
-                  >
-                    {option.option}
-                  </Option>
-                )
-              )}
+              {options.map(option => (
+                <Option
+                  // isLast
+                  invert
+                  onClick={() => option.onClick(dispatch)}
+                  key={option.option}
+                >
+                  {option.option}
+                </Option>
+              ))}
             </MenuWrapper>
           )}
         </>
