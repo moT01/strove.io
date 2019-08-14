@@ -245,14 +245,6 @@ const PricingPage = () => {
           <CardTitle>Congratulations!</CardTitle>
           <Text>Your purchase has been succesfully completed.</Text>
           <ButtonsWrapper mobile={device}>
-            {/* <StyledAnchor
-              primary
-              href={githubHref}
-              onClick={() => setModalVisible(false)}
-            >
-              Login with Github
-              <Github />
-            </StyledAnchor> */}
             <Button onClick={() => setModalVisible(false)}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
