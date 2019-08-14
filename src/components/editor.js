@@ -65,13 +65,13 @@ const Editor = () => {
           variables: { projectId },
         })
       )
-    resetCron()
+    projectId && resetCron()
     const projectPing = setInterval(resetCron, 59000)
 
     return () => {
       clearInterval(projectPing)
     }
-  }, [])
+  }, [projectId])
 
   return (
     <Layout>

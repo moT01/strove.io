@@ -10,7 +10,7 @@ const cache = new InMemoryCache()
 const wsLink = process.browser
   ? new WebSocketLink({
       // if you instantiate in the server, the error will be thrown
-      uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
+      uri: process.env.SILISKY_WEBSOCKET_ENDPOINT,
       options: {
         reconnect: true,
       },
