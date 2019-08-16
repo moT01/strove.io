@@ -103,8 +103,8 @@ const Option = styled.a`
   width: auto;
   height: 32px;
   font-size: 1.2rem;
-  border-bottom-left-radius: ${props => props.isLast && '5px'};
-  border-bottom-right-radius: ${props => props.isLast && '5px'};
+  border-bottom-left-radius: ${props => props.isLast && '3px'};
+  border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
   text-decoration: none;
   font-weight: 200;
