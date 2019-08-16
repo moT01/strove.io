@@ -16,7 +16,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 ### [https://www.strove.io/](https://www.strove.io/)
 
 <div align="center">
-<img src="./src/images/readmeAssets/stroveGif2.gif" width='900px'>
+<img src="./src/images/readmeAssets/strove.gif" width='900px'>
 </div>
 
 # Get started
