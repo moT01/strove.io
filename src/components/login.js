@@ -11,24 +11,10 @@ import {
   //  Bitbucket,
   Gitlab,
 } from '../images/logos'
-import { persistor } from '../../wrapper'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
-
-const options = [
-  {
-    option: 'Logout',
-    onClick: dispatch => {
-      persistor.purge()
-      localStorage.removeItem('token')
-      dispatch({
-        type: 'LOGOUT',
-      })
-    },
-  },
-]
 
 const loginOptions = [
   {
@@ -100,6 +86,7 @@ const MenuWrapper = styled.div`
   z-index: 3;
   left: -2vw;
   position: relative;
+
   @media (max-width: 1365px) {
     left: -6vw;
   }
@@ -152,19 +139,12 @@ const getUserData = createSelector(
 const LoginDropdown = () => {
   const [value, setValue] = useState()
 
-  const selectedItem =
-    options.find(i => {
-      return String(i.value) === value
-    }) || null
   return (
-    <Downshift selectedItem={selectedItem} onChange={item => setValue(item)}>
+    <Downshift onChange={item => setValue(item)}>
       {({
         getToggleButtonProps,
-        getMenuProps,
-        getItemProps,
+
         isOpen,
-        selectedItem,
-        highlightedIndex,
       }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
@@ -204,7 +184,6 @@ const Login = () => {
   ) : (
     <UserInfoHeader
       user={user}
-      options={options}
       handleDropdown={handleDropdown}
       showDropdown={showDropdown}
       handleDropdownClick={handleDropdownClick}

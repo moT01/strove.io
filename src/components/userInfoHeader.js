@@ -1,9 +1,10 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import onClickOutside from 'react-onclickoutside'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/fullScreenLoader'
 import { isMobileOnly } from 'react-device-detect'
+import { persistor } from '../../wrapper'
 
 import { selectors } from 'state'
 
@@ -17,6 +18,8 @@ const MenuWrapper = styled.div`
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
+  /* position: absolute;
+  top: 22px; */
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   align-self: flex-end;
   z-index: 3;
@@ -103,7 +106,6 @@ const Option = styled.div`
 `
 
 const UserInfoHeader = props => {
-  const [options] = useState(props.options)
   const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
 
@@ -125,22 +127,18 @@ const UserInfoHeader = props => {
           </Wrapper>
           {props.showDropdown && (
             <MenuWrapper invert>
-              {options.map(option =>
-                option.option !== 'Logout' ? (
-                  <Option key={option.option} invert>
-                    {option.option}
-                  </Option>
-                ) : (
-                  <Option
-                    isLast
-                    invert
-                    onClick={() => option.onClick(dispatch)}
-                    key={option.option}
-                  >
-                    {option.option}
-                  </Option>
-                )
-              )}
+              <Option
+                onClick={() => {
+                  persistor.purge()
+                  localStorage.removeItem('token')
+                  dispatch({
+                    type: 'LOGOUT',
+                  })
+                }}
+                invert
+              >
+                Logout
+              </Option>
             </MenuWrapper>
           )}
         </>
