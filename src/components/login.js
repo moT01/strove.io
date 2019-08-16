@@ -134,7 +134,7 @@ const Inline = styled.div`
   width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   margin-left: 4px;
-  background: #0072ce;
+  /* background: #0072ce; */
 `
 
 const UserPhoto = styled.img`
@@ -150,7 +150,7 @@ const Text = styled.h3`
   transition: color 0.3s;
   margin: 0;
   font-weight: 200;
-  background: #0072ce;
+  /* background: #0072ce; */
   @media (max-width: 767px) {
     font-size: 1.4rem;
   }
@@ -238,7 +238,10 @@ const UserDropdown = props => {
               </Inline>
             </StyledDropdown>
           </Wrapper>
-          <div hidden={!isOpen} style={{ position: 'absolute' }}>
+          <div
+            hidden={!isOpen}
+            style={{ position: 'absolute', background: 'none' }}
+          >
             <MenuWrapper invert>
               <Option
                 onClick={() => {
