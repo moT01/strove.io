@@ -8,7 +8,7 @@ const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 16vh;
+  height: 18vh;
   background-color: #0072ce;
   @media (max-width: 767px) {
     height: auto;
