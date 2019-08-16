@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import Loader from 'components/fullScreenLoader.js'
 import Header from './header'
-import { selectors } from 'state'
 import './layout.css'
 
 const MainContent = styled.main`
@@ -20,8 +17,6 @@ const MainContent = styled.main`
 `
 
 const Layout = ({ children }) => {
-  const isLoading = useSelector(selectors.api.getLoading('myProjects'))
-
   return (
     <StaticQuery
       query={graphql`
@@ -36,15 +31,11 @@ const Layout = ({ children }) => {
       render={data => (
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
-          {isLoading ? (
-            <Loader isFullScreen={true} color="#0072ce" />
-          ) : (
-            <MainContent>{children}</MainContent>
-          )}
+          <MainContent>{children}</MainContent>
         </>
       )}
     />
   )
 }
 
-export default Layout
+export default memo(Layout)

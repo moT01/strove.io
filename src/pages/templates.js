@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components'
 import { Icon } from 'antd'
+import { isMobileOnly, isTablet } from 'react-device-detect'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
 import { Typescript } from 'images/logos'
 import { createProject } from 'utils'
 import { selectors } from 'state'
+import AddProjectProvider from 'components/addProjectProvider'
 
 const FadeIn = keyframes`
   0% {
@@ -45,9 +47,9 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   width: 100vw;
-  flex-direction: row;
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   justify-content: center;
-  align-items: flex-start;
+  align-items: ${props => (props.mobile ? 'center' : 'flex-start')};
 `
 
 const TilesWrapper = styled.div`
@@ -72,13 +74,8 @@ const Tile = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
-  height: 25vh;
+  height: auto;
   width: 45vw;
-
-  @media (max-width: 1366px) {
-    width: 80vw;
-    height: auto;
-  }
 `
 
 const ProjectTitle = styled.h3`
@@ -97,9 +94,9 @@ const Text = styled.p`
 
 const VerticalDivider = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
 `
@@ -255,33 +252,29 @@ const templates = [
   },
 ]
 
-const Dashboard = () => {
+const Dashboard = ({ addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
 
-  const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
-  }
+  const handleClick = item => addProject(item.link)
 
   const leftColumn = []
   const rightColumn = []
 
   templates.map((template, index) =>
-    index % 2 === 0 ? leftColumn.push(template) : rightColumn.push(template)
+    index % (isMobileOnly ? 1 : 2) === 0
+      ? leftColumn.push(template)
+      : rightColumn.push(template)
   )
 
   return (
     <Layout>
       <SEO title="Templates" />
-      <PageWrapper>
+      <PageWrapper mobile={isMobileOnly}>
         <TilesWrapper>
           {leftColumn.map(template => (
             <Tile key={template.name}>
-              <VerticalDivider>
+              <VerticalDivider mobile={isMobileOnly}>
                 <InfoWrapper>
                   <ProjectTitle>{template.name}</ProjectTitle>
                   <TextWrapper>
@@ -299,7 +292,7 @@ const Dashboard = () => {
         <TilesWrapper>
           {rightColumn.map(template => (
             <Tile key={template.name}>
-              <VerticalDivider>
+              <VerticalDivider mobile={isMobileOnly}>
                 <InfoWrapper>
                   <ProjectTitle>{template.name}</ProjectTitle>
                   <TextWrapper>
@@ -319,4 +312,8 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default memo(() => (
+  <AddProjectProvider>
+    {({ addProject }) => <Dashboard addProject={addProject} />}
+  </AddProjectProvider>
+))

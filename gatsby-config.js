@@ -97,5 +97,12 @@ module.exports = {
         respectDNT: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        id: 1422829,
+        sv: 6,
+      },
+    },
   ],
 }

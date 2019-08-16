@@ -1,61 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'gatsby'
 
-import {
-  CSharp,
-  Cpp,
-  Python,
-  Typescript,
-  Go,
-  Java,
-  Ruby,
-  Javascript,
-} from 'images/logos'
-import { createProject } from 'utils'
 import { selectors } from 'state'
+import { templates } from 'constants'
+import AddProjectProvider from 'components/addProjectProvider'
 import Layout from './layout'
 import SEO from './seo'
-
-const templates = [
-  {
-    name: 'Typescript',
-    icon: <Typescript />,
-    link: 'https://github.com/codengo-llc/TypeScript-HelloWorld',
-  },
-  {
-    name: 'Ruby',
-    icon: <Ruby />,
-    link: 'https://github.com/codengo-llc/ruby-starter',
-  },
-  { name: 'Javascript', value: 'javascript', icon: <Javascript /> },
-  {
-    name: 'C++',
-    icon: <Cpp />,
-    link: 'https://github.com/codengo-llc/c-plus-plus-starter',
-  },
-  {
-    name: 'Python',
-    icon: <Python />,
-    link: 'https://github.com/codengo-llc/python-starter',
-  },
-  {
-    name: 'Go',
-    icon: <Go />,
-    link: 'https://github.com/codengo-llc/Go-HelloWorld',
-  },
-  {
-    name: 'C#',
-    icon: <CSharp />,
-    link: 'https://github.com/codengo-llc/C-Sharp-starter',
-  },
-  {
-    name: 'Java',
-    icon: <Java />,
-    link: 'https://github.com/codengo-llc/java-starter',
-  },
-]
 
 const ComponentWrapper = styled.div`
   display: flex;
@@ -152,17 +104,11 @@ const StyledLink = styled(Link)`
   }
 `
 
-const Templates = () => {
+const Templates = ({ addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
 
-  const handleClick = item => {
-    createProject({
-      repoLink: item.link,
-      dispatch: dispatch,
-      user: user,
-    })
-  }
+  const handleClick = item => addProject(item.link)
 
   return (
     <Layout>
@@ -184,4 +130,8 @@ const Templates = () => {
     </Layout>
   )
 }
-export default Templates
+export default memo(
+  <AddProjectProvider>
+    {({ addProject }) => <Templates addProject={addProject} />}
+  </AddProjectProvider>
+)

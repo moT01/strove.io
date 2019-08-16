@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import StripeCheckout from 'react-stripe-checkout'
-import { BUY_SUBSCRIPTION } from 'queries'
-import { useDispatch } from 'react-redux'
-import { mutation } from 'utils'
+import { isMobileOnly, isTablet } from 'react-device-detect'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { BUY_SUBSCRIPTION } from 'queries'
+import { mutation } from 'utils'
 import SEO from 'components/seo'
 import Layout from 'components/layout'
+import { C } from 'state'
+import Modal from 'components/modal'
+import { selectors } from 'state'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -78,7 +82,7 @@ const Card = styled.div`
   background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
   margin-top: ${props => (props.team ? '9vh' : 0)};
-  z-index: ${props => (props.team ? 1 : 2)};
+  z-index: ${props => (props.team ? -1 : 0)};
   border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
@@ -107,6 +111,38 @@ const PricingWrapper = styled.div`
     width: 90%;
     height: auto;
   }
+`
+
+const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
+const Text = styled.p`
+  color: #0072ce;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-bottom: 12px;
+  white-space: normal;
+  text-overflow: wrap;
+  overflow: visible;
+  text-align: center;
+`
+const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: ${props =>
+    props.mobile === 'mobile'
+      ? '85%'
+      : props.mobile === 'tablet'
+      ? '60%'
+      : '45%'};
 `
 
 const PricingSection = styled.div`
@@ -165,18 +201,23 @@ const StripeButton = styled(Button)`
 
 const PricingPage = () => {
   const dispatch = useDispatch()
+  const [modalVisible, setModalVisible] = useState(false)
+  const subscription = useSelector(selectors.api.getApiData('subscription'))
+
+  const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const queryToken = ({ id }) => {
     if (id) {
       dispatch(
         mutation({
           name: 'buySubscription',
-          storeKey: 'user',
+          storeKey: 'subscription',
           mutation: BUY_SUBSCRIPTION,
           variables: { tokenId: id },
+          onSuccess: data => setModalVisible(true),
           onSuccessDispatch: [
-            subscriptionId => ({
-              type: 'FETCH_SUCCESS',
-              payload: { data: subscriptionId, storeKey: 'user' },
+            buySubscription => ({
+              type: C.api.UPDATE_ITEM,
+              payload: { storeKey: 'subscription', data: buySubscription },
             }),
           ],
         })
@@ -185,75 +226,108 @@ const PricingPage = () => {
   }
 
   return (
-    <Layout>
-      <SEO title="Pricing" />
-      <CardsWrapper>
-        <Card>
-          <CardTitle>Individuals</CardTitle>
-          <PricingSection>
-            <PricingWrapper>
-              <PlanTitle>Free</PlanTitle>
-              <PlanDesc>The basic plan for individual developers</PlanDesc>
-              <Price>$0</Price>
-              <PlanSubTitle>Per month</PlanSubTitle>
-              <Feature>Public repositories</Feature>
-              <Feature>1,25 - 2 GB of Ram</Feature>
-              <Feature>No commercial use</Feature>
-              <Button disabled>
-                <ButtonText team>Already subscribed</ButtonText>
-              </Button>
-            </PricingWrapper>
-            <PricingWrapper>
-              <PlanTitle>Pro</PlanTitle>
-              <PlanDesc>Plan for professionals</PlanDesc>
-              <Price>$39.99</Price>
-              <PlanSubTitle>Per month</PlanSubTitle>
-              <Feature>Private and Public repositories</Feature>
-              <Feature>4 GB of RAM</Feature>
-              <Feature>Commerial use</Feature>
-              <StripeCheckout
-                amount={3999}
-                description="SiliSky"
-                image="https://i.imgur.com/2IE6t8u.png"
-                locale="en"
-                name="SiliSky.com"
-                stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
-                token={queryToken}
-                allowRememberMe={false}
-              >
-                <StripeButton>
-                  <ButtonText team>Choose Pro</ButtonText>
-                </StripeButton>
-              </StripeCheckout>
-            </PricingWrapper>
-          </PricingSection>
-        </Card>
-        <Card team>
-          <CardTitle team>Teams</CardTitle>
-          <PricingSection>
-            <PricingWrapper>
-              <PlanTitle team>Enterprise</PlanTitle>
-              <PlanDesc team>
-                Plan aimed for developer teams and companies
-              </PlanDesc>
-              <Contact team>Contact Sales for pricing</Contact>
-              <Feature team>Private and Public repositories</Feature>
-              <Feature team>
-                RAM, hard drive and speeed adjusted to teams needs
-              </Feature>
-              <Feature team>Commercial use</Feature>
+    <>
+      <Modal
+        isOpen={!!modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+        contentLabel={'Activate Pro plan'}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '40vh' : '25vh'}
+        zIndex={99}
+      >
+        <ModalWrapper>
+          <CardTitle>Congratulations!</CardTitle>
+          <Text>Your purchase has been succesfully completed.</Text>
+          <ButtonsWrapper mobile={device}>
+            {/* <StyledAnchor
+              primary
+              href={githubHref}
+              onClick={() => setModalVisible(false)}
+            >
+              Login with Github
+              <Github />
+            </StyledAnchor> */}
+            <Button onClick={() => setModalVisible(false)}>Close</Button>
+          </ButtonsWrapper>
+        </ModalWrapper>
+      </Modal>
+      <Layout>
+        <SEO title="Pricing" />
+        <CardsWrapper>
+          <Card>
+            <CardTitle>Individuals</CardTitle>
+            <PricingSection>
+              <PricingWrapper>
+                <PlanTitle>Free</PlanTitle>
+                <PlanDesc>The basic plan for individual developers</PlanDesc>
+                <Price>$0</Price>
+                <PlanSubTitle>Per month</PlanSubTitle>
+                <Feature>Public repositories</Feature>
+                <Feature>1,25 - 2 GB of Ram</Feature>
+                <Feature>No commercial use</Feature>
+                <Button disabled>
+                  <ButtonText team>Already subscribed</ButtonText>
+                </Button>
+              </PricingWrapper>
+              <PricingWrapper>
+                <PlanTitle>Pro</PlanTitle>
+                <PlanDesc>Plan for professionals</PlanDesc>
+                <Price>$39.99</Price>
+                <PlanSubTitle>Per month</PlanSubTitle>
+                <Feature>Private and Public repositories</Feature>
+                <Feature>4 GB of RAM</Feature>
+                <Feature>Commerial use</Feature>
+                {subscription?.status !== 'active' ? (
+                  <StripeCheckout
+                    amount={3999}
+                    description="SiliSky"
+                    image="https://i.imgur.com/2IE6t8u.png"
+                    locale="en"
+                    name="SiliSky.com"
+                    stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
+                    token={queryToken}
+                    allowRememberMe={false}
+                  >
+                    <StripeButton>
+                      <ButtonText team>Choose Pro</ButtonText>
+                    </StripeButton>
+                  </StripeCheckout>
+                ) : (
+                  <Button disabled>
+                    <ButtonText team>Already subscribed</ButtonText>
+                  </Button>
+                )}
+              </PricingWrapper>
+            </PricingSection>
+          </Card>
+          <Card team>
+            <CardTitle team>Teams</CardTitle>
+            <PricingSection>
+              <PricingWrapper>
+                <PlanTitle team>Enterprise</PlanTitle>
+                <PlanDesc team>
+                  Plan aimed for developer teams and companies
+                </PlanDesc>
+                <Contact team>Contact Sales for pricing</Contact>
+                <Feature team>Private and Public repositories</Feature>
+                <Feature team>
+                  RAM, hard drive and speeed adjusted to teams needs
+                </Feature>
+                <Feature team>Commercial use</Feature>
 
-              <Feature team>Priority support</Feature>
+                <Feature team>Priority support</Feature>
 
-              <Button team>
-                <ButtonText>Choose Enterprise</ButtonText>
-              </Button>
-            </PricingWrapper>
-          </PricingSection>
-        </Card>
-      </CardsWrapper>
-    </Layout>
+                <Button team>
+                  <ButtonText>Choose Enterprise</ButtonText>
+                </Button>
+              </PricingWrapper>
+            </PricingSection>
+          </Card>
+        </CardsWrapper>
+      </Layout>
+    </>
   )
 }
 
-export default PricingPage
+export default memo(PricingPage)

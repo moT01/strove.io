@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Router } from '@reach/router'
 import PrivateRoute from 'components/privateRoute'
 import Editor from 'components/editor'
@@ -15,4 +15,4 @@ const App = () => (
   </Router>
 )
 
-export default App
+export default memo(App)

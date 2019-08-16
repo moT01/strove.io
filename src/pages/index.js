@@ -1,18 +1,14 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
 import AntDesign from '../Home'
 
-class IndexPage extends React.Component {
-  render() {
-    return (
-      <Layout>
-        <SEO title="SiliSky" />
-        <AntDesign />
-      </Layout>
-    )
-  }
-}
+const IndexPage = () => (
+  <Layout>
+    <SEO title="SiliSky" />
+    <AntDesign />
+  </Layout>
+)
 
-export default IndexPage
+export default memo(IndexPage)
