@@ -67,7 +67,7 @@ const LoginButton = styled.button`
     }
   }
 
-  * {
+  > {
     vertical-align: bottom;
   }
 `
@@ -137,15 +137,9 @@ const getUserData = createSelector(
 )
 
 const LoginDropdown = () => {
-  const [value, setValue] = useState()
-
   return (
-    <Downshift onChange={item => setValue(item)}>
-      {({
-        getToggleButtonProps,
-
-        isOpen,
-      }) => (
+    <Downshift>
+      {({ getToggleButtonProps, isOpen }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
 
@@ -159,7 +153,6 @@ const LoginDropdown = () => {
                   isLast={index === loginOptions.length - 1 ? true : false}
                 >
                   {item.icon}
-
                   {item.label}
                 </Option>
               ))}
