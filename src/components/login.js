@@ -41,7 +41,6 @@ const loginOptions = [
 ]
 
 const LoginButton = styled.button`
-  font-size: 1.2rem;
   color: white;
   text-decoration: none;
   display: flex;
@@ -52,8 +51,11 @@ const LoginButton = styled.button`
   background: none;
   border: none;
   text-decoration: none;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1;
+  padding: 0;
+  height: 3vh;
+  cursor: pointer;
 
   :focus {
     outline: 0;
@@ -88,29 +90,24 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: ${props => (props.login ? '-2vw' : '50px')};
   position: relative;
-
-  @media (max-width: 1365px) {
-    left: -6vw;
-  }
 `
 
 const Option = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
   height: 32px;
   font-size: 1.2rem;
-  color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-  border-bottom-left-radius: ${props => props.isLast && '5px'};
-  border-bottom-right-radius: ${props => props.isLast && '5px'};
+  border-bottom-left-radius: ${props => props.isLast && '3px'};
+  border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
   text-decoration: none;
-  font-weight: 200;
+  font-weight: 300;
 
   svg {
     fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -121,7 +118,6 @@ const Option = styled.a`
 
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-    color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
   }
 
@@ -151,13 +147,21 @@ const Text = styled.h3`
   color: white;
   transition: color 0.3s;
   margin: 0;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1;
   @media (max-width: 767px) {
     font-size: 1.4rem;
   }
   :hover {
     color: black;
+  }
+`
+
+const OptionText = styled(Text)`
+  color: #0072ce;
+  font-weight: 300;
+  :hover {
+    color: #ffffff;
   }
 `
 
@@ -182,6 +186,12 @@ const StyledDropdown = styled.div`
   background: #0072ce;
 `
 
+const DropdownWrapper = styled.div`
+  position: absolute;
+  background: none;
+  right: 1.5vw;
+`
+
 const getUserName = selectors.api.getApiData('user', null, 'name')
 
 const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
@@ -196,15 +206,10 @@ const LoginDropdown = props => {
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
         <span>
-          <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
-          <div
-            hidden={!isOpen}
-            style={{
-              position: 'absolute',
-              background: 'none',
-              right: props.browser === 'safari' ? '-30px' : '60px',
-            }}
-          >
+          <LoginButton {...getToggleButtonProps({})}>
+            <Text>Login</Text>
+          </LoginButton>
+          <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               {loginOptions.map((item, index) => (
                 <Option
@@ -214,11 +219,11 @@ const LoginDropdown = props => {
                   isLast={index === loginOptions.length - 1 ? true : false}
                 >
                   {item.icon}
-                  {item.label}
+                  <OptionText invert>{item.label}</OptionText>
                 </Option>
               ))}
             </MenuWrapper>
-          </div>
+          </DropdownWrapper>
         </span>
       )}
     </Downshift>
@@ -244,16 +249,10 @@ const UserDropdown = props => {
               </Inline>
             </StyledDropdown>
           </Wrapper>
-          <div
-            hidden={!isOpen}
-            style={{
-              position: 'absolute',
-              background: 'none',
-              right: props.browser === 'safari' ? '-30px' : '60px',
-            }}
-          >
+          <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               <Option
+                isLast
                 onClick={() => {
                   persistor.purge()
                   localStorage.removeItem('token')
@@ -263,10 +262,10 @@ const UserDropdown = props => {
                 }}
                 invert
               >
-                Logout
+                <OptionText invert>Logout</OptionText>
               </Option>
             </MenuWrapper>
-          </div>
+          </DropdownWrapper>
         </span>
       )}
     </Downshift>

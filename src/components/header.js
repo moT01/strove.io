@@ -25,7 +25,7 @@ const LinkWrapper = styled.div`
   align-items: center;
   height: ${props => (props.mobile ? '100%' : '2.5vh')};
   margin: 0 3vw 0 0;
-  font-weight: 200;
+  font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
 `
 
@@ -36,8 +36,9 @@ const ZeldaWrapper = styled.div`
   align-items: center;
   height: ${props => (props.mobile ? '100%' : '2.5vh')};
   margin: 0;
-  font-weight: 200;
+  font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
+  cursor: pointer;
   @media (max-width: 767px) {
     height: 4vh;
   }
@@ -68,7 +69,7 @@ const LinkText = styled.h3`
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
-  font-weight: 200;
+  font-weight: 300;
   margin: 0;
   @media (max-width: 767px) {
     height: 5vh;
@@ -88,7 +89,7 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: ${props => (props.mobile ? '8vh' : '3vh')};
+  height: ${props => (props.mobile ? '8vh' : '3.2vh')};
   background: #0072ce;
   min-height: 1.3rem;
 `
