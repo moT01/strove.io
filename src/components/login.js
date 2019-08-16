@@ -41,7 +41,6 @@ const loginOptions = [
 ]
 
 const LoginButton = styled.button`
-  font-size: 1.2rem;
   color: white;
   text-decoration: none;
   display: flex;
@@ -55,6 +54,7 @@ const LoginButton = styled.button`
   font-weight: 200;
   line-height: 1;
   padding: 0;
+  height: 3vh;
   cursor: pointer;
 
   :focus {
@@ -90,12 +90,7 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  /* right: ${props => (props.login ? '-2vw' : '50px')}; */
   position: relative;
-
-  /* @media (max-width: 1365px) {
-    left: -6vw;
-  } */
 `
 
 const Option = styled.a`
@@ -130,25 +125,6 @@ const Option = styled.a`
   :hover svg {
     fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
-  }
-`
-
-const LinkText = styled.h3`
-  font-size: 1.2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  transition: color 0.3s;
-  font-weight: 200;
-  margin: 0;
-  @media (max-width: 767px) {
-    height: 5vh;
-    font-size: 1.8rem;
-  }
-
-  :hover {
-    color: black;
   }
 `
 
@@ -224,16 +200,8 @@ const LoginDropdown = props => {
       {({ getToggleButtonProps, isOpen }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>
-            <LinkText>Login</LinkText>
+            <Text>Login</Text>
           </LoginButton>
-          {/* <div
-            hidden={!isOpen}
-            style={{
-              position: 'absolute',
-              background: 'none',
-              right: '1.5vw',
-            }}
-          > */}
           <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               {loginOptions.map((item, index) => (
@@ -248,7 +216,6 @@ const LoginDropdown = props => {
                 </Option>
               ))}
             </MenuWrapper>
-            {/* </div> */}
           </DropdownWrapper>
         </span>
       )}
@@ -275,14 +242,6 @@ const UserDropdown = props => {
               </Inline>
             </StyledDropdown>
           </Wrapper>
-          {/* <div
-            hidden={!isOpen}
-            style={{
-              position: 'absolute',
-              background: 'none',
-              right: '1.5vw',
-            }}
-          > */}
           <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               <Option
@@ -298,7 +257,6 @@ const UserDropdown = props => {
                 Logout
               </Option>
             </MenuWrapper>
-            {/* </div> */}
           </DropdownWrapper>
         </span>
       )}
