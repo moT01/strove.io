@@ -89,7 +89,7 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: ${props => (props.mobile ? '8vh' : '3vh')};
+  height: ${props => (props.mobile ? '8vh' : '3.2vh')};
   background: #0072ce;
   min-height: 1.3rem;
 `
