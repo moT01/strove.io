@@ -51,7 +51,7 @@ const LoginButton = styled.button`
   background: none;
   border: none;
   text-decoration: none;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1;
   padding: 0;
   height: 3vh;
@@ -107,7 +107,7 @@ const Option = styled.a`
   border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
   text-decoration: none;
-  font-weight: 200;
+  font-weight: 300;
 
   svg {
     fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -147,7 +147,7 @@ const Text = styled.h3`
   color: white;
   transition: color 0.3s;
   margin: 0;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1;
   @media (max-width: 767px) {
     font-size: 1.4rem;
