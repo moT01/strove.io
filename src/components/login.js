@@ -86,6 +86,7 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
+  left: ${props => (props.login ? '-2vw' : '30px')};
   position: relative;
 
   @media (max-width: 1365px) {
@@ -198,7 +199,7 @@ const LoginDropdown = () => {
             hidden={!isOpen}
             style={{ position: 'absolute', background: 'none' }}
           >
-            <MenuWrapper invert>
+            <MenuWrapper invert login>
               {loginOptions.map((item, index) => (
                 <Option
                   invert
