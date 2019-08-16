@@ -6,11 +6,11 @@ import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
-import { isMobile } from 'react-device-detect'
+import { isMobileOnly, isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
-import Loader from '../components/fullScreenLoader'
-import GetStarted from '../components/getStarted'
+import Loader from 'components/fullScreenLoader'
+import GetStarted from 'components/getStarted'
 
 const FadeIn = keyframes`
   0% {
@@ -22,13 +22,12 @@ const FadeIn = keyframes`
 `
 
 const ButtonFadeIn = keyframes`
-0% {
-  opacity: 0;
-}
-100% {
-  opacity: 0.9;
-}
-
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
 `
 
 const Button = styled.button`
@@ -96,12 +95,25 @@ const StyledModal = styled(Modal)`
   height: auto;
   width: auto;
   top: 25%;
-  left: 25%;
+  ${({ isMobile }) =>
+    !isMobile &&
+    css`
+      left: 25%;
+    `}
   position: fixed;
   animation: ${FadeIn} 0.2s ease-out;
 
   :focus {
     outline: 0;
+  }
+
+  @media (max-width: 1366px) {
+    width: 80vw;
+    ${({ isMobile }) =>
+      !isMobile &&
+      css`
+        left: 10vw;
+      `}
   }
 `
 
@@ -125,71 +137,77 @@ const Banner = props => {
   const closeModal = () => setModalVisible(false)
 
   return (
-    <div className="banner-wrapper">
-      {props.isMobile && (
-        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-          <div className="home-banner-image">
-            <img
-              alt="banner"
-              src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
-              width="100%"
+    <>
+      <div className="banner-wrapper">
+        {/* {isMobileOnly && (
+          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+            <div className="home-banner-image">
+              <img
+                alt="banner"
+                src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
+                width="100%"
+              />
+            </div>
+          </TweenOne>
+        )} */}
+        <QueueAnim
+          className="banner-title-wrapper"
+          type={isMobileOnly ? 'bottom' : 'right'}
+        >
+          <div key="line" className="title-line-wrapper">
+            <div
+              className="title-line"
+              style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-        </TweenOne>
-      )}
-      <QueueAnim
-        className="banner-title-wrapper"
-        type={props.isMobile ? 'bottom' : 'right'}
+          <h1 key="h1">SiliSky</h1>
+          <p key="content">Code in clouds. One evironment for everyone.</p>
+          <ButtonsWrapper mobile={isMobileOnly}>
+            <Button
+              primary
+              mobile={isMobileOnly}
+              disabled={isLoading}
+              onClick={useCallback(() => setModalVisible(true))}
+            >
+              {isLoading ? (
+                <Loader
+                  isFullScreen={false}
+                  color={'#ffffff'}
+                  height={'2.2rem'}
+                />
+              ) : (
+                'Get started'
+              )}
+            </Button>
+
+            <Button mobile={isMobileOnly}>
+              <StyledA href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+                Request a demo
+              </StyledA>
+            </Button>
+          </ButtonsWrapper>
+        </QueueAnim>
+        {/* {!isMobileOnly && (
+          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+            <BannerSVGAnim />
+          </TweenOne>
+        )} */}
+      </div>
+      <StyledModal
+        isOpen={isModalVisible}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+        isMobile={isMobileOnly}
       >
-        <div key="line" className="title-line-wrapper">
-          <div
-            className="title-line"
-            style={{ transform: 'translateX(-64px)' }}
+        {!isMobile && (
+          <StyledIcon
+            type="close"
+            onClick={useCallback(() => setModalVisible(false))}
           />
-        </div>
-        <h1 key="h1">SiliSky</h1>
-        <p key="content">Code in clouds. One evironment for everyone.</p>
-        <ButtonsWrapper mobile={isMobile}>
-          <Button
-            primary
-            mobile={isMobile}
-            disabled={isLoading}
-            onClick={useCallback(() => setModalVisible(true))}
-          >
-            {isLoading ? (
-              <Loader
-                isFullScreen={false}
-                color={'#ffffff'}
-                height={'2.2rem'}
-              />
-            ) : (
-              'Get started'
-            )}
-          </Button>
-          <StyledModal
-            isOpen={isModalVisible}
-            onRequestClose={closeModal}
-            ariaHideApp={false}
-          >
-            <StyledIcon
-              type="close"
-              onClick={useCallback(() => setModalVisible(false))}
-            />
-            <GetStarted closeModal={closeModal} />
-          </StyledModal>
-          <Button mobile={isMobile}>
-            <StyledA href="mailto:contact@codengo.net?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-              Request a demo
-            </StyledA>
-          </Button>
-        </ButtonsWrapper>
-      </QueueAnim>
-      {!props.isMobile && (
-        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-          <BannerSVGAnim />
-        </TweenOne>
-      )}
-    </div>
+        )}
+        <GetStarted closeModal={closeModal} />
+      </StyledModal>
+    </>
   )
 }
 

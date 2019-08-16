@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Cog } from 'images/svg'
 import { Silisky } from 'images/logos'
+import { useInterval } from '../hooks'
 
 const SpinToWin = keyframes`
   0% {
@@ -44,19 +45,54 @@ const LogoContainer = styled.div`
   animation: ${AntiSpinToWin} 3s linear infinite;
 `
 
-const Loader = props => {
+const Text = styled.p`
+  color: #0072ce;
+  font-size: 1rem;
+  margin-bottom: 0;
+  margin-top: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
+const StyledSilisky = styled(Silisky)`
+  width: '100%';
+  height: 'auto';
+`
+
+const allMessages = {
+  addProject: [
+    'Accessing repository',
+    'Reserving resources',
+    'Cloning repository',
+    'Starting virtual machine',
+    'Launching editor',
+  ],
+  continueProject: [],
+  getMyProjects: [],
+}
+
+const Loader = ({ type = 'getMyProjects', ...props }) => {
+  const [counter, setCounter] = useState(0)
+
+  useInterval(
+    () => setCounter(counter + 1),
+    counter !== allMessages[type].length - 1 ? 1500 : null
+  )
+
   return (
     <LoaderWrapper {...props}>
       <LoaderContainer {...props}>
         <Cog fill={props.color} />
         {props.isFullScreen && (
           <LogoContainer {...props}>
-            <Silisky style={{ width: '100%', height: 'auto' }} fill="#0072ce" />
+            <StyledSilisky fill="#0072ce" />
           </LogoContainer>
         )}
       </LoaderContainer>
+      {props.isFullScreen && <Text>{allMessages[type][counter]}</Text>}
     </LoaderWrapper>
   )
 }
 
-export default Loader
+export default memo(Loader)

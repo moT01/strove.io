@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
@@ -11,6 +11,7 @@ import {
   //  Bitbucket,
   Gitlab,
 } from '../images/logos'
+import { persistor } from '../../wrapper'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -20,6 +21,7 @@ const options = [
   {
     option: 'Logout',
     onClick: dispatch => {
+      persistor.purge()
       localStorage.removeItem('token')
       dispatch({
         type: 'LOGOUT',
@@ -32,7 +34,7 @@ const loginOptions = [
   {
     value: 'github',
     label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`,
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github`,
     icon: <Github />,
   },
   // {
@@ -210,4 +212,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default memo(Login)
