@@ -38,6 +38,7 @@ const ZeldaWrapper = styled.div`
   margin: 0;
   font-weight: 200;
   animation: ${FadeIn} 0.3s ease-out;
+  cursor: pointer;
   @media (max-width: 767px) {
     height: 4vh;
   }
