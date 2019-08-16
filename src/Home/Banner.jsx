@@ -145,7 +145,7 @@ const Banner = () => {
                 <Loader
                   isFullScreen={false}
                   color={'#ffffff'}
-                  height={'2.2rem'}
+                  height={'1.7rem'}
                 />
               ) : (
                 'Get started'

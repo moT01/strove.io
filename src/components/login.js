@@ -97,6 +97,7 @@ const Option = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
@@ -245,6 +246,7 @@ const UserDropdown = props => {
           <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               <Option
+                isLast
                 onClick={() => {
                   persistor.purge()
                   localStorage.removeItem('token')
