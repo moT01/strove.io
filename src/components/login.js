@@ -54,6 +54,8 @@ const LoginButton = styled.button`
   text-decoration: none;
   font-weight: 200;
   line-height: 1;
+  padding: 0;
+  cursor: pointer;
 
   :focus {
     outline: 0;
@@ -88,12 +90,12 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: ${props => (props.login ? '-2vw' : '50px')};
+  /* right: ${props => (props.login ? '-2vw' : '50px')}; */
   position: relative;
 
-  @media (max-width: 1365px) {
+  /* @media (max-width: 1365px) {
     left: -6vw;
-  }
+  } */
 `
 
 const Option = styled.a`
@@ -128,6 +130,25 @@ const Option = styled.a`
   :hover svg {
     fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
+  }
+`
+
+const LinkText = styled.h3`
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  transition: color 0.3s;
+  font-weight: 200;
+  margin: 0;
+  @media (max-width: 767px) {
+    height: 5vh;
+    font-size: 1.8rem;
+  }
+
+  :hover {
+    color: black;
   }
 `
 
@@ -182,6 +203,12 @@ const StyledDropdown = styled.div`
   background: #0072ce;
 `
 
+const DropdownWrapper = styled.div`
+  position: absolute;
+  background: none;
+  right: 1.5vw;
+`
+
 const getUserName = selectors.api.getApiData('user', null, 'name')
 
 const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
@@ -196,15 +223,18 @@ const LoginDropdown = props => {
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
         <span>
-          <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
-          <div
+          <LoginButton {...getToggleButtonProps({})}>
+            <LinkText>Login</LinkText>
+          </LoginButton>
+          {/* <div
             hidden={!isOpen}
             style={{
               position: 'absolute',
               background: 'none',
-              right: props.browser === 'safari' ? '-30px' : '60px',
+              right: '1.5vw',
             }}
-          >
+          > */}
+          <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               {loginOptions.map((item, index) => (
                 <Option
@@ -218,7 +248,8 @@ const LoginDropdown = props => {
                 </Option>
               ))}
             </MenuWrapper>
-          </div>
+            {/* </div> */}
+          </DropdownWrapper>
         </span>
       )}
     </Downshift>
@@ -244,14 +275,15 @@ const UserDropdown = props => {
               </Inline>
             </StyledDropdown>
           </Wrapper>
-          <div
+          {/* <div
             hidden={!isOpen}
             style={{
               position: 'absolute',
               background: 'none',
-              right: props.browser === 'safari' ? '-30px' : '60px',
+              right: '1.5vw',
             }}
-          >
+          > */}
+          <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
               <Option
                 onClick={() => {
@@ -266,7 +298,8 @@ const UserDropdown = props => {
                 Logout
               </Option>
             </MenuWrapper>
-          </div>
+            {/* </div> */}
+          </DropdownWrapper>
         </span>
       )}
     </Downshift>
