@@ -52,6 +52,7 @@ const LoginButton = styled.button`
   border: none;
   text-decoration: none;
   font-weight: 200;
+  line-height: 1;
 
   :focus {
     outline: 0;
@@ -86,7 +87,7 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: ${props => (props.login ? '-2vw' : '30px')};
+  left: ${props => (props.login ? '-2vw' : '50px')};
   position: relative;
 
   @media (max-width: 1365px) {
@@ -134,7 +135,6 @@ const Inline = styled.div`
   width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   margin-left: 4px;
-  /* background: #0072ce; */
 `
 
 const UserPhoto = styled.img`
@@ -150,7 +150,7 @@ const Text = styled.h3`
   transition: color 0.3s;
   margin: 0;
   font-weight: 200;
-  /* background: #0072ce; */
+  line-height: 1;
   @media (max-width: 767px) {
     font-size: 1.4rem;
   }
@@ -197,9 +197,9 @@ const LoginDropdown = () => {
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
           <div
             hidden={!isOpen}
-            style={{ position: 'absolute', background: 'none' }}
+            style={{ position: 'absolute', background: 'none', right: '60px' }}
           >
-            <MenuWrapper invert login>
+            <MenuWrapper invert>
               {loginOptions.map((item, index) => (
                 <Option
                   invert
@@ -240,7 +240,7 @@ const UserDropdown = props => {
           </Wrapper>
           <div
             hidden={!isOpen}
-            style={{ position: 'absolute', background: 'none' }}
+            style={{ position: 'absolute', background: 'none', right: '60px' }}
           >
             <MenuWrapper invert>
               <Option
