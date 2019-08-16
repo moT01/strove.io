@@ -190,7 +190,7 @@ const getUserData = createSelector(
   (username, userphoto) => ({ username, userphoto })
 )
 
-const LoginDropdown = () => {
+const LoginDropdown = props => {
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
@@ -198,7 +198,11 @@ const LoginDropdown = () => {
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
           <div
             hidden={!isOpen}
-            style={{ position: 'absolute', background: 'none', right: '60px' }}
+            style={{
+              position: 'absolute',
+              background: 'none',
+              right: props.browser === 'safari' ? '-30px' : '60px',
+            }}
           >
             <MenuWrapper invert>
               {loginOptions.map((item, index) => (
@@ -241,7 +245,11 @@ const UserDropdown = props => {
           </Wrapper>
           <div
             hidden={!isOpen}
-            style={{ position: 'absolute', background: 'none', right: '60px' }}
+            style={{
+              position: 'absolute',
+              background: 'none',
+              right: props.browser === 'safari' ? '-30px' : '60px',
+            }}
           >
             <MenuWrapper invert>
               <Option
@@ -264,15 +272,19 @@ const UserDropdown = props => {
   )
 }
 
-const Login = () => {
+const Login = ({ browser }) => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
   return !user.username && !isLoading ? (
-    <LoginDropdown />
+    <LoginDropdown browser={browser} />
   ) : (
-    <UserDropdown user={user} />
+    <UserDropdown user={user} browser={browser} />
   )
 }
 
-export default memo(Login)
+const LoginWithBrowserInfo = () => (
+  <DetectBrowser>{({ browser }) => <Login browser={browser} />}</DetectBrowser>
+)
+
+export default memo(LoginWithBrowserInfo)
