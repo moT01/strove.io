@@ -1,16 +1,18 @@
 import React, { useState, memo } from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
+import { useDispatch, useSelector } from 'react-redux'
+import { isMobileOnly } from 'react-device-detect'
 
+import Loader from 'components/fullScreenLoader'
 import { selectors } from 'state'
-import UserInfoHeader from 'components/userInfoHeader'
 import {
   Github,
   //  Bitbucket,
   Gitlab,
 } from '../images/logos'
+import { persistor } from '../../wrapper'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -84,7 +86,6 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: -2vw;
   position: relative;
 
   @media (max-width: 1365px) {
@@ -127,6 +128,57 @@ const Option = styled.a`
   }
 `
 
+const Inline = styled.div`
+  display: inline-block;
+  width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  margin-left: 4px;
+  background: #0072ce;
+`
+
+const UserPhoto = styled.img`
+  width: 100%;
+  height: 100%;
+  margin-left: 4px;
+  border-radius: 5px;
+`
+
+const Text = styled.h3`
+  font-size: 1.2rem;
+  color: white;
+  transition: color 0.3s;
+  margin: 0;
+  font-weight: 200;
+  background: #0072ce;
+  @media (max-width: 767px) {
+    font-size: 1.4rem;
+  }
+  :hover {
+    color: black;
+  }
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 3vh;
+  width: auto;
+  margin: 0;
+  background: none;
+`
+
+const StyledDropdown = styled.div`
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #0072ce;
+`
+
 const getUserName = selectors.api.getApiData('user', null, 'name')
 
 const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
@@ -142,8 +194,10 @@ const LoginDropdown = () => {
       {({ getToggleButtonProps, isOpen }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
-
-          <div hidden={!isOpen} style={{ position: 'absolute' }}>
+          <div
+            hidden={!isOpen}
+            style={{ position: 'absolute', background: 'none' }}
+          >
             <MenuWrapper invert>
               {loginOptions.map((item, index) => (
                 <Option
@@ -164,23 +218,55 @@ const LoginDropdown = () => {
   )
 }
 
-const Login = () => {
-  const [showDropdown, setShowDropdown] = useState(false)
+const UserDropdown = props => {
+  const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
 
-  const handleDropdown = () => setShowDropdown(false)
-  const handleDropdownClick = () => setShowDropdown(!showDropdown)
+  if (isLoading)
+    return <Loader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
+
+  return (
+    <Downshift>
+      {({ getToggleButtonProps, isOpen }) => (
+        <span>
+          <Wrapper {...getToggleButtonProps({})}>
+            <StyledDropdown>
+              <Text>{props.user.username}</Text>
+              <Inline mobile={isMobileOnly}>
+                <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
+              </Inline>
+            </StyledDropdown>
+          </Wrapper>
+          <div hidden={!isOpen} style={{ position: 'absolute' }}>
+            <MenuWrapper invert>
+              <Option
+                onClick={() => {
+                  persistor.purge()
+                  localStorage.removeItem('token')
+                  dispatch({
+                    type: 'LOGOUT',
+                  })
+                }}
+                invert
+              >
+                Logout
+              </Option>
+            </MenuWrapper>
+          </div>
+        </span>
+      )}
+    </Downshift>
+  )
+}
+
+const Login = () => {
+  const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
   return !user.username && !isLoading ? (
     <LoginDropdown />
   ) : (
-    <UserInfoHeader
-      user={user}
-      handleDropdown={handleDropdown}
-      showDropdown={showDropdown}
-      handleDropdownClick={handleDropdownClick}
-    />
+    <UserDropdown user={user} />
   )
 }
 
