@@ -103,7 +103,6 @@ const Option = styled.a`
   width: auto;
   height: 32px;
   font-size: 1.2rem;
-  color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '5px'};
   border-bottom-right-radius: ${props => props.isLast && '5px'};
   z-index: 4;
@@ -119,7 +118,6 @@ const Option = styled.a`
 
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
-    color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
   }
 
@@ -156,6 +154,14 @@ const Text = styled.h3`
   }
   :hover {
     color: black;
+  }
+`
+
+const OptionText = styled(Text)`
+  color: #0072ce;
+  font-weight: 300;
+  :hover {
+    color: #ffffff;
   }
 `
 
@@ -213,7 +219,7 @@ const LoginDropdown = props => {
                   isLast={index === loginOptions.length - 1 ? true : false}
                 >
                   {item.icon}
-                  {item.label}
+                  <OptionText invert>{item.label}</OptionText>
                 </Option>
               ))}
             </MenuWrapper>
@@ -256,7 +262,7 @@ const UserDropdown = props => {
                 }}
                 invert
               >
-                Logout
+                <OptionText invert>Logout</OptionText>
               </Option>
             </MenuWrapper>
           </DropdownWrapper>
