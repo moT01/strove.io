@@ -4,6 +4,7 @@ import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
+import DetectBrowser from 'react-detect-browser'
 
 import Loader from 'components/fullScreenLoader'
 import { selectors } from 'state'
