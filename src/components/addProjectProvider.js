@@ -81,6 +81,8 @@ const AddProjectProvider = ({ children }) => {
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={isLoading || isDeleting || isStopping || isContinuing}
+        // isOpen={true}
+
         contentLabel="Loading"
         ariaHideApp={false}
       >
