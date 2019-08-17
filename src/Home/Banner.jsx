@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react'
 import QueueAnim from 'rc-queue-anim'
-import TweenOne from 'rc-tween-one'
-import BannerSVGAnim from './component/BannerSVGAnim'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
@@ -94,26 +92,11 @@ const StyledModal = styled(Modal)`
   display: flex;
   height: auto;
   width: auto;
-  top: 25%;
-  ${({ isMobile }) =>
-    !isMobile &&
-    css`
-      left: 25%;
-    `}
   position: fixed;
   animation: ${FadeIn} 0.2s ease-out;
 
   :focus {
     outline: 0;
-  }
-
-  @media (max-width: 1366px) {
-    width: 80vw;
-    ${({ isMobile }) =>
-      !isMobile &&
-      css`
-        left: 10vw;
-      `}
   }
 `
 
@@ -130,7 +113,7 @@ const StyledIcon = styled(Icon)`
   }
 `
 
-const Banner = props => {
+const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
 
@@ -139,17 +122,6 @@ const Banner = props => {
   return (
     <>
       <div className="banner-wrapper">
-        {/* {isMobileOnly && (
-          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-            <div className="home-banner-image">
-              <img
-                alt="banner"
-                src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
-                width="100%"
-              />
-            </div>
-          </TweenOne>
-        )} */}
         <QueueAnim
           className="banner-title-wrapper"
           type={isMobileOnly ? 'bottom' : 'right'}
@@ -160,8 +132,8 @@ const Banner = props => {
               style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-          <h1 key="h1">SiliSky</h1>
-          <p key="content">Code in clouds. One evironment for everyone.</p>
+          <h1 key="h1">Strove</h1>
+          <p key="content">Code in clouds. One environment for everyone.</p>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
@@ -181,17 +153,12 @@ const Banner = props => {
             </Button>
 
             <Button mobile={isMobileOnly}>
-              <StyledA href="mailto:contact@codengo.page?subject=Silisky demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+              <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
                 Request a demo
               </StyledA>
             </Button>
           </ButtonsWrapper>
         </QueueAnim>
-        {/* {!isMobileOnly && (
-          <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
-            <BannerSVGAnim />
-          </TweenOne>
-        )} */}
       </div>
       <StyledModal
         isOpen={isModalVisible}

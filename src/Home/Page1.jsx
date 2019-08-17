@@ -63,7 +63,7 @@ const featuresCN = [
   {
     title: "It's open source",
     content:
-      'Contribute! Silisky has been built with contributors in mind. This page is hosted on github as well',
+      'Contribute! Strove has been built with contributors in mind. This page is hosted on github as well',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg',
     color: '#FA8C16',
     shadowColor: 'rgba(250,140,22,.12)',
@@ -71,7 +71,7 @@ const featuresCN = [
   },
   {
     title: 'Push straight to GitHub or Bitbucket',
-    content: 'Silisky is made with seamless git experience in mind',
+    content: 'Strove is made with seamless git experience in mind',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg',
     color: '#1AC44D',
     shadowColor: 'rgba(26,196,77,.12)',
@@ -243,17 +243,12 @@ class Page1 extends React.PureComponent {
               <BigCloud />
             </Parallax>
           )}
-          {/* <h2>
-            What <span>SiliSky</span> means{" "}
-          </h2> */}
           <div className="title-line-wrapper page1-line">
             <div className="title-line" />
           </div>
-          {/* <OverPack> */}
           <div className="tiles-wrapper" style={{ width: '80vw' }}>
             {children}
           </div>
-          {/* </OverPack> */}
         </div>
       </div>
     )

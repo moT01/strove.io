@@ -225,8 +225,8 @@ const Dashboard = () => {
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const currentProjectId = useSelector(selectors.api.getApiData('user'))
-    .currentProjectId
+  const currentProject = projects.find(item => item.machineId)
+  const currentProjectId = currentProject && currentProject.id
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const projectsLimit = subscription.projects_limit || 4

@@ -5,7 +5,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: `SiliSky`,
+    title: `Strove`,
     description: `Move your development to the cloud. Access and run code anywhere using powerful linux servers.`,
     author: `@gatsbyjs`,
     siteUrl: `${process.env.SILISKY_URL}`,
@@ -63,13 +63,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `SiliSky`,
-        short_name: `SiliSky`,
+        name: `Strove`,
+        short_name: `Strove`,
         start_url: `/`,
         background_color: `#FFF`,
         theme_color: `#194F9D`,
         display: `minimal-ui`,
-        icon: `src/images/silisky3.png`, // This path is relative to the root of the site.
+        icon: `src/images/strove.png`, // This path is relative to the root of the site.
       },
     },
     {
@@ -82,6 +82,7 @@ module.exports = {
           'REDIRECT_URI',
           'SILISKY_URL',
           'GITLAB_CLIENT_ID',
+          'SILISKY_WEBSOCKET_ENDPOINT',
         ],
       },
     },

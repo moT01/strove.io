@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-// import Layout from "components/layout"
 import SEO from 'components/seo'
 import 'components/layout.css'
 
@@ -30,7 +29,7 @@ const StyledH2 = styled.h2`
 const Legal = () => (
   <>
     <SEO title="Cookies" />
-    <Header siteTitle="SiliSky" />
+    <Header siteTitle="Strove" />
 
     <TextWell>
       <StyledH2> About Cookies</StyledH2>
@@ -54,14 +53,14 @@ const Legal = () => (
         experience in using our services. Cookies can also help ensure marketing
         you see online is more relevant to you and your interests.
       </p>
-      <h2> Why does (SiliSky) use cookies and similar technologies?</h2>
+      <h2> Why does (Strove) use cookies and similar technologies?</h2>
       <p>
         We use cookies, pixels, local storage, and similar technologies to show
         you relevant content, improve your experience, and help protect
         Instagram and our users. We may use these technologies to deliver the
         service, provide you with a service that is easy to use, enables you to
         move around the Service and use its features, such as accessing secure
-        areas, and store information so that (SiliSky) responds faster. We may
+        areas, and store information so that (Strove) responds faster. We may
         use these technologies to collect information about how you use the
         Service, for example which pages you go to most often and if you get
         error messages from certain pages. We may use these technologies to
@@ -69,12 +68,12 @@ const Legal = () => (
         or the region you're in) and tailor the Service to provide enhanced
         features and content for you. These cookies can also be used to remember
         changes you've made to text size, font and other parts of pages that you
-        can customize. (SiliSky) or our advertising partners may use these
+        can customize. (Strove) or our advertising partners may use these
         technologies to deliver advertising that is relevant to your interests.
         These technologies can remember that your device has visited a site or
         service, and may also be able to track your device's browsing activity
         on other sites or services other than Instagram. This information may be
-        shared with organizations outside (SiliSky), such as advertisers and/or
+        shared with organizations outside (Strove), such as advertisers and/or
         advertising networks to deliver the advertising, and to help measure the
         effectiveness of an advertising campaign. *We may use these technologies
         to understand, improve, and research products and services.
@@ -90,7 +89,7 @@ const Legal = () => (
       </p>
       <h2> First and third party cookies</h2>
       <p>
-        First-party cookies are cookies that belong to (SiliSky), third-party
+        First-party cookies are cookies that belong to (Strove), third-party
         cookies are cookies that another party places on your device through our
         Service. Third-party cookies may be placed on your device by someone
         providing a service for Instagram, for example to help us understand how

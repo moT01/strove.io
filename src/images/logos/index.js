@@ -12,7 +12,7 @@ import VSCode from './vscode.svg'
 import Google from './google.svg'
 import Github from './github.svg'
 import Docker from './docker.svg'
-import Silisky from './siliskyhollow.svg'
+import Strove from './strove.svg'
 import Bitbucket from './bitbucket.svg'
 import Gitlab from './gitlab.svg'
 import Php from './php.svg'
@@ -35,7 +35,7 @@ export {
   Google,
   Github,
   Docker,
-  Silisky,
+  Strove,
   Bitbucket,
   Gitlab,
   Php,

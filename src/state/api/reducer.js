@@ -29,12 +29,12 @@ export default (state = initialState, action) => {
       the following initial state: myProjects: { data: [] } and action:
       { type: 'FETCH_SUCCESS',
         storeKey: 'myProjects',
-        data: { id: 123, githubLink: 'https://github.com/codengo-llc/silisky-client'}
+        data: { id: 123, githubLink: 'https://github.com/stroveio/stroveio-client'}
       } we get the following state:
       {
         api: {
           myProjects: [
-            { id: 123, githubLink: 'https://github.com/codengo-llc/silisky-client'}
+            { id: 123, githubLink: 'https://github.com/stroveio/stroveio-client'}
           ]
         }
       }
@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
         If old data was an array and one one isn't, append new data to array (for example
         when adding additional project to projects)
         If old data was an object extend object with new props (for example when user is already
-        logged in but more user data has beeen fetched)
+        logged in but more user data has been fetched)
         For old data being an array or primitive and new data coming in array or primitive overwrite
         old data with a new one (for example when re-fetching projects
       */

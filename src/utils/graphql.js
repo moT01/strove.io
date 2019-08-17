@@ -130,6 +130,7 @@ export const mutation = ({
  * @param {function} objectParam.dataSelector - Function used to get result data, useful for example for paginated results like data.myProjects.edges
  * @param {string} objectParam.client - GraphQL client, for example Github. Defaults to Silisky
  */
+
 export const query = ({
   name,
   storeKey = name,
