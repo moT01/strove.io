@@ -16,7 +16,6 @@ const AddProjectProvider = ({ children }) => {
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  // const [modalVisible, setModalVisible] = useState(false)
 
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -24,8 +23,8 @@ const AddProjectProvider = ({ children }) => {
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
-  const currentProjectId = useSelector(selectors.api.getApiData('user'))
-    .currentProjectId
+  const currentProject = projects.find(item => item.machineId)
+  const currentProjectId = currentProject && currentProject.id
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const subscriptionStatus = subscription.status

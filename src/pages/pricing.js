@@ -34,6 +34,11 @@ const CardsWrapper = styled.div`
   }
 `
 
+const StyledA = styled.a`
+  text-decoration: none;
+  margin: 0;
+`
+
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -82,7 +87,7 @@ const Card = styled.div`
   background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
   margin-top: ${props => (props.team ? '9vh' : 0)};
-  z-index: ${props => (props.team ? -1 : 0)};
+  z-index: auto;
   border-radius: 5px;
   border-color: #0072ce;
   border-width: 1px;
@@ -240,14 +245,6 @@ const PricingPage = () => {
           <CardTitle>Congratulations!</CardTitle>
           <Text>Your purchase has been succesfully completed.</Text>
           <ButtonsWrapper mobile={device}>
-            {/* <StyledAnchor
-              primary
-              href={githubHref}
-              onClick={() => setModalVisible(false)}
-            >
-              Login with Github
-              <Github />
-            </StyledAnchor> */}
             <Button onClick={() => setModalVisible(false)}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
@@ -281,10 +278,10 @@ const PricingPage = () => {
                 {subscription?.status !== 'active' ? (
                   <StripeCheckout
                     amount={3999}
-                    description="SiliSky"
+                    description="Strove"
                     image="https://i.imgur.com/2IE6t8u.png"
                     locale="en"
-                    name="SiliSky.com"
+                    name="Strive.io"
                     stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
                     token={queryToken}
                     allowRememberMe={false}
@@ -312,14 +309,14 @@ const PricingPage = () => {
                 <Contact team>Contact Sales for pricing</Contact>
                 <Feature team>Private and Public repositories</Feature>
                 <Feature team>
-                  RAM, hard drive and speeed adjusted to teams needs
+                  RAM, hard drive and speed adjusted to teams needs
                 </Feature>
                 <Feature team>Commercial use</Feature>
-
                 <Feature team>Priority support</Feature>
-
                 <Button team>
+                  <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
                   <ButtonText>Choose Enterprise</ButtonText>
+                  </StyledA>
                 </Button>
               </PricingWrapper>
             </PricingSection>

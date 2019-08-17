@@ -2,12 +2,12 @@ import React, { memo } from 'react'
 
 import Layout from 'components/layout'
 import SEO from 'components/seo'
-import AntDesign from '../Home'
+import Home from '../Home'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="SiliSky" />
-    <AntDesign />
+    <SEO title="Strove" />
+    <Home />
   </Layout>
 )
 

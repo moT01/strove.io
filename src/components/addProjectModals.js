@@ -487,7 +487,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
           <Text>
             Unable to clone a repository. This repository most likely belongs to
             an organization. The only way to overcome this issue is to ask one
-            of repository's organization owners to log in to Silisky and approve
+            of repository's organization owners to log in to Strove and approve
             it.
           </Text>
           <ButtonsWrapper mobile={device}>

@@ -40,13 +40,13 @@
 //   {
 //     header: 'Can I work on mobile apps or Windows/MacOS apps?',
 //     paragraph: `Yes and no. Here is an overview:
-// Silisky runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Silisky as well.
+// Strove runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Strove as well.
 // Mobile development using solutions such as React Native and Expo or native desktop development using solutions such as Electorn is possible.
-// You won't be able to use Silisky if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
+// You won't be able to use Strove if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
 //     `,
 //   },
 //   {
-//     header: 'Is Silisky free?',
+//     header: 'Is Strove free?',
 //     paragraph:
 //       'Yes, each user gets up to 2 GB of RAM and 4 public projects in the free plan. Universities',
 //   },
@@ -58,9 +58,9 @@
 //     header: 'Why does project load several seconds',
 //     paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
 // 1. A new Docker container is started on one of virtual machines.
-// 2. Silisky provides read and write access to the project folder.
-// 3. Silisky clones your repository from a chosen git provider.
-// 4. Init script from silisky.json is run if it's present.`,
+// 2. Strove provides read and write access to the project folder.
+// 3. Strove clones your repository from a chosen git provider.
+// 4. Init script from strove.json is run if it's present.`,
 //   },
 //   {
 //     header: 'Why do i need to log in with Github/Gitlab',

@@ -1,10 +1,13 @@
 import { ApolloClient } from 'apollo-client'
+import { split } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { withClientState } from 'apollo-link-state'
 import { ApolloLink, Observable } from 'apollo-link'
 import fetch from 'isomorphic-fetch'
+import { WebSocketLink } from 'apollo-link-ws'
+import { getMainDefinition } from 'apollo-utilities'
 
 const cache = new InMemoryCache()
 
@@ -18,6 +21,33 @@ const defaultOptions = {
     errorPolicy: 'all',
   },
 }
+
+const wsLink = process.browser
+  ? new WebSocketLink({
+      // if you instantiate in the server, the error will be thrown
+      uri: process.env.SILISKY_WEBSOCKET_ENDPOINT,
+      options: {
+        reconnect: true,
+      },
+    })
+  : null
+
+const httpLink = new HttpLink({
+  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
+})
+
+const link = process.browser
+  ? split(
+      //only create the split in the browser
+      // split based on operation type
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(query)
+        return kind === 'OperationDefinition' && operation === 'subscription'
+      },
+      wsLink,
+      httpLink
+    )
+  : httpLink
 
 const requestLink = new ApolloLink(
   (operation, forward) =>
@@ -80,9 +110,7 @@ export default new ApolloClient({
       },
       cache,
     }),
-    new HttpLink({
-      uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
-    }),
+    link,
   ]),
   cache,
 })

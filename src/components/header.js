@@ -6,7 +6,7 @@ import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
-import { Silisky, Dashboard, Desktop } from 'images/logos'
+import { Strove, Dashboard, Desktop } from 'images/logos'
 import Login from './login'
 
 const FadeIn = keyframes`
@@ -114,7 +114,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
-              <Silisky
+              <Strove
                 style={{ height: '100%', marginTop: '0.6rem' }}
                 fill="#ffffff"
               />

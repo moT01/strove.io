@@ -1,11 +1,13 @@
 import React, { useState, memo } from 'react'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
+import { useDispatch, useSelector } from 'react-redux'
+import { isMobileOnly } from 'react-device-detect'
+import DetectBrowser from 'react-detect-browser'
 
+import Loader from 'components/fullScreenLoader'
 import { selectors } from 'state'
-import UserInfoHeader from 'components/userInfoHeader'
 import {
   Github,
   //  Bitbucket,
@@ -16,19 +18,6 @@ import { persistor } from '../../wrapper'
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
-
-const options = [
-  {
-    option: 'Logout',
-    onClick: dispatch => {
-      persistor.purge()
-      localStorage.removeItem('token')
-      dispatch({
-        type: 'LOGOUT',
-      })
-    },
-  },
-]
 
 const loginOptions = [
   {
@@ -64,6 +53,7 @@ const LoginButton = styled.button`
   border: none;
   text-decoration: none;
   font-weight: 200;
+  line-height: 1;
 
   :focus {
     outline: 0;
@@ -81,7 +71,7 @@ const LoginButton = styled.button`
     }
   }
 
-  * {
+  > {
     vertical-align: bottom;
   }
 `
@@ -98,8 +88,9 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
-  left: -2vw;
-  position: absolute;
+  left: ${props => (props.login ? '-2vw' : '50px')};
+  position: relative;
+
   @media (max-width: 1365px) {
     left: -6vw;
   }
@@ -112,7 +103,7 @@ const Option = styled.a`
   padding: 3px;
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
-  height: auto;
+  height: 32px;
   font-size: 1.2rem;
   color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
   border-bottom-left-radius: ${props => props.isLast && '5px'};
@@ -140,6 +131,57 @@ const Option = styled.a`
   }
 `
 
+const Inline = styled.div`
+  display: inline-block;
+  width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  margin-left: 4px;
+  background: #0072ce;
+`
+
+const UserPhoto = styled.img`
+  width: 100%;
+  height: 100%;
+  margin-left: 4px;
+  border-radius: 5px;
+`
+
+const Text = styled.h3`
+  font-size: 1.2rem;
+  color: white;
+  transition: color 0.3s;
+  margin: 0;
+  font-weight: 200;
+  line-height: 1;
+  @media (max-width: 767px) {
+    font-size: 1.4rem;
+  }
+  :hover {
+    color: black;
+  }
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 3vh;
+  width: auto;
+  margin: 0;
+  background: none;
+`
+
+const StyledDropdown = styled.div`
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #0072ce;
+`
+
 const getUserName = selectors.api.getApiData('user', null, 'name')
 
 const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
@@ -149,27 +191,20 @@ const getUserData = createSelector(
   (username, userphoto) => ({ username, userphoto })
 )
 
-const LoginDropdown = () => {
-  const [value, setValue] = useState()
-
-  const selectedItem =
-    options.find(i => {
-      return String(i.value) === value
-    }) || null
+const LoginDropdown = props => {
   return (
-    <Downshift selectedItem={selectedItem} onChange={item => setValue(item)}>
-      {({
-        getToggleButtonProps,
-        getMenuProps,
-        getItemProps,
-        isOpen,
-        selectedItem,
-        highlightedIndex,
-      }) => (
+    <Downshift>
+      {({ getToggleButtonProps, isOpen }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>Login</LoginButton>
-
-          <div hidden={!isOpen} style={{ position: 'absolute' }}>
+          <div
+            hidden={!isOpen}
+            style={{
+              position: 'absolute',
+              background: 'none',
+              right: props.browser === 'safari' ? '-30px' : '60px',
+            }}
+          >
             <MenuWrapper invert>
               {loginOptions.map((item, index) => (
                 <Option
@@ -179,7 +214,6 @@ const LoginDropdown = () => {
                   isLast={index === loginOptions.length - 1 ? true : false}
                 >
                   {item.icon}
-
                   {item.label}
                 </Option>
               ))}
@@ -191,25 +225,67 @@ const LoginDropdown = () => {
   )
 }
 
-const Login = () => {
-  const [showDropdown, setShowDropdown] = useState(false)
+const UserDropdown = props => {
+  const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
 
-  const handleDropdown = () => setShowDropdown(false)
-  const handleDropdownClick = () => setShowDropdown(!showDropdown)
-  const user = useSelector(getUserData)
+  if (isLoading)
+    return <Loader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
 
-  return !user.username && !isLoading ? (
-    <LoginDropdown />
-  ) : (
-    <UserInfoHeader
-      user={user}
-      options={options}
-      handleDropdown={handleDropdown}
-      showDropdown={showDropdown}
-      handleDropdownClick={handleDropdownClick}
-    />
+  return (
+    <Downshift>
+      {({ getToggleButtonProps, isOpen }) => (
+        <span>
+          <Wrapper {...getToggleButtonProps({})}>
+            <StyledDropdown>
+              <Text>{props.user.username}</Text>
+              <Inline mobile={isMobileOnly}>
+                <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
+              </Inline>
+            </StyledDropdown>
+          </Wrapper>
+          <div
+            hidden={!isOpen}
+            style={{
+              position: 'absolute',
+              background: 'none',
+              right: props.browser === 'safari' ? '-30px' : '60px',
+            }}
+          >
+            <MenuWrapper invert>
+              <Option
+                onClick={() => {
+                  persistor.purge()
+                  localStorage.removeItem('token')
+                  dispatch({
+                    type: 'LOGOUT',
+                  })
+                }}
+                invert
+              >
+                Logout
+              </Option>
+            </MenuWrapper>
+          </div>
+        </span>
+      )}
+    </Downshift>
   )
 }
 
-export default memo(Login)
+const Login = ({ browser }) => {
+  const isLoading = useSelector(selectors.api.getLoading('user'))
+  const user = useSelector(getUserData)
+
+  return !user.username && !isLoading ? (
+    <LoginDropdown browser={browser} />
+  ) : (
+    <UserDropdown user={user} browser={browser} />
+  )
+}
+
+const LoginWithBrowserInfo = () => (
+  <DetectBrowser>{({ browser }) => <Login browser={browser} />}</DetectBrowser>
+)
+
+export default memo(LoginWithBrowserInfo)
