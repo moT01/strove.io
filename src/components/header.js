@@ -137,7 +137,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <PreviewLink
             style={{ color: '#fff', textDecoration: 'none' }}
-            href={'/app/preview/'}
+            href={'/app/preview?host=3000'}
             target="_blank"
             rel="noopener noreferrer"
           >
