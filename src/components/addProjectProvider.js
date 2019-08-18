@@ -28,7 +28,7 @@ const AddProjectProvider = ({ children }) => {
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const subscriptionStatus = subscription.status
-  const projectsLimit = subscription.projects_limit
+  const projectsLimit = subscription.projects_limit || 4
 
   const addProject = async repoLink => {
     const repoUrlParts = repoLink.split('/')
