@@ -16,11 +16,11 @@ import {
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
-import GetStarted from '../components/getStarted'
+import Modal from 'components/modal'
+import GetStarted from 'components/getStarted'
 import Layout from './layout'
 import SEO from './seo'
 import Loader from './fullScreenLoader'
-import Modal from 'components/modal'
 
 const FadeIn = keyframes`
   0% {
