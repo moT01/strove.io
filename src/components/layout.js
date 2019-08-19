@@ -67,7 +67,7 @@ const Layout = ({ children, browser }) => {
   )
 }
 
-export default memo(children => (
+export default memo(({ children }) => (
   <DetectBrowser>
     {({ browser }) => <Layout browser={browser}>{children}</Layout>}
   </DetectBrowser>
