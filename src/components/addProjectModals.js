@@ -215,7 +215,6 @@ const ButtonsWrapper = styled.div`
 
 const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
-  // const incomingProject = useSelector(selectors.incomingProject.getProjectData)
 
   if (modalContent === 'AddGithubPrivatePermissions') {
     return (
