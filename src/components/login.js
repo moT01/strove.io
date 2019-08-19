@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
