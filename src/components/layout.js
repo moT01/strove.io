@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import DetectBrowser from 'react-detect-browser'
@@ -17,7 +17,22 @@ const MainContent = styled.main`
   padding-top: 0;
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, browser }) => {
+  const [modalVisible, setModalVisible] = useState(false)
+
+  useEffect(() => {
+    if (
+      (browser && browser.name === 'chrome') ||
+      (browser && browser.name === 'firefox') ||
+      (browser && browser.name === 'opera') ||
+      (browser && browser.name === 'safari')
+    ) {
+      return null
+    } else {
+      setModalVisible(true)
+    }
+  }, [])
+
   return (
     <StaticQuery
       query={graphql`
@@ -32,27 +47,19 @@ const Layout = ({ children }) => {
       render={data => (
         <>
           <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>
-            <DetectBrowser>
-              {({ browser }) =>
-                (browser && browser.name === 'chrome') ||
-                (browser && browser.name === 'firefox') ||
-                (browser && browser.name === 'opera') ||
-                (browser && browser.name === 'safari') ? null : (
-                  <>
-                    Your browser might not provide the best Strove.io user
-                    experience. We recommend using Google Chrome, Mozilla
-                    Firefox, Safari or Opera
-                  </>
-                )
-              }
-            </DetectBrowser>
-            {children}
-          </MainContent>
+          <MainContent>{children}</MainContent>
         </>
       )}
     />
   )
 }
 
-export default memo(Layout)
+// Your browser might not provide the best Strove.io user
+//                     experience. We recommend using Google Chrome, Mozilla
+//                     Firefox, Safari or Opera
+
+const LayoutWithBrowser = () => (
+  <DetectBrowser>{({ browser }) => <Layout browser={browser} />}</DetectBrowser>
+)
+
+export default memo(LayoutWithBrowser)
