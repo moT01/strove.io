@@ -1,7 +1,9 @@
 import React, { memo, useState, useEffect } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
-import DetectBrowser from 'react-detect-browser'
+import DetectBrowser, { isMobileOnly, isTablet } from 'react-detect-browser'
+
+import Modal from 'components/modal'
 
 import Header from './header'
 import './layout.css'
@@ -22,16 +24,15 @@ const Layout = ({ children, browser }) => {
 
   useEffect(() => {
     if (
-      (browser && browser.name === 'chrome') ||
-      (browser && browser.name === 'firefox') ||
-      (browser && browser.name === 'opera') ||
-      (browser && browser.name === 'safari')
+      browser &&
+      browser.name !== 'chrome' &&
+      browser.name !== 'firefox' &&
+      browser.name !== 'opera' &&
+      browser.name !== 'safari'
     ) {
-      return null
-    } else {
       setModalVisible(true)
     }
-  }, [])
+  }, [browser])
 
   return (
     <StaticQuery
@@ -46,6 +47,18 @@ const Layout = ({ children, browser }) => {
       `}
       render={data => (
         <>
+          <Modal
+            isOpen={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+            contentLabel={'Browser not supported'}
+            ariaHideApp={false}
+            width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+            height={isMobileOnly ? '40vh' : '25vh'}
+            zIndex={99}
+          >
+            Your browser might not provide the best Strove.io user experience.
+            We recommend using Google Chrome, Mozilla Firefox, Safari or Opera
+          </Modal>
           <Header siteTitle={data.site.siteMetadata.title} />
           <MainContent>{children}</MainContent>
         </>
@@ -54,12 +67,8 @@ const Layout = ({ children, browser }) => {
   )
 }
 
-// Your browser might not provide the best Strove.io user
-//                     experience. We recommend using Google Chrome, Mozilla
-//                     Firefox, Safari or Opera
-
-const LayoutWithBrowser = () => (
-  <DetectBrowser>{({ browser }) => <Layout browser={browser} />}</DetectBrowser>
-)
-
-export default memo(LayoutWithBrowser)
+export default memo(children => (
+  <DetectBrowser>
+    {({ browser }) => <Layout browser={browser}>{children}</Layout>}
+  </DetectBrowser>
+))
