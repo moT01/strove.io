@@ -16,11 +16,11 @@ import {
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
-import GetStarted from '../components/getStarted'
+import Modal from 'components/modal'
+import GetStarted from 'components/getStarted'
 import Layout from './layout'
 import SEO from './seo'
 import Loader from './fullScreenLoader'
-import Modal from 'components/modal'
 
 const FadeIn = keyframes`
   0% {
@@ -406,24 +406,6 @@ const Dashboard = () => {
                       Start
                     </Button>
                   )}
-                  {isDeleting || isContinuing || isStopping ? (
-                    <Button disabled={isDeleting || isContinuing || isStopping}>
-                      <Loader
-                        isFullScreen={false}
-                        color={'#0072ce'}
-                        height={'1.2rem'}
-                      />
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={() => {
-                        setModalVisible(true)
-                        setProjectToDelete(project)
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  )}
                   {currentProjectId && currentProjectId === project.id ? (
                     isDeleting || isContinuing || isStopping ? (
                       <Button
@@ -444,8 +426,24 @@ const Dashboard = () => {
                         Stop
                       </Button>
                     )
+                  ) : null}
+                  {isDeleting || isContinuing || isStopping ? (
+                    <Button disabled={isDeleting || isContinuing || isStopping}>
+                      <Loader
+                        isFullScreen={false}
+                        color={'#0072ce'}
+                        height={'1.2rem'}
+                      />
+                    </Button>
                   ) : (
-                    <div></div>
+                    <Button
+                      onClick={() => {
+                        setModalVisible(true)
+                        setProjectToDelete(project)
+                      }}
+                    >
+                      Delete
+                    </Button>
                   )}
                 </RightSection>
               </VerticalDivider>
