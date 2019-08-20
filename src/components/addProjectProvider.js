@@ -28,7 +28,8 @@ const AddProjectProvider = ({ children }) => {
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const subscriptionStatus = subscription.status
-  const projectsLimit = subscription.projects_limit || 4
+  const projectsLimit =
+    (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
   const addProject = async repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -58,7 +59,7 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('AddGithubPrivatePermissions')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')
-    } else if (projects && projects.length === projectsLimit) {
+    } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
