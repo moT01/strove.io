@@ -13,6 +13,7 @@ import { useSubscription } from '@apollo/react-hooks'
 import {
   GITHUB_LOGIN,
   GITLAB_LOGIN,
+  BITBUCKET_LOGIN,
   MY_PROJECTS,
   ACTIVE_PROJECT,
 } from 'queries'
@@ -103,14 +104,17 @@ const LoginProvider = ({ children }) => {
 
   useEffect(() => {
     const code = window?.location?.href
-      .match(/code=(.*)(?=&state)/g)
+      .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
 
     const state = window?.location?.href
-      ?.match(/state=(.*)/g)
+      ?.match(/state=([a-z]+)/g)
       ?.toString()
       .split('=')[1]
+
+    console.log('state', state)
+    console.log('code', code)
 
     // Scopes update after buying subscription, may actually be redundant atm
     if (code && user?.subscription?.status === 'active') {
@@ -186,10 +190,53 @@ const LoginProvider = ({ children }) => {
               context: null,
               onSuccess: ({ siliskyToken }) =>
                 localStorage.setItem('token', siliskyToken),
+              onSuccessDispatch: [
+                user => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'user',
+                    data: user,
+                  },
+                }),
+                ({ subscription }) => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'subscription',
+                    data: subscription,
+                  },
+                }),
+              ],
             })
           )
           break
         case 'bitbucket':
+          dispatch(
+            mutation({
+              mutation: BITBUCKET_LOGIN,
+              variables: { code },
+              storeKey: 'user',
+              name: 'bitbucketAuth',
+              context: null,
+              onSuccess: ({ siliskyToken }) =>
+                localStorage.setItem('token', siliskyToken),
+              onSuccessDispatch: [
+                user => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'user',
+                    data: user,
+                  },
+                }),
+                ({ subscription }) => ({
+                  type: C.api.FETCH_SUCCESS,
+                  payload: {
+                    storeKey: 'subscription',
+                    data: subscription,
+                  },
+                }),
+              ],
+            })
+          )
           break
         default:
           break
