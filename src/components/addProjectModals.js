@@ -475,7 +475,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         onRequestClose={() => closeModal()}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '90vh' : isTablet ? '60vw' : '40vw'}
+        width={isMobileOnly ? '90vw' : isTablet ? '60vw' : '40vw'}
         height={isMobileOnly ? '80vh' : '40vh'}
       >
         <ModalWrapepr>
