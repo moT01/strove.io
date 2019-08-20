@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import Modal from 'react-modal'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components'
 
 const FullFadeIn = keyframes`
   0% {
@@ -11,7 +11,13 @@ const FullFadeIn = keyframes`
   }
 `
 
+const sizeProps = props =>
+  css`
+    ${props.width && `width: ${props.width}`};
+  `
+
 export default memo(styled(Modal)`
+  ${sizeProps};
   display: flex;
   flex-direction: column;
   justify-content: center;
