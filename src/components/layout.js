@@ -20,7 +20,7 @@ const MainContent = styled.main`
 `
 
 const Layout = ({ children, browser }) => {
-  const [modalVisible, setModalVisible] = useState(false)
+  const [noSupportModalVisible, setNoSupportModalVisible] = useState(false)
 
   useEffect(() => {
     if (
@@ -30,7 +30,7 @@ const Layout = ({ children, browser }) => {
       browser.name !== 'opera' &&
       browser.name !== 'safari'
     ) {
-      setModalVisible(true)
+      setNoSupportModalVisible(true)
     }
   }, [browser])
 
@@ -48,8 +48,8 @@ const Layout = ({ children, browser }) => {
       render={data => (
         <>
           <Modal
-            isOpen={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
+            isOpen={noSupportModalVisible}
+            onRequestClose={() => setNoSupportModalVisible(false)}
             contentLabel={'Browser not supported'}
             ariaHideApp={false}
             width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -60,7 +60,15 @@ const Layout = ({ children, browser }) => {
             We recommend using Google Chrome, Mozilla Firefox, Safari or Opera
           </Modal>
           <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>{children}</MainContent>
+          <MainContent>
+            {noSupportModalVisible && (
+              <div>
+                Your browser is not supported. Strove.io currently supports only
+                Google Chrome, Mozilla Firefox and Opera
+              </div>
+            )}
+            {children}
+          </MainContent>
         </>
       )}
     />
