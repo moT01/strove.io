@@ -230,7 +230,7 @@ const Dashboard = () => {
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const projectsLimit =
-    (subscription.status === 'acitve' && subscription.projects_limit) || 4
+    (subscription.status === 'active' && subscription.projects_limit) || 4
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
