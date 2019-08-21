@@ -64,24 +64,25 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
   },
   {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
-    paragraph: 'It would be impossible to clone a repository otherwise, those providers only allow apps to clone if the user is logged in.',
+    paragraph:
+      'It would be impossible to clone a repository otherwise, those providers only allow apps to clone if the user is logged in.',
   },
   {
     header: 'How to manage env variables?',
-    paragraph: 'Environment variables will be stored inside your project alone as long as they are ignored by git, just as they would be if you were using your physical machine to code.',
+    paragraph:
+      'Environment variables will be stored inside your project alone as long as they are ignored by git, just as they would be if you were using your physical machine to code.',
   },
   {
-    header: 'Why is my project loading?',
-    paragraph: 'I do not know ask Adam',
-  },
-
-  {
-    header: 'I want seelsd?????? language version what to do',
-    paragraph: ' Hello, how are you?',
+    header:
+      'I want a particular language version that\x27s not yet supported. What should I do to make it work?',
+    paragraph:
+      'Right now they only way is to contact us. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
   },
   {
-    header: 'HOST 0.0.0.0',
-    paragraph: 'Yyyyyyyyyyyy',
+    header:
+      'I am not able to preview my application from within the IDE even though server is running! What should I do?',
+    paragraph:
+      'This is most likely due to not your app not running on host 0.0.0.0. Some frameworks and servers choose a different port and you can almost always specify that you want host 0.0.0.0 instead.',
   },
 ]
 
