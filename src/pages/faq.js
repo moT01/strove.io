@@ -38,17 +38,20 @@ const TopicWrapper = styled.div``
 
 const topics = [
   {
-    header: 'Can I work on mobile apps or Windows/MacOS apps?',
-    paragraph: `Yes and no. Here is an overview:
-Strove runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Strove as well.
-Mobile development using solutions such as React Native and Expo or native desktop development using solutions such as Electorn is possible.
-You won't be able to use Strove if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
-    `,
-  },
-  {
     header: 'Is Strove free?',
     paragraph:
       'Yes, each user gets up to 2 GB of RAM and 4 public projects in the free plan.',
+  },
+  {
+    header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
+    paragraph:
+      'It would be impossible to clone a repository otherwise, those providers only allow apps to clone if the user is logged in.',
+  },
+  {
+    header:
+      'I am not able to preview my application from within the IDE even though server is running! What should I do?',
+    paragraph:
+      'This is most likely due to not your app not running on host 0.0.0.0. Some frameworks and servers choose a different port and you can almost always specify that you want host 0.0.0.0 instead.',
   },
   {
     header: 'Can I have more than 4 repositories?',
@@ -63,26 +66,23 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
 4. Init script from strove.json is run if it's present.`,
   },
   {
-    header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
-    paragraph:
-      'It would be impossible to clone a repository otherwise, those providers only allow apps to clone if the user is logged in.',
-  },
-  {
     header: 'How to manage env variables?',
     paragraph:
       'Environment variables will be stored inside your project alone as long as they are ignored by git, just as they would be if you were using your physical machine to code.',
   },
   {
-    header:
-      'I want a particular language version that\x27s not yet supported. What should I do to make it work?',
-    paragraph:
-      'Right now they only way is to contact us. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
+    header: 'Can I work on mobile apps or Windows/MacOS apps?',
+    paragraph: `Yes and no. Here is an overview:
+Strove runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Strove as well.
+Mobile development using solutions such as React Native and Expo or native desktop development using solutions such as Electorn is possible.
+You won't be able to use Strove if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
+    `,
   },
   {
     header:
-      'I am not able to preview my application from within the IDE even though server is running! What should I do?',
+      'I want a particular language version that\x27s not yet supported. What should I do to make it work?',
     paragraph:
-      'This is most likely due to not your app not running on host 0.0.0.0. Some frameworks and servers choose a different port and you can almost always specify that you want host 0.0.0.0 instead.',
+      'Right now they only way is to contact us on contact@codengo.page. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
   },
 ]
 
