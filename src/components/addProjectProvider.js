@@ -28,7 +28,8 @@ const AddProjectProvider = ({ children }) => {
   const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const subscriptionStatus = subscription.status
-  const projectsLimit = subscription.projects_limit
+  const projectsLimit =
+    (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
   const addProject = async repoLink => {
     const repoUrlParts = repoLink.split('/')
@@ -59,7 +60,7 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('AddGithubPrivatePermissions')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')
-    } else if (projects && projects.length === projectsLimit) {
+    } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
@@ -82,6 +83,8 @@ const AddProjectProvider = ({ children }) => {
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={isLoading || isDeleting || isStopping || isContinuing}
+        // isOpen={true}
+
         contentLabel="Loading"
         ariaHideApp={false}
       >

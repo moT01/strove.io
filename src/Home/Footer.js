@@ -8,7 +8,7 @@ const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 16vh;
+  height: 18vh;
   background-color: #0072ce;
   @media (max-width: 767px) {
     height: auto;
@@ -35,7 +35,7 @@ const Column = styled.div`
 
 const ColumnTitle = styled.h3`
   font-size: 1.3rem;
-  font-weight: 200;
+  font-weight: 300;
   color: white;
   margin: 5px 0 5px 0;
 `
