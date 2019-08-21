@@ -133,7 +133,7 @@ const Banner = () => {
             />
           </div>
           <h1 key="h1">Strove</h1>
-          <p key="content">Code in clouds. One evironment for everyone.</p>
+          <p key="content">Code in clouds. One environment for everyone.</p>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
@@ -145,7 +145,7 @@ const Banner = () => {
                 <Loader
                   isFullScreen={false}
                   color={'#ffffff'}
-                  height={'2.2rem'}
+                  height={'1.7rem'}
                 />
               ) : (
                 'Get started'

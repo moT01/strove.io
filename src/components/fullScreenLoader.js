@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
+
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
 import { useInterval } from '../hooks'
