@@ -261,7 +261,7 @@ const PricingPage = () => {
                 <Price>$0</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Public repositories</Feature>
-                <Feature>1,25 - 2 GB of Ram</Feature>
+                <Feature>6 GB of Ram</Feature>
                 <Feature>No commercial use</Feature>
                 <Button disabled>
                   <ButtonText team>Already subscribed</ButtonText>
@@ -273,8 +273,8 @@ const PricingPage = () => {
                 <Price>$39.99</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Private and Public repositories</Feature>
-                <Feature>4 GB of RAM</Feature>
                 <Feature>Commerial use</Feature>
+                <Feature>Suited for small companies</Feature>
                 {subscription?.status !== 'active' ? (
                   <StripeCheckout
                     amount={3999}
@@ -315,7 +315,7 @@ const PricingPage = () => {
                 <Feature team>Priority support</Feature>
                 <Button team>
                   <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-                  <ButtonText>Choose Enterprise</ButtonText>
+                    <ButtonText>Choose Enterprise</ButtonText>
                   </StyledA>
                 </Button>
               </PricingWrapper>
