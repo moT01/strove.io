@@ -23,12 +23,12 @@ const loginOptions = [
     href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github`,
     icon: <Github />,
   },
-  // {
-  //   value: 'bitbucket',
-  //   label: 'Bitbucket',
-  //   href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`,
-  //   icon: <Bitbucket />,
-  // },
+  {
+    value: 'bitbucket',
+    label: 'Bitbucket',
+    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`,
+    icon: <Bitbucket />,
+  },
   {
     value: 'gitlab',
     label: 'Gitlab',
