@@ -2,9 +2,7 @@ export const getbitbucketToken = async refresh_token => {
   try {
     const BITBUCKET_CLIENT_SECRET = process.env.BITBUCKET_CLIENT_SECRET
     const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
-
     const auth = btoa(`${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}`)
-
     const { access_token } = await fetch(
       'https://bitbucket.org/site/oauth2/access_token',
       {
