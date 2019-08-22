@@ -79,6 +79,7 @@ const createProject = async ({
         }
         break
       case 'bitbucket':
+        // Proper functionality will be added soon
         break
       default:
         break

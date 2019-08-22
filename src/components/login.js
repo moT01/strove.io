@@ -8,15 +8,12 @@ import DetectBrowser from 'react-detect-browser'
 
 import Loader from 'components/fullScreenLoader'
 import { selectors } from 'state'
-import {
-  Github,
-  //  Bitbucket,
-  Gitlab,
-} from '../images/logos'
+import { Github, Bitbucket, Gitlab } from '../images/logos'
 import { persistor } from '../../wrapper'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
+const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
 
 const loginOptions = [
@@ -26,12 +23,12 @@ const loginOptions = [
     href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github`,
     icon: <Github />,
   },
-  // {
-  //   value: 'bitbucket',
-  //   label: 'Bitbucket',
-  //   href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo`,
-  //   icon: <Bitbucket />,
-  // },
+  {
+    value: 'bitbucket',
+    label: 'Bitbucket',
+    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`,
+    icon: <Bitbucket />,
+  },
   {
     value: 'gitlab',
     label: 'Gitlab',
