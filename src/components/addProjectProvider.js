@@ -37,6 +37,7 @@ const AddProjectProvider = ({ children }) => {
 
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
+    const repoFromBitbucket = repoProvider === 'bitbucket'
 
     const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
 
