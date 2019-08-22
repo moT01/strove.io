@@ -261,7 +261,7 @@ const PricingPage = () => {
                 <Price>$0</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Public repositories</Feature>
-                <Feature>6 GB of Ram</Feature>
+                <Feature>6 GB of RAM</Feature>
                 <Feature>No commercial use</Feature>
                 <Button disabled>
                   <ButtonText team>Already subscribed</ButtonText>
