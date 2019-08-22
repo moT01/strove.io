@@ -16,7 +16,7 @@ const logos = [
       <VSCode style={{ fill: '#303c42' }} width="100%" length="auto" />
     ),
     name: 'VSCode',
-    description: 'VSCode is integrated out of the box.',
+    description: 'VSCode is integrated out of the box',
   },
   {
     component: (
