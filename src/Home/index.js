@@ -1,20 +1,18 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import Banner from './Banner'
-import Page1 from './Page1'
-import Page2 from './Page2'
+import Features from './Features'
+import Technologies from './Technologies'
 import Footer from './Footer'
 import './static/style'
 
 const Home = () => (
-  <div>
-    <div className="home-wrapper">
-      <Banner />
-      <Page1 />
-      <Page2 />
-      <Footer />
-    </div>
+  <div className="home-wrapper">
+    <Banner />
+    <Features />
+    <Technologies />
+    <Footer />
   </div>
 )
 
-export default Home
+export default memo(Home)
