@@ -113,9 +113,6 @@ const LoginProvider = ({ children }) => {
       ?.toString()
       .split('=')[1]
 
-    console.log('state', state)
-    console.log('code', code)
-
     // Scopes update after buying subscription, may actually be redundant atm
     if (code && user?.subscription?.status === 'active') {
       switch (state) {
@@ -260,6 +257,8 @@ const LoginProvider = ({ children }) => {
 }
 
 const WithAddProject = ({ children, addProject }) => {
+  const user = useSelector(selectors.api.getUser)
+  const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   useEffect(() => {
     let repoLink =
       window?.location?.href?.match(/#(.*)/) &&
@@ -269,7 +268,11 @@ const WithAddProject = ({ children, addProject }) => {
       /.*(github|gitlab|bitbucket).com/i.test(repoLink) &&
       addProject(repoLink)
   }, [])
-
+  useEffect(() => {
+    if (user && incomingProjectLink) {
+      addProject(incomingProjectLink)
+    }
+  }, [user])
   return children
 }
 

@@ -12,6 +12,12 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 }
 
+const incomingProjectConfig = {
+  key: 'incomingProject',
+  storage,
+  stateReconciler: autoMergeLevel2,
+}
+
 export const selectors = {
   api: api.selectors,
   incomingProject: incomingProject.selectors,
@@ -28,7 +34,10 @@ export const C = {
 
 const appReducer = combineReducers({
   api: persistReducer(persistConfig, api.reducer),
-  incomingProject: incomingProject.reducer,
+  incomingProject: persistReducer(
+    incomingProjectConfig,
+    incomingProject.reducer
+  ),
 })
 
 export default (state, action) => {
