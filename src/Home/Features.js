@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { Parallax } from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
@@ -98,7 +98,7 @@ const pointPos = [
   { x: 50, y: 50, opacity: 0.2 },
 ]
 
-const Page1 = () => {
+const Features = () => {
   const [hoverNum, setHoverNum] = useState()
 
   const onMouseOver = i => setHoverNum(i)
@@ -246,4 +246,4 @@ const Page1 = () => {
   )
 }
 
-export default Page1
+export default memo(Features)

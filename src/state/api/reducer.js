@@ -51,6 +51,16 @@ export default (state = initialState, action) => {
         old data with a new one (for example when re-fetching projects
       */
 
+      /* Todo: Investigate when this happens */
+      if (!data) {
+        return {
+          ...state,
+          data: null,
+          error: undefined,
+          isLoading: false,
+        }
+      }
+
       let newData
       if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
         newData = [...state[storeKey].data, data]
