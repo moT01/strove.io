@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Parallax } from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
@@ -70,12 +70,13 @@ const featuresCN = [
     type: 'github',
   },
   {
-    title: 'Push straight to GitHub or Bitbucket',
+    title: 'Push straight to GitHub, Gitlab or Bitbucket',
     content: 'Strove is made with seamless git experience in mind',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg',
     color: '#1AC44D',
     shadowColor: 'rgba(26,196,77,.12)',
     type: 'cloud',
+    // onClick: () => setGetStartedVisible(true),
   },
   {
     title: "Say goodbye to 'it works on my machine'",
@@ -97,24 +98,14 @@ const pointPos = [
   { x: 50, y: 50, opacity: 0.2 },
 ]
 
-class Page1 extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      hoverNum: null,
-    }
-  }
-  onMouseOver = i => {
-    this.setState({
-      hoverNum: i,
-    })
-  }
-  onMouseOut = () => {
-    this.setState({
-      hoverNum: null,
-    })
-  }
-  getEnter = e => {
+const Page1 = () => {
+  const [hoverNum, setHoverNum] = useState()
+
+  const onMouseOver = i => setHoverNum(i)
+
+  const onMouseOut = () => setHoverNum(null)
+
+  const getEnter = e => {
     const i = e.index
     const r = Math.random() * 2 - 1
     const y = Math.random() * 10 + 5
@@ -135,124 +126,124 @@ class Page1 extends React.PureComponent {
       },
     ]
   }
-  render() {
-    const { hoverNum } = this.state
-    let children = [[], [], []]
-    featuresCN.forEach((item, i) => {
-      const isHover = hoverNum === i
-      const pointChild = [
-        'point-0 left',
-        'point-0 right',
-        'point-ring',
-        'point-1',
-        'point-2',
-        'point-3',
-      ].map(className => (
-        <TweenOne
-          component="i"
-          className={className}
-          key={className}
-          style={{
-            background: item.color,
-            borderColor: item.color,
+
+  let children = [[], [], []]
+  featuresCN.forEach((item, i) => {
+    const isHover = hoverNum === i
+    const pointChild = [
+      'point-0 left',
+      'point-0 right',
+      'point-ring',
+      'point-1',
+      'point-2',
+      'point-3',
+    ].map(className => (
+      <TweenOne
+        onClick={() => console.log('clicked!')}
+        component="i"
+        className={className}
+        key={className}
+        style={{
+          background: item.color,
+          borderColor: item.color,
+        }}
+      />
+    ))
+    const child = (
+      <li key={i.toString()}>
+        <div
+          className="page1-box"
+          onMouseEnter={() => {
+            onMouseOver(i)
           }}
-        />
-      ))
-      const child = (
-        <li key={i.toString()}>
-          <div
-            className="page1-box"
-            onMouseEnter={() => {
-              this.onMouseOver(i)
+          onMouseLeave={() => {
+            onMouseOut()
+          }}
+        >
+          <TweenOneGroup
+            className="page1-point-wrapper"
+            enter={getEnter}
+            leave={{
+              x: 0,
+              y: 30,
+              opacity: 0,
+              duration: 300,
+              ease: 'easeInBack',
             }}
-            onMouseLeave={() => {
-              this.onMouseOut()
+            resetStyleBool={false}
+          >
+            {(isMobileOnly || isHover) && pointChild}
+          </TweenOneGroup>
+          <div
+            className="page1-image"
+            style={{
+              boxShadow: `${isHover ? '0 12px 24px' : '0 6px 12px'} ${
+                item.shadowColor
+              }`,
             }}
           >
-            <TweenOneGroup
-              className="page1-point-wrapper"
-              enter={this.getEnter}
-              leave={{
-                x: 0,
-                y: 30,
-                opacity: 0,
-                duration: 300,
-                ease: 'easeInBack',
-              }}
-              resetStyleBool={false}
-            >
-              {(isMobileOnly || isHover) && pointChild}
-            </TweenOneGroup>
-            <div
-              className="page1-image"
-              style={{
-                boxShadow: `${isHover ? '0 12px 24px' : '0 6px 12px'} ${
-                  item.shadowColor
-                }`,
-              }}
-            >
-              {item.type ? (
-                <Icon
-                  type={item.type}
-                  style={{
-                    fontSize: '32px',
-                    color: `${item.color}`,
-                    marginTop: '10px',
-                  }}
-                />
-              ) : (
-                <VSCode width="38px" height="auto" fill={item.color} />
-              )}
-            </div>
-            <h3>{item.title}</h3>
-            <p>{item.content}</p>
+            {item.type ? (
+              <Icon
+                type={item.type}
+                style={{
+                  fontSize: '32px',
+                  color: `${item.color}`,
+                  marginTop: '10px',
+                }}
+              />
+            ) : (
+              <VSCode width="38px" height="auto" fill={item.color} />
+            )}
           </div>
-        </li>
-      )
-      children[Math.floor(i / 3)].push(child)
-    })
+          <h3>{item.title}</h3>
+          <p>{item.content}</p>
+        </div>
+      </li>
+    )
+    children[Math.floor(i / 3)].push(child)
+  })
 
-    children = children.map((item, i) => (
-      <QueueAnim
-        className="page1-box-wrapper"
-        key={i.toString()}
-        type="bottom"
-        leaveReverse
-        delay={[i * 100, (children.length - 1 - i) * 100]}
-        component="ul"
-      >
-        {item}
-      </QueueAnim>
-    ))
-    return (
-      <div className="home-page page1">
-        <div className="home-page-wrapper" id="page1-wrapper">
-          {!isMobileOnly && (
-            <Parallax
-              className="page1-bg"
-              animation={{
-                translateY: 300,
-                ease: 'linear',
-                playScale: [0, 1.65],
-              }}
-              style={{ top: '-30vh' }}
-              location="page1-wrapper"
-            >
-              <SmallCloud />
-              <MediumCloud />
-              <BigCloud />
-            </Parallax>
-          )}
-          <div className="title-line-wrapper page1-line">
-            <div className="title-line" />
-          </div>
-          <div className="tiles-wrapper" style={{ width: '80vw' }}>
-            {children}
-          </div>
+  children = children.map((item, i) => (
+    <QueueAnim
+      className="page1-box-wrapper"
+      key={i.toString()}
+      type="bottom"
+      leaveReverse
+      delay={[i * 100, (children.length - 1 - i) * 100]}
+      component="ul"
+    >
+      {item}
+    </QueueAnim>
+  ))
+
+  return (
+    <div className="home-page page1">
+      <div className="home-page-wrapper" id="page1-wrapper">
+        {!isMobileOnly && (
+          <Parallax
+            className="page1-bg"
+            animation={{
+              translateY: 300,
+              ease: 'linear',
+              playScale: [0, 1.65],
+            }}
+            style={{ top: '-30vh' }}
+            location="page1-wrapper"
+          >
+            <SmallCloud />
+            <MediumCloud />
+            <BigCloud />
+          </Parallax>
+        )}
+        <div className="title-line-wrapper page1-line">
+          <div className="title-line" />
+        </div>
+        <div className="tiles-wrapper" style={{ width: '80vw' }}>
+          {children}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Page1
