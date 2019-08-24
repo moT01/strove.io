@@ -35,6 +35,7 @@ export const persistor = persistStore(createStore)
 const LoginProvider = ({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const projects = useSelector(selectors.api.getUserProjects)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   const [projectToStop, setProjectToStop] = useState(null)
 
@@ -256,10 +257,14 @@ const LoginProvider = ({ children, addProject }) => {
           name: 'myProjects',
           dataSelector: data => data.myProjects.edges,
           query: MY_PROJECTS,
-          onSuccess: cloneIncomingProject,
         })
       )
   }, [user])
+
+  useEffect(() => {
+    const currentProject = projects.find(item => item.machineId)
+    !currentProject && cloneIncomingProject()
+  }, [projects.length])
 
   return children
 }
