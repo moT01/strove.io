@@ -133,8 +133,7 @@ const LoginProvider = ({ children, addProject }) => {
                 name: 'githubAuth',
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
-                  !localStorage.getItem('token') &&
-                    localStorage.setItem('token', siliskyToken)
+                  localStorage.setItem('token', siliskyToken)
                 },
                 onSuccessDispatch: [
                   user => ({
@@ -165,7 +164,6 @@ const LoginProvider = ({ children, addProject }) => {
                 name: 'gitlabAuth',
                 context: null,
                 onSuccess: ({ siliskyToken }) =>
-                  !localStorage.getItem('token') &&
                   localStorage.setItem('token', siliskyToken),
                 onSuccessDispatch: [
                   user => ({
@@ -196,7 +194,6 @@ const LoginProvider = ({ children, addProject }) => {
                 name: 'bitbucketAuth',
                 context: null,
                 onSuccess: ({ siliskyToken }) =>
-                  !localStorage.getItem('token') &&
                   localStorage.setItem('token', siliskyToken),
                 onSuccessDispatch: [
                   user => ({
