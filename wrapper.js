@@ -32,9 +32,10 @@ const createStore = reduxCreateStore(
 
 export const persistor = persistStore(createStore)
 
-const LoginProvider = ({ children }) => {
+const LoginProvider = ({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   const [projectToStop, setProjectToStop] = useState(null)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
@@ -65,6 +66,12 @@ const LoginProvider = ({ children }) => {
     })
 
     machineId ? setProjectToStop(id) : setProjectToStop(null)
+  }
+
+  const cloneIncomingProject = () => {
+    if (user && incomingProjectLink) {
+      addProject(incomingProjectLink)
+    }
   }
 
   const currentProjectSet = result => {
@@ -249,6 +256,7 @@ const LoginProvider = ({ children }) => {
           name: 'myProjects',
           dataSelector: data => data.myProjects.edges,
           query: MY_PROJECTS,
+          onSuccess: cloneIncomingProject,
         })
       )
   }, [user])
@@ -257,8 +265,6 @@ const LoginProvider = ({ children }) => {
 }
 
 const WithAddProject = ({ children, addProject }) => {
-  const user = useSelector(selectors.api.getUser)
-  const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   useEffect(() => {
     let repoLink =
       window?.location?.href?.match(/#(.*)/) &&
@@ -268,11 +274,7 @@ const WithAddProject = ({ children, addProject }) => {
       /.*(github|gitlab|bitbucket).com/i.test(repoLink) &&
       addProject(repoLink)
   }, [])
-  useEffect(() => {
-    if (user && incomingProjectLink) {
-      addProject(incomingProjectLink)
-    }
-  }, [user])
+
   return children
 }
 
@@ -281,15 +283,15 @@ export const wrapRootElement = ({ element }) => (
     <ApolloProvider client={client}>
       <Provider store={createStore}>
         <PersistGate loading={null} persistor={persistor}>
-          <LoginProvider>
-            <AddProjectProvider>
-              {({ addProject }) => (
+          <AddProjectProvider>
+            {({ addProject }) => (
+              <LoginProvider addProject={addProject}>
                 <WithAddProject addProject={addProject}>
                   {element}
                 </WithAddProject>
-              )}
-            </AddProjectProvider>
-          </LoginProvider>
+              </LoginProvider>
+            )}
+          </AddProjectProvider>
         </PersistGate>
       </Provider>
     </ApolloProvider>
