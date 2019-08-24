@@ -282,7 +282,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github `}
-              // onClick={() => closeModal()}
+              onClick={() => closeModal()}
             >
               Login with Github
               <Github />
