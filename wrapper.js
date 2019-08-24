@@ -121,7 +121,7 @@ const LoginProvider = ({ children, addProject }) => {
       .split('=')[1]
 
     // Regular login
-    if (code) {
+    if (code && !localStorage.getItem('token')) {
       switch (state) {
         case 'github':
           !githubToken &&
