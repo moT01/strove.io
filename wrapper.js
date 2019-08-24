@@ -32,9 +32,16 @@ const createStore = reduxCreateStore(
 
 export const persistor = persistStore(createStore)
 
-const LoginProvider = ({ children }) => {
+const LoginProvider = ({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const projects = useSelector(selectors.api.getUserProjects)
+  const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
+  const githubToken = useSelector(selectors.api.getToken('githubToken'))
+  const gitlabToken = useSelector(selectors.api.getToken('gitlabToken'))
+  const bitbucketRefreshToken = useSelector(
+    selectors.api.getToken('bitbucketRefreshToken')
+  )
   const [projectToStop, setProjectToStop] = useState(null)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
@@ -113,130 +120,102 @@ const LoginProvider = ({ children }) => {
       ?.toString()
       .split('=')[1]
 
-    console.log('state', state)
-    console.log('code', code)
-
-    // Scopes update after buying subscription, may actually be redundant atm
-    if (code && user?.subscription?.status === 'active') {
-      switch (state) {
-        case 'github':
-          dispatch(
-            mutation({
-              mutation: GITHUB_LOGIN,
-              variables: { code },
-              storeKey: 'user',
-              name: 'githubAuth',
-              context: null,
-            })
-          )
-          break
-        // case 'gitlab':
-        //   dispatch(
-        //     mutation({
-        //       mutation: GITLAB_LOGIN,
-        //       variables: { code },
-        //       storeKey: 'user',
-        //       name: 'gitlabAuth',
-        //       context: null,
-        //     })
-        //   )
-        //   break
-        // case 'bitbucket':
-        //   break
-        default:
-          break
-      }
-    }
     // Regular login
-    if (code && !localStorage.getItem('token')) {
+    if (code) {
       switch (state) {
         case 'github':
-          dispatch(
-            mutation({
-              mutation: GITHUB_LOGIN,
-              variables: { code },
-              storeKey: 'user',
-              name: 'githubAuth',
-              context: null,
-              onSuccess: ({ siliskyToken }) => {
-                localStorage.setItem('token', siliskyToken)
-              },
-              onSuccessDispatch: [
-                user => ({
-                  type: C.api.FETCH_SUCCESS,
-                  payload: {
-                    storeKey: 'user',
-                    data: user,
-                  },
-                }),
-                ({ subscription }) => ({
-                  type: C.api.FETCH_SUCCESS,
-                  payload: {
-                    storeKey: 'subscription',
-                    data: subscription,
-                  },
-                }),
-              ],
-            })
-          )
+          !githubToken &&
+            dispatch(
+              mutation({
+                mutation: GITHUB_LOGIN,
+                variables: { code },
+                storeKey: 'user',
+                name: 'githubAuth',
+                context: null,
+                onSuccess: ({ siliskyToken }) => {
+                  !localStorage.getItem('token') &&
+                    localStorage.setItem('token', siliskyToken)
+                },
+                onSuccessDispatch: [
+                  user => ({
+                    type: C.api.FETCH_SUCCESS,
+                    payload: {
+                      storeKey: 'user',
+                      data: user,
+                    },
+                  }),
+                  ({ subscription }) => ({
+                    type: C.api.FETCH_SUCCESS,
+                    payload: {
+                      storeKey: 'subscription',
+                      data: subscription,
+                    },
+                  }),
+                ],
+              })
+            )
           break
         case 'gitlab':
-          dispatch(
-            mutation({
-              mutation: GITLAB_LOGIN,
-              variables: { code },
-              storeKey: 'user',
-              name: 'gitlabAuth',
-              context: null,
-              onSuccess: ({ siliskyToken }) =>
-                localStorage.setItem('token', siliskyToken),
-              onSuccessDispatch: [
-                user => ({
-                  type: C.api.FETCH_SUCCESS,
-                  payload: {
-                    storeKey: 'user',
-                    data: user,
-                  },
-                }),
-                ({ subscription }) => ({
-                  type: C.api.FETCH_SUCCESS,
-                  payload: {
-                    storeKey: 'subscription',
-                    data: subscription,
-                  },
-                }),
-              ],
-            })
-          )
+          !gitlabToken &&
+            dispatch(
+              mutation({
+                mutation: GITLAB_LOGIN,
+                variables: { code },
+                storeKey: 'user',
+                name: 'gitlabAuth',
+                context: null,
+                onSuccess: ({ siliskyToken }) =>
+                  !localStorage.getItem('token') &&
+                  localStorage.setItem('token', siliskyToken),
+                onSuccessDispatch: [
+                  user => ({
+                    type: C.api.FETCH_SUCCESS,
+                    payload: {
+                      storeKey: 'user',
+                      data: user,
+                    },
+                  }),
+                  ({ subscription }) => ({
+                    type: C.api.FETCH_SUCCESS,
+                    payload: {
+                      storeKey: 'subscription',
+                      data: subscription,
+                    },
+                  }),
+                ],
+              })
+            )
           break
         case 'bitbucket':
-          dispatch(
-            mutation({
-              mutation: BITBUCKET_LOGIN,
-              variables: { code },
-              storeKey: 'user',
-              name: 'bitbucketAuth',
-              context: null,
-              onSuccess: ({ siliskyToken }) =>
-                localStorage.setItem('token', siliskyToken),
-              onSuccessDispatch: [
-                user => ({
-                  type: C.api.FETCH_SUCCESS,
-                  payload: {
-                    storeKey: 'user',
-                    data: user,
-                  },
-                }),
-                ({ subscription }) => ({
-                  type: C.api.FETCH_SUCCESS,
-                  payload: {
-                    storeKey: 'subscription',
-                    data: subscription,
-                  },
-                }),
-              ],
-            })
-          )
+          !bitbucketRefreshToken &&
+            dispatch(
+              mutation({
+                mutation: BITBUCKET_LOGIN,
+                variables: { code },
+                storeKey: 'user',
+                name: 'bitbucketAuth',
+                context: null,
+                onSuccess: ({ siliskyToken }) =>
+                  !localStorage.getItem('token') &&
+                  localStorage.setItem('token', siliskyToken),
+                onSuccessDispatch: [
+                  user => ({
+                    type: C.api.FETCH_SUCCESS,
+                    payload: {
+                      storeKey: 'user',
+                      data: user,
+                    },
+                  }),
+                  ({ subscription }) => ({
+                    type: C.api.FETCH_SUCCESS,
+                    payload: {
+                      storeKey: 'subscription',
+                      data: subscription,
+                    },
+                  }),
+                ],
+              })
+            )
           break
         default:
           break
@@ -255,6 +234,12 @@ const LoginProvider = ({ children }) => {
         })
       )
   }, [user])
+
+  useEffect(() => {
+    if (user && incomingProjectLink) {
+      addProject(incomingProjectLink)
+    }
+  }, [projects.length])
 
   return children
 }
@@ -278,15 +263,15 @@ export const wrapRootElement = ({ element }) => (
     <ApolloProvider client={client}>
       <Provider store={createStore}>
         <PersistGate loading={null} persistor={persistor}>
-          <LoginProvider>
-            <AddProjectProvider>
-              {({ addProject }) => (
+          <AddProjectProvider>
+            {({ addProject }) => (
+              <LoginProvider addProject={addProject}>
                 <WithAddProject addProject={addProject}>
                   {element}
                 </WithAddProject>
-              )}
-            </AddProjectProvider>
-          </LoginProvider>
+              </LoginProvider>
+            )}
+          </AddProjectProvider>
         </PersistGate>
       </Provider>
     </ApolloProvider>
