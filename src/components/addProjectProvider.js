@@ -41,6 +41,7 @@ const AddProjectProvider = ({ children }) => {
 
     const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
 
+
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
     )

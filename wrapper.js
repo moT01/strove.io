@@ -69,12 +69,6 @@ const LoginProvider = ({ children, addProject }) => {
     machineId ? setProjectToStop(id) : setProjectToStop(null)
   }
 
-  const cloneIncomingProject = () => {
-    if (user && incomingProjectLink) {
-      addProject(incomingProjectLink)
-    }
-  }
-
   const currentProjectSet = result => {
     const currentProject = result.find(item => item.machineId)
     const currentProjectID = currentProject ? currentProject.id : null
@@ -262,8 +256,9 @@ const LoginProvider = ({ children, addProject }) => {
   }, [user])
 
   useEffect(() => {
-    const currentProject = projects.find(item => item.machineId)
-    !currentProject && cloneIncomingProject()
+    if (user && incomingProjectLink) {
+      addProject(incomingProjectLink)
+    }
   }, [projects.length])
 
   return children
