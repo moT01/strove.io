@@ -121,10 +121,10 @@ const LoginProvider = ({ children, addProject }) => {
       .split('=')[1]
 
     // Regular login
-    if (code && !localStorage.getItem('token')) {
+    if (code) {
       switch (state) {
         case 'github':
-          !githubToken &&
+          if (!localStorage.getItem('token') || !githubToken) {
             dispatch(
               mutation({
                 mutation: GITHUB_LOGIN,
@@ -153,9 +153,10 @@ const LoginProvider = ({ children, addProject }) => {
                 ],
               })
             )
+          }
           break
         case 'gitlab':
-          !gitlabToken &&
+          if (!localStorage.getItem('token') || !gitlabToken) {
             dispatch(
               mutation({
                 mutation: GITLAB_LOGIN,
@@ -183,9 +184,10 @@ const LoginProvider = ({ children, addProject }) => {
                 ],
               })
             )
+          }
           break
         case 'bitbucket':
-          !bitbucketRefreshToken &&
+          if (!localStorage.getItem('token') || !bitbucketRefreshToken) {
             dispatch(
               mutation({
                 mutation: BITBUCKET_LOGIN,
@@ -213,6 +215,7 @@ const LoginProvider = ({ children, addProject }) => {
                 ],
               })
             )
+          }
           break
         default:
           break
