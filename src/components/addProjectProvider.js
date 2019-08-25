@@ -4,11 +4,9 @@ import { isMobileOnly } from 'react-device-detect'
 
 import { createProject } from 'utils'
 import { selectors } from 'state'
-import AddProjectModals from 'components/addProjectModals'
+import { AddProjectModals, Modal, FullScreenLoader } from 'components'
 import { actions } from 'state'
 import getRepoInfo from 'utils'
-import Modal from 'components/modal'
-import Loader from 'components/fullScreenLoader'
 
 const AddProjectProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState()
@@ -83,12 +81,14 @@ const AddProjectProvider = ({ children }) => {
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={isLoading || isDeleting || isStopping || isContinuing}
-        // isOpen={true}
-
         contentLabel="Loading"
         ariaHideApp={false}
       >
-        <Loader isFullScreen={false} color={'#0072ce'} height={'15vh'} />
+        <FullScreenLoader
+          isFullScreen={false}
+          color="#0072ce"
+          height={'15vh'}
+        />
       </Modal>
     </>
   )
