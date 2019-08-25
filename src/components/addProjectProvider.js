@@ -2,22 +2,19 @@ import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 
-import { createProject } from 'utils'
-import { selectors } from 'state'
-import { actions } from 'state'
-import getRepoInfo from 'utils'
+import { createProject, getRepoInfo } from 'utils'
+import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
 import AddProjectModals from './addProjectModals'
 
 const AddProjectProvider = ({ children }) => {
+  const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-
-  const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user?.githubToken
@@ -26,7 +23,6 @@ const AddProjectProvider = ({ children }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
   const subscription = useSelector(selectors.api.getApiData('subscription'))
-
   const subscriptionStatus = subscription.status
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
@@ -37,7 +33,8 @@ const AddProjectProvider = ({ children }) => {
 
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
-    const repoFromBitbucket = repoProvider === 'bitbucket'
+    // ToDo: Handle bitbucket
+    // const repoFromBitbucket = repoProvider === 'bitbucket'
 
     const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
 
