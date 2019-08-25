@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
 
-import Loader from 'components/fullScreenLoader'
 import { selectors } from 'state'
-import { Github, Bitbucket, Gitlab } from '../images/logos'
+import { Github, Bitbucket, Gitlab } from 'images/logos'
+
+import FullScreenLoader from './fullScreenLoader'
 import { persistor } from '../../wrapper'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
@@ -232,7 +233,9 @@ const UserDropdown = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
 
   if (isLoading)
-    return <Loader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
+    return (
+      <FullScreenLoader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
+    )
 
   return (
     <Downshift>

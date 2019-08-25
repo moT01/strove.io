@@ -4,9 +4,11 @@ import { isMobileOnly } from 'react-device-detect'
 
 import { createProject } from 'utils'
 import { selectors } from 'state'
-import { AddProjectModals, Modal, FullScreenLoader } from 'components'
 import { actions } from 'state'
 import getRepoInfo from 'utils'
+import Modal from './modal'
+import FullScreenLoader from './fullScreenLoader'
+import AddProjectModals from './addProjectModals'
 
 const AddProjectProvider = ({ children }) => {
   const [modalContent, setModalContent] = useState()

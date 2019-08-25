@@ -3,8 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import DetectBrowser, { isMobileOnly, isTablet } from 'react-detect-browser'
 
-import Modal from 'components/modal'
-
+import Modal from './modal'
 import Header from './header'
 import './layout.css'
 
