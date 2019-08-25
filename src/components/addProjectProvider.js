@@ -6,7 +6,7 @@ import { createProject } from 'utils'
 import { selectors } from 'state'
 import AddProjectModals from 'components/addProjectModals'
 import { actions } from 'state'
-import getRepoInfo from 'utils/getRepoInfo'
+import getRepoInfo from 'utils'
 import Modal from 'components/modal'
 import Loader from 'components/fullScreenLoader'
 
