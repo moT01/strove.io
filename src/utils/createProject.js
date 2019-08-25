@@ -4,7 +4,7 @@ import { navigate } from 'gatsby'
 import { mutation } from 'utils'
 import { C, actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
-import { getbitbucketToken } from './getBitbucketToken'
+import getBitbucketToken from './getBitbucketToken'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
@@ -82,7 +82,7 @@ const createProject = async ({
         }
         break
       case 'bitbucket':
-        const access_token = await getbitbucketToken(user.bitbucketRefreshToken)
+        const access_token = await getBitbucketToken(user.bitbucketRefreshToken)
 
         const { values } = await fetch(
           `https://api.bitbucket.org/2.0/users/${user.fullName}/repositories`,

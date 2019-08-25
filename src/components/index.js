@@ -2,7 +2,7 @@ import { SmallCloud, MediumCloud, BigCloud } from './clouds'
 import Header from './header'
 import Image from './image'
 import Login from './logos'
-import Seo from './seo'
+import SEO from './seo'
 import AddProjectModals from './addProjectModals'
 import AddProjectProvider from './addProjectProvider'
 import FullScreenLoader from './fullScreenLoader'
@@ -22,7 +22,7 @@ export {
   Header,
   Image,
   Login,
-  Seo,
+  SEO,
   AddProjectModals,
   AddProjectProvider,
   FullScreenLoader,
