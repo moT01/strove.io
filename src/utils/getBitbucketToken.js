@@ -1,4 +1,4 @@
-export const getbitbucketToken = async refresh_token => {
+export default async refresh_token => {
   try {
     const BITBUCKET_CLIENT_SECRET = process.env.BITBUCKET_CLIENT_SECRET
     const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
