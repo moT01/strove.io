@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 
-import Modal from 'components/modal'
+import { Modal } from 'components'
 import { Github, Gitlab } from 'images/logos'
 import { actions } from 'state'
 
