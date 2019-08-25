@@ -120,10 +120,9 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
-    // Regular login
     if (code) {
       switch (state) {
-        case 'github':
+        case 'github': {
           if (!localStorage.getItem('token') || !githubToken) {
             dispatch(
               mutation({
@@ -155,7 +154,8 @@ const LoginProvider = ({ children, addProject }) => {
             )
           }
           break
-        case 'gitlab':
+        }
+        case 'gitlab': {
           if (!localStorage.getItem('token') || !gitlabToken) {
             dispatch(
               mutation({
@@ -186,7 +186,8 @@ const LoginProvider = ({ children, addProject }) => {
             )
           }
           break
-        case 'bitbucket':
+        }
+        case 'bitbucket': {
           if (!localStorage.getItem('token') || !bitbucketRefreshToken) {
             dispatch(
               mutation({
@@ -217,6 +218,7 @@ const LoginProvider = ({ children, addProject }) => {
             )
           }
           break
+        }
         default:
           break
       }
@@ -259,21 +261,17 @@ const WithAddProject = ({ children, addProject }) => {
 }
 
 export const wrapRootElement = ({ element }) => (
-  <>
-    <ApolloProvider client={client}>
-      <Provider store={createStore}>
-        <PersistGate loading={null} persistor={persistor}>
-          <AddProjectProvider>
-            {({ addProject }) => (
-              <LoginProvider addProject={addProject}>
-                <WithAddProject addProject={addProject}>
-                  {element}
-                </WithAddProject>
-              </LoginProvider>
-            )}
-          </AddProjectProvider>
-        </PersistGate>
-      </Provider>
-    </ApolloProvider>
-  </>
+  <ApolloProvider client={client}>
+    <Provider store={createStore}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AddProjectProvider>
+          {({ addProject }) => (
+            <LoginProvider addProject={addProject}>
+              <WithAddProject addProject={addProject}>{element}</WithAddProject>
+            </LoginProvider>
+          )}
+        </AddProjectProvider>
+      </PersistGate>
+    </Provider>
+  </ApolloProvider>
 )
