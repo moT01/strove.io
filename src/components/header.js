@@ -1,12 +1,12 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import InputLabel from '@material-ui/core/InputLabel'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -108,9 +108,11 @@ const StyledLink = styled(Link)`
 const PreviewLink = styled.a`
   color: '#fff';
   text-decoration: 'none';
+  position: relative;
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
+  const [areLinksVisible, setLinksVisible] = useState(false)
   const user = useSelector(selectors.api.getUser)
   return (
     <HeaderSection mobile={isMobileOnly}>
@@ -141,14 +143,26 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <PreviewLink
             style={{ color: '#fff', textDecoration: 'none' }}
-            href={'/app/preview?host=3000'}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() => setLinksVisible(true)}
           >
             <IconWrapper>
               <Desktop style={{ height: '80%' }} fill="#fff"></Desktop>
             </IconWrapper>
-            
+
+            {areLinksVisible && (
+              <div
+                style={{
+                  position: 'absolute',
+                  background: 'black',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div>PORT 3000</div>
+                <div>PORT 4000</div>
+                <div>PORT 8000</div>
+              </div>
+            )}
           </PreviewLink>
         )}
       </HeaderWrapper>
