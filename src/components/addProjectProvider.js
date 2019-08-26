@@ -45,15 +45,19 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
       setModalContent('LoginWithGitlab')
-    } else if (!user && repoFromBitbucket) {
+    } /* else if (!user && repoFromBitbucket) {
       setModalContent('LoginWithBitbucket')
-    } else if (user && repoFromGithub && !githubToken) {
+    } */ else if (
+      user &&
+      repoFromGithub &&
+      !githubToken
+    ) {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
-    } else if (user && repoFromBitbucket && !bitbucketRefreshToken) {
+    } /* else if (user && repoFromBitbucket && !bitbucketRefreshToken) {
       setModalContent('AddBitbucketToLogin')
-    } else if (
+    } */ else if (
       addProjectError &&
       addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
