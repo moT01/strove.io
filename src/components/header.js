@@ -109,6 +109,17 @@ const PreviewLink = styled.a`
 
 const HeaderComponent = ({ siteTitle, location }) => {
   const user = useSelector(selectors.api.getUser)
+  const project = useSelector(selectors.api.getCurrentProject)
+  // let address
+  // if (project?.machineName) {
+  //   process.env.NODE_ENV === 'development'
+  //     ? (address = `https://${project.additionalPorts[0][1]}.vmdev${
+  //         project.machineName.match(/\d+/g)[0]
+  //       }.silisky.com`)
+  //     : (address = `https://${project.additionalPorts[0][1]}.vm${
+  //         project.machineName.match(/\d+/g)[0]
+  //       }.silisky.com`)
+  // }
   return (
     <HeaderSection mobile={isMobileOnly}>
       <HeaderWrapper mobile={isMobileOnly}>
@@ -135,10 +146,23 @@ const HeaderComponent = ({ siteTitle, location }) => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {location.pathname === '/app/editor/' && (
+        {location.pathname === '/app/editor/' && project && (
           <PreviewLink
             style={{ color: '#fff', textDecoration: 'none' }}
-            href={'/app/preview?host=3000'}
+            // href={'/app/preview?host=3000'}
+            href={() => {
+              let address
+              if (project?.machineName) {
+                process.env.NODE_ENV === 'development'
+                  ? (address = `https://${project.additionalPorts[0][1]}.vmdev${
+                      project.machineName.match(/\d+/g)[0]
+                    }.silisky.com`)
+                  : (address = `https://${project.additionalPorts[0][1]}.vm${
+                      project.machineName.match(/\d+/g)[0]
+                    }.silisky.com`)
+              }
+              return address
+            }}
             target="_blank"
             rel="noopener noreferrer"
           >
