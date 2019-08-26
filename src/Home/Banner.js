@@ -133,7 +133,8 @@ const Banner = () => {
             />
           </div>
           <h1 key="h1">Strove</h1>
-          <p key="content">Code in clouds. One environment for everyone.</p>
+          <h4 key="content">Say goodbye to hours of setting up environment.</h4>
+          <h4 key="content">Code in seconds in Docker on any device.</h4>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary

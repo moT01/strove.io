@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 
 import { window } from 'utils'
 import { selectors } from 'state'
-import SEO from 'components/seo'
-import Loader from 'components/fullScreenLoader.js'
+import SEO from './seo'
+import Loader from './fullScreenLoader.js'
 
 const StyledIframe = styled.iframe`
   display: block;

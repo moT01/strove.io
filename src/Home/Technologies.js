@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import Logos from 'components/logos.js'
 
-function Page2() {
+const Technologies = () => {
   const [selectedLogo, setSelectedLogo] = useState()
 
   const handleHoverIn = logo => setSelectedLogo(logo)
@@ -37,4 +37,4 @@ function Page2() {
   )
 }
 
-export default Page2
+export default memo(Technologies)

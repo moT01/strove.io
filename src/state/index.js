@@ -6,6 +6,12 @@ import storage from 'redux-persist/lib/storage'
 import api from './api'
 import incomingProject from './incomingProject'
 
+const rootConfig = {
+  key: 'root',
+  storage: storage,
+  blacklist: 'api',
+}
+
 const persistConfig = {
   key: 'api',
   storage,
@@ -31,10 +37,10 @@ const appReducer = combineReducers({
   incomingProject: incomingProject.reducer,
 })
 
-export default (state, action) => {
+export default persistReducer(rootConfig, (state, action) => {
   if (action.type === api.C.LOGOUT) {
     state = undefined
   }
 
   return appReducer(state, action)
-}
+})

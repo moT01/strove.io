@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 
 import { selectors } from 'state'
 import { templates } from 'constants'
-import AddProjectProvider from 'components/addProjectProvider'
+import AddProjectProvider from './addProjectProvider'
 import Layout from './layout'
 import SEO from './seo'
 

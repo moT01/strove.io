@@ -2,12 +2,10 @@ import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
-// import { Link } from 'gatsby'
 import { isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
-// import { templates } from 'constants'
-import AddProjectProvider from 'components/addProjectProvider'
+import AddProjectProvider from './addProjectProvider'
 
 const FadeIn = keyframes`
   0% {

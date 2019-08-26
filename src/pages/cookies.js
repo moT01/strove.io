@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import SEO from 'components/seo'
+import { SEO } from 'components'
 import 'components/layout.css'
 
 import Header from 'components/header'
@@ -44,7 +44,6 @@ const Legal = () => (
       </p>
       <h2>What are cookies used for?</h2>
       <p>
-        {' '}
         Cookies and other technologies allow a site or services to know if your
         computer or device has visited it before. These technologies can then be
         used to deliver products, services, and ads, help us understand how the
@@ -80,7 +79,6 @@ const Legal = () => (
       </p>
       <h2> How long will cookies stay on my device?</h2>
       <p>
-        {' '}
         The length of time a cookie will stay on your computer or mobile device
         depends on whether it is a "persistent" or "session" cookie. Session
         cookies will only stay on your device until you stop browsing.
@@ -107,7 +105,6 @@ const Legal = () => (
         properly.
       </p>
       <p>
-        {' '}
         To learn more about the choices that advertisers provide generally for
         individuals to influence how information about their online activities
         over time and across third-party Web sites or online services is
