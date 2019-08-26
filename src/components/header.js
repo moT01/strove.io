@@ -4,6 +4,9 @@ import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -145,6 +148,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             <IconWrapper>
               <Desktop style={{ height: '80%' }} fill="#fff"></Desktop>
             </IconWrapper>
+            
           </PreviewLink>
         )}
       </HeaderWrapper>
