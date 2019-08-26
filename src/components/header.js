@@ -223,18 +223,18 @@ const DropdownWrapper = styled.div`
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
-const ports = [
-  {
-    label: 'PORT 3000',
-    href: `https://20402.vm1.silisky.com`,
-  },
-  {
-    label: 'PORT 8000',
-    href: `https://20129.vm1.silisky.com`,
-  },
-]
-
 const HeaderComponent = ({ siteTitle, location }) => {
+  const ports = [
+    {
+      label: 'PORT 3000',
+      href: `https://20402.vm1.silisky.com`,
+    },
+    {
+      label: 'PORT 8000',
+      href: `https://20129.vm1.silisky.com`,
+    },
+  ]
+  
   const user = useSelector(selectors.api.getUser)
   return (
     <HeaderSection mobile={isMobileOnly}>
@@ -269,25 +269,27 @@ const HeaderComponent = ({ siteTitle, location }) => {
                 <LoginButton {...getToggleButtonProps({})}>
                   <Desktop style={{ height: '80%' }} fill="#fff" />
                 </LoginButton>
-                <DropdownWrapper hidden={!isOpen}>
-                  <MenuWrapper invert>
-                    {ports.map(item => (
-                      <Option invert key={item.value} href={item.href}>
-                        <PreviewLink
-                          style={{ color: '#fff', textDecoration: 'none' }}
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Desktop
-                            style={{ display: 'inline-block' }}
-                            fill="#fff"
-                          ></Desktop>
-                          <OptionText invert>{item.label}</OptionText>
-                        </PreviewLink>
-                      </Option>
-                    ))}
-                  </MenuWrapper>
+                <DropdownWrapper>
+                  {isOpen && (
+                    <MenuWrapper invert>
+                      {ports.map(item => (
+                        <Option invert key={item.value} href={item.href}>
+                          <PreviewLink
+                            style={{ color: '#fff', textDecoration: 'none' }}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Desktop
+                              style={{ display: 'inline-block' }}
+                              fill="#fff"
+                            ></Desktop>
+                            <OptionText invert>{item.label}</OptionText>
+                          </PreviewLink>
+                        </Option>
+                      ))}
+                    </MenuWrapper>
+                  )}
                 </DropdownWrapper>
               </span>
             )}
