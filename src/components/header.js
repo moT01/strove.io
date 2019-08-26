@@ -4,9 +4,10 @@ import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
+// import Select from '@material-ui/core/Select'
+// import MenuItem from '@material-ui/core/MenuItem'
+// import InputLabel from '@material-ui/core/InputLabel'
+import Downshift from 'downshift'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -44,16 +45,6 @@ const ZeldaWrapper = styled.div`
   cursor: pointer;
   @media (max-width: 767px) {
     height: 4vh;
-  }
-`
-
-const IconWrapper = styled(LinkWrapper)`
-  color: #fff;
-  animation: ${FadeIn} 0.3s ease-out;
-  transition: color 0.3s;
-
-  :hover {
-    color: black;
   }
 `
 
@@ -111,6 +102,185 @@ const PreviewLink = styled.a`
   position: relative;
 `
 
+const LoginButton = styled.button`
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: 'relative';
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-weight: 300;
+  line-height: 1;
+  padding: 0;
+  height: 3vh;
+  cursor: pointer;
+
+  :focus {
+    outline: 0;
+  }
+
+  span {
+    color: white;
+  }
+
+  :hover {
+    color: black;
+
+    span {
+      color: black;
+    }
+  }
+
+  > {
+    vertical-align: bottom;
+  }
+`
+
+const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: auto;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: #0072ce;
+  border-style: solid;
+  background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+  z-index: 3;
+  position: relative;
+`
+
+const Option = styled.a`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3px;
+  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  width: auto;
+  height: 32px;
+  font-size: 1.2rem;
+  border-bottom-left-radius: ${props => props.isLast && '3px'};
+  border-bottom-right-radius: ${props => props.isLast && '3px'};
+  z-index: 4;
+  text-decoration: none;
+  font-weight: 300;
+
+  svg {
+    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    width: 2.2vh;
+    height: auto;
+    margin-right: 5px;
+  }
+
+  :hover {
+    background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    cursor: pointer;
+  }
+
+  :hover svg {
+    fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    cursor: pointer;
+  }
+`
+
+const Text = styled.h3`
+  font-size: 1.2rem;
+  color: white;
+  transition: color 0.3s;
+  margin: 0;
+  font-weight: 300;
+  line-height: 1;
+  @media (max-width: 767px) {
+    font-size: 1.4rem;
+  }
+  :hover {
+    color: black;
+  }
+`
+
+const OptionText = styled(Text)`
+  color: #0072ce;
+  font-weight: 300;
+  :hover {
+    color: #ffffff;
+  }
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 3vh;
+  width: auto;
+  margin: 0;
+  background: none;
+`
+
+const StyledDropdown = styled.div`
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #0072ce;
+`
+
+const DropdownWrapper = styled.div`
+  position: absolute;
+  background: none;
+  right: 1.5vw;
+`
+
+const ports = [
+  {
+    label: 'PORT 3000',
+    href: `https://20402.vm1.silisky.com`,
+  },
+  {
+    label: 'PORT 8000',
+    href: `https://20129.vm1.silisky.com`,
+  },
+]
+
+const PortsDropdown = props => {
+  return (
+    <Downshift>
+      {({ getToggleButtonProps, isOpen }) => (
+        <span>
+          <LoginButton {...getToggleButtonProps({})}>
+            <Desktop style={{ height: '80%' }} fill="#fff" />
+          </LoginButton>
+          <DropdownWrapper hidden={!isOpen}>
+            <MenuWrapper invert>
+              {ports.map(item => (
+                <Option invert key={item.value} href={item.href}>
+                  <PreviewLink
+                    style={{ color: '#fff', textDecoration: 'none' }}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {/* <Desktop style={{ height: '80%' }} fill="#fff"></Desktop> */}
+                    <OptionText invert>{item.label}</OptionText>
+                  </PreviewLink>
+                </Option>
+              ))}
+            </MenuWrapper>
+          </DropdownWrapper>
+        </span>
+      )}
+    </Downshift>
+  )
+}
+
 const HeaderComponent = ({ siteTitle, location }) => {
   const [areLinksVisible, setLinksVisible] = useState(false)
   const user = useSelector(selectors.api.getUser)
@@ -140,31 +310,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {location.pathname === '/app/editor/' && (
-          <PreviewLink
-            style={{ color: '#fff', textDecoration: 'none' }}
-            onClick={() => setLinksVisible(true)}
-          >
-            <IconWrapper>
-              <Desktop style={{ height: '80%' }} fill="#fff"></Desktop>
-            </IconWrapper>
-
-            {areLinksVisible && (
-              <div
-                style={{
-                  position: 'absolute',
-                  background: 'black',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <div>PORT 3000</div>
-                <div>PORT 4000</div>
-                <div>PORT 8000</div>
-              </div>
-            )}
-          </PreviewLink>
-        )}
+        {location.pathname === '/app/editor/' && <PortsDropdown />}
       </HeaderWrapper>
       <ZeldaWrapper>
         <Login />
