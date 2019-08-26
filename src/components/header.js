@@ -221,29 +221,30 @@ const DropdownWrapper = styled.div`
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
-  const ports = [
-    {
-      label: 'PORT 3000',
-      href: `https://20402.vm1.silisky.com`,
-    },
-    {
-      label: 'PORT 8000',
-      href: `https://20129.vm1.silisky.com`,
-    },
-  ]
+
+  const ports = []
 
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
-  // let address
-  // if (project?.machineName) {
-  //   process.env.NODE_ENV === 'development'
-  //     ? (address = `https://${project.additionalPorts[0][1]}.vmdev${
-  //         project.machineName.match(/\d+/g)[0]
-  //       }.silisky.com`)
-  //     : (address = `https://${project.additionalPorts[0][1]}.vm${
-  //         project.machineName.match(/\d+/g)[0]
-  //       }.silisky.com`)
-  // }
+
+  if (project?.machineName) {
+    project.additionalPorts.forEach((portPair, index) => {
+      let href
+
+      process.env.NODE_ENV === 'development'
+        ? (href = `https://${project.additionalPorts[index][1]}.vmdev${
+            project.machineName.match(/\d+/g)[0]
+          }.silisky.com`)
+        : (href = `https://${project.additionalPorts[index][1]}.vm${
+            project.machineName.match(/\d+/g)[0]
+          }.silisky.com`)
+
+      ports.push({
+        label: `PORT ${portPair[0]}`,
+        href,
+      })
+    })
+  }
   return (
     <HeaderSection mobile={isMobileOnly}>
       <HeaderWrapper mobile={isMobileOnly}>
