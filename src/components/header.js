@@ -4,9 +4,6 @@ import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
-// import Select from '@material-ui/core/Select'
-// import MenuItem from '@material-ui/core/MenuItem'
-// import InputLabel from '@material-ui/core/InputLabel'
 import Downshift from 'downshift'
 
 import { selectors } from 'state'
@@ -234,7 +231,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
       href: `https://20129.vm1.silisky.com`,
     },
   ]
-  
+
   const user = useSelector(selectors.api.getUser)
   return (
     <HeaderSection mobile={isMobileOnly}>
