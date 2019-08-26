@@ -2,31 +2,28 @@ import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 
-import { createProject } from 'utils'
-import { selectors } from 'state'
-import AddProjectModals from 'components/addProjectModals'
-import { actions } from 'state'
-import getRepoInfo from 'utils/getRepoInfo'
-import Modal from 'components/modal'
-import Loader from 'components/fullScreenLoader'
+import { createProject, getRepoInfo } from 'utils'
+import { actions, selectors } from 'state'
+import Modal from './modal'
+import FullScreenLoader from './fullScreenLoader'
+import AddProjectModals from './addProjectModals'
 
 const AddProjectProvider = ({ children }) => {
+  const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-
-  const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
+  const bitbucketRefreshToken = user?.bitbucketRefreshToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
   const subscription = useSelector(selectors.api.getApiData('subscription'))
-
   const subscriptionStatus = subscription.status
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
@@ -48,10 +45,14 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
       setModalContent('LoginWithGitlab')
+    } else if (!user && repoFromBitbucket) {
+      setModalContent('LoginWithBitbucket')
     } else if (user && repoFromGithub && !githubToken) {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
+    } else if (user && repoFromBitbucket && !bitbucketRefreshToken) {
+      setModalContent('AddBitbucketToLogin')
     } else if (
       addProjectError &&
       addProjectError.message &&
@@ -83,12 +84,14 @@ const AddProjectProvider = ({ children }) => {
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={isLoading || isDeleting || isStopping || isContinuing}
-        // isOpen={true}
-
         contentLabel="Loading"
         ariaHideApp={false}
       >
-        <Loader isFullScreen={false} color={'#0072ce'} height={'15vh'} />
+        <FullScreenLoader
+          isFullScreen={false}
+          color="#0072ce"
+          height={'15vh'}
+        />
       </Modal>
     </>
   )
