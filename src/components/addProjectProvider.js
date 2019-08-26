@@ -19,7 +19,7 @@ const AddProjectProvider = ({ children }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
-  const bitbucketToken = user?.bitbucketToken
+  const bitbucketRefreshToken = user?.bitbucketRefreshToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
@@ -51,7 +51,7 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
-    } else if (user && repoFromBitbucket && !bitbucketToken) {
+    } else if (user && repoFromBitbucket && !bitbucketRefreshToken) {
       setModalContent('AddBitbucketToLogin')
     } else if (
       addProjectError &&
