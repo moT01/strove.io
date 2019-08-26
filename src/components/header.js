@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
@@ -100,6 +100,7 @@ const PreviewLink = styled.a`
   color: '#fff';
   text-decoration: 'none';
   position: relative;
+  display: flex;
 `
 
 const LoginButton = styled.button`
@@ -170,6 +171,7 @@ const Option = styled.a`
   z-index: 4;
   text-decoration: none;
   font-weight: 300;
+  min-width: 150px;
 
   svg {
     fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -212,31 +214,13 @@ const OptionText = styled(Text)`
   }
 `
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: 3vh;
-  width: auto;
-  margin: 0;
-  background: none;
-`
-
-const StyledDropdown = styled.div`
-  color: white;
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: #0072ce;
-`
-
 const DropdownWrapper = styled.div`
   position: absolute;
   background: none;
   right: 1.5vw;
+  display: flex;
+  right: -10px;
+  display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
 const ports = [
@@ -250,39 +234,7 @@ const ports = [
   },
 ]
 
-const PortsDropdown = props => {
-  return (
-    <Downshift>
-      {({ getToggleButtonProps, isOpen }) => (
-        <span>
-          <LoginButton {...getToggleButtonProps({})}>
-            <Desktop style={{ height: '80%' }} fill="#fff" />
-          </LoginButton>
-          <DropdownWrapper hidden={!isOpen}>
-            <MenuWrapper invert>
-              {ports.map(item => (
-                <Option invert key={item.value} href={item.href}>
-                  <PreviewLink
-                    style={{ color: '#fff', textDecoration: 'none' }}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {/* <Desktop style={{ height: '80%' }} fill="#fff"></Desktop> */}
-                    <OptionText invert>{item.label}</OptionText>
-                  </PreviewLink>
-                </Option>
-              ))}
-            </MenuWrapper>
-          </DropdownWrapper>
-        </span>
-      )}
-    </Downshift>
-  )
-}
-
 const HeaderComponent = ({ siteTitle, location }) => {
-  const [areLinksVisible, setLinksVisible] = useState(false)
   const user = useSelector(selectors.api.getUser)
   return (
     <HeaderSection mobile={isMobileOnly}>
@@ -310,7 +262,37 @@ const HeaderComponent = ({ siteTitle, location }) => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {location.pathname === '/app/editor/' && <PortsDropdown />}
+        {location.pathname === '/app/editor/' && (
+          <Downshift>
+            {({ getToggleButtonProps, isOpen }) => (
+              <span style={{ position: 'relative' }}>
+                <LoginButton {...getToggleButtonProps({})}>
+                  <Desktop style={{ height: '80%' }} fill="#fff" />
+                </LoginButton>
+                <DropdownWrapper hidden={!isOpen}>
+                  <MenuWrapper invert>
+                    {ports.map(item => (
+                      <Option invert key={item.value} href={item.href}>
+                        <PreviewLink
+                          style={{ color: '#fff', textDecoration: 'none' }}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Desktop
+                            style={{ display: 'inline-block' }}
+                            fill="#fff"
+                          ></Desktop>
+                          <OptionText invert>{item.label}</OptionText>
+                        </PreviewLink>
+                      </Option>
+                    ))}
+                  </MenuWrapper>
+                </DropdownWrapper>
+              </span>
+            )}
+          </Downshift>
+        )}
       </HeaderWrapper>
       <ZeldaWrapper>
         <Login />
