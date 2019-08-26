@@ -19,6 +19,7 @@ const AddProjectProvider = ({ children }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
+  const bitbucketToken = user?.bitbucketToken
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
@@ -33,8 +34,7 @@ const AddProjectProvider = ({ children }) => {
 
     const repoFromGithub = repoProvider === 'github'
     const repoFromGitlab = repoProvider === 'gitlab'
-    // ToDo: Handle bitbucket
-    // const repoFromBitbucket = repoProvider === 'bitbucket'
+    const repoFromBitbucket = repoProvider === 'bitbucket'
 
     const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
 
@@ -45,10 +45,14 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
       setModalContent('LoginWithGitlab')
+    } else if (!user && repoFromBitbucket) {
+      setModalContent('LoginWithBitbucket')
     } else if (user && repoFromGithub && !githubToken) {
       setModalContent('AddGithubToLogin')
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
+    } else if (user && repoFromBitbucket && !bitbucketToken) {
+      setModalContent('AddBitbucketToLogin')
     } else if (
       addProjectError &&
       addProjectError.message &&

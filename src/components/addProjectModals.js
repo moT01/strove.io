@@ -5,11 +5,12 @@ import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 
 import Modal from './modal'
-import { Github, Gitlab } from 'images/logos'
+import { Github, Gitlab, Bitbucket } from 'images/logos'
 import { actions } from 'state'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
+const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
 
 const FadeIn = keyframes`
@@ -281,7 +282,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github `}
+              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
               onClick={() => setModalContent(null)}
             >
               Login with Github
@@ -316,6 +317,36 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             >
               Login with Gitlab
               <Gitlab />
+            </StyledAnchor>
+            <Button onClick={() => closeModal()}>Close</Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
+  if (modalContent === 'LoginWithBitbucket') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => closeModal()}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height="30vh"
+      >
+        <ModalWrapepr>
+          <Text>
+            To clone this repository you have to log in with a Bitbucket account
+          </Text>
+          <ButtonsWrapper mobile={device}>
+            <StyledAnchor
+              primary
+              href={`https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
+              onClick={() => setModalContent(null)}
+            >
+              Login with Bitbucket
+              <Bitbucket />
             </StyledAnchor>
             <Button onClick={() => closeModal()}>Close</Button>
           </ButtonsWrapper>
