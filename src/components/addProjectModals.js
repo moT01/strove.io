@@ -417,6 +417,37 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     )
   }
 
+  if (modalContent === 'AddBitbucketToLogin') {
+    return (
+      <Modal
+        isOpen={!!modalContent}
+        onRequestClose={() => closeModal()}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '37vh' : '20vh'}
+      >
+        <ModalWrapepr>
+          <Text>
+            To clone this repository you have to log in with a Bitbucket
+            account. You are logged in with a Github account
+          </Text>
+          <ButtonsWrapper mobile={device}>
+            <StyledAnchor
+              primary
+              href={`https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
+              onClick={() => closeModal()}
+            >
+              Login with Bitbucket
+              <Bitbucket />
+            </StyledAnchor>
+            <Button onClick={() => closeModal()}>Close</Button>
+          </ButtonsWrapper>
+        </ModalWrapepr>
+      </Modal>
+    )
+  }
+
   if (modalContent === 'ProjectsLimitExceeded') {
     return (
       <Modal
