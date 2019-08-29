@@ -6,10 +6,7 @@
 </div>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
-
-<a href="https://discord.gg/gb2VEvV">
-<img alt="Discord" src="https://img.shields.io/discord/593787637291286529.svg?color=%230E1D23&label=discord&style=popout">
-</a>
+<img alt="Discord" src="https://img.shields.io/discord/615832777199321098">
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 
@@ -17,7 +14,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 
 <div align="center">
 <img src="./src/images/readmeAssets/strove.gif" width='900px'>
-</div>
+g</div>
 
 # Get started
 
