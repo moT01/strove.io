@@ -213,6 +213,10 @@ const OptionText = styled(Text)`
   }
 `
 
+const PortOption = styled(OptionText)`
+  font-size: 16px;
+`
+
 const DropdownWrapper = styled.div`
   position: absolute;
   background: none;
@@ -252,7 +256,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
               }.silisky.com`
             }
             return {
-              label: `PORT ${portPair[0]}`,
+              label: `http://0.0.0.0:${portPair[0]}`,
               href,
               // isOnline: await isReachable(href),
             }
@@ -312,11 +316,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Desktop
-                              style={{ display: 'inline-block' }}
-                              fill="#fff"
-                            ></Desktop>
-                            <OptionText invert>{item.label}</OptionText>
+                            <PortOption invert>{item.label}</PortOption>
                           </PreviewLink>
                         </Option>
                       ))}
