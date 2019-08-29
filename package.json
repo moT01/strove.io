@@ -53,6 +53,7 @@
     "gatsby-transformer-sharp": "^2.1.21",
     "graphql-tag": "^2.10.1",
     "intersection-observer": "^0.7.0",
+    "is-reachable": "^3.1.0",
     "isomorphic-ws": "^4.0.1",
     "lodash": "^4.17.11",
     "prism-themes": "^1.1.0",

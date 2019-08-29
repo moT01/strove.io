@@ -1,10 +1,11 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
+// import { useInterval } from '../hooks'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -221,30 +222,42 @@ const DropdownWrapper = styled.div`
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
-
-  const ports = []
+  const [ports, setPorts] = useState([])
 
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
 
-  if (project?.machineName) {
-    project.additionalPorts.forEach((portPair, index) => {
-      let href
+  useEffect(() => {
+    if (location.pathname === '/app/editor/') {
+      let newPorts = []
+      if (project?.machineName) {
+        project.additionalPorts.forEach((portPair, index) => {
+          let href
 
-      process.env.NODE_ENV === 'development'
-        ? (href = `https://${project.additionalPorts[index][1]}.vmdev${
-            project.machineName.match(/\d+/g)[0]
-          }.silisky.com`)
-        : (href = `https://${project.additionalPorts[index][1]}.vm${
-            project.machineName.match(/\d+/g)[0]
-          }.silisky.com`)
+          process.env.NODE_ENV === 'development'
+            ? (href = `https://${project.additionalPorts[index][1]}.vmdev${
+                project.machineName.match(/\d+/g)[0]
+              }.silisky.com`)
+            : (href = `https://${project.additionalPorts[index][1]}.vm${
+                project.machineName.match(/\d+/g)[0]
+              }.silisky.com`)
 
-      ports.push({
-        label: `PORT ${portPair[0]}`,
-        href,
-      })
-    })
-  }
+          newPorts.push({
+            label: `PORT ${portPair[0]}`,
+            href,
+          })
+        })
+        console.log('ports', ports)
+        setPorts(newPorts)
+      }
+    }
+  }, [location.pathname])
+
+  // useInterval(
+  //   () => setCounter(counter + 1),
+  //   counter !== allMessages[type].length - 1 ? 1500 : null
+  // )
+
   return (
     <HeaderSection mobile={isMobileOnly}>
       <HeaderWrapper mobile={isMobileOnly}>
