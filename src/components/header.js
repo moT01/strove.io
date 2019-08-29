@@ -10,6 +10,7 @@ import Downshift from 'downshift'
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
 import Login from './login'
+import { isReachable } from 'is-reachable'
 
 const FadeIn = keyframes`
   0% {
@@ -227,28 +228,37 @@ const HeaderComponent = ({ siteTitle, location }) => {
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
 
+  // const anAsyncFunction = async item => {
+  //   return await functionWithPromise(item)
+  // }
+
+  // const getData = async () => {
+  //   return await Promise.all(list.map(item => anAsyncFunction(item)))
+  // }
+
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
-      let newPorts = []
       if (project?.machineName) {
-        project.additionalPorts.forEach((portPair, index) => {
-          let href
-
-          process.env.NODE_ENV === 'development'
-            ? (href = `https://${project.additionalPorts[index][1]}.vmdev${
+        setPorts(
+          project.additionalPorts.map((portPair, index) => {
+            let href
+            if (process.env.NODE_ENV === 'development') {
+              href = `https://${project.additionalPorts[index][1]}.vmdev${
                 project.machineName.match(/\d+/g)[0]
-              }.silisky.com`)
-            : (href = `https://${project.additionalPorts[index][1]}.vm${
+              }.silisky.com`
+            } else {
+              href = `https://${project.additionalPorts[index][1]}.vm${
                 project.machineName.match(/\d+/g)[0]
-              }.silisky.com`)
-
-          newPorts.push({
-            label: `PORT ${portPair[0]}`,
-            href,
+              }.silisky.com`
+            }
+            return {
+              label: `PORT ${portPair[0]}`,
+              href,
+              // isOnline: await isReachable(href),
+            }
           })
-        })
+        )
         console.log('ports', ports)
-        setPorts(newPorts)
       }
     }
   }, [location.pathname])
