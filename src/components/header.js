@@ -247,8 +247,8 @@ const HeaderComponent = ({ siteTitle, location }) => {
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
             } else {
-              href = `https://${project.additionalPorts[index][1]}.vm${
-                project.machineName.match(/\d+/g)[0]
+              href = `https://${project.additionalPorts[index][1]}.${
+                project.machineName
               }.silisky.com`
             }
             return {
