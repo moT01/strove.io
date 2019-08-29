@@ -33,10 +33,9 @@ const Preview = () => {
   const projectId = currentProject && currentProject.id
   const [loaderVisible, setLoaderVisible] = useState(true)
 
-  let r = Math.random()
+  const r = Math.random()
     .toString(36)
     .substring(7)
-  console.log('random', r)
 
   return (
     <>
@@ -44,7 +43,7 @@ const Preview = () => {
       {loaderVisible && <StyledLoader isFullScreen={true} color="#0072ce" />}
       <StyledIframe
         onLoad={useCallback(() => setLoaderVisible(false))}
-        src={`${process.env.SILISKY_ENDPOINT}/preview?token=${token}&machineId=${machineId}&host=${host}&projectId=${projectId}&${r}`}
+        src={`${process.env.SILISKY_ENDPOINT}/preview?token=${token}&machineId=${machineId}&host=${host}&projectId=${projectId}&r=${r}`}
         loaderVisible={loaderVisible}
       />
     </>
