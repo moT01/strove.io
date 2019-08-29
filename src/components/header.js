@@ -10,7 +10,7 @@ import Downshift from 'downshift'
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
 import Login from './login'
-import { isReachable } from 'is-reachable'
+// import { isReachable } from 'is-reachable'
 
 const FadeIn = keyframes`
   0% {
@@ -258,7 +258,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             }
           })
         )
-        console.log('ports', ports)
+        // console.log('ports', ports)
       }
     }
   }, [location.pathname])
