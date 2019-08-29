@@ -6,8 +6,7 @@
 </div>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
-
-![Discord](https://img.shields.io/discord/611927628428869662?color=%23052029&logoColor=%23052029)
+<img alt="Discord" src="https://img.shields.io/discord/615832777199321098">
 
 Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
 
