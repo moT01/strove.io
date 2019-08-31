@@ -5,12 +5,10 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
-// import { useInterval } from '../hooks'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
 import Login from './login'
-// import { isReachable } from 'is-reachable'
 
 const FadeIn = keyframes`
   0% {
