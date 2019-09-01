@@ -230,14 +230,6 @@ const HeaderComponent = ({ siteTitle, location }) => {
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
 
-  // const anAsyncFunction = async item => {
-  //   return await functionWithPromise(item)
-  // }
-
-  // const getData = async () => {
-  //   return await Promise.all(list.map(item => anAsyncFunction(item)))
-  // }
-
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
       if (project?.machineName) {
@@ -256,19 +248,12 @@ const HeaderComponent = ({ siteTitle, location }) => {
             return {
               label: `http://0.0.0.0:${portPair[0]}`,
               href,
-              // isOnline: await isReachable(href),
             }
           })
         )
-        // console.log('ports', ports)
       }
     }
   }, [location.pathname])
-
-  // useInterval(
-  //   () => setCounter(counter + 1),
-  //   counter !== allMessages[type].length - 1 ? 1500 : null
-  // )
 
   return (
     <HeaderSection mobile={isMobileOnly}>
