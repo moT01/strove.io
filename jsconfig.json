@@ -9,7 +9,8 @@
       "state": ["src/state"],
       "utils": ["src/utils"],
       "constants": ["src/constants"],
-      "middlwares": ["src/middlewares"]
+      "middlwares": ["src/middlewares"],
+      "hooks": ["src/hooks"]
     }
   },
   "search.exclude": {

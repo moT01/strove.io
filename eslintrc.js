@@ -43,6 +43,7 @@ module.exports = {
           ['utils', './src/utils'],
           ['constants', './src/constants'],
           ['middlewares', './src/middlewares'],
+          ['hooks', './src/hooks'],
         ],
         extensions: ['.ts', '.js', '.jsx', '.json'],
       },

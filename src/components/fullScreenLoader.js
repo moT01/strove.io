@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components'
 
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
-import { useInterval } from '../hooks'
+import { useInterval } from 'hooks'
 
 const SpinToWin = keyframes`
   0% {

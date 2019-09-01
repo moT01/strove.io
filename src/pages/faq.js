@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
-import { useScroll } from '../hooks'
+import { useScroll } from 'hooks'
 
 const TextWell = styled.div`
   color: black;
