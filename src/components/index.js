@@ -13,7 +13,6 @@ import Layout from './layout'
 import Logos from './logos.js'
 import Modal from './modal'
 import PrivateRoute from './privateRoute'
-import Homepage from './homePage'
 
 export {
   SmallCloud,
@@ -33,5 +32,4 @@ export {
   Logos,
   Modal,
   PrivateRoute,
-  Homepage,
 }
