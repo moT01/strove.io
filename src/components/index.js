@@ -12,7 +12,6 @@ import GetStarted from './getStarted'
 import Layout from './layout'
 import Logos from './logos.js'
 import Modal from './modal'
-import Preview from './preview'
 import PrivateRoute from './privateRoute'
 import Homepage from './homePage'
 
@@ -33,7 +32,6 @@ export {
   Layout,
   Logos,
   Modal,
-  Preview,
   PrivateRoute,
   Homepage,
 }
