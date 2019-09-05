@@ -1,15 +1,9 @@
 import React, { memo } from 'react'
 import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
 import { selectors } from 'state'
 
-const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
-
-const getToken = createSelector(
-  [getUserToken],
-  token => token
-)
+const getToken = selectors.api.getUserField('siliskyToken')
 
 const PrivateRoute = ({
   component: Component,

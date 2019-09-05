@@ -16,7 +16,8 @@ const logos = [
       <VSCode style={{ fill: '#303c42' }} width="100%" length="auto" />
     ),
     name: 'VSCode',
-    description: 'VSCode is integrated out of the box',
+    description:
+      'Strove.io supports VSCode to provide the best programming experience',
   },
   {
     component: (
@@ -31,7 +32,7 @@ const logos = [
     ),
     name: 'Github',
     description:
-      'Github and Gitlab integration for state-of-the-art version control',
+      'Github, Gitlab and Bitbucket integration for state-of-the-art version control',
   },
 ]
 
