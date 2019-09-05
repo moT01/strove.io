@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Router } from '@reach/router'
 
-import { PrivateRoute, Editor, Preview, Dashboard, Homepage } from 'components'
+import { PrivateRoute, Editor, Dashboard, Homepage } from 'components'
 
 const App = () => (
   <Router>
