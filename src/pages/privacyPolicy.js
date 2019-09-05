@@ -25,7 +25,6 @@ const Legal = () => (
   <>
     <SEO title="Privacy Policy" />
     <Header siteTitle="Strove" />
-
     <TextWell>
       <h1 style={{ alignSelf: 'center' }}>Privacy Policy</h1>
       <h6>Last Edited on 2019-06–06</h6>
@@ -251,7 +250,7 @@ const Legal = () => (
       </p>
       <p>
         Do we let third-parties, including ad networks or plug-ins collect PII
-        from children under 13?{' '}
+        from children under 13?
       </p>
       <h2>Fair Information Practices</h2>
       <p>
@@ -263,7 +262,6 @@ const Legal = () => (
         privacy laws that protect personal information.
       </p>
       <h2>
-        {' '}
         In order to be in line with Fair Information Practices we will take the
         following responsive action, should a data breach occur:
       </h2>
@@ -306,16 +304,16 @@ const Legal = () => (
       <ul>
         <li> Not use false or misleading subjects or email addresses. </li>
         <li>
-          • Identify the message as an advertisement in some reasonable way.
+          Identify the message as an advertisement in some reasonable way.
         </li>
         <li>
-          • Include the physical address of our business or site headquarters.{' '}
+          Include the physical address of our business or site headquarters.{' '}
         </li>
         <li>
-          • Monitor third-party email marketing services for compliance, if one
-          is used.
+          Monitor third-party email marketing services for compliance, if one is
+          used.
         </li>
-        <li> • Honor opt-out/unsubscribe requests quickly.</li>
+        <li>Honor opt-out/unsubscribe requests quickly.</li>
         <li>
           Allow users to unsubscribe by using the link at the bottom of each
           email
@@ -325,11 +323,11 @@ const Legal = () => (
           emails, you can email us at contact@codengo.page
         </h4>
         <li>
-          • Follow the instructions at the bottom of each email. and we will
+          Follow the instructions at the bottom of each email. and we will
           promptly remove you from all correspondence.
         </li>
       </ul>
-      <h2> Contacting Us</h2>
+      <h2>Contact Us</h2>
       <p>
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
