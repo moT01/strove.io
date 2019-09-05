@@ -42,6 +42,7 @@ const LoginProvider = ({ children, addProject }) => {
   const bitbucketRefreshToken = useSelector(
     selectors.api.getUserField('bitbucketRefreshToken')
   )
+  console.log('githubToken', githubToken)
   const [projectToStop, setProjectToStop] = useState(null)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
