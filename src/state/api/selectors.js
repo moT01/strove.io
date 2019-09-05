@@ -10,9 +10,10 @@ export const getLoading = dataKey => getOr(false, ['api', dataKey, 'isLoading'])
 
 export const getMessage = dataKey => getOr('', ['api', dataKey, 'message'])
 
-export const getCode = dataKey => getOr('', ['api', dataKey, 'code'])
+export const getCode = dataKey => getOr(null, ['api', dataKey, 'code'])
 
-export const getToken = dataKey => getOr('', ['api', 'user', dataKey])
+export const getUserField = dataKey => state =>
+  state?.api?.user?.data?.[dataKey]
 
 export const getUser = getApiData('user', null)
 
