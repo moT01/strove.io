@@ -12,7 +12,7 @@ export const getMessage = dataKey => getOr('', ['api', dataKey, 'message'])
 
 export const getCode = dataKey => getOr('', ['api', dataKey, 'code'])
 
-export const getToken = dataKey => getOr('', ['api', 'user', dataKey])
+export const getUserField = dataKey => getOr('', ['api', 'user', dataKey])
 
 export const getUser = getApiData('user', null)
 
