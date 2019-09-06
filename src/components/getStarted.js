@@ -157,8 +157,6 @@ const Templates = ({ addProject }) => {
     return errors
   }
 
-  // const handleClick = item => addProject(item.link)
-
   return (
     <AddProjectWrapper mobile={isMobile}>
       <Title mobile={isMobile}>
@@ -195,7 +193,6 @@ const Templates = ({ addProject }) => {
           </GithubLinkForm>
         )}
       />
-      <ComponentWrapper></ComponentWrapper>
     </AddProjectWrapper>
   )
 }

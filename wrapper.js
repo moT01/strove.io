@@ -37,10 +37,10 @@ const LoginProvider = ({ children, addProject }) => {
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
-  const githubToken = useSelector(selectors.api.getToken('githubToken'))
-  const gitlabToken = useSelector(selectors.api.getToken('gitlabToken'))
+  const githubToken = useSelector(selectors.api.getUserField('githubToken'))
+  const gitlabToken = useSelector(selectors.api.getUserField('gitlabToken'))
   const bitbucketRefreshToken = useSelector(
-    selectors.api.getToken('bitbucketRefreshToken')
+    selectors.api.getUserField('bitbucketRefreshToken')
   )
   const [projectToStop, setProjectToStop] = useState(null)
 
