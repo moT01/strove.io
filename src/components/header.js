@@ -5,12 +5,10 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
-// import { useInterval } from '../hooks'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
 import Login from './login'
-// import { isReachable } from 'is-reachable'
 
 const FadeIn = keyframes`
   0% {
@@ -213,6 +211,10 @@ const OptionText = styled(Text)`
   }
 `
 
+const PortOption = styled(OptionText)`
+  font-size: 16px;
+`
+
 const DropdownWrapper = styled.div`
   position: absolute;
   background: none;
@@ -228,14 +230,6 @@ const HeaderComponent = ({ siteTitle, location }) => {
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
 
-  // const anAsyncFunction = async item => {
-  //   return await functionWithPromise(item)
-  // }
-
-  // const getData = async () => {
-  //   return await Promise.all(list.map(item => anAsyncFunction(item)))
-  // }
-
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
       if (project?.machineName) {
@@ -247,26 +241,19 @@ const HeaderComponent = ({ siteTitle, location }) => {
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
             } else {
-              href = `https://${project.additionalPorts[index][1]}.vm${
-                project.machineName.match(/\d+/g)[0]
+              href = `https://${project.additionalPorts[index][1]}.${
+                project.machineName
               }.silisky.com`
             }
             return {
-              label: `PORT ${portPair[0]}`,
+              label: `http://0.0.0.0:${portPair[0]}`,
               href,
-              // isOnline: await isReachable(href),
             }
           })
         )
-        // console.log('ports', ports)
       }
     }
   }, [location.pathname])
-
-  // useInterval(
-  //   () => setCounter(counter + 1),
-  //   counter !== allMessages[type].length - 1 ? 1500 : null
-  // )
 
   return (
     <HeaderSection mobile={isMobileOnly}>
@@ -312,11 +299,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <Desktop
-                              style={{ display: 'inline-block' }}
-                              fill="#fff"
-                            ></Desktop>
-                            <OptionText invert>{item.label}</OptionText>
+                            <PortOption invert>{item.label}</PortOption>
                           </PreviewLink>
                         </Option>
                       ))}

@@ -190,9 +190,9 @@ const DropdownWrapper = styled.div`
   right: 1.5vw;
 `
 
-const getUserName = selectors.api.getApiData('user', null, 'name')
+const getUserName = selectors.api.getUserField('name')
 
-const getUserPhoto = selectors.api.getApiData('user', null, 'photoUrl')
+const getUserPhoto = selectors.api.getUserField('photoUrl')
 
 const getUserData = createSelector(
   [getUserName, getUserPhoto],
