@@ -53,67 +53,6 @@ const ComponentWrapper = styled.div`
   align-items: center;
 `
 
-// const TemplatesWrapper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-//   height: auto;
-//   padding: 0.5vh;
-//   justify-content: ${props => (props.mobile ? 'flex-start' : 'center')};
-//   align-items: center;
-//   overflow-x: ${props => (props.mobile ? 'scroll' : 'visible')};
-
-//   ${props =>
-//     props.mobile &&
-//     css`
-//       border: 1px solid #0072ce;
-//       box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
-//       border-radius: 5px;
-//       margin: 10px 0 10px 0;
-//     `}
-// `
-
-// const TemplateContainer = styled.a`
-//   display: flex;
-//   flex: 1;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   height: auto;
-//   margin: 0.25vh;
-//   text-decoration: none;
-//   cursor: pointer;
-//   transition: all 0.2s;
-
-//   :hover {
-//     transform: translateY(-3px);
-//   }
-
-//   svg {
-//     width: 100%;
-//     height: 100%;
-//   }
-// `
-
-// const IconContainer = styled.div`
-//   width: ${props => (props.mobile ? '20vw' : '5vw')};
-//   height: ${props => (props.mobile ? '20vw' : '5vw')};
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// `
-
-// const TemplateText = styled.p`
-//   color: #0072ce;
-//   font-size: 1rem;
-//   margin-left: 2%;
-//   margin-bottom: 0;
-//   white-space: nowrap;
-//   text-overflow: ellipsis;
-//   overflow: hidden;
-// `
-
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -165,26 +104,6 @@ const Title = styled.h3`
   text-align: center;
 `
 
-// const SectionDivider = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   flex-direction: row;
-// `
-
-// const SectionDividerLine = styled.div`
-//   flex: 1;
-//   border-top: 1px solid #0072ce;
-// `
-
-// const SectionDividerText = styled(Title)`
-//   flex: 2;
-//   margin: 0.5vh;
-//   text-align: center;
-// `
-
 const GithubLinkInput = styled.input`
   width: 80%;
   border-width: 1px;
@@ -218,40 +137,6 @@ const ErrorMessage = styled.p`
   margin: 0;
   height: 0.9rem;
 `
-
-// const StyledLink = styled(Link)`
-//   display: flex;
-//   flex-direction: row;
-//   height: auto;
-//   width: ${props => (props.mobile ? '100%' : '20%')};
-//   min-width: 70px;
-//   margin: 5px;
-//   padding: 0.5vh;
-//   align-items: center;
-//   justify-content: center;
-//   text-align: center;
-//   background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
-//   border-width: 1px;
-//   border-style: solid;
-//   color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
-//   border-radius: 5px;
-//   border-color: #0072ce;
-//   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-//   text-decoration: none;
-//   transition: all 0.2s ease;
-//   opacity: 0.9;
-//   cursor: pointer;
-
-//   :focus {
-//     outline: 0;
-//   }
-
-//   &:hover {
-//     opacity: 1;
-//     box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
-//     transform: translateY(-1px);
-//   }
-// `
 
 const Templates = ({ addProject }) => {
   const repoError = useSelector(selectors.api.getError('myProjects'))
@@ -299,7 +184,7 @@ const Templates = ({ addProject }) => {
                   : 'https://github.com/evil-corp/worldDomination'
               }
             />
-            <ErrorMessage>
+            {/* <ErrorMessage>
               {props.errors.repoLink && (
                 <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
               )}
@@ -312,7 +197,7 @@ const Templates = ({ addProject }) => {
                     Provided link leads to a private repository
                   </ErrorMessage>
                 )}
-            </ErrorMessage>
+            </ErrorMessage> */}
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
@@ -324,30 +209,7 @@ const Templates = ({ addProject }) => {
           </GithubLinkForm>
         )}
       />
-      {/* <SectionDivider>
-        {!isMobile && <SectionDividerLine />}
-        <SectionDividerText mobile={isMobile}>
-          Or try out one of the templates
-        </SectionDividerText>
-        {!isMobile && <SectionDividerLine />}
-      </SectionDivider> */}
-      <ComponentWrapper>
-        {/* <TemplatesWrapper mobile={isMobile}>
-          {templates.map(item => (
-            <TemplateContainer
-              key={item.name}
-              onClick={() => handleClick(item)}
-            >
-              <IconContainer mobile={isMobile}>{item.icon}</IconContainer>
-              <TemplateText>{item.name}</TemplateText>
-            </TemplateContainer>
-          ))}
-        </TemplatesWrapper> */}
-
-        {/* <StyledLink mobile={isMobile} to="templates">
-          More templates
-        </StyledLink> */}
-      </ComponentWrapper>
+      <ComponentWrapper></ComponentWrapper>
     </AddProjectWrapper>
   )
 }
