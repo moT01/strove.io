@@ -184,20 +184,6 @@ const Templates = ({ addProject }) => {
                   : 'https://github.com/evil-corp/worldDomination'
               }
             />
-            {/* <ErrorMessage>
-              {props.errors.repoLink && (
-                <ErrorMessage>{props.errors.repoLink}</ErrorMessage>
-              )}
-              {repoError &&
-                repoError.message &&
-                repoError.message.includes(
-                  'Could not resolve to a Repository'
-                ) && (
-                  <ErrorMessage>
-                    Provided link leads to a private repository
-                  </ErrorMessage>
-                )}
-            </ErrorMessage> */}
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
