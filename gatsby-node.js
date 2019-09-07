@@ -23,3 +23,32 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     },
   })
 }
+
+exports.createPages = ({ graphql, actions }) => {
+  const { createRedirect } = actions
+
+  createRedirect({
+    fromPath: 'https://fic.dev/*',
+    toPath: 'https://strove.io/:splat',
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: 'https://www.fic.dev/*',
+    toPath: 'https://strove.io/:splat',
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: 'https://www.silisky.com/*',
+    toPath: 'https://strove.io/:splat',
+    isPermanent: true,
+    force: true,
+  })
+  createRedirect({
+    fromPath: 'https://www.silisky.com/*',
+    toPath: 'https://strove.io/:splat',
+    isPermanent: true,
+    force: true,
+  })
+}
