@@ -10,8 +10,6 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
 
-console.log('test')
-
 import {
   GITHUB_LOGIN,
   GITLAB_LOGIN,
@@ -31,6 +29,8 @@ const createStore = reduxCreateStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 )
+
+console.log('test')
 
 export const persistor = persistStore(createStore)
 
