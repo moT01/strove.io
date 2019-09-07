@@ -44,15 +44,6 @@ const AddProjectWrapper = styled.div`
   max-width: 100vw;
 `
 
-const ComponentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-  justify-content: center;
-  align-items: center;
-`
-
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -131,16 +122,7 @@ const GithubLinkForm = styled.form`
   margin: 2vh 0 0;
 `
 
-const ErrorMessage = styled.p`
-  color: red;
-  font-size: 0.9rem;
-  margin: 0;
-  height: 0.9rem;
-`
-
 const Templates = ({ addProject }) => {
-  const repoError = useSelector(selectors.api.getError('myProjects'))
-
   const validate = values => {
     let errors = {}
 
