@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
 
+console.log('test')
+
 import {
   GITHUB_LOGIN,
   GITLAB_LOGIN,
