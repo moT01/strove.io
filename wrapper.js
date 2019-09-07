@@ -30,8 +30,6 @@ const createStore = reduxCreateStore(
   composeWithDevTools(applyMiddleware(thunk))
 )
 
-console.log('test')
-
 export const persistor = persistStore(createStore)
 
 const LoginProvider = ({ children, addProject }) => {
