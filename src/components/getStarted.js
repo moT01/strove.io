@@ -1,10 +1,8 @@
 import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 
-import { selectors } from 'state'
 import AddProjectProvider from './addProjectProvider'
 
 const FadeIn = keyframes`
@@ -142,7 +140,7 @@ const Templates = ({ addProject }) => {
   return (
     <AddProjectWrapper mobile={isMobile}>
       <Title mobile={isMobile}>
-        Add project from Github or Gitlab repository
+        Add project from Github, Gitlab or Bitbucket repository
       </Title>
       <Formik
         onSubmit={(values, actions) => {
