@@ -107,5 +107,7 @@ module.exports = {
         sv: 6,
       },
     },
+    // Todo: Use the plugin to handle redirects from other domains to strove.io
+    `gatsby-plugin-netlify`,
   ],
 }
