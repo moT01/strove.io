@@ -20,7 +20,7 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 
 # Get started
 
-Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/rt2zz/redux-persist
+Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/stroveio/2048-clone
 
 # Found a bug?
 
