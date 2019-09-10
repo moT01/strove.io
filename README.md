@@ -16,11 +16,11 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 
 <div align="center">
 <img src="./src/images/readmeAssets/strove.gif" width='900px'>
-g</div>
+</div>
 
 # Get started
 
-Add # + github url after strove.io to get start coding right away, for example: strove.io/#https://github.com/rt2zz/redux-persist
+Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/stroveio/2048-clone
 
 # Found a bug?
 
