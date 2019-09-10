@@ -1,7 +1,7 @@
 {
   "name": "stroveio",
   "private": true,
-  "description": "Write and run code in the cloud",
+  "description": "Language-agnostic Linux-based programming environment for teams",
   "version": "0.1.0",
   "author": "Adam Żaczek, Mateusz Olek, Paweł Wygoda, Piotr Jarosz",
   "dependencies": {
