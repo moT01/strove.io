@@ -1,9 +1,15 @@
 {
   "name": "stroveio",
   "private": true,
-  "description": "Language-agnostic Linux-based programming environment for teams",
+  "description": "Language-agnostic Linux-based programming environment for teams and single developers",
   "version": "0.1.0",
-  "author": "Adam Żaczek, Mateusz Olek, Paweł Wygoda, Piotr Jarosz",
+  "author": "Adam Żaczek",
+  "contributors": [
+    "Adam Żaczek",
+    "Piotr Jarosz",
+    "Mateusz Olek",
+    "Paweł Wygoda"
+  ],
   "dependencies": {
     "@apollo/react-hooks": "^3.0.0",
     "@emotion/core": "^10.0.10",
