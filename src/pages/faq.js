@@ -84,6 +84,16 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     paragraph:
       'Right now they only way is to contact us on contact@codengo.page. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
   },
+  {
+    header: 'Can I use Docker inside my project?',
+    paragraph:
+      'Strove.io is built using Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
+  },
+  {
+    header: 'Is the code secure?',
+    paragraph:
+      'Security of our users code is our top priority. We store projects in Google Cloud using encrypted connection to provide the best security. All the projects are run within Docker containers to make sure files used within a project are not accessible to unauthorized users. Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical decides and this is one of the reasons we started working on Strove.io.',
+  },
 ]
 
 const FAQ = () => {
