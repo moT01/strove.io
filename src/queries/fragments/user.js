@@ -14,6 +14,7 @@ export const UserFragment = gql`
     gitlabToken
     bitbucketUrl
     bitbucketRefreshToken
+    bitbucketName
     scopes
     siliskyToken
     currentProjectId
