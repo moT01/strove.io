@@ -120,7 +120,7 @@ const GithubLinkForm = styled.form`
   margin: 2vh 0 0;
 `
 
-const Templates = ({ addProject }) => {
+const GetStarted = ({ addProject }) => {
   const validate = values => {
     let errors = {}
 
@@ -179,6 +179,6 @@ const Templates = ({ addProject }) => {
 
 export default memo(() => (
   <AddProjectProvider>
-    {({ addProject }) => <Templates addProject={addProject} />}
+    {({ addProject }) => <GetStarted addProject={addProject} />}
   </AddProjectProvider>
 ))
