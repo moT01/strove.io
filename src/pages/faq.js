@@ -40,12 +40,12 @@ const topics = [
   {
     header: 'Is Strove free?',
     paragraph:
-      'Yes, each user gets up to 2 GB of RAM and 4 public projects in the free plan.',
+      'Yes, each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
   },
   {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
     paragraph:
-      'It would be impossible to clone a repository otherwise, those providers only allow apps to clone if the user is logged in.',
+      'Aforementioned providers only allow cloning if the user is logged in.',
   },
   {
     header:
@@ -55,7 +55,7 @@ const topics = [
   },
   {
     header: 'Can I have more than 4 repositories?',
-    paragraph: `Yes, we have a pro plan prepared for very active developers working on multiple projects. Pro plan has a limit of 12 reposiitories.`,
+    paragraph: `Yes, we have a pro plan prepared for very active developers working on multiple projects. Pro plan has a limit of 12 repositories.`,
   },
   {
     header: 'Why does project load several seconds',
@@ -68,7 +68,7 @@ const topics = [
   {
     header: 'How to manage env variables?',
     paragraph:
-      'Environment variables will be stored inside your project alone as long as they are ignored by git, just as they would be if you were using your physical machine to code.',
+      'Environment variables will be stored inside your project but they will not be shared as long as they are ignored by git. This works just the same way as if you were using your physical machine to code.',
   },
   {
     header: 'Can I work on mobile apps or Windows/MacOS apps?',
