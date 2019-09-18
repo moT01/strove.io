@@ -85,7 +85,7 @@ const createProject = async ({
         const access_token = await getBitbucketToken(user.bitbucketRefreshToken)
 
         const { values } = await fetch(
-          `https://api.bitbucket.org/2.0/users/${user.fullName}/repositories`,
+          `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
           {
             headers: {
               Authorization: `Bearer ${access_token}`,
