@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import styled from 'styled-components'
 import {
   Accordion,
@@ -159,6 +159,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
 ]
 
 const FAQ = () => {
+  const [focusedItem, setFocusedItem] = useState()
   const [executeScroll, scrollHtmlAttributes] = useScroll()
   const topicId =
     window?.location?.href?.match(/#(.*)/) &&
@@ -172,8 +173,6 @@ const FAQ = () => {
     topicId && executeScroll()
   }, [topicId])
 
-  console.log(topicId)
-
   return (
     <Layout>
       <SEO title="FAQ" />
@@ -185,26 +184,29 @@ const FAQ = () => {
           preExpanded={[topicId - 1]}
         >
           {topics.map((topic, index) => (
-            <TopicWrapper key={topic.header}>
+            <TopicWrapper
+              key={topic.header}
+              onMouseEnter={() => setFocusedItem(index)}
+              onMouseLeave={() => setFocusedItem(null)}
+            >
               <AccordionItem uuid={index}>
-                {index + 1 === +topicId ? (
+                {index + 1 === topicId ? (
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <Button onClick={() => reloadPageWithHash(index + 1)}>
-                        #
-                      </Button>
-                      <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
-                        topic.header
-                      }`}</Header>
+                      <Header
+                        onClick={() => reloadPageWithHash(index + 1)}
+                        {...scrollHtmlAttributes}
+                      >{`${index + 1}. ${topic.header}`}</Header>
+                      {focusedItem === index && '#'}
                     </AccordionItemButton>
                   </AccordionItemHeading>
                 ) : (
                   <AccordionItemHeading>
                     <AccordionItemButton>
-                      <Button onClick={() => reloadPageWithHash(index + 1)}>
-                        #
-                      </Button>
-                      <Header>{`${index + 1}. ${topic.header}`}</Header>
+                      <Header
+                        onClick={() => reloadPageWithHash(index + 1)}
+                      >{`${index + 1}. ${topic.header}`}</Header>
+                      {focusedItem === index && '#'}
                     </AccordionItemButton>
                   </AccordionItemHeading>
                 )}
