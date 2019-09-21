@@ -7,11 +7,60 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from 'react-accessible-accordion'
-// import 'react-accessible-accordion/dist/fancy-example.css'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
 import { useScroll } from 'hooks'
+
+const StyledAccordion = styled(Accordion)`
+  .accordion__item + .accordion__item {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .accordion__button {
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+  }
+
+  .accordion__button:hover {
+    background-color: #ddd;
+  }
+
+  .accordion__button:before {
+    display: inline-block;
+    content: '';
+    height: 10px;
+    width: 10px;
+    margin-right: 12px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(-45deg);
+  }
+
+  .accordion__button[aria-expanded='true']::before,
+  .accordion__button[aria-selected='true']::before {
+    transform: rotate(45deg);
+  }
+
+  .accordion__panel {
+    padding: 20px;
+    animation: fadein 0.35s ease-in;
+  }
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+`
 
 const TextWell = styled.div`
   color: black;
@@ -130,7 +179,7 @@ const FAQ = () => {
       <SEO title="FAQ" />
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
-        <Accordion preExpanded={[topicId - 1]}>
+        <StyledAccordion preExpanded={[topicId - 1]}>
           {topics.map((topic, index) => (
             <TopicWrapper key={topic.header}>
               <AccordionItem uuid={index}>
@@ -169,7 +218,7 @@ const FAQ = () => {
               </AccordionItem>
             </TopicWrapper>
           ))}
-        </Accordion>
+        </StyledAccordion>
       </TextWell>
     </Layout>
   )
