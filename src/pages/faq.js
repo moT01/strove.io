@@ -18,6 +18,7 @@ const StyledAccordion = styled(Accordion)`
   }
 
   .accordion__button {
+    position: relative;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -60,6 +61,12 @@ const StyledAccordion = styled(Accordion)`
       opacity: 1;
     }
   }
+`
+
+const StyledAnchor = styled.div`
+  position: absolute;
+  left: -30px;
+  top: 10px;
 `
 
 const TextWell = styled.div`
@@ -193,20 +200,20 @@ const FAQ = () => {
                 {index + 1 === topicId ? (
                   <AccordionItemHeading>
                     <AccordionItemButton>
+                      {focusedItem === index && <StyledAnchor>#</StyledAnchor>}
                       <Header
                         onClick={() => reloadPageWithHash(index + 1)}
                         {...scrollHtmlAttributes}
                       >{`${index + 1}. ${topic.header}`}</Header>
-                      {focusedItem === index && '#'}
                     </AccordionItemButton>
                   </AccordionItemHeading>
                 ) : (
                   <AccordionItemHeading>
                     <AccordionItemButton>
+                      {focusedItem === index && <StyledAnchor>#</StyledAnchor>}
                       <Header
                         onClick={() => reloadPageWithHash(index + 1)}
                       >{`${index + 1}. ${topic.header}`}</Header>
-                      {focusedItem === index && '#'}
                     </AccordionItemButton>
                   </AccordionItemHeading>
                 )}
