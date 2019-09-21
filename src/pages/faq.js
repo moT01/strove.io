@@ -1,5 +1,13 @@
 import React, { useEffect, memo } from 'react'
 import styled from 'styled-components'
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion'
+// import 'react-accessible-accordion/dist/fancy-example.css'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
@@ -120,25 +128,36 @@ const FAQ = () => {
       <SEO title="FAQ" />
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
+        <Accordion>
         {topics.map((topic, index) => (
           <TopicWrapper key={topic.header}>
-            <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
+          <AccordionItem>
             {index + 1 === +topicId ? (
+              <AccordionItemHeading>
+              <AccordionItemButton>
+              <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
               <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
                 topic.header
               }`}</Header>
+              </AccordionItemButton>
+              </AccordionItemHeading>
             ) : (
-              <Header>{`${index + 1}. ${topic.header}`}</Header>
+              <AccordionItemHeading>
+              <AccordionItemButton>
+              <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
+              <Header>{`${index + 1}. ${topic.header}`}</Header></AccordionItemButton></AccordionItemHeading>
             )}
             {typeof topic.paragraph === 'string' ? (
               topic.paragraph
                 .split('\n')
-                .map((item, i) => <Paragraph key={i}>{item}</Paragraph>)
+                .map((item, i) => <AccordionItemPanel><Paragraph key={i}>{item}</Paragraph></AccordionItemPanel>)
             ) : (
-              <Paragraph>{topic.paragraph}</Paragraph>
+              <AccordionItemPanel><Paragraph>{topic.paragraph}</Paragraph></AccordionItemPanel>
             )}
+            </AccordionItem>
           </TopicWrapper>
         ))}
+        </Accordion>
       </TextWell>
     </Layout>
   )
