@@ -106,7 +106,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header: 'Is the code secure?',
     paragraph:
       'Security of our users code is our top priority. We store projects in Google Cloud using encrypted connection to provide the best security. All the projects are run within Docker containers to make sure files used within a project are not accessible to unauthorized users. Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical decides and this is one of the reasons we started working on Strove.io.',
-  }
+  },
 ]
 
 const FAQ = () => {
@@ -129,34 +129,44 @@ const FAQ = () => {
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
         <Accordion>
-        {topics.map((topic, index) => (
-          <TopicWrapper key={topic.header}>
-          <AccordionItem>
-            {index + 1 === +topicId ? (
-              <AccordionItemHeading>
-              <AccordionItemButton>
-              <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
-              <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
-                topic.header
-              }`}</Header>
-              </AccordionItemButton>
-              </AccordionItemHeading>
-            ) : (
-              <AccordionItemHeading>
-              <AccordionItemButton>
-              <Button onClick={() => reloadPageWithHash(index + 1)}>#</Button>
-              <Header>{`${index + 1}. ${topic.header}`}</Header></AccordionItemButton></AccordionItemHeading>
-            )}
-            {typeof topic.paragraph === 'string' ? (
-              topic.paragraph
-                .split('\n')
-                .map((item, i) => <AccordionItemPanel><Paragraph key={i}>{item}</Paragraph></AccordionItemPanel>)
-            ) : (
-              <AccordionItemPanel><Paragraph>{topic.paragraph}</Paragraph></AccordionItemPanel>
-            )}
-            </AccordionItem>
-          </TopicWrapper>
-        ))}
+          {topics.map((topic, index) => (
+            <TopicWrapper key={topic.header}>
+              <AccordionItem>
+                {index + 1 === +topicId ? (
+                  <AccordionItemHeading>
+                    <AccordionItemButton>
+                      <Button onClick={() => reloadPageWithHash(index + 1)}>
+                        #
+                      </Button>
+                      <Header {...scrollHtmlAttributes}>{`${index + 1}. ${
+                        topic.header
+                      }`}</Header>
+                    </AccordionItemButton>
+                  </AccordionItemHeading>
+                ) : (
+                  <AccordionItemHeading>
+                    <AccordionItemButton>
+                      <Button onClick={() => reloadPageWithHash(index + 1)}>
+                        #
+                      </Button>
+                      <Header>{`${index + 1}. ${topic.header}`}</Header>
+                    </AccordionItemButton>
+                  </AccordionItemHeading>
+                )}
+                {typeof topic.paragraph === 'string' ? (
+                  topic.paragraph.split('\n').map((item, i) => (
+                    <AccordionItemPanel>
+                      <Paragraph key={i}>{item}</Paragraph>
+                    </AccordionItemPanel>
+                  ))
+                ) : (
+                  <AccordionItemPanel>
+                    <Paragraph>{topic.paragraph}</Paragraph>
+                  </AccordionItemPanel>
+                )}
+              </AccordionItem>
+            </TopicWrapper>
+          ))}
         </Accordion>
       </TextWell>
     </Layout>
