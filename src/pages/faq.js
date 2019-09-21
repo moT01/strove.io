@@ -123,15 +123,17 @@ const FAQ = () => {
     topicId && executeScroll()
   }, [topicId])
 
+  console.log(topicId)
+
   return (
     <Layout>
       <SEO title="FAQ" />
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
-        <Accordion>
+        <Accordion preExpanded={[topicId - 1]}>
           {topics.map((topic, index) => (
             <TopicWrapper key={topic.header}>
-              <AccordionItem>
+              <AccordionItem uuid={index}>
                 {index + 1 === +topicId ? (
                   <AccordionItemHeading>
                     <AccordionItemButton>
