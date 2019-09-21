@@ -48,6 +48,11 @@ const topics = [
       'Aforementioned providers only allow cloning if the user is logged in.',
   },
   {
+    header: 'Why do i need to provide private repository access to Github',
+    paragraph:
+      'We initially made login with public repos by default but this approach had a serious downside. Most private repositories belong to organizations and the only way to know if a user can clone them is having private repo permissions.',
+  },
+  {
     header:
       'I am not able to preview my application from within the IDE even though server is running! What should I do?',
     paragraph:
@@ -58,7 +63,7 @@ const topics = [
     paragraph: `Yes, we have a pro plan prepared for very active developers working on multiple projects. Pro plan has a limit of 12 repositories.`,
   },
   {
-    header: 'Why does project load several seconds',
+    header: 'Why does project load several seconds?',
     paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
 1. A new Docker container is started on one of virtual machines.
 2. Strove provides read and write access to the project folder.
