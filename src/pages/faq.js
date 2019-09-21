@@ -179,7 +179,11 @@ const FAQ = () => {
       <SEO title="FAQ" />
       <TextWell>
         <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
-        <StyledAccordion preExpanded={[topicId - 1]}>
+        <StyledAccordion
+          allowZeroExpanded
+          allowMultipleExpanded
+          preExpanded={[topicId - 1]}
+        >
           {topics.map((topic, index) => (
             <TopicWrapper key={topic.header}>
               <AccordionItem uuid={index}>
