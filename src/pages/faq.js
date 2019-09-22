@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react'
+import React, { useState, memo } from 'react'
 import styled from 'styled-components'
 import {
   Accordion,
@@ -10,7 +10,7 @@ import {
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
-import { useScroll } from 'hooks'
+// import { useScroll } from 'hooks'
 
 const StyledAccordion = styled(Accordion)`
   .accordion__item + .accordion__item {
@@ -63,11 +63,11 @@ const StyledAccordion = styled(Accordion)`
   }
 `
 
-const StyledAnchor = styled.div`
-  position: absolute;
-  left: -30px;
-  top: 10px;
-`
+// const StyledAnchor = styled.div`
+//   position: absolute;
+//   left: -30px;
+//   top: 10px;
+// `
 
 const TextWell = styled.div`
   color: black;
@@ -165,76 +165,39 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
   },
 ]
 
-const FAQ = () => {
-  const [focusedItem, setFocusedItem] = useState()
-  const [executeScroll, scrollHtmlAttributes] = useScroll()
-  const topicId =
-    window?.location?.href?.match(/#(.*)/) &&
-    window.location.href.match(/#(.*)/)[1]
+const FAQ = () => (
+  <Layout>
+    <SEO title="FAQ" />
+    <TextWell>
+      <StyledAccordion
+        allowZeroExpanded
+        allowMultipleExpanded
+        preExpanded={[...Array(topics.length).keys()]}
+      >
+        {topics.map((topic, index) => (
+          <AccordionItem key={topic.header} uuid={index}>
+            <AccordionItemHeading>
+              <AccordionItemButton>
+                <Header>{`${index + 1}. ${topic.header}`}</Header>
+              </AccordionItemButton>
+            </AccordionItemHeading>
 
-  const reloadPageWithHash = index => {
-    window.location.replace('http://localhost:8000/faq#' + index)
-  }
-
-  useEffect(() => {
-    topicId && executeScroll()
-  }, [topicId])
-
-  return (
-    <Layout>
-      <SEO title="FAQ" />
-      <TextWell>
-        <h1 style={{ alignSelf: 'center' }}>FAQ</h1>
-        <StyledAccordion
-          allowZeroExpanded
-          allowMultipleExpanded
-          preExpanded={[topicId - 1]}
-        >
-          {topics.map((topic, index) => (
-            <TopicWrapper
-              key={topic.header}
-              onMouseEnter={() => setFocusedItem(index)}
-              onMouseLeave={() => setFocusedItem(null)}
-            >
-              <AccordionItem uuid={index}>
-                {index + 1 === topicId ? (
-                  <AccordionItemHeading>
-                    <AccordionItemButton>
-                      {focusedItem === index && <StyledAnchor>#</StyledAnchor>}
-                      <Header
-                        onClick={() => reloadPageWithHash(index + 1)}
-                        {...scrollHtmlAttributes}
-                      >{`${index + 1}. ${topic.header}`}</Header>
-                    </AccordionItemButton>
-                  </AccordionItemHeading>
-                ) : (
-                  <AccordionItemHeading>
-                    <AccordionItemButton>
-                      {focusedItem === index && <StyledAnchor>#</StyledAnchor>}
-                      <Header
-                        onClick={() => reloadPageWithHash(index + 1)}
-                      >{`${index + 1}. ${topic.header}`}</Header>
-                    </AccordionItemButton>
-                  </AccordionItemHeading>
-                )}
-                {typeof topic.paragraph === 'string' ? (
-                  topic.paragraph.split('\n').map((item, i) => (
-                    <AccordionItemPanel>
-                      <Paragraph key={i}>{item}</Paragraph>
-                    </AccordionItemPanel>
-                  ))
-                ) : (
-                  <AccordionItemPanel>
-                    <Paragraph>{topic.paragraph}</Paragraph>
-                  </AccordionItemPanel>
-                )}
-              </AccordionItem>
-            </TopicWrapper>
-          ))}
-        </StyledAccordion>
-      </TextWell>
-    </Layout>
-  )
-}
+            {typeof topic.paragraph === 'string' ? (
+              topic.paragraph.split('\n').map((item, i) => (
+                <AccordionItemPanel>
+                  <Paragraph key={i}>{item}</Paragraph>
+                </AccordionItemPanel>
+              ))
+            ) : (
+              <AccordionItemPanel>
+                <Paragraph>{topic.paragraph}</Paragraph>
+              </AccordionItemPanel>
+            )}
+          </AccordionItem>
+        ))}
+      </StyledAccordion>
+    </TextWell>
+  </Layout>
+)
 
 export default memo(FAQ)
