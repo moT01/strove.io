@@ -98,7 +98,7 @@ const topics = [
   {
     header: 'Is Strove free?',
     paragraph:
-      'It is for open source and public projects, Each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
+      'It is for open-source and public projects. Each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
   },
   {
     header:
@@ -136,6 +136,10 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header: 'Can I use Docker inside my project?',
     paragraph:
       'Strove.io is built with Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
+  },
+  {
+    header: 'I didn\x27t find an answer I was looking for.',
+    paragraph: 'No worries, contact us at contact@codengo.page',
   },
 ]
 
