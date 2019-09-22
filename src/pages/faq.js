@@ -92,10 +92,9 @@ const topics = [
   },
   {
     header: 'How to manage env variables?',
-    paragraph:
-      `To add environment variables create a file that will store them such as .env.development.
+    paragraph: `To add environment variables create a file that will store them such as .env.development.
       Environment variables will be stored inside your project alone and they will not be shared, as long as files they live in are ignored by git.
-      This prevents users from accidentally sharing them even if you share your project using a link such as strove.io/#https://github.com/stroveio/2048-clone`.
+      This prevents users from accidentally sharing them even if you share your project using a link such as https://strove.io/#https://github.com/stroveio/2048-clone.`,
   },
   {
     header: 'Is Strove free?',
