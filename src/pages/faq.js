@@ -24,10 +24,11 @@ const StyledAccordion = styled(Accordion)`
     width: 100%;
     text-align: left;
     border: none;
+    outline: none;
   }
 
   .accordion__button:hover {
-    background-color: #ddd;
+    background-color: #efefef;
   }
 
   .accordion__panel {
