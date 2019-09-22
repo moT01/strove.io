@@ -13,8 +13,6 @@ import SEO from 'components/seo'
 import Layout from 'components/layout'
 
 const StyledAccordion = styled(Accordion)`
-  padding-top: 0;
-
   .accordion__item + .accordion__item {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
