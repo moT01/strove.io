@@ -75,8 +75,9 @@ const Header = styled.h3`
 const topics = [
   {
     header: 'Is Strove.io secure?',
-    paragraph:
-      'Security of our users code is our top priority. We store code in state of the art cloud provider - Google Cloud. All the connections to the cloud are encrypted using SSL. All the projects are run within Docker containers to make sure files used within a project are not accessible to unauthorized users. Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical decides and this is one of the reasons we started working on Strove.io.',
+    paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections to the it are encrypted using SSL to prevent third parties from hijacking any kind of information.
+      Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
+      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
   },
   {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
