@@ -13,6 +13,8 @@ import SEO from 'components/seo'
 import Layout from 'components/layout'
 
 const StyledAccordion = styled(Accordion)`
+  padding-top: 0;
+
   .accordion__item + .accordion__item {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
@@ -33,7 +35,7 @@ const StyledAccordion = styled(Accordion)`
   }
 
   .accordion__panel {
-    padding: 20px;
+    padding: 0 20px 30px;
     animation: fadein 0.35s ease-in;
   }
 
@@ -65,6 +67,7 @@ const Paragraph = styled.p`
   text-indent: 30px;
   font-size: 20px;
   display: inline-block;
+  padding-top: 0;
 `
 
 const Header = styled.h3`
