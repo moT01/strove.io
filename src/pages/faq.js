@@ -7,6 +7,7 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from 'react-accessible-accordion'
+import { isMobile } from 'react-device-detect'
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
@@ -50,7 +51,7 @@ const StyledAccordion = styled(Accordion)`
 const TextWell = styled.div`
   color: black;
   height: auto;
-  width: 60vw;
+  width: ${isMobile ? '100vw' : '60vw'};
   margin: 0vw 7.5vw 0 7.5vw;
   padding: 3vh;
   flex-direction: column;
