@@ -18,6 +18,7 @@ const StyledAccordion = styled(Accordion)`
 
   .accordion__button {
     position: relative;
+    display: inline-block;
     color: #444;
     cursor: pointer;
     padding: 18px;
