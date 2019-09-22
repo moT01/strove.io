@@ -98,7 +98,7 @@ const topics = [
   {
     header: 'Is Strove free?',
     paragraph:
-      'Yes, each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
+      'It is for open source and public projects, Each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
   },
   {
     header:
