@@ -62,24 +62,12 @@ const Footer = () => {
       <ColumnWrapper>
         <Column>
           <ColumnTitle>Social</ColumnTitle>
-          {/* <StyledLink to="/blog">
-            <LinkText>Blog</LinkText>
-          </StyledLink>
-          <StyledLink to="/cookies">
-            <LinkText>Github</LinkText>
-          </StyledLink>
-          <StyledLink to="/cookies">
-            <LinkText>Twitter</LinkText>
-          </StyledLink> */}
           <StyledAnchor href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
             <LinkText>Contact us</LinkText>
           </StyledAnchor>
         </Column>
         <Column>
           <ColumnTitle>About</ColumnTitle>
-          {/* <StyledLink to="/documentation">
-            <LinkText>Documentation</LinkText>
-          </StyledLink> */}
           <StyledLink to="/pricing">
             <LinkText>Pricing</LinkText>
           </StyledLink>
