@@ -18,7 +18,6 @@ const StyledAccordion = styled(Accordion)`
 
   .accordion__button {
     position: relative;
-    display: inline-block;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -29,22 +28,6 @@ const StyledAccordion = styled(Accordion)`
 
   .accordion__button:hover {
     background-color: #ddd;
-  }
-
-  .accordion__button:before {
-    display: inline-block;
-    content: '';
-    height: 10px;
-    width: 10px;
-    margin-right: 12px;
-    border-bottom: 2px solid currentColor;
-    border-right: 2px solid currentColor;
-    transform: rotate(-45deg);
-  }
-
-  .accordion__button[aria-expanded='true']::before,
-  .accordion__button[aria-selected='true']::before {
-    transform: rotate(45deg);
   }
 
   .accordion__panel {
