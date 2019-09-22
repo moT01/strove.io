@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import {
   Accordion,
@@ -10,7 +10,6 @@ import {
 
 import SEO from 'components/seo'
 import Layout from 'components/layout'
-// import { useScroll } from 'hooks'
 
 const StyledAccordion = styled(Accordion)`
   .accordion__item + .accordion__item {
@@ -63,12 +62,6 @@ const StyledAccordion = styled(Accordion)`
   }
 `
 
-// const StyledAnchor = styled.div`
-//   position: absolute;
-//   left: -30px;
-//   top: 10px;
-// `
-
 const TextWell = styled.div`
   color: black;
   height: auto;
@@ -97,8 +90,6 @@ const Header = styled.h3`
   font-size: 22;
   display: inline-block;
 `
-
-const TopicWrapper = styled.div``
 
 const topics = [
   {
