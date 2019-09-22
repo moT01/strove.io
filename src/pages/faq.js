@@ -105,7 +105,7 @@ const topics = [
     header:
       'I am not able to preview my application from within the IDE even though server is running! What should I do?',
     paragraph:
-      'This is most likely due to not your app not running on host 0.0.0.0. Some frameworks and servers choose a different port and you can almost always specify that you want host 0.0.0.0 instead.',
+      'This is most likely due to your app not running on host 0.0.0.0. Some frameworks and servers choose a different port and you can almost always specify that you want host 0.0.0.0 instead.',
   },
   {
     header: 'Can I have more than 4 repositories?',
@@ -136,7 +136,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
   {
     header: 'Can I use Docker inside my project?',
     paragraph:
-      'Strove.io is built using Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
+      'Strove.io is built with Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
   },
 ]
 
