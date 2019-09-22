@@ -61,7 +61,7 @@ const TextWell = styled.div`
   background-color: white;
 `
 const Paragraph = styled.p`
-  text-indent: 50px;
+  text-indent: 30px;
   font-size: 20px;
   display: inline-block;
 `
