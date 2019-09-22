@@ -83,9 +83,9 @@ const Footer = () => {
           <StyledLink to="/pricing">
             <LinkText>Pricing</LinkText>
           </StyledLink>
-          {/* <StyledLink to="/faq">
+          <StyledLink to="/faq">
             <LinkText>FAQ</LinkText>
-          </StyledLink> */}
+          </StyledLink>
         </Column>
         <Column>
           <ColumnTitle>Terms of use</ColumnTitle>
