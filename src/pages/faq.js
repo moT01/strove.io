@@ -81,11 +81,6 @@ const Paragraph = styled.p`
   display: inline-block;
 `
 
-const Button = styled.div`
-  font-size: 22;
-  display: inline-block;
-`
-
 const Header = styled.h3`
   font-size: 22;
   display: inline-block;
@@ -93,9 +88,9 @@ const Header = styled.h3`
 
 const topics = [
   {
-    header: 'Is Strove free?',
+    header: 'Is Strove.io secure?',
     paragraph:
-      'Yes, each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
+      'Security of our users code is our top priority. We store code in state of the art cloud provider - Google Cloud. All the connections to the cloud are encrypted using SSL. All the projects are run within Docker containers to make sure files used within a project are not accessible to unauthorized users. Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical decides and this is one of the reasons we started working on Strove.io.',
   },
   {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
@@ -106,6 +101,16 @@ const topics = [
     header: 'Why do i need to provide private repository access to Github',
     paragraph:
       'We initially made login with public repos by default but this approach had a serious downside. Most private repositories belong to organizations and the only way to know if a user can clone them is having private repo permissions.',
+  },
+  {
+    header: 'How to manage env variables?',
+    paragraph:
+      'Environment variables will be stored inside your project but they will not be shared as long as they are ignored by git. This works just the same way as if you were using your physical machine to code.',
+  },
+  {
+    header: 'Is Strove free?',
+    paragraph:
+      'Yes, each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
   },
   {
     header:
@@ -126,11 +131,6 @@ const topics = [
 4. Init script from strove.json is run if it's present.`,
   },
   {
-    header: 'How to manage env variables?',
-    paragraph:
-      'Environment variables will be stored inside your project but they will not be shared as long as they are ignored by git. This works just the same way as if you were using your physical machine to code.',
-  },
-  {
     header: 'Can I work on mobile apps or Windows/MacOS apps?',
     paragraph: `Yes and no. Here is an overview:
 Strove runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Strove as well.
@@ -148,11 +148,6 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header: 'Can I use Docker inside my project?',
     paragraph:
       'Strove.io is built using Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
-  },
-  {
-    header: 'Is the code secure?',
-    paragraph:
-      'Security of our users code is our top priority. We store projects in Google Cloud using encrypted connection to provide the best security. All the projects are run within Docker containers to make sure files used within a project are not accessible to unauthorized users. Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical decides and this is one of the reasons we started working on Strove.io.',
   },
 ]
 
