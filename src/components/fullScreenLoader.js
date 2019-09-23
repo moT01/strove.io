@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { isMobileOnly } from 'react-device-detect'
 
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
@@ -34,21 +35,20 @@ const LoaderWrapper = styled.div`
 `
 
 const LoaderContainer = styled(LoaderWrapper)`
-  width: ${props => (props.isFullScreen ? '25vw' : '100%')};
+  width: ${props => (props.isFullScreen ? '15vw' : '100%')};
   top: ${props => props.isFullScreen && '3vh'};
   height: auto;
-  animation: ${SpinToWin} 3s linear infinite;
+  animation: ${SpinToWin} 3.5s linear infinite;
 `
 
 const LogoContainer = styled.div`
-  width: ${props => (props.isFullScreen ? '20vw' : '4vh')};
   position: absolute;
-  animation: ${AntiSpinToWin} 3s linear infinite;
+  animation: ${AntiSpinToWin} 3.5s linear infinite;
 `
 
 const Text = styled.p`
   color: #0072ce;
-  font-size: 1rem;
+  font-size: 21px;
   margin-bottom: 0;
   margin-top: 15px;
   white-space: nowrap;
@@ -57,8 +57,8 @@ const Text = styled.p`
 `
 
 const StyledLogo = styled(Strove)`
-  width: '100%';
-  height: 'auto';
+  width: 5vw;
+  height: 5vw;
 `
 
 const allMessages = {
