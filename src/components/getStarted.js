@@ -128,18 +128,17 @@ const GetStarted = ({ addProject }) => {
   const validate = values => {
     let errors = {}
 
-    if (!values.repoLink || (values.repoLink && !values.repoLink)) {
-      return
+    if (!values.repoLink) {
+      return errors
+    } else if (!values.repoLink.trim()) {
+      errors.repoLink = 'No link provided'
+      return errors
     } else if (
       !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
         values.repoLink
       )
     ) {
       errors.repoLink = 'Invalid repository link'
-    }
-
-    if (!values.repoLink.trim()) {
-      errors.repoLink = 'No link provided'
       return errors
     }
 
@@ -172,7 +171,6 @@ const GetStarted = ({ addProject }) => {
                   : 'https://github.com/evil-corp/worldDomination'
               }
             />
-            <StyledErrors>{props.errors.repoLink}</StyledErrors>
             <Button
               disabled={!props.values.repoLink || props.errors.repoLink}
               primary
@@ -181,6 +179,7 @@ const GetStarted = ({ addProject }) => {
             >
               Add project
             </Button>
+            <StyledErrors>{props.errors.repoLink}</StyledErrors>
           </GithubLinkForm>
         )}
       />
