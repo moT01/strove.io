@@ -28,7 +28,8 @@ const AddProjectProvider = ({ children }) => {
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
-  const addProject = async repoLink => {
+  const addProject = async link => {
+    const repoLink = link.trim().toLowerCase()
     const repoUrlParts = repoLink.split('/')
     const repoProvider = repoUrlParts[2].split('.')[0]
 
