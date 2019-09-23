@@ -130,7 +130,7 @@ const GetStarted = ({ addProject }) => {
 
     if (!values.repoLink) {
       return errors
-    } else if (!values.repoLink.trim()) {
+    } else if (values.repoLink && !values.repoLink.trim()) {
       errors.repoLink = 'No link provided'
       return errors
     } else if (
