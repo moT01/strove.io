@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { isMobileOnly } from 'react-device-detect'
 
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
@@ -38,12 +37,13 @@ const LoaderContainer = styled(LoaderWrapper)`
   width: ${props => (props.isFullScreen ? '15vw' : '100%')};
   top: ${props => props.isFullScreen && '3vh'};
   height: auto;
-  animation: ${SpinToWin} 3.5s linear infinite;
+  animation: ${SpinToWin} 3s linear infinite;
 `
 
 const LogoContainer = styled.div`
+  width: ${props => (props.isFullScreen ? '20vw' : '4vh')};
   position: absolute;
-  animation: ${AntiSpinToWin} 3.5s linear infinite;
+  animation: ${AntiSpinToWin} 3s linear infinite;
 `
 
 const Text = styled.p`
@@ -57,8 +57,8 @@ const Text = styled.p`
 `
 
 const StyledLogo = styled(Strove)`
-  width: 5vw;
-  height: 5vw;
+  width: '100%';
+  height: 'auto';
 `
 
 const allMessages = {
@@ -87,7 +87,7 @@ const Loader = ({ type = 'getMyProjects', ...props }) => {
         <Cog fill={props.color} />
         {props.isFullScreen && (
           <LogoContainer {...props}>
-            <StyledLogo fill="#0072ce" />
+            {/* <StyledLogo fill="#0072ce" /> */}
           </LogoContainer>
         )}
       </LoaderContainer>
