@@ -68,11 +68,14 @@ const allMessages = {
     'Starting virtual machine',
     'Launching editor',
   ],
-  continueProject: [],
-  getMyProjects: [],
+  continueProject: [
+    'Reserving resources',
+    'Starting virtual machine',
+    'Launching editor',
+  ]
 }
 
-const Loader = ({ type = 'getMyProjects', ...props }) => {
+const Loader = ({ type = 'addProject', ...props }) => {
   const [counter, setCounter] = useState(0)
 
   useInterval(
