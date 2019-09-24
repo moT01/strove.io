@@ -16,24 +16,25 @@ const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
 const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REDIRECT_URI = process.env.REDIRECT_URI
+const IS_OPENSOURCE = process.env.IS_OPENSOURCE
 
 const loginOptions = [
   {
     value: 'github',
     label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github`,
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github=${IS_OPENSOURCE}`,
     icon: <Github />,
   },
   {
     value: 'bitbucket',
     label: 'Bitbucket',
-    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`,
+    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket=${IS_OPENSOURCE}`,
     icon: <Bitbucket />,
   },
   {
     value: 'gitlab',
     label: 'Gitlab',
-    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`,
+    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab=${IS_OPENSOURCE}`,
     icon: <Gitlab />,
   },
 ]
