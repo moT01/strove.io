@@ -116,13 +116,14 @@ const LoginProvider = ({ children, addProject }) => {
       .split('=')[1]
 
     const loginState = window?.location?.href
-      ?.match(/state=([a-z]+)/g)
+      ?.match(/state=(.+)/g)
       ?.toString()
-      .split('=')
+      .split('=')[1]
 
-    const gitProvider = loginState[1]
-
-    const isOpensource = loginState[2]
+    /* %2C is an encoding for , */
+    const stateParams = loginState.split('%2C')
+    const gitProvider = stateParams[0]
+    const isOpensource = stateParams[1]
 
     if (code) {
       switch (gitProvider) {
