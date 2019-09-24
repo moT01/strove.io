@@ -106,14 +106,13 @@ const createProject = async ({
     if (repoData) {
       const {
         description,
-        name /* add language and color in future */,
+        name /* add language and color */,
       } = repoData
 
       dispatch(
         mutation({
           name: 'addProject',
           storeKey: 'myProjects',
-          /* ToDo: Support Bitbucket as well */
           variables: { repoLink, name, description },
           mutation: ADD_PROJECT,
           onSuccess: [

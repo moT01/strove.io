@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
-import { isMobileOnly } from 'react-device-detect'
 
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
