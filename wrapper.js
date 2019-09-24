@@ -120,10 +120,16 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
-    /* %2C is an encoding for , */
-    const stateParams = loginState.split('%2C')
-    const gitProvider = stateParams[0]
-    const isOpensource = stateParams[1]
+    let gitProvider
+
+    if (loginState) {
+      /* %2C is an encoding for , */
+      const stateParams = loginState.split('%2C')
+      gitProvider = stateParams[0]
+      const isOpensource = stateParams[1]
+      console.log('stateParams', stateParams)
+      /* http%3A%2F%2F is encoded http:// */
+    }
 
     if (code) {
       switch (gitProvider) {
