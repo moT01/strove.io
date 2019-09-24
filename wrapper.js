@@ -115,13 +115,17 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
-    const state = window?.location?.href
+    const loginState = window?.location?.href
       ?.match(/state=([a-z]+)/g)
       ?.toString()
-      .split('=')[1]
+      .split('=')
+
+    const gitProvider = loginState[1]
+
+    const isOpensource = loginState[2]
 
     if (code) {
-      switch (state) {
+      switch (gitProvider) {
         case 'github': {
           if (!localStorage.getItem('token') || !githubToken) {
             dispatch(
