@@ -54,6 +54,7 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('AddGitlabToLogin')
     } else if (user && repoFromBitbucket && !bitbucketRefreshToken) {
       setModalContent('AddBitbucketToLogin')
+      // ToDo: Handle gitlab and bitbucket unresolved repo errors
     } else if (
       addProjectError &&
       addProjectError.message &&
