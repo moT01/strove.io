@@ -23,7 +23,7 @@ const loginOptions = [
   {
     value: 'github',
     label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github${IS_OPENSOURCE},${window?.location?.href}`,
+    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,repo&state=github,${IS_OPENSOURCE},${window?.location?.href}`,
     icon: <Github />,
   },
   {
