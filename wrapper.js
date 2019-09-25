@@ -121,14 +121,25 @@ const LoginProvider = ({ children, addProject }) => {
       .split('=')[1]
 
     let gitProvider
+    let decoredLoggedUri
 
     if (loginState) {
       /* %2C is an encoding for , */
       const stateParams = loginState.split('%2C')
       gitProvider = stateParams[0]
       const isOpensource = stateParams[1]
-      console.log('stateParams', stateParams)
-      /* http%3A%2F%2F is encoded http:// */
+
+      const loggedUri = stateParams[2]
+      decoredLoggedUri = decodeURIComponent(loggedUri)
+      console.log(
+        'stateParams',
+        stateParams,
+        'decoredLoggedUri',
+        decoredLoggedUri
+      )
+      // if (decoredLoggedUri) {
+      //   window.location.replace(decoredLoggedUri)
+      // }
     }
 
     if (code) {
@@ -144,6 +155,7 @@ const LoginProvider = ({ children, addProject }) => {
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
                   localStorage.setItem('token', siliskyToken)
+                  window.location.replace(decoredLoggedUri)
                 },
                 onSuccessDispatch: [
                   user => ({
