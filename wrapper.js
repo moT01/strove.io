@@ -115,22 +115,6 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
-    if (
-      window &&
-      window.location.href &&
-      !window.location.href.includes('app/dashboard') &&
-      window?.location?.href?.match(/state=(.+)/g)
-    ) {
-      return (window.location.href = ' http://localhost:8000/faq')
-      // return window.location.replace('http://localhost:8000/app/dashboard')
-      console.log('redirected')
-      // window.location.replace(
-      //   `http://localhost:8000/app/dashboard?${window?.location?.href
-      //     ?.match(/state=(.+)/g)
-      //     ?.toString()}`
-      // )
-    }
-
     const loginState = window?.location?.href
       ?.match(/state=(.+)/g)
       ?.toString()
@@ -142,8 +126,21 @@ const LoginProvider = ({ children, addProject }) => {
     if (loginState) {
       /* %2C is an encoding for , */
       const stateParams = loginState.split('%2C')
+      const isOpensource = true // stateParams[1]
+
+      const href = window.location.href
+      if (!href.includes('/faq') && isOpensource) {
+        return window.location.replace(
+          `http://localhost:8000/faq?code=${code}&state=${
+            window?.location?.href
+              ?.match(/state=(.+)/g)
+              ?.toString()
+              .split('=')[1]
+          }`
+        )
+      }
+
       gitProvider = stateParams[0]
-      const isOpensource = stateParams[1]
 
       const loggedUri = stateParams[2]
       decoredLoggedUri = decodeURIComponent(loggedUri)
