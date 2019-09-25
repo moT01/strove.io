@@ -160,6 +160,7 @@ const GetStarted = ({ addProject }) => {
         render={props => (
           <GithubLinkForm onSubmit={props.handleSubmit}>
             <GithubLinkInput
+              autoComplete="off"
               type="text"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
