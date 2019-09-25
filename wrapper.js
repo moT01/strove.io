@@ -115,6 +115,22 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
+    if (
+      window &&
+      window.location.href &&
+      !window.location.href.includes('app/dashboard') &&
+      window?.location?.href?.match(/state=(.+)/g)
+    ) {
+      return (window.location.href = ' http://localhost:8000/faq')
+      // return window.location.replace('http://localhost:8000/app/dashboard')
+      console.log('redirected')
+      // window.location.replace(
+      //   `http://localhost:8000/app/dashboard?${window?.location?.href
+      //     ?.match(/state=(.+)/g)
+      //     ?.toString()}`
+      // )
+    }
+
     const loginState = window?.location?.href
       ?.match(/state=(.+)/g)
       ?.toString()
@@ -155,7 +171,11 @@ const LoginProvider = ({ children, addProject }) => {
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
                   localStorage.setItem('token', siliskyToken)
-                  window.location.replace(decoredLoggedUri)
+                  // window.location.replace(
+                  //   `http://localhost:8000/app/dashboard?${window?.location?.href
+                  //     ?.match(/state=(.+)/g)
+                  //     ?.toString()}`
+                  // )
                 },
                 onSuccessDispatch: [
                   user => ({
