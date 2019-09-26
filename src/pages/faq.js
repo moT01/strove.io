@@ -80,6 +80,17 @@ const topics = [
       Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
   },
   {
+    header: 'Why should I use Strove.io ?',
+    paragraph: `Strove.io solves 3 problems programmers face:
+      1. Programmers waste a lot of time on setting up the environment - this problem is very troublesome for many teams and has been our initial inspiration to start working on this project.
+      Strove.io can cut the time to set a programming environment to seconds.
+      2. It is hard to use different computers when working on a project and code breaks across different devices and operating systems.
+      In Strove.io the code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access.
+      3. 'It works on my machine' problem.
+      Strove.io lets programmers use their favorite devices without sacrificing productivity. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
+    `,
+  },
+  {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
     paragraph:
       'Aforementioned providers only allow cloning if the user is logged in.',
