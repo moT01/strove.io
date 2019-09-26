@@ -74,6 +74,17 @@ const Header = styled.h3`
 
 const topics = [
   {
+    header: 'Why should I use Strove.io?',
+    paragraph: `Strove.io solves 3 problems programmers face:
+      1. Programmers waste a lot of time on setting up the environment - this problem is very troublesome for many teams and has been our initial inspiration to start working on this project.
+      Strove.io can cut the time to set a programming environment to seconds.
+      2. It is hard to use different computers when working on a project and code breaks across different devices and operating systems.
+      In Strove.io the code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access.
+      3. 'It works on my machine' problem.
+      Strove.io lets programmers use their favorite devices without sacrificing productivity. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
+    `,
+  },
+  {
     header: 'Is Strove.io secure?',
     paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections to the it are encrypted using SSL to prevent third parties from hijacking any kind of information.
       Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
