@@ -47,6 +47,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   margin: 0;
   height: 100%;
+  height: ${props => (props.mobile ? '5.5vh' : '3vh')};
   align-items: center;
   width: ${({ isUserInsideEditor, mobile }) =>
     isUserInsideEditor ? '350px' : mobile ? '150px' : '250px'};
@@ -93,11 +94,11 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
   position: relative;
   display: flex;
+  height: 25px;
+  padding: 0;
 `
 
 const LoginButton = styled.button`
-  color: white;
-  text-decoration: none;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -231,7 +232,6 @@ const ShareWrapper = styled.div`
 
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
-
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
@@ -292,7 +292,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {({ getToggleButtonProps, isOpen }) => (
               <span style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})}>
-                  <Desktop style={{ height: '100%' }} fill="#fff" />
+                  <Desktop style={{ height: '20px' }} fill="#fff" />
                 </LoginButton>
                 <DropdownWrapper>
                   {isOpen && (
