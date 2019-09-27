@@ -27,7 +27,6 @@ const LinkWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: ${props => (props.mobile ? '100%' : '2.5vh')};
-  margin: 0 3vw 0 0;
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
 `
@@ -49,10 +48,21 @@ const ZeldaWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  height: 100%;
+  align-items: center;
+  width: 250px;
+`
+
+const LeftHeaderSideWrapper = styled.div`
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   margin: 0;
   height: 100%;
+  align-items: center;
 `
 
 const LinkText = styled.h3`
@@ -229,7 +239,7 @@ const DropdownWrapper = styled.div`
 
 const ShareWrapper = styled.div`
   cursor: pointer;
-  margin: 0 0 0 3vw;
+  align-items: center;
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
@@ -269,10 +279,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
-              <Strove
-                style={{ height: '100%', marginTop: '0.6rem' }}
-                fill="#ffffff"
-              />
+              <Strove style={{ height: '100%' }} fill="#ffffff" />
             ) : (
               <LinkText>{siteTitle}</LinkText>
             )}
