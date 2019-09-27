@@ -5,6 +5,8 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
+import copy from 'copy-to-clipboard'
+import { Share } from 'images/svg'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -216,12 +218,17 @@ const PortOption = styled(OptionText)`
 `
 
 const DropdownWrapper = styled.div`
+  cursor: pointer;
   position: absolute;
   background: none;
   right: 1.5vw;
   display: flex;
   right: -10px;
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
+`
+
+const ShareWrapper = styled.div`
+  cursor: pointer;
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
@@ -280,6 +287,11 @@ const HeaderComponent = ({ siteTitle, location }) => {
               )}
             </StyledLink>
           </LinkWrapper>
+        )}
+        {location.pathname === '/app/editor/' && (
+          <ShareWrapper>
+            <Share />
+          </ShareWrapper>
         )}
         {location.pathname === '/app/editor/' && (
           <Downshift>
