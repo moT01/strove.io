@@ -52,15 +52,6 @@ const HeaderWrapper = styled.div`
   width: 350px;
 `
 
-const LeftHeaderSideWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 0;
-  height: 100%;
-  align-items: center;
-`
-
 const LinkText = styled.h3`
   font-size: 1.2rem;
   display: flex;
@@ -241,8 +232,10 @@ const ShareWrapper = styled.div`
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
 
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
+  console.log('currentProject', currentProject)
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
@@ -322,7 +315,9 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </Downshift>
         )}
         {location.pathname === '/app/editor/' && (
-          <ShareWrapper>
+          <ShareWrapper
+            onClick={() => copy(`https://strove.io#${currentProject.repoLink}`)}
+          >
             <Share
               style={{
                 height: '20px',
