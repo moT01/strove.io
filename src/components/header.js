@@ -49,7 +49,8 @@ const HeaderWrapper = styled.div`
   margin: 0;
   height: 100%;
   align-items: center;
-  width: 350px;
+  width: ${({ isUserInsideEditor }) =>
+    isUserInsideEditor ? '350px' : '150px'};
 `
 
 const LinkText = styled.h3`
@@ -227,6 +228,10 @@ const DropdownWrapper = styled.div`
 const ShareWrapper = styled.div`
   cursor: pointer;
   margin-top: 3px;
+
+  svg {
+    height: 20px;
+  }
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
@@ -264,7 +269,10 @@ const HeaderComponent = ({ siteTitle, location }) => {
 
   return (
     <HeaderSection mobile={isMobileOnly}>
-      <HeaderWrapper mobile={isMobileOnly}>
+      <HeaderWrapper
+        isUserInsideEditor={location.pathname === '/app/editor/'}
+        mobile={isMobileOnly}
+      >
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
@@ -320,11 +328,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
               copy(`https://strove.io/#${currentProject.repoLink}`)
             }
           >
-            <Share
-              style={{
-                height: '20px',
-              }}
-            />
+            <Share />
           </ShareWrapper>
         )}
       </HeaderWrapper>
