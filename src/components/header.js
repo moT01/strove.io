@@ -22,10 +22,6 @@ const FadeIn = keyframes`
 `
 
 const LinkWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
   height: ${props => (props.mobile ? '100%' : '2.5vh')};
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
@@ -53,7 +49,7 @@ const HeaderWrapper = styled.div`
   margin: 0;
   height: 100%;
   align-items: center;
-  width: 250px;
+  width: 350px;
 `
 
 const LeftHeaderSideWrapper = styled.div`
@@ -239,7 +235,7 @@ const DropdownWrapper = styled.div`
 
 const ShareWrapper = styled.div`
   cursor: pointer;
-  align-items: center;
+  margin-top: 3px;
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
@@ -289,7 +285,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
-                <Dashboard style={{ height: '70%' }} fill="#ffffff" />
+                <Dashboard style={{ height: '25px' }} fill="#ffffff" />
               ) : (
                 <LinkText>Dashboard</LinkText>
               )}
