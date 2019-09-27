@@ -49,8 +49,8 @@ const HeaderWrapper = styled.div`
   margin: 0;
   height: 100%;
   align-items: center;
-  width: ${({ isUserInsideEditor }) =>
-    isUserInsideEditor ? '350px' : '150px'};
+  width: ${({ isUserInsideEditor, mobile }) =>
+    isUserInsideEditor ? '350px' : mobile ? '150px' : '250px'};
 `
 
 const LinkText = styled.h3`
