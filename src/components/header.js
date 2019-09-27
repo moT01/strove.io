@@ -229,6 +229,7 @@ const DropdownWrapper = styled.div`
 
 const ShareWrapper = styled.div`
   cursor: pointer;
+  margin: 0 0 0 3vw;
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
@@ -289,16 +290,11 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </LinkWrapper>
         )}
         {location.pathname === '/app/editor/' && (
-          <ShareWrapper>
-            <Share />
-          </ShareWrapper>
-        )}
-        {location.pathname === '/app/editor/' && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
               <span style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})}>
-                  <Desktop style={{ height: '80%' }} fill="#fff" />
+                  <Desktop style={{ height: '100%' }} fill="#fff" />
                 </LoginButton>
                 <DropdownWrapper>
                   {isOpen && (
@@ -321,6 +317,15 @@ const HeaderComponent = ({ siteTitle, location }) => {
               </span>
             )}
           </Downshift>
+        )}
+        {location.pathname === '/app/editor/' && (
+          <ShareWrapper>
+            <Share
+              style={{
+                height: '20px',
+              }}
+            />
+          </ShareWrapper>
         )}
       </HeaderWrapper>
       <ZeldaWrapper>
