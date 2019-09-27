@@ -137,12 +137,11 @@ const Features = () => {
       'point-1',
       'point-2',
       'point-3',
-    ].map(className => (
+    ].map((className, index) => (
       <TweenOne
-        onClick={() => console.log('clicked!')}
         component="i"
         className={className}
-        key={className}
+        key={index}
         style={{
           background: item.color,
           borderColor: item.color,
