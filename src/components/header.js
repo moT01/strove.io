@@ -230,6 +230,7 @@ const ShareWrapper = styled.div`
   }
 `
 
+/* ToDo: Redirect to dashboard on change from at least 1 port to 0 ports  */
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
