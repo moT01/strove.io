@@ -325,7 +325,12 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <ShareWrapper
             onClick={() =>
-              copy(`https://strove.io/#${currentProject.repoLink}`)
+              copy(
+                `https://strove.io/#${currentProject.repoLink}`.replace(
+                  '.git',
+                  ''
+                )
+              )
             }
           >
             <Share />
