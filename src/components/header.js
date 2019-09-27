@@ -240,7 +240,6 @@ const HeaderComponent = ({ siteTitle, location }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
-  console.log('currentProject', currentProject)
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
