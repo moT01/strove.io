@@ -22,7 +22,6 @@ const FadeIn = keyframes`
 `
 
 const LinkWrapper = styled.div`
-  height: ${props => (props.mobile ? '100%' : '2.5vh')};
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
 `
@@ -80,17 +79,13 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: ${props => (props.mobile ? '8vh' : '3.2vh')};
   background: #0072ce;
-  min-height: 1.3rem;
 `
 
 const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
   display: flex;
-  align-items: center;
-  height: 100%;
 `
 
 const PreviewLink = styled.a`
@@ -275,7 +270,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
-              <Strove style={{ height: '100%' }} fill="#ffffff" />
+              <Strove style={{ height: '25px' }} fill="#ffffff" />
             ) : (
               <LinkText>{siteTitle}</LinkText>
             )}
