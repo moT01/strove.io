@@ -5,6 +5,8 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
+import copy from 'copy-to-clipboard'
+import { Share } from 'images/svg'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -20,12 +22,7 @@ const FadeIn = keyframes`
 `
 
 const LinkWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
   height: ${props => (props.mobile ? '100%' : '2.5vh')};
-  margin: 0 3vw 0 0;
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
 `
@@ -47,10 +44,13 @@ const ZeldaWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin: 0;
   height: 100%;
+  align-items: center;
+  width: ${({ isUserInsideEditor }) =>
+    isUserInsideEditor ? '350px' : '150px'};
 `
 
 const LinkText = styled.h3`
@@ -216,6 +216,7 @@ const PortOption = styled(OptionText)`
 `
 
 const DropdownWrapper = styled.div`
+  cursor: pointer;
   position: absolute;
   background: none;
   right: 1.5vw;
@@ -224,11 +225,22 @@ const DropdownWrapper = styled.div`
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
+const ShareWrapper = styled.div`
+  cursor: pointer;
+  margin-top: 3px;
+
+  svg {
+    height: 20px;
+  }
+`
+
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
 
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
+  console.log('currentProject', currentProject)
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
@@ -257,14 +269,14 @@ const HeaderComponent = ({ siteTitle, location }) => {
 
   return (
     <HeaderSection mobile={isMobileOnly}>
-      <HeaderWrapper mobile={isMobileOnly}>
+      <HeaderWrapper
+        isUserInsideEditor={location.pathname === '/app/editor/'}
+        mobile={isMobileOnly}
+      >
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
-              <Strove
-                style={{ height: '100%', marginTop: '0.6rem' }}
-                fill="#ffffff"
-              />
+              <Strove style={{ height: '100%' }} fill="#ffffff" />
             ) : (
               <LinkText>{siteTitle}</LinkText>
             )}
@@ -274,7 +286,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
-                <Dashboard style={{ height: '70%' }} fill="#ffffff" />
+                <Dashboard style={{ height: '25px' }} fill="#ffffff" />
               ) : (
                 <LinkText>Dashboard</LinkText>
               )}
@@ -286,7 +298,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {({ getToggleButtonProps, isOpen }) => (
               <span style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})}>
-                  <Desktop style={{ height: '80%' }} fill="#fff" />
+                  <Desktop style={{ height: '100%' }} fill="#fff" />
                 </LoginButton>
                 <DropdownWrapper>
                   {isOpen && (
@@ -309,6 +321,20 @@ const HeaderComponent = ({ siteTitle, location }) => {
               </span>
             )}
           </Downshift>
+        )}
+        {location.pathname === '/app/editor/' && (
+          <ShareWrapper
+            onClick={() =>
+              copy(
+                `https://strove.io/#${currentProject.repoLink}`.replace(
+                  '.git',
+                  ''
+                )
+              )
+            }
+          >
+            <Share />
+          </ShareWrapper>
         )}
       </HeaderWrapper>
       <ZeldaWrapper>
