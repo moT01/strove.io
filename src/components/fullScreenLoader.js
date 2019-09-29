@@ -95,8 +95,22 @@ const Loader = ({ type = 'addProject', ...props }) => {
     counter !== allMessages[type].length - 1 ? 1500 : null
   )
 
+  if (props.isFullscreen) {
+    return (
+      <LoaderWrapper {...props}>
+        <LoaderContainer {...props}>
+          <Cog fill={props.color} />
+          <LogoContainer {...props}>
+            <StyledLogo fill="#0072ce" />
+          </LogoContainer>
+        </LoaderContainer>
+        <Text>{allMessages[type][counter]}</Text>
+      </LoaderWrapper>
+    )
+  }
+
   return (
-    <LoaderWrapper {...props}>
+    <SmallLoaderWrapper {...props}>
       <LoaderContainer {...props}>
         <Cog fill={props.color} />
         {props.isFullScreen && (
@@ -106,7 +120,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
         )}
       </LoaderContainer>
       {props.isFullScreen && <Text>{allMessages[type][counter]}</Text>}
-    </LoaderWrapper>
+    </SmallLoaderWrapper>
   )
 }
 
