@@ -85,9 +85,7 @@ const AddProjectProvider = ({ children }) => {
       <Modal
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
-        isOpen={
-          (isLoading && !isAdding) || isDeleting || isStopping || isContinuing
-        }
+        isOpen={(isLoading && !isAdding) || isDeleting || isStopping}
         contentLabel="Loading"
         ariaHideApp={false}
       >
