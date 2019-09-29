@@ -76,12 +76,11 @@ const allMessages = {
   addProject: [
     'Checking permissions',
     'Cloning repository - this can take a moment',
-  ],
-  continueProject: [
     'Reserving resources',
     'Starting virtual machine',
-    'Launching editor',
   ],
+  openProject: ['Launching editor'],
+  continueProject: ['Reserving resources', 'Starting virtual machine'],
 }
 
 const Loader = ({ type = 'addProject', ...props }) => {
