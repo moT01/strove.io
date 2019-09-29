@@ -113,9 +113,6 @@ const Loader = ({ type = 'addProject', ...props }) => {
     <SmallLoaderWrapper {...props}>
       <LoaderContainer {...props}>
         <Cog fill={props.color} />
-        <LogoContainer {...props}>
-          <StyledLogo fill="#0072ce" />
-        </LogoContainer>
       </LoaderContainer>
       {props.isFullScreen && <Text>{allMessages[type][counter]}</Text>}
     </SmallLoaderWrapper>
