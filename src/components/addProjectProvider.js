@@ -94,6 +94,7 @@ const AddProjectProvider = ({ children }) => {
           height={'15vh'}
         />
       </Modal>
+      {isContinuing && <FullScreenLoader isFullScreen color="#0072ce" />}
     </>
   )
 }
