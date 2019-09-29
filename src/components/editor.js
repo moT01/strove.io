@@ -83,7 +83,7 @@ const Editor = () => {
       {loaderVisible && (
         <FullScreenLoader
           isFullScreen={true}
-          type="continueProject"
+          type="openProject"
           color="#0072ce"
         />
       )}
