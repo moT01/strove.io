@@ -23,7 +23,7 @@ const AntiSpinToWin = keyframes`
   }
 `
 
-const LoaderWrapper = styled.div`
+const SmallLoaderWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,19 @@ const LoaderWrapper = styled.div`
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
 `
 
-const LoaderContainer = styled(LoaderWrapper)`
+const LoaderWrapper = styled.div`
+  top: 0;
+  position: fixed;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: ${props => (props.isFullScreen ? '100vh' : props.height)};
+  width: ${props => (props.isFullScreen ? '100vw' : props.height)};
+`
+
+const LoaderContainer = styled(SmallLoaderWrapper)`
   width: ${props => (props.isFullScreen ? '15vw' : '100%')};
   top: ${props => props.isFullScreen && '3vh'};
   height: auto;
@@ -72,7 +84,7 @@ const allMessages = {
     'Reserving resources',
     'Starting virtual machine',
     'Launching editor',
-  ]
+  ],
 }
 
 const Loader = ({ type = 'addProject', ...props }) => {

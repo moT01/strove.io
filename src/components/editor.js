@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 
 import Layout from 'components/layout'
-import Loader from 'components/fullScreenLoader.js'
+import FullScreenLoader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
 import { C } from 'state'
@@ -81,7 +81,11 @@ const Editor = () => {
     <Layout>
       <SEO title="Editor" />
       {loaderVisible && (
-        <Loader isFullScreen={true} type="addProject" color="#0072ce" />
+        <FullScreenLoader
+          isFullScreen={true}
+          type="addProject"
+          color="#0072ce"
+        />
       )}
       <StyledIframe
         loaderVisible={loaderVisible}
