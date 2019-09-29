@@ -5,8 +5,8 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
-import copy from 'copy-to-clipboard'
-import { Share } from 'images/svg'
+import copyToClipboard from 'copy-to-clipboard'
+import { Copy } from 'images/svg'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -320,7 +320,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <ShareWrapper
             onClick={() =>
-              copy(
+              copyToClipboard(
                 `https://strove.io/#${currentProject.repoLink}`.replace(
                   '.git',
                   ''
@@ -332,7 +332,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
               )
             }
           >
-            <Share />
+            <Copy />
           </ShareWrapper>
         )}
       </HeaderWrapper>
