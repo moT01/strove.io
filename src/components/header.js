@@ -324,7 +324,11 @@ const HeaderComponent = ({ siteTitle, location }) => {
                 `https://strove.io/#${currentProject.repoLink}`.replace(
                   '.git',
                   ''
-                )
+                ),
+                {
+                  message:
+                    'Press #{key} to copy link to the project for easy sharing',
+                }
               )
             }
           >
