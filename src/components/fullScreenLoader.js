@@ -73,13 +73,7 @@ const StyledLogo = styled(Strove)`
 `
 
 const allMessages = {
-  addProject: [
-    'Accessing repository',
-    'Reserving resources',
-    'Cloning repository',
-    'Starting virtual machine',
-    'Launching editor',
-  ],
+  addProject: ['Accessing repository', 'Cloning repository'],
   continueProject: [
     'Reserving resources',
     'Starting virtual machine',
