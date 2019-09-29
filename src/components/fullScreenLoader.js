@@ -95,7 +95,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
     counter !== allMessages[type].length - 1 ? 1500 : null
   )
 
-  if (props.isFullscreen) {
+  if (props.isFullScreen) {
     return (
       <LoaderWrapper {...props}>
         <LoaderContainer {...props}>
@@ -113,11 +113,9 @@ const Loader = ({ type = 'addProject', ...props }) => {
     <SmallLoaderWrapper {...props}>
       <LoaderContainer {...props}>
         <Cog fill={props.color} />
-        {props.isFullScreen && (
-          <LogoContainer {...props}>
-            <StyledLogo fill="#0072ce" />
-          </LogoContainer>
-        )}
+        <LogoContainer {...props}>
+          <StyledLogo fill="#0072ce" />
+        </LogoContainer>
       </LoaderContainer>
       {props.isFullScreen && <Text>{allMessages[type][counter]}</Text>}
     </SmallLoaderWrapper>
