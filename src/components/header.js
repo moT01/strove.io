@@ -296,7 +296,11 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {({ getToggleButtonProps, isOpen }) => (
               <div style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})}>
-                  <Desktop style={{ height: '20px' }} fill="#fff" />
+                  {isMobileOnly ? (
+                    <Desktop style={{ height: '20px' }} fill="#fff" />
+                  ) : (
+                    <LinkText>Preview</LinkText>
+                  )}
                 </LoginButton>
                 <DropdownWrapper>
                   {isOpen && (
