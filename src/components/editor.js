@@ -14,7 +14,7 @@ const StyledIframe = styled.iframe`
   display: block;
   background: #000;
   border: none;
-  min-height: 96.8vh;
+  min-height: 97vh;
   width: 100vw;
   margin: 0;
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
