@@ -49,11 +49,14 @@ const HeaderWrapper = styled.div`
   height: 100%;
   height: ${props => (props.mobile ? '5.5vh' : '3vh')};
   align-items: center;
-  width: ${({ isUserInsideEditor, mobile }) =>
-    isUserInsideEditor ? '350px' : mobile ? '150px' : '250px'};
+
+  > div {
+    margin: 0 20px;
+  }
 `
 
 const LinkText = styled.h3`
+  color: white;
   font-size: 1.2rem;
   display: flex;
   flex-direction: row;
@@ -221,9 +224,9 @@ const DropdownWrapper = styled.div`
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
-const ShareWrapper = styled.div`
+const CopyWrapper = styled.div`
   cursor: pointer;
-  margin-top: 3px;
+  display: flex;
 
   svg {
     height: 20px;
@@ -291,7 +294,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
-              <span style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})}>
                   <Desktop style={{ height: '20px' }} fill="#fff" />
                 </LoginButton>
@@ -313,12 +316,12 @@ const HeaderComponent = ({ siteTitle, location }) => {
                     </MenuWrapper>
                   )}
                 </DropdownWrapper>
-              </span>
+              </div>
             )}
           </Downshift>
         )}
         {location.pathname === '/app/editor/' && (
-          <ShareWrapper
+          <CopyWrapper
             onClick={() =>
               copyToClipboard(
                 `https://strove.io/#${currentProject.repoLink}`.replace(
@@ -332,8 +335,8 @@ const HeaderComponent = ({ siteTitle, location }) => {
               )
             }
           >
-            <Copy />
-          </ShareWrapper>
+            {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
+          </CopyWrapper>
         )}
       </HeaderWrapper>
       <ZeldaWrapper>
