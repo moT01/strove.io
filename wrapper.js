@@ -77,11 +77,16 @@ const LoginProvider = ({ children, addProject }) => {
   const currentProjectSet = result => {
     const currentProject = result.find(item => item.machineId)
     const currentProjectID = currentProject ? currentProject.id : null
+
     dispatch({
       type: C.api.UPDATE_ITEM,
       payload: {
-        storeKey: 'user',
-        data: { currentProjectId: currentProjectID },
+        storeKey: 'myProjects',
+        id: currentProjectID,
+        data: {
+          editorPort: currentProject.editorPort,
+          machineId: currentProject.machineId,
+        },
       },
     })
   }
