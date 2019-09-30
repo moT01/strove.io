@@ -36,6 +36,7 @@ const LoginProvider = ({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   const githubToken = useSelector(selectors.api.getUserField('githubToken'))
   const gitlabToken = useSelector(selectors.api.getUserField('gitlabToken'))
@@ -60,31 +61,6 @@ const LoginProvider = ({ children, addProject }) => {
   const editorPort = activeProjectData && activeProjectData.editorPort
   const id = activeProjectData && activeProjectData.id
 
-  const syncActiveProject = () => {
-    dispatch({
-      type: C.api.UPDATE_ITEM,
-      payload: {
-        storeKey: 'myProjects',
-        id,
-        data: { editorPort, machineId },
-      },
-    })
-  }
-
-  const setCurrentProject = () => {
-    dispatch({
-      type: C.api.UPDATE_ITEM,
-      payload: {
-        storeKey: 'myProjects',
-        id,
-        data: {
-          editorPort,
-          machine: machineId,
-        },
-      },
-    })
-  }
-
   const checkAwake = () => {
     let then = moment().format('X')
     setInterval(() => {
@@ -96,7 +72,18 @@ const LoginProvider = ({ children, addProject }) => {
               name: 'myProjects',
               dataSelector: data => data.myProjects.edges,
               query: MY_PROJECTS,
-              onSuccess: setCurrentProject,
+              onSuccess: () =>
+                dispatch({
+                  type: C.api.UPDATE_ITEM,
+                  payload: {
+                    storeKey: 'myProjects',
+                    id,
+                    data: {
+                      editorPort,
+                      machine: machineId,
+                    },
+                  },
+                }),
             })
           )
       }
@@ -105,7 +92,25 @@ const LoginProvider = ({ children, addProject }) => {
   }
 
   useEffect(() => {
-    user && syncActiveProject()
+    if (editorPort) {
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: 'myProjects',
+          id,
+          data: { editorPort, machineId },
+        },
+      })
+    } else if (currentProject) {
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: 'myProjects',
+          id: currentProject.id,
+          data: { editorPort, machineId },
+        },
+      })
+    }
   }, [activeProject.data])
 
   useEffect(() => {
