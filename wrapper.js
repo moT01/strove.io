@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
@@ -36,13 +36,13 @@ const LoginProvider = ({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   const githubToken = useSelector(selectors.api.getUserField('githubToken'))
   const gitlabToken = useSelector(selectors.api.getUserField('gitlabToken'))
   const bitbucketRefreshToken = useSelector(
     selectors.api.getUserField('bitbucketRefreshToken')
   )
-  const [projectToStop, setProjectToStop] = useState(null)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     client,
@@ -55,36 +55,11 @@ const LoginProvider = ({ children, addProject }) => {
     },
   })
 
-  const syncActiveProject = () => {
-    const activeProjectData =
-      activeProject?.data && activeProject.data.activeProject
-    const machineId = activeProjectData ? activeProjectData.machineId : null
-    const editorPort = activeProjectData ? activeProjectData.editorPort : null
-    const id = activeProjectData ? activeProjectData.id : projectToStop
-
-    dispatch({
-      type: C.api.UPDATE_ITEM,
-      payload: {
-        storeKey: 'myProjects',
-        id,
-        data: { editorPort, machineId },
-      },
-    })
-
-    machineId ? setProjectToStop(id) : setProjectToStop(null)
-  }
-
-  const currentProjectSet = result => {
-    const currentProject = result.find(item => item.machineId)
-    const currentProjectID = currentProject ? currentProject.id : null
-    dispatch({
-      type: C.api.UPDATE_ITEM,
-      payload: {
-        storeKey: 'user',
-        data: { currentProjectId: currentProjectID },
-      },
-    })
-  }
+  const activeProjectData =
+    activeProject?.data && activeProject.data.activeProject
+  const machineId = activeProjectData && activeProjectData.machineId
+  const editorPort = activeProjectData && activeProjectData.editorPort
+  const id = activeProjectData && activeProjectData.id
 
   const checkAwake = () => {
     let then = moment().format('X')
@@ -97,7 +72,18 @@ const LoginProvider = ({ children, addProject }) => {
               name: 'myProjects',
               dataSelector: data => data.myProjects.edges,
               query: MY_PROJECTS,
-              onSuccess: currentProjectSet,
+              onSuccess: () =>
+                dispatch({
+                  type: C.api.UPDATE_ITEM,
+                  payload: {
+                    storeKey: 'myProjects',
+                    id,
+                    data: {
+                      editorPort,
+                      machine: machineId,
+                    },
+                  },
+                }),
             })
           )
       }
@@ -106,7 +92,25 @@ const LoginProvider = ({ children, addProject }) => {
   }
 
   useEffect(() => {
-    user && syncActiveProject()
+    if (editorPort) {
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: 'myProjects',
+          id,
+          data: { editorPort, machineId },
+        },
+      })
+    } else if (currentProject) {
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: 'myProjects',
+          id: currentProject.id,
+          data: { editorPort, machineId },
+        },
+      })
+    }
   }, [activeProject.data])
 
   useEffect(() => {
