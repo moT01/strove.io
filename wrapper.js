@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
@@ -42,7 +42,6 @@ const LoginProvider = ({ children, addProject }) => {
   const bitbucketRefreshToken = useSelector(
     selectors.api.getUserField('bitbucketRefreshToken')
   )
-  const [projectToStop, setProjectToStop] = useState(null)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     client,
@@ -55,13 +54,13 @@ const LoginProvider = ({ children, addProject }) => {
     },
   })
 
-  const syncActiveProject = () => {
-    const activeProjectData =
-      activeProject?.data && activeProject.data.activeProject
-    const machineId = activeProjectData ? activeProjectData.machineId : null
-    const editorPort = activeProjectData ? activeProjectData.editorPort : null
-    const id = activeProjectData ? activeProjectData.id : projectToStop
+  const activeProjectData =
+    activeProject?.data && activeProject.data.activeProject
+  const machineId = activeProjectData && activeProjectData.machineId
+  const editorPort = activeProjectData && activeProjectData.editorPort
+  const id = activeProjectData && activeProjectData.id
 
+  const syncActiveProject = () => {
     dispatch({
       type: C.api.UPDATE_ITEM,
       payload: {
@@ -70,22 +69,17 @@ const LoginProvider = ({ children, addProject }) => {
         data: { editorPort, machineId },
       },
     })
-
-    machineId ? setProjectToStop(id) : setProjectToStop(null)
   }
 
-  const currentProjectSet = result => {
-    const currentProject = result.find(item => item.machineId)
-    const currentProjectID = currentProject ? currentProject.id : null
-
+  const setCurrentProject = () => {
     dispatch({
       type: C.api.UPDATE_ITEM,
       payload: {
         storeKey: 'myProjects',
-        id: currentProjectID,
+        id,
         data: {
-          editorPort: currentProject.editorPort,
-          machineId: currentProject.machineId,
+          editorPort,
+          machine: machineId,
         },
       },
     })
@@ -102,7 +96,7 @@ const LoginProvider = ({ children, addProject }) => {
               name: 'myProjects',
               dataSelector: data => data.myProjects.edges,
               query: MY_PROJECTS,
-              onSuccess: currentProjectSet,
+              onSuccess: setCurrentProject,
             })
           )
       }
