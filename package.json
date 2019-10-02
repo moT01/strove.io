@@ -119,7 +119,8 @@
   "license": "GNU",
   "scripts": {
     "build": "BABEL_ENV=production gatsby build",
-    "start": "BABEL_ENV=development gatsby develop",
+    "start": "BABEL_ENV=opensource GATSBY_ACTIVE_ENV=opensource gatsby develop -H 0.0.0.0",
+    "startDev": "BABEL_ENV=development gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "serve": "BABEL_ENV=development gatsby serve"
   },
