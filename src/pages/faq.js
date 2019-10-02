@@ -74,13 +74,7 @@ const Header = styled.h3`
 
 const topics = [
   {
-    header: 'Is Strove.io secure?',
-    paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections to the it are encrypted using SSL to prevent third parties from hijacking any kind of information.
-      Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
-      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
-  },
-  {
-    header: 'Why should I use Strove.io ?',
+    header: 'Why should I use Strove.io?',
     paragraph: `Strove.io solves 3 problems programmers face:
       1. Programmers waste a lot of time on setting up the environment - this problem is very troublesome for many teams and has been our initial inspiration to start working on this project.
       Strove.io can cut the time to set a programming environment to seconds.
@@ -91,12 +85,18 @@ const topics = [
     `,
   },
   {
+    header: 'Is Strove.io secure?',
+    paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections to the it are encrypted using SSL to prevent third parties from hijacking any kind of information.
+      Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
+      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
+  },
+  {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
     paragraph:
       'Aforementioned providers only allow cloning if the user is logged in.',
   },
   {
-    header: 'Why do i need to provide private repository access to Github',
+    header: 'Why do i need to provide private repository access to Github?',
     paragraph:
       'We initially made login with public repos by default but this approach had a serious downside. Most private repositories belong to organizations and the only way to know if a user can clone them is having private repo permissions.',
   },

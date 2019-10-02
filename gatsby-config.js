@@ -1,6 +1,14 @@
+let activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development'
+
 /* Netlify uses .env file to store envs */
 require('dotenv').config({
-  path: process.env.NODE_ENV === 'development' ? `.env.development` : '.env',
+  path:
+    activeEnv === 'development'
+      ? `.env.development`
+      : activeEnv === 'opensource'
+      ? '.env.opensource'
+      : '.env',
 })
 
 module.exports = {

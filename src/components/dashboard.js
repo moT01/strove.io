@@ -400,7 +400,9 @@ const Dashboard = () => {
                       primary
                       onClick={() => handleStartClick(project)}
                     >
-                      Start
+                      {currentProjectId && project.id === currentProjectId
+                        ? 'Continue'
+                        : 'Start'}
                     </Button>
                   )}
                   {currentProjectId && currentProjectId === project.id ? (

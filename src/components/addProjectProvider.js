@@ -20,6 +20,7 @@ const AddProjectProvider = ({ children }) => {
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
+  const isAdding = useSelector(selectors.incomingProject.getRepoLink)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
@@ -85,7 +86,7 @@ const AddProjectProvider = ({ children }) => {
       <Modal
         width={isMobileOnly ? '60vw' : '20vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
-        isOpen={isLoading || isDeleting || isStopping || isContinuing}
+        isOpen={(isLoading && !isAdding) || isDeleting || isStopping}
         contentLabel="Loading"
         ariaHideApp={false}
       >
@@ -95,6 +96,12 @@ const AddProjectProvider = ({ children }) => {
           height={'15vh'}
         />
       </Modal>
+      {isContinuing && (
+        <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" />
+      )}
+      {isAdding && (
+        <FullScreenLoader type="addProject" isFullScreen color="#0072ce" />
+      )}
     </>
   )
 }

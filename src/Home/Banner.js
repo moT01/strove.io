@@ -7,7 +7,7 @@ import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 
 import { selectors } from 'state'
-import Loader from 'components/fullScreenLoader'
+import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
 
 const FadeIn = keyframes`
@@ -143,7 +143,7 @@ const Banner = () => {
               onClick={useCallback(() => setModalVisible(true))}
             >
               {isLoading ? (
-                <Loader
+                <FullScreenLoader
                   isFullScreen={false}
                   color={'#ffffff'}
                   height={'1.7rem'}
