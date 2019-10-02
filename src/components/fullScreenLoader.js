@@ -23,7 +23,7 @@ const AntiSpinToWin = keyframes`
   }
 `
 
-const LoaderWrapper = styled.div`
+const SmallLoaderWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -33,7 +33,19 @@ const LoaderWrapper = styled.div`
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
 `
 
-const LoaderContainer = styled(LoaderWrapper)`
+const LoaderWrapper = styled.div`
+  top: 0;
+  position: fixed;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: ${props => (props.isFullScreen ? '100vh' : props.height)};
+  width: ${props => (props.isFullScreen ? '100vw' : props.height)};
+`
+
+const LoaderContainer = styled(SmallLoaderWrapper)`
   width: ${props => (props.isFullScreen ? '15vw' : '100%')};
   top: ${props => props.isFullScreen && '3vh'};
   height: auto;
@@ -62,17 +74,13 @@ const StyledLogo = styled(Strove)`
 
 const allMessages = {
   addProject: [
-    'Accessing repository',
+    'Checking permissions',
+    'Cloning repository - this can take a moment',
     'Reserving resources',
-    'Cloning repository',
     'Starting virtual machine',
-    'Launching editor',
   ],
-  continueProject: [
-    'Reserving resources',
-    'Starting virtual machine',
-    'Launching editor',
-  ]
+  openProject: ['Launching editor'],
+  continueProject: ['Reserving resources', 'Starting virtual machine'],
 }
 
 const Loader = ({ type = 'addProject', ...props }) => {
@@ -83,18 +91,27 @@ const Loader = ({ type = 'addProject', ...props }) => {
     counter !== allMessages[type].length - 1 ? 1500 : null
   )
 
-  return (
-    <LoaderWrapper {...props}>
-      <LoaderContainer {...props}>
-        <Cog fill={props.color} />
-        {props.isFullScreen && (
+  if (props.isFullScreen) {
+    return (
+      <LoaderWrapper {...props}>
+        <LoaderContainer {...props}>
+          <Cog fill={props.color} />
           <LogoContainer {...props}>
             <StyledLogo fill="#0072ce" />
           </LogoContainer>
-        )}
+        </LoaderContainer>
+        <Text>{allMessages[type][counter]}</Text>
+      </LoaderWrapper>
+    )
+  }
+
+  return (
+    <SmallLoaderWrapper {...props}>
+      <LoaderContainer {...props}>
+        <Cog fill={props.color} />
       </LoaderContainer>
       {props.isFullScreen && <Text>{allMessages[type][counter]}</Text>}
-    </LoaderWrapper>
+    </SmallLoaderWrapper>
   )
 }
 

@@ -5,6 +5,8 @@ import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
+import copyToClipboard from 'copy-to-clipboard'
+import { Copy } from 'images/svg'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -20,12 +22,6 @@ const FadeIn = keyframes`
 `
 
 const LinkWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: ${props => (props.mobile ? '100%' : '2.5vh')};
-  margin: 0 3vw 0 0;
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
 `
@@ -47,13 +43,20 @@ const ZeldaWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin: 0;
   height: 100%;
+  height: ${props => (props.mobile ? '5.5vh' : '3vh')};
+  align-items: center;
+
+  > div {
+    margin: 0 20px;
+  }
 `
 
 const LinkText = styled.h3`
+  color: white;
   font-size: 1.2rem;
   display: flex;
   flex-direction: row;
@@ -80,17 +83,13 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  height: ${props => (props.mobile ? '8vh' : '3.2vh')};
   background: #0072ce;
-  min-height: 1.3rem;
 `
 
 const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
   display: flex;
-  align-items: center;
-  height: 100%;
 `
 
 const PreviewLink = styled.a`
@@ -98,11 +97,11 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
   position: relative;
   display: flex;
+  height: 25px;
+  padding: 0;
 `
 
 const LoginButton = styled.button`
-  color: white;
-  text-decoration: none;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -216,6 +215,7 @@ const PortOption = styled(OptionText)`
 `
 
 const DropdownWrapper = styled.div`
+  cursor: pointer;
   position: absolute;
   background: none;
   right: 1.5vw;
@@ -224,9 +224,19 @@ const DropdownWrapper = styled.div`
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
+const CopyWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+
+  svg {
+    height: 20px;
+  }
+`
+
+/* ToDo: Redirect to dashboard on change from at least 1 port to 0 ports  */
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
-
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
 
@@ -257,14 +267,14 @@ const HeaderComponent = ({ siteTitle, location }) => {
 
   return (
     <HeaderSection mobile={isMobileOnly}>
-      <HeaderWrapper mobile={isMobileOnly}>
+      <HeaderWrapper
+        isUserInsideEditor={location.pathname === '/app/editor/'}
+        mobile={isMobileOnly}
+      >
         <LinkWrapper mobile={isMobileOnly}>
           <StyledLink to="/">
             {isMobileOnly ? (
-              <Strove
-                style={{ height: '100%', marginTop: '0.6rem' }}
-                fill="#ffffff"
-              />
+              <Strove style={{ height: '25px' }} fill="#ffffff" />
             ) : (
               <LinkText>{siteTitle}</LinkText>
             )}
@@ -274,7 +284,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
-                <Dashboard style={{ height: '70%' }} fill="#ffffff" />
+                <Dashboard style={{ height: '25px' }} fill="#ffffff" />
               ) : (
                 <LinkText>Dashboard</LinkText>
               )}
@@ -284,9 +294,13 @@ const HeaderComponent = ({ siteTitle, location }) => {
         {location.pathname === '/app/editor/' && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
-              <span style={{ position: 'relative' }}>
+              <div style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})}>
-                  <Desktop style={{ height: '80%' }} fill="#fff" />
+                  {isMobileOnly ? (
+                    <Desktop style={{ height: '20px' }} fill="#fff" />
+                  ) : (
+                    <LinkText>Preview</LinkText>
+                  )}
                 </LoginButton>
                 <DropdownWrapper>
                   {isOpen && (
@@ -306,9 +320,27 @@ const HeaderComponent = ({ siteTitle, location }) => {
                     </MenuWrapper>
                   )}
                 </DropdownWrapper>
-              </span>
+              </div>
             )}
           </Downshift>
+        )}
+        {location.pathname === '/app/editor/' && (
+          <CopyWrapper
+            onClick={() =>
+              copyToClipboard(
+                `https://strove.io/#${currentProject.repoLink}`.replace(
+                  '.git',
+                  ''
+                ),
+                {
+                  message:
+                    'Press #{key} to copy link to the project for easy sharing',
+                }
+              )
+            }
+          >
+            {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
+          </CopyWrapper>
         )}
       </HeaderWrapper>
       <ZeldaWrapper>
