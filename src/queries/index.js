@@ -10,6 +10,7 @@ import BUY_SUBSCRIPTION from './buySubscription'
 import RESET_CRON from './resetCron'
 import ACTIVE_PROJECT from './activeProjectSubscription'
 import BITBUCKET_LOGIN from './bitbucketAuth'
+import SEND_EMAIL from './sendEmail'
 
 export {
   ADD_PROJECT,
@@ -24,4 +25,5 @@ export {
   RESET_CRON,
   ACTIVE_PROJECT,
   BITBUCKET_LOGIN,
+  SEND_EMAIL,
 }
