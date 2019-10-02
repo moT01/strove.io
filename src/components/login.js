@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
 
+import { window } from 'utils'
 import { selectors } from 'state'
 import { Github, Bitbucket, Gitlab } from 'images/logos'
 
