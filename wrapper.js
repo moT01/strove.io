@@ -131,11 +131,23 @@ const LoginProvider = ({ children, addProject }) => {
       /* %2C is an encoding for , */
       const stateParams = loginState.split('%2C')
       const isOpensource = true // stateParams[1]
+      console.log('stateparams', stateParams)
+      const origin = stateParams[2]
 
       const href = window.location.href
-      if (!href.includes('/faq') && isOpensource) {
+      // if (!href.includes('/faq') && isOpensource) {
+      if (true && isOpensource) {
+        // return window.location.replace(
+        //   `http://localhost:8000/faq?code=${code}&state=${
+        //     window?.location?.href
+        //       ?.match(/state=(.+)/g)
+        //       ?.toString()
+        //       .split('=')[1]
+        //   }`
+        // )
+
         return window.location.replace(
-          `http://localhost:8000/faq?code=${code}&state=${
+          `${href}?code=${code}&state=${
             window?.location?.href
               ?.match(/state=(.+)/g)
               ?.toString()
