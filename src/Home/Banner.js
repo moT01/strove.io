@@ -150,11 +150,20 @@ const EmailFormWrapper = styled.div`
   }
 `
 
+const EmailFormWrapper2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 400px;
+  flex-wrap: wrap;
+  margin: 20px;
+`
+
 const StyledInput = styled(Field)`
   height: 50px;
   border-radius: 0;
   outline: none;
-  box-shadow: 0 2px 4px 0 rgba(100, 150, 230, 0.24);
+  /* box-shadow: 0 2px 4px 0 rgba(100, 150, 230, 0.24); */
 `
 
 const Video = styled.video`
@@ -249,12 +258,83 @@ const Banner = () => {
                   'Get started'
                 )}
               </Button>
-
-              <Button mobile={isMobileOnly}>
-                <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-                  Request a demo
-                </StyledA>
-              </Button>
+              <Formik
+                initialValues={{
+                  email: '',
+                }}
+                validate={validate}
+                onSubmit={values => {
+                  console.log(values)
+                }}
+              >
+                {({ errors, touched, values }) => (
+                  <Form>
+                    <EmailFormWrapper>
+                      <StyledInput
+                        type="email"
+                        name="email"
+                        placeholder="Your email"
+                      />
+                      <EmailSubmitButton
+                        primary
+                        mobile={isMobileOnly}
+                        isDisabled={
+                          values.email && errors.email && touched.email
+                        }
+                        onClick={() => {}}
+                        type="submit"
+                      >
+                        Request demo
+                      </EmailSubmitButton>
+                    </EmailFormWrapper>
+                  </Form>
+                )}
+              </Formik>
+              <form
+                id="homepage-get-started"
+                data-form-processed="true"
+                className="error"
+              >
+                <EmailFormWrapper2 className="fields">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    className="Form-field"
+                  />
+                  <svg
+                    // fill="blue"
+                    className="Form-fieldGroupIcon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      fill="none"
+                      fill-rule="evenodd"
+                      stroke="#9CA2B4"
+                      stroke-width="2"
+                    >
+                      <path d="M2 4h20v16H2z"></path>
+                      <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                    </g>
+                  </svg>
+                  <button
+                    type="submit"
+                    className="report-ga"
+                    data-ga="Start Trial - Homepage Email"
+                    disabled="disabled"
+                  >
+                    Get Started
+                  </button>
+                </EmailFormWrapper2>
+                <div className="form-summary">
+                  <div>Example text</div>
+                  <div>Example text 2</div>
+                  <div>No idea what to add here</div>
+                </div>
+              </form>
             </ButtonsWrapper>
           </QueueAnim>
         </div>
@@ -289,56 +369,6 @@ const Banner = () => {
                 Programmers get access to instances of the same cloud
                 environment so they can focus on creating new features
               </h4>
-              {/* <ButtonsWrapper mobile={isMobileOnly}>
-                <Button
-                  primary
-                  mobile={isMobileOnly}
-                  disabled={isLoading}
-                  onClick={useCallback(() => setModalVisible(true))}
-                >
-                  {isLoading ? (
-                    <FullScreenLoader
-                      isFullScreen={false}
-                      color={'#ffffff'}
-                      height={'1.7rem'}
-                    />
-                  ) : (
-                    'Get started'
-                  )}
-                </Button>
-                <Formik
-                  initialValues={{
-                    email: '',
-                  }}
-                  validate={validate}
-                  onSubmit={values => {
-                    console.log(values)
-                  }}
-                >
-                  {({ errors, touched, values }) => (
-                    <Form>
-                      <EmailFormWrapper>
-                        <StyledInput
-                          type="email"
-                          name="email"
-                          placeholder="Your email"
-                        />
-                        <EmailSubmitButton
-                          primary
-                          mobile={isMobileOnly}
-                          isDisabled={
-                            values.email && errors.email && touched.email
-                          }
-                          onClick={() => {}}
-                          type="submit"
-                        >
-                          Request demo
-                        </EmailSubmitButton>
-                      </EmailFormWrapper>
-                    </Form>
-                  )}
-                </Formik>
-              </ButtonsWrapper> */}
             </QueueAnim>
           </SectionWrapper>
           <SectionWrapper>
