@@ -71,12 +71,6 @@ const Button = styled.button`
   animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      cursor: not-allowed;
-    `}
-
   :focus {
     outline: 0;
   }
@@ -97,6 +91,39 @@ const Button = styled.button`
     `}
 `
 
+const EmailSubmitButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  width: 200px
+  min-width: 70px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #0072ce;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1.3rem;
+  color: #fff;
+  border-radius: 5px;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      cursor: not-allowed;
+    `}
+
+  :focus {
+    outline: 0;
+    animation: ${FadeIn} 0.5s ease-out; */
+  }
+`
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -113,7 +140,7 @@ const EmailFormWrapper = styled.div`
   min-width: 400px;
   align-items: center;
 
-  ${Button} {
+  ${EmailSubmitButton} {
     height: 50px;
     padding: 0;
     margin: 0;
@@ -127,6 +154,7 @@ const StyledInput = styled(Field)`
   height: 50px;
   border-radius: 0;
   outline: none;
+  box-shadow: 0 2px 4px 0 rgba(100, 150, 230, 0.24);
 `
 
 const Video = styled.video`
@@ -250,19 +278,25 @@ const Banner = () => {
                     console.log(values)
                   }}
                 >
-                  {({ errors, touched }) => (
+                  {({ errors, touched, values }) => (
                     <Form>
                       <EmailFormWrapper>
-                        <StyledInput type="email" name="email" />
-                        <Button
+                        <StyledInput
+                          type="email"
+                          name="email"
+                          placeholder="Your email"
+                        />
+                        <EmailSubmitButton
                           primary
                           mobile={isMobileOnly}
-                          disabled={errors.email}
+                          isDisabled={
+                            values.email && errors.email && touched.email
+                          }
                           onClick={() => {}}
                           type="submit"
                         >
                           Request demo
-                        </Button>
+                        </EmailSubmitButton>
                       </EmailFormWrapper>
                     </Form>
                   )}
