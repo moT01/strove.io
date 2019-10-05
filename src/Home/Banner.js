@@ -71,6 +71,12 @@ const Button = styled.button`
   animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
 
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+    `}
+
   :focus {
     outline: 0;
   }
@@ -189,8 +195,6 @@ const validate = values => {
     errors.email = 'Invalid email address'
   }
 
-  console.log('errors', errors)
-
   return errors
 }
 
@@ -237,12 +241,6 @@ const Banner = () => {
                     'Get started'
                   )}
                 </Button>
-
-                {/* <Button mobile={isMobileOnly}>
-                  <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-                    Request a demo
-                  </StyledA>
-                </Button> */}
                 <Formik
                   initialValues={{
                     email: '',
@@ -259,7 +257,7 @@ const Banner = () => {
                         <Button
                           primary
                           mobile={isMobileOnly}
-                          disabled={errors.email && touched.email}
+                          disabled={errors.email}
                           onClick={() => {}}
                           type="submit"
                         >
