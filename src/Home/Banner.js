@@ -120,7 +120,7 @@ const EmailSubmitButton = styled.button`
 
   :focus {
     outline: 0;
-    animation: ${FadeIn} 0.5s ease-out; */
+    animation: ${FadeIn} 0.5s ease-out;
   }
 `
 
@@ -157,6 +157,59 @@ const EmailFormWrapper2 = styled.div`
   min-width: 400px;
   flex-wrap: wrap;
   margin: 20px;
+  position: relative;
+
+  box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
+    0 8px 24px 0 rgba(174, 174, 186, 0.16);
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+
+  input {
+    box-shadow: none;
+    color: #333e63;
+    outline: 0;
+    background: #fff;
+    width: calc(100% - 156px);
+    height: 56px;
+    border: 0;
+    padding: 0;
+    padding-left: 64px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 36px;
+    font-size: 17px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0.2px;
+  }
+
+  svg {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    height: 24px;
+    width: 24px;
+  }
+
+  button {
+    width: 156px;
+    height: 56px;
+    color: #fff;
+    background: #0072ce;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    transition: opacity 0.2s;
+  }
 `
 
 const StyledInput = styled(Field)`
