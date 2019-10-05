@@ -95,7 +95,7 @@ const EmailSubmitButton = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 200px
+  width: 200px;
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
@@ -229,9 +229,9 @@ const Banner = () => {
             </div>
             <h1 key="h1">Strove</h1>
             <h4 key="content">
-              Say goodbye to hours of setting up environment.
+              Make programming cheaper, delivering features faster,
+              collaboration easier
             </h4>
-            <h4 key="content">Code in seconds in Docker on any device.</h4>
             <ButtonsWrapper mobile={isMobileOnly}>
               <Button
                 primary
@@ -280,14 +280,8 @@ const Banner = () => {
               className="banner-title-wrapper"
               type={isMobileOnly ? 'bottom' : 'right'}
             >
-              <div key="line" className="title-line-wrapper">
-                <div
-                  className="title-line"
-                  style={{ transform: 'translateX(-64px)' }}
-                />
-              </div>
               <h2>Focus on what's important</h2>
-              <h4>Strove let's programmers be productive in seconds</h4>
+              <h4>Strove lets programmers be productive in seconds</h4>
               <h2>Easiest collaboration out there</h2>
               <h4>Team members can work from any computer and any location</h4>
               <h2>Forget that "it works on my machine" issue ever existed</h2>
