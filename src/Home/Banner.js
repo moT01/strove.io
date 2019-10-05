@@ -28,6 +28,22 @@ const ButtonFadeIn = keyframes`
   }
 `
 
+const SectionDivider = styled.div`
+  display: flex;
+  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
+  height: 100%;
+  width: 100%;
+`
+
+const SectionWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`
+
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -81,6 +97,13 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
 `
 
+const Video = styled.iframe`
+  height: ${props => (props.isMobile ? '67vw' : '26vw')};
+  width: ${props => (props.isMobile ? '90vw' : '35vw')};
+  border: none;
+  margin-top: ${props => (props.isMobile ? '5vh' : '0')};
+`
+
 const StyledA = styled.a`
   margin: 0;
   text-decoration: none;
@@ -122,44 +145,56 @@ const Banner = () => {
   return (
     <>
       <div className="banner-wrapper">
-        <QueueAnim
-          className="banner-title-wrapper"
-          type={isMobileOnly ? 'bottom' : 'right'}
-        >
-          <div key="line" className="title-line-wrapper">
-            <div
-              className="title-line"
-              style={{ transform: 'translateX(-64px)' }}
-            />
-          </div>
-          <h1 key="h1">Strove</h1>
-          <h4 key="content">Say goodbye to hours of setting up environment.</h4>
-          <h4 key="content">Code in seconds in Docker on any device.</h4>
-          <ButtonsWrapper mobile={isMobileOnly}>
-            <Button
-              primary
-              mobile={isMobileOnly}
-              disabled={isLoading}
-              onClick={useCallback(() => setModalVisible(true))}
+        <SectionDivider isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile}>
+            <QueueAnim
+              className="banner-title-wrapper"
+              type={isMobileOnly ? 'bottom' : 'right'}
             >
-              {isLoading ? (
-                <FullScreenLoader
-                  isFullScreen={false}
-                  color={'#ffffff'}
-                  height={'1.7rem'}
+              <div key="line" className="title-line-wrapper">
+                <div
+                  className="title-line"
+                  style={{ transform: 'translateX(-64px)' }}
                 />
-              ) : (
-                'Get started'
-              )}
-            </Button>
+              </div>
+              <h1 key="h1">Strove</h1>
+              <h4 key="content">
+                Say goodbye to hours of setting up environment.
+              </h4>
+              <h4 key="content">Code in seconds in Docker on any device.</h4>
+              <ButtonsWrapper mobile={isMobileOnly}>
+                <Button
+                  primary
+                  mobile={isMobileOnly}
+                  disabled={isLoading}
+                  onClick={useCallback(() => setModalVisible(true))}
+                >
+                  {isLoading ? (
+                    <FullScreenLoader
+                      isFullScreen={false}
+                      color={'#ffffff'}
+                      height={'1.7rem'}
+                    />
+                  ) : (
+                    'Get started'
+                  )}
+                </Button>
 
-            <Button mobile={isMobileOnly}>
-              <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
-                Request a demo
-              </StyledA>
-            </Button>
-          </ButtonsWrapper>
-        </QueueAnim>
+                <Button mobile={isMobileOnly}>
+                  <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+                    Request a demo
+                  </StyledA>
+                </Button>
+              </ButtonsWrapper>
+            </QueueAnim>
+          </SectionWrapper>
+          <SectionWrapper>
+            <Video
+              src="https://www.youtube.com/embed/wbNlI3rH_Go"
+              isMobile={isMobile}
+            ></Video>
+          </SectionWrapper>
+        </SectionDivider>
       </div>
       <StyledModal
         isOpen={isModalVisible}
