@@ -159,7 +159,7 @@ const StyledInput = styled(Field)`
 
 const Video = styled.video`
   height: ${props => (props.isMobile ? '50vw' : '19,6vw')};
-  width: ${props => (props.isMobile ? '90vw' : '35vw')};
+  width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
 `
 
@@ -188,6 +188,13 @@ const StyledIcon = styled(Icon)`
   }
 `
 
+const StyledA = styled.a`
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.3rem;
+`
+
 const validate = values => {
   let errors = {}
 
@@ -208,6 +215,64 @@ const Banner = () => {
 
   return (
     <>
+      <>
+        <div className="banner-wrapper">
+          <QueueAnim
+            className="banner-title-wrapper"
+            type={isMobileOnly ? 'bottom' : 'right'}
+          >
+            <div key="line" className="title-line-wrapper">
+              <div
+                className="title-line"
+                style={{ transform: 'translateX(-64px)' }}
+              />
+            </div>
+            <h1 key="h1">Strove</h1>
+            <h4 key="content">
+              Say goodbye to hours of setting up environment.
+            </h4>
+            <h4 key="content">Code in seconds in Docker on any device.</h4>
+            <ButtonsWrapper mobile={isMobileOnly}>
+              <Button
+                primary
+                mobile={isMobileOnly}
+                disabled={isLoading}
+                onClick={useCallback(() => setModalVisible(true))}
+              >
+                {isLoading ? (
+                  <FullScreenLoader
+                    isFullScreen={false}
+                    color={'#ffffff'}
+                    height={'1.7rem'}
+                  />
+                ) : (
+                  'Get started'
+                )}
+              </Button>
+
+              <Button mobile={isMobileOnly}>
+                <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
+                  Request a demo
+                </StyledA>
+              </Button>
+            </ButtonsWrapper>
+          </QueueAnim>
+        </div>
+        <StyledModal
+          isOpen={isModalVisible}
+          onRequestClose={closeModal}
+          ariaHideApp={false}
+          isMobile={isMobileOnly}
+        >
+          {!isMobile && (
+            <StyledIcon
+              type="close"
+              onClick={useCallback(() => setModalVisible(false))}
+            />
+          )}
+          <GetStarted closeModal={closeModal} />
+        </StyledModal>
+      </>
       <div className="banner-wrapper">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
@@ -221,12 +286,11 @@ const Banner = () => {
                   style={{ transform: 'translateX(-64px)' }}
                 />
               </div>
-              <h1 key="h1">Strove</h1>
               <h4 key="content">
                 Say goodbye to hours of setting up environment
               </h4>
               <h4 key="content">#1 productivity tool for programmers</h4>
-              <ButtonsWrapper mobile={isMobileOnly}>
+              {/* <ButtonsWrapper mobile={isMobileOnly}>
                 <Button
                   primary
                   mobile={isMobileOnly}
@@ -275,7 +339,7 @@ const Banner = () => {
                     </Form>
                   )}
                 </Formik>
-              </ButtonsWrapper>
+              </ButtonsWrapper> */}
             </QueueAnim>
           </SectionWrapper>
           <SectionWrapper>

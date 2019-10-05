@@ -45,7 +45,7 @@ svg g {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  min-height: 75vh;
   width: 100%;
   position: relative;
 }
