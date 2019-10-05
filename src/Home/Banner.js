@@ -9,6 +9,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
+import Demo from '../assets/StroveDemo.mp4'
 
 const FadeIn = keyframes`
   0% {
@@ -214,11 +215,9 @@ const Banner = () => {
             </QueueAnim>
           </SectionWrapper>
           <SectionWrapper>
-            <Video
-              isMobile={isMobile}
-              src="../videos/StroveDemo.mp4"
-              controls
-            ></Video>
+            <Video isMobile={isMobile} controls>
+              <source src={Demo} type="video/mp4"></source>
+            </Video>
             <TextWell>
               <Header>Why Strove?</Header>
               <Paragraph>
