@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
+import isEmail from 'validator/lib/isEmail'
+import { Formik, Form, Field } from 'formik'
 
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
@@ -114,7 +116,7 @@ const EmailFormWrapper = styled.div`
   }
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled(Field)`
   height: 50px;
   border-radius: 0;
   outline: none;
@@ -152,9 +154,25 @@ const StyledIcon = styled(Icon)`
   }
 `
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  console.log('errors', errors)
+
+  return errors
+}
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
+  // const [isEmailValid, setEmailValid] = useState(false)
+  // const [isEmailValid, setEmailValid] = useState(false)
 
   const closeModal = () => setModalVisible(false)
 
@@ -201,18 +219,32 @@ const Banner = () => {
                     Request a demo
                   </StyledA>
                 </Button> */}
-
-                <EmailFormWrapper>
-                  <StyledInput />
-                  <Button
-                    primary
-                    mobile={isMobileOnly}
-                    disabled={isLoading}
-                    onClick={() => {}}
-                  >
-                    Request demo
-                  </Button>
-                </EmailFormWrapper>
+                <Formik
+                  initialValues={{
+                    email: '',
+                  }}
+                  validate={validate}
+                  onSubmit={values => {
+                    console.log(values)
+                  }}
+                >
+                  {({ errors, touched }) => (
+                    <Form>
+                      <EmailFormWrapper>
+                        <StyledInput type="email" name="email" />
+                        <Button
+                          primary
+                          mobile={isMobileOnly}
+                          disabled={errors.email && touched.email}
+                          onClick={() => {}}
+                          type="submit"
+                        >
+                          Request demo
+                        </Button>
+                      </EmailFormWrapper>
+                    </Form>
+                  )}
+                </Formik>
               </ButtonsWrapper>
             </QueueAnim>
           </SectionWrapper>
