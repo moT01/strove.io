@@ -156,7 +156,7 @@ const EmailFormWrapper2 = styled.div`
   width: 100%;
   min-width: 400px;
   flex-wrap: wrap;
-  margin: 20px;
+  margin: 20px 0;
   position: relative;
 
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
@@ -166,6 +166,8 @@ const EmailFormWrapper2 = styled.div`
   flex-wrap: wrap;
   position: relative;
 
+  border-radius: 5px;
+
   input {
     box-shadow: none;
     color: #333e63;
@@ -173,7 +175,6 @@ const EmailFormWrapper2 = styled.div`
     background: #fff;
     width: calc(100% - 156px);
     height: 56px;
-    border: 0;
     padding: 0;
     padding-left: 64px;
     padding-top: 10px;
@@ -184,6 +185,10 @@ const EmailFormWrapper2 = styled.div`
     font-style: normal;
     font-stretch: normal;
     letter-spacing: 0.2px;
+    border: 0;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   svg {
@@ -209,6 +214,9 @@ const EmailFormWrapper2 = styled.div`
     line-height: normal;
     letter-spacing: 0.8px;
     transition: opacity 0.2s;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 `
 
