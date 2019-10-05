@@ -11,6 +11,7 @@ import { Formik, Form, Field } from 'formik'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
+import Demo from '../assets/StroveDemo.mp4'
 
 const FadeIn = keyframes`
   0% {
@@ -122,10 +123,9 @@ const StyledInput = styled(Field)`
   outline: none;
 `
 
-const Video = styled.iframe`
+const Video = styled.video`
   height: ${props => (props.isMobile ? '67vw' : '26vw')};
   width: ${props => (props.isMobile ? '90vw' : '35vw')};
-  border: none;
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
 `
 
@@ -154,6 +154,32 @@ const StyledIcon = styled(Icon)`
   }
 `
 
+const TextWell = styled.div`
+  color: black;
+  height: auto;
+  width: ${isMobile ? '100vw' : '40vw'};
+  margin: 0vw 7.5vw 0 7.5vw;
+  padding: 3vh;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  text-align: left;
+  text-justify: inter-word;
+  background-color: white;
+`
+
+const Paragraph = styled.p`
+  text-indent: 30px;
+  font-size: 16px;
+  display: inline-block;
+  padding-top: 0;
+`
+
+const Header = styled.h3`
+  font-size: 22;
+  display: inline-block;
+`
+
 const validate = values => {
   let errors = {}
 
@@ -171,8 +197,6 @@ const validate = values => {
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
-  // const [isEmailValid, setEmailValid] = useState(false)
-  // const [isEmailValid, setEmailValid] = useState(false)
 
   const closeModal = () => setModalVisible(false)
 
@@ -249,10 +273,28 @@ const Banner = () => {
             </QueueAnim>
           </SectionWrapper>
           <SectionWrapper>
-            <Video
-              src="https://www.youtube.com/embed/wbNlI3rH_Go"
-              isMobile={isMobile}
-            ></Video>
+            <Video isMobile={isMobile} controls>
+              <source src={Demo} type="video/mp4"></source>
+            </Video>
+            <TextWell>
+              <Header>Why Strove?</Header>
+              <Paragraph>
+                Strove.io solves 3 problems programmers face: 1. Programmers
+                waste a lot of time on setting up the environment - this problem
+                is very troublesome for many teams and has been our initial
+                inspiration to start working on this project. Strove.io can cut
+                the time to set a programming environment to seconds. 2. It is
+                hard to use different computers when working on a project and
+                code breaks across different devices and operating systems. In
+                Strove.io the code lives in a cloud. This makes it possible to
+                resume working on a project from any computer with internet
+                access. 3. 'It works on my machine' problem. Strove.io lets
+                programmers use their favorite devices without sacrificing
+                productivity. All team members access instances of the same
+                programming environment, no matter if they use Macbook or an old
+                PC.
+              </Paragraph>
+            </TextWell>
           </SectionWrapper>
         </SectionDivider>
       </div>
