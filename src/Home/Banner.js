@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
+import isEmail from 'validator/lib/isEmail'
+import { Formik, Form, Field } from 'formik'
 
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
@@ -95,24 +97,40 @@ const Button = styled.button`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
+  flex-direction: column;
   width: 100%;
   height: auto;
   align-items: center;
   justify-content: space-around;
 `
 
+const EmailFormWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 400px;
+  align-items: center;
+
+  ${Button} {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+`
+
+const StyledInput = styled(Field)`
+  height: 50px;
+  border-radius: 0;
+  outline: none;
+`
+
 const Video = styled.video`
   height: ${props => (props.isMobile ? '67vw' : '26vw')};
   width: ${props => (props.isMobile ? '90vw' : '35vw')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
-`
-
-const StyledA = styled.a`
-  margin: 0;
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.3rem;
 `
 
 const StyledModal = styled(Modal)`
@@ -166,6 +184,20 @@ const Header = styled.h3`
   display: inline-block;
 `
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  console.log('errors', errors)
+
+  return errors
+}
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -192,9 +224,9 @@ const Banner = () => {
               </div>
               <h1 key="h1">Strove</h1>
               <h4 key="content">
-                Say goodbye to hours of setting up environment.
+                Say goodbye to hours of setting up environment
               </h4>
-              <h4 key="content">Code in seconds in Docker on any device.</h4>
+              <h4 key="content">#1 productivity tool for programmers</h4>
               <ButtonsWrapper mobile={isMobileOnly}>
                 <Button
                   primary
@@ -213,11 +245,37 @@ const Banner = () => {
                   )}
                 </Button>
 
-                <Button mobile={isMobileOnly}>
+                {/* <Button mobile={isMobileOnly}>
                   <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
                     Request a demo
                   </StyledA>
-                </Button>
+                </Button> */}
+                <Formik
+                  initialValues={{
+                    email: '',
+                  }}
+                  validate={validate}
+                  onSubmit={values => {
+                    console.log(values)
+                  }}
+                >
+                  {({ errors, touched }) => (
+                    <Form>
+                      <EmailFormWrapper>
+                        <StyledInput type="email" name="email" />
+                        <Button
+                          primary
+                          mobile={isMobileOnly}
+                          disabled={errors.email && touched.email}
+                          onClick={() => {}}
+                          type="submit"
+                        >
+                          Request demo
+                        </Button>
+                      </EmailFormWrapper>
+                    </Form>
+                  )}
+                </Formik>
               </ButtonsWrapper>
             </QueueAnim>
           </LeftSection>
