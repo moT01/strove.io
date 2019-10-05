@@ -138,23 +138,6 @@ const EmailFormWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   min-width: 400px;
-  align-items: center;
-
-  ${EmailSubmitButton} {
-    height: 50px;
-    padding: 0;
-    margin: 0;
-    border: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-`
-
-const EmailFormWrapper2 = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  min-width: 400px;
   flex-wrap: wrap;
   margin: 20px 0;
   position: relative;
@@ -258,27 +241,20 @@ const StyledIcon = styled(Icon)`
   }
 `
 
-const StyledA = styled.a`
-  margin: 0;
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.3rem;
-`
-
 const StyledTrialInfo = styled.ul`
-padding: 0;
-li {list-style: none}
-li:before {
-  display:inline-block;
-  vertical-align: top;
-  line-height: 1em;
-  width: 1em;
-  height:1em;
-  margin-right: 0.3em;
-  text-align: center;
-  content: '✔';
-  color: #0072ce;
-}
+  font-size: 13px;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin-right: 8px;
+    list-style: none;
+
+    &:before {
+      margin-right: 0.3em;
+      content: '✔';
+      color: #0072ce;
+    }
+  }
 `
 
 const validate = values => {
@@ -335,6 +311,7 @@ const Banner = () => {
                   'Get started'
                 )}
               </Button>
+              <h6 key="content">Or, if you're a corporate user:</h6>
               <Formik
                 initialValues={{
                   email: '',
@@ -347,23 +324,43 @@ const Banner = () => {
                 {({ errors, touched, values }) => (
                   <Form>
                     <EmailFormWrapper>
-                      <StyledInput
+                      <input
                         type="email"
                         name="email"
-                        placeholder="Your email"
+                        placeholder="Your Email"
+                        className="Form-field"
                       />
-                      <EmailSubmitButton
-                        primary
-                        mobile={isMobileOnly}
+                      <svg
+                        className="Form-fieldGroupIcon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <g
+                          fill="none"
+                          fill-rule="evenodd"
+                          stroke="#9CA2B4"
+                          stroke-width="2"
+                        >
+                          <path d="M2 4h20v16H2z"></path>
+                          <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                        </g>
+                      </svg>
+                      <button
+                        type="submit"
                         isDisabled={
                           values.email && errors.email && touched.email
                         }
-                        onClick={() => {}}
-                        type="submit"
                       >
                         Request demo
-                      </EmailSubmitButton>
+                      </button>
                     </EmailFormWrapper>
+                    <StyledTrialInfo>
+                      <li>Free 14-day Demo</li>
+                      <li>No credit card needed</li>
+                      <li>No setup</li>
+                    </StyledTrialInfo>
                   </Form>
                 )}
               </Formik>
@@ -371,47 +368,7 @@ const Banner = () => {
                 id="homepage-get-started"
                 data-form-processed="true"
                 className="error"
-              >
-                <EmailFormWrapper2 className="fields">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    className="Form-field"
-                  />
-                  <svg
-                    // fill="blue"
-                    className="Form-fieldGroupIcon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <g
-                      fill="none"
-                      fill-rule="evenodd"
-                      stroke="#9CA2B4"
-                      stroke-width="2"
-                    >
-                      <path d="M2 4h20v16H2z"></path>
-                      <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                    </g>
-                  </svg>
-                  <button
-                    type="submit"
-                    className="report-ga"
-                    data-ga="Start Trial - Homepage Email"
-                    disabled="disabled"
-                  >
-                    Get Started
-                  </button>
-                </EmailFormWrapper2>
-                <StyledTrialInfo>
-                  <li>Free 14-day Demo</li>
-                  <li>No credit card needed</li>
-                  <li>No setup</li>
-                </StyledTrialInfo>
-              </form>
+              ></form>
             </ButtonsWrapper>
           </QueueAnim>
         </div>
