@@ -265,6 +265,22 @@ const StyledA = styled.a`
   font-size: 1.3rem;
 `
 
+const StyledTrialInfo = styled.ul`
+padding: 0;
+li {list-style: none}
+li:before {
+  display:inline-block;
+  vertical-align: top;
+  line-height: 1em;
+  width: 1em;
+  height:1em;
+  margin-right: 0.3em;
+  text-align: center;
+  content: '✔';
+  color: #0072ce;
+}
+`
+
 const validate = values => {
   let errors = {}
 
@@ -390,11 +406,11 @@ const Banner = () => {
                     Get Started
                   </button>
                 </EmailFormWrapper2>
-                <div className="form-summary">
-                  <div>Example text</div>
-                  <div>Example text 2</div>
-                  <div>No idea what to add here</div>
-                </div>
+                <StyledTrialInfo>
+                  <li>Free 14-day Demo</li>
+                  <li>No credit card needed</li>
+                  <li>No setup</li>
+                </StyledTrialInfo>
               </form>
             </ButtonsWrapper>
           </QueueAnim>
