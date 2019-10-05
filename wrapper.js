@@ -44,6 +44,7 @@ const LoginProvider = ({ children, addProject }) => {
     selectors.api.getUserField('bitbucketRefreshToken')
   )
 
+  console.log(window.location, 'window')
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     client,
     fetchPolicy: 'no-cache',
@@ -159,16 +160,16 @@ const LoginProvider = ({ children, addProject }) => {
       //   )
       // }
 
-      gitProvider = stateParams[0]
+      // gitProvider = stateParams[0]
 
-      const loggedUri = stateParams[2]
-      decoredLoggedUri = decodeURIComponent(loggedUri)
-      console.log(
-        'stateParams',
-        stateParams,
-        'decoredLoggedUri',
-        decoredLoggedUri
-      )
+      // const loggedUri = stateParams[2]
+      // decoredLoggedUri = decodeURIComponent(loggedUri)
+      // console.log(
+      //   'stateParams',
+      //   stateParams,
+      //   'decoredLoggedUri',
+      //   decoredLoggedUri
+      // )
       // if (decoredLoggedUri) {
       //   window.location.replace(decoredLoggedUri)
       // }
