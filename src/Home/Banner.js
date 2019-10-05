@@ -51,7 +51,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: ${props => (props.mobile ? '90%' : '45%')};
+  width: ${props => (props.mobile ? '90%' : '55%')};
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
