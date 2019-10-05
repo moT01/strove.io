@@ -90,11 +90,34 @@ const Button = styled.button`
 
 const ButtonsWrapper = styled.div`
   display: flex;
-  flex-direction: ${props => (props.mobile ? 'column' : 'row')};
+  flex-direction: column;
   width: 100%;
   height: auto;
   align-items: center;
   justify-content: space-around;
+`
+
+const EmailFormWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 400px;
+  align-items: center;
+
+  ${Button} {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+`
+
+const StyledInput = styled.input`
+  height: 50px;
+  border-radius: 0;
+  outline: none;
 `
 
 const Video = styled.iframe`
@@ -102,13 +125,6 @@ const Video = styled.iframe`
   width: ${props => (props.isMobile ? '90vw' : '35vw')};
   border: none;
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
-`
-
-const StyledA = styled.a`
-  margin: 0;
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.3rem;
 `
 
 const StyledModal = styled(Modal)`
@@ -180,11 +196,23 @@ const Banner = () => {
                   )}
                 </Button>
 
-                <Button mobile={isMobileOnly}>
+                {/* <Button mobile={isMobileOnly}>
                   <StyledA href="mailto:contact@codengo.page?subject=Strove demo&body=We'd love to get to know how we can help!%0D%0A%0D%0AWhen is it a good time to schedule a call?">
                     Request a demo
                   </StyledA>
-                </Button>
+                </Button> */}
+
+                <EmailFormWrapper>
+                  <StyledInput />
+                  <Button
+                    primary
+                    mobile={isMobileOnly}
+                    disabled={isLoading}
+                    onClick={() => {}}
+                  >
+                    Request demo
+                  </Button>
+                </EmailFormWrapper>
               </ButtonsWrapper>
             </QueueAnim>
           </SectionWrapper>
