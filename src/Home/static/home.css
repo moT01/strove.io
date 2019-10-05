@@ -51,7 +51,7 @@ svg g {
 }
 .banner-wrapper .banner-title-wrapper {
   width: 60%;
-  height: 245px;
+  max-width: 480px;
   top: 0;
   bottom: 0;
   left: 8%;
