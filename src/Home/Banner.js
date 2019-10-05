@@ -286,10 +286,15 @@ const Banner = () => {
                   style={{ transform: 'translateX(-64px)' }}
                 />
               </div>
-              <h4 key="content">
-                Say goodbye to hours of setting up environment
+              <h2>Focus on what's important</h2>
+              <h4>Strove let's programmers be productive in seconds</h4>
+              <h2>Easiest collaboration out there</h2>
+              <h4>Team members can work from any computer and any location</h4>
+              <h2>Forget that "it works on my machine" issue ever existed</h2>
+              <h4>
+                Programmers get access to instances of the same cloud
+                environment so they can focus on creating new features
               </h4>
-              <h4 key="content">#1 productivity tool for programmers</h4>
               {/* <ButtonsWrapper mobile={isMobileOnly}>
                 <Button
                   primary
