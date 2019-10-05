@@ -45,6 +45,10 @@ const SectionWrapper = styled.div`
   align-items: center;
 `
 
+const LeftSection = styled(SectionWrapper)`
+  margin-top: ${props => (props.isMobile ? '30vh' : '0')};
+`
+
 const Button = styled.button`
   display: flex;
   flex-direction: row;
@@ -172,7 +176,10 @@ const Banner = () => {
     <>
       <div className="banner-wrapper">
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile}>
+          <LeftSection
+            isMobile={isMobile}
+            style={!isMobile ? { marginTop: '30vh' } : {}}
+          >
             <QueueAnim
               className="banner-title-wrapper"
               type={isMobileOnly ? 'bottom' : 'right'}
@@ -213,7 +220,7 @@ const Banner = () => {
                 </Button>
               </ButtonsWrapper>
             </QueueAnim>
-          </SectionWrapper>
+          </LeftSection>
           <SectionWrapper>
             <Video isMobile={isMobile} controls>
               <source src={Demo} type="video/mp4"></source>
