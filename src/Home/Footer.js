@@ -49,6 +49,7 @@ const LinkText = styled.h3`
   font-size: 0.9rem;
   font-weight: 200;
   margin: 0 0 6px 0;
+  cursor: pointer;
 `
 
 const StyledAnchor = styled.a`
