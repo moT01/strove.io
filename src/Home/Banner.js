@@ -1,13 +1,15 @@
 import React, { useState, useCallback } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import styled, { keyframes, css } from 'styled-components'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 
+import { mutation } from 'utils'
+import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
@@ -311,121 +313,125 @@ const validate = values => {
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
-
+  const dispatch = useDispatch()
   const closeModal = () => setModalVisible(false)
 
   return (
     <>
-      <>
-        <div className="banner-wrapper">
-          <QueueAnim
-            className="banner-title-wrapper"
-            type={isMobileOnly ? 'bottom' : 'right'}
-          >
-            <div className="title-line-wrapper">
-              <div
-                className="title-line"
-                style={{ transform: 'translateX(-64px)' }}
-              />
-            </div>
-            <h1>Strove</h1>
-            <h4>
-              Make programming cheaper, delivering features faster,
-              collaboration easier
-            </h4>
-            <ButtonsWrapper mobile={isMobileOnly}>
-              <Button
-                primary
-                mobile={isMobileOnly}
-                disabled={isLoading}
-                onClick={useCallback(() => setModalVisible(true))}
-              >
-                {isLoading ? (
-                  <FullScreenLoader
-                    isFullScreen={false}
-                    color={'#ffffff'}
-                    height={'1.7rem'}
-                  />
-                ) : (
-                  'Get started'
-                )}
-              </Button>
-              <StyledTrialInfo>
-                <li>Free for non-commercial use</li>
-              </StyledTrialInfo>
-              <StyledH6>Or, if you're a corporate user:</StyledH6>
-              <Formik
-                initialValues={{
-                  email: '',
-                }}
-                validate={validate}
-                onSubmit={values => {
-                  console.log(values)
-                }}
-              >
-                {({ errors, touched, values }) => (
-                  <StyledForm>
-                    <EmailFormWrapper
-                      disabled={errors.email || !values.email}
-                      isMobile={isMobileOnly}
-                    >
-                      <Field
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                      ></Field>
-                      <svg
-                        className="Form-fieldGroupIcon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                      >
-                        <g
-                          fill="none"
-                          fill-rule="evenodd"
-                          stroke="#9CA2B4"
-                          stroke-width="2"
-                        >
-                          <path d="M2 4h20v16H2z"></path>
-                          <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                        </g>
-                      </svg>
-                      <button
-                        type="submit"
-                        isDisabled={
-                          values.email && errors.email && touched.email
-                        }
-                      >
-                        Request demo
-                      </button>
-                    </EmailFormWrapper>
-                    <StyledTrialInfo>
-                      <li>Free 14-day Demo</li>
-                      <li>No credit card needed</li>
-                      <li>No setup</li>
-                    </StyledTrialInfo>
-                  </StyledForm>
-                )}
-              </Formik>
-            </ButtonsWrapper>
-          </QueueAnim>
-        </div>
-        <StyledModal
-          isOpen={isModalVisible}
-          onRequestClose={closeModal}
-          ariaHideApp={false}
-          isMobile={isMobileOnly}
+      <div className="banner-wrapper">
+        <QueueAnim
+          className="banner-title-wrapper"
+          type={isMobileOnly ? 'bottom' : 'right'}
         >
-          {!isMobile && (
-            <StyledIcon
-              type="close"
-              onClick={useCallback(() => setModalVisible(false))}
+          <div className="title-line-wrapper">
+            <div
+              className="title-line"
+              style={{ transform: 'translateX(-64px)' }}
             />
-          )}
-          <GetStarted closeModal={closeModal} />
-        </StyledModal>
-      </>
+          </div>
+          <h1>Strove</h1>
+          <h4>
+            Make programming cheaper, delivering features faster, collaboration
+            easier
+          </h4>
+          <ButtonsWrapper mobile={isMobileOnly}>
+            <Button
+              primary
+              mobile={isMobileOnly}
+              disabled={isLoading}
+              onClick={useCallback(() => setModalVisible(true))}
+            >
+              {isLoading ? (
+                <FullScreenLoader
+                  isFullScreen={false}
+                  color={'#ffffff'}
+                  height={'1.7rem'}
+                />
+              ) : (
+                'Get started'
+              )}
+            </Button>
+            <StyledTrialInfo>
+              <li>Free for non-commercial use</li>
+            </StyledTrialInfo>
+            <StyledH6>Or, if you're a corporate user:</StyledH6>
+            <Formik
+              initialValues={{
+                email: '',
+              }}
+              validate={validate}
+              onSubmit={values => {
+                console.log(values)
+                dispatch(
+                  mutation({
+                    name: 'sendEmail',
+                    context: null,
+                    mutation: SEND_EMAIL,
+                    variables: values,
+                  })
+                )
+              }}
+            >
+              {({ errors, touched, values }) => (
+                <StyledForm>
+                  <EmailFormWrapper
+                    disabled={errors.email || !values.email}
+                    isMobile={isMobileOnly}
+                  >
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                    ></Field>
+                    <svg
+                      className="Form-fieldGroupIcon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <g
+                        fill="none"
+                        fill-rule="evenodd"
+                        stroke="#9CA2B4"
+                        stroke-width="2"
+                      >
+                        <path d="M2 4h20v16H2z"></path>
+                        <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                      </g>
+                    </svg>
+                    <button
+                      type="submit"
+                      isDisabled={values.email && errors.email && touched.email}
+                    >
+                      Request demo
+                    </button>
+                  </EmailFormWrapper>
+                  <StyledTrialInfo>
+                    <li>Free 14-day Demo</li>
+                    <li>No credit card needed</li>
+                    <li>No setup</li>
+                  </StyledTrialInfo>
+                </StyledForm>
+              )}
+            </Formik>
+          </ButtonsWrapper>
+        </QueueAnim>
+      </div>
+      <StyledModal
+        isOpen={isModalVisible}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+        isMobile={isMobileOnly}
+      >
+        {!isMobile && (
+          <StyledIcon
+            type="close"
+            onClick={useCallback(() => setModalVisible(false))}
+          />
+        )}
+        <GetStarted closeModal={closeModal} />
+      </StyledModal>
       <div className="banner-wrapper">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
