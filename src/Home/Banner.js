@@ -233,6 +233,8 @@ const StyledIcon = styled(Icon)`
 const StyledTrialInfo = styled.ul`
   font-size: 13px;
   padding: 0;
+  margin: 0;
+
   li {
     display: inline-block;
     margin-right: 8px;
@@ -247,7 +249,7 @@ const StyledTrialInfo = styled.ul`
 `
 
 const StyledH6 = styled.h6`
-  margin-bottom: 20px;
+  margin: 20px;
 `
 
 const validate = values => {
@@ -360,11 +362,6 @@ const Banner = () => {
                   </Form>
                 )}
               </Formik>
-              <form
-                id="homepage-get-started"
-                data-form-processed="true"
-                className="error"
-              ></form>
             </ButtonsWrapper>
           </QueueAnim>
         </div>
