@@ -145,7 +145,7 @@ const LoginProvider = ({ children, addProject }) => {
         const originWithoutParams = decoredOrigin.includes('/&code') ? decoredOrigin.split('/&code')[0] : decoredOrigin
         // console.log('stateParams', stateParams)
 
-        const redirectAdress = `${originWithoutParams}/?code=${code}`
+        const redirectAdress = `${originWithoutParams}/?code=${code}&state=${gitProvider}`
                 // console.log('redirectAdress', redirectAdress)
 
         return window.location.replace(redirectAdress)
