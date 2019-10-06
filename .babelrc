@@ -29,6 +29,7 @@
     "production": {
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
+        "babel-plugin-transform-remove-console"
       ],
       "presets": [
         [
