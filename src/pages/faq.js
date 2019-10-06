@@ -93,7 +93,7 @@ const topics = [
   {
     header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
     paragraph:
-      'Aforementioned providers only allow cloning if the user is logged in.',
+      'Aforementioned providers only allow apps to clone if the user is logged in.',
   },
   {
     header: 'Why do i need to provide private repository access to Github?',
@@ -124,10 +124,11 @@ const topics = [
   {
     header: 'Why does project load several seconds?',
     paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
-1. A new Docker container is started on one of virtual machines.
-2. Strove provides read and write access to the project folder.
-3. Strove clones your repository from a chosen git provider.
-4. Init script from strove.json is run if it's present.`,
+1. We check if user has permissions to clone the repository.
+2. A new Docker container is started on one of virtual machines.
+3. Strove provides read and write access to the project folder.
+4. Your repository is cloned from a chosen git provider.
+5. Init script from strove.json is run if it's present.`,
   },
   {
     header: 'Can I work on mobile apps or Windows/MacOS apps?',
