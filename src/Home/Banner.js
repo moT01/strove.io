@@ -367,7 +367,7 @@ const Banner = () => {
                     name: 'sendEmail',
                     context: null,
                     mutation: SEND_EMAIL,
-                    variables: values,
+                    variables: { email: values.email, isDemo: true },
                   })
                 )
               }}
