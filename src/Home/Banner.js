@@ -55,7 +55,7 @@ const Button = styled.button`
   font-weight: bold;
   line-height: normal;
   letter-spacing: 0.8px;
-  width: ${props => (props.mobile ? '250px' : '55%')};
+  width: ${props => (props.mobile ? '100%' : '55%')};
   min-width: 70px;
   margin: 5px;
   padding: 0.5vh;
@@ -177,7 +177,7 @@ const EmailFormWrapper = styled.div`
         box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
           0 8px 24px 0 rgba(174, 174, 186, 0.16);
         border-radius: 5px;
-        width: 250px;
+        width: 100%;
       `}
   }
 
@@ -219,7 +219,7 @@ const EmailFormWrapper = styled.div`
         box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
           0 8px 24px 0 rgba(174, 174, 186, 0.16);
         border-radius: 5px;
-        width: 250px;
+        width: 100%;
         margin-top: 10px;
       `}
 
@@ -373,7 +373,7 @@ const Banner = () => {
                         type="email"
                         name="email"
                         placeholder="Your Email"
-                      />
+                      ></Field>
                       <svg
                         className="Form-fieldGroupIcon"
                         xmlns="http://www.w3.org/2000/svg"
