@@ -3,6 +3,7 @@ import * as C from './constants'
 
 const initialState = {
   user: null,
+  sendEmail: null,
   myProjects: { data: [] },
   subscription: { data: {} },
 }

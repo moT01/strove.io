@@ -314,6 +314,7 @@ const Banner = () => {
   const [isModalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
   const closeModal = () => setModalVisible(false)
+  const [emailSent, setEmailSent] = useState(false)
 
   return (
     <>
@@ -367,6 +368,7 @@ const Banner = () => {
                     context: null,
                     mutation: SEND_EMAIL,
                     variables: { email: values.email, isDemo: true },
+                    onSuccess: () => setEmailSent(true),
                   })
                 )
               }}
@@ -411,6 +413,9 @@ const Banner = () => {
                     <li>No credit card needed</li>
                     <li>No setup</li>
                   </StyledTrialInfo>
+                  {emailSent && (
+                    <StyledH6>Thank you, well get in touch soon!</StyledH6>
+                  )}
                 </StyledForm>
               )}
             </Formik>
