@@ -80,48 +80,19 @@ const Button = styled.button`
   }
 
   ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-    `}
-`
-
-const EmailSubmitButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: 200px;
-  min-width: 70px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: #0072ce;
-  border-width: 1px;
-  border-style: solid;
-  font-size: 1.3rem;
-  color: #fff;
-  border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-decoration: none;
-
-  ${({ isDisabled }) =>
-    isDisabled &&
-    css`
-      cursor: not-allowed;
-    `}
-
-  :focus {
-    outline: 0;
-    animation: ${FadeIn} 0.5s ease-out;
-  }
+    !props.disabled
+      ? css`
+          animation: ${ButtonFadeIn} 1s ease-out;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+            box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
+              0 9px 26px 0 rgba(174, 174, 186, 0.16);
+          }
+        `
+      : css`
+          cursor: not-allowed;
+        `}
 `
 
 const ButtonsWrapper = styled.div`
@@ -141,15 +112,21 @@ const EmailFormWrapper = styled.div`
   flex-wrap: wrap;
   margin: 20px 0;
   position: relative;
-
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
   background: #fff;
   display: flex;
   flex-wrap: wrap;
   position: relative;
-
   border-radius: 5px;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+
+  &:hover {
+    opacity: 1;
+    box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
+      0 9px 26px 0 rgba(174, 174, 186, 0.16);
+  }
 
   input {
     box-shadow: none;
@@ -180,6 +157,10 @@ const EmailFormWrapper = styled.div`
     left: 20px;
     height: 24px;
     width: 24px;
+
+    g {
+      stroke: #0072ce;
+    }
   }
 
   button {
@@ -200,14 +181,22 @@ const EmailFormWrapper = styled.div`
     border-radius: 5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-  }
-`
+    outline: none;
 
-const StyledInput = styled(Field)`
-  height: 50px;
-  border-radius: 0;
-  outline: none;
-  /* box-shadow: 0 2px 4px 0 rgba(100, 150, 230, 0.24); */
+    ${props =>
+      !props.disabled
+        ? css`
+            cursor: pointer;
+            &:hover {
+              opacity: 1;
+              box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
+                0 9px 26px 0 rgba(174, 174, 186, 0.16);
+            }
+          `
+        : css`
+            cursor: not-allowed;
+          `}
+  }
 `
 
 const Video = styled.video`
@@ -258,7 +247,7 @@ const StyledTrialInfo = styled.ul`
 `
 
 const StyledH6 = styled.h6`
-  margin: 20px;
+  margin-bottom: 20px;
 `
 
 const validate = values => {
@@ -330,13 +319,13 @@ const Banner = () => {
               >
                 {({ errors, touched, values }) => (
                   <Form>
-                    <EmailFormWrapper>
-                      <input
+                    <EmailFormWrapper disabled={errors.email || !values.email}>
+                      <Field
                         type="email"
                         name="email"
                         placeholder="Your Email"
-                        className="Form-field"
                       />
+                      {console.log('errors', errors)}
                       <svg
                         className="Form-fieldGroupIcon"
                         xmlns="http://www.w3.org/2000/svg"
