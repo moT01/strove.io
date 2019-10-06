@@ -115,16 +115,6 @@ const LoginProvider = ({ children, addProject }) => {
   }, [activeProject.data])
 
   useEffect(() => {
-    const code = adress
-      .match(/code=([a-z0-9A-Z]+)/g)
-      .toString()
-      .split('=')[1]
-
-    const loginState = adress
-      .match(/state=(.+)/g)
-      .toString()
-      .split('=')[1]
-
     const code = window?.location?.href
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
@@ -149,10 +139,17 @@ const LoginProvider = ({ children, addProject }) => {
 
       if (shouldBeRedirected && origin) {
         const decoredOrigin = decodeURIComponent(origin)
+        const originHostname = new URL(decoredOrigin).hostname
 
-        const redirectAdress = `${decoredOrigin}?code=${code}`
 
-        return window.location.replace(redirectAdress)
+              // console.log('origin', origin, 'stateParams', stateParams, 'originHostname', originHostname)
+
+
+        const redirectAdress = `${originHostname}/?code=${code}`
+                console.log('redirectAdress', redirectAdress)
+
+
+        // return window.location.replace(redirectAdress)
       }
     }
 
