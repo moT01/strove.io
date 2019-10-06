@@ -125,27 +125,6 @@ const LoginProvider = ({ children, addProject }) => {
       .toString()
       .split('=')[1]
 
-    /* Proof of concept */
-    // const stateParams = loginState.split('%2C')
-
-    // const shouldBeRedirected = stateParams[1]
-
-    // const origin = stateParams[2] || null
-
-    // const decoredOrigin = decodeURIComponent(origin)
-
-    // // // We want to make sure this redirect behavior is strove.io specific
-    // // const shouldBeRedirected = decoredOrigin.includes("https://strove.io") && isOpensource
-
-    // if (shouldBeRedirected) {
-    //   const redirectAdress = `${decoredOrigin}?code=${code}`
-    //   console.log('redirectAdress', redirectAdress)
-    // }
-
-    // if (!shouldBeRedirected && code) {
-    //   console.log('yay')
-    // }
-
     const code = window?.location?.href
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
@@ -157,51 +136,24 @@ const LoginProvider = ({ children, addProject }) => {
       .split('=')[1]
 
     let gitProvider
-    let decoredLoggedUri
 
     if (loginState) {
       /* %2C is an encoding for , */
-      // const stateParams = loginState.split('%2C')
-      // console.log(stateParams)
-      // const isOpensource = stateParams[1] === 'true' ? true : false
-      // console.log(isOpensource)
-      // const origin = stateParams[2] || null
-      // console.log(origin)
-      // console.log('boolean', Boolean(isOpensource))
-      // const href = window.location.href
-      // const loggedUri = stateParams[2]
-      // decoredLoggedUri = decodeURIComponent(loggedUri)
-      // console.log(
-      //   `${loggedUri}?code=${code}&state=${
-      //     window?.location?.href
-      //       ?.match(/state=(.+)/g)
-      //       ?.toString()
-      //       .split('=')[1]
-      //   }`
-      // )
-      // if (!href.includes('/faq') && isOpensource) {
-      //   // if (true && isOpensource) {
-      //   return window.location.replace(
-      //     `${href}?code=${code}&state=${
-      //       window?.location?.href
-      //         ?.match(/state=(.+)/g)
-      //         ?.toString()
-      //         .split('=')[1]
-      //     }`
-      //   )
-      // }
-      // gitProvider = stateParams[0]
-      // const loggedUri = stateParams[2]
-      // decoredLoggedUri = decodeURIComponent(loggedUri)
-      // console.log(
-      //   'stateParams',
-      //   stateParams,
-      //   'decoredLoggedUri',
-      //   decoredLoggedUri
-      // )
-      // if (decoredLoggedUri) {
-      //   window.location.replace(decoredLoggedUri)
-      // }
+      const stateParams = loginState.split('%2C')
+
+      gitProvider = stateParams[0]
+
+      const shouldBeRedirected = stateParams[1]
+
+      const origin = stateParams[2]
+
+      if (shouldBeRedirected && origin) {
+        const decoredOrigin = decodeURIComponent(origin)
+
+        const redirectAdress = `${decoredOrigin}?code=${code}`
+
+        return window.location.replace(redirectAdress)
+      }
     }
 
     if (code) {
@@ -217,11 +169,6 @@ const LoginProvider = ({ children, addProject }) => {
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
                   localStorage.setItem('token', siliskyToken)
-                  // window.location.replace(
-                  //   `http://localhost:8000/app/dashboard?${window?.location?.href
-                  //     ?.match(/state=(.+)/g)
-                  //     ?.toString()}`
-                  // )
                 },
                 onSuccessDispatch: [
                   user => ({
