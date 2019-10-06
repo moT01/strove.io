@@ -124,8 +124,6 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
-      console.log('loginState', loginState)
-
     let gitProvider
 
     if (loginState) {
@@ -142,12 +140,13 @@ const LoginProvider = ({ children, addProject }) => {
         const decoredOrigin = decodeURIComponent(origin)
 
         // Gitlal login makes extremely messy redirect lik strove.io/&code
-        const originWithoutParams = decoredOrigin.includes('/&code') ? decoredOrigin.split('/&code')[0] : decoredOrigin
-        // console.log('stateParams', stateParams)
+        const originWithoutParams = decoredOrigin.includes('/&code')
+          ? decoredOrigin.split('/&code')[0]
+          : decoredOrigin
 
         const redirectAdress = `${originWithoutParams}/?code=${code}&state=${gitProvider}`
-                // console.log('redirectAdress', redirectAdress)
 
+        /* Redirect to project */
         return window.location.replace(redirectAdress)
       }
     }
