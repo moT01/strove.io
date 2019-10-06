@@ -45,14 +45,13 @@ svg g {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  min-height: 75vh;
   width: 100%;
   position: relative;
 }
 .banner-wrapper .banner-title-wrapper {
-  width: 40%;
+  width: 60%;
   max-width: 480px;
-  height: 245px;
   top: 0;
   bottom: 0;
   left: 8%;
