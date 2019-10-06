@@ -214,6 +214,14 @@ img {
   padding-top: 0;
   margin-bottom: 1.45rem;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: default;
+}
 h1 {
   margin-left: 0;
   margin-right: 0;
@@ -380,6 +388,7 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+  cursor: default;
 }
 figure {
   margin-left: 0;
@@ -466,7 +475,6 @@ iframe {
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  margin-bottom: 1.45rem;
 }
 hr {
   margin-left: 0;

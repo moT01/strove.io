@@ -1,7 +1,8 @@
 import React, { memo, useState, useEffect } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
-import DetectBrowser, { isMobileOnly, isTablet } from 'react-detect-browser'
+import DetectBrowser from 'react-detect-browser'
+import { isMobile } from 'react-device-detect'
 
 import Modal from './modal'
 import Header from './header'
@@ -16,6 +17,10 @@ const MainContent = styled.main`
   margin: 0 auto;
   max-width: 100vw;
   padding-top: 0;
+`
+
+const StyledModal = styled(Modal)`
+  width: ${props => (props.isMobile ? '70vw' : '30vw')};
 `
 
 const Layout = ({ children, browser }) => {
@@ -46,18 +51,17 @@ const Layout = ({ children, browser }) => {
       `}
       render={data => (
         <>
-          <Modal
+          <StyledModal
             isOpen={noSupportModalVisible}
             onRequestClose={() => setNoSupportModalVisible(false)}
             contentLabel={'Browser not supported'}
             ariaHideApp={false}
-            width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-            height={isMobileOnly ? '40vh' : '25vh'}
-            zIndex={99}
+            isMobile={isMobile}
+            // zIndex={99}
           >
             Your browser might not provide the best Strove.io user experience.
             We recommend using Google Chrome, Mozilla Firefox, Safari or Opera
-          </Modal>
+          </StyledModal>
           <Header siteTitle={data.site.siteMetadata.title} />
           <MainContent>
             {noSupportModalVisible && (
