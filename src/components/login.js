@@ -21,8 +21,6 @@ const IS_OPENSOURCE = process.env.IS_OPENSOURCE
 
 const adress = window?.location?.href?.split('?')[0]
 
-console.log('adress', adress)
-
 /* State in href allows us to control login behavior https://auth0.com/docs/protocols/oauth2/oauth-state */
 const loginOptions = [
   {
