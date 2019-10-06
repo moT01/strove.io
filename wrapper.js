@@ -44,7 +44,6 @@ const LoginProvider = ({ children, addProject }) => {
     selectors.api.getUserField('bitbucketRefreshToken')
   )
 
-  console.log(window.location, 'window')
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     client,
     fetchPolicy: 'no-cache',
@@ -125,6 +124,8 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
+      console.log('loginState', loginState)
+
     let gitProvider
 
     if (loginState) {
@@ -139,17 +140,15 @@ const LoginProvider = ({ children, addProject }) => {
 
       if (shouldBeRedirected && origin) {
         const decoredOrigin = decodeURIComponent(origin)
-        const originHostname = new URL(decoredOrigin).hostname
 
+        // Gitlal login makes extremely messy redirect lik strove.io/&code
+        const originWithoutParams = decoredOrigin.includes('/&code') ? decoredOrigin.split('/&code')[0] : decoredOrigin
+        // console.log('stateParams', stateParams)
 
-              // console.log('origin', origin, 'stateParams', stateParams, 'originHostname', originHostname)
+        const redirectAdress = `${originWithoutParams}/?code=${code}`
+                // console.log('redirectAdress', redirectAdress)
 
-
-        const redirectAdress = `${originHostname}/?code=${code}`
-                console.log('redirectAdress', redirectAdress)
-
-
-        // return window.location.replace(redirectAdress)
+        return window.location.replace(redirectAdress)
       }
     }
 
