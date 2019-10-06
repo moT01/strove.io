@@ -175,6 +175,8 @@ const LoginProvider = ({ children, addProject }) => {
       // }
     }
 
+    return null
+
     if (code) {
       switch (gitProvider) {
         case 'github': {
