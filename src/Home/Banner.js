@@ -57,8 +57,7 @@ const Button = styled.button`
   font-weight: bold;
   line-height: normal;
   letter-spacing: 0.8px;
-  width: ${props => (props.mobile ? '100%' : '55%')};
-  min-width: 70px;
+  width: 100%;
   margin: 5px;
   padding: 0.5vh;
   align-items: center;
