@@ -50,7 +50,11 @@ const SectionWrapper = styled.div`
 const Button = styled.button`
   display: flex;
   flex-direction: row;
-  height: auto;
+  height: 56px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.8px;
   width: ${props => (props.mobile ? '90%' : '55%')};
   min-width: 70px;
   margin: 5px;
