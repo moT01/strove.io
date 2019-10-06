@@ -257,6 +257,10 @@ const StyledTrialInfo = styled.ul`
   }
 `
 
+const StyledH6 = styled.h6`
+  margin: 20px;
+`
+
 const validate = values => {
   let errors = {}
 
@@ -283,14 +287,14 @@ const Banner = () => {
             className="banner-title-wrapper"
             type={isMobileOnly ? 'bottom' : 'right'}
           >
-            <div key="line" className="title-line-wrapper">
+            <div className="title-line-wrapper">
               <div
                 className="title-line"
                 style={{ transform: 'translateX(-64px)' }}
               />
             </div>
-            <h1 key="h1">Strove</h1>
-            <h4 key="content">
+            <h1>Strove</h1>
+            <h4>
               Make programming cheaper, delivering features faster,
               collaboration easier
             </h4>
@@ -311,7 +315,10 @@ const Banner = () => {
                   'Get started'
                 )}
               </Button>
-              <h6 key="content">Or, if you're a corporate user:</h6>
+              <StyledTrialInfo>
+                <li>Free for non-commercial use</li>
+              </StyledTrialInfo>
+              <StyledH6>Or, if you're a corporate user:</StyledH6>
               <Formik
                 initialValues={{
                   email: '',
