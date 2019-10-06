@@ -44,6 +44,7 @@ const LoginProvider = ({ children, addProject }) => {
     selectors.api.getUserField('bitbucketRefreshToken')
   )
 
+  console.log(window.location, 'window')
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     client,
     fetchPolicy: 'no-cache',
@@ -130,42 +131,45 @@ const LoginProvider = ({ children, addProject }) => {
     if (loginState) {
       /* %2C is an encoding for , */
       const stateParams = loginState.split('%2C')
-      const isOpensource = true // stateParams[1]
-      console.log('stateparams', stateParams)
-      const origin = stateParams[2]
+      console.log(stateParams)
+      const isOpensource = stateParams[1] === 'true' ? true : false
+      console.log(isOpensource)
+      const origin = stateParams[2] || null
+      console.log(origin)
+      console.log('boolean', Boolean(isOpensource))
 
-      const href = window.location.href
+      // const href = window.location.href
       // if (!href.includes('/faq') && isOpensource) {
-      if (true && isOpensource) {
-        // return window.location.replace(
-        //   `http://localhost:8000/faq?code=${code}&state=${
-        //     window?.location?.href
-        //       ?.match(/state=(.+)/g)
-        //       ?.toString()
-        //       .split('=')[1]
-        //   }`
-        // )
+      //   // if (true && isOpensource) {
+      //   // return window.location.replace(
+      //   //   `http://localhost:8000/faq?code=${code}&state=${
+      //   //     window?.location?.href
+      //   //       ?.match(/state=(.+)/g)
+      //   //       ?.toString()
+      //   //       .split('=')[1]
+      //   //   }`
+      //   // )
 
-        return window.location.replace(
-          `${href}?code=${code}&state=${
-            window?.location?.href
-              ?.match(/state=(.+)/g)
-              ?.toString()
-              .split('=')[1]
-          }`
-        )
-      }
+      //   return window.location.replace(
+      //     `${href}?code=${code}&state=${
+      //       window?.location?.href
+      //         ?.match(/state=(.+)/g)
+      //         ?.toString()
+      //         .split('=')[1]
+      //     }`
+      //   )
+      // }
 
-      gitProvider = stateParams[0]
+      // gitProvider = stateParams[0]
 
-      const loggedUri = stateParams[2]
-      decoredLoggedUri = decodeURIComponent(loggedUri)
-      console.log(
-        'stateParams',
-        stateParams,
-        'decoredLoggedUri',
-        decoredLoggedUri
-      )
+      // const loggedUri = stateParams[2]
+      // decoredLoggedUri = decodeURIComponent(loggedUri)
+      // console.log(
+      //   'stateParams',
+      //   stateParams,
+      //   'decoredLoggedUri',
+      //   decoredLoggedUri
+      // )
       // if (decoredLoggedUri) {
       //   window.location.replace(decoredLoggedUri)
       // }
