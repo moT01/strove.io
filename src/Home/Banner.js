@@ -126,10 +126,24 @@ const EmailFormWrapper = styled.div`
   transition: all 0.2s ease;
   opacity: 0.9;
 
+  ${({ isMobile }) =>
+    isMobile &&
+    css`
+      flex-direction: column;
+      box-shadow: none;
+      border-radius: 5px;
+    `}
+
   &:hover {
     opacity: 1;
     box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
       0 9px 26px 0 rgba(174, 174, 186, 0.16);
+
+    ${({ isMobile }) =>
+      isMobile &&
+      css`
+        box-shadow: none;
+      `}
   }
 
   input {
@@ -153,6 +167,16 @@ const EmailFormWrapper = styled.div`
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+
+    ${({ isMobile }) =>
+      isMobile &&
+      css`
+        flex-direction: column;
+        box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
+          0 8px 24px 0 rgba(174, 174, 186, 0.16);
+        border-radius: 5px;
+        width: 100%;
+      `}
   }
 
   svg {
@@ -186,6 +210,16 @@ const EmailFormWrapper = styled.div`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
+
+    ${({ isMobile }) =>
+      isMobile &&
+      css`
+        box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
+          0 8px 24px 0 rgba(174, 174, 186, 0.16);
+        border-radius: 5px;
+        width: 100%;
+        margin-top: 10px;
+      `}
 
     ${props =>
       !props.disabled
@@ -325,38 +359,73 @@ const Banner = () => {
               >
                 {({ errors, touched, values }) => (
                   <Form>
-                    <EmailFormWrapper disabled={errors.email || !values.email}>
+                    <EmailFormWrapper
+                      disabled={errors.email || !values.email}
+                      isMobile={isMobileOnly}
+                    >
                       <Field
                         type="email"
                         name="email"
                         placeholder="Your Email"
                       />
                       {console.log('errors', errors)}
-                      <svg
-                        className="Form-fieldGroupIcon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                      >
-                        <g
-                          fill="none"
-                          fill-rule="evenodd"
-                          stroke="#9CA2B4"
-                          stroke-width="2"
-                        >
-                          <path d="M2 4h20v16H2z"></path>
-                          <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                        </g>
-                      </svg>
-                      <button
-                        type="submit"
-                        isDisabled={
-                          values.email && errors.email && touched.email
-                        }
-                      >
-                        Request demo
-                      </button>
+                      {isMobileOnly ? (
+                        <>
+                          <svg
+                            className="Form-fieldGroupIcon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <g
+                              fill="none"
+                              fill-rule="evenodd"
+                              stroke="#9CA2B4"
+                              stroke-width="2"
+                            >
+                              <path d="M2 4h20v16H2z"></path>
+                              <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                            </g>
+                          </svg>
+                          <button
+                            type="submit"
+                            isDisabled={
+                              values.email && errors.email && touched.email
+                            }
+                          >
+                            Request demo
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <svg
+                            className="Form-fieldGroupIcon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <g
+                              fill="none"
+                              fill-rule="evenodd"
+                              stroke="#9CA2B4"
+                              stroke-width="2"
+                            >
+                              <path d="M2 4h20v16H2z"></path>
+                              <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                            </g>
+                          </svg>
+                          <button
+                            type="submit"
+                            isDisabled={
+                              values.email && errors.email && touched.email
+                            }
+                          >
+                            Request demo
+                          </button>
+                        </>
+                      )}
                     </EmailFormWrapper>
                     <StyledTrialInfo>
                       <li>Free 14-day Demo</li>
