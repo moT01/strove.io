@@ -144,7 +144,6 @@ svg g {
 }
 .home-page h2 {
   text-align: center;
-  font-weight: 300;
   font-size: 28px;
   color: #314659;
   letter-spacing: 0.6px;
@@ -267,7 +266,7 @@ svg g {
   align-items: center;
 }
 .page2-line {
-  margin: 148px auto 24px;
+  margin: 50px auto 24px;
   width: 114px;
 }
 .page2-line .title-line {
