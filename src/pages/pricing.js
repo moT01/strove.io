@@ -465,12 +465,14 @@ const PricingPage = () => {
                     </StyledTrialInfo>
                   </StripeCheckout>
                 ) : (
+                  <>
                   <Button disabled>
                     <ButtonText team>Already subscribed</ButtonText>
-                    <StyledTrialInfo>
+                  </Button>
+                  <StyledTrialInfo>
                       <li>Thank you for subscribing!</li>
                     </StyledTrialInfo>
-                  </Button>
+                  </>
                 )}
               </PricingWrapper>
             </PricingSection>
