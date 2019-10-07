@@ -28,6 +28,8 @@ const StyledTrialInfo = styled.ul`
   padding: 0;
   margin: 0;
 
+  color: #fff;
+
   li {
     display: inline-block;
     margin-right: 8px;
@@ -36,7 +38,7 @@ const StyledTrialInfo = styled.ul`
     &:before {
       margin-right: 0.3em;
       content: '✔';
-      color: #0072ce;
+      color: #fff;
     }
   }
 `
@@ -56,6 +58,7 @@ const CardsWrapper = styled.div`
 
 const StyledH6 = styled.h6`
   margin: 20px;
+  color: #0072ce;
 `
 
 const EmailFormWrapper = styled.div`
@@ -64,7 +67,7 @@ const EmailFormWrapper = styled.div`
   width: 100%;
   min-width: 400px;
   flex-wrap: wrap;
-  margin: 20px 0;
+  margin: 10px 0 0;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
@@ -147,7 +150,7 @@ const EmailFormWrapper = styled.div`
     width: 156px;
     height: 56px;
     color: #fff;
-    background: #0072ce;
+    background: #000;
     text-transform: uppercase;
     display: block;
     text-align: center;
@@ -187,10 +190,6 @@ const EmailFormWrapper = styled.div`
             cursor: not-allowed;
           `}
   }
-`
-
-const StyledForm = styled(Form)`
-  width: 100%;
 `
 
 const Button = styled.button`
@@ -499,7 +498,7 @@ const PricingPage = () => {
                   }}
                 >
                   {({ errors, touched, values }) => (
-                    <StyledForm>
+                    <Form>
                       <EmailFormWrapper
                         disabled={errors.email || !values.email}
                         isMobile={isMobileOnly}
@@ -543,7 +542,7 @@ const PricingPage = () => {
                       {emailSent && (
                         <StyledH6>Thank you, well get in touch soon!</StyledH6>
                       )}
-                    </StyledForm>
+                    </Form>
                   )}
                 </Formik>
               </PricingWrapper>
