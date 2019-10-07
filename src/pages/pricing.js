@@ -337,19 +337,19 @@ const Contact = styled(PlanTitle)`
   width: 75%;
 `
 const Price = styled(PlanTitle)`
-  font-size: 6vh;
+  font-size: 30px;
 `
 const PlanSubTitle = styled(PlanTitle)`
-  font-size: 2vh;
+  font-size: 20px;
 `
 const ButtonText = styled(PlanTitle)`
-  font-size: 1rem;
+  font-size: 16px;
 `
 const PlanDesc = styled(Feature)`
-  font-size: 1.5vh;
+  font-size: 15px;
 `
 const CardTitle = styled(PlanTitle)`
-  font-size: 3vh;
+  font-size: 40px;
 `
 
 const StripeButton = styled(Button)`
@@ -466,10 +466,10 @@ const PricingPage = () => {
                   </StripeCheckout>
                 ) : (
                   <>
-                  <Button disabled>
-                    <ButtonText team>Already subscribed</ButtonText>
-                  </Button>
-                  <StyledTrialInfo>
+                    <Button disabled>
+                      <ButtonText team>Already subscribed</ButtonText>
+                    </Button>
+                    <StyledTrialInfo>
                       <li>Thank you for subscribing!</li>
                     </StyledTrialInfo>
                   </>
