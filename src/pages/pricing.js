@@ -328,12 +328,11 @@ const Feature = styled.p`
 `
 const PlanTitle = styled.h1`
   margin: 10px;
-  font-size: 4vh;
+  font-size: 26px;
   color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
   font-weight: 500;
 `
 const Contact = styled(PlanTitle)`
-  font-size: 2.5vh;
   width: 75%;
 `
 const Price = styled(PlanTitle)`
