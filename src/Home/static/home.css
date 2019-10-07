@@ -216,10 +216,9 @@ svg g {
   transform: translateY(-5px);
 }
 .page1-box-wrapper li .page1-box h3 {
-  color: #0d1a26;
   font-size: 16px;
   margin: 8px auto;
-  font-weight: 500;
+  font-weight: 700;
 }
 .page1-point-wrapper {
   position: absolute;
