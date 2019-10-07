@@ -467,6 +467,9 @@ const PricingPage = () => {
                 ) : (
                   <Button disabled>
                     <ButtonText team>Already subscribed</ButtonText>
+                    <StyledTrialInfo>
+                      <li>Thank you for subscribing!</li>
+                    </StyledTrialInfo>
                   </Button>
                 )}
               </PricingWrapper>
