@@ -66,12 +66,12 @@ const EmailFormWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   min-width: 400px;
+
   flex-wrap: wrap;
   margin: 10px 0 0;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
-  background: #fff;
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -79,6 +79,7 @@ const EmailFormWrapper = styled.div`
   transition: all 0.2s ease;
   opacity: 0.9;
   align-items: center;
+  background: #0072ce;
 
   ${({ isMobile }) =>
     isMobile &&
