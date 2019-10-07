@@ -282,7 +282,7 @@ const ModalWrapper = styled.div`
 
 const Text = styled.p`
   color: #0072ce;
-  font-size: 1rem;
+  font-size: 15px;
   margin-left: 2%;
   margin-bottom: 12px;
   white-space: normal;
@@ -322,7 +322,7 @@ const PricingSection = styled.div`
 
 const Feature = styled.p`
   color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
-  font-size: 1.7vh;
+  font-size: 15px;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
 `
