@@ -334,6 +334,10 @@ const Banner = () => {
             Make programming cheaper, delivering features faster, collaboration
             easier
           </h4>
+          <h3>
+            Everything programmers need. All major Linux-supported languages and
+            tools such as git, now in cloud
+          </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
