@@ -245,10 +245,9 @@ const Card = styled.div`
   border-color: #0072ce;
   border-width: 1px;
   border-style: solid;
-  padding: 20px;
+  padding: 50px 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
 
-  height: 85vh;
   width: 40vw;
   @media (max-width: 1366px) {
     width: 80vw;
