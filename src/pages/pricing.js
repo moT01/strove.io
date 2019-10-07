@@ -27,8 +27,7 @@ const StyledTrialInfo = styled.ul`
   font-size: 13px;
   padding: 0;
   margin: 0;
-
-  color: #fff;
+  color: ${({ team }) => (team ? '#fff' : '#0072ce')};
 
   li {
     display: inline-block;
@@ -38,7 +37,7 @@ const StyledTrialInfo = styled.ul`
     &:before {
       margin-right: 0.3em;
       content: '✔';
-      color: #fff;
+      color: ${({ team }) => (team ? '#fff' : '#0072ce')};
     }
   }
 `
@@ -249,7 +248,7 @@ const Card = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
 
-  height: 70vh;
+  height: 85vh;
   width: 40vw;
   @media (max-width: 1366px) {
     width: 80vw;
@@ -433,6 +432,9 @@ const PricingPage = () => {
                 <Button disabled>
                   <ButtonText team>Already subscribed</ButtonText>
                 </Button>
+                <StyledTrialInfo>
+                  <li>Free for non-commercial use</li>
+                </StyledTrialInfo>
               </PricingWrapper>
               <PricingWrapper>
                 <PlanTitle>Pro</PlanTitle>
@@ -456,6 +458,11 @@ const PricingPage = () => {
                     <StripeButton>
                       <ButtonText team>Choose Pro</ButtonText>
                     </StripeButton>
+                    <StyledTrialInfo>
+                      <li>Free 14-day Demo</li>
+                      <li>No credit card needed</li>
+                      <li>No setup</li>
+                    </StyledTrialInfo>
                   </StripeCheckout>
                 ) : (
                   <Button disabled>
@@ -535,7 +542,7 @@ const PricingPage = () => {
                           Request demo
                         </button>
                       </EmailFormWrapper>
-                      <StyledTrialInfo>
+                      <StyledTrialInfo team>
                         <li>Free 14-day Demo</li>
                         <li>No credit card needed</li>
                         <li>No setup</li>
