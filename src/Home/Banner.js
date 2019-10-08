@@ -49,6 +49,9 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
+const LeftSectionWrapper = styled(SectionWrapper)`
+  width: 50%;
+`
 
 const Button = styled.button`
   display: flex;
@@ -290,6 +293,11 @@ const StyledTrialInfo = styled.ul`
   }
 `
 
+const H4 = styled.h4`
+  font-size: 1rem;
+  font-weight: 700;
+`
+
 const StyledForm = styled(Form)`
   width: 100%;
 `
@@ -444,15 +452,17 @@ const Banner = () => {
       <div className="banner-wrapper">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
-            <h2>Focus on what's important</h2>
-            <h4>Strove lets programmers be productive in seconds</h4>
-            <h2>Easiest collaboration out there</h2>
-            <h4>Team members can work from any computer and any location</h4>
-            <h2>Forget that "it works on my machine" issue ever existed</h2>
-            <h4>
-              Programmers get access to instances of the same cloud environment
-              so they can focus on creating new features
-            </h4>
+            <LeftSectionWrapper isMobile={isMobile}>
+              <h2>Focus on what's important</h2>
+              <H4>Strove lets programmers be productive in seconds</H4>
+              <h2>Easiest collaboration out there</h2>
+              <H4>Team members can work from any computer and any location</H4>
+              <h2>Forget that "it works on my machine" issue ever existed</h2>
+              <H4>
+                Programmers get access to instances of the same cloud
+                environment so they can focus on creating new features
+              </H4>
+            </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
             <Video isMobile={isMobile} controls>
