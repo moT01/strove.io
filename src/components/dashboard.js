@@ -286,10 +286,6 @@ const Dashboard = () => {
             type: C.api.REMOVE_ITEM,
             payload: { storeKey: 'myProjects', id },
           }),
-          () => ({
-            type: C.api.FETCH_SUCCESS,
-            payload: { storeKey: 'deleteProject', data: true },
-          }),
           () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
         ],
       })
