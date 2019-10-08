@@ -42,7 +42,7 @@ Raise an issue! We'll take a look!
 
 # Supported languages
 
-Strove supports all major languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, Chicken and many more.
+Strove supports all major languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, and many more.
 
 <div align='center'>
 <table>
