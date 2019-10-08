@@ -244,7 +244,7 @@ const Features = () => {
           </Parallax>
         )}
         <div className="title-line-wrapper page1-line">
-          <div className="title-line" />
+          {/* <div className="title-line" /> */}
         </div>
         <div className="tiles-wrapper" style={{ width: '80vw' }}>
           {children}
