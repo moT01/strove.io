@@ -33,7 +33,7 @@ const Legal = () => (
 
     <TextWell>
       <StyledHeader>Terms and Conditions</StyledHeader>
-      <h6>Last Edited on 2019-06–06</h6>
+      <h6>Last Edited on 2019-10–08</h6>
       <p>
         These Terms and Conditions govern your relationship with
         https://strove.io website the "Service" and the creation service therein
@@ -52,8 +52,7 @@ const Legal = () => (
       <p>
         Some parts of the Service are billed on a subscription basis
         Subscription(s). You will be billed in advance on a recurring and
-        periodic basis ("Billing Cycle"). Billing cycles are set on a monthly
-        basis.
+        periodic basis. Billing cycles are set on a monthly basis.
       </p>
       <p>
         At the end of each Billing Cycle, your Subscription will automatically
@@ -94,8 +93,8 @@ const Legal = () => (
       </p>
       <h2>Refunds</h2>
       <p>
-        Certain refund requests for Subscriptions may be considered by (Strove)
-        on a case-by-case basis and granted in sole discretion of (Strove)
+        Certain refund requests for Subscriptions may be considered by Strove on
+        a case-by-case basis and granted in sole discretion of Strove
       </p>
       <h2>Content</h2>
       <p>
@@ -205,7 +204,7 @@ const Legal = () => (
       <h2> Governing Law </h2>
       <p>
         These Terms shall be governed and construed in accordance with the laws
-        of (Netherlands), without regard to its conflict of law provisions.
+        of Poland, without regard to its conflict of law provisions.
       </p>
       <p>
         Our failure to enforce any right or provision of these Terms will not be
