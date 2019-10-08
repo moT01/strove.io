@@ -244,7 +244,7 @@ const Legal = () => (
       <p>
         {' '}
         Us If you have any questions about these Terms, please contact us
-        at contact@codengo.page
+        at contact@strove.io
       </p>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
