@@ -92,6 +92,7 @@ module.exports = {
           'GITLAB_CLIENT_ID',
           'BITBUCKET_CLIENT_ID',
           'BITBUCKET_CLIENT_SECRET',
+          'IS_OPENSOURCE',
         ],
       },
     },
