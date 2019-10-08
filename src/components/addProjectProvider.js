@@ -98,7 +98,7 @@ const AddProjectProvider = ({ children }) => {
       {isContinuing && (
         <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" />
       )}
-      {isAdding && (
+      {isAdding && isLoading && (
         <FullScreenLoader type="addProject" isFullScreen color="#0072ce" />
       )}
     </>
