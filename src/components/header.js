@@ -245,7 +245,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         setPorts(
           project.additionalPorts.map((portPair, index) => {
             let href
-            if (process.env.IS_OPENSOURCE) {
+            if (process.env.IS_OPENSOURCE === true) {
               href = `https://${project.additionalPorts[index][1]}.vmopen${
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
