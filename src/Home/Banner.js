@@ -262,6 +262,17 @@ const StyledModal = styled(Modal)`
   }
 `
 
+const StyledBannerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  width: 100%;
+  position: relative;
+  background-color: #0072ce;
+  color: #fff;
+`
+
 const StyledIcon = styled(Icon)`
   position: absolute;
   top: 15px;
@@ -449,7 +460,7 @@ const Banner = () => {
         )}
         <GetStarted closeModal={closeModal} />
       </StyledModal>
-      <div className="banner-wrapper">
+      <StyledBannerWrapper>
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
@@ -470,7 +481,7 @@ const Banner = () => {
             </Video>
           </SectionWrapper>
         </SectionDivider>
-      </div>
+      </StyledBannerWrapper>
       <StyledModal
         isOpen={isModalVisible}
         onRequestClose={closeModal}
