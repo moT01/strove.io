@@ -440,10 +440,6 @@ const Banner = () => {
       <div className="banner-wrapper">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
-            {/* <QueueAnim
-              className="banner-title-wrapper"
-              type={isMobileOnly ? 'bottom' : 'right'}
-            > */}
             <h2>Focus on what's important</h2>
             <h4>Strove lets programmers be productive in seconds</h4>
             <h2>Easiest collaboration out there</h2>
@@ -453,7 +449,6 @@ const Banner = () => {
               Programmers get access to instances of the same cloud environment
               so they can focus on creating new features
             </h4>
-            {/* </QueueAnim> */}
           </SectionWrapper>
           <SectionWrapper>
             <Video isMobile={isMobile} controls>
