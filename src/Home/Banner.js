@@ -36,6 +36,7 @@ const ButtonFadeIn = keyframes`
 const SectionDivider = styled.div`
   display: flex;
   flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
+  align-items: center;
   height: 100%;
   width: 100%;
 `
@@ -439,20 +440,20 @@ const Banner = () => {
       <div className="banner-wrapper">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
-            <QueueAnim
+            {/* <QueueAnim
               className="banner-title-wrapper"
               type={isMobileOnly ? 'bottom' : 'right'}
-            >
-              <h2>Focus on what's important</h2>
-              <h4>Strove lets programmers be productive in seconds</h4>
-              <h2>Easiest collaboration out there</h2>
-              <h4>Team members can work from any computer and any location</h4>
-              <h2>Forget that "it works on my machine" issue ever existed</h2>
-              <h4>
-                Programmers get access to instances of the same cloud
-                environment so they can focus on creating new features
-              </h4>
-            </QueueAnim>
+            > */}
+            <h2>Focus on what's important</h2>
+            <h4>Strove lets programmers be productive in seconds</h4>
+            <h2>Easiest collaboration out there</h2>
+            <h4>Team members can work from any computer and any location</h4>
+            <h2>Forget that "it works on my machine" issue ever existed</h2>
+            <h4>
+              Programmers get access to instances of the same cloud environment
+              so they can focus on creating new features
+            </h4>
+            {/* </QueueAnim> */}
           </SectionWrapper>
           <SectionWrapper>
             <Video isMobile={isMobile} controls>
