@@ -42,23 +42,18 @@ Raise an issue! We'll take a look!
 
 # Supported languages
 
-Strove supports all major languages including: Python, TypeScript, R, Haskell, Go, Javascript, PHP, C, Elixir, C#, Java, Scala, Rust, Ruby, C++, Chicken and many more.
+Strove supports all major languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, Chicken and many more.
 
 <div align='center'>
 <table>
 <tr align="center">
 <td align="center"><img src="./src/images/readmeAssets/python.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/typescript.png" width="120px"></td>
-<td align="center"><img src="./src/images/readmeAssets/r.png" width="120px"></td>
-<td align="center"><img src="./src/images/readmeAssets/haskell.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/go.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/php.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/c.png" width="120px"></td>
-<td align="center"><img src="./src/images/readmeAssets/elixir.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/csharp.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/java.png" width="120px"></td>
-<td align="center"><img src="./src/images/readmeAssets/scala.png" width="120px"></td>
-<td align="center"><img src="./src/images/readmeAssets/rust.png" width="120px"></td>
 <td align="center"><img src="./src/images/readmeAssets/ruby.png" width="120x"></td>
 <td align="center"><img src="./src/images/readmeAssets/c++.png" width="120px"></td>
 

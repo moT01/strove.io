@@ -142,7 +142,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header:
       'I want a particular language version that\x27s not yet supported. What should I do to make it work?',
     paragraph:
-      'Right now they only way is to contact us on contact@codengo.page. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
+      'Right now they only way is to contact us on contact@strove.io. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
   },
   {
     header: 'Can I use Docker inside my project?',
@@ -151,7 +151,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
   },
   {
     header: 'I didn\x27t find an answer I was looking for.',
-    paragraph: 'No worries, contact us at contact@codengo.page',
+    paragraph: 'No worries, contact us at contact@strove.io',
   },
 ]
 

@@ -1,4 +1,3 @@
-import "react-github-button/assets/style.css"
 import "./header.css"
 import "./home.css"
 import "./footer.css"
