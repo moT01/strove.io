@@ -6,6 +6,7 @@ import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'images/logos'
 import { isMobileOnly } from 'react-device-detect'
+import styled from 'styled-components'
 
 const { TweenOneGroup } = TweenOne
 
@@ -97,6 +98,14 @@ const pointPos = [
   { x: 35, y: 5 },
   { x: 50, y: 50, opacity: 0.2 },
 ]
+
+const StyledFeatureTitle = styled.h3`
+  color: rgb(105, 123, 140);
+`
+
+const StyledFeatureContent = styled.p`
+  color: rgb(105, 123, 140);
+`
 
 const Features = () => {
   const [hoverNum, setHoverNum] = useState()
@@ -194,8 +203,8 @@ const Features = () => {
               <VSCode width="38px" height="auto" fill={item.color} />
             )}
           </div>
-          <h3>{item.title}</h3>
-          <p>{item.content}</p>
+          <StyledFeatureTitle>{item.title}</StyledFeatureTitle>
+          <StyledFeatureContent>{item.content}</StyledFeatureContent>
         </div>
       </li>
     )

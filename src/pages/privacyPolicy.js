@@ -320,7 +320,7 @@ const Legal = () => (
         </li>
         <h4>
           If at any time you would like to unsubscribe from receiving future
-          emails, you can email us at contact@codengo.page
+          emails, you can email us at contact@strove.io
         </h4>
         <li>
           Follow the instructions at the bottom of each email. and we will
@@ -335,7 +335,7 @@ const Legal = () => (
       <h5>CodeNGo</h5>
       <h5>Andrespol</h5>
       <h5>Rokicińska 121 street</h5>
-      <h5>contact@codengo.page</h5>
+      <h5>contact@strove.io</h5>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
   </>
