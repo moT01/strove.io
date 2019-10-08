@@ -22,13 +22,17 @@ const TextWell = styled.div`
   font-size: 20px;
 `
 
+const StyledHeader = styled.h1`
+  align-self: center;
+`
+
 const Legal = () => (
   <>
     <SEO title="Terms And Conditions" />
     <Header siteTitle="Strove" />
 
     <TextWell>
-      <h1 style={{ alignSelf: 'center' }}>Terms and Conditions</h1>
+      <StyledHeader>Terms and Conditions</StyledHeader>
       <h6>Last Edited on 2019-06–06</h6>
       <p>
         These Terms and Conditions govern your relationship with
