@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components'
 
 const AnimateCloud = keyframes`
   0% {
-    right: 0;
+    right: -20vw;
   }
   100% {
     right: 100vw;
@@ -10,7 +10,7 @@ const AnimateCloud = keyframes`
 `
 const AnimateMediumCloud = keyframes`
   0% {
-    right: 0;
+    right: -20vw;
   }
   100% {
     right: 100vw;
@@ -19,7 +19,7 @@ const AnimateMediumCloud = keyframes`
 
 const AnimateSmallCloud = keyframes`
   0% {
-    right: 0;
+    right: -20vw;
   }
   100% {
     right: 100vw;
