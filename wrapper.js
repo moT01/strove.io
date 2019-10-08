@@ -119,13 +119,40 @@ const LoginProvider = ({ children, addProject }) => {
       ?.toString()
       .split('=')[1]
 
-    const state = window?.location?.href
-      ?.match(/state=([a-z]+)/g)
+    const loginState = window?.location?.href
+      ?.match(/state=(.+)/g)
       ?.toString()
       .split('=')[1]
 
+    let gitProvider
+
+    if (loginState) {
+      /* %2C is an encoding for , */
+      const stateParams = loginState.split('%2C')
+
+      gitProvider = stateParams[0]
+
+      const shouldBeRedirected = stateParams[1]
+
+      const origin = stateParams[2]
+
+      if (shouldBeRedirected && origin) {
+        const decoredOrigin = decodeURIComponent(origin)
+
+        // Gitlab login makes extremely messy redirect lik strove.io/&code
+        const originWithoutParams = decoredOrigin.includes('/&code')
+          ? decoredOrigin.split('/&code')[0]
+          : decoredOrigin
+
+        const redirectAdress = `${originWithoutParams}/?code=${code}&state=${gitProvider}`
+
+        /* Redirect to project */
+        return window.location.replace(redirectAdress)
+      }
+    }
+
     if (code) {
-      switch (state) {
+      switch (gitProvider) {
         case 'github': {
           if (!localStorage.getItem('token') || !githubToken) {
             dispatch(

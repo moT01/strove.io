@@ -91,7 +91,7 @@ const topics = [
       Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
   },
   {
-    header: 'Why do i need to log in with Github/Gitlab/Bitbucket?',
+    header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
     paragraph:
       'Aforementioned providers only allow apps to clone if the user is logged in.',
   },
