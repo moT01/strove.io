@@ -247,15 +247,15 @@ const HeaderComponent = ({ siteTitle, location }) => {
             let href
             /* Env's are loaded as strings on production */
             if (process.env.IS_OPENSOURCE === "true") {
-              href = `https://${project.additionalPorts[index][1]}.vmopen${
+              href = `https://${portPair[1]}.vmopen${
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
             } else if (process.env.NODE_ENV === 'development') {
-              href = `https://${project.additionalPorts[index][1]}.vmdev${
+              href = `https://${portPair[1]}.vmdev${
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
             } else {
-              href = `https://${project.additionalPorts[index][1]}.${
+              href = `https://${portPair[1]}.${
                 project.machineName
               }.silisky.com`
             }
