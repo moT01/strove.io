@@ -1,6 +1,11 @@
 import React, { useState, memo } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import Logos from 'components/logos.js'
+import styled from 'styled-components'
+
+const StyledTitle = styled.h2`
+  font-weight: 600;
+`
 
 const Technologies = () => {
   const [selectedLogo, setSelectedLogo] = useState()
@@ -15,7 +20,7 @@ const Technologies = () => {
         <div className="title-line-wrapper page2-line">
           <div className="title-line" />
         </div>
-        <h2>On the shoulders of giants</h2>
+        <StyledTitle>On the shoulders of giants</StyledTitle>
         <QueueAnim
           key="queue"
           type="bottom"
