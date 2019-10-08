@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components'
 
 const AnimateCloud = keyframes`
   0% {
-    right: 0;
+    right: -20vw;
   }
   100% {
     right: 100vw;
@@ -10,7 +10,7 @@ const AnimateCloud = keyframes`
 `
 const AnimateMediumCloud = keyframes`
   0% {
-    right: 0;
+    right: -20vw;
   }
   100% {
     right: 100vw;
@@ -19,7 +19,7 @@ const AnimateMediumCloud = keyframes`
 
 const AnimateSmallCloud = keyframes`
   0% {
-    right: 0;
+    right: -20vw;
   }
   100% {
     right: 100vw;
@@ -69,7 +69,7 @@ const MediumCloud = styled.div`
     height: 9vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: -20vh;
+    top: -15vh;
     animation: ${AnimateMediumCloud} 57s linear infinite;
     z-index: -1;
   }
@@ -105,7 +105,7 @@ const SmallCloud = styled.div`
     height: 7vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 1vh;
+    top: 6vh;
     animation: ${AnimateSmallCloud} 40s linear infinite;
     z-index: -1;
   }
