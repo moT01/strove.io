@@ -64,7 +64,7 @@ const featuresCN = [
   {
     title: "It's open source",
     content:
-      'Contribute! Strove has been built with contributors in mind. This page is hosted on github as well',
+      'Contribute! Strove has been built with contributors in mind: https://github.com/stroveio/strove.io-client',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg',
     color: '#FA8C16',
     shadowColor: 'rgba(250,140,22,.12)',
