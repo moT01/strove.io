@@ -139,7 +139,7 @@ const LoginProvider = ({ children, addProject }) => {
       if (shouldBeRedirected && origin) {
         const decoredOrigin = decodeURIComponent(origin)
 
-        // Gitlal login makes extremely messy redirect lik strove.io/&code
+        // Gitlab login makes extremely messy redirect lik strove.io/&code
         const originWithoutParams = decoredOrigin.includes('/&code')
           ? decoredOrigin.split('/&code')[0]
           : decoredOrigin
