@@ -11,6 +11,7 @@ import RESET_CRON from './resetCron'
 import ACTIVE_PROJECT from './activeProjectSubscription'
 import BITBUCKET_LOGIN from './bitbucketAuth'
 import SEND_EMAIL from './sendEmail'
+import GET_BITBUCKET_TOKEN from './getBitbucketToken'
 
 export {
   ADD_PROJECT,
@@ -26,4 +27,5 @@ export {
   ACTIVE_PROJECT,
   BITBUCKET_LOGIN,
   SEND_EMAIL,
+  GET_BITBUCKET_TOKEN,
 }
