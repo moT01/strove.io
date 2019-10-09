@@ -45,6 +45,7 @@ const LoginProvider = ({ children, addProject }) => {
   )
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
+    variables: { email: user.email },
     client,
     fetchPolicy: 'no-cache',
     context: {
@@ -56,7 +57,8 @@ const LoginProvider = ({ children, addProject }) => {
   })
 
   const activeProjectData =
-    activeProject?.data && activeProject.data.activeProject
+    activeProject?.data?.activeProject?.machineId &&
+    activeProject.data.activeProject
   const machineId = activeProjectData && activeProjectData.machineId
   const editorPort = activeProjectData && activeProjectData.editorPort
   const id = activeProjectData && activeProjectData.id
