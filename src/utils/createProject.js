@@ -105,6 +105,8 @@ const createProject = async ({
           repoData = values.find(
             repo => repo.name.toLowerCase() === name.toLowerCase()
           )
+
+          if (!repoData) setModalContent('UnableToClone')
         }
         break
       default:
