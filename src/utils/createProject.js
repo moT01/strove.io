@@ -1,19 +1,17 @@
 import ApolloClient from 'apollo-boost'
 import { navigate } from 'gatsby'
-
 import { mutation } from 'utils'
 import { C, actions } from 'state'
-import { ADD_PROJECT, GET_REPO_INFO } from 'queries'
-import getBitbucketToken from './getBitbucketToken'
-
+import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
-
+const stroveClient = new ApolloClient({
+  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
+})
 const startProject = () => {
   navigate('/app/editor/')
 }
-
 const createProject = async ({
   repoLink,
   dispatch,
@@ -22,7 +20,6 @@ const createProject = async ({
   setModalContent,
 }) => {
   const query = GET_REPO_INFO
-
   const repoUrlParts = repoLink.split('/')
   let repoProvider = repoUrlParts[2].split('.')[0]
   if (repoProvider.toString().length > 6)
@@ -32,7 +29,6 @@ const createProject = async ({
   const variables = { owner, name }
   try {
     let repoData = null
-
     switch (repoProvider.toString()) {
       case 'github':
         if (user.githubToken) {
@@ -49,7 +45,6 @@ const createProject = async ({
               variables,
               fetchPolicy: 'no-cache',
             })
-
             repoData = data.repository
           } catch (error) {
             dispatch({
@@ -82,33 +77,41 @@ const createProject = async ({
         }
         break
       case 'bitbucket':
-        const access_token = await getBitbucketToken(user.bitbucketRefreshToken)
-
-        const { values } = await fetch(
-          `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
-          {
+        const access_token = await stroveClient.query({
+          query: GET_BITBUCKET_TOKEN,
+          context: {
             headers: {
-              Authorization: `Bearer ${access_token}`,
-              'Content-Type': 'application/x-www-form-urlencoded',
+              Authorization: `Bearer ${user.siliskyToken}`,
+              'User-Agent': 'node',
             },
-            method: 'GET',
-          }
-        ).then(res => res.json())
+          },
+          fetchPolicy: 'no-cache',
+        })
 
-        repoData = values.find(
-          repo => repo.name.toLowerCase() === name.toLowerCase()
-        )
+        const token = access_token?.data?.getbitBucketToken
+
+        if (token) {
+          const { values } = await fetch(
+            `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              method: 'GET',
+            }
+          ).then(res => res.json())
+
+          repoData = values.find(
+            repo => repo.name.toLowerCase() === name.toLowerCase()
+          )
+        }
         break
       default:
         break
     }
-
     if (repoData) {
-      const {
-        description,
-        name /* add language and color */,
-      } = repoData
-
+      const { description, name /* add language and color */ } = repoData
       dispatch(
         mutation({
           name: 'addProject',
@@ -144,5 +147,4 @@ const createProject = async ({
     setModalContent('TryAgainLater')
   }
 }
-
 export default createProject
