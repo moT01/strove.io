@@ -44,26 +44,17 @@ const LoginProvider = ({ children, addProject }) => {
     selectors.api.getUserField('bitbucketRefreshToken')
   )
 
-  // let id = null
-  // let machineId = null
-  // let editorPort = null
-
-  // useEffect(() => {
-  //   if (user?.email) {
-  let activeProject = null
-  if (user?.email) {
-    activeProject = useSubscription(ACTIVE_PROJECT, {
-      variables: { email: user?.email },
-      client,
-      fetchPolicy: 'no-cache',
-      context: {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'User-Agent': 'node',
-        },
+  const activeProject = useSubscription(ACTIVE_PROJECT, {
+    variables: { email: user?.email || 'null' },
+    client,
+    fetchPolicy: 'no-cache',
+    context: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'User-Agent': 'node',
       },
-    })
-  }
+    },
+  })
 
   const activeProjectData =
     activeProject?.data?.activeProject?.machineId &&
@@ -71,8 +62,6 @@ const LoginProvider = ({ children, addProject }) => {
   const machineId = activeProjectData?.machineId
   const editorPort = activeProjectData?.editorPort
   const id = activeProjectData?.id
-  // }
-  // }, [user])
 
   const checkAwake = () => {
     let then = moment().format('X')
@@ -124,7 +113,7 @@ const LoginProvider = ({ children, addProject }) => {
         },
       })
     }
-  }, [activeProject?.data])
+  }, [activeProject.data])
 
   useEffect(() => {
     const code = window?.location?.href
@@ -157,7 +146,7 @@ const LoginProvider = ({ children, addProject }) => {
           ? decoredOrigin.split('/&code')[0]
           : decoredOrigin
 
-        const redirectAdress = `${originWithoutParams}/?code=${code}&state=${gitProvider}`
+        const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
