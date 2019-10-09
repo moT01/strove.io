@@ -44,24 +44,35 @@ const LoginProvider = ({ children, addProject }) => {
     selectors.api.getUserField('bitbucketRefreshToken')
   )
 
-  const activeProject = useSubscription(ACTIVE_PROJECT, {
-    variables: { email: user.email },
-    client,
-    fetchPolicy: 'no-cache',
-    context: {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'User-Agent': 'node',
+  // let id = null
+  // let machineId = null
+  // let editorPort = null
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  let activeProject = null
+  if (user?.email) {
+    activeProject = useSubscription(ACTIVE_PROJECT, {
+      variables: { email: user?.email },
+      client,
+      fetchPolicy: 'no-cache',
+      context: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
+        },
       },
-    },
-  })
+    })
+  }
 
   const activeProjectData =
     activeProject?.data?.activeProject?.machineId &&
-    activeProject.data.activeProject
-  const machineId = activeProjectData && activeProjectData.machineId
-  const editorPort = activeProjectData && activeProjectData.editorPort
-  const id = activeProjectData && activeProjectData.id
+    activeProject?.data?.activeProject
+  const machineId = activeProjectData?.machineId
+  const editorPort = activeProjectData?.editorPort
+  const id = activeProjectData?.id
+  // }
+  // }, [user])
 
   const checkAwake = () => {
     let then = moment().format('X')
@@ -113,7 +124,7 @@ const LoginProvider = ({ children, addProject }) => {
         },
       })
     }
-  }, [activeProject.data])
+  }, [activeProject?.data])
 
   useEffect(() => {
     const code = window?.location?.href
