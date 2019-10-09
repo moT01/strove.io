@@ -67,7 +67,7 @@ const EmailFormWrapper = styled.div`
   min-width: 400px;
 
   flex-wrap: wrap;
-  margin: 10px 0 0;
+  margin: 10px 0 5px;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
@@ -197,7 +197,7 @@ const Button = styled.button`
   flex-direction: row;
   height: auto;
   width: 75%;
-  margin: 15px;
+  margin: 15px 0 5px;
   padding: 0.5vh;
   align-items: center;
   justify-content: center;
@@ -351,7 +351,6 @@ const CardTitle = styled(PlanTitle)`
 `
 
 const StripeButton = styled(Button)`
-  margin: 15px 0;
   width: 100%;
 `
 
