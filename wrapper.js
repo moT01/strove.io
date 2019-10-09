@@ -45,6 +45,7 @@ const LoginProvider = ({ children, addProject }) => {
   )
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
+    variables: { email: user?.email || 'null' },
     client,
     fetchPolicy: 'no-cache',
     context: {
@@ -56,10 +57,11 @@ const LoginProvider = ({ children, addProject }) => {
   })
 
   const activeProjectData =
-    activeProject?.data && activeProject.data.activeProject
-  const machineId = activeProjectData && activeProjectData.machineId
-  const editorPort = activeProjectData && activeProjectData.editorPort
-  const id = activeProjectData && activeProjectData.id
+    activeProject?.data?.activeProject?.machineId &&
+    activeProject?.data?.activeProject
+  const machineId = activeProjectData?.machineId
+  const editorPort = activeProjectData?.editorPort
+  const id = activeProjectData?.id
 
   const checkAwake = () => {
     let then = moment().format('X')
@@ -144,7 +146,7 @@ const LoginProvider = ({ children, addProject }) => {
           ? decoredOrigin.split('/&code')[0]
           : decoredOrigin
 
-        const redirectAdress = `${originWithoutParams}/?code=${code}&state=${gitProvider}`
+        const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
