@@ -438,7 +438,7 @@ const Banner = () => {
                     <li>No setup</li>
                   </StyledTrialInfo>
                   {emailSent && (
-                    <StyledH6>Thank you, well get in touch soon!</StyledH6>
+                    <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
                   )}
                 </StyledForm>
               )}
