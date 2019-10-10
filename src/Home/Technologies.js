@@ -15,7 +15,7 @@ const StyledTitle = styled.h2`
 `
 
 const StyledH6 = styled.h6`
-  margin: 20px 20px 0;
+  margin: 50px 20px 0;
 `
 
 const EmailFormWrapper = styled.div`
@@ -151,6 +151,7 @@ const EmailFormWrapper = styled.div`
 
 const StyledFormWrapper = styled.div`
   max-width: 480px;
+  align-self: center;
 `
 
 const validate = values => {
@@ -197,7 +198,7 @@ const Technologies = () => {
         </QueueAnim>
       </div>
       <StyledFormWrapper>
-        <StyledH6>Want updates regarding our Strove?</StyledH6>
+        <StyledH6>Be up to date with our new deals and features!</StyledH6>
         <Formik
           initialValues={{
             email: '',
