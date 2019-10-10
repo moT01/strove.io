@@ -120,7 +120,7 @@ const StyledForm = styled(Form)`
 `
 
 const StyledH6 = styled.h6`
-  margin: 20px;
+  margin: 20px 20px 0;
 `
 
 const EmailFormWrapper = styled.div`
@@ -424,6 +424,7 @@ const Features = () => {
         <div className="tiles-wrapper" style={{ width: '80vw' }}>
           {children}
         </div>
+        <StyledH6>Want updates regarding our Strove?</StyledH6>
         <Formik
           initialValues={{
             email: '',
