@@ -111,6 +111,7 @@ const Option = styled.a`
   z-index: 4;
   text-decoration: none;
   font-weight: 300;
+  color: #0072ce;
 
   svg {
     fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
@@ -122,6 +123,7 @@ const Option = styled.a`
   :hover {
     background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
     cursor: pointer;
+    color: #fff;
   }
 
   :hover svg {
@@ -147,8 +149,6 @@ const UserPhoto = styled.img`
 
 const Text = styled.h3`
   font-size: 1.2rem;
-  color: white;
-  transition: color 0.3s;
   margin: 0;
   font-weight: 300;
   line-height: 1;
@@ -157,11 +157,11 @@ const Text = styled.h3`
   }
   :hover {
     color: black;
+    cursor: pointer;
   }
 `
 
 const OptionText = styled(Text)`
-  color: #0072ce;
   font-weight: 300;
   :hover {
     color: #ffffff;
