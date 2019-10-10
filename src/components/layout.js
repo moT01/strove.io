@@ -3,9 +3,11 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
+import { useSelector } from 'react-redux'
 
 import Modal from './modal'
 import Header from './header'
+import { selectors } from 'state'
 import './layout.css'
 
 const MainContent = styled.main`
@@ -25,6 +27,7 @@ const StyledModal = styled(Modal)`
 
 const Layout = ({ children, browser }) => {
   const [noSupportModalVisible, setNoSupportModalVisible] = useState(false)
+  const user = useSelector(selectors.api.getUser)
 
   useEffect(() => {
     if (
@@ -51,27 +54,23 @@ const Layout = ({ children, browser }) => {
       `}
       render={data => (
         <>
-          <StyledModal
-            isOpen={noSupportModalVisible}
-            onRequestClose={() => setNoSupportModalVisible(false)}
-            contentLabel={'Browser not supported'}
-            ariaHideApp={false}
-            isMobile={isMobile}
-            // zIndex={99}
-          >
-            Your browser might not provide the best Strove.io user experience.
-            We recommend using Google Chrome, Mozilla Firefox, Safari or Opera
-          </StyledModal>
+          {user ? (
+            <StyledModal
+              isOpen={noSupportModalVisible}
+              onRequestClose={() => setNoSupportModalVisible(false)}
+              contentLabel={'Browser not supported'}
+              ariaHideApp={false}
+              isMobile={isMobile}
+            >
+              {isMobile
+                ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
+                : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
+            </StyledModal>
+          ) : (
+            ''
+          )}
           <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>
-            {noSupportModalVisible && (
-              <div>
-                Your browser is not supported. Strove.io currently supports only
-                Google Chrome, Mozilla Firefox and Opera
-              </div>
-            )}
-            {children}
-          </MainContent>
+          <MainContent>{children}</MainContent>
         </>
       )}
     />
