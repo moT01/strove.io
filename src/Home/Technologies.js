@@ -12,6 +12,7 @@ import { SEND_EMAIL } from 'queries'
 
 const StyledTitle = styled.h2`
   font-weight: 600;
+  margin: 0;
 `
 
 const StyledH6 = styled.h6`
