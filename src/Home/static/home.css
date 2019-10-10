@@ -52,10 +52,8 @@ svg g {
 .banner-wrapper .banner-title-wrapper {
   width: 60%;
   max-width: 480px;
-  top: 0;
-  bottom: 0;
-  margin-top: 10vh;
-  margin-bottom: 5vh;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .banner-wrapper .banner-title-wrapper h1 {
   font-size: 54px;
