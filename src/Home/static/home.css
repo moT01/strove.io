@@ -260,6 +260,8 @@ svg g {
   text-align: center;
   height: auto;
   margin-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
 }
 .page2 .page2-content {
   will-change: transform;
