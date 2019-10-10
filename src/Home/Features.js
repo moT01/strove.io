@@ -436,14 +436,14 @@ const Features = () => {
                 name: 'sendEmail',
                 context: null,
                 mutation: SEND_EMAIL,
-                variables: { email: values.email, isDemo: true },
+                variables: { email: values.email, isNewsletter: true },
                 onSuccess: () => setEmailSent(true),
               })
             )
           }}
         >
           {({ errors, touched, values }) => (
-            <StyledForm>
+            <Form>
               <EmailFormWrapper
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
@@ -474,11 +474,11 @@ const Features = () => {
                   type="submit"
                   isDisabled={values.email && errors.email && touched.email}
                 >
-                  Request demo
+                  Subscribe to newsletter
                 </button>
               </EmailFormWrapper>
               {emailSent && <StyledH6>Thank you!</StyledH6>}
-            </StyledForm>
+            </Form>
           )}
         </Formik>
       </div>
