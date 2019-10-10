@@ -477,14 +477,7 @@ const Features = () => {
                   Request demo
                 </button>
               </EmailFormWrapper>
-              <StyledTrialInfo>
-                <li>Free 14-day Demo</li>
-                <li>No credit card needed</li>
-                <li>No setup</li>
-              </StyledTrialInfo>
-              {emailSent && (
-                <StyledH6>Thank you, well get in touch soon!</StyledH6>
-              )}
+              {emailSent && <StyledH6>Thank you!</StyledH6>}
             </StyledForm>
           )}
         </Formik>
