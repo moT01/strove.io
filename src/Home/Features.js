@@ -6,15 +6,13 @@ import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'images/logos'
 import styled, { css } from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
-// import { Icon } from 'antd'
-import { isMobileOnly, isMobile } from 'react-device-detect'
+import { useDispatch } from 'react-redux'
+import { isMobileOnly } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { selectors } from 'state'
 
 const { TweenOneGroup } = TweenOne
 
@@ -113,10 +111,6 @@ const StyledFeatureTitle = styled.h3`
 
 const StyledFeatureContent = styled.p`
   color: rgb(105, 123, 140);
-`
-
-const StyledForm = styled(Form)`
-  width: 100%;
 `
 
 const StyledH6 = styled.h6`
@@ -251,24 +245,6 @@ const EmailFormWrapper = styled.div`
         : css`
             cursor: not-allowed;
           `}
-  }
-`
-
-const StyledTrialInfo = styled.ul`
-  font-size: 13px;
-  padding: 0;
-  margin: 0;
-
-  li {
-    display: inline-block;
-    margin-right: 8px;
-    list-style: none;
-
-    &:before {
-      margin-right: 0.3em;
-      content: '✔';
-      color: #0072ce;
-    }
   }
 `
 
