@@ -70,15 +70,7 @@ const Layout = ({ children, browser }) => {
             ''
           )}
           <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>
-            {noSupportModalVisible && (
-              <div>
-                Your browser is not supported. Strove.io currently supports only
-                Google Chrome, Mozilla Firefox and Opera
-              </div>
-            )}
-            {children}
-          </MainContent>
+          <MainContent>{children}</MainContent>
         </>
       )}
     />
