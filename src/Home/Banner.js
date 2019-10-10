@@ -244,6 +244,10 @@ const EmailFormWrapper = styled.div`
   }
 `
 
+const StyledH2 = styled.h2`
+  margin-bottom: 0;
+`
+
 const Video = styled.video`
   height: ${props => (props.isMobile ? '50vw' : '19,6vw')};
   width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
@@ -464,11 +468,13 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
-              <h2>Focus on what's important</h2>
+              <StyledH2>Focus on what's important</StyledH2>
               <H4>Strove lets programmers be productive in seconds</H4>
-              <h2>Easiest collaboration out there</h2>
+              <StyledH2>Easiest collaboration out there</StyledH2>
               <H4>Team members can work from any computer and any location</H4>
-              <h2>Forget that "it works on my machine" issue ever existed</h2>
+              <StyledH2>
+                Forget that "it works on my machine" issue ever existed
+              </StyledH2>
               <H4>
                 Programmers get access to instances of the same cloud
                 environment so they can focus on creating new features
