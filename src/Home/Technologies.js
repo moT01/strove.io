@@ -154,6 +154,59 @@ const StyledFormWrapper = styled.div`
   align-self: center;
 `
 
+const StyledAnchor = styled.a`
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  max-width: 300px;
+  margin: 5px;
+  padding: 0.5vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  border-width: 1px;
+  border-style: solid;
+  font-size: 0.9rem;
+  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  border-radius: 5px;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+
+  svg {
+    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    width: 2.2vh;
+    height: auto;
+    margin-left: 5px;
+  }
+
+  :focus {
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  ${props =>
+    !props.disabled &&
+    css`
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        transform: translateY(-3px);
+        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+      }
+    `}
+`
+
+const StyledMadeWithStrove = styled.div`
+  /* margin-top: 20px; */
+`
+
 const validate = values => {
   let errors = {}
 
@@ -186,6 +239,16 @@ const Technologies = () => {
             : selectedLogo}
         </p>
         <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
+        <StyledMadeWithStrove>
+          Obviously, we made this app with Strove as well
+        </StyledMadeWithStrove>
+        <StyledAnchor
+          href="https://github.com/stroveio/strove.io-client"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Check our source
+        </StyledAnchor>
       </div>
       <StyledFormWrapper>
         <StyledH6>Be up to date with our new deals and features!</StyledH6>
