@@ -181,6 +181,11 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     ),
   },
   {
+    header: 'Why am I only limited to 4 ports by default?',
+    paragraph:
+      'We run multiple projects on one machine using Docker and two users could use the same ports if we did not implement the limit. Docker requires specifying which ports should the user take so to support any number of ports, we would have to let the first user take all the ports. If this number proves too small for you please, do let us know at contact@strove.io!',
+  },
+  {
     header: 'I didn\x27t find an answer I was looking for.',
     paragraph: 'No worries, contact us at contact@strove.io',
   },
