@@ -324,6 +324,10 @@ const StyledInfo = styled.span`
   font-size: 13px;
 `
 
+const StyledH1 = styled.h1`
+  margin-bottom: 0;
+`
+
 const validate = values => {
   let errors = {}
 
@@ -356,7 +360,7 @@ const Banner = () => {
               style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-          <h1>Strove</h1>
+          <StyledH1>Strove</StyledH1>
           <h4>
             Make programming cheaper, delivering features faster, collaboration
             easier
