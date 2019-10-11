@@ -366,7 +366,7 @@ const Banner = () => {
             easier
           </h4>
           <h3>
-            All major Linux-supported programming languages and tools such as
+            All major Linux-available programming languages and tools such as
             Python and git, now in cloud
           </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
