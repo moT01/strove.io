@@ -6,7 +6,6 @@
 </div>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
-<img alt="Discord" src="https://img.shields.io/discord/615832777199321098?color=%231472CE&label=discord&logo=discord&logoColor=%231472CE&style=social">
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
 
