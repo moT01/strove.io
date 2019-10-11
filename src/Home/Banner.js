@@ -317,8 +317,10 @@ const StyledForm = styled(Form)`
   width: 100%;
 `
 
-const StyledH6 = styled.h6`
+const StyledInfo = styled.span`
   margin: 20px;
+  color: #697b8c;
+  font-size: 13px;
 `
 
 const validate = values => {
@@ -382,7 +384,7 @@ const Banner = () => {
             <StyledTrialInfo>
               <li>Free for non-commercial use</li>
             </StyledTrialInfo>
-            <StyledH6>Or, if you're a corporate user:</StyledH6>
+            <StyledInfo>Or, if you're a corporate user:</StyledInfo>
             <Formik
               initialValues={{
                 email: '',
@@ -441,7 +443,7 @@ const Banner = () => {
                     <li>No setup</li>
                   </StyledTrialInfo>
                   {emailSent && (
-                    <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
+                    <StyledInfo>Thank you, we'll get in touch soon!</StyledInfo>
                   )}
                 </StyledForm>
               )}
