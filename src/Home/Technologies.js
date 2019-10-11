@@ -245,7 +245,7 @@ const Technologies = () => {
         </p>
         <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
         <StyledMadeWithStrove>
-          Obviously, we made this app with Strove as well
+          Obviously, this app is made with Strove as well
         </StyledMadeWithStrove>
         <StyledButtonsWrapper>
           <StyledAnchor
@@ -268,7 +268,7 @@ const Technologies = () => {
         </StyledButtonsWrapper>
       </div>
       <StyledFormWrapper>
-        <StyledH6>Be up to date with our new deals and features!</StyledH6>
+        <StyledH6>Be up to date with new deals and features!</StyledH6>
         <Formik
           initialValues={{
             email: '',
