@@ -10,6 +10,19 @@ import { isMobileOnly } from 'react-device-detect'
 
 const { TweenOneGroup } = TweenOne
 
+const StyledFeatureTitle = styled.h3`
+  color: rgb(105, 123, 140);
+`
+
+const StyledFeatureContent = styled.p`
+  color: rgb(105, 123, 140);
+`
+
+const StyledAnchor = styled.a`
+  text-decoration: none;
+  color: rgb(105, 123, 140);
+`
+
 const featuresCN = [
   {
     title: 'Run projects straight in the browser',
@@ -64,6 +77,7 @@ const featuresCN = [
   {
     title: "It's open-source",
     content: 'Contribute! Strove has been built with contributors in mind',
+    href: 'https://github.com/stroveio/strove.io-client',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg',
     color: '#FA8C16',
     shadowColor: 'rgba(250,140,22,.12)',
@@ -96,14 +110,6 @@ const pointPos = [
   { x: 35, y: 5 },
   { x: 50, y: 50, opacity: 0.2 },
 ]
-
-const StyledFeatureTitle = styled.h3`
-  color: rgb(105, 123, 140);
-`
-
-const StyledFeatureContent = styled.p`
-  color: rgb(105, 123, 140);
-`
 
 const Features = () => {
   const [hoverNum, setHoverNum] = useState()
@@ -154,57 +160,85 @@ const Features = () => {
       />
     ))
     const child = (
-      <li key={i.toString()}>
-        <div
-          className="page1-box"
-          onMouseEnter={() => {
-            onMouseOver(i)
+      <>
+        <TweenOneGroup
+          className="page1-point-wrapper"
+          enter={getEnter}
+          leave={{
+            x: 0,
+            y: 30,
+            opacity: 0,
+            duration: 300,
+            ease: 'easeInBack',
           }}
-          onMouseLeave={() => {
-            onMouseOut()
+          resetStyleBool={false}
+        >
+          {(isMobileOnly || isHover) && pointChild}
+        </TweenOneGroup>
+        <div
+          className="page1-image"
+          style={{
+            boxShadow: `${isHover ? '0 12px 24px' : '0 6px 12px'} ${
+              item.shadowColor
+            }`,
           }}
         >
-          <TweenOneGroup
-            className="page1-point-wrapper"
-            enter={getEnter}
-            leave={{
-              x: 0,
-              y: 30,
-              opacity: 0,
-              duration: 300,
-              ease: 'easeInBack',
-            }}
-            resetStyleBool={false}
-          >
-            {(isMobileOnly || isHover) && pointChild}
-          </TweenOneGroup>
-          <div
-            className="page1-image"
-            style={{
-              boxShadow: `${isHover ? '0 12px 24px' : '0 6px 12px'} ${
-                item.shadowColor
-              }`,
-            }}
-          >
-            {item.type ? (
-              <Icon
-                type={item.type}
-                style={{
-                  fontSize: '32px',
-                  color: `${item.color}`,
-                  marginTop: '10px',
-                }}
-              />
-            ) : (
-              <VSCode width="38px" height="auto" fill={item.color} />
-            )}
-          </div>
-          <StyledFeatureTitle>{item.title}</StyledFeatureTitle>
-          <StyledFeatureContent>{item.content}</StyledFeatureContent>
+          {item.type ? (
+            <Icon
+              type={item.type}
+              style={{
+                fontSize: '32px',
+                color: `${item.color}`,
+                marginTop: '10px',
+              }}
+            />
+          ) : (
+            <VSCode width="38px" height="auto" fill={item.color} />
+          )}
         </div>
-      </li>
+        <StyledFeatureTitle>{item.title}</StyledFeatureTitle>
+        <StyledFeatureContent>{item.content}</StyledFeatureContent>
+      </>
     )
-    children[Math.floor(i / 3)].push(child)
+    if (item.href) {
+      children[Math.floor(i / 3)].push(
+        <li key={i.toString()}>
+          <div
+            className="page1-box"
+            onMouseEnter={() => {
+              onMouseOver(i)
+            }}
+            onMouseLeave={() => {
+              onMouseOut()
+            }}
+          >
+            <StyledAnchor
+              rel="noopener noreferrer"
+              target="_blank"
+              href={item.href}
+            >
+              {child}
+            </StyledAnchor>
+          </div>
+        </li>
+      )
+    } else {
+      children[Math.floor(i / 3)].push(
+        <li key={i.toString()}>
+          <div
+            className="page1-box"
+            onMouseEnter={() => {
+              onMouseOver(i)
+            }}
+            onMouseLeave={() => {
+              onMouseOut()
+            }}
+          >
+            {child}
+          </div>
+        </li>
+      )
+    }
   })
 
   children = children.map((item, i) => (
