@@ -16,7 +16,6 @@ const AddProjectProvider = ({ children }) => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const user = useSelector(selectors.api.getUser)
-  console.log('user', user)
   const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken

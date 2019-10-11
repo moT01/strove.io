@@ -166,9 +166,6 @@ const LoginProvider = ({ children, addProject }) => {
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
                   localStorage.setItem('token', siliskyToken)
-                  // if (incomingProjectLink) {
-                  //   addProject(incomingProjectLink)
-                  // }
                 },
                 onSuccessDispatch: [
                   user => ({
@@ -202,9 +199,6 @@ const LoginProvider = ({ children, addProject }) => {
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
                   localStorage.setItem('token', siliskyToken)
-                  // if (incomingProjectLink) {
-                  //   addProject(incomingProjectLink)
-                  // }
                 },
                 onSuccessDispatch: [
                   user => ({
@@ -238,9 +232,6 @@ const LoginProvider = ({ children, addProject }) => {
                 context: null,
                 onSuccess: ({ siliskyToken }) => {
                   localStorage.setItem('token', siliskyToken)
-                  // if (incomingProjectLink) {
-                  //   addProject(incomingProjectLink)
-                  // }
                 },
                 onSuccessDispatch: [
                   user => ({
