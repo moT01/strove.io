@@ -257,7 +257,7 @@ const Technologies = () => {
           </StyledAnchor>
           or, even better
           <StyledAnchor
-            href="https://strove.io/#https://github.com/stroveio/strove.io-client"
+            href="/#https://github.com/stroveio/strove.io-client"
             rel="noopener noreferrer"
             target="_blank"
           >
