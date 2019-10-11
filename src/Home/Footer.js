@@ -72,6 +72,7 @@ const Footer = () => {
         <Column>
           <ColumnTitle>Social</ColumnTitle>
           <StyledAnchor
+            target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/stroveio/strove.io-client"
           >
