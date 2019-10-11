@@ -165,6 +165,22 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     ),
   },
   {
+    header: 'Why is the company not called Strove but Codengo',
+    paragraph: (
+      <span>
+        Initially we worked on a Freecodecamp for mobile devices -{' '}
+        <a
+          href="https://play.google.com/store/apps/details?id=com.codengoclient"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          link here
+        </a>
+        but we decided we should focus on Strove for now
+      </span>
+    ),
+  },
+  {
     header: 'I didn\x27t find an answer I was looking for.',
     paragraph: 'No worries, contact us at contact@strove.io',
   },
