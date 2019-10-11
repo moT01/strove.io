@@ -45,7 +45,7 @@ svg g {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 75vh;
+  min-height: 85vh;
   width: 100%;
   position: relative;
 }
@@ -54,10 +54,6 @@ svg g {
   max-width: 480px;
   margin-top: auto;
   margin-bottom: auto;
-}
-.banner-wrapper .banner-title-wrapper h1 {
-  font-size: 54px;
-  margin: 12px 0;
 }
 
 .banner-wrapper .banner-title-wrapper {
