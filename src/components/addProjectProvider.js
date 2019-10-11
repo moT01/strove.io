@@ -29,7 +29,8 @@ const AddProjectProvider = ({ children }) => {
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
-  const addProject = async link => {
+  /* User can be passed as second argument because there are cases when we don't have him in redux store just yet  */
+  const addProject = async (link, user) => {
     const repoLink = link.trim().toLowerCase()
     const repoUrlParts = repoLink.split('/')
     const repoProvider = repoUrlParts[2].split('.')[0]
