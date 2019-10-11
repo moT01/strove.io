@@ -168,7 +168,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header: 'Why is the company not called Strove but Codengo',
     paragraph: (
       <span>
-        Initially we worked on a Freecodecamp for mobile devices -{' '}
+        Initially we worked on a Freecodecamp for mobile devices (
         <a
           href="https://play.google.com/store/apps/details?id=com.codengoclient"
           target="_blank"
@@ -176,18 +176,31 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
         >
           link here
         </a>
-        but we decided we should focus on Strove for now
+        ) but we decided we should focus on Strove for now,
       </span>
     ),
   },
   {
     header: 'Why am I only limited to 4 ports by default?',
-    paragraph:
-      'We run multiple projects on one machine using Docker and two users could use the same ports if we did not implement the limit. Docker requires specifying which ports should the user take so to support any number of ports, we would have to let the first user take all the ports. If this number proves too small for you please, do let us know at contact@strove.io!',
+    paragraph: (
+      <span>
+        We run multiple projects on one machine using Docker and two users could
+        use the same ports if we did not implement the limit. Docker requires
+        specifying which ports should the user take so to support any number of
+        ports, we would have to let the first user take all the ports. If this
+        number proves too small for you please, do let us know at{' '}
+        <a href="mailto:contact@strove.io">contact@strove.io</a>.
+      </span>
+    ),
   },
   {
     header: 'I didn\x27t find an answer I was looking for.',
-    paragraph: 'No worries, contact us at contact@strove.io',
+    paragraph: (
+      <span>
+        No worries, contact us at{' '}
+        <a href="mailto:contact@strove.io">contact@strove.io</a>.
+      </span>
+    ),
   },
 ]
 
