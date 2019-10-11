@@ -66,6 +66,10 @@ const IconContainer = styled.div`
     opacity: 1;
   }
 
+  :last-of-type {
+    margin-right: 0;
+  }
+
   @media (max-width: 960px) {
     flex-shrink: 0;
     width: 20%;
