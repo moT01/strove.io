@@ -91,7 +91,7 @@ const topics = [
       Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
   },
   {
-    header: 'Why do i need to log in with Github/Gitlab/Bitbucket',
+    header: 'Why do i need to log in with Github/Gitlab/Bitbucket?',
     paragraph:
       'Aforementioned providers only allow apps to clone if the user is logged in.',
   },
@@ -148,6 +148,21 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header: 'Can I use Docker inside my project?',
     paragraph:
       'Strove.io is built with Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
+  },
+  {
+    header: 'Where should I report a bug or request a feature?',
+    paragraph: (
+      <span>
+        The best place is our github repository -{' '}
+        <a
+          href="https://github.com/stroveio/strove.io-client/issues"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          link here
+        </a>
+      </span>
+    ),
   },
   {
     header: 'I didn\x27t find an answer I was looking for.',
