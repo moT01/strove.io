@@ -203,6 +203,11 @@ const StyledAnchor = styled.a`
     `}
 `
 
+const StyledButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const StyledMadeWithStrove = styled.div`
   /* margin-top: 20px; */
 `
@@ -242,13 +247,23 @@ const Technologies = () => {
         <StyledMadeWithStrove>
           Obviously, we made this app with Strove as well
         </StyledMadeWithStrove>
-        <StyledAnchor
-          href="https://github.com/stroveio/strove.io-client"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Check our source
-        </StyledAnchor>
+        <StyledButtonsWrapper>
+          <StyledAnchor
+            href="https://github.com/stroveio/strove.io-client"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Check our source
+          </StyledAnchor>
+          or, even better
+          <StyledAnchor
+            href="https://strove.io/#https://github.com/stroveio/strove.io-client"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Start editing
+          </StyledAnchor>
+        </StyledButtonsWrapper>
       </div>
       <StyledFormWrapper>
         <StyledH6>Be up to date with our new deals and features!</StyledH6>
