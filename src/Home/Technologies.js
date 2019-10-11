@@ -209,7 +209,7 @@ const StyledButtonsWrapper = styled.div`
 `
 
 const StyledMadeWithStrove = styled.div`
-  /* margin-top: 20px; */
+  margin-top: 100px;
 `
 
 const validate = values => {
@@ -249,6 +249,7 @@ const Technologies = () => {
         </StyledMadeWithStrove>
         <StyledButtonsWrapper>
           <StyledAnchor
+            primary
             href="https://github.com/stroveio/strove.io-client"
             rel="noopener noreferrer"
             target="_blank"
@@ -257,6 +258,7 @@ const Technologies = () => {
           </StyledAnchor>
           or, even better
           <StyledAnchor
+            primary
             href="/#https://github.com/stroveio/strove.io-client"
             rel="noopener noreferrer"
             target="_blank"
