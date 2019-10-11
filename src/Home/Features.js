@@ -62,9 +62,8 @@ const featuresCN = [
     type: 'appstore',
   },
   {
-    title: "It's open source",
-    content:
-      'Contribute! Strove has been built with contributors in mind: https://github.com/stroveio/strove.io-client',
+    title: "It's open-source",
+    content: 'Contribute! Strove has been built with contributors in mind',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/pbmKMSFpLurLALLNliUQ.svg',
     color: '#FA8C16',
     shadowColor: 'rgba(250,140,22,.12)',
@@ -77,7 +76,6 @@ const featuresCN = [
     color: '#1AC44D',
     shadowColor: 'rgba(26,196,77,.12)',
     type: 'cloud',
-    // onClick: () => setGetStartedVisible(true),
   },
   {
     title: "Say goodbye to 'it works on my machine'",
