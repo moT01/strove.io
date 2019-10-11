@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { Github } from 'images/logos'
 
 const FooterWrapper = styled.div`
   display: flex;
@@ -55,6 +56,13 @@ const LinkText = styled.h3`
 const StyledAnchor = styled.a`
   text-decoration: none;
   color: white;
+  display: flex;
+
+  svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-right: 5px;
+  }
 `
 
 const Footer = () => {
@@ -63,6 +71,14 @@ const Footer = () => {
       <ColumnWrapper>
         <Column>
           <ColumnTitle>Social</ColumnTitle>
+          <StyledAnchor
+            rel="noopener noreferrer"
+            href="https://github.com/stroveio/strove.io-client"
+          >
+            <Github style={{ fill: '#fff' }} />
+
+            <LinkText>Source code</LinkText>
+          </StyledAnchor>
           <StyledAnchor href="mailto:contact@strove.io?subject=Strove demo&body=We'd love to get to know how we can help!">
             <LinkText>Contact us</LinkText>
           </StyledAnchor>
