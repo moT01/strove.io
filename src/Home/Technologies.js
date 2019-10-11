@@ -181,22 +181,12 @@ const Technologies = () => {
           <div className="title-line" />
         </div>
         <StyledTitle>On the shoulders of giants</StyledTitle>
-        <QueueAnim
-          key="queue"
-          type="bottom"
-          leaveReverse
-          className="page2-content"
-        >
-          <p key="p" className="page-content">
-            {!selectedLogo
-              ? `Powered by technologies from the biggest players`
-              : selectedLogo}
-          </p>
-          <Logos
-            handleHoverIn={handleHoverIn}
-            handleHoverOut={handleHoverOut}
-          />
-        </QueueAnim>
+        <p>
+          {!selectedLogo
+            ? `Powered by technologies from the biggest players`
+            : selectedLogo}
+        </p>
+        <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
       </div>
       <StyledFormWrapper>
         <StyledH6>Be up to date with our new deals and features!</StyledH6>
@@ -206,6 +196,7 @@ const Technologies = () => {
           }}
           validate={validate}
           onSubmit={values => {
+            console.log(values)
             dispatch(
               mutation({
                 name: 'sendEmail',
