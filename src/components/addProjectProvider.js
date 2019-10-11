@@ -16,6 +16,7 @@ const AddProjectProvider = ({ children }) => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const user = useSelector(selectors.api.getUser)
+  console.log('user', user)
   const projects = useSelector(selectors.api.getUserProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
@@ -29,8 +30,7 @@ const AddProjectProvider = ({ children }) => {
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
-  /* User can be passed as second argument because there are cases when we don't have him in redux store just yet  */
-  const addProject = async (link, user) => {
+  const addProject = async link => {
     const repoLink = link.trim().toLowerCase()
     const repoUrlParts = repoLink.split('/')
     const repoProvider = repoUrlParts[2].split('.')[0]

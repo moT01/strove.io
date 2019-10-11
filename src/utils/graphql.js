@@ -56,6 +56,7 @@ export const mutation = ({
       })
     }
 
+    console.log('name', name, 'context', context)
     try {
       const { data } = await client.mutate({
         mutation,
