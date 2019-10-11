@@ -1,5 +1,4 @@
 import React, { useState, memo } from 'react'
-import QueueAnim from 'rc-queue-anim'
 import Logos from 'components/logos.js'
 import styled, { css } from 'styled-components'
 import { useDispatch } from 'react-redux'
