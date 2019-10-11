@@ -246,6 +246,7 @@ const EmailFormWrapper = styled.div`
 
 const StyledH2 = styled.h2`
   margin-bottom: 0;
+  font-size: 28px;
 `
 
 const Video = styled.video`
@@ -308,9 +309,9 @@ const StyledTrialInfo = styled.ul`
   }
 `
 
-const H4 = styled.h4`
+const StyledFeatureDescription = styled.span`
   font-size: 1rem;
-  font-weight: 700;
+  margin-bottom: 20px;
 `
 
 const StyledForm = styled(Form)`
@@ -470,16 +471,20 @@ const Banner = () => {
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>Focus on what's important</StyledH2>
-              <H4>Strove lets programmers be productive in seconds</H4>
+              <StyledFeatureDescription>
+                Strove lets programmers be productive in seconds
+              </StyledFeatureDescription>
               <StyledH2>Easiest collaboration out there</StyledH2>
-              <H4>Team members can work from any computer and any location</H4>
+              <StyledFeatureDescription>
+                Team members can work from any computer and any location
+              </StyledFeatureDescription>
               <StyledH2>
                 Forget that "it works on my machine" issue ever existed
               </StyledH2>
-              <H4>
+              <StyledFeatureDescription>
                 Programmers get access to instances of the same cloud
                 environment so they can focus on creating new features
-              </H4>
+              </StyledFeatureDescription>
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
