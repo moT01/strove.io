@@ -495,7 +495,6 @@ const PricingPage = () => {
                   }}
                   validate={validate}
                   onSubmit={values => {
-                    console.log(values)
                     dispatch(
                       mutation({
                         name: 'sendEmail',

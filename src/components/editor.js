@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
+import { navigate } from 'gatsby'
 
 import Layout from 'components/layout'
 import FullScreenLoader from 'components/fullScreenLoader.js'
@@ -72,6 +73,14 @@ const Editor = () => {
       clearInterval(projectPing)
     }
   }, [projectId])
+
+  /* Sometimes project might fail to load so we don't want to make user stuck at editor screen */
+  /* ToDo: Display a message */
+  useEffect(() => {
+    if (!currentProject) {
+      navigate('app/dashboard')
+    }
+  }, [currentProject])
 
   const r = Math.random()
     .toString(36)

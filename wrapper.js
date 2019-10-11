@@ -197,8 +197,9 @@ const LoginProvider = ({ children, addProject }) => {
                 storeKey: 'user',
                 name: 'gitlabAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) =>
-                  localStorage.setItem('token', siliskyToken),
+                onSuccess: ({ siliskyToken }) => {
+                  localStorage.setItem('token', siliskyToken)
+                },
                 onSuccessDispatch: [
                   user => ({
                     type: C.api.FETCH_SUCCESS,
@@ -229,8 +230,9 @@ const LoginProvider = ({ children, addProject }) => {
                 storeKey: 'user',
                 name: 'bitbucketAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) =>
-                  localStorage.setItem('token', siliskyToken),
+                onSuccess: ({ siliskyToken }) => {
+                  localStorage.setItem('token', siliskyToken)
+                },
                 onSuccessDispatch: [
                   user => ({
                     type: C.api.FETCH_SUCCESS,
