@@ -1,4 +1,4 @@
-let activeEnv =
+const activeEnv =
   process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development'
 
 /* Netlify uses .env file to store envs */
@@ -14,7 +14,7 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     title: `Strove`,
-    description: `Move your development to the cloud. Access and run code anywhere using powerful linux servers.`,
+    description: `Code in seconds in cloud in Docker. Access and run code anywhere using powerful servers.`,
     author: `@gatsbyjs`,
     siteUrl: `${process.env.SILISKY_URL}`,
   },
