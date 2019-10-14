@@ -9,7 +9,7 @@
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
 
-Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser!
+Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser
 
 ### [https://www.strove.io/](https://www.strove.io/)
 
@@ -17,15 +17,25 @@ Say goodbye to 'it works on my machine' problem by coding in the same environmen
 <img src="./src/images/readmeAssets/strove.gif" width='900px'>
 </div>
 
-# Get started
+
+## Why did we make this?
+
+There are several problems programmers face make this project important in our eyes.
+1. Security
+It’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
+2. 'It works on my machine' problem. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
+3. It is hard to use different computers when working on a project. The code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access. This is especially useful for students and people who travel a lot.
+4. Programmers waste a lot of time on setting up the environment. The browser-based solution can cut the time to set a programming environment to seconds.
+
+## Get started
 
 Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/stroveio/2048-clone
 
-# Found a bug?
+## Found a bug?
 
 Raise an issue! We'll take a look!
 
-# Contributors
+## Contributors
 
 <div align='center'>
 <table>
@@ -39,9 +49,9 @@ Raise an issue! We'll take a look!
 </table>
 </div>
 
-# Supported languages
+## Supported languages
 
-Strove supports all major languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, and many more.
+Strove supports all major Linux-available languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, and many more.
 
 <div align='center'>
 <table>
