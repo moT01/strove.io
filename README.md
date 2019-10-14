@@ -1,22 +1,23 @@
 <div align='center'>
 <img src="./src/images/readmeAssets/strove2.png" width="220px">
 
-# [Strove.io](https://www.strove.io/)
+## [Strove.io](https://www.strove.io/) website source code
 
 </div>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
+Strove gives browser access to cloud with all major Linux-available programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
+### [Edit source code](https://strove.io/#https://github.com/stroveio/strove.io-client)
 
-Say goodbye to 'it works on my machine' problem by coding in the same environment no matter the machine. All you need is a browser
+or, visit our website
 
 ### [https://www.strove.io/](https://www.strove.io/)
 
 <div align="center">
 <img src="./src/images/readmeAssets/strove.gif" width='900px'>
 </div>
-
 
 ## Why did we make this?
 
@@ -68,12 +69,4 @@ Strove supports all major Linux-available languages including: Python, TypeScrip
 
 </tr>
 </table>
-</div>
-
-# Donations
-
-<div align='center'>
-
-[<img src="./src/images/readmeAssets/coffee.png" width="250">](https://www.paypal.me/codengonet)
-
 </div>
