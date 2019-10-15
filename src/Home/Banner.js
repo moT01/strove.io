@@ -333,8 +333,6 @@ const StyledH1 = styled.h1`
   letter-spacing: -1.48px;
   margin: 0;
   color: #333e63;
-  display: block;
-  max-width: 100%;
 `
 
 const StyledBoldH1 = styled(StyledH1)`
