@@ -339,6 +339,12 @@ const StyledH1 = styled.h1`
 
 const StyledBoldH1 = styled(StyledH1)`
   font-weight: 700;
+  padding: 0;
+`
+
+const StyledH3 = styled.h3`
+  margin: 20px 0 0;
+  letter-spacing: -0.3px;
 `
 
 const validate = values => {
@@ -370,7 +376,7 @@ const Banner = () => {
           <StyledH1>Spending too much time on builds and setup, not coding?
           </StyledH1>
           <StyledBoldH1>We can fix that.</StyledBoldH1>
-          <h3>Focus on what’s important, coding.</h3>
+          <StyledH3>Code in consistent Linux environment available from any computer</StyledH3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
