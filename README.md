@@ -36,7 +36,9 @@ Add # + github url after strove.io to get start coding right away, for example: 
 
 Raise an issue! We'll take a look!
 
-## Contributors
+## Contribute!
+
+Here are our contributors so far:
 
 <div align='center'>
 <table>
