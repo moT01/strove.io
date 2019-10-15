@@ -79,15 +79,12 @@ const Button = styled.button`
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
-
   :focus {
     outline: 0;
   }
-
   &:disabled {
     opacity: 0.4;
   }
-
   ${props =>
     !props.disabled
       ? css`
@@ -131,7 +128,6 @@ const EmailFormWrapper = styled.div`
   transition: all 0.2s ease;
   opacity: 0.9;
   align-items: center;
-
   ${({ isMobile }) =>
     isMobile &&
     css`
@@ -140,19 +136,16 @@ const EmailFormWrapper = styled.div`
       min-width: 100px;
       border-radius: 5px;
     `}
-
   &:hover {
     opacity: 1;
     box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
       0 9px 26px 0 rgba(174, 174, 186, 0.16);
-
     ${({ isMobile }) =>
       isMobile &&
       css`
         box-shadow: none;
       `}
   }
-
   input {
     box-shadow: none;
     color: #333e63;
@@ -174,7 +167,6 @@ const EmailFormWrapper = styled.div`
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-
     ${({ isMobile }) =>
       isMobile &&
       css`
@@ -185,19 +177,16 @@ const EmailFormWrapper = styled.div`
         width: 100%;
       `}
   }
-
   svg {
     position: absolute;
     top: 18px;
     left: 20px;
     height: 24px;
     width: 24px;
-
     g {
       stroke: #0072ce;
     }
   }
-
   button {
     width: 156px;
     height: 56px;
@@ -217,7 +206,6 @@ const EmailFormWrapper = styled.div`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-
     ${({ isMobile }) =>
       isMobile &&
       css`
@@ -227,7 +215,6 @@ const EmailFormWrapper = styled.div`
         width: 100%;
         margin-top: 10px;
       `}
-
     ${props =>
       !props.disabled
         ? css`
@@ -261,7 +248,6 @@ const StyledModal = styled(Modal)`
   width: auto;
   position: fixed;
   animation: ${FadeIn} 0.2s ease-out;
-
   :focus {
     outline: 0;
   }
@@ -285,7 +271,6 @@ const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
   color: #0072ce;
   cursor: pointer;
-
   :focus {
     outline: none;
   }
@@ -295,12 +280,10 @@ const StyledTrialInfo = styled.ul`
   font-size: 13px;
   padding: 0;
   margin: 0;
-
   li {
     display: inline-block;
     margin-right: 8px;
     list-style: none;
-
     &:before {
       margin-right: 0.3em;
       content: '✔';
@@ -326,23 +309,6 @@ const StyledInfo = styled.span`
 
 const StyledH1 = styled.h1`
   margin-bottom: 0;
-  padding-top: 32px;
-  font-size: 50px;
-  font-weight: normal;
-  line-height: 1.12;
-  letter-spacing: -1.48px;
-  margin: 0;
-  color: #333e63;
-`
-
-const StyledBoldH1 = styled(StyledH1)`
-  font-weight: 700;
-  padding: 0;
-`
-
-const StyledH3 = styled.h3`
-  margin: 20px 0 0;
-  letter-spacing: -0.3px;
 `
 
 const validate = values => {
@@ -371,10 +337,20 @@ const Banner = () => {
           className="banner-title-wrapper"
           type={isMobileOnly ? 'bottom' : 'right'}
         >
-          <StyledH1>Spending too much time on builds and setup, not coding?
-          </StyledH1>
-          <StyledBoldH1>We can fix that.</StyledBoldH1>
-          <StyledH3>Code in consistent Linux environment available from any computer</StyledH3>
+          <div className="title-line-wrapper">
+            <div
+              className="title-line"
+              style={{ transform: 'translateX(-64px)' }}
+            />
+          </div>
+          <StyledH1>Strove</StyledH1>
+          <h4>
+            Ready in seconds programming environment, available from any computer
+          </h4>
+          <h3>
+            All major Linux-available programming languages and tools such as
+            Python and git, now in cloud
+          </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
@@ -521,5 +497,4 @@ const Banner = () => {
     </>
   )
 }
-
 export default Banner
