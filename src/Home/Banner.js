@@ -326,6 +326,23 @@ const StyledInfo = styled.span`
 
 const StyledH1 = styled.h1`
   margin-bottom: 0;
+  padding-top: 32px;
+  font-size: 50px;
+  font-weight: normal;
+  line-height: 1.12;
+  letter-spacing: -1.48px;
+  margin: 0;
+  color: #333e63;
+`
+
+const StyledBoldH1 = styled(StyledH1)`
+  font-weight: 700;
+  padding: 0;
+`
+
+const StyledH3 = styled.h3`
+  margin: 20px 0 0;
+  letter-spacing: -0.3px;
 `
 
 const validate = values => {
@@ -354,21 +371,10 @@ const Banner = () => {
           className="banner-title-wrapper"
           type={isMobileOnly ? 'bottom' : 'right'}
         >
-          <div className="title-line-wrapper">
-            <div
-              className="title-line"
-              style={{ transform: 'translateX(-64px)' }}
-            />
-          </div>
-          <StyledH1>Strove</StyledH1>
-          <h4>
-            Make programming cheaper, delivering features faster, collaboration
-            easier
-          </h4>
-          <h3>
-            All major Linux-available programming languages and tools such as
-            Python and git, now in cloud
-          </h3>
+          <StyledH1>Spending too much time on builds and setup, not coding?
+          </StyledH1>
+          <StyledBoldH1>We can fix that.</StyledBoldH1>
+          <StyledH3>Code in consistent Linux environment available from any computer</StyledH3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
