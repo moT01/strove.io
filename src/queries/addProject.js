@@ -6,7 +6,7 @@ export default gql`
     $name: String!
     $description: String
     $isPrivate: Boolean
-    $repoLink: String!
+    $repoLink: String
   ) {
     addProject(
       name: $name
