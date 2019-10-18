@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
+import { onError } from 'apollo-link-error'
 
 const FadeIn = keyframes`
   0% {
@@ -178,12 +179,18 @@ const GetStarted = ({ addProject }) => {
               mobile={isMobile}
               type="submit"
             >
-              Add project
+              Clone project
             </Button>
+
             <StyledErrors>{props.errors.repoLink}</StyledErrors>
           </GithubLinkForm>
         )}
       />
+      don't have a link? Want to clone private repository? Create an empty
+      project
+      <Button primary mobile={isMobile} onClick={() => addProject(null)}>
+        Create empty project
+      </Button>
     </AddProjectWrapper>
   )
 }
