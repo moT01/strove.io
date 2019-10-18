@@ -236,26 +236,15 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         height={isMobileOnly ? '75vh' : '33vh'}
       >
         <ModalWrapepr>
-          <Text>
-            We couldn't clone your repository. This may happen due to one of the
-            two reasons:
-          </Text>
+          <Text>Looks like you are trying to clone a private repository!</Text>
           <StyledList>
             <li>
-              You do not have access rights to the repository you are trying to
-              reach
+              We will create an empty project for you - if your permissions are
+              correct you will be able to clone the repository using http git
+              clone link from the terminal.
             </li>
-            <li>Repository from the provided link does not exist</li>
           </StyledList>
-          <Text>Please investigate the reasons and try again later</Text>
           <ButtonsWrapper mobile={device}>
-            {/* <StyledLink
-              to="pricing"
-              primary
-              onClick={() => closeModal()}
-            >
-              Pricing
-            </StyledLink> */}
             <Button primary onClick={() => closeModal()}>
               Close
             </Button>
