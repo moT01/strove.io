@@ -61,7 +61,7 @@ const AddProjectProvider = ({ children }) => {
       addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
-      setModalContent('AddGithubPrivatePermissions')
+      setModalContent('AddEmptyProject')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')
     } else if (projects && projects.length >= projectsLimit) {

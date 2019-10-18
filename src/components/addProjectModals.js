@@ -225,7 +225,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     dispatch(actions.incomingProject.removeIncomingProject())
   }
 
-  if (modalContent === 'AddGithubPrivatePermissions') {
+  if (modalContent === 'AddEmptyProject') {
     return (
       <Modal
         isOpen={!!modalContent}
