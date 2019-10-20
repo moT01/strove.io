@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 
-import { createProject, getRepoInfo } from 'utils'
+import { createProject } from 'utils'
 import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
@@ -30,15 +30,25 @@ const AddProjectProvider = ({ children }) => {
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
   const addProject = async link => {
-    const repoLink = link.trim().toLowerCase()
-    const repoUrlParts = repoLink.split('/')
-    const repoProvider = repoUrlParts[2].split('.')[0]
+    let repoLink
+    let repoUrlParts
+    let repoProvider
 
-    const repoFromGithub = repoProvider === 'github'
-    const repoFromGitlab = repoProvider === 'gitlab'
-    const repoFromBitbucket = repoProvider === 'bitbucket'
+    let repoFromGithub
+    let repoFromGitlab
+    let repoFromBitbucket
 
-    const repoInfo = await getRepoInfo({ repoUrlParts, dispatch, user })
+    if (link) {
+      repoLink = link.trim().toLowerCase()
+      repoUrlParts = repoLink.split('/')
+      repoProvider = repoUrlParts[2].split('.')[0]
+
+      repoFromGithub = repoProvider === 'github'
+      repoFromGitlab = repoProvider === 'gitlab'
+      repoFromBitbucket = repoProvider === 'bitbucket'
+    } else {
+      repoLink = ''
+    }
 
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
