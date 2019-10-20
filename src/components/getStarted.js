@@ -4,7 +4,6 @@ import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
-import { onError } from 'apollo-link-error'
 
 const FadeIn = keyframes`
   0% {
