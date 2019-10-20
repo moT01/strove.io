@@ -17,10 +17,8 @@ const startProject = () => {
 }
 
 const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
+  let repoData = null
   try {
-    let repoData = null
-
-    /* Check if repo can be cloned */
     if (repoLink) {
       const query = GET_REPO_INFO
       const repoUrlParts = repoLink.split('/')
@@ -31,7 +29,7 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
       const name = repoUrlParts[4]
       const variables = { owner, name }
       switch (repoProvider.toString()) {
-        case 'github': {
+        case 'github':
           if (user.githubToken) {
             const context = {
               headers: {
@@ -56,9 +54,7 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
             }
           }
           break
-        }
-
-        case 'gitlab': {
+        case 'gitlab':
           if (user.gitlabToken) {
             try {
               const res = await fetch(
@@ -79,9 +75,7 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
             }
           }
           break
-        }
-
-        case 'bitbucket': {
+        case 'bitbucket':
           const access_token = await stroveClient.query({
             query: GET_BITBUCKET_TOKEN,
             context: {
@@ -114,13 +108,11 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
             if (!repoData) setModalContent('UnableToClone')
           }
           break
-        }
         default:
           break
       }
     }
 
-    /* Clone project if there is git provider or add empty project if there is no repo link */
     if (repoData || !repoLink) {
       const { description, name /* add language and color */ } = repoData
       dispatch(
