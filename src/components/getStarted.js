@@ -47,10 +47,10 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: ${props => (props.mobile ? '100%' : '20%')};
+  /* width: ${props => (props.mobile ? '100%' : '20%')}; */
   min-width: 70px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 10px 30px;
   align-items: center;
   justify-content: center;
   text-align: center;

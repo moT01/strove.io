@@ -38,7 +38,7 @@ const AddProjectProvider = ({ children }) => {
     const repoFromGitlab = repoProvider === 'gitlab'
     const repoFromBitbucket = repoProvider === 'bitbucket'
 
-    const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
+    const repoInfo = await getRepoInfo({ repoUrlParts, dispatch, user })
 
     dispatch(
       actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
@@ -68,8 +68,6 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('ProjectsLimitExceeded')
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
-    } else if (repoInfo?.isPrivate && subscriptionStatus !== 'active') {
-      setModalContent('PrivateRepo')
     } else {
       createProject({ repoLink, dispatch, user, setModalContent })
     }
