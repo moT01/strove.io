@@ -20,7 +20,7 @@ const AddProjectProvider = ({ children }) => {
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
-  const isAdding = useSelector(selectors.incomingProject.getRepoLink)
+  const isAdding = useSelector(selectors.incomingProject.getRepoName)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id

@@ -5,3 +5,5 @@ export const getError = getOr('', ['incomingProject', 'error'])
 export const getProjectData = getOr(null, ['incomingProject'])
 
 export const getRepoLink = getOr(null, ['incomingProject', 'repoLink'])
+
+export const getRepoName = getOr(null, ['incomingProject', 'name'])
