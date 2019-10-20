@@ -114,6 +114,10 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
     }
 
     if (repoData || !repoLink) {
+      /* Todo: Use name provided by user */
+      if (!repoData) {
+        repoData = { name: 'Empty project', description: '' }
+      }
       const { description, name /* add language and color */ } = repoData
       dispatch(
         mutation({
