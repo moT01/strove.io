@@ -14,6 +14,9 @@ const startProject = () => {
 }
 const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
   try {
+    let repoData = null
+
+    /* Check if repo can be cloned */
     if (repoLink) {
       const query = GET_REPO_INFO
       const repoUrlParts = repoLink.split('/')
@@ -23,7 +26,6 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
       const owner = repoUrlParts[3]
       const name = repoUrlParts[4]
       const variables = { owner, name }
-      let repoData = null
       switch (repoProvider.toString()) {
         case 'github':
           if (user.githubToken) {
@@ -107,40 +109,42 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
         default:
           break
       }
-      if (repoData) {
-        const { description, name /* add language and color */ } = repoData
-        dispatch(
-          mutation({
-            name: 'addProject',
-            storeKey: 'myProjects',
-            variables: { repoLink, name, description },
-            mutation: ADD_PROJECT,
-            context: {
-              headers: {
-                Authorization: `Bearer ${user.siliskyToken}`,
-                'User-Agent': 'node',
-              },
+    }
+
+    /* Clone project if there is git provider or add empty project if there is no repo link */
+    if (repoData || !repoLink) {
+      const { description, name /* add language and color */ } = repoData
+      dispatch(
+        mutation({
+          name: 'addProject',
+          storeKey: 'myProjects',
+          variables: { repoLink, name, description },
+          mutation: ADD_PROJECT,
+          context: {
+            headers: {
+              Authorization: `Bearer ${user.siliskyToken}`,
+              'User-Agent': 'node',
             },
-            onSuccess: [
-              startProject,
-              () => dispatch(actions.incomingProject.removeIncomingProject()),
-            ],
-            onError: () => setModalContent('TryAgainLater'),
-            onErrorDispatch: [
-              error =>
-                dispatch({
-                  type: C.incomingProject.CATCH_INCOMING_ERROR,
-                  payload: { error },
-                }),
-              () =>
-                dispatch({
-                  type: C.api.FETCH_ERROR,
-                  payload: { storeKey: 'myProjects' },
-                }),
-            ],
-          })
-        )
-      }
+          },
+          onSuccess: [
+            startProject,
+            () => dispatch(actions.incomingProject.removeIncomingProject()),
+          ],
+          onError: () => setModalContent('TryAgainLater'),
+          onErrorDispatch: [
+            error =>
+              dispatch({
+                type: C.incomingProject.CATCH_INCOMING_ERROR,
+                payload: { error },
+              }),
+            () =>
+              dispatch({
+                type: C.api.FETCH_ERROR,
+                payload: { storeKey: 'myProjects' },
+              }),
+          ],
+        })
+      )
     }
   } catch (error) {
     console.log('fetch error: ', error)
