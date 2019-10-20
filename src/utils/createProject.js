@@ -3,15 +3,19 @@ import { navigate } from 'gatsby'
 import { mutation } from 'utils'
 import { C, actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
+
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
+
 const stroveClient = new ApolloClient({
   uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
 })
+
 const startProject = () => {
   navigate('/app/editor/')
 }
+
 const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
   try {
     let repoData = null
@@ -27,7 +31,7 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
       const name = repoUrlParts[4]
       const variables = { owner, name }
       switch (repoProvider.toString()) {
-        case 'github':
+        case 'github': {
           if (user.githubToken) {
             const context = {
               headers: {
@@ -52,7 +56,9 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
             }
           }
           break
-        case 'gitlab':
+        }
+
+        case 'gitlab': {
           if (user.gitlabToken) {
             try {
               const res = await fetch(
@@ -73,7 +79,9 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
             }
           }
           break
-        case 'bitbucket':
+        }
+
+        case 'bitbucket': {
           const access_token = await stroveClient.query({
             query: GET_BITBUCKET_TOKEN,
             context: {
@@ -106,6 +114,7 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
             if (!repoData) setModalContent('UnableToClone')
           }
           break
+        }
         default:
           break
       }
