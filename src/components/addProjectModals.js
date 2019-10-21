@@ -236,14 +236,12 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         height={isMobileOnly ? '75vh' : '33vh'}
       >
         <ModalWrapepr>
-          <Text>Looks like you are trying to clone a private repository!</Text>
-          <StyledList>
-            <li>
-              We will create an empty project for you - if your permissions are
-              correct you will be able to clone the repository using http git
-              clone link from the terminal.
-            </li>
-          </StyledList>
+          <Text>
+            Looks like you are trying to clone a private repository! We will
+            create an empty project for you - if your permissions are correct
+            you will be able to clone the repository using http git clone link
+            from the terminal.
+          </Text>
           <ButtonsWrapper mobile={device}>
             <Button primary onClick={() => closeModal()}>
               Close
@@ -501,15 +499,13 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         height={isMobileOnly ? '75vh' : '33vh'}
       >
         <ModalWrapepr>
-          <Text>
-            Free version doesn't support cloning private repositories. For more
-            information visit our pricing section
-          </Text>
-
+          <Text>Looks like you are trying to clone a private repository!</Text>
+          <StyledList>
+            We will create an empty project for you - if your permissions are
+            correct you will be able to clone the repository using http git
+            clone link from the terminal.
+          </StyledList>
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="pricing" primary onClick={() => closeModal()}>
-              Pricing
-            </StyledLink>
             <Button primary onClick={() => closeModal()}>
               Close
             </Button>
@@ -526,19 +522,19 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         onRequestClose={() => closeModal()}
         contentLabel={modalContent}
         ariaHideApp={false}
-        width={isMobileOnly ? '90vw' : isTablet ? '60vw' : '40vw'}
-        height={isMobileOnly ? '80vh' : '40vh'}
+        width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
+        height={isMobileOnly ? '75vh' : '33vh'}
       >
         <ModalWrapepr>
-          <Text>
-            Unable to clone a repository. This repository most likely belongs to
-            an organization. The only way to overcome this issue is to ask one
-            of repository's organization owners to log in to Strove and approve
-            it.
-          </Text>
+          <Text>Looks like you are trying to clone a private repository!</Text>
+          <StyledList>
+            We will create an empty project for you - if your permissions are
+            correct you will be able to clone the repository using http git
+            clone link from the terminal.
+          </StyledList>
           <ButtonsWrapper mobile={device}>
             <Button primary onClick={() => closeModal()}>
-              Ok
+              Close
             </Button>
           </ButtonsWrapper>
         </ModalWrapepr>
