@@ -1,8 +1,9 @@
 import React, { memo, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
-import { isMobileOnly, isTablet } from 'react-device-detect'
+import { isMobileOnly, isTablet, isMobile } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
+import { Formik } from 'formik'
 
 import AddingEmptyProjectModal from './addEmptyProjectModal.js'
 import Modal from './modal'
@@ -218,6 +219,51 @@ const Title = styled.h3`
   text-align: center;
 `
 
+const GithubLinkInput = styled.input`
+  width: 80%;
+  border-width: 1px;
+  border-style: solid;
+  color: #0072ce;
+  border-radius: 5px;
+  border-color: #0072ce;
+  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.5vh 0;
+
+  :focus {
+    outline: none;
+  }
+`
+
+const GithubLinkForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 2vh 0 0;
+`
+
+const StyledErrors = styled.span`
+  color: red;
+`
+
+const validateProjectName = values => {
+  let errors = {}
+
+  if (values.projectName && !values.projectName.trim()) {
+    errors.projectName = 'Add name'
+    return errors
+  } else if (values.projectName.length > 100) {
+    errors.projectName = 'Name too long'
+    return errors
+  }
+
+  return errors
+}
+
 const AddEmptyProjectModal = ({
   isOpen,
   closeModal,
@@ -266,7 +312,7 @@ const AddProjectModals = ({
     dispatch(actions.incomingProject.removeIncomingProject())
   }
 
-  return null
+  // return null
   return (
     <>
       <AddEmptyProjectModal
@@ -510,11 +556,53 @@ const AddProjectModals = ({
         </ModalWrapper>
       </Modal>
 
-      <AddingEmptyProjectModal
-        handleClose={() => setModalContent(null)}
+      <Modal
+        width={isMobileOnly ? '60vw' : '30vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={modalContent === 'AddingEmptyProjectOpen'}
+        onRequestClose={closeModal}
+        contentLabel="Name project"
+        ariaHideApp={false}
+      >
+        {console.log('hello')}
+        <Title mobile={isMobile}>Add project's name</Title>
+        <Formik
+          onSubmit={(values, actions) => {
+            closeModal()
+            addProject({ name: values.projectName.trim() })
+            actions.setSubmitting(false)
+          }}
+          validate={validateProjectName}
+          render={props => (
+            <GithubLinkForm onSubmit={props.handleSubmit}>
+              <GithubLinkInput
+                autoComplete="off"
+                type="text"
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.projectName}
+                name="projectName"
+                placeholder={'Name'}
+              />
+              <Button
+                disabled={!props.values.projectName || props.errors.projectName}
+                primary
+                mobile={isMobile}
+                type="submit"
+              >
+                Create project
+              </Button>
+              <StyledErrors>{props.errors.projectName}</StyledErrors>
+            </GithubLinkForm>
+          )}
+        />
+      </Modal>
+
+      {/* <AddingEmptyProjectModal
+        handleClose={closeModal}
         isOpen={false}
         // isOpen={modalContent === 'AddingEmptyProjectOpen'}
-      />
+      /> */}
     </>
   )
 }
