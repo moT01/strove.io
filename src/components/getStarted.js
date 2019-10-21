@@ -257,7 +257,6 @@ const GetStarted = ({ addProject }) => {
             </GithubLinkForm>
           )}
         />
-        <ModalButton onClick={() => setNameModal(false)}>Close</ModalButton>
       </Modal>
     </AddProjectWrapper>
   )
