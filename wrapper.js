@@ -283,12 +283,12 @@ const LoginProvider = ({ children, addProject }) => {
 
 const WithAddProject = ({ children, addProject }) => {
   useEffect(() => {
-    let repoLink =
+    let link =
       window?.location?.href?.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-    repoLink &&
-      /.*(github|gitlab|bitbucket).com/i.test(repoLink) &&
+    link &&
+      /.*(github|gitlab|bitbucket).com/i.test(link) &&
       addProject({ link })
   }, [])
 
