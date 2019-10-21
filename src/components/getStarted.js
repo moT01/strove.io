@@ -5,6 +5,7 @@ import { isMobile, isMobileOnly } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
 import Modal from './modal'
+import AddEmptyProjectModal from './addEmptyProjectModal'
 
 const FadeIn = keyframes`
   0% {
@@ -21,15 +22,6 @@ const ButtonFadeIn = keyframes`
   }
   100% {
     opacity: 0.9;
-  }
-`
-
-const FullFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 `
 
@@ -133,41 +125,42 @@ const StyledErrors = styled.span`
   color: red;
 `
 
+const validateRepoLink = values => {
+  let errors = {}
+
+  if (!values.repoLink) {
+    return errors
+  } else if (values.repoLink && !values.repoLink.trim()) {
+    errors.repoLink = 'No link provided'
+    return errors
+  } else if (
+    !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
+      values.repoLink
+    )
+  ) {
+    errors.repoLink = 'Invalid repository link'
+    return errors
+  }
+
+  return errors
+}
+
+const validateProjectName = values => {
+  let errors = {}
+
+  if (values.projectName && !values.projectName.trim()) {
+    errors.projectName = 'Add name'
+    return errors
+  } else if (values.projectName.length > 100) {
+    errors.projectName = 'Name too long'
+    return errors
+  }
+
+  return errors
+}
+
 const GetStarted = ({ addProject }) => {
-  const [nameModal, setNameModal] = useState(false)
-  const validateRepoLink = values => {
-    let errors = {}
-
-    if (!values.repoLink) {
-      return errors
-    } else if (values.repoLink && !values.repoLink.trim()) {
-      errors.repoLink = 'No link provided'
-      return errors
-    } else if (
-      !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
-        values.repoLink
-      )
-    ) {
-      errors.repoLink = 'Invalid repository link'
-      return errors
-    }
-
-    return errors
-  }
-
-  const validateProjectName = values => {
-    let errors = {}
-
-    if (values.projectName && !values.projectName.trim()) {
-      errors.projectName = 'Add name'
-      return errors
-    } else if (values.projectName.length > 100) {
-      errors.projectName = 'Name too long'
-      return errors
-    }
-
-    return errors
-  }
+  const [nameModalOpen, setNameModalOpen] = useState(false)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
@@ -210,49 +203,13 @@ const GetStarted = ({ addProject }) => {
         )}
       />
       Don't have a link? Want to clone private repository?
-      <Button primary mobile={isMobile} onClick={() => setNameModal(true)}>
+      <Button primary mobile={isMobile} onClick={() => setNameModalOpen(true)}>
         Create empty project
       </Button>
-      <Modal
-        width={isMobileOnly ? '60vw' : '30vw'}
-        height={isMobileOnly ? '40vh' : '20vh'}
-        isOpen={nameModal}
-        onRequestClose={() => setNameModal(false)}
-        contentLabel="Name project"
-        ariaHideApp={false}
-      >
-        <Title mobile={isMobile}>Add project's name</Title>
-        <Formik
-          onSubmit={(values, actions) => {
-            setNameModal(false)
-            addProject({ name: values.projectName.trim() })
-            actions.setSubmitting(false)
-          }}
-          validate={validateProjectName}
-          render={props => (
-            <GithubLinkForm onSubmit={props.handleSubmit}>
-              <GithubLinkInput
-                autoComplete="off"
-                type="text"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.projectName}
-                name="projectName"
-                placeholder={'Name'}
-              />
-              <Button
-                disabled={!props.values.projectName || props.errors.projectName}
-                primary
-                mobile={isMobile}
-                type="submit"
-              >
-                Create project
-              </Button>
-              <StyledErrors>{props.errors.projectName}</StyledErrors>
-            </GithubLinkForm>
-          )}
-        />
-      </Modal>
+      <AddEmptyProjectModal
+        handleClose={setNameModalOpen}
+        isOpen={nameModalOpen}
+      />
     </AddProjectWrapper>
   )
 }
