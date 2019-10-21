@@ -223,7 +223,7 @@ const AddEmptyProjectModal = ({
   closeModal,
   modalContent,
   device,
-  setAddingProjectModalOpen,
+  setModalContent,
 }) => (
   <Modal
     isOpen={!!isOpen}
@@ -241,7 +241,10 @@ const AddEmptyProjectModal = ({
         from the terminal.
       </Text>
       <ButtonsWrapper mobile={device}>
-        <Button primary onClick={() => setAddingProjectModalOpen(true)}>
+        <Button
+          primary
+          onClick={() => setModalContent('AddingEmptyProjectOpen')}
+        >
           Ok
         </Button>
         <Button onClick={closeModal}>Cancel</Button>
@@ -256,7 +259,6 @@ const AddProjectModals = ({
   projectsLimit,
   addProject,
 }) => {
-  const [addingProjectModalOpen, setAddingProjectModalOpen] = useState(false)
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
   const closeModal = () => {
@@ -264,24 +266,24 @@ const AddProjectModals = ({
     dispatch(actions.incomingProject.removeIncomingProject())
   }
 
-  if (modalContent === 'AddEmptyProject') {
-    return (
+  return null
+  return (
+    <>
       <AddEmptyProjectModal
         closeModal={closeModal}
-        isOpen={!!modalContent}
+        isOpen={
+          modalContent === 'AddEmptyProject' ||
+          modalContent === 'PrivateRepo' ||
+          modalContent === 'UnableToClone'
+        }
         modalContent={modalContent}
         addProject={addProject}
         device={device}
-        setModalContent={() => setModalContent(null)}
-        setAddingProjectModalOpen={setAddingProjectModalOpen}
+        setModalContent={setModalContent}
       />
-    )
-  }
 
-  if (modalContent === 'LoginWithGithub') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'LoginWithGithub'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -305,13 +307,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'LoginWithGitlab') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'LoginWithGitlab'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -335,13 +333,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'LoginWithBitbucket') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'LoginWithBitbucket'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -365,13 +359,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AddGithubToLogin') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'AddGithubToLogin'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -396,13 +386,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AddGitlabToLogin') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'AddGitlabToLogin'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -427,13 +413,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AddBitbucketToLogin') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'AddBitbucketToLogin'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -458,13 +440,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'ProjectsLimitExceeded') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'ProjectsLimitExceeded'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -485,13 +463,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AnotherActiveProject') {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent === 'AnotherActiveProject'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -511,35 +485,9 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'PrivateRepo') {
-    return (
-      <AddEmptyProjectModal
-        closeModal={closeModal}
-        isOpen={!!modalContent}
-        modalContent={modalContent}
-        addProject={addProject}
-      />
-    )
-  }
-
-  if (modalContent === 'UnableToClone') {
-    return (
-      <AddEmptyProjectModal
-        closeModal={closeModal}
-        isOpen={!!modalContent}
-        modalContent={modalContent}
-        addProject={addProject}
-      />
-    )
-  }
-
-  if (modalContent?.includes('TryAgainLater')) {
-    return (
       <Modal
-        isOpen={!!modalContent}
+        isOpen={modalContent?.includes('TryAgainLater')}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
@@ -561,14 +509,13 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-    )
-  }
 
-  return (
-    <AddingEmptyProjectModal
-      handleClose={closeModal}
-      isOpen={addingProjectModalOpen}
-    />
+      <AddingEmptyProjectModal
+        handleClose={() => setModalContent(null)}
+        isOpen={false}
+        // isOpen={modalContent === 'AddingEmptyProjectOpen'}
+      />
+    </>
   )
 }
 
