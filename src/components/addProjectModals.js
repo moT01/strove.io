@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'

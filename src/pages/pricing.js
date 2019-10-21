@@ -1,17 +1,15 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly, isTablet } from 'react-device-detect'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import isEmail from 'validator/lib/isEmail'
 
-import { BUY_SUBSCRIPTION, SEND_EMAIL } from 'queries'
+import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
 import SEO from 'components/seo'
 import Layout from 'components/layout'
-import { C } from 'state'
 import Modal from 'components/modal'
-import { selectors } from 'state'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -348,10 +346,6 @@ const CardTitle = styled(PlanTitle)`
   font-size: 40px;
 `
 
-const StripeButton = styled(Button)`
-  width: 100%;
-`
-
 const validate = values => {
   let errors = {}
 
@@ -368,28 +362,8 @@ const PricingPage = () => {
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
-  const subscription = useSelector(selectors.api.getApiData('subscription'))
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
-  const queryToken = ({ id }) => {
-    if (id) {
-      dispatch(
-        mutation({
-          name: 'buySubscription',
-          storeKey: 'subscription',
-          mutation: BUY_SUBSCRIPTION,
-          variables: { tokenId: id },
-          onSuccess: data => setModalVisible(true),
-          onSuccessDispatch: [
-            buySubscription => ({
-              type: C.api.UPDATE_ITEM,
-              payload: { storeKey: 'subscription', data: buySubscription },
-            }),
-          ],
-        })
-      )
-    }
-  }
 
   return (
     <>

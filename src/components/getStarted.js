@@ -144,20 +144,6 @@ const validateRepoLink = values => {
   return errors
 }
 
-const validateProjectName = values => {
-  let errors = {}
-
-  if (values.projectName && !values.projectName.trim()) {
-    errors.projectName = 'Add name'
-    return errors
-  } else if (values.projectName.length > 100) {
-    errors.projectName = 'Name too long'
-    return errors
-  }
-
-  return errors
-}
-
 const GetStarted = ({ addProject }) => {
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
@@ -202,7 +188,11 @@ const GetStarted = ({ addProject }) => {
         )}
       />
       Don't have a link? Want to clone private repository?
-      <Button primary mobile={isMobile} onClick={() => setAddProjectModalOpen(true)}>
+      <Button
+        primary
+        mobile={isMobile}
+        onClick={() => setAddProjectModalOpen(true)}
+      >
         Create empty project
       </Button>
       <AddEmptyProjectModal
