@@ -53,6 +53,7 @@ const createProject = async ({
               })
               repoData = data.repository
             } catch (error) {
+              console.log('error', error)
               dispatch({
                 type: C.incomingProject.CATCH_INCOMING_ERROR,
                 payload: { error },
@@ -120,9 +121,15 @@ const createProject = async ({
       }
     }
 
-    if (!repoData || !repoLink) {
+    if (!repoData && !name) {
+      setModalContent('UnableToClone')
+      return null
+    }
+
+    if (!repoData && !repoLink) {
       repoData = { name: customName, description: '' }
     }
+
     const { description, name /* add language and color */ } = repoData
     dispatch(
       mutation({
