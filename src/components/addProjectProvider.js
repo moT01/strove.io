@@ -29,7 +29,7 @@ const AddProjectProvider = ({ children }) => {
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
-  const addProject = async link => {
+  const addProject = async ({ link, name }) => {
     let repoLink
     let repoUrlParts
     let repoProvider

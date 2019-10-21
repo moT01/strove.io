@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
-import StripeCheckout from 'react-stripe-checkout'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
