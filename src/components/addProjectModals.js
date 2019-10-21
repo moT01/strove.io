@@ -275,7 +275,6 @@ const AddProjectModals = ({
         closeModal={closeModal}
         isOpen={
           modalContent === 'AddEmptyProject' ||
-          modalContent === 'PrivateRepo' ||
           modalContent === 'UnableToClone'
         }
         modalContent={modalContent}
