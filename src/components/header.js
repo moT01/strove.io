@@ -272,7 +272,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
     /* This condition means that the project has been closed but user is still inside editor */
     if (
       location.pathname === '/app/editor/' &&
-      !project.additionalPorts.length
+      !project?.additionalPorts?.length
     ) {
       navigate('/app/dashboard')
     }
