@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'
@@ -223,7 +223,7 @@ const AddEmptyProjectModal = ({
   closeModal,
   modalContent,
   device,
-  setModalContent,
+  setAddingProjectModalOpen,
 }) => (
   <Modal
     isOpen={!!isOpen}
@@ -241,7 +241,7 @@ const AddEmptyProjectModal = ({
         from the terminal.
       </Text>
       <ButtonsWrapper mobile={device}>
-        <Button primary onClick={() => setModalContent('AddingEmptyProject')}>
+        <Button primary onClick={() => setAddingProjectModalOpen(true)}>
           Ok
         </Button>
         <Button onClick={closeModal}>Cancel</Button>
@@ -256,20 +256,12 @@ const AddProjectModals = ({
   projectsLimit,
   addProject,
 }) => {
+  const [addingProjectModalOpen, setAddingProjectModalOpen] = useState(false)
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
   const closeModal = () => {
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
-  }
-
-  if (modalContent === 'AddingEmptyProject') {
-    return (
-      <AddingEmptyProjectModal
-        handleClose={closeModal}
-        isOpen={!!modalContent}
-      />
-    )
   }
 
   if (modalContent === 'AddEmptyProject') {
@@ -280,7 +272,8 @@ const AddProjectModals = ({
         modalContent={modalContent}
         addProject={addProject}
         device={device}
-        setModalContent={setModalContent}
+        setModalContent={() => setModalContent(null)}
+        setAddingProjectModalOpen={setAddingProjectModalOpen}
       />
     )
   }
@@ -303,7 +296,7 @@ const AddProjectModals = ({
             <StyledAnchor
               primary
               href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-              onClick={setModalContent}
+              onClick={() => setModalContent(null)}
             >
               Login with Github
               <Github />
@@ -571,7 +564,12 @@ const AddProjectModals = ({
     )
   }
 
-  return null
+  return (
+    <AddingEmptyProjectModal
+      handleClose={closeModal}
+      isOpen={addingProjectModalOpen}
+    />
+  )
 }
 
 export default memo(AddProjectModals)
