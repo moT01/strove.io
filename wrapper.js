@@ -278,6 +278,19 @@ const LoginProvider = ({ children, addProject }) => {
     }
   }, [projects.length])
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', ev => {
+      ev.preventDefault()
+
+      if (navigator && navigator.sendBeacon) {
+        navigator.sendBeacon(
+          `${process.env.SILISKY_ENDPOINT}/beacon`,
+          JSON.stringify({ token: localStorage.getItem('token') })
+        )
+      }
+    })
+  }, [])
+
   return children
 }
 
