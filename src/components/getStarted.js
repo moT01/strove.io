@@ -123,16 +123,6 @@ const GithubLinkInput = styled.input`
   }
 `
 
-const ModalText = styled.p`
-  color: #0072ce;
-  font-size: 1rem;
-  margin-left: 2%;
-  margin-bottom: 0;
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-`
-
 const GithubLinkForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -172,15 +162,11 @@ const GetStarted = ({ addProject }) => {
   const validateProjectName = values => {
     let errors = {}
 
-    if (!values.projectName) {
-      return errors
-    } else if (values.projectName && !values.projectName.trim()) {
+    if (values.projectName && !values.projectName.trim()) {
       errors.projectName = 'Add name'
       return errors
-    } else if (
-      !/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/i.test(values.projectName)
-    ) {
-      errors.projectName = 'Invalid name'
+    } else if (values.projectName.length > 100) {
+      errors.projectName = 'Name too long'
       return errors
     }
 
@@ -240,7 +226,7 @@ const GetStarted = ({ addProject }) => {
         contentLabel="Name project"
         ariaHideApp={false}
       >
-        <ModalText>Add project's name</ModalText>
+        <Title mobile={isMobile}>Add project's name</Title>
         <Formik
           onSubmit={(values, actions) => {
             setNameModal(false)
@@ -257,7 +243,7 @@ const GetStarted = ({ addProject }) => {
                 onBlur={props.handleBlur}
                 value={props.values.projectName}
                 name="projectName"
-                placeholder={"Project's name"}
+                placeholder={'Name'}
               />
               <Button
                 disabled={!props.values.projectName || props.errors.projectName}
@@ -267,8 +253,7 @@ const GetStarted = ({ addProject }) => {
               >
                 Create project
               </Button>
-
-              <StyledErrors>{props.errors.repoLink}</StyledErrors>
+              <StyledErrors>{props.errors.projectName}</StyledErrors>
             </GithubLinkForm>
           )}
         />
