@@ -7,6 +7,7 @@ import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
 import { Copy } from 'images/svg'
+import { navigate } from 'gatsby'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -246,7 +247,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           project.additionalPorts.map((portPair, index) => {
             let href
             /* Env's are loaded as strings on production */
-            if (process.env.IS_OPENSOURCE === "true") {
+            if (process.env.IS_OPENSOURCE === 'true') {
               href = `https://${portPair[1]}.vmopen${
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
@@ -255,9 +256,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
             } else {
-              href = `https://${portPair[1]}.${
-                project.machineName
-              }.silisky.com`
+              href = `https://${portPair[1]}.${project.machineName}.silisky.com`
             }
             return {
               label: `http://0.0.0.0:${portPair[0]}`,
@@ -268,6 +267,16 @@ const HeaderComponent = ({ siteTitle, location }) => {
       }
     }
   }, [location.pathname])
+
+  useEffect(() => {
+    /* This condition means that the project has been closed but user is still inside editor */
+    if (
+      location.pathname === '/app/editor/' &&
+      !project.additionalPorts.length
+    ) {
+      navigate('/app/dashboard')
+    }
+  }, [location.pathname, project])
 
   return (
     <HeaderSection mobile={isMobileOnly}>
