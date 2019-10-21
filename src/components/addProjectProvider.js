@@ -20,7 +20,7 @@ const AddProjectProvider = ({ children }) => {
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
-  const isAdding = useSelector(selectors.incomingProject.getRepoName)
+  const isAdding = useSelector(selectors.incomingProject.isIncoming)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
@@ -51,7 +51,11 @@ const AddProjectProvider = ({ children }) => {
     }
 
     dispatch(
-      actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
+      actions.incomingProject.addIncomingProject({
+        repoLink,
+        repoProvider,
+        name,
+      })
     )
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
