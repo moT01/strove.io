@@ -256,11 +256,8 @@ const AddProjectModals = ({
   projectsLimit,
   addProject,
 }) => {
-  // const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
-
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
-
   const closeModal = () => {
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
@@ -271,7 +268,6 @@ const AddProjectModals = ({
       <AddingEmptyProjectModal
         handleClose={closeModal}
         isOpen={!!modalContent}
-        setModalContent={setModalContent}
       />
     )
   }
