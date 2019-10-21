@@ -261,7 +261,6 @@ const PricingWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  width: 45%;
   height: 80%;
 
   @media (max-width: 1366px) {
@@ -406,7 +405,7 @@ const PricingPage = () => {
       >
         <ModalWrapper>
           <CardTitle>Congratulations!</CardTitle>
-          <Text>Your purchase has been succesfully completed.</Text>
+          <Text>Your purchase has been successfully completed.</Text>
           <ButtonsWrapper mobile={device}>
             <Button onClick={() => setModalVisible(false)}>Close</Button>
           </ButtonsWrapper>
@@ -432,45 +431,6 @@ const PricingPage = () => {
                 <StyledTrialInfo>
                   <li>Free for non-commercial use</li>
                 </StyledTrialInfo>
-              </PricingWrapper>
-              <PricingWrapper>
-                <PlanTitle>Pro</PlanTitle>
-                <PlanDesc>Plan for professionals</PlanDesc>
-                <Price>$39.99</Price>
-                <PlanSubTitle>Per month</PlanSubTitle>
-                <Feature>Private and Public repositories</Feature>
-                <Feature>Commerial use</Feature>
-                <Feature>Suited for small companies</Feature>
-                {subscription?.status !== 'active' ? (
-                  <StripeCheckout
-                    amount={3999}
-                    description="Strove"
-                    image="https://i.imgur.com/2IE6t8u.png"
-                    locale="en"
-                    name="Strive.io"
-                    stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
-                    token={queryToken}
-                    allowRememberMe={false}
-                  >
-                    <StripeButton>
-                      <ButtonText team>Choose Pro</ButtonText>
-                    </StripeButton>
-                    <StyledTrialInfo>
-                      <li>Free 14-day Demo</li>
-                      <li>No credit card needed</li>
-                      <li>No setup</li>
-                    </StyledTrialInfo>
-                  </StripeCheckout>
-                ) : (
-                  <>
-                    <Button disabled>
-                      <ButtonText team>Already subscribed</ButtonText>
-                    </Button>
-                    <StyledTrialInfo>
-                      <li>Thank you for subscribing!</li>
-                    </StyledTrialInfo>
-                  </>
-                )}
               </PricingWrapper>
             </PricingSection>
           </Card>
