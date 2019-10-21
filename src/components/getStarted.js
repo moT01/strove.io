@@ -1,10 +1,9 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Formik } from 'formik'
-import { isMobile, isMobileOnly } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
-import Modal from './modal'
 import AddEmptyProjectModal from './addEmptyProjectModal'
 
 const FadeIn = keyframes`
@@ -160,7 +159,7 @@ const validateProjectName = values => {
 }
 
 const GetStarted = ({ addProject }) => {
-  const [nameModalOpen, setNameModalOpen] = useState(false)
+  const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
@@ -203,12 +202,12 @@ const GetStarted = ({ addProject }) => {
         )}
       />
       Don't have a link? Want to clone private repository?
-      <Button primary mobile={isMobile} onClick={() => setNameModalOpen(true)}>
+      <Button primary mobile={isMobile} onClick={() => setAddProjectModalOpen(true)}>
         Create empty project
       </Button>
       <AddEmptyProjectModal
-        handleClose={setNameModalOpen}
-        isOpen={nameModalOpen}
+        handleClose={setAddProjectModalOpen}
+        isOpen={addProjectModalOpen}
       />
     </AddProjectWrapper>
   )

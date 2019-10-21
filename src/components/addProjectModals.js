@@ -1,13 +1,13 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 
+import AddingEmptyProjectModal from './addEmptyProjectModal.js'
 import Modal from './modal'
 import { Github, Gitlab, Bitbucket } from 'images/logos'
 import { actions } from 'state'
-import modal from './modal'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -222,8 +222,8 @@ const AddEmptyProjectModal = ({
   isOpen,
   closeModal,
   modalContent,
-  addProject,
   device,
+  setModalContent,
 }) => (
   <Modal
     isOpen={!!isOpen}
@@ -241,7 +241,7 @@ const AddEmptyProjectModal = ({
         from the terminal.
       </Text>
       <ButtonsWrapper mobile={device}>
-        <Button primary onClick={addProject}>
+        <Button primary onClick={() => setModalContent('AddingEmptyProject')}>
           Ok
         </Button>
         <Button onClick={closeModal}>Cancel</Button>
@@ -256,12 +256,24 @@ const AddProjectModals = ({
   projectsLimit,
   addProject,
 }) => {
+  // const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
+
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
 
   const closeModal = () => {
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
+  }
+
+  if (modalContent === 'AddingEmptyProject') {
+    return (
+      <AddingEmptyProjectModal
+        handleClose={closeModal}
+        isOpen={!!modalContent}
+        setModalContent={setModalContent}
+      />
+    )
   }
 
   if (modalContent === 'AddEmptyProject') {
@@ -272,6 +284,7 @@ const AddProjectModals = ({
         modalContent={modalContent}
         addProject={addProject}
         device={device}
+        setModalContent={setModalContent}
       />
     )
   }
@@ -294,7 +307,7 @@ const AddProjectModals = ({
             <StyledAnchor
               primary
               href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-              onClick={() => setModalContent(null)}
+              onClick={setModalContent}
             >
               Login with Github
               <Github />
