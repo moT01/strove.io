@@ -198,6 +198,7 @@ const GetStarted = ({ addProject }) => {
       <AddEmptyProjectModal
         handleClose={setAddProjectModalOpen}
         isOpen={addProjectModalOpen}
+        addProject={addProject}
       />
     </AddProjectWrapper>
   )

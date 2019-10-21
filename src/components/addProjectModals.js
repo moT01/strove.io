@@ -556,53 +556,11 @@ const AddProjectModals = ({
         </ModalWrapper>
       </Modal>
 
-      <Modal
-        width={isMobileOnly ? '60vw' : '30vw'}
-        height={isMobileOnly ? '40vh' : '20vh'}
-        isOpen={modalContent === 'AddingEmptyProjectOpen'}
-        onRequestClose={closeModal}
-        contentLabel="Name project"
-        ariaHideApp={false}
-      >
-        {console.log('hello')}
-        <Title mobile={isMobile}>Add project's name</Title>
-        <Formik
-          onSubmit={(values, actions) => {
-            closeModal()
-            addProject({ name: values.projectName.trim() })
-            actions.setSubmitting(false)
-          }}
-          validate={validateProjectName}
-          render={props => (
-            <GithubLinkForm onSubmit={props.handleSubmit}>
-              <GithubLinkInput
-                autoComplete="off"
-                type="text"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.projectName}
-                name="projectName"
-                placeholder={'Name'}
-              />
-              <Button
-                disabled={!props.values.projectName || props.errors.projectName}
-                primary
-                mobile={isMobile}
-                type="submit"
-              >
-                Create project
-              </Button>
-              <StyledErrors>{props.errors.projectName}</StyledErrors>
-            </GithubLinkForm>
-          )}
-        />
-      </Modal>
-
-      {/* <AddingEmptyProjectModal
+      <AddingEmptyProjectModal
         handleClose={closeModal}
-        isOpen={false}
-        // isOpen={modalContent === 'AddingEmptyProjectOpen'}
-      /> */}
+        addProject={addProject}
+        isOpen={modalContent === 'AddingEmptyProjectOpen'}
+      />
     </>
   )
 }

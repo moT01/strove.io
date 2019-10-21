@@ -119,7 +119,7 @@ const validateProjectName = values => {
   return errors
 }
 
-const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
+export default ({ handleClose, isOpen, addProject }) => (
   <Modal
     width={isMobileOnly ? '60vw' : '30vw'}
     height={isMobileOnly ? '40vh' : '20vh'}
@@ -161,11 +161,3 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
     />
   </Modal>
 )
-
-export default memo(props => (
-  <AddProjectProvider>
-    {({ addProject }) => (
-      <AddEmptyProjectModal {...props} addProject={addProject} />
-    )}
-  </AddProjectProvider>
-))
