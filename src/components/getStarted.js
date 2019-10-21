@@ -1,9 +1,10 @@
-import React, { memo } from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Formik } from 'formik'
-import { isMobile } from 'react-device-detect'
+import { isMobile, isMobileOnly } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
+import Modal from './modal'
 
 const FadeIn = keyframes`
   0% {
@@ -20,6 +21,16 @@ const ButtonFadeIn = keyframes`
   }
   100% {
     opacity: 0.9;
+  }
+`
+
+
+const FullFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 `
 
@@ -86,6 +97,11 @@ const Button = styled.button`
     `}
 `
 
+
+const ModalButton = styled(Button)`
+  animation: ${FullFadeIn} 0.2s ease-out;
+`
+
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: #0072ce;
@@ -110,6 +126,17 @@ const GithubLinkInput = styled.input`
   }
 `
 
+
+const ModalText = styled.p`
+color: #0072ce;
+font-size: 1rem;
+margin-left: 2%;
+margin-bottom: 0;
+  white-space: normal;
+  text-overflow: wrap;
+  overflow: visible;
+`
+
 const GithubLinkForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -125,7 +152,8 @@ const StyledErrors = styled.span`
 `
 
 const GetStarted = ({ addProject }) => {
-  const validate = values => {
+  const [nameModal, setNameModal] = useState(false)
+  const validateRepoLink = values => {
     let errors = {}
 
     if (!values.repoLink) {
@@ -145,6 +173,26 @@ const GetStarted = ({ addProject }) => {
     return errors
   }
 
+  const validateProjectName = values => {
+    let errors = {}
+
+    if (!values.projectName) {
+      return errors
+    } else if (values.projectName && !values.projectName.trim()) {
+      errors.projectName = 'Add name'
+      return errors
+    } else if (
+      !/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/i.test(
+        values.projectName
+      )
+    ) {
+      errors.projectName = 'Invalid name'
+      return errors
+    }
+
+    return errors
+  }
+
   return (
     <AddProjectWrapper mobile={isMobile}>
       <Title mobile={isMobile}>
@@ -156,7 +204,7 @@ const GetStarted = ({ addProject }) => {
             addProject(values.repoLink.replace(/.git$/, ''))
           actions.setSubmitting(false)
         }}
-        validate={validate}
+        validate={validateRepoLink}
         render={props => (
           <GithubLinkForm onSubmit={props.handleSubmit}>
             <GithubLinkInput
@@ -185,11 +233,57 @@ const GetStarted = ({ addProject }) => {
           </GithubLinkForm>
         )}
       />
-      don't have a link? Want to clone private repository? Create an empty
+      Don't have a link? Want to clone private repository? Create an empty
       project
-      <Button primary mobile={isMobile} onClick={() => addProject(null)}>
+      <Button primary mobile={isMobile} onClick={() => setNameModal(true)}>
         Create empty project
       </Button>
+      <Modal
+        width={isMobileOnly ? '60vw' : '30vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={nameModal}
+        onRequestClose={() => setNameModal(false)}
+        contentLabel="Name project"
+        ariaHideApp={false}
+      >
+        <ModalText>
+          Enter your project's name
+        </ModalText>
+        <Formik
+        onSubmit={(values, actions) => {
+          values.projectName.trim() &&
+            addProject(null)
+          actions.setSubmitting(false)
+        }}
+        validate={validateProjectName}
+        render={props => (
+          <GithubLinkForm onSubmit={props.handleSubmit}>
+            <GithubLinkInput
+              autoComplete="off"
+              type="text"
+              onChange={props.handleChange}
+              onBlur={props.handleBlur}
+              value={props.values.projectName}
+              name="projectName"
+              placeholder={
+                `Project's name`
+              }
+            />
+            <Button
+              disabled={!props.values.projectName || props.errors.projectName}
+              primary
+              mobile={isMobile}
+              type="submit"
+            >
+              Create project
+            </Button>
+
+            <StyledErrors>{props.errors.repoLink}</StyledErrors>
+          </GithubLinkForm>
+        )}
+      />
+        <ModalButton onClick={() => setNameModal(false)}>Close</ModalButton>
+      </Modal>
     </AddProjectWrapper>
   )
 }
