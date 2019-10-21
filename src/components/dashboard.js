@@ -84,7 +84,6 @@ const Tile = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
   margin: 15px;
-  height: 25vh;
   width: 50vw;
 
   @media (max-width: 1366px) {
