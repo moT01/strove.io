@@ -75,6 +75,7 @@ const AddProjectProvider = ({ children }) => {
       addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
+      console.log('AddEmptyProject')
       setModalContent('AddEmptyProject')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')

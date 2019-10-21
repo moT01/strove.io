@@ -243,7 +243,10 @@ const AddEmptyProjectModal = ({
       <ButtonsWrapper mobile={device}>
         <Button
           primary
-          onClick={() => setModalContent('AddingEmptyProjectOpen')}
+          onClick={() => {
+            closeModal()
+            setModalContent('AddingEmptyProjectOpen')
+          }}
         >
           Ok
         </Button>
@@ -266,7 +269,6 @@ const AddProjectModals = ({
     dispatch(actions.incomingProject.removeIncomingProject())
   }
 
-  // return null
   return (
     <>
       <AddEmptyProjectModal
