@@ -213,8 +213,7 @@ const GetStarted = ({ addProject }) => {
           </GithubLinkForm>
         )}
       />
-      Don't have a link? Want to clone private repository? Create an empty
-      project
+      Don't have a link? Want to clone private repository?
       <Button primary mobile={isMobile} onClick={() => setNameModal(true)}>
         Create empty project
       </Button>
