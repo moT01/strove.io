@@ -162,10 +162,10 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
   </Modal>
 )
 
-export default props => (
+export default memo(props => (
   <AddProjectProvider>
     {({ addProject }) => (
       <AddEmptyProjectModal {...props} addProject={addProject} />
     )}
   </AddProjectProvider>
-)
+))
