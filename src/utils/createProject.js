@@ -121,7 +121,7 @@ const createProject = async ({
       }
     }
 
-    if (!repoData && !name) {
+    if (!repoData && !customName) {
       setModalContent('UnableToClone')
       return null
     }
