@@ -16,8 +16,15 @@ const startProject = () => {
   navigate('/app/editor/')
 }
 
-const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
+const createProject = async ({
+  repoLink,
+  dispatch,
+  user,
+  setModalContent,
+  name,
+}) => {
   let repoData = null
+  const customName = name
   try {
     if (repoLink) {
       const query = GET_REPO_INFO
@@ -113,44 +120,41 @@ const createProject = async ({ repoLink, dispatch, user, setModalContent }) => {
       }
     }
 
-    if (repoData || !repoLink) {
-      /* Todo: Use name provided by user */
-      if (!repoData) {
-        repoData = { name: 'Empty project', description: '' }
-      }
-      const { description, name /* add language and color */ } = repoData
-      dispatch(
-        mutation({
-          name: 'addProject',
-          storeKey: 'myProjects',
-          variables: { repoLink, name, description },
-          mutation: ADD_PROJECT,
-          context: {
-            headers: {
-              Authorization: `Bearer ${user.siliskyToken}`,
-              'User-Agent': 'node',
-            },
-          },
-          onSuccess: [
-            startProject,
-            () => dispatch(actions.incomingProject.removeIncomingProject()),
-          ],
-          onError: () => setModalContent('TryAgainLater'),
-          onErrorDispatch: [
-            error =>
-              dispatch({
-                type: C.incomingProject.CATCH_INCOMING_ERROR,
-                payload: { error },
-              }),
-            () =>
-              dispatch({
-                type: C.api.FETCH_ERROR,
-                payload: { storeKey: 'myProjects' },
-              }),
-          ],
-        })
-      )
+    if (!repoData || !repoLink) {
+      repoData = { name: customName, description: '' }
     }
+    const { description, name /* add language and color */ } = repoData
+    dispatch(
+      mutation({
+        name: 'addProject',
+        storeKey: 'myProjects',
+        variables: { repoLink, name, description },
+        mutation: ADD_PROJECT,
+        context: {
+          headers: {
+            Authorization: `Bearer ${user.siliskyToken}`,
+            'User-Agent': 'node',
+          },
+        },
+        onSuccess: [
+          startProject,
+          () => dispatch(actions.incomingProject.removeIncomingProject()),
+        ],
+        onError: () => setModalContent('TryAgainLater'),
+        onErrorDispatch: [
+          error =>
+            dispatch({
+              type: C.incomingProject.CATCH_INCOMING_ERROR,
+              payload: { error },
+            }),
+          () =>
+            dispatch({
+              type: C.api.FETCH_ERROR,
+              payload: { storeKey: 'myProjects' },
+            }),
+        ],
+      })
+    )
   } catch (error) {
     console.log('fetch error: ', error)
     dispatch({

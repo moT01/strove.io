@@ -79,7 +79,7 @@ const AddProjectProvider = ({ children }) => {
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
     } else {
-      createProject({ repoLink, dispatch, user, setModalContent })
+      createProject({ repoLink, dispatch, user, setModalContent, name })
     }
   }
 
