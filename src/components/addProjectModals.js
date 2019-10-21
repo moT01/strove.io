@@ -1,9 +1,8 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Link } from 'gatsby'
-import { isMobileOnly, isTablet, isMobile } from 'react-device-detect'
+import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
-import { Formik } from 'formik'
 
 import AddingEmptyProjectModal from './addEmptyProjectModal.js'
 import Modal from './modal'
@@ -218,51 +217,6 @@ const Title = styled.h3`
   margin: 10px 0 10px 0;
   text-align: center;
 `
-
-const GithubLinkInput = styled.input`
-  width: 80%;
-  border-width: 1px;
-  border-style: solid;
-  color: #0072ce;
-  border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
-  text-align: center;
-  font-size: 1rem;
-  padding: 0.5vh 0;
-
-  :focus {
-    outline: none;
-  }
-`
-
-const GithubLinkForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  margin: 2vh 0 0;
-`
-
-const StyledErrors = styled.span`
-  color: red;
-`
-
-const validateProjectName = values => {
-  let errors = {}
-
-  if (values.projectName && !values.projectName.trim()) {
-    errors.projectName = 'Add name'
-    return errors
-  } else if (values.projectName.length > 100) {
-    errors.projectName = 'Name too long'
-    return errors
-  }
-
-  return errors
-}
 
 const AddEmptyProjectModal = ({
   isOpen,

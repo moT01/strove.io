@@ -1,9 +1,8 @@
 import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Formik } from 'formik'
-import { isMobile, isMobileOnly } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
-import AddProjectProvider from './addProjectProvider'
 import Modal from './modal'
 
 const FadeIn = keyframes`
@@ -119,7 +118,7 @@ const validateProjectName = values => {
   return errors
 }
 
-export default ({ handleClose, isOpen, addProject }) => (
+const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
   <Modal
     width={isMobileOnly ? '60vw' : '30vw'}
     height={isMobileOnly ? '40vh' : '20vh'}
@@ -128,7 +127,7 @@ export default ({ handleClose, isOpen, addProject }) => (
     contentLabel="Name project"
     ariaHideApp={false}
   >
-    <Title mobile={isMobile}>Add project's name</Title>
+    <Title mobile={isMobileOnly}>Add project's name</Title>
     <Formik
       onSubmit={(values, actions) => {
         handleClose()
@@ -150,7 +149,7 @@ export default ({ handleClose, isOpen, addProject }) => (
           <Button
             disabled={!props.values.projectName || props.errors.projectName}
             primary
-            mobile={isMobile}
+            mobile={isMobileOnly}
             type="submit"
           >
             Create project
@@ -161,3 +160,5 @@ export default ({ handleClose, isOpen, addProject }) => (
     />
   </Modal>
 )
+
+export default memo(AddEmptyProjectModal)
