@@ -24,7 +24,6 @@ const ButtonFadeIn = keyframes`
   }
 `
 
-
 const FullFadeIn = keyframes`
   0% {
     opacity: 0;
@@ -57,7 +56,6 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  /* width: ${props => (props.mobile ? '100%' : '20%')}; */
   min-width: 70px;
   margin: 5px;
   padding: 10px 30px;
@@ -97,7 +95,6 @@ const Button = styled.button`
     `}
 `
 
-
 const ModalButton = styled(Button)`
   animation: ${FullFadeIn} 0.2s ease-out;
 `
@@ -126,12 +123,11 @@ const GithubLinkInput = styled.input`
   }
 `
 
-
 const ModalText = styled.p`
-color: #0072ce;
-font-size: 1rem;
-margin-left: 2%;
-margin-bottom: 0;
+  color: #0072ce;
+  font-size: 1rem;
+  margin-left: 2%;
+  margin-bottom: 0;
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
@@ -182,9 +178,7 @@ const GetStarted = ({ addProject }) => {
       errors.projectName = 'Add name'
       return errors
     } else if (
-      !/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/i.test(
-        values.projectName
-      )
+      !/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/i.test(values.projectName)
     ) {
       errors.projectName = 'Invalid name'
       return errors
@@ -246,41 +240,38 @@ const GetStarted = ({ addProject }) => {
         contentLabel="Name project"
         ariaHideApp={false}
       >
-        <ModalText>
-          Enter your project's name
-        </ModalText>
+        <ModalText>Add project's name</ModalText>
         <Formik
-        onSubmit={(values, actions) => {
-          addProject({ name: values.projectName.trim() })
-          actions.setSubmitting(false)
-        }}
-        validate={validateProjectName}
-        render={props => (
-          <GithubLinkForm onSubmit={props.handleSubmit}>
-            <GithubLinkInput
-              autoComplete="off"
-              type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.projectName}
-              name="projectName"
-              placeholder={
-                `Project's name`
-              }
-            />
-            <Button
-              disabled={!props.values.projectName || props.errors.projectName}
-              primary
-              mobile={isMobile}
-              type="submit"
-            >
-              Create project
-            </Button>
+          onSubmit={(values, actions) => {
+            setNameModal(false)
+            addProject({ name: values.projectName.trim() })
+            actions.setSubmitting(false)
+          }}
+          validate={validateProjectName}
+          render={props => (
+            <GithubLinkForm onSubmit={props.handleSubmit}>
+              <GithubLinkInput
+                autoComplete="off"
+                type="text"
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.projectName}
+                name="projectName"
+                placeholder={"Project's name"}
+              />
+              <Button
+                disabled={!props.values.projectName || props.errors.projectName}
+                primary
+                mobile={isMobile}
+                type="submit"
+              >
+                Create project
+              </Button>
 
-            <StyledErrors>{props.errors.repoLink}</StyledErrors>
-          </GithubLinkForm>
-        )}
-      />
+              <StyledErrors>{props.errors.repoLink}</StyledErrors>
+            </GithubLinkForm>
+          )}
+        />
         <ModalButton onClick={() => setNameModal(false)}>Close</ModalButton>
       </Modal>
     </AddProjectWrapper>
