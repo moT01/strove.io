@@ -260,7 +260,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -279,7 +279,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Login with Github
               <Github />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -290,7 +290,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -309,7 +309,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -320,7 +320,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -339,7 +339,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -350,7 +350,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -365,12 +365,12 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             >
               Login with Github
               <Github />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -381,7 +381,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -396,12 +396,12 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             >
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -412,7 +412,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -427,12 +427,12 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             >
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -443,7 +443,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -456,10 +456,10 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             account. To do so visit our pricing section.
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="pricing" primary onClick={() => closeModal()}>
+            <StyledLink to="pricing" primary onClick={closeModal}>
               Pricing
             </StyledLink>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -470,7 +470,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -482,10 +482,10 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             adding a new one. You can do that in your dashboard.
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="app/dashboard" primary onClick={() => closeModal()}>
+            <StyledLink to="app/dashboard" primary onClick={closeModal}>
               Ok
             </StyledLink>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -516,7 +516,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
     return (
       <Modal
         isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
@@ -531,7 +531,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
           try again later.`}
           </Text>
           <ButtonsWrapper mobile={device}>
-            <Button primary onClick={() => closeModal()}>
+            <Button primary onClick={closeModal}>
               Ok
             </Button>
           </ButtonsWrapper>
