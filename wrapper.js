@@ -274,7 +274,7 @@ const LoginProvider = ({ children, addProject }) => {
 
   useEffect(() => {
     if (user && incomingProjectLink) {
-      addProject(incomingProjectLink)
+      addProject({ link: incomingProjectLink })
     }
   }, [projects.length])
 
@@ -289,7 +289,7 @@ const WithAddProject = ({ children, addProject }) => {
 
     repoLink &&
       /.*(github|gitlab|bitbucket).com/i.test(repoLink) &&
-      addProject(repoLink)
+      addProject({ link })
   }, [])
 
   return children
