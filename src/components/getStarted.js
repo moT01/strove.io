@@ -95,10 +95,6 @@ const Button = styled.button`
     `}
 `
 
-const ModalButton = styled(Button)`
-  animation: ${FullFadeIn} 0.2s ease-out;
-`
-
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: #0072ce;

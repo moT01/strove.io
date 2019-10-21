@@ -94,6 +94,7 @@ const AddProjectProvider = ({ children }) => {
         projectsLimit={projectsLimit}
         modalContent={modalContent}
         setModalContent={setModalContent}
+        addProject={addProject}
       />
       <Modal
         width={isMobileOnly ? '60vw' : '20vw'}

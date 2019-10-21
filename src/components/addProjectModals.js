@@ -34,7 +34,6 @@ const ButtonFadeIn = keyframes`
 const Text = styled.p`
   color: #0072ce;
   font-size: 1rem;
-  margin-left: 2%;
   margin-bottom: 12px;
   white-space: normal;
   text-overflow: wrap;
@@ -212,7 +211,20 @@ const ButtonsWrapper = styled.div`
       : '45%'};
 `
 
-const AddEmptyProjectModal = ({ isOpen, closeModal, modalContent }) => (
+const Title = styled.h3`
+  font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
+  color: #0072ce;
+  margin: 10px 0 10px 0;
+  text-align: center;
+`
+
+const AddEmptyProjectModal = ({
+  isOpen,
+  closeModal,
+  modalContent,
+  addProject,
+  device,
+}) => (
   <Modal
     isOpen={!!isOpen}
     onRequestClose={closeModal}
@@ -222,22 +234,28 @@ const AddEmptyProjectModal = ({ isOpen, closeModal, modalContent }) => (
     height={isMobileOnly ? '75vh' : '33vh'}
   >
     <ModalWrapper>
+      <Title>Looks like you are trying to clone a private repository!</Title>
       <Text>
-        Looks like you are trying to clone a private repository! We will create
-        an empty project for you - if your permissions are correct you will be
-        able to clone the repository using http git clone link from the
-        terminal.
+        We will create an empty project for you - if your permissions are
+        correct you will be able to clone the repository using https git clone
+        from the terminal.
       </Text>
       <ButtonsWrapper mobile={device}>
-        <Button primary onClick={closeModal}>
-          Close
+        <Button primary onClick={addProject}>
+          Ok
         </Button>
+        <Button onClick={closeModal}>Cancel</Button>
       </ButtonsWrapper>
     </ModalWrapper>
   </Modal>
 )
 
-const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
+const AddProjectModals = ({
+  modalContent,
+  setModalContent,
+  projectsLimit,
+  addProject,
+}) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
 
@@ -252,6 +270,8 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         closeModal={closeModal}
         isOpen={!!modalContent}
         modalContent={modalContent}
+        addProject={addProject}
+        device={device}
       />
     )
   }
@@ -498,6 +518,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         closeModal={closeModal}
         isOpen={!!modalContent}
         modalContent={modalContent}
+        addProject={addProject}
       />
     )
   }
@@ -508,6 +529,7 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
         closeModal={closeModal}
         isOpen={!!modalContent}
         modalContent={modalContent}
+        addProject={addProject}
       />
     )
   }
