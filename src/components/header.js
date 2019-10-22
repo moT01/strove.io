@@ -356,7 +356,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </CopyWrapper>
         )}
       </HeaderWrapper>
-      {location.pathname === '/app/editor/' || true && <LatencyIndicator />}
+      {location.pathname === '/app/editor/' && <LatencyIndicator />}
       <ZeldaWrapper>
         <Login />
       </ZeldaWrapper>
