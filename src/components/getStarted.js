@@ -1,9 +1,10 @@
-import React, { memo } from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
+import AddEmptyProjectModal from './addEmptyProjectModal'
 
 const FadeIn = keyframes`
   0% {
@@ -46,10 +47,9 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: ${props => (props.mobile ? '100%' : '20%')};
   min-width: 70px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 10px 30px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -124,26 +124,28 @@ const StyledErrors = styled.span`
   color: red;
 `
 
-const GetStarted = ({ addProject }) => {
-  const validate = values => {
-    let errors = {}
+const validateRepoLink = values => {
+  let errors = {}
 
-    if (!values.repoLink) {
-      return errors
-    } else if (values.repoLink && !values.repoLink.trim()) {
-      errors.repoLink = 'No link provided'
-      return errors
-    } else if (
-      !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
-        values.repoLink
-      )
-    ) {
-      errors.repoLink = 'Invalid repository link'
-      return errors
-    }
-
+  if (!values.repoLink) {
+    return errors
+  } else if (values.repoLink && !values.repoLink.trim()) {
+    errors.repoLink = 'No link provided'
+    return errors
+  } else if (
+    !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
+      values.repoLink
+    )
+  ) {
+    errors.repoLink = 'Invalid repository link'
     return errors
   }
+
+  return errors
+}
+
+const GetStarted = ({ addProject }) => {
+  const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
@@ -153,10 +155,10 @@ const GetStarted = ({ addProject }) => {
       <Formik
         onSubmit={(values, actions) => {
           values.repoLink.trim() &&
-            addProject(values.repoLink.replace(/.git$/, ''))
+            addProject({ link: values.repoLink.replace(/.git$/, '') })
           actions.setSubmitting(false)
         }}
-        validate={validate}
+        validate={validateRepoLink}
         render={props => (
           <GithubLinkForm onSubmit={props.handleSubmit}>
             <GithubLinkInput
@@ -178,11 +180,25 @@ const GetStarted = ({ addProject }) => {
               mobile={isMobile}
               type="submit"
             >
-              Add project
+              Clone project
             </Button>
+
             <StyledErrors>{props.errors.repoLink}</StyledErrors>
           </GithubLinkForm>
         )}
+      />
+      Don't have a link? Want to clone private repository?
+      <Button
+        primary
+        mobile={isMobile}
+        onClick={() => setAddProjectModalOpen(true)}
+      >
+        Create empty project
+      </Button>
+      <AddEmptyProjectModal
+        handleClose={setAddProjectModalOpen}
+        isOpen={addProjectModalOpen}
+        addProject={addProject}
       />
     </AddProjectWrapper>
   )

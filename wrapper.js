@@ -274,7 +274,7 @@ const LoginProvider = ({ children, addProject }) => {
 
   useEffect(() => {
     if (user && incomingProjectLink) {
-      addProject(incomingProjectLink)
+      addProject({ link: incomingProjectLink })
     }
   }, [projects.length])
 
@@ -296,13 +296,13 @@ const LoginProvider = ({ children, addProject }) => {
 
 const WithAddProject = ({ children, addProject }) => {
   useEffect(() => {
-    let repoLink =
+    let link =
       window?.location?.href?.match(/#(.*)/) &&
       window.location.href.match(/#(.*)/)[1]
 
-    repoLink &&
-      /.*(github|gitlab|bitbucket).com/i.test(repoLink) &&
-      addProject(repoLink)
+    link &&
+      /.*(github|gitlab|bitbucket).com/i.test(link) &&
+      addProject({ link })
   }, [])
 
   return children

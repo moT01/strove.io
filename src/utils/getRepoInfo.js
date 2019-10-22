@@ -7,10 +7,9 @@ const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
-const getRepoInfo = async ({ repoLink, dispatch, user }) => {
+const getRepoInfo = async ({ repoUrlParts, dispatch, user }) => {
   const query = GET_REPO_INFO
 
-  const repoUrlParts = repoLink.split('/')
   const repoProvider = repoUrlParts[2].split('.')[0]
   const owner = repoUrlParts[3]
   const name = repoUrlParts[4]

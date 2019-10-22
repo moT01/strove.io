@@ -1,10 +1,11 @@
 import * as C from './constants'
 
-export const addIncomingProject = ({ repoLink, repoProvider }) => ({
+export const addIncomingProject = ({ repoLink, repoProvider, name }) => ({
   type: C.ADD_INCOMING_PROJECT,
   payload: {
     repoLink,
     repoProvider,
+    name,
   },
 })
 
