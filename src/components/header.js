@@ -11,6 +11,7 @@ import { navigate } from 'gatsby'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
+import LatencyIndicator from './latencyIndicator'
 import Login from './login'
 
 const FadeIn = keyframes`
@@ -233,7 +234,6 @@ const CopyWrapper = styled.div`
   }
 `
 
-/* ToDo: Redirect to dashboard on change from at least 1 port to 0 ports  */
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
@@ -356,6 +356,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </CopyWrapper>
         )}
       </HeaderWrapper>
+      {location.pathname === '/app/editor/' || true && <LatencyIndicator />}
       <ZeldaWrapper>
         <Login />
       </ZeldaWrapper>
