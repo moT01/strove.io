@@ -8,7 +8,6 @@ import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
 import { Copy } from 'images/svg'
 import { navigate } from 'gatsby'
-import LatencyMonitor from 'latency-monitor';
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
