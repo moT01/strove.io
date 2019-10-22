@@ -234,14 +234,19 @@ const CopyWrapper = styled.div`
   }
 `
 
-// const monitor = new LatencyMonitor();
-// console.log('Event Loop Latency Monitor Loaded: %O', {
-//     latencyCheckIntervalMs: monitor.latencyCheckIntervalMs,
-//     dataEmitIntervalMs: monitor.dataEmitIntervalMs
-// });
-// monitor.on('data', (summary) => console.log('Event Loop Latency: %O', summary));
+const LatencyCircle = styled.div`
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  padding: 8px;
 
-/* ToDo: Redirect to dashboard on change from at least 1 port to 0 ports  */
+  background: #fff;
+  border: 1px solid #fff;
+  color: #666;
+  text-align: center;
+  background-color: ${({ latency }) => latency > 20 && latency < 50 ? 'yellow' : '#39e626'};
+`
+
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
   const [latency, setLatency] = useState(0)
@@ -369,7 +374,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
           </CopyWrapper>
         )}
-        {latency}
+        {<LatencyCircle latency={latency} />} Latency: {Math.round(latency)}
       </HeaderWrapper>
       <ZeldaWrapper>
         <Login />
