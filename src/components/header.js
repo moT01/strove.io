@@ -8,6 +8,7 @@ import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
 import { Copy } from 'images/svg'
 import { navigate } from 'gatsby'
+import LatencyMonitor from 'latency-monitor';
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -233,12 +234,25 @@ const CopyWrapper = styled.div`
   }
 `
 
+// const monitor = new LatencyMonitor();
+// console.log('Event Loop Latency Monitor Loaded: %O', {
+//     latencyCheckIntervalMs: monitor.latencyCheckIntervalMs,
+//     dataEmitIntervalMs: monitor.dataEmitIntervalMs
+// });
+// monitor.on('data', (summary) => console.log('Event Loop Latency: %O', summary));
+
 /* ToDo: Redirect to dashboard on change from at least 1 port to 0 ports  */
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
+  const [latency, setLatency] = useState(0)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
+
+  useEffect(() => {
+    const monitor = new LatencyMonitor();
+    monitor.on('data', ({ avgMs }) => setLatency(avgMs));
+  })
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
@@ -355,6 +369,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
           </CopyWrapper>
         )}
+        {latency}
       </HeaderWrapper>
       <ZeldaWrapper>
         <Login />
