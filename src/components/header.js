@@ -241,10 +241,9 @@ const LatencyCircle = styled.div`
   padding: 8px;
 
   background: #fff;
-  border: 1px solid #fff;
   color: #666;
   text-align: center;
-  background-color: ${({ latency }) => latency > 20 && latency < 50 ? 'yellow' : '#39e626'};
+  background-color: ${({ latency }) => latency > 10 && latency < 30 ? 'yellow' : latency <= 10 ? '#39e626' : '#ef7a2c'};
 `
 
 const HeaderComponent = ({ siteTitle, location }) => {
