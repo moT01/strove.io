@@ -12,6 +12,7 @@ import LatencyMonitor from 'latency-monitor';
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
+import LatencyIndicator from './latencyIndicator'
 import Login from './login'
 
 const FadeIn = keyframes`
@@ -234,37 +235,11 @@ const CopyWrapper = styled.div`
   }
 `
 
-const LatencyCircle = styled.div`
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  padding: 8px;
-
-  background: #fff;
-  color: #666;
-  text-align: center;
-  background-color: ${({ latency }) => latency > 10 && latency < 30 ? 'yellow' : latency <= 10 ? '#39e626' : '#ef7a2c'};
-`
-
-const LatencyWrapper = styled.div`
-  display: flex;
-`
-
-const StyledText = styled.div`
-  color: white;
-  margin-left: 5px;`
-
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
-  const [latency, setLatency] = useState(0)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
-
-  useEffect(() => {
-    const monitor = new LatencyMonitor();
-    monitor.on('data', ({ avgMs }) => setLatency(avgMs));
-  })
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
@@ -382,7 +357,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </CopyWrapper>
         )}
       </HeaderWrapper>
-      <LatencyWrapper><LatencyCircle latency={latency} /><StyledText>Latency: {Math.round(latency)}</StyledText></LatencyWrapper>
+      {location.pathname === '/app/editor/' || true && <LatencyIndicator />}
       <ZeldaWrapper>
         <Login />
       </ZeldaWrapper>
