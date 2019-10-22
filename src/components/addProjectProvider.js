@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 
-import { createProject, getRepoInfo } from 'utils'
+import { createProject } from 'utils'
 import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
@@ -20,7 +20,7 @@ const AddProjectProvider = ({ children }) => {
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
-  const isAdding = useSelector(selectors.incomingProject.getRepoLink)
+  const isAdding = useSelector(selectors.incomingProject.isIncoming)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
@@ -29,19 +29,33 @@ const AddProjectProvider = ({ children }) => {
   const projectsLimit =
     (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
-  const addProject = async link => {
-    const repoLink = link.trim().toLowerCase()
-    const repoUrlParts = repoLink.split('/')
-    const repoProvider = repoUrlParts[2].split('.')[0]
+  const addProject = async ({ link, name }) => {
+    let repoLink
+    let repoUrlParts
+    let repoProvider
 
-    const repoFromGithub = repoProvider === 'github'
-    const repoFromGitlab = repoProvider === 'gitlab'
-    const repoFromBitbucket = repoProvider === 'bitbucket'
+    let repoFromGithub
+    let repoFromGitlab
+    let repoFromBitbucket
 
-    const repoInfo = await getRepoInfo({ repoLink, dispatch, user })
+    if (link) {
+      repoLink = link.trim().toLowerCase()
+      repoUrlParts = repoLink.split('/')
+      repoProvider = repoUrlParts[2].split('.')[0]
+
+      repoFromGithub = repoProvider === 'github'
+      repoFromGitlab = repoProvider === 'gitlab'
+      repoFromBitbucket = repoProvider === 'bitbucket'
+    } else {
+      repoLink = ''
+    }
 
     dispatch(
-      actions.incomingProject.addIncomingProject({ repoLink, repoProvider })
+      actions.incomingProject.addIncomingProject({
+        repoLink,
+        repoProvider,
+        name,
+      })
     )
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
@@ -61,17 +75,16 @@ const AddProjectProvider = ({ children }) => {
       addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
-      setModalContent('AddGithubPrivatePermissions')
+      console.log('AddEmptyProject')
+      setModalContent('AddEmptyProject')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')
     } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
-    } else if (repoInfo?.isPrivate && subscriptionStatus !== 'active') {
-      setModalContent('PrivateRepo')
     } else {
-      createProject({ repoLink, dispatch, user, setModalContent })
+      createProject({ repoLink, dispatch, user, setModalContent, name })
     }
   }
 
@@ -82,6 +95,7 @@ const AddProjectProvider = ({ children }) => {
         projectsLimit={projectsLimit}
         modalContent={modalContent}
         setModalContent={setModalContent}
+        addProject={addProject}
       />
       <Modal
         width={isMobileOnly ? '60vw' : '20vw'}

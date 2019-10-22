@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 
+import AddingEmptyProjectModal from './addEmptyProjectModal.js'
 import Modal from './modal'
 import { Github, Gitlab, Bitbucket } from 'images/logos'
 import { actions } from 'state'
@@ -33,7 +34,6 @@ const ButtonFadeIn = keyframes`
 const Text = styled.p`
   color: #0072ce;
   font-size: 1rem;
-  margin-left: 2%;
   margin-bottom: 12px;
   white-space: normal;
   text-overflow: wrap;
@@ -41,7 +41,7 @@ const Text = styled.p`
   text-align: center;
 `
 
-const ModalWrapepr = styled.div`
+const ModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -154,11 +154,6 @@ const StyledAnchor = styled.a`
     `}
 `
 
-const StyledList = styled.ul`
-  margin: 0 0 0 4vw;
-  color: #0072ce;
-`
-
 const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
@@ -216,66 +211,87 @@ const ButtonsWrapper = styled.div`
       : '45%'};
 `
 
-const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
+const Title = styled.h3`
+  font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
+  color: #0072ce;
+  margin: 10px 0 10px 0;
+  text-align: center;
+`
+
+const AddEmptyProjectModal = ({
+  isOpen,
+  closeModal,
+  modalContent,
+  device,
+  setModalContent,
+}) => (
+  <Modal
+    isOpen={!!isOpen}
+    onRequestClose={closeModal}
+    contentLabel={modalContent}
+    ariaHideApp={false}
+    width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
+    height={isMobileOnly ? '75vh' : '33vh'}
+  >
+    <ModalWrapper>
+      <Title>Looks like you are trying to clone a private repository!</Title>
+      <Text>
+        We will create an empty project for you - if your permissions are
+        correct you will be able to clone the repository using https git clone
+        from the terminal.
+      </Text>
+      <ButtonsWrapper mobile={device}>
+        <Button
+          primary
+          onClick={() => {
+            closeModal()
+            setModalContent('AddingEmptyProjectOpen')
+          }}
+        >
+          Ok
+        </Button>
+        <Button onClick={closeModal}>Cancel</Button>
+      </ButtonsWrapper>
+    </ModalWrapper>
+  </Modal>
+)
+
+const AddProjectModals = ({
+  modalContent,
+  setModalContent,
+  projectsLimit,
+  addProject,
+}) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
-
   const closeModal = () => {
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
   }
 
-  if (modalContent === 'AddGithubPrivatePermissions') {
-    return (
-      <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
-        height={isMobileOnly ? '75vh' : '33vh'}
-      >
-        <ModalWrapepr>
-          <Text>
-            We couldn't clone your repository. This may happen due to one of the
-            two reasons:
-          </Text>
-          <StyledList>
-            <li>
-              You do not have access rights to the repository you are trying to
-              reach
-            </li>
-            <li>Repository from the provided link does not exist</li>
-          </StyledList>
-          <Text>Please investigate the reasons and try again later</Text>
-          <ButtonsWrapper mobile={device}>
-            {/* <StyledLink
-              to="pricing"
-              primary
-              onClick={() => closeModal()}
-            >
-              Pricing
-            </StyledLink> */}
-            <Button primary onClick={() => closeModal()}>
-              Close
-            </Button>
-          </ButtonsWrapper>
-        </ModalWrapepr>
-      </Modal>
-    )
-  }
+  return (
+    <>
+      <AddEmptyProjectModal
+        closeModal={closeModal}
+        isOpen={
+          modalContent === 'AddEmptyProject' ||
+          modalContent === 'UnableToClone'
+        }
+        modalContent={modalContent}
+        addProject={addProject}
+        device={device}
+        setModalContent={setModalContent}
+      />
 
-  if (modalContent === 'LoginWithGithub') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'LoginWithGithub'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height="30vh"
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Github account
           </Text>
@@ -288,24 +304,20 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Login with Github
               <Github />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'LoginWithGitlab') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'LoginWithGitlab'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height="30vh"
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Gitlab account
           </Text>
@@ -318,24 +330,20 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'LoginWithBitbucket') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'LoginWithBitbucket'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height="30vh"
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Bitbucket account
           </Text>
@@ -348,24 +356,20 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AddGithubToLogin') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'AddGithubToLogin'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '37vh' : '20vh'}
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Github account.
             You are logged in with a Gitlab account
@@ -374,29 +378,25 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             >
               Login with Github
               <Github />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AddGitlabToLogin') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'AddGitlabToLogin'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '37vh' : '20vh'}
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Gitlab account.
             You are logged in with a Github account
@@ -405,29 +405,25 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab`}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             >
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AddBitbucketToLogin') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'AddBitbucketToLogin'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '37vh' : '20vh'}
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Bitbucket
             account. You are logged in with a Github account
@@ -436,138 +432,70 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
             <StyledAnchor
               primary
               href={`https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
-              onClick={() => closeModal()}
+              onClick={closeModal}
             >
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'ProjectsLimitExceeded') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'ProjectsLimitExceeded'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '47vh' : '25vh'}
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             You have exceeded your projects limit. You can create up to{' '}
             {projectsLimit} projects. To increase the limit you can upgrade your
             account. To do so visit our pricing section.
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="pricing" primary onClick={() => closeModal()}>
+            <StyledLink to="pricing" primary onClick={closeModal}>
               Pricing
             </StyledLink>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'AnotherActiveProject') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent === 'AnotherActiveProject'}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '47vh' : '25vh'}
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             One of your projects is currently active. You have to stop it before
             adding a new one. You can do that in your dashboard.
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="app/dashboard" primary onClick={() => closeModal()}>
+            <StyledLink to="app/dashboard" primary onClick={closeModal}>
               Ok
             </StyledLink>
-            <Button onClick={() => closeModal()}>Close</Button>
+            <Button onClick={closeModal}>Close</Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  if (modalContent === 'PrivateRepo') {
-    return (
       <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width={isMobileOnly ? '80vw' : isTablet ? '60vw' : '30vw'}
-        height={isMobileOnly ? '75vh' : '33vh'}
-      >
-        <ModalWrapepr>
-          <Text>
-            Free version doesn't support cloning private repositories. For more
-            information visit our pricing section
-          </Text>
-
-          <ButtonsWrapper mobile={device}>
-            <StyledLink to="pricing" primary onClick={() => closeModal()}>
-              Pricing
-            </StyledLink>
-            <Button primary onClick={() => closeModal()}>
-              Close
-            </Button>
-          </ButtonsWrapper>
-        </ModalWrapepr>
-      </Modal>
-    )
-  }
-
-  if (modalContent === 'UnableToClone') {
-    return (
-      <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width={isMobileOnly ? '90vw' : isTablet ? '60vw' : '40vw'}
-        height={isMobileOnly ? '80vh' : '40vh'}
-      >
-        <ModalWrapepr>
-          <Text>
-            Unable to clone a repository. This repository most likely belongs to
-            an organization. The only way to overcome this issue is to ask one
-            of repository's organization owners to log in to Strove and approve
-            it.
-          </Text>
-          <ButtonsWrapper mobile={device}>
-            <Button primary onClick={() => closeModal()}>
-              Ok
-            </Button>
-          </ButtonsWrapper>
-        </ModalWrapepr>
-      </Modal>
-    )
-  }
-
-  if (modalContent?.includes('TryAgainLater')) {
-    return (
-      <Modal
-        isOpen={!!modalContent}
-        onRequestClose={() => closeModal()}
+        isOpen={modalContent?.includes('TryAgainLater')}
+        onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '33vh' : '20vh'}
       >
-        <ModalWrapepr>
+        <ModalWrapper>
           <Text>
             {modalContent === 'TryAgainLaterButGitlabIsToBlame'
               ? `We have encountered an error while cloning your repository from Gitlab. Please
@@ -576,16 +504,20 @@ const AddProjectModals = ({ modalContent, setModalContent, projectsLimit }) => {
           try again later.`}
           </Text>
           <ButtonsWrapper mobile={device}>
-            <Button primary onClick={() => closeModal()}>
+            <Button primary onClick={closeModal}>
               Ok
             </Button>
           </ButtonsWrapper>
-        </ModalWrapepr>
+        </ModalWrapper>
       </Modal>
-    )
-  }
 
-  return null
+      <AddingEmptyProjectModal
+        handleClose={closeModal}
+        addProject={addProject}
+        isOpen={modalContent === 'AddingEmptyProjectOpen'}
+      />
+    </>
+  )
 }
 
 export default memo(AddProjectModals)
