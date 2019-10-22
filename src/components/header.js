@@ -381,8 +381,8 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
           </CopyWrapper>
         )}
-        <LatencyWrapper><LatencyCircle latency={latency} /><StyledText>Latency: {Math.round(latency)}</StyledText></LatencyWrapper>
       </HeaderWrapper>
+      <LatencyWrapper><LatencyCircle latency={latency} /><StyledText>Latency: {Math.round(latency)}</StyledText></LatencyWrapper>
       <ZeldaWrapper>
         <Login />
       </ZeldaWrapper>
