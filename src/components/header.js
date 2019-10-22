@@ -246,6 +246,14 @@ const LatencyCircle = styled.div`
   background-color: ${({ latency }) => latency > 10 && latency < 30 ? 'yellow' : latency <= 10 ? '#39e626' : '#ef7a2c'};
 `
 
+const LatencyWrapper = styled.div`
+  display: flex;
+`
+
+const StyledText = styled.div`
+  color: white;
+  margin-left: 5px;`
+
 const HeaderComponent = ({ siteTitle, location }) => {
   const [ports, setPorts] = useState([])
   const [latency, setLatency] = useState(0)
@@ -373,7 +381,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
           </CopyWrapper>
         )}
-        {<LatencyCircle latency={latency} />} Latency: {Math.round(latency)}
+        <LatencyWrapper><LatencyCircle latency={latency} /><StyledText>Latency: {Math.round(latency)}</StyledText></LatencyWrapper>
       </HeaderWrapper>
       <ZeldaWrapper>
         <Login />
