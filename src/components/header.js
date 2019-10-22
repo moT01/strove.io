@@ -337,11 +337,11 @@ const HeaderComponent = ({ siteTitle, location }) => {
             )}
           </Downshift>
         )}
-        {location.pathname === '/app/editor/' && currentProject.repoLink && (
+        {location.pathname === '/app/editor/' && currentProject?.repoLink && (
           <CopyWrapper
             onClick={() =>
               copyToClipboard(
-                `https://strove.io/#${currentProject.repoLink}`.replace(
+                `https://strove.io/#${currentProject?.repoLink}`.replace(
                   '.git',
                   ''
                 ),
