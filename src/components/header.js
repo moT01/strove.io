@@ -337,7 +337,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             )}
           </Downshift>
         )}
-        {location.pathname === '/app/editor/' && (
+        {location.pathname === '/app/editor/' && currentProject.repoLink && (
           <CopyWrapper
             onClick={() =>
               copyToClipboard(
