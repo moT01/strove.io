@@ -248,7 +248,7 @@ const UserDropdown = props => {
         <span>
           <Wrapper {...getToggleButtonProps({})}>
             <StyledDropdown>
-              <Text>{props.user.username}</Text>
+              {!isMobileOnly && <Text>{props.user.username}</Text>}
               <Inline mobile={isMobileOnly}>
                 <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
               </Inline>
