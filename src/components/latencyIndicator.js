@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components'
 import LatencyMonitor from 'latency-monitor'
+import { isMobileOnly } from 'react-device-detect'
 
 const LatencyCircle = styled.div`
   border-radius: 50%;
@@ -39,7 +40,9 @@ const LatencyIndicator = () => {
   return (
     <LatencyWrapper>
       <LatencyCircle latency={latency} />
-      <StyledText>Latency: {Math.round(latency)}ms</StyledText>
+      {!isMobileOnly && (
+        <StyledText>Latency: {Math.round(latency)}ms</StyledText>
+      )}
     </LatencyWrapper>
   )
 }
