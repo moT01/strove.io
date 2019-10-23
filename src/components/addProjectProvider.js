@@ -1,12 +1,18 @@
 import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isMobileOnly } from 'react-device-detect'
+import styled from 'styled-components'
 
 import { createProject } from 'utils'
 import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
 import AddProjectModals from './addProjectModals'
+
+const StyledModal = styled(Modal)`
+  background: none;
+  border: none;
+  box-shadow: none;
+`
 
 const AddProjectProvider = ({ children }) => {
   const dispatch = useDispatch()
@@ -75,7 +81,6 @@ const AddProjectProvider = ({ children }) => {
       addProjectError.message &&
       addProjectError.message.includes('Could not resolve to a Repository')
     ) {
-      console.log('AddEmptyProject')
       setModalContent('AddEmptyProject')
     } else if (addProjectError) {
       setModalContent('SomethingWentWrong')
@@ -97,9 +102,7 @@ const AddProjectProvider = ({ children }) => {
         setModalContent={setModalContent}
         addProject={addProject}
       />
-      <Modal
-        width={isMobileOnly ? '60vw' : '20vw'}
-        height={isMobileOnly ? '30vh' : '20vh'}
+      <StyledModal
         isOpen={(isLoading && !isAdding) || isDeleting || isStopping}
         contentLabel="Loading"
         ariaHideApp={false}
@@ -109,7 +112,7 @@ const AddProjectProvider = ({ children }) => {
           color="#0072ce"
           height={'15vh'}
         />
-      </Modal>
+      </StyledModal>
       {isContinuing && (
         <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" />
       )}
