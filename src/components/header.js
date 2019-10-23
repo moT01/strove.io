@@ -11,7 +11,7 @@ import { navigate } from 'gatsby'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
-import LatencyIndicator from './latencyIndicator'
+// import LatencyIndicator from './latencyIndicator'
 import Login from './login'
 
 const FadeIn = keyframes`
@@ -356,7 +356,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </CopyWrapper>
         )}
       </HeaderWrapper>
-      {location.pathname === '/app/editor/' && <LatencyIndicator />}
+      {/* {location.pathname === '/app/editor/' && <LatencyIndicator />} */}
       <ZeldaWrapper>
         <Login />
       </ZeldaWrapper>
