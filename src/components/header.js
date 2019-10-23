@@ -266,7 +266,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
         )
       }
     }
-  }, [location.pathname])
+  }, [project?.machineName])
 
   useEffect(() => {
     /* This condition means that the project has been closed but user is still inside editor */
