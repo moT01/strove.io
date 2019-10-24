@@ -5,18 +5,16 @@ const initialState = null
 export default (state = initialState, action) => {
   switch (action.type) {
     case C.LATENCY_MEASURE_START: {
-      const { timeStart } = action.payload
       return {
         ...state,
-        timeStart,
+        timeStart: action.payload,
       }
     }
 
     case C.LATENCY_MEASURE_END: {
-      const { timeEnd } = action.payload
       return {
         ...state,
-        latency: timeEnd - timeStart,
+        latency: action.payload - timeStart,
       }
     }
 
