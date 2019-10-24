@@ -155,7 +155,7 @@ svg g {
   justify-content: flex-start;
   align-self: center;
   align-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .page1 {
   height: auto;
