@@ -65,8 +65,8 @@ const Editor = () => {
           name: 'resetCron',
           mutation: RESET_CRON,
           variables: { projectId },
-          onLoading: () => actions.latency.latencyMeasureStart(dayjs()),
-          onSuccess: () => actions.latency.latencyMeasureEnd(dayjs()),
+          onLoadingDispatch: () => actions.latency.latencyMeasureStart(dayjs()),
+          onSuccessDispatch: () => actions.latency.latencyMeasureEnd(dayjs()),
         })
       )
     projectId && resetCron()
