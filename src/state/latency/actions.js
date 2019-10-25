@@ -5,7 +5,7 @@ export const latencyMeasureStart = payload => ({
   payload,
 })
 
-export const LatencyMeasureEnd = payload => ({
+export const latencyMeasureEnd = payload => ({
   type: C.LATENCY_MEASURE_END,
   payload,
 })

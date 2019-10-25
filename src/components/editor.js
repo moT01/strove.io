@@ -7,9 +7,10 @@ import Layout from 'components/layout'
 import FullScreenLoader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import { C } from 'state'
+import { C, actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation } from 'utils'
+import dayjs from 'dayjs'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -64,6 +65,8 @@ const Editor = () => {
           name: 'resetCron',
           mutation: RESET_CRON,
           variables: { projectId },
+          onLoading: () => actions.latency.latencyMeasureStart(dayjs()),
+          onSuccess: () => actions.latency.latencyMeasureEnd(dayjs()),
         })
       )
     projectId && resetCron()
