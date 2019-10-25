@@ -87,7 +87,7 @@ const Editor = () => {
     }
   }, [projectId])
 
-  const r = Math.random()
+  const randomId = Math.random()
     .toString(36)
     .substring(7)
 
@@ -104,7 +104,7 @@ const Editor = () => {
       <StyledIframe
         loaderVisible={loaderVisible}
         onLoad={useCallback(() => setLoaderVisible(false))}
-        src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${r}`}
+        src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
     </Layout>
   )
