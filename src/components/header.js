@@ -67,6 +67,7 @@ const LinkText = styled.h3`
   transition: color 0.3s;
   font-weight: 300;
   margin: 0;
+  cursor: pointer;
   @media (max-width: 767px) {
     height: 5vh;
     font-size: 1.8rem;
