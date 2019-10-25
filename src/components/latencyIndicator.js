@@ -1,7 +1,9 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
-import LatencyMonitor from 'latency-monitor'
 import { isMobileOnly } from 'react-device-detect'
+import { useSelector } from 'react-redux'
+
+import { selectors } from 'state'
 
 const LatencyCircle = styled.div`
   border-radius: 50%;
@@ -27,21 +29,20 @@ const LatencyWrapper = styled.div`
 const StyledText = styled.div`
   color: white;
   margin-left: 5px;
+  text-overflow: ellipsis;
 `
 
 const LatencyIndicator = () => {
-  const [latency, setLatency] = useState(20)
-
-  useEffect(() => {
-    const monitor = new LatencyMonitor()
-    monitor.on('data', ({ avgMs }) => setLatency(avgMs))
-  }, [])
+  const latency = useSelector(selectors.latency.getLatency)
 
   return (
     <LatencyWrapper>
       <LatencyCircle latency={latency} />
       {!isMobileOnly && (
-        <StyledText>Latency: {Math.round(latency)}ms</StyledText>
+        <StyledText>
+          Latency: {latency}ms{' '}
+          {latency > 10 && '- Syntax highlight will take a moment to load'}
+        </StyledText>
       )}
     </LatencyWrapper>
   )
