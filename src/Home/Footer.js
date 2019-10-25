@@ -77,7 +77,6 @@ const Footer = () => {
             href="https://github.com/stroveio/strove.io-client"
           >
             <Github style={{ fill: '#fff' }} />
-
             <LinkText>Source code</LinkText>
           </StyledAnchor>
           <StyledAnchor href="mailto:contact@strove.io?subject=Strove demo&body=We'd love to get to know how we can help!">
