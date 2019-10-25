@@ -1,6 +1,5 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
-import LatencyMonitor from 'latency-monitor'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
