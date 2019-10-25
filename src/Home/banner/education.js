@@ -349,8 +349,8 @@ const Banner = () => {
             computer
           </h4>
           <h3>
-            All major Linux-available programming languages and tools such as
-            Python and git, now in cloud
+            Code with major Linux-available programming languages and tools such
+            as Python, Javascript and git
           </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
@@ -459,18 +459,15 @@ const Banner = () => {
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>Focus on what's important</StyledH2>
               <StyledFeatureDescription>
-                Strove lets programmers be productive in seconds
+                Start coding in seconds, no setup needed
               </StyledFeatureDescription>
-              <StyledH2>Easiest collaboration out there</StyledH2>
+              <StyledH2>Code on any computer, anywhere</StyledH2>
               <StyledFeatureDescription>
-                Team members can work from any computer and any location
+                Don't lose your progress, even when switching computers
               </StyledFeatureDescription>
-              <StyledH2>
-                Forget that "it works on my machine" issue ever existed
-              </StyledH2>
+              <StyledH2>Use worlds most popular coding editor</StyledH2>
               <StyledFeatureDescription>
-                Programmers get access to instances of the same cloud
-                environment so they can focus on creating new features
+                Get the best coding experience with Visual Studio Code support
               </StyledFeatureDescription>
             </LeftSectionWrapper>
           </SectionWrapper>
