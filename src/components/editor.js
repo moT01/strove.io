@@ -7,9 +7,10 @@ import Layout from 'components/layout'
 import FullScreenLoader from 'components/fullScreenLoader.js'
 import { selectors } from 'state'
 import SEO from 'components/seo'
-import { C } from 'state'
+import { C, actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation } from 'utils'
+import dayjs from 'dayjs'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -64,25 +65,29 @@ const Editor = () => {
           name: 'resetCron',
           mutation: RESET_CRON,
           variables: { projectId },
+          onLoadingDispatch: () => actions.latency.latencyMeasureStart(dayjs()),
+          onSuccessDispatch: () => actions.latency.latencyMeasureEnd(dayjs()),
         })
       )
     projectId && resetCron()
     const projectPing = setInterval(resetCron, 59000)
 
+    const checkIfProjectIsActive = () => {
+      /* This condition means that the project has been closed but user is still inside editor */
+      if (!currentProject?.additionalPorts?.length) {
+        navigate('/app/dashboard')
+      }
+    }
+
+    const activeProjectCheck = setInterval(checkIfProjectIsActive, 10000)
+
     return () => {
       clearInterval(projectPing)
+      clearInterval(activeProjectCheck)
     }
   }, [projectId])
 
-  /* Sometimes project might fail to load so we don't want to make user stuck at editor screen */
-  /* ToDo: Display a message */
-  useEffect(() => {
-    if (!currentProject) {
-      navigate('app/dashboard')
-    }
-  }, [currentProject])
-
-  const r = Math.random()
+  const randomId = Math.random()
     .toString(36)
     .substring(7)
 
@@ -99,7 +104,7 @@ const Editor = () => {
       <StyledIframe
         loaderVisible={loaderVisible}
         onLoad={useCallback(() => setLoaderVisible(false))}
-        src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${r}`}
+        src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
     </Layout>
   )
