@@ -7,7 +7,6 @@ import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
 import { Copy } from 'images/svg'
-import { navigate } from 'gatsby'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -268,16 +267,6 @@ const HeaderComponent = ({ siteTitle, location }) => {
       }
     }
   }, [project?.machineName])
-
-  useEffect(() => {
-    /* This condition means that the project has been closed but user is still inside editor */
-    if (
-      location.pathname === '/app/editor/' &&
-      !project?.additionalPorts?.length
-    ) {
-      navigate('/app/dashboard')
-    }
-  }, [location.pathname, project])
 
   return (
     <HeaderSection mobile={isMobileOnly}>

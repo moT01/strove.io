@@ -72,18 +72,20 @@ const Editor = () => {
     projectId && resetCron()
     const projectPing = setInterval(resetCron, 59000)
 
+    const checkIfProjectIsActive = () => {
+      /* This condition means that the project has been closed but user is still inside editor */
+      if (!currentProject?.additionalPorts?.length) {
+        navigate('/app/dashboard')
+      }
+    }
+
+    const activeProjectCheck = setInterval(checkIfProjectIsActive, 10000)
+
     return () => {
       clearInterval(projectPing)
+      clearInterval(activeProjectCheck)
     }
   }, [projectId])
-
-  /* Sometimes project might fail to load so we don't want to make user stuck at editor screen */
-  /* ToDo: Display a message */
-  useEffect(() => {
-    if (!currentProject) {
-      navigate('app/dashboard')
-    }
-  }, [currentProject])
 
   const r = Math.random()
     .toString(36)
