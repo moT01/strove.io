@@ -13,7 +13,7 @@ import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
-import Demo from '../assets/StroveDemo.mp4'
+import Demo from '../../assets/StroveDemo.mp4'
 
 const FadeIn = keyframes`
   0% {
@@ -345,7 +345,8 @@ const Banner = () => {
           </div>
           <StyledH1>Strove</StyledH1>
           <h4>
-            Ready in seconds programming environment, available from any computer
+            Ready in seconds programming environment, available from any
+            computer
           </h4>
           <h3>
             All major Linux-available programming languages and tools such as
