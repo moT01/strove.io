@@ -29,16 +29,21 @@ const LatencyWrapper = styled.div`
 const StyledText = styled.div`
   color: white;
   margin-left: 5px;
+  text-overflow: ellipsis;
 `
 
 const LatencyIndicator = () => {
   const latency = useSelector(selectors.latency.getLatency)
-  console.log('latency', latency)
 
   return (
     <LatencyWrapper>
       <LatencyCircle latency={latency} />
-      {!isMobileOnly && <StyledText>Latency: {latency}ms</StyledText>}
+      {!isMobileOnly && (
+        <StyledText>
+          Latency: {latency}ms{' '}
+          {latency > 10 && '- Syntax highlight will take a moment to load'}
+        </StyledText>
+      )}
     </LatencyWrapper>
   )
 }
