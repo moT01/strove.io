@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
     case C.LATENCY_MEASURE_END: {
       return {
         ...state,
-        latency: action.payload - timeStart,
+        latency: action.payload - state.timeStart,
       }
     }
 
