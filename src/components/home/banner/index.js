@@ -14,13 +14,12 @@ const checkGoogleOptimizeLoading = () => {
 export default props => {
   useInterval(checkGoogleOptimizeLoading, window?.google_optimize ? 100 : null)
 
+  const searchParams = new URL(window?.location?.href).searchParams
+  const feature = searchParams?.get('feature') || ''
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      {window?.location?.search?.includes('b') ? (
-        <B {...props} />
-      ) : (
-        <A {...props} />
-      )}
+      {feature.includes('b') ? <B {...props} /> : <A {...props} />}
     </Suspense>
   )
 }
