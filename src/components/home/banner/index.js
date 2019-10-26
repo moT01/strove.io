@@ -1,27 +1,26 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { window } from 'utils'
 import { useInterval } from 'hooks'
 
-import Education from './education'
-import Enterprise from './enterprise'
+const A = lazy(() => import('./a'))
+const B = lazy(() => import('./b'))
 
 const checkGoogleOptimizeLoading = () => {
   if (window?.google_optimize !== undefined) {
     const variant = window.google_optimize.get(process.env.GOOGLE_OPTIMIZE_ID)
-    this.setState({ variant })
   }
 }
 
 export default props => {
+  useInterval(checkGoogleOptimizeLoading, window?.google_optimize ? 100 : null)
 
-  useInterval(
-    checkGoogleOptimizeLoading,
-    window?.google_optimize ? 100 : null
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      {window?.location?.search?.includes('b') ? (
+        <B {...props} />
+      ) : (
+        <A {...props} />
+      )}
+    </Suspense>
   )
-
-  if (window?.location?.href?.includes('strove.io')) {
-    return <Enterprise {...props} />
-  } else {
-    return <Education {...props} />
-  }
 }
