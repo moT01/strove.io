@@ -309,8 +309,8 @@ const StyledInfo = styled.span`
 
 const StyledH1 = styled.h1`
   margin-bottom: 10px;
-  color: #0d101e;
-  font-size: 500;
+  color: indianred;
+  font-weight: 600;
 `
 
 const validate = values => {
