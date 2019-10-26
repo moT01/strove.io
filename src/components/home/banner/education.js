@@ -308,7 +308,9 @@ const StyledInfo = styled.span`
 `
 
 const StyledH1 = styled.h1`
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  color: #0d101e;
+  font-size: 500;
 `
 
 const validate = values => {
@@ -343,15 +345,11 @@ const Banner = () => {
               style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-          <StyledH1>Strove</StyledH1>
+          <StyledH1>Bring your ideas to life</StyledH1>
           <h4>
-            Ready in seconds programming environment, available from any
-            computer
+            Strove.io gives you instant environment to learn, build,
+            collaborate, no matter the language. All you need is the browser.
           </h4>
-          <h3>
-            Code with major Linux-available programming languages and tools such
-            as Python, Javascript and git
-          </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
