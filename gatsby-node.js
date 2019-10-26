@@ -19,6 +19,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         constants: path.resolve(__dirname, 'src/constants'),
         middlewares: path.resolve(__dirname, 'src/middlewares'),
         hooks: path.resolve(__dirname, 'src/hooks'),
+        assets: path.resolve(__dirname, 'src/assets'),
       },
     },
   })

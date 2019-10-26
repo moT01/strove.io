@@ -13,7 +13,7 @@ import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
-import Demo from '../../../assets/StroveDemo.mp4'
+import Demo from 'assets/StroveDemo.mp4'
 
 const FadeIn = keyframes`
   0% {
