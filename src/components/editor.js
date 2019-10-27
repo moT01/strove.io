@@ -14,7 +14,7 @@ import dayjs from 'dayjs'
 
 const StyledIframe = styled.iframe`
   display: block;
-  background: #000;
+  background: ${({ theme }) => theme.colors.c3};
   border: none;
   min-height: 97vh;
   width: 100vw;

@@ -54,7 +54,7 @@ const CardsWrapper = styled.div`
 
 const StyledH6 = styled.h6`
   margin: 20px;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const EmailFormWrapper = styled.div`
@@ -75,7 +75,7 @@ const EmailFormWrapper = styled.div`
   transition: all 0.2s ease;
   opacity: 0.9;
   align-items: center;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 
   ${({ isMobile }) =>
     isMobile &&
@@ -139,15 +139,15 @@ const EmailFormWrapper = styled.div`
     width: 24px;
 
     g {
-      stroke: #0072ce;
+      stroke: ${({ theme }) => theme.colors.c1};
     }
   }
 
   button {
     width: 156px;
     height: 56px;
-    color: #fff;
-    background: #000;
+    color: ${({ theme }) => theme.colors.c2};
+    background: ${({ theme }) => theme.colors.c3};
     text-transform: uppercase;
     display: block;
     text-align: center;
@@ -239,11 +239,11 @@ const Card = styled.div`
   margin-top: ${props => (props.team ? '9vh' : 0)};
   z-index: auto;
   border-radius: 5px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
 
   width: 40vw;
   @media (max-width: 1366px) {
@@ -276,7 +276,7 @@ const ModalWrapper = styled.div`
 `
 
 const Text = styled.p`
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   font-size: 15px;
   margin-left: 2%;
   margin-bottom: 12px;
