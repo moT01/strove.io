@@ -148,7 +148,8 @@ const MenuWrapper = styled.div`
   border-width: 1px;
   border-color: #0072ce;
   border-style: solid;
-  background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+  background-color: ${({ primary, theme }) =>
+    primary ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
   position: relative;
 `
@@ -207,7 +208,7 @@ const OptionText = styled(Text)`
   color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;
   :hover {
-    color: #ffffff;
+    color: {({ theme }) => theme.colors.c2};
   }
 `
 
