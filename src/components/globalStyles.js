@@ -3,16 +3,13 @@ import styledNormalize from 'styled-normalize'
 
 export default createGlobalStyle`
   ${styledNormalize}
-
-  html {
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  }
+  
   .ReactModal__Overlay {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   body {
     margin: 0;
     -webkit-font-smoothing: antialiased;

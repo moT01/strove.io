@@ -236,6 +236,10 @@ const EmailFormWrapper = styled.div`
 const StyledH2 = styled.h2`
   margin-bottom: 0;
   font-size: 28px;
+  text-align: center;
+  font-size: 28px;
+  color: #314659;
+  letter-spacing: 0.6px;
 `
 
 const Video = styled.video`
