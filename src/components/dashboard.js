@@ -76,13 +76,13 @@ const Tile = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.c2};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
   margin: 15px;
   width: 50vw;
 
@@ -104,15 +104,20 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props =>
-    (props.primary && '#0072ce') || (props.delete && 'red') || '#fff'};
+  background-color: ${({ theme, primary, isDelete }) =>
+    (primary && theme.colors.c1) ||
+    (isDelete && theme.colors.c5) ||
+    theme.colors.c2};
   border-width: 1px;
   border-style: solid;
-  color: ${props =>
-    (props.primary && '#fff') || (props.delete && '#fff') || '#0072ce'};
+  color: ${({ primary, isDelete, theme }) =>
+    (primary && theme.colors.c2) ||
+    (isDelete && theme.colors.c2) ||
+    theme.colors.c1};
   border-radius: 5px;
-  border-color: ${props => (!props.delete ? '#0072ce' : '#000')};
-  box-shadow: 0 1vh 1vh -1.5vh ${props => (!props.delete ? '#0072ce' : '#000')};
+  border-color: ${({ theme, isDelete }) =>
+    !isDelete ? theme.colors.c1 : theme.colors.c3};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme, isDelete }) => (!isDelete ? theme.colors.c1 : theme.colors.c3)};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -462,7 +467,7 @@ const Dashboard = () => {
           undone.
         </ModalText>
         <ModalButton
-          delete
+          isDelete
           onClick={() => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
