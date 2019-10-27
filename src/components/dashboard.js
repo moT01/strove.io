@@ -212,7 +212,8 @@ const CircleIcon = styled.div`
   height: 1.5vh;
   width: 1.5vh;
   border-radius: 50%;
-  background: ${props => (props.active ? '#009900' : '#990000')};
+  background: ${({ theme, active }) =>
+    active ? theme.colors.c8 : theme.colors.c9};
 `
 
 const StyledIcon = styled(Icon)`
