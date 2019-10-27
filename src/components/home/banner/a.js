@@ -345,15 +345,6 @@ const StyledQueueAnim = styled(QueueAnim)`
   margin-top: auto;
 `
 
-const Line = styled.div`
-  transform: translateX(-64px);
-  animation: bannerTitleLine 3s ease-in-out 0s infinite;
-  height: 100%;
-  width: 64px;
-  transform: translateX(-64px);
-  background: linear-gradient(to right, rgba(24, 144, 255, 0) 0%, #1890ff 100%);
-`
-
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
