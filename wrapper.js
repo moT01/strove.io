@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
@@ -24,7 +24,6 @@ import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
 import { C } from 'state'
-import { displayFeature } from 'state/feature/actions'
 
 const createStore = reduxCreateStore(
   rootReducer,
@@ -33,7 +32,7 @@ const createStore = reduxCreateStore(
 
 export const persistor = persistStore(createStore)
 
-const LoginProvider = ({ children, addProject }) => {
+const LoginProvider = memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
@@ -293,9 +292,9 @@ const LoginProvider = ({ children, addProject }) => {
   }, [])
 
   return children
-}
+})
 
-const WithAddProject = ({ children, addProject }) => {
+const WithAddProject = memo(({ children, addProject }) => {
   useEffect(() => {
     let link =
       window?.location?.href?.match(/#(.*)/) &&
@@ -307,9 +306,9 @@ const WithAddProject = ({ children, addProject }) => {
   }, [])
 
   return children
-}
+})
 
-const WithAnalyticsWrapper = ({ children }) => {
+const WithAnalyticsWrapper = memo(({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -320,7 +319,7 @@ const WithAnalyticsWrapper = ({ children }) => {
   }, [])
 
   return children
-}
+})
 
 export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
