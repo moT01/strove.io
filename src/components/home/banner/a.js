@@ -67,11 +67,13 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  background-color: ${({ primary, theme }) =>
+    primary ? theme.colors.c1 : theme.colors.c2};
   border-width: 1px;
   border-style: solid;
   font-size: 1.3rem;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
+  color: ${({ primary, theme }) =>
+    primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
   border-color: #0072ce;
   box-shadow: 0 1vh 1vh -1.5vh #0072ce;
