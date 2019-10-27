@@ -172,7 +172,7 @@ const Option = styled.a`
   min-width: 150px;
 
   svg {
-    fill: ${({ invert, invert }) =>
+    fill: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
@@ -180,13 +180,13 @@ const Option = styled.a`
   }
 
   :hover {
-    background-color: ${({ invert, invert }) =>
+    background-color: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 
   :hover svg {
-    fill: ${({ invert, invert }) =>
+    fill: ${({ theme, invert }) =>
       invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
