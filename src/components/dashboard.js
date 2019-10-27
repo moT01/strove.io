@@ -212,7 +212,7 @@ const CircleIcon = styled.div`
 
 const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const Dashboard = () => {
