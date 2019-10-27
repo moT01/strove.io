@@ -15,6 +15,18 @@ import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const FadeIn = keyframes`
   0% {
     opacity: 0;
@@ -315,18 +327,6 @@ const StyledH1 = styled.h1`
   font-weight: 600;
 `
 
-const validate = values => {
-  let errors = {}
-
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
-
 const BannerWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -342,6 +342,16 @@ const StyledQueueAnim = styled(QueueAnim)`
   margin-top: auto;
   margin-bottom: auto;
   font-size: 20px;
+  margin-top: auto;
+`
+
+const Line = styled.div`
+  transform: translateX(-64px);
+  animation: bannerTitleLine 3s ease-in-out 0s infinite;
+  height: 100%;
+  width: 64px;
+  transform: translateX(-64px);
+  background: linear-gradient(to right, rgba(24, 144, 255, 0) 0%, #1890ff 100%);
 `
 
 const Banner = () => {
@@ -354,16 +364,7 @@ const Banner = () => {
   return (
     <>
       <BannerWrapper>
-        <StyledQueueAnim
-          className="banner-title-wrapper"
-          type={isMobileOnly ? 'bottom' : 'right'}
-        >
-          <div className="title-line-wrapper">
-            <div
-              className="title-line"
-              style={{ transform: 'translateX(-64px)' }}
-            />
-          </div>
+        <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <h4>
             Strove.io gives you instant environment to learn, build,

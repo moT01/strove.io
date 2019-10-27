@@ -273,7 +273,6 @@ const Features = () => {
             <BigCloud />
           </Parallax>
         )}
-        <div className="title-line-wrapper page1-line"></div>
         <div className="tiles-wrapper" style={{ width: '80vw' }}>
           {children}
         </div>

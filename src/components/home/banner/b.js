@@ -343,12 +343,6 @@ const Banner = () => {
           className="banner-title-wrapper"
           type={isMobileOnly ? 'bottom' : 'right'}
         >
-          <div className="title-line-wrapper">
-            <div
-              className="title-line"
-              style={{ transform: 'translateX(-64px)' }}
-            />
-          </div>
           <StyledH1>Strove</StyledH1>
           <h4>
             Ready in seconds programming environment, available from any
