@@ -85,7 +85,7 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const StyledLink = styled(Link)`
@@ -95,7 +95,7 @@ const StyledLink = styled(Link)`
 `
 
 const PreviewLink = styled.a`
-  color: '#fff';
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: 'none';
   position: relative;
   display: flex;
@@ -143,7 +143,7 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
   border-color: #0072ce;
@@ -204,7 +204,7 @@ const Text = styled.h3`
 `
 
 const OptionText = styled(Text)`
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;
   :hover {
     color: #ffffff;
