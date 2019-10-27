@@ -3,7 +3,7 @@ import styledNormalize from 'styled-normalize'
 
 export default createGlobalStyle`
   ${styledNormalize}
-  
+
   .ReactModal__Overlay {
     display: flex;
     justify-content: center;
@@ -625,5 +625,88 @@ export default createGlobalStyle`
     html {
       font-size: 100%;
     }
+  }
+
+  .page1-bg {
+    font-size: 320px;
+    color: #ebedf0;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    opacity: 0.25;
+    top: 0;
+    transform: translateY(960px);
+  }
+  .page1-box-wrapper {
+    margin-bottom: 62px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .page1-box-wrapper li {
+    width: 33.33%;
+    display: inline-block;
+    will-change: transform;
+  }
+  .page1-box-wrapper li .page1-box {
+    width: 194px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+  }
+  .page1-box-wrapper li .page1-box .page1-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin: 20px auto 32px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+  }
+  .page1-box-wrapper li .page1-box:hover .page1-image {
+    transform: translateY(-5px);
+  }
+  .page1-box-wrapper li .page1-box h3 {
+    font-size: 16px;
+    margin: 8px auto;
+    font-weight: 700;
+  }
+  .page1-point-wrapper {
+    position: absolute;
+    width: 0;
+    left: 50%;
+    top: 0;
+  }
+  .page1-point-wrapper .point-0 {
+    width: 4px;
+    height: 4px;
+  }
+  .page1-point-wrapper .point-2,
+  .page1-point-wrapper .point-ring {
+    width: 10px;
+    height: 10px;
+  }
+  .page1-point-wrapper .point-ring {
+    border-style: solid;
+    border-width: 1px;
+    background: transparent !important;
+  }
+  .page1-point-wrapper .point-1 {
+    width: 6px;
+    height: 6px;
+  }
+  .page1-point-wrapper .point-3 {
+    width: 15px;
+    height: 15px;
+  }
+  .page1-point-wrapper i {
+    display: inline-block;
+    border-radius: 100%;
+    position: absolute;
+    opacity: 0;
+    transform: translate(0, 30px);
   }
 `
