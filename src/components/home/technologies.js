@@ -241,9 +241,6 @@ const Technologies = () => {
   return (
     <div className="home-page page2">
       <div className="home-page-wrapper">
-        <div className="title-line-wrapper page2-line">
-          <div className="title-line" />
-        </div>
         <StyledTitle>On the shoulders of giants</StyledTitle>
         <p>
           {!selectedLogo

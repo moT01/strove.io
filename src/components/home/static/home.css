@@ -21,19 +21,6 @@ body button {
   opacity: 0;
 }
 
-.title-line-wrapper {
-  margin-top: 20px;
-  height: 2px;
-  width: 100%;
-  overflow: hidden;
-}
-.title-line-wrapper .title-line {
-  height: 100%;
-  width: 64px;
-  transform: translateX(-64px);
-  background: linear-gradient(to right, rgba(24, 144, 255, 0) 0%, #1890ff 100%);
-}
-
 .home-page h2 {
   text-align: center;
   font-size: 28px;
@@ -58,13 +45,7 @@ body button {
   height: auto;
   width: 100%;
 }
-.page1-line.title-line-wrapper {
-  width: 312px;
-  margin: 24px auto 76px;
-}
-.page1-line.title-line-wrapper .title-line {
-  animation: page1TitleLine 3s ease-in-out 1.5s infinite;
-}
+
 .page1-bg {
   font-size: 320px;
   color: #ebedf0;
@@ -164,9 +145,7 @@ body button {
   margin: 50px auto 24px;
   width: 114px;
 }
-.page2-line .title-line {
-  animation: page2TitleLine 3s ease-in-out 0s infinite;
-}
+
 .page-content {
   width: 760px;
   margin: 24px auto 32px;
