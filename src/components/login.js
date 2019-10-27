@@ -44,7 +44,7 @@ const loginOptions = [
 ]
 
 const LoginButton = styled.button`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -65,15 +65,11 @@ const LoginButton = styled.button`
   }
 
   span {
-    color: white;
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover {
-    color: black;
-
-    span {
-      color: black;
-    }
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   > {
@@ -160,7 +156,7 @@ const Text = styled.h3`
     font-size: 1.4rem;
   }
   :hover {
-    color: black;
+    color: ${({ theme }) => theme.colors.c3};;
     cursor: pointer;
   }
 `
@@ -184,7 +180,7 @@ const Wrapper = styled.div`
 `
 
 const StyledDropdown = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};;
   text-decoration: none;
   display: flex;
   flex-direction: row;
