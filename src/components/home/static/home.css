@@ -1,10 +1,4 @@
 html,
-a {
-  transition: color 0.3s ease;
-}
-a:focus {
-  text-decoration-skip: auto;
-}
 .home-wrapper {
   width: 100vw;
   color: #697b8c;
