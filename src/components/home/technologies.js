@@ -9,6 +9,18 @@ import { Formik, Form, Field } from 'formik'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const StyledTitle = styled.h2`
   font-weight: 600;
   margin: 0;
@@ -220,17 +232,17 @@ const StyledMadeWithStrove = styled.div`
   margin-top: 100px;
 `
 
-const validate = values => {
-  let errors = {}
-
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
+const StyledFeatureWrapper = styled.div`
+  width: 100vw;
+  margin: 50px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: center;
+  align-items: center;
+  overflow: hidden;
+`
 
 const Technologies = () => {
   const [selectedLogo, setSelectedLogo] = useState()
@@ -241,7 +253,7 @@ const Technologies = () => {
 
   return (
     <div className="home-page page2">
-      <div className="home-page-wrapper">
+      <StyledFeatureWrapper>
         <StyledTitle>On the shoulders of giants</StyledTitle>
         <p>
           {!selectedLogo
@@ -271,7 +283,7 @@ const Technologies = () => {
             Start editing
           </StyledAnchor>
         </StyledButtonsWrapper>
-      </div>
+      </StyledFeatureWrapper>
       <StyledFormWrapper>
         <StyledH6>Be up to date with new deals and features!</StyledH6>
         <Formik
