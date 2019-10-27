@@ -327,6 +327,23 @@ const validate = values => {
   return errors
 }
 
+const BannerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  width: 100%;
+  position: relative;
+`
+
+const StyledQueueAnim = styled(QueueAnim)`
+  width: 60%;
+  max-width: 480px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 20px;
+`
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -336,8 +353,8 @@ const Banner = () => {
 
   return (
     <>
-      <div className="banner-wrapper">
-        <QueueAnim
+      <BannerWrapper>
+        <StyledQueueAnim
           className="banner-title-wrapper"
           type={isMobileOnly ? 'bottom' : 'right'}
         >
@@ -437,8 +454,8 @@ const Banner = () => {
               )}
             </Formik>
           </ButtonsWrapper>
-        </QueueAnim>
-      </div>
+        </StyledQueueAnim>
+      </BannerWrapper>
       <StyledModal
         isOpen={isModalVisible}
         onRequestClose={closeModal}
