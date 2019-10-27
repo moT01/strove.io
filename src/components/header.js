@@ -148,8 +148,8 @@ const MenuWrapper = styled.div`
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
+  background-color: ${({ invert, theme }) =>
+    invert ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
   position: relative;
 `

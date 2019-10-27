@@ -78,7 +78,7 @@ const Button = styled.button`
 
   svg {
     fill: ${({ invert, theme }) =>
-      invert ? theme.colors.c2 : theme.colors.c1};
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-left: 5px;
@@ -133,7 +133,7 @@ const StyledAnchor = styled.a`
 
   svg {
     fill: ${({ invert, theme }) =>
-      invert ? theme.colors.c2 : theme.colors.c1};
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-left: 5px;
