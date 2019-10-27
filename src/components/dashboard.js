@@ -76,13 +76,13 @@ const Tile = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.c2};
   border-radius: 5px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh #0072ce;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
   margin: 15px;
   width: 50vw;
 
@@ -104,15 +104,20 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props =>
-    (props.primary && '#0072ce') || (props.delete && 'red') || '#fff'};
+  background-color: ${({ theme, primary, isDelete }) =>
+    (primary && theme.colors.c1) ||
+    (isDelete && theme.colors.c5) ||
+    theme.colors.c2};
   border-width: 1px;
   border-style: solid;
-  color: ${props =>
-    (props.primary && '#fff') || (props.delete && '#fff') || '#0072ce'};
+  color: ${({ primary, isDelete, theme }) =>
+    (primary && theme.colors.c2) ||
+    (isDelete && theme.colors.c2) ||
+    theme.colors.c1};
   border-radius: 5px;
-  border-color: ${props => (!props.delete ? '#0072ce' : '#000')};
-  box-shadow: 0 1vh 1vh -1.5vh ${props => (!props.delete ? '#0072ce' : '#000')};
+  border-color: ${({ theme, isDelete }) =>
+    !isDelete ? theme.colors.c1 : theme.colors.c3};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme, isDelete }) => (!isDelete ? theme.colors.c1 : theme.colors.c3)};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -133,7 +138,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
         transform: translateY(-1px);
       }
     `}
@@ -145,12 +150,12 @@ const ModalButton = styled(Button)`
 
 const ProjectTitle = styled.h3`
   font-size: 1.4rem;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
 const Text = styled.p`
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
@@ -207,12 +212,13 @@ const CircleIcon = styled.div`
   height: 1.5vh;
   width: 1.5vh;
   border-radius: 50%;
-  background: ${props => (props.active ? '#009900' : '#990000')};
+  background: ${({ theme, active }) =>
+    active ? theme.colors.c8 : theme.colors.c9};
 `
 
 const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const Dashboard = () => {
@@ -462,7 +468,7 @@ const Dashboard = () => {
           undone.
         </ModalText>
         <ModalButton
-          delete
+          isDelete
           onClick={() => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)

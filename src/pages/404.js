@@ -44,7 +44,7 @@ const ErrorBody = styled.div`
   line-height: 1.5em;
   cursor: default;
   a {
-    color: #fff;
+    color: ${({ theme }) => theme.colors.c2};
   }
 `
 

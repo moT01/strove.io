@@ -36,7 +36,7 @@ const SmallLoaderWrapper = styled.div`
 const LoaderWrapper = styled.div`
   top: 0;
   position: fixed;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.c2};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,7 +58,7 @@ const LogoContainer = styled.div`
 `
 
 const Text = styled.p`
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   font-size: 21px;
   margin-bottom: 0;
   margin-top: 15px;

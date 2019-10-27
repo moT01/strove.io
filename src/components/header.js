@@ -57,7 +57,7 @@ const HeaderWrapper = styled.div`
 `
 
 const LinkText = styled.h3`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   font-size: 1.2rem;
   display: flex;
   flex-direction: row;
@@ -73,7 +73,7 @@ const LinkText = styled.h3`
   }
 
   :hover {
-    color: black;
+    color: ${({ theme }) => theme.colors.c3};
   }
 `
 
@@ -85,17 +85,17 @@ const HeaderSection = styled.div`
   width: 100vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const StyledLink = styled(Link)`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
 `
 
 const PreviewLink = styled.a`
-  color: '#fff';
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: 'none';
   position: relative;
   display: flex;
@@ -122,14 +122,12 @@ const LoginButton = styled.button`
   }
 
   span {
-    color: white;
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover {
-    color: black;
-
     span {
-      color: black;
+      color: ${({ theme }) => theme.colors.c3};
     }
   }
 
@@ -143,12 +141,13 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
-  background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+  background-color: ${({ invert, theme }) =>
+    invert ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
   position: relative;
 `
@@ -171,26 +170,29 @@ const Option = styled.a`
   min-width: 150px;
 
   svg {
-    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-right: 5px;
   }
 
   :hover {
-    background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    background-color: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 
   :hover svg {
-    fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ theme, invert }) =>
+      invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 `
 
 const Text = styled.h3`
   font-size: 1.2rem;
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   transition: color 0.3s;
   margin: 0;
   font-weight: 300;
@@ -199,15 +201,15 @@ const Text = styled.h3`
     font-size: 1.4rem;
   }
   :hover {
-    color: black;
+    color: ${({ theme }) => theme.colors.c3};
   }
 `
 
 const OptionText = styled(Text)`
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;
   :hover {
-    color: #ffffff;
+    color: ${({ theme }) => theme.colors.c2};
   }
 `
 

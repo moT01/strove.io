@@ -11,15 +11,14 @@ const LatencyCircle = styled.div`
   height: 20px;
   padding: 8px;
 
-  background: #fff;
-  color: #666;
+  background: ${({ theme }) => theme.colors.c2};
   text-align: center;
-  background-color: ${({ latency }) =>
+  background-color: ${({ latency, theme }) =>
     latency > 10 && latency < 30
       ? 'yellow'
       : latency <= 10
-      ? '#39e626'
-      : '#ef7a2c'};
+      ? theme.colors.c6
+      : theme.colors.c7};
 `
 
 const LatencyWrapper = styled.div`
@@ -27,7 +26,7 @@ const LatencyWrapper = styled.div`
 `
 
 const StyledText = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   margin-left: 5px;
   text-overflow: ellipsis;
 `
@@ -41,7 +40,7 @@ const LatencyIndicator = () => {
       {!isMobileOnly && (
         <StyledText>
           Latency: {latency}ms{' '}
-          {latency > 10 && '- Syntax highlight will take a moment to load'}
+          {latency > 10 && '- Syntax highlight might take a moment to load'}
         </StyledText>
       )}
     </LatencyWrapper>
