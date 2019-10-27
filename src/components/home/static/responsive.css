@@ -1,10 +1,4 @@
 @media only screen and (max-width: 680px) {
-  .page1 {
-    height: auto;
-  }
-  .page2 {
-    /* height: 428px; */
-  }
   .page1-box-wrapper {
     display: block;
   }
