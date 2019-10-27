@@ -21,20 +21,7 @@ body button {
     BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.home-wrapper .ant-btn {
-  min-width: 110px;
-  height: 40px;
-  border-radius: 20px;
-  font-size: 16px;
-}
-.home-wrapper .ant-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
-}
-svg g {
-  transform-origin: 50% 50%;
-  transform-box: fill-box;
-}
+
 .banner-wrapper {
   display: flex;
   justify-content: center;
