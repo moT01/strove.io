@@ -226,6 +226,10 @@ const StyledAnchor = styled.a`
 const StyledButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `
 
 const StyledMadeWithStrove = styled.div`
@@ -235,6 +239,7 @@ const StyledMadeWithStrove = styled.div`
 const StyledFeatureWrapper = styled.div`
   width: 100vw;
   margin: 50px 0;
+  padding: 0 20px;
   position: relative;
   display: flex;
   flex-direction: column;

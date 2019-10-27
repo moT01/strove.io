@@ -339,10 +339,13 @@ const BannerWrapper = styled.div`
 const StyledQueueAnim = styled(QueueAnim)`
   width: 60%;
   max-width: 480px;
-  margin-top: auto;
+  margin: auto 20px;
   margin-bottom: auto;
   font-size: 20px;
-  margin-top: auto;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `
 
 const Banner = () => {
