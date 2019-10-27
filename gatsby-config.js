@@ -94,6 +94,7 @@ module.exports = {
           'BITBUCKET_CLIENT_SECRET',
           'IS_OPENSOURCE',
           'GOOGLE_OPTIMIZE_ID',
+          'GOOGLE_OPTIMIZE_EXPERIMENT_ID',
         ],
       },
     },
