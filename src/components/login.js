@@ -69,7 +69,7 @@ const LoginButton = styled.button`
   }
 
   :hover {
-    color: ${({ theme }) => theme.colors.c2};
+    color: ${({ theme }) => theme.colors.c3};
   }
 
   > {
@@ -156,7 +156,7 @@ const Text = styled.h3`
     font-size: 1.4rem;
   }
   :hover {
-    color: ${({ theme }) => theme.colors.c3};;
+    color: ${({ theme }) => theme.colors.c3};
     cursor: pointer;
   }
 `
@@ -180,7 +180,7 @@ const Wrapper = styled.div`
 `
 
 const StyledDropdown = styled.div`
-  color: ${({ theme }) => theme.colors.c2};;
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
   flex-direction: row;
