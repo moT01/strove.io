@@ -5,7 +5,6 @@ import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
 import Footer from './footer'
-import './static/style'
 
 const StyledWrapper = styled.div`
   width: 100vw;
