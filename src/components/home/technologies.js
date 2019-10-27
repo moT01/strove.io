@@ -156,6 +156,7 @@ const EmailFormWrapper = styled.div`
 const StyledFormWrapper = styled.div`
   max-width: 480px;
   align-self: center;
+  margin: auto;
 `
 
 const StyledAnchor = styled.a`

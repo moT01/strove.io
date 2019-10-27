@@ -23,6 +23,18 @@ const StyledAnchor = styled.a`
   color: rgb(105, 123, 140);
 `
 
+const StyledFeatureWrapper = styled.div`
+  width: 100vw;
+  margin: 50px 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: center;
+  align-items: center;
+  overflow: hidden;
+`
+
 const featuresCN = [
   {
     title: 'Run projects straight in the browser',
@@ -255,29 +267,27 @@ const Features = () => {
   ))
 
   return (
-    <div className="home-page page1">
-      <div className="home-page-wrapper" id="page1-wrapper">
-        {!isMobileOnly && (
-          <Parallax
-            className="page1-bg"
-            animation={{
-              translateY: 300,
-              ease: 'linear',
-              playScale: [0, 1.65],
-            }}
-            style={{ top: '-30vh' }}
-            location="page1-wrapper"
-          >
-            <SmallCloud />
-            <MediumCloud />
-            <BigCloud />
-          </Parallax>
-        )}
-        <div className="tiles-wrapper" style={{ width: '80vw' }}>
-          {children}
-        </div>
+    <StyledFeatureWrapper id="page1-wrapper">
+      {!isMobileOnly && (
+        <Parallax
+          className="page1-bg"
+          animation={{
+            translateY: 300,
+            ease: 'linear',
+            playScale: [0, 1.65],
+          }}
+          style={{ top: '-30vh' }}
+          location="page1-wrapper"
+        >
+          <SmallCloud />
+          <MediumCloud />
+          <BigCloud />
+        </Parallax>
+      )}
+      <div className="tiles-wrapper" style={{ width: '80vw' }}>
+        {children}
       </div>
-    </div>
+    </StyledFeatureWrapper>
   )
 }
 
