@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage'
 import api from './api'
 import incomingProject from './incomingProject'
 import latency from './latency'
+import feature from './feature'
 
 const rootConfig = {
   key: 'root',
@@ -23,23 +24,27 @@ export const selectors = {
   api: api.selectors,
   incomingProject: incomingProject.selectors,
   latency: latency.selectors,
+  feature: feature.selectors,
 }
 export const actions = {
   api: api.actions,
   incomingProject: incomingProject.actions,
   latency: latency.actions,
+  feature: feature.actions,
 }
 
 export const C = {
   api: api.C,
   incomingProject: incomingProject.C,
   latency: latency.C,
+  feature: feature.C,
 }
 
 const appReducer = combineReducers({
   api: persistReducer(persistConfig, api.reducer),
   incomingProject: incomingProject.reducer,
   latency: latency.reducer,
+  feature: feature.reducer,
 })
 
 export default persistReducer(rootConfig, (state, action) => {
