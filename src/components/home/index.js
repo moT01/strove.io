@@ -14,18 +14,6 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
-  .ant-btn {
-    min-width: 110px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 16px;
-  }
-
-  .ant-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
-  }
 `
 
 const Home = () => (
