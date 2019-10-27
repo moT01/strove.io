@@ -75,8 +75,8 @@ const Button = styled.button`
   color: ${({ primary, theme }) =>
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -186,14 +186,14 @@ const EmailFormWrapper = styled.div`
     height: 24px;
     width: 24px;
     g {
-      stroke: #0072ce;
+      stroke: ${({ theme }) => theme.colors.c1};
     }
   }
   button {
     width: 156px;
     height: 56px;
-    color: #fff;
-    background: #0072ce;
+    color: ${({ theme }) => theme.colors.c2};
+    background: ${({ theme }) => theme.colors.c1};
     text-transform: uppercase;
     display: block;
     text-align: center;
@@ -262,8 +262,8 @@ const StyledBannerWrapper = styled.div`
   min-height: 70vh;
   width: 100%;
   position: relative;
-  background-color: #0072ce;
-  color: #fff;
+  background-color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledIcon = styled(Icon)`
@@ -271,7 +271,7 @@ const StyledIcon = styled(Icon)`
   top: 15px;
   right: 15px;
   font-size: 1.7vh;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   cursor: pointer;
   :focus {
     outline: none;
@@ -289,7 +289,7 @@ const StyledTrialInfo = styled.ul`
     &:before {
       margin-right: 0.3em;
       content: '✔';
-      color: #0072ce;
+      color: ${({ theme }) => theme.colors.c1};
     }
   }
 `

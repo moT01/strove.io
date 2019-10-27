@@ -10,7 +10,7 @@ const FooterWrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: 18vh;
-  background-color: #0072ce;
+  background-color: ${({ theme }) => theme.colors.c1};
   @media (max-width: 767px) {
     height: auto;
     padding: 10px 0 10px 0;
