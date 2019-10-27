@@ -1,35 +1,3 @@
-html,
-body button {
-  font-family: 'Futura', 'Helvetica Neue For Number', -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-.banner-wrapper .banner-title-wrapper .title-line {
-  transform: translateX(-64px);
-  animation: bannerTitleLine 3s ease-in-out 0s infinite;
-}
-.banner-wrapper .banner-image-wrapper {
-  width: 45%;
-  max-width: 598px;
-  height: 324px;
-  position: absolute;
-  right: 8%;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  opacity: 0;
-}
-
-.home-page h2 {
-  text-align: center;
-  font-size: 28px;
-  color: #314659;
-  letter-spacing: 0.6px;
-}
-.home-page h2 span {
-  font-weight: 600;
-}
 .home-page-wrapper {
   width: 100%;
   margin: auto;
@@ -40,10 +8,6 @@ body button {
   align-self: center;
   align-items: center;
   overflow: hidden;
-}
-.page1 {
-  height: auto;
-  width: 100%;
 }
 
 .page1-bg {
@@ -127,78 +91,4 @@ body button {
   position: absolute;
   opacity: 0;
   transform: translate(0, 30px);
-}
-.page2 {
-  text-align: center;
-  height: auto;
-  margin-bottom: 5vh;
-  display: flex;
-  flex-direction: column;
-}
-.page2 .page2-content {
-  will-change: transform;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.page2-line {
-  margin: 50px auto 24px;
-  width: 114px;
-}
-
-.page-content {
-  width: 760px;
-  margin: 24px auto 32px;
-  line-height: 28px;
-}
-.home-code {
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-width: 840px;
-  border-radius: 4px;
-  background: #f2f4f5;
-  line-height: 28px;
-  margin: 16px auto;
-  color: #151e26;
-  font-size: 16px;
-  text-align: left;
-  padding: 20px 50px;
-}
-.home-code span {
-  color: #f5222d;
-}
-.home-code-comment {
-  color: #314659;
-}
-@keyframes bannerTitleLine {
-  0%,
-  25% {
-    transform: translateX(-64px);
-  }
-  75%,
-  100% {
-    transform: translateX(544px);
-  }
-}
-@keyframes page1TitleLine {
-  0%,
-  25% {
-    transform: translateX(-64px);
-  }
-  75%,
-  100% {
-    transform: translateX(376px);
-  }
-}
-@keyframes page2TitleLine {
-  0%,
-  25% {
-    transform: translateX(-64px);
-  }
-  75%,
-  100% {
-    transform: translateX(178px);
-  }
 }
