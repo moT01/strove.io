@@ -709,4 +709,18 @@ export default createGlobalStyle`
     opacity: 0;
     transform: translate(0, 30px);
   }
+
+  @media only screen and (max-width: 680px) {
+    .page1-box-wrapper {
+      display: block;
+    }
+    .page1-box-wrapper li {
+      width: 80%;
+      display: block;
+      margin: 0 auto 100px;
+    }
+    .page1-box-wrapper li .page1-box {
+      width: 100%;
+    }
+  }
 `
