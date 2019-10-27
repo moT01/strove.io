@@ -308,17 +308,34 @@ const WithAddProject = ({ children, addProject }) => {
   return children
 }
 
+const WithAnalyticsWrapper = ({ children }) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const searchParams = new URL(window?.location?.href).searchParams
+    const feature = searchParams?.get('feature') || ''
+
+    feature && dispatch({ type: 'DISPLAY_FEATURE' })
+  }, [])
+
+  return children
+}
+
 export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <AddProjectProvider>
-          {({ addProject }) => (
-            <LoginProvider addProject={addProject}>
-              <WithAddProject addProject={addProject}>{element}</WithAddProject>
-            </LoginProvider>
-          )}
-        </AddProjectProvider>
+        <WithAnalyticsWrapper>
+          <AddProjectProvider>
+            {({ addProject }) => (
+              <LoginProvider addProject={addProject}>
+                <WithAddProject addProject={addProject}>
+                  {element}
+                </WithAddProject>
+              </LoginProvider>
+            )}
+          </AddProjectProvider>
+        </WithAnalyticsWrapper>
       </PersistGate>
     </Provider>
   </ApolloProvider>
