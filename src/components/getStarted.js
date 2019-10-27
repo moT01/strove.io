@@ -123,7 +123,7 @@ const GithubLinkForm = styled.form`
 `
 
 const StyledErrors = styled.span`
-  color: red;
+  color: color: ${({ theme }) => theme.colors.c5};
 `
 
 const validateRepoLink = values => {

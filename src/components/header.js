@@ -57,7 +57,7 @@ const HeaderWrapper = styled.div`
 `
 
 const LinkText = styled.h3`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   font-size: 1.2rem;
   display: flex;
   flex-direction: row;
@@ -73,7 +73,7 @@ const LinkText = styled.h3`
   }
 
   :hover {
-    color: black;
+    color: ${({ theme }) => theme.colors.c3};
   }
 `
 
@@ -89,7 +89,7 @@ const HeaderSection = styled.div`
 `
 
 const StyledLink = styled(Link)`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
 `
@@ -122,14 +122,12 @@ const LoginButton = styled.button`
   }
 
   span {
-    color: white;
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover {
-    color: black;
-
     span {
-      color: black;
+      color: ${({ theme }) => theme.colors.c3};
     }
   }
 
@@ -194,7 +192,7 @@ const Option = styled.a`
 
 const Text = styled.h3`
   font-size: 1.2rem;
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   transition: color 0.3s;
   margin: 0;
   font-weight: 300;
@@ -203,7 +201,7 @@ const Text = styled.h3`
     font-size: 1.4rem;
   }
   :hover {
-    color: black;
+    color: ${({ theme }) => theme.colors.c3};
   }
 `
 

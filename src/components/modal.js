@@ -22,7 +22,7 @@ export default memo(styled(Modal)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.c2};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;

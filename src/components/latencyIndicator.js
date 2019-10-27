@@ -11,7 +11,7 @@ const LatencyCircle = styled.div`
   height: 20px;
   padding: 8px;
 
-  background: #fff;
+  background: ${({ theme }) => theme.colors.c2};
   text-align: center;
   background-color: ${({ latency, theme }) =>
     latency > 10 && latency < 30
@@ -26,7 +26,7 @@ const LatencyWrapper = styled.div`
 `
 
 const StyledText = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   margin-left: 5px;
   text-overflow: ellipsis;
 `
