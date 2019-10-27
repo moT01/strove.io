@@ -114,7 +114,8 @@ const Option = styled.a`
   color: #0072ce;
 
   svg {
-    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ primary, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-right: 5px;
@@ -127,7 +128,8 @@ const Option = styled.a`
   }
 
   :hover svg {
-    fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ primary, invert }) =>
+      invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 `

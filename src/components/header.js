@@ -146,7 +146,7 @@ const MenuWrapper = styled.div`
   box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
   background-color: ${({ primary, theme }) =>
     primary ? theme.colors.c2 : theme.colors.c1};
@@ -172,19 +172,22 @@ const Option = styled.a`
   min-width: 150px;
 
   svg {
-    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ invert, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-right: 5px;
   }
 
   :hover {
-    background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    background-color: ${({ invert, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 
   :hover svg {
-    fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ invert, invert }) =>
+      invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 `
@@ -208,7 +211,7 @@ const OptionText = styled(Text)`
   color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;
   :hover {
-    color: {({ theme }) => theme.colors.c2};
+    color: ${({ theme }) => theme.colors.c2};
   }
 `
 
