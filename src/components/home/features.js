@@ -27,7 +27,7 @@ const StyledAnchor = styled.a`
 
 const StyledFeatureWrapper = styled.div`
   width: 100vw;
-  margin: 50px 0;
+  margin: 50px 0 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -35,6 +35,10 @@ const StyledFeatureWrapper = styled.div`
   align-self: center;
   align-items: center;
   overflow: hidden;
+`
+
+const StyledFeature = styled.div`
+  width: 80vw;
 `
 
 const featuresCN = [
@@ -286,9 +290,7 @@ const Features = () => {
           <BigCloud />
         </Parallax>
       )}
-      <div className="tiles-wrapper" style={{ width: '80vw' }}>
-        {children}
-      </div>
+      <StyledFeature>{children}</StyledFeature>
     </StyledFeatureWrapper>
   )
 }
