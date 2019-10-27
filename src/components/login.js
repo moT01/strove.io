@@ -86,10 +86,10 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
   background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
   z-index: 3;
@@ -111,7 +111,7 @@ const Option = styled.a`
   z-index: 4;
   text-decoration: none;
   font-weight: 300;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
 
   svg {
     fill: ${({ theme, invert }) =>
@@ -125,7 +125,7 @@ const Option = styled.a`
     background-color: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
-    color: #fff;
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover svg {
@@ -140,7 +140,7 @@ const Inline = styled.div`
   width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   margin-left: 4px;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const UserPhoto = styled.img`
@@ -167,7 +167,7 @@ const Text = styled.h3`
 const OptionText = styled(Text)`
   font-weight: 300;
   :hover {
-    color: #ffffff;
+    color: ${({ theme }) => theme.colors.c2};
   }
 `
 
@@ -189,7 +189,7 @@ const StyledDropdown = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const DropdownWrapper = styled.div`
