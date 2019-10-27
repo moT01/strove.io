@@ -8,7 +8,7 @@ import 'components/layout.css'
 import Header from 'components/header'
 
 const TextWell = styled.div`
-  color: black;
+  color: ${({ theme }) => theme.colors.c3};
   height: auto;
   width: 60vw;
   margin: 3vw 7.5vw 0 7.5vw;
@@ -18,7 +18,7 @@ const TextWell = styled.div`
   justify-items: center;
   text-align: left;
   text-justify: inter-word;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.c2};
   font-size: 20px;
 `
 

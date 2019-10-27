@@ -44,7 +44,7 @@ const loginOptions = [
 ]
 
 const LoginButton = styled.button`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -65,15 +65,11 @@ const LoginButton = styled.button`
   }
 
   span {
-    color: white;
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover {
-    color: black;
-
-    span {
-      color: black;
-    }
+    color: ${({ theme }) => theme.colors.c3};
   }
 
   > {
@@ -86,12 +82,13 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh #0072ce;
+  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
-  background-color: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+  background-color: ${({ theme, invert }) =>
+    invert ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
   position: relative;
 `
@@ -111,23 +108,26 @@ const Option = styled.a`
   z-index: 4;
   text-decoration: none;
   font-weight: 300;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
 
   svg {
-    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-right: 5px;
   }
 
   :hover {
-    background-color: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    background-color: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
-    color: #fff;
+    color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover svg {
-    fill: ${props => (props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ theme, invert }) =>
+      invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
   }
 `
@@ -137,7 +137,7 @@ const Inline = styled.div`
   width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
   margin-left: 4px;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const UserPhoto = styled.img`
@@ -156,7 +156,7 @@ const Text = styled.h3`
     font-size: 1.4rem;
   }
   :hover {
-    color: black;
+    color: ${({ theme }) => theme.colors.c3};
     cursor: pointer;
   }
 `
@@ -164,7 +164,7 @@ const Text = styled.h3`
 const OptionText = styled(Text)`
   font-weight: 300;
   :hover {
-    color: #ffffff;
+    color: ${({ theme }) => theme.colors.c2};
   }
 `
 
@@ -180,13 +180,13 @@ const Wrapper = styled.div`
 `
 
 const StyledDropdown = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #0072ce;
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const DropdownWrapper = styled.div`
