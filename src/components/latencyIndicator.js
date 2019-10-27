@@ -40,7 +40,7 @@ const LatencyIndicator = () => {
       {!isMobileOnly && (
         <StyledText>
           Latency: {latency}ms{' '}
-          {latency > 10 && '- Syntax highlight will take a moment to load'}
+          {latency > 10 && '- Syntax highlight might take a moment to load'}
         </StyledText>
       )}
     </LatencyWrapper>
