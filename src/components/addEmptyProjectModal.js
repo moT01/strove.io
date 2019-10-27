@@ -33,13 +33,15 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.primary ? '#0072ce' : '#ffffff')};
+  color: ${({ primary, theme }) =>
+    primary ? theme.colors.c2 : theme.colors.c1};
+  background-color: ${({ primary, theme }) =>
+    primary ? theme.colors.c1 : theme.colors.c2};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (props.primary ? '#ffffff' : '#0072ce')};
   border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -60,7 +62,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
         transform: translateY(-1px);
       }
     `}
@@ -68,7 +70,7 @@ const Button = styled.button`
 
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   margin: 0.3vh 0.3vh 0.3vh 0;
   text-align: center;
 `
@@ -77,10 +79,10 @@ const GithubLinkInput = styled.input`
   width: 80%;
   border-width: 1px;
   border-style: solid;
-  color: #0072ce;
+  color: ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-align: center;
   font-size: 1rem;
   padding: 0.5vh 0;
