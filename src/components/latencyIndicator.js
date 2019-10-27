@@ -12,7 +12,6 @@ const LatencyCircle = styled.div`
   padding: 8px;
 
   background: #fff;
-  color: #666;
   text-align: center;
   background-color: ${({ latency }) =>
     latency > 10 && latency < 30
