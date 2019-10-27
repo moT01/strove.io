@@ -93,6 +93,8 @@ module.exports = {
           'BITBUCKET_CLIENT_ID',
           'BITBUCKET_CLIENT_SECRET',
           'IS_OPENSOURCE',
+          'GOOGLE_OPTIMIZE_ID',
+          'GOOGLE_OPTIMIZE_EXPERIMENT_ID',
         ],
       },
     },
@@ -106,6 +108,7 @@ module.exports = {
         anonymize: true,
         // Setting this parameter is also optional
         respectDNT: true,
+        optimizeId: process.env.GOOGLE_OPTIMIZE_ID,
       },
     },
     {

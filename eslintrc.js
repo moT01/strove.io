@@ -44,6 +44,7 @@ module.exports = {
           ['constants', './src/constants'],
           ['middlewares', './src/middlewares'],
           ['hooks', './src/hooks'],
+          ['assets', './src/assets'],
         ],
         extensions: ['.ts', '.js', '.jsx', '.json'],
       },

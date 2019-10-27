@@ -1,4 +1,4 @@
 {
   "init": "yarn",
-  "ports": []
+  "ports": ["8000"]
 }

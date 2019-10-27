@@ -1,13 +1,16 @@
-import React from 'react'
-import { window } from 'utils'
+import React, { lazy, Suspense, memo } from 'react'
+import { useSelector } from 'react-redux'
+import { selectors } from 'state'
 
-import Education from 'components/pricing/education'
-import Enterprise from 'components/pricing/enterprise'
+const A = lazy(() => import('components/pricing/a'))
+const B = lazy(() => import('components/pricing/b'))
 
-export default props => {
-  if (window?.location?.href?.includes('strove.io')) {
-    return <Enterprise {...props} />
-  } else {
-    return <Education {...props} />
-  }
-}
+export default memo(props => {
+  const feature = useSelector(selectors.feature.getFeature)
+  console.log('feature', feature)
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      {feature.includes('b') ? <B {...props} /> : <A {...props} />}
+    </Suspense>
+  )
+})

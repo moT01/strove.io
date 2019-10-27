@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, memo } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider, useDispatch } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
@@ -19,7 +19,7 @@ import {
 } from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
-import { selectors } from 'state'
+import { actions, selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
@@ -32,7 +32,7 @@ const createStore = reduxCreateStore(
 
 export const persistor = persistStore(createStore)
 
-const LoginProvider = ({ children, addProject }) => {
+const LoginProvider = memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
@@ -292,9 +292,9 @@ const LoginProvider = ({ children, addProject }) => {
   }, [])
 
   return children
-}
+})
 
-const WithAddProject = ({ children, addProject }) => {
+const WithAddProject = memo(({ children, addProject }) => {
   useEffect(() => {
     let link =
       window?.location?.href?.match(/#(.*)/) &&
@@ -306,19 +306,36 @@ const WithAddProject = ({ children, addProject }) => {
   }, [])
 
   return children
-}
+})
+
+const WithAnalyticsWrapper = memo(({ children }) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const searchParams = new URL(window?.location?.href).searchParams
+    const feature = searchParams?.get('feature') || ''
+
+    feature && dispatch(actions.feature.displayFeature(feature))
+  }, [])
+
+  return children
+})
 
 export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <AddProjectProvider>
-          {({ addProject }) => (
-            <LoginProvider addProject={addProject}>
-              <WithAddProject addProject={addProject}>{element}</WithAddProject>
-            </LoginProvider>
-          )}
-        </AddProjectProvider>
+        <WithAnalyticsWrapper>
+          <AddProjectProvider>
+            {({ addProject }) => (
+              <LoginProvider addProject={addProject}>
+                <WithAddProject addProject={addProject}>
+                  {element}
+                </WithAddProject>
+              </LoginProvider>
+            )}
+          </AddProjectProvider>
+        </WithAnalyticsWrapper>
       </PersistGate>
     </Provider>
   </ApolloProvider>
