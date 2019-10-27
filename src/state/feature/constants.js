@@ -1,0 +1,1 @@
+export const DISPLAY_FEATURE = 'DISPLAY_FEATURE'
