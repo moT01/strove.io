@@ -37,13 +37,13 @@ const Column = styled.div`
 const ColumnTitle = styled.h3`
   font-size: 1.3rem;
   font-weight: 300;
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   margin: 5px 0 5px 0;
 `
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const LinkText = styled.h3`
@@ -55,7 +55,7 @@ const LinkText = styled.h3`
 
 const StyledAnchor = styled.a`
   text-decoration: none;
-  color: white;
+  color: ${({ theme }) => theme.colors.c2};
   display: flex;
 
   svg {

@@ -122,7 +122,7 @@ const EmailFormWrapper = styled.div`
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
-  background: #fff;
+  background: ${({ theme }) => theme.colors.c2};
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -152,7 +152,7 @@ const EmailFormWrapper = styled.div`
     box-shadow: none;
     color: #333e63;
     outline: 0;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.c2};
     width: calc(100% - 156px);
     height: 56px;
     padding: 0;
