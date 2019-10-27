@@ -19,11 +19,12 @@ import {
 } from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
-import { selectors } from 'state'
+import { actions, selectors } from 'state'
 import AddProjectProvider from 'components/addProjectProvider'
 import client from './client'
 import rootReducer from './src/state'
 import { C } from 'state'
+import { displayFeature } from 'state/feature/actions'
 
 const createStore = reduxCreateStore(
   rootReducer,
@@ -315,7 +316,7 @@ const WithAnalyticsWrapper = ({ children }) => {
     const searchParams = new URL(window?.location?.href).searchParams
     const feature = searchParams?.get('feature') || ''
 
-    feature && dispatch({ type: 'DISPLAY_FEATURE' })
+    feature && dispatch(actions.feature.displayFeature(feature))
   }, [])
 
   return children

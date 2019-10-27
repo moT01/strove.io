@@ -5,7 +5,7 @@ const initialState = null
 export default (state = initialState, action) => {
   switch (action.type) {
     case C.DISPLAY_FEATURE: {
-      return payload
+      return action.payload
     }
 
     default:
