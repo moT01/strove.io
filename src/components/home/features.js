@@ -12,10 +12,12 @@ const { TweenOneGroup } = TweenOne
 
 const StyledFeatureTitle = styled.h3`
   color: rgb(105, 123, 140);
+  font-size: 16px;
 `
 
 const StyledFeatureContent = styled.p`
   color: rgb(105, 123, 140);
+  font-size: 14px;
 `
 
 const StyledAnchor = styled.a`

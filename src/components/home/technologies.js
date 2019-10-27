@@ -252,7 +252,7 @@ const Technologies = () => {
   const dispatch = useDispatch()
 
   return (
-    <div className="home-page page2">
+    <>
       <StyledFeatureWrapper>
         <StyledTitle>On the shoulders of giants</StyledTitle>
         <p>
@@ -315,7 +315,6 @@ const Technologies = () => {
                   placeholder="Your Email"
                 ></Field>
                 <svg
-                  className="Form-fieldGroupIcon"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -343,7 +342,7 @@ const Technologies = () => {
           )}
         </Formik>
       </StyledFormWrapper>
-    </div>
+    </>
   )
 }
 
