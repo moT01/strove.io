@@ -13,12 +13,12 @@ const LatencyCircle = styled.div`
 
   background: #fff;
   text-align: center;
-  background-color: ${({ latency }) =>
+  background-color: ${({ latency, theme }) =>
     latency > 10 && latency < 30
       ? 'yellow'
       : latency <= 10
-      ? '#39e626'
-      : '#ef7a2c'};
+      ? theme.colors.c6
+      : theme.colors.c7};
 `
 
 const LatencyWrapper = styled.div`
