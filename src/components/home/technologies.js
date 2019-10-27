@@ -99,15 +99,15 @@ const EmailFormWrapper = styled.div`
     width: 24px;
 
     g {
-      stroke: #0072ce;
+      stroke: ${({ theme }) => theme.colors.c1};
     }
   }
 
   button {
     width: 156px;
     height: 56px;
-    color: #fff;
-    background: #0072ce;
+    color: ${({ theme }) => theme.colors.c2};
+    background: ${({ theme }) => theme.colors.c1};
     text-transform: uppercase;
     display: block;
     text-align: center;
@@ -172,14 +172,15 @@ const StyledAnchor = styled.a`
   color: ${({ primary, theme }) =>
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
-  border-color: #0072ce;
-  box-shadow: 0 1vh 1vh -1.5vh #0072ce;
+  border-color: ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   opacity: 0.9;
 
   svg {
-    fill: ${props => (!props.invert ? '#ffffff' : '#0072ce')};
+    fill: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
     width: 2.2vh;
     height: auto;
     margin-left: 5px;
@@ -200,7 +201,7 @@ const StyledAnchor = styled.a`
       &:hover {
         opacity: 1;
         transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
       }
     `}
 `
