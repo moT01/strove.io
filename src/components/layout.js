@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 import Modal from './modal'
 import Header from './header'
 import { selectors } from 'state'
-import './layout.css'
 
 const MainContent = styled.main`
   display: flex;
