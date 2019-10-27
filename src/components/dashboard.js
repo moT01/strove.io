@@ -78,7 +78,7 @@ const Tile = styled.div`
   align-items: center;
   background-color: #ffffff;
   border-radius: 5px;
-  border-color: #0072ce;
+  border-color: ${({ theme }) => theme.c1};
   border-width: 1px;
   border-style: solid;
   padding: 20px;
@@ -133,7 +133,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh #0072ce;
+        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.c1};
         transform: translateY(-1px);
       }
     `}
@@ -145,12 +145,12 @@ const ModalButton = styled(Button)`
 
 const ProjectTitle = styled.h3`
   font-size: 1.4rem;
-  color: #0072ce;
+  color: ${({ theme }) => theme.c1};
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
 const Text = styled.p`
-  color: #0072ce;
+  color: ${({ theme }) => theme.c1};
   font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
