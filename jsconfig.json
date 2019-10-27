@@ -10,7 +10,8 @@
       "utils": ["src/utils"],
       "constants": ["src/constants"],
       "middlwares": ["src/middlewares"],
-      "hooks": ["src/hooks"]
+      "hooks": ["src/hooks"],
+      "assets": ["src/assets"]
     }
   },
   "search.exclude": {

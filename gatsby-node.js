@@ -19,26 +19,15 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         constants: path.resolve(__dirname, 'src/constants'),
         middlewares: path.resolve(__dirname, 'src/middlewares'),
         hooks: path.resolve(__dirname, 'src/hooks'),
+        assets: path.resolve(__dirname, 'src/assets'),
       },
     },
   })
 }
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = ({ actions }) => {
   const { createRedirect } = actions
 
-  createRedirect({
-    fromPath: 'https://fic.dev/*',
-    toPath: 'https://strove.io/:splat',
-    isPermanent: true,
-    force: true,
-  })
-  createRedirect({
-    fromPath: 'https://www.fic.dev/*',
-    toPath: 'https://strove.io/:splat',
-    isPermanent: true,
-    force: true,
-  })
   createRedirect({
     fromPath: 'https://www.silisky.com/*',
     toPath: 'https://strove.io/:splat',

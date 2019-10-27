@@ -4,6 +4,13 @@
   "description": "Language-agnostic Linux-based programming environment for teams and single developers",
   "version": "0.1.0",
   "author": "Adam Żaczek",
+  "scripts": {
+    "build": "BABEL_ENV=production gatsby build",
+    "start": "BABEL_ENV=opensource GATSBY_ACTIVE_ENV=opensource gatsby develop -H 0.0.0.0",
+    "startDev": "BABEL_ENV=development gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "serve": "BABEL_ENV=development gatsby serve"
+  },
   "contributors": [
     "Adam Żaczek",
     "Piotr Jarosz",
@@ -91,6 +98,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-gatsby": "^0.2.6",
@@ -117,13 +125,6 @@
     "fullstack"
   ],
   "license": "GNU",
-  "scripts": {
-    "build": "BABEL_ENV=production gatsby build",
-    "start": "BABEL_ENV=opensource GATSBY_ACTIVE_ENV=opensource gatsby develop -H 0.0.0.0",
-    "startDev": "BABEL_ENV=development gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "serve": "BABEL_ENV=development gatsby serve"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/stroveio/strove-client"

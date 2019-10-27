@@ -13,7 +13,7 @@ import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
-import Demo from '../../../assets/StroveDemo.mp4'
+import Demo from 'assets/StroveDemo.mp4'
 
 const FadeIn = keyframes`
   0% {
@@ -308,7 +308,9 @@ const StyledInfo = styled.span`
 `
 
 const StyledH1 = styled.h1`
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  color: indianred;
+  font-weight: 600;
 `
 
 const validate = values => {
@@ -343,15 +345,11 @@ const Banner = () => {
               style={{ transform: 'translateX(-64px)' }}
             />
           </div>
-          <StyledH1>Strove</StyledH1>
+          <StyledH1>Bring your ideas to life</StyledH1>
           <h4>
-            Ready in seconds programming environment, available from any
-            computer
+            Strove.io gives you instant environment to learn, build,
+            collaborate, no matter the language. All you need is the browser.
           </h4>
-          <h3>
-            All major Linux-available programming languages and tools such as
-            Python and git, now in cloud
-          </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
@@ -459,18 +457,15 @@ const Banner = () => {
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>Focus on what's important</StyledH2>
               <StyledFeatureDescription>
-                Strove lets programmers be productive in seconds
+                Start coding in seconds, no setup needed
               </StyledFeatureDescription>
-              <StyledH2>Easiest collaboration out there</StyledH2>
+              <StyledH2>Code on any computer, anywhere</StyledH2>
               <StyledFeatureDescription>
-                Team members can work from any computer and any location
+                Don't lose your progress, even when switching computers
               </StyledFeatureDescription>
-              <StyledH2>
-                Forget that "it works on my machine" issue ever existed
-              </StyledH2>
+              <StyledH2>Use worlds most popular coding editor</StyledH2>
               <StyledFeatureDescription>
-                Programmers get access to instances of the same cloud
-                environment so they can focus on creating new features
+                Get the best coding experience with Visual Studio Code support
               </StyledFeatureDescription>
             </LeftSectionWrapper>
           </SectionWrapper>
