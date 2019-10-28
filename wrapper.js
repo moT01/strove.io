@@ -16,6 +16,7 @@ import {
   BITBUCKET_LOGIN,
   MY_PROJECTS,
   ACTIVE_PROJECT,
+  START_PROJECT,
 } from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
@@ -114,6 +115,33 @@ const LoginProvider = ({ children, addProject }) => {
       })
     }
   }, [activeProject.data])
+
+  const startProjectData = useSubscription(START_PROJECT, {
+    variables: { email: user?.email || 'null' },
+    client,
+    fetchPolicy: 'no-cache',
+    context: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'User-Agent': 'node',
+      },
+    },
+  })
+
+  useEffect(() => {
+    if (
+      startProjectData?.data?.startProject?.queuePosition === 0 &&
+      startProjectData?.data?.startProject?.project?.machineId
+    )
+      dispatch({
+        type: C.api.FETCH_SUCCESS,
+        payload: {
+          storeKey: 'myProjects',
+          id,
+          data: { editorPort, machineId },
+        },
+      })
+  }, [startProjectData?.data])
 
   useEffect(() => {
     const code = window?.location?.href

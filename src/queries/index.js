@@ -12,6 +12,7 @@ import ACTIVE_PROJECT from './activeProjectSubscription'
 import BITBUCKET_LOGIN from './bitbucketAuth'
 import SEND_EMAIL from './sendEmail'
 import GET_BITBUCKET_TOKEN from './getBitbucketToken'
+import START_PROJECT from './startProject'
 
 export {
   ADD_PROJECT,
@@ -28,4 +29,5 @@ export {
   BITBUCKET_LOGIN,
   SEND_EMAIL,
   GET_BITBUCKET_TOKEN,
+  START_PROJECT,
 }
