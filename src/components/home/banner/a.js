@@ -15,6 +15,18 @@ import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const FadeIn = keyframes`
   0% {
     opacity: 0;
@@ -311,21 +323,30 @@ const StyledInfo = styled.span`
 
 const StyledH1 = styled.h1`
   margin-bottom: 10px;
-  color: indianred;
+  color: ${({ theme }) => theme.colors.c11};
   font-weight: 600;
 `
 
-const validate = values => {
-  let errors = {}
+const BannerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  width: 100%;
+  position: relative;
+`
 
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
+const StyledQueueAnim = styled(QueueAnim)`
+  width: 60%;
+  max-width: 480px;
+  margin: auto 20px;
+  margin-bottom: auto;
+  font-size: 20px;
+
+  @media (max-width: 767px) {
+    width: 100%;
   }
-
-  return errors
-}
+`
 
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
@@ -336,17 +357,8 @@ const Banner = () => {
 
   return (
     <>
-      <div className="banner-wrapper">
-        <QueueAnim
-          className="banner-title-wrapper"
-          type={isMobileOnly ? 'bottom' : 'right'}
-        >
-          <div className="title-line-wrapper">
-            <div
-              className="title-line"
-              style={{ transform: 'translateX(-64px)' }}
-            />
-          </div>
+      <BannerWrapper>
+        <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <h4>
             Strove.io gives you instant environment to learn, build,
@@ -402,7 +414,6 @@ const Banner = () => {
                       placeholder="Your Email"
                     ></Field>
                     <svg
-                      className="Form-fieldGroupIcon"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -437,8 +448,8 @@ const Banner = () => {
               )}
             </Formik>
           </ButtonsWrapper>
-        </QueueAnim>
-      </div>
+        </StyledQueueAnim>
+      </BannerWrapper>
       <StyledModal
         isOpen={isModalVisible}
         onRequestClose={closeModal}

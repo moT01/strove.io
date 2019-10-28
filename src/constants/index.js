@@ -1,3 +1,4 @@
 import theme from './theme'
+import features from './features'
 
-export { theme }
+export { theme, features }

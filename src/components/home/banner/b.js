@@ -15,6 +15,18 @@ import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const FadeIn = keyframes`
   0% {
     opacity: 0;
@@ -122,7 +134,7 @@ const EmailFormWrapper = styled.div`
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
-  background: #fff;
+  background: ${({ theme }) => theme.colors.c2};
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -152,7 +164,7 @@ const EmailFormWrapper = styled.div`
     box-shadow: none;
     color: #333e63;
     outline: 0;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.c2};
     width: calc(100% - 156px);
     height: 56px;
     padding: 0;
@@ -310,20 +322,31 @@ const StyledInfo = styled.span`
 `
 
 const StyledH1 = styled.h1`
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.colors.c11};
+  font-weight: 600;
 `
 
-const validate = values => {
-  let errors = {}
+const BannerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  width: 100%;
+  position: relative;
+`
 
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
+const StyledQueueAnim = styled(QueueAnim)`
+  width: 60%;
+  max-width: 480px;
+  margin: auto 20px;
+  margin-bottom: auto;
+  font-size: 20px;
+
+  @media (max-width: 767px) {
+    width: 100%;
   }
-
-  return errors
-}
+`
 
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
@@ -334,26 +357,13 @@ const Banner = () => {
 
   return (
     <>
-      <div className="banner-wrapper">
-        <QueueAnim
-          className="banner-title-wrapper"
-          type={isMobileOnly ? 'bottom' : 'right'}
-        >
-          <div className="title-line-wrapper">
-            <div
-              className="title-line"
-              style={{ transform: 'translateX(-64px)' }}
-            />
-          </div>
-          <StyledH1>Strove</StyledH1>
+      <BannerWrapper>
+        <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
+          <StyledH1>Bring your ideas to life</StyledH1>
           <h4>
-            Ready in seconds programming environment, available from any
-            computer
+            Strove.io gives you instant environment to learn, build,
+            collaborate, no matter the language. All you need is the browser.
           </h4>
-          <h3>
-            All major Linux-available programming languages and tools such as
-            Python and git, now in cloud
-          </h3>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
@@ -404,7 +414,6 @@ const Banner = () => {
                       placeholder="Your Email"
                     ></Field>
                     <svg
-                      className="Form-fieldGroupIcon"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -439,8 +448,8 @@ const Banner = () => {
               )}
             </Formik>
           </ButtonsWrapper>
-        </QueueAnim>
-      </div>
+        </StyledQueueAnim>
+      </BannerWrapper>
       <StyledModal
         isOpen={isModalVisible}
         onRequestClose={closeModal}
@@ -461,18 +470,15 @@ const Banner = () => {
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>Focus on what's important</StyledH2>
               <StyledFeatureDescription>
-                Strove lets programmers be productive in seconds
+                Start coding in seconds, no setup needed
               </StyledFeatureDescription>
-              <StyledH2>Easiest collaboration out there</StyledH2>
+              <StyledH2>Code on any computer, anywhere</StyledH2>
               <StyledFeatureDescription>
-                Team members can work from any computer and any location
+                Don't lose your progress, even when switching computers
               </StyledFeatureDescription>
-              <StyledH2>
-                Forget that "it works on my machine" issue ever existed
-              </StyledH2>
+              <StyledH2>Use worlds most popular coding editor</StyledH2>
               <StyledFeatureDescription>
-                Programmers get access to instances of the same cloud
-                environment so they can focus on creating new features
+                Get the best coding experience with Visual Studio Code support
               </StyledFeatureDescription>
             </LeftSectionWrapper>
           </SectionWrapper>

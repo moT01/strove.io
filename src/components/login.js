@@ -204,7 +204,7 @@ const getUserData = createSelector(
   (username, userphoto) => ({ username, userphoto })
 )
 
-const LoginDropdown = props => {
+const LoginDropdown = () => {
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (

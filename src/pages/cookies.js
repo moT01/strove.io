@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 import { SEO } from 'components'
-import 'components/layout.css'
 
 import Header from 'components/header'
 
@@ -24,6 +23,10 @@ const TextWell = styled.div`
 
 const StyledH2 = styled.h2`
   align-self: center;
+  text-align: center;
+  font-size: 28px;
+  color: #314659;
+  letter-spacing: 0.6px;
 `
 
 const Legal = () => (
