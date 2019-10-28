@@ -501,7 +501,7 @@ const Banner = () => {
             onClick={useCallback(() => setModalVisible(false))}
           />
         )}
-        <GetStarted closeModal={closeModal} />
+        <GetStarted closeModal={closeModal}/>
       </StyledModal>
     </>
   )
