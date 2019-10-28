@@ -5,9 +5,10 @@ import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
+import { selectors } from 'state'
 import Modal from './modal'
 import Header from './header'
-import { selectors } from 'state'
+import GlobalStyles from './globalStyles'
 
 const MainContent = styled.main`
   display: flex;
@@ -68,6 +69,7 @@ const Layout = ({ children, browser }) => {
           ) : (
             ''
           )}
+          <GlobalStyles />
           <Header siteTitle={data.site.siteMetadata.title} />
           <MainContent>{children}</MainContent>
         </>
