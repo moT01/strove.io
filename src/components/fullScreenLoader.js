@@ -35,6 +35,7 @@ const SmallLoaderWrapper = styled.div`
 
 const LoaderWrapper = styled.div`
   top: 0;
+  left: 0;
   position: fixed;
   background-color: ${({ theme }) => theme.colors.c2};
   display: flex;
