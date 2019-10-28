@@ -4,11 +4,13 @@ import styled from 'styled-components'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
+import { ThemeProvider } from 'styled-components'
 
 import { selectors } from 'state'
 import Modal from './modal'
 import Header from './header'
 import GlobalStyles from './globalStyles'
+import { theme } from 'constants'
 
 const MainContent = styled.main`
   display: flex;
@@ -53,7 +55,7 @@ const Layout = ({ children, browser }) => {
         }
       `}
       render={data => (
-        <>
+        <ThemeProvider theme={theme}>
           {user ? (
             <StyledModal
               isOpen={noSupportModalVisible}
@@ -72,7 +74,7 @@ const Layout = ({ children, browser }) => {
           <GlobalStyles />
           <Header siteTitle={data.site.siteMetadata.title} />
           <MainContent>{children}</MainContent>
-        </>
+        </ThemeProvider>
       )}
     />
   )
