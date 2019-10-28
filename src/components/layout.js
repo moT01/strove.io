@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
+import { AddProjectProvider, WithAddProject, LoginProvider } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
 import Header from './header'
@@ -56,24 +57,32 @@ const Layout = ({ children, browser }) => {
       `}
       render={data => (
         <ThemeProvider theme={theme}>
-          {user ? (
-            <StyledModal
-              isOpen={noSupportModalVisible}
-              onRequestClose={() => setNoSupportModalVisible(false)}
-              contentLabel={'Browser not supported'}
-              ariaHideApp={false}
-              isMobile={isMobile}
-            >
-              {isMobile
-                ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
-                : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
-            </StyledModal>
-          ) : (
-            ''
-          )}
-          <GlobalStyles />
-          <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>{children}</MainContent>
+          <AddProjectProvider>
+            {({ addProject }) => (
+              <LoginProvider addProject={addProject}>
+                <WithAddProject addProject={addProject}>
+                  {user ? (
+                    <StyledModal
+                      isOpen={noSupportModalVisible}
+                      onRequestClose={() => setNoSupportModalVisible(false)}
+                      contentLabel={'Browser not supported'}
+                      ariaHideApp={false}
+                      isMobile={isMobile}
+                    >
+                      {isMobile
+                        ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
+                        : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
+                    </StyledModal>
+                  ) : (
+                    ''
+                  )}
+                  <GlobalStyles />
+                  <Header siteTitle={data.site.siteMetadata.title} />
+                  <MainContent>{children}</MainContent>
+                </WithAddProject>
+              </LoginProvider>
+            )}
+          </AddProjectProvider>
         </ThemeProvider>
       )}
     />
