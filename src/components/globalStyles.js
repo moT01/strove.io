@@ -10,6 +10,12 @@ export default createGlobalStyle`
     align-items: center;
   }
 
+  body button {
+    font-family: 'Futura', 'Helvetica Neue For Number', -apple-system,
+      BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB',
+      'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
   body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
