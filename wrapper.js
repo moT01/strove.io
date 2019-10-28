@@ -21,7 +21,7 @@ import {
 import { mutation, query } from 'utils'
 import { window } from 'utils'
 import { actions, selectors } from 'state'
-import { AddProjectProvider, GlobalStyles } from 'components'
+import { AddProjectProvider } from 'components'
 import client from './client'
 import rootReducer from './src/state'
 import { C } from 'state'
@@ -332,7 +332,6 @@ export const wrapRootElement = ({ element }) => (
             <AddProjectProvider>
               {({ addProject }) => (
                 <LoginProvider addProject={addProject}>
-                  <GlobalStyles />
                   <WithAddProject addProject={addProject}>
                     {element}
                   </WithAddProject>
