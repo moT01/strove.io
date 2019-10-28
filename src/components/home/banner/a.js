@@ -323,7 +323,7 @@ const StyledInfo = styled.span`
 
 const StyledH1 = styled.h1`
   margin-bottom: 10px;
-  color: indianred;
+  color: ${({ theme }) => theme.colors.c3};
   font-weight: 600;
 `
 
