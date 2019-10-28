@@ -9,7 +9,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
-import { ThemeProvider } from 'styled-components'
 
 import {
   GITHUB_LOGIN,
@@ -25,7 +24,6 @@ import { AddProjectProvider } from 'components'
 import client from './client'
 import rootReducer from './src/state'
 import { C } from 'state'
-import { theme } from 'constants'
 
 const createStore = reduxCreateStore(
   rootReducer,
@@ -324,23 +322,21 @@ const WithAnalyticsWrapper = memo(({ children }) => {
 })
 
 export const wrapRootElement = ({ element }) => (
-  <ThemeProvider theme={theme}>
-    <ApolloProvider client={client}>
-      <Provider store={createStore}>
-        <PersistGate loading={null} persistor={persistor}>
-          <WithAnalyticsWrapper>
-            <AddProjectProvider>
-              {({ addProject }) => (
-                <LoginProvider addProject={addProject}>
-                  <WithAddProject addProject={addProject}>
-                    {element}
-                  </WithAddProject>
-                </LoginProvider>
-              )}
-            </AddProjectProvider>
-          </WithAnalyticsWrapper>
-        </PersistGate>
-      </Provider>
-    </ApolloProvider>
-  </ThemeProvider>
+  <ApolloProvider client={client}>
+    <Provider store={createStore}>
+      <PersistGate loading={null} persistor={persistor}>
+        <WithAnalyticsWrapper>
+          <AddProjectProvider>
+            {({ addProject }) => (
+              <LoginProvider addProject={addProject}>
+                <WithAddProject addProject={addProject}>
+                  {element}
+                </WithAddProject>
+              </LoginProvider>
+            )}
+          </AddProjectProvider>
+        </WithAnalyticsWrapper>
+      </PersistGate>
+    </Provider>
+  </ApolloProvider>
 )
