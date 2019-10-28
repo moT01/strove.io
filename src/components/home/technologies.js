@@ -9,9 +9,25 @@ import { Formik, Form, Field } from 'formik'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const StyledTitle = styled.h2`
   font-weight: 600;
   margin: 0;
+  text-align: center;
+  font-size: 28px;
+  color: #314659;
+  letter-spacing: 0.6px;
 `
 
 const StyledH6 = styled.h6`
@@ -152,6 +168,7 @@ const EmailFormWrapper = styled.div`
 const StyledFormWrapper = styled.div`
   max-width: 480px;
   align-self: center;
+  margin: auto;
 `
 
 const StyledAnchor = styled.a`
@@ -209,23 +226,28 @@ const StyledAnchor = styled.a`
 const StyledButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `
 
 const StyledMadeWithStrove = styled.div`
   margin-top: 100px;
 `
 
-const validate = values => {
-  let errors = {}
-
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
+const StyledFeatureWrapper = styled.div`
+  width: 100vw;
+  margin: 50px 0 0;
+  padding: 0 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: center;
+  align-items: center;
+  overflow: hidden;
+`
 
 const Technologies = () => {
   const [selectedLogo, setSelectedLogo] = useState()
@@ -235,11 +257,8 @@ const Technologies = () => {
   const dispatch = useDispatch()
 
   return (
-    <div className="home-page page2">
-      <div className="home-page-wrapper">
-        <div className="title-line-wrapper page2-line">
-          <div className="title-line" />
-        </div>
+    <>
+      <StyledFeatureWrapper>
         <StyledTitle>On the shoulders of giants</StyledTitle>
         <p>
           {!selectedLogo
@@ -269,7 +288,7 @@ const Technologies = () => {
             Start editing
           </StyledAnchor>
         </StyledButtonsWrapper>
-      </div>
+      </StyledFeatureWrapper>
       <StyledFormWrapper>
         <StyledH6>Be up to date with new deals and features!</StyledH6>
         <Formik
@@ -301,7 +320,6 @@ const Technologies = () => {
                   placeholder="Your Email"
                 ></Field>
                 <svg
-                  className="Form-fieldGroupIcon"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -329,7 +347,7 @@ const Technologies = () => {
           )}
         </Formik>
       </StyledFormWrapper>
-    </div>
+    </>
   )
 }
 

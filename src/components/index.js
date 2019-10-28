@@ -13,6 +13,9 @@ import Layout from './layout'
 import Logos from './logos.js'
 import Modal from './modal'
 import PrivateRoute from './privateRoute'
+import GlobalStyles from './globalStyles'
+import LoginProvider from './loginProvider'
+import WithAddProject from './withAddProject'
 
 export {
   SmallCloud,
@@ -32,4 +35,7 @@ export {
   Logos,
   Modal,
   PrivateRoute,
+  GlobalStyles,
+  LoginProvider,
+  WithAddProject,
 }

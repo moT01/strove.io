@@ -27,7 +27,7 @@ const LinkWrapper = styled.div`
   animation: ${FadeIn} 0.3s ease-out;
 `
 
-const ZeldaWrapper = styled.div`
+const LoginWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -349,9 +349,9 @@ const HeaderComponent = ({ siteTitle, location }) => {
         )}
       </HeaderWrapper>
       {location.pathname === '/app/editor/' && <LatencyIndicator />}
-      <ZeldaWrapper>
+      <LoginWrapper>
         <Login />
-      </ZeldaWrapper>
+      </LoginWrapper>
     </HeaderSection>
   )
 }
