@@ -1,11 +1,5 @@
-import React, { useEffect, memo } from 'react'
-import { ApolloProvider } from 'react-apollo'
-import { Provider, useDispatch } from 'react-redux'
-import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
-import thunk from 'redux-thunk'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
+import { useEffect, memo } from 'react'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
@@ -19,20 +13,11 @@ import {
 } from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
-import { actions, selectors } from 'state'
-import { AddProjectProvider } from 'components'
-import client from './client'
-import rootReducer from './src/state'
+import { selectors } from 'state'
+import client from '../../client'
 import { C } from 'state'
 
-const createStore = reduxCreateStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
-
-export const persistor = persistStore(createStore)
-
-const LoginProvider = memo(({ children, addProject }) => {
+export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getUserProjects)
@@ -293,40 +278,3 @@ const LoginProvider = memo(({ children, addProject }) => {
 
   return children
 })
-
-const WithAddProject = memo(({ children, addProject }) => {
-  useEffect(() => {
-    let link =
-      window?.location?.href?.match(/#(.*)/) &&
-      window.location.href.match(/#(.*)/)[1]
-
-    link &&
-      /.*(github|gitlab|bitbucket).com/i.test(link) &&
-      addProject({ link })
-  }, [])
-
-  return children
-})
-
-const WithAnalyticsWrapper = memo(({ children }) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const searchParams = new URL(window?.location?.href).searchParams
-    const feature = searchParams?.get('feature') || ''
-
-    feature && dispatch(actions.feature.displayFeature(feature))
-  }, [])
-
-  return children
-})
-
-export const wrapRootElement = ({ element }) => (
-  <ApolloProvider client={client}>
-    <Provider store={createStore}>
-      <PersistGate loading={null} persistor={persistor}>
-        <WithAnalyticsWrapper>{element}</WithAnalyticsWrapper>
-      </PersistGate>
-    </Provider>
-  </ApolloProvider>
-)
