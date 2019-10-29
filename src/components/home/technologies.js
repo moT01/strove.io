@@ -40,7 +40,7 @@ const EmailFormWrapper = styled.div`
   width: 100%;
   min-width: 400px;
   flex-wrap: wrap;
-  margin: 20px 0 5px;
+  margin: 20px 0 50px;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
