@@ -181,6 +181,7 @@ const Wrapper = styled.div`
 
 const StyledDropdown = styled.div`
   color: ${({ theme }) => theme.colors.c2};
+  height: 3vh;
   text-decoration: none;
   display: flex;
   flex-direction: row;
