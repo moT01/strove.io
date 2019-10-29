@@ -9,6 +9,7 @@ export default {
     c7: '#ef7a2c', // bad latency,
     c8: '#009900', // active project,
     c9: '#990000', // inactive project
-    c11: '#4f4f4f', // nice dark-gray color used for header
+    c11: '#4f4f4f', // nice dark-gray color used for header,
+    c12: '#333e63' // some inputs
   },
 }
