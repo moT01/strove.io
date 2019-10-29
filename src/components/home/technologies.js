@@ -26,7 +26,7 @@ const StyledTitle = styled.h2`
   margin: 0;
   text-align: center;
   font-size: 28px;
-  color: #314659;
+  color: ${({ theme }) => theme.colors.c13};
   letter-spacing: 0.6px;
 `
 

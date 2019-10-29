@@ -80,41 +80,11 @@ export default createGlobalStyle`
     font-size: 2em;
     margin: 0.67em 0;
   }
-  mark {
-    background-color: #ff0;
-    color: #000;
-  }
-  small {
-    font-size: 80%;
-  }
-  sub,
-  sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-  }
-  sub {
-    bottom: -0.25em;
-  }
-  sup {
-    top: -0.5em;
-  }
   img {
     border-style: none;
   }
   svg:not(:root) {
     overflow: hidden;
-  }
-  code,
-  kbd,
-  pre,
-  samp {
-    font-family: monospace, monospace;
-    font-size: 1em;
-  }
-  figure {
-    margin: 1em 40px;
   }
   hr {
     box-sizing: content-box;
