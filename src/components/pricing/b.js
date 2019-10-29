@@ -102,7 +102,7 @@ const EmailFormWrapper = styled.div`
     box-shadow: none;
     color: ${({ theme }) => theme.colors.c12};
     outline: 0;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.c2};
     width: calc(100% - 156px);
     height: 56px;
     padding: 0;

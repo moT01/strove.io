@@ -13,9 +13,11 @@ const CodeArea = styled.div`
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+
   > span {
     display: block;
   }
+
   @media screen and (max-width: 320px) {
     .code-area {
       font-size: 5vw;
