@@ -26,7 +26,7 @@ const StyledTitle = styled.h2`
   margin: 0;
   text-align: center;
   font-size: 28px;
-  color: #314659;
+  color: ${({ theme }) => theme.colors.c13};
   letter-spacing: 0.6px;
 `
 
@@ -40,7 +40,7 @@ const EmailFormWrapper = styled.div`
   width: 100%;
   min-width: 400px;
   flex-wrap: wrap;
-  margin: 20px 0 5px;
+  margin: 20px 0 50px;
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
@@ -76,7 +76,7 @@ const EmailFormWrapper = styled.div`
 
   input {
     box-shadow: none;
-    color: #333e63;
+    color: ${({ theme }) => theme.colors.c12};
     outline: 0;
     background: #fff;
     width: calc(100% - 156px);

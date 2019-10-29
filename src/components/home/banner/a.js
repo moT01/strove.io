@@ -162,7 +162,7 @@ const EmailFormWrapper = styled.div`
   }
   input {
     box-shadow: none;
-    color: #333e63;
+    color: ${({ theme }) => theme.colors.c12};
     outline: 0;
     background: ${({ theme }) => theme.colors.c2};
     width: calc(100% - 156px);
@@ -317,7 +317,7 @@ const StyledForm = styled(Form)`
 
 const StyledInfo = styled.span`
   margin: 20px;
-  color: #697b8c;
+  color: ${({ theme }) => theme.colors.c13};
   font-size: 13px;
 `
 
@@ -501,7 +501,7 @@ const Banner = () => {
             onClick={useCallback(() => setModalVisible(false))}
           />
         )}
-        <GetStarted closeModal={closeModal}/>
+        <GetStarted closeModal={closeModal} />
       </StyledModal>
     </>
   )
