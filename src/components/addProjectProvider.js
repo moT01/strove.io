@@ -31,7 +31,7 @@ const AddProjectProvider = ({ children }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
   const subscription = useSelector(
-    selectors.api.getApiData2({ fields: 'subscription' })
+    selectors.api.getApiData({ fields: 'subscription' })
   )
   const subscriptionStatus = subscription.status
   const projectsLimit =
