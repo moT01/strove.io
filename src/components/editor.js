@@ -36,7 +36,6 @@ const Editor = () => {
   const port = currentProject && currentProject.editorPort
 
   const token = useSelector(getUserToken)
-  console.log('token', token)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {
