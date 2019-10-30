@@ -22,7 +22,10 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
+const getUserToken = selectors.api.getApiData2({
+  fields: ['user', 'siliskyToken'],
+  defaultValue: null,
+})
 
 const Editor = () => {
   const dispatch = useDispatch()
@@ -33,6 +36,7 @@ const Editor = () => {
   const port = currentProject && currentProject.editorPort
 
   const token = useSelector(getUserToken)
+  console.log('token', token)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {

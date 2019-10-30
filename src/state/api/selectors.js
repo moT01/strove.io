@@ -21,3 +21,9 @@ export const getUserProjects = getApiData('myProjects', [])
 
 export const getCurrentProject = state =>
   getApiData('myProjects', [])(state).find(item => item.machineId)
+
+// getApiData2({ nestedFields, defaultValue })
+export const getApiData2 = ({ fields, defaultValue = {} }) =>
+  Array.isArray(fields)
+    ? getOr(defaultValue, ['api', fields[0], 'data', ...fields.slice(1)])
+    : getOr(defaultValue, ['api', fields, 'data'])
