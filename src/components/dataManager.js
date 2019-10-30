@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
+import { navigate } from 'gatsby'
 
 import {
   GITHUB_LOGIN,
@@ -149,6 +150,7 @@ export default memo(({ children, addProject }) => {
             },
           })
         }
+        navigate('/app/editor/')
       }
     }
   }, [startProjectData?.data])
