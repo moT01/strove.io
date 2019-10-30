@@ -22,7 +22,10 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
+const getUserToken = selectors.api.getApiData({
+  fields: ['user', 'siliskyToken'],
+  defaultValue: null,
+})
 
 const Editor = () => {
   const dispatch = useDispatch()
