@@ -245,23 +245,6 @@ const Dashboard = () => {
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
             variables: { projectId: id },
-            onSuccess: () => navigate('/app/editor/'),
-            onSuccessDispatch: [
-              ({ id, editorPort, machineId }) => ({
-                type: C.api.UPDATE_ITEM,
-                payload: {
-                  storeKey: 'myProjects',
-                  id,
-                  data: { editorPort, machineId },
-                },
-              }),
-              ({ id }) =>
-                actions.api.fetchSuccess({
-                  data: { currentProjectId: id },
-                  storeKey: 'user',
-                }),
-              () => actions.api.fetchSuccess({ storeKey: 'continueProject' }),
-            ],
           })
         )
       } else {
