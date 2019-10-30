@@ -5,6 +5,7 @@ export default gql`
   subscription($email: String!) {
     startProject(email: $email) {
       queuePosition
+      type
       project {
         ...Project
       }
