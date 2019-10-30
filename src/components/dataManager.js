@@ -10,12 +10,14 @@ import {
   BITBUCKET_LOGIN,
   MY_PROJECTS,
   ACTIVE_PROJECT,
+  START_PROJECT,
 } from 'queries'
 import { mutation, query } from 'utils'
 import { window } from 'utils'
 import { selectors } from 'state'
 import client from '../../client'
 import { C } from 'state'
+import { actions } from 'state'
 
 export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
@@ -99,6 +101,57 @@ export default memo(({ children, addProject }) => {
       })
     }
   }, [activeProject.data])
+
+  const startProjectData = useSubscription(START_PROJECT, {
+    variables: { email: user?.email || 'null' },
+    client,
+    fetchPolicy: 'no-cache',
+    context: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'User-Agent': 'node',
+      },
+    },
+  })
+
+  useEffect(() => {
+    if (startProjectData?.data?.startProject) {
+      const {
+        data: {
+          startProject: { queuePosition, project, type },
+        },
+      } = startProjectData
+      if (queuePosition === 0 && project?.machineId) {
+        if (type === 'continueProject') {
+          dispatch({
+            type: C.api.UPDATE_ITEM,
+            payload: {
+              storeKey: 'myProjects',
+              id: project.id,
+              data: { editorPort, machineId },
+            },
+          })
+          dispatch(({ id }) =>
+            actions.api.fetchSuccess({
+              data: { currentProjectId: id },
+              storeKey: 'user',
+            })
+          )
+          dispatch(() =>
+            actions.api.fetchSuccess({ storeKey: 'continueProject' })
+          )
+        } else if (type === 'addProject') {
+          dispatch({
+            type: C.api.FETCH_SUCCESS,
+            payload: {
+              storeKey: 'myProjects',
+              data: project,
+            },
+          })
+        }
+      }
+    }
+  }, [startProjectData?.data])
 
   useEffect(() => {
     const code = window?.location?.href
