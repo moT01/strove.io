@@ -60,6 +60,7 @@ const SectionWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  max-width: 1200px;
 `
 const LeftSectionWrapper = styled(SectionWrapper)`
   width: 50%;
@@ -354,6 +355,13 @@ const StyledProductDescription = styled.h4`
   font-weight: 500;
 `
 
+const StyledSmallText = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  margin: 20px 0;
+  ${({ isUpperCase }) => isUpperCase && 'text-transform: uppercase;'}
+`
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -458,20 +466,23 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledQueueAnim>
       </BannerWrapper>
-      <StyledModal
-        isOpen={isModalVisible}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-        isMobile={isMobileOnly}
-      >
-        {!isMobile && (
-          <StyledIcon
-            type="close"
-            onClick={useCallback(() => setModalVisible(false))}
-          />
-        )}
-        <GetStarted closeModal={closeModal} />
-      </StyledModal>
+      <StyledBannerWrapper>
+        <SectionWrapper>
+          <StyledSmallText isUpperCase>
+            <upperCase>What is strove?</upperCase>
+          </StyledSmallText>
+          <StyledH2>
+            Strove.io brings pre-configured, remote dev environments to the
+            modern enterprise.
+          </StyledH2>
+          <StyledSmallText>
+            Strove.io represents each environment as a Docker container built
+            from a shared image. Configure your environment once, then
+            distribute it to your team to reduce onboarding times and get rid of
+            'it works on my machine' issue.
+          </StyledSmallText>
+        </SectionWrapper>
+      </StyledBannerWrapper>
       <StyledBannerWrapper>
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>

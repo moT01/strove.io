@@ -456,20 +456,6 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledQueueAnim>
       </BannerWrapper>
-      <StyledModal
-        isOpen={isModalVisible}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-        isMobile={isMobileOnly}
-      >
-        {!isMobile && (
-          <StyledIcon
-            type="close"
-            onClick={useCallback(() => setModalVisible(false))}
-          />
-        )}
-        <GetStarted closeModal={closeModal} />
-      </StyledModal>
       <StyledBannerWrapper>
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
