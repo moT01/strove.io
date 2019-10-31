@@ -271,21 +271,27 @@ const StyledModal = styled(Modal)`
   }
 `
 
-const StyledBannerWrapper = styled.div`
+const StyledSectionWrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 85vh;
+
+  ${({ isSecondary }) =>
+    !isSecondary &&
+    css`
+      min-height: 85vh;
+    `}
   width: 100%;
   position: relative;
+
   ${({ isSecondary }) =>
     isSecondary &&
     css`
-      min-height: 10vh;
       background-color: ${({ theme }) => theme.colors.c1};
       color: ${({ theme }) => theme.colors.c2};
-      padding: 50px 0;
     `}
+
+    padding: ${({ padding }) => padding};
 `
 
 const StyledIcon = styled(Icon)`
@@ -374,7 +380,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledBannerWrapper>
+      <StyledSectionWrapper padding="50px 0 0">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
@@ -467,8 +473,8 @@ const Banner = () => {
             </Formik>
           </ButtonsWrapper>
         </StyledQueueAnim>
-      </StyledBannerWrapper>
-      <StyledBannerWrapper isSecondary>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="50px 0 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>
             <upperCase>What is strove?</upperCase>
@@ -482,9 +488,16 @@ const Banner = () => {
             and forget that'it works on my machine' issue ever existed.
           </StyledSmallText>
         </SectionWrapper>
-      </StyledBannerWrapper>
-      <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
-      <StyledBannerWrapper isSecondary>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="0 0 50px">
+        <SectionWrapper isSecondary>
+          <Logos
+            handleHoverIn={handleHoverIn}
+            handleHoverOut={handleHoverOut}
+          />
+        </SectionWrapper>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="0 0 50px">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
@@ -508,7 +521,7 @@ const Banner = () => {
             </Video>
           </SectionWrapper>
         </SectionDivider>
-      </StyledBannerWrapper>
+      </StyledSectionWrapper>
       <StyledModal
         isOpen={isModalVisible}
         onRequestClose={closeModal}
