@@ -89,8 +89,6 @@ const ScrollAtMobile = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  min-width: 70%;
-  max-width: 80vw;
 
   @media (max-width: 960px) {
     justify-content: flex-start;
