@@ -354,6 +354,13 @@ const StyledProductDescription = styled.h4`
   font-weight: 500;
 `
 
+const StyledSmallText = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+`
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -458,6 +465,26 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledQueueAnim>
       </BannerWrapper>
+      <StyledBannerWrapper>
+        <SectionWrapper>
+          <StyledSmallText>What is strove?</StyledSmallText>
+          <StyledH2>
+            Strove.io brings pre-configured, remote dev environments to the
+            modern enterprise.
+          </StyledH2>
+          {/* <StyledFeatureDescription>
+            Start coding in seconds, no setup needed
+          </StyledFeatureDescription>
+          <StyledH2>Code on any computer, anywhere</StyledH2>
+          <StyledFeatureDescription>
+            Don't lose your progress, even when switching computers
+          </StyledFeatureDescription>
+          <StyledH2>Use worlds most popular coding editor</StyledH2>
+          <StyledFeatureDescription>
+            Get the best coding experience with Visual Studio Code support
+          </StyledFeatureDescription> */}
+        </SectionWrapper>
+      </StyledBannerWrapper>
       <StyledBannerWrapper>
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
