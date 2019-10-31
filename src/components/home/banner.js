@@ -15,6 +15,7 @@ import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
+import Logos from 'components/logos.js'
 
 const validate = values => {
   let errors = {}
@@ -367,6 +368,10 @@ const Banner = () => {
   const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
 
+  const [selectedLogo, setSelectedLogo] = useState()
+  const handleHoverIn = logo => setSelectedLogo(logo)
+  const handleHoverOut = () => setSelectedLogo('')
+
   return (
     <>
       <StyledBannerWrapper>
@@ -478,6 +483,7 @@ const Banner = () => {
           </StyledSmallText>
         </SectionWrapper>
       </StyledBannerWrapper>
+      <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
       <StyledBannerWrapper isSecondary>
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
