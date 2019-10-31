@@ -485,7 +485,7 @@ const Banner = () => {
           <StyledSmallText>
             Strove.io represents each environment as a Docker container built
             from a shared image. This lets you code in seconds, on any computer
-            and forget that'it works on my machine' issue ever existed.
+            and forget that 'it works on my machine' issue ever existed.
           </StyledSmallText>
         </SectionWrapper>
       </StyledSectionWrapper>
