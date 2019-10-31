@@ -60,6 +60,7 @@ const SectionWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
+  max-width: 1200px;
 `
 const LeftSectionWrapper = styled(SectionWrapper)`
   width: 50%;
@@ -357,8 +358,8 @@ const StyledProductDescription = styled.h4`
 const StyledSmallText = styled.span`
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+  margin: 20px 0;
+  ${({ isUpperCase }) => isUpperCase && 'text-transform: uppercase;'}
 `
 
 const Banner = () => {
@@ -467,22 +468,19 @@ const Banner = () => {
       </BannerWrapper>
       <StyledBannerWrapper>
         <SectionWrapper>
-          <StyledSmallText>What is strove?</StyledSmallText>
+          <StyledSmallText isUpperCase>
+            <upperCase>What is strove?</upperCase>
+          </StyledSmallText>
           <StyledH2>
             Strove.io brings pre-configured, remote dev environments to the
             modern enterprise.
           </StyledH2>
-          {/* <StyledFeatureDescription>
-            Start coding in seconds, no setup needed
-          </StyledFeatureDescription>
-          <StyledH2>Code on any computer, anywhere</StyledH2>
-          <StyledFeatureDescription>
-            Don't lose your progress, even when switching computers
-          </StyledFeatureDescription>
-          <StyledH2>Use worlds most popular coding editor</StyledH2>
-          <StyledFeatureDescription>
-            Get the best coding experience with Visual Studio Code support
-          </StyledFeatureDescription> */}
+          <StyledSmallText>
+            Strove.io represents each environment as a Docker container built
+            from a shared image. Configure your environment once, then
+            distribute it to your team to reduce onboarding times and get rid of
+            'it works on my machine' issue.
+          </StyledSmallText>
         </SectionWrapper>
       </StyledBannerWrapper>
       <StyledBannerWrapper>
