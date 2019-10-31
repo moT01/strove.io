@@ -13,7 +13,6 @@ import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
-import Demo from 'assets/StroveDemo.mp4'
 
 const validate = values => {
   let errors = {}
@@ -45,14 +44,6 @@ const ButtonFadeIn = keyframes`
   }
 `
 
-const SectionDivider = styled.div`
-  display: flex;
-  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
-  align-items: center;
-  height: 100%;
-  width: 100%;
-`
-
 const SectionWrapper = styled.div`
   display: flex;
   flex: 1;
@@ -60,10 +51,7 @@ const SectionWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  max-width: 1200px;
-`
-const LeftSectionWrapper = styled(SectionWrapper)`
-  width: 50%;
+  max-width: 1000px;
 `
 
 const Button = styled.button`
@@ -325,9 +313,8 @@ const StyledInfo = styled.span`
 const StyledH1 = styled.h1`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.c3};
-  font-weight: 400;
+  font-weight: 700;
   font-size: 50px;
-  font-family: sans-serif;
 `
 
 const BannerWrapper = styled.div`
@@ -373,12 +360,11 @@ const Banner = () => {
     <>
       <BannerWrapper>
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>
-            <b>Productivity</b> and <b>security</b> in harmony
-          </StyledH1>
+          <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
-            Strove.io provides <b>instant</b> and <b>secure</b> programming
-            environment letting developers get things done.
+            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
+            <b>build</b> and <b>collaborate</b> no matter the language. All you
+            need is a browser.
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
@@ -472,41 +458,14 @@ const Banner = () => {
             <upperCase>What is strove?</upperCase>
           </StyledSmallText>
           <StyledH2>
-            Strove.io brings pre-configured, remote dev environments to the
-            modern enterprise.
+            Strove.io brings ready in seconds remote programming environment.
           </StyledH2>
           <StyledSmallText>
             Strove.io represents each environment as a Docker container built
-            from a shared image. Configure your environment once, then
-            distribute it to your team to reduce onboarding times and get rid of
-            'it works on my machine' issue.
+            from a shared image. This lets you code in seconds, on any computer
+            and forget that 'it works on my machine' issue ever existed.
           </StyledSmallText>
         </SectionWrapper>
-      </StyledBannerWrapper>
-      <StyledBannerWrapper>
-        <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile}>
-            <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH2>Focus on what's important</StyledH2>
-              <StyledFeatureDescription>
-                Start coding in seconds, no setup needed
-              </StyledFeatureDescription>
-              <StyledH2>Code on any computer, anywhere</StyledH2>
-              <StyledFeatureDescription>
-                Don't lose your progress, even when switching computers
-              </StyledFeatureDescription>
-              <StyledH2>Use worlds most popular coding editor</StyledH2>
-              <StyledFeatureDescription>
-                Get the best coding experience with Visual Studio Code support
-              </StyledFeatureDescription>
-            </LeftSectionWrapper>
-          </SectionWrapper>
-          <SectionWrapper>
-            <Video isMobile={isMobile} controls>
-              <source src={Demo} type="video/mp4"></source>
-            </Video>
-          </SectionWrapper>
-        </SectionDivider>
       </StyledBannerWrapper>
       <StyledModal
         isOpen={isModalVisible}
