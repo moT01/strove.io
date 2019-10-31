@@ -13,6 +13,8 @@ import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
+import Demo from 'assets/StroveDemo.mp4'
+import demoPreview from 'assets/demoPreview.png'
 
 const validate = values => {
   let errors = {}
@@ -44,6 +46,14 @@ const ButtonFadeIn = keyframes`
   }
 `
 
+const SectionDivider = styled.div`
+  display: flex;
+  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
+  align-items: center;
+  height: 100%;
+  width: 100%;
+`
+
 const SectionWrapper = styled.div`
   display: flex;
   flex: 1;
@@ -51,7 +61,11 @@ const SectionWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
+  max-width: 1200px;
+`
+
+const LeftSectionWrapper = styled(SectionWrapper)`
+  width: 50%;
 `
 
 const Button = styled.button`
@@ -240,9 +254,9 @@ const StyledH2 = styled.h2`
 `
 
 const Video = styled.video`
-  height: ${props => (props.isMobile ? '50vw' : '19,6vw')};
   width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
+  outline: none;
 `
 
 const StyledModal = styled(Modal)`
@@ -260,11 +274,16 @@ const StyledBannerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 85vh;
   width: 100%;
   position: relative;
-  background-color: ${({ theme }) => theme.colors.c1};
-  color: ${({ theme }) => theme.colors.c2};
+  ${({ isSecondary }) =>
+    isSecondary &&
+    css`
+      min-height: 70vh;
+      background-color: ${({ theme }) => theme.colors.c1};
+      color: ${({ theme }) => theme.colors.c2};
+    `}
 `
 
 const StyledIcon = styled(Icon)`
@@ -293,11 +312,6 @@ const StyledTrialInfo = styled.ul`
       color: ${({ theme }) => theme.colors.c1};
     }
   }
-`
-
-const StyledFeatureDescription = styled.span`
-  font-size: 1rem;
-  margin-bottom: 20px;
 `
 
 const StyledForm = styled(Form)`
@@ -358,112 +372,125 @@ const Banner = () => {
 
   return (
     <>
-      <BannerWrapper>
-        <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>Bring your ideas to life</StyledH1>
-          <StyledProductDescription>
-            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
-            <b>build</b> and <b>collaborate</b> no matter the language. All you
-            need is a browser.
-          </StyledProductDescription>
-          <ButtonsWrapper mobile={isMobileOnly}>
-            <Button
-              primary
-              mobile={isMobileOnly}
-              disabled={isLoading}
-              onClick={useCallback(() => setModalVisible(true))}
-            >
-              {isLoading ? (
-                <FullScreenLoader
-                  isFullScreen={false}
-                  color={'#ffffff'}
-                  height={'1.7rem'}
-                />
-              ) : (
-                'Get started'
-              )}
-            </Button>
-            <StyledTrialInfo>
-              <li>Free for non-commercial use</li>
-            </StyledTrialInfo>
-            <StyledInfo>Or, if you're a corporate user:</StyledInfo>
-            <Formik
-              initialValues={{
-                email: '',
-              }}
-              validate={validate}
-              onSubmit={values => {
-                dispatch(
-                  mutation({
-                    name: 'sendEmail',
-                    context: null,
-                    mutation: SEND_EMAIL,
-                    variables: { email: values.email, isDemo: true },
-                    onSuccess: () => setEmailSent(true),
-                  })
-                )
-              }}
-            >
-              {({ errors, touched, values }) => (
-                <StyledForm>
-                  <EmailFormWrapper
-                    disabled={errors.email || !values.email}
-                    isMobile={isMobileOnly}
-                  >
-                    <Field
-                      type="email"
-                      name="email"
-                      placeholder="Your Email"
-                    ></Field>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <g
-                        fill="none"
-                        fill-rule="evenodd"
-                        stroke="#9CA2B4"
-                        stroke-width="2"
-                      >
-                        <path d="M2 4h20v16H2z"></path>
-                        <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                      </g>
-                    </svg>
-                    <button
-                      type="submit"
-                      isDisabled={values.email && errors.email && touched.email}
-                    >
-                      Request demo
-                    </button>
-                  </EmailFormWrapper>
-                  <StyledTrialInfo>
-                    <li>Free 14-day Demo</li>
-                    <li>No credit card needed</li>
-                    <li>No setup</li>
-                  </StyledTrialInfo>
-                  {emailSent && (
-                    <StyledInfo>Thank you, we'll get in touch soon!</StyledInfo>
-                  )}
-                </StyledForm>
-              )}
-            </Formik>
-          </ButtonsWrapper>
-        </StyledQueueAnim>
-      </BannerWrapper>
       <StyledBannerWrapper>
+        <SectionDivider isMobile={isMobile}>
+          <LeftSectionWrapper isMobile={isMobile}>
+            <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
+              <StyledH1>Bring your ideas to life</StyledH1>
+              <StyledProductDescription>
+                Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
+                <b>build</b> and <b>collaborate</b> no matter the language. All
+                you need is a browser.
+              </StyledProductDescription>
+              <ButtonsWrapper mobile={isMobileOnly}>
+                <Button
+                  primary
+                  mobile={isMobileOnly}
+                  disabled={isLoading}
+                  onClick={useCallback(() => setModalVisible(true))}
+                >
+                  {isLoading ? (
+                    <FullScreenLoader
+                      isFullScreen={false}
+                      color={'#ffffff'}
+                      height={'1.7rem'}
+                    />
+                  ) : (
+                    'Get started'
+                  )}
+                </Button>
+                <StyledTrialInfo>
+                  <li>Free for non-commercial use</li>
+                </StyledTrialInfo>
+                <StyledInfo>Or, if you're a corporate user:</StyledInfo>
+                <Formik
+                  initialValues={{
+                    email: '',
+                  }}
+                  validate={validate}
+                  onSubmit={values => {
+                    dispatch(
+                      mutation({
+                        name: 'sendEmail',
+                        context: null,
+                        mutation: SEND_EMAIL,
+                        variables: { email: values.email, isDemo: true },
+                        onSuccess: () => setEmailSent(true),
+                      })
+                    )
+                  }}
+                >
+                  {({ errors, touched, values }) => (
+                    <StyledForm>
+                      <EmailFormWrapper
+                        disabled={errors.email || !values.email}
+                        isMobile={isMobileOnly}
+                      >
+                        <Field
+                          type="email"
+                          name="email"
+                          placeholder="Your Email"
+                        ></Field>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <g
+                            fill="none"
+                            fill-rule="evenodd"
+                            stroke="#9CA2B4"
+                            stroke-width="2"
+                          >
+                            <path d="M2 4h20v16H2z"></path>
+                            <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                          </g>
+                        </svg>
+                        <button
+                          type="submit"
+                          isDisabled={
+                            values.email && errors.email && touched.email
+                          }
+                        >
+                          Request demo
+                        </button>
+                      </EmailFormWrapper>
+                      <StyledTrialInfo>
+                        <li>Free 14-day Demo</li>
+                        <li>No credit card needed</li>
+                        <li>No setup</li>
+                      </StyledTrialInfo>
+                      {emailSent && (
+                        <StyledInfo>
+                          Thank you, we'll get in touch soon!
+                        </StyledInfo>
+                      )}
+                    </StyledForm>
+                  )}
+                </Formik>
+              </ButtonsWrapper>
+            </StyledQueueAnim>
+          </LeftSectionWrapper>
+          <SectionWrapper>
+            <Video isMobile={isMobile} controls poster={demoPreview}>
+              <source src={Demo} type="video/mp4"></source>
+            </Video>
+          </SectionWrapper>
+        </SectionDivider>
+      </StyledBannerWrapper>
+      <StyledBannerWrapper isSecondary>
         <SectionWrapper>
           <StyledSmallText isUpperCase>
             <upperCase>What is strove?</upperCase>
           </StyledSmallText>
           <StyledH2>
-            Strove.io brings ready in seconds remote programming environment.
+            Strove.io brings pre-configured, remote dev environments.
           </StyledH2>
           <StyledSmallText>
             Strove.io represents each environment as a Docker container built
             from a shared image. This lets you code in seconds, on any computer
-            and forget that 'it works on my machine' issue ever existed.
+            and forget that'it works on my machine' issue ever existed.
           </StyledSmallText>
         </SectionWrapper>
       </StyledBannerWrapper>
