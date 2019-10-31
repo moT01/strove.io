@@ -350,6 +350,10 @@ const StyledQueueAnim = styled(QueueAnim)`
   }
 `
 
+const StyledProductDescription = styled.h4`
+  font-weight: 500;
+`
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -364,10 +368,10 @@ const Banner = () => {
           <StyledH1>
             <b>Productivity</b> and <b>security</b> in harmony
           </StyledH1>
-          <h4>
-            Strove.io provides instant, secure programming environment letting
-            developers get things done.
-          </h4>
+          <StyledProductDescription>
+            Strove.io provides <b>instant</b> and <b>secure</b> programming
+            environment letting developers get things done.
+          </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
               primary
