@@ -323,8 +323,10 @@ const StyledInfo = styled.span`
 
 const StyledH1 = styled.h1`
   margin-bottom: 10px;
-  color: ${({ theme }) => theme.colors.c11};
-  font-weight: 600;
+  color: ${({ theme }) => theme.colors.c3};
+  font-weight: 400;
+  font-size: 50px;
+  font-family: sans-serif;
 `
 
 const BannerWrapper = styled.div`
@@ -359,10 +361,12 @@ const Banner = () => {
     <>
       <BannerWrapper>
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>Bring your ideas to life</StyledH1>
+          <StyledH1>
+            <b>Productivity</b> and <b>security</b> in harmony
+          </StyledH1>
           <h4>
-            Strove.io gives you instant environment to learn, build,
-            collaborate, no matter the language. All you need is the browser.
+            Strove.io provides instant, secure programming environment letting
+            developers get things done.
           </h4>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
