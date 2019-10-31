@@ -280,9 +280,10 @@ const StyledBannerWrapper = styled.div`
   ${({ isSecondary }) =>
     isSecondary &&
     css`
-      min-height: 70vh;
+      min-height: 10vh;
       background-color: ${({ theme }) => theme.colors.c1};
       color: ${({ theme }) => theme.colors.c2};
+      padding: 50px 0;
     `}
 `
 
@@ -331,15 +332,6 @@ const StyledH1 = styled.h1`
   font-size: 50px;
 `
 
-const BannerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 85vh;
-  width: 100%;
-  position: relative;
-`
-
 const StyledQueueAnim = styled(QueueAnim)`
   width: 60%;
   max-width: 480px;
@@ -363,6 +355,11 @@ const StyledSmallText = styled.span`
   ${({ isUpperCase }) => isUpperCase && 'text-transform: uppercase;'}
 `
 
+const StyledFeatureDescription = styled.span`
+  font-size: 1rem;
+  margin-bottom: 20px;
+`
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -373,111 +370,98 @@ const Banner = () => {
   return (
     <>
       <StyledBannerWrapper>
-        <SectionDivider isMobile={isMobile}>
-          <LeftSectionWrapper isMobile={isMobile}>
-            <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-              <StyledH1>Bring your ideas to life</StyledH1>
-              <StyledProductDescription>
-                Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
-                <b>build</b> and <b>collaborate</b> no matter the language. All
-                you need is a browser.
-              </StyledProductDescription>
-              <ButtonsWrapper mobile={isMobileOnly}>
-                <Button
-                  primary
-                  mobile={isMobileOnly}
-                  disabled={isLoading}
-                  onClick={useCallback(() => setModalVisible(true))}
-                >
-                  {isLoading ? (
-                    <FullScreenLoader
-                      isFullScreen={false}
-                      color={'#ffffff'}
-                      height={'1.7rem'}
-                    />
-                  ) : (
-                    'Get started'
-                  )}
-                </Button>
-                <StyledTrialInfo>
-                  <li>Free for non-commercial use</li>
-                </StyledTrialInfo>
-                <StyledInfo>Or, if you're a corporate user:</StyledInfo>
-                <Formik
-                  initialValues={{
-                    email: '',
-                  }}
-                  validate={validate}
-                  onSubmit={values => {
-                    dispatch(
-                      mutation({
-                        name: 'sendEmail',
-                        context: null,
-                        mutation: SEND_EMAIL,
-                        variables: { email: values.email, isDemo: true },
-                        onSuccess: () => setEmailSent(true),
-                      })
-                    )
-                  }}
-                >
-                  {({ errors, touched, values }) => (
-                    <StyledForm>
-                      <EmailFormWrapper
-                        disabled={errors.email || !values.email}
-                        isMobile={isMobileOnly}
+        <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
+          <StyledH1>Bring your ideas to life</StyledH1>
+          <StyledProductDescription>
+            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
+            <b>build</b> and <b>collaborate</b> no matter the language. All you
+            need is a browser.
+          </StyledProductDescription>
+          <ButtonsWrapper mobile={isMobileOnly}>
+            <Button
+              primary
+              mobile={isMobileOnly}
+              disabled={isLoading}
+              onClick={useCallback(() => setModalVisible(true))}
+            >
+              {isLoading ? (
+                <FullScreenLoader
+                  isFullScreen={false}
+                  color={'#ffffff'}
+                  height={'1.7rem'}
+                />
+              ) : (
+                'Get started'
+              )}
+            </Button>
+            <StyledTrialInfo>
+              <li>Free for non-commercial use</li>
+            </StyledTrialInfo>
+            <StyledInfo>Or, if you're a corporate user:</StyledInfo>
+            <Formik
+              initialValues={{
+                email: '',
+              }}
+              validate={validate}
+              onSubmit={values => {
+                dispatch(
+                  mutation({
+                    name: 'sendEmail',
+                    context: null,
+                    mutation: SEND_EMAIL,
+                    variables: { email: values.email, isDemo: true },
+                    onSuccess: () => setEmailSent(true),
+                  })
+                )
+              }}
+            >
+              {({ errors, touched, values }) => (
+                <StyledForm>
+                  <EmailFormWrapper
+                    disabled={errors.email || !values.email}
+                    isMobile={isMobileOnly}
+                  >
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                    ></Field>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                    >
+                      <g
+                        fill="none"
+                        fill-rule="evenodd"
+                        stroke="#9CA2B4"
+                        stroke-width="2"
                       >
-                        <Field
-                          type="email"
-                          name="email"
-                          placeholder="Your Email"
-                        ></Field>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                        >
-                          <g
-                            fill="none"
-                            fill-rule="evenodd"
-                            stroke="#9CA2B4"
-                            stroke-width="2"
-                          >
-                            <path d="M2 4h20v16H2z"></path>
-                            <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                          </g>
-                        </svg>
-                        <button
-                          type="submit"
-                          isDisabled={
-                            values.email && errors.email && touched.email
-                          }
-                        >
-                          Request demo
-                        </button>
-                      </EmailFormWrapper>
-                      <StyledTrialInfo>
-                        <li>Free 14-day Demo</li>
-                        <li>No credit card needed</li>
-                        <li>No setup</li>
-                      </StyledTrialInfo>
-                      {emailSent && (
-                        <StyledInfo>
-                          Thank you, we'll get in touch soon!
-                        </StyledInfo>
-                      )}
-                    </StyledForm>
+                        <path d="M2 4h20v16H2z"></path>
+                        <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                      </g>
+                    </svg>
+                    <button
+                      type="submit"
+                      isDisabled={values.email && errors.email && touched.email}
+                    >
+                      Request demo
+                    </button>
+                  </EmailFormWrapper>
+                  <StyledTrialInfo>
+                    <li>Free 14-day Demo</li>
+                    <li>No credit card needed</li>
+                    <li>No setup</li>
+                  </StyledTrialInfo>
+                  {emailSent && (
+                    <StyledInfo>Thank you, we'll get in touch soon!</StyledInfo>
                   )}
-                </Formik>
-              </ButtonsWrapper>
-            </StyledQueueAnim>
-          </LeftSectionWrapper>
-          <SectionWrapper>
-            <Video isMobile={isMobile} controls poster={demoPreview}>
-              <source src={Demo} type="video/mp4"></source>
-            </Video>
-          </SectionWrapper>
-        </SectionDivider>
+                </StyledForm>
+              )}
+            </Formik>
+          </ButtonsWrapper>
+        </StyledQueueAnim>
       </StyledBannerWrapper>
       <StyledBannerWrapper isSecondary>
         <SectionWrapper>
@@ -493,6 +477,31 @@ const Banner = () => {
             and forget that'it works on my machine' issue ever existed.
           </StyledSmallText>
         </SectionWrapper>
+      </StyledBannerWrapper>
+      <StyledBannerWrapper isSecondary>
+        <SectionDivider isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile}>
+            <LeftSectionWrapper isMobile={isMobile}>
+              <StyledH2>Focus on what's important</StyledH2>
+              <StyledFeatureDescription>
+                Start coding in seconds, no setup needed
+              </StyledFeatureDescription>
+              <StyledH2>Code on any computer, anywhere</StyledH2>
+              <StyledFeatureDescription>
+                Don't lose your progress, even when switching computers
+              </StyledFeatureDescription>
+              <StyledH2>Use worlds most popular coding editor</StyledH2>
+              <StyledFeatureDescription>
+                Get the best coding experience with Visual Studio Code support
+              </StyledFeatureDescription>
+            </LeftSectionWrapper>
+          </SectionWrapper>
+          <SectionWrapper>
+            <Video isMobile={isMobile} controls poster={demoPreview}>
+              <source src={Demo} type="video/mp4"></source>
+            </Video>
+          </SectionWrapper>
+        </SectionDivider>
       </StyledBannerWrapper>
       <StyledModal
         isOpen={isModalVisible}
