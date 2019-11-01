@@ -16,7 +16,7 @@ export default [
     ),
     name: 'Google',
     description:
-      'Google Cloud allows us to host secure, consistent cloud environment',
+      'Google Cloud allows us to host secure, consistent cloud environment.',
   },
   {
     component: (
@@ -24,7 +24,7 @@ export default [
     ),
     name: 'VSCode',
     description:
-      'Strove.io supports VSCode to provide the best programming experience',
+      'Strove.io supports VSCode to provide the best programming experience.',
   },
   {
     component: (
@@ -32,6 +32,6 @@ export default [
     ),
     name: 'Github',
     description:
-      'Github, Gitlab and Bitbucket integration for state-of-the-art version control',
+      'Github, Gitlab and Bitbucket integration provide state-of-the-art version control.',
   },
 ]
