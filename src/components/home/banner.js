@@ -16,6 +16,7 @@ import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
 import Logos from 'components/logos.js'
+import { technologies } from 'constants'
 
 const validate = values => {
   let errors = {}
@@ -367,6 +368,8 @@ const StyledFeatureDescription = styled.span`
   margin-bottom: 20px;
 `
 
+const defaultTechnologyDescription = technologies[0].description
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -374,9 +377,12 @@ const Banner = () => {
   const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
 
-  const [selectedLogo, setSelectedLogo] = useState()
-  const handleHoverIn = logo => setSelectedLogo(logo)
-  const handleHoverOut = () => setSelectedLogo('')
+  const [technologyDescription, setTechnologyDescription] = useState(
+    defaultTechnologyDescription
+  )
+  const handleHoverIn = logo => setTechnologyDescription(logo)
+  const handleHoverOut = () =>
+    setTechnologyDescription(defaultTechnologyDescription)
 
   return (
     <>
@@ -482,11 +488,6 @@ const Banner = () => {
           <StyledH2>
             Strove.io brings pre-configured, remote dev environments.
           </StyledH2>
-          <StyledSmallText>
-            Strove.io represents each environment as a Docker container built
-            from a shared image. This lets you code in seconds, on any computer
-            and forget that 'it works on my machine' issue ever existed.
-          </StyledSmallText>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="0 0 50px">
@@ -495,6 +496,7 @@ const Banner = () => {
             handleHoverIn={handleHoverIn}
             handleHoverOut={handleHoverOut}
           />
+          <StyledSmallText>{technologyDescription}</StyledSmallText>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="0 0 50px">
