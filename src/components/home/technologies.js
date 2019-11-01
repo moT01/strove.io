@@ -1,5 +1,4 @@
 import React, { useState, memo } from 'react'
-import Logos from 'components/logos.js'
 import styled, { css } from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -20,15 +19,6 @@ const validate = values => {
 
   return errors
 }
-
-const StyledTitle = styled.h2`
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-  font-size: 28px;
-  color: ${({ theme }) => theme.colors.c13};
-  letter-spacing: 0.6px;
-`
 
 const StyledH6 = styled.h6`
   margin: 50px 20px 0;
@@ -247,9 +237,6 @@ const StyledFeatureWrapper = styled.div`
 `
 
 const Technologies = () => {
-  const [selectedLogo, setSelectedLogo] = useState()
-  const handleHoverIn = logo => setSelectedLogo(logo)
-  const handleHoverOut = () => setSelectedLogo('')
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
 
