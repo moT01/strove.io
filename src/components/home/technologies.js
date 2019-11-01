@@ -232,13 +232,10 @@ const StyledButtonsWrapper = styled.div`
   }
 `
 
-const StyledMadeWithStrove = styled.div`
-  margin-top: 100px;
-`
+const StyledMadeWithStrove = styled.div``
 
 const StyledFeatureWrapper = styled.div`
   width: 100vw;
-  margin: 50px 0 0;
   padding: 0 20px;
   position: relative;
   display: flex;
@@ -259,13 +256,6 @@ const Technologies = () => {
   return (
     <>
       <StyledFeatureWrapper>
-        <StyledTitle>On the shoulders of giants</StyledTitle>
-        <p>
-          {!selectedLogo
-            ? `Powered by technologies from the biggest players`
-            : selectedLogo}
-        </p>
-        <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
         <StyledMadeWithStrove>
           Obviously, this app is made with Strove as well
         </StyledMadeWithStrove>

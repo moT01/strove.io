@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Docker, Github, Google, VSCode } from 'images/logos'
+import { isMobileOnly } from 'react-device-detect'
 
 const logos = [
   {
@@ -36,15 +37,22 @@ const logos = [
   },
 ]
 
+const LogosWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  background-color: ${({ theme }) => theme.colors.c1};
+  width: 100%;
+`
+
 const SectionWrapper = styled.div`
-  flex: 1;
-  position: relative;
+  width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: auto;
   overflow-x: hidden;
+  background-color: inherit;
 `
 
 const IconContainer = styled.div`
@@ -59,7 +67,7 @@ const IconContainer = styled.div`
   border-radius: 8px;
   opacity: 0.9;
 
-  width: 100px;
+  width: 40px;
   height: auto;
 
   &:hover {
@@ -72,8 +80,6 @@ const IconContainer = styled.div`
 
   @media (max-width: 960px) {
     flex-shrink: 0;
-    width: 20%;
-    height: 20%;
   }
 `
 
@@ -83,8 +89,6 @@ const ScrollAtMobile = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  min-width: 70%;
-  max-width: 80vw;
 
   @media (max-width: 960px) {
     justify-content: flex-start;
@@ -94,19 +98,21 @@ const ScrollAtMobile = styled.div`
 
 const Logos = ({ handleHoverIn, handleHoverOut }) => {
   return (
-    <SectionWrapper>
-      <ScrollAtMobile>
-        {logos.map(logo => (
-          <IconContainer
-            key={logo.name}
-            onMouseEnter={() => handleHoverIn(logo.description)}
-            onMouseLeave={handleHoverOut}
-          >
-            {logo.component}
-          </IconContainer>
-        ))}
-      </ScrollAtMobile>
-    </SectionWrapper>
+    <LogosWrapper>
+      <SectionWrapper isMobile={isMobileOnly}>
+        <ScrollAtMobile>
+          {logos.map(logo => (
+            <IconContainer
+              key={logo.name}
+              onMouseEnter={() => handleHoverIn(logo.description)}
+              onMouseLeave={handleHoverOut}
+            >
+              {logo.component}
+            </IconContainer>
+          ))}
+        </ScrollAtMobile>
+      </SectionWrapper>
+    </LogosWrapper>
   )
 }
 
