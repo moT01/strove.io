@@ -16,7 +16,6 @@ import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
 import Logos from 'components/logos.js'
-import { technologies } from 'constants'
 
 const validate = values => {
   let errors = {}
@@ -378,7 +377,8 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   justify-content: center;
 `
 
-const defaultTechnologyDescription = technologies[0].description
+const defaultTechnologyDescription =
+  'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
