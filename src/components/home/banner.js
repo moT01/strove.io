@@ -16,6 +16,7 @@ import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
 import Logos from 'components/logos.js'
+import { technologies } from 'constants'
 
 const validate = values => {
   let errors = {}
@@ -49,7 +50,7 @@ const ButtonFadeIn = keyframes`
 
 const SectionDivider = styled.div`
   display: flex;
-  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
+  flex-direction: ${({ isMobile }) => (isMobile ? 'column' : 'row')};
   align-items: center;
   height: 100%;
   width: 100%;
@@ -292,6 +293,9 @@ const StyledSectionWrapper = styled.section`
     `}
 
     padding: ${({ padding }) => padding};
+    ${({ minHeight }) => css`
+      min-height: ${minHeight};
+    `};
 `
 
 const StyledIcon = styled(Icon)`
@@ -367,16 +371,25 @@ const StyledFeatureDescription = styled.span`
   margin-bottom: 20px;
 `
 
+const StyledTechnologyDescriptionWrapper = styled.div`
+  min-height: ${({ isMobile }) => (isMobile ? '150px' : '100px')};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const defaultTechnologyDescription = technologies[0].description
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
   const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
-
-  const [selectedLogo, setSelectedLogo] = useState()
-  const handleHoverIn = logo => setSelectedLogo(logo)
-  const handleHoverOut = () => setSelectedLogo('')
+  const [technologyDescription, setTechnologyDescription] = useState(
+    defaultTechnologyDescription
+  )
+  const handleHoverIn = logo => setTechnologyDescription(logo)
 
   return (
     <>
@@ -482,19 +495,14 @@ const Banner = () => {
           <StyledH2>
             Strove.io brings pre-configured, remote dev environments.
           </StyledH2>
-          <StyledSmallText>
-            Strove.io represents each environment as a Docker container built
-            from a shared image. This lets you code in seconds, on any computer
-            and forget that 'it works on my machine' issue ever existed.
-          </StyledSmallText>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="0 0 50px">
+      <StyledSectionWrapper isSecondary padding="20px 0 50px">
         <SectionWrapper isSecondary>
-          <Logos
-            handleHoverIn={handleHoverIn}
-            handleHoverOut={handleHoverOut}
-          />
+          <Logos handleHoverIn={handleHoverIn} />
+          <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
+            <StyledSmallText>{technologyDescription}</StyledSmallText>
+          </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="0 0 50px">
