@@ -14,6 +14,8 @@ import { selectors } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import GetStarted from 'components/getStarted'
 import Demo from 'assets/StroveDemo.mp4'
+import demoPreview from 'assets/demoPreview.png'
+import Logos from 'components/logos.js'
 
 const validate = values => {
   let errors = {}
@@ -62,6 +64,7 @@ const SectionWrapper = styled.div`
   align-items: center;
   max-width: 1200px;
 `
+
 const LeftSectionWrapper = styled(SectionWrapper)`
   width: 50%;
 `
@@ -252,9 +255,9 @@ const StyledH2 = styled.h2`
 `
 
 const Video = styled.video`
-  height: ${props => (props.isMobile ? '50vw' : '19,6vw')};
   width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
+  outline: none;
 `
 
 const StyledModal = styled(Modal)`
@@ -268,15 +271,27 @@ const StyledModal = styled(Modal)`
   }
 `
 
-const StyledBannerWrapper = styled.div`
+const StyledSectionWrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+
+  ${({ isSecondary }) =>
+    !isSecondary &&
+    css`
+      min-height: 85vh;
+    `}
   width: 100%;
   position: relative;
-  background-color: ${({ theme }) => theme.colors.c1};
-  color: ${({ theme }) => theme.colors.c2};
+
+  ${({ isSecondary }) =>
+    isSecondary &&
+    css`
+      background-color: ${({ theme }) => theme.colors.c1};
+      color: ${({ theme }) => theme.colors.c2};
+    `}
+
+    padding: ${({ padding }) => padding};
 `
 
 const StyledIcon = styled(Icon)`
@@ -307,11 +322,6 @@ const StyledTrialInfo = styled.ul`
   }
 `
 
-const StyledFeatureDescription = styled.span`
-  font-size: 1rem;
-  margin-bottom: 20px;
-`
-
 const StyledForm = styled(Form)`
   width: 100%;
 `
@@ -325,18 +335,8 @@ const StyledInfo = styled.span`
 const StyledH1 = styled.h1`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.c3};
-  font-weight: 400;
+  font-weight: 700;
   font-size: 50px;
-  font-family: sans-serif;
-`
-
-const BannerWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 85vh;
-  width: 100%;
-  position: relative;
 `
 
 const StyledQueueAnim = styled(QueueAnim)`
@@ -362,6 +362,11 @@ const StyledSmallText = styled.span`
   ${({ isUpperCase }) => isUpperCase && 'text-transform: uppercase;'}
 `
 
+const StyledFeatureDescription = styled.span`
+  font-size: 1rem;
+  margin-bottom: 20px;
+`
+
 const Banner = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
@@ -369,16 +374,19 @@ const Banner = () => {
   const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
 
+  const [selectedLogo, setSelectedLogo] = useState()
+  const handleHoverIn = logo => setSelectedLogo(logo)
+  const handleHoverOut = () => setSelectedLogo('')
+
   return (
     <>
-      <BannerWrapper>
+      <StyledSectionWrapper padding="50px 0 0">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>
-            <b>Productivity</b> and <b>security</b> in harmony
-          </StyledH1>
+          <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
-            Strove.io provides <b>instant</b> and <b>secure</b> programming
-            environment letting developers get things done.
+            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
+            <b>build</b> and <b>collaborate</b> no matter the language. All you
+            need is a browser.
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
@@ -465,25 +473,31 @@ const Banner = () => {
             </Formik>
           </ButtonsWrapper>
         </StyledQueueAnim>
-      </BannerWrapper>
-      <StyledBannerWrapper>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="50px 0 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>
             <upperCase>What is strove?</upperCase>
           </StyledSmallText>
           <StyledH2>
-            Strove.io brings pre-configured, remote dev environments to the
-            modern enterprise.
+            Strove.io brings pre-configured, remote dev environments.
           </StyledH2>
           <StyledSmallText>
             Strove.io represents each environment as a Docker container built
-            from a shared image. Configure your environment once, then
-            distribute it to your team to reduce onboarding times and get rid of
-            'it works on my machine' issue.
+            from a shared image. This lets you code in seconds, on any computer
+            and forget that 'it works on my machine' issue ever existed.
           </StyledSmallText>
         </SectionWrapper>
-      </StyledBannerWrapper>
-      <StyledBannerWrapper>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="0 0 50px">
+        <SectionWrapper isSecondary>
+          <Logos
+            handleHoverIn={handleHoverIn}
+            handleHoverOut={handleHoverOut}
+          />
+        </SectionWrapper>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="0 0 50px">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
@@ -502,12 +516,12 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <Video isMobile={isMobile} controls>
+            <Video isMobile={isMobile} controls poster={demoPreview}>
               <source src={Demo} type="video/mp4"></source>
             </Video>
           </SectionWrapper>
         </SectionDivider>
-      </StyledBannerWrapper>
+      </StyledSectionWrapper>
       <StyledModal
         isOpen={isModalVisible}
         onRequestClose={closeModal}
