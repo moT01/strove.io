@@ -250,9 +250,8 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin-bottom: 0;
+  margin-bottom: 20px;
   font-size: 34px;
-  font-weight: 500;
 `
 
 const StyledH3 = styled.h3`
@@ -509,7 +508,7 @@ const Banner = () => {
             <upperCase>What is strove?</upperCase>
           </StyledSmallText>
           <StyledH2>
-            Strove.io brings pre-configured, remote dev environments.
+            Strove brings ready in seconds, pre-configured and remote dev environment.
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
