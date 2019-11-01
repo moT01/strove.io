@@ -301,6 +301,12 @@ const StyledSectionWrapper = styled.section`
     ${({ minHeight }) => css`
       min-height: ${minHeight};
     `};
+
+    ${({ background }) =>
+      background &&
+      css`
+        background: ${background};
+      `}
 `
 
 const StyledIcon = styled(Icon)`
@@ -383,39 +389,6 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   margin-top: 20px;
 `
 
-const TopCorner = styled.div`
-  transform: skewY(-15deg);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.c13};
-  left: 0;
-  top: -50%;
-  z-index: -1;
-`
-
-const MiddleCorner = styled.div`
-  transform: skewY(-15deg);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.c4};
-  left: 0;
-  top: 0;
-  z-index: -1;
-`
-
-const BottomCorner = styled.div`
-  transform: skewY(-15deg);
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  background: #8c99b8;
-  bottom: -50%;
-  right: 0;
-  z-index: -1;
-`
-
 const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
@@ -432,10 +405,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding="50px 0 0">
-        <TopCorner />
-        <MiddleCorner />
-        <BottomCorner />
+      <StyledSectionWrapper padding="20px 0 20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
@@ -540,7 +510,7 @@ const Banner = () => {
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px 0 50px">
+      <StyledSectionWrapper isSecondary padding="20px 0 20px">
         <SectionWrapper isSecondary>
           <Logos handleHoverIn={handleHoverIn} />
           <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
@@ -548,7 +518,11 @@ const Banner = () => {
           </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="0 0 50px">
+      <StyledSectionWrapper
+        isSecondary
+        padding="50px 0 50px"
+        background="black"
+      >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
