@@ -390,8 +390,6 @@ const Banner = () => {
     defaultTechnologyDescription
   )
   const handleHoverIn = logo => setTechnologyDescription(logo)
-  const handleHoverOut = () =>
-    setTechnologyDescription(defaultTechnologyDescription)
 
   return (
     <>
@@ -501,10 +499,7 @@ const Banner = () => {
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px 0 50px">
         <SectionWrapper isSecondary>
-          <Logos
-            handleHoverIn={handleHoverIn}
-            handleHoverOut={handleHoverOut}
-          />
+          <Logos handleHoverIn={handleHoverIn} />
           <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
             <StyledSmallText>{technologyDescription}</StyledSmallText>
           </StyledTechnologyDescriptionWrapper>
