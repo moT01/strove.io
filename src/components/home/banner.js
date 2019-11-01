@@ -66,7 +66,7 @@ const SectionWrapper = styled.div`
 `
 
 const LeftSectionWrapper = styled(SectionWrapper)`
-  width: 50%;
+  width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
 `
 
 const Button = styled.button`
@@ -250,7 +250,7 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin-bottom: 20px;
+  margin: 20px;
   font-size: 34px;
 `
 
@@ -387,6 +387,7 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  max-width: 800px;
 `
 
 const defaultTechnologyDescription =
@@ -405,7 +406,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding="20px 0 20px">
+      <StyledSectionWrapper padding="20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
@@ -499,7 +500,7 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledQueueAnim>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="50px 0 0">
+      <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>
             <upperCase>What is strove?</upperCase>
@@ -510,7 +511,7 @@ const Banner = () => {
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px 0 20px">
+      <StyledSectionWrapper isSecondary padding="20px">
         <SectionWrapper isSecondary>
           <Logos handleHoverIn={handleHoverIn} />
           <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
@@ -520,7 +521,7 @@ const Banner = () => {
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
-        padding="50px 0 50px"
+        padding="50px 20px 50px"
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
