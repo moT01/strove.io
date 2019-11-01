@@ -293,6 +293,9 @@ const StyledSectionWrapper = styled.section`
     `}
 
     padding: ${({ padding }) => padding};
+    ${({ minHeight }) => css`
+      min-height: ${minHeight};
+    `};
 `
 
 const StyledIcon = styled(Icon)`
@@ -368,6 +371,13 @@ const StyledFeatureDescription = styled.span`
   margin-bottom: 20px;
 `
 
+const StyledTechnologyDescriptionWrapper = styled.div`
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
 const defaultTechnologyDescription = technologies[0].description
 
 const Banner = () => {
@@ -376,7 +386,6 @@ const Banner = () => {
   const dispatch = useDispatch()
   const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
-
   const [technologyDescription, setTechnologyDescription] = useState(
     defaultTechnologyDescription
   )
@@ -490,13 +499,15 @@ const Banner = () => {
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="0 0 50px">
+      <StyledSectionWrapper isSecondary padding="20px 0 50px">
         <SectionWrapper isSecondary>
           <Logos
             handleHoverIn={handleHoverIn}
             handleHoverOut={handleHoverOut}
           />
-          <StyledSmallText>{technologyDescription}</StyledSmallText>
+          <StyledTechnologyDescriptionWrapper>
+            <StyledSmallText>{technologyDescription}</StyledSmallText>
+          </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="0 0 50px">
