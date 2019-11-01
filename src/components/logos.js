@@ -1,41 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { Docker, Github, Google, VSCode } from 'images/logos'
 import { isMobileOnly } from 'react-device-detect'
-
-const logos = [
-  {
-    component: (
-      <Google style={{ fill: '#303c42' }} width="100%" length="auto" />
-    ),
-    name: 'Google',
-    description:
-      'Google Cloud allows us to host secure, consistent cloud environment',
-  },
-  {
-    component: (
-      <VSCode style={{ fill: '#303c42' }} width="100%" length="auto" />
-    ),
-    name: 'VSCode',
-    description:
-      'Strove.io supports VSCode to provide the best programming experience',
-  },
-  {
-    component: (
-      <Docker style={{ fill: '#303c42' }} width="100%" length="auto" />
-    ),
-    name: 'Docker',
-    description: "Docker isn't actually a whale",
-  },
-  {
-    component: (
-      <Github style={{ fill: '#303c42' }} width="100%" length="auto" />
-    ),
-    name: 'Github',
-    description:
-      'Github, Gitlab and Bitbucket integration for state-of-the-art version control',
-  },
-]
+import { technologies } from 'constants'
 
 const LogosWrapper = styled.div`
   display: flex;
@@ -101,13 +67,13 @@ const Logos = ({ handleHoverIn, handleHoverOut }) => {
     <LogosWrapper>
       <SectionWrapper isMobile={isMobileOnly}>
         <ScrollAtMobile>
-          {logos.map(logo => (
+          {technologies.map(technology => (
             <IconContainer
-              key={logo.name}
-              onMouseEnter={() => handleHoverIn(logo.description)}
+              key={technology.name}
+              onMouseEnter={() => handleHoverIn(technology.description)}
               onMouseLeave={handleHoverOut}
             >
-              {logo.component}
+              {technology.component}
             </IconContainer>
           ))}
         </ScrollAtMobile>
