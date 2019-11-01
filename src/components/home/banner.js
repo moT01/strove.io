@@ -50,7 +50,7 @@ const ButtonFadeIn = keyframes`
 
 const SectionDivider = styled.div`
   display: flex;
-  flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
+  flex-direction: ${({ isMobile }) => (isMobile ? 'column' : 'row')};
   align-items: center;
   height: 100%;
   width: 100%;
@@ -372,7 +372,7 @@ const StyledFeatureDescription = styled.span`
 `
 
 const StyledTechnologyDescriptionWrapper = styled.div`
-  min-height: 100px;
+  min-height: ${({ isMobile }) => (isMobile ? '150px' : '100px')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -505,7 +505,7 @@ const Banner = () => {
             handleHoverIn={handleHoverIn}
             handleHoverOut={handleHoverOut}
           />
-          <StyledTechnologyDescriptionWrapper>
+          <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
             <StyledSmallText>{technologyDescription}</StyledSmallText>
           </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
