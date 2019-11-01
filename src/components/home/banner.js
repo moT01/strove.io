@@ -349,7 +349,7 @@ const StyledH1 = styled.h1`
 
 const StyledQueueAnim = styled(QueueAnim)`
   width: 60%;
-  max-width: 480px;
+  max-width: 520px;
   margin: auto 20px;
   margin-bottom: auto;
   font-size: 20px;
