@@ -251,6 +251,12 @@ const EmailFormWrapper = styled.div`
 
 const StyledH2 = styled.h2`
   margin-bottom: 0;
+  font-size: 34px;
+  font-weight: 500;
+`
+
+const StyledH3 = styled.h3`
+  margin-bottom: 0;
   font-size: 28px;
 `
 
@@ -375,6 +381,16 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  g,
+  path {
+    stroke: ${({ theme }) => theme.colors.c2};
+  }
+
+  svg,
+  path {
+    fill: white;
+  }
 `
 
 const defaultTechnologyDescription =
@@ -509,15 +525,15 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH2>Focus on what's important</StyledH2>
+              <StyledH3>Focus on what's important</StyledH3>
               <StyledFeatureDescription>
                 Start coding in seconds, no setup needed
               </StyledFeatureDescription>
-              <StyledH2>Code on any computer, anywhere</StyledH2>
+              <StyledH3>Code on any computer, anywhere</StyledH3>
               <StyledFeatureDescription>
                 Don't lose your progress, even when switching computers
               </StyledFeatureDescription>
-              <StyledH2>Use worlds most popular coding editor</StyledH2>
+              <StyledH3>Use worlds most popular coding editor</StyledH3>
               <StyledFeatureDescription>
                 Get the best coding experience with Visual Studio Code support
               </StyledFeatureDescription>
