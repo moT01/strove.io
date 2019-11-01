@@ -66,7 +66,7 @@ const SectionWrapper = styled.div`
 `
 
 const LeftSectionWrapper = styled(SectionWrapper)`
-  width: 50%;
+  width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
 `
 
 const Button = styled.button`
@@ -250,7 +250,7 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin-bottom: 20px;
+  margin: 20px;
   font-size: 34px;
 `
 
@@ -288,6 +288,7 @@ const StyledSectionWrapper = styled.section`
     `}
   width: 100%;
   position: relative;
+}
 
   ${({ isSecondary }) =>
     isSecondary &&
@@ -300,6 +301,12 @@ const StyledSectionWrapper = styled.section`
     ${({ minHeight }) => css`
       min-height: ${minHeight};
     `};
+
+    ${({ background }) =>
+      background &&
+      css`
+        background: ${background};
+      `}
 `
 
 const StyledIcon = styled(Icon)`
@@ -380,16 +387,7 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-
-  g,
-  path {
-    stroke: ${({ theme }) => theme.colors.c2};
-  }
-
-  svg,
-  path {
-    fill: white;
-  }
+  max-width: 800px;
 `
 
 const defaultTechnologyDescription =
@@ -408,7 +406,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding="50px 0 0">
+      <StyledSectionWrapper padding="20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
@@ -502,17 +500,18 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledQueueAnim>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="50px 0 0">
+      <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>
             <upperCase>What is strove?</upperCase>
           </StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured and remote dev environment.
+            Strove brings ready in seconds, pre-configured and remote dev
+            environment.
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px 0 50px">
+      <StyledSectionWrapper isSecondary padding="20px">
         <SectionWrapper isSecondary>
           <Logos handleHoverIn={handleHoverIn} />
           <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
@@ -520,7 +519,11 @@ const Banner = () => {
           </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="0 0 50px">
+      <StyledSectionWrapper
+        isSecondary
+        padding="50px 20px 50px"
+        background="black"
+      >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
