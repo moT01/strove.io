@@ -379,7 +379,7 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   min-height: ${({ isMobile }) => (isMobile ? '150px' : '100px')};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 20px;
 
   g,
   path {
