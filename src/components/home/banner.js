@@ -288,6 +288,7 @@ const StyledSectionWrapper = styled.section`
     `}
   width: 100%;
   position: relative;
+}
 
   ${({ isSecondary }) =>
     isSecondary &&
@@ -380,16 +381,39 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+`
 
-  g,
-  path {
-    stroke: ${({ theme }) => theme.colors.c2};
-  }
+const TopCorner = styled.div`
+  transform: skewY(-15deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.c13};
+  left: 0;
+  top: -50%;
+  z-index: -1;
+`
 
-  svg,
-  path {
-    fill: white;
-  }
+const MiddleCorner = styled.div`
+  transform: skewY(-15deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.c4};
+  left: 0;
+  top: 0;
+  z-index: -1;
+`
+
+const BottomCorner = styled.div`
+  transform: skewY(-15deg);
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: #8c99b8;
+  bottom: -50%;
+  right: 0;
+  z-index: -1;
 `
 
 const defaultTechnologyDescription =
@@ -409,6 +433,9 @@ const Banner = () => {
   return (
     <>
       <StyledSectionWrapper padding="50px 0 0">
+        <TopCorner />
+        <MiddleCorner />
+        <BottomCorner />
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
@@ -508,7 +535,8 @@ const Banner = () => {
             <upperCase>What is strove?</upperCase>
           </StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured and remote dev environment.
+            Strove brings ready in seconds, pre-configured and remote dev
+            environment.
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
