@@ -1,8 +1,6 @@
 import React, { memo } from 'react'
 
-import Layout from 'components/layout'
-import SEO from 'components/seo'
-import Home from 'components/home'
+import { SEO, Layout, Home } from 'components'
 
 const IndexPage = () => (
   <Layout>

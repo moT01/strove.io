@@ -16,6 +16,7 @@ import PrivateRoute from './privateRoute'
 import GlobalStyles from './globalStyles'
 import LoginProvider from './loginProvider'
 import WithAddProject from './withAddProject'
+import Home from './home'
 
 export {
   SmallCloud,
@@ -38,4 +39,5 @@ export {
   GlobalStyles,
   LoginProvider,
   WithAddProject,
+  Home,
 }
