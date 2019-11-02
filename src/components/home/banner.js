@@ -11,11 +11,9 @@ import { Formik, Form, Field } from 'formik'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
-import FullScreenLoader from 'components/fullScreenLoader'
-import GetStarted from 'components/getStarted'
+import { FullScreenLoader, GetStarted, Logos } from 'components'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
-import Logos from 'components/logos.js'
 
 const validate = values => {
   let errors = {}
