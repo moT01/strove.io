@@ -65,6 +65,7 @@ const SectionWrapper = styled.div`
 
 const LeftSectionWrapper = styled(SectionWrapper)`
   width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
+  ${({ isMobile }) => !isMobile && css`text-align: left;`}
 `
 
 const Button = styled.button`
@@ -375,9 +376,10 @@ const StyledSmallText = styled.span`
   ${({ isUpperCase }) => isUpperCase && 'text-transform: uppercase;'}
 `
 
-const StyledFeatureDescription = styled.span`
+const StyledFeatureDescription = styled.div`
   font-size: 1rem;
   margin-bottom: 20px;
+  width: 100%;
 `
 
 const StyledTechnologyDescriptionWrapper = styled.div`
@@ -525,7 +527,7 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH3>Focus on what's important</StyledH3>
+              <StyledH3>Spend less time on setup, and more on what's important - coding</StyledH3>
               <StyledFeatureDescription>
                 Start coding in seconds, no setup needed
               </StyledFeatureDescription>
