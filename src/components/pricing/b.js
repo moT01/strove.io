@@ -7,9 +7,7 @@ import isEmail from 'validator/lib/isEmail'
 
 import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
-import SEO from 'components/seo'
-import Layout from 'components/layout'
-import Modal from 'components/modal'
+import { SEO, Layout, Modal } from 'components'
 
 const ButtonFadeIn = keyframes`
   0% {
