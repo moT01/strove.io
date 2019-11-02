@@ -9,8 +9,7 @@ import {
 } from 'react-accessible-accordion'
 import { isMobile } from 'react-device-detect'
 
-import SEO from 'components/seo'
-import Layout from 'components/layout'
+import { SEO, Layout } from 'components'
 
 const StyledAccordion = styled(Accordion)`
   .accordion__item + .accordion__item {
