@@ -24,7 +24,7 @@ export default [
     component: <Google {...defaultProps} />,
     name: 'Google',
     description:
-      'Code written in Strove is hosted and run in Google Cloud, ensuring consistency, security and the best performance',
+      'Code written in Strove is hosted and run in Google Cloud, ensuring consistency, security and the best performance.',
   },
   {
     component: <Github {...defaultProps} />,
