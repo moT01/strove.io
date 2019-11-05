@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { SEO, Header } from 'components'
+import { Layout, SEO, Header } from 'components'
 
 const TextWell = styled.div`
   color: ${({ theme }) => theme.colors.c3};
@@ -28,9 +28,8 @@ const StyledH2 = styled.h2`
 `
 
 const Legal = () => (
-  <>
+  <Layout>
     <SEO title="Cookies" />
-    <Header siteTitle="Strove" />
 
     <TextWell>
       <StyledH2> About Cookies</StyledH2>
@@ -116,7 +115,7 @@ const Legal = () => (
       </p>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
-  </>
+  </Layout>
 )
 
 export default memo(Legal)
