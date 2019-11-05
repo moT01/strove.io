@@ -27,8 +27,6 @@ const StyledHeader = styled.h1`
 const Legal = () => (
   <Layout>
     <SEO title="Terms And Conditions" />
-    <Header siteTitle="Strove" />
-
     <TextWell>
       <StyledHeader>Terms and Conditions</StyledHeader>
       <h6>Last Edited on 2019-10–08</h6>
