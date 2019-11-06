@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import { SEO, Header, Layout } from 'components'
+import { SEO, Layout } from 'components'
 
 const TextWell = styled.div`
   color: ${({ theme }) => theme.colors.c3};
