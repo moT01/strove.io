@@ -65,7 +65,11 @@ const SectionWrapper = styled.div`
 
 const LeftSectionWrapper = styled(SectionWrapper)`
   width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
-  ${({ isMobile }) => !isMobile && css`text-align: left;`}
+  ${({ isMobile }) =>
+    !isMobile &&
+    css`
+      text-align: left;
+    `}
 `
 
 const Button = styled.button`
@@ -471,20 +475,15 @@ const Banner = () => {
                     >
                       <g
                         fill="none"
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         stroke="#9CA2B4"
-                        stroke-width="2"
+                        strokeWidth="2"
                       >
                         <path d="M2 4h20v16H2z"></path>
                         <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                       </g>
                     </svg>
-                    <button
-                      type="submit"
-                      isDisabled={values.email && errors.email && touched.email}
-                    >
-                      Request demo
-                    </button>
+                    <button type="submit">Request demo</button>
                   </EmailFormWrapper>
                   <StyledTrialInfo>
                     <li>Free 14-day Demo</li>
@@ -502,9 +501,7 @@ const Banner = () => {
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
-          <StyledSmallText isUpperCase>
-            <upperCase>What is strove?</upperCase>
-          </StyledSmallText>
+          <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
             Strove brings ready in seconds, pre-configured and remote dev
             environment.
@@ -527,7 +524,9 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile}>
             <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH3>Spend less time on setup, and more on what's important - coding</StyledH3>
+              <StyledH3>
+                Spend less time on setup, and more on what's important - coding
+              </StyledH3>
               <StyledFeatureDescription>
                 Start coding in seconds, no setup needed
               </StyledFeatureDescription>
