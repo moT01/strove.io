@@ -1,8 +1,10 @@
 import React from 'react'
+
+import { theme } from 'constants'
 import { Docker, Github, Google, VSCode } from 'images/logos'
 
 const defaultProps = {
-  style: { fill: '#303c42' },
+  style: { fill: theme.colors.c14 },
   width: '100%',
   length: 'auto',
   height: '100%',
