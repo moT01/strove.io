@@ -5,7 +5,7 @@ const defaultProps = {
   style: { fill: '#303c42' },
   width: '100%',
   length: 'auto',
-  height: 'auto',
+  height: '100%',
 }
 
 export default [
