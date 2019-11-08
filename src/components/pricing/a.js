@@ -456,22 +456,15 @@ const PricingPage = () => {
                         >
                           <g
                             fill="none"
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             stroke="#9CA2B4"
-                            stroke-width="2"
+                            strokeWidth="2"
                           >
                             <path d="M2 4h20v16H2z"></path>
                             <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                           </g>
                         </svg>
-                        <button
-                          type="submit"
-                          isDisabled={
-                            values.email && errors.email && touched.email
-                          }
-                        >
-                          Request demo
-                        </button>
+                        <button type="submit">Request demo</button>
                       </EmailFormWrapper>
                       <StyledTrialInfo team>
                         <li>Free 14-day Demo</li>
