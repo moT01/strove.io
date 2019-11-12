@@ -544,8 +544,8 @@ const Banner = () => {
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured and remote dev
-            environment.
+            Strove brings ready in seconds, pre-configured and remote servers to
+            write, build and run code.
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
