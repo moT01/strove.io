@@ -65,11 +65,11 @@ const SectionWrapper = styled.div`
 `
 
 const LeftSectionWrapper = styled(SectionWrapper)`
-  width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
   ${({ isMobile }) =>
     !isMobile &&
     css`
       text-align: left;
+      max-width: 500px;
     `}
 `
 
@@ -563,22 +563,12 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH3>
-                Spend less time on setup, and more on what's important - coding
-              </StyledH3>
-              <StyledFeatureDescription>
-                Start coding in seconds, no setup needed
-              </StyledFeatureDescription>
-              <StyledH3>Code on any computer, anywhere</StyledH3>
-              <StyledFeatureDescription>
-                Don't lose your progress, even when switching computers
-              </StyledFeatureDescription>
-              <StyledH3>Use worlds most popular coding editor</StyledH3>
-              <StyledFeatureDescription>
-                Get the best coding experience with Visual Studio Code support
-              </StyledFeatureDescription>
+              <StyledH2>
+                Strove improves programmers productivity by removing waste and
+                error-prone redundant repetitive tasks from their workflows.
+              </StyledH2>
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
