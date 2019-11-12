@@ -11,7 +11,7 @@ const LogosWrapper = styled.div`
 `
 
 const SectionWrapper = styled.div`
-  width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,11 +29,11 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  margin: 0 50px 0 0;
+  margin: 0;
   border-radius: 8px;
   opacity: 0.9;
 
-  width: 40px;
+  width: 80px;
   height: auto;
 
   &:hover {
@@ -51,15 +51,11 @@ const IconContainer = styled.div`
 
 const ScrollAtMobile = styled.div`
   display: flex;
-  height: auto;
+  width: 100%;
+  max-width: 500px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  @media (max-width: 960px) {
-    justify-content: flex-start;
-    overflow-x: scroll;
-  }
 `
 
 const Logos = ({ handleHoverIn, handleHoverOut }) => {
