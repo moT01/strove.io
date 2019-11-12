@@ -95,11 +95,6 @@ const topics = [
       'Aforementioned providers only allow apps to clone if the user is logged in.',
   },
   {
-    header: 'Why do i need to provide private repository access to Github?',
-    paragraph:
-      'We initially made login with public repos by default but this approach had a serious downside. Most private repositories belong to organizations and the only way to know if a user can clone them is having private repo permissions.',
-  },
-  {
     header: 'How to manage env variables?',
     paragraph: `To add environment variables create a file that will store them such as .env.development.
       Environment variables will be stored inside your project alone and they will not be shared, as long as files they live in are ignored by git.
