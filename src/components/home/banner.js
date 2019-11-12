@@ -8,6 +8,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 
+import { theme } from 'constants'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
@@ -64,11 +65,11 @@ const SectionWrapper = styled.div`
 `
 
 const LeftSectionWrapper = styled(SectionWrapper)`
-  width: ${({ isMobile }) => (isMobile ? '100%' : '50%')};
   ${({ isMobile }) =>
     !isMobile &&
     css`
       text-align: left;
+      max-width: 500px;
     `}
 `
 
@@ -279,6 +280,12 @@ const StyledModal = styled(Modal)`
   }
 `
 
+const StyledCellHeader = styled.div`
+  margin-bottom: 5px;
+  font-size: 28px;
+  display: flex;
+`
+
 const StyledSectionWrapper = styled.section`
   display: flex;
   justify-content: center;
@@ -291,13 +298,13 @@ const StyledSectionWrapper = styled.section`
     `}
   width: 100%;
   position: relative;
-}
+  max-width: 1200;
 
-  ${({ isSecondary }) =>
+  ${({ isSecondary, background, theme }) =>
     isSecondary &&
     css`
-      background-color: ${({ theme }) => theme.colors.c1};
-      color: ${({ theme }) => theme.colors.c2};
+      background: ${background || theme.colors.c1};
+      color: ${theme.colors.c2};
     `}
 
     padding: ${({ padding }) => padding};
@@ -392,6 +399,40 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   flex-direction: column;
   margin-top: 20px;
   max-width: 800px;
+`
+
+const StyledGrid = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  background-color: ${({ theme }) => theme.colors.c3};
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  border-top: 1px solid white;
+`
+
+const StyledCell = styled.div`
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+`
+
+const IconContainer = styled.div`
+  margin: auto 10px;
+  width: 40px;
+  height: auto;
+
+  @media (max-width: 960px) {
+    flex-shrink: 0;
+  }
+`
+
+const StyledHeaderText = styled.div`
+  margin: 0 10px 5px 10px;
+  text-align: left;
 `
 
 const defaultTechnologyDescription =
@@ -503,8 +544,8 @@ const Banner = () => {
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured and remote dev
-            environment.
+            Strove brings ready in seconds, pre-configured and remote servers to
+            write, build and run code.
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
@@ -522,22 +563,12 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH3>
-                Spend less time on setup, and more on what's important - coding
-              </StyledH3>
-              <StyledFeatureDescription>
-                Start coding in seconds, no setup needed
-              </StyledFeatureDescription>
-              <StyledH3>Code on any computer, anywhere</StyledH3>
-              <StyledFeatureDescription>
-                Don't lose your progress, even when switching computers
-              </StyledFeatureDescription>
-              <StyledH3>Use worlds most popular coding editor</StyledH3>
-              <StyledFeatureDescription>
-                Get the best coding experience with Visual Studio Code support
-              </StyledFeatureDescription>
+              <StyledH2>
+                Strove improves programmers productivity by removing waste and
+                error-prone redundant repetitive tasks from their workflows.
+              </StyledH2>
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
@@ -546,6 +577,59 @@ const Banner = () => {
             </Video>
           </SectionWrapper>
         </SectionDivider>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper
+        isSecondary
+        padding="0 20px 20px"
+        background={theme.colors.c3}
+      >
+        <StyledGrid>
+          <StyledCell>
+            <StyledCellHeader>
+              <IconContainer>
+                <Icon type="clock-circle" />
+              </IconContainer>
+              <StyledHeaderText>Save time</StyledHeaderText>
+            </StyledCellHeader>
+            <StyledFeatureDescription>
+              Even modern companies waste several days every time they onboard a
+              new programmer. Those days are spent on repetitive and redundant
+              programming environment setup. This source of waste can be easily
+              dealt with by letting programmers access ready-in-seconds
+              environment.
+            </StyledFeatureDescription>
+          </StyledCell>
+          <StyledCell>
+            <StyledCellHeader>
+              <IconContainer>
+                <Icon type="bug" />
+              </IconContainer>
+              <StyledHeaderText>Debug less</StyledHeaderText>
+            </StyledCellHeader>
+            <StyledFeatureDescription>
+              Say goodbye to 'It works on my machine' issue. Editor runs within
+              Docker container ensuring consistent environment. The code will
+              work the same for all team members, no matter the machine or
+              operating system. Personal files, such as editor extensions are
+              protected from sharing ensuring programmers stay in control over
+              their favorite tools.
+            </StyledFeatureDescription>
+          </StyledCell>
+          <StyledCell>
+            <StyledCellHeader>
+              <IconContainer>
+                <Icon type="cloud-sync" />
+              </IconContainer>
+              <StyledHeaderText>Keep your progress</StyledHeaderText>
+            </StyledCellHeader>
+            <StyledFeatureDescription>
+              We believe that securely storing code for easy browser access is
+              the future of programming. In Strove, programmers can pick up
+              where they left in seconds, no matter if working on enterprise
+              projects or learning on university computers.
+            </StyledFeatureDescription>
+          </StyledCell>
+        </StyledGrid>
       </StyledSectionWrapper>
       <StyledModal
         isOpen={isModalVisible}
