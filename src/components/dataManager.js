@@ -123,12 +123,9 @@ export default memo(({ children, addProject }) => {
         },
       } = startProjectData
       if (queuePosition === 0 && project?.machineId) {
-        console.log('navigate')
-        console.log(actions)
         navigate('/app/editor/')
         if (type === 'continueProject') {
           try {
-            console.log('lel')
             dispatch({
               type: C.api.UPDATE_ITEM,
               payload: {
@@ -140,18 +137,18 @@ export default memo(({ children, addProject }) => {
                 },
               },
             })
-            console.log('first dispatch')
-            dispatch(({ id }) =>
+            dispatch(() =>
               actions.api.fetchSuccess({
                 data: { currentProjectId: project.id },
                 storeKey: 'user',
               })
             )
-            console.log('second dispatch')
-            dispatch(() =>
-              actions.api.fetchSuccess({ storeKey: 'continueProject' })
-            )
-            console.log('done')
+            dispatch({
+              type: C.api.FETCH_SUCCESS,
+              payload: {
+                storeKey: 'continueProject',
+              },
+            })
           } catch (e) {
             console.log('error: ', e)
           }
