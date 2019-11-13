@@ -245,6 +245,7 @@ const Dashboard = () => {
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
             variables: { projectId: id },
+            onSuccessDispatch: null,
           })
         )
       } else {

@@ -123,25 +123,40 @@ export default memo(({ children, addProject }) => {
         },
       } = startProjectData
       if (queuePosition === 0 && project?.machineId) {
+        console.log('navigate')
+        console.log(actions)
+        navigate('/app/editor/')
         if (type === 'continueProject') {
-          dispatch({
-            type: C.api.UPDATE_ITEM,
-            payload: {
-              storeKey: 'myProjects',
-              id: project.id,
-              data: { editorPort, machineId },
-            },
-          })
-          dispatch(({ id }) =>
-            actions.api.fetchSuccess({
-              data: { currentProjectId: id },
-              storeKey: 'user',
+          try {
+            console.log('lel')
+            dispatch({
+              type: C.api.UPDATE_ITEM,
+              payload: {
+                storeKey: 'myProjects',
+                id: project.id,
+                data: {
+                  editorPort: project.editorPort,
+                  machineId: project.machineId,
+                },
+              },
             })
-          )
-          dispatch(() =>
-            actions.api.fetchSuccess({ storeKey: 'continueProject' })
-          )
+            console.log('first dispatch')
+            dispatch(({ id }) =>
+              actions.api.fetchSuccess({
+                data: { currentProjectId: project.id },
+                storeKey: 'user',
+              })
+            )
+            console.log('second dispatch')
+            dispatch(() =>
+              actions.api.fetchSuccess({ storeKey: 'continueProject' })
+            )
+            console.log('done')
+          } catch (e) {
+            console.log('error: ', e)
+          }
         } else if (type === 'addProject') {
+          dispatch(actions.incomingProject.removeIncomingProject())
           dispatch({
             type: C.api.FETCH_SUCCESS,
             payload: {
@@ -150,7 +165,6 @@ export default memo(({ children, addProject }) => {
             },
           })
         }
-        navigate('/app/editor/')
       }
     }
   }, [startProjectData?.data])

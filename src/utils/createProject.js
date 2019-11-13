@@ -131,22 +131,14 @@ const createProject = async ({
     }
 
     const { description, name /* add language and color */ } = repoData
+    console.log('clicked')
     dispatch(
       mutation({
         name: 'addProject',
         storeKey: 'myProjects',
         variables: { repoLink, name, description },
         mutation: ADD_PROJECT,
-        context: {
-          headers: {
-            Authorization: `Bearer ${user.siliskyToken}`,
-            'User-Agent': 'node',
-          },
-        },
-        onSuccess: [
-          startProject,
-          () => dispatch(actions.incomingProject.removeIncomingProject()),
-        ],
+        onSuccessDispatch: null,
         onError: () => setModalContent('TryAgainLater'),
         onErrorDispatch: [
           error =>
