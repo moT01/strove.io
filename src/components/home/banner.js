@@ -391,6 +391,7 @@ const StyledFeatureDescription = styled.div`
   font-size: 1rem;
   margin-bottom: 20px;
   width: 100%;
+  text-align: left;
 `
 
 const StyledTechnologyDescriptionWrapper = styled.div`
