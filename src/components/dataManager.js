@@ -137,18 +137,12 @@ export default memo(({ children, addProject }) => {
                 },
               },
             })
-            dispatch(() =>
+            dispatch(
               actions.api.fetchSuccess({
-                data: { currentProjectId: project.id },
-                storeKey: 'user',
+                storeKey: 'continueProject',
+                data: {},
               })
             )
-            dispatch({
-              type: C.api.FETCH_SUCCESS,
-              payload: {
-                storeKey: 'continueProject',
-              },
-            })
           } catch (e) {
             console.log('error: ', e)
           }
