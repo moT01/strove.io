@@ -81,7 +81,7 @@ export const mutation = ({
         } else {
           dispatch(onSuccessDispatch(result))
         }
-      } else {
+      } else if (onSuccessDispatch !== null) {
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: { storeKey, data: result },

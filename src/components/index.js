@@ -14,7 +14,7 @@ import Logos from './logos.js'
 import Modal from './modal'
 import PrivateRoute from './privateRoute'
 import GlobalStyles from './globalStyles'
-import LoginProvider from './loginProvider'
+import DataManager from './dataManager'
 import WithAddProject from './withAddProject'
 import Home from './home'
 
@@ -37,7 +37,7 @@ export {
   Modal,
   PrivateRoute,
   GlobalStyles,
-  LoginProvider,
+  DataManager,
   WithAddProject,
   Home,
 }
