@@ -51,7 +51,8 @@ const HeaderWrapper = styled.div`
   height: ${props => (props.mobile ? '5.5vh' : '3vh')};
   align-items: center;
 
-  > div {
+  > div,
+  a {
     margin: 0 20px;
   }
 `
@@ -67,6 +68,29 @@ const LinkText = styled.h3`
   font-weight: 300;
   margin: 0;
   cursor: pointer;
+  @media (max-width: 767px) {
+    height: 5vh;
+    font-size: 1.8rem;
+  }
+
+  :hover {
+    color: ${({ theme }) => theme.colors.c3};
+  }
+`
+
+const DocsLink = styled.a`
+  color: ${({ theme }) => theme.colors.c2};
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  transition: color 0.3s;
+  font-weight: 300;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  animation: ${FadeIn} 0.3s ease-out;
   @media (max-width: 767px) {
     height: 5vh;
     font-size: 1.8rem;
@@ -346,6 +370,16 @@ const HeaderComponent = ({ siteTitle, location }) => {
           >
             {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
           </CopyWrapper>
+        )}
+
+        {(location.pathname !== '/app/editor/' || !isMobileOnly) && (
+          <DocsLink
+            href="https://docs.strove.io"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Docs
+          </DocsLink>
         )}
       </HeaderWrapper>
       {location.pathname === '/app/editor/' && <LatencyIndicator />}
