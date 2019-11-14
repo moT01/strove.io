@@ -11,6 +11,7 @@ export default {
     c9: '#990000', // inactive project
     c11: '#4f4f4f', // nice dark-gray color used for header,
     c12: '#333e63', // some inputs,
-    c13: '#697b8c', // used in text
+    c13: '#697b8c', // used in text,
+    c14: '#303c42', // svg
   },
 }

@@ -9,8 +9,7 @@ import {
 } from 'react-accessible-accordion'
 import { isMobile } from 'react-device-detect'
 
-import SEO from 'components/seo'
-import Layout from 'components/layout'
+import { SEO, Layout } from 'components'
 
 const StyledAccordion = styled(Accordion)`
   .accordion__item + .accordion__item {
@@ -96,11 +95,6 @@ const topics = [
       'Aforementioned providers only allow apps to clone if the user is logged in.',
   },
   {
-    header: 'Why do i need to provide private repository access to Github?',
-    paragraph:
-      'We initially made login with public repos by default but this approach had a serious downside. Most private repositories belong to organizations and the only way to know if a user can clone them is having private repo permissions.',
-  },
-  {
     header: 'How to manage env variables?',
     paragraph: `To add environment variables create a file that will store them such as .env.development.
       Environment variables will be stored inside your project alone and they will not be shared, as long as files they live in are ignored by git.
@@ -168,15 +162,8 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header: 'Why is the company not called Strove but Codengo',
     paragraph: (
       <span>
-        Initially we worked on a Freecodecamp for mobile devices (
-        <a
-          href="https://play.google.com/store/apps/details?id=com.codengoclient"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          link here
-        </a>
-        ) but we decided we should focus on Strove for now,
+        We made a company before we had a good idea for a name. We are currently
+        procrastinating on updading our company name to Strove.
       </span>
     ),
   },

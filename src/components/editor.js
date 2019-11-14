@@ -3,10 +3,8 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { navigate } from 'gatsby'
 
-import Layout from 'components/layout'
-import FullScreenLoader from 'components/fullScreenLoader.js'
+import { Layout, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
-import SEO from 'components/seo'
 import { C, actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation } from 'utils'
@@ -22,7 +20,10 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const getUserToken = selectors.api.getApiData('user', null, 'siliskyToken')
+const getUserToken = selectors.api.getApiData({
+  fields: ['user', 'siliskyToken'],
+  defaultValue: null,
+})
 
 const Editor = () => {
   const dispatch = useDispatch()
