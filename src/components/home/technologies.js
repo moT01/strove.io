@@ -1,5 +1,4 @@
 import React, { useState, memo } from 'react'
-import Logos from 'components/logos.js'
 import styled, { css } from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -21,15 +20,6 @@ const validate = values => {
   return errors
 }
 
-const StyledTitle = styled.h2`
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
-  font-size: 28px;
-  color: ${({ theme }) => theme.colors.c13};
-  letter-spacing: 0.6px;
-`
-
 const StyledH6 = styled.h6`
   margin: 50px 20px 0;
 `
@@ -44,7 +34,7 @@ const EmailFormWrapper = styled.div`
   position: relative;
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
-  background: #fff;
+  background: ${({ theme }) => theme.colors.c2};
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -78,7 +68,7 @@ const EmailFormWrapper = styled.div`
     box-shadow: none;
     color: ${({ theme }) => theme.colors.c12};
     outline: 0;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.c2};
     width: calc(100% - 156px);
     height: 56px;
     padding: 0;
@@ -232,13 +222,10 @@ const StyledButtonsWrapper = styled.div`
   }
 `
 
-const StyledMadeWithStrove = styled.div`
-  margin-top: 100px;
-`
+const StyledMadeWithStrove = styled.div``
 
 const StyledFeatureWrapper = styled.div`
   width: 100vw;
-  margin: 50px 0 0;
   padding: 0 20px;
   position: relative;
   display: flex;
@@ -250,22 +237,12 @@ const StyledFeatureWrapper = styled.div`
 `
 
 const Technologies = () => {
-  const [selectedLogo, setSelectedLogo] = useState()
-  const handleHoverIn = logo => setSelectedLogo(logo)
-  const handleHoverOut = () => setSelectedLogo('')
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
 
   return (
     <>
       <StyledFeatureWrapper>
-        <StyledTitle>On the shoulders of giants</StyledTitle>
-        <p>
-          {!selectedLogo
-            ? `Powered by technologies from the biggest players`
-            : selectedLogo}
-        </p>
-        <Logos handleHoverIn={handleHoverIn} handleHoverOut={handleHoverOut} />
         <StyledMadeWithStrove>
           Obviously, this app is made with Strove as well
         </StyledMadeWithStrove>
@@ -327,20 +304,15 @@ const Technologies = () => {
                 >
                   <g
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     stroke="#9CA2B4"
-                    stroke-width="2"
+                    strokeWidth="2"
                   >
                     <path d="M2 4h20v16H2z"></path>
                     <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                   </g>
                 </svg>
-                <button
-                  type="submit"
-                  isDisabled={values.email && errors.email && touched.email}
-                >
-                  Subscribe to newsletter
-                </button>
+                <button type="submit">Subscribe to newsletter</button>
               </EmailFormWrapper>
               {emailSent && <StyledH6>Thank you!</StyledH6>}
             </Form>

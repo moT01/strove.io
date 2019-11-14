@@ -2,8 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
-import SEO from 'components/seo'
-import Header from 'components/header'
+import { SEO, Layout } from 'components'
 
 const TextWell = styled.div`
   align-self: center;
@@ -26,10 +25,8 @@ const StyledHeader = styled.h1`
 `
 
 const Legal = () => (
-  <>
+  <Layout>
     <SEO title="Terms And Conditions" />
-    <Header siteTitle="Strove" />
-
     <TextWell>
       <StyledHeader>Terms and Conditions</StyledHeader>
       <h6>Last Edited on 2019-10–08</h6>
@@ -232,7 +229,7 @@ const Legal = () => (
       </p>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
-  </>
+  </Layout>
 )
 
 export default memo(Legal)

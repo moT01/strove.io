@@ -368,7 +368,7 @@ export default createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: ${({ theme }) => theme.colors.c2};
     transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
   }
   .page1-box-wrapper li .page1-box:hover .page1-image {
