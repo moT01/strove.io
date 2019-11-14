@@ -7,6 +7,7 @@ import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
 import { Copy } from 'images/svg'
+import { Icon } from 'antd'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
@@ -372,7 +373,19 @@ const HeaderComponent = ({ siteTitle, location }) => {
           </CopyWrapper>
         )}
 
-        {(location.pathname !== '/app/editor/' || !isMobileOnly) && (
+        {(location.pathname !== '/app/editor/' || !isMobileOnly) &&
+        isMobileOnly ? (
+          <DocsLink
+            href="https://docs.strove.io"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon
+              type="file-text"
+              style={{ fontSize: '25px', height: '1.5rem' }}
+            />
+          </DocsLink>
+        ) : (
           <DocsLink
             href="https://docs.strove.io"
             target="_blank"
