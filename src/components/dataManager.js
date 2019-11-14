@@ -144,7 +144,7 @@ export default memo(({ children, addProject }) => {
               })
             )
           } catch (e) {
-            console.log('error: ', e)
+            console.log('error on continueProject in subscription: ', e)
           }
         } else if (type === 'addProject') {
           dispatch(actions.incomingProject.removeIncomingProject())
