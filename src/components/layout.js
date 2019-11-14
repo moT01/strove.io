@@ -6,7 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 
-import { AddProjectProvider, WithAddProject, LoginProvider } from 'components'
+import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
 import Header from './header'
@@ -59,7 +59,8 @@ const Layout = ({ children, browser }) => {
         <ThemeProvider theme={theme}>
           <AddProjectProvider>
             {({ addProject }) => (
-              <LoginProvider addProject={addProject}>
+              // data manager
+              <DataManager addProject={addProject}>
                 <WithAddProject addProject={addProject}>
                   {user ? (
                     <StyledModal
@@ -80,7 +81,7 @@ const Layout = ({ children, browser }) => {
                   <Header siteTitle={data.site.siteMetadata.title} />
                   <MainContent>{children}</MainContent>
                 </WithAddProject>
-              </LoginProvider>
+              </DataManager>
             )}
           </AddProjectProvider>
         </ThemeProvider>
