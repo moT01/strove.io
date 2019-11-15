@@ -42,6 +42,7 @@ export default memo(({ children, addProject }) => {
         'User-Agent': 'node',
       },
     },
+    shouldResubscribe: true,
   })
 
   const activeProjectData =
