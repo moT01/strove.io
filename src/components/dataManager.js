@@ -114,9 +114,20 @@ export default memo(({ children, addProject }) => {
         'User-Agent': 'node',
       },
     },
+    shouldResubscribe: true,
   })
 
   useEffect(() => {
+    const error = startProjectData?.error
+    if (error) {
+      dispatch(
+        actions.api.fetchError({
+          storeKey: 'myProjects',
+          error,
+        })
+      )
+    }
+
     if (startProjectData?.data?.startProject) {
       const {
         data: {
@@ -149,17 +160,16 @@ export default memo(({ children, addProject }) => {
           }
         } else if (type === 'addProject') {
           dispatch(actions.incomingProject.removeIncomingProject())
-          dispatch({
-            type: C.api.FETCH_SUCCESS,
-            payload: {
+          dispatch(
+            actions.api.fetchSuccess({
               storeKey: 'myProjects',
               data: project,
-            },
-          })
+            })
+          )
         }
       }
     }
-  }, [startProjectData?.data])
+  }, [startProjectData?.data, startProjectData?.error])
 
   useEffect(() => {
     const code = window?.location?.href
