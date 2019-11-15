@@ -124,7 +124,7 @@ export default memo(({ children, addProject }) => {
     if (startProjectError) {
       dispatch(
         actions.api.fetchError({
-          storeKey: 'myProjects',
+          storeKey: 'startProject',
           error: startProjectError,
         })
       )
@@ -134,7 +134,15 @@ export default memo(({ children, addProject }) => {
       const {
         startProject: { queuePosition, project, type },
       } = startProjectData
-      if (queuePosition === 0 && project?.machineId) {
+
+      if (queuePosition === 0 && !project) {
+        dispatch(
+          actions.api.fetchError({
+            storeKey: 'startProject',
+            error: 'Project start failed',
+          })
+        )
+      } else if (queuePosition === 0 && project?.machineId) {
         navigate('/app/editor/')
         if (type === 'continueProject') {
           try {
