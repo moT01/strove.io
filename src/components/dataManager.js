@@ -104,7 +104,7 @@ export default memo(({ children, addProject }) => {
     }
   }, [activeProject.data])
 
-  const startProjectData = useSubscription(START_PROJECT, {
+  const startProjectSubscription = useSubscription(START_PROJECT, {
     variables: { email: user?.email || 'null' },
     client,
     fetchPolicy: 'no-cache',
@@ -114,16 +114,35 @@ export default memo(({ children, addProject }) => {
         'User-Agent': 'node',
       },
     },
+    shouldResubscribe: true,
   })
 
+  const startProjectData = startProjectSubscription?.data
+  const startProjectError = startProjectSubscription?.error
+
   useEffect(() => {
-    if (startProjectData?.data?.startProject) {
+    if (startProjectError) {
+      dispatch(
+        actions.api.fetchError({
+          storeKey: 'startProject',
+          error: startProjectError,
+        })
+      )
+    }
+
+    if (startProjectData?.startProject) {
       const {
-        data: {
-          startProject: { queuePosition, project, type },
-        },
+        startProject: { queuePosition, project, type },
       } = startProjectData
-      if (queuePosition === 0 && project?.machineId) {
+
+      if (queuePosition === 0 && !project) {
+        dispatch(
+          actions.api.fetchError({
+            storeKey: 'startProject',
+            error: 'Project start failed',
+          })
+        )
+      } else if (queuePosition === 0 && project?.machineId) {
         navigate('/app/editor/')
         if (type === 'continueProject') {
           try {
@@ -149,17 +168,16 @@ export default memo(({ children, addProject }) => {
           }
         } else if (type === 'addProject') {
           dispatch(actions.incomingProject.removeIncomingProject())
-          dispatch({
-            type: C.api.FETCH_SUCCESS,
-            payload: {
+          dispatch(
+            actions.api.fetchSuccess({
               storeKey: 'myProjects',
               data: project,
-            },
-          })
+            })
+          )
         }
       }
     }
-  }, [startProjectData?.data])
+  }, [startProjectData, startProjectError])
 
   useEffect(() => {
     const code = window?.location?.href
