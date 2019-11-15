@@ -104,7 +104,7 @@ export default memo(({ children, addProject }) => {
     }
   }, [activeProject.data])
 
-  const startProjectData = useSubscription(START_PROJECT, {
+  const startProjectSubscription = useSubscription(START_PROJECT, {
     variables: { email: user?.email || 'null' },
     client,
     fetchPolicy: 'no-cache',
@@ -117,8 +117,10 @@ export default memo(({ children, addProject }) => {
     shouldResubscribe: true,
   })
 
+  const startProjectSubscription?.data
+
   useEffect(() => {
-    const error = startProjectData?.error
+    const error = startProjectSubscription?.error
     if (error) {
       dispatch(
         actions.api.fetchError({
@@ -128,12 +130,12 @@ export default memo(({ children, addProject }) => {
       )
     }
 
-    if (startProjectData?.data?.startProject) {
+    if (startProjectSubscription?.data?.startProject) {
       const {
         data: {
           startProject: { queuePosition, project, type },
         },
-      } = startProjectData
+      } = startProjectSubscription
       if (queuePosition === 0 && project?.machineId) {
         navigate('/app/editor/')
         if (type === 'continueProject') {
@@ -169,7 +171,7 @@ export default memo(({ children, addProject }) => {
         }
       }
     }
-  }, [startProjectData?.data, startProjectData?.error])
+  }, [startProjectSubscription?.data, startProjectSubscription?.error])
 
   useEffect(() => {
     const code = window?.location?.href
