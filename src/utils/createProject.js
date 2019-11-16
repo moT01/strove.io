@@ -1,15 +1,12 @@
 import ApolloClient from 'apollo-boost'
-import { navigate } from 'gatsby'
+
 import { mutation } from 'utils'
 import { C } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
+import stroveClient from '../../client'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
-})
-
-const stroveClient = new ApolloClient({
-  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
 })
 
 const createProject = async ({
