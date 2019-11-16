@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost'
 import { navigate } from 'gatsby'
 import { mutation } from 'utils'
-import { C, actions } from 'state'
+import { C } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
 
 const client = new ApolloClient({
@@ -11,10 +11,6 @@ const client = new ApolloClient({
 const stroveClient = new ApolloClient({
   uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
 })
-
-const startProject = () => {
-  navigate('/app/editor/')
-}
 
 const createProject = async ({
   repoLink,
