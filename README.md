@@ -1,6 +1,6 @@
 <div align='center'>
 
-## [Strove.io](https://www.strove.io/) - move programming to the cloud [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=It's%20possible%20to%20code%20in%20secons%20in%20any%20Linux%20available%20programming%20language%20from%20any%20computer.%20%20&url=https://strove.io&hashtags=serverless,cloud,programming,vscode,developers)
+## [Strove.io](https://www.strove.io/) - move programming to the cloud [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Remote%20programming%20to%20servers%20ready%20in%20secons%20.%20Use%20any%20Linux%20available%20programming%20language%20from%20any%20computer.%20%20&url=https://strove.io&hashtags=serverless,cloud,programming,vscode,developers)
 
 </div>
 
