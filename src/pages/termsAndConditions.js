@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+import Footer from 'components/home/footer'
 import { SEO, Layout } from 'components'
 
 const TextWell = styled.div`
@@ -229,6 +230,7 @@ const Legal = () => (
       </p>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
+    <Footer />
   </Layout>
 )
 
