@@ -88,7 +88,7 @@ const DocsLink = styled.a`
   align-items: center;
   transition: color 0.3s;
   font-weight: 300;
-  margin: 0;
+  padding: 0 20px;
   cursor: pointer;
   text-decoration: none;
   animation: ${FadeIn} 0.3s ease-out;
