@@ -21,7 +21,7 @@ const TextWell = styled.div`
 `
 
 const StyledH1 = styled.h1`
-  align-self: center;
+  letter-spacing: 0.6px;
 `
 
 const Legal = () => (

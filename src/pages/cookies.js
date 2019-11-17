@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+import Footer from 'components/home/footer'
 import { Layout, SEO } from 'components'
 
 const TextWell = styled.div`
@@ -19,11 +20,7 @@ const TextWell = styled.div`
   font-size: 20px;
 `
 
-const StyledH2 = styled.h2`
-  align-self: center;
-  text-align: center;
-  font-size: 28px;
-  color: ${({ theme }) => theme.colors.c13};
+const StyledH1 = styled.h1`
   letter-spacing: 0.6px;
 `
 
@@ -32,8 +29,8 @@ const Legal = () => (
     <SEO title="Cookies" />
 
     <TextWell>
-      <StyledH2> About Cookies</StyledH2>
-      <h6>Last Edited on 2019-06–06</h6>
+      <StyledH1>About Cookies</StyledH1>
+      <h6>Last Edited on 2019-11–17</h6>
       <h3>What are cookies?</h3>
       <p>
         Cookies are small text files containing a string of characters that can
@@ -115,6 +112,7 @@ const Legal = () => (
       </p>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
+    <Footer />
   </Layout>
 )
 
