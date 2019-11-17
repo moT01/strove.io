@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+import Footer from 'components/home/footer'
 import { SEO, Layout } from 'components'
 
 const TextWell = styled.div`
@@ -329,12 +330,10 @@ const Legal = () => (
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
       </p>
-      <h5>CodeNGo</h5>
-      <h5>Andrespol</h5>
-      <h5>Rokicińska 121 street</h5>
       <h5>contact@strove.io</h5>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
+    <Footer />
   </Layout>
 )
 
