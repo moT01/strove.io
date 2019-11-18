@@ -1,13 +1,34 @@
 import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
+import { isMobileOnly } from 'react-device-detect'
 
 import { theme } from 'constants'
+import { FullScreenLoader } from 'components'
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
+const ButtonFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.9;
+  }
+`
 
 const Button = styled.button`
-  display: flex;
-  flex-direction: row;
   height: auto;
   min-width: 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   margin: 5px;
   padding: 10px 30px;
   align-items: center;
@@ -24,7 +45,7 @@ const Button = styled.button`
   box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
+  animation: ${keyframes`0%{opacity: 0;}100%{opacity${props => props.disabled ? '0.4' : '0.9'}}`} 0.5s ease-out;
   opacity: 0.9;
 
   :focus {
@@ -47,25 +68,26 @@ const Button = styled.button`
       }
     `}
 `
-const Button = (buttonText, isLoading) => {
+const StroveButton = (type, text, isLoading, isDisabled, isPrimary, onClick) => {
   return (
     <Button
-      disabled={!props.values.projectName || props.errors.projectName}
-      primary
+      disabled={isDisabled || isLoading}
+      primary={isPrimary}
       mobile={isMobileOnly}
-      type="submit"
+      type={type}
+      onClick={onClick}
     >
       {isLoading ? (
-                <FullScreenLoader
-                  isFullScreen={false}
-                  color={'#ffffff'}
-                  height={'1.7rem'}
-                />
-              ) : (
-                'Get started'
-              )}
+        <FullScreenLoader
+          isFullScreen={false}
+          color={'#ffffff'}
+          height={'1.7rem'}
+        />
+      ) : (
+        { text }
+      )}
     </Button>
   )
 }
 
-export default memo(Button)
+export default memo(StroveButton)
