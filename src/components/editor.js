@@ -5,7 +5,7 @@ import { navigate } from 'gatsby'
 
 import { Layout, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
-import { C, actions } from 'state'
+import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation } from 'utils'
 import dayjs from 'dayjs'
@@ -44,16 +44,7 @@ const Editor = () => {
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId },
-          onSuccessDispatch: [
-            ({ id, editorPort, machineId }) => ({
-              type: C.UPDATE_ITEM,
-              payload: {
-                storeKey: 'myProjects',
-                id,
-                data: { editorPort, machineId },
-              },
-            }),
-          ],
+          onSuccessDispatch: null,
         })
       )
     }

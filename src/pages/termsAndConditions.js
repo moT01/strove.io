@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+import Footer from 'components/home/footer'
 import { SEO, Layout } from 'components'
 
 const TextWell = styled.div`
@@ -20,16 +21,16 @@ const TextWell = styled.div`
   font-size: 20px;
 `
 
-const StyledHeader = styled.h1`
-  align-self: center;
+const StyledH1 = styled.h1`
+  letter-spacing: 0.6px;
 `
 
 const Legal = () => (
   <Layout>
     <SEO title="Terms And Conditions" />
     <TextWell>
-      <StyledHeader>Terms and Conditions</StyledHeader>
-      <h6>Last Edited on 2019-10–08</h6>
+      <StyledH1>Terms and Conditions</StyledH1>
+      <h6>Last Edited on 2019-11–17</h6>
       <p>
         These Terms and Conditions govern your relationship with
         https://strove.io website the "Service" and the creation service therein
@@ -229,6 +230,7 @@ const Legal = () => (
       </p>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
+    <Footer />
   </Layout>
 )
 
