@@ -10,6 +10,7 @@ const LatencyCircle = styled.div`
   width: 20px;
   height: 20px;
   padding: 8px;
+  margin: auto;
 
   background: ${({ theme }) => theme.colors.c2};
   text-align: center;
