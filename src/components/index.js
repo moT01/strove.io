@@ -17,6 +17,7 @@ import GlobalStyles from './globalStyles'
 import LoginProvider from './loginProvider'
 import WithAddProject from './withAddProject'
 import Home from './home'
+import StroveButton from './stroveButton'
 
 export {
   SmallCloud,
