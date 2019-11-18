@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+import Footer from 'components/home/footer'
 import { SEO, Layout } from 'components'
 
 const TextWell = styled.div`
@@ -19,12 +20,16 @@ const TextWell = styled.div`
   font-size: 20px;
 `
 
+const StyledH1 = styled.h1`
+  letter-spacing: 0.6px;
+`
+
 const Legal = () => (
   <Layout>
     <SEO title="Privacy Policy" />
     <TextWell>
-      <h1 style={{ alignSelf: 'center' }}>Privacy Policy</h1>
-      <h6>Last Edited on 2019-06–06</h6>
+      <StyledH1>Privacy Policy</StyledH1>
+      <h6>Last Edited on 2019-11–17</h6>
       <p>
         his privacy policy has been compiled to better serve those who are
         concerned with how their 'Personally Identifiable Information' (PII) is
@@ -146,7 +151,7 @@ const Legal = () => (
       </p>
       <p>
         However, non-personally identifiable visitor information may be provided
-        to other parties for marketing, advertising, or other uses.{' '}
+        to other parties for marketing, advertising, or other uses.
       </p>
       <h2>Third-party links</h2>
       <p>
@@ -228,7 +233,7 @@ const Legal = () => (
         We honor Do Not Track signals and Do Not Track, plant cookies, or use
         advertising when a Do Not Track (DNT) browser mechanism is in place.
       </p>
-      <h2> Does our site allow third-party behavioral tracking?</h2>{' '}
+      <h2> Does our site allow third-party behavioral tracking?</h2>
       <p>
         It's also important to note that we do not allow third-party behavioral
         tracking
@@ -294,7 +299,7 @@ const Legal = () => (
         </li>
         <li>
           Market to our mailing list or continue to send emails to our clients
-          after the original transaction has occurred.{' '}
+          after the original transaction has occurred.
         </li>
       </ul>
       <h2>To be in accordance with CANSPAM, we agree to the following: </h2>
@@ -304,7 +309,7 @@ const Legal = () => (
           Identify the message as an advertisement in some reasonable way.
         </li>
         <li>
-          Include the physical address of our business or site headquarters.{' '}
+          Include the physical address of our business or site headquarters.
         </li>
         <li>
           Monitor third-party email marketing services for compliance, if one is
@@ -329,12 +334,10 @@ const Legal = () => (
         If there are any questions regarding this privacy policy, you may
         contact us using the information below.
       </p>
-      <h5>CodeNGo</h5>
-      <h5>Andrespol</h5>
-      <h5>Rokicińska 121 street</h5>
       <h5>contact@strove.io</h5>
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
+    <Footer />
   </Layout>
 )
 

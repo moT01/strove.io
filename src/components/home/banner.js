@@ -258,11 +258,6 @@ const StyledH2 = styled.h2`
   font-size: 34px;
 `
 
-const StyledH3 = styled.h3`
-  margin-bottom: 0;
-  font-size: 28px;
-`
-
 const Video = styled.video`
   width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
