@@ -75,6 +75,8 @@ const AddProjectProvider = ({ children }) => {
         repoLink = `https://${accountName}@bitbucket.org/${accountName}/${repoName}`
       }
 
+      repoLink = repoLink.replace('.git', '')
+
       repoUrlParts = repoLink.split('/')
       repoProvider = repoUrlParts[2].split('.')[0]
 
@@ -84,6 +86,8 @@ const AddProjectProvider = ({ children }) => {
     } else {
       repoLink = ''
     }
+
+    console.log('repoLink', repoLink)
 
     dispatch(
       actions.incomingProject.addIncomingProject({
