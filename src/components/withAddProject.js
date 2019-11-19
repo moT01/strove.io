@@ -8,7 +8,7 @@ export default memo(({ children, addProject }) => {
       window.location.href.match(/#(.*)/)[1]
 
     link &&
-      /.*(github|gitlab|bitbucket).com/i.test(link) &&
+      /.*(github|gitlab|bitbucket).(com|org)/i.test(link) &&
       addProject({ link })
   }, [])
 
