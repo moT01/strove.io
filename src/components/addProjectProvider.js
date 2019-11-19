@@ -51,20 +51,28 @@ const AddProjectProvider = ({ children }) => {
 
       // https://github.com/stroveio/strove.io.git
       // git@github.com:stroveio/strove.io.git
-
-      // https://gitlab.com/AdamZaczek/codengolanding.git
-      // git@gitlab.com:AdamZaczek/codengolanding.git
-
-      // https://AdamZaczek@bitbucket.org/AdamZaczek/currencies.git
-      // git@bitbucket.org:AdamZaczek/currencies.git
       if (repoLink.includes('git@github')) {
-        const sshLinkParts = link.split(':')
+        const sshLinkParts = repoLink.split(':')
         repoLink = `https://github.com/${sshLinkParts[1]}`
       }
 
+      // https://gitlab.com/stroveio/strove.io.git
+      // git@gitlab.com:stroveio/strove.io.git
       if (repoLink.includes('git@gitlab')) {
-        const sshLinkParts = link.split(':')
+        const sshLinkParts = repoLink.split(':')
         repoLink = `https://gitlab.com/${sshLinkParts[1]}`
+      }
+
+      // https://stroveio@bitbucket.org/stroveio/stroveio.io.git
+      // git@bitbucket.org:stroveio/strove.io.git
+      if (repoLink.includes('git@bitbucket')) {
+        const sshLinkParts = repoLink.split(':')
+        const repoDetails = sshLinkParts[1].split('/')
+        // console.log('repoDetails', repoDetails)
+        const accountName = repoDetails[0]
+        const repoName = repoDetails[1]
+        repoLink = `https://gitlab.com/${sshLinkParts[1]}`
+        repoLink = `https://${accountName}@bitbucket.org/${accountName}/${repoName}`
       }
 
       repoUrlParts = repoLink.split('/')
