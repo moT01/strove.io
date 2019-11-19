@@ -62,6 +62,11 @@ const AddProjectProvider = ({ children }) => {
         repoLink = `https://github.com/${sshLinkParts[1]}`
       }
 
+      if (repoLink.includes('git@gitlab')) {
+        const sshLinkParts = link.split(':')
+        repoLink = `https://gitlab.com/${sshLinkParts[1]}`
+      }
+
       repoUrlParts = repoLink.split('/')
       repoProvider = repoUrlParts[2].split('.')[0]
 
