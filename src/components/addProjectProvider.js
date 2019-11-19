@@ -49,6 +49,14 @@ const AddProjectProvider = ({ children }) => {
     if (link) {
       repoLink = link.trim().toLowerCase()
 
+      // https://github.com/stroveio/strove.io.git
+      // git@github.com:stroveio/strove.io.git
+
+      // https://gitlab.com/AdamZaczek/codengolanding.git
+      // git@gitlab.com:AdamZaczek/codengolanding.git
+
+      // https://AdamZaczek@bitbucket.org/AdamZaczek/currencies.git
+      // git@bitbucket.org:AdamZaczek/currencies.git
       if (repoLink.includes('git@github')) {
         const sshLinkParts = link.split(':')
         repoLink = `https://github.com/${sshLinkParts[1]}`
