@@ -128,6 +128,10 @@ const StyledErrors = styled.span`
 
 const validateRepoLink = values => {
   let errors = {}
+  const isShhLink =
+    values.repoLink.includes('git@') && values.repoLink.includes('.git')
+
+  console.log('isShhLink', isShhLink)
 
   if (!values.repoLink) {
     return errors
@@ -137,7 +141,8 @@ const validateRepoLink = values => {
   } else if (
     !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
       values.repoLink
-    )
+    ) &&
+    !isShhLink
   ) {
     errors.repoLink = 'Invalid repository link'
     return errors
