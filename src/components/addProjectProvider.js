@@ -49,22 +49,22 @@ const AddProjectProvider = ({ children }) => {
     if (link) {
       repoLink = link.trim().toLowerCase()
 
-      // https://github.com/stroveio/strove.io.git
       // git@github.com:stroveio/strove.io.git
+      // https://github.com/stroveio/strove.io.git
       if (repoLink.includes('git@github')) {
         const sshLinkParts = repoLink.split(':')
         repoLink = `https://github.com/${sshLinkParts[1]}`
       }
 
-      // https://gitlab.com/stroveio/strove.io.git
       // git@gitlab.com:stroveio/strove.io.git
+      // https://gitlab.com/stroveio/strove.io.git
       if (repoLink.includes('git@gitlab')) {
         const sshLinkParts = repoLink.split(':')
         repoLink = `https://gitlab.com/${sshLinkParts[1]}`
       }
 
-      // https://stroveio@bitbucket.org/stroveio/stroveio.io.git
       // git@bitbucket.org:stroveio/strove.io.git
+      // https://stroveio@bitbucket.org/stroveio/stroveio.io.git
       if (repoLink.includes('git@bitbucket')) {
         const sshLinkParts = repoLink.split(':')
         const repoDetails = sshLinkParts[1].split('/')
@@ -87,8 +87,6 @@ const AddProjectProvider = ({ children }) => {
       repoLink = ''
     }
 
-    console.log('repoLink', repoLink)
-
     dispatch(
       actions.incomingProject.addIncomingProject({
         repoLink,
@@ -96,6 +94,7 @@ const AddProjectProvider = ({ children }) => {
         name,
       })
     )
+
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
