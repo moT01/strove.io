@@ -128,19 +128,17 @@ const StyledErrors = styled.span`
 
 const validateRepoLink = values => {
   let errors = {}
-  const isShhLink =
-    values.repoLink.includes('git@') && values.repoLink.includes('.git')
+  const repoLink = values.repoLink
+  const isShhLink = repoLink.includes('git@') && repoLink.includes('.git')
 
-  console.log('isShhLink', isShhLink)
-
-  if (!values.repoLink) {
+  if (!repoLink) {
     return errors
-  } else if (values.repoLink && !values.repoLink.trim()) {
+  } else if (repoLink && !repoLink.trim()) {
     errors.repoLink = 'No link provided'
     return errors
   } else if (
     !/.*(github|gitlab|bitbucket).(com|org)\/[A-Za-z0-9._%+-]+\/[A-Za-z0-9._%+-]+/i.test(
-      values.repoLink
+      repoLink
     ) &&
     !isShhLink
   ) {
