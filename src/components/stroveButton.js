@@ -1,9 +1,11 @@
 import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
+import { useSelector } from 'react-redux'
 
 import { theme } from 'constants'
 import { FullScreenLoader } from 'components'
+import { selectors } from 'state'
 
 const FadeIn = keyframes`
   0% {
@@ -24,9 +26,13 @@ const ButtonFadeIn = keyframes`
 `
 
 const Button = styled.button`
-  height: auto;
+font-size: 14px;
+font-weight: bold;
+line-height: normal;
+letter-spacing: 0.8px;
+  height: ${props => props.height};
   min-width: 70px;
-  width: 100%;
+  width: ${props => props.width};
   display: flex;
   flex-direction: row;
   margin: 5px;
@@ -45,7 +51,7 @@ const Button = styled.button`
   box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${keyframes`0%{opacity: 0;}100%{opacity${props => props.disabled ? '0.4' : '0.9'}}`} 0.5s ease-out;
+  animation: ${FadeIn} 0, 5s ease-out;
   opacity: 0.9;
 
   :focus {
@@ -68,14 +74,17 @@ const Button = styled.button`
       }
     `}
 `
-const StroveButton = (type, text, isLoading, isDisabled, isPrimary, onClick) => {
+const StroveButton = props => {
+  const isLoading = useSelector(selectors.api.getLoading('user'))
   return (
     <Button
-      disabled={isDisabled || isLoading}
-      primary={isPrimary}
+      disabled={isLoading}
+      primary={props.isPrimary}
       mobile={isMobileOnly}
-      type={type}
-      onClick={onClick}
+      // type={type}
+      onClick={props.onClick}
+      height={props.height}
+      width={props.width}
     >
       {isLoading ? (
         <FullScreenLoader
@@ -84,7 +93,7 @@ const StroveButton = (type, text, isLoading, isDisabled, isPrimary, onClick) => 
           height={'1.7rem'}
         />
       ) : (
-        { text }
+        props.text
       )}
     </Button>
   )
