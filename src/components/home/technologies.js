@@ -7,6 +7,7 @@ import { Formik, Form, Field } from 'formik'
 
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
+import StroveButton from 'components/stroveButton.js'
 
 const validate = values => {
   let errors = {}
@@ -312,7 +313,7 @@ const Technologies = () => {
                     <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                   </g>
                 </svg>
-                <button type="submit">Subscribe to newsletter</button>
+                <StroveButton type="submit" text='Subscribe to newsletter'/>
               </EmailFormWrapper>
               {emailSent && <StyledH6>Thank you!</StyledH6>}
             </Form>
