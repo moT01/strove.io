@@ -33,6 +33,7 @@ const Button = styled.button`
     props.letterSpacing ? props.letterSpacing : 'normal'};
   height: ${props => (props.height ? props.height : 'auto')};
   min-width: 70px;
+  max-width: ${props => (props.maxWidth ? props.maxWidth : 'none')};
   width: ${props => (props.width ? props.width : '100%')};
   display: flex;
   flex-direction: row;
@@ -41,8 +42,10 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
+  color: ${({ primary, theme, isDelete }) =>
+    (primary && theme.colors.c2) ||
+    (isDelete && theme.colors.c2) ||
+    theme.colors.c1};
   background-color: ${({ theme, primary, isDelete }) =>
     (primary && theme.colors.c1) ||
     (isDelete && theme.colors.c5) ||
@@ -50,7 +53,8 @@ const Button = styled.button`
   border-width: 1px;
   border-style: solid;
   border-radius: ${props => (props.borderRadius ? props.borderRadius : '5px')};
-  border-color: ${({ theme }) => theme.colors.c1};
+  border-color: ${({ theme, isDelete }) =>
+    !isDelete ? theme.colors.c1 : theme.colors.c3};
   box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
@@ -145,6 +149,7 @@ const StroveButton = props => {
     <Button
       disabled={isLoading || props.isDisabled}
       primary={props.isPrimary}
+      isDelete={props.isDelete}
       mobile={isMobileOnly}
       onClick={props.onClick}
       height={props.height}
@@ -154,6 +159,7 @@ const StroveButton = props => {
       lineHeight={props.lineHeight}
       letterSpacing={props.letterSpacing}
       padding={props.padding}
+      maxWidth={props.maxWidth}
     >
       {isLoading || isDeleting || isContinuing || isStopping ? (
         <FullScreenLoader

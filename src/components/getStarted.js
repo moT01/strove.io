@@ -5,6 +5,7 @@ import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
 import AddEmptyProjectModal from './addEmptyProjectModal'
+import StroveButton from 'components/stroveButton.js'
 
 const FadeIn = keyframes`
   0% {

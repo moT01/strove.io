@@ -408,12 +408,6 @@ const AddProjectModals = ({
             {projectsLimit} projects. To increase the limit you can upgrade your
             account my mailing us at contact@strove.io.
           </Text>
-          {/* <ButtonsWrapper mobile={device}>
-            <StyledLink to="pricing" primary onClick={closeModal}>
-              Pricing
-            </StyledLink>
-            <Button onClick={closeModal}>Close</Button>
-          </ButtonsWrapper> */}
         </ModalWrapper>
       </Modal>
 
