@@ -27,9 +27,10 @@ const ButtonFadeIn = keyframes`
 
 const Button = styled.button`
   font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
-  font-weight: bold;
-  line-height: normal;
-  letter-spacing: 0.8px;
+  font-weight: ${props => (props.fontWeight ? props.fontWeight : '400')};
+  line-height: ${props => (props.lineHeight ? props.lineHeight : 'normal')};
+  letter-spacing: ${props =>
+    props.letterSpacing ? props.letterSpacing : 'normal'};
   height: ${props => props.height};
   min-width: 70px;
   width: ${props => props.width};
@@ -76,75 +77,76 @@ const Button = styled.button`
 `
 
 const SubmitButton = styled.button`
+  width: 156px;
+  height: 56px;
+  color: ${({ theme }) => theme.colors.c2};
+  background: ${({ theme }) => theme.colors.c1};
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.8px;
+  transition: opacity 0.2s;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  outline: none;
 
-width: 156px;
-    height: 56px;
-    color: ${({ theme }) => theme.colors.c2};
-    background: ${({ theme }) => theme.colors.c1};
-    text-transform: uppercase;
-    display: block;
-    text-align: center;
-    padding: 0;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: normal;
-    letter-spacing: 0.8px;
-    transition: opacity 0.2s;
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    outline: none;
+  ${({ isMobile }) =>
+    isMobile &&
+    css`
+      box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
+        0 8px 24px 0 rgba(174, 174, 186, 0.16);
+      border-radius: 5px;
+      width: 100%;
+      margin-top: 10px;
+    `}
 
-    ${({ isMobile }) =>
-      isMobile &&
-      css`
-        box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
-          0 8px 24px 0 rgba(174, 174, 186, 0.16);
-        border-radius: 5px;
-        width: 100%;
-        margin-top: 10px;
-      `}
-
-    ${props =>
-      !props.disabled
-        ? css`
-            cursor: pointer;
-            &:hover {
-              opacity: 1;
-              box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
-                0 9px 26px 0 rgba(174, 174, 186, 0.16);
-            }
-          `
-        : css`
-            cursor: not-allowed;
-          `}
+  ${props =>
+    !props.disabled
+      ? css`
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+            box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
+              0 9px 26px 0 rgba(174, 174, 186, 0.16);
+          }
+        `
+      : css`
+          cursor: not-allowed;
+        `}
 `
 
 const StroveButton = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
-  return (
-    props.type === 'submit' ?
-    <SubmitButton
-    primary={props.isPrimary}
-    mobile={isMobileOnly}>{isLoading ? (
-      <FullScreenLoader
-        isFullScreen={false}
-        color={'#ffffff'}
-        height={'1.7rem'}
-      />
-    ) : (
-      props.text
-    )}</SubmitButton>
-    :
+  return props.type === 'submit' ? (
+    <SubmitButton primary={props.isPrimary} mobile={isMobileOnly}>
+      {isLoading ? (
+        <FullScreenLoader
+          isFullScreen={false}
+          color={'#ffffff'}
+          height={'1.7rem'}
+        />
+      ) : (
+        props.text
+      )}
+    </SubmitButton>
+  ) : (
     <Button
-      disabled={isLoading}
+      disabled={isLoading || props.isDisabled}
       primary={props.isPrimary}
       mobile={isMobileOnly}
       onClick={props.onClick}
       height={props.height}
       width={props.width}
       fontSize={props.fontSize}
+      lineWeight={props.lineWeight}
+      lineHeight={props.lineHeight}
+      letterSpacing={props.letterSpacing}
     >
       {isLoading ? (
         <FullScreenLoader
