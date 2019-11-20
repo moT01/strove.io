@@ -52,8 +52,7 @@ const HeaderWrapper = styled.div`
   height: ${props => (props.mobile ? '5.5vh' : '3vh')};
   align-items: center;
 
-  > div,
-  a {
+  > div {
     margin: 0 20px;
   }
 `
