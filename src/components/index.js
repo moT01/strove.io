@@ -41,4 +41,5 @@ export {
   DataManager,
   WithAddProject,
   Home,
+  StroveButton,
 }

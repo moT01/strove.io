@@ -13,6 +13,7 @@ import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
 import { FullScreenLoader, GetStarted, Logos } from 'components'
+import StroveButton from 'components/stroveButton.js'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
 
@@ -73,10 +74,7 @@ const LeftSectionWrapper = styled(SectionWrapper)`
     `}
 `
 
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: 56px;
+const Button = styled(StroveButton)`
   font-size: 14px;
   font-weight: bold;
   line-height: normal;
@@ -87,26 +85,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c1 : theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  font-size: 1.3rem;
-  color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-  :focus {
-    outline: 0;
-  }
-  &:disabled {
-    opacity: 0.4;
-  }
+
   ${props =>
     !props.disabled
       ? css`
@@ -449,7 +428,7 @@ const Banner = () => {
     <>
       <StyledSectionWrapper padding="20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>Bring your ideas to life</StyledH1>
+          <StyledH1>Slowo i poezja</StyledH1>
           <StyledProductDescription>
             Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
             <b>build</b> and <b>collaborate</b> no matter the language. All you
@@ -457,9 +436,10 @@ const Banner = () => {
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <Button
-              primary
-              mobile={isMobileOnly}
-              disabled={isLoading}
+              height={'56px'}
+              width={'100%'}
+              isPrimary={true}
+              text={'Get started'}
               onClick={useCallback(() => setModalVisible(true))}
             >
               {isLoading ? (
@@ -472,6 +452,13 @@ const Banner = () => {
                 'Get started'
               )}
             </Button>
+            <StroveButton
+              height={'56px'}
+              width={'100%'}
+              isPrimary={true}
+              text={'Get started'}
+              onClick={useCallback(() => setModalVisible(true))}
+            />
             <StyledTrialInfo>
               <li>Free for non-commercial use</li>
             </StyledTrialInfo>
