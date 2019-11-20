@@ -413,6 +413,7 @@ const Banner = () => {
               fontSize={'1.3rem'}
               isPrimary={true}
               text={'Get started'}
+              letterSpacing={'0.8px'}
               onClick={useCallback(() => setModalVisible(true))}
             />
             <StyledTrialInfo>

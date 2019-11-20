@@ -4,6 +4,7 @@ import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
 
 import Modal from './modal'
+import StroveButton from 'components/stroveButton.js'
 
 const FadeIn = keyframes`
   0% {
@@ -148,14 +149,13 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
             name="projectName"
             placeholder={'Name'}
           />
-          <Button
-            disabled={!props.values.projectName || props.errors.projectName}
-            primary
-            mobile={isMobileOnly}
-            type="submit"
-          >
-            Create project
-          </Button>
+          <StroveButton
+            isDisabled={!props.values.projectName || props.errors.projectName}
+            isPrimary={true}
+            text={'Create project'}
+            // mobile={isMobileOnly}
+            // type="submit"
+          ></StroveButton>
           <StyledErrors>{props.errors.projectName}</StyledErrors>
         </GithubLinkForm>
       )}
