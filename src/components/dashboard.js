@@ -21,6 +21,7 @@ import GetStarted from './getStarted'
 import Layout from './layout'
 import SEO from './seo'
 import Loader from './fullScreenLoader'
+import StroveButton from 'components/stroveButton.js'
 
 const FadeIn = keyframes`
   0% {
@@ -374,67 +375,37 @@ const Dashboard = () => {
                   </TextWrapper>
                 </InfoWrapper>
                 <RightSection>
-                  {isDeleting || isContinuing || isStopping ? (
-                    <Button
-                      primary
-                      disabled={isDeleting || isContinuing || isStopping}
-                    >
-                      <Loader
-                        isFullScreen={false}
-                        color={'#ffffff'}
-                        height={'1.2rem'}
-                      />
-                    </Button>
-                  ) : (
-                    <Button
-                      to="/app/editor/"
-                      primary
-                      onClick={() => handleStartClick(project)}
-                    >
-                      {currentProjectId && project.id === currentProjectId
+                  <StroveButton
+                    to="/app/editor/"
+                    isDisabled={isDeleting || isContinuing || isStopping}
+                    isPrimary={true}
+                    padding={'0.5vh'}
+                    onClick={() => handleStartClick(project)}
+                    text={
+                      currentProjectId && project.id === currentProjectId
                         ? 'Continue'
-                        : 'Start'}
-                    </Button>
-                  )}
+                        : 'Start'
+                    }
+                  />
                   {currentProjectId && currentProjectId === project.id ? (
-                    isDeleting || isContinuing || isStopping ? (
-                      <Button
-                        disabled={isDeleting || isContinuing || isStopping}
-                      >
-                        <Loader
-                          isFullScreen={false}
-                          color={'#0072ce'}
-                          height={'1.2rem'}
-                        />
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => {
-                          handleStopClick(project.id)
-                        }}
-                      >
-                        Stop
-                      </Button>
-                    )
-                  ) : null}
-                  {isDeleting || isContinuing || isStopping ? (
-                    <Button disabled={isDeleting || isContinuing || isStopping}>
-                      <Loader
-                        isFullScreen={false}
-                        color={'#0072ce'}
-                        height={'1.2rem'}
-                      />
-                    </Button>
-                  ) : (
-                    <Button
+                    <StroveButton
+                      isDisabled={isDeleting || isContinuing || isStopping}
+                      padding={'0.5vh'}
                       onClick={() => {
-                        setModalVisible(true)
-                        setProjectToDelete(project)
+                        handleStopClick(project.id)
                       }}
-                    >
-                      Delete
-                    </Button>
-                  )}
+                      text={'Stop'}
+                    />
+                  ) : null}
+                  <StroveButton
+                    isDisabled={isDeleting || isContinuing || isStopping}
+                    padding={'0.5vh'}
+                    onClick={() => {
+                      setModalVisible(true)
+                      setProjectToDelete(project)
+                    }}
+                    text={'Delete'}
+                  />
                 </RightSection>
               </VerticalDivider>
             </Tile>

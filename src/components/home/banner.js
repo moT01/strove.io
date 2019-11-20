@@ -464,7 +464,7 @@ const Banner = () => {
                         <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                       </g>
                     </svg>
-                    <StroveButton type="submit" text='Request demo'/>
+                    <StroveButton type="submit" text="Request demo" />
                   </EmailFormWrapper>
                   <StyledTrialInfo>
                     <li>Free 14-day Demo</li>
