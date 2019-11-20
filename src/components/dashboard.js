@@ -20,17 +20,7 @@ import Modal from './modal'
 import GetStarted from './getStarted'
 import Layout from './layout'
 import SEO from './seo'
-import Loader from './fullScreenLoader'
 import StroveButton from 'components/stroveButton.js'
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
-  }
-`
 
 const FullFadeIn = keyframes`
   0% {
@@ -38,15 +28,6 @@ const FullFadeIn = keyframes`
   }
   100% {
     opacity: 1;
-  }
-`
-
-const ButtonFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.9;
   }
 `
 
@@ -93,60 +74,10 @@ const Tile = styled.div`
   }
 `
 
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-  min-width: 70px;
-  max-width: 150px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${({ theme, primary, isDelete }) =>
-    (primary && theme.colors.c1) ||
-    (isDelete && theme.colors.c5) ||
-    theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  color: ${({ primary, isDelete, theme }) =>
-    (primary && theme.colors.c2) ||
-    (isDelete && theme.colors.c2) ||
-    theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme, isDelete }) =>
-    !isDelete ? theme.colors.c1 : theme.colors.c3};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme, isDelete }) => (!isDelete ? theme.colors.c1 : theme.colors.c3)};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-
-  :focus {
-    outline: 0;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
-        transform: translateY(-1px);
-      }
-    `}
-`
-
-const ModalButton = styled(Button)`
+const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
+  max-width: 150px;
+  padding: 0.5vh;
 `
 
 const ProjectTitle = styled.h3`
@@ -425,15 +356,21 @@ const Dashboard = () => {
           undone.
         </ModalText>
         <ModalButton
-          isDelete
+          isDelete={true}
           onClick={() => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
-        >
-          Confirm
-        </ModalButton>
-        <ModalButton onClick={closeModal}>Close</ModalButton>
+          padding={'0.5vh'}
+          text={'Confirm'}
+          maxWidth={'150px'}
+        />
+        <ModalButton
+          onClick={closeModal}
+          text={'Close'}
+          padding={'0.5vh'}
+          maxWidth={'150px'}
+        />
       </Modal>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
@@ -449,15 +386,21 @@ const Dashboard = () => {
           you want to stop your active project?
         </ModalText>
         <ModalButton
-          primary
+          isPrimary={true}
           onClick={() => {
             handleStopClick(currentProjectId)
             setStopModal(false)
           }}
-        >
-          Confirm
-        </ModalButton>
-        <ModalButton onClick={() => setStopModal(false)}>Close</ModalButton>
+          text={'Confirm'}
+          padding={'0.5vh'}
+          maxWidth={'150px'}
+        />
+        <ModalButton
+          onClick={() => setStopModal(false)}
+          text={'Close'}
+          padding={'0.5vh'}
+          maxWidth={'150px'}
+        />
       </Modal>
     </Layout>
   )
