@@ -28,26 +28,28 @@ const ButtonFadeIn = keyframes`
 const Button = styled.button`
   font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '400')};
-  line-height: ${props => (props.lineHeight ? props.lineHeight : 'normal')};
+  line-height: ${props => (props.lineHeight ? props.lineHeight : 'inherit')};
   letter-spacing: ${props =>
     props.letterSpacing ? props.letterSpacing : 'normal'};
-  height: ${props => props.height};
+  height: ${props => (props.height ? props.height : 'auto')};
   min-width: 70px;
-  width: ${props => props.width};
+  width: ${props => (props.width ? props.width : '100%')};
   display: flex;
   flex-direction: row;
   margin: 5px;
-  padding: 10px 30px;
+  padding: ${props => (props.padding ? props.padding : '10px 30px')};
   align-items: center;
   justify-content: center;
   text-align: center;
   color: ${({ primary, theme }) =>
     primary ? theme.colors.c2 : theme.colors.c1};
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c1 : theme.colors.c2};
+  background-color: ${({ theme, primary, isDelete }) =>
+    (primary && theme.colors.c1) ||
+    (isDelete && theme.colors.c5) ||
+    theme.colors.c2};
   border-width: 1px;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: ${props => (props.borderRadius ? props.borderRadius : '5px')};
   border-color: ${({ theme }) => theme.colors.c1};
   box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
   text-decoration: none;
@@ -123,6 +125,10 @@ const SubmitButton = styled.button`
 
 const StroveButton = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
+  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
+  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
+
   return props.type === 'submit' ? (
     <SubmitButton primary={props.isPrimary} mobile={isMobileOnly}>
       {isLoading ? (
@@ -147,8 +153,9 @@ const StroveButton = props => {
       lineWeight={props.lineWeight}
       lineHeight={props.lineHeight}
       letterSpacing={props.letterSpacing}
+      padding={props.padding}
     >
-      {isLoading ? (
+      {isLoading || isDeleting || isContinuing || isStopping ? (
         <FullScreenLoader
           isFullScreen={false}
           color={'#ffffff'}

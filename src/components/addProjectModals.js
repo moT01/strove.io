@@ -8,6 +8,7 @@ import AddingEmptyProjectModal from './addEmptyProjectModal.js'
 import Modal from './modal'
 import { Github, Gitlab, Bitbucket } from 'images/logos'
 import { actions } from 'state'
+import StroveButton from 'components/stroveButton.js'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -48,61 +49,6 @@ const ModalWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-`
-
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  width: 100%;
-  min-width: 70px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c1 : theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  font-size: 0.9rem;
-  color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-
-  svg {
-    fill: ${({ invert, theme }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
-    height: auto;
-    margin-left: 5px;
-  }
-
-  :focus {
-    outline: 0;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
-      }
-    `}
 `
 
 const StyledAnchor = styled.a`
@@ -249,16 +195,15 @@ const AddEmptyProjectModal = ({
         from the terminal.
       </Text>
       <ButtonsWrapper mobile={device}>
-        <Button
-          primary
+        <StroveButton
+          isPrimary={true}
           onClick={() => {
             closeModal()
             setModalContent('AddingEmptyProjectOpen')
           }}
-        >
-          Ok
-        </Button>
-        <Button onClick={closeModal}>Cancel</Button>
+          text={'Ok'}
+        />
+        <StroveButton onClick={closeModal} text={'Cancel'} />
       </ButtonsWrapper>
     </ModalWrapper>
   </Modal>
@@ -311,7 +256,7 @@ const AddProjectModals = ({
               Login with Github
               <Github />
             </StyledAnchor>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -337,7 +282,7 @@ const AddProjectModals = ({
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -363,7 +308,7 @@ const AddProjectModals = ({
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -390,7 +335,7 @@ const AddProjectModals = ({
               Login with Github
               <Github />
             </StyledAnchor>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -417,7 +362,7 @@ const AddProjectModals = ({
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -444,7 +389,7 @@ const AddProjectModals = ({
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -489,7 +434,7 @@ const AddProjectModals = ({
             <StyledLink to="app/dashboard" primary onClick={closeModal}>
               Ok
             </StyledLink>
-            <Button onClick={closeModal}>Close</Button>
+            <StroveButton onClick={closeModal} text={'Close'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -511,9 +456,7 @@ const AddProjectModals = ({
           try again later.`}
           </Text>
           <ButtonsWrapper mobile={device}>
-            <Button primary onClick={closeModal}>
-              Ok
-            </Button>
+            <StroveButton primary onClick={closeModal} text={'Ok'} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
