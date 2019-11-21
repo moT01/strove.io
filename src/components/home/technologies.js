@@ -270,7 +270,11 @@ const Technologies = () => {
                     <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                   </g>
                 </svg>
-                <StroveButton type="submit" text='Subscribe to newsletter'/>
+                <StroveButton
+                  layout={'form'}
+                  type="submit"
+                  text="Subscribe to newsletter"
+                />
               </EmailFormWrapper>
               {emailSent && <StyledH6>Thank you!</StyledH6>}
             </Form>
