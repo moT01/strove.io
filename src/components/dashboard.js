@@ -309,7 +309,7 @@ const Dashboard = () => {
                   <StroveButton
                     to="/app/editor/"
                     isDisabled={isDeleting || isContinuing || isStopping}
-                    isPrimary={true}
+                    isPrimary
                     padding={'0.5vh'}
                     onClick={() => handleStartClick(project)}
                     text={
@@ -386,7 +386,7 @@ const Dashboard = () => {
           you want to stop your active project?
         </ModalText>
         <ModalButton
-          isPrimary={true}
+          isPrimary
           onClick={() => {
             handleStopClick(currentProjectId)
             setStopModal(false)

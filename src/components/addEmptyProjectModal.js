@@ -88,7 +88,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
           />
           <StroveButton
             isDisabled={!props.values.projectName || props.errors.projectName}
-            isPrimary={true}
+            isPrimary
             text={'Create project'}
             width={'auto'}
           ></StroveButton>

@@ -196,7 +196,7 @@ const AddEmptyProjectModal = ({
       </Text>
       <ButtonsWrapper mobile={device}>
         <StroveButton
-          isPrimary={true}
+          isPrimary
           onClick={() => {
             closeModal()
             setModalContent('AddingEmptyProjectOpen')
