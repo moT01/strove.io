@@ -346,7 +346,7 @@ export default memo(({ children, addProject }) => {
     window.addEventListener('beforeunload', ev => {
       ev.preventDefault()
 
-      if (navigator && navigator.sendBeacon) {
+      if (navigator?.sendBeacon && user) {
         navigator.sendBeacon(
           `${process.env.SILISKY_ENDPOINT}/beacon`,
           JSON.stringify({ token: localStorage.getItem('token') })
