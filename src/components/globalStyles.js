@@ -17,6 +17,7 @@ export default createGlobalStyle`
   }
 
   body {
+    background-color: #fff;
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
