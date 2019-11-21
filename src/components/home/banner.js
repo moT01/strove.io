@@ -366,13 +366,13 @@ const Banner = () => {
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <StroveButton
-              height={'56px'}
-              width={'100%'}
-              fontSize={'1.3rem'}
-              fontWeight={'bold'}
+              height="56px"
+              width="100%"
+              fontSize="1.3rem"
+              fontWeight="bold"
               isPrimary
-              text={'Get started'}
-              letterSpacing={'0.8px'}
+              text="Get started"
+              letterSpacing="0.8px"
               onClick={useCallback(() => setModalVisible(true))}
             />
             <StyledTrialInfo>
@@ -425,7 +425,7 @@ const Banner = () => {
                     </svg>
                     <StroveButton
                       type="submit"
-                      layout={'form'}
+                      layout="form"
                       text="Request demo"
                     />
                   </EmailFormWrapper>
