@@ -25,8 +25,12 @@ const WithAnalyticsWrapper = memo(({ children }) => {
   useEffect(() => {
     const searchParams = new URL(window?.location?.href).searchParams
     const feature = searchParams?.get('feature') || ''
-
     feature && dispatch(actions.feature.displayFeature(feature))
+
+    const displayEmbedded = searchParams?.get('embed')
+    console.log('displayEmbedded', displayEmbedded)
+    displayEmbedded &&
+      dispatch(actions.displayEmbedded.displayEmbedded(feature))
   }, [])
 
   return children
