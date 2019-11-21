@@ -82,7 +82,7 @@ const Button = styled.button`
     `}
 `
 
-const SubmitButton = styled.button`
+const FormButton = styled.button`
   width: 156px;
   height: 56px;
   color: ${({ theme }) => theme.colors.c2};
@@ -133,18 +133,19 @@ const StroveButton = props => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
 
-  return props.type === 'submit' ? (
-    <SubmitButton primary={props.isPrimary} mobile={isMobileOnly}>
+  return props.layout === 'form' ? (
+    <FormButton primary={props.isPrimary} mobile={isMobileOnly}>
       {isLoading ? (
         <FullScreenLoader
           isFullScreen={false}
           color={'#ffffff'}
           height={'1.7rem'}
+          type={props.type}
         />
       ) : (
         props.text
       )}
-    </SubmitButton>
+    </FormButton>
   ) : (
     <Button
       disabled={isLoading || props.isDisabled}
@@ -160,6 +161,7 @@ const StroveButton = props => {
       letterSpacing={props.letterSpacing}
       padding={props.padding}
       maxWidth={props.maxWidth}
+      type={props.type}
     >
       {isLoading || isDeleting || isContinuing || isStopping ? (
         <FullScreenLoader
