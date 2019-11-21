@@ -12,7 +12,8 @@ import { theme } from 'constants'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { selectors } from 'state'
-import { FullScreenLoader, GetStarted, Logos } from 'components'
+import { GetStarted, Logos } from 'components'
+import StroveButton from 'components/stroveButton.js'
 import Demo from 'assets/StroveDemo.mp4'
 import demoPreview from 'assets/demoPreview.png'
 
@@ -71,56 +72,6 @@ const LeftSectionWrapper = styled(SectionWrapper)`
       text-align: left;
       max-width: 500px;
     `}
-`
-
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: 56px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  width: 100%;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c1 : theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  font-size: 1.3rem;
-  color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-  :focus {
-    outline: 0;
-  }
-  &:disabled {
-    opacity: 0.4;
-  }
-  ${props =>
-    !props.disabled
-      ? css`
-          animation: ${ButtonFadeIn} 1s ease-out;
-          cursor: pointer;
-          &:hover {
-            opacity: 1;
-            box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
-              0 9px 26px 0 rgba(174, 174, 186, 0.16);
-          }
-        `
-      : css`
-          cursor: not-allowed;
-        `}
 `
 
 const ButtonsWrapper = styled.div`
@@ -208,48 +159,6 @@ const EmailFormWrapper = styled.div`
     g {
       stroke: ${({ theme }) => theme.colors.c1};
     }
-  }
-  button {
-    width: 156px;
-    height: 56px;
-    color: ${({ theme }) => theme.colors.c2};
-    background: ${({ theme }) => theme.colors.c1};
-    text-transform: uppercase;
-    display: block;
-    text-align: center;
-    padding: 0;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: normal;
-    letter-spacing: 0.8px;
-    transition: opacity 0.2s;
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    outline: none;
-    ${({ isMobile }) =>
-      isMobile &&
-      css`
-        box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
-          0 8px 24px 0 rgba(174, 174, 186, 0.16);
-        border-radius: 5px;
-        width: 100%;
-        margin-top: 10px;
-      `}
-    ${props =>
-      !props.disabled
-        ? css`
-            cursor: pointer;
-            &:hover {
-              opacity: 1;
-              box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
-                0 9px 26px 0 rgba(174, 174, 186, 0.16);
-            }
-          `
-        : css`
-            cursor: not-allowed;
-          `}
   }
 `
 
@@ -456,22 +365,16 @@ const Banner = () => {
             need is a browser.
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
-            <Button
-              primary
-              mobile={isMobileOnly}
-              disabled={isLoading}
+            <StroveButton
+              height={'56px'}
+              width={'100%'}
+              fontSize={'1.3rem'}
+              fontWeight={'bold'}
+              isPrimary
+              text={'Get started'}
+              letterSpacing={'0.8px'}
               onClick={useCallback(() => setModalVisible(true))}
-            >
-              {isLoading ? (
-                <FullScreenLoader
-                  isFullScreen={false}
-                  color={'#ffffff'}
-                  height={'1.7rem'}
-                />
-              ) : (
-                'Get started'
-              )}
-            </Button>
+            />
             <StyledTrialInfo>
               <li>Free for non-commercial use</li>
             </StyledTrialInfo>
@@ -520,7 +423,11 @@ const Banner = () => {
                         <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                       </g>
                     </svg>
-                    <button type="submit">Request demo</button>
+                    <StroveButton
+                      type="submit"
+                      layout={'form'}
+                      text="Request demo"
+                    />
                   </EmailFormWrapper>
                   <StyledTrialInfo>
                     <li>Free 14-day Demo</li>
