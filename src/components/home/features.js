@@ -130,7 +130,7 @@ const Features = () => {
               style={{
                 fontSize: '32px',
                 color: `${item.color}`,
-                marginTop: '10px',
+                // marginTop: '10px',
               }}
             />
           ) : (
