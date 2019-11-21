@@ -7,6 +7,7 @@ import { Formik, Form, Field } from 'formik'
 
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
+import StroveButton from 'components/stroveButton.js'
 
 const validate = values => {
   let errors = {}
@@ -109,49 +110,6 @@ const EmailFormWrapper = styled.div`
     }
   }
 
-  button {
-    width: 156px;
-    height: 56px;
-    color: ${({ theme }) => theme.colors.c2};
-    background: ${({ theme }) => theme.colors.c1};
-    text-transform: uppercase;
-    display: block;
-    text-align: center;
-    padding: 0;
-    border: 0;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: normal;
-    letter-spacing: 0.8px;
-    transition: opacity 0.2s;
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    outline: none;
-
-    ${({ isMobile }) =>
-      isMobile &&
-      css`
-        box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
-          0 8px 24px 0 rgba(174, 174, 186, 0.16);
-        border-radius: 5px;
-        width: 100%;
-        margin-top: 10px;
-      `}
-
-    ${props =>
-      !props.disabled
-        ? css`
-            cursor: pointer;
-            &:hover {
-              opacity: 1;
-              box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
-                0 9px 26px 0 rgba(174, 174, 186, 0.16);
-            }
-          `
-        : css`
-            cursor: not-allowed;
-          `}
   }
 `
 
@@ -312,7 +270,11 @@ const Technologies = () => {
                     <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                   </g>
                 </svg>
-                <button type="submit">Subscribe to newsletter</button>
+                <StroveButton
+                  layout={'form'}
+                  type="submit"
+                  text="Subscribe to newsletter"
+                />
               </EmailFormWrapper>
               {emailSent && <StyledH6>Thank you!</StyledH6>}
             </Form>

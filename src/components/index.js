@@ -17,6 +17,7 @@ import GlobalStyles from './globalStyles'
 import DataManager from './dataManager'
 import WithAddProject from './withAddProject'
 import Home from './home'
+import StroveButton from './stroveButton'
 
 export {
   SmallCloud,
@@ -40,4 +41,5 @@ export {
   DataManager,
   WithAddProject,
   Home,
+  StroveButton,
 }

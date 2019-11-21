@@ -5,6 +5,7 @@ import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
 import AddEmptyProjectModal from './addEmptyProjectModal'
+import StroveButton from 'components/stroveButton.js'
 
 const FadeIn = keyframes`
   0% {
@@ -179,27 +180,25 @@ const GetStarted = ({ addProject }) => {
                   : 'https://github.com/evil-corp/worldDomination'
               }
             />
-            <Button
-              disabled={!props.values.repoLink || props.errors.repoLink}
-              primary
-              mobile={isMobile}
+            <StroveButton
+              isDisabled={!props.values.repoLink || props.errors.repoLink}
+              isPrimary
               type="submit"
-            >
-              Clone project
-            </Button>
+              text={'Clone project'}
+              width={'30%'}
+            />
 
             <StyledErrors>{props.errors.repoLink}</StyledErrors>
           </GithubLinkForm>
         )}
       />
       Don't have a link? Want to clone private repository?
-      <Button
-        primary
-        mobile={isMobile}
+      <StroveButton
+        isPrimary
         onClick={() => setAddProjectModalOpen(true)}
-      >
-        Create empty project
-      </Button>
+        text={'Create empty project'}
+        width={'30%'}
+      />
       <AddEmptyProjectModal
         handleClose={setAddProjectModalOpen}
         isOpen={addProjectModalOpen}
