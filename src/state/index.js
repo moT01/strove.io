@@ -7,6 +7,7 @@ import api from './api'
 import incomingProject from './incomingProject'
 import latency from './latency'
 import feature from './feature'
+import displayEmbedded from './displayEmbedded'
 
 const rootConfig = {
   key: 'root',
@@ -25,12 +26,14 @@ export const selectors = {
   incomingProject: incomingProject.selectors,
   latency: latency.selectors,
   feature: feature.selectors,
+  displayEmbedded: displayEmbedded.selectors,
 }
 export const actions = {
   api: api.actions,
   incomingProject: incomingProject.actions,
   latency: latency.actions,
   feature: feature.actions,
+  displayEmbedded: displayEmbedded.actions,
 }
 
 export const C = {
@@ -38,6 +41,7 @@ export const C = {
   incomingProject: incomingProject.C,
   latency: latency.C,
   feature: feature.C,
+  displayEmbedded: displayEmbedded.C,
 }
 
 const appReducer = combineReducers({
@@ -45,6 +49,7 @@ const appReducer = combineReducers({
   incomingProject: incomingProject.reducer,
   latency: latency.reducer,
   feature: feature.reducer,
+  displayEmbedded: displayEmbedded.reducer,
 })
 
 export default persistReducer(rootConfig, (state, action) => {
