@@ -184,8 +184,8 @@ const GetStarted = ({ addProject }) => {
               isDisabled={!props.values.repoLink || props.errors.repoLink}
               isPrimary
               type="submit"
-              text={'Clone project'}
-              width={'30%'}
+              text="Clone project"
+              width="30%"
             />
 
             <StyledErrors>{props.errors.repoLink}</StyledErrors>
@@ -196,8 +196,8 @@ const GetStarted = ({ addProject }) => {
       <StroveButton
         isPrimary
         onClick={() => setAddProjectModalOpen(true)}
-        text={'Create empty project'}
-        width={'30%'}
+        text="Create empty project"
+        width="30%"
       />
       <AddEmptyProjectModal
         handleClose={setAddProjectModalOpen}

@@ -201,9 +201,9 @@ const AddEmptyProjectModal = ({
             closeModal()
             setModalContent('AddingEmptyProjectOpen')
           }}
-          text={'Ok'}
+          text="Ok"
         />
-        <StroveButton onClick={closeModal} text={'Cancel'} />
+        <StroveButton onClick={closeModal} text="Cancel" />
       </ButtonsWrapper>
     </ModalWrapper>
   </Modal>
@@ -256,7 +256,7 @@ const AddProjectModals = ({
               Login with Github
               <Github />
             </StyledAnchor>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -282,7 +282,7 @@ const AddProjectModals = ({
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -308,7 +308,7 @@ const AddProjectModals = ({
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -335,7 +335,7 @@ const AddProjectModals = ({
               Login with Github
               <Github />
             </StyledAnchor>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -362,7 +362,7 @@ const AddProjectModals = ({
               Login with Gitlab
               <Gitlab />
             </StyledAnchor>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -389,7 +389,7 @@ const AddProjectModals = ({
               Login with Bitbucket
               <Bitbucket />
             </StyledAnchor>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -428,7 +428,7 @@ const AddProjectModals = ({
             <StyledLink to="app/dashboard" primary onClick={closeModal}>
               Ok
             </StyledLink>
-            <StroveButton onClick={closeModal} text={'Close'} />
+            <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
@@ -450,7 +450,7 @@ const AddProjectModals = ({
           try again later.`}
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StroveButton primary onClick={closeModal} text={'Ok'} />
+            <StroveButton primary onClick={closeModal} text="Ok" />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>

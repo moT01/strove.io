@@ -89,8 +89,8 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
           <StroveButton
             isDisabled={!props.values.projectName || props.errors.projectName}
             isPrimary
-            text={'Create project'}
-            width={'auto'}
+            text="Create project"
+            width="auto"
           ></StroveButton>
           <StyledErrors>{props.errors.projectName}</StyledErrors>
         </GithubLinkForm>

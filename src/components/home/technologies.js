@@ -271,7 +271,7 @@ const Technologies = () => {
                   </g>
                 </svg>
                 <StroveButton
-                  layout={'form'}
+                  layout="form"
                   type="submit"
                   text="Subscribe to newsletter"
                 />

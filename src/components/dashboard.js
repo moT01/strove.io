@@ -321,21 +321,21 @@ const Dashboard = () => {
                   {currentProjectId && currentProjectId === project.id ? (
                     <StroveButton
                       isDisabled={isDeleting || isContinuing || isStopping}
-                      padding={'0.5vh'}
+                      padding="0.5vh"
                       onClick={() => {
                         handleStopClick(project.id)
                       }}
-                      text={'Stop'}
+                      text="Stop"
                     />
                   ) : null}
                   <StroveButton
                     isDisabled={isDeleting || isContinuing || isStopping}
-                    padding={'0.5vh'}
+                    padding="0.5vh"
                     onClick={() => {
                       setModalVisible(true)
                       setProjectToDelete(project)
                     }}
-                    text={'Delete'}
+                    text="Delete"
                   />
                 </RightSection>
               </VerticalDivider>
