@@ -156,7 +156,7 @@ const StroveButton = props => {
       height={props.height}
       width={props.width}
       fontSize={props.fontSize}
-      lineWeight={props.lineWeight}
+      fontWeight={props.fontWeight}
       lineHeight={props.lineHeight}
       letterSpacing={props.letterSpacing}
       padding={props.padding}

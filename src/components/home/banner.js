@@ -369,7 +369,8 @@ const Banner = () => {
               height={'56px'}
               width={'100%'}
               fontSize={'1.3rem'}
-              isPrimary={true}
+              fontWeight={'bold'}
+              isPrimary
               text={'Get started'}
               letterSpacing={'0.8px'}
               onClick={useCallback(() => setModalVisible(true))}
