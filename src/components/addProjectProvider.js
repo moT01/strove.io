@@ -28,7 +28,6 @@ const AddProjectProvider = ({ children }) => {
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
   const isAdding = useSelector(selectors.incomingProject.isIncoming)
   const addProjectError = useSelector(selectors.incomingProject.getError)
-  const queuePosition = useSelector(selectors.api.getQueuePosition)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
   const subscription = useSelector(
@@ -147,10 +146,10 @@ const AddProjectProvider = ({ children }) => {
         />
       </StyledModal>
       {isContinuing && (
-        <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" queuePosition={queuePosition}/>
+        <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" />
       )}
       {isAdding && isLoading && (
-        <FullScreenLoader type="addProject" isFullScreen color="#0072ce" queuePosition={queuePosition}/>
+        <FullScreenLoader type="addProject" isFullScreen color="#0072ce" />
       )}
     </>
   )
