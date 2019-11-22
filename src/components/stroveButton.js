@@ -3,7 +3,6 @@ import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
-import { theme } from 'constants'
 import { FullScreenLoader } from 'components'
 import { selectors } from 'state'
 
@@ -146,7 +145,7 @@ const StroveButton = props => {
           height={'1.7rem'}
         />
       ) : (
-        props.text
+        props.text || props.children
       )}
     </FormButton>
   ) : (
@@ -173,7 +172,7 @@ const StroveButton = props => {
           height={'1.7rem'}
         />
       ) : (
-        props.text
+        props.text || props.children
       )}
     </Button>
   )

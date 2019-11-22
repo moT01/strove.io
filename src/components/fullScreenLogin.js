@@ -1,16 +1,12 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { createSelector } from 'reselect'
-import Downshift from 'downshift'
-import { useDispatch, useSelector } from 'react-redux'
-import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 import { loginOptions } from 'constants'
-import { Layout } from 'components'
+import { Layout, StroveButton } from 'components'
 
 import FullScreenLoader from './fullScreenLoader'
-import { persistor } from '../../wrapper'
 
 const LoginButton = styled.button`
   color: ${({ theme }) => theme.colors.c2};
@@ -47,10 +43,7 @@ const LoginButton = styled.button`
 `
 
 const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: auto;
+  padding: 20px;
   box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
@@ -139,13 +132,10 @@ const OptionText = styled(Text)`
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  height: 97vh;
+  display: flex;
   align-items: center;
-  height: 3vh;
-  width: auto;
-  margin: 0;
-  background: none;
+  justify-content: center;
 `
 
 const StyledDropdown = styled.div`
@@ -177,19 +167,21 @@ const getUserData = createSelector(
 const LoginDropdown = () => {
   return (
     <Layout>
-      <MenuWrapper invert>
-        {loginOptions.map((item, index) => (
-          <Option
-            invert
-            key={item.value}
-            href={item.href}
-            isLast={index === loginOptions.length - 1 ? true : false}
-          >
-            {item.icon}
-            <OptionText invert>{item.label}</OptionText>
-          </Option>
-        ))}
-      </MenuWrapper>
+      <Wrapper>
+        <MenuWrapper invert>
+          {loginOptions.map((item, index) => (
+            <Option
+              invert
+              key={item.value}
+              href={item.href}
+              isLast={index === loginOptions.length - 1 ? true : false}
+            >
+              {item.icon}
+              <OptionText invert>{item.label}</OptionText>
+            </Option>
+          ))}
+        </MenuWrapper>
+      </Wrapper>
     </Layout>
   )
 }
