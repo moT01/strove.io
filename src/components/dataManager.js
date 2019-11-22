@@ -136,7 +136,6 @@ export default memo(({ children, addProject }) => {
       } = startProjectData
 
       try {
-        console.log('Queue position 3', queuePosition)
         dispatch({
           type: C.api.UPDATE_ITEM,
           payload: {
