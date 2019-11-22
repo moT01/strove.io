@@ -19,25 +19,9 @@ const MenuWrapper = styled.div`
   position: relative;
 `
 
-const Text = styled.h3`
-  font-size: 1.2rem;
-  margin: 0;
-  font-weight: 300;
-  line-height: 1;
-  @media (max-width: 767px) {
-    font-size: 1.4rem;
-  }
-  :hover {
-    color: ${({ theme }) => theme.colors.c3};
-    cursor: pointer;
-  }
-`
-
-const OptionText = styled(Text)`
-  font-weight: 300;
-  :hover {
-    color: ${({ theme }) => theme.colors.c2};
-  }
+const LoginText = styled.span`
+  font-weight: 500;
+  font-size: 20px;
 `
 
 const Wrapper = styled.div`
@@ -66,10 +50,8 @@ const LoginDropdown = () => {
         <MenuWrapper invert>
           {loginOptions.map(item => (
             <StyledButton isPrimary key={item.label}>
-              <>
-                {item.icon}
-                <OptionText invert>{item.label}</OptionText>
-              </>
+              {item.icon}
+              <LoginText invert>{item.label}</LoginText>
             </StyledButton>
           ))}
         </MenuWrapper>
