@@ -1,9 +1,11 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useSelector } from 'react-redux'
 
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
 import { useInterval } from 'hooks'
+import { selectors } from 'state'
 
 const SpinToWin = keyframes`
   0% {
@@ -75,6 +77,7 @@ const StyledLogo = styled(Strove)`
 
 const Loader = ({ type = 'addProject', ...props }) => {
   const [counter, setCounter] = useState(0)
+  const queuePosition = useSelector(selectors.api.getQueuePosition)
 
   const allMessages = {
     addProject: [
@@ -82,25 +85,14 @@ const Loader = ({ type = 'addProject', ...props }) => {
       'Cloning repository - this can take a moment',
       'Reserving resources',
       'Starting virtual machine',
-      `Our servers are full. Your position in queue: ${props.queuePosition -
-        1}`,
     ],
     openProject: ['Launching editor'],
-    continueProject: [
-      'Reserving resources',
-      'Starting virtual machine',
-      `Our servers are full. Your position in queue: ${props.queuePosition -
-        1}`,
-    ],
+    continueProject: ['Reserving resources', 'Starting virtual machine'],
   }
 
   useInterval(
     () => setCounter(counter + 1),
-    counter !==
-      allMessages[type].length -
-        (props.queuePosition > 1 || type === 'openProject' ? 1 : 2)
-      ? 1500
-      : null
+    counter !== allMessages[type].length - 1 ? 1500 : null
   )
 
   if (props.isFullScreen) {
@@ -112,7 +104,11 @@ const Loader = ({ type = 'addProject', ...props }) => {
             <StyledLogo fill="#0072ce" />
           </LogoContainer>
         </LoaderContainer>
-        <Text>{allMessages[type][counter]}</Text>
+        <Text>
+          {queuePosition > 1
+            ? `Our servers are full. Your position in queue: ${queuePosition}`
+            : allMessages[type][counter]}
+        </Text>
       </LoaderWrapper>
     )
   }
