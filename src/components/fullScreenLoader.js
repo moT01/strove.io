@@ -73,23 +73,34 @@ const StyledLogo = styled(Strove)`
   height: 5vw;
 `
 
-const allMessages = {
-  addProject: [
-    'Checking permissions',
-    'Cloning repository - this can take a moment',
-    'Reserving resources',
-    'Starting virtual machine',
-  ],
-  openProject: ['Launching editor'],
-  continueProject: ['Reserving resources', 'Starting virtual machine'],
-}
-
 const Loader = ({ type = 'addProject', ...props }) => {
   const [counter, setCounter] = useState(0)
 
+  const allMessages = {
+    addProject: [
+      'Checking permissions',
+      'Cloning repository - this can take a moment',
+      'Reserving resources',
+      'Starting virtual machine',
+      `Our servers are full. Your position in queue: ${props.queuePosition -
+        1}`,
+    ],
+    openProject: ['Launching editor'],
+    continueProject: [
+      'Reserving resources',
+      'Starting virtual machine',
+      `Our servers are full. Your position in queue: ${props.queuePosition -
+        1}`,
+    ],
+  }
+
   useInterval(
     () => setCounter(counter + 1),
-    counter !== allMessages[type].length - 1 ? 1500 : null
+    counter !==
+      allMessages[type].length -
+        (props.queuePosition > 1 || type === 'openProject' ? 1 : 2)
+      ? 1500
+      : null
   )
 
   if (props.isFullScreen) {
