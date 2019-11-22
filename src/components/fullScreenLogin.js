@@ -6,42 +6,6 @@ import { selectors } from 'state'
 import { loginOptions } from 'constants'
 import { Layout, StroveButton } from 'components'
 
-import FullScreenLoader from './fullScreenLoader'
-
-const LoginButton = styled.button`
-  color: ${({ theme }) => theme.colors.c2};
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  position: 'relative';
-  background: none;
-  border: none;
-  text-decoration: none;
-  font-weight: 300;
-  line-height: 1;
-  padding: 0;
-  height: 3vh;
-  cursor: pointer;
-
-  :focus {
-    outline: 0;
-  }
-
-  span {
-    color: ${({ theme }) => theme.colors.c2};
-  }
-
-  :hover {
-    color: ${({ theme }) => theme.colors.c3};
-  }
-
-  > {
-    vertical-align: bottom;
-  }
-`
-
 const MenuWrapper = styled.div`
   padding: 20px;
   box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
@@ -53,60 +17,6 @@ const MenuWrapper = styled.div`
     invert ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
   position: relative;
-`
-
-const Option = styled.a`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
-  width: auto;
-  height: 32px;
-  font-size: 1.2rem;
-  border-bottom-left-radius: ${props => props.isLast && '3px'};
-  border-bottom-right-radius: ${props => props.isLast && '3px'};
-  z-index: 4;
-  text-decoration: none;
-  font-weight: 300;
-  color: ${({ theme }) => theme.colors.c1};
-
-  svg {
-    fill: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
-    height: auto;
-    margin-right: 5px;
-  }
-
-  :hover {
-    background-color: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    cursor: pointer;
-    color: ${({ theme }) => theme.colors.c2};
-  }
-
-  :hover svg {
-    fill: ${({ theme, invert }) =>
-      invert ? theme.colors.c2 : theme.colors.c1};
-    cursor: pointer;
-  }
-`
-
-const Inline = styled.div`
-  display: inline-block;
-  width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
-  height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
-  margin-left: 4px;
-  background: ${({ theme }) => theme.colors.c1};
-`
-
-const UserPhoto = styled.img`
-  width: 100%;
-  height: 100%;
-  margin-left: 4px;
-  border-radius: 5px;
 `
 
 const Text = styled.h3`
@@ -138,47 +48,29 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const StyledDropdown = styled.div`
-  color: ${({ theme }) => theme.colors.c2};
-  height: 3vh;
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.colors.c1};
+const StyledButton = styled(StroveButton)`
+  height: 60px;
+  width: 300px;
+  > svg {
+    fill: ${({ theme }) => theme.colors.c2};
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+  }
 `
-
-const DropdownWrapper = styled.div`
-  position: absolute;
-  background: none;
-  right: 1.5vw;
-`
-
-const getUserName = selectors.api.getUserField('name')
-
-const getUserPhoto = selectors.api.getUserField('photoUrl')
-
-const getUserData = createSelector(
-  [getUserName, getUserPhoto],
-  (username, userphoto) => ({ username, userphoto })
-)
 
 const LoginDropdown = () => {
   return (
     <Layout>
       <Wrapper>
         <MenuWrapper invert>
-          {loginOptions.map((item, index) => (
-            <Option
-              invert
-              key={item.value}
-              href={item.href}
-              isLast={index === loginOptions.length - 1 ? true : false}
-            >
-              {item.icon}
-              <OptionText invert>{item.label}</OptionText>
-            </Option>
+          {loginOptions.map(item => (
+            <StyledButton isPrimary key={item.label}>
+              <>
+                {item.icon}
+                <OptionText invert>{item.label}</OptionText>
+              </>
+            </StyledButton>
           ))}
         </MenuWrapper>
       </Wrapper>
