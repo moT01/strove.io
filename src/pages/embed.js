@@ -17,14 +17,16 @@ const Embed = () => {
     // If we’re not logged in, redirect to the home page.
     navigate('/embed/')
     return null
-  }
-  //else if (token && window?.location?.pathname !== `/embed/editor/`) {
-
+  } else if (token && window?.location?.pathname !== `/embed/editor/`) {
+    navigate('/embed/run/')
   }
 
   return (
     <Router>
       <FullScreenLogin path="/embed" />
+      <FullScreenLogin path="/embed/login" />
+      <FullScreenLogin path="/embed/goBackToOrigin" />
+      <FullScreenLogin path="/embed/run" />
       <PrivateRoute path="/embed/editor" component={Editor} />
     </Router>
   )

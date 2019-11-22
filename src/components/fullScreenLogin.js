@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { createSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
+import { useSelector } from 'react-redux'
 
 import { theme } from 'constants'
 import { selectors } from 'state'
@@ -48,16 +49,26 @@ const StyledButton = styled(StroveButton)`
 `
 
 const LoginDropdown = () => {
+  // const repoProvider = useSelector(selectors.incomingProject.getRepoProvider)
+
+  const loginProvider = loginOptions.filter(
+    option => option.value === repoProvider
+  )
+
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
-          {loginOptions.map(item => (
+          {/* {loginOptions.filter(item => (
             <StyledButton isPrimary key={item.label}>
               {item.icon}
               <LoginText invert>{item.label}</LoginText>
             </StyledButton>
-          ))}
+          ))} */}
+          <StyledButton isPrimary key={loginProvider.label}>
+            {loginProvider.icon}
+            <LoginText invert>{loginProvider.label}</LoginText>
+          </StyledButton>
         </MenuWrapper>
       </Wrapper>
       <GlobalStyles />
