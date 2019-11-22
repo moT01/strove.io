@@ -1,10 +1,14 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { createSelector } from 'reselect'
+import { ThemeProvider } from 'styled-components'
 
+import { theme } from 'constants'
 import { selectors } from 'state'
 import { loginOptions } from 'constants'
-import { Layout, StroveButton } from 'components'
+import { StroveButton } from 'components'
+
+import GlobalStyles from './globalStyles'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -45,7 +49,7 @@ const StyledButton = styled(StroveButton)`
 
 const LoginDropdown = () => {
   return (
-    <Layout>
+    <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
           {loginOptions.map(item => (
@@ -56,7 +60,8 @@ const LoginDropdown = () => {
           ))}
         </MenuWrapper>
       </Wrapper>
-    </Layout>
+      <GlobalStyles />
+    </ThemeProvider>
   )
 }
 
