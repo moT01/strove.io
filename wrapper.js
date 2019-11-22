@@ -28,7 +28,6 @@ const WithAnalyticsWrapper = memo(({ children }) => {
     feature && dispatch(actions.feature.displayFeature(feature))
 
     const displayEmbedded = searchParams?.get('embed')
-    console.log('displayEmbedded', displayEmbedded)
     displayEmbedded &&
       dispatch(actions.displayEmbedded.displayEmbedded(feature))
   }, [])
