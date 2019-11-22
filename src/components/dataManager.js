@@ -134,6 +134,19 @@ export default memo(({ children, addProject }) => {
       const {
         startProject: { queuePosition, project, type },
       } = startProjectData
+      try {
+        dispatch({
+          type: C.api.UPDATE_ITEM,
+          payload: {
+            storeKey: 'user',
+            data: {
+              queuePosition,
+            },
+          },
+        })
+      } catch (e) {
+        console.log('Error on showing queue position: ', e)
+      }
 
       if (queuePosition === 0 && !project) {
         dispatch(
