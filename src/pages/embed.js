@@ -18,6 +18,9 @@ const Embed = () => {
     navigate('/embed/')
     return null
   }
+  //else if (token && window?.location?.pathname !== `/embed/editor/`) {
+
+  }
 
   return (
     <Router>
