@@ -141,7 +141,7 @@ export default memo(({ children, addProject }) => {
           payload: {
             storeKey: 'user',
             data: {
-              queuePosition: queuePosition,
+              queuePosition,
             },
           },
         })
