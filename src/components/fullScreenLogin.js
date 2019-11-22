@@ -51,24 +51,18 @@ const StyledButton = styled(StroveButton)`
 const LoginDropdown = () => {
   // const repoProvider = useSelector(selectors.incomingProject.getRepoProvider)
 
-  const loginProvider = loginOptions.filter(
-    option => option.value === repoProvider
-  )
+  // const loginProvider = loginOptions.filter(
+  //   option => option.value === repoProvider
+  // )
 
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
-          {/* {loginOptions.filter(item => (
-            <StyledButton isPrimary key={item.label}>
-              {item.icon}
-              <LoginText invert>{item.label}</LoginText>
-            </StyledButton>
-          ))} */}
-          <StyledButton isPrimary key={loginProvider.label}>
+          {/* <StyledButton isPrimary key={loginProvider.label}>
             {loginProvider.icon}
             <LoginText invert>{loginProvider.label}</LoginText>
-          </StyledButton>
+          </StyledButton> */}
         </MenuWrapper>
       </Wrapper>
       <GlobalStyles />

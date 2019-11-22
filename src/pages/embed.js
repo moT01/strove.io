@@ -4,7 +4,7 @@ import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'
-import { window } from 'utils'
+import { window, getSearchParams } from 'utils'
 import { PrivateRoute, Editor, FullScreenLogin } from 'components'
 
 const getToken = selectors.api.getUserField('siliskyToken')
@@ -13,13 +13,16 @@ const getToken = selectors.api.getUserField('siliskyToken')
 const Embed = () => {
   const token = useSelector(getToken)
 
+  const searchParams = getSearchParams()
+  const projectUrl = searchParams.get('projectUrl')
+
   if (!token && window?.location?.pathname !== `/embed/`) {
-    // If we’re not logged in, redirect to the home page.
+    // If users is not logged in, redirect to the embed main page.
     navigate('/embed/')
-    return null
-  } else if (token && window?.location?.pathname !== `/embed/editor/`) {
-    navigate('/embed/run/')
   }
+  // else if (token && window?.location?.pathname !== `/embed/editor/`) {
+  //   navigate('/embed/run/')
+  // }
 
   return (
     <Router>
