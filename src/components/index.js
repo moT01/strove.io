@@ -18,6 +18,7 @@ import DataManager from './dataManager'
 import WithAddProject from './withAddProject'
 import Home from './home'
 import StroveButton from './stroveButton'
+import FullScreenLogin from './fullScreenLogin'
 
 export {
   SmallCloud,
@@ -42,4 +43,5 @@ export {
   WithAddProject,
   Home,
   StroveButton,
+  FullScreenLogin,
 }
