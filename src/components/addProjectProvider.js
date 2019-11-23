@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import { createProject } from 'utils'
+import { createProject, getRepoProvider } from 'utils'
 import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
@@ -39,7 +39,6 @@ const AddProjectProvider = ({ children }) => {
 
   const addProject = async ({ link, name }) => {
     let repoLink
-    let repoUrlParts
     let repoProvider
 
     let repoFromGithub
@@ -77,8 +76,7 @@ const AddProjectProvider = ({ children }) => {
 
       repoLink = repoLink.replace('.git', '')
 
-      repoUrlParts = repoLink.split('/')
-      repoProvider = repoUrlParts[2].split('.')[0]
+      repoProvider = getRepoProvider(repoLink)
 
       repoFromGithub = repoProvider === 'github'
       repoFromGitlab = repoProvider === 'gitlab'
