@@ -18,7 +18,7 @@ import DataManager from './dataManager'
 import WithAddProject from './withAddProject'
 import Home from './home'
 import StroveButton from './stroveButton'
-import FullScreenLogin from './fullScreenLogin'
+import * as Embed from './embed'
 
 export {
   SmallCloud,
@@ -43,5 +43,5 @@ export {
   WithAddProject,
   Home,
   StroveButton,
-  FullScreenLogin,
+  Embed,
 }
