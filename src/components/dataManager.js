@@ -14,7 +14,7 @@ import {
   START_PROJECT,
 } from 'queries'
 import { mutation, query } from 'utils'
-import { window } from 'utils'
+import { window, getWindowHref } from 'utils'
 import { selectors } from 'state'
 import client from '../../client'
 import { C } from 'state'
@@ -180,12 +180,12 @@ export default memo(({ children, addProject }) => {
   }, [startProjectData, startProjectError])
 
   useEffect(() => {
-    const code = window?.location?.href
+    const code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
 
-    const loginState = window?.location?.href
+    const loginState = getWindowHref()
       ?.match(/state=(.+)/g)
       ?.toString()
       .split('=')[1]

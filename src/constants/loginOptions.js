@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { getWindowHref } from 'utils'
 import { Github, Bitbucket, Gitlab } from 'images/logos'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
@@ -9,7 +10,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI
 const IS_OPENSOURCE = process.env.IS_OPENSOURCE
 
 /* This will catch route such as strove.io/app/dashboard/ */
-const adress = window?.location?.href?.split('?')[0]
+const adress = getWindowHref()?.split('?')[0]
 
 /* State in href allows us to control login behavior https://auth0.com/docs/protocols/oauth2/oauth-state */
 export default [

@@ -9,7 +9,7 @@ import { selectors } from 'state'
 import { loginOptions } from 'constants'
 import { StroveButton } from 'components'
 
-import GlobalStyles from './globalStyles'
+import GlobalStyles from '../globalStyles'
 
 const MenuWrapper = styled.div`
   padding: 20px;

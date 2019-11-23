@@ -4,13 +4,13 @@ import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'
-import { window, getWindowSearchParams, getWindowPathName } from 'utils'
-import { PrivateRoute, Editor, FullScreenLogin } from 'components'
+import { getWindowSearchParams, getWindowPathName } from 'utils'
+import { PrivateRoute, Editor, Embed } from 'components'
 
 const getToken = selectors.api.getUserField('siliskyToken')
 
 /* Todo: Add embed only loading screen */
-const Embed = () => {
+const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
@@ -28,13 +28,13 @@ const Embed = () => {
 
   return (
     <Router>
-      <FullScreenLogin path="/embed" />
-      <FullScreenLogin path="/embed/login" />
-      <FullScreenLogin path="/embed/goBackToOrigin" />
-      <FullScreenLogin path="/embed/run" />
+      <Embed.Login path="/embed" />
+      <Embed.Login path="/embed/login" />
+      <Embed.Login path="/embed/goBackToOrigin" />
+      <Embed.Login path="/embed/run" />
       <PrivateRoute path="/embed/editor" component={Editor} />
     </Router>
   )
 }
 
-export default memo(Embed)
+export default memo(EmbedWrapper)
