@@ -52,10 +52,19 @@ const Login = () => {
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
-          <StyledButton isPrimary key={loginProvider.label}>
-            {loginProvider.icon}
-            <LoginText invert>Login with {loginProvider.label}</LoginText>
-          </StyledButton>
+          {loginProvider ? (
+            <StyledButton isPrimary key={loginProvider.label}>
+              {loginProvider.icon}
+              <LoginText invert>Login with {loginProvider.label}</LoginText>
+            </StyledButton>
+          ) : (
+            <h3>
+              Please provide repoUrl. Example:{' '}
+              <i>
+                https://strove.io/embed/?repoUrl=https://github.com/validatorjs/validator.js
+              </i>
+            </h3>
+          )}
         </MenuWrapper>
       </Wrapper>
       <GlobalStyles />
