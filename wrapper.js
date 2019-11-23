@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { getSearchParams } from 'utils'
+import { getWindowSearchParams } from 'utils'
 import { actions } from 'state'
 import client from './client'
 import rootReducer from './src/state'
@@ -23,7 +23,7 @@ const WithAnalyticsWrapper = memo(({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const searchParams = getSearchParams()
+    const searchParams = getWindowSearchParams()
     const feature = searchParams?.get('feature') || ''
     feature && dispatch(actions.feature.displayFeature(feature))
 
