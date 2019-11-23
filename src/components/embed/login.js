@@ -4,10 +4,8 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import { loginOptions } from 'constants'
-import { StroveButton } from 'components'
+import { StroveButton, GlobalStyles } from 'components'
 import { getRepoProvider, getWindowSearchParams } from 'utils'
-
-import GlobalStyles from '../globalStyles'
 
 const MenuWrapper = styled.div`
   padding: 20px;

@@ -3,9 +3,7 @@ import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
-import { StroveButton, AddProjectProvider } from 'components'
-
-import GlobalStyles from '../globalStyles'
+import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -41,21 +39,21 @@ const StyledButton = styled(StroveButton)`
 
 const Run = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Wrapper>
-        <MenuWrapper invert>
-          <StyledButton isPrimary>
-            <LoginText invert>Run with Strove</LoginText>
-          </StyledButton>
-        </MenuWrapper>
-      </Wrapper>
-      <GlobalStyles />
-    </ThemeProvider>
+    <Wrapper>
+      <MenuWrapper invert>
+        <StyledButton isPrimary>
+          <LoginText invert>Run with Strove</LoginText>
+        </StyledButton>
+      </MenuWrapper>
+    </Wrapper>
   )
 }
 
 export default memo(() => (
-  <AddProjectProvider>
-    {({ addProject }) => <Run addProject={addProject} />}
-  </AddProjectProvider>
+  <ThemeProvider theme={theme}>
+    <AddProjectProvider>
+      {({ addProject }) => <Run addProject={addProject} />}
+    </AddProjectProvider>
+    <GlobalStyles />
+  </ThemeProvider>
 ))
