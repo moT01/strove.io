@@ -9,6 +9,7 @@ import {
   getWindowHref,
 } from './windowUtils'
 import getRepoProvider from './getRepoProvider'
+import changeRepoLinkFromSshToHttps from './changeRepoLinkFromSshToHttps'
 
 export {
   query,
@@ -21,4 +22,5 @@ export {
   getWindowSearchParams,
   getWindowHref,
   getRepoProvider,
+  changeRepoLinkFromSshToHttps,
 }
