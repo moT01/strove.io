@@ -1,23 +1,16 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { createSelector } from 'reselect'
 import { ThemeProvider } from 'styled-components'
-import { useSelector } from 'react-redux'
 
 import { theme } from 'constants'
-import { selectors } from 'state'
 import { loginOptions } from 'constants'
 import { StroveButton } from 'components'
+import { getRepoProvider, getWindowSearchParams } from 'utils'
 
 import GlobalStyles from '../globalStyles'
 
 const MenuWrapper = styled.div`
   padding: 20px;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-style: solid;
   background-color: ${({ theme, invert }) =>
     invert ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
@@ -49,20 +42,20 @@ const StyledButton = styled(StroveButton)`
 `
 
 const LoginDropdown = () => {
-  // const repoProvider = useSelector(selectors.incomingProject.getRepoProvider)
-
-  // const loginProvider = loginOptions.filter(
-  //   option => option.value === repoProvider
-  // )
+  const repoUrl = getWindowSearchParams()?.get('repoUrl')
+  const repoProvider = getRepoProvider(repoUrl)
+  const loginProvider = loginOptions.find(
+    option => option.value === repoProvider
+  )
 
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
-          {/* <StyledButton isPrimary key={loginProvider.label}>
+          <StyledButton isPrimary key={loginProvider.label}>
             {loginProvider.icon}
-            <LoginText invert>{loginProvider.label}</LoginText>
-          </StyledButton> */}
+            <LoginText invert>Login with {loginProvider.label}</LoginText>
+          </StyledButton>
         </MenuWrapper>
       </Wrapper>
       <GlobalStyles />
