@@ -23,23 +23,17 @@ const FadeIn = keyframes`
   }
 `
 
-const LinkWrapper = styled.div`
-  font-weight: 300;
-  animation: ${FadeIn} 0.3s ease-out;
-`
-
-const LoginWrapper = styled.div`
+const HeaderSection = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  height: ${props => (props.mobile ? '100%' : '2.5vh')};
-  margin: 0;
-  font-weight: 300;
-  animation: ${FadeIn} 0.3s ease-out;
-  cursor: pointer;
+  width: 100vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  background: ${({ theme }) => theme.colors.c1};
   @media (max-width: 767px) {
-    height: 4vh;
+    height: 20px;
   }
 `
 
@@ -57,6 +51,11 @@ const HeaderWrapper = styled.div`
   }
 `
 
+const LinkWrapper = styled.div`
+  font-weight: 300;
+  animation: ${FadeIn} 0.3s ease-out;
+`
+
 const LinkText = styled.h3`
   color: ${({ theme }) => theme.colors.c2};
   font-size: 1.2rem;
@@ -69,8 +68,8 @@ const LinkText = styled.h3`
   margin: 0;
   cursor: pointer;
   @media (max-width: 767px) {
-    height: 5vh;
-    font-size: 1.8rem;
+    height: 100%;
+    font-size: 18px;
   }
 
   :hover {
@@ -101,17 +100,6 @@ const DocsLink = styled.a`
   }
 `
 
-const HeaderSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
-  background: ${({ theme }) => theme.colors.c1};
-`
-
 const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
@@ -125,6 +113,21 @@ const PreviewLink = styled.a`
   display: flex;
   height: 25px;
   padding: 0;
+`
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: ${props => (props.mobile ? '100%' : '2.5vh')};
+  margin: 0;
+  font-weight: 300;
+  animation: ${FadeIn} 0.3s ease-out;
+  cursor: pointer;
+  @media (max-width: 767px) {
+    height: 100%;
+  }
 `
 
 const LoginButton = styled.button`
@@ -222,7 +225,7 @@ const Text = styled.h3`
   font-weight: 300;
   line-height: 1;
   @media (max-width: 767px) {
-    font-size: 1.4rem;
+    font-size: 16px;
   }
   :hover {
     color: ${({ theme }) => theme.colors.c3};
