@@ -3,9 +3,7 @@ import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
-import { loginOptions } from 'constants'
-import { StroveButton } from 'components'
-import { getRepoProvider, getWindowSearchParams } from 'utils'
+import { StroveButton, AddProjectProvider } from 'components'
 
 import GlobalStyles from '../globalStyles'
 
@@ -41,20 +39,13 @@ const StyledButton = styled(StroveButton)`
   }
 `
 
-const Login = () => {
-  const repoUrl = getWindowSearchParams()?.get('repoUrl')
-  const repoProvider = getRepoProvider(repoUrl)
-  const loginProvider = loginOptions.find(
-    option => option.value === repoProvider
-  )
-
+const Run = () => {
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
-          <StyledButton isPrimary key={loginProvider.label}>
-            {loginProvider.icon}
-            <LoginText invert>Login with {loginProvider.label}</LoginText>
+          <StyledButton isPrimary>
+            <LoginText invert>Run with Strove</LoginText>
           </StyledButton>
         </MenuWrapper>
       </Wrapper>
@@ -63,4 +54,8 @@ const Login = () => {
   )
 }
 
-export default memo(Login)
+export default memo(() => (
+  <AddProjectProvider>
+    {({ addProject }) => <Run addProject={addProject} />}
+  </AddProjectProvider>
+))
