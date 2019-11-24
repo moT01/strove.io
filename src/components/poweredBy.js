@@ -1,24 +1,41 @@
 import React, { memo } from 'react'
-import styled, { css, keyframes } from 'styled-components'
+import styled from 'styled-components'
 
-const Strove = styled.div`
+import { Strove } from 'images/logos'
+import { theme } from 'constants'
+
+const StroveLogoWrapper = styled.div`
   font-size: 18px;
   font-weight: 600;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+
+  svg {
+    margin-top: 5px;
+    margin-right: 3px;
+    height: 21px;
+    fill: ${({ theme }) => theme.colors.c1};
+  }
 `
 
 const PoweredByText = styled.div`
   font-size: 18px;
   text-align: center;
   font-style: italic;
-  margin-top: 10px;
+  margin-top: 8px;
 `
 
 const PoweredBy = () => {
   return (
     <>
       <PoweredByText>Powered by:</PoweredByText>
-      <Strove>Strove.io</Strove>
+      <StroveLogoWrapper>
+        <Strove fill={theme.colors.c1} />
+        Strove.io
+      </StroveLogoWrapper>
     </>
   )
 }
