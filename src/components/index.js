@@ -20,6 +20,7 @@ import Home from './home'
 import StroveButton from './stroveButton'
 import NoRepoUrlInfo from './NoRepoUrlInfo'
 import PoweredBy from './poweredBy'
+import ExternalLink from './externalLink'
 
 export {
   SmallCloud,
@@ -46,4 +47,5 @@ export {
   StroveButton,
   NoRepoUrlInfo,
   PoweredBy,
+  ExternalLink,
 }
