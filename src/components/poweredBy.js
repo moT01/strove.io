@@ -5,7 +5,7 @@ import { Strove } from 'images/logos'
 import { theme } from 'constants'
 
 const StroveLogoWrapper = styled.div`
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 600;
   display: flex;
   flex-direction: row;
@@ -22,7 +22,7 @@ const StroveLogoWrapper = styled.div`
 `
 
 const PoweredByText = styled.div`
-  font-size: 18px;
+  font-size: 15px;
   text-align: center;
   font-style: italic;
   margin-top: 8px;

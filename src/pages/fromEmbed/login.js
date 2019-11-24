@@ -23,8 +23,12 @@ const LoginText = styled.span`
 const RedirectInfoWrapper = styled.div`
   font-size: 16px;
   text-align: center;
-  line-height: 1;
   width: 300px;
+`
+
+const Url = styled.span`
+  font-style: italic;
+  font-weight: 600;
 `
 
 const Wrapper = styled.div`
@@ -77,7 +81,8 @@ const Login = () => {
               </StyledButton>
               {redirectTo ? (
                 <RedirectInfoWrapper>
-                  You'll be redirected back to ${redirectTo} once you log in!
+                  You'll be redirected back to <Url>{redirectTo}</Url> once you
+                  log in!
                 </RedirectInfoWrapper>
               ) : (
                 <NoRedirectUrlInfo>
