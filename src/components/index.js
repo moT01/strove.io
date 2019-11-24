@@ -19,6 +19,7 @@ import WithAddProject from './withAddProject'
 import Home from './home'
 import StroveButton from './stroveButton'
 import NoRepoUrlInfo from './NoRepoUrlInfo'
+import PoweredBy from './poweredBy'
 
 export {
   SmallCloud,
@@ -44,4 +45,5 @@ export {
   Home,
   StroveButton,
   NoRepoUrlInfo,
+  PoweredBy,
 }
