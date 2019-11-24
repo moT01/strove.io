@@ -13,6 +13,7 @@ import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
 import AddProjectModals from './addProjectModals'
+import { navigate } from 'gatsby'
 
 const StyledModal = styled(Modal)`
   background: none;
@@ -66,24 +67,28 @@ const AddProjectProvider = ({ children }) => {
     }
 
     const existingProject = projects.find(
-      project =>
-        console.log(
-          'project.repoLink',
-          project.repoLink,
-          'repoLink',
-          `${repoLink}.git`
-        ) || project.repoLink === `${repoLink}.git`
+      project => project.repoLink === `${repoLink}.git`
     )
 
     if (existingProject) {
-      return dispatch(
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: { projectId: existingProject?.id },
-          onSuccessDispatch: null,
-        })
+      console.log(
+        'existingProject',
+        existingProject,
+        'existingProject.additionalPorts?.machineId',
+        existingProject?.machineId
       )
+      if (existingProject.machineId) {
+        return navigate('app/editor')
+      } else {
+        return dispatch(
+          mutation({
+            name: 'continueProject',
+            mutation: CONTINUE_PROJECT,
+            variables: { projectId: existingProject?.id },
+            onSuccessDispatch: null,
+          })
+        )
+      }
     } else {
       dispatch(
         actions.incomingProject.addIncomingProject({
