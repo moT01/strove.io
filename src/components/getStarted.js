@@ -160,8 +160,7 @@ const GetStarted = ({ addProject }) => {
       </Title>
       <Formik
         onSubmit={(values, actions) => {
-          values.repoLink.trim() &&
-            addProject({ link: values.repoLink.replace(/.git$/, '') })
+          values.repoLink.trim() && addProject({ link: values.repoLink })
           actions.setSubmitting(false)
         }}
         validate={validateRepoLink}
