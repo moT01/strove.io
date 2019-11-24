@@ -49,6 +49,11 @@ const Run = () => {
   )
 }
 
+/*
+  Repo are passed via repoLink parameter.
+  For example, to open strove website use:
+  https://strove.io/embed/runProject/?repoUrl=https://github.com/stroveio/strove.io
+*/
 export default memo(() => (
   <ThemeProvider theme={theme}>
     <AddProjectProvider>

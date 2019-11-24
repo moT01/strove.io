@@ -40,7 +40,8 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Login = () => {
-  const repoUrl = getWindowSearchParams()?.get('repoUrl')
+  const searchParams = getWindowSearchParams()
+  const repoUrl = searchParams.get('repoUrl')
   const repoProvider = getRepoProvider(repoUrl)
   const loginProvider = loginOptions.find(
     option => option.value === repoProvider
