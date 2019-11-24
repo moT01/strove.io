@@ -1,39 +1,20 @@
 import React, { memo } from 'react'
-import { navigate } from 'gatsby'
+// import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import {
-  StroveButton,
-  AddProjectProvider,
   GlobalStyles,
   NoRepoUrlInfo,
   PoweredBy,
+  ExternalLink,
 } from 'components'
 import { selectors } from 'state'
-import { getWindowSearchParams, getWindowPathName } from 'utils'
+import { getWindowSearchParams } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
-  }
-`
-
-const ButtonFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.9;
-  }
-`
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -56,59 +37,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const StyledAnchor = styled.a`
-  display: flex;
-  flex-direction: row;
-  height: 60px;
-  width: 300px;
-  margin: 5px;
-  padding: 0.5vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c1 : theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  font-size: 0.9rem;
-  color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-
-  > svg {
-    fill: ${({ theme }) => theme.colors.c2};
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
-  }
-
-  :focus {
-    outline: 0;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        transform: translateY(-1px);
-        box-shadow: 0 1.1vh 1.1vh -1.2vh ${({ theme }) => theme.colors.c1};
-      }
-    `}
-`
-
 /* Todo: Add embed only loading screen */
 const EmbedWrapper = () => {
   const token = useSelector(getToken)
@@ -126,14 +54,14 @@ const EmbedWrapper = () => {
       <Wrapper>
         <MenuWrapper invert>
           {repoUrl ? (
-            <StyledAnchor
+            <ExternalLink
               primary
               href={`/fromEmbed/login/?repoUrl=${repoUrl}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               <LoginText invert>Login to start coding</LoginText>
-            </StyledAnchor>
+            </ExternalLink>
           ) : (
             <NoRepoUrlInfo />
           )}
