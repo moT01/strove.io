@@ -65,13 +65,34 @@ const AddProjectProvider = ({ children }) => {
       repoLink = ''
     }
 
-    dispatch(
-      actions.incomingProject.addIncomingProject({
-        repoLink,
-        repoProvider,
-        name,
-      })
+    const existingProject = projects.find(
+      project =>
+        console.log(
+          'project.repoLink',
+          project.repoLink,
+          'repoLink',
+          `${repoLink}.git`
+        ) || project.repoLink === `${repoLink}.git`
     )
+
+    if (existingProject) {
+      return dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId: existingProject?.id },
+          onSuccessDispatch: null,
+        })
+      )
+    } else {
+      dispatch(
+        actions.incomingProject.addIncomingProject({
+          repoLink,
+          repoProvider,
+          name,
+        })
+      )
+    }
 
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
@@ -101,26 +122,7 @@ const AddProjectProvider = ({ children }) => {
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
     } else {
-      const existingProject = projects.find(
-        project =>
-          console.log(
-            'project.repoLink',
-            project.repoLink,
-            'repoLink',
-            repoLink
-          ) || project.repoLink === repoLink
-      )
-
-      if (existingProject) {
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: { projectId: existingProject?.id },
-          onSuccessDispatch: null,
-        })
-      } else {
-        createProject({ repoLink, dispatch, user, setModalContent, name })
-      }
+      createProject({ repoLink, dispatch, user, setModalContent, name })
     }
   }
 
