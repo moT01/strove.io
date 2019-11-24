@@ -26,5 +26,5 @@ export default link => {
     repoLink = `https://${accountName}@bitbucket.org/${accountName}/${repoName}`
   }
 
-  return repoLink.replace('.git', '')
+  return repoLink // ToDo: Decide if this replac stays .replace('.git', '')
 }
