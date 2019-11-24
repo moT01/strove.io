@@ -4,7 +4,12 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import { loginOptions } from 'constants'
-import { StroveButton, GlobalStyles, NoRepoUrlInfo } from 'components'
+import {
+  StroveButton,
+  GlobalStyles,
+  NoRepoUrlInfo,
+  ExternalLink,
+} from 'components'
 import { getRepoProvider, getWindowSearchParams } from 'utils'
 
 const MenuWrapper = styled.div`
@@ -75,10 +80,15 @@ const Login = () => {
         <MenuWrapper invert>
           {loginProvider ? (
             <div>
-              <StyledButton isPrimary key={loginProvider.label}>
+              <ExternalLink
+                primary
+                href={loginProvider.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {loginProvider.icon}
                 <LoginText invert>Login with {loginProvider.label}</LoginText>
-              </StyledButton>
+              </ExternalLink>
               {redirectTo ? (
                 <RedirectInfoWrapper>
                   You'll be redirected back to <Url>{redirectTo}</Url> once you

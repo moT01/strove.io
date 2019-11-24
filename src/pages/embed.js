@@ -37,7 +37,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-/* Todo: Add embed only loading screen */
 const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
