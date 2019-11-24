@@ -50,17 +50,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const StyledButton = styled(StroveButton)`
-  height: 60px;
-  width: 300px;
-  > svg {
-    fill: ${({ theme }) => theme.colors.c2};
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
-  }
-`
-
 const StyledAnchor = styled.a`
   display: flex;
   flex-direction: row;
@@ -86,12 +75,11 @@ const StyledAnchor = styled.a`
   animation: ${FadeIn} 0.5s ease-out;
   opacity: 0.9;
 
-  svg {
-    fill: ${({ invert, theme }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
-    height: auto;
-    margin-left: 5px;
+  > svg {
+    fill: ${({ theme }) => theme.colors.c2};
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
   }
 
   :focus {
@@ -115,12 +103,25 @@ const StyledAnchor = styled.a`
     `}
 `
 
+const NoRepoUrlInfo = styled.div`
+  font-size: 21px;
+  font-weight: 600;
+  text-align: center;
+`
+
+const RepoUrlInfoExample = styled.div`
+  font-size: 18px;
+  text-align: center;
+  font-style: italic;
+  margin-top: 10px;
+`
+
 /* Todo: Add embed only loading screen */
 const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
-  // const searchParams = getWindowSearchParams()
-  // const projectUrl = searchParams.get('projectUrl')
+  const searchParams = getWindowSearchParams()
+  const projectUrl = searchParams.get('projectUrl')
 
   // if (!token && getWindowPathName() !== `/embed/`) {
   //   // If users is not logged in, redirect to the embed main page.
@@ -134,9 +135,20 @@ const EmbedWrapper = () => {
           {/* <StyledButton isPrimary>
             <LoginText invert>Login to start coding</LoginText>
           </StyledButton> */}
-          <StyledAnchor primary>
-            <LoginText invert>Login to start coding</LoginText>
-          </StyledAnchor>
+          {projectUrl ? (
+            <StyledAnchor primary>
+              <LoginText invert>Login to start coding</LoginText>
+            </StyledAnchor>
+          ) : (
+            <div>
+              <NoRepoUrlInfo>
+                Please provide repoUrl in url parameters. Example:
+              </NoRepoUrlInfo>
+              <RepoUrlInfoExample>
+                https://strove.io/embed/?repoUrl=https://github.com/validatorjs/validator.js
+              </RepoUrlInfoExample>
+            </div>
+          )}
         </MenuWrapper>
       </Wrapper>
     </ThemeProvider>
