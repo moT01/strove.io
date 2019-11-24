@@ -10,6 +10,7 @@ import {
   AddProjectProvider,
   GlobalStyles,
   NoRepoUrlInfo,
+  PoweredBy,
 } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getWindowPathName } from 'utils'
@@ -136,6 +137,7 @@ const EmbedWrapper = () => {
           ) : (
             <NoRepoUrlInfo />
           )}
+          <PoweredBy />
         </MenuWrapper>
       </Wrapper>
       <GlobalStyles />
