@@ -31,7 +31,7 @@ const Button = styled.button`
   letter-spacing: ${props =>
     props.letterSpacing ? props.letterSpacing : 'normal'};
   height: ${props => (props.height ? props.height : 'auto')};
-  min-width: 70px;
+  min-width: ${props => (props.minWidth ? props.minWidth : '70px')};
   max-width: ${props => (props.maxWidth ? props.maxWidth : 'none')};
   width: ${props => (props.width ? props.width : '100%')};
   display: flex;

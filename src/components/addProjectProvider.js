@@ -2,7 +2,13 @@ import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import { createProject, getRepoProvider , changeRepoLinkFromSshToHttps} from 'utils'
+import {
+  createProject,
+  getRepoProvider,
+  changeRepoLinkFromSshToHttps,
+  mutation,
+} from 'utils'
+import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
@@ -93,7 +99,26 @@ const AddProjectProvider = ({ children }) => {
     } else if (currentProjectId) {
       setModalContent('AnotherActiveProject')
     } else {
-      createProject({ repoLink, dispatch, user, setModalContent, name })
+      const existingProject = projects.find(
+        project =>
+          console.log(
+            'project.repoLink',
+            project.repoLink,
+            'repoLink',
+            repoLink
+          ) || project.repoLink === repoLink
+      )
+
+      if (existingProject) {
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId: existingProject?.id },
+          onSuccessDispatch: null,
+        })
+      } else {
+        createProject({ repoLink, dispatch, user, setModalContent, name })
+      }
     }
   }
 
