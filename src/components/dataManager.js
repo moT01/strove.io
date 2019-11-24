@@ -212,6 +212,8 @@ export default memo(({ children, addProject }) => {
 
         const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
 
+        // console.log('redirectAdress', redirectAdress)
+
         /* Redirect to project */
         return window.location.replace(redirectAdress)
       }

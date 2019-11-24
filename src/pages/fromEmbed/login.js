@@ -63,7 +63,7 @@ const Login = () => {
             <>
               <ExternalLink
                 primary
-                href={`${loginProvider.href}${redirectTo}`}
+                href={`${loginProvider.embedHref}${redirectTo}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
