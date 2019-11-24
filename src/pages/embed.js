@@ -108,39 +108,23 @@ const StyledAnchor = styled.a`
     `}
 `
 
-// const NoRepoUrlInfo = styled.div`
-//   font-size: 21px;
-//   font-weight: 600;
-//   text-align: center;
-// `
-
-// const RepoUrlInfoExample = styled.div`
-//   font-size: 18px;
-//   text-align: center;
-//   font-style: italic;
-//   margin-top: 10px;
-// `
-
 /* Todo: Add embed only loading screen */
 const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
-  const projectUrl = searchParams.get('projectUrl')
+  const repoUrl = searchParams.get('repoUrl')
 
-  // if (!token && getWindowPathName() !== `/embed/`) {
-  //   // If users is not logged in, redirect to the embed main page.
-  //   navigate('/embed/')
-  // }
+  if (token && repoUrl) {
+    // If users is logged in, redirect to the embed run.
+    navigate(`/embed/run/?repoUrl=${repoUrl}`)
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
-          {/* <StyledButton isPrimary>
-            <LoginText invert>Login to start coding</LoginText>
-          </StyledButton> */}
-          {projectUrl ? (
+          {repoUrl ? (
             <StyledAnchor primary>
               <LoginText invert>Login to start coding</LoginText>
             </StyledAnchor>
@@ -149,6 +133,7 @@ const EmbedWrapper = () => {
           )}
         </MenuWrapper>
       </Wrapper>
+      <GlobalStyles />
     </ThemeProvider>
   )
 }
