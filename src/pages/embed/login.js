@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import { loginOptions } from 'constants'
-import { StroveButton, GlobalStyles } from 'components'
+import { StroveButton, GlobalStyles, NoRepoUrlInfo } from 'components'
 import { getRepoProvider, getWindowSearchParams } from 'utils'
 
 const MenuWrapper = styled.div`
@@ -56,12 +56,7 @@ const Login = () => {
               <LoginText invert>Login with {loginProvider.label}</LoginText>
             </StyledButton>
           ) : (
-            <h3>
-              Please provide repoUrl. Example:{' '}
-              <i>
-                https://strove.io/embed/?repoUrl=https://github.com/validatorjs/validator.js
-              </i>
-            </h3>
+            <NoRepoUrlInfo />
           )}
         </MenuWrapper>
       </Wrapper>
