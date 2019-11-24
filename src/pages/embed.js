@@ -115,17 +115,22 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
 
-  if (token && repoUrl) {
-    // If users is logged in, redirect to the embed run.
-    navigate(`/embed/run/?repoUrl=${repoUrl}`)
-  }
+  // if (token && repoUrl) {
+  //   // If user is logged in, redirect to the embed project run
+  //   navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+  // }
 
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
           {repoUrl ? (
-            <StyledAnchor primary>
+            <StyledAnchor
+              primary
+              href={`/fromEmbed/login/?repoUrl=${repoUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <LoginText invert>Login to start coding</LoginText>
             </StyledAnchor>
           ) : (
