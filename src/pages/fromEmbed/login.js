@@ -4,12 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import { loginOptions } from 'constants'
-import {
-  StroveButton,
-  GlobalStyles,
-  NoRepoUrlInfo,
-  ExternalLink,
-} from 'components'
+import { GlobalStyles, NoRepoUrlInfo, ExternalLink } from 'components'
 import { getRepoProvider, getWindowSearchParams } from 'utils'
 
 const MenuWrapper = styled.div`
@@ -44,18 +39,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const StyledButton = styled(StroveButton)`
-  height: 60px;
-  width: 300px;
-  margin-bottom: 8px;
-  > svg {
-    fill: ${({ theme }) => theme.colors.c2};
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
-  }
-`
-
 const NoRedirectUrlInfo = styled.div`
   font-size: 18px;
   text-align: center;
@@ -72,17 +55,15 @@ const Login = () => {
     option => option.value === repoProvider
   )
 
-  console.log('redirectTo', redirectTo)
-
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
           {loginProvider ? (
-            <div>
+            <>
               <ExternalLink
                 primary
-                href={loginProvider.href}
+                href={`${loginProvider.href}${redirectTo}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -99,7 +80,7 @@ const Login = () => {
                   Ops! No redirect link available!
                 </NoRedirectUrlInfo>
               )}
-            </div>
+            </>
           ) : (
             <NoRepoUrlInfo />
           )}
