@@ -5,7 +5,12 @@ import styled, { css, keyframes } from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
-import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
+import {
+  StroveButton,
+  AddProjectProvider,
+  GlobalStyles,
+  NoRepoUrlInfo,
+} from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getWindowPathName } from 'utils'
 
@@ -103,18 +108,18 @@ const StyledAnchor = styled.a`
     `}
 `
 
-const NoRepoUrlInfo = styled.div`
-  font-size: 21px;
-  font-weight: 600;
-  text-align: center;
-`
+// const NoRepoUrlInfo = styled.div`
+//   font-size: 21px;
+//   font-weight: 600;
+//   text-align: center;
+// `
 
-const RepoUrlInfoExample = styled.div`
-  font-size: 18px;
-  text-align: center;
-  font-style: italic;
-  margin-top: 10px;
-`
+// const RepoUrlInfoExample = styled.div`
+//   font-size: 18px;
+//   text-align: center;
+//   font-style: italic;
+//   margin-top: 10px;
+// `
 
 /* Todo: Add embed only loading screen */
 const EmbedWrapper = () => {
@@ -140,14 +145,7 @@ const EmbedWrapper = () => {
               <LoginText invert>Login to start coding</LoginText>
             </StyledAnchor>
           ) : (
-            <div>
-              <NoRepoUrlInfo>
-                Please provide repoUrl in url parameters. Example:
-              </NoRepoUrlInfo>
-              <RepoUrlInfoExample>
-                https://strove.io/embed/?repoUrl=https://github.com/validatorjs/validator.js
-              </RepoUrlInfoExample>
-            </div>
+            <NoRepoUrlInfo />
           )}
         </MenuWrapper>
       </Wrapper>
