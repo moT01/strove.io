@@ -19,7 +19,6 @@ export default link => {
   if (repoLink.includes('git@bitbucket')) {
     const sshLinkParts = repoLink.split(':')
     const repoDetails = sshLinkParts[1].split('/')
-    // console.log('repoDetails', repoDetails)
     const accountName = repoDetails[0]
     const repoName = repoDetails[1]
     repoLink = `https://gitlab.com/${sshLinkParts[1]}`

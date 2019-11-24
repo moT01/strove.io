@@ -71,12 +71,6 @@ const AddProjectProvider = ({ children }) => {
     )
 
     if (existingProject) {
-      console.log(
-        'existingProject',
-        existingProject,
-        'existingProject.additionalPorts?.machineId',
-        existingProject?.machineId
-      )
       if (existingProject.machineId) {
         return navigate('app/editor')
       } else {
