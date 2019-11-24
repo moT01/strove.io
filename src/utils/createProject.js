@@ -9,7 +9,6 @@ const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
-/* Todo: This is called two times on certain ocassions, fix */
 const createProject = async ({
   repoLink,
   dispatch,
@@ -89,7 +88,7 @@ const createProject = async ({
 
           const token = access_token?.data?.getbitBucketToken
 
-          /* Todo: This endpoint seems to work inconsistently - some repos are not returned. Investigate. */
+          /* Todo: This endpoint does not allow 10+ results. Investigate other ways to do it. */
           if (token) {
             const { values } = await fetch(
               `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
