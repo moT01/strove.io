@@ -20,6 +20,13 @@ const LoginText = styled.span`
   font-size: 20px;
 `
 
+const RedirectInfoWrapper = styled.div`
+  font-size: 16px;
+  text-align: center;
+  line-height: 1;
+  width: 300px;
+`
+
 const Wrapper = styled.div`
   display: flex;
   height: 97vh;
@@ -31,6 +38,7 @@ const Wrapper = styled.div`
 const StyledButton = styled(StroveButton)`
   height: 60px;
   width: 300px;
+  margin-bottom: 8px;
   > svg {
     fill: ${({ theme }) => theme.colors.c2};
     width: 30px;
@@ -39,23 +47,44 @@ const StyledButton = styled(StroveButton)`
   }
 `
 
+const NoRedirectUrlInfo = styled.div`
+  font-size: 18px;
+  text-align: center;
+  font-style: italic;
+  margin-top: 10px;
+`
+
 const Login = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
+  const redirectTo = searchParams.get('redirectTo')
   const repoProvider = getRepoProvider(repoUrl)
   const loginProvider = loginOptions.find(
     option => option.value === repoProvider
   )
+
+  console.log('redirectTo', redirectTo)
 
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <MenuWrapper invert>
           {loginProvider ? (
-            <StyledButton isPrimary key={loginProvider.label}>
-              {loginProvider.icon}
-              <LoginText invert>Login with {loginProvider.label}</LoginText>
-            </StyledButton>
+            <div>
+              <StyledButton isPrimary key={loginProvider.label}>
+                {loginProvider.icon}
+                <LoginText invert>Login with {loginProvider.label}</LoginText>
+              </StyledButton>
+              {redirectTo ? (
+                <RedirectInfoWrapper>
+                  You'll be redirected back to ${redirectTo} once you log in!
+                </RedirectInfoWrapper>
+              ) : (
+                <NoRedirectUrlInfo>
+                  Ops! No redirect link available!
+                </NoRedirectUrlInfo>
+              )}
+            </div>
           ) : (
             <NoRepoUrlInfo />
           )}
