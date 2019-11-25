@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
-// import { navigate } from 'gatsby'
+import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
@@ -43,10 +43,10 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
 
-  // if (token && repoUrl) {
-  //   // If user is logged in, redirect to the embed project run
-  //   navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
-  // }
+  if (token && repoUrl) {
+    // If user is logged in, redirect to the embed project run
+    navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+  }
 
   return (
     <ThemeProvider theme={theme}>
