@@ -4,12 +4,12 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
+import { getRepoUrl } from 'utils'
 
 const MenuWrapper = styled.div`
   padding: 20px;
   background-color: ${({ theme, invert }) =>
     invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
   position: relative;
 `
 
@@ -37,11 +37,18 @@ const StyledButton = styled(StroveButton)`
   }
 `
 
-const Run = () => {
+const Run = ({ addProject }) => {
+  const onClick = () => {
+    addProject({ link: repoLink })
+  }
+
+  // This is a workaround fix for getRepoLink returning link in "https:/github" format with single "/" instead of double
+  const repoLink = getRepoUrl().slice(0, 7) + getRepoUrl().slice(6)
+
   return (
     <Wrapper>
       <MenuWrapper invert>
-        <StyledButton isPrimary>
+        <StyledButton isPrimary onClick={onClick}>
           <LoginText invert>Run with Strove</LoginText>
         </StyledButton>
       </MenuWrapper>
