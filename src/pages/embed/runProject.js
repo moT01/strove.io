@@ -43,7 +43,7 @@ const Run = ({ addProject }) => {
   }
 
   // Todo: This does not work on some browsers, use a consistent approach
-  const repoLink = getRepoUrl()
+  const repoLink = getRepoUrl().slice(0, 7) + getRepoUrl().slice(6)
 
   return (
     <Wrapper>
