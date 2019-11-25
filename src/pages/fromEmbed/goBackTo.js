@@ -36,12 +36,11 @@ const GoBackTo = () => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
-  const repoUrl = searchParams.get('url')
+  const redirectUrl = searchParams.get('url')
 
-  // if (token && repoUrl) {
-  //   // If user is logged in, redirect to the embed project run
-  //   navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
-  // }
+  if (redirectUrl) {
+    window.location.replace(redirectUrl)
+  }
 
   return (
     <ThemeProvider theme={theme}>
