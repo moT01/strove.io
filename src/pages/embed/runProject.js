@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
 import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
-import { getRepoUrl } from 'utils'
+import { getWindowSearchParams } from 'utils'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -38,12 +38,16 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject }) => {
-  const onClick = () => {
-    addProject({ link: repoLink })
-  }
+
 
   // Todo: This does not work on some browsers, use a consistent approach
-  const repoLink = getRepoUrl().slice(0, 7) + getRepoUrl().slice(6)
+  const searchParams = getWindowSearchParams()
+  const repoUrl = searchParams.get('repoUrl')
+  // .slice(0, 7) + getRepoUrl().slice(6)
+
+  const onClick = () => {
+    addProject({ link: repoUrl })
+  }
 
   return (
     <Wrapper>
