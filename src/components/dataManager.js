@@ -13,12 +13,19 @@ import {
   ACTIVE_PROJECT,
   START_PROJECT,
 } from 'queries'
-import { mutation, query } from 'utils'
-import { window, getWindowHref } from 'utils'
+import {
+  mutation,
+  query,
+  getWindowPathName,
+  window,
+  getWindowHref,
+  getWindowSearchParams,
+} from 'utils'
 import { selectors } from 'state'
-import client from '../../client'
 import { C } from 'state'
 import { actions } from 'state'
+
+import client from '../../client'
 
 export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
@@ -143,7 +150,14 @@ export default memo(({ children, addProject }) => {
           })
         )
       } else if (queuePosition === 0 && project?.machineId) {
-        navigate('/app/editor/')
+        const path = getWindowPathName()
+        if (path.includes('embed')) {
+          const searchParams = getWindowSearchParams()
+          const repoUrl = searchParams.get('repoUrl')
+          navigate(`/embed/reditor/?repoUrl=${repoUrl}`)
+        } else {
+          navigate('/app/dashboard')
+        }
         if (type === 'continueProject') {
           try {
             dispatch({
