@@ -42,8 +42,8 @@ const Run = ({ addProject }) => {
     addProject({ link: repoLink })
   }
 
-  // This is a workaround fix for getRepoLink returning link in "https:/github" format with single "/" instead of double
-  const repoLink = getRepoUrl().slice(0, 7) + getRepoUrl().slice(6)
+  // Todo: This does not work on some browsers, use a consistent approach
+  const repoLink = getRepoUrl()
 
   return (
     <Wrapper>
