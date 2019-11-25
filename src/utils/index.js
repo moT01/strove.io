@@ -7,6 +7,7 @@ import {
   getWindowPathName,
   getWindowSearchParams,
   getWindowHref,
+  getRepoUrl,
 } from './windowUtils'
 import getRepoProvider from './getRepoProvider'
 import changeRepoLinkFromSshToHttps from './changeRepoLinkFromSshToHttps'
@@ -22,5 +23,6 @@ export {
   getWindowSearchParams,
   getWindowHref,
   getRepoProvider,
+  getRepoUrl,
   changeRepoLinkFromSshToHttps,
 }

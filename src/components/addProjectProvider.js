@@ -92,6 +92,7 @@ const AddProjectProvider = ({ children }) => {
         })
       )
     }
+    console.log(repoLink)
 
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
