@@ -41,20 +41,20 @@ exports.createPages = ({ actions }) => {
     force: true,
   })
   createRedirect({
-    fromPath: 'https://strove.io/embed/goBackTo/*',
+    fromPath: 'https://strove.io/fromEmbed/goBackTo/*',
     toPath: ':splat',
     isPermanent: true,
     force: true,
   })
   createRedirect({
-    fromPath: 'https://www.strove.io/embed/goBackTo/*',
+    fromPath: 'https://www.strove.io/fromEmbed/goBackTo/*',
     toPath: ':splat',
     isPermanent: true,
     force: true,
   })
 
   createRedirect({
-    fromPath: 'http://localhost:8000/embed/goBackTo/*',
+    fromPath: 'http://localhost:8000/fromEmbed/goBackTo/*',
     toPath: ':splat',
     isPermanent: true,
     force: true,
