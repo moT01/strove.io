@@ -1,15 +1,5 @@
 import React, { memo } from 'react'
-import { navigate } from 'gatsby'
-import { useSelector } from 'react-redux'
 import styled, { css, keyframes } from 'styled-components'
-import { ThemeProvider } from 'styled-components'
-
-import { theme } from 'constants'
-import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
-import { selectors } from 'state'
-import { getWindowSearchParams, getWindowPathName } from 'utils'
-
-const getToken = selectors.api.getUserField('siliskyToken')
 
 const FadeIn = keyframes`
   0% {

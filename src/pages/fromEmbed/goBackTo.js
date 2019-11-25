@@ -1,20 +1,10 @@
 import React, { memo } from 'react'
-// import { navigate } from 'gatsby'
-import { useSelector } from 'react-redux'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from 'constants'
-import {
-  GlobalStyles,
-  NoRepoUrlInfo,
-  PoweredBy,
-  ExternalLink,
-} from 'components'
-import { selectors } from 'state'
+import { GlobalStyles } from 'components'
 import { getWindowSearchParams } from 'utils'
-
-const getToken = selectors.api.getUserField('siliskyToken')
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -33,8 +23,6 @@ const Wrapper = styled.div`
 `
 
 const GoBackTo = () => {
-  const token = useSelector(getToken)
-
   const searchParams = getWindowSearchParams()
   const redirectUrl = searchParams.get('url')
 
