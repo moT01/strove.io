@@ -8,7 +8,6 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import { getWindowSearchParams } from 'utils'
-import { Layout } from 'components'
 import { actions } from 'state'
 import client from './client'
 import rootReducer from './src/state'
@@ -40,9 +39,7 @@ export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <WithAnalyticsWrapper>
-          <Layout>{element}</Layout>
-        </WithAnalyticsWrapper>
+        <WithAnalyticsWrapper>{element}</WithAnalyticsWrapper>
       </PersistGate>
     </Provider>
   </ApolloProvider>
