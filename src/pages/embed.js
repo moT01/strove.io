@@ -42,9 +42,9 @@ const EmbedWrapper = () => {
 
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
-
+  /* Optional url seatch param allowing to specify exactly where should the user be redirected to */
   const goBackTo =
-    window.location != window.parent.location
+    searchParams.get('goBackTo') || window.location != window.parent.location
       ? document.referrer
       : document.location.href
 
