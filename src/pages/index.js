@@ -1,12 +1,13 @@
 import React, { memo } from 'react'
 
-import { SEO, Layout, Home } from 'components'
+import { SEO, Header, Home } from 'components'
 
 const IndexPage = () => (
-  <Layout>
+  <>
     <SEO title="Strove" />
+    <Header />
     <Home />
-  </Layout>
+  </>
 )
 
 export default memo(IndexPage)

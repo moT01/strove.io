@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 
-import { Layout, SEO } from 'components'
+import { SEO, Header } from 'components'
 
 const CodeArea = styled.div`
   position: absolute;
@@ -89,10 +89,11 @@ const NotFound = () => (
 )
 
 const NotFoundPage = () => (
-  <Layout>
+  <>
     <SEO title="404: Not found" />
+    <Header />
     <NotFound />
-  </Layout>
+  </>
 )
 
 export default memo(NotFoundPage)

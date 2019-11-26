@@ -18,9 +18,9 @@ import { C } from 'state'
 import { selectors } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
-import Layout from './layout'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
+import Header from './header'
 
 const FullFadeIn = keyframes`
   0% {
@@ -247,8 +247,9 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
+    <>
       <SEO title="Dashboard" />
+      <Header />
       <PageWrapper>
         <GetStarted />
         <TilesWrapper>
@@ -402,7 +403,7 @@ const Dashboard = () => {
           maxWidth={'150px'}
         />
       </Modal>
-    </Layout>
+    </>
   )
 }
 
