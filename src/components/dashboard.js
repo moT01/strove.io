@@ -1,6 +1,6 @@
 import React, { useState, memo } from 'react'
 import { navigate } from 'gatsby'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
