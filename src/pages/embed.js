@@ -43,6 +43,11 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
 
+  const redirectTo =
+    window.location != window.parent.location
+      ? document.referrer
+      : document.location.href
+
   if (token && repoUrl) {
     // If user is logged in, redirect to the embed project run
     navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
@@ -55,7 +60,7 @@ const EmbedWrapper = () => {
           {repoUrl ? (
             <ExternalLink
               primary
-              href={`/fromEmbed/login/?repoUrl=${repoUrl}`}
+              href={`/fromEmbed/login/?repoUrl=${repoUrl}?goBackTo=${redirectTo}`}
               target="_blank"
               rel="noopener noreferrer"
             >
