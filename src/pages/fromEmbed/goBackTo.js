@@ -24,10 +24,10 @@ const Wrapper = styled.div`
 
 const GoBackTo = () => {
   const searchParams = getWindowSearchParams()
-  const redirectUrl = searchParams.get('url')
+  const goBackTo = searchParams.get('goBackTo')
 
-  if (redirectUrl) {
-    window.location.replace(redirectUrl)
+  if (goBackTo) {
+    window.location.replace(goBackTo)
   }
 
   return (

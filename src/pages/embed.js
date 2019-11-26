@@ -43,7 +43,7 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
 
-  const redirectTo =
+  const goBackTo =
     window.location != window.parent.location
       ? document.referrer
       : document.location.href
@@ -60,7 +60,7 @@ const EmbedWrapper = () => {
           {repoUrl ? (
             <ExternalLink
               primary
-              href={`/fromEmbed/login/?repoUrl=${repoUrl}?goBackTo=${redirectTo}`}
+              href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
               target="_blank"
               rel="noopener noreferrer"
             >
