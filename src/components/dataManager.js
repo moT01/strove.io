@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
-import { navigate } from 'gatsby'
 
 import {
   GITHUB_LOGIN,
@@ -150,14 +149,6 @@ export default memo(({ children, addProject }) => {
           })
         )
       } else if (queuePosition === 0 && project?.machineId) {
-        const path = getWindowPathName()
-        if (path.includes('embed')) {
-          const searchParams = getWindowSearchParams()
-          const repoUrl = searchParams.get('repoUrl')
-          navigate(`/embed/editor/?repoUrl=${repoUrl}`)
-        } else {
-          navigate('/app/dashboard')
-        }
         if (type === 'continueProject') {
           try {
             dispatch({
@@ -188,6 +179,22 @@ export default memo(({ children, addProject }) => {
               data: project,
             })
           )
+        }
+        /*
+          The next to window.location.replace are a bad pattern forced by Gatsby.
+          It's bad because we lose the state and do a whole app rerender.
+          Navigate function from Gatsby does not work from wrapRootElement level.
+          ToDo: Check if using wrapPageElement will do the trick.
+        */
+        const path = getWindowPathName()
+        if (path.includes('embed')) {
+          const searchParams = getWindowSearchParams()
+          const repoUrl = searchParams.get('repoUrl')
+          window.location.replace(
+            `${process.env.SILISKY_URL}embed/editor/?repoUrl=${repoUrl}`
+          )
+        } else {
+          window.location.replace(`${process.env.SILISKY_URL}app/dashboard/`)
         }
       }
     }
