@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
+import { navigate } from 'gatsby'
 
 import {
   GITHUB_LOGIN,
@@ -190,11 +191,9 @@ export default memo(({ children, addProject }) => {
         if (path.includes('embed')) {
           const searchParams = getWindowSearchParams()
           const repoUrl = searchParams.get('repoUrl')
-          window.location.replace(
-            `${process.env.SILISKY_URL}embed/editor/?repoUrl=${repoUrl}`
-          )
+          navigate(`/embed/editor/?$repoUrl?${repoUrl}`)
         } else {
-          window.location.replace(`${process.env.SILISKY_URL}app/dashboard/`)
+          navigate('/app/editor/')
         }
       }
     }

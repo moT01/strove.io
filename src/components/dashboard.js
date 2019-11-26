@@ -248,7 +248,7 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
+    <>
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
@@ -404,7 +404,7 @@ const Dashboard = () => {
           maxWidth={'150px'}
         />
       </Modal>
-    </Layout>
+    </>
   )
 }
 
