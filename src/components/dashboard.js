@@ -21,6 +21,7 @@ import GetStarted from './getStarted'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header'
+import Layout from './layout'
 
 const FullFadeIn = keyframes`
   0% {
@@ -247,7 +248,7 @@ const Dashboard = () => {
   }
 
   return (
-    <>
+    <Layout>
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
@@ -403,7 +404,7 @@ const Dashboard = () => {
           maxWidth={'150px'}
         />
       </Modal>
-    </>
+    </Layout>
   )
 }
 
