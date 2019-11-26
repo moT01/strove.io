@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { navigate } from 'gatsby'
 
-import { Layout, FullScreenLoader, SEO } from 'components'
+import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
-import { mutation } from 'utils'
+import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 import dayjs from 'dayjs'
 
 const StyledIframe = styled.iframe`
@@ -65,9 +65,17 @@ const Editor = () => {
     const projectPing = setInterval(resetCron, 59000)
 
     const checkIfProjectIsActive = () => {
+      console.log('getWindowPathName', getWindowPathName())
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
-        navigate('/app/dashboard')
+        const path = getWindowPathName()
+        if (path.includes('embed')) {
+          const searchParams = getWindowSearchParams()
+          const repoUrl = searchParams.get('repoUrl')
+          navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+        } else {
+          navigate('/app/dashboard')
+        }
       }
     }
 
@@ -84,8 +92,9 @@ const Editor = () => {
     .substring(7)
 
   return (
-    <Layout>
+    <>
       <SEO title="Editor" />
+      <Header />
       {loaderVisible && (
         <FullScreenLoader
           isFullScreen={true}
@@ -98,7 +107,7 @@ const Editor = () => {
         onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
-    </Layout>
+    </>
   )
 }
 

@@ -1,5 +1,4 @@
 import React, { memo, useState, useEffect } from 'react'
-import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
@@ -9,7 +8,6 @@ import { ThemeProvider } from 'styled-components'
 import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
-import Header from './header'
 import GlobalStyles from './globalStyles'
 import { theme } from 'constants'
 
@@ -45,48 +43,33 @@ const Layout = ({ children, browser }) => {
   }, [browser])
 
   return (
-    <StaticQuery
-      query={graphql`
-        query SiteTitleQuery {
-          site {
-            siteMetadata {
-              title
-            }
-          }
-        }
-      `}
-      render={data => (
-        <ThemeProvider theme={theme}>
-          <AddProjectProvider>
-            {({ addProject }) => (
-              // data manager
-              <DataManager addProject={addProject}>
-                <WithAddProject addProject={addProject}>
-                  {user ? (
-                    <StyledModal
-                      isOpen={noSupportModalVisible}
-                      onRequestClose={() => setNoSupportModalVisible(false)}
-                      contentLabel={'Browser not supported'}
-                      ariaHideApp={false}
-                      isMobile={isMobile}
-                    >
-                      {isMobile
-                        ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
-                        : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
-                    </StyledModal>
-                  ) : (
-                    ''
-                  )}
-                  <GlobalStyles />
-                  <Header siteTitle={data.site.siteMetadata.title} />
-                  <MainContent>{children}</MainContent>
-                </WithAddProject>
-              </DataManager>
-            )}
-          </AddProjectProvider>
-        </ThemeProvider>
-      )}
-    />
+    <ThemeProvider theme={theme}>
+      <AddProjectProvider>
+        {({ addProject }) => (
+          <DataManager addProject={addProject}>
+            <WithAddProject addProject={addProject}>
+              {user ? (
+                <StyledModal
+                  isOpen={noSupportModalVisible}
+                  onRequestClose={() => setNoSupportModalVisible(false)}
+                  contentLabel={'Browser not supported'}
+                  ariaHideApp={false}
+                  isMobile={isMobile}
+                >
+                  {isMobile
+                    ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
+                    : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
+                </StyledModal>
+              ) : (
+                ''
+              )}
+              <GlobalStyles />
+              <MainContent>{children}</MainContent>
+            </WithAddProject>
+          </DataManager>
+        )}
+      </AddProjectProvider>
+    </ThemeProvider>
   )
 }
 

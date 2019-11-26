@@ -1,6 +1,6 @@
 import React, { useState, memo } from 'react'
 import { navigate } from 'gatsby'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -18,9 +18,10 @@ import { C } from 'state'
 import { selectors } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
-import Layout from './layout'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
+import Header from './header'
+import Layout from './layout'
 
 const FullFadeIn = keyframes`
   0% {
@@ -247,8 +248,9 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
+    <>
       <SEO title="Dashboard" />
+      <Header />
       <PageWrapper>
         <GetStarted />
         <TilesWrapper>
@@ -402,7 +404,7 @@ const Dashboard = () => {
           maxWidth={'150px'}
         />
       </Modal>
-    </Layout>
+    </>
   )
 }
 
