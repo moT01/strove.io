@@ -13,6 +13,7 @@ import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
 import LatencyIndicator from './latencyIndicator'
 import Login from './login'
+import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
   0% {
@@ -268,6 +269,7 @@ const HeaderComponent = ({ location }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
+  const isEmbedded = getWindowPathName().includes('embed')
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
@@ -303,16 +305,18 @@ const HeaderComponent = ({ location }) => {
         isUserInsideEditor={location.pathname === '/app/editor/'}
         mobile={isMobileOnly}
       >
-        <LinkWrapper mobile={isMobileOnly}>
-          <StyledLink to="/">
-            {isMobileOnly ? (
-              <Strove style={{ height: '25px' }} fill="#ffffff" />
-            ) : (
-              <LinkText>Strove</LinkText>
-            )}
-          </StyledLink>
-        </LinkWrapper>
-        {user && (
+        {!isEmbedded && (
+          <LinkWrapper mobile={isMobileOnly}>
+            <StyledLink to="/">
+              {isMobileOnly ? (
+                <Strove style={{ height: '25px' }} fill="#ffffff" />
+              ) : (
+                <LinkText>Strove</LinkText>
+              )}
+            </StyledLink>
+          </LinkWrapper>
+        )}
+        {user && !isEmbedded && (
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
@@ -323,7 +327,8 @@ const HeaderComponent = ({ location }) => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {location.pathname === '/app/editor/' && (
+
+        {location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
               <div style={{ position: 'relative' }}>
