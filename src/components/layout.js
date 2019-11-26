@@ -9,7 +9,6 @@ import { ThemeProvider } from 'styled-components'
 import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
-import Header from './header'
 import GlobalStyles from './globalStyles'
 import { theme } from 'constants'
 
@@ -78,7 +77,6 @@ const Layout = ({ children, browser }) => {
                     ''
                   )}
                   <GlobalStyles />
-                  <Header siteTitle={data.site.siteMetadata.title} />
                   <MainContent>{children}</MainContent>
                 </WithAddProject>
               </DataManager>
