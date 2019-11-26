@@ -7,7 +7,7 @@ import isEmail from 'validator/lib/isEmail'
 
 import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
-import { SEO, Layout, Modal } from 'components'
+import { SEO, Modal, Header } from 'components'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -382,8 +382,9 @@ const PricingPage = () => {
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-      <Layout>
+      <>
         <SEO title="Pricing" />
+        <Header />
         <CardsWrapper>
           <Card>
             <CardTitle>Individuals</CardTitle>
@@ -481,7 +482,7 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
         </CardsWrapper>
-      </Layout>
+      </>
     </>
   )
 }
