@@ -160,8 +160,7 @@ const GetStarted = ({ addProject }) => {
       </Title>
       <Formik
         onSubmit={(values, actions) => {
-          values.repoLink.trim() &&
-            addProject({ link: values.repoLink.replace(/.git$/, '') })
+          values.repoLink.trim() && addProject({ link: values.repoLink })
           actions.setSubmitting(false)
         }}
         validate={validateRepoLink}
@@ -186,6 +185,7 @@ const GetStarted = ({ addProject }) => {
               type="submit"
               text="Clone project"
               width="30%"
+              minWidth="200px"
             />
 
             <StyledErrors>{props.errors.repoLink}</StyledErrors>
@@ -198,6 +198,7 @@ const GetStarted = ({ addProject }) => {
         onClick={() => setAddProjectModalOpen(true)}
         text="Create empty project"
         width="30%"
+        minWidth="200px"
       />
       <AddEmptyProjectModal
         handleClose={setAddProjectModalOpen}

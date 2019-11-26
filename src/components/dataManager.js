@@ -13,12 +13,19 @@ import {
   ACTIVE_PROJECT,
   START_PROJECT,
 } from 'queries'
-import { mutation, query } from 'utils'
-import { window } from 'utils'
+import {
+  mutation,
+  query,
+  getWindowPathName,
+  window,
+  getWindowHref,
+  getWindowSearchParams,
+} from 'utils'
 import { selectors } from 'state'
-import client from '../../client'
 import { C } from 'state'
 import { actions } from 'state'
+
+import client from '../../client'
 
 export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
@@ -156,7 +163,6 @@ export default memo(({ children, addProject }) => {
           })
         )
       } else if (queuePosition === 0 && project?.machineId) {
-        navigate('/app/editor/')
         if (type === 'continueProject') {
           try {
             dispatch({
@@ -188,17 +194,31 @@ export default memo(({ children, addProject }) => {
             })
           )
         }
+        /*
+          The next to window.location.replace are a bad pattern forced by Gatsby.
+          It's bad because we lose the state and do a whole app rerender.
+          Navigate function from Gatsby does not work from wrapRootElement level.
+          ToDo: Check if using wrapPageElement will do the trick.
+        */
+        const path = getWindowPathName()
+        if (path.includes('embed')) {
+          const searchParams = getWindowSearchParams()
+          const repoUrl = searchParams.get('repoUrl')
+          navigate(`/embed/editor/?$repoUrl?${repoUrl}`)
+        } else {
+          navigate('/app/editor/')
+        }
       }
     }
   }, [startProjectData, startProjectError])
 
   useEffect(() => {
-    const code = window?.location?.href
+    const code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
 
-    const loginState = window?.location?.href
+    const loginState = getWindowHref()
       ?.match(/state=(.+)/g)
       ?.toString()
       .split('=')[1]
@@ -224,6 +244,8 @@ export default memo(({ children, addProject }) => {
           : decoredOrigin
 
         const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
+
+        // console.log('redirectAdress', redirectAdress)
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
@@ -359,7 +381,7 @@ export default memo(({ children, addProject }) => {
     window.addEventListener('beforeunload', ev => {
       ev.preventDefault()
 
-      if (navigator && navigator.sendBeacon) {
+      if (navigator?.sendBeacon && user) {
         navigator.sendBeacon(
           `${process.env.SILISKY_ENDPOINT}/beacon`,
           JSON.stringify({ token: localStorage.getItem('token') })
