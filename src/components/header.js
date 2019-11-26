@@ -30,11 +30,12 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
+  height: ${props => (props.isEmbed ? '20px' : 'auto')};
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   background: ${({ theme }) => theme.colors.c1};
   @media (max-width: 767px) {
-    height: 20px;
+    height: 5vh;
   }
 `
 
@@ -60,6 +61,7 @@ const LinkWrapper = styled.div`
 const LinkText = styled.h3`
   color: ${({ theme }) => theme.colors.c2};
   font-size: 1.2rem;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -69,7 +71,6 @@ const LinkText = styled.h3`
   margin: 0;
   cursor: pointer;
   @media (max-width: 767px) {
-    height: 100%;
     font-size: 18px;
   }
 
@@ -80,7 +81,7 @@ const LinkText = styled.h3`
 
 const DocsLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 1.2rem;
+  font-size: ${props => (props.isEmbed ? '16px' : '1.2rem')};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -112,7 +113,7 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
   position: relative;
   display: flex;
-  height: 25px;
+  height: ${props => (props.isEmbed ? '16px' : 'auto')};
   padding: 0;
 `
 
@@ -121,7 +122,8 @@ const LoginWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: ${props => (props.mobile ? '100%' : '2.5vh')};
+  height: ${props =>
+    props.mobile ? '100%' : props.isEmbed ? '20px' : '2.5vh'};
   margin: 0;
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
@@ -269,7 +271,7 @@ const HeaderComponent = ({ location }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
-  const isEmbedded = getWindowPathName().includes('embed')
+  const isEmbed = getWindowPathName().includes('embed')
 
   useEffect(() => {
     if (location.pathname === '/app/editor/') {
@@ -300,12 +302,13 @@ const HeaderComponent = ({ location }) => {
   }, [project?.machineName])
 
   return (
-    <HeaderSection mobile={isMobileOnly}>
+    <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
       <HeaderWrapper
         isUserInsideEditor={location.pathname === '/app/editor/'}
         mobile={isMobileOnly}
+        isEmbed={isEmbed}
       >
-        {!isEmbedded && (
+        {!isEmbed && (
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/">
               {isMobileOnly ? (
@@ -316,7 +319,7 @@ const HeaderComponent = ({ location }) => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {user && !isEmbedded && (
+        {user && !isEmbed && (
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
@@ -332,11 +335,11 @@ const HeaderComponent = ({ location }) => {
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
               <div style={{ position: 'relative' }}>
-                <LoginButton {...getToggleButtonProps({})}>
+                <LoginButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
                   {isMobileOnly ? (
                     <Desktop style={{ height: '20px' }} fill="#fff" />
                   ) : (
-                    <LinkText>Preview</LinkText>
+                    <LinkText isEmbed={isEmbed}>Preview</LinkText>
                   )}
                 </LoginButton>
                 <DropdownWrapper>
