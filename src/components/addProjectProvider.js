@@ -40,9 +40,9 @@ const AddProjectProvider = ({ children }) => {
   const subscription = useSelector(
     selectors.api.getApiData({ fields: 'subscription' })
   )
-  const subscriptionStatus = subscription.status
-  const projectsLimit =
-    (subscriptionStatus === 'active' && subscription.projects_limit) || 4
+  // const subscriptionStatus = subscription.status
+  const projectsLimit = 20
+  // (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
   const addProject = async ({ link, name }) => {
     let repoLink
