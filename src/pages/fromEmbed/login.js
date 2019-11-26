@@ -49,7 +49,7 @@ const NoRedirectUrlInfo = styled.div`
 const Login = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = searchParams.get('repoUrl')
-  const redirectTo = searchParams.get('redirectTo')
+  const goBackTo = searchParams.get('goBackTo')
   const repoProvider = getRepoProvider(repoUrl)
   const loginProvider = loginOptions.find(
     option => option.value === repoProvider
@@ -63,16 +63,16 @@ const Login = () => {
             <>
               <ExternalLink
                 primary
-                href={`${loginProvider.embedHref}?goBackTo=${redirectTo}&repoUrl=${repoUrl}`}
+                href={`${loginProvider.embedHref}?goBackTo=${goBackTo}&repoUrl=${repoUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {loginProvider.icon}
                 <LoginText invert>Login with {loginProvider.label}</LoginText>
               </ExternalLink>
-              {redirectTo ? (
+              {goBackTo ? (
                 <RedirectInfoWrapper>
-                  You'll be redirected back to <Url>{redirectTo}</Url> once you
+                  You'll be redirected back to <Url>{goBackTo}</Url> once you
                   log in!
                 </RedirectInfoWrapper>
               ) : (
