@@ -541,10 +541,7 @@ const Banner = () => {
         isMobile={isMobileOnly}
       >
         {!isMobile && (
-          <StyledIcon
-            type="close"
-            onClick={useCallback(() => setModalVisible(false))}
-          />
+          <StyledIcon type="close" onClick={() => setModalVisible(false)} />
         )}
         <GetStarted closeModal={closeModal} />
       </StyledModal>
