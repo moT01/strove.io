@@ -165,12 +165,12 @@ const Dashboard = () => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
-  const subscription = useSelector(
-    selectors.api.getApiData({ fields: 'subscription' })
-  )
+  // const subscription = useSelector(
+  //   selectors.api.getApiData({ fields: 'subscription' })
+  // )
 
-  const projectsLimit =
-    (subscription.status === 'active' && subscription.projects_limit) || 4
+  const projectsLimit = 20
+  // (subscription.status === 'active' && subscription.projects_limit) || 4
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
