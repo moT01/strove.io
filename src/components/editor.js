@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { navigate } from 'gatsby'
 
-import { Layout, FullScreenLoader, SEO } from 'components'
+import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
@@ -92,8 +92,9 @@ const Editor = () => {
     .substring(7)
 
   return (
-    <Layout>
+    <>
       <SEO title="Editor" />
+      <Header />
       {loaderVisible && (
         <FullScreenLoader
           isFullScreen={true}
@@ -106,7 +107,7 @@ const Editor = () => {
         onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
-    </Layout>
+    </>
   )
 }
 
