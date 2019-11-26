@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 import Footer from 'components/home/footer'
-import { SEO, Layout } from 'components'
+import { SEO, Layout, Header } from 'components'
 
 const TextWell = styled.div`
   align-self: center;
@@ -27,6 +27,7 @@ const StyledH1 = styled.h1`
 
 const Legal = () => (
   <Layout>
+    <Header />
     <SEO title="Terms And Conditions" />
     <TextWell>
       <StyledH1>Terms and Conditions</StyledH1>

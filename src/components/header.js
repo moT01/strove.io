@@ -260,7 +260,7 @@ const CopyWrapper = styled.div`
   }
 `
 
-const HeaderComponent = ({ siteTitle, location }) => {
+const HeaderComponent = ({ location }) => {
   const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
@@ -305,7 +305,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             {isMobileOnly ? (
               <Strove style={{ height: '25px' }} fill="#ffffff" />
             ) : (
-              <LinkText>{siteTitle}</LinkText>
+              <LinkText>Strove</LinkText>
             )}
           </StyledLink>
         </LinkWrapper>
