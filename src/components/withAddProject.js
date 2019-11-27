@@ -1,14 +1,15 @@
 import { useEffect, memo } from 'react'
-import { getWindowHref } from 'utils'
+import { getWindowHref, getRepoUrl } from 'utils'
 
 export default memo(({ children, addProject }) => {
   useEffect(() => {
-    let link =
-      getWindowHref()?.match(/#(.*)/) && getWindowHref().match(/#(.*)/)[1]
+    const repoUrl =
+      (getWindowHref()?.match(/#(.*)/) && getWindowHref().match(/#(.*)/)[1]) ||
+      getRepoUrl()
 
-    link &&
-      /.*(github|gitlab|bitbucket).(com|org)/i.test(link) &&
-      addProject({ link })
+    repoUrl &&
+      /.*(github|gitlab|bitbucket).(com|org)/i.test(repoUrl) &&
+      addProject({ link: repoUrl })
   }, [])
 
   return children
