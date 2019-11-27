@@ -102,6 +102,10 @@ const DocsLink = styled.a`
   }
 `
 
+const StroveLink = styled(DocsLink)`
+  font-size: 14px;
+`
+
 const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
@@ -197,7 +201,7 @@ const Option = styled.a`
   z-index: 4;
   text-decoration: none;
   font-weight: 300;
-  min-width: 150px;
+  min-width: ${props => (props.isEmbed ? '0' : '150px')};
 
   svg {
     fill: ${({ theme, invert }) =>
@@ -251,9 +255,9 @@ const DropdownWrapper = styled.div`
   cursor: pointer;
   position: absolute;
   background: none;
-  right: 1.5vw;
+  /* right: 1.5vw; */
   display: flex;
-  right: -10px;
+  right: ${props => (props.isEmbed ? '-75px' : '-10px')};
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
@@ -274,7 +278,7 @@ const HeaderComponent = ({ location }) => {
   const isEmbed = getWindowPathName().includes('embed')
 
   useEffect(() => {
-    if (location.pathname === '/app/editor/') {
+    if (location.pathname.includes('editor')) {
       if (project?.machineName) {
         setPorts(
           project.additionalPorts.map((portPair, index) => {
@@ -342,11 +346,16 @@ const HeaderComponent = ({ location }) => {
                     <LinkText isEmbed={isEmbed}>Preview</LinkText>
                   )}
                 </LoginButton>
-                <DropdownWrapper>
+                <DropdownWrapper isEmbed={isEmbed}>
                   {isOpen && (
                     <MenuWrapper invert>
                       {ports.map(item => (
-                        <Option invert key={item.value} href={item.href}>
+                        <Option
+                          invert
+                          key={item.value}
+                          href={item.href}
+                          isEmbed={isEmbed}
+                        >
                           <PreviewLink
                             style={{ color: '#fff', textDecoration: 'none' }}
                             href={item.href}
@@ -408,7 +417,17 @@ const HeaderComponent = ({ location }) => {
         )}
       </HeaderWrapper>
       {location.pathname.includes('editor') && <LatencyIndicator />}
+
       <LoginWrapper>
+        {isEmbed && (
+          <StroveLink
+            href="https://strove.io"
+            target="_blank"
+            isEmbed={isEmbed}
+          >
+            Powered by Strove.io
+          </StroveLink>
+        )}
         <Login isEmbed={isEmbed} />
       </LoginWrapper>
     </HeaderSection>
