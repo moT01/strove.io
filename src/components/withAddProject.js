@@ -4,8 +4,7 @@ import { getWindowHref, getRepoUrl } from 'utils'
 export default memo(({ children, addProject }) => {
   useEffect(() => {
     const repoUrl =
-      (getWindowHref()?.match(/#(.*)/) && getWindowHref().match(/#(.*)/)[1]) ||
-      getRepoUrl()
+      getWindowHref()?.match(/#(.*)/) && getWindowHref().match(/#(.*)/)[1]
 
     repoUrl &&
       /.*(github|gitlab|bitbucket).(com|org)/i.test(repoUrl) &&
