@@ -7,6 +7,7 @@ import {
   getRepoProvider,
   changeRepoLinkFromSshToHttps,
   mutation,
+  redirectToEditor,
   getWindowPathName,
   getWindowSearchParams,
 } from 'utils'
@@ -74,14 +75,7 @@ const AddProjectProvider = ({ children }) => {
 
     if (existingProject) {
       if (existingProject.machineId) {
-        const path = getWindowPathName()
-        if (path.includes('embed')) {
-          const searchParams = getWindowSearchParams()
-          const repoUrl = searchParams.get('repoUrl')
-          navigate(`/embed/editor/?$repoUrl?${repoUrl}`)
-        } else {
-          navigate('/app/editor/')
-        }
+        redirectToEditor()
       } else {
         return dispatch(
           mutation({
