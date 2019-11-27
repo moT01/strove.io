@@ -6,8 +6,8 @@ export default () => {
   if (path.includes('embed')) {
     const searchParams = getWindowSearchParams()
     const repoUrl = searchParams.get('repoUrl')
-    navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+    navigate(`/embed/editor/?$repoUrl?${repoUrl}`)
   } else {
-    navigate('/app/dashboard')
+    navigate('/app/editor/')
   }
 }
