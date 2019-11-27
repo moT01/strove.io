@@ -11,6 +11,7 @@ import {
 } from './windowUtils'
 import getRepoProvider from './getRepoProvider'
 import changeRepoLinkFromSshToHttps from './changeRepoLinkFromSshToHttps'
+import redirectToEditor from './redirectToEditor'
 
 export {
   query,
@@ -25,4 +26,5 @@ export {
   getRepoProvider,
   getRepoUrl,
   changeRepoLinkFromSshToHttps,
+  redirectToEditor
 }

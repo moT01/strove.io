@@ -7,6 +7,9 @@ import {
   getRepoProvider,
   changeRepoLinkFromSshToHttps,
   mutation,
+  redirectToEditor,
+  getWindowPathName,
+  getWindowSearchParams,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
@@ -72,7 +75,7 @@ const AddProjectProvider = ({ children }) => {
 
     if (existingProject) {
       if (existingProject.machineId) {
-        return navigate('app/editor')
+        redirectToEditor()
       } else {
         return dispatch(
           mutation({

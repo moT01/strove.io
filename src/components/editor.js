@@ -50,6 +50,8 @@ const Editor = () => {
     }
   }, [projectId, machineId])
 
+  console.log('getWindowPathName', getWindowPathName())
+
   useEffect(() => {
     const resetCron = () =>
       dispatch(
@@ -65,7 +67,6 @@ const Editor = () => {
     const projectPing = setInterval(resetCron, 59000)
 
     const checkIfProjectIsActive = () => {
-      console.log('getWindowPathName', getWindowPathName())
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
         const path = getWindowPathName()
