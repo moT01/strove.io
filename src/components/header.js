@@ -60,7 +60,7 @@ const LinkWrapper = styled.div`
 
 const LinkText = styled.h3`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEmbed ? '18px' : 'auto')};
+  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   height: 100%;
   display: flex;
   flex-direction: row;

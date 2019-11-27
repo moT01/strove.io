@@ -29,7 +29,7 @@ const LatencyWrapper = styled.div`
 
 const StyledText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEmbed ? '16px' : '1.2rem')};
+  font-size: ${props => (props.isEmbed ? '16px' : '0.8rem')};
   margin-left: 5px;
   text-overflow: ellipsis;
 `
