@@ -181,12 +181,6 @@ export default memo(({ children, addProject }) => {
             })
           )
         }
-        /*
-          The next to window.location.replace are a bad pattern forced by Gatsby.
-          It's bad because we lose the state and do a whole app rerender.
-          Navigate function from Gatsby does not work from wrapRootElement level.
-          ToDo: Check if using wrapPageElement will do the trick.
-        */
         const path = getWindowPathName()
         if (path.includes('embed')) {
           const searchParams = getWindowSearchParams()
