@@ -60,7 +60,7 @@ const LinkWrapper = styled.div`
 
 const LinkText = styled.h3`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 1.2rem;
+  font-size: ${props => (props.isEmbed ? '18px' : 'auto')};
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -81,7 +81,7 @@ const LinkText = styled.h3`
 
 const DocsLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEmbed ? '16px' : '1.2rem')};
+  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -113,7 +113,7 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
   position: relative;
   display: flex;
-  height: ${props => (props.isEmbed ? '16px' : 'auto')};
+  height: ${props => (props.isEmbed ? '18px' : 'auto')};
   padding: 0;
 `
 
@@ -389,6 +389,7 @@ const HeaderComponent = ({ location }) => {
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
+            isEmbed={isEmbed}
           >
             <Icon
               type="file-text"
@@ -400,14 +401,15 @@ const HeaderComponent = ({ location }) => {
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
+            isEmbed={isEmbed}
           >
             Docs
           </DocsLink>
         )}
       </HeaderWrapper>
-      {location.pathname === '/app/editor/' && <LatencyIndicator />}
+      {location.pathname.includes('editor') && <LatencyIndicator />}
       <LoginWrapper>
-        <Login />
+        <Login isEmbed={isEmbed} />
       </LoginWrapper>
     </HeaderSection>
   )
