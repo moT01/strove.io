@@ -255,7 +255,6 @@ const DropdownWrapper = styled.div`
   cursor: pointer;
   position: absolute;
   background: none;
-  /* right: 1.5vw; */
   display: flex;
   right: ${props => (props.isEmbed ? '-75px' : '-10px')};
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
