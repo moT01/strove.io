@@ -39,7 +39,6 @@ const StyledButton = styled(StroveButton)`
 
 const Run = ({ addProject }) => {
   const repoUrl = getRepoUrl()
-
   const onClick = () => {
     addProject({ link: repoUrl })
   }

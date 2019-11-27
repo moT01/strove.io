@@ -14,7 +14,7 @@ export const getWindowSearchParams = () =>
   params.
 */
 export const getRepoUrl = () => {
-  let repoUrl = getWindowSearchParams().get('repoUrl')
+  const repoUrl = getWindowSearchParams().get('repoUrl')
   return !repoUrl?.includes('https://')
     ? repoUrl?.slice(0, 7) + repoUrl?.slice(6)
     : repoUrl
