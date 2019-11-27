@@ -75,7 +75,7 @@ const AddProjectProvider = ({ children }) => {
 
     if (existingProject) {
       if (existingProject.machineId) {
-        redirectToEditor()
+        return redirectToEditor()
       } else {
         return dispatch(
           mutation({
@@ -86,16 +86,15 @@ const AddProjectProvider = ({ children }) => {
           })
         )
       }
-    } else {
-      dispatch(
-        actions.incomingProject.addIncomingProject({
-          repoLink,
-          repoProvider,
-          name,
-        })
-      )
     }
-    console.log(repoLink)
+
+    dispatch(
+      actions.incomingProject.addIncomingProject({
+        repoLink,
+        repoProvider,
+        name,
+      })
+    )
 
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
