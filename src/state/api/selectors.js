@@ -23,6 +23,10 @@ export const getUserProjects = getApiData({
   defaultValue: [],
 })
 
+export const getQueuePosition = getApiData({
+  fields: ['user', 'queuePosition'],
+})
+
 export const getCurrentProject = state =>
   getApiData({ fields: 'myProjects', defaultValue: [] })(state).find(
     item => item.machineId

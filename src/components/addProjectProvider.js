@@ -7,6 +7,9 @@ import {
   getRepoProvider,
   changeRepoLinkFromSshToHttps,
   mutation,
+  redirectToEditor,
+  getWindowPathName,
+  getWindowSearchParams,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
@@ -72,7 +75,7 @@ const AddProjectProvider = ({ children }) => {
 
     if (existingProject) {
       if (existingProject.machineId) {
-        return navigate('app/editor')
+        return redirectToEditor()
       } else {
         return dispatch(
           mutation({
@@ -83,16 +86,15 @@ const AddProjectProvider = ({ children }) => {
           })
         )
       }
-    } else {
-      dispatch(
-        actions.incomingProject.addIncomingProject({
-          repoLink,
-          repoProvider,
-          name,
-        })
-      )
     }
-    console.log(repoLink)
+
+    dispatch(
+      actions.incomingProject.addIncomingProject({
+        repoLink,
+        repoProvider,
+        name,
+      })
+    )
 
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')

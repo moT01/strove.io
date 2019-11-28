@@ -95,6 +95,11 @@ module.exports = {
           'IS_OPENSOURCE',
           'GOOGLE_OPTIMIZE_ID',
           'GOOGLE_OPTIMIZE_EXPERIMENT_ID',
+          /* Those ports can be accessed and will point to ssl secured online adress */
+          'STROVE_PORT_3000',
+          'STROVE_PORT_4040',
+          'STROVE_PORT_8000',
+          'STROVE_PORT_8080'
         ],
       },
     },

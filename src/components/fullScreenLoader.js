@@ -1,9 +1,11 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useSelector } from 'react-redux'
 
 import { Cog } from 'images/svg'
 import { Strove } from 'images/logos'
 import { useInterval } from 'hooks'
+import { selectors } from 'state'
 
 const SpinToWin = keyframes`
   0% {
@@ -73,19 +75,20 @@ const StyledLogo = styled(Strove)`
   height: 5vw;
 `
 
-const allMessages = {
-  addProject: [
-    'Checking permissions',
-    'Cloning repository - this can take a moment',
-    'Reserving resources',
-    'Starting virtual machine',
-  ],
-  openProject: ['Launching editor'],
-  continueProject: ['Reserving resources', 'Starting virtual machine'],
-}
-
 const Loader = ({ type = 'addProject', ...props }) => {
   const [counter, setCounter] = useState(0)
+  const queuePosition = useSelector(selectors.api.getQueuePosition)
+
+  const allMessages = {
+    addProject: [
+      'Checking permissions',
+      'Cloning repository - this can take a moment',
+      'Reserving resources',
+      'Starting virtual machine',
+    ],
+    openProject: ['Launching editor'],
+    continueProject: ['Reserving resources', 'Starting virtual machine'],
+  }
 
   useInterval(
     () => setCounter(counter + 1),
@@ -101,7 +104,11 @@ const Loader = ({ type = 'addProject', ...props }) => {
             <StyledLogo fill="#0072ce" />
           </LogoContainer>
         </LoaderContainer>
-        <Text>{allMessages[type][counter]}</Text>
+        <Text>
+          {queuePosition > 1
+            ? `Our servers are full. Your position in queue: ${queuePosition}`
+            : allMessages[type][counter]}
+        </Text>
       </LoaderWrapper>
     )
   }
