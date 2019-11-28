@@ -11,6 +11,7 @@ import { loginOptions } from 'constants'
 
 import FullScreenLoader from './fullScreenLoader'
 import { persistor } from '../../wrapper'
+import { getWindowPathName } from 'utils'
 
 const LoginButton = styled.button`
   color: ${({ theme }) => theme.colors.c2};
@@ -103,8 +104,10 @@ const Option = styled.a`
 
 const Inline = styled.div`
   display: inline-block;
-  width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
-  height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  width: ${props =>
+    props.mobile ? '5.5vh' : props.isEmbed ? '18px' : '2.7vh'};
+  height: ${props =>
+    props.mobile ? '5.5vh' : props.isEmbed ? '18px' : '2.7vh'};
   margin-left: 4px;
   background: ${({ theme }) => theme.colors.c1};
 `
@@ -117,7 +120,7 @@ const UserPhoto = styled.img`
 `
 
 const Text = styled.h3`
-  font-size: 1.2rem;
+  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   margin: 0;
   font-weight: 300;
   line-height: 1;
@@ -175,12 +178,14 @@ const getUserData = createSelector(
 )
 
 const LoginDropdown = () => {
+  const isEmbed = getWindowPathName().includes('embed')
+
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>
-            <Text>Login</Text>
+            <Text isEmbed={isEmbed}>Login</Text>
           </LoginButton>
           <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
@@ -206,6 +211,7 @@ const LoginDropdown = () => {
 const UserDropdown = props => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
+  const isEmbed = getWindowPathName().includes('embed')
 
   if (isLoading)
     return (
@@ -218,8 +224,10 @@ const UserDropdown = props => {
         <span>
           <Wrapper {...getToggleButtonProps({})}>
             <StyledDropdown>
-              {!isMobileOnly && <Text>{props.user.username}</Text>}
-              <Inline mobile={isMobileOnly}>
+              {!isMobileOnly && (
+                <Text isEmbed={isEmbed}>{props.user.username}</Text>
+              )}
+              <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
                 <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
               </Inline>
             </StyledDropdown>

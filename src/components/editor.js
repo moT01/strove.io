@@ -14,7 +14,7 @@ const StyledIframe = styled.iframe`
   display: block;
   background: ${({ theme }) => theme.colors.c3};
   border: none;
-  min-height: 97vh;
+  min-height: ${props => (props.isEmbed ? 'calc(100vh - 20px)' : '97vh')};
   width: 100vw;
   margin: 0;
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
@@ -32,6 +32,7 @@ const Editor = () => {
   const projectId = currentProject && currentProject.id
   const machineId = currentProject && currentProject.machineId
   const port = currentProject && currentProject.editorPort
+  const isEmbed = getWindowPathName().includes('embed')
 
   const token = useSelector(getUserToken)
   const [loaderVisible, setLoaderVisible] = useState(true)
@@ -50,6 +51,8 @@ const Editor = () => {
     }
   }, [projectId, machineId])
 
+  console.log('getWindowPathName', getWindowPathName())
+
   useEffect(() => {
     const resetCron = () =>
       dispatch(
@@ -65,7 +68,6 @@ const Editor = () => {
     const projectPing = setInterval(resetCron, 59000)
 
     const checkIfProjectIsActive = () => {
-      console.log('getWindowPathName', getWindowPathName())
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
         const path = getWindowPathName()
@@ -103,6 +105,7 @@ const Editor = () => {
         />
       )}
       <StyledIframe
+        isEmbed={isEmbed}
         loaderVisible={loaderVisible}
         onLoad={useCallback(() => setLoaderVisible(false))}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}

@@ -38,10 +38,7 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject }) => {
-  // Todo: This does not work on some browsers, use a consistent approach
-  // const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
-
   const onClick = () => {
     addProject({ link: repoUrl })
   }
