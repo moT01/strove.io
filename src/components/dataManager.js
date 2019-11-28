@@ -12,6 +12,7 @@ import {
   MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
+  USER_LOGIN,
 } from 'queries'
 import {
   mutation,
@@ -27,6 +28,18 @@ import { actions } from 'state'
 
 import client from '../../client'
 
+// Generate unique device id
+const generateDeviceID = () => {
+  return (
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  )
+}
+
 export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -38,6 +51,12 @@ export default memo(({ children, addProject }) => {
   const bitbucketRefreshToken = useSelector(
     selectors.api.getUserField('bitbucketRefreshToken')
   )
+
+  if (!localStorage.getItem('deviceId'))
+    localStorage.setItem('deviceId', generateDeviceID())
+  const deviceId = localStorage.getItem('deviceId')
+
+  console.log('deviceId', deviceId)
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     variables: { email: user?.email || 'null' },
@@ -125,7 +144,7 @@ export default memo(({ children, addProject }) => {
   })
 
   const startProjectData = startProjectSubscription?.data
-  const startProjectError = startProjectSubscription?.error
+  const startProjectError = startProjectSubscription?.error //
 
   useEffect(() => {
     if (startProjectError) {
@@ -199,8 +218,9 @@ export default memo(({ children, addProject }) => {
     }
   }, [startProjectData, startProjectError])
 
+  let code = null
   useEffect(() => {
-    const code = getWindowHref()
+    code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
@@ -246,29 +266,10 @@ export default memo(({ children, addProject }) => {
             dispatch(
               mutation({
                 mutation: GITHUB_LOGIN,
-                variables: { code },
+                variables: { code, deviceId },
                 storeKey: 'user',
                 name: 'githubAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) => {
-                  localStorage.setItem('token', siliskyToken)
-                },
-                onSuccessDispatch: [
-                  user => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'user',
-                      data: user,
-                    },
-                  }),
-                  ({ subscription }) => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'subscription',
-                      data: subscription,
-                    },
-                  }),
-                ],
               })
             )
           }
@@ -279,29 +280,10 @@ export default memo(({ children, addProject }) => {
             dispatch(
               mutation({
                 mutation: GITLAB_LOGIN,
-                variables: { code },
+                variables: { code, deviceId },
                 storeKey: 'user',
                 name: 'gitlabAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) => {
-                  localStorage.setItem('token', siliskyToken)
-                },
-                onSuccessDispatch: [
-                  user => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'user',
-                      data: user,
-                    },
-                  }),
-                  ({ subscription }) => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'subscription',
-                      data: subscription,
-                    },
-                  }),
-                ],
               })
             )
           }
@@ -312,29 +294,10 @@ export default memo(({ children, addProject }) => {
             dispatch(
               mutation({
                 mutation: BITBUCKET_LOGIN,
-                variables: { code },
+                variables: { code, deviceId },
                 storeKey: 'user',
                 name: 'bitbucketAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) => {
-                  localStorage.setItem('token', siliskyToken)
-                },
-                onSuccessDispatch: [
-                  user => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'user',
-                      data: user,
-                    },
-                  }),
-                  ({ subscription }) => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'subscription',
-                      data: subscription,
-                    },
-                  }),
-                ],
               })
             )
           }
@@ -346,6 +309,54 @@ export default memo(({ children, addProject }) => {
     }
     checkAwake()
   }, [])
+
+  ////////////
+  const userDataSubscription = useSubscription(USER_LOGIN, {
+    variables: { deviceId },
+    client,
+    fetchPolicy: 'no-cache',
+    context: {
+      headers: {
+        'User-Agent': 'node',
+      },
+    },
+    shouldResubscribe: true,
+  })
+
+  console.log('userDataSubscription', userDataSubscription)
+  const userData = userDataSubscription?.data
+  const userError = userDataSubscription?.error
+
+  useEffect(() => {
+    if (userError) {
+      dispatch(
+        actions.api.fetchError({
+          storeKey: 'user',
+          error: userError,
+        })
+      )
+    }
+    console.log('eff')
+    if (userData?.userLogin) {
+      const { siliskyToken, subscription } = userData?.userLogin
+      console.log('in if')
+      localStorage.setItem('token', siliskyToken)
+      dispatch({
+        type: C.api.FETCH_SUCCESS,
+        payload: {
+          storeKey: 'user',
+          data: userData?.userLogin,
+        },
+      })
+      dispatch({
+        type: C.api.FETCH_SUCCESS,
+        payload: {
+          storeKey: 'subscription',
+          data: subscription,
+        },
+      })
+    }
+  }, [userData, userError])
 
   useEffect(() => {
     user &&
