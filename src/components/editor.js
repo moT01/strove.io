@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { navigate } from 'gatsby'
@@ -49,6 +49,7 @@ const Editor = () => {
         })
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId, machineId])
 
   console.log('getWindowPathName', getWindowPathName())
@@ -87,6 +88,7 @@ const Editor = () => {
       clearInterval(projectPing)
       clearInterval(activeProjectCheck)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
   const randomId = Math.random()
@@ -107,7 +109,7 @@ const Editor = () => {
       <StyledIframe
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
-        onLoad={useCallback(() => setLoaderVisible(false))}
+        onLoad={() => setLoaderVisible(false)}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
     </>
