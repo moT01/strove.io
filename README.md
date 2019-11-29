@@ -7,7 +7,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
-Strove gives browser access to cloud with all major Linux-available programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
+Strove gives browser access to cloud with all major Linux-supported programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
 ### [Edit source code](https://strove.io/#https://github.com/stroveio/strove.io-client)
 
 or, visit our website
@@ -53,7 +53,7 @@ Here are our contributors so far:
 
 ## Supported languages
 
-Strove supports all major Linux-available languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, and many more.
+Strove supports all major Linux-supported languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, and many more.
 
 <div align='center'>
 <table>
