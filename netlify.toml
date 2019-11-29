@@ -1,4 +1,5 @@
 [[headers]]
   for = "/*"
   [headers.values]
-	X-Frame-Options = ""
+	X-Frame-Options = '"
+    Content-Security-Policy: frame-src *; script-src: *; style-src: *;"'
