@@ -8,15 +8,12 @@ import {
   changeRepoLinkFromSshToHttps,
   mutation,
   redirectToEditor,
-  getWindowPathName,
-  getWindowSearchParams,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
 import Modal from './modal'
 import FullScreenLoader from './fullScreenLoader'
 import AddProjectModals from './addProjectModals'
-import { navigate } from 'gatsby'
 
 const StyledModal = styled(Modal)`
   background: none;
@@ -40,9 +37,9 @@ const AddProjectProvider = ({ children }) => {
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
-  const subscription = useSelector(
-    selectors.api.getApiData({ fields: 'subscription' })
-  )
+  // const subscription = useSelector(
+  //   selectors.api.getApiData({ fields: 'subscription' })
+  // )
   // const subscriptionStatus = subscription.status
   const projectsLimit = 20
   // (subscriptionStatus === 'active' && subscription.projects_limit) || 4

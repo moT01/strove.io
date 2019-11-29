@@ -120,6 +120,7 @@ export default memo(({ children, addProject }) => {
         },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProject.data])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
@@ -208,6 +209,7 @@ export default memo(({ children, addProject }) => {
         redirectToEditor()
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startProjectData, startProjectError])
 
   let code = null
@@ -348,6 +350,7 @@ export default memo(({ children, addProject }) => {
         },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData, userError])
 
   useEffect(() => {
@@ -359,12 +362,14 @@ export default memo(({ children, addProject }) => {
           query: MY_PROJECTS,
         })
       )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   useEffect(() => {
     if (user && incomingProjectLink) {
       addProject({ link: incomingProjectLink })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projects.length])
 
   useEffect(() => {
@@ -378,6 +383,7 @@ export default memo(({ children, addProject }) => {
         )
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return children
