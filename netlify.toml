@@ -1,4 +1,5 @@
 [[headers]]
   for = "/*"
   [headers.values]
-	X-Frame-Options = "Content-Security-Policy: frame-src *; script-src: *; style-src: *;"
+	# X-Frame-Options = "Content-Security-Policy: frame-src *; script-src: *; style-src: *;"
+    Content-Security-Policy = "frame-ancestors *"
