@@ -73,21 +73,6 @@ const AddProjectProvider = ({ children }) => {
       project => project.repoLink === `${repoLink}.git`
     )
 
-    if (existingProject) {
-      if (existingProject.machineId) {
-        return redirectToEditor()
-      } else {
-        return dispatch(
-          mutation({
-            name: 'continueProject',
-            mutation: CONTINUE_PROJECT,
-            variables: { projectId: existingProject?.id },
-            onSuccessDispatch: null,
-          })
-        )
-      }
-    }
-
     dispatch(
       actions.incomingProject.addIncomingProject({
         repoLink,
@@ -125,6 +110,21 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('AnotherActiveProject')
     } else {
       createProject({ repoLink, dispatch, user, setModalContent, name })
+    }
+  }
+
+  if (existingProject) {
+    if (existingProject.machineId) {
+      return redirectToEditor()
+    } else {
+      return dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId: existingProject?.id },
+          onSuccessDispatch: null,
+        })
+      )
     }
   }
 
