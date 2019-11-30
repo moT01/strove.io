@@ -108,20 +108,20 @@ const AddProjectProvider = ({ children }) => {
     } else {
       createProject({ repoLink, dispatch, user, setModalContent, name })
     }
-  }
 
-  if (existingProject) {
-    if (existingProject.machineId) {
-      return redirectToEditor()
-    } else {
-      return dispatch(
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: { projectId: existingProject?.id },
-          onSuccessDispatch: null,
-        })
-      )
+    if (existingProject) {
+      if (existingProject.machineId) {
+        return redirectToEditor()
+      } else {
+        return dispatch(
+          mutation({
+            name: 'continueProject',
+            mutation: CONTINUE_PROJECT,
+            variables: { projectId: existingProject?.id },
+            onSuccessDispatch: null,
+          })
+        )
+      }
     }
   }
 
