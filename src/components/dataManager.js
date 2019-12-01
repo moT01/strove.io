@@ -304,7 +304,6 @@ export default memo(({ children, addProject }) => {
     checkAwake()
   }, [])
 
-  ////////////
   const userDataSubscription = useSubscription(USER_LOGIN, {
     variables: { deviceId },
     client,
@@ -317,7 +316,6 @@ export default memo(({ children, addProject }) => {
     shouldResubscribe: true,
   })
 
-  console.log('userDataSubscription', userDataSubscription)
   const userData = userDataSubscription?.data
   const userError = userDataSubscription?.error
 
@@ -330,10 +328,8 @@ export default memo(({ children, addProject }) => {
         })
       )
     }
-    console.log('eff')
     if (userData?.userLogin) {
       const { siliskyToken, subscription } = userData?.userLogin
-      console.log('in if')
       localStorage.setItem('token', siliskyToken)
       dispatch({
         type: C.api.FETCH_SUCCESS,
