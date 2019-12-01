@@ -329,7 +329,7 @@ export default memo(({ children, addProject }) => {
       )
     }
     if (userData?.userLogin) {
-      const { siliskyToken, subscription } = userData?.userLogin
+      const { siliskyToken, subscription, projects } = userData?.userLogin
       localStorage.setItem('token', siliskyToken)
       dispatch({
         type: C.api.FETCH_SUCCESS,
@@ -338,13 +338,22 @@ export default memo(({ children, addProject }) => {
           data: userData?.userLogin,
         },
       })
-      dispatch({
-        type: C.api.FETCH_SUCCESS,
-        payload: {
-          storeKey: 'subscription',
-          data: subscription,
-        },
-      })
+      subscription &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'subscription',
+            data: subscription,
+          },
+        })
+      projects &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'myProjects',
+            data: projects,
+          },
+        })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData, userError])
