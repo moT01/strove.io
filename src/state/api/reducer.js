@@ -53,13 +53,17 @@ export default (state = initialState, action) => {
       */
 
       let newData
-      if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
-        newData = [...state[storeKey].data, data]
-      } else if (
-        !Array.isArray(state[storeKey].data) &&
-        typeof state[storeKey].data === 'object'
-      ) {
-        newData = { ...state[storeKey].data, ...data }
+      if (state[storeKey]?.data) {
+        if (Array.isArray(state[storeKey].data) && !Array.isArray(data)) {
+          newData = [...state[storeKey].data, data]
+        } else if (
+          !Array.isArray(state[storeKey].data) &&
+          typeof state[storeKey].data === 'object'
+        ) {
+          newData = { ...state[storeKey].data, ...data }
+        } else {
+          newData = data
+        }
       } else {
         newData = data
       }
