@@ -48,8 +48,6 @@ export default memo(({ children, addProject }) => {
     localStorage.setItem('deviceId', generateDeviceID())
   const deviceId = localStorage.getItem('deviceId')
 
-  console.log('deviceId', deviceId)
-
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     variables: { email: user?.email || 'null' },
     client,
@@ -245,8 +243,6 @@ export default memo(({ children, addProject }) => {
           : decoredOrigin
 
         const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
-
-        // console.log('redirectAdress', redirectAdress)
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
