@@ -6,13 +6,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
-import { query, mutation, handleStopProject } from 'utils'
-import {
-  DELETE_PROJECT,
-  CONTINUE_PROJECT,
-  STOP_PROJECT,
-  MY_PROJECTS,
-} from 'queries'
+import { mutation, handleStopProject } from 'utils'
+import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
@@ -217,29 +212,6 @@ const Dashboard = () => {
 
   const handleStopClick = id => {
     handleStopProject({ id, dispatch })
-    // dispatch(
-    //   mutation({
-    //     name: 'stopProject',
-    //     mutation: STOP_PROJECT,
-    //     dataSelector: data => data,
-    //     variables: { projectId: id },
-    //     onSuccessDispatch: [
-    //       () =>
-    //         actions.api.fetchSuccess({
-    //           data: { currentProjectId: null },
-    //           storeKey: 'user',
-    //         }),
-    //       () => actions.api.fetchSuccess({ storeKey: 'stopProject' }),
-    //     ],
-    //   })
-    // )
-    // dispatch(
-    //   query({
-    //     name: 'myProjects',
-    //     dataSelector: data => data.myProjects.edges,
-    //     query: MY_PROJECTS,
-    //   })
-    // )
   }
 
   const closeModal = () => {
