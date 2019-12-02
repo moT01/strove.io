@@ -11,7 +11,7 @@ import {
   MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
-  USER_LOGIN,
+  LOGIN_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
 import { selectors } from 'state'
@@ -300,7 +300,7 @@ export default memo(({ children, addProject }) => {
     checkAwake()
   }, [])
 
-  const userDataSubscription = useSubscription(USER_LOGIN, {
+  const userDataSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
     variables: { deviceId },
     client,
     fetchPolicy: 'no-cache',
