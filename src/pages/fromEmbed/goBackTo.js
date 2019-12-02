@@ -1,10 +1,12 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
+import { useSelector } from 'react-redux'
 
 import { theme } from 'constants'
 import { GlobalStyles } from 'components'
 import { getWindowSearchParams } from 'utils'
+import { selectors } from 'state'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -23,10 +25,14 @@ const Wrapper = styled.div`
 `
 
 const GoBackTo = () => {
+  const token = useSelector(selectors.api.getUser)?.siliskyToken
   const searchParams = getWindowSearchParams()
   const goBackTo = searchParams.get('goBackTo')
 
-  if (goBackTo) {
+  console.log('goBackTo', goBackTo, 'token', token)
+
+  /* Redirect logged in users */
+  if (goBackTo && token) {
     window.location.replace(goBackTo)
   }
 
