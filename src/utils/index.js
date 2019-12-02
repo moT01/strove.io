@@ -1,5 +1,6 @@
 import { query, mutation } from './graphql'
 import createProject from './createProject'
+import handleStopProject from './stopProject'
 import window from './window'
 import getBitbucketToken from './getBitbucketToken'
 import getRepoInfo from './getRepoInfo'
@@ -26,5 +27,6 @@ export {
   getRepoProvider,
   getRepoUrl,
   changeRepoLinkFromSshToHttps,
-  redirectToEditor
+  redirectToEditor,
+  handleStopProject,
 }

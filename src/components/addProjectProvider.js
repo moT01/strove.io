@@ -36,7 +36,7 @@ const AddProjectProvider = ({ children }) => {
   const isAdding = useSelector(selectors.incomingProject.isIncoming)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
-  const currentProjectId = currentProject && currentProject.id
+  const currentProjectId = currentProject?.id
   // const subscription = useSelector(
   //   selectors.api.getApiData({ fields: 'subscription' })
   // )
@@ -103,15 +103,14 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('ProjectsLimitExceeded')
 
       dispatch(actions.incomingProject.removeIncomingProject)
-    } else if (currentProjectId) {
+    } else if (
+      currentProjectId &&
+      currentProject.machineId !== existingProject.machineId
+    ) {
       setModalContent('AnotherActiveProject')
     } else {
       createProject({ repoLink, dispatch, user, setModalContent, name })
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 80314639ad39911208987e6230c3ce708545fdb7
     if (existingProject) {
       if (existingProject.machineId) {
         return redirectToEditor()
