@@ -301,7 +301,7 @@ export default memo(({ children, addProject }) => {
     /* eslint-disable-next-line */
   }, [])
 
-  const userDataSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
+  const loginSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
     variables: { deviceId },
     client,
     fetchPolicy: 'no-cache',
@@ -312,27 +312,26 @@ export default memo(({ children, addProject }) => {
     },
     shouldResubscribe: true,
   })
-
-  const userData = userDataSubscription?.data
-  const userError = userDataSubscription?.error
+  const loginData = loginSubscription?.data
+  const loginError = loginSubscription?.error
 
   useEffect(() => {
-    if (userError) {
+    if (loginError) {
       dispatch(
         actions.api.fetchError({
           storeKey: 'user',
-          error: userError,
+          error: loginError,
         })
       )
     }
-    if (userData?.userLogin) {
-      const { siliskyToken, subscription, projects } = userData?.userLogin
+    if (loginData?.userLogin) {
+      const { siliskyToken, subscription, projects } = loginData?.userLogin
       localStorage.setItem('token', siliskyToken)
       dispatch({
         type: C.api.FETCH_SUCCESS,
         payload: {
           storeKey: 'user',
-          data: userData?.userLogin,
+          data: loginData?.userLogin,
         },
       })
       subscription &&
@@ -353,7 +352,7 @@ export default memo(({ children, addProject }) => {
         })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData, userError])
+  }, [loginData, loginError])
 
   useEffect(() => {
     user &&
