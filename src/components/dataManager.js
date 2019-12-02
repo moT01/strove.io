@@ -220,8 +220,6 @@ export default memo(({ children, addProject }) => {
       }
     }
 
-    console.log('getWindowHref()', getWindowHref(), 'code', code)
-
     if (code) {
       switch (gitProvider) {
         case 'github': {

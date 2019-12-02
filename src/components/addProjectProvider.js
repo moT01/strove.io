@@ -93,8 +93,6 @@ const AddProjectProvider = ({ children }) => {
       })
     )
 
-    console.log('Yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet me')
-
     if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
