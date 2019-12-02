@@ -55,6 +55,8 @@ const Login = () => {
     option => option.value === repoProvider
   )
 
+  console.log('goBackTo', goBackTo)
+
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
