@@ -199,7 +199,7 @@ export default memo(({ children, addProject }) => {
 
       gitProvider = stateParams[0]
 
-      const shouldBeRedirected = stateParams[1]
+      const shouldBeRedirected = stateParams[1] === 'true'
 
       const origin = stateParams[2]
 
