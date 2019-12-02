@@ -203,8 +203,16 @@ export default memo(({ children, addProject }) => {
 
       const origin = stateParams[2]
 
-      if (shouldBeRedirected && origin) {
-        console.log('shouldBeRedirected', shouldBeRedirected, 'origin', origin)
+      console.log(
+        'shouldBeRedirected',
+        shouldBeRedirected === 'true' && origin,
+        'shouldBe',
+        shouldBeRedirected,
+        'origin',
+        origin
+      )
+
+      if (shouldBeRedirected.includes('true') && origin) {
         const decoredOrigin = decodeURIComponent(origin)
 
         // Gitlab login makes extremely messy redirect lik strove.io/&code
@@ -217,8 +225,8 @@ export default memo(({ children, addProject }) => {
           : `${originWithoutParams}?code=${code}&state=${gitProvider}`
 
         /* Redirect to project */
-        console.log('redirectAdress', redirectAdress)
-        // return window.location.replace(redirectAdress)
+        console.log('redirectAdressssssss', redirectAdress)
+        return window.location.replace(redirectAdress)
       }
     }
 
