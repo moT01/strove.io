@@ -52,8 +52,6 @@ const Editor = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId, machineId])
 
-  console.log('getWindowPathName', getWindowPathName())
-
   useEffect(() => {
     const resetCron = () =>
       dispatch(

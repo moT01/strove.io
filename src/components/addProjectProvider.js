@@ -108,6 +108,10 @@ const AddProjectProvider = ({ children }) => {
     } else {
       createProject({ repoLink, dispatch, user, setModalContent, name })
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 80314639ad39911208987e6230c3ce708545fdb7
     if (existingProject) {
       if (existingProject.machineId) {
         return redirectToEditor()
