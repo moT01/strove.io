@@ -11,7 +11,7 @@ import {
   MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
-  USER_LOGIN,
+  LOGIN_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
 import { selectors } from 'state'
@@ -68,36 +68,6 @@ export default memo(({ children, addProject }) => {
   const editorPort = activeProjectData?.editorPort
   const id = activeProjectData?.id
 
-  const checkAwake = () => {
-    let then = moment().format('X')
-    setInterval(() => {
-      let now = moment().format('X')
-      if (now - then > 300) {
-        user &&
-          dispatch(
-            query({
-              name: 'myProjects',
-              dataSelector: data => data.myProjects.edges,
-              query: MY_PROJECTS,
-              onSuccess: () =>
-                dispatch({
-                  type: C.api.UPDATE_ITEM,
-                  payload: {
-                    storeKey: 'myProjects',
-                    id,
-                    data: {
-                      editorPort,
-                      machine: machineId,
-                    },
-                  },
-                }),
-            })
-          )
-      }
-      then = now
-    }, 2000)
-  }
-
   useEffect(() => {
     if (editorPort) {
       dispatch({
@@ -118,6 +88,7 @@ export default memo(({ children, addProject }) => {
         },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProject.data])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
@@ -206,11 +177,11 @@ export default memo(({ children, addProject }) => {
         redirectToEditor()
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startProjectData, startProjectError])
 
-  let code = null
   useEffect(() => {
-    code = getWindowHref()
+    const code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
@@ -241,8 +212,6 @@ export default memo(({ children, addProject }) => {
           : decoredOrigin
 
         const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
-
-        // console.log('redirectAdress', redirectAdress)
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
@@ -297,11 +266,42 @@ export default memo(({ children, addProject }) => {
           break
       }
     }
+
+    const checkAwake = () => {
+      let then = moment().format('X')
+      setInterval(() => {
+        let now = moment().format('X')
+        if (now - then > 300) {
+          user &&
+            dispatch(
+              query({
+                name: 'myProjects',
+                dataSelector: data => data.myProjects.edges,
+                query: MY_PROJECTS,
+                onSuccess: () =>
+                  dispatch({
+                    type: C.api.UPDATE_ITEM,
+                    payload: {
+                      storeKey: 'myProjects',
+                      id,
+                      data: {
+                        editorPort,
+                        machine: machineId,
+                      },
+                    },
+                  }),
+              })
+            )
+        }
+        then = now
+      }, 2000)
+    }
+
     checkAwake()
+    /* eslint-disable-next-line */
   }, [])
 
-  ////////////
-  const userDataSubscription = useSubscription(USER_LOGIN, {
+  const loginSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
     variables: { deviceId },
     client,
     fetchPolicy: 'no-cache',
@@ -312,38 +312,47 @@ export default memo(({ children, addProject }) => {
     },
     shouldResubscribe: true,
   })
-
-  const userData = userDataSubscription?.data
-  const userError = userDataSubscription?.error
+  const loginData = loginSubscription?.data
+  const loginError = loginSubscription?.error
 
   useEffect(() => {
-    if (userError) {
+    if (loginError) {
       dispatch(
         actions.api.fetchError({
           storeKey: 'user',
-          error: userError,
+          error: loginError,
         })
       )
     }
-    if (userData?.userLogin) {
-      const { siliskyToken, subscription } = userData?.userLogin
+    if (loginData?.userLogin) {
+      const { siliskyToken, subscription, projects } = loginData?.userLogin
       localStorage.setItem('token', siliskyToken)
       dispatch({
         type: C.api.FETCH_SUCCESS,
         payload: {
           storeKey: 'user',
-          data: userData?.userLogin,
+          data: loginData?.userLogin,
         },
       })
-      dispatch({
-        type: C.api.FETCH_SUCCESS,
-        payload: {
-          storeKey: 'subscription',
-          data: subscription,
-        },
-      })
+      subscription &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'subscription',
+            data: subscription,
+          },
+        })
+      projects &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'myProjects',
+            data: projects,
+          },
+        })
     }
-  }, [userData, userError])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginData, loginError])
 
   useEffect(() => {
     user &&
@@ -354,12 +363,14 @@ export default memo(({ children, addProject }) => {
           query: MY_PROJECTS,
         })
       )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   useEffect(() => {
     if (user && incomingProjectLink) {
       addProject({ link: incomingProjectLink })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projects.length])
 
   useEffect(() => {
@@ -373,6 +384,7 @@ export default memo(({ children, addProject }) => {
         )
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return children
