@@ -20,7 +20,7 @@ export default [
     value: 'github',
     label: 'Github',
     href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,${IS_OPENSOURCE},${adress}`,
-    embedHref: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,$true,${SILISKY_URL}fromEmbed/goBackTo/`,
+    embedHref: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,true,${SILISKY_URL}fromEmbed/goBackTo/`,
     icon: <Github />,
   },
   {
