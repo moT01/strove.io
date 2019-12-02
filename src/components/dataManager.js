@@ -68,36 +68,6 @@ export default memo(({ children, addProject }) => {
   const editorPort = activeProjectData?.editorPort
   const id = activeProjectData?.id
 
-  const checkAwake = () => {
-    let then = moment().format('X')
-    setInterval(() => {
-      let now = moment().format('X')
-      if (now - then > 300) {
-        user &&
-          dispatch(
-            query({
-              name: 'myProjects',
-              dataSelector: data => data.myProjects.edges,
-              query: MY_PROJECTS,
-              onSuccess: () =>
-                dispatch({
-                  type: C.api.UPDATE_ITEM,
-                  payload: {
-                    storeKey: 'myProjects',
-                    id,
-                    data: {
-                      editorPort,
-                      machine: machineId,
-                    },
-                  },
-                }),
-            })
-          )
-      }
-      then = now
-    }, 2000)
-  }
-
   useEffect(() => {
     if (editorPort) {
       dispatch({
@@ -210,9 +180,8 @@ export default memo(({ children, addProject }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startProjectData, startProjectError])
 
-  let code = null
   useEffect(() => {
-    code = getWindowHref()
+    const code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
@@ -297,7 +266,39 @@ export default memo(({ children, addProject }) => {
           break
       }
     }
+
+    const checkAwake = () => {
+      let then = moment().format('X')
+      setInterval(() => {
+        let now = moment().format('X')
+        if (now - then > 300) {
+          user &&
+            dispatch(
+              query({
+                name: 'myProjects',
+                dataSelector: data => data.myProjects.edges,
+                query: MY_PROJECTS,
+                onSuccess: () =>
+                  dispatch({
+                    type: C.api.UPDATE_ITEM,
+                    payload: {
+                      storeKey: 'myProjects',
+                      id,
+                      data: {
+                        editorPort,
+                        machine: machineId,
+                      },
+                    },
+                  }),
+              })
+            )
+        }
+        then = now
+      }, 2000)
+    }
+
     checkAwake()
+    /* eslint-disable-next-line */
   }, [])
 
   const userDataSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
