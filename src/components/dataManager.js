@@ -212,13 +212,17 @@ export default memo(({ children, addProject }) => {
           ? decoredOrigin.split('/&code')[0]
           : decoredOrigin
 
-        const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
+        const redirectAdress = originWithoutParams.includes('?')
+          ? `${originWithoutParams}&code=${code}&state=${gitProvider}`
+          : `${originWithoutParams}?code=${code}&state=${gitProvider}`
 
         /* Redirect to project */
         console.log('redirectAdress', redirectAdress)
         // return window.location.replace(redirectAdress)
       }
     }
+
+    console.log('getWindowHref()', getWindowHref(), 'code', code)
 
     if (code) {
       switch (gitProvider) {
