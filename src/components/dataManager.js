@@ -11,7 +11,7 @@ import {
   MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
-  USER_LOGIN,
+  LOGIN_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
 import { selectors } from 'state'
@@ -48,8 +48,6 @@ export default memo(({ children, addProject }) => {
     localStorage.setItem('deviceId', generateDeviceID())
   const deviceId = localStorage.getItem('deviceId')
 
-  console.log('deviceId', deviceId)
-
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     variables: { email: user?.email || 'null' },
     client,
@@ -69,36 +67,6 @@ export default memo(({ children, addProject }) => {
   const machineId = activeProjectData?.machineId
   const editorPort = activeProjectData?.editorPort
   const id = activeProjectData?.id
-
-  const checkAwake = () => {
-    let then = moment().format('X')
-    setInterval(() => {
-      let now = moment().format('X')
-      if (now - then > 300) {
-        user &&
-          dispatch(
-            query({
-              name: 'myProjects',
-              dataSelector: data => data.myProjects.edges,
-              query: MY_PROJECTS,
-              onSuccess: () =>
-                dispatch({
-                  type: C.api.UPDATE_ITEM,
-                  payload: {
-                    storeKey: 'myProjects',
-                    id,
-                    data: {
-                      editorPort,
-                      machine: machineId,
-                    },
-                  },
-                }),
-            })
-          )
-      }
-      then = now
-    }, 2000)
-  }
 
   useEffect(() => {
     if (editorPort) {
@@ -212,9 +180,8 @@ export default memo(({ children, addProject }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startProjectData, startProjectError])
 
-  let code = null
   useEffect(() => {
-    code = getWindowHref()
+    const code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
@@ -245,8 +212,6 @@ export default memo(({ children, addProject }) => {
           : decoredOrigin
 
         const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
-
-        // console.log('redirectAdress', redirectAdress)
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
@@ -301,11 +266,42 @@ export default memo(({ children, addProject }) => {
           break
       }
     }
+
+    const checkAwake = () => {
+      let then = moment().format('X')
+      setInterval(() => {
+        let now = moment().format('X')
+        if (now - then > 300) {
+          user &&
+            dispatch(
+              query({
+                name: 'myProjects',
+                dataSelector: data => data.myProjects.edges,
+                query: MY_PROJECTS,
+                onSuccess: () =>
+                  dispatch({
+                    type: C.api.UPDATE_ITEM,
+                    payload: {
+                      storeKey: 'myProjects',
+                      id,
+                      data: {
+                        editorPort,
+                        machine: machineId,
+                      },
+                    },
+                  }),
+              })
+            )
+        }
+        then = now
+      }, 2000)
+    }
+
     checkAwake()
+    /* eslint-disable-next-line */
   }, [])
 
-  ////////////
-  const userDataSubscription = useSubscription(USER_LOGIN, {
+  const userDataSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
     variables: { deviceId },
     client,
     fetchPolicy: 'no-cache',
@@ -317,7 +313,6 @@ export default memo(({ children, addProject }) => {
     shouldResubscribe: true,
   })
 
-  console.log('userDataSubscription', userDataSubscription)
   const userData = userDataSubscription?.data
   const userError = userDataSubscription?.error
 
@@ -330,10 +325,8 @@ export default memo(({ children, addProject }) => {
         })
       )
     }
-    console.log('eff')
     if (userData?.userLogin) {
-      const { siliskyToken, subscription } = userData?.userLogin
-      console.log('in if')
+      const { siliskyToken, subscription, projects } = userData?.userLogin
       localStorage.setItem('token', siliskyToken)
       dispatch({
         type: C.api.FETCH_SUCCESS,
@@ -342,13 +335,22 @@ export default memo(({ children, addProject }) => {
           data: userData?.userLogin,
         },
       })
-      dispatch({
-        type: C.api.FETCH_SUCCESS,
-        payload: {
-          storeKey: 'subscription',
-          data: subscription,
-        },
-      })
+      subscription &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'subscription',
+            data: subscription,
+          },
+        })
+      projects &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'myProjects',
+            data: projects,
+          },
+        })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData, userError])
