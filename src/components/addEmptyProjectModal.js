@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled from 'styled-components'
 import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
 

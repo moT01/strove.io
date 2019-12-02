@@ -302,6 +302,7 @@ const HeaderComponent = ({ location }) => {
         )
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project?.machineName])
 
   return (

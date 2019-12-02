@@ -14,3 +14,4 @@ quote_type = single
 
 editor.formatOnSave = true,
 prettier.eslintIntegration = true
+typescript.validate.enable = false
