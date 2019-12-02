@@ -12,7 +12,7 @@ import {
   ExternalLink,
 } from 'components'
 import { selectors } from 'state'
-import { getWindowSearchParams } from 'utils'
+import { getWindowSearchParams, getRepoUrl } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
 
@@ -41,7 +41,7 @@ const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
-  const repoUrl = searchParams.get('repoUrl')
+  const repoUrl = getRepoUrl()
   /* Optional url seatch param allowing to specify exactly where should the user be redirected to */
   const goBackTo =
     searchParams.get('goBackTo') || window.location !== window.parent.location
