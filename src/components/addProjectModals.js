@@ -113,7 +113,7 @@ const StyledLink = styled(Link)`
   width: 100%;
   min-width: 70px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   text-align: center;
