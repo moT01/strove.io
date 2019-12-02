@@ -105,7 +105,7 @@ const AddProjectProvider = ({ children }) => {
       dispatch(actions.incomingProject.removeIncomingProject)
     } else if (
       currentProjectId &&
-      currentProject.machineId !== existingProject.machineId
+      currentProject?.machineId !== existingProject?.machineId
     ) {
       setModalContent('AnotherActiveProject')
     } else {
@@ -135,6 +135,7 @@ const AddProjectProvider = ({ children }) => {
         modalContent={modalContent}
         setModalContent={setModalContent}
         addProject={addProject}
+        currentProjectId={currentProjectId}
       />
       <StyledModal
         isOpen={(isLoading && !isAdding) || isDeleting || isStopping}
