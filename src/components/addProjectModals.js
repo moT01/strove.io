@@ -59,7 +59,7 @@ const StyledAnchor = styled.a`
   min-width: 100%;
   max-width: 300px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -444,7 +444,7 @@ const AddProjectModals = ({
                   closeModal()
                 }}
                 text={'Confirm'}
-                padding={'0.5vh'}
+                padding={'10px'}
                 maxWidth={'150px'}
               />
             ) : (
