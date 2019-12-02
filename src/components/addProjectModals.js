@@ -9,6 +9,7 @@ import Modal from './modal'
 import { Github, Gitlab, Bitbucket } from 'images/logos'
 import { actions } from 'state'
 import StroveButton from 'components/stroveButton.js'
+import { getWindowPathName } from 'utils'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -221,6 +222,7 @@ const AddProjectModals = ({
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
   }
+  const isEmbed = getWindowPathName().includes('embed')
 
   return (
     <>
@@ -422,13 +424,15 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             One of your projects is currently active. You have to stop it before
-            adding a new one. You can do that in your dashboard.
+            adding a new one. {!isEmbed && 'You can do that in your dashboard.'}
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="app/dashboard" primary onClick={closeModal}>
-              Ok
-            </StyledLink>
-            <StroveButton onClick={closeModal} text="Close" />
+            {!isEmbed && (
+              <StyledLink to="app/dashboard" primary onClick={closeModal}>
+                Ok
+              </StyledLink>
+            )}
+            <StroveButton onClick={closeModal} text="Close" primary={isEmbed} />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
