@@ -1,10 +1,15 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
+import { useSelector } from 'react-redux'
+import { navigate } from 'gatsby'
 
 import { theme } from 'constants'
+import { selectors } from 'state'
 import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
-import { getRepoUrl } from 'utils'
+import { getRepoUrl, getWindowSearchParams } from 'utils'
+
+const getToken = selectors.api.getUserField('siliskyToken')
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -38,7 +43,21 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject }) => {
+  const token = useSelector(getToken)
+
+  const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
+  /* Optional url seatch param allowing to specify exactly where should the user be redirected to */
+  const goBackTo =
+    searchParams.get('goBackTo') || window.location !== window.parent.location
+      ? document.referrer
+      : document.location.href
+
+  if (!token) {
+    // If user is logged in, redirect to the embed project run
+    navigate(`/embed/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
+  }
+
   const onClick = () => {
     addProject({ link: repoUrl })
   }
