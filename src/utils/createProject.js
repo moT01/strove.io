@@ -1,8 +1,9 @@
 import ApolloClient from 'apollo-boost'
 
 import { mutation, getRepoProvider } from 'utils'
-import { C } from 'state'
+import { C, actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
+
 import stroveClient from '../../client'
 
 const client = new ApolloClient({
@@ -25,6 +26,8 @@ const createProject = async ({
       const repoUrlParts = repoLink.split('/')
       const owner = repoUrlParts[3]
       const name = repoUrlParts[4]
+      dispatch(actions.incomingProject.setProjectIsBeingAdded())
+
       const variables = { owner, name }
       switch (repoProvider) {
         case 'github':
