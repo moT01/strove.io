@@ -135,14 +135,12 @@ export const query = ({
   name,
   storeKey = name,
   variables,
-  context = localStorage.getItem('token')
-    ? {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'User-Agent': 'node',
-        },
-      }
-    : null,
+  context = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'User-Agent': 'node',
+    },
+  },
   fetchPolicy = 'no-cache',
   errorPolicy = 'all',
   query,
