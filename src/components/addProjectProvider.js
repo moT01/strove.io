@@ -122,6 +122,7 @@ const AddProjectProvider = ({ children }) => {
       currentProject?.machineId !== existingProject?.machineId
     ) {
       setModalContent('AnotherActiveProject')
+      dispatch(actions.incomingProject.setProjectIsBeingStarted())
     } else {
       createProject({ repoLink, dispatch, user, setModalContent, name })
     }
