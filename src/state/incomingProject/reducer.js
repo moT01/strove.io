@@ -7,6 +7,7 @@ export default (state = initialState, action) => {
     case C.ADD_INCOMING_PROJECT: {
       const { repoLink, repoProvider } = action.payload
       return {
+        ...state,
         repoLink,
         repoProvider,
       }
@@ -16,6 +17,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isBeingAdded: true,
+      }
+    }
+
+    case C.SET_PROJECT_IS_BEING_STARTED: {
+      return {
+        ...state,
+        isBeingStarted: true,
       }
     }
 

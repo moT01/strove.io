@@ -47,6 +47,10 @@ export default memo(({ children, addProject }) => {
     selectors.incomingProject.isProjectBeingAdded
   )
 
+  const isProjectBeingStarted = useSelector(
+    selectors.incomingProject.isProjectBeingStarted
+  )
+
   if (!localStorage.getItem('deviceId'))
     localStorage.setItem('deviceId', generateDeviceID())
   const deviceId = localStorage.getItem('deviceId')
@@ -372,7 +376,12 @@ export default memo(({ children, addProject }) => {
   }, [token])
 
   useEffect(() => {
-    if (token && incomingProjectLink && !isProjectBeingAdded) {
+    if (
+      token &&
+      incomingProjectLink &&
+      !isProjectBeingAdded &&
+      !isProjectBeingStarted
+    ) {
       addProject({ link: incomingProjectLink })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
