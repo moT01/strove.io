@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from 'constants'
 import { loginOptions } from 'constants'
 import { GlobalStyles, NoRepoUrlInfo, ExternalLink } from 'components'
-import { getRepoProvider, getWindowSearchParams } from 'utils'
+import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -70,8 +70,8 @@ const Login = () => {
               </ExternalLink>
               {goBackTo ? (
                 <RedirectInfoWrapper>
-                  You'll be redirected back to <Url>{goBackTo}</Url> once you
-                  log in!
+                  You'll be redirected back to <Url>{getDomain(goBackTo)}</Url>{' '}
+                  once you log in
                 </RedirectInfoWrapper>
               ) : (
                 <NoRedirectUrlInfo>
