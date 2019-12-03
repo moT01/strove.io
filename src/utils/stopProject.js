@@ -1,7 +1,6 @@
 import { query, mutation } from 'utils'
 import { STOP_PROJECT, MY_PROJECTS } from 'queries'
 import { actions } from 'state'
-// import stopProject from 'src/queries/stopProject'
 
 const handleStopProject = ({ id, dispatch }) => {
   dispatch(

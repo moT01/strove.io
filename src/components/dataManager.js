@@ -35,6 +35,7 @@ const generateDeviceID = () => {
 export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const token = user?.siliskyToken
   const projects = useSelector(selectors.api.getUserProjects)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
@@ -274,7 +275,7 @@ export default memo(({ children, addProject }) => {
       setInterval(() => {
         let now = moment().format('X')
         if (now - then > 300) {
-          user &&
+          token &&
             dispatch(
               query({
                 name: 'myProjects',
@@ -357,7 +358,7 @@ export default memo(({ children, addProject }) => {
   }, [loginData, loginError])
 
   useEffect(() => {
-    user &&
+    token &&
       dispatch(
         query({
           name: 'myProjects',
@@ -366,14 +367,14 @@ export default memo(({ children, addProject }) => {
         })
       )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
+  }, [token])
 
   useEffect(() => {
-    if (user && incomingProjectLink) {
+    if (token && incomingProjectLink) {
       addProject({ link: incomingProjectLink })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projects.length])
+  }, [incomingProjectLink, token])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
