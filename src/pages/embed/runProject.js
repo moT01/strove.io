@@ -7,7 +7,7 @@ import { navigate } from 'gatsby'
 import { theme } from 'constants'
 import { selectors } from 'state'
 import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
-import { getRepoUrl, getWindowSearchParams } from 'utils'
+import { getRepoUrl, getWindowSearchParams, getDomain } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
 
@@ -47,11 +47,15 @@ const Run = ({ addProject }) => {
 
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
-  /* Optional url seatch param allowing to specify exactly where should the user be redirected to */
-  const goBackTo =
-    searchParams.get('goBackTo') || window.location !== window.parent.location
+  /* Specify the route a user should be redirected to */
+  const goBackToRoute = searchParams.get('goBackTo')
+
+  const parentDomain =
+    window.location !== window.parent.location
       ? document.referrer
-      : document.location.href
+      : process.env.SILISKY_URL.slice(0, -1)
+
+  const goBackTo = `${parentDomain}${goBackToRoute}`
 
   if (!token) {
     // If user is logged in, redirect to the embed project run
