@@ -12,7 +12,7 @@ import {
   ExternalLink,
 } from 'components'
 import { selectors } from 'state'
-import { getWindowSearchParams, getRepoUrl, getDomain } from 'utils'
+import { getWindowSearchParams, getRepoUrl } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
 
@@ -43,18 +43,18 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
   /* Specify the route a user should be redirected to */
-  const goBackToRoute = searchParams.get('goBackTo')
+  const goBackToRoute = searchParams.get('goBackToRoute')
 
   const parentDomain =
     window.location !== window.parent.location
       ? document.referrer
       : process.env.SILISKY_URL.slice(0, -1)
 
-  const goBackTo = `${parentDomain}${goBackToRoute}`
+  const goBackTo = `${parentDomain}/${goBackToRoute}`
 
   if (token && repoUrl) {
     // If user is logged in, redirect to the embed project run
-    navigate(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
+    navigate(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackToRoute}`)
   }
 
   return (
