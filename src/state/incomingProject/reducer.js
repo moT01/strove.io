@@ -12,6 +12,13 @@ export default (state = initialState, action) => {
       }
     }
 
+    case C.SET_PROJECT_IS_BEING_ADDED: {
+      return {
+        ...state,
+        isBeingAdded: true,
+      }
+    }
+
     case C.REMOVE_INCOMING_PROJECT: {
       return initialState
     }

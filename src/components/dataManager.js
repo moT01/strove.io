@@ -43,6 +43,9 @@ export default memo(({ children, addProject }) => {
   const bitbucketRefreshToken = useSelector(
     selectors.api.getUserField('bitbucketRefreshToken')
   )
+  const isProjectBeingAdded = useSelector(
+    selectors.incomingProject.isProjectBeingAdded
+  )
 
   if (!localStorage.getItem('deviceId'))
     localStorage.setItem('deviceId', generateDeviceID())
@@ -369,11 +372,11 @@ export default memo(({ children, addProject }) => {
   }, [token])
 
   useEffect(() => {
-    if (token && incomingProjectLink) {
+    if (token && incomingProjectLink && !isProjectBeingAdded) {
       addProject({ link: incomingProjectLink })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incomingProjectLink, token])
+  }, [incomingProjectLink, isProjectBeingAdded, token])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {

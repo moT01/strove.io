@@ -8,3 +8,7 @@ export const getRepoLink = getOr(null, ['incomingProject', 'repoLink'])
 
 export const getRepoName = getOr(null, ['incomingProject', 'name'])
 
+export const isProjectBeingAdded = getOr(null, [
+  'incomingProject',
+  'isBeingAdded',
+])

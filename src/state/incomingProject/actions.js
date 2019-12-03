@@ -9,6 +9,10 @@ export const addIncomingProject = ({ repoLink, repoProvider, name }) => ({
   },
 })
 
+export const setProjectIsBeingAdded = () => ({
+  type: C.SET_PROJECT_IS_BEING_ADDED,
+})
+
 export const catchIncomingError = ({ error }) => ({
   type: C.CATCH_INCOMING_ERROR,
   payload: { error },
