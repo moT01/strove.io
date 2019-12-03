@@ -23,6 +23,7 @@ export const getRepoUrl = () => {
 export const getWindowHref = () => window?.location?.href
 
 export const getDomain = url => {
+  /* eslint-disable-next-line */
   const matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)
   return matches && matches[1]
 }
