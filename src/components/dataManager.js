@@ -36,7 +36,6 @@ export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const token = user?.siliskyToken
-  const projects = useSelector(selectors.api.getUserProjects)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   const githubToken = useSelector(selectors.api.getUserField('githubToken'))
