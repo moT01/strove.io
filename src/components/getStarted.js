@@ -1,29 +1,11 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled from 'styled-components'
 import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 
 import AddProjectProvider from './addProjectProvider'
 import AddEmptyProjectModal from './addEmptyProjectModal'
 import StroveButton from 'components/stroveButton.js'
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.4;
-  }
-`
-
-const ButtonFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.9;
-  }
-`
 
 const AddProjectWrapper = styled.div`
   display: flex;
@@ -42,51 +24,6 @@ const AddProjectWrapper = styled.div`
   width: auto;
   min-width: 50vw;
   max-width: 100vw;
-`
-
-const Button = styled.button`
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  min-width: 70px;
-  margin: 5px;
-  padding: 10px 30px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background-color: ${({ primary, theme }) =>
-    primary ? theme.colors.c1 : theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  color: ${({ primary, theme }) =>
-    primary ? theme.colors.c2 : theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  animation: ${FadeIn} 0.5s ease-out;
-  opacity: 0.9;
-
-  :focus {
-    outline: 0;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-  }
-
-  ${props =>
-    !props.disabled &&
-    css`
-      animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
-        transform: translateY(-1px);
-      }
-    `}
 `
 
 const Title = styled.h3`
@@ -160,8 +97,7 @@ const GetStarted = ({ addProject }) => {
       </Title>
       <Formik
         onSubmit={(values, actions) => {
-          values.repoLink.trim() &&
-            addProject({ link: values.repoLink.replace(/.git$/, '') })
+          values.repoLink.trim() && addProject({ link: values.repoLink })
           actions.setSubmitting(false)
         }}
         validate={validateRepoLink}
@@ -186,6 +122,7 @@ const GetStarted = ({ addProject }) => {
               type="submit"
               text="Clone project"
               width="30%"
+              minWidth="200px"
             />
 
             <StyledErrors>{props.errors.repoLink}</StyledErrors>
@@ -198,6 +135,7 @@ const GetStarted = ({ addProject }) => {
         onClick={() => setAddProjectModalOpen(true)}
         text="Create empty project"
         width="30%"
+        minWidth="200px"
       />
       <AddEmptyProjectModal
         handleClose={setAddProjectModalOpen}

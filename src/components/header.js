@@ -13,6 +13,7 @@ import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'images/logos'
 import LatencyIndicator from './latencyIndicator'
 import Login from './login'
+import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
   0% {
@@ -23,23 +24,18 @@ const FadeIn = keyframes`
   }
 `
 
-const LinkWrapper = styled.div`
-  font-weight: 300;
-  animation: ${FadeIn} 0.3s ease-out;
-`
-
-const LoginWrapper = styled.div`
+const HeaderSection = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  height: ${props => (props.mobile ? '100%' : '2.5vh')};
-  margin: 0;
-  font-weight: 300;
-  animation: ${FadeIn} 0.3s ease-out;
-  cursor: pointer;
+  width: 100vw;
+  height: ${props => (props.isEmbed ? '20px' : 'auto')};
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  background: ${({ theme }) => theme.colors.c1};
   @media (max-width: 767px) {
-    height: 4vh;
+    height: 5vh;
   }
 `
 
@@ -57,9 +53,15 @@ const HeaderWrapper = styled.div`
   }
 `
 
+const LinkWrapper = styled.div`
+  font-weight: 300;
+  animation: ${FadeIn} 0.3s ease-out;
+`
+
 const LinkText = styled.h3`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 1.2rem;
+  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -69,8 +71,7 @@ const LinkText = styled.h3`
   margin: 0;
   cursor: pointer;
   @media (max-width: 767px) {
-    height: 5vh;
-    font-size: 1.8rem;
+    font-size: 18px;
   }
 
   :hover {
@@ -80,7 +81,7 @@ const LinkText = styled.h3`
 
 const DocsLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 1.2rem;
+  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -101,15 +102,8 @@ const DocsLink = styled.a`
   }
 `
 
-const HeaderSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
-  background: ${({ theme }) => theme.colors.c1};
+const StroveLink = styled(DocsLink)`
+  font-size: 14px;
 `
 
 const StyledLink = styled(Link)`
@@ -123,8 +117,24 @@ const PreviewLink = styled.a`
   text-decoration: 'none';
   position: relative;
   display: flex;
-  height: 25px;
+  height: ${props => (props.isEmbed ? '18px' : 'auto')};
   padding: 0;
+`
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: ${props =>
+    props.mobile ? '100%' : props.isEmbed ? '20px' : '2.5vh'};
+  margin: 0;
+  font-weight: 300;
+  animation: ${FadeIn} 0.3s ease-out;
+  cursor: pointer;
+  @media (max-width: 767px) {
+    height: 100%;
+  }
 `
 
 const LoginButton = styled.button`
@@ -191,7 +201,7 @@ const Option = styled.a`
   z-index: 4;
   text-decoration: none;
   font-weight: 300;
-  min-width: 150px;
+  min-width: ${props => (props.isEmbed ? '0' : '150px')};
 
   svg {
     fill: ${({ theme, invert }) =>
@@ -222,7 +232,7 @@ const Text = styled.h3`
   font-weight: 300;
   line-height: 1;
   @media (max-width: 767px) {
-    font-size: 1.4rem;
+    font-size: 16px;
   }
   :hover {
     color: ${({ theme }) => theme.colors.c3};
@@ -245,9 +255,8 @@ const DropdownWrapper = styled.div`
   cursor: pointer;
   position: absolute;
   background: none;
-  right: 1.5vw;
   display: flex;
-  right: -10px;
+  right: ${props => (props.isEmbed ? '-75px' : '-10px')};
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
@@ -260,14 +269,15 @@ const CopyWrapper = styled.div`
   }
 `
 
-const HeaderComponent = ({ siteTitle, location }) => {
+const HeaderComponent = ({ location }) => {
   const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
   const project = useSelector(selectors.api.getCurrentProject)
+  const isEmbed = getWindowPathName().includes('embed')
 
   useEffect(() => {
-    if (location.pathname === '/app/editor/') {
+    if (location.pathname.includes('editor')) {
       if (project?.machineName) {
         setPorts(
           project.additionalPorts.map((portPair, index) => {
@@ -292,24 +302,28 @@ const HeaderComponent = ({ siteTitle, location }) => {
         )
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project?.machineName])
 
   return (
-    <HeaderSection mobile={isMobileOnly}>
+    <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
       <HeaderWrapper
         isUserInsideEditor={location.pathname === '/app/editor/'}
         mobile={isMobileOnly}
+        isEmbed={isEmbed}
       >
-        <LinkWrapper mobile={isMobileOnly}>
-          <StyledLink to="/">
-            {isMobileOnly ? (
-              <Strove style={{ height: '25px' }} fill="#ffffff" />
-            ) : (
-              <LinkText>{siteTitle}</LinkText>
-            )}
-          </StyledLink>
-        </LinkWrapper>
-        {user && (
+        {!isEmbed && (
+          <LinkWrapper mobile={isMobileOnly}>
+            <StyledLink to="/">
+              {isMobileOnly ? (
+                <Strove style={{ height: '25px' }} fill="#ffffff" />
+              ) : (
+                <LinkText>Strove</LinkText>
+              )}
+            </StyledLink>
+          </LinkWrapper>
+        )}
+        {user && !isEmbed && (
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
@@ -320,22 +334,28 @@ const HeaderComponent = ({ siteTitle, location }) => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {location.pathname === '/app/editor/' && (
+
+        {location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
               <div style={{ position: 'relative' }}>
-                <LoginButton {...getToggleButtonProps({})}>
+                <LoginButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
                   {isMobileOnly ? (
                     <Desktop style={{ height: '20px' }} fill="#fff" />
                   ) : (
-                    <LinkText>Preview</LinkText>
+                    <LinkText isEmbed={isEmbed}>Preview</LinkText>
                   )}
                 </LoginButton>
-                <DropdownWrapper>
+                <DropdownWrapper isEmbed={isEmbed}>
                   {isOpen && (
                     <MenuWrapper invert>
                       {ports.map(item => (
-                        <Option invert key={item.value} href={item.href}>
+                        <Option
+                          invert
+                          key={item.value}
+                          href={item.href}
+                          isEmbed={isEmbed}
+                        >
                           <PreviewLink
                             style={{ color: '#fff', textDecoration: 'none' }}
                             href={item.href}
@@ -378,6 +398,7 @@ const HeaderComponent = ({ siteTitle, location }) => {
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
+            isEmbed={isEmbed}
           >
             <Icon
               type="file-text"
@@ -389,14 +410,25 @@ const HeaderComponent = ({ siteTitle, location }) => {
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
+            isEmbed={isEmbed}
           >
             Docs
           </DocsLink>
         )}
       </HeaderWrapper>
-      {location.pathname === '/app/editor/' && <LatencyIndicator />}
+      {location.pathname.includes('editor') && <LatencyIndicator />}
+
       <LoginWrapper>
-        <Login />
+        {isEmbed && (
+          <StroveLink
+            href="https://strove.io"
+            target="_blank"
+            isEmbed={isEmbed}
+          >
+            Powered by Strove.io
+          </StroveLink>
+        )}
+        <Login isEmbed={isEmbed} />
       </LoginWrapper>
     </HeaderSection>
   )
