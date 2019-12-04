@@ -159,12 +159,7 @@ const Dashboard = () => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
-  // const subscription = useSelector(
-  //   selectors.api.getApiData({ fields: 'subscription' })
-  // )
-
   const projectsLimit = 20
-  // (subscription.status === 'active' && subscription.projects_limit) || 4
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -284,7 +279,7 @@ const Dashboard = () => {
                     to="/app/editor/"
                     isDisabled={isDeleting || isContinuing || isStopping}
                     isPrimary
-                    padding={'0.5vh'}
+                    padding="0.5vh"
                     onClick={() => handleStartClick(project)}
                     text={
                       currentProjectId && project.id === currentProjectId
@@ -335,15 +330,15 @@ const Dashboard = () => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
-          padding={'0.5vh'}
-          text={'Confirm'}
-          maxWidth={'150px'}
+          padding="0.5vh"
+          text="Confirm"
+          maxWidth="150px"
         />
         <ModalButton
           onClick={closeModal}
-          text={'Close'}
-          padding={'0.5vh'}
-          maxWidth={'150px'}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
         />
       </Modal>
       <Modal
@@ -365,15 +360,15 @@ const Dashboard = () => {
             handleStopClick(currentProjectId)
             setStopModal(false)
           }}
-          text={'Confirm'}
-          padding={'0.5vh'}
-          maxWidth={'150px'}
+          text="Confirm"
+          padding="0.5vh"
+          maxWidth="150px"
         />
         <ModalButton
           onClick={() => setStopModal(false)}
-          text={'Close'}
-          padding={'0.5vh'}
-          maxWidth={'150px'}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
         />
       </Modal>
     </>

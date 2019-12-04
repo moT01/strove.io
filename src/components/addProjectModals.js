@@ -443,12 +443,12 @@ const AddProjectModals = ({
                   handleStopProject({ id: currentProjectId, dispatch })
                   closeModal()
                 }}
-                text={'Confirm'}
-                padding={'10px'}
-                maxWidth={'150px'}
+                text="Confirm"
+                padding="10px"
+                maxWidth="150px"
               />
             ) : (
-              <StyledLink to="app/dashboard" primary onClick={closeModal}>
+              <StyledLink to="/app/dashboard" primary onClick={closeModal}>
                 Ok
               </StyledLink>
             )}

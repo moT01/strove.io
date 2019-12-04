@@ -84,7 +84,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
             onBlur={props.handleBlur}
             value={props.values.projectName}
             name="projectName"
-            placeholder={'Name'}
+            placeholder="Name"
           />
           <StroveButton
             isDisabled={!props.values.projectName || props.errors.projectName}

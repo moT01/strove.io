@@ -52,7 +52,7 @@ const Layout = ({ children, browser }) => {
                 <StyledModal
                   isOpen={noSupportModalVisible}
                   onRequestClose={() => setNoSupportModalVisible(false)}
-                  contentLabel={'Browser not supported'}
+                  contentLabel="Browser not supported"
                   ariaHideApp={false}
                   isMobile={isMobile}
                 >
