@@ -116,7 +116,7 @@ const AddProjectProvider = ({ children }) => {
       setModalContent('SomethingWentWrong')
     } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
-      dispatch(actions.incomingProject.removeIncomingProject)
+      dispatch(actions.incomingProject.removeIncomingProject())
     } else if (
       currentProjectId &&
       currentProject?.machineId !== existingProject?.machineId
