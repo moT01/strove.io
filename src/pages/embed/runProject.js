@@ -48,7 +48,7 @@ const Run = ({ addProject }) => {
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
   /* Specify the route a user should be redirected to */
-  const goBackToRoute = searchParams.get('goBackToRoute')
+  const goBackToRoute = searchParams.get('goBackToRoute') || ''
 
   if (!token) {
     // If user is logged in, redirect to the embed project run

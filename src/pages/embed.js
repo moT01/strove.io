@@ -43,7 +43,7 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
   /* Specify the route a user should be redirected to */
-  const goBackToRoute = searchParams.get('goBackToRoute')
+  const goBackToRoute = searchParams.get('goBackToRoute') || ''
 
   const parentDomain =
     window.location !== window.parent.location
