@@ -132,7 +132,6 @@ const createProject = async ({
     dispatch(
       mutation({
         name: 'addProject',
-        storeKey: 'myProjects',
         variables: { repoLink, name, description },
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
