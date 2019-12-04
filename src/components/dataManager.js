@@ -296,18 +296,6 @@ export default memo(({ children, addProject }) => {
                 name: 'myProjects',
                 dataSelector: data => data.myProjects.edges,
                 query: MY_PROJECTS,
-                onSuccess: () =>
-                  dispatch({
-                    type: C.api.UPDATE_ITEM,
-                    payload: {
-                      storeKey: 'myProjects',
-                      id,
-                      data: {
-                        editorPort,
-                        machine: machineId,
-                      },
-                    },
-                  }),
               })
             )
         }
