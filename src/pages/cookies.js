@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 import Footer from 'components/home/footer'
-import { Layout, SEO } from 'components'
+import { SEO, Header } from 'components'
 
 const TextWell = styled.div`
   color: ${({ theme }) => theme.colors.c3};
@@ -25,9 +25,9 @@ const StyledH1 = styled.h1`
 `
 
 const Legal = () => (
-  <Layout>
+  <>
     <SEO title="Cookies" />
-
+    <Header />
     <TextWell>
       <StyledH1>About Cookies</StyledH1>
       <h6>Last Edited on 2019-11–17</h6>
@@ -113,7 +113,7 @@ const Legal = () => (
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
     <Footer />
-  </Layout>
+  </>
 )
 
 export default memo(Legal)

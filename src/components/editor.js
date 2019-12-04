@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useCallback, memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { navigate } from 'gatsby'
 
-import { Layout, FullScreenLoader, SEO } from 'components'
+import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
-import { mutation } from 'utils'
+import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 import dayjs from 'dayjs'
 
 const StyledIframe = styled.iframe`
   display: block;
   background: ${({ theme }) => theme.colors.c3};
   border: none;
-  min-height: 97vh;
+  min-height: ${props => (props.isEmbed ? 'calc(100vh - 20px)' : '97vh')};
   width: 100vw;
   margin: 0;
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
@@ -32,6 +32,7 @@ const Editor = () => {
   const projectId = currentProject && currentProject.id
   const machineId = currentProject && currentProject.machineId
   const port = currentProject && currentProject.editorPort
+  const isEmbed = getWindowPathName().includes('embed')
 
   const token = useSelector(getUserToken)
   const [loaderVisible, setLoaderVisible] = useState(true)
@@ -48,6 +49,7 @@ const Editor = () => {
         })
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId, machineId])
 
   useEffect(() => {
@@ -67,7 +69,14 @@ const Editor = () => {
     const checkIfProjectIsActive = () => {
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
-        navigate('/app/dashboard')
+        const path = getWindowPathName()
+        if (path.includes('embed')) {
+          const searchParams = getWindowSearchParams()
+          const repoUrl = searchParams.get('repoUrl')
+          navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+        } else {
+          navigate('/app/dashboard')
+        }
       }
     }
 
@@ -77,6 +86,7 @@ const Editor = () => {
       clearInterval(projectPing)
       clearInterval(activeProjectCheck)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
   const randomId = Math.random()
@@ -84,8 +94,9 @@ const Editor = () => {
     .substring(7)
 
   return (
-    <Layout>
+    <>
       <SEO title="Editor" />
+      <Header />
       {loaderVisible && (
         <FullScreenLoader
           isFullScreen={true}
@@ -94,11 +105,12 @@ const Editor = () => {
         />
       )}
       <StyledIframe
+        isEmbed={isEmbed}
         loaderVisible={loaderVisible}
-        onLoad={useCallback(() => setLoaderVisible(false))}
+        onLoad={() => setLoaderVisible(false)}
         src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
-    </Layout>
+    </>
   )
 }
 

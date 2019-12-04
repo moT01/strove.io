@@ -3,7 +3,6 @@ import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
-import { theme } from 'constants'
 import { FullScreenLoader } from 'components'
 import { selectors } from 'state'
 
@@ -32,7 +31,7 @@ const Button = styled.button`
   letter-spacing: ${props =>
     props.letterSpacing ? props.letterSpacing : 'normal'};
   height: ${props => (props.height ? props.height : 'auto')};
-  min-width: 70px;
+  min-width: ${props => (props.minWidth ? props.minWidth : '70px')};
   max-width: ${props => (props.maxWidth ? props.maxWidth : 'none')};
   width: ${props => (props.width ? props.width : '100%')};
   display: flex;
@@ -134,46 +133,32 @@ const StroveButton = props => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
 
   return props.layout === 'form' ? (
-    <FormButton
-      primary={props.isPrimary}
-      mobile={isMobileOnly}
-      type={props.type}
-    >
+    <FormButton primary={props.isPrimary} mobile={isMobileOnly} {...props}>
       {isLoading ? (
         <FullScreenLoader
           isFullScreen={false}
-          color={'#ffffff'}
-          height={'1.7rem'}
+          color="#ffffff"
+          height="1.7rem"
         />
       ) : (
-        props.text
+        props.text || props.children
       )}
     </FormButton>
   ) : (
     <Button
       disabled={isLoading || props.isDisabled}
       primary={props.isPrimary}
-      isDelete={props.isDelete}
       mobile={isMobileOnly}
-      onClick={props.onClick}
-      height={props.height}
-      width={props.width}
-      fontSize={props.fontSize}
-      fontWeight={props.fontWeight}
-      lineHeight={props.lineHeight}
-      letterSpacing={props.letterSpacing}
-      padding={props.padding}
-      maxWidth={props.maxWidth}
-      type={props.type}
+      {...props}
     >
       {isLoading || isDeleting || isContinuing || isStopping ? (
         <FullScreenLoader
           isFullScreen={false}
-          color={'#ffffff'}
-          height={'1.7rem'}
+          color="#ffffff"
+          height="1.7rem"
         />
       ) : (
-        props.text
+        props.text || props.children
       )}
     </Button>
   )

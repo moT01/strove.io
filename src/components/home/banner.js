@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import styled, { keyframes, css } from 'styled-components'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
@@ -11,7 +11,6 @@ import { Formik, Form, Field } from 'formik'
 import { theme } from 'constants'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { selectors } from 'state'
 import { GetStarted, Logos } from 'components'
 import StroveButton from 'components/stroveButton.js'
 import Demo from 'assets/StroveDemo.mp4'
@@ -35,15 +34,6 @@ const FadeIn = keyframes`
   }
   100% {
     opacity: 1;
-  }
-`
-
-const ButtonFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.9;
   }
 `
 
@@ -344,7 +334,6 @@ const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
 const Banner = () => {
-  const isLoading = useSelector(selectors.api.getLoading('user'))
   const [isModalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
   const closeModal = () => setModalVisible(false)
@@ -373,7 +362,7 @@ const Banner = () => {
               isPrimary
               text="Get started"
               letterSpacing="0.8px"
-              onClick={useCallback(() => setModalVisible(true))}
+              onClick={() => setModalVisible(true)}
             />
             <StyledTrialInfo>
               <li>Free for non-commercial use</li>
@@ -541,10 +530,7 @@ const Banner = () => {
         isMobile={isMobileOnly}
       >
         {!isMobile && (
-          <StyledIcon
-            type="close"
-            onClick={useCallback(() => setModalVisible(false))}
-          />
+          <StyledIcon type="close" onClick={() => setModalVisible(false)} />
         )}
         <GetStarted closeModal={closeModal} />
       </StyledModal>
