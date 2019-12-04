@@ -137,8 +137,8 @@ const StroveButton = props => {
       {isLoading ? (
         <FullScreenLoader
           isFullScreen={false}
-          color={'#ffffff'}
-          height={'1.7rem'}
+          color="#ffffff"
+          height="1.7rem"
         />
       ) : (
         props.text || props.children
@@ -154,8 +154,8 @@ const StroveButton = props => {
       {isLoading || isDeleting || isContinuing || isStopping ? (
         <FullScreenLoader
           isFullScreen={false}
-          color={'#ffffff'}
-          height={'1.7rem'}
+          color="#ffffff"
+          height="1.7rem"
         />
       ) : (
         props.text || props.children

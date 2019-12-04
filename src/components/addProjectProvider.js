@@ -143,11 +143,7 @@ const AddProjectProvider = ({ children }) => {
         contentLabel="Loading"
         ariaHideApp={false}
       >
-        <FullScreenLoader
-          isFullScreen={false}
-          color="#0072ce"
-          height={'15vh'}
-        />
+        <FullScreenLoader isFullScreen={false} color="#0072ce" height="15vh" />
       </StyledModal>
       {isContinuing && (
         <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" />

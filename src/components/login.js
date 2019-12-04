@@ -117,6 +117,7 @@ const UserPhoto = styled.img`
   height: 100%;
   margin-left: 4px;
   border-radius: 5px;
+  margin: 0;
 `
 
 const Text = styled.h3`
@@ -215,7 +216,7 @@ const UserDropdown = props => {
 
   if (isLoading)
     return (
-      <FullScreenLoader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
+      <FullScreenLoader isFullscreen={false} height="3vh" color="#ffffff" />
     )
 
   return (
@@ -228,7 +229,7 @@ const UserDropdown = props => {
                 <Text isEmbed={isEmbed}>{props.user.username}</Text>
               )}
               <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
-                <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
+                <UserPhoto src={props.user.userphoto} />
               </Inline>
             </StyledDropdown>
           </Wrapper>

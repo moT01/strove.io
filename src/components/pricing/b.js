@@ -368,7 +368,7 @@ const PricingPage = () => {
       <Modal
         isOpen={!!modalVisible}
         onRequestClose={() => setModalVisible(false)}
-        contentLabel={'Activate Pro plan'}
+        contentLabel="Activate Pro plan"
         ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '40vh' : '25vh'}
