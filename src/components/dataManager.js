@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { useSubscription } from '@apollo/react-hooks'
-import { navigate } from 'gatsby'
 
 import {
   GITHUB_LOGIN,
@@ -12,18 +11,31 @@ import {
   MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
+  LOGIN_SUBSCRIPTION,
 } from 'queries'
-import { mutation, query } from 'utils'
-import { window } from 'utils'
+import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
 import { selectors } from 'state'
-import client from '../../client'
 import { C } from 'state'
 import { actions } from 'state'
+
+import client from '../../client'
+
+// Generate unique device id
+const generateDeviceID = () => {
+  return (
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  )
+}
 
 export default memo(({ children, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
-  const projects = useSelector(selectors.api.getUserProjects)
+  const token = user?.siliskyToken
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const incomingProjectLink = useSelector(selectors.incomingProject.getRepoLink)
   const githubToken = useSelector(selectors.api.getUserField('githubToken'))
@@ -31,6 +43,17 @@ export default memo(({ children, addProject }) => {
   const bitbucketRefreshToken = useSelector(
     selectors.api.getUserField('bitbucketRefreshToken')
   )
+  const isProjectBeingAdded = useSelector(
+    selectors.incomingProject.isProjectBeingAdded
+  )
+
+  const isProjectBeingStarted = useSelector(
+    selectors.incomingProject.isProjectBeingStarted
+  )
+
+  if (!localStorage.getItem('deviceId'))
+    localStorage.setItem('deviceId', generateDeviceID())
+  const deviceId = localStorage.getItem('deviceId')
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     variables: { email: user?.email || 'null' },
@@ -52,36 +75,6 @@ export default memo(({ children, addProject }) => {
   const editorPort = activeProjectData?.editorPort
   const id = activeProjectData?.id
 
-  const checkAwake = () => {
-    let then = moment().format('X')
-    setInterval(() => {
-      let now = moment().format('X')
-      if (now - then > 300) {
-        user &&
-          dispatch(
-            query({
-              name: 'myProjects',
-              dataSelector: data => data.myProjects.edges,
-              query: MY_PROJECTS,
-              onSuccess: () =>
-                dispatch({
-                  type: C.api.UPDATE_ITEM,
-                  payload: {
-                    storeKey: 'myProjects',
-                    id,
-                    data: {
-                      editorPort,
-                      machine: machineId,
-                    },
-                  },
-                }),
-            })
-          )
-      }
-      then = now
-    }, 2000)
-  }
-
   useEffect(() => {
     if (editorPort) {
       dispatch({
@@ -102,6 +95,7 @@ export default memo(({ children, addProject }) => {
         },
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeProject.data])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
@@ -118,7 +112,7 @@ export default memo(({ children, addProject }) => {
   })
 
   const startProjectData = startProjectSubscription?.data
-  const startProjectError = startProjectSubscription?.error
+  const startProjectError = startProjectSubscription?.error //
 
   useEffect(() => {
     if (startProjectError) {
@@ -156,7 +150,6 @@ export default memo(({ children, addProject }) => {
           })
         )
       } else if (queuePosition === 0 && project?.machineId) {
-        navigate('/app/editor/')
         if (type === 'continueProject') {
           try {
             dispatch({
@@ -188,17 +181,19 @@ export default memo(({ children, addProject }) => {
             })
           )
         }
+        redirectToEditor()
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startProjectData, startProjectError])
 
   useEffect(() => {
-    const code = window?.location?.href
+    const code = getWindowHref()
       .match(/code=([a-z0-9A-Z]+)/g)
       ?.toString()
       .split('=')[1]
 
-    const loginState = window?.location?.href
+    const loginState = getWindowHref()
       ?.match(/state=(.+)/g)
       ?.toString()
       .split('=')[1]
@@ -211,7 +206,7 @@ export default memo(({ children, addProject }) => {
 
       gitProvider = stateParams[0]
 
-      const shouldBeRedirected = stateParams[1]
+      const shouldBeRedirected = stateParams[1] === 'true'
 
       const origin = stateParams[2]
 
@@ -223,7 +218,9 @@ export default memo(({ children, addProject }) => {
           ? decoredOrigin.split('/&code')[0]
           : decoredOrigin
 
-        const redirectAdress = `${originWithoutParams}?code=${code}&state=${gitProvider}`
+        const redirectAdress = originWithoutParams.includes('?')
+          ? `${originWithoutParams}&code=${code}&state=${gitProvider}`
+          : `${originWithoutParams}?code=${code}&state=${gitProvider}`
 
         /* Redirect to project */
         return window.location.replace(redirectAdress)
@@ -237,29 +234,10 @@ export default memo(({ children, addProject }) => {
             dispatch(
               mutation({
                 mutation: GITHUB_LOGIN,
-                variables: { code },
+                variables: { code, deviceId },
                 storeKey: 'user',
                 name: 'githubAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) => {
-                  localStorage.setItem('token', siliskyToken)
-                },
-                onSuccessDispatch: [
-                  user => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'user',
-                      data: user,
-                    },
-                  }),
-                  ({ subscription }) => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'subscription',
-                      data: subscription,
-                    },
-                  }),
-                ],
               })
             )
           }
@@ -270,29 +248,10 @@ export default memo(({ children, addProject }) => {
             dispatch(
               mutation({
                 mutation: GITLAB_LOGIN,
-                variables: { code },
+                variables: { code, deviceId },
                 storeKey: 'user',
                 name: 'gitlabAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) => {
-                  localStorage.setItem('token', siliskyToken)
-                },
-                onSuccessDispatch: [
-                  user => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'user',
-                      data: user,
-                    },
-                  }),
-                  ({ subscription }) => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'subscription',
-                      data: subscription,
-                    },
-                  }),
-                ],
               })
             )
           }
@@ -303,29 +262,10 @@ export default memo(({ children, addProject }) => {
             dispatch(
               mutation({
                 mutation: BITBUCKET_LOGIN,
-                variables: { code },
+                variables: { code, deviceId },
                 storeKey: 'user',
                 name: 'bitbucketAuth',
                 context: null,
-                onSuccess: ({ siliskyToken }) => {
-                  localStorage.setItem('token', siliskyToken)
-                },
-                onSuccessDispatch: [
-                  user => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'user',
-                      data: user,
-                    },
-                  }),
-                  ({ subscription }) => ({
-                    type: C.api.FETCH_SUCCESS,
-                    payload: {
-                      storeKey: 'subscription',
-                      data: subscription,
-                    },
-                  }),
-                ],
               })
             )
           }
@@ -335,11 +275,96 @@ export default memo(({ children, addProject }) => {
           break
       }
     }
+
+    const checkAwake = () => {
+      let then = moment().format('X')
+      setInterval(() => {
+        let now = moment().format('X')
+        if (now - then > 300) {
+          token &&
+            dispatch(
+              query({
+                name: 'myProjects',
+                dataSelector: data => data.myProjects.edges,
+                query: MY_PROJECTS,
+                onSuccess: () =>
+                  dispatch({
+                    type: C.api.UPDATE_ITEM,
+                    payload: {
+                      storeKey: 'myProjects',
+                      id,
+                      data: {
+                        editorPort,
+                        machine: machineId,
+                      },
+                    },
+                  }),
+              })
+            )
+        }
+        then = now
+      }, 2000)
+    }
+
     checkAwake()
+    /* eslint-disable-next-line */
   }, [])
 
+  const loginSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
+    variables: { deviceId },
+    client,
+    fetchPolicy: 'no-cache',
+    context: {
+      headers: {
+        'User-Agent': 'node',
+      },
+    },
+    shouldResubscribe: true,
+  })
+  const loginData = loginSubscription?.data
+  const loginError = loginSubscription?.error
+
   useEffect(() => {
-    user &&
+    if (loginError) {
+      dispatch(
+        actions.api.fetchError({
+          storeKey: 'user',
+          error: loginError,
+        })
+      )
+    }
+    if (loginData?.userLogin) {
+      const { siliskyToken, subscription, projects } = loginData?.userLogin
+      localStorage.setItem('token', siliskyToken)
+      dispatch({
+        type: C.api.FETCH_SUCCESS,
+        payload: {
+          storeKey: 'user',
+          data: loginData?.userLogin,
+        },
+      })
+      subscription &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'subscription',
+            data: subscription,
+          },
+        })
+      projects &&
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'myProjects',
+            data: projects,
+          },
+        })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginData, loginError])
+
+  useEffect(() => {
+    token &&
       dispatch(
         query({
           name: 'myProjects',
@@ -347,25 +372,33 @@ export default memo(({ children, addProject }) => {
           query: MY_PROJECTS,
         })
       )
-  }, [user])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token])
 
   useEffect(() => {
-    if (user && incomingProjectLink) {
+    if (
+      token &&
+      incomingProjectLink &&
+      !isProjectBeingAdded &&
+      !isProjectBeingStarted
+    ) {
       addProject({ link: incomingProjectLink })
     }
-  }, [projects.length])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [incomingProjectLink, isProjectBeingAdded, token])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
       ev.preventDefault()
 
-      if (navigator && navigator.sendBeacon) {
+      if (navigator?.sendBeacon && user) {
         navigator.sendBeacon(
           `${process.env.SILISKY_ENDPOINT}/beacon`,
           JSON.stringify({ token: localStorage.getItem('token') })
         )
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return children

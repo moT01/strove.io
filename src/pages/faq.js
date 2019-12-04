@@ -9,7 +9,7 @@ import {
 } from 'react-accessible-accordion'
 import { isMobile } from 'react-device-detect'
 
-import { SEO, Layout } from 'components'
+import { SEO, Header } from 'components'
 
 const StyledAccordion = styled(Accordion)`
   .accordion__item + .accordion__item {
@@ -66,7 +66,7 @@ const Paragraph = styled.p`
   padding-top: 0;
 `
 
-const Header = styled.h3`
+const QuestionHeader = styled.h3`
   font-size: 22;
   display: inline-block;
 `
@@ -192,8 +192,9 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
 ]
 
 const FAQ = () => (
-  <Layout>
+  <>
     <SEO title="FAQ" />
+    <Header />
     <TextWell>
       <StyledAccordion
         allowZeroExpanded
@@ -204,7 +205,9 @@ const FAQ = () => (
           <AccordionItem key={topic.header} uuid={index}>
             <AccordionItemHeading>
               <AccordionItemButton>
-                <Header>{`${index + 1}. ${topic.header}`}</Header>
+                <QuestionHeader>{`${index + 1}. ${
+                  topic.header
+                }`}</QuestionHeader>
               </AccordionItemButton>
             </AccordionItemHeading>
 
@@ -223,7 +226,7 @@ const FAQ = () => (
         ))}
       </StyledAccordion>
     </TextWell>
-  </Layout>
+  </>
 )
 
 export default memo(FAQ)

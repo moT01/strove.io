@@ -9,6 +9,7 @@ import Modal from './modal'
 import { Github, Gitlab, Bitbucket } from 'images/logos'
 import { actions } from 'state'
 import StroveButton from 'components/stroveButton.js'
+import { getWindowPathName, handleStopProject } from 'utils'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
 const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
@@ -58,7 +59,7 @@ const StyledAnchor = styled.a`
   min-width: 100%;
   max-width: 300px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -113,7 +114,7 @@ const StyledLink = styled(Link)`
   width: 100%;
   min-width: 70px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 10px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -214,6 +215,7 @@ const AddProjectModals = ({
   setModalContent,
   projectsLimit,
   addProject,
+  currentProjectId,
 }) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
@@ -221,6 +223,7 @@ const AddProjectModals = ({
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
   }
+  const isEmbed = getWindowPathName().includes('embed')
 
   return (
     <>
@@ -420,14 +423,35 @@ const AddProjectModals = ({
         height={isMobileOnly ? '47vh' : '25vh'}
       >
         <ModalWrapper>
-          <Text>
-            One of your projects is currently active. You have to stop it before
-            adding a new one. You can do that in your dashboard.
-          </Text>
+          {isEmbed ? (
+            <Text>
+              Before starting new project you have to stop your currently
+              running project. That means you may lose all unsaved progress. Are
+              you sure you want to stop your active project?
+            </Text>
+          ) : (
+            <Text>
+              One of your projects is currently active. You have to stop it
+              before adding a new one. You can do that in your dashboard.
+            </Text>
+          )}
           <ButtonsWrapper mobile={device}>
-            <StyledLink to="app/dashboard" primary onClick={closeModal}>
-              Ok
-            </StyledLink>
+            {isEmbed ? (
+              <StroveButton
+                primary
+                onClick={() => {
+                  handleStopProject({ id: currentProjectId, dispatch })
+                  closeModal()
+                }}
+                text="Confirm"
+                padding="10px"
+                maxWidth="150px"
+              />
+            ) : (
+              <StyledLink to="/app/dashboard" primary onClick={closeModal}>
+                Ok
+              </StyledLink>
+            )}
             <StroveButton onClick={closeModal} text="Close" />
           </ButtonsWrapper>
         </ModalWrapper>

@@ -1,26 +1,21 @@
 import React, { useState, memo } from 'react'
 import { navigate } from 'gatsby'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
-import { query, mutation } from 'utils'
-import {
-  DELETE_PROJECT,
-  CONTINUE_PROJECT,
-  STOP_PROJECT,
-  MY_PROJECTS,
-} from 'queries'
+import { mutation, handleStopProject } from 'utils'
+import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
-import Layout from './layout'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
+import Header from './header'
 
 const FullFadeIn = keyframes`
   0% {
@@ -164,12 +159,7 @@ const Dashboard = () => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject && currentProject.id
-  const subscription = useSelector(
-    selectors.api.getApiData({ fields: 'subscription' })
-  )
-
-  const projectsLimit =
-    (subscription.status === 'active' && subscription.projects_limit) || 4
+  const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -216,29 +206,7 @@ const Dashboard = () => {
   }
 
   const handleStopClick = id => {
-    dispatch(
-      mutation({
-        name: 'stopProject',
-        mutation: STOP_PROJECT,
-        dataSelector: data => data,
-        variables: { projectId: id },
-        onSuccessDispatch: [
-          () =>
-            actions.api.fetchSuccess({
-              data: { currentProjectId: null },
-              storeKey: 'user',
-            }),
-          () => actions.api.fetchSuccess({ storeKey: 'stopProject' }),
-        ],
-      })
-    )
-    dispatch(
-      query({
-        name: 'myProjects',
-        dataSelector: data => data.myProjects.edges,
-        query: MY_PROJECTS,
-      })
-    )
+    handleStopProject({ id, dispatch })
   }
 
   const closeModal = () => {
@@ -247,8 +215,9 @@ const Dashboard = () => {
   }
 
   return (
-    <Layout>
+    <>
       <SEO title="Dashboard" />
+      <Header />
       <PageWrapper>
         <GetStarted />
         <TilesWrapper>
@@ -310,7 +279,7 @@ const Dashboard = () => {
                     to="/app/editor/"
                     isDisabled={isDeleting || isContinuing || isStopping}
                     isPrimary
-                    padding={'0.5vh'}
+                    padding="0.5vh"
                     onClick={() => handleStartClick(project)}
                     text={
                       currentProjectId && project.id === currentProjectId
@@ -361,15 +330,15 @@ const Dashboard = () => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
-          padding={'0.5vh'}
-          text={'Confirm'}
-          maxWidth={'150px'}
+          padding="0.5vh"
+          text="Confirm"
+          maxWidth="150px"
         />
         <ModalButton
           onClick={closeModal}
-          text={'Close'}
-          padding={'0.5vh'}
-          maxWidth={'150px'}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
         />
       </Modal>
       <Modal
@@ -391,18 +360,18 @@ const Dashboard = () => {
             handleStopClick(currentProjectId)
             setStopModal(false)
           }}
-          text={'Confirm'}
-          padding={'0.5vh'}
-          maxWidth={'150px'}
+          text="Confirm"
+          padding="0.5vh"
+          maxWidth="150px"
         />
         <ModalButton
           onClick={() => setStopModal(false)}
-          text={'Close'}
-          padding={'0.5vh'}
-          maxWidth={'150px'}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
         />
       </Modal>
-    </Layout>
+    </>
   )
 }
 

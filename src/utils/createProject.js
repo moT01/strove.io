@@ -1,15 +1,15 @@
 import ApolloClient from 'apollo-boost'
 
-import { mutation } from 'utils'
-import { C } from 'state'
+import { mutation, getRepoProvider } from 'utils'
+import { actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
+
 import stroveClient from '../../client'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
 })
 
-/* Todo: This is called two times on certain ocassions, fix */
 const createProject = async ({
   repoLink,
   dispatch,
@@ -22,15 +22,15 @@ const createProject = async ({
   try {
     if (repoLink) {
       const query = GET_REPO_INFO
+      const repoProvider = getRepoProvider(repoLink)
       const repoUrlParts = repoLink.split('/')
-      let repoProvider = repoUrlParts[2].split('.')[0]
-      if (repoProvider.toString().length > 6)
-        repoProvider = repoProvider.split('@')[1]
       const owner = repoUrlParts[3]
       const name = repoUrlParts[4]
+      dispatch(actions.incomingProject.setProjectIsBeingAdded())
+
       const variables = { owner, name }
-      switch (repoProvider.toString()) {
-        case 'github':
+      switch (repoProvider) {
+        case 'github': {
           if (user.githubToken) {
             const context = {
               headers: {
@@ -48,15 +48,13 @@ const createProject = async ({
               repoData = data.repository
             } catch (error) {
               console.log('error', error)
-              dispatch({
-                type: C.incomingProject.CATCH_INCOMING_ERROR,
-                payload: { error },
-              })
+              dispatch(actions.incomingProject.catchIncomingError({ error }))
               setModalContent('UnableToClone')
             }
           }
           break
-        case 'gitlab':
+        }
+        case 'gitlab': {
           if (user.gitlabToken) {
             try {
               const res = await fetch(
@@ -69,15 +67,13 @@ const createProject = async ({
               )
               repoData = await res.json()
             } catch (error) {
-              dispatch({
-                type: C.incomingProject.CATCH_INCOMING_ERROR,
-                payload: { error },
-              })
+              dispatch(actions.incomingProject.catchIncomingError({ error }))
               setModalContent('TryAgainLaterButGitlabIsToBlame')
             }
           }
           break
-        case 'bitbucket':
+        }
+        case 'bitbucket': {
           const access_token = await stroveClient.query({
             query: GET_BITBUCKET_TOKEN,
             context: {
@@ -91,7 +87,7 @@ const createProject = async ({
 
           const token = access_token?.data?.getbitBucketToken
 
-          /* Todo: This endpoint seems to work inconsistently - some repos are not returned. Investigate. */
+          /* Todo: This endpoint does not allow 10+ results. Investigate other ways to do it. */
           if (token) {
             const { values } = await fetch(
               `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
@@ -111,6 +107,7 @@ const createProject = async ({
             if (!repoData) setModalContent('UnableToClone')
           }
           break
+        }
         default:
           break
       }
@@ -126,6 +123,7 @@ const createProject = async ({
     }
 
     const { description, name /* add language and color */ } = repoData
+
     dispatch(
       mutation({
         name: 'addProject',
@@ -134,26 +132,15 @@ const createProject = async ({
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: () => setModalContent('TryAgainLater'),
-        onErrorDispatch: [
-          error =>
-            dispatch({
-              type: C.incomingProject.CATCH_INCOMING_ERROR,
-              payload: { error },
-            }),
-          () =>
-            dispatch({
-              type: C.api.FETCH_ERROR,
-              payload: { storeKey: 'myProjects' },
-            }),
-        ],
+        onErrorDispatch: error => {
+          actions.api.fetchError({ storeKey: 'myProjects', error })
+          actions.incomingProject.catchIncomingError({ error })
+        },
       })
     )
   } catch (error) {
     console.log('fetch error: ', error)
-    dispatch({
-      type: C.incomingProject.CATCH_INCOMING_ERROR,
-      payload: { error },
-    })
+    dispatch(actions.incomingProject.catchIncomingError({ error }))
     setModalContent('TryAgainLater')
   }
 }

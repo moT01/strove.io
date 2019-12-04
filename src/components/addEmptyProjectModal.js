@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled from 'styled-components'
 import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
 
@@ -84,7 +84,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
             onBlur={props.handleBlur}
             value={props.values.projectName}
             name="projectName"
-            placeholder={'Name'}
+            placeholder="Name"
           />
           <StroveButton
             isDisabled={!props.values.projectName || props.errors.projectName}

@@ -6,42 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
 
-import { window } from 'utils'
 import { selectors } from 'state'
-import { Github, Bitbucket, Gitlab } from 'images/logos'
+import { loginOptions } from 'constants'
 
 import FullScreenLoader from './fullScreenLoader'
 import { persistor } from '../../wrapper'
-
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
-const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
-const REDIRECT_URI = process.env.REDIRECT_URI
-const IS_OPENSOURCE = process.env.IS_OPENSOURCE
-
-const adress = window?.location?.href?.split('?')[0]
-
-/* State in href allows us to control login behavior https://auth0.com/docs/protocols/oauth2/oauth-state */
-const loginOptions = [
-  {
-    value: 'github',
-    label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,${IS_OPENSOURCE},${adress}`,
-    icon: <Github />,
-  },
-  {
-    value: 'bitbucket',
-    label: 'Bitbucket',
-    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,${IS_OPENSOURCE},${adress}`,
-    icon: <Bitbucket />,
-  },
-  {
-    value: 'gitlab',
-    label: 'Gitlab',
-    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&state=gitlab,${IS_OPENSOURCE},${adress}`,
-    icon: <Gitlab />,
-  },
-]
+import { getWindowPathName } from 'utils'
 
 const LoginButton = styled.button`
   color: ${({ theme }) => theme.colors.c2};
@@ -134,8 +104,10 @@ const Option = styled.a`
 
 const Inline = styled.div`
   display: inline-block;
-  width: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
-  height: ${props => (props.mobile ? '5.5vh' : '2.7vh')};
+  width: ${props =>
+    props.mobile ? '5.5vh' : props.isEmbed ? '18px' : '2.7vh'};
+  height: ${props =>
+    props.mobile ? '5.5vh' : props.isEmbed ? '18px' : '2.7vh'};
   margin-left: 4px;
   background: ${({ theme }) => theme.colors.c1};
 `
@@ -145,10 +117,11 @@ const UserPhoto = styled.img`
   height: 100%;
   margin-left: 4px;
   border-radius: 5px;
+  margin: 0;
 `
 
 const Text = styled.h3`
-  font-size: 1.2rem;
+  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   margin: 0;
   font-weight: 300;
   line-height: 1;
@@ -206,12 +179,14 @@ const getUserData = createSelector(
 )
 
 const LoginDropdown = () => {
+  const isEmbed = getWindowPathName().includes('embed')
+
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
         <span>
           <LoginButton {...getToggleButtonProps({})}>
-            <Text>Login</Text>
+            <Text isEmbed={isEmbed}>Login</Text>
           </LoginButton>
           <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper invert>
@@ -237,10 +212,11 @@ const LoginDropdown = () => {
 const UserDropdown = props => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
+  const isEmbed = getWindowPathName().includes('embed')
 
   if (isLoading)
     return (
-      <FullScreenLoader isFullscreen={false} height={'3vh'} color={'#ffffff'} />
+      <FullScreenLoader isFullscreen={false} height="3vh" color="#ffffff" />
     )
 
   return (
@@ -249,9 +225,11 @@ const UserDropdown = props => {
         <span>
           <Wrapper {...getToggleButtonProps({})}>
             <StyledDropdown>
-              {!isMobileOnly && <Text>{props.user.username}</Text>}
-              <Inline mobile={isMobileOnly}>
-                <UserPhoto src={props.user.userphoto} style={{ margin: `0` }} />
+              {!isMobileOnly && (
+                <Text isEmbed={isEmbed}>{props.user.username}</Text>
+              )}
+              <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
+                <UserPhoto src={props.user.userphoto} />
               </Inline>
             </StyledDropdown>
           </Wrapper>
