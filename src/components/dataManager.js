@@ -373,18 +373,6 @@ export default memo(({ children, addProject }) => {
   }, [loginData, loginError])
 
   useEffect(() => {
-    token &&
-      dispatch(
-        query({
-          name: 'myProjects',
-          dataSelector: data => data.myProjects.edges,
-          query: MY_PROJECTS,
-        })
-      )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token])
-
-  useEffect(() => {
     if (
       token &&
       incomingProjectLink &&
