@@ -305,7 +305,7 @@ export default memo(({ children, addProject }) => {
 
     checkAwake()
     /* eslint-disable-next-line */
-  }, [])
+  }, [token])
 
   const loginSubscription = useSubscription(LOGIN_SUBSCRIPTION, {
     variables: { deviceId },
