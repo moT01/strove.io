@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost'
 
 import { mutation, getRepoProvider } from 'utils'
-import { C, actions } from 'state'
+import { actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
 
 import stroveClient from '../../client'
@@ -30,7 +30,7 @@ const createProject = async ({
 
       const variables = { owner, name }
       switch (repoProvider) {
-        case 'github':
+        case 'github': {
           if (user.githubToken) {
             const context = {
               headers: {
@@ -48,15 +48,13 @@ const createProject = async ({
               repoData = data.repository
             } catch (error) {
               console.log('error', error)
-              dispatch({
-                type: C.incomingProject.CATCH_INCOMING_ERROR,
-                payload: { error },
-              })
+              dispatch(actions.incomingProject.catchIncomingError({ error }))
               setModalContent('UnableToClone')
             }
           }
           break
-        case 'gitlab':
+        }
+        case 'gitlab': {
           if (user.gitlabToken) {
             try {
               const res = await fetch(
@@ -69,15 +67,13 @@ const createProject = async ({
               )
               repoData = await res.json()
             } catch (error) {
-              dispatch({
-                type: C.incomingProject.CATCH_INCOMING_ERROR,
-                payload: { error },
-              })
+              dispatch(actions.incomingProject.catchIncomingError({ error }))
               setModalContent('TryAgainLaterButGitlabIsToBlame')
             }
           }
           break
-        case 'bitbucket':
+        }
+        case 'bitbucket': {
           const access_token = await stroveClient.query({
             query: GET_BITBUCKET_TOKEN,
             context: {
@@ -111,6 +107,7 @@ const createProject = async ({
             if (!repoData) setModalContent('UnableToClone')
           }
           break
+        }
         default:
           break
       }
@@ -135,26 +132,15 @@ const createProject = async ({
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: () => setModalContent('TryAgainLater'),
-        onErrorDispatch: [
-          error =>
-            dispatch({
-              type: C.incomingProject.CATCH_INCOMING_ERROR,
-              payload: { error },
-            }),
-          () =>
-            dispatch({
-              type: C.api.FETCH_ERROR,
-              payload: { storeKey: 'myProjects' },
-            }),
-        ],
+        onErrorDispatch: error => {
+          actions.api.fetchError({ storeKey: 'myProjects', error })
+          actions.incomingProject.catchIncomingError({ error })
+        },
       })
     )
   } catch (error) {
     console.log('fetch error: ', error)
-    dispatch({
-      type: C.incomingProject.CATCH_INCOMING_ERROR,
-      payload: { error },
-    })
+    dispatch(actions.incomingProject.catchIncomingError({ error }))
     setModalContent('TryAgainLater')
   }
 }
