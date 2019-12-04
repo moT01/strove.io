@@ -186,11 +186,11 @@ export default memo(({ children, addProject }) => {
             })
           )
         }
-        redirectToEditor()
+        redirectToEditor(dispatch)
       }
 
       if (project || currentProject) {
-        redirectToEditor()
+        redirectToEditor(dispatch)
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
