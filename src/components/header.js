@@ -357,6 +357,8 @@ const HeaderComponent = ({ location }) => {
                           key={item.value}
                           href={item.href}
                           isEmbed={isEmbed}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           <PreviewLink
                             style={{ color: '#fff', textDecoration: 'none' }}
