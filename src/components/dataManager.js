@@ -142,7 +142,11 @@ export default memo(({ children, addProject }) => {
         console.log('Error on showing queue position: ', e)
       }
 
-      if (queuePosition === 0 && !project) {
+      /*
+        The "|| !currentProject" part of the login can be removed once api returns projects
+        when they are continued as well
+      */
+      if (queuePosition === 0 && !project && !currentProject) {
         dispatch(
           actions.api.fetchError({
             storeKey: 'startProject',
@@ -167,7 +171,7 @@ export default memo(({ children, addProject }) => {
             dispatch(
               actions.api.fetchSuccess({
                 storeKey: 'continueProject',
-                data: {},
+                data: true,
               })
             )
           } catch (e) {
@@ -182,6 +186,10 @@ export default memo(({ children, addProject }) => {
             })
           )
         }
+        redirectToEditor()
+      }
+
+      if (project || currentProject) {
         redirectToEditor()
       }
     }
