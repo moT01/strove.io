@@ -72,7 +72,7 @@ const AddProjectProvider = ({ children }) => {
 
     if (existingProject && !currentProject) {
       if (existingProject.machineId) {
-        return redirectToEditor()
+        return redirectToEditor(dispatch)
       } else {
         return dispatch(
           mutation({
