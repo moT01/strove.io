@@ -359,6 +359,7 @@ const Banner = () => {
       <StyledSectionWrapper padding="20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
+          <StyledH1>Hello from Microsoft</StyledH1>
           <StyledProductDescription>
             Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
             <b>build</b> and <b>collaborate</b> no matter the language. All you
