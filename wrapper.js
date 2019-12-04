@@ -7,7 +7,8 @@ import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { window } from 'utils'
+import { getWindowSearchParams } from 'utils'
+import { Layout } from 'components'
 import { actions } from 'state'
 import client from './client'
 import rootReducer from './src/state'
@@ -23,10 +24,10 @@ const WithAnalyticsWrapper = memo(({ children }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const searchParams = new URL(window?.location?.href).searchParams
+    const searchParams = getWindowSearchParams()
     const feature = searchParams?.get('feature') || ''
-
     feature && dispatch(actions.feature.displayFeature(feature))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return children
@@ -36,7 +37,9 @@ export const wrapRootElement = ({ element }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
-        <WithAnalyticsWrapper>{element}</WithAnalyticsWrapper>
+        <WithAnalyticsWrapper>
+          <Layout>{element}</Layout>
+        </WithAnalyticsWrapper>
       </PersistGate>
     </Provider>
   </ApolloProvider>
