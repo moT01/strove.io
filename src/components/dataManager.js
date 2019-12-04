@@ -112,7 +112,7 @@ export default memo(({ children, addProject }) => {
   })
 
   const startProjectData = startProjectSubscription?.data
-  const startProjectError = startProjectSubscription?.error //
+  const startProjectError = startProjectSubscription?.error
 
   useEffect(() => {
     if (startProjectError) {
