@@ -149,6 +149,7 @@ export default memo(({ children, addProject }) => {
             error: 'Project start failed',
           })
         )
+        dispatch(actions.incomingProject.removeIncomingProject())
       } else if (queuePosition === 0 && project?.machineId) {
         if (type === 'continueProject') {
           try {
