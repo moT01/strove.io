@@ -276,6 +276,8 @@ const HeaderComponent = ({ location }) => {
   const project = useSelector(selectors.api.getCurrentProject)
   const isEmbed = getWindowPathName().includes('embed')
 
+  console.log('project.additionalPorts', project.additionalPorts)
+
   useEffect(() => {
     if (location.pathname.includes('editor')) {
       if (project?.machineName) {
