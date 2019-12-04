@@ -1,4 +1,6 @@
 import * as C from './constants'
+import { REHYDRATE } from 'redux-persist'
+import { isProjectBeingAdded } from 'state/incomingProject/selectors'
 
 const initialState = null
 
@@ -34,6 +36,15 @@ export default (state = initialState, action) => {
     case C.CATCH_INCOMING_ERROR: {
       const { error } = action.payload
       return { error }
+    }
+
+    case REHYDRATE: {
+      const { payload } = action
+      return {
+        ...state,
+        isBeingAdded: false,
+        isBeingStarted: false,
+      }
     }
 
     default:
