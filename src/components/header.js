@@ -285,7 +285,7 @@ const HeaderComponent = ({ location }) => {
 
   useEffect(() => {
     if (location.pathname.includes('editor')) {
-      if (project?.machineName) {
+      if (project?.machineId) {
         setPorts(
           project.additionalPorts.map(portPair => {
             let href
@@ -310,7 +310,7 @@ const HeaderComponent = ({ location }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project?.machineName])
+  }, [project?.machineName, project?.additionalPorts])
 
   return (
     <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
