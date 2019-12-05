@@ -73,6 +73,7 @@ export default memo(({ children, addProject }) => {
     activeProject?.data?.activeProject
   const machineId = activeProjectData?.machineId
   const editorPort = activeProjectData?.editorPort
+  const additionalPorts = activeProjectData?.additionalPorts
   const id = activeProjectData?.id
 
   useEffect(() => {
@@ -91,7 +92,7 @@ export default memo(({ children, addProject }) => {
         payload: {
           storeKey: 'myProjects',
           id: currentProject.id,
-          data: { editorPort, machineId },
+          data: { editorPort, machineId, additionalPorts },
         },
       })
     }
@@ -165,6 +166,7 @@ export default memo(({ children, addProject }) => {
                 data: {
                   editorPort: project.editorPort,
                   machineId: project.machineId,
+                  additionalPorts: project.additionalPorts,
                 },
               },
             })
