@@ -7,13 +7,8 @@ import dayjs from 'dayjs'
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { actions } from 'state'
-import { CONTINUE_PROJECT, RESET_CRON, MY_PROJECTS } from 'queries'
-import {
-  query,
-  mutation,
-  getWindowPathName,
-  getWindowSearchParams,
-} from 'utils'
+import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
+import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -72,21 +67,6 @@ const Editor = () => {
     const projectPing = setInterval(resetCron, 59000)
 
     const checkIfProjectIsActive = () => {
-      const arePortsCorrect = !currentProject?.additionalPorts?.find(portPair =>
-        portPair.find(port => !port)
-      )
-
-      /* ToDo: Find a way to get correct ports without additional query */
-      if (!arePortsCorrect) {
-        dispatch(
-          query({
-            name: 'myProjects',
-            dataSelector: data => data.myProjects.edges,
-            query: MY_PROJECTS,
-          })
-        )
-      }
-
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
         const path = getWindowPathName()
