@@ -86,12 +86,10 @@ export default new ApolloClient({
             ({ extensions }) => extensions.code === 'FORBIDDEN'
           )
         ) {
-          // logout()
           console.log('FORBIDDEN!')
         }
       }
       if (networkError) {
-        // logoutUser()
         console.log(`[Network error]: ${networkError}`)
       }
     }),

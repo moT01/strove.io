@@ -38,7 +38,8 @@
       "plugins": [
         "@babel/plugin-proposal-optional-chaining",
         "@babel/plugin-syntax-dynamic-import",
-        "babel-plugin-styled-components"
+        "babel-plugin-styled-components",
+        "babel-plugin-transform-remove-console"
       ],
       "presets": [
         [
