@@ -2,13 +2,13 @@ import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import { navigate } from 'gatsby'
+import dayjs from 'dayjs'
 
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
-import dayjs from 'dayjs'
 
 const StyledIframe = styled.iframe`
   display: block;
