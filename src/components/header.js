@@ -276,13 +276,18 @@ const HeaderComponent = ({ location }) => {
   const project = useSelector(selectors.api.getCurrentProject)
   const isEmbed = getWindowPathName().includes('embed')
 
-  console.log('project.additionalPorts', project?.additionalPorts)
+  console.log(
+    'project.additionalPorts',
+    project?.additionalPorts,
+    'ports',
+    ports
+  )
 
   useEffect(() => {
     if (location.pathname.includes('editor')) {
       if (project?.machineName) {
         setPorts(
-          project.additionalPorts.map((portPair, index) => {
+          project.additionalPorts.map(portPair => {
             let href
             /* Env's are loaded as strings on production */
             if (process.env.IS_OPENSOURCE === 'true') {
