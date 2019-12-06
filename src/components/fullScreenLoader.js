@@ -57,22 +57,22 @@ const LoaderContainer = styled(SmallLoaderWrapper)`
 
 const LogoContainer = styled.div`
   position: absolute;
-  animation: ${AntiSpinToWin} 3.5s linear infinite;
+  /* animation: ${AntiSpinToWin} 3.5s linear infinite; */
 `
 
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 21px;
   margin-bottom: 0;
-  margin-top: 15px;
+  margin-top: 25px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 `
 
 const StyledLogo = styled(Strove)`
-  width: 5vw;
-  height: 5vw;
+  width: 7vw;
+  height: 7vw;
 `
 
 const Loader = ({ type = 'addProject', ...props }) => {
@@ -99,11 +99,12 @@ const Loader = ({ type = 'addProject', ...props }) => {
     return (
       <LoaderWrapper {...props}>
         <LoaderContainer {...props}>
-          <Cog fill={props.color} />
-          <LogoContainer {...props}>
-            <StyledLogo fill="#0072ce" />
-          </LogoContainer>
+          <Cog fill={props.color} height={'130px'} />
         </LoaderContainer>
+
+        <LogoContainer {...props}>
+          <StyledLogo fill="#0072ce" />
+        </LogoContainer>
         <Text>
           {queuePosition > 1
             ? `Our servers are full. Your position in queue: ${queuePosition}`
