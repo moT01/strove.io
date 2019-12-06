@@ -21,6 +21,7 @@ import StroveButton from './stroveButton'
 import NoRepoUrlInfo from './NoRepoUrlInfo'
 import PoweredBy from './poweredBy'
 import ExternalLink from './externalLink'
+import DeployModal from './deployModal'
 
 export {
   SmallCloud,
@@ -48,4 +49,5 @@ export {
   NoRepoUrlInfo,
   PoweredBy,
   ExternalLink,
+  DeployModal,
 }
