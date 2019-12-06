@@ -99,7 +99,11 @@ const Loader = ({ type = 'addProject', ...props }) => {
     return (
       <LoaderWrapper {...props}>
         <LoaderContainer {...props}>
+<<<<<<< HEAD
           <Cog fill={props.color} height={'140px'} />
+=======
+          <Cog fill={props.color} height={'130px'} />
+>>>>>>> origin
         </LoaderContainer>
 
         <LogoContainer {...props}>
