@@ -37,12 +37,8 @@ const AddProjectProvider = ({ children }) => {
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  // const subscription = useSelector(
-  //   selectors.api.getApiData({ fields: 'subscription' })
-  // )
-  // const subscriptionStatus = subscription.status
+  const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
-  // (subscriptionStatus === 'active' && subscription.projects_limit) || 4
 
   const addProject = async ({ link, name }) => {
     let repoLink
@@ -146,10 +142,20 @@ const AddProjectProvider = ({ children }) => {
         <FullScreenLoader isFullScreen={false} color="#0072ce" height="15vh" />
       </StyledModal>
       {isContinuing && (
-        <FullScreenLoader type="continueProject" isFullScreen color="#0072ce" />
+        <FullScreenLoader
+          type="continueProject"
+          isFullScreen
+          color="#0072ce"
+          queuePosition={queuePosition}
+        />
       )}
       {isAdding && isLoading && (
-        <FullScreenLoader type="addProject" isFullScreen color="#0072ce" />
+        <FullScreenLoader
+          type="addProject"
+          isFullScreen
+          color="#0072ce"
+          queuePosition={queuePosition}
+        />
       )}
     </>
   )
