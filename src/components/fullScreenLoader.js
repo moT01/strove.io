@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components'
 import { useSelector } from 'react-redux'
 
 import { Cog } from 'images/svg'
-import { Strove } from 'images/logos'
 import { useInterval } from 'hooks'
 import { selectors } from 'state'
 
@@ -13,15 +12,6 @@ const SpinToWin = keyframes`
   }
   100% {
     transform: rotate(360deg)
-  }
-`
-
-const AntiSpinToWin = keyframes`
-  0% {
-    transform: rotate(360deg)
-  }
-  100% {
-    transform: rotate(0deg)
   }
 `
 
@@ -55,24 +45,14 @@ const LoaderContainer = styled(SmallLoaderWrapper)`
   animation: ${SpinToWin} 3.5s linear infinite;
 `
 
-const LogoContainer = styled.div`
-  position: absolute;
-  /* animation: ${AntiSpinToWin} 3.5s linear infinite; */
-`
-
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 21px;
   margin-bottom: 0;
-  margin-top: 25px;
+  margin-top: 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-`
-
-const StyledLogo = styled(Strove)`
-  width: 7vw;
-  height: 7vw;
 `
 
 const Loader = ({ type = 'addProject', ...props }) => {
@@ -98,17 +78,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
   if (props.isFullScreen) {
     return (
       <LoaderWrapper {...props}>
-        <LoaderContainer {...props}>
-<<<<<<< HEAD
-          <Cog fill={props.color} height={'140px'} />
-=======
-          <Cog fill={props.color} height={'130px'} />
->>>>>>> origin
-        </LoaderContainer>
-
-        <LogoContainer {...props}>
-          <StyledLogo fill="#0072ce" />
-        </LogoContainer>
+        <Text>Loading...</Text>
         <Text>
           {queuePosition > 1
             ? `Our servers are full. Your position in queue: ${queuePosition}`
