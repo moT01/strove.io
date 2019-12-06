@@ -420,18 +420,20 @@ const HeaderComponent = ({ location }) => {
       </HeaderWrapper>
       {location.pathname.includes('editor') && <LatencyIndicator />}
 
-      <LoginWrapper>
-        {isEmbed && (
-          <StroveLink
-            href="https://strove.io"
-            target="_blank"
-            isEmbed={isEmbed}
-          >
-            Powered by Strove.io
-          </StroveLink>
-        )}
-        <Login isEmbed={isEmbed} />
-      </LoginWrapper>
+      {!location.pathname.includes('embed/editor') && (
+        <LoginWrapper>
+          {isEmbed && (
+            <StroveLink
+              href="https://strove.io"
+              target="_blank"
+              isEmbed={isEmbed}
+            >
+              Powered by Strove.io
+            </StroveLink>
+          )}
+          <Login isEmbed={isEmbed} />
+        </LoginWrapper>
+      )}
     </HeaderSection>
   )
 }
