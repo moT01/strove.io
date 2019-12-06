@@ -8,14 +8,13 @@ import dayjs from 'dayjs'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
-import { actions } from 'state'
-import { C } from 'state'
-import { selectors } from 'state'
+import { actions, C, selectors } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header'
+import { DeployModal } from 'components'
 
 const FullFadeIn = keyframes`
   0% {
@@ -154,6 +153,7 @@ const Dashboard = () => {
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
+  const [deployModalVisible, setDeployModaVisible] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -306,6 +306,15 @@ const Dashboard = () => {
                     }}
                     text="Delete"
                   />
+                  <StroveButton
+                    isDisabled={isDeleting || isContinuing || isStopping}
+                    padding="0.5vh"
+                    onClick={() => {
+                      setDeployModaVisible(true)
+                      // setProjectToDelete(project)
+                    }}
+                    text="Deploy"
+                  />
                 </RightSection>
               </VerticalDivider>
             </Tile>
@@ -371,6 +380,10 @@ const Dashboard = () => {
           maxWidth="150px"
         />
       </Modal>
+      <DeployModal
+        isOpen={deployModalVisible}
+        setModalVisible={setDeployModaVisible}
+      ></DeployModal>
     </>
   )
 }
