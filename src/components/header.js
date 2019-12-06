@@ -278,7 +278,7 @@ const HeaderComponent = ({ location }) => {
 
   useEffect(() => {
     if (location.pathname.includes('editor')) {
-      if (project?.machineId) {
+      if (project?.machineName) {
         setPorts(
           project.additionalPorts.map(portPair => {
             let href
