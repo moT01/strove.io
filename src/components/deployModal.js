@@ -36,6 +36,16 @@ const PortsForm = styled.form`
   margin: 2vh 0 0;
 `
 
+const SettingSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+`
+
 const validatePort = values => {
   let errors = {}
   const port = values.port
@@ -53,12 +63,12 @@ const validatePort = values => {
 
 const DeployModal = ({ isOpen, setModalVisible }) => {
   const [height, setHeight] = useState()
+  const [editMode, setEditMode] = useState()
   return (
     <Modal
-      width={isMobileOnly ? '60vw' : '30vw'}
+      width={isMobileOnly ? '90vw' : '60vw'}
       height={isMobileOnly ? '40vh' : '20vh'}
       isOpen={isOpen}
-      onRequestClose={() => setModalVisible(false)}
       contentLabel="Name project"
       ariaHideApp={false}
     >
@@ -70,33 +80,51 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
         validate={validatePort}
         render={props => (
           <PortsForm onSubmit={props.handleSubmit}>
-            <GithubLinkInput
-              autoComplete="off"
-              type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.port}
-              name="port"
-              placeholder={
-                isMobile
-                  ? 'Paste repo link here'
-                  : 'https://github.com/evil-corp/worldDomination'
-              }
-            />
-            <StroveButton
-              isDisabled={!props.values.port || props.errors.port}
-              isPrimary
-              type="submit"
-              text="Do I even have to be here?"
-              width="30%"
-              minWidth="200px"
-            />
+            <SettingSection>
+              <GithubLinkInput
+                autoComplete="off"
+                type="text"
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.port}
+                name="port"
+                placeholder={isMobile ? 'Env value' : 'Env value'}
+              />
+              <StroveButton
+                isDisabled={!props.values.port || props.errors.port}
+                isPrimary
+                type="submit"
+                text="Submit"
+                width="20%"
+                height="2rem"
+                minWidth="200px"
+                padding="0.3rem"
+              />
 
-            <StyledErrors>{props.errors.port}</StyledErrors>
+              <StyledErrors>{props.errors.port}</StyledErrors>
+            </SettingSection>
           </PortsForm>
         )}
       />
-      <StroveButton text="Test button with no purpose in life" />
+      <SettingSection>
+        <StroveButton
+          text="Save changes"
+          isPrimary
+          onClick={() => setModalVisible(false)}
+          width="25%"
+        />
+        <StroveButton
+          text="Save and close"
+          isPrimary
+          onClick={() => setModalVisible(false)}
+          width="25%"
+        />
+        <StroveButton
+          text="Discard and close"
+          onClick={() => setModalVisible(false)}
+          width="25%"
+        />
+      </SettingSection>
     </Modal>
   )
 }
