@@ -276,13 +276,11 @@ const HeaderComponent = ({ location }) => {
   const project = useSelector(selectors.api.getCurrentProject)
   const isEmbed = getWindowPathName().includes('embed')
 
-  console.log('project.additionalPorts', project?.additionalPorts)
-
   useEffect(() => {
     if (location.pathname.includes('editor')) {
-      if (project?.machineName) {
+      if (project?.machineId) {
         setPorts(
-          project.additionalPorts.map((portPair, index) => {
+          project.additionalPorts.map(portPair => {
             let href
             /* Env's are loaded as strings on production */
             if (process.env.IS_OPENSOURCE === 'true') {
@@ -305,7 +303,7 @@ const HeaderComponent = ({ location }) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project?.machineName])
+  }, [project?.machineName, project?.additionalPorts])
 
   return (
     <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
@@ -357,6 +355,8 @@ const HeaderComponent = ({ location }) => {
                           key={item.value}
                           href={item.href}
                           isEmbed={isEmbed}
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
                           <PreviewLink
                             style={{ color: '#fff', textDecoration: 'none' }}
