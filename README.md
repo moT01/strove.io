@@ -8,6 +8,7 @@
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
 Strove gives browser access to cloud with all major Linux-supported programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
+
 ### [Edit source code](https://strove.io/#https://github.com/stroveio/strove.io-client)
 
 or, visit our website
@@ -18,18 +19,33 @@ or, visit our website
 <img src="./src/images/readmeAssets/strove.gif" width='900px'>
 </div>
 
+## Get started
+
+Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/stroveio/2048-clone
+
+## Docs
+
+### If you're here just to find docs we've got you covered
+
+[Docs link](https://docs.strove.io/embedding-strove)
+
 ## Why did we make this?
 
 There are several problems programmers face make this project important in our eyes.
+
 1. Security
-It’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
+   It’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
 2. 'It works on my machine' problem. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
 3. It is hard to use different computers when working on a project. The code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access. This is especially useful for students and people who travel a lot.
 4. Programmers waste a lot of time on setting up the environment. The browser-based solution can cut the time to set a programming environment to seconds.
 
-## Get started
+## Embedding
 
-Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/stroveio/2048-clone
+Similarly to Youtube, Strove can be used in any site. Live demo using fullstack hackathon stater:
+
+### [Example embeded strove project](https://priceless-raman-a750f4.netlify.com/hackathon-starter-strove/)
+
+More on how to use use Strove in [this docs link](https://docs.strove.io/embedding-strove)
 
 ## Found a bug?
 
