@@ -47,7 +47,7 @@ const EmbedWrapper = () => {
 
   const parentDomain =
     window.location !== window.parent.location
-      ? document.referrer
+      ? document.location.ancestorOrigins[0]
       : process.env.SILISKY_URL.slice(0, -1)
 
   const goBackTo = `${parentDomain}/${goBackToRoute}`
