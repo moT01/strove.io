@@ -17,7 +17,19 @@ const GithubLinkInput = styled.input`
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
   box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-align: center;
+  text-align: left;
+  font-size: 1rem;
+  padding: 0.5vh 0;
+
+  :focus {
+    outline: none;
+  }
+`
+
+const Text = styled.p`
+  width: 80%;
+  color: ${({ theme }) => theme.colors.c1};
+  text-align: left;
   font-size: 1rem;
   padding: 0.5vh 0;
 
@@ -36,7 +48,7 @@ const PortsForm = styled.form`
   margin: 2vh 0 0;
 `
 
-const SettingSection = styled.div`
+const Setting = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -72,41 +84,58 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
       contentLabel="Name project"
       ariaHideApp={false}
     >
-      <Formik
-        onSubmit={(values, actions) => {
-          console.log('Hi values', values)
-          actions.setSubmitting(false)
-        }}
-        validate={validatePort}
-        render={props => (
-          <PortsForm onSubmit={props.handleSubmit}>
-            <SettingSection>
-              <GithubLinkInput
-                autoComplete="off"
-                type="text"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.port}
-                name="port"
-                placeholder={isMobile ? 'Env value' : 'Env value'}
-              />
-              <StroveButton
-                isDisabled={!props.values.port || props.errors.port}
-                isPrimary
-                type="submit"
-                text="Submit"
-                width="20%"
-                height="2rem"
-                minWidth="200px"
-                padding="0.3rem"
-              />
+      {editMode ? (
+        <Formik
+          onSubmit={(values, actions) => {
+            console.log('Hi values', values)
+            actions.setSubmitting(false)
+          }}
+          validate={validatePort}
+          render={props => (
+            <PortsForm onSubmit={props.handleSubmit}>
+              <Setting>
+                <GithubLinkInput
+                  autoComplete="off"
+                  type="text"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.port}
+                  name="port"
+                  placeholder={isMobile ? 'Env value' : 'Env value'}
+                />
+                <StroveButton
+                  isPrimary
+                  type="submit"
+                  text="Submit"
+                  width="20%"
+                  height="2rem"
+                  minWidth="200px"
+                  padding="0.3rem"
+                  onClick={() => setEditMode(false)}
+                />
 
-              <StyledErrors>{props.errors.port}</StyledErrors>
-            </SettingSection>
-          </PortsForm>
-        )}
-      />
-      <SettingSection>
+                <StyledErrors>{props.errors.port}</StyledErrors>
+              </Setting>
+            </PortsForm>
+          )}
+        />
+      ) : (
+        <Setting>
+          <Text>This is something</Text>
+          <StroveButton
+            // isDisabled={!props.values.port || props.errors.port}
+            isPrimary
+            type="submit"
+            text="Edit"
+            width="20%"
+            height="2rem"
+            minWidth="200px"
+            padding="0.3rem"
+            onClick={() => setEditMode(true)}
+          />
+        </Setting>
+      )}
+      <Setting>
         <StroveButton
           text="Save changes"
           isPrimary
@@ -124,7 +153,7 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
           onClick={() => setModalVisible(false)}
           width="25%"
         />
-      </SettingSection>
+      </Setting>
     </Modal>
   )
 }
