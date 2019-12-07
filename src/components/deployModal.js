@@ -296,8 +296,15 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
   const [languageOptions, setLanguageOptions] = useState()
 
   useEffect(() => {
-    setLanguageOptions(languages.map((item) => ({value: item.name, version: item.version, label: `${item.name}` + ` ${item.version}`})))
-  },[])
+    setLanguageOptions(
+      languages.map(item => ({
+        value: `${item.name}` + ` ${item.version}`,
+        name: item.name,
+        version: item.version,
+        label: `${item.name}` + ` ${item.version}`,
+      }))
+    )
+  }, [])
 
   const [selectedLanguage, setSelectedLanguage] = useState(null)
 
