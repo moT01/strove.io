@@ -38,8 +38,14 @@ const StyledDashboardIcon = styled(Dashboard)`
   fill: ${({ theme }) => theme.colors.c2};
 `
 
-const StyledDesktopIcon = styled(Dashboard)`
+const StyledDesktopIcon = styled(Desktop)`
   height: 20px;
+  fill: ${({ theme }) => theme.colors.c2};
+  font-size: 25px;
+`
+
+const StyledAntdIcon = styled(Icon)`
+  height: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
@@ -378,7 +384,6 @@ const HeaderComponent = ({ location }) => {
                           rel="noopener noreferrer"
                         >
                           <PreviewLink
-                            style={{ color: '#fff', textDecoration: 'none' }}
                             href={item.href}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -421,10 +426,7 @@ const HeaderComponent = ({ location }) => {
             rel="noopener noreferrer"
             isEmbed={isEmbed}
           >
-            <Icon
-              type="file-text"
-              style={{ fontSize: '25px', height: '1.5rem' }}
-            />
+            <StyledAntdIcon type="file-text" />
           </DocsLink>
         ) : (
           <DocsLink
