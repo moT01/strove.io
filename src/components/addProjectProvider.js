@@ -34,6 +34,9 @@ const AddProjectProvider = ({ children }) => {
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
   const isAdding = useSelector(selectors.incomingProject.isIncoming)
+  const incomingProjectRepoUrl = useSelector(
+    selectors.incomingProject.getRepoLink
+  )
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
@@ -65,6 +68,10 @@ const AddProjectProvider = ({ children }) => {
     const existingProject = projects.find(
       project => project.repoLink === `${repoLink}.git`
     )
+
+    const theSameIncomingProject = repoLink === incomingProjectRepoUrl
+
+    if (theSameIncomingProject) return null
 
     if (existingProject && !currentProject) {
       if (existingProject.machineId) {
