@@ -24,8 +24,22 @@ const FadeIn = keyframes`
   }
 `
 
-const StyledStrove = styled(Strove)`
+const Relative = styled.div`
+  position: relative;
+`
+
+const StyledStroveIcon = styled(Strove)`
   height: 25px;
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
+const StyledDashboardIcon = styled(Dashboard)`
+  height: 25px;
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
+const StyledDesktopIcon = styled(Dashboard)`
+  height: 20px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
@@ -320,7 +334,11 @@ const HeaderComponent = ({ location }) => {
         {!isEmbed && (
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/">
-              {isMobileOnly ? <StyledStrove /> : <LinkText>Strove</LinkText>}
+              {isMobileOnly ? (
+                <StyledStroveIcon />
+              ) : (
+                <LinkText>Strove</LinkText>
+              )}
             </StyledLink>
           </LinkWrapper>
         )}
@@ -328,7 +346,7 @@ const HeaderComponent = ({ location }) => {
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
-                <Dashboard style={{ height: '25px' }} fill="#ffffff" />
+                <StyledDashboardIcon />
               ) : (
                 <LinkText>Dashboard</LinkText>
               )}
@@ -339,10 +357,10 @@ const HeaderComponent = ({ location }) => {
         {location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
-              <div style={{ position: 'relative' }}>
+              <Relative>
                 <LoginButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
                   {isMobileOnly ? (
-                    <Desktop style={{ height: '20px' }} fill="#fff" />
+                    <StyledDesktopIcon />
                   ) : (
                     <LinkText isEmbed={isEmbed}>Preview</LinkText>
                   )}
@@ -372,7 +390,7 @@ const HeaderComponent = ({ location }) => {
                     </MenuWrapper>
                   )}
                 </DropdownWrapper>
-              </div>
+              </Relative>
             )}
           </Downshift>
         )}
