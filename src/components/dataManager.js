@@ -83,21 +83,12 @@ export default memo(({ children, addProject }) => {
         payload: {
           storeKey: 'myProjects',
           id,
-          data: { editorPort, machineId },
-        },
-      })
-    } else if (currentProject) {
-      dispatch({
-        type: C.api.UPDATE_ITEM,
-        payload: {
-          storeKey: 'myProjects',
-          id: currentProject.id,
           data: { editorPort, machineId, additionalPorts },
         },
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeProject.data])
+  }, [activeProjectData])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
     variables: { email: user?.email || 'null' },
