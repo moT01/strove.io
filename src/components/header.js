@@ -24,6 +24,11 @@ const FadeIn = keyframes`
   }
 `
 
+const StyledStrove = styled(Strove)`
+  height: 25px;
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
 const HeaderSection = styled.div`
   display: flex;
   flex-direction: row;
@@ -315,11 +320,7 @@ const HeaderComponent = ({ location }) => {
         {!isEmbed && (
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/">
-              {isMobileOnly ? (
-                <Strove style={{ height: '25px' }} fill="#ffffff" />
-              ) : (
-                <LinkText>Strove</LinkText>
-              )}
+              {isMobileOnly ? <StyledStrove /> : <LinkText>Strove</LinkText>}
             </StyledLink>
           </LinkWrapper>
         )}
