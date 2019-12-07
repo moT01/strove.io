@@ -85,6 +85,7 @@
     "react-helmet": "^5.2.1",
     "react-modal": "^3.8.2",
     "react-redux": "^7.1.0",
+    "react-select": "^3.0.8",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^4.0.0",
     "react-transition-group": "^4.1.0",
