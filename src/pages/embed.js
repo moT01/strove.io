@@ -43,18 +43,23 @@ const EmbedWrapper = () => {
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
   /* Specify the route a user should be redirected to */
-  const goBackToRoute = searchParams.get('goBackToRoute') || ''
+  const goBackTo =
+    searchParams.get('goBackTo') || window.location !== window.parent.location
+      ? document.referrer
+      : document.location.href
 
+  /* This is a perfectly viable code but it should wait till ancestorOrigins gets better browser support
+  const goBackToRoute = searchParams.get('goBackToRoute') || ''
   const parentDomain =
     window.location !== window.parent.location
       ? document.location.ancestorOrigins[0]
       : process.env.SILISKY_URL.slice(0, -1)
-
   const goBackTo = `${parentDomain}/${goBackToRoute}`
+   */
 
   if (token && repoUrl) {
     // If user is logged in, redirect to the embed project run
-    navigate(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackToRoute}`)
+    navigate(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
   }
 
   return (
