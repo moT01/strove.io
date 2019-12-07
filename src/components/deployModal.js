@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Formik, Field, FieldArray } from 'formik'
@@ -181,10 +181,12 @@ const StyledField = styled(Field)`
 const DropdownWrapper = styled.div`
   width: 100%;
   flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 `
 
 const StyledSelect = styled(Select)`
-  width: ${props => (props.isLang ? '60%' : '20%')};
+  width: ${props => (props.isLang ? '40%' : '10%')};
   color: ${({ theme }) => theme.colors.c1};
   border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
@@ -269,21 +271,38 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
   ])
   const [languages, setLanguages] = useState([
     {
-      value: 'Node.js',
-      version: ['13.3.0', '13.2.9', '13.2.8'],
-      label: 'Node.js',
+      name: 'Node.js',
+      version: '13.3.0',
     },
-    { value: 'Python', version: ['1', '2', '3', '4'], label: 'Python' },
+    {
+      name: 'Node.js',
+      version: '13.3.1',
+    },
+    {
+      name: 'Node.js',
+      version: '13.3.2',
+    },
+    {
+      name: 'Node.js',
+      version: '13.3.your mum',
+    },
+
+    { name: 'Python', version: '1' },
+    { name: 'Python', version: '2' },
+    { name: 'Python', version: '3' },
+    { name: 'Python', version: '4' },
   ])
 
+  const [languageOptions, setLanguageOptions] = useState()
+
+  useEffect(() => {
+    setLanguageOptions(languages.map((item) => ({value: item.name, version: item.version, label: `${item.name}` + ` ${item.version}`})))
+  },[])
+
   const [selectedLanguage, setSelectedLanguage] = useState(null)
-  const [selectedVersion, setSelectedVersion] = useState(null)
 
   const handleLanguageChange = selectedOption =>
     setSelectedLanguage(selectedOption)
-
-  const handleVersionChange = selectedOption =>
-    setSelectedVersion(selectedOption)
 
   const handleSave = () => {
     setEditMode(null)
@@ -303,8 +322,6 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
     setEditMode(null)
     setEnvVariables(envs)
   }
-
-  console.log('SelectedLanguage', selectedLanguage, Boolean(selectedLanguage))
 
   return (
     <Modal
@@ -533,13 +550,7 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
           isLang
           value={selectedLanguage}
           onChange={handleLanguageChange}
-          options={languages}
-        />
-        <StyledSelect
-          isDisabled={() => Boolean(selectedLanguage)}
-          value={selectedVersion}
-          onChange={handleVersionChange}
-          options={selectedLanguage}
+          options={languageOptions}
         />
       </DropdownWrapper>
       <HorizontalDivider />
