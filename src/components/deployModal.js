@@ -7,13 +7,19 @@ import Select from 'react-select'
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
 
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: scroll;
+`
+
+const ControlsWrapper = styled(ContentWrapper)`
+  height: 20%;
+  overflow-y: hidden;
 `
 
 const StyledErrors = styled.span`
@@ -119,7 +125,6 @@ const SettingWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
   margin: 2vh 0 0;
 `
 
@@ -260,6 +265,7 @@ const validatePort = values => {
 
 const DeployModal = ({ isOpen, setModalVisible }) => {
   const [editMode, setEditMode] = useState(null)
+  const [port, setPort] = useState(null)
   const [envVariables, setEnvVariables] = useState([
     { name: 'Var one', value: 'random string' },
     { name: 'What is love?', value: `Baby don't hurt me` },
@@ -303,6 +309,11 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
 
   const [selectedLanguage, setSelectedLanguage] = useState(null)
 
+  const handlePortSubmit = port => {
+    setPort(port)
+    setEditMode(null)
+  }
+
   const handleLanguageChange = selectedOption =>
     setSelectedLanguage(selectedOption)
 
@@ -328,272 +339,221 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
   return (
     <Modal
       width={isMobileOnly ? '90vw' : '60vw'}
-      height={isMobileOnly ? '40vh' : '20vh'}
-      maxHeight="95vh"
+      height="95vh"
       overflowY="scroll"
       isOpen={isOpen}
       contentLabel="Name project"
       ariaHideApp={false}
     >
-      <HorizontalDivider />
-      <SectionTitle>Ports</SectionTitle>
-      {editMode === 'port' ? (
-        <SettingWrapper>
-          <Formik
-            onSubmit={(values, actions) => {
-              actions.setSubmitting(false)
-            }}
-            validate={validatePort}
-            render={props => (
-              <StyledForm onSubmit={props.handleSubmit}>
-                <Setting>
-                  <StyledInput
-                    autoComplete="off"
-                    type="text"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.port}
-                    name="port"
-                    placeholder={isMobile ? 'Env value' : 'Env value'}
-                  />
-                  <StroveButton
-                    isPrimary
-                    type="submit"
-                    text="Submit"
-                    width="20%"
-                    height="2rem"
-                    padding="0.3rem"
-                    onClick={() => setEditMode(null)}
-                  />
-                </Setting>
-                <StyledErrors>{props.errors.port}</StyledErrors>
-              </StyledForm>
-            )}
-          />
-        </SettingWrapper>
-      ) : (
-        <SettingWrapper>
-          <Setting>
-            <Text>This is the setting value</Text>
-            <StroveButton
-              isPrimary
-              type="submit"
-              text="Edit"
-              width="20%"
-              height="2rem"
-              padding="0.3rem"
-              onClick={() => setEditMode('port')}
+      <ContentWrapper>
+        <HorizontalDivider />
+        <SectionTitle>Ports</SectionTitle>
+        {editMode === 'port' ? (
+          <SettingWrapper>
+            <Formik
+              onSubmit={(values, actions) => {
+                handlePortSubmit(values.port)
+                actions.setSubmitting(false)
+              }}
+              validate={validatePort}
+              render={props => (
+                <StyledForm onSubmit={props.handleSubmit}>
+                  <Setting>
+                    <StyledInput
+                      autoComplete="off"
+                      type="text"
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      value={props.values.port}
+                      name="port"
+                      placeholder={isMobile ? 'Env value' : 'Env value'}
+                    />
+                    <StroveButton
+                      isPrimary
+                      type="submit"
+                      text="Submit"
+                      width="20%"
+                      height="2rem"
+                      padding="0.3rem"
+                    />
+                  </Setting>
+                  <StyledErrors>{props.errors.port}</StyledErrors>
+                </StyledForm>
+              )}
             />
-          </Setting>
-        </SettingWrapper>
-      )}
-      <HorizontalDivider />
-      <SectionTitle>Language</SectionTitle>
-      {editMode === 'language' ? (
-        <SettingWrapper>
-          <Setting>
-            <DropdownWrapper>
-              <StyledSelect
-                isLang
-                value={selectedLanguage}
-                onChange={handleLanguageChange}
-                options={languageOptions}
-                theme={theme => ({
-                  ...theme,
-                  borderRadius: 0,
-                  colors: {
-                    ...theme.colors,
-                    primary: '#0072ce',
-                    neutral5: '#0072ce',
-                    neutral10: '#0072ce',
-                    neutral20: '#0072ce',
-                    neutral30: '#0072ce',
-                    neutral40: '#0072ce',
-                    neutral50: '#0072ce',
-                    neutral60: '#0072ce',
-                    neutral70: '#0072ce',
-                    neutral80: '#0072ce',
-                    neutral90: '#0072ce',
-                  },
-                })}
+          </SettingWrapper>
+        ) : (
+          <SettingWrapper>
+            <Setting>
+              {port ? <Text>{port}</Text> : <Text>Define port</Text>}
+              <StroveButton
+                isPrimary
+                type="submit"
+                text="Edit"
+                width="20%"
+                height="2rem"
+                padding="0.3rem"
+                onClick={() => setEditMode('port')}
               />
-            </DropdownWrapper>
+            </Setting>
+          </SettingWrapper>
+        )}
+        <HorizontalDivider />
+        <SectionTitle>Language</SectionTitle>
+        {editMode === 'language' ? (
+          <SettingWrapper>
+            <Setting>
+              <DropdownWrapper>
+                <StyledSelect
+                  isLang
+                  value={selectedLanguage}
+                  onChange={handleLanguageChange}
+                  options={languageOptions}
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: 0,
+                    colors: {
+                      ...theme.colors,
+                      primary: '#0072ce',
+                      neutral5: '#0072ce',
+                      neutral10: '#0072ce',
+                      neutral20: '#0072ce',
+                      neutral30: '#0072ce',
+                      neutral40: '#0072ce',
+                      neutral50: '#0072ce',
+                      neutral60: '#0072ce',
+                      neutral70: '#0072ce',
+                      neutral80: '#0072ce',
+                      neutral90: '#0072ce',
+                    },
+                  })}
+                />
+              </DropdownWrapper>
 
-            <StroveButton
-              isPrimary
-              type="submit"
-              text="Submit"
-              width="20%"
-              height="2rem"
-              padding="0.3rem"
-              onClick={() => setEditMode(null)}
-            />
-          </Setting>
-        </SettingWrapper>
-      ) : (
-        <SettingWrapper>
-          <Setting>
-            <Text>{selectedLanguage ? selectedLanguage.label : 'Hi'}</Text>
-            <StroveButton
-              isPrimary
-              type="submit"
-              text="Edit"
-              width="20%"
-              height="2rem"
-              padding="0.3rem"
-              onClick={() => setEditMode('language')}
-            />
-          </Setting>
-        </SettingWrapper>
-      )}
-      <HorizontalDivider />
-      <SectionTitle>Environment variables</SectionTitle>
-      {editMode === 'env' ? (
-        <SettingWrapper>
-          <Formik
-            initialValues={{
-              envs: envVariables,
-            }}
-            validate={validatePort}
-            render={({ values }) => (
-              <StyledForm>
-                <EnvsWrapper>
-                  <FieldArray
-                    name="envs"
-                    render={arrayHelpers => (
-                      <>
-                        <TableWrapper>
-                          <Table>
-                            {values.envs.map((env, index) => (
-                              <TableRow key={index}>
-                                <StyledField
-                                  isFirst={index === 0}
-                                  name={`envs.${index}.name`}
-                                />
-                                <StyledField
-                                  isRight
-                                  isFirst={index === 0}
-                                  name={`envs.${index}.value`}
-                                />
-                                <RemoveButton
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                >
-                                  -
-                                </RemoveButton>
-                              </TableRow>
-                            ))}
-                          </Table>
-                          <AddButton
-                            type="button"
-                            onClick={() => {
-                              // values.envs[values.envs.length - 1].name !== '' &&
-                              //   values.envs[values.envs.length - 1].value !==
-                              //     '' &&
-                              arrayHelpers.push({ name: '', value: '' })
-                            }}
-                          >
-                            +
-                          </AddButton>
-                        </TableWrapper>
-                        <EnvButtonsWrapper>
-                          <StroveButton
-                            isPrimary
-                            type="submit"
-                            text="Save"
-                            width="100%"
-                            height="2rem"
-                            padding="0.3rem"
-                            onClick={() =>
-                              handleEnvSubmit(
-                                values.envs.filter(
-                                  env => env.value !== '' && env.name !== ''
+              <StroveButton
+                isPrimary
+                type="submit"
+                text="Submit"
+                width="20%"
+                height="2rem"
+                padding="0.3rem"
+                onClick={() => setEditMode(null)}
+              />
+            </Setting>
+          </SettingWrapper>
+        ) : (
+          <SettingWrapper>
+            <Setting>
+              <Text>{selectedLanguage ? selectedLanguage.label : 'Hi'}</Text>
+              <StroveButton
+                isPrimary
+                type="submit"
+                text="Edit"
+                width="20%"
+                height="2rem"
+                padding="0.3rem"
+                onClick={() => setEditMode('language')}
+              />
+            </Setting>
+          </SettingWrapper>
+        )}
+        <HorizontalDivider />
+        <SectionTitle>Environment variables</SectionTitle>
+        {editMode === 'env' ? (
+          <SettingWrapper>
+            <Formik
+              initialValues={{
+                envs: envVariables,
+              }}
+              validate={validatePort}
+              render={({ values }) => (
+                <StyledForm>
+                  <EnvsWrapper>
+                    <FieldArray
+                      name="envs"
+                      render={arrayHelpers => (
+                        <>
+                          <TableWrapper>
+                            <Table>
+                              {values.envs.map((env, index) => (
+                                <TableRow key={index}>
+                                  <StyledField
+                                    isFirst={index === 0}
+                                    name={`envs.${index}.name`}
+                                  />
+                                  <StyledField
+                                    isRight
+                                    isFirst={index === 0}
+                                    name={`envs.${index}.value`}
+                                  />
+                                  <RemoveButton
+                                    type="button"
+                                    onClick={() => arrayHelpers.remove(index)}
+                                  >
+                                    -
+                                  </RemoveButton>
+                                </TableRow>
+                              ))}
+                            </Table>
+                            <AddButton
+                              type="button"
+                              onClick={() => {
+                                // values.envs[values.envs.length - 1].name !== '' &&
+                                //   values.envs[values.envs.length - 1].value !==
+                                //     '' &&
+                                arrayHelpers.push({ name: '', value: '' })
+                              }}
+                            >
+                              +
+                            </AddButton>
+                          </TableWrapper>
+                          <EnvButtonsWrapper>
+                            <StroveButton
+                              isPrimary
+                              type="submit"
+                              text="Save"
+                              width="100%"
+                              height="2rem"
+                              padding="0.3rem"
+                              onClick={() =>
+                                handleEnvSubmit(
+                                  values.envs.filter(
+                                    env => env.value !== '' && env.name !== ''
+                                  )
                                 )
-                              )
-                            }
-                          />
-                          <StroveButton
-                            type="submit"
-                            text="Cancel"
-                            width="100%"
-                            height="2rem"
-                            padding="0.3rem"
-                            onClick={() => setEditMode(null)}
-                          />
-                        </EnvButtonsWrapper>
-                      </>
-                    )}
-                  />
-                </EnvsWrapper>
-              </StyledForm>
-            )}
-          />
-        </SettingWrapper>
-      ) : (
-        <EnvsWrapper>
-          <TableWrapper>
-            <Table>
-              {envVariables.map((item, index) => (
-                <TableRow>
-                  <TableCell isFirst={index === 0}>{item.name}</TableCell>
-                  <TableCell isRight isFirst={index === 0}>
-                    {item.value}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </Table>
-          </TableWrapper>
-          <StroveButton
-            isPrimary
-            type="submit"
-            text="Edit"
-            width="20%"
-            height="2rem"
-            padding="0.3rem"
-            onClick={() => setEditMode('env')}
-          />
-        </EnvsWrapper>
-      )}
-      <HorizontalDivider />
-      <SectionTitle>Build command</SectionTitle>
-      {editMode === 'buildCommand' ? (
-        <SettingWrapper>
-          <Formik
-            onSubmit={(values, actions) => {
-              actions.setSubmitting(false)
-            }}
-            validate={validatePort}
-            render={props => (
-              <StyledForm onSubmit={props.handleSubmit}>
-                <Setting>
-                  <StyledInput
-                    autoComplete="off"
-                    type="text"
-                    onChange={props.handleChange}
-                    onBlur={props.handleBlur}
-                    value={props.values.port}
-                    name="port"
-                    placeholder={isMobile ? 'Env value' : 'Env value'}
-                  />
-                  <StroveButton
-                    isPrimary
-                    type="submit"
-                    text="Submit"
-                    width="20%"
-                    height="2rem"
-                    padding="0.3rem"
-                    onClick={() => setEditMode(null)}
-                  />
-                </Setting>
-                <StyledErrors>{props.errors.port}</StyledErrors>
-              </StyledForm>
-            )}
-          />
-        </SettingWrapper>
-      ) : (
-        <SettingWrapper>
-          <Setting>
-            <Text>This is the setting value</Text>
+                              }
+                            />
+                            <StroveButton
+                              type="submit"
+                              text="Cancel"
+                              width="100%"
+                              height="2rem"
+                              padding="0.3rem"
+                              onClick={() => setEditMode(null)}
+                            />
+                          </EnvButtonsWrapper>
+                        </>
+                      )}
+                    />
+                  </EnvsWrapper>
+                </StyledForm>
+              )}
+            />
+          </SettingWrapper>
+        ) : (
+          <EnvsWrapper>
+            <TableWrapper>
+              <Table>
+                {envVariables.map((item, index) => (
+                  <TableRow>
+                    <TableCell isFirst={index === 0}>{item.name}</TableCell>
+                    <TableCell isRight isFirst={index === 0}>
+                      {item.value}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </Table>
+            </TableWrapper>
             <StroveButton
               isPrimary
               type="submit"
@@ -601,31 +561,85 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
               width="20%"
               height="2rem"
               padding="0.3rem"
-              onClick={() => setEditMode('buildCommand')}
+              onClick={() => setEditMode('env')}
             />
-          </Setting>
-        </SettingWrapper>
-      )}
-      <HorizontalDivider />
-      <Setting>
-        <StroveButton
-          text="Save changes"
-          isPrimary
-          onClick={() => handleSave()}
-          width="25%"
-        />
-        <StroveButton
-          text="Save and close"
-          isPrimary
-          onClick={() => handleSaveAndClose()}
-          width="25%"
-        />
-        <StroveButton
-          text="Discard and close"
-          onClick={() => handleDiscard()}
-          width="25%"
-        />
-      </Setting>
+          </EnvsWrapper>
+        )}
+        <HorizontalDivider />
+        <SectionTitle>Build command</SectionTitle>
+        {editMode === 'buildCommand' ? (
+          <SettingWrapper>
+            <Formik
+              onSubmit={(values, actions) => {
+                actions.setSubmitting(false)
+              }}
+              validate={validatePort}
+              render={props => (
+                <StyledForm onSubmit={props.handleSubmit}>
+                  <Setting>
+                    <StyledInput
+                      autoComplete="off"
+                      type="text"
+                      onChange={props.handleChange}
+                      onBlur={props.handleBlur}
+                      value={props.values.port}
+                      name="port"
+                      placeholder={isMobile ? 'Env value' : 'Env value'}
+                    />
+                    <StroveButton
+                      isPrimary
+                      type="submit"
+                      text="Submit"
+                      width="20%"
+                      height="2rem"
+                      padding="0.3rem"
+                      onClick={() => setEditMode(null)}
+                    />
+                  </Setting>
+                  <StyledErrors>{props.errors.port}</StyledErrors>
+                </StyledForm>
+              )}
+            />
+          </SettingWrapper>
+        ) : (
+          <SettingWrapper>
+            <Setting>
+              <Text>This is the setting value</Text>
+              <StroveButton
+                isPrimary
+                type="submit"
+                text="Edit"
+                width="20%"
+                height="2rem"
+                padding="0.3rem"
+                onClick={() => setEditMode('buildCommand')}
+              />
+            </Setting>
+          </SettingWrapper>
+        )}
+      </ContentWrapper>
+      <ControlsWrapper>
+        <HorizontalDivider />
+        <Setting>
+          <StroveButton
+            text="Save changes"
+            isPrimary
+            onClick={() => handleSave()}
+            width="25%"
+          />
+          <StroveButton
+            text="Save and close"
+            isPrimary
+            onClick={() => handleSaveAndClose()}
+            width="25%"
+          />
+          <StroveButton
+            text="Discard and close"
+            onClick={() => handleDiscard()}
+            width="25%"
+          />
+        </Setting>
+      </ControlsWrapper>
     </Modal>
   )
 }

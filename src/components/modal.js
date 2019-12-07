@@ -14,7 +14,7 @@ const FullFadeIn = keyframes`
 const sizeProps = props =>
   css`
     ${props.width && `width: ${props.width}`};
-    ${props.maxHeight && `max-height: ${props.maxHeight}`};
+    ${props.height && `height: ${props.height}`};
     ${props.overflowY && `overflow-y: ${props.overflowY}`};
   `
 
