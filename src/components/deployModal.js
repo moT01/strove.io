@@ -6,6 +6,7 @@ import Select from 'react-select'
 
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
+import { red } from 'ansi-colors'
 
 const FadeIn = keyframes`
   0% {
@@ -86,7 +87,7 @@ const Setting = styled.div`
 `
 
 const EnvsWrapper = styled(Setting)`
-  align-item: flex-start;
+  align-items: flex-start;
 `
 
 const HorizontalDivider = styled.div`
@@ -96,6 +97,7 @@ const HorizontalDivider = styled.div`
   border-width: 1px;
   border-top-style: solid;
   opacity: 0.4;
+  margin: 15px 0px;
 `
 
 const ColumnWrapper = styled.div`
@@ -179,7 +181,7 @@ const StyledField = styled(Field)`
 `
 
 const DropdownWrapper = styled.div`
-  width: 100%;
+  width: 80%;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
@@ -187,10 +189,6 @@ const DropdownWrapper = styled.div`
 
 const StyledSelect = styled(Select)`
   width: ${props => (props.isLang ? '40%' : '10%')};
-  color: ${({ theme }) => theme.colors.c1};
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-style: solid;
 `
 
 const RemoveButton = styled.button`
@@ -391,6 +389,56 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
         </SettingWrapper>
       )}
       <HorizontalDivider />
+      <SectionTitle>Language</SectionTitle>
+      {editMode === 'language' ? (
+        <SettingWrapper>
+          <Setting>
+            <DropdownWrapper>
+              <StyledSelect
+                isLang
+                value={selectedLanguage}
+                onChange={handleLanguageChange}
+                options={languageOptions}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  maxHeight: '50px',
+                  colors: {
+                    primary: '#0072ce',
+                    neutral20: '#0072ce',
+                  },
+                })}
+              />
+            </DropdownWrapper>
+
+            <StroveButton
+              isPrimary
+              type="submit"
+              text="Submit"
+              width="20%"
+              height="2rem"
+              padding="0.3rem"
+              onClick={() => setEditMode(false)}
+            />
+          </Setting>
+        </SettingWrapper>
+      ) : (
+        <SettingWrapper>
+          <Setting>
+            <Text>{selectedLanguage ? selectedLanguage.label : 'Hi'}</Text>
+            <StroveButton
+              isPrimary
+              type="submit"
+              text="Edit"
+              width="20%"
+              height="2rem"
+              padding="0.3rem"
+              onClick={() => setEditMode('language')}
+            />
+          </Setting>
+        </SettingWrapper>
+      )}
+      <HorizontalDivider />
       <SectionTitle>Environment variables</SectionTitle>
       {editMode === 'env' ? (
         <SettingWrapper>
@@ -550,16 +598,6 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
           </Setting>
         </SettingWrapper>
       )}
-      <HorizontalDivider />
-      <SectionTitle>Language</SectionTitle>
-      <DropdownWrapper>
-        <StyledSelect
-          isLang
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-          options={languageOptions}
-        />
-      </DropdownWrapper>
       <HorizontalDivider />
       <Setting>
         <StroveButton
