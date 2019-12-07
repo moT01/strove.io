@@ -42,11 +42,12 @@ const EmbedWrapper = () => {
 
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
-  /* Specify the route a user should be redirected to */
-  const goBackTo =
-    searchParams.get('goBackTo') || window.location !== window.parent.location
+  const defaultGoBackTo =
+    window.location !== window.parent.location
       ? document.referrer
       : document.location.href
+  /* Specify the route a user should be redirected to */
+  const goBackTo = searchParams.get('goBackTo') || defaultGoBackTo
 
   /* This is a perfectly viable code but it should wait till ancestorOrigins gets better browser support
   const goBackToRoute = searchParams.get('goBackToRoute') || ''
