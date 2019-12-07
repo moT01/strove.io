@@ -33,7 +33,7 @@ const AddProjectProvider = ({ children }) => {
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
-  const isAdding = useSelector(selectors.incomingProject.isIncoming)
+  const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const incomingProjectRepoUrl = useSelector(
     selectors.incomingProject.getRepoLink
   )
@@ -70,8 +70,6 @@ const AddProjectProvider = ({ children }) => {
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
-
-    if (theSameIncomingProject) return null
 
     if (existingProject && !currentProject) {
       if (existingProject.machineId) {
@@ -126,7 +124,7 @@ const AddProjectProvider = ({ children }) => {
     ) {
       setModalContent('AnotherActiveProject')
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
-    } else {
+    } else if (!theSameIncomingProject) {
       createProject({ repoLink, dispatch, user, setModalContent, name })
     }
   }
@@ -156,7 +154,7 @@ const AddProjectProvider = ({ children }) => {
           queuePosition={queuePosition}
         />
       )}
-      {isAdding && isLoading && (
+      {(isAdding || isLoading) && (
         <FullScreenLoader
           type="addProject"
           isFullScreen
