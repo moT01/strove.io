@@ -14,6 +14,8 @@ const FullFadeIn = keyframes`
 const sizeProps = props =>
   css`
     ${props.width && `width: ${props.width}`};
+    ${props.maxHeight && `max-height: ${props.maxHeight}`};
+    ${props.overflowY && `overflow-y: ${props.overflowY}`};
   `
 
 export default memo(styled(Modal)`

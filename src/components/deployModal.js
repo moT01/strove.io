@@ -6,7 +6,6 @@ import Select from 'react-select'
 
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
-import { red } from 'ansi-colors'
 
 const FadeIn = keyframes`
   0% {
@@ -32,7 +31,6 @@ const StyledInput = styled.input`
   text-align: left;
   font-size: 1rem;
   padding: 0.5vh 0;
-  animation: ${FadeIn} 0, 5s ease-out;
 
   :focus {
     outline: none;
@@ -46,7 +44,6 @@ const Text = styled.p`
   font-size: 1rem;
   padding: 0.5vh 0;
   margin: 0px;
-  animation: ${FadeIn} 0, 5s ease-out;
 
   :focus {
     outline: none;
@@ -60,7 +57,6 @@ const SectionTitle = styled.h2`
   font-size: 1rem;
   padding: 0.5vh 0;
   margin: 0px;
-  animation: ${FadeIn} 0, 5s ease-out;
 
   :focus {
     outline: none;
@@ -185,6 +181,7 @@ const DropdownWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const StyledSelect = styled(Select)`
@@ -332,6 +329,8 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
     <Modal
       width={isMobileOnly ? '90vw' : '60vw'}
       height={isMobileOnly ? '40vh' : '20vh'}
+      maxHeight="95vh"
+      overflowY="scroll"
       isOpen={isOpen}
       contentLabel="Name project"
       ariaHideApp={false}
@@ -364,7 +363,7 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
                     width="20%"
                     height="2rem"
                     padding="0.3rem"
-                    onClick={() => setEditMode(false)}
+                    onClick={() => setEditMode(null)}
                   />
                 </Setting>
                 <StyledErrors>{props.errors.port}</StyledErrors>
@@ -402,10 +401,19 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
                 theme={theme => ({
                   ...theme,
                   borderRadius: 0,
-                  maxHeight: '50px',
                   colors: {
+                    ...theme.colors,
                     primary: '#0072ce',
+                    neutral5: '#0072ce',
+                    neutral10: '#0072ce',
                     neutral20: '#0072ce',
+                    neutral30: '#0072ce',
+                    neutral40: '#0072ce',
+                    neutral50: '#0072ce',
+                    neutral60: '#0072ce',
+                    neutral70: '#0072ce',
+                    neutral80: '#0072ce',
+                    neutral90: '#0072ce',
                   },
                 })}
               />
@@ -418,7 +426,7 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
               width="20%"
               height="2rem"
               padding="0.3rem"
-              onClick={() => setEditMode(false)}
+              onClick={() => setEditMode(null)}
             />
           </Setting>
         </SettingWrapper>
@@ -574,7 +582,7 @@ const DeployModal = ({ isOpen, setModalVisible }) => {
                     width="20%"
                     height="2rem"
                     padding="0.3rem"
-                    onClick={() => setEditMode(false)}
+                    onClick={() => setEditMode(null)}
                   />
                 </Setting>
                 <StyledErrors>{props.errors.port}</StyledErrors>
