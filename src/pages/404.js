@@ -11,8 +11,8 @@ const CodeArea = styled.div`
   min-width: 320px;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  text-align: left;
 
   > span {
     display: block;
@@ -75,7 +75,7 @@ const StyledIf = styled.div`
 
 const StyledThrow = styled.div`
   > :first-child {
-    padding-left: 180px;
+    padding-left: 30px;
     color: #d65562;
   }
 
