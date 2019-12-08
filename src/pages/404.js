@@ -50,18 +50,40 @@ const ErrorBody = styled.div`
   }
 `
 
+const StyledIf = styled.span`
+  > :first-child {
+    color: #d65562;
+  }
+
+  > :nth-child(2) {
+    color: #bdbdbd;
+  }
+
+  > :nth-child(3) {
+    color: #4ca8ef;
+  }
+
+  > :nth-child(4) {
+    font-style: italic;
+    color: #bdbdbd;
+  }
+
+  > :nth-child(5) {
+    color: #a6a61f;
+  }
+`
+
 const NotFound = () => (
   <ErrorBody>
     <CodeArea>
       <ErrorMessage>/* Page not found */</ErrorMessage>
-      <span>
-        <span style={{ color: '#d65562' }}>if</span>
-        <span style={{ color: '#bdbdbd' }}> (</span>
-        <span style={{ color: '#4ca8ef' }}>!</span>
-        <span style={{ fontStyle: 'italic', color: '#bdbdbd' }}>
-          found) <span style={{ color: '#a6a61f' }}>{'{'}</span>
-        </span>
-      </span>
+      <StyledIf>
+        <span>if</span>
+        <span> (</span>
+        <span>!</span>
+        <span>found)</span>
+        <span>{'{'}</span>
+      </StyledIf>
       <span>
         <span style={{ paddingLeft: '15px', color: '#2796ec' }}>
           <i style={{ width: '10px', display: 'inline-block' }} />
