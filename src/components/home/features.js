@@ -43,6 +43,10 @@ const StyledFeature = styled.div`
   width: 80vw;
 `
 
+const StyledParlax = styled(Parallax)`
+  top: -30vh;
+`
+
 const pointPos = [
   { x: -30, y: -10 },
   { x: 20, y: -20 },
@@ -197,20 +201,19 @@ const Features = () => {
   return (
     <StyledFeatureWrapper id="page1-wrapper">
       {!isMobileOnly && (
-        <Parallax
+        <StyledParlax
           className="page1-bg"
           animation={{
             translateY: 300,
             ease: 'linear',
             playScale: [0, 1.65],
           }}
-          style={{ top: '-30vh' }}
           location="page1-wrapper"
         >
           <SmallCloud />
           <MediumCloud />
           <BigCloud />
-        </Parallax>
+        </StyledParlax>
       )}
       <StyledFeature>{children}</StyledFeature>
     </StyledFeatureWrapper>
