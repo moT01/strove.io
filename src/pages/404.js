@@ -50,7 +50,7 @@ const ErrorBody = styled.div`
   }
 `
 
-const StyledIf = styled.span`
+const StyledIf = styled.div`
   > :first-child {
     color: #d65562;
   }
@@ -73,6 +73,30 @@ const StyledIf = styled.span`
   }
 `
 
+const StyledThrow = styled.div`
+  > :first-child {
+    padding-left: 180px;
+    color: #d65562;
+  }
+
+  > :nth-child(2) {
+    color: #2796ec;
+  }
+
+  > :nth-child(3) {
+    color: #a6a61f;
+  }
+
+  > :nth-child(4) {
+    color: #2796ec;
+  }
+
+  > :nth-child(5) {
+    display: block;
+    color: #a6a61f;
+  }
+`
+
 const NotFound = () => (
   <ErrorBody>
     <CodeArea>
@@ -84,28 +108,25 @@ const NotFound = () => (
         <span>found)</span>
         <span>{'{'}</span>
       </StyledIf>
-      <span>
-        <span style={{ paddingLeft: '15px', color: '#2796ec' }}>
-          <i style={{ width: '10px', display: 'inline-block' }} />
-          throw
-        </span>
-        <span>
-          (<span style={{ color: '#a6a61f' }}>"(╯°□°)╯︵ ┻━┻"</span>)
-        </span>
-        <span style={{ display: 'block', color: '#a6a61f' }}>{'}'}</span>
+      <StyledThrow>
+        <span>throw</span>
+        <span>(</span>
+        <span>"(╯°□°)╯︵ ┻━┻"</span>
+        <span>)</span>
+      </StyledThrow>
+      <span>{'}'}</span>
 
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          <span style={{ color: '#777', fontStyle: 'italic' }}>
-            // Go back to main page!
-          </span>
-        </Link>
-      </span>
+      <Link
+        to="/"
+        style={{
+          color: `white`,
+          textDecoration: `none`,
+        }}
+      >
+        <span style={{ color: '#777', fontStyle: 'italic' }}>
+          // Go back to main page!
+        </span>
+      </Link>
     </CodeArea>
   </ErrorBody>
 )
