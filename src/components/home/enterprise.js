@@ -7,14 +7,15 @@ const EnterpriseWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  background-color: ${({ theme }) => theme.colors.c3};
+  width: 100vw;
+  padding: 40px 0;
 `
 
-const Footer = () => {
-  return (
-    <EnterpriseWrapper>
-      Enterprise
-    </EnterpriseWrapper>
-  )
-}
+const Footer = () => (
+  <EnterpriseWrapper>
+    Enterprise
+  </EnterpriseWrapper>
+)
 
 export default memo(Footer)
