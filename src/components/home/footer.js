@@ -65,6 +65,10 @@ const StyledAnchor = styled.a`
   }
 `
 
+const StyledGithubIcon = styled(Github)`
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
 const Footer = () => {
   return (
     <FooterWrapper>
@@ -76,7 +80,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             href="https://github.com/stroveio/strove.io-client"
           >
-            <Github style={{ fill: '#fff' }} />
+            <StyledGithubIcon />
             <LinkText>Source code</LinkText>
           </StyledAnchor>
           <StyledAnchor href="mailto:contact@strove.io?subject=Strove demo&body=We'd love to get to know how we can help!">
