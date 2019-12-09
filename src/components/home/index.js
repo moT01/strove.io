@@ -21,6 +21,7 @@ const Home = () => (
     <Banner />
     <Features />
     <Technologies />
+    <Enterprise />
     <Footer />
   </StyledWrapper>
 )
