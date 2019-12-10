@@ -234,7 +234,7 @@ const Card = styled.div`
   align-items: center;
   background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
-  margin-top: ${props => (props.team ? '9vh' : 0)};
+  margin-top: ${props => (props.team ? '5vh' : 0)};
   z-index: auto;
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
