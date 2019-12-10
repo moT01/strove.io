@@ -465,7 +465,12 @@ const PricingPage = () => {
                             <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                           </g>
                         </svg>
-                        <button type="submit">Request demo</button>
+                        <button
+                          type="submit"
+                          disabled={errors.email || !values.email}
+                        >
+                          Request demo
+                        </button>
                       </EmailFormWrapper>
                       <StyledTrialInfo team>
                         <li>Free 14-day Demo</li>
