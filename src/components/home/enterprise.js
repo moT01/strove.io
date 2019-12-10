@@ -9,7 +9,7 @@ const EnterpriseWrapper = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c3};
   width: 100vw;
-  padding: 40px 0;
+  padding: 20px 0;
 `
 
 const EnterpriseFeatures = styled.ul`

@@ -225,7 +225,7 @@ const Technologies = () => {
         </StyledButtonsWrapper>
       </StyledFeatureWrapper>
       <StyledFormWrapper>
-        <StyledH6>Be up to date with new deals and features!</StyledH6>
+        <StyledH6>Get familiar with how Strove can help your company</StyledH6>
         <Formik
           initialValues={{
             email: '',
@@ -237,7 +237,7 @@ const Technologies = () => {
                 name: 'sendEmail',
                 context: null,
                 mutation: SEND_EMAIL,
-                variables: { email: values.email, isNewsletter: true },
+                variables: { email: values.email, isDemo: true },
                 onSuccess: () => setEmailSent(true),
               })
             )
@@ -270,13 +270,11 @@ const Technologies = () => {
                     <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                   </g>
                 </svg>
-                <StroveButton
-                  layout="form"
-                  type="submit"
-                  text="Subscribe to newsletter"
-                />
+                <StroveButton layout="form" type="submit" text="Talk to us" />
               </EmailFormWrapper>
-              {emailSent && <StyledH6>Thank you!</StyledH6>}
+              {emailSent && (
+                <StyledH6>Thank you, we'll get back to you soon!</StyledH6>
+              )}
             </Form>
           )}
         </Formik>
