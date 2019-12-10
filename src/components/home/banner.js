@@ -272,6 +272,7 @@ const StyledQueueAnim = styled(QueueAnim)`
 
 const StyledProductDescription = styled.h4`
   font-weight: 500;
+  font-size: 22px;
 `
 
 const StyledSmallText = styled.span`
@@ -353,20 +354,6 @@ const Banner = () => {
             a fraction of the cost
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
-            <StroveButton
-              height="56px"
-              width="100%"
-              fontSize="1.3rem"
-              fontWeight="bold"
-              isPrimary
-              text="Get started"
-              letterSpacing="0.8px"
-              onClick={() => setModalVisible(true)}
-            />
-            <StyledTrialInfo>
-              <li>Free for non-commercial use</li>
-            </StyledTrialInfo>
-            <StyledInfo>Or, if you're a corporate user:</StyledInfo>
             <Formik
               initialValues={{
                 email: '',
