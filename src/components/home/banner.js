@@ -442,19 +442,14 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
-            <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH2>
-                Strove improves programmers productivity by removing waste and
-                error-prone redundant repetitive tasks from their workflows.
-              </StyledH2>
-            </LeftSectionWrapper>
-          </SectionWrapper>
-          <SectionWrapper>
-            <Video isMobile={isMobile} controls poster={demoPreview}>
-              <source src={Demo} type="video/mp4"></source>
-            </Video>
-          </SectionWrapper>
+          {/* <SectionWrapper isMobile={isMobile} padding="20px 40px"> */}
+          {/* <LeftSectionWrapper isMobile={isMobile}> */}
+          <StyledH2>
+            Strove improves programmers productivity by removing waste and
+            error-prone redundant repetitive tasks from their workflows.
+          </StyledH2>
+          {/* </LeftSectionWrapper> */}
+          {/* </SectionWrapper> */}
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper
