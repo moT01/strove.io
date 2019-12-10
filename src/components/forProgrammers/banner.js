@@ -349,8 +349,9 @@ const Banner = () => {
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
-            Get the advantage over teams with the best programming equipment for
-            a fraction of the cost
+            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
+            <b>build</b> and <b>collaborate</b> no matter the language. All you
+            need is a browser.
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <StroveButton
@@ -435,7 +436,7 @@ const Banner = () => {
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured cloud servers to
+            Strove brings ready in seconds, pre-configured and remote servers to
             write, build and run code.
           </StyledH2>
         </SectionWrapper>
