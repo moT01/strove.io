@@ -22,7 +22,14 @@ const validate = values => {
 }
 
 const StyledH6 = styled.h6`
-  margin: 50px 20px 0;
+  margin: 0 20px;
+`
+
+const StyledH2 = styled.h2`
+  margin: 50px 20px 20px;
+  font-size: 8vh;
+  letter-spacing: -0.89px;
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const EmailFormWrapper = styled.div`
@@ -108,8 +115,6 @@ const EmailFormWrapper = styled.div`
     g {
       stroke: ${({ theme }) => theme.colors.c1};
     }
-  }
-
   }
 `
 
@@ -225,6 +230,7 @@ const Technologies = () => {
         </StyledButtonsWrapper>
       </StyledFeatureWrapper>
       <StyledFormWrapper>
+        <StyledH2>Enterprise</StyledH2>
         <StyledH6>Get familiar with how Strove can help your company</StyledH6>
         <Formik
           initialValues={{
