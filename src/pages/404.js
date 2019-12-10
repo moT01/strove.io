@@ -10,8 +10,8 @@ const CodeArea = styled.div`
   min-width: 320px;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  text-align: left;
 
   > span {
     display: block;
@@ -49,40 +49,90 @@ const ErrorBody = styled.div`
   }
 `
 
+const StyledIf = styled.div`
+  > :first-child {
+    color: #d65562;
+  }
+
+  > :nth-child(2) {
+    color: #bdbdbd;
+  }
+
+  > :nth-child(3) {
+    color: #4ca8ef;
+  }
+
+  > :nth-child(4) {
+    color: #bdbdbd;
+    margin-right: 10px;
+  }
+
+  > :nth-child(5) {
+    color: #a6a61f;
+  }
+`
+
+const StyledThrow = styled.div`
+  > :first-child {
+    padding-left: 30px;
+    color: #d65562;
+  }
+
+  > :nth-child(2) {
+    color: #2796ec;
+  }
+
+  > :nth-child(3) {
+    color: #a6a61f;
+  }
+
+  > :nth-child(4) {
+    color: #2796ec;
+  }
+
+  > :nth-child(5) {
+    display: block;
+    color: #a6a61f;
+  }
+`
+
+const StyledClosingTag = styled.span`
+  color: #a6a61f;
+`
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  margin-top: 20px;
+  display: block;
+
+  > :first-child {
+    color: #777;
+    font-style: italic;
+  }
+`
+
 const NotFound = () => (
   <ErrorBody>
     <CodeArea>
       <ErrorMessage>/* Page not found */</ErrorMessage>
-      <span>
-        <span style={{ color: '#d65562' }}>if</span>
-        <span style={{ color: '#bdbdbd' }}> (</span>
-        <span style={{ color: '#4ca8ef' }}>!</span>
-        <span style={{ fontStyle: 'italic', color: '#bdbdbd' }}>
-          found) <span style={{ color: '#a6a61f' }}>{'{'}</span>
-        </span>
-      </span>
-      <span>
-        <span style={{ paddingLeft: '15px', color: '#2796ec' }}>
-          <i style={{ width: '10px', display: 'inline-block' }} />
-          throw
-        </span>
-        <span>
-          (<span style={{ color: '#a6a61f' }}>"(╯°□°)╯︵ ┻━┻"</span>)
-        </span>
-        <span style={{ display: 'block', color: '#a6a61f' }}>{'}'}</span>
+      <StyledIf>
+        <span>if</span>
+        <span> (</span>
+        <span>!found</span>
+        <span>)</span>
+        <span>{'{'}</span>
+      </StyledIf>
+      <StyledThrow>
+        <span>throw</span>
+        <span>(</span>
+        <span>"(╯°□°)╯︵ ┻━┻"</span>
+        <span>)</span>
+      </StyledThrow>
+      <StyledClosingTag>{'}'}</StyledClosingTag>
 
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          <span style={{ color: '#777', fontStyle: 'italic' }}>
-            // Go back to main page!
-          </span>
-        </Link>
-      </span>
+      <StyledLink to="/">
+        <span>// --> Click to go back to main page!</span>
+      </StyledLink>
     </CodeArea>
   </ErrorBody>
 )

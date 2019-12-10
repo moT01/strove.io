@@ -24,6 +24,31 @@ const FadeIn = keyframes`
   }
 `
 
+const Relative = styled.div`
+  position: relative;
+`
+
+const StyledStroveIcon = styled(Strove)`
+  height: 25px;
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
+const StyledDashboardIcon = styled(Dashboard)`
+  height: 25px;
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
+const StyledDesktopIcon = styled(Desktop)`
+  height: 20px;
+  fill: ${({ theme }) => theme.colors.c2};
+  font-size: 25px;
+`
+
+const StyledAntdIcon = styled(Icon)`
+  height: 25px;
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
 const HeaderSection = styled.div`
   display: flex;
   flex-direction: row;
@@ -316,7 +341,7 @@ const HeaderComponent = ({ location }) => {
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/">
               {isMobileOnly ? (
-                <Strove style={{ height: '25px' }} fill="#ffffff" />
+                <StyledStroveIcon />
               ) : (
                 <LinkText>Strove</LinkText>
               )}
@@ -327,7 +352,7 @@ const HeaderComponent = ({ location }) => {
           <LinkWrapper mobile={isMobileOnly}>
             <StyledLink to="/app/dashboard">
               {isMobileOnly ? (
-                <Dashboard style={{ height: '25px' }} fill="#ffffff" />
+                <StyledDashboardIcon />
               ) : (
                 <LinkText>Dashboard</LinkText>
               )}
@@ -338,10 +363,10 @@ const HeaderComponent = ({ location }) => {
         {location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
-              <div style={{ position: 'relative' }}>
+              <Relative>
                 <LoginButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
                   {isMobileOnly ? (
-                    <Desktop style={{ height: '20px' }} fill="#fff" />
+                    <StyledDesktopIcon />
                   ) : (
                     <LinkText isEmbed={isEmbed}>Preview</LinkText>
                   )}
@@ -359,7 +384,6 @@ const HeaderComponent = ({ location }) => {
                           rel="noopener noreferrer"
                         >
                           <PreviewLink
-                            style={{ color: '#fff', textDecoration: 'none' }}
                             href={item.href}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -371,7 +395,7 @@ const HeaderComponent = ({ location }) => {
                     </MenuWrapper>
                   )}
                 </DropdownWrapper>
-              </div>
+              </Relative>
             )}
           </Downshift>
         )}
@@ -402,10 +426,7 @@ const HeaderComponent = ({ location }) => {
             rel="noopener noreferrer"
             isEmbed={isEmbed}
           >
-            <Icon
-              type="file-text"
-              style={{ fontSize: '25px', height: '1.5rem' }}
-            />
+            <StyledAntdIcon type="file-text" />
           </DocsLink>
         ) : (
           <DocsLink
