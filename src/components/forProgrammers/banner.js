@@ -416,6 +416,7 @@ const Banner = () => {
                       type="submit"
                       layout="form"
                       text="Request demo"
+                      disabled={errors.email || !values.email}
                     />
                   </EmailFormWrapper>
                   <StyledTrialInfo>

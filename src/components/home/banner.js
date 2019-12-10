@@ -373,6 +373,7 @@ const Banner = () => {
             >
               {({ errors, touched, values }) => (
                 <StyledForm>
+                  {console.log('values', values)}
                   <EmailFormWrapper
                     disabled={errors.email || !values.email}
                     isMobile={isMobileOnly}
@@ -402,6 +403,7 @@ const Banner = () => {
                       type="submit"
                       layout="form"
                       text="Request demo"
+                      disabled={errors.email || !values.email}
                     />
                   </EmailFormWrapper>
                   <StyledTrialInfo>
