@@ -276,14 +276,7 @@ const Technologies = () => {
                     <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
                   </g>
                 </svg>
-                <StroveButton
-                  layout={isMobileOnly ? null : 'form'}
-                  primary
-                  type="submit"
-                  text="Talk to us"
-                  fontSize="20px"
-                  fontWeight={700}
-                />
+                <StroveButton layout="form" type="submit" text="Talk to us" />
               </EmailFormWrapper>
               {emailSent && (
                 <StyledH6>Thank you, we'll get back to you soon!</StyledH6>
