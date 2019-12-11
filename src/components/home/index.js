@@ -5,7 +5,6 @@ import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
 import Footer from './footer'
-import Enterprise from './enterprise'
 
 const StyledWrapper = styled.div`
   width: 100vw;
@@ -21,7 +20,6 @@ const Home = () => (
     <Banner />
     <Features />
     <Technologies />
-    <Enterprise />
     <Footer />
   </StyledWrapper>
 )

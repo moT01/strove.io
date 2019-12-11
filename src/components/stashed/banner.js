@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import styled, { keyframes, css } from 'styled-components'
@@ -272,6 +273,7 @@ const StyledQueueAnim = styled(QueueAnim)`
 
 const StyledProductDescription = styled.h4`
   font-weight: 500;
+  font-size: 22px;
 `
 
 const StyledSmallText = styled.span`
@@ -306,7 +308,11 @@ const StyledGrid = styled.div`
   margin: 0 auto;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  border-top: 1px solid white;
+  ${({ withBorderTop, theme }) =>
+    withBorderTop ? `border-top: 1px solid ${theme.colors.c2}` : 'none'};
+
+  ${({ withBorderBottom, theme }) =>
+    withBorderBottom ? `border-bottom: 1px solid ${theme.colors.c2}` : 'none'};
 `
 
 const StyledCell = styled.div`
@@ -333,6 +339,9 @@ const StyledHeaderText = styled.div`
 const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
+const SomeString = `Strove improves programmers productivity by removing waste and
+error-prone redundant repetitive tasks from their workflows.`
+
 const Banner = () => {
   const [isModalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
@@ -349,25 +358,10 @@ const Banner = () => {
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Bring your ideas to life</StyledH1>
           <StyledProductDescription>
-            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
-            <b>build</b> and <b>collaborate</b> no matter the language. All you
-            need is a browser.
+            Get the advantage over teams with the best programming equipment for
+            a fraction of the cost
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
-            <StroveButton
-              height="56px"
-              width="100%"
-              fontSize="1.3rem"
-              fontWeight="bold"
-              isPrimary
-              text="Get started"
-              letterSpacing="0.8px"
-              onClick={() => setModalVisible(true)}
-            />
-            <StyledTrialInfo>
-              <li>Free for non-commercial use</li>
-            </StyledTrialInfo>
-            <StyledInfo>Or, if you're a corporate user:</StyledInfo>
             <Formik
               initialValues={{
                 email: '',
@@ -437,7 +431,7 @@ const Banner = () => {
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured and remote servers to
+            Strove brings ready in seconds, pre-configured cloud servers to
             write, build and run code.
           </StyledH2>
         </SectionWrapper>
@@ -452,31 +446,70 @@ const Banner = () => {
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
+        padding="0 20px 20px"
+        background={theme.colors.c3}
+      >
+        <StyledGrid withBorderBottom>
+          <StyledCell>
+            <StyledCellHeader>
+              <IconContainer>
+                <Icon type="clock-circle" />
+              </IconContainer>
+              <StyledHeaderText>Less bureaucracy</StyledHeaderText>
+            </StyledCellHeader>
+            <StyledFeatureDescription>
+              Spending too much time managing employees computers, permissions,
+              onboardings? We can fix that. In Strove code is stored in the
+              cloud allowing programmers to work on their own computers.
+            </StyledFeatureDescription>
+          </StyledCell>
+          <StyledCell>
+            <StyledCellHeader>
+              <IconContainer>
+                <Icon type="bug" />
+              </IconContainer>
+              <StyledHeaderText>Debug less</StyledHeaderText>
+            </StyledCellHeader>
+            <StyledFeatureDescription>
+              Say goodbye to 'It works on my machine' issue. Editor runs within
+              Docker container ensuring consistent environment. The code will
+              work the same for all team members, no matter the machine or
+              operating system. Personal files, such as editor extensions are
+              protected from sharing ensuring programmers stay in control over
+              their favorite tools.
+            </StyledFeatureDescription>
+          </StyledCell>
+          <StyledCell>
+            <StyledCellHeader>
+              <IconContainer>
+                <Icon type="cloud-sync" />
+              </IconContainer>
+              <StyledHeaderText>
+                No need to buy expensive equipment
+              </StyledHeaderText>
+            </StyledCellHeader>
+            <StyledFeatureDescription>
+              Buying computers for programmers is not only expensive but it
+              consumes a lot of time. With Strove, code is run on cloud servers
+              allowing programmers to work on their own gear or older computers
+              and enjoy best performance
+            </StyledFeatureDescription>
+          </StyledCell>
+        </StyledGrid>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper
+        isSecondary
         padding="50px 20px 50px"
         background="black"
       >
-        <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
-            <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH2>
-                Strove improves programmers productivity by removing waste and
-                error-prone redundant repetitive tasks from their workflows.
-              </StyledH2>
-            </LeftSectionWrapper>
-          </SectionWrapper>
-          <SectionWrapper>
-            <Video isMobile={isMobile} controls poster={demoPreview}>
-              <source src={Demo} type="video/mp4"></source>
-            </Video>
-          </SectionWrapper>
-        </SectionDivider>
+        <StyledH2>For Enterprise</StyledH2>
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
         padding="0 20px 20px"
         background={theme.colors.c3}
       >
-        <StyledGrid>
+        <StyledGrid withBorderTop>
           <StyledCell>
             <StyledCellHeader>
               <IconContainer>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react'
 import QueueAnim from 'rc-queue-anim'
 import styled, { keyframes, css } from 'styled-components'

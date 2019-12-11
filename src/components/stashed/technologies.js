@@ -22,7 +22,14 @@ const validate = values => {
 }
 
 const StyledH6 = styled.h6`
-  margin: 50px 20px 0;
+  margin: 0 20px;
+`
+
+const StyledH2 = styled.h2`
+  margin: 50px 20px 20px;
+  font-size: 8vh;
+  letter-spacing: -0.89px;
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const EmailFormWrapper = styled.div`
@@ -108,8 +115,6 @@ const EmailFormWrapper = styled.div`
     g {
       stroke: ${({ theme }) => theme.colors.c1};
     }
-  }
-
   }
 `
 
@@ -225,7 +230,8 @@ const Technologies = () => {
         </StyledButtonsWrapper>
       </StyledFeatureWrapper>
       <StyledFormWrapper>
-        <StyledH6>Be up to date with new deals and features!</StyledH6>
+        <StyledH2>Enterprise</StyledH2>
+        <StyledH6>Get familiar with how Strove can help your company</StyledH6>
         <Formik
           initialValues={{
             email: '',
@@ -237,7 +243,7 @@ const Technologies = () => {
                 name: 'sendEmail',
                 context: null,
                 mutation: SEND_EMAIL,
-                variables: { email: values.email, isNewsletter: true },
+                variables: { email: values.email, isDemo: true },
                 onSuccess: () => setEmailSent(true),
               })
             )
@@ -273,11 +279,13 @@ const Technologies = () => {
                 <StroveButton
                   layout="form"
                   type="submit"
-                  text="Subscribe to newsletter"
+                  text="Talk to us"
                   disabled={errors.email || !values.email}
                 />
               </EmailFormWrapper>
-              {emailSent && <StyledH6>Thank you!</StyledH6>}
+              {emailSent && (
+                <StyledH6>Thank you, we'll get back to you soon!</StyledH6>
+              )}
             </Form>
           )}
         </Formik>

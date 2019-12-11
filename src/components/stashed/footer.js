@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { Github } from 'images/logos'
@@ -65,8 +65,8 @@ const StyledAnchor = styled.a`
   }
 `
 
-const StyledGithub = styled(Github)`
-  fill: #fff;
+const StyledGithubIcon = styled(Github)`
+  fill: ${({ theme }) => theme.colors.c2};
 `
 
 const Footer = () => {
@@ -80,7 +80,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             href="https://github.com/stroveio/strove.io-client"
           >
-            <StyledGithub />
+            <StyledGithubIcon />
             <LinkText>Source code</LinkText>
           </StyledAnchor>
           <StyledAnchor href="mailto:contact@strove.io?subject=Strove demo&body=We'd love to get to know how we can help!">
@@ -113,4 +113,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default memo(Footer)
