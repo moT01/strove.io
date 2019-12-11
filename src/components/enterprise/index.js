@@ -411,11 +411,10 @@ const PricingPage = () => {
             <PricingSection>
               <PricingWrapper>
                 <PlanTitle team>
-                  Go fast, move to serverless development
+                  Move faster than competition, for less
                 </PlanTitle>
                 <PlanDesc team>
-                  Annual plan for developer teams and companies that want to
-                  move fast.
+                  Annual plan for developer teams and companies.
                 </PlanDesc>
                 <Contact team>Benefits:</Contact>
                 <Feature team>Private cloud</Feature>
