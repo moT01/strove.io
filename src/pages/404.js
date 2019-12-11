@@ -114,6 +114,7 @@ const StyledLink = styled(Link)`
 const NotFound = () => (
   <ErrorBody>
     <CodeArea>
+      {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
       <ErrorMessage>/* Page not found */</ErrorMessage>
       <StyledIf>
         <span>if</span>

@@ -328,9 +328,7 @@ const PlanTitle = styled.h1`
 const Contact = styled(PlanTitle)`
   width: 75%;
 `
-const Price = styled(PlanTitle)`
-  font-size: 30px;
-`
+
 const PlanSubTitle = styled(PlanTitle)`
   font-size: 20px;
 `
@@ -386,16 +384,15 @@ const PricingPage = () => {
         <SEO title="Pricing" />
         <Header />
         <CardsWrapper>
-          {/* <Card>
+          <Card>
             <CardTitle>Individuals</CardTitle>
             <PricingSection>
               <PricingWrapper>
                 <PlanTitle>Free</PlanTitle>
                 <PlanDesc>The basic plan for individual developers</PlanDesc>
-                <Price>$0</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Public repositories</Feature>
-                <Feature>6 GB of RAM</Feature>
+                <Feature>5 GB of RAM</Feature>
                 <Feature>No commercial use</Feature>
                 <Button disabled>
                   <ButtonText team>Already subscribed</ButtonText>
@@ -405,7 +402,7 @@ const PricingPage = () => {
                 </StyledTrialInfo>
               </PricingWrapper>
             </PricingSection>
-          </Card> */}
+          </Card>
           <Card team>
             <CardTitle team>Enterprise</CardTitle>
             <PricingSection>
@@ -418,13 +415,17 @@ const PricingPage = () => {
                 </PlanDesc>
                 <Contact team>Benefits:</Contact>
                 <Feature team>Private cloud</Feature>
+                <Feature team>Private repositories</Feature>
                 <Feature team>
                   RAM, hard drive and speed adjusted to team's needs
                 </Feature>
-                <Feature team>Active directory</Feature>
+                <Feature team>
+                  Active directory - highest code security and control
+                </Feature>
                 <Feature team>
                   Extensive docker support - multiple containers, custom images
                 </Feature>
+                <Feature team>Access restriction</Feature>
                 <Feature team>Priority support</Feature>
                 <Formik
                   initialValues={{
