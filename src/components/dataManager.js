@@ -68,11 +68,10 @@ export default memo(({ children, addProject }) => {
     shouldResubscribe: true,
   })
 
-  const activeProjectData =
-    activeProject?.data?.activeProject?.machineId &&
-    activeProject?.data?.activeProject
+  const activeProjectData = activeProject?.data?.activeProject
   const machineId = activeProjectData?.machineId
   const editorPort = activeProjectData?.editorPort
+  const machineName = activeProjectData?.machineName
   const additionalPorts = activeProjectData?.additionalPorts
   const id = activeProjectData?.id
 
@@ -83,12 +82,12 @@ export default memo(({ children, addProject }) => {
         payload: {
           storeKey: 'myProjects',
           id,
-          data: { editorPort, machineId, additionalPorts },
+          data: { editorPort, machineId, additionalPorts, machineName },
         },
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeProjectData])
+  }, [machineName, machineId, editorPort])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
     variables: { email: user?.email || 'null' },
