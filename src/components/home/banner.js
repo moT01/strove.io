@@ -454,14 +454,12 @@ const Banner = () => {
               <IconContainer>
                 <Icon type="clock-circle" />
               </IconContainer>
-              <StyledHeaderText>Save time</StyledHeaderText>
+              <StyledHeaderText>Less bureaucracy</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              Even modern companies waste several days every time they onboard a
-              new programmer. Those days are spent on repetitive and redundant
-              programming environment setup. This source of waste can be easily
-              dealt with by letting programmers access ready-in-seconds
-              environment.
+              Spending too much time managing employees computers, permissions,
+              onboardings? We can fix that. In Strove code is stored in the cloud allowing
+              programmers to work on their own computers.
             </StyledFeatureDescription>
           </StyledCell>
           <StyledCell>
@@ -485,13 +483,15 @@ const Banner = () => {
               <IconContainer>
                 <Icon type="cloud-sync" />
               </IconContainer>
-              <StyledHeaderText>Keep your progress</StyledHeaderText>
+              <StyledHeaderText>
+                No need to buy expensive equipment
+              </StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              We believe that securely storing code for easy browser access is
-              the future of programming. In Strove, programmers can pick up
-              where they left in seconds, no matter if working on enterprise
-              projects or learning on university computers.
+              Buying computers for programmers is not only expensive but it
+              consumes a lot of time. With Strove, code is run on cloud servers
+              allowing programmers to work on their own gear or older computers
+              and enjoy best performance
             </StyledFeatureDescription>
           </StyledCell>
         </StyledGrid>
@@ -501,11 +501,7 @@ const Banner = () => {
         padding="50px 20px 50px"
         background="black"
       >
-        {/* <SectionWrapper isMobile={isMobile} padding="20px 40px"> */}
-        {/* <LeftSectionWrapper isMobile={isMobile}> */}
         <StyledH2>For Enterprise</StyledH2>
-        {/* </LeftSectionWrapper> */}
-        {/* </SectionWrapper> */}
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
