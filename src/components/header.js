@@ -24,10 +24,6 @@ const FadeIn = keyframes`
   }
 `
 
-const Relative = styled.div`
-  position: relative;
-`
-
 const StyledStroveIcon = styled(Strove)`
   height: 25px;
   fill: ${({ theme }) => theme.colors.c2};
@@ -363,7 +359,8 @@ const HeaderComponent = ({ location }) => {
         {location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
-              <Relative>
+              // This has to be done with <div>. Using styled components causes Downshift crash
+              <div style={{ position: 'relative' }}>
                 <LoginButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
                   {isMobileOnly ? (
                     <StyledDesktopIcon />
@@ -395,7 +392,7 @@ const HeaderComponent = ({ location }) => {
                     </MenuWrapper>
                   )}
                 </DropdownWrapper>
-              </Relative>
+              </div>
             )}
           </Downshift>
         )}
