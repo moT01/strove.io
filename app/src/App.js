@@ -1,6 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
+import { wrapRootElement } from './wrapper'
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+const WrapperApp = wrapRootElement(App)
+
+export default WrapperApp
