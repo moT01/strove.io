@@ -71,7 +71,7 @@ const EmbedWrapper = () => {
             <ExternalLink
               primary
               href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
-              // target="_blank"
+              target="_blank"
               rel="noopener noreferrer"
             >
               <LoginText invert>Login to start coding</LoginText>
