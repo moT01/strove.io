@@ -123,6 +123,7 @@ const GetStarted = ({ addProject }) => {
               text="Clone project"
               width="30%"
               minWidth="200px"
+              disabled={!props.values.repoLink || props.errors.repoLink}
             />
 
             <StyledErrors>{props.errors.repoLink}</StyledErrors>

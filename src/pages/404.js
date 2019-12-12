@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
@@ -115,6 +114,7 @@ const StyledLink = styled(Link)`
 const NotFound = () => (
   <ErrorBody>
     <CodeArea>
+      {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
       <ErrorMessage>/* Page not found */</ErrorMessage>
       <StyledIf>
         <span>if</span>

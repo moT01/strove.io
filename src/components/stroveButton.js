@@ -132,8 +132,8 @@ const StroveButton = props => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
 
-  return props.layout === 'form' ? (
-    <FormButton primary={props.isPrimary} mobile={isMobileOnly} {...props}>
+  return props.layout === 'form' && !isMobileOnly ? (
+    <FormButton mobile={isMobileOnly} {...props}>
       {isLoading ? (
         <FullScreenLoader
           isFullScreen={false}
@@ -144,6 +144,25 @@ const StroveButton = props => {
         props.text || props.children
       )}
     </FormButton>
+  ) : props.layout === 'form' && isMobileOnly ? (
+    <Button
+      primary
+      fontWeight="700"
+      fontSize="20px"
+      height="56px"
+      mobile={isMobileOnly}
+      {...props}
+    >
+      {isLoading ? (
+        <FullScreenLoader
+          isFullScreen={false}
+          color="#ffffff"
+          height="1.7rem"
+        />
+      ) : (
+        props.text || props.children
+      )}
+    </Button>
   ) : (
     <Button
       disabled={isLoading || props.isDisabled}

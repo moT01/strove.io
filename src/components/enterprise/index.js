@@ -234,7 +234,7 @@ const Card = styled.div`
   align-items: center;
   background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
-  margin-top: ${props => (props.team ? '9vh' : 0)};
+  margin-top: ${props => (props.team ? '5vh' : 0)};
   z-index: auto;
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
@@ -328,9 +328,7 @@ const PlanTitle = styled.h1`
 const Contact = styled(PlanTitle)`
   width: 75%;
 `
-const Price = styled(PlanTitle)`
-  font-size: 30px;
-`
+
 const PlanSubTitle = styled(PlanTitle)`
   font-size: 20px;
 `
@@ -392,10 +390,9 @@ const PricingPage = () => {
               <PricingWrapper>
                 <PlanTitle>Free</PlanTitle>
                 <PlanDesc>The basic plan for individual developers</PlanDesc>
-                <Price>$0</Price>
                 <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Public repositories</Feature>
-                <Feature>6 GB of RAM</Feature>
+                <Feature>5 GB of RAM</Feature>
                 <Feature>No commercial use</Feature>
                 <Button disabled>
                   <ButtonText team>Already subscribed</ButtonText>
@@ -407,19 +404,28 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
           <Card team>
-            <CardTitle team>Teams</CardTitle>
+            <CardTitle team>Enterprise</CardTitle>
             <PricingSection>
               <PricingWrapper>
-                <PlanTitle team>Enterprise</PlanTitle>
+                <PlanTitle team>
+                  Move faster than competition, for less
+                </PlanTitle>
                 <PlanDesc team>
-                  Plan aimed for developer teams and companies
+                  Annual plan for developer teams and companies.
                 </PlanDesc>
-                <Contact team>Contact Sales for pricing</Contact>
-                <Feature team>Private and Public repositories</Feature>
+                <Contact team>Benefits:</Contact>
+                <Feature team>Private cloud</Feature>
+                <Feature team>Private repositories</Feature>
                 <Feature team>
                   RAM, hard drive and speed adjusted to team's needs
                 </Feature>
-                <Feature team>Commercial use</Feature>
+                <Feature team>
+                  Active directory - highest code security and control
+                </Feature>
+                <Feature team>
+                  Extensive docker support - multiple containers, custom images
+                </Feature>
+                <Feature team>Access restriction</Feature>
                 <Feature team>Priority support</Feature>
                 <Formik
                   initialValues={{
