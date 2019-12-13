@@ -20,9 +20,6 @@
     "Paweł Wygoda"
   ],
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0",
     "@apollo/react-hooks": "^3.1.3",
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.11",
@@ -49,6 +46,7 @@
     "rc-queue-anim": "^1.6.12",
     "rc-scroll-anim": "^2.5.8",
     "rc-tween-one": "1.5.5",
+    "react": "^16.12.0",
     "react-accessible-accordion": "^3.0.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-apollo": "^2.5.6",
@@ -56,10 +54,12 @@
     "react-detect-browser": "^1.0.0",
     "react-device-detect": "^1.6.2",
     "react-document-title": "^2.0.3",
+    "react-dom": "^16.12.0",
     "react-dropdown": "^1.6.4",
     "react-helmet": "^5.2.1",
     "react-modal": "^3.8.2",
     "react-redux": "^7.1.0",
+    "react-scripts": "3.3.0",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^4.0.0",
     "react-transition-group": "^4.1.0",
@@ -88,6 +88,7 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "prettier": "^1.17.1",
+    "reactotron-react-js": "^3.3.7",
     "redux-devtools": "^3.5.0"
   },
   "keywords": [
