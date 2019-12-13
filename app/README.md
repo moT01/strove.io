@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align='center'>
 
-## Available Scripts
+## [Strove.io](https://www.strove.io/) - move programming to the cloud [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Remote%20programming%20to%20servers%20ready%20in%20secons%20.%20Use%20any%20Linux%20available%20programming%20language%20from%20any%20computer.%20%20&url=https://strove.io&hashtags=serverless,cloud,programming,vscode,developers)
 
-In the project directory, you can run:
+</div>
 
-### `yarn start`
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
+<img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Strove gives browser access to cloud with all major Linux-supported programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### [Edit source code](https://strove.io/#https://github.com/stroveio/strove.io-client)
 
-### `yarn test`
+or, visit our website
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### [https://www.strove.io/](https://www.strove.io/)
 
-### `yarn build`
+<div align="center">
+<img src="./src/images/readmeAssets/strove.gif" width='900px'>
+</div>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Get started
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Add # + github url after strove.io to get start coding right away, for example: https://strove.io/#https://github.com/stroveio/2048-clone
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Docs
 
-### `yarn eject`
+### If you're here just to find docs we've got you covered
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[Docs link](https://docs.strove.io/embedding-strove)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Why did we make this?
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+There are several problems programmers face make this project important in our eyes.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Security
+   It’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
+2. 'It works on my machine' problem. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
+3. It is hard to use different computers when working on a project. The code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access. This is especially useful for students and people who travel a lot.
+4. Programmers waste a lot of time on setting up the environment. The browser-based solution can cut the time to set a programming environment to seconds.
 
-## Learn More
+## Embedding
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Similarly to Youtube, Strove can be used in any site. Live demo using fullstack hackathon stater:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### [Example embeded strove project](https://priceless-raman-a750f4.netlify.com/hackathon-starter-strove/)
 
-### Code Splitting
+More on how to use use Strove in [this docs link](https://docs.strove.io/embedding-strove)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Found a bug?
 
-### Analyzing the Bundle Size
+Raise an issue! We'll take a look!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Contribute!
 
-### Making a Progressive Web App
+Here are our contributors so far:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+<div align='center'>
+<table>
+<tr align="center">
+<td align="center"><a href="https://github.com/AdamZaczek"><img src="https://avatars2.githubusercontent.com/u/14284341?s=400&v=4" width="150px;" alt="Adam Żaczek"/><br /><sub><b>Adam Żaczek</b></sub></a></td>
+<td align="center"><a href="https://github.com/jaroszpiotr91"><img src="https://avatars3.githubusercontent.com/u/39913918?s=460&v=4" width="150px;" alt="Piotr Jarosz"/><br /><sub><b>Piotr Jarosz</b></sub></a></td>
+<td align="center"><a href="https://github.com/MateuszOlek"><img src="https://avatars3.githubusercontent.com/u/38132787?s=460&v=4" width="150px;" alt="Mateusz Olek"/><br /><sub><b>Mateusz Olek</b></sub></a></td>
+<td align="center"><a href="https://github.com/AceSpadeAble"><img src="https://avatars3.githubusercontent.com/u/33558885?s=460&v=4" width="150px;" alt="Paweł Wygoda"/><br /><sub><b>Pawel Wygoda</b></sub></a></td>
+<td align="center"><a href="https://github.com/DawidUrbanek"><img src="https://avatars1.githubusercontent.com/u/29239301?s=460&v=4" width="150px;" alt="Dawid Urbnaek"/><br /><sub><b>Dawid Urbanek</b></sub></a></td>
+</tr>
+</table>
+</div>
 
-### Advanced Configuration
+## Supported languages
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Strove supports all major Linux-supported languages including: Python, TypeScript, Go, Javascript, PHP, C, C#, Java, Ruby, C++, and many more.
 
-### Deployment
+<div align='center'>
+<table>
+<tr align="center">
+<td align="center"><img src="./src/images/readmeAssets/python.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/typescript.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/go.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/php.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/c.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/csharp.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/java.png" width="120px"></td>
+<td align="center"><img src="./src/images/readmeAssets/ruby.png" width="120x"></td>
+<td align="center"><img src="./src/images/readmeAssets/c++.png" width="120px"></td>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+</tr>
+</table>
+</div>
