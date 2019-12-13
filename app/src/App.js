@@ -1,13 +1,16 @@
 import React from 'react'
-import Reactotron from 'reactotron-react-js'
+// import Reactotron from 'reactotron-react-js'
+// import { reactotronRedux } from 'reactotron-redux'
 
 import logo from './logo.svg'
 import './App.css'
 import { wrapRootElement } from './wrapper'
 
-if (process.env.NODE_ENV !== 'production') {
-  Reactotron.configure().connect()
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Reactotron.configure()
+//     .use(reactotronRedux())
+//     .connect()
+// }
 
 function App() {
   return (
