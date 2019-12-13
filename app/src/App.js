@@ -5,6 +5,10 @@ import logo from './logo.svg'
 import './App.css'
 import { wrapRootElement } from './wrapper'
 
+if (process.env.NODE_ENV !== 'production') {
+  Reactotron.configure().connect()
+}
+
 function App() {
   return (
     <div className="App">
