@@ -107,7 +107,7 @@ const StyledAnchor = styled.a`
     `}
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   display: flex;
   flex-direction: row;
   height: auto;

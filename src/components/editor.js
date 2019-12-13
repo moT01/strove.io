@@ -93,6 +93,8 @@ const Editor = () => {
     .toString(36)
     .substring(7)
 
+  console.log('yeyey')
+
   return (
     <>
       <SEO title="Editor" />

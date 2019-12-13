@@ -127,7 +127,7 @@ const StroveLink = styled(DocsLink)`
   font-size: 14px;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;

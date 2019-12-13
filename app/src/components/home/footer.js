@@ -41,7 +41,7 @@ const ColumnTitle = styled.h3`
   margin: 5px 0 5px 0;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.c2};
 `

@@ -101,7 +101,7 @@ const StyledClosingTag = styled.span`
   color: #a6a61f;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   text-decoration: none;
   margin-top: 20px;
   display: block;
