@@ -1,4 +1,6 @@
 import React from 'react'
+import Reactotron from 'reactotron-react-js'
+
 import logo from './logo.svg'
 import './App.css'
 import { wrapRootElement } from './wrapper'
