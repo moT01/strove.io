@@ -90,6 +90,7 @@ const LinkText = styled.h3`
   transition: color 0.3s;
   font-weight: 300;
   margin: 0;
+  text-decoration: none;
   cursor: pointer;
   @media (max-width: 767px) {
     font-size: 18px;
@@ -97,6 +98,7 @@ const LinkText = styled.h3`
 
   :hover {
     color: ${({ theme }) => theme.colors.c3};
+    text-decoration: none;
   }
 `
 
@@ -140,6 +142,11 @@ const PreviewLink = styled.a`
   display: flex;
   height: ${props => (props.isEmbed ? '18px' : 'auto')};
   padding: 0;
+  text-decoration: none;
+
+  :hover {
+    text-decoration: none;
+  }
 `
 
 const LoginWrapper = styled.div`
@@ -236,6 +243,7 @@ const Option = styled.a`
     background-color: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
+    text-decoration: none;
   }
 
   :hover svg {
