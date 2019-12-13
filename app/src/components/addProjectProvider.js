@@ -51,7 +51,7 @@ const AddProjectProvider = ({ children }) => {
     let repoFromGitlab
     let repoFromBitbucket
 
-    if .a {
+    if (link) {
       repoLink = link.trim().toLowerCase()
 
       repoLink = changeRepoLinkFromSshToHttps(repoLink)
