@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import { Link } from 'gatsby'
 
 import { SEO, Header } from 'components'
 

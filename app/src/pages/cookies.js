@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { Link } from 'gatsby'
+
 import styled from 'styled-components'
 
 import Footer from 'components/home/footer'

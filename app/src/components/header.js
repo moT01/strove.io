@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'gatsby'
+
 import styled, { keyframes } from 'styled-components'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
