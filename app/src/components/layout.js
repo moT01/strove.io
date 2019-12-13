@@ -9,7 +9,7 @@ import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
 import GlobalStyles from './globalStyles'
-import { theme } from 'constants'
+import { theme } from 'consts'
 
 const MainContent = styled.main`
   display: flex;

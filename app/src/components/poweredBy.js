@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 
 import { Strove } from 'images/logos'
-import { theme } from 'constants'
+import { theme } from 'consts'
 
 const StroveLogoWrapper = styled.div`
   font-size: 21px;

@@ -8,7 +8,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { GetStarted, Logos } from 'components'

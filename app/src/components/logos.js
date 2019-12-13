@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
-import { technologies } from 'constants'
+import { technologies } from 'consts'
 
 const LogosWrapper = styled.div`
   display: flex;

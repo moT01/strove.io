@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { navigate } from 'gatsby'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import { selectors } from 'state'
 import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'

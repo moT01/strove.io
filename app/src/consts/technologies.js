@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import { Docker, Github, Google, VSCode } from 'images/logos'
 
 const defaultProps = {

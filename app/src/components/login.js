@@ -7,7 +7,7 @@ import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
 
 import { selectors } from 'state'
-import { loginOptions } from 'constants'
+import { loginOptions } from 'consts'
 
 import FullScreenLoader from './fullScreenLoader'
 import { persistor } from '../../wrapper'

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import { GlobalStyles } from 'components'
 import { getWindowSearchParams } from 'utils'
 import { selectors } from 'state'

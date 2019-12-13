@@ -8,7 +8,7 @@ import { VSCode } from 'images/logos'
 import styled from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
 
-import { features } from 'constants'
+import { features } from 'src/constants'
 
 const { TweenOneGroup } = TweenOne
 

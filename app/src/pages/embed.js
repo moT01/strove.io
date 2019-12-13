@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import {
   GlobalStyles,
   NoRepoUrlInfo,
