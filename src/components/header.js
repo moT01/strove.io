@@ -210,7 +210,6 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${({ invert, theme }) =>
     invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
   position: relative;
 `
 
@@ -226,7 +225,6 @@ const Option = styled.a`
   font-size: 1.2rem;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
-  z-index: 4;
   text-decoration: none;
   font-weight: 300;
   min-width: ${props => (props.isEmbed ? '0' : '150px')};
