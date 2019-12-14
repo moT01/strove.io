@@ -1,5 +1,4 @@
 import React, { useState, memo } from 'react'
-import { navigate } from 'gatsby'
 import styled, { keyframes } from 'styled-components'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -161,7 +160,7 @@ const Dashboard = () => {
   const currentProjectId = currentProject && currentProject.id
   const projectsLimit = 20
 
-  const handleStartClick = ({ id, editorPort }) => {
+  const handleStartClick = ({ id, editorPort, history }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(
@@ -179,7 +178,7 @@ const Dashboard = () => {
             storeKey: 'user',
           })
         )
-        navigate('/app/editor/')
+        history.push('/app/editor/')
       }
     } else {
       setStopModal(true)

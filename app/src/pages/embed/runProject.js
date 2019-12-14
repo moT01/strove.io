@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
-import { navigate } from 'gatsby'
 
 import { theme } from 'consts'
 import { selectors } from 'state'
@@ -42,7 +41,7 @@ const StyledButton = styled(StroveButton)`
   }
 `
 
-const Run = ({ addProject }) => {
+const Run = ({ addProject, history }) => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
@@ -52,7 +51,7 @@ const Run = ({ addProject }) => {
 
   if (!token) {
     // If user is logged in, redirect to the embed project run
-    navigate(`/embed/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
+    history.push(`/embed/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
   }
 
   const onClick = () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
-import { navigate } from 'gatsby'
 import dayjs from 'dayjs'
 
 import { Header, FullScreenLoader, SEO } from 'components'
@@ -25,7 +24,7 @@ const getUserToken = selectors.api.getApiData({
   defaultValue: null,
 })
 
-const Editor = () => {
+const Editor = ({ history }) => {
   const dispatch = useDispatch()
 
   const currentProject = useSelector(selectors.api.getCurrentProject)
@@ -73,9 +72,9 @@ const Editor = () => {
         if (path.includes('embed')) {
           const searchParams = getWindowSearchParams()
           const repoUrl = searchParams.get('repoUrl')
-          navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+          history.push(`/embed/runProject/?repoUrl=${repoUrl}`)
         } else {
-          navigate('/app/dashboard')
+          history.push('/app/dashboard')
         }
       }
     }

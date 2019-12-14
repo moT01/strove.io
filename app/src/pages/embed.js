@@ -1,5 +1,4 @@
 import React, { memo } from 'react'
-import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
@@ -37,7 +36,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const EmbedWrapper = () => {
+const EmbedWrapper = ({ history }) => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
@@ -60,7 +59,7 @@ const EmbedWrapper = () => {
 
   if (token && repoUrl) {
     // If user is logged in, redirect to the embed project run
-    navigate(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
+    history.push(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
   }
 
   return (
