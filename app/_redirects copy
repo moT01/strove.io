@@ -1,0 +1,8 @@
+# Redirect default Netlify subdomain to primary domain
+https://inspiring-shaw-cb8237.netlify.com/* https://www.strove.io/:splat 301!
+
+http://inspiring-shaw-cb8237.netlify.com/* https://www.strove.io/:splat 301!
+
+https://silisky.com/* https://www.strove.io/:splat 301!
+
+http://silisky.com/* https://www.strove.io/:splat 301!
