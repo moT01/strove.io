@@ -39,6 +39,7 @@
     "dotenv": "^8.0.0",
     "downshift": "^3.2.10",
     "formik": "^1.5.7",
+    "graphql": "^14.5.8",
     "intersection-observer": "^0.7.0",
     "isomorphic-ws": "^4.0.1",
     "lodash": "^4.17.11",
