@@ -1,8 +1,9 @@
 import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
-import logo from './logo.svg'
-import './App.css'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import Home from 'pages'
+import Embed from 'pages/embed'
 import Wrapper from './wrapper'
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -11,26 +12,18 @@ import Wrapper from './wrapper'
 //     .connect()
 // }
 
-const App = () => {
-  return (
-    <StyledDiv className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </StyledDiv>
-  )
-}
+const App = () => (
+  <Router>
+    <Switch>
+      <Route path="/">
+        <Home />
+      </Route>
+      <Route path="/embed">
+        <Embed />
+      </Route>
+    </Switch>
+  </Router>
+)
 
 const WrapperApp = () => (
   <Wrapper>
