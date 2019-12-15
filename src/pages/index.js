@@ -1,13 +1,5 @@
-import React, { memo } from 'react'
+import Home from './home'
+import Faq from './faq'
+import Embed from './embed'
 
-import { SEO, Header, Home } from 'components'
-
-const IndexPage = () => (
-  <>
-    <SEO title="Strove" />
-    <Header />
-    <Home />
-  </>
-)
-
-export default memo(IndexPage)
+export { Home, Faq, Embed }

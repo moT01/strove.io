@@ -2,8 +2,7 @@ import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Home from 'pages'
-import Embed from 'pages/embed'
+import { Home, Faq, Embed } from 'pages'
 import Wrapper from './wrapper'
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -13,22 +12,21 @@ import Wrapper from './wrapper'
 // }
 
 const App = () => (
-  <Router>
-    <Switch>
-      <Route path="/">
-        <Home />
-      </Route>
-      <Route path="/embed">
-        <Embed />
-      </Route>
-    </Switch>
-  </Router>
-)
-
-const WrapperApp = () => (
   <Wrapper>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/embed">
+          <Embed />
+        </Route>
+        <Route path="/faq">
+          <Faq />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   </Wrapper>
 )
 
-export default WrapperApp
+export default App
