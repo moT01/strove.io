@@ -304,7 +304,7 @@ const HeaderComponent = ({ location }) => {
           project.additionalPorts.map(portPair => {
             let href
             /* Env's are loaded as strings on production */
-            if (process.env.IS_OPENSOURCE === 'true') {
+            if (process.env.REACT_APP_IS_OPENSOURCE === 'true') {
               href = `https://${portPair[1]}.vmopen${
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
