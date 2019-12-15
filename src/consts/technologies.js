@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { theme } from 'consts'
-import { Docker, Github, Google, VSCode } from 'images/logos'
+import { Docker, Github, Google, VSCode } from 'components/svgs'
 
 const defaultProps = {
   style: { fill: theme.colors.c14 },

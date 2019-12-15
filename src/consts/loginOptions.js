@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { getWindowHref } from 'utils'
-import { Github, Bitbucket, Gitlab } from 'images/logos'
+import { Github, Bitbucket, Gitlab } from 'components/svgs'
 
 const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID

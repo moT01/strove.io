@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components/macro'
-import { Github } from 'images/logos'
+import { Github } from 'components/svgs'
 
 const FooterWrapper = styled.div`
   display: flex;

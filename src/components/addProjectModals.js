@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 import AddingEmptyProjectModal from './addEmptyProjectModal.js'
 import Modal from './modal'
-import { Github, Gitlab, Bitbucket } from 'images/logos'
+import { Github, Gitlab, Bitbucket } from 'components/svgs'
 import { actions } from 'state'
 import StroveButton from 'components/stroveButton.js'
 import { getWindowPathName, handleStopProject } from 'utils'

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
-import { Strove } from 'images/logos'
+import { Strove } from 'components/svgs'
 import { theme } from 'consts'
 
 const StroveLogoWrapper = styled.div`
