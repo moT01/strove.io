@@ -3,7 +3,7 @@ import React from 'react'
 import { getWindowHref } from 'utils'
 import { Github, Bitbucket, Gitlab } from 'images/logos'
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
+const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
 const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
@@ -21,8 +21,8 @@ export default [
   {
     value: 'github',
     label: 'Github',
-    href: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,${IS_OPENSOURCE},${address}`,
-    embedHref: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,true,${SILISKY_URL}fromEmbed/goBackTo/`,
+    href: `https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,${IS_OPENSOURCE},${address}`,
+    embedHref: `https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,true,${SILISKY_URL}fromEmbed/goBackTo/`,
     icon: <Github />,
   },
   {

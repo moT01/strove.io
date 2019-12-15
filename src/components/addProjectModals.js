@@ -11,7 +11,7 @@ import { actions } from 'state'
 import StroveButton from 'components/stroveButton.js'
 import { getWindowPathName, handleStopProject } from 'utils'
 
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
+const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
 const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
@@ -253,7 +253,7 @@ const AddProjectModals = ({
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+              href={`https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
               onClick={() => setModalContent(null)}
             >
               Login with Github
@@ -332,7 +332,7 @@ const AddProjectModals = ({
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
+              href={`https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github`}
               onClick={closeModal}
             >
               Login with Github
