@@ -53,7 +53,7 @@ const EmbedWrapper = ({ history }) => {
   const parentDomain =
     window.location !== window.parent.location
       ? document.location.ancestorOrigins[0]
-      : process.env.SILISKY_URL.slice(0, -1)
+      : process.env.REACT_APP_STROVE_URL.slice(0, -1)
   const goBackTo = `${parentDomain}/${goBackToRoute}`
    */
 
