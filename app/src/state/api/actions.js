@@ -1,4 +1,4 @@
-import * as C from './constants'
+import * as C from './consts'
 
 export const fetchStart = ({ storeKey, source, config }) => ({
   type: C.FETCH_START,

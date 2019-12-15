@@ -41,7 +41,7 @@ module.exports = {
           ['queries', './src/queries'],
           ['state', './src/state'],
           ['utils', './src/utils'],
-          ['constants', './src/constants'],
+          ['consts', './src/consts'],
           ['middlewares', './src/middlewares'],
           ['hooks', './src/hooks'],
           ['assets', './src/assets'],

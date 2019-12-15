@@ -1,5 +1,5 @@
 import { REHYDRATE } from 'redux-persist'
-import * as C from './constants'
+import * as C from './consts'
 
 const initialState = {
   user: { data: null },

@@ -1,4 +1,4 @@
-import * as C from './constants'
+import * as C from './consts'
 
 export const displayFeature = payload => ({
   type: C.DISPLAY_FEATURE,
