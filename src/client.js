@@ -25,7 +25,7 @@ const defaultOptions = {
 const wsLink = process.browser
   ? new WebSocketLink({
       // if you instantiate in the server, the error will be thrown
-      uri: process.env.SILISKY_WEBSOCKET_ENDPOINT,
+      uri: process.env.REACT_APP_STROVE_WEBSOCKET_ENDPOINT,
       options: {
         reconnect: true,
       },
