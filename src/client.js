@@ -33,7 +33,7 @@ const wsLink = process.browser
   : null
 
 const httpLink = new HttpLink({
-  uri: process.env.SILISKY_GRAPHQL_ENDPOINT,
+  uri: process.env.REACT_APP_STROVE_GRAPHQL_ENDPOINT,
 })
 
 const link = process.browser
