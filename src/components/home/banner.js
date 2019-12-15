@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import QueueAnim from 'rc-queue-anim'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'

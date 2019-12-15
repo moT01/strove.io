@@ -1,7 +1,6 @@
 import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
-
 import logo from './logo.svg'
 import './App.css'
 import Wrapper from './wrapper'
@@ -14,7 +13,7 @@ import Wrapper from './wrapper'
 
 const App = () => {
   return (
-    <div className="App">
+    <StyledDiv className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -29,7 +28,7 @@ const App = () => {
           Learn React
         </a>
       </header>
-    </div>
+    </StyledDiv>
   )
 }
 

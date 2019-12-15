@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import Modal from 'react-modal'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components/macro'
 
 const FullFadeIn = keyframes`
   0% {

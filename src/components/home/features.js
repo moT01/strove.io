@@ -5,7 +5,7 @@ import TweenOne from 'rc-tween-one'
 import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'images/logos'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
 import { features } from 'consts'

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'

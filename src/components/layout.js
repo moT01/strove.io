@@ -1,9 +1,9 @@
 import React, { memo, useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components/macro'
 
 import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'

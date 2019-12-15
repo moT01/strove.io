@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { ThemeProvider } from 'styled-components'
+import styled from 'styled-components/macro'
+import { ThemeProvider } from 'styled-components/macro'
 
 import { theme } from 'consts'
 import {

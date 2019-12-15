@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 

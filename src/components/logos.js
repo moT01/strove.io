@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 import { technologies } from 'consts'
 

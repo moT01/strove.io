@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
 

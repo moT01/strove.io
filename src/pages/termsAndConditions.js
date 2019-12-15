@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import Footer from 'components/home/footer'
 import { SEO, Header } from 'components'

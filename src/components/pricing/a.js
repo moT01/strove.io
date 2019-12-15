@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'

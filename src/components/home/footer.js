@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { Github } from 'images/logos'
 
 const FooterWrapper = styled.div`

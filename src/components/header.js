@@ -1,7 +1,7 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components/macro'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'

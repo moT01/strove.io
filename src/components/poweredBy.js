@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 import { Strove } from 'images/logos'
 import { theme } from 'consts'
