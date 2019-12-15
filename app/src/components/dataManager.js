@@ -18,7 +18,7 @@ import { selectors } from 'state'
 import { C } from 'state'
 import { actions } from 'state'
 
-import client from '../../client'
+import client from 'client'
 
 // Generate unique device id
 const generateDeviceID = () => {

@@ -4,7 +4,7 @@ import { mutation, getRepoProvider } from 'utils'
 import { actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
 
-import stroveClient from '../../client'
+import stroveClient from 'client'
 
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
