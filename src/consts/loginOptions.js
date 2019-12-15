@@ -5,7 +5,7 @@ import { Github, Bitbucket, Gitlab } from 'images/logos'
 
 const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
-const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
+const REACT_APP_BITBUCKET_CLIENT_ID = process.env.REACT_APP_BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 const IS_OPENSOURCE = process.env.IS_OPENSOURCE
 const SILISKY_URL = process.env.SILISKY_URL
@@ -28,8 +28,8 @@ export default [
   {
     value: 'bitbucket',
     label: 'Bitbucket',
-    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,${IS_OPENSOURCE},${address}`,
-    embedHref: `https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,true,${SILISKY_URL}fromEmbed/goBackTo/`,
+    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,${IS_OPENSOURCE},${address}`,
+    embedHref: `https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,true,${SILISKY_URL}fromEmbed/goBackTo/`,
     icon: <Bitbucket />,
   },
   {

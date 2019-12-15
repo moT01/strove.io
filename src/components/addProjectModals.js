@@ -13,7 +13,7 @@ import { getWindowPathName, handleStopProject } from 'utils'
 
 const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
-const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
+const REACT_APP_BITBUCKET_CLIENT_ID = process.env.REACT_APP_BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 
 const FadeIn = keyframes`
@@ -305,7 +305,7 @@ const AddProjectModals = ({
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
+              href={`https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
               onClick={() => setModalContent(null)}
             >
               Login with Bitbucket
@@ -386,7 +386,7 @@ const AddProjectModals = ({
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://bitbucket.org/site/oauth2/authorize?client_id=${BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
+              href={`https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket`}
               onClick={closeModal}
             >
               Login with Bitbucket
