@@ -1,7 +1,7 @@
 import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from 'pages'
 import Embed from 'pages/embed'
 import Wrapper from './wrapper'
