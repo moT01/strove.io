@@ -4,7 +4,7 @@ import React from 'react'
 
 import logo from './logo.svg'
 import './App.css'
-import { wrapRootElement } from './wrapper'
+import Wrapper from './wrapper'
 
 // if (process.env.NODE_ENV !== 'production') {
 //   Reactotron.configure()
@@ -12,7 +12,7 @@ import { wrapRootElement } from './wrapper'
 //     .connect()
 // }
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -33,6 +33,10 @@ function App() {
   )
 }
 
-const WrapperApp = wrapRootElement(App)
+const WrapperApp = () => (
+  <Wrapper>
+    <App />
+  </Wrapper>
+)
 
 export default WrapperApp

@@ -33,12 +33,12 @@ const WithAnalyticsWrapper = memo(({ children }) => {
   return children
 })
 
-export const wrapRootElement = ({ element }) => (
+export default ({ children }) => (
   <ApolloProvider client={client}>
     <Provider store={createStore}>
       <PersistGate loading={null} persistor={persistor}>
         <WithAnalyticsWrapper>
-          <Layout>{element}</Layout>
+          <Layout>{children}</Layout>
         </WithAnalyticsWrapper>
       </PersistGate>
     </Provider>
