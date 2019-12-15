@@ -107,7 +107,7 @@ const Editor = ({ history }) => {
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
         onLoad={() => setLoaderVisible(false)}
-        src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
+        src={`${process.env.REACT_APP_STROVE_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
     </>
   )

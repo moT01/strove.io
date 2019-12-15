@@ -382,7 +382,7 @@ export default memo(({ children, addProject }) => {
 
       if (navigator?.sendBeacon && user) {
         navigator.sendBeacon(
-          `${process.env.SILISKY_ENDPOINT}/beacon`,
+          `${process.env.REACT_APP_STROVE_ENDPOINT}/beacon`,
           JSON.stringify({ token: localStorage.getItem('token') })
         )
       }
