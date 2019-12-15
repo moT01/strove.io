@@ -4,7 +4,7 @@ import { getWindowHref } from 'utils'
 import { Github, Bitbucket, Gitlab } from 'images/logos'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
+const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
 const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 const IS_OPENSOURCE = process.env.IS_OPENSOURCE
@@ -35,8 +35,8 @@ export default [
   {
     value: 'gitlab',
     label: 'Gitlab',
-    href: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,${IS_OPENSOURCE},${address}`,
-    embedHref: `https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,true,${SILISKY_URL}fromEmbed/goBackTo/`,
+    href: `https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,${IS_OPENSOURCE},${address}`,
+    embedHref: `https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,true,${SILISKY_URL}fromEmbed/goBackTo/`,
     icon: <Gitlab />,
   },
 ]

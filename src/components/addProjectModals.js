@@ -12,7 +12,7 @@ import StroveButton from 'components/stroveButton.js'
 import { getWindowPathName, handleStopProject } from 'utils'
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID
-const GITLAB_CLIENT_ID = process.env.GITLAB_CLIENT_ID
+const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
 const BITBUCKET_CLIENT_ID = process.env.BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 
@@ -279,7 +279,7 @@ const AddProjectModals = ({
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab`}
+              href={`https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab`}
               onClick={() => setModalContent(null)}
             >
               Login with Gitlab
@@ -359,7 +359,7 @@ const AddProjectModals = ({
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
               primary
-              href={`https://gitlab.com/oauth/authorize?client_id=${GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab`}
+              href={`https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab`}
               onClick={closeModal}
             >
               Login with Gitlab
