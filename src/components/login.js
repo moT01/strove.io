@@ -5,7 +5,6 @@ import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
-import { Link } from 'react-router-dom'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
