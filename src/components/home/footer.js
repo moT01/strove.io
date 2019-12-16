@@ -1,6 +1,7 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
+
 import { Github } from 'components/svgs'
 
 const FooterWrapper = styled.div`
@@ -41,7 +42,7 @@ const ColumnTitle = styled.h3`
   margin: 5px 0 5px 0;
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.c2};
 `
@@ -53,7 +54,7 @@ const LinkText = styled.h3`
   cursor: pointer;
 `
 
-const StyledAnchor = styled.a`
+const StyledAnchor = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.c2};
   display: flex;

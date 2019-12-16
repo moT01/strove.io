@@ -7,6 +7,7 @@ import { Icon } from 'antd'
 import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
+import { Link } from 'react-router-dom'
 
 import { features } from 'consts'
 
@@ -22,7 +23,7 @@ const StyledFeatureContent = styled.p`
   font-size: 14px;
 `
 
-const StyledAnchor = styled.a`
+const StyledAnchor = styled(Link)`
   text-decoration: none;
   color: rgb(105, 123, 140);
 `

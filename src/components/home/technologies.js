@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
+import { Link } from 'react-router-dom'
 
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
@@ -119,7 +120,7 @@ const StyledFormWrapper = styled.div`
   margin: auto;
 `
 
-const StyledAnchor = styled.a`
+const StyledAnchor = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;

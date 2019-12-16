@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
-
+import { Link } from 'react-router-dom'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 
@@ -52,7 +52,7 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-const StyledAnchor = styled.a`
+const StyledAnchor = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;
@@ -107,7 +107,7 @@ const StyledAnchor = styled.a`
     `}
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
   height: auto;

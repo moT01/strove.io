@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
 import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
@@ -100,7 +100,7 @@ const LinkText = styled.h3`
   }
 `
 
-const DocsLink = styled.a`
+const DocsLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   display: flex;
@@ -127,13 +127,13 @@ const StroveLink = styled(DocsLink)`
   font-size: 14px;
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
 `
 
-const PreviewLink = styled.a`
+const PreviewLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: 'none';
   position: relative;
@@ -207,7 +207,7 @@ const MenuWrapper = styled.div`
   position: relative;
 `
 
-const Option = styled.a`
+const Option = styled(Link)`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

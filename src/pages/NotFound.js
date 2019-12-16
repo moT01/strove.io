@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 
 import { SEO, Header } from 'components'
 
@@ -100,7 +101,7 @@ const StyledClosingTag = styled.span`
   color: #a6a61f;
 `
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   text-decoration: none;
   margin-top: 20px;
   display: block;
