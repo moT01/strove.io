@@ -2,7 +2,17 @@ import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { Home, Faq, Embed } from 'pages'
+import {
+  Home,
+  Faq,
+  Embed,
+  // FromEmbed,
+  // NotFound,
+  // Cookies,
+  // PrivacyPolicy,
+  // TermsAndConditions,
+} from 'pages'
+
 import Wrapper from './wrapper'
 
 // if (process.env.NODE_ENV !== 'production') {
