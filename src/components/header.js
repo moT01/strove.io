@@ -100,7 +100,7 @@ const LinkText = styled.h3`
   }
 `
 
-const DocsLink = styled(Link)`
+const DocsLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
   font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   display: flex;
