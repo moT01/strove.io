@@ -52,7 +52,7 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-const StyledAnchor = styled(Link)`
+const StyledAnchor = styled.a`
   display: flex;
   flex-direction: row;
   height: auto;
