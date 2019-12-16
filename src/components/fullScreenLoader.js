@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import styled, { keyframes } from 'styled-components/macro'
 import { useSelector } from 'react-redux'
 
-import { Cog } from 'images/svg'
+import { Cog } from 'components/svgs'
 import { useInterval } from 'hooks'
 import { selectors } from 'state'
 

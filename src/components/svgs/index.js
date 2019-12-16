@@ -19,6 +19,7 @@ import Gitlab from './gitlab'
 // import C from './c'
 import Dashboard from './dashboard'
 import Desktop from './desktop'
+import Cog from './cog'
 
 export {
   // Typescript,
@@ -42,4 +43,5 @@ export {
   // C,
   Dashboard,
   Desktop,
+  Cog,
 }
