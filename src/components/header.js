@@ -6,7 +6,7 @@ import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
-import { Cog } from 'components/svgs'
+import { Copy } from 'components/svgs'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'

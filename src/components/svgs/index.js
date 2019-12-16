@@ -20,6 +20,7 @@ import Gitlab from './gitlab'
 import Dashboard from './dashboard'
 import Desktop from './desktop'
 import Cog from './cog'
+import Copy from './copy'
 
 export {
   // Typescript,
@@ -44,4 +45,5 @@ export {
   Dashboard,
   Desktop,
   Cog,
+  Copy
 }
