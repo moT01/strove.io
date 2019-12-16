@@ -90,6 +90,7 @@ const LinkText = styled.h3`
   transition: color 0.3s;
   font-weight: 300;
   margin: 0;
+  text-decoration: none;
   cursor: pointer;
   @media (max-width: 767px) {
     font-size: 18px;
@@ -97,6 +98,7 @@ const LinkText = styled.h3`
 
   :hover {
     color: ${({ theme }) => theme.colors.c3};
+    text-decoration: none;
   }
 `
 
@@ -140,6 +142,11 @@ const PreviewLink = styled.a`
   display: flex;
   height: ${props => (props.isEmbed ? '18px' : 'auto')};
   padding: 0;
+  text-decoration: none;
+
+  :hover {
+    text-decoration: none;
+  }
 `
 
 const LoginWrapper = styled.div`
@@ -203,7 +210,6 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${({ invert, theme }) =>
     invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
   position: relative;
 `
 
@@ -219,7 +225,6 @@ const Option = styled.a`
   font-size: 1.2rem;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
-  z-index: 4;
   text-decoration: none;
   font-weight: 300;
   min-width: ${props => (props.isEmbed ? '0' : '150px')};
@@ -236,6 +241,7 @@ const Option = styled.a`
     background-color: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
+    text-decoration: none;
   }
 
   :hover svg {
@@ -371,12 +377,13 @@ const HeaderComponent = ({ location }) => {
                 <DropdownWrapper isEmbed={isEmbed}>
                   {isOpen && (
                     <MenuWrapper invert>
-                      {ports.map(item => (
+                      {ports.map((item, index, arr) => (
                         <Option
                           invert
                           key={item.value}
                           href={item.href}
                           isEmbed={isEmbed}
+                          isLast={index === arr.length - 1}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
