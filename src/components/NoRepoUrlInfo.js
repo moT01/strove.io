@@ -59,22 +59,20 @@ const RepoUrlInfoExample = styled.div`
   margin-top: 10px;
 `
 
-const NoRepoUrlInfo = () => {
-  return (
-    <>
-      <NoRepoUrl>Please provide repoUrl in url parameters. Example:</NoRepoUrl>
-      <RepoUrlInfoExample>
-        https://strove.io/embed/?repoUrl=https://github.com/validatorjs/validator.js
-      </RepoUrlInfoExample>
-      <RepoUrlInfoExample>
-        For more info visit:
-        <br />
-        <StyledAnchor href="https://docs.strove.io/embedding-strove">
-          Strove documentation
-        </StyledAnchor>
-      </RepoUrlInfoExample>
-    </>
-  )
-}
+const NoRepoUrlInfo = () => (
+  <>
+    <NoRepoUrl>Please provide repoUrl in url parameters. Example:</NoRepoUrl>
+    <RepoUrlInfoExample>
+      https://strove.io/embed/?repoUrl=https://github.com/validatorjs/validator.js
+    </RepoUrlInfoExample>
+    <RepoUrlInfoExample>
+      For more info visit:
+      <br />
+      <StyledAnchor href="https://docs.strove.io/embedding-strove">
+        Strove documentation
+      </StyledAnchor>
+    </RepoUrlInfoExample>
+  </>
+)
 
 export default memo(NoRepoUrlInfo)
