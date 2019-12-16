@@ -109,8 +109,6 @@ const EmailFormWrapper = styled.div`
       stroke: ${({ theme }) => theme.colors.c1};
     }
   }
-
-  }
 `
 
 const StyledFormWrapper = styled.div`
