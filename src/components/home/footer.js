@@ -54,7 +54,7 @@ const LinkText = styled.h3`
   cursor: pointer;
 `
 
-const StyledAnchor = styled(Link)`
+const StyledAnchor = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.colors.c2};
   display: flex;
