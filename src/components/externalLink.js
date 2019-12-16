@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from 'styled-components/macro'
-import { Link } from 'react-router-dom'
 
 const FadeIn = keyframes`
   0% {
