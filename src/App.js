@@ -6,11 +6,14 @@ import {
   Home,
   Faq,
   Embed,
-  // FromEmbed,
-  // NotFound,
-  // Cookies,
-  // PrivacyPolicy,
-  // TermsAndConditions,
+  NotFound,
+  Cookies,
+  PrivacyPolicy,
+  TermsAndConditions,
+  GoBackTo,
+  Login,
+  RunProject,
+  App,
 } from 'pages'
 
 import Wrapper from './wrapper'
@@ -21,7 +24,7 @@ import Wrapper from './wrapper'
 //     .connect()
 // }
 
-const App = () => (
+const Strove = () => (
   <Wrapper>
     <Router>
       <Switch>
@@ -31,6 +34,33 @@ const App = () => (
         <Route path="/faq">
           <Faq />
         </Route>
+        <Route path="/checkHowTo">
+          <NotFound />
+        </Route>
+        <Route path="/embed">
+          <Embed />
+        </Route>
+        <Route path="/cookies">
+          <Cookies />
+        </Route>
+        <Route path="/privacyPolicy">
+          <PrivacyPolicy />
+        </Route>
+        <Route path="/termsAndConditions">
+          <TermsAndConditions />
+        </Route>
+        <Route path="/goBackTo">
+          <GoBackTo />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/runProject">
+          <RunProject />
+        </Route>
+        <Route path="/app">
+          <App />
+        </Route>
         <Route path="/">
           <Home />
         </Route>
@@ -39,4 +69,4 @@ const App = () => (
   </Wrapper>
 )
 
-export default App
+export default Strove
