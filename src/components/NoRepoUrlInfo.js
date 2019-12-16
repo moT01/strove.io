@@ -69,7 +69,9 @@ const NoRepoUrlInfo = () => {
       <RepoUrlInfoExample>
         For more info visit:
         <br />
-        <StyledAnchor>Strove documentation</StyledAnchor>
+        <StyledAnchor href="https://docs.strove.io/embedding-strove">
+          Strove documentation
+        </StyledAnchor>
       </RepoUrlInfoExample>
     </>
   )
