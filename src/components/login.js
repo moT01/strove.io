@@ -64,7 +64,7 @@ const MenuWrapper = styled.div`
   position: relative;
 `
 
-const Option = styled(Link)`
+const Option = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
