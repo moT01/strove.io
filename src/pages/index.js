@@ -5,7 +5,7 @@ import NotFound from './notFound'
 import Cookies from './cookies'
 import PrivacyPolicy from './privacyPolicy'
 import TermsAndConditions from './termsAndConditions'
-import FromEmbed from './fromEmbed'
+import { GoBackTo, Login } from './fromEmbed'
 import App from './app'
 
 export { Home, Faq, Embed }
