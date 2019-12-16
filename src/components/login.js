@@ -184,7 +184,7 @@ const LoginDropdown = () => {
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
-        <span>
+        <div>
           <LoginButton {...getToggleButtonProps({})}>
             <Text isEmbed={isEmbed}>Login</Text>
           </LoginButton>
@@ -203,7 +203,7 @@ const LoginDropdown = () => {
               ))}
             </MenuWrapper>
           </DropdownWrapper>
-        </span>
+        </div>
       )}
     </Downshift>
   )
