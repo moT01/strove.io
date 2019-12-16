@@ -6,6 +6,7 @@ import Cookies from './cookies'
 import PrivacyPolicy from './privacyPolicy'
 import TermsAndConditions from './termsAndConditions'
 import { GoBackTo, Login } from './fromEmbed'
+import { RunProject } from './embed'
 import App from './app'
 
 export { Home, Faq, Embed }
