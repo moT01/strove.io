@@ -62,7 +62,7 @@ const Strove = () => (
         </Route>
         <PrivateRoute path="/app/editor" component={Editor} />
         <PrivateRoute path="/app/dashboard" component={Dashboard} />
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>
