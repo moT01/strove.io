@@ -143,6 +143,11 @@ const PreviewLink = styled(Link)`
   display: flex;
   height: ${props => (props.isEmbed ? '18px' : 'auto')};
   padding: 0;
+  text-decoration: none;
+
+  :hover {
+    text-decoration: none;
+  }
 `
 
 const LoginWrapper = styled.div`
@@ -239,6 +244,7 @@ const Option = styled(Link)`
     background-color: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
+    text-decoration: none;
   }
 
   :hover svg {
@@ -266,8 +272,10 @@ const Text = styled.h3`
 const OptionText = styled(Text)`
   color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;
+  text-decoration: none;
   :hover {
     color: ${({ theme }) => theme.colors.c2};
+    text-decoration: none;
   }
 `
 
