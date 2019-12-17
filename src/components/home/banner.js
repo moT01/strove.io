@@ -272,6 +272,7 @@ const StyledQueueAnim = styled(QueueAnim)`
 
 const StyledProductDescription = styled.h4`
   font-weight: 500;
+  font-size: 22px;
 `
 
 const StyledSmallText = styled.span`
@@ -347,11 +348,10 @@ const Banner = () => {
     <>
       <StyledSectionWrapper padding="20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>Bring your ideas to life</StyledH1>
+          <StyledH1>To create what's next</StyledH1>
           <StyledProductDescription>
-            Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
-            <b>build</b> and <b>collaborate</b> no matter the language. All you
-            need is a browser.
+            Get the advantage over teams with the best programming equipment for
+            a fraction of the cost s
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <StroveButton
@@ -416,6 +416,7 @@ const Banner = () => {
                       type="submit"
                       layout="form"
                       text="Request demo"
+                      disabled={errors.email || !values.email}
                     />
                   </EmailFormWrapper>
                   <StyledTrialInfo>
@@ -436,8 +437,8 @@ const Banner = () => {
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
-            Strove brings ready in seconds, pre-configured and remote servers to
-            write, build and run code.
+            Strove brings powerful, ready in seconds, pre-configured cloud
+            servers to write, build and run code
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
