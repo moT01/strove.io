@@ -1,6 +1,4 @@
-import React from 'react'
 import { actions } from 'state'
-import { Redirect } from 'react-router-dom'
 
 import { getWindowPathName, getWindowSearchParams } from './windowUtils'
 
