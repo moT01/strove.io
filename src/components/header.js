@@ -215,6 +215,31 @@ const MenuWrapper = styled.div`
   position: relative;
 `
 
+const Text = styled.h3`
+  font-size: 1.2rem;
+  color: ${({ theme }) => theme.colors.c2};
+  transition: color 0.3s;
+  margin: 0;
+  font-weight: 300;
+  line-height: 1;
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
+  :hover {
+    color: ${({ theme }) => theme.colors.c3};
+  }
+`
+
+const OptionText = styled(Text)`
+  color: ${({ theme }) => theme.colors.c1};
+  font-weight: 300;
+  text-decoration: none;
+  :hover {
+    color: ${({ theme }) => theme.colors.c2};
+    transition: color 0.1s;
+    text-decoration: none;
+  }
+`
 const Option = styled(Link)`
   display: flex;
   flex-direction: row;
@@ -245,6 +270,10 @@ const Option = styled(Link)`
       !invert ? theme.colors.c2 : theme.colors.c1};
     cursor: pointer;
     text-decoration: none;
+    ${OptionText} {
+      color: ${({ theme }) => theme.colors.c2};
+      transition: color 0.1s;
+      text-decoration: none;}
   }
 
   :hover svg {
@@ -254,30 +283,6 @@ const Option = styled(Link)`
   }
 `
 
-const Text = styled.h3`
-  font-size: 1.2rem;
-  color: ${({ theme }) => theme.colors.c2};
-  transition: color 0.3s;
-  margin: 0;
-  font-weight: 300;
-  line-height: 1;
-  @media (max-width: 767px) {
-    font-size: 16px;
-  }
-  :hover {
-    color: ${({ theme }) => theme.colors.c3};
-  }
-`
-
-const OptionText = styled(Text)`
-  color: ${({ theme }) => theme.colors.c1};
-  font-weight: 300;
-  text-decoration: none;
-  :hover {
-    color: ${({ theme }) => theme.colors.c2};
-    text-decoration: none;
-  }
-`
 
 const PortOption = styled(OptionText)`
   font-size: 16px;
