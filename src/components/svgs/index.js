@@ -15,24 +15,12 @@ import Docker from './docker'
 import Strove from './strove'
 import Bitbucket from './bitbucket'
 import Gitlab from './gitlab'
-// import Php from './php'
-// import C from './c'
 import Dashboard from './dashboard'
 import Desktop from './desktop'
 import Cog from './cog'
 import Copy from './copy'
 
 export {
-  // Typescript,
-  // Cpp,
-  // Go,
-  // Java,
-  // Ruby,
-  // CLogo,
-  // Javascript,
-  // Python,
-  // CSharp,
-  // Node,
   VSCode,
   Google,
   Github,
@@ -40,10 +28,8 @@ export {
   Strove,
   Bitbucket,
   Gitlab,
-  // Php,
-  // C,
   Dashboard,
   Desktop,
   Cog,
-  Copy
+  Copy,
 }
