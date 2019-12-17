@@ -25,22 +25,26 @@ const FadeIn = keyframes`
 
 const StyledStroveIcon = styled(Strove)`
   height: 25px;
+  width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledDashboardIcon = styled(Dashboard)`
   height: 25px;
+  width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledDesktopIcon = styled(Desktop)`
   height: 20px;
+  width: 20px;
   fill: ${({ theme }) => theme.colors.c2};
   font-size: 25px;
 `
 
 const StyledAntdIcon = styled(Icon)`
   height: 25px;
+  width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
