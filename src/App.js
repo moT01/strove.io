@@ -1,7 +1,7 @@
 import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import {
   Home,
   Faq,
@@ -13,7 +13,6 @@ import {
   GoBackTo,
   Login,
   RunProject,
-  App,
 } from 'pages'
 
 import { PrivateRoute, Editor, Dashboard } from 'components'
@@ -28,43 +27,43 @@ import Wrapper from './wrapper'
 
 const Strove = () => (
   <Wrapper>
-      <Switch>
-        <Route path="/embed">
-          <Embed />
-        </Route>
-        <Route path="/faq">
-          <Faq />
-        </Route>
-        <Route path="/checkHowTo">
-          <NotFound />
-        </Route>
-        <Route path="/cookies">
-          <Cookies />
-        </Route>
-        <Route path="/privacyPolicy">
-          <PrivacyPolicy />
-        </Route>
-        <Route path="/termsAndConditions">
-          <TermsAndConditions />
-        </Route>
-        <Route path="fromEmbed/goBackTo">
-          <GoBackTo />
-        </Route>
-        <Route path="fromEmbed/login">
-          <Login />
-        </Route>
-        <Route path="/embed">
-          <Embed />
-        </Route>
-        <Route path="embed/runProject">
-          <RunProject />
-        </Route>
-        <PrivateRoute path="/app/editor" component={Editor} />
-        <PrivateRoute path="/app/dashboard" component={Dashboard} />
-        <Route exact path="/">
-          <Home />
-        </Route>
-      </Switch>
+    <Switch>
+      <Route path="/embed">
+        <Embed />
+      </Route>
+      <Route path="/faq">
+        <Faq />
+      </Route>
+      <Route path="/checkHowTo">
+        <NotFound />
+      </Route>
+      <Route path="/cookies">
+        <Cookies />
+      </Route>
+      <Route path="/privacyPolicy">
+        <PrivacyPolicy />
+      </Route>
+      <Route path="/termsAndConditions">
+        <TermsAndConditions />
+      </Route>
+      <Route path="fromEmbed/goBackTo">
+        <GoBackTo />
+      </Route>
+      <Route path="fromEmbed/login">
+        <Login />
+      </Route>
+      <Route path="/embed">
+        <Embed />
+      </Route>
+      <Route path="embed/runProject">
+        <RunProject />
+      </Route>
+      <PrivateRoute path="/app/editor" component={Editor} />
+      <PrivateRoute path="/app/dashboard" component={Dashboard} />
+      <Route exact path="/">
+        <Home />
+      </Route>
+    </Switch>
   </Wrapper>
 )
 
