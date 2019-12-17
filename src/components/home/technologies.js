@@ -272,6 +272,7 @@ const Technologies = () => {
                   layout="form"
                   type="submit"
                   text="Subscribe to newsletter"
+                  disabled={errors.email || !values.email}
                 />
               </EmailFormWrapper>
               {emailSent && <StyledH6>Thank you!</StyledH6>}
