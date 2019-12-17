@@ -43,12 +43,8 @@ const Strove = () => (
       <Route path="/termsAndConditions">
         <TermsAndConditions />
       </Route>
-      <Route path="fromEmbed/goBackTo">
-        <GoBackTo />
-      </Route>
-      <Route path="/fromEmbed/login">
-        <Login />
-      </Route>
+      <Route path="/fromEmbed/goBackTo" component={GoBackTo} />
+      <Route path="/fromEmbed/login" component={Login} />
       <Route exact path="/embed" component={Embed} />
       <Route path="/embed/runProject" component={RunProject} />
       <Route path="/embed/editor" component={Editor} />
