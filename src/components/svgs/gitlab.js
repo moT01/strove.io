@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SvgGitlab = props => (
-  <svg viewBox="0 0 210 194" width="1em" height="1em" {...props}>
+  <svg viewBox="0 0 210 194" {...props}>
     <g fillRule="evenodd">
       <path d="M105.061 193.655l38.64-118.921h-77.28l38.64 118.921z" />
       <path d="M105.061 193.655L66.421 74.734H12.268l92.793 118.92z" />

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const SvgGoogle = props => (
-  <svg viewBox="0 0 48 48" width="1em" height="1em" {...props}>
+  <svg viewBox="0 0 48 48" {...props}>
     <defs>
       <path
         id="google_svg__a"
