@@ -7,6 +7,7 @@ import PrivacyPolicy from './privacyPolicy'
 import TermsAndConditions from './termsAndConditions'
 import { GoBackTo, Login } from './fromEmbed'
 import RunProject from './runProject'
+import Enterprise from './enterprise'
 
 export {
   Home,
@@ -19,4 +20,5 @@ export {
   GoBackTo,
   Login,
   RunProject,
+  Enterprise,
 }

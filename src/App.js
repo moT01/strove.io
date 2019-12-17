@@ -13,6 +13,7 @@ import {
   GoBackTo,
   Login,
   RunProject,
+  Enterprise,
 } from 'pages'
 
 import { PrivateRoute, Editor, Dashboard } from 'components'
@@ -34,6 +35,7 @@ const Strove = () => (
       <Route path="/cookies" component={Cookies} />
       <Route path="/privacyPolicy" component={PrivacyPolicy} />
       <Route path="/termsAndConditions" component={TermsAndConditions} />
+      <Route path="/enterprise" component={Enterprise} />
       <Route path="/fromEmbed/goBackTo" component={GoBackTo} />
       <Route path="/fromEmbed/login" component={Login} />
       <Route exact path="/embed" component={Embed} />
