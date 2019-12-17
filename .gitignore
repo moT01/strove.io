@@ -36,8 +36,10 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+node_modules/*
 jspm_packages/
+# Include again once wss fix is realesed by facebook
+!node_modules/react-dev-utils
 
 # Typescript v1 declaration files
 typings/
