@@ -1,10 +1,10 @@
 import React, { useState, memo } from 'react'
-import { navigate } from 'gatsby'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
+import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -148,7 +148,7 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -158,7 +158,7 @@ const Dashboard = () => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
-  const currentProjectId = currentProject && currentProject.id
+  const currentProjectId = currentProject?.id
   const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort }) => {
@@ -179,7 +179,7 @@ const Dashboard = () => {
             storeKey: 'user',
           })
         )
-        navigate('/app/editor/')
+        history.push('/app/editor/')
       }
     } else {
       setStopModal(true)
@@ -375,4 +375,4 @@ const Dashboard = () => {
   )
 }
 
-export default memo(Dashboard)
+export default memo(withRouter(Dashboard))

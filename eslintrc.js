@@ -31,23 +31,4 @@ module.exports = {
     document: true,
     fetch: true,
   },
-  settings: {
-    'import/resolver': {
-      'import/resolver': {
-        alias: [
-          ['components', './src/components'],
-          ['images', './src/images'],
-          ['pages', './src/pages'],
-          ['queries', './src/queries'],
-          ['state', './src/state'],
-          ['utils', './src/utils'],
-          ['constants', './src/constants'],
-          ['middlewares', './src/middlewares'],
-          ['hooks', './src/hooks'],
-          ['assets', './src/assets'],
-        ],
-        extensions: ['.ts', '.js', '.jsx', '.json'],
-      },
-    },
-  },
 }

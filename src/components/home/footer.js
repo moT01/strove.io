@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import styled from 'styled-components'
-import { Github } from 'images/logos'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components/macro'
+
+import { Github } from 'components/svgs'
 
 const FooterWrapper = styled.div`
   display: flex;

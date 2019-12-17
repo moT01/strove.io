@@ -1,9 +1,9 @@
 import window from './window'
 
-export const getWindowPathName = () => window?.location?.pathname
+export const getWindowPathName = () => window.location.pathname
 
 export const getWindowSearchParams = () =>
-  new URL(window?.location?.href).searchParams
+  new URL(window.location.href).searchParams
 
 /*
   Quick fix to make getting repoUrl actually work
@@ -20,7 +20,7 @@ export const getRepoUrl = () => {
     : repoUrl
 }
 
-export const getWindowHref = () => window?.location?.href
+export const getWindowHref = () => window.location.href
 
 export const getDomain = url => {
   /* eslint-disable-next-line */

@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
-import { Strove } from 'images/logos'
-import { theme } from 'constants'
+import { Strove } from 'components/svgs'
+import { theme } from 'consts'
 
 const StroveLogoWrapper = styled.div`
   font-size: 21px;

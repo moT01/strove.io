@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import QueueAnim from 'rc-queue-anim'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
@@ -8,7 +8,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { GetStarted, Logos } from 'components'
@@ -351,10 +351,7 @@ const Banner = () => {
           <StyledH1>To create what's next</StyledH1>
           <StyledProductDescription>
             Get the advantage over teams with the best programming equipment for
-            a fraction of the cost
-            {/* Strove.io gives you <b>instant</b> environment to <b>learn</b>,{' '}
-            <b>build</b> and <b>collaborate</b> no matter the language. All you
-            need is a browser. */}
+            a fraction of the cost s
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <StroveButton

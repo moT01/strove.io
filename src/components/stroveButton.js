@@ -59,15 +59,12 @@ const Button = styled.button`
   transition: all 0.2s ease;
   animation: ${FadeIn} 0, 5s ease-out;
   opacity: 0.9;
-
   :focus {
     outline: 0;
   }
-
   &:disabled {
     opacity: 0.4;
   }
-
   ${props =>
     !props.disabled &&
     css`
@@ -100,7 +97,6 @@ const FormButton = styled.button`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   outline: none;
-
   ${({ isMobile }) =>
     isMobile &&
     css`
@@ -110,7 +106,6 @@ const FormButton = styled.button`
       width: 100%;
       margin-top: 10px;
     `}
-
   ${props =>
     !props.disabled
       ? css`

@@ -1,13 +1,24 @@
-import React, { memo } from 'react'
+import Home from './home'
+import Faq from './faq'
+import Embed from './embed'
+import NotFound from './notFound'
+import Cookies from './cookies'
+import PrivacyPolicy from './privacyPolicy'
+import TermsAndConditions from './termsAndConditions'
+import { GoBackTo, Login } from './fromEmbed'
+import RunProject from './runProject'
+import Enterprise from './enterprise'
 
-import { SEO, Header, Home } from 'components'
-
-const IndexPage = () => (
-  <>
-    <SEO title="Strove" />
-    <Header />
-    <Home />
-  </>
-)
-
-export default memo(IndexPage)
+export {
+  Home,
+  Faq,
+  Embed,
+  NotFound,
+  Cookies,
+  PrivacyPolicy,
+  TermsAndConditions,
+  GoBackTo,
+  Login,
+  RunProject,
+  Enterprise,
+}

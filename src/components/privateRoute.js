@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
-import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+
 import { selectors } from 'state'
 
 const getToken = selectors.api.getUserField('siliskyToken')
@@ -9,6 +10,7 @@ const PrivateRoute = ({
   component: Component,
   location,
   onAccessDenied,
+  history,
   ...rest
 }) => {
   const token = useSelector(getToken)
@@ -16,8 +18,7 @@ const PrivateRoute = ({
   if (!token && location.pathname !== `/`) {
     // If we’re not logged in, redirect to the home page.
     onAccessDenied && onAccessDenied()
-    navigate(`/`)
-    return null
+    return <Redirect to="/" />
   }
 
   return <Component {...rest} />

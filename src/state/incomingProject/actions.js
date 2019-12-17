@@ -1,4 +1,4 @@
-import * as C from './constants'
+import * as C from './consts'
 
 export const addIncomingProject = ({ repoLink, repoProvider, name }) => ({
   type: C.ADD_INCOMING_PROJECT,

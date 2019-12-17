@@ -1,16 +1,16 @@
-import { navigate } from 'gatsby'
 import { actions } from 'state'
 
 import { getWindowPathName, getWindowSearchParams } from './windowUtils'
 
-export default dispatch => {
+/* NO_GATSBY_TODO Pass history */
+export default (dispatch, history) => {
   dispatch(actions.incomingProject.removeIncomingProject())
   const path = getWindowPathName()
   if (path.includes('embed')) {
     const searchParams = getWindowSearchParams()
     const repoUrl = searchParams.get('repoUrl')
-    navigate(`/embed/editor/?repoUrl=${repoUrl}`)
+    history.push(`/embed/editor/?repoUrl=${repoUrl}`)
   } else {
-    navigate('/app/editor/')
+    history.push('/app/editor/')
   }
 }

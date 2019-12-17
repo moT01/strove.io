@@ -1,15 +1,15 @@
 import React, { memo, useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components/macro'
 
 import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
 import GlobalStyles from './globalStyles'
-import { theme } from 'constants'
+import { theme } from 'consts'
 
 const MainContent = styled.main`
   display: flex;

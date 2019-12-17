@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
-import { Link } from 'gatsby'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components/macro'
 
 import Footer from 'components/home/footer'
 import { SEO, Header } from 'components'

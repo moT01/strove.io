@@ -1,4 +1,4 @@
-import * as C from './constants'
+import * as C from './consts'
 
 export const latencyMeasureStart = payload => ({
   type: C.LATENCY_MEASURE_START,

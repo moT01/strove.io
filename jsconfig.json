@@ -1,18 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "components": ["src/components"],
-      "images": ["src/images"],
-      "pages": ["src/pages"],
-      "queries": ["src/queries"],
-      "state": ["src/state"],
-      "utils": ["src/utils"],
-      "constants": ["src/constants"],
-      "middlwares": ["src/middlewares"],
-      "hooks": ["src/hooks"],
-      "assets": ["src/assets"]
-    }
+    "baseUrl": "src"
   },
   "search.exclude": {
     "**/.git": true,

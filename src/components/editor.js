@@ -1,8 +1,8 @@
 import React, { useState, useEffect, memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
-import { navigate } from 'gatsby'
 import dayjs from 'dayjs'
+import { Redirect } from 'react-router-dom'
 
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
@@ -73,9 +73,9 @@ const Editor = () => {
         if (path.includes('embed')) {
           const searchParams = getWindowSearchParams()
           const repoUrl = searchParams.get('repoUrl')
-          navigate(`/embed/runProject/?repoUrl=${repoUrl}`)
+          return <Redirect to={`/embed/runProject/?repoUrl=${repoUrl}`} />
         } else {
-          navigate('/app/dashboard')
+          return <Redirect to="/app/dashboard" />
         }
       }
     }
@@ -108,7 +108,7 @@ const Editor = () => {
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
         onLoad={() => setLoaderVisible(false)}
-        src={`${process.env.SILISKY_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
+        src={`${process.env.REACT_APP_STROVE_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
     </>
   )

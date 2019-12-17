@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
-import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { ThemeProvider } from 'styled-components'
+import styled from 'styled-components/macro'
+import { ThemeProvider } from 'styled-components/macro'
+import { Redirect } from 'react-router-dom'
 
-import { theme } from 'constants'
+import { theme } from 'consts'
 import {
   GlobalStyles,
   NoRepoUrlInfo,
@@ -54,13 +54,17 @@ const EmbedWrapper = () => {
   const parentDomain =
     window.location !== window.parent.location
       ? document.location.ancestorOrigins[0]
-      : process.env.SILISKY_URL.slice(0, -1)
+      : process.env.REACT_APP_STROVE_URL.slice(0, -1)
   const goBackTo = `${parentDomain}/${goBackToRoute}`
    */
 
   if (token && repoUrl) {
     // If user is logged in, redirect to the embed project run
-    navigate(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
+    return (
+      <Redirect
+        to={`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
+      />
+    )
   }
 
   return (

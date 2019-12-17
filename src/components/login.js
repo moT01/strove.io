@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,10 +7,10 @@ import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
 
 import { selectors } from 'state'
-import { loginOptions } from 'constants'
+import { loginOptions } from 'consts'
 
 import FullScreenLoader from './fullScreenLoader'
-import { persistor } from '../../wrapper'
+import { persistor } from 'wrapper'
 import { getWindowPathName } from 'utils'
 
 const LoginButton = styled.button`
@@ -184,7 +184,7 @@ const LoginDropdown = () => {
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
-        <span>
+        <div>
           <LoginButton {...getToggleButtonProps({})}>
             <Text isEmbed={isEmbed}>Login</Text>
           </LoginButton>
@@ -203,7 +203,7 @@ const LoginDropdown = () => {
               ))}
             </MenuWrapper>
           </DropdownWrapper>
-        </span>
+        </div>
       )}
     </Downshift>
   )

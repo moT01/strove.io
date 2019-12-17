@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
 
@@ -123,7 +123,6 @@ const GetStarted = ({ addProject }) => {
               text="Clone project"
               width="30%"
               minWidth="200px"
-              disabled={!props.values.repoLink || props.errors.repoLink}
             />
 
             <StyledErrors>{props.errors.repoLink}</StyledErrors>

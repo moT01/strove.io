@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
@@ -108,8 +108,6 @@ const EmailFormWrapper = styled.div`
     g {
       stroke: ${({ theme }) => theme.colors.c1};
     }
-  }
-
   }
 `
 

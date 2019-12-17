@@ -1,16 +1,15 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'gatsby'
-import styled, { keyframes } from 'styled-components'
-import { Location } from '@reach/router'
+import { Link } from 'react-router-dom'
+import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
-import { Copy } from 'images/svg'
+import { Copy } from 'components/svgs'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'
-import { Strove, Dashboard, Desktop } from 'images/logos'
+import { Strove, Dashboard, Desktop } from 'components/svgs'
 import LatencyIndicator from './latencyIndicator'
 import Login from './login'
 import { getWindowPathName } from 'utils'
@@ -26,22 +25,26 @@ const FadeIn = keyframes`
 
 const StyledStroveIcon = styled(Strove)`
   height: 25px;
+  width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledDashboardIcon = styled(Dashboard)`
   height: 25px;
+  width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledDesktopIcon = styled(Desktop)`
   height: 20px;
+  width: 20px;
   fill: ${({ theme }) => theme.colors.c2};
   font-size: 25px;
 `
 
 const StyledAntdIcon = styled(Icon)`
   height: 25px;
+  width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
 `
 
@@ -90,7 +93,6 @@ const LinkText = styled.h3`
   transition: color 0.3s;
   font-weight: 300;
   margin: 0;
-  text-decoration: none;
   cursor: pointer;
   @media (max-width: 767px) {
     font-size: 18px;
@@ -98,7 +100,6 @@ const LinkText = styled.h3`
 
   :hover {
     color: ${({ theme }) => theme.colors.c3};
-    text-decoration: none;
   }
 `
 
@@ -135,7 +136,7 @@ const StyledLink = styled(Link)`
   display: flex;
 `
 
-const PreviewLink = styled.a`
+const PreviewLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: 'none';
   position: relative;
@@ -210,45 +211,8 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${({ invert, theme }) =>
     invert ? theme.colors.c2 : theme.colors.c1};
+  z-index: 3;
   position: relative;
-`
-
-const Option = styled.a`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
-  width: auto;
-  height: 32px;
-  font-size: 1.2rem;
-  border-bottom-left-radius: ${props => props.isLast && '3px'};
-  border-bottom-right-radius: ${props => props.isLast && '3px'};
-  text-decoration: none;
-  font-weight: 300;
-  min-width: ${props => (props.isEmbed ? '0' : '150px')};
-
-  svg {
-    fill: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
-    height: auto;
-    margin-right: 5px;
-  }
-
-  :hover {
-    background-color: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  :hover svg {
-    fill: ${({ theme, invert }) =>
-      invert ? theme.colors.c2 : theme.colors.c1};
-    cursor: pointer;
-  }
 `
 
 const Text = styled.h3`
@@ -269,10 +233,56 @@ const Text = styled.h3`
 const OptionText = styled(Text)`
   color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;
+  text-decoration: none;
   :hover {
     color: ${({ theme }) => theme.colors.c2};
+    transition: color 0.1s;
+    text-decoration: none;
   }
 `
+const Option = styled(Link)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3px;
+  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  width: auto;
+  height: 32px;
+  font-size: 1.2rem;
+  border-bottom-left-radius: ${props => props.isLast && '3px'};
+  border-bottom-right-radius: ${props => props.isLast && '3px'};
+  z-index: 4;
+  text-decoration: none;
+  font-weight: 300;
+  min-width: ${props => (props.isEmbed ? '0' : '150px')};
+
+  svg {
+    fill: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
+    width: 2.2vh;
+    height: auto;
+    margin-right: 5px;
+  }
+
+  :hover {
+    background-color: ${({ theme, invert }) =>
+      !invert ? theme.colors.c2 : theme.colors.c1};
+    cursor: pointer;
+    text-decoration: none;
+    ${OptionText} {
+      color: ${({ theme }) => theme.colors.c2};
+      transition: color 0.1s;
+      text-decoration: none;}
+  }
+
+  :hover svg {
+    fill: ${({ theme, invert }) =>
+      invert ? theme.colors.c2 : theme.colors.c1};
+    cursor: pointer;
+  }
+`
+
 
 const PortOption = styled(OptionText)`
   font-size: 16px;
@@ -296,7 +306,7 @@ const CopyWrapper = styled.div`
   }
 `
 
-const HeaderComponent = ({ location }) => {
+const Header = () => {
   const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
@@ -304,13 +314,13 @@ const HeaderComponent = ({ location }) => {
   const isEmbed = getWindowPathName().includes('embed')
 
   useEffect(() => {
-    if (location.pathname.includes('editor')) {
+    if (window.location.pathname.includes('editor')) {
       if (project?.machineName) {
         setPorts(
           project.additionalPorts.map(portPair => {
             let href
             /* Env's are loaded as strings on production */
-            if (process.env.IS_OPENSOURCE === 'true') {
+            if (process.env.REACT_APP_IS_OPENSOURCE === 'true') {
               href = `https://${portPair[1]}.vmopen${
                 project.machineName.match(/\d+/g)[0]
               }.silisky.com`
@@ -335,7 +345,7 @@ const HeaderComponent = ({ location }) => {
   return (
     <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
       <HeaderWrapper
-        isUserInsideEditor={location.pathname === '/app/editor/'}
+        isUserInsideEditor={window.location.pathname === '/app/editor/'}
         mobile={isMobileOnly}
         isEmbed={isEmbed}
       >
@@ -362,7 +372,7 @@ const HeaderComponent = ({ location }) => {
           </LinkWrapper>
         )}
 
-        {location.pathname.includes('editor') && (
+        {window.location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
               // This has to be done with <div>. Using styled components causes Downshift crash
@@ -403,26 +413,27 @@ const HeaderComponent = ({ location }) => {
             )}
           </Downshift>
         )}
-        {location.pathname === '/app/editor/' && currentProject?.repoLink && (
-          <CopyWrapper
-            onClick={() =>
-              copyToClipboard(
-                `https://strove.io/#${currentProject?.repoLink}`.replace(
-                  '.git',
-                  ''
-                ),
-                {
-                  message:
-                    'Press #{key} to copy link to the project for easy sharing',
-                }
-              )
-            }
-          >
-            {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
-          </CopyWrapper>
-        )}
+        {window.location.pathname === '/app/editor/' &&
+          currentProject?.repoLink && (
+            <CopyWrapper
+              onClick={() =>
+                copyToClipboard(
+                  `https://strove.io/#${currentProject?.repoLink}`.replace(
+                    '.git',
+                    ''
+                  ),
+                  {
+                    message:
+                      'Press #{key} to copy link to the project for easy sharing',
+                  }
+                )
+              }
+            >
+              {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
+            </CopyWrapper>
+          )}
 
-        {(location.pathname !== '/app/editor/' || !isMobileOnly) &&
+        {(window.location.pathname !== '/app/editor/' || !isMobileOnly) &&
         isMobileOnly ? (
           <DocsLink
             href="https://docs.strove.io"
@@ -443,9 +454,9 @@ const HeaderComponent = ({ location }) => {
           </DocsLink>
         )}
       </HeaderWrapper>
-      {location.pathname.includes('editor') && <LatencyIndicator />}
+      {window.location.pathname.includes('editor') && <LatencyIndicator />}
 
-      {!location.pathname.includes('embed/editor') && (
+      {!window.location.pathname.includes('embed/editor') && (
         <LoginWrapper>
           {isEmbed && (
             <StroveLink
@@ -462,11 +473,5 @@ const HeaderComponent = ({ location }) => {
     </HeaderSection>
   )
 }
-
-const Header = props => (
-  <Location>
-    {({ location }) => <HeaderComponent {...props} location={location} />}
-  </Location>
-)
 
 export default memo(Header)

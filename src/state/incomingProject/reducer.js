@@ -1,4 +1,4 @@
-import * as C from './constants'
+import * as C from './consts'
 import { REHYDRATE } from 'redux-persist'
 
 const initialState = null

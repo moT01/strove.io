@@ -4,11 +4,11 @@ import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
-import { VSCode } from 'images/logos'
-import styled from 'styled-components'
+import { VSCode } from 'components/svgs'
+import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
-import { features } from 'constants'
+import { features } from 'consts'
 
 const { TweenOneGroup } = TweenOne
 

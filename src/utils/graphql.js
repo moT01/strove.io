@@ -1,6 +1,6 @@
 import { C } from 'state/'
 
-import defaultClient from '../../client'
+import defaultClient from 'client'
 
 /**
  * Gracefully handle mutations. Handles all the async aspects of querying, automatically dispatches redux

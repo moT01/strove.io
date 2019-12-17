@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
-import { ThemeProvider } from 'styled-components'
+import styled from 'styled-components/macro'
+import { ThemeProvider } from 'styled-components/macro'
 
-import { theme } from 'constants'
-import { loginOptions } from 'constants'
+import { theme } from 'consts'
+import { loginOptions } from 'consts'
 import { GlobalStyles, NoRepoUrlInfo, ExternalLink } from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
