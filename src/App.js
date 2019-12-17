@@ -28,9 +28,6 @@ import Wrapper from './wrapper'
 const Strove = () => (
   <Wrapper>
     <Switch>
-      <Route path="/embed">
-        <Embed />
-      </Route>
       <Route path="/faq">
         <Faq />
       </Route>
@@ -49,15 +46,14 @@ const Strove = () => (
       <Route path="fromEmbed/goBackTo">
         <GoBackTo />
       </Route>
-      <Route path="fromEmbed/login">
+      <Route path="/fromEmbed/login">
         <Login />
       </Route>
-      <Route path="/embed">
+      <Route exact path="/embed">
         <Embed />
       </Route>
-      <Route path="embed/runProject">
-        <RunProject />
-      </Route>
+      <Route path="/embed/runProject" component={RunProject} />
+      {/* <Route path="/embed" component={Embed} /> */}
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
       <Route exact path="/">
