@@ -37,9 +37,6 @@ const Strove = () => (
         <Route path="/checkHowTo">
           <NotFound />
         </Route>
-        <Route path="/embed">
-          <Embed />
-        </Route>
         <Route path="/cookies">
           <Cookies />
         </Route>
@@ -49,13 +46,16 @@ const Strove = () => (
         <Route path="/termsAndConditions">
           <TermsAndConditions />
         </Route>
-        <Route path="/goBackTo">
+        <Route path="fromEmbed/goBackTo">
           <GoBackTo />
         </Route>
-        <Route path="/login">
+        <Route path="fromEmbed/login">
           <Login />
         </Route>
-        <Route path="/runProject">
+        <Route path="/embed">
+          <Embed />
+        </Route>
+        <Route path="embed/runProject">
           <RunProject />
         </Route>
         <Route path="/app">
