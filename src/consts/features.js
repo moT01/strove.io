@@ -45,8 +45,7 @@ export default [
   },
   {
     title: "It's open source",
-    content:
-      'Contribute! Strove has been built with contributors in mind: https://github.com/stroveio/strove.io-client',
+    content: 'Contribute! Strove has been built with contributors in mind',
     href: 'https://github.com/stroveio/strove.io-client',
     color: '#FA8C16',
     shadowColor: 'rgba(250,140,22,.12)',

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
@@ -59,15 +59,12 @@ const Button = styled.button`
   transition: all 0.2s ease;
   animation: ${FadeIn} 0, 5s ease-out;
   opacity: 0.9;
-
   :focus {
     outline: 0;
   }
-
   &:disabled {
     opacity: 0.4;
   }
-
   ${props =>
     !props.disabled &&
     css`
@@ -100,7 +97,6 @@ const FormButton = styled.button`
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   outline: none;
-
   ${({ isMobile }) =>
     isMobile &&
     css`
@@ -110,7 +106,6 @@ const FormButton = styled.button`
       width: 100%;
       margin-top: 10px;
     `}
-
   ${props =>
     !props.disabled
       ? css`
@@ -132,8 +127,8 @@ const StroveButton = props => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
 
-  return props.layout === 'form' ? (
-    <FormButton primary={props.isPrimary} mobile={isMobileOnly} {...props}>
+  return props.layout === 'form' && !isMobileOnly ? (
+    <FormButton mobile={isMobileOnly} {...props}>
       {isLoading ? (
         <FullScreenLoader
           isFullScreen={false}
@@ -144,6 +139,25 @@ const StroveButton = props => {
         props.text || props.children
       )}
     </FormButton>
+  ) : props.layout === 'form' && isMobileOnly ? (
+    <Button
+      primary
+      fontWeight="700"
+      fontSize="20px"
+      height="56px"
+      mobile={isMobileOnly}
+      {...props}
+    >
+      {isLoading ? (
+        <FullScreenLoader
+          isFullScreen={false}
+          color="#ffffff"
+          height="1.7rem"
+        />
+      ) : (
+        props.text || props.children
+      )}
+    </Button>
   ) : (
     <Button
       disabled={isLoading || props.isDisabled}
