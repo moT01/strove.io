@@ -23,7 +23,6 @@ const StyledModal = styled(Modal)`
 `
 
 const AddProjectProvider = ({ children, history }) => {
-  console.log('history', history)
   const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))

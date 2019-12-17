@@ -179,7 +179,6 @@ const Dashboard = ({ history }) => {
             storeKey: 'user',
           })
         )
-        console.log('fnjefjefnej')
         history.push('/app/editor/')
       }
     } else {
