@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { ThemeProvider } from 'styled-components/macro'
+import { Redirect } from 'react-router-dom'
 
 import { theme } from 'consts'
 import {
@@ -36,7 +37,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
-const EmbedWrapper = ({ history }) => {
+const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
   const searchParams = getWindowSearchParams()
@@ -59,7 +60,11 @@ const EmbedWrapper = ({ history }) => {
 
   if (token && repoUrl) {
     // If user is logged in, redirect to the embed project run
-    history.push(`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
+    return (
+      <Redirect
+        to={`/embed/runProject/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
+      />
+    )
   }
 
   return (
