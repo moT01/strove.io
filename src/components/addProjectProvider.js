@@ -1,6 +1,7 @@
 import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
+import { withRouter } from 'react-router-dom'
 
 import {
   createProject,
@@ -21,7 +22,8 @@ const StyledModal = styled(Modal)`
   box-shadow: none;
 `
 
-const AddProjectProvider = ({ children }) => {
+const AddProjectProvider = ({ children, history }) => {
+  console.log('history', history)
   const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
@@ -73,7 +75,7 @@ const AddProjectProvider = ({ children }) => {
 
     if (existingProject && !currentProject) {
       if (existingProject.machineId) {
-        return redirectToEditor(dispatch)
+        return redirectToEditor(dispatch, history)
       } else {
         return dispatch(
           mutation({
@@ -166,4 +168,4 @@ const AddProjectProvider = ({ children }) => {
   )
 }
 
-export default memo(AddProjectProvider)
+export default memo(withRouter(AddProjectProvider))

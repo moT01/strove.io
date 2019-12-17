@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { getWindowSearchParams } from 'utils'
 import { Layout } from 'components'
@@ -34,13 +35,15 @@ const WithAnalyticsWrapper = memo(({ children }) => {
 })
 
 export default ({ children }) => (
-  <ApolloProvider client={client}>
-    <Provider store={createStore}>
-      <PersistGate loading={null} persistor={persistor}>
-        <WithAnalyticsWrapper>
-          <Layout>{children}</Layout>
-        </WithAnalyticsWrapper>
-      </PersistGate>
-    </Provider>
-  </ApolloProvider>
+  <Router>
+    <ApolloProvider client={client}>
+      <Provider store={createStore}>
+        <PersistGate loading={null} persistor={persistor}>
+          <WithAnalyticsWrapper>
+            <Layout>{children}</Layout>
+          </WithAnalyticsWrapper>
+        </PersistGate>
+      </Provider>
+    </ApolloProvider>
+  </Router>
 )

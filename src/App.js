@@ -28,7 +28,6 @@ import Wrapper from './wrapper'
 
 const Strove = () => (
   <Wrapper>
-    <Router>
       <Switch>
         <Route path="/embed">
           <Embed />
@@ -66,7 +65,6 @@ const Strove = () => (
           <Home />
         </Route>
       </Switch>
-    </Router>
   </Wrapper>
 )
 
