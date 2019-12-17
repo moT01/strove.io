@@ -381,6 +381,10 @@ export default memo(({ children, addProject }) => {
       ev.preventDefault()
 
       if (navigator?.sendBeacon && user) {
+        console.log(
+          'process.env.REACT_APP_STROVE_ENDPOINT',
+          process.env.REACT_APP_STROVE_ENDPOINT
+        )
         navigator.sendBeacon(
           `${process.env.REACT_APP_STROVE_ENDPOINT}/beacon`,
           JSON.stringify({ token: localStorage.getItem('token') })

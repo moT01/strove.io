@@ -4,6 +4,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
+import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -147,7 +148,7 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
-const Dashboard = () => {
+const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -160,7 +161,7 @@ const Dashboard = () => {
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
 
-  const handleStartClick = ({ id, editorPort, history }) => {
+  const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(
@@ -178,6 +179,7 @@ const Dashboard = () => {
             storeKey: 'user',
           })
         )
+        console.log('fnjefjefnej')
         history.push('/app/editor/')
       }
     } else {
@@ -374,4 +376,4 @@ const Dashboard = () => {
   )
 }
 
-export default memo(Dashboard)
+export default memo(withRouter(Dashboard))

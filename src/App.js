@@ -16,6 +16,8 @@ import {
   App,
 } from 'pages'
 
+import { PrivateRoute, Editor, Dashboard } from 'components'
+
 import Wrapper from './wrapper'
 
 // if (process.env.NODE_ENV !== 'production') {
@@ -58,9 +60,8 @@ const Strove = () => (
         <Route path="embed/runProject">
           <RunProject />
         </Route>
-        <Route path="/app">
-          <App />
-        </Route>
+        <PrivateRoute path="/app/editor" component={Editor} />
+        <PrivateRoute path="/app/dashboard" component={Dashboard} />
         <Route path="/">
           <Home />
         </Route>
