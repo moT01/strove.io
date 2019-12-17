@@ -36,6 +36,8 @@ const httpLink = new HttpLink({
   uri: process.env.REACT_APP_STROVE_GRAPHQL_ENDPOINT,
 })
 
+console.log(wsLink)
+
 const link = process.browser
   ? split(
       //only create the split in the browser
