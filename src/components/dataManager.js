@@ -35,7 +35,6 @@ const generateDeviceID = () => {
 
 export default memo(
   withRouter(({ children, addProject, history }) => {
-    console.log('history', history)
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
     const token = user?.siliskyToken
