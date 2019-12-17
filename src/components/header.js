@@ -2,7 +2,6 @@ import React, { memo, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
-import { Location } from '@reach/router'
 import { isMobileOnly } from 'react-device-detect'
 import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
@@ -290,7 +289,7 @@ const CopyWrapper = styled.div`
   }
 `
 
-const HeaderComponent = ({ location }) => {
+const Header = () => {
   const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
@@ -298,7 +297,7 @@ const HeaderComponent = ({ location }) => {
   const isEmbed = getWindowPathName().includes('embed')
 
   useEffect(() => {
-    if (location.pathname.includes('editor')) {
+    if (window.location.pathname.includes('editor')) {
       if (project?.machineName) {
         setPorts(
           project.additionalPorts.map(portPair => {
@@ -329,7 +328,7 @@ const HeaderComponent = ({ location }) => {
   return (
     <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
       <HeaderWrapper
-        isUserInsideEditor={location.pathname === '/app/editor/'}
+        isUserInsideEditor={window.location.pathname === '/app/editor/'}
         mobile={isMobileOnly}
         isEmbed={isEmbed}
       >
@@ -356,7 +355,7 @@ const HeaderComponent = ({ location }) => {
           </LinkWrapper>
         )}
 
-        {location.pathname.includes('editor') && (
+        {window.location.pathname.includes('editor') && (
           <Downshift>
             {({ getToggleButtonProps, isOpen }) => (
               // This has to be done with <div>. Using styled components causes Downshift crash
@@ -396,26 +395,27 @@ const HeaderComponent = ({ location }) => {
             )}
           </Downshift>
         )}
-        {location.pathname === '/app/editor/' && currentProject?.repoLink && (
-          <CopyWrapper
-            onClick={() =>
-              copyToClipboard(
-                `https://strove.io/#${currentProject?.repoLink}`.replace(
-                  '.git',
-                  ''
-                ),
-                {
-                  message:
-                    'Press #{key} to copy link to the project for easy sharing',
-                }
-              )
-            }
-          >
-            {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
-          </CopyWrapper>
-        )}
+        {window.location.pathname === '/app/editor/' &&
+          currentProject?.repoLink && (
+            <CopyWrapper
+              onClick={() =>
+                copyToClipboard(
+                  `https://strove.io/#${currentProject?.repoLink}`.replace(
+                    '.git',
+                    ''
+                  ),
+                  {
+                    message:
+                      'Press #{key} to copy link to the project for easy sharing',
+                  }
+                )
+              }
+            >
+              {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
+            </CopyWrapper>
+          )}
 
-        {(location.pathname !== '/app/editor/' || !isMobileOnly) &&
+        {(window.location.pathname !== '/app/editor/' || !isMobileOnly) &&
         isMobileOnly ? (
           <DocsLink
             href="https://docs.strove.io"
@@ -436,9 +436,9 @@ const HeaderComponent = ({ location }) => {
           </DocsLink>
         )}
       </HeaderWrapper>
-      {location.pathname.includes('editor') && <LatencyIndicator />}
+      {window.location.pathname.includes('editor') && <LatencyIndicator />}
 
-      {!location.pathname.includes('embed/editor') && (
+      {!window.location.pathname.includes('embed/editor') && (
         <LoginWrapper>
           {isEmbed && (
             <StroveLink
@@ -455,11 +455,5 @@ const HeaderComponent = ({ location }) => {
     </HeaderSection>
   )
 }
-
-const Header = props => (
-  <Location>
-    {({ location }) => <HeaderComponent {...props} location={location} />}
-  </Location>
-)
 
 export default memo(Header)
