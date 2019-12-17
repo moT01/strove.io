@@ -382,12 +382,13 @@ const Header = () => {
                 <DropdownWrapper isEmbed={isEmbed}>
                   {isOpen && (
                     <MenuWrapper invert>
-                      {ports.map(item => (
+                      {ports.map((item, index, arr) => (
                         <Option
                           invert
                           key={item.value}
                           href={item.href}
                           isEmbed={isEmbed}
+                          isLast={index === arr.length - 1}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
