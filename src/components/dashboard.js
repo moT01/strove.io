@@ -157,7 +157,7 @@ const Dashboard = () => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
-  const currentProjectId = currentProject && currentProject.id
+  const currentProjectId = currentProject?.id
   const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort, history }) => {
