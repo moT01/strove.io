@@ -28,21 +28,12 @@ import Wrapper from './wrapper'
 const Strove = () => (
   <Wrapper>
     <Switch>
-      <Route path="/faq">
-        <Faq />
-      </Route>
-      <Route path="/checkHowTo">
-        <NotFound />
-      </Route>
-      <Route path="/cookies">
-        <Cookies />
-      </Route>
-      <Route path="/privacyPolicy">
-        <PrivacyPolicy />
-      </Route>
-      <Route path="/termsAndConditions">
-        <TermsAndConditions />
-      </Route>
+      <Route exact path="/" component={Home} />
+      <Route path="/faq" component={Faq} />
+      <Route path="/checkHowTo" component={NotFound} />
+      <Route path="/cookies" component={Cookies} />
+      <Route path="/privacyPolicy" component={PrivacyPolicy} />
+      <Route path="/termsAndConditions" component={TermsAndConditions} />
       <Route path="/fromEmbed/goBackTo" component={GoBackTo} />
       <Route path="/fromEmbed/login" component={Login} />
       <Route exact path="/embed" component={Embed} />
@@ -50,9 +41,6 @@ const Strove = () => (
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
-      <Route exact path="/">
-        <Home />
-      </Route>
     </Switch>
   </Wrapper>
 )
