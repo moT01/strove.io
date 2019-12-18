@@ -1,5 +1,4 @@
 import React, { useState, useEffect, memo, useCallback } from 'react'
-import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
 import { Redirect } from 'react-router-dom'
