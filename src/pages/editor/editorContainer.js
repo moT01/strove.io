@@ -93,7 +93,6 @@ const EditorWrapper = () => {
           color="#0072ce"
         />
       )}
-      {console.log('rendered')}
       {token && machineId && port && (
         <Editor
           token={token}
