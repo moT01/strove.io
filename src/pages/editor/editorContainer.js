@@ -11,16 +11,6 @@ import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 import Editor from './editor'
 
-const StyledIframe = styled.iframe`
-  display: block;
-  background: ${({ theme }) => theme.colors.c3};
-  border: none;
-  min-height: ${props => (props.isEmbed ? 'calc(100vh - 20px)' : '97vh')};
-  width: 100vw;
-  margin: 0;
-  opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
-`
-
 const getUserToken = selectors.api.getApiData({
   fields: ['user', 'siliskyToken'],
   defaultValue: null,
@@ -106,11 +96,13 @@ const EditorWrapper = () => {
         />
       )}
       {console.log('rendered')}
-      <StyledIframe
+      <Editor
+        token={token}
+        machineId={machineId}
+        port={port}
+        onLoad={() => setLoaderVisible(false)}
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
-        onLoad={() => setLoaderVisible(false)}
-        src={`${process.env.REACT_APP_STROVE_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
       />
     </>
   )
