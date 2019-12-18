@@ -130,13 +130,13 @@ const StroveLink = styled(DocsLink)`
   font-size: 14px;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
 `
 
-const PreviewLink = styled(Link)`
+const PreviewLink = styled.a`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: 'none';
   position: relative;
@@ -240,7 +240,7 @@ const OptionText = styled(Text)`
     text-decoration: none;
   }
 `
-const Option = styled(Link)`
+const Option = styled.a`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
