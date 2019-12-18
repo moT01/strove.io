@@ -80,10 +80,6 @@ const EditorWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
-  const randomId = Math.random()
-    .toString(36)
-    .substring(7)
-
   return (
     <>
       <SEO title="Editor" />
@@ -96,14 +92,16 @@ const EditorWrapper = () => {
         />
       )}
       {console.log('rendered')}
-      <Editor
-        token={token}
-        machineId={machineId}
-        port={port}
-        onLoad={() => setLoaderVisible(false)}
-        isEmbed={isEmbed}
-        loaderVisible={loaderVisible}
-      />
+      {token && machineId && port && (
+        <Editor
+          token={token}
+          machineId={machineId}
+          port={port}
+          onLoad={() => setLoaderVisible(false)}
+          isEmbed={isEmbed}
+          loaderVisible={loaderVisible}
+        />
+      )}
     </>
   )
 }
