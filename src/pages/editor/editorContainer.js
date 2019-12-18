@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, useEffect, memo, useCallback } from 'react'
 import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
@@ -80,6 +80,8 @@ const EditorWrapper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
+  const setLoaderVisibleFalse = useCallback(() => setLoaderVisible(false), [])
+
   return (
     <>
       <SEO title="Editor" />
@@ -97,7 +99,7 @@ const EditorWrapper = () => {
           token={token}
           machineId={machineId}
           port={port}
-          onLoad={() => setLoaderVisible(false)}
+          onLoad={setLoaderVisibleFalse}
           isEmbed={isEmbed}
           loaderVisible={loaderVisible}
         />

@@ -12,6 +12,14 @@ const StyledIframe = styled.iframe`
 `
 
 const Editor = ({ token, machineId, port, onLoad, isEmbed, loaderVisible }) => {
+  console.log('{ token, machineId, port, onLoad, isEmbed, loaderVisible }', {
+    token,
+    machineId,
+    port,
+    onLoad,
+    isEmbed,
+    loaderVisible,
+  })
   const randomId = Math.random()
     .toString(36)
     .substring(7)
