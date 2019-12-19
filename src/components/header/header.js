@@ -55,7 +55,6 @@ const HeaderSection = styled.div`
   align-items: center;
   width: 100vw;
   height: 64px;
-  /* height: ${props => (props.isEmbed ? '20px' : 'auto')}; */
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   background: ${({ theme }) => theme.colors.c1};
@@ -80,7 +79,7 @@ const LinkWrapper = styled.div`
   animation: ${FadeIn} 0.3s ease-out;
 `
 
-const LinkText = styled.h3`
+const LinkText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
   font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   height: 100%;
@@ -92,12 +91,12 @@ const LinkText = styled.h3`
   font-weight: 600;
   margin: 0;
   cursor: pointer;
-  @media (max-width: 767px) {
-    font-size: 18px;
-  }
 
   :hover {
     color: ${({ theme }) => theme.colors.c3};
+    svg {
+      fill: ${({ theme }) => theme.colors.c3};
+    }
   }
 `
 

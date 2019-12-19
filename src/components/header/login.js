@@ -103,10 +103,8 @@ const Option = styled.a`
 
 const Inline = styled.div`
   display: inline-block;
-  width: ${props =>
-    props.mobile ? '5.5vh' : props.isEmbed ? '18px' : '2.7vh'};
-  height: ${props =>
-    props.mobile ? '5.5vh' : props.isEmbed ? '18px' : '2.7vh'};
+  width: 32px;
+  height: 32px;
   margin-left: 4px;
   background: ${({ theme }) => theme.colors.c1};
 `
