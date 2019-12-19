@@ -103,7 +103,7 @@ const LinkText = styled.h3`
   }
 `
 
-const DocsLink = styled.a`
+const StyledA = styled.a`
   color: ${({ theme }) => theme.colors.c2};
   font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   display: flex;
@@ -126,7 +126,7 @@ const DocsLink = styled.a`
   }
 `
 
-const StroveLink = styled(DocsLink)`
+const StroveLink = styled(StyledA)`
   font-size: 14px;
 `
 
@@ -136,7 +136,7 @@ const StyledLink = styled(Link)`
   display: flex;
 `
 
-const PreviewLink = styled.a`
+const PreviewLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: 'none';
   position: relative;
@@ -240,7 +240,7 @@ const OptionText = styled(Text)`
     text-decoration: none;
   }
 `
-const Option = styled.a`
+const Option = styled(Link)`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -273,7 +273,8 @@ const Option = styled.a`
     ${OptionText} {
       color: ${({ theme }) => theme.colors.c2};
       transition: color 0.1s;
-      text-decoration: none;}
+      text-decoration: none;
+    }
   }
 
   :hover svg {
@@ -282,7 +283,6 @@ const Option = styled.a`
     cursor: pointer;
   }
 `
-
 
 const PortOption = styled(OptionText)`
   font-size: 16px;
@@ -435,38 +435,35 @@ const Header = () => {
 
         {(window.location.pathname !== '/app/editor/' || !isMobileOnly) &&
         isMobileOnly ? (
-          <DocsLink
+          <StyledA
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
             isEmbed={isEmbed}
           >
             <StyledAntdIcon type="file-text" />
-          </DocsLink>
+          </StyledA>
         ) : (
-          <DocsLink
+          <StyledA
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
             isEmbed={isEmbed}
           >
             Docs
-          </DocsLink>
+          </StyledA>
         )}
       </HeaderWrapper>
       {window.location.pathname.includes('editor') && <LatencyIndicator />}
 
+      {isEmbed && (
+        <StroveLink href="https://strove.io" target="_blank" isEmbed={isEmbed}>
+          Powered by Strove.io
+        </StroveLink>
+      )}
+
       {!window.location.pathname.includes('embed/editor') && (
         <LoginWrapper>
-          {isEmbed && (
-            <StroveLink
-              href="https://strove.io"
-              target="_blank"
-              isEmbed={isEmbed}
-            >
-              Powered by Strove.io
-            </StroveLink>
-          )}
           <Login isEmbed={isEmbed} />
         </LoginWrapper>
       )}
