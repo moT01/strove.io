@@ -5,6 +5,7 @@ import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import DetectBrowser from 'react-detect-browser'
+import { Icon } from 'antd'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
@@ -99,7 +100,7 @@ const Option = styled.a`
 `
 
 const Inline = styled.div`
-  display: inline-block;
+  display: flex;
   width: 32px;
   height: 32px;
   margin-left: 4px;
@@ -222,6 +223,7 @@ const UserDropdown = props => {
               )}
               <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
                 <UserPhoto src={props.user.userphoto} />
+                <Icon type="caret-down" />
               </Inline>
             </StyledDropdown>
           </Wrapper>
