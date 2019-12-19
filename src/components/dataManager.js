@@ -79,8 +79,6 @@ export default memo(
     const additionalPorts = activeProjectData?.additionalPorts
     const id = activeProjectData?.id
 
-    console.log('activeProjectData', activeProjectData)
-
     useEffect(() => {
       dispatch({
         type: C.api.UPDATE_ITEM,
