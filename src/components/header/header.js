@@ -58,7 +58,7 @@ const HeaderSection = styled.div`
   /* height: ${props => (props.isEmbed ? '20px' : 'auto')}; */
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  background: ${({ theme }) => theme.colors.c15};
+  background: ${({ theme }) => theme.colors.c1};
 `
 
 const HeaderWrapper = styled.div`
@@ -89,7 +89,7 @@ const LinkText = styled.h3`
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
-  font-weight: 300;
+  font-weight: 600;
   margin: 0;
   cursor: pointer;
   @media (max-width: 767px) {
@@ -109,7 +109,7 @@ const StyledA = styled.a`
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
-  font-weight: 300;
+  font-weight: 600;
   padding: 0 20px;
   cursor: pointer;
   text-decoration: none;
@@ -132,6 +132,7 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
+  font-weight: 600;
 `
 
 const PreviewLink = styled(Link)`

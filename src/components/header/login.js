@@ -76,7 +76,7 @@ const Option = styled.a`
   border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
   text-decoration: none;
-  font-weight: 300;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.c1};
 
   svg {
@@ -119,10 +119,10 @@ const UserPhoto = styled.img`
   margin: 0;
 `
 
-const Text = styled.h3`
+const Text = styled.span`
   font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   margin: 0;
-  font-weight: 300;
+  font-weight: 600;
   line-height: 1;
   @media (max-width: 767px) {
     font-size: 1.4rem;
@@ -134,7 +134,6 @@ const Text = styled.h3`
 `
 
 const OptionText = styled(Text)`
-  font-weight: 300;
   :hover {
     color: ${({ theme }) => theme.colors.c2};
   }
