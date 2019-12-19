@@ -54,13 +54,11 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: ${props => (props.isEmbed ? '20px' : 'auto')};
+  height: 64px;
+  /* height: ${props => (props.isEmbed ? '20px' : 'auto')}; */
   padding-left: 1.5vw;
   padding-right: 1.5vw;
-  background: ${({ theme }) => theme.colors.c1};
-  @media (max-width: 767px) {
-    height: 5vh;
-  }
+  background: ${({ theme }) => theme.colors.c15};
 `
 
 const HeaderWrapper = styled.div`
@@ -209,8 +207,7 @@ const MenuWrapper = styled.div`
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
-  background-color: ${({ invert, theme }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
+  background-color: ${({ theme }) => theme.colors.c2};
   z-index: 3;
   position: relative;
 `
@@ -386,7 +383,7 @@ const Header = () => {
                 </LoginButton>
                 <DropdownWrapper isEmbed={isEmbed}>
                   {isOpen && (
-                    <MenuWrapper invert>
+                    <MenuWrapper>
                       {ports.map((item, index, arr) => (
                         <Option
                           invert
