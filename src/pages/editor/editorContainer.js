@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
@@ -57,24 +57,14 @@ const EditorWrapper = ({ history }) => {
     const projectPing = setInterval(resetCron, 59000)
 
     const checkIfProjectIsActive = () => {
-      console.log(
-        'currentProject.additionalPorts',
-        currentProject?.additionalPorts,
-        '!currentProject?.additionalPorts?.length CONDITION',
-        !currentProject?.additionalPorts?.length
-      )
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
-        console.log('hello')
         const path = getWindowPathName()
         if (path.includes('/embed/editor')) {
-          console.log('hello 1')
-
           const searchParams = getWindowSearchParams()
           const repoUrl = searchParams.get('repoUrl')
           history.push(`/embed/runProject/?repoUrl=${repoUrl}`)
         } else {
-          console.log('hello 2')
           history.push('/app/dashboard')
         }
       }
