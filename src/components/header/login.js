@@ -80,23 +80,20 @@ const Option = styled.a`
   color: ${({ theme }) => theme.colors.c1};
 
   svg {
-    fill: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
+    fill: ${({ theme }) => theme.colors.c2};
     width: 2.2vh;
     height: auto;
     margin-right: 5px;
   }
 
   :hover {
-    background-color: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
+    background-color: ${({ theme }) => theme.colors.c1};
     cursor: pointer;
     color: ${({ theme }) => theme.colors.c2};
   }
 
   :hover svg {
-    fill: ${({ theme, invert }) =>
-      invert ? theme.colors.c2 : theme.colors.c1};
+    fill: ${({ theme }) => theme.colors.c2};
     cursor: pointer;
   }
 `
@@ -188,13 +185,12 @@ const LoginDropdown = () => {
             <MenuWrapper>
               {loginOptions.map((item, index) => (
                 <Option
-                  invert
                   key={item.value}
                   href={item.href}
                   isLast={index === loginOptions.length - 1 ? true : false}
                 >
                   {item.icon}
-                  <OptionText invert>{item.label}</OptionText>
+                  <OptionText>{item.label}</OptionText>
                 </Option>
               ))}
             </MenuWrapper>
@@ -240,9 +236,8 @@ const UserDropdown = props => {
                     type: 'LOGOUT',
                   })
                 }}
-                invert
               >
-                <OptionText invert>Logout</OptionText>
+                <OptionText>Logout</OptionText>
               </Option>
             </MenuWrapper>
           </DropdownWrapper>
