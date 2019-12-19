@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
@@ -15,7 +15,7 @@ const getUserToken = selectors.api.getApiData({
   defaultValue: null,
 })
 
-const EditorWrapper = () => {
+const EditorWrapper = ({ history }) => {
   const dispatch = useDispatch()
 
   const currentProject = useSelector(selectors.api.getCurrentProject)
@@ -57,15 +57,25 @@ const EditorWrapper = () => {
     const projectPing = setInterval(resetCron, 59000)
 
     const checkIfProjectIsActive = () => {
+      console.log(
+        'currentProject.additionalPorts',
+        currentProject?.additionalPorts,
+        '!currentProject?.additionalPorts?.length CONDITION',
+        !currentProject?.additionalPorts?.length
+      )
       /* This condition means that the project has been closed but user is still inside editor */
       if (!currentProject?.additionalPorts?.length) {
+        console.log('hello')
         const path = getWindowPathName()
-        if (path.includes('embed')) {
+        if (path.includes('/embed/editor')) {
+          console.log('hello 1')
+
           const searchParams = getWindowSearchParams()
           const repoUrl = searchParams.get('repoUrl')
-          return <Redirect to={`/embed/runProject/?repoUrl=${repoUrl}`} />
+          history.push(`/embed/runProject/?repoUrl=${repoUrl}`)
         } else {
-          return <Redirect to="/app/dashboard" />
+          console.log('hello 2')
+          history.push('/app/dashboard')
         }
       }
     }
@@ -106,4 +116,4 @@ const EditorWrapper = () => {
   )
 }
 
-export default memo(EditorWrapper)
+export default memo(withRouter(EditorWrapper))
