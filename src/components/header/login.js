@@ -9,7 +9,7 @@ import DetectBrowser from 'react-detect-browser'
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 
-import FullScreenLoader from './fullScreenLoader'
+import FullScreenLoader from '../fullScreenLoader'
 import { persistor } from 'wrapper'
 import { getWindowPathName } from 'utils'
 

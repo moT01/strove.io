@@ -1,6 +1,5 @@
 import { SmallCloud, MediumCloud, BigCloud } from './clouds'
 import Header from './header'
-import Login from './logos'
 import SEO from './seo'
 import AddProjectModals from './addProjectModals'
 import AddProjectProvider from './addProjectProvider'
@@ -25,7 +24,6 @@ export {
   MediumCloud,
   BigCloud,
   Header,
-  Login,
   SEO,
   AddProjectModals,
   AddProjectProvider,

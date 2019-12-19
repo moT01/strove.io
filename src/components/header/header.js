@@ -10,7 +10,7 @@ import { Icon } from 'antd'
 
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'components/svgs'
-import LatencyIndicator from './latencyIndicator'
+import LatencyIndicator from '../latencyIndicator'
 import Login from './login'
 import { getWindowPathName } from 'utils'
 

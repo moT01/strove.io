@@ -15,7 +15,7 @@ import Modal from './modal'
 import GetStarted from './getStarted'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
-import Header from './header'
+import Header from './header/header'
 
 const FullFadeIn = keyframes`
   0% {
