@@ -8,6 +8,7 @@ import TermsAndConditions from './termsAndConditions'
 import { GoBackTo, Login } from './fromEmbed'
 import RunProject from './runProject'
 import Enterprise from './enterprise'
+import Editor from './editor'
 
 export {
   Home,
@@ -21,4 +22,5 @@ export {
   Login,
   RunProject,
   Enterprise,
+  Editor,
 }

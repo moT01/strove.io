@@ -14,9 +14,10 @@ import {
   Login,
   RunProject,
   Enterprise,
+  Editor
 } from 'pages'
 
-import { PrivateRoute, Editor, Dashboard } from 'components'
+import { PrivateRoute, Dashboard } from 'components'
 
 import Wrapper from './wrapper'
 

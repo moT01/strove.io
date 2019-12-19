@@ -6,7 +6,6 @@ import AddProjectModals from './addProjectModals'
 import AddProjectProvider from './addProjectProvider'
 import FullScreenLoader from './fullScreenLoader'
 import Dashboard from './dashboard'
-import Editor from './editor'
 import GetStarted from './getStarted'
 import Layout from './layout'
 import Logos from './logos.js'
@@ -32,7 +31,6 @@ export {
   AddProjectProvider,
   FullScreenLoader,
   Dashboard,
-  Editor,
   GetStarted,
   Layout,
   Logos,

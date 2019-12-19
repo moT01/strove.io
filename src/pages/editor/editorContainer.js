@@ -1,5 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
-import styled from 'styled-components/macro'
+import React, { useState, useEffect, memo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs'
 import { Redirect } from 'react-router-dom'
@@ -9,23 +8,14 @@ import { selectors } from 'state'
 import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
-
-const StyledIframe = styled.iframe`
-  display: block;
-  background: ${({ theme }) => theme.colors.c3};
-  border: none;
-  min-height: ${props => (props.isEmbed ? 'calc(100vh - 20px)' : '97vh')};
-  width: 100vw;
-  margin: 0;
-  opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
-`
+import Editor from './editor'
 
 const getUserToken = selectors.api.getApiData({
   fields: ['user', 'siliskyToken'],
   defaultValue: null,
 })
 
-const Editor = () => {
+const EditorWrapper = () => {
   const dispatch = useDispatch()
 
   const currentProject = useSelector(selectors.api.getCurrentProject)
@@ -89,9 +79,7 @@ const Editor = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
-  const randomId = Math.random()
-    .toString(36)
-    .substring(7)
+  const setLoaderVisibleFalse = useCallback(() => setLoaderVisible(false), [])
 
   return (
     <>
@@ -104,14 +92,18 @@ const Editor = () => {
           color="#0072ce"
         />
       )}
-      <StyledIframe
-        isEmbed={isEmbed}
-        loaderVisible={loaderVisible}
-        onLoad={() => setLoaderVisible(false)}
-        src={`${process.env.REACT_APP_STROVE_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
-      />
+      {token && machineId && port && (
+        <Editor
+          token={token}
+          machineId={machineId}
+          port={port}
+          onLoad={setLoaderVisibleFalse}
+          isEmbed={isEmbed}
+          loaderVisible={loaderVisible}
+        />
+      )}
     </>
   )
 }
 
-export default memo(Editor)
+export default memo(EditorWrapper)
