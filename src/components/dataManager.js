@@ -80,16 +80,15 @@ export default memo(
     const id = activeProjectData?.id
 
     useEffect(() => {
-      if (editorPort) {
-        dispatch({
-          type: C.api.UPDATE_ITEM,
-          payload: {
-            storeKey: 'myProjects',
-            id,
-            data: { editorPort, machineId, additionalPorts, machineName },
-          },
-        })
-      }
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: 'myProjects',
+          id,
+          data: { editorPort, machineId, additionalPorts, machineName },
+        },
+      })
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [machineName, machineId, editorPort])
 
