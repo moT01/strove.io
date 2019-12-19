@@ -222,7 +222,7 @@ const UserDropdown = props => {
   return (
     <Downshift>
       {({ getToggleButtonProps, isOpen }) => (
-        <span>
+        <div>
           <Wrapper {...getToggleButtonProps({})}>
             <StyledDropdown>
               {!isMobileOnly && (
@@ -250,7 +250,7 @@ const UserDropdown = props => {
               </Option>
             </MenuWrapper>
           </DropdownWrapper>
-        </span>
+        </div>
       )}
     </Downshift>
   )
