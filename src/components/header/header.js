@@ -164,7 +164,7 @@ const LoginWrapper = styled.div`
   }
 `
 
-const LoginButton = styled.button`
+const PreviewButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -173,10 +173,11 @@ const LoginButton = styled.button`
   background: none;
   border: none;
   text-decoration: none;
-  font-weight: 300;
   line-height: 1;
   padding: 0;
   cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
   :focus {
     outline: 0;
@@ -374,13 +375,13 @@ const Header = () => {
             {({ getToggleButtonProps, isOpen }) => (
               // This has to be done with <div>. Using styled components causes Downshift crash
               <div style={{ position: 'relative' }}>
-                <LoginButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
+                <PreviewButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
                   {isMobileOnly ? (
                     <StyledDesktopIcon />
                   ) : (
                     <LinkText isEmbed={isEmbed}>Preview</LinkText>
                   )}
-                </LoginButton>
+                </PreviewButton>
                 <DropdownWrapper isEmbed={isEmbed}>
                   {isOpen && (
                     <MenuWrapper>
