@@ -39,7 +39,6 @@ const StyledDesktopIcon = styled(Desktop)`
   height: 20px;
   width: 20px;
   fill: ${({ theme }) => theme.colors.c2};
-  font-size: 25px;
 `
 
 const StyledAntdIcon = styled(Icon)`
@@ -81,7 +80,7 @@ const LinkWrapper = styled.div`
 
 const LinkText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
+  font-size: 14px;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -102,7 +101,7 @@ const LinkText = styled.div`
 
 const StyledA = styled.a`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
+  font-size: 14px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -113,10 +112,6 @@ const StyledA = styled.a`
   cursor: pointer;
   text-decoration: none;
   animation: ${FadeIn} 0.3s ease-out;
-  @media (max-width: 767px) {
-    height: 5vh;
-    font-size: 1.8rem;
-  }
 
   :hover {
     color: ${({ theme }) => theme.colors.c3};
@@ -214,15 +209,12 @@ const MenuWrapper = styled.div`
 `
 
 const Text = styled.h3`
-  font-size: 1.2rem;
+  font-size: 14px;
   color: ${({ theme }) => theme.colors.c2};
   transition: color 0.3s;
   margin: 0;
   font-weight: 300;
   line-height: 1;
-  @media (max-width: 767px) {
-    font-size: 16px;
-  }
   :hover {
     color: ${({ theme }) => theme.colors.c3};
   }
@@ -247,7 +239,7 @@ const Option = styled(Link)`
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
   height: 32px;
-  font-size: 1.2rem;
+  font-size: 14px;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
@@ -283,7 +275,7 @@ const Option = styled(Link)`
 `
 
 const PortOption = styled(OptionText)`
-  font-size: 16px;
+  font-size: 14px;
 `
 
 const DropdownWrapper = styled.div`
