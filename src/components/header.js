@@ -103,7 +103,7 @@ const LinkText = styled.h3`
   }
 `
 
-const DocsLink = styled.a`
+const StyledA = styled.a`
   color: ${({ theme }) => theme.colors.c2};
   font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
   display: flex;
@@ -126,7 +126,7 @@ const DocsLink = styled.a`
   }
 `
 
-const StroveLink = styled(DocsLink)`
+const StroveLink = styled(StyledA)`
   font-size: 14px;
 `
 
@@ -435,23 +435,23 @@ const Header = () => {
 
         {(window.location.pathname !== '/app/editor/' || !isMobileOnly) &&
         isMobileOnly ? (
-          <DocsLink
+          <StyledA
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
             isEmbed={isEmbed}
           >
             <StyledAntdIcon type="file-text" />
-          </DocsLink>
+          </StyledA>
         ) : (
-          <DocsLink
+          <StyledA
             href="https://docs.strove.io"
             target="_blank"
             rel="noopener noreferrer"
             isEmbed={isEmbed}
           >
             Docs
-          </DocsLink>
+          </StyledA>
         )}
       </HeaderWrapper>
       {window.location.pathname.includes('editor') && <LatencyIndicator />}
