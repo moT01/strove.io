@@ -42,8 +42,12 @@ const StyledDesktopIcon = styled(Desktop)`
 `
 
 const StyledAntdIcon = styled(Icon)`
-  height: 25px;
-  width: 25px;
+  svg {
+    height: 25px;
+    width: 25px;
+  }
+  line-height: 1;
+
   fill: ${({ theme }) => theme.colors.c2};
 `
 
