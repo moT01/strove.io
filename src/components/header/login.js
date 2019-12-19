@@ -172,6 +172,11 @@ const getUserData = createSelector(
   (username, userphoto) => ({ username, userphoto })
 )
 
+const StyledAntdIcon = styled(Icon)`
+  align-items: center;
+  display: flex;
+`
+
 const LoginDropdown = () => {
   const isEmbed = getWindowPathName().includes('embed')
 
@@ -223,7 +228,7 @@ const UserDropdown = props => {
               )}
               <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
                 <UserPhoto src={props.user.userphoto} />
-                <Icon type="caret-down" />
+                <StyledAntdIcon type="caret-down" />
               </Inline>
             </StyledDropdown>
           </Wrapper>
