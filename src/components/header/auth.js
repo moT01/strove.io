@@ -24,10 +24,8 @@ const LoginButton = styled.button`
   background: none;
   border: none;
   text-decoration: none;
-  font-weight: 300;
   line-height: 1;
   padding: 0;
-  height: 3vh;
   cursor: pointer;
 
   :focus {
