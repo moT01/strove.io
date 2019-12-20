@@ -11,7 +11,7 @@ import { Icon } from 'antd'
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'components/svgs'
 import LatencyIndicator from '../latencyIndicator'
-import Login from './login'
+import Login from './auth'
 import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
