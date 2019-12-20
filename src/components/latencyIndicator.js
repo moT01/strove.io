@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux'
 import { selectors } from 'state'
 import { getWindowPathName } from 'utils'
 
+const lowerLatencyThreshold = 20
+const higherLatencyThreshold = 50
+
 const LatencyCircle = styled.div`
   border-radius: 50%;
   width: 16px;
@@ -16,9 +19,9 @@ const LatencyCircle = styled.div`
   background: ${({ theme }) => theme.colors.c2};
   text-align: center;
   background-color: ${({ latency, theme }) =>
-    latency > 10 && latency < 30
+    latency > lowerLatencyThreshold && latency < higherLatencyThreshold
       ? 'yellow'
-      : latency <= 10
+      : latency <= lowerLatencyThreshold
       ? theme.colors.c6
       : theme.colors.c7};
 `
@@ -45,7 +48,8 @@ const LatencyIndicator = () => {
       {!isMobileOnly && (
         <StyledText isEmbed={isEmbed}>
           Latency: {latency}ms{' '}
-          {latency > 10 && '- Syntax highlight might take a moment to load'}
+          {latency > lowerLatencyThreshold &&
+            '- Syntax highlight might take a moment to load'}
         </StyledText>
       )}
     </LatencyWrapper>
