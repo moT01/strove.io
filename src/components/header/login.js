@@ -4,15 +4,14 @@ import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
-import DetectBrowser from 'react-detect-browser'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
-
-import FullScreenLoader from '../fullScreenLoader'
 import { persistor } from 'wrapper'
 import { getWindowPathName } from 'utils'
+
+import FullScreenLoader from '../fullScreenLoader'
 
 const LoginButton = styled.button`
   color: ${({ theme }) => theme.colors.c2};
@@ -223,9 +222,6 @@ const UserDropdown = props => {
         <div>
           <Wrapper {...getToggleButtonProps({})}>
             <StyledDropdown>
-              {!isMobileOnly && (
-                <Text isEmbed={isEmbed}>{props.user.username}</Text>
-              )}
               <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
                 <UserPhoto src={props.user.userphoto} />
                 <StyledAntdIcon type="caret-down" />
@@ -254,19 +250,15 @@ const UserDropdown = props => {
   )
 }
 
-const Login = ({ browser }) => {
+const Login = () => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
   return !user.username && !isLoading ? (
-    <LoginDropdown browser={browser} />
+    <LoginDropdown />
   ) : (
-    <UserDropdown user={user} browser={browser} />
+    <UserDropdown user={user} />
   )
 }
 
-const LoginWithBrowserInfo = () => (
-  <DetectBrowser>{({ browser }) => <Login browser={browser} />}</DetectBrowser>
-)
-
-export default memo(LoginWithBrowserInfo)
+export default memo(Login)
