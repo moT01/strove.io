@@ -11,7 +11,7 @@ import { Icon } from 'antd'
 import { selectors } from 'state'
 import { Strove, Dashboard, Desktop } from 'components/svgs'
 import LatencyIndicator from '../latencyIndicator'
-import Login from './auth'
+import Auth from './auth'
 import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
@@ -147,7 +147,7 @@ const PreviewLink = styled(Link)`
   }
 `
 
-const LoginWrapper = styled.div`
+const AuthWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -457,9 +457,9 @@ const Header = () => {
       )}
 
       {!window.location.pathname.includes('embed/editor') && (
-        <LoginWrapper>
-          <Login isEmbed={isEmbed} />
-        </LoginWrapper>
+        <AuthWrapper>
+          <Auth isEmbed={isEmbed} />
+        </AuthWrapper>
       )}
     </HeaderSection>
   )
