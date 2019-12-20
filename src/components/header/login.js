@@ -119,9 +119,6 @@ const Text = styled.span`
   margin: 0;
   font-weight: 600;
   line-height: 1;
-  @media (max-width: 767px) {
-    font-size: 1.4rem;
-  }
   :hover {
     color: ${({ theme }) => theme.colors.c3};
     cursor: pointer;
