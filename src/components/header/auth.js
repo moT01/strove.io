@@ -114,14 +114,19 @@ const UserPhoto = styled.img`
   margin: 0;
 `
 
-const Text = styled.span`
+const Text = styled.div`
   font-size: 16px;
   margin: 0;
   font-weight: 600;
   line-height: 1;
+  border: 1px solid white;
+  padding: 6px;
+  border-radius: 6px;
+  border-width: 1px;
   :hover {
     color: ${({ theme }) => theme.colors.c3};
     cursor: pointer;
+    border-color: black;
   }
 `
 
