@@ -84,7 +84,7 @@ const LinkWrapper = styled.div`
 
 const LinkText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 14px;
+  font-size: 16px;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -105,7 +105,7 @@ const LinkText = styled.div`
 
 const StyledA = styled.a`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -123,7 +123,7 @@ const StyledA = styled.a`
 `
 
 const StroveLink = styled(StyledA)`
-  font-size: 14px;
+  font-size: 16px;
 `
 
 const StyledLink = styled(Link)`
@@ -213,7 +213,7 @@ const MenuWrapper = styled.div`
 `
 
 const Text = styled.h3`
-  font-size: 14px;
+  font-size: 16px;
   color: ${({ theme }) => theme.colors.c2};
   transition: color 0.3s;
   margin: 0;
@@ -243,7 +243,7 @@ const Option = styled(Link)`
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
   height: 32px;
-  font-size: 14px;
+  font-size: 16px;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
@@ -279,7 +279,7 @@ const Option = styled(Link)`
 `
 
 const PortOption = styled(OptionText)`
-  font-size: 14px;
+  font-size: 16px;
 `
 
 const DropdownWrapper = styled.div`
