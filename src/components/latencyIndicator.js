@@ -8,8 +8,8 @@ import { getWindowPathName } from 'utils'
 
 const LatencyCircle = styled.div`
   border-radius: 50%;
-  width: ${props => (props.isEmbed ? '16px' : '20px')};
-  height: ${props => (props.isEmbed ? '16px' : '20px')};
+  width: 16px;
+  height: 16px;
   padding: 8px;
   margin: auto;
 
@@ -29,8 +29,9 @@ const LatencyWrapper = styled.div`
 
 const StyledText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEmbed ? '16px' : '0.8rem')};
+  font-size: 16px;
   margin-left: 5px;
+  font-weight: 600;
   text-overflow: ellipsis;
 `
 
