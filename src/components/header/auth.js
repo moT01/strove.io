@@ -119,15 +119,21 @@ const Text = styled.div`
   margin: 0;
   font-weight: 600;
   line-height: 1;
-  border: 1px solid white;
   padding: 6px;
-  border-radius: 6px;
-  border-width: 1px;
   :hover {
     color: ${({ theme }) => theme.colors.c3};
     cursor: pointer;
-    border-color: black;
   }
+`
+
+const AuthText = styled(Text)`
+border: 1px solid white;
+border-radius: 6px;
+border-width: 1px;
+:hover {
+  cursor: pointer;
+  border-color: black;
+}
 `
 
 const OptionText = styled(Text)`
@@ -186,7 +192,7 @@ const LoginDropdown = () => {
       {({ getToggleButtonProps, isOpen }) => (
         <div>
           <LoginButton {...getToggleButtonProps({})}>
-            <Text isEmbed={isEmbed}>Login</Text>
+            <AuthText isEmbed={isEmbed}>Login</AuthText>
           </LoginButton>
           <DropdownWrapper hidden={!isOpen}>
             <MenuWrapper>
