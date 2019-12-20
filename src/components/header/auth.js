@@ -115,7 +115,7 @@ const UserPhoto = styled.img`
 `
 
 const Text = styled.span`
-  font-size: ${props => (props.isEmbed ? '18px' : '1.2rem')};
+  font-size: 16px;
   margin: 0;
   font-weight: 600;
   line-height: 1;
