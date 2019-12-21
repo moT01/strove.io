@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { theme } from 'consts'
 import { selectors } from 'state'
-import { StroveButton, AddProjectProvider, GlobalStyles } from 'components'
+import { StroveButton, AddProjectProvider, GlobalStyles, PoweredBy } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
@@ -64,6 +64,7 @@ const Run = ({ addProject, history }) => {
         <StyledButton isPrimary onClick={onClick}>
           <LoginText invert>Run with Strove</LoginText>
         </StyledButton>
+        <PoweredBy />
       </MenuWrapper>
     </Wrapper>
   )
