@@ -14,7 +14,6 @@ import Auth from './auth'
 import PreviewDropdown from './previewDropdown'
 import DashboardLink from './dashboardLink'
 import { getWindowPathName } from 'utils'
-import Button from 'components/stroveButton'
 
 const FadeIn = keyframes`
   0% {
@@ -151,7 +150,7 @@ const CopyWrapper = styled.div`
 const Header = () => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const isEmbed = getWindowPathName().includes('embed')
-  const [tabs, setTabs] = useState()
+  const [tabs, setTabs] = useState([])
 
   return (
     <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
@@ -173,7 +172,7 @@ const Header = () => {
         )}
         <DashboardLink />
 
-        {window.location.pathname.includes('editor') && <PreviewDropdown />}
+         <PreviewDropdown />
 
         {window.location.pathname === '/app/editor/' &&
           currentProject?.repoLink && (

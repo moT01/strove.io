@@ -222,45 +222,49 @@ const PreviewDropdown = () => {
   }, [project?.machineName, project?.additionalPorts])
 
   return (
-    <Downshift>
-      {({ getToggleButtonProps, isOpen }) => (
-        // This has to be done with <div>. Using styled components causes Downshift crash
-        <div style={{ position: 'relative' }}>
-          <PreviewButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
-            {isMobileOnly ? (
-              <StyledDesktopIcon />
-            ) : (
-              <LinkText isEmbed={isEmbed}>Preview</LinkText>
-            )}
-          </PreviewButton>
-          <DropdownWrapper isEmbed={isEmbed}>
-            {isOpen && (
-              <MenuWrapper>
-                {ports.map((item, index, arr) => (
-                  <Option
-                    invert
-                    key={item.value}
-                    href={item.href}
-                    isEmbed={isEmbed}
-                    isLast={index === arr.length - 1}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <PreviewLink
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <PortOption invert>{item.label}</PortOption>
-                    </PreviewLink>
-                  </Option>
-                ))}
-              </MenuWrapper>
-            )}
-          </DropdownWrapper>
-        </div>
+    <>
+      {window.location.pathname.includes('editor') && (
+        <Downshift>
+          {({ getToggleButtonProps, isOpen }) => (
+            // This has to be done with <div>. Using styled components causes Downshift crash
+            <div style={{ position: 'relative' }}>
+              <PreviewButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
+                {isMobileOnly ? (
+                  <StyledDesktopIcon />
+                ) : (
+                  <LinkText isEmbed={isEmbed}>Preview</LinkText>
+                )}
+              </PreviewButton>
+              <DropdownWrapper isEmbed={isEmbed}>
+                {isOpen && (
+                  <MenuWrapper>
+                    {ports.map((item, index, arr) => (
+                      <Option
+                        invert
+                        key={item.value}
+                        href={item.href}
+                        isEmbed={isEmbed}
+                        isLast={index === arr.length - 1}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <PreviewLink
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <PortOption invert>{item.label}</PortOption>
+                        </PreviewLink>
+                      </Option>
+                    ))}
+                  </MenuWrapper>
+                )}
+              </DropdownWrapper>
+            </div>
+          )}
+        </Downshift>
       )}
-    </Downshift>
+    </>
   )
 }
 
