@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
@@ -8,11 +8,13 @@ import { Copy } from 'components/svgs'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'
-import { Strove, Dashboard } from 'components/svgs'
+import { Strove } from 'components/svgs'
 import LatencyIndicator from '../latencyIndicator'
 import Auth from './auth'
 import PreviewDropdown from './previewDropdown'
+import DashboardLink from './dashboardLink'
 import { getWindowPathName } from 'utils'
+import Button from 'components/stroveButton'
 
 const FadeIn = keyframes`
   0% {
@@ -24,12 +26,6 @@ const FadeIn = keyframes`
 `
 
 const StyledStroveIcon = styled(Strove)`
-  height: 25px;
-  width: 25px;
-  fill: ${({ theme }) => theme.colors.c2};
-`
-
-const StyledDashboardIcon = styled(Dashboard)`
   height: 25px;
   width: 25px;
   fill: ${({ theme }) => theme.colors.c2};
@@ -154,9 +150,7 @@ const CopyWrapper = styled.div`
 
 const Header = () => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
-  const user = useSelector(selectors.api.getUser)
   const isEmbed = getWindowPathName().includes('embed')
-  const [isVisible, setVisible] = useState(true)
   const [tabs, setTabs] = useState()
 
   return (
@@ -177,19 +171,10 @@ const Header = () => {
             </StyledLink>
           </LinkWrapper>
         )}
-        {user && !isEmbed && (
-          <LinkWrapper mobile={isMobileOnly}>
-            <StyledLink to="/app/dashboard">
-              {isMobileOnly ? (
-                <StyledDashboardIcon />
-              ) : (
-                <LinkText>Dashboard</LinkText>
-              )}
-            </StyledLink>
-          </LinkWrapper>
-        )}
+        <DashboardLink />
 
         {window.location.pathname.includes('editor') && <PreviewDropdown />}
+
         {window.location.pathname === '/app/editor/' &&
           currentProject?.repoLink && (
             <CopyWrapper
