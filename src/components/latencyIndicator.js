@@ -11,8 +11,8 @@ const higherLatencyThreshold = 50
 
 const LatencyCircle = styled.div`
   border-radius: 50%;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   padding: 8px;
   margin: auto;
 
@@ -32,9 +32,9 @@ const LatencyWrapper = styled.div`
 
 const StyledText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 16px;
+  font-size: 14px;
   margin-left: 5px;
-  font-weight: 600;
+  font-weight: 300;
   text-overflow: ellipsis;
 `
 

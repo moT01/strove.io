@@ -98,8 +98,8 @@ const Option = styled.a`
 
 const Inline = styled.div`
   display: flex;
-  width: 32px;
-  height: 32px;
+  width: 18px;
+  height: 18px;
   margin-left: 4px;
   background: ${({ theme }) => theme.colors.c1};
 `
@@ -115,7 +115,7 @@ const UserPhoto = styled.img`
 const Text = styled.div`
   font-size: 16px;
   margin: 0;
-  font-weight: 600;
+  font-weight: 300;
   line-height: 1;
   padding: 6px;
   :hover {

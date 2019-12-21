@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
-import Downshift from 'downshift'
 import copyToClipboard from 'copy-to-clipboard'
 import { Copy } from 'components/svgs'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'
-import { Strove, Dashboard, Desktop } from 'components/svgs'
+import { Strove, Dashboard } from 'components/svgs'
 import LatencyIndicator from '../latencyIndicator'
 import Auth from './auth'
+import PreviewDropdown from './previewDropdown'
 import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
@@ -35,12 +35,6 @@ const StyledDashboardIcon = styled(Dashboard)`
   fill: ${({ theme }) => theme.colors.c2};
 `
 
-const StyledDesktopIcon = styled(Desktop)`
-  height: 20px;
-  width: 20px;
-  fill: ${({ theme }) => theme.colors.c2};
-`
-
 const StyledAntdIcon = styled(Icon)`
   svg {
     height: 25px;
@@ -57,7 +51,7 @@ const HeaderSection = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 64px;
+  height: 20px;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   background: ${({ theme }) => theme.colors.c1};
@@ -91,7 +85,7 @@ const LinkText = styled.div`
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
-  font-weight: 600;
+  font-weight: 300;
   margin: 0;
   cursor: pointer;
 
@@ -111,7 +105,7 @@ const StyledA = styled.a`
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
-  font-weight: 600;
+  font-weight: 300;
   padding: 0 20px;
   cursor: pointer;
   text-decoration: none;
@@ -130,21 +124,7 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
-  font-weight: 600;
-`
-
-const PreviewLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.c2};
-  text-decoration: 'none';
-  position: relative;
-  display: flex;
-  height: ${props => (props.isEmbed ? '18px' : 'auto')};
-  padding: 0;
-  text-decoration: none;
-
-  :hover {
-    text-decoration: none;
-  }
+  font-weight: 300;
 `
 
 const AuthWrapper = styled.div`
@@ -163,134 +143,6 @@ const AuthWrapper = styled.div`
   }
 `
 
-const PreviewButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  position: 'relative';
-  background: none;
-  border: none;
-  text-decoration: none;
-  line-height: 1;
-  padding: 0;
-  cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-
-  :focus {
-    outline: 0;
-  }
-
-  span {
-    color: ${({ theme }) => theme.colors.c2};
-  }
-
-  :hover {
-    span {
-      color: ${({ theme }) => theme.colors.c3};
-    }
-  }
-
-  > {
-    vertical-align: bottom;
-  }
-`
-
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-style: solid;
-  background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
-  position: relative;
-`
-
-const Text = styled.h3`
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.c2};
-  transition: color 0.3s;
-  margin: 0;
-  font-weight: 300;
-  line-height: 1;
-  :hover {
-    color: ${({ theme }) => theme.colors.c3};
-  }
-`
-
-const OptionText = styled(Text)`
-  color: ${({ theme }) => theme.colors.c1};
-  font-weight: 300;
-  text-decoration: none;
-  :hover {
-    color: ${({ theme }) => theme.colors.c2};
-    transition: color 0.1s;
-    text-decoration: none;
-  }
-`
-const Option = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
-  width: auto;
-  height: 32px;
-  font-size: 16px;
-  border-bottom-left-radius: ${props => props.isLast && '3px'};
-  border-bottom-right-radius: ${props => props.isLast && '3px'};
-  z-index: 4;
-  text-decoration: none;
-  font-weight: 300;
-  min-width: ${props => (props.isEmbed ? '0' : '150px')};
-
-  svg {
-    fill: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
-    height: auto;
-    margin-right: 5px;
-  }
-
-  :hover {
-    background-color: ${({ theme, invert }) =>
-      !invert ? theme.colors.c2 : theme.colors.c1};
-    cursor: pointer;
-    text-decoration: none;
-    ${OptionText} {
-      color: ${({ theme }) => theme.colors.c2};
-      transition: color 0.1s;
-      text-decoration: none;
-    }
-  }
-
-  :hover svg {
-    fill: ${({ theme, invert }) =>
-      invert ? theme.colors.c2 : theme.colors.c1};
-    cursor: pointer;
-  }
-`
-
-const PortOption = styled(OptionText)`
-  font-size: 16px;
-`
-
-const DropdownWrapper = styled.div`
-  cursor: pointer;
-  position: absolute;
-  background: none;
-  display: flex;
-  right: ${props => (props.isEmbed ? '-75px' : '-10px')};
-  display: ${({ display }) => (display ? 'visible' : 'hidden')};
-`
-
 const CopyWrapper = styled.div`
   cursor: pointer;
   display: flex;
@@ -301,40 +153,11 @@ const CopyWrapper = styled.div`
 `
 
 const Header = () => {
-  const [ports, setPorts] = useState([])
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const user = useSelector(selectors.api.getUser)
-  const project = useSelector(selectors.api.getCurrentProject)
   const isEmbed = getWindowPathName().includes('embed')
-
-  useEffect(() => {
-    if (window.location.pathname.includes('editor')) {
-      if (project?.machineName) {
-        setPorts(
-          project.additionalPorts.map(portPair => {
-            let href
-            /* Env's are loaded as strings on production */
-            if (process.env.REACT_APP_IS_OPENSOURCE === 'true') {
-              href = `https://${portPair[1]}.vmopen${
-                project.machineName.match(/\d+/g)[0]
-              }.silisky.com`
-            } else if (process.env.NODE_ENV === 'development') {
-              href = `https://${portPair[1]}.vmdev${
-                project.machineName.match(/\d+/g)[0]
-              }.silisky.com`
-            } else {
-              href = `https://${portPair[1]}.${project.machineName}.silisky.com`
-            }
-            return {
-              label: `http://0.0.0.0:${portPair[0]}`,
-              href,
-            }
-          })
-        )
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project?.machineName, project?.additionalPorts])
+  const [isVisible, setVisible] = useState(true)
+  const [tabs, setTabs] = useState()
 
   return (
     <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
@@ -366,47 +189,7 @@ const Header = () => {
           </LinkWrapper>
         )}
 
-        {window.location.pathname.includes('editor') && (
-          <Downshift>
-            {({ getToggleButtonProps, isOpen }) => (
-              // This has to be done with <div>. Using styled components causes Downshift crash
-              <div style={{ position: 'relative' }}>
-                <PreviewButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
-                  {isMobileOnly ? (
-                    <StyledDesktopIcon />
-                  ) : (
-                    <LinkText isEmbed={isEmbed}>Preview</LinkText>
-                  )}
-                </PreviewButton>
-                <DropdownWrapper isEmbed={isEmbed}>
-                  {isOpen && (
-                    <MenuWrapper>
-                      {ports.map((item, index, arr) => (
-                        <Option
-                          invert
-                          key={item.value}
-                          href={item.href}
-                          isEmbed={isEmbed}
-                          isLast={index === arr.length - 1}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <PreviewLink
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <PortOption invert>{item.label}</PortOption>
-                          </PreviewLink>
-                        </Option>
-                      ))}
-                    </MenuWrapper>
-                  )}
-                </DropdownWrapper>
-              </div>
-            )}
-          </Downshift>
-        )}
+        {window.location.pathname.includes('editor') && <PreviewDropdown />}
         {window.location.pathname === '/app/editor/' &&
           currentProject?.repoLink && (
             <CopyWrapper
