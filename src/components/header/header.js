@@ -1,6 +1,5 @@
 import React, { memo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 import copyToClipboard from 'copy-to-clipboard'
@@ -8,11 +7,11 @@ import { Copy } from 'components/svgs'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'
-import { Strove } from 'components/svgs'
 import LatencyIndicator from '../latencyIndicator'
 import Auth from './auth'
 import PreviewDropdown from './previewDropdown'
 import DashboardLink from './dashboardLink'
+import HomeLink from './homeLink'
 import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
@@ -22,12 +21,6 @@ const FadeIn = keyframes`
   100% {
     opacity: 1
   }
-`
-
-const StyledStroveIcon = styled(Strove)`
-  height: 25px;
-  width: 25px;
-  fill: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledAntdIcon = styled(Icon)`
@@ -64,11 +57,6 @@ const HeaderWrapper = styled.div`
   > div {
     margin: 0 20px;
   }
-`
-
-const LinkWrapper = styled.div`
-  font-weight: 300;
-  animation: ${FadeIn} 0.3s ease-out;
 `
 
 const LinkText = styled.div`
@@ -115,13 +103,6 @@ const StroveLink = styled(StyledA)`
   font-size: 16px;
 `
 
-const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.c2};
-  text-decoration: none;
-  display: flex;
-  font-weight: 300;
-`
-
 const AuthWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -159,20 +140,11 @@ const Header = () => {
         mobile={isMobileOnly}
         isEmbed={isEmbed}
       >
-        {!isEmbed && (
-          <LinkWrapper mobile={isMobileOnly}>
-            <StyledLink to="/">
-              {isMobileOnly ? (
-                <StyledStroveIcon />
-              ) : (
-                <LinkText>Strove</LinkText>
-              )}
-            </StyledLink>
-          </LinkWrapper>
-        )}
+        <HomeLink />
+
         <DashboardLink />
 
-         <PreviewDropdown />
+        <PreviewDropdown />
 
         {window.location.pathname === '/app/editor/' &&
           currentProject?.repoLink && (
