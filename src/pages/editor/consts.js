@@ -48,7 +48,7 @@ export const codeServerHead = `
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
 		<!-- Prefetch to avoid waterfall -->
-        <link rel="prefetch" href="https://strove.io/static/vscode/semver-umd.js">
-		<link rel="prefetch" href="https://strove.io/static/vscode/applicationinsights-web.js">
+		<link rel="prefetch" href="./static-c36d30657b8fbbf4fd7f622b34490601ddd512be/node_modules/semver-umd/lib/semver-umd.js">
+		<link rel="prefetch" href="./static-c36d30657b8fbbf4fd7f622b34490601ddd512be/node_modules/@microsoft/applicationinsights-web/dist/applicationinsights-web.js">
 	</head>
 `
