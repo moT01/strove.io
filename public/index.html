@@ -26,6 +26,12 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <!--
+      Prefetch workbench styles so they are ready once needed to reduce initial load time.
+      We append the same tag to editor's html head to make this work.
+      TODO: Update workbench styles on each vscode new release in Strove.
+    -->
+    <link data-name="vs/workbench/workbench.web.api" rel="dns-prefetch" href="./%PUBLIC_URL%/vscode/workbench.web.api.css">
     <title>Strove</title>
   </head>
   <body>
