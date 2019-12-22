@@ -31,14 +31,17 @@
     <!--
       Prefetch vscode assets so they are ready once needed to reduce initial load time.
       We append the same tags to editor's html head to make this work.
+
+      Notice how the url is absolute: https://strove.io and not relative.
+      Relative url would not work inside iframe where editor lives.
       TODO: Update workbench styles on each vscode new release in Strove.
     -->
     <!--
       Prefetch workbench styles.
     -->
-    <link data-name="vs/workbench/workbench.web.api" rel="dns-prefetch" href="%PUBLIC_URL%/vscode/workbench.web.api.css">
-    <link rel="prefetch" href="%PUBLIC_URL%/vscode//semver-umd.js">
-		<link rel="prefetch" href="%PUBLIC_URL%/vscode/applicationinsights-web.js">
+    <link data-name="vs/workbench/workbench.web.api" rel="dns-prefetch" href="https://strove.io/static/vscode/workbench.web.api.css">
+    <link rel="prefetch" href="https://strove.io/static/vscode//semver-umd.js">
+		<link rel="prefetch" href="https://strove.io/static/vscode/applicationinsights-web.js">
     <title>Strove</title>
   </head>
   <body>
