@@ -43,7 +43,10 @@ export const codeServerHead = `
 		<!-- Workbench Icon/Manifest/CSS -->
 		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
 		<link rel="manifest" href="./manifest.json">
-        <link rel="apple-touch-icon" href="./static-{{COMMIT}}/out/vs/server/src/media/code-server.png" />
+		<link rel="apple-touch-icon" href="./static-{{COMMIT}}/out/vs/server/src/media/code-server.png" />
+
+
+		<!-- Prefetched beforehand in Strove. Look Strove html for details. -->
         <link data-name="vs/workbench/workbench.web.api" rel="stylesheet" href="https://strove.io/static/vscode/workbench.web.api.css">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 
