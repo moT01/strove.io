@@ -27,11 +27,14 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-    
+
     <!--
-      Prefetch workbench styles so they are ready once needed to reduce initial load time.
-      We append the same tag to editor's html head to make this work.
+      Prefetch vscode assets so they are ready once needed to reduce initial load time.
+      We append the same tags to editor's html head to make this work.
       TODO: Update workbench styles on each vscode new release in Strove.
+    -->
+    <!--
+      Prefetch workbench styles.
     -->
     <link data-name="vs/workbench/workbench.web.api" rel="dns-prefetch" href="%PUBLIC_URL%/vscode/workbench.web.api.css">
     <link rel="prefetch" href="%PUBLIC_URL%/vscode//semver-umd.js">
