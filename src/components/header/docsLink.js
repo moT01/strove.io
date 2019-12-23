@@ -23,7 +23,7 @@ const StyledAntdIcon = styled(Icon)`
 
 const StyledA = styled.a`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEditor ? '16px' : '24px')};
+  font-size: 16px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
