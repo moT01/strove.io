@@ -53,22 +53,17 @@ const LinkText = styled.div`
   }
 `
 
-const HomeLink = props => {
-  return (
-    <>
-      {!props.isEmbed && (
-        <LinkWrapper {...props}>
-          <StyledLink to="/" {...props}>
-            {isMobileOnly ? (
-              <StyledStroveIcon {...props} />
-            ) : (
-              <LinkText {...props}>Strove</LinkText>
-            )}
-          </StyledLink>
-        </LinkWrapper>
-      )}
-    </>
+const HomeLink = props =>
+  !props.isEmbed && (
+    <LinkWrapper {...props}>
+      <StyledLink to="/" {...props}>
+        {isMobileOnly ? (
+          <StyledStroveIcon {...props} />
+        ) : (
+          <LinkText {...props}>Strove</LinkText>
+        )}
+      </StyledLink>
+    </LinkWrapper>
   )
-}
 
 export default HomeLink

@@ -60,7 +60,6 @@ const DashboardLink = props => {
 
   return (
     <>
-      {' '}
       {user && !props.isEmbed && (
         <LinkWrapper mobile={isMobileOnly} {...props}>
           <StyledLink to="/app/dashboard" {...props}>

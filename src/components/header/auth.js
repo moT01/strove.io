@@ -205,35 +205,33 @@ const StyledAntdIcon = styled(Icon)`
   display: flex;
 `
 
-const LoginDropdown = props => {
-  return (
-    <AuthWrapper>
-      <Downshift>
-        {({ getToggleButtonProps, isOpen }) => (
-          <div>
-            <LoginButton {...getToggleButtonProps({})}>
-              <AuthText {...props}>Login</AuthText>
-            </LoginButton>
-            <DropdownWrapper hidden={!isOpen}>
-              <MenuWrapper>
-                {loginOptions.map((item, index) => (
-                  <Option
-                    key={item.value}
-                    href={item.href}
-                    isLast={index === loginOptions.length - 1 ? true : false}
-                  >
-                    {item.icon}
-                    <OptionText>{item.label}</OptionText>
-                  </Option>
-                ))}
-              </MenuWrapper>
-            </DropdownWrapper>
-          </div>
-        )}
-      </Downshift>
-    </AuthWrapper>
-  )
-}
+const LoginDropdown = props => (
+  <AuthWrapper>
+    <Downshift>
+      {({ getToggleButtonProps, isOpen }) => (
+        <div>
+          <LoginButton {...getToggleButtonProps({})}>
+            <AuthText {...props}>Login</AuthText>
+          </LoginButton>
+          <DropdownWrapper hidden={!isOpen}>
+            <MenuWrapper>
+              {loginOptions.map((item, index) => (
+                <Option
+                  key={item.value}
+                  href={item.href}
+                  isLast={index === loginOptions.length - 1 ? true : false}
+                >
+                  {item.icon}
+                  <OptionText>{item.label}</OptionText>
+                </Option>
+              ))}
+            </MenuWrapper>
+          </DropdownWrapper>
+        </div>
+      )}
+    </Downshift>
+  </AuthWrapper>
+)
 
 const UserDropdown = props => {
   const dispatch = useDispatch()

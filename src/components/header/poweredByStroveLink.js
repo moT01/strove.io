@@ -29,14 +29,11 @@ const StyledA = styled.a`
   }
 `
 
-const PoweredByStroveLink = props => {
-  return (
-    props.isEmbed && (
-      <StyledA href="https://strove.io" target="_blank">
-        Powered by Strove.io
-      </StyledA>
-    )
+const PoweredByStroveLink = props =>
+  props.isEmbed && (
+    <StyledA href="https://strove.io" target="_blank">
+      Powered by Strove.io
+    </StyledA>
   )
-}
 
 export default memo(PoweredByStroveLink)

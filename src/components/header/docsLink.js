@@ -40,15 +40,15 @@ const StyledA = styled.a`
   }
 `
 
-const CopyLink = props => {
-  return props.isMobileOnly ? (
+const DocsLink = props =>
+  props.isMobileOnly ? (
     <StyledA
       href="https://docs.strove.io"
       target="_blank"
       rel="noopener noreferrer"
       {...props}
     >
-      <StyledAntdIcon type="file-text" {...props}/>
+      <StyledAntdIcon type="file-text" {...props} />
     </StyledA>
   ) : (
     <StyledA
@@ -60,6 +60,5 @@ const CopyLink = props => {
       Docs
     </StyledA>
   )
-}
 
-export default memo(CopyLink)
+export default memo(DocsLink)
