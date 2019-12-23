@@ -5,7 +5,7 @@ const StyledIframe = styled.iframe`
   display: block;
   background: ${({ theme }) => theme.colors.c3};
   border: none;
-  min-height: ${props => (props.isEmbed ? 'calc(100vh - 20px)' : '97vh')};
+  min-height: calc(100vh - 20px);
   width: 100vw;
   margin: 0;
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
