@@ -48,7 +48,7 @@ const CopyLink = props => {
       rel="noopener noreferrer"
       {...props}
     >
-      <StyledAntdIcon type="file-text" />
+      <StyledAntdIcon type="file-text" {...props}/>
     </StyledA>
   ) : (
     <StyledA

@@ -41,7 +41,7 @@ const HeaderWrapper = styled.div`
 const Header = () => {
   const isEmbed = getWindowPathName().includes('embed')
   const isEditor = getWindowPathName().includes('editor')
-  const [tabs, setTabs] = useState([
+  const [tabs] = useState([
     HomeLink,
     DashboardLink,
     PreviewDropdown,

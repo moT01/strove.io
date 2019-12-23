@@ -37,6 +37,12 @@ const LinkText = styled.div`
   }
 `
 
+const StyledCopyIcon = styled(Copy)`
+  height: ${props => (props.isEditor ? '16px' : '25px')};
+  width: ${props => (props.isEditor ? '16px' : '25px')};
+  fill: ${({ theme }) => theme.colors.c2};
+`
+
 const CopyLink = props => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   return (
@@ -56,7 +62,11 @@ const CopyLink = props => {
             )
           }
         >
-          {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
+          {isMobileOnly ? (
+            <StyledCopyIcon {...props} />
+          ) : (
+            <LinkText>Copy link</LinkText>
+          )}
         </CopyWrapper>
       )}
     </>
