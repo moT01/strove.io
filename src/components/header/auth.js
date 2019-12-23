@@ -91,12 +91,12 @@ const Option = styled.a`
   margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
   width: auto;
   height: 32px;
-  font-size: 1.2rem;
+  font-size: 16px;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
   z-index: 4;
   text-decoration: none;
-  font-weight: 600;
+  transition: color 0.3s ease 0s;
   color: ${({ theme }) => theme.colors.c1};
 
   svg {
@@ -135,7 +135,7 @@ const UserPhoto = styled.img`
 `
 
 const Text = styled.div`
-  font-size: ${props => (props.isEditor ? '16px' : '24px')};
+  font-size: 16px;
   margin: 0;
   font-weight: ${props => (props.isEditor ? '300' : '600')};
   line-height: 1;

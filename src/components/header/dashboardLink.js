@@ -24,7 +24,7 @@ const StyledDashboardIcon = styled(Dashboard)`
 
 const LinkText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: ${props => (props.isEditor ? '16px' : '24px')};
+  font-size: 16px;
   height: 100%;
   display: flex;
   flex-direction: row;
