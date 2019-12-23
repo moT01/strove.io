@@ -1,17 +1,39 @@
 import React, { memo } from 'react'
-import styled from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
-import { isMobileOnly } from 'react-device-detect'
 import { Icon } from 'antd'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { persistor } from 'wrapper'
-import { getWindowPathName } from 'utils'
-
 import FullScreenLoader from '../fullScreenLoader'
+
+const FadeIn = keyframes`
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1
+  }
+`
+
+const AuthWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: ${props =>
+    props.isMobileOnly ? '100%' : props.isEmbed ? '20px' : '2.5vh'};
+  margin: 0;
+  font-weight: 300;
+  animation: ${FadeIn} 0.3s ease-out;
+  cursor: pointer;
+  @media (max-width: 767px) {
+    height: 100%;
+  }
+`
 
 const LoginButton = styled.button`
   color: ${({ theme }) => theme.colors.c2};
@@ -125,13 +147,13 @@ const Text = styled.div`
 `
 
 const AuthText = styled(Text)`
-border: 1px solid white;
-border-radius: 6px;
-border-width: 1px;
-:hover {
-  cursor: pointer;
-  border-color: black;
-}
+  border: 1px solid white;
+  border-radius: 6px;
+  border-width: 1px;
+  :hover {
+    cursor: pointer;
+    border-color: black;
+  }
 `
 
 const OptionText = styled(Text)`
@@ -182,40 +204,39 @@ const StyledAntdIcon = styled(Icon)`
   display: flex;
 `
 
-const LoginDropdown = () => {
-  const isEmbed = getWindowPathName().includes('embed')
-
+const LoginDropdown = props => {
   return (
-    <Downshift>
-      {({ getToggleButtonProps, isOpen }) => (
-        <div>
-          <LoginButton {...getToggleButtonProps({})}>
-            <AuthText isEmbed={isEmbed}>Login</AuthText>
-          </LoginButton>
-          <DropdownWrapper hidden={!isOpen}>
-            <MenuWrapper>
-              {loginOptions.map((item, index) => (
-                <Option
-                  key={item.value}
-                  href={item.href}
-                  isLast={index === loginOptions.length - 1 ? true : false}
-                >
-                  {item.icon}
-                  <OptionText>{item.label}</OptionText>
-                </Option>
-              ))}
-            </MenuWrapper>
-          </DropdownWrapper>
-        </div>
-      )}
-    </Downshift>
+    <AuthWrapper>
+      <Downshift>
+        {({ getToggleButtonProps, isOpen }) => (
+          <div>
+            <LoginButton {...getToggleButtonProps({})}>
+              <AuthText {...props}>Login</AuthText>
+            </LoginButton>
+            <DropdownWrapper hidden={!isOpen}>
+              <MenuWrapper>
+                {loginOptions.map((item, index) => (
+                  <Option
+                    key={item.value}
+                    href={item.href}
+                    isLast={index === loginOptions.length - 1 ? true : false}
+                  >
+                    {item.icon}
+                    <OptionText>{item.label}</OptionText>
+                  </Option>
+                ))}
+              </MenuWrapper>
+            </DropdownWrapper>
+          </div>
+        )}
+      </Downshift>
+    </AuthWrapper>
   )
 }
 
 const UserDropdown = props => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
-  const isEmbed = getWindowPathName().includes('embed')
 
   if (isLoading)
     return (
@@ -223,48 +244,50 @@ const UserDropdown = props => {
     )
 
   return (
-    <Downshift>
-      {({ getToggleButtonProps, isOpen }) => (
-        <div>
-          <Wrapper {...getToggleButtonProps({})}>
-            <StyledDropdown>
-              <Inline mobile={isMobileOnly} isEmbed={isEmbed}>
-                <UserPhoto src={props.user.userphoto} />
-                <StyledAntdIcon type="caret-down" />
-              </Inline>
-            </StyledDropdown>
-          </Wrapper>
-          <DropdownWrapper hidden={!isOpen}>
-            <MenuWrapper>
-              <Option
-                isLast
-                onClick={() => {
-                  persistor.purge()
-                  localStorage.removeItem('token')
-                  dispatch({
-                    type: 'LOGOUT',
-                  })
-                }}
-              >
-                <OptionText>Logout</OptionText>
-              </Option>
-            </MenuWrapper>
-          </DropdownWrapper>
-        </div>
-      )}
-    </Downshift>
+    <AuthWrapper>
+      <Downshift>
+        {({ getToggleButtonProps, isOpen }) => (
+          <div>
+            <Wrapper {...getToggleButtonProps({})}>
+              <StyledDropdown>
+                <Inline {...props}>
+                  <UserPhoto src={props.user.userphoto} />
+                  <StyledAntdIcon type="caret-down" />
+                </Inline>
+              </StyledDropdown>
+            </Wrapper>
+            <DropdownWrapper hidden={!isOpen}>
+              <MenuWrapper>
+                <Option
+                  isLast
+                  onClick={() => {
+                    persistor.purge()
+                    localStorage.removeItem('token')
+                    dispatch({
+                      type: 'LOGOUT',
+                    })
+                  }}
+                >
+                  <OptionText>Logout</OptionText>
+                </Option>
+              </MenuWrapper>
+            </DropdownWrapper>
+          </div>
+        )}
+      </Downshift>
+    </AuthWrapper>
   )
 }
 
-const Login = () => {
+const Auth = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
   return !user.username && !isLoading ? (
-    <LoginDropdown />
+    <LoginDropdown {...props} />
   ) : (
-    <UserDropdown user={user} />
+    <UserDropdown user={user} {...props} />
   )
 }
 
-export default memo(Login)
+export default memo(Auth)
