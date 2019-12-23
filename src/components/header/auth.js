@@ -120,8 +120,8 @@ const Option = styled.a`
 
 const Inline = styled.div`
   display: flex;
-  width: 18px;
-  height: 18px;
+  width: ${props => (props.isEditor ? '18px' : '40px')};
+  height: ${props => (props.isEditor ? '18px' : '40px')};
   margin-left: 4px;
   background: ${({ theme }) => theme.colors.c1};
 `
@@ -135,9 +135,9 @@ const UserPhoto = styled.img`
 `
 
 const Text = styled.div`
-  font-size: 16px;
+  font-size: ${props => (props.isEditor ? '16px' : '24px')};
   margin: 0;
-  font-weight: 300;
+  font-weight: ${props => (props.isEditor ? '300' : '600')};
   line-height: 1;
   padding: 6px;
   :hover {
@@ -188,6 +188,7 @@ const DropdownWrapper = styled.div`
   position: absolute;
   background: none;
   right: 1.5vw;
+  margin-top: 5px;
 `
 
 const getUserName = selectors.api.getUserField('name')
@@ -249,7 +250,10 @@ const UserDropdown = props => {
         {({ getToggleButtonProps, isOpen }) => (
           <div>
             <Wrapper {...getToggleButtonProps({})}>
-              <StyledDropdown>
+              <StyledDropdown {...props}>
+                {!props.isEditor && !props.isMobileOnly && (
+                  <Text {...props}> {props.user.username}</Text>
+                )}
                 <Inline {...props}>
                   <UserPhoto src={props.user.userphoto} />
                   <StyledAntdIcon type="caret-down" />

@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
 import LatencyIndicator from './latencyIndicator'
@@ -11,15 +11,6 @@ import DocsLink from './docsLink'
 import CopyLink from './copyLink'
 import PoweredByStroveLink from './poweredByStroveLink'
 import { getWindowPathName } from 'utils'
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0
-  }
-  100% {
-    opacity: 1
-  }
-`
 
 const HeaderSection = styled.div`
   display: flex;
@@ -47,22 +38,6 @@ const HeaderWrapper = styled.div`
   }
 `
 
-const AuthWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: ${props =>
-    props.mobile ? '100%' : props.isEmbed ? '20px' : '2.5vh'};
-  margin: 0;
-  font-weight: 300;
-  animation: ${FadeIn} 0.3s ease-out;
-  cursor: pointer;
-  @media (max-width: 767px) {
-    height: 100%;
-  }
-`
-
 const Header = () => {
   const isEmbed = getWindowPathName().includes('embed')
   const isEditor = getWindowPathName().includes('editor')
@@ -83,14 +58,8 @@ const Header = () => {
         ))}
       </HeaderWrapper>
       <LatencyIndicator {...locProps} />
-
       <PoweredByStroveLink />
-
-      {!isEmbed && (
-        <AuthWrapper {...locProps}>
-          <Auth {...locProps} />
-        </AuthWrapper>
-      )}
+      <Auth {...locProps} />
     </HeaderSection>
   )
 }
