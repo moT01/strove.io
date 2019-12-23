@@ -5,7 +5,6 @@ import styled from 'styled-components/macro'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'
-import { getWindowPathName } from 'utils'
 import { Desktop } from 'components/svgs'
 
 const Text = styled.h3`
@@ -186,13 +185,12 @@ const StyledDesktopIcon = styled(Desktop)`
   fill: ${({ theme }) => theme.colors.c2};
 `
 
-const PreviewDropdown = () => {
+const PreviewDropdown = props => {
   const [ports, setPorts] = useState([])
-  const isEmbed = getWindowPathName().includes('embed')
   const project = useSelector(selectors.api.getCurrentProject)
 
   useEffect(() => {
-    if (window.location.pathname.includes('editor')) {
+    if (props.isEditor) {
       if (project?.machineName) {
         setPorts(
           project.additionalPorts.map(portPair => {
@@ -222,27 +220,27 @@ const PreviewDropdown = () => {
 
   return (
     <>
-      {window.location.pathname.includes('editor') && (
+      {props.isEditor && (
         <Downshift>
           {({ getToggleButtonProps, isOpen }) => (
             // This has to be done with <div>. Using styled components causes Downshift crash
             <div style={{ position: 'relative' }}>
-              <PreviewButton {...getToggleButtonProps({})} isEmbed={isEmbed}>
+              <PreviewButton {...getToggleButtonProps({})} {...props}>
                 {isMobileOnly ? (
-                  <StyledDesktopIcon />
+                  <StyledDesktopIcon {...props} />
                 ) : (
-                  <LinkText isEmbed={isEmbed}>Preview</LinkText>
+                  <LinkText {...props}>Preview</LinkText>
                 )}
               </PreviewButton>
-              <DropdownWrapper isEmbed={isEmbed}>
+              <DropdownWrapper {...props}>
                 {isOpen && (
                   <MenuWrapper>
                     {ports.map((item, index, arr) => (
                       <Option
                         invert
+                        {...props}
                         key={item.value}
                         href={item.href}
-                        isEmbed={isEmbed}
                         isLast={index === arr.length - 1}
                         target="_blank"
                         rel="noopener noreferrer"

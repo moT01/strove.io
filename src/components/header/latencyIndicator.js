@@ -4,7 +4,6 @@ import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'
-import { getWindowPathName } from 'utils'
 
 const lowerLatencyThreshold = 20
 const higherLatencyThreshold = 50
@@ -38,21 +37,24 @@ const StyledText = styled.div`
   text-overflow: ellipsis;
 `
 
-const LatencyIndicator = () => {
+const LatencyIndicator = props => {
   const latency = useSelector(selectors.latency.getLatency)
-  const isEmbed = getWindowPathName().includes('embed')
 
   return (
-    <LatencyWrapper>
-      <LatencyCircle latency={latency} isEmbed={isEmbed} />
-      {!isMobileOnly && (
-        <StyledText isEmbed={isEmbed}>
-          Latency: {latency}ms{' '}
-          {latency > lowerLatencyThreshold &&
-            '- Syntax highlight might take a moment to load'}
-        </StyledText>
+    <>
+      {props.isEditor && (
+        <LatencyWrapper>
+          <LatencyCircle latency={latency} {...props} />
+          {!isMobileOnly && (
+            <StyledText {...props}>
+              Latency: {latency}ms{' '}
+              {latency > lowerLatencyThreshold &&
+                '- Syntax highlight might take a moment to load'}
+            </StyledText>
+          )}
+        </LatencyWrapper>
       )}
-    </LatencyWrapper>
+    </>
   )
 }
 

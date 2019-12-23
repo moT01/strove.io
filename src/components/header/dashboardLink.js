@@ -6,7 +6,6 @@ import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 import { Dashboard } from 'components/svgs'
-import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
   0% {
@@ -18,21 +17,21 @@ const FadeIn = keyframes`
 `
 
 const StyledDashboardIcon = styled(Dashboard)`
-  height: 25px;
-  width: 25px;
+  height: ${props => (props.isEditor ? '16px' : '25px')};
+  width: ${props => (props.isEditor ? '16px' : '25px')};
   fill: ${({ theme }) => theme.colors.c2};
 `
 
 const LinkText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  font-size: 16px;
+  font-size: ${props => (props.isEditor ? '16px' : '24px')};
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   transition: color 0.3s;
-  font-weight: 300;
+  font-weight: ${props => (props.isEditor ? '300' : '600')};
   margin: 0;
   cursor: pointer;
 
@@ -48,28 +47,27 @@ const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
-  font-weight: 300;
+  font-weight: ${props => (props.isEditor ? '300' : '600')};
 `
 
 const LinkWrapper = styled.div`
-  font-weight: 300;
+  font-weight: ${props => (props.isEditor ? '300' : '600')};
   animation: ${FadeIn} 0.3s ease-out;
 `
 
-const DashboardLink = () => {
+const DashboardLink = props => {
   const user = useSelector(selectors.api.getUser)
-  const isEmbed = getWindowPathName().includes('embed')
 
   return (
     <>
       {' '}
-      {user && !isEmbed && (
-        <LinkWrapper mobile={isMobileOnly}>
-          <StyledLink to="/app/dashboard">
+      {user && !props.isEmbed && (
+        <LinkWrapper mobile={isMobileOnly} {...props}>
+          <StyledLink to="/app/dashboard" {...props}>
             {isMobileOnly ? (
-              <StyledDashboardIcon />
+              <StyledDashboardIcon {...props} />
             ) : (
-              <LinkText>Dashboard</LinkText>
+              <LinkText {...props}>Dashboard</LinkText>
             )}
           </StyledLink>
         </LinkWrapper>

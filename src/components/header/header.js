@@ -1,17 +1,15 @@
 import React, { memo, useState } from 'react'
-import { useSelector } from 'react-redux'
 import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
-import copyToClipboard from 'copy-to-clipboard'
-import { Copy } from 'components/svgs'
-import { Icon } from 'antd'
 
-import { selectors } from 'state'
-import LatencyIndicator from '../latencyIndicator'
+import LatencyIndicator from './latencyIndicator'
 import Auth from './auth'
 import PreviewDropdown from './previewDropdown'
 import DashboardLink from './dashboardLink'
 import HomeLink from './homeLink'
+import DocsLink from './docsLink'
+import CopyLink from './copyLink'
+import PoweredByStroveLink from './poweredByStroveLink'
 import { getWindowPathName } from 'utils'
 
 const FadeIn = keyframes`
@@ -23,23 +21,13 @@ const FadeIn = keyframes`
   }
 `
 
-const StyledAntdIcon = styled(Icon)`
-  svg {
-    height: 25px;
-    width: 25px;
-  }
-  line-height: 1;
-
-  fill: ${({ theme }) => theme.colors.c2};
-`
-
 const HeaderSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 20px;
+  height: ${props => (props.isEditor ? '20px' : '64px')};
   padding-left: 1.5vw;
   padding-right: 1.5vw;
   background: ${({ theme }) => theme.colors.c1};
@@ -59,50 +47,6 @@ const HeaderWrapper = styled.div`
   }
 `
 
-const LinkText = styled.div`
-  color: ${({ theme }) => theme.colors.c2};
-  font-size: 16px;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  transition: color 0.3s;
-  font-weight: 300;
-  margin: 0;
-  cursor: pointer;
-
-  :hover {
-    color: ${({ theme }) => theme.colors.c3};
-    svg {
-      fill: ${({ theme }) => theme.colors.c3};
-    }
-  }
-`
-
-const StyledA = styled.a`
-  color: ${({ theme }) => theme.colors.c2};
-  font-size: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  transition: color 0.3s;
-  font-weight: 300;
-  padding: 0 20px;
-  cursor: pointer;
-  text-decoration: none;
-  animation: ${FadeIn} 0.3s ease-out;
-
-  :hover {
-    color: ${({ theme }) => theme.colors.c3};
-  }
-`
-
-const StroveLink = styled(StyledA)`
-  font-size: 16px;
-`
-
 const AuthWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -119,85 +63,32 @@ const AuthWrapper = styled.div`
   }
 `
 
-const CopyWrapper = styled.div`
-  cursor: pointer;
-  display: flex;
-
-  svg {
-    height: 20px;
-  }
-`
-
 const Header = () => {
-  const currentProject = useSelector(selectors.api.getCurrentProject)
   const isEmbed = getWindowPathName().includes('embed')
-  const [tabs, setTabs] = useState([])
+  const isEditor = getWindowPathName().includes('editor')
+  const [tabs, setTabs] = useState([
+    HomeLink,
+    DashboardLink,
+    PreviewDropdown,
+    CopyLink,
+    DocsLink,
+  ])
+  const locProps = { isEmbed, isEditor, isMobileOnly }
 
   return (
-    <HeaderSection mobile={isMobileOnly} isEmbed={isEmbed}>
-      <HeaderWrapper
-        isUserInsideEditor={window.location.pathname === '/app/editor/'}
-        mobile={isMobileOnly}
-        isEmbed={isEmbed}
-      >
-        <HomeLink />
-
-        <DashboardLink />
-
-        <PreviewDropdown />
-
-        {window.location.pathname === '/app/editor/' &&
-          currentProject?.repoLink && (
-            <CopyWrapper
-              onClick={() =>
-                copyToClipboard(
-                  `https://strove.io/#${currentProject?.repoLink}`.replace(
-                    '.git',
-                    ''
-                  ),
-                  {
-                    message:
-                      'Press #{key} to copy link to the project for easy sharing',
-                  }
-                )
-              }
-            >
-              {isMobileOnly ? <Copy /> : <LinkText>Copy link</LinkText>}
-            </CopyWrapper>
-          )}
-
-        {(window.location.pathname !== '/app/editor/' || !isMobileOnly) &&
-        isMobileOnly ? (
-          <StyledA
-            href="https://docs.strove.io"
-            target="_blank"
-            rel="noopener noreferrer"
-            isEmbed={isEmbed}
-          >
-            <StyledAntdIcon type="file-text" />
-          </StyledA>
-        ) : (
-          <StyledA
-            href="https://docs.strove.io"
-            target="_blank"
-            rel="noopener noreferrer"
-            isEmbed={isEmbed}
-          >
-            Docs
-          </StyledA>
-        )}
+    <HeaderSection {...locProps}>
+      <HeaderWrapper {...locProps}>
+        {tabs.map((Component, i) => (
+          <Component {...locProps} key={i} />
+        ))}
       </HeaderWrapper>
-      {window.location.pathname.includes('editor') && <LatencyIndicator />}
+      <LatencyIndicator {...locProps} />
 
-      {isEmbed && (
-        <StroveLink href="https://strove.io" target="_blank" isEmbed={isEmbed}>
-          Powered by Strove.io
-        </StroveLink>
-      )}
+      <PoweredByStroveLink />
 
-      {!window.location.pathname.includes('embed/editor') && (
-        <AuthWrapper>
-          <Auth isEmbed={isEmbed} />
+      {!isEmbed && (
+        <AuthWrapper {...locProps}>
+          <Auth {...locProps} />
         </AuthWrapper>
       )}
     </HeaderSection>
