@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
@@ -41,13 +41,7 @@ const HeaderWrapper = styled.div`
 const Header = () => {
   const isEmbed = getWindowPathName().includes('embed')
   const isEditor = getWindowPathName().includes('editor')
-  const [tabs] = useState([
-    HomeLink,
-    DashboardLink,
-    PreviewDropdown,
-    CopyLink,
-    DocsLink,
-  ])
+  const tabs = [HomeLink, DashboardLink, PreviewDropdown, CopyLink, DocsLink]
   const locProps = { isEmbed, isEditor, isMobileOnly }
 
   return (
