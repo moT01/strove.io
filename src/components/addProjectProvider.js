@@ -155,7 +155,7 @@ const AddProjectProvider = ({ children, history }) => {
           queuePosition={queuePosition}
         />
       )}
-      {(isAdding || isLoading || true) && (
+      {(isAdding || isLoading) && (
         <FullScreenLoader
           type="addProject"
           isFullScreen
