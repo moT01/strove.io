@@ -46,10 +46,9 @@ const LoaderContainer = styled(SmallLoaderWrapper)`
 `
 
 const FullScreenLoaderWrapper = styled.div`
-animation: ${SpinToWin} 3.5s linear infinite;
-width: 30px;
-height: 30px;
-
+  animation: ${SpinToWin} 3.5s linear infinite;
+  width: 30px;
+  height: 30px;
 `
 
 const Text = styled.p`
