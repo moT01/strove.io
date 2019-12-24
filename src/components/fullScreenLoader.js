@@ -65,6 +65,11 @@ const Text = styled.p`
 const StyledFullScreenWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+
+  ${Text} {
+    margin: 0 10px;
+  }
 `
 
 const Loader = ({ type = 'addProject', ...props }) => {
