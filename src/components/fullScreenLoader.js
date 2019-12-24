@@ -45,6 +45,13 @@ const LoaderContainer = styled(SmallLoaderWrapper)`
   animation: ${SpinToWin} 3.5s linear infinite;
 `
 
+const FullScreenLoaderWrapper = styled.div`
+animation: ${SpinToWin} 3.5s linear infinite;
+width: 20px;
+height: 20px;
+
+`
+
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 21px;
@@ -53,6 +60,11 @@ const Text = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+`
+
+const StyledFullScreenWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `
 
 const Loader = ({ type = 'addProject', ...props }) => {
@@ -78,9 +90,12 @@ const Loader = ({ type = 'addProject', ...props }) => {
   if (props.isFullScreen) {
     return (
       <LoaderWrapper {...props}>
-        <div>
+        <StyledFullScreenWrapper {...props}>
+          <FullScreenLoaderWrapper {...props}>
+            <Cog fill={props.color} />
+          </FullScreenLoaderWrapper>
           <Text>Loading...</Text>
-        </div>
+        </StyledFullScreenWrapper>
         <Text>
           {queuePosition > 1
             ? `Our servers are full. Your position in queue: ${queuePosition}`
