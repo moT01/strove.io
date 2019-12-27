@@ -1,7 +1,7 @@
 {
   "name": "stroveio",
   "private": true,
-  "description": "Language-agnostic Linux-based programming environment for teams and single developers",
+  "description": "Language-agnostic cloud-based programming environment for teams and single developers",
   "version": "0.1.0",
   "author": "Adam Żaczek",
   "scripts": {
@@ -106,7 +106,7 @@
   "license": "GNU",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stroveio/strove-client"
+    "url": "https://https://github.com/stroveio/strove.io"
   },
   "browserslist": {
     "production": [
