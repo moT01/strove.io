@@ -21,7 +21,7 @@ const Editor = ({ token, machineId, port, onLoad, isEmbed, loaderVisible }) => {
       isEmbed={isEmbed}
       loaderVisible={loaderVisible}
       onLoad={onLoad}
-      src={`${process.env.REACT_APP_STROVE_URL}/vm/editor/${machineId}/${port}?r=${randomId}`}
+      src={`${process.env.REACT_APP_STROVE_URL}/vm/editor/${machineId}/${port}?r=${randomId}&folder=/home/strove/project`}
     />
   )
 }
