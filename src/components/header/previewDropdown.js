@@ -193,12 +193,10 @@ const PreviewDropdown = props => {
     if (props.isEditor) {
       if (project?.machineName) {
         setPorts(
-          project.additionalPorts.map(portPair => {
-            return {
-              label: `http://0.0.0.0:${portPair[0]}`,
-              href: `https://strove.io/vm/${project.machineName}/${portPair[1]}`,
-            }
-          })
+          project.additionalPorts.map(portPair => ({
+            label: `http://0.0.0.0:${portPair[0]}`,
+            href: `https://strove.io/vm/${project.machineName}/${portPair[1]}`,
+          }))
         )
       }
     }
