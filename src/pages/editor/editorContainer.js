@@ -21,6 +21,7 @@ const EditorWrapper = ({ history }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const projectId = currentProject && currentProject.id
   const machineId = currentProject && currentProject.machineId
+  const machineName = currentProject && currentProject.machineName
   const port = currentProject && currentProject.editorPort
   const isEmbed = getWindowPathName().includes('embed')
 
@@ -92,10 +93,10 @@ const EditorWrapper = ({ history }) => {
           color="#0072ce"
         />
       )}
-      {token && machineId && port && (
+      {token && machineName && machineId && port && (
         <Editor
           token={token}
-          machineId={machineId}
+          machineName={machineName}
           port={port}
           onLoad={setLoaderVisibleFalse}
           isEmbed={isEmbed}
