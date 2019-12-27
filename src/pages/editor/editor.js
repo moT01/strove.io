@@ -12,7 +12,6 @@ const StyledIframe = styled.iframe`
 `
 
 const Editor = ({
-  token,
   machineName,
   port,
   onLoad,
