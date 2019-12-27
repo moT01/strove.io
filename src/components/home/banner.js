@@ -351,7 +351,7 @@ const Banner = () => {
           <StyledH1>To create what's next</StyledH1>
           <StyledProductDescription>
             Get the advantage over teams with the best programming equipment for
-            a fraction of the cost s
+            a fraction of the cost
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <StroveButton
