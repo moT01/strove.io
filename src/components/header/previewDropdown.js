@@ -194,22 +194,9 @@ const PreviewDropdown = props => {
       if (project?.machineName) {
         setPorts(
           project.additionalPorts.map(portPair => {
-            let href
-            /* Env's are loaded as strings on production */
-            if (process.env.REACT_APP_IS_OPENSOURCE === 'true') {
-              href = `https://${portPair[1]}.vmopen${
-                project.machineName.match(/\d+/g)[0]
-              }.silisky.com`
-            } else if (process.env.NODE_ENV === 'development') {
-              href = `https://${portPair[1]}.vmdev${
-                project.machineName.match(/\d+/g)[0]
-              }.silisky.com`
-            } else {
-              href = `https://${portPair[1]}.${project.machineName}.silisky.com`
-            }
             return {
               label: `http://0.0.0.0:${portPair[0]}`,
-              href,
+              href: `https://strove.io/vm/${project.machineName}/${portPair[1]}`,
             }
           })
         )
