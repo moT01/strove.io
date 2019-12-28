@@ -11,7 +11,13 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const Editor = ({ token, machineId, port, onLoad, isEmbed, loaderVisible }) => {
+const Editor = ({
+  machineName,
+  port,
+  onLoad,
+  isEmbed,
+  loaderVisible,
+}) => {
   const randomId = Math.random()
     .toString(36)
     .substring(7)
@@ -21,7 +27,7 @@ const Editor = ({ token, machineId, port, onLoad, isEmbed, loaderVisible }) => {
       isEmbed={isEmbed}
       loaderVisible={loaderVisible}
       onLoad={onLoad}
-      src={`${process.env.REACT_APP_STROVE_ENDPOINT}/editor?token=${token}&id=${machineId}&port=${port}&r=${randomId}`}
+      src={`${process.env.REACT_APP_STROVE_URL}/vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project`}
     />
   )
 }
