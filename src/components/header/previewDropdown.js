@@ -106,6 +106,7 @@ const OptionText = styled(Text)`
     color: ${({ theme }) => theme.colors.c2};
     transition: color 0.1s;
     text-decoration: none;
+    cursor: pointer;
   }
 `
 
