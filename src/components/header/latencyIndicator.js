@@ -27,6 +27,8 @@ const LatencyCircle = styled.div`
 
 const LatencyWrapper = styled.div`
   display: flex;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const StyledText = styled.div`
