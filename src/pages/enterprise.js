@@ -384,27 +384,19 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
           <Card team>
-            <CardTitle team>Enterprise</CardTitle>
+            <CardTitle team>Team</CardTitle>
             <PricingSection>
               <PricingWrapper>
                 <PlanTitle team>
                   Move faster than competition, for less
                 </PlanTitle>
                 <PlanDesc team>
-                  Annual plan for developer teams and companies.
+                  For teams that want to get their ideas get out there
                 </PlanDesc>
                 <Contact team>Benefits:</Contact>
-                <Feature team>Private cloud</Feature>
+                <Feature team>Unlimited coding time</Feature>
+                <Feature team>Team management</Feature>
                 <Feature team>Private repositories</Feature>
-                <Feature team>
-                  RAM, hard drive and speed adjusted to team's needs
-                </Feature>
-                <Feature team>
-                  Active directory - highest code security and control
-                </Feature>
-                <Feature team>
-                  Extensive docker support - multiple containers, custom images
-                </Feature>
                 <Feature team>Access restriction</Feature>
                 <Feature team>Priority support</Feature>
                 <Formik
@@ -476,11 +468,8 @@ const PricingPage = () => {
             <CardTitle team>Enterprise</CardTitle>
             <PricingSection>
               <PricingWrapper>
-                <PlanTitle team>
-                  Move faster than competition, for less
-                </PlanTitle>
                 <PlanDesc team>
-                  Annual plan for developer teams and companies.
+                  Custom setup designed for the needs of your company
                 </PlanDesc>
                 <Contact team>Benefits:</Contact>
                 <Feature team>Private cloud</Feature>
