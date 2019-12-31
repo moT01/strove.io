@@ -370,9 +370,9 @@ const PricingPage = () => {
               <PricingWrapper>
                 <PlanTitle>Free</PlanTitle>
                 <PlanDesc>The basic plan for individual developers</PlanDesc>
-                <PlanSubTitle>Per month</PlanSubTitle>
                 <Feature>Public repositories</Feature>
                 <Feature>5 GB of RAM</Feature>
+                <Feature>35 hours/month</Feature>
                 <Feature>No commercial use</Feature>
                 <Button disabled>
                   <ButtonText team>Already subscribed</ButtonText>
