@@ -225,7 +225,7 @@ const Card = styled.div`
   border-style: solid;
   padding: 50px 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-  width: 40vw;
+  width: 35vw;
   @media (max-width: 1366px) {
     width: 80vw;
     height: auto;
@@ -235,12 +235,15 @@ const Card = styled.div`
 const PricingWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  text-align: left;
   height: 80%;
   @media (max-width: 1366px) {
     width: 90%;
     height: auto;
+  }
+
+  h1 {
+    margin: 10px 0;
   }
 `
 
@@ -261,7 +264,6 @@ const Text = styled.p`
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
-  text-align: center;
 `
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -461,6 +463,90 @@ const PricingPage = () => {
                         <li>No credit card needed</li>
                         <li>No setup</li>
                       </StyledTrialInfo>
+                      {emailSent && (
+                        <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
+                      )}
+                    </Form>
+                  )}
+                </Formik>
+              </PricingWrapper>
+            </PricingSection>
+          </Card>
+          <Card team>
+            <CardTitle team>Enterprise</CardTitle>
+            <PricingSection>
+              <PricingWrapper>
+                <PlanTitle team>
+                  Move faster than competition, for less
+                </PlanTitle>
+                <PlanDesc team>
+                  Annual plan for developer teams and companies.
+                </PlanDesc>
+                <Contact team>Benefits:</Contact>
+                <Feature team>Private cloud</Feature>
+                <Feature team>Private repositories</Feature>
+                <Feature team>
+                  RAM, hard drive and speed adjusted to team's needs
+                </Feature>
+                <Feature team>
+                  Active directory - highest code security and control
+                </Feature>
+                <Feature team>
+                  Extensive docker support - multiple containers, custom images
+                </Feature>
+                <Feature team>Access restriction</Feature>
+                <Feature team>Priority support</Feature>
+                <Formik
+                  initialValues={{
+                    email: '',
+                  }}
+                  validate={validate}
+                  onSubmit={values => {
+                    dispatch(
+                      mutation({
+                        name: 'sendEmail',
+                        context: null,
+                        mutation: SEND_EMAIL,
+                        variables: { email: values.email, isDemo: true },
+                        onSuccess: () => setEmailSent(true),
+                      })
+                    )
+                  }}
+                >
+                  {({ errors, touched, values }) => (
+                    <Form>
+                      <EmailFormWrapper
+                        disabled={errors.email || !values.email}
+                        isMobile={isMobileOnly}
+                      >
+                        <Field
+                          type="email"
+                          name="email"
+                          placeholder="Your Email"
+                        ></Field>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                        >
+                          <g
+                            fill="none"
+                            fillRule="evenodd"
+                            stroke="#9CA2B4"
+                            strokeWidth="2"
+                          >
+                            <path d="M2 4h20v16H2z"></path>
+                            <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                          </g>
+                        </svg>
+                        <button
+                          type="submit"
+                          disabled={errors.email || !values.email}
+                        >
+                          Request demo
+                        </button>
+                      </EmailFormWrapper>
                       {emailSent && (
                         <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
                       )}

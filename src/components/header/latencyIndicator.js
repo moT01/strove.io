@@ -50,8 +50,7 @@ const LatencyIndicator = props => {
           {!isMobileOnly && (
             <StyledText {...props}>
               Latency: {latency}ms{' '}
-              {latency > lowerLatencyThreshold &&
-                '- Syntax highlight might take a moment to load'}
+                - Syntax highlight might take a moment to load}
             </StyledText>
           )}
         </LatencyWrapper>
