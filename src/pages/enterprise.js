@@ -387,11 +387,8 @@ const PricingPage = () => {
             <CardTitle team>Team</CardTitle>
             <PricingSection>
               <PricingWrapper>
-                <PlanTitle team>
-                  Move faster than competition, for less
-                </PlanTitle>
                 <PlanDesc team>
-                  For teams that want to get their ideas get out there
+                  For small and medium sized teams and businesses
                 </PlanDesc>
                 <Contact team>Benefits:</Contact>
                 <Feature team>Unlimited coding time</Feature>
@@ -469,7 +466,7 @@ const PricingPage = () => {
             <PricingSection>
               <PricingWrapper>
                 <PlanDesc team>
-                  Custom setup designed for the needs of your company
+                  For larger enterprises or those with custom requirements
                 </PlanDesc>
                 <Contact team>Benefits:</Contact>
                 <Feature team>Private cloud</Feature>
