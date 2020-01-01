@@ -314,6 +314,7 @@ const PlanSubTitle = styled(PlanTitle)`
 `
 const ButtonText = styled(PlanTitle)`
   font-size: 16px;
+  cursor: pointer;
 `
 const PlanDesc = styled(Feature)`
   font-size: 15px;
@@ -396,68 +397,14 @@ const PricingPage = () => {
                 <Feature team>Private repositories</Feature>
                 <Feature team>Access restriction</Feature>
                 <Feature team>Priority support</Feature>
-                <Formik
-                  initialValues={{
-                    email: '',
-                  }}
-                  validate={validate}
-                  onSubmit={values => {
-                    dispatch(
-                      mutation({
-                        name: 'sendEmail',
-                        context: null,
-                        mutation: SEND_EMAIL,
-                        variables: { email: values.email, isDemo: true },
-                        onSuccess: () => setEmailSent(true),
-                      })
-                    )
-                  }}
-                >
-                  {({ errors, touched, values }) => (
-                    <Form>
-                      <EmailFormWrapper
-                        disabled={errors.email || !values.email}
-                        isMobile={isMobileOnly}
-                      >
-                        <Field
-                          type="email"
-                          name="email"
-                          placeholder="Your Email"
-                        ></Field>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                        >
-                          <g
-                            fill="none"
-                            fillRule="evenodd"
-                            stroke="#9CA2B4"
-                            strokeWidth="2"
-                          >
-                            <path d="M2 4h20v16H2z"></path>
-                            <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                          </g>
-                        </svg>
-                        <button
-                          type="submit"
-                          disabled={errors.email || !values.email}
-                        >
-                          Request demo
-                        </button>
-                      </EmailFormWrapper>
-                      <StyledTrialInfo team>
-                        <li>Free 14-day Demo</li>
-                        <li>No credit card needed</li>
-                        <li>No setup</li>
-                      </StyledTrialInfo>
-                      {emailSent && (
-                        <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
-                      )}
-                    </Form>
-                  )}
-                </Formik>
+                <Button team>
+                  <ButtonText>Get started</ButtonText>
+                </Button>
+                <StyledTrialInfo team>
+                  <li>Free 14-day Demo</li>
+                  <li>No credit card needed</li>
+                  <li>No setup</li>
+                </StyledTrialInfo>
               </PricingWrapper>
             </PricingSection>
           </Card>
