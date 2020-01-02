@@ -186,7 +186,7 @@ const Button = styled.button`
   background-color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
+  color: ${({ team, theme }) => (team ? theme.colors.c1 : theme.colors.c2)};
   border-radius: 4px;
   border-color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
