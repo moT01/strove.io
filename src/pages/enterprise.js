@@ -210,10 +210,6 @@ const Button = styled.button`
 `
 
 const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2)};
   z-index: auto;
   border-radius: 5px;
@@ -236,10 +232,6 @@ const PricingWrapper = styled.div`
   text-align: left;
   @media (max-width: 1366px) {
     width: 90%;
-  }
-
-  h1 {
-    margin: 10px 0;
   }
 `
 
