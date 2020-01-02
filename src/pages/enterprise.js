@@ -215,7 +215,6 @@ const Card = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2)};
-  margin-left: ${props => (props.team ? '-3vw' : 0)};
   z-index: auto;
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
@@ -223,10 +222,10 @@ const Card = styled.div`
   border-style: solid;
   padding: 50px 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-  width: 35vw;
+  width: ${({ enterprise }) => enterprise ? '40vw' : '30vw'};
+  height: auto;
   @media (max-width: 1366px) {
     width: 80vw;
-    height: auto;
     margin: 10px 0;
   }
 `
@@ -258,7 +257,6 @@ const ModalWrapper = styled.div`
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 15px;
-  margin-left: 2%;
   margin-bottom: 12px;
   white-space: normal;
   text-overflow: wrap;
