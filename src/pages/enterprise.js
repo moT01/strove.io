@@ -50,7 +50,7 @@ const CardsWrapper = styled.div`
 
 const StyledEmailConfirmation = styled.div`
   margin: 20px;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const EmailFormWrapper = styled.div`
