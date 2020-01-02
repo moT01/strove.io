@@ -234,6 +234,7 @@ const Button = styled.button`
     `}
   @media (max-width: 1366px) {
     box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+    width: 100%;
   }
 `
 
@@ -252,6 +253,7 @@ const Card = styled.div`
   margin: 0 20px;
   @media (max-width: 1366px) {
     margin: 10px 0;
+    width: 100%;
   }
 `
 
