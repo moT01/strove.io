@@ -183,13 +183,13 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
+  background-color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   border-width: 1px;
   border-style: solid;
   color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
   border-radius: 4px;
-  border-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
-  box-shadow: 0 1.1vh 1.1vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+  border-color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
   &:disabled {
     opacity: 0.4;
@@ -201,12 +201,12 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.3vh 1.3vh -1.3vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+        box-shadow: 0 1.3vh 1.3vh -1.3vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
         transform: translateY(-3px);
       }
     `}
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   }
 `
 
