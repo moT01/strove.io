@@ -62,7 +62,7 @@ const FaqColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 10px 20px;
   width: 40%;
   height: 90%;
@@ -318,6 +318,7 @@ const StyledText = styled.p`
   font-size: 15px;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
+  text-align: justify;
 `
 
 const Feature = styled(StyledText)`
@@ -594,7 +595,7 @@ const PricingPage = () => {
             </StyledText>
             <Divider />
             <ImportantPricingInfo team>
-              Is it possible to upgrade from Team plan to Enterprise?
+              Can I upgrade from Team plan to Enterprise?
             </ImportantPricingInfo>
             <StyledText team>
               Yes, it is possible. In order to upgrade contact us.
