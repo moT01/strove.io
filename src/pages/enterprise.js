@@ -299,19 +299,19 @@ const Feature = styled.p`
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
 `
-const PlanTitle = styled.h1`
-  margin: 10px;
+const PlanTitle = styled.span`
+  margin: 10px 0;
   font-size: 26px;
   color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-weight: 500;
 `
 const Contact = styled(PlanTitle)`
-  width: 75%;
 `
 
 const PricingDetails = styled(PlanTitle)`
-  font-size: 15px;
-  color: ${({ theme }) => theme.colors.c4};
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.c14};
+  font-weight: 300;
 `
 
 const ButtonText = styled(PlanTitle)`
@@ -395,7 +395,7 @@ const PricingPage = () => {
                 <PlanDesc team>
                   For small and medium sized teams and businesses
                 </PlanDesc>
-                <PlanTitle>40$</PlanTitle>
+                <PlanTitle team>40$</PlanTitle>
                 <PricingDetails>per person, per month, when billed yearly
 $15 USD/person, per month, when billed monthly</PricingDetails>
                 <Contact team>Benefits:</Contact>
