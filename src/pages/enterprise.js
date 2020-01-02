@@ -66,6 +66,10 @@ const FaqColumn = styled.div`
   margin: 10px 20px;
   width: 40%;
   height: 90%;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+  }
 `
 
 const StyledEmailConfirmation = styled.div`
