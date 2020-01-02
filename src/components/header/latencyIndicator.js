@@ -27,6 +27,8 @@ const LatencyCircle = styled.div`
 
 const LatencyWrapper = styled.div`
   display: flex;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const StyledText = styled.div`
@@ -48,8 +50,7 @@ const LatencyIndicator = props => {
           {!isMobileOnly && (
             <StyledText {...props}>
               Latency: {latency}ms{' '}
-              {latency > lowerLatencyThreshold &&
-                '- Syntax highlight might take a moment to load'}
+                - Syntax highlight might take a moment to load}
             </StyledText>
           )}
         </LatencyWrapper>

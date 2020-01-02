@@ -3,28 +3,18 @@
   "name":"Strove - create software in the cloud",
   "icons":[
      {
-        "src":"favicons/icon-48.png?v=51824b8db1e36d68a5d90ed7d3a57e20",
-        "sizes":"48x48",
+        "src":"favicons/icon-16.png",
+        "sizes":"16x16",
         "type":"image/png"
      },
      {
-        "src":"favicons/icon-72.png?v=51824b8db1e36d68a5d90ed7d3a57e20",
-        "sizes":"72x72",
+        "src":"favicons/icon-32.png",
+        "sizes":"32x32",
         "type":"image/png"
      },
      {
-        "src":"favicons/icon-96.png?v=51824b8db1e36d68a5d90ed7d3a57e20",
-        "sizes":"96x96",
-        "type":"image/png"
-     },
-     {
-        "src":"favicons/icon-144.png?v=51824b8db1e36d68a5d90ed7d3a57e20",
-        "sizes":"144x144",
-        "type":"image/png"
-     },
-     {
-        "src":"favicons/icon-192.png?v=51824b8db1e36d68a5d90ed7d3a57e20",
-        "sizes":"192x192",
+        "src":"favicons/icon-180.png",
+        "sizes":"180x180",
         "type":"image/png"
      }
   ],

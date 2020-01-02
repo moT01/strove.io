@@ -14,7 +14,7 @@ import {
   Login,
   RunProject,
   Enterprise,
-  Editor
+  Editor,
 } from 'pages'
 
 import { PrivateRoute, Dashboard } from 'components'
@@ -32,7 +32,6 @@ const Strove = () => (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/faq" component={Faq} />
-      <Route path="/checkHowTo" component={NotFound} />
       <Route path="/cookies" component={Cookies} />
       <Route path="/privacyPolicy" component={PrivacyPolicy} />
       <Route path="/termsAndConditions" component={TermsAndConditions} />
@@ -44,6 +43,7 @@ const Strove = () => (
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
+      <Route component={NotFound} />
     </Switch>
   </Wrapper>
 )
