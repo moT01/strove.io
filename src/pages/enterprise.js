@@ -299,22 +299,22 @@ const Feature = styled.p`
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
 `
-const PlanTitle = styled.span`
+const ImportantPricingInfo = styled.span`
   margin: 10px 0;
   font-size: 26px;
   color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-weight: 500;
 `
-const Contact = styled(PlanTitle)`
+const Price = styled(ImportantPricingInfo)`
+  margin: 0;
 `
 
-const PricingDetails = styled(PlanTitle)`
+const PricingDetails = styled(ImportantPricingInfo)`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.c14};
-  font-weight: 300;
 `
 
-const ButtonText = styled(PlanTitle)`
+const ButtonText = styled(ImportantPricingInfo)`
   font-size: 16px;
   cursor: pointer;
 `
@@ -323,7 +323,7 @@ const PlanDesc = styled(Feature)`
   font-size: 15px;
 `
 
-const CardTitle = styled(PlanTitle)`
+const CardTitle = styled(ImportantPricingInfo)`
   font-size: 40px;
 `
 
@@ -373,7 +373,7 @@ const PricingPage = () => {
             <CardTitle>Individuals</CardTitle>
             <PricingSection>
               <PricingWrapper>
-                <PlanTitle>Free</PlanTitle>
+                <ImportantPricingInfo>Free</ImportantPricingInfo>
                 <PlanDesc>The basic plan for individual developers</PlanDesc>
                 <Feature>Public repositories</Feature>
                 <Feature>5 GB of RAM</Feature>
@@ -395,10 +395,10 @@ const PricingPage = () => {
                 <PlanDesc team>
                   For small and medium sized teams and businesses
                 </PlanDesc>
-                <PlanTitle team>40$</PlanTitle>
+                <Price team>40$</Price>
                 <PricingDetails>per person, per month, when billed yearly
 $15 USD/person, per month, when billed monthly</PricingDetails>
-                <Contact team>Benefits:</Contact>
+                <ImportantPricingInfo team>Benefits:</ImportantPricingInfo>
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
                 <Feature team>Private repositories</Feature>
@@ -422,7 +422,7 @@ $15 USD/person, per month, when billed monthly</PricingDetails>
                 <PlanDesc team>
                   For larger enterprises or those with custom requirements
                 </PlanDesc>
-                <Contact team>Benefits:</Contact>
+                <ImportantPricingInfo team>Benefits:</ImportantPricingInfo>
                 <Feature team>Private cloud</Feature>
                 <Feature team>Private repositories</Feature>
                 <Feature team>
