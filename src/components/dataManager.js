@@ -355,6 +355,8 @@ export default memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loginData, loginError])
 
+    console.log('history', history)
+
     useEffect(() => {
       if (token) {
         dispatch(
@@ -365,7 +367,10 @@ export default memo(
           })
         )
 
-        history.push('/app/dashboard')
+        console.log('history.location', history.location.pathname)
+        if (history.location.pathname === '/') {
+          history.push('/app/dashboard')
+        }
       }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
