@@ -391,6 +391,7 @@ const PricingPage = () => {
                 <Feature team>Private repositories</Feature>
                 <Feature team>Access restriction</Feature>
                 <Feature team>Priority support</Feature>
+                <Feature team>Upgrade to Enterprise Plan if needed</Feature>
                 <Button team>
                   <ButtonText>Get started</ButtonText>
                 </Button>
