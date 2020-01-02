@@ -44,8 +44,28 @@ const CardsWrapper = styled.div`
   animation: ${ButtonFadeIn} 0.3s ease-out;
   @media (max-width: 1366px) {
     flex-direction: column;
-    padding: ;
   }
+`
+
+const EducationSectionWrapper = styled(CardsWrapper)`
+  margin-top: 3vh;
+  flex-direction: column;
+  align-items: center;
+`
+
+const FaqSectionWrapper = styled(EducationSectionWrapper)`
+  flex-direction: row;
+  background-color: ${({ theme }) => theme.colors.c1};
+`
+
+const FaqColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 20px;
+  width: 40%;
+  height: 90%;
 `
 
 const StyledEmailConfirmation = styled.div`
@@ -293,12 +313,14 @@ const PricingSection = styled.div`
   }
 `
 
-const Feature = styled.p`
+const StyledText = styled.p`
   color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-size: 15px;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
+`
 
+const Feature = styled(StyledText)`
   &:before {
     margin-right: 0.3em;
     content: '✔';
@@ -427,7 +449,7 @@ const PricingPage = () => {
                     <ButtonText>Get started</ButtonText>
                   </Button>
                   <StyledTrialInfo team>
-                    <li>Free 14-day Demo</li>
+                    <li>Free 14-day Trial</li>
                     <li>No credit card needed</li>
                     <li>No setup</li>
                   </StyledTrialInfo>
@@ -459,7 +481,8 @@ const PricingPage = () => {
                   Specs (RAM, HDD, CPUs and more) adjusted to team's needs
                 </Feature>
                 <Feature team>
-                  Active directory - highest code security and control
+                  Azure Active directory integration - highest code security and
+                  control
                 </Feature>
                 <Feature team>
                   Extensive docker support - multiple containers, custom images
@@ -527,6 +550,53 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
         </CardsWrapper>
+        <EducationSectionWrapper>
+          <StyledText>
+            Do you work at a School, University or some other Education
+            institution? Education plans are available so Contact us and see how
+            Strove.io can help your institution.
+          </StyledText>
+        </EducationSectionWrapper>
+        <FaqSectionWrapper>
+          <FaqColumn>
+            <ImportantPricingInfo team>
+              How does trial work?
+            </ImportantPricingInfo>
+            <StyledText team>
+              Once you sign up for Trial you will get instant access to all the
+              features of Team plan for 14 days. The trial does not require
+              payment information and you will not be charged anything.
+            </StyledText>
+            <Divider />
+            <ImportantPricingInfo team>
+              What are the billing options?
+            </ImportantPricingInfo>
+            <StyledText team>
+              We offer billing monthly or billing annually. You can pay by Visa,
+              MasterCard, Discover and American Express credit cards or by
+              Stripe. For further information feel free to contact us.
+            </StyledText>
+          </FaqColumn>
+          <FaqColumn>
+            <ImportantPricingInfo team>
+              What happens at the Trial period end?
+            </ImportantPricingInfo>
+            <StyledText team>
+              Three days before your trial ends you will receive an email
+              reminder. At that time or any time before that you are free to
+              upgrade to the Team plan. If you do not upgrade your account
+              during the Trial period your it will revert to the Free version of
+              Strove.io once the Trial ends.
+            </StyledText>
+            <Divider />
+            <ImportantPricingInfo team>
+              Is it possible to upgrade from Team plan to Enterprise?
+            </ImportantPricingInfo>
+            <StyledText team>
+              Yes, it is possible. In order to upgrade please contact us.
+            </StyledText>
+          </FaqColumn>
+        </FaqSectionWrapper>
       </>
     </>
   )
