@@ -367,7 +367,6 @@ export default memo(
           })
         )
 
-        console.log('history.location', history.location.pathname)
         if (history.location.pathname === '/') {
           history.push('/app/dashboard')
         }
