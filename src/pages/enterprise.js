@@ -22,7 +22,7 @@ const StyledTrialInfo = styled.ul`
   font-size: 13px;
   padding: 0;
   margin: 0;
-  color: ${({ team }) => (team ? '#fff' : '#0072ce')};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   li {
     display: inline-block;
     margin-right: 8px;
@@ -30,7 +30,7 @@ const StyledTrialInfo = styled.ul`
     &:before {
       margin-right: 0.3em;
       content: '✔';
-      color: ${({ team }) => (team ? '#fff' : '#0072ce')};
+      color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
     }
   }
 `
@@ -309,16 +309,20 @@ const Contact = styled(PlanTitle)`
   width: 75%;
 `
 
-const PlanSubTitle = styled(PlanTitle)`
-  font-size: 20px;
+const PricingDetails = styled(PlanTitle)`
+  font-size: 15px;
+  color: ${({ theme }) => theme.colors.c4};
 `
+
 const ButtonText = styled(PlanTitle)`
   font-size: 16px;
   cursor: pointer;
 `
+
 const PlanDesc = styled(Feature)`
   font-size: 15px;
 `
+
 const CardTitle = styled(PlanTitle)`
   font-size: 40px;
 `
@@ -391,6 +395,9 @@ const PricingPage = () => {
                 <PlanDesc team>
                   For small and medium sized teams and businesses
                 </PlanDesc>
+                <PlanTitle>40$</PlanTitle>
+                <PricingDetails>per person, per month, when billed yearly
+$15 USD/person, per month, when billed monthly</PricingDetails>
                 <Contact team>Benefits:</Contact>
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
