@@ -319,12 +319,17 @@ const PlanDesc = styled(Feature)`
   }
 `
 
+const CancelationInfo = styled(PlanDesc)`
+  color: ${({ theme }) => theme.colors.c3};
+`
+
 const CardTitle = styled(ImportantPricingInfo)`
   font-size: 36px;
 `
 
 const PricingHeader = styled(CardTitle)`
   margin: 40px 10px 0;
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const validate = values => {
@@ -369,7 +374,7 @@ const PricingPage = () => {
         <SEO title="Pricing" />
         <Header />
         <PricingHeader>Choose the plan that’s right for your team</PricingHeader>
-        <PlanDesc>Pay by month or the year, and cancel at any time.</PlanDesc>
+        <CancelationInfo>Pay by month or the year, and cancel at any time.</CancelationInfo>
         <CardsWrapper>
           <Card team>
             <PricingSection>
