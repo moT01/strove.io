@@ -215,7 +215,7 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c1 : team ? theme.colors.c3 : theme.colors.c2)};
+  background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2)};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
   margin-top: ${props => (props.team ? '5vh' : 0)};
   z-index: auto;
