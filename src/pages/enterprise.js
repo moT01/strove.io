@@ -178,7 +178,7 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 75%;
+  width: ${({ team }) => (team ? '40%' : '75%')};
   margin: 15px 0 5px;
   padding: 0.5vh;
   align-items: center;
@@ -224,8 +224,6 @@ const Card = styled.div`
   border-style: solid;
   padding: 50px 20px;
   box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
-  /* flex-grow: 1;
-  flex-basis: 100%; */
   width: 40%;
   margin: 0 20px;
   @media (max-width: 1366px) {
@@ -271,6 +269,14 @@ const ButtonsWrapper = styled.div`
       : props.mobile === 'tablet'
       ? '60%'
       : '45%'};
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `
 
 const PricingSection = styled.div`
@@ -416,14 +422,16 @@ const PricingPage = () => {
                 <Feature team>Priority support</Feature>
                 <Feature team>5 GB of RAM and 10 GB of HDD/project</Feature>
                 <Feature team>Upgrade to Enterprise Plan if needed</Feature>
-                <Button team>
-                  <ButtonText>Get started</ButtonText>
-                </Button>
-                <StyledTrialInfo team>
-                  <li>Free 14-day Demo</li>
-                  <li>No credit card needed</li>
-                  <li>No setup</li>
-                </StyledTrialInfo>
+                <ButtonWrapper>
+                  <Button team>
+                    <ButtonText>Get started</ButtonText>
+                  </Button>
+                  <StyledTrialInfo team>
+                    <li>Free 14-day Demo</li>
+                    <li>No credit card needed</li>
+                    <li>No setup</li>
+                  </StyledTrialInfo>
+                </ButtonWrapper>
               </PricingWrapper>
             </PricingSection>
           </Card>
