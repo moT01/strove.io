@@ -339,7 +339,7 @@ const Price = styled(ImportantPricingInfo)`
 
 const PricingDetails = styled(ImportantPricingInfo)`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.c15};
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const ButtonText = styled(ImportantPricingInfo)`
@@ -364,8 +364,9 @@ const CardTitle = styled(ImportantPricingInfo)`
 `
 
 const Divider = styled.div`
-  width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.c2};
+  width: ${({ blue }) => (blue ? '30%' : '100%')};
+  border-bottom: 1px solid
+    ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
 `
 
 const PricingHeader = styled(CardTitle)`
@@ -433,7 +434,8 @@ const PricingPage = () => {
                 <PricingDetails>
                   per person, per month, when billed yearly
                   <br />
-                  $50 USD/person, per month, when billed monthly
+                  <strong>$50 USD</strong>/person, per month, when billed
+                  monthly
                 </PricingDetails>
                 <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
                 <Divider />
@@ -551,10 +553,13 @@ const PricingPage = () => {
           </Card>
         </CardsWrapper>
         <EducationSectionWrapper>
+          <ImportantPricingInfo>
+            Do you work in an educational institution?
+          </ImportantPricingInfo>
+          <Divider blue />
           <StyledText>
-            Do you work at a School, University or some other Education
-            institution? Education plans are available so Contact us and see how
-            Strove.io can help your institution.
+            We have special plans tailored for schools, universities and other
+            educational institutions. Contact us and learn how we can help you.
           </StyledText>
         </EducationSectionWrapper>
         <FaqSectionWrapper>
@@ -593,7 +598,7 @@ const PricingPage = () => {
               Is it possible to upgrade from Team plan to Enterprise?
             </ImportantPricingInfo>
             <StyledText team>
-              Yes, it is possible. In order to upgrade please contact us.
+              Yes, it is possible. In order to upgrade contact us.
             </StyledText>
           </FaqColumn>
         </FaqSectionWrapper>
