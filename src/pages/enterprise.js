@@ -215,7 +215,7 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
+  background-color: ${({ team, theme }) => (team ? theme.colors.c1 : theme.colors.c2)};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
   margin-top: ${props => (props.team ? '5vh' : 0)};
   z-index: auto;
@@ -294,7 +294,7 @@ const PricingSection = styled.div`
 `
 
 const Feature = styled.p`
-  color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-size: 15px;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
@@ -302,7 +302,7 @@ const Feature = styled.p`
 const PlanTitle = styled.h1`
   margin: 10px;
   font-size: 26px;
-  color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-weight: 500;
 `
 const Contact = styled(PlanTitle)`
