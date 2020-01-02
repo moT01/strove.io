@@ -422,7 +422,7 @@ const PricingPage = () => {
                 <Feature team>Priority support</Feature>
                 <Feature team>Private cloud</Feature>
                 <Feature team>
-                  RAM, hard drive and speed adjusted to team's needs
+                  Specs (RAM, HDD, CPUs and more) adjusted to team's needs
                 </Feature>
                 <Feature team>
                   Active directory - highest code security and control
