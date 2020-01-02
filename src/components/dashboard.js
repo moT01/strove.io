@@ -34,8 +34,13 @@ const Wrapper = styled.div`
 `
 
 const PageWrapper = styled(Wrapper)`
-  width: 100vw;
+  width: 100%;
   padding-top: 5vh;
+  flex-direction: ${({ isAdmin }) => isAdmin && 'row'};
+`
+
+const SectionWrapper = styled(Wrapper)`
+  width: ${({ menu }) => (menu ? '30%' : '70%')};
 `
 
 const TilesWrapper = styled.div`
@@ -160,6 +165,109 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
+  const isAdmin = true
+
+  const tabs = [
+    { name: 'Teams' },
+    {
+      name: 'Projects',
+      value: (
+        <TilesWrapper>
+          <ProjectTitle>
+            Projects count: {projects.length}/{projectsLimit}
+          </ProjectTitle>
+          {projects.map(project => (
+            <Tile key={project.id}>
+              <VerticalDivider>
+                <InfoWrapper>
+                  <ProjectTitle>{project.name}</ProjectTitle>
+
+                  {currentProjectId && project.id === currentProjectId ? (
+                    <TextWrapper>
+                      <CircleIcon active />
+                      <Text>Active</Text>
+                    </TextWrapper>
+                  ) : (
+                    <TextWrapper>
+                      <CircleIcon />
+                      <Text>Inactive</Text>
+                    </TextWrapper>
+                  )}
+                  <TextWrapper>
+                    <StyledIcon type="calendar" />
+                    <Text>
+                      {dayjs(+project.createdAt).format('DD/MM/YYYY')}
+                    </Text>
+                  </TextWrapper>
+                  {project.description && (
+                    <TextWrapper>
+                      <StyledIcon type="edit" />
+                      <Text>
+                        {project.description
+                          ? project.description
+                          : 'This is the project description.. Tribute'}
+                      </Text>
+                    </TextWrapper>
+                  )}
+                  {/* <TextWrapper>
+        <StyledIcon
+          type="branches"
+        />
+        <Text> {project.branch}</Text>
+      </TextWrapper>
+      <TextWrapper>
+        <StyledIcon
+          type="code"
+        />
+        <Text>{project.language}</Text>
+      </TextWrapper> */}
+                  <TextWrapper>
+                    <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
+                    <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
+                  </TextWrapper>
+                </InfoWrapper>
+                <RightSection>
+                  <StroveButton
+                    to="/app/editor/"
+                    isDisabled={isDeleting || isContinuing || isStopping}
+                    isPrimary
+                    padding="0.5vh"
+                    onClick={() => handleStartClick(project)}
+                    text={
+                      currentProjectId && project.id === currentProjectId
+                        ? 'Continue'
+                        : 'Start'
+                    }
+                  />
+                  {currentProjectId && currentProjectId === project.id ? (
+                    <StroveButton
+                      isDisabled={isDeleting || isContinuing || isStopping}
+                      padding="0.5vh"
+                      onClick={() => {
+                        handleStopClick(project.id)
+                      }}
+                      text="Stop"
+                    />
+                  ) : null}
+                  <StroveButton
+                    isDisabled={isDeleting || isContinuing || isStopping}
+                    padding="0.5vh"
+                    onClick={() => {
+                      setModalVisible(true)
+                      setProjectToDelete(project)
+                    }}
+                    text="Delete"
+                  />
+                </RightSection>
+              </VerticalDivider>
+            </Tile>
+          ))}
+        </TilesWrapper>
+      ),
+    },
+  ]
+
+  const [selectedTab, setSelectedTab] = useState(tabs[0])
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -218,46 +326,62 @@ const Dashboard = ({ history }) => {
     <>
       <SEO title="Dashboard" />
       <Header />
-      <PageWrapper>
-        <GetStarted />
-        <TilesWrapper>
-          <ProjectTitle>
-            Projects count: {projects.length}/{projectsLimit}
-          </ProjectTitle>
-          {projects.map(project => (
-            <Tile key={project.id}>
-              <VerticalDivider>
-                <InfoWrapper>
-                  <ProjectTitle>{project.name}</ProjectTitle>
+      <PageWrapper isAdmin>
+        {isAdmin ? (
+          <>
+            <SectionWrapper menu>
+              {tabs.map((tab, index) => (
+                <StroveButton
+                  onClick={() => setSelectedTab(tabs[index])}
+                  text={tab.name}
+                />
+              ))}
+            </SectionWrapper>
+            <SectionWrapper>
+              {tabs[tabs.findIndex(tab => tab.name === selectedTab.name)].value}
+            </SectionWrapper>
+          </>
+        ) : (
+          <>
+            <GetStarted />
+            <TilesWrapper>
+              <ProjectTitle>
+                Projects count: {projects.length}/{projectsLimit}
+              </ProjectTitle>
+              {projects.map(project => (
+                <Tile key={project.id}>
+                  <VerticalDivider>
+                    <InfoWrapper>
+                      <ProjectTitle>{project.name}</ProjectTitle>
 
-                  {currentProjectId && project.id === currentProjectId ? (
-                    <TextWrapper>
-                      <CircleIcon active />
-                      <Text>Active</Text>
-                    </TextWrapper>
-                  ) : (
-                    <TextWrapper>
-                      <CircleIcon />
-                      <Text>Inactive</Text>
-                    </TextWrapper>
-                  )}
-                  <TextWrapper>
-                    <StyledIcon type="calendar" />
-                    <Text>
-                      {dayjs(+project.createdAt).format('DD/MM/YYYY')}
-                    </Text>
-                  </TextWrapper>
-                  {project.description && (
-                    <TextWrapper>
-                      <StyledIcon type="edit" />
-                      <Text>
-                        {project.description
-                          ? project.description
-                          : 'This is the project description.. Tribute'}
-                      </Text>
-                    </TextWrapper>
-                  )}
-                  {/* <TextWrapper>
+                      {currentProjectId && project.id === currentProjectId ? (
+                        <TextWrapper>
+                          <CircleIcon active />
+                          <Text>Active</Text>
+                        </TextWrapper>
+                      ) : (
+                        <TextWrapper>
+                          <CircleIcon />
+                          <Text>Inactive</Text>
+                        </TextWrapper>
+                      )}
+                      <TextWrapper>
+                        <StyledIcon type="calendar" />
+                        <Text>
+                          {dayjs(+project.createdAt).format('DD/MM/YYYY')}
+                        </Text>
+                      </TextWrapper>
+                      {project.description && (
+                        <TextWrapper>
+                          <StyledIcon type="edit" />
+                          <Text>
+                            {project.description
+                              ? project.description
+                              : 'This is the project description.. Tribute'}
+                          </Text>
+                        </TextWrapper>
+                      )}
+                      {/* <TextWrapper>
                   <StyledIcon
                     type="branches"
                   />
@@ -269,48 +393,52 @@ const Dashboard = ({ history }) => {
                   />
                   <Text>{project.language}</Text>
                 </TextWrapper> */}
-                  <TextWrapper>
-                    <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
-                    <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
-                  </TextWrapper>
-                </InfoWrapper>
-                <RightSection>
-                  <StroveButton
-                    to="/app/editor/"
-                    isDisabled={isDeleting || isContinuing || isStopping}
-                    isPrimary
-                    padding="0.5vh"
-                    onClick={() => handleStartClick(project)}
-                    text={
-                      currentProjectId && project.id === currentProjectId
-                        ? 'Continue'
-                        : 'Start'
-                    }
-                  />
-                  {currentProjectId && currentProjectId === project.id ? (
-                    <StroveButton
-                      isDisabled={isDeleting || isContinuing || isStopping}
-                      padding="0.5vh"
-                      onClick={() => {
-                        handleStopClick(project.id)
-                      }}
-                      text="Stop"
-                    />
-                  ) : null}
-                  <StroveButton
-                    isDisabled={isDeleting || isContinuing || isStopping}
-                    padding="0.5vh"
-                    onClick={() => {
-                      setModalVisible(true)
-                      setProjectToDelete(project)
-                    }}
-                    text="Delete"
-                  />
-                </RightSection>
-              </VerticalDivider>
-            </Tile>
-          ))}
-        </TilesWrapper>
+                      <TextWrapper>
+                        <StyledIcon
+                          type={project.isPrivate ? 'lock' : 'unlock'}
+                        />
+                        <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
+                      </TextWrapper>
+                    </InfoWrapper>
+                    <RightSection>
+                      <StroveButton
+                        to="/app/editor/"
+                        isDisabled={isDeleting || isContinuing || isStopping}
+                        isPrimary
+                        padding="0.5vh"
+                        onClick={() => handleStartClick(project)}
+                        text={
+                          currentProjectId && project.id === currentProjectId
+                            ? 'Continue'
+                            : 'Start'
+                        }
+                      />
+                      {currentProjectId && currentProjectId === project.id ? (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="0.5vh"
+                          onClick={() => {
+                            handleStopClick(project.id)
+                          }}
+                          text="Stop"
+                        />
+                      ) : null}
+                      <StroveButton
+                        isDisabled={isDeleting || isContinuing || isStopping}
+                        padding="0.5vh"
+                        onClick={() => {
+                          setModalVisible(true)
+                          setProjectToDelete(project)
+                        }}
+                        text="Delete"
+                      />
+                    </RightSection>
+                  </VerticalDivider>
+                </Tile>
+              ))}
+            </TilesWrapper>
+          </>
+        )}
       </PageWrapper>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
