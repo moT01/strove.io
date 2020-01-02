@@ -331,7 +331,11 @@ const PlanDesc = styled(Feature)`
 `
 
 const CardTitle = styled(ImportantPricingInfo)`
-  font-size: 40px;
+  font-size: 36px;
+`
+
+const PricingHeader = styled(CardTitle)`
+  margin-top: 40px;
 `
 
 const validate = values => {
@@ -375,6 +379,8 @@ const PricingPage = () => {
       <>
         <SEO title="Pricing" />
         <Header />
+        <PricingHeader>Choose the plan that’s right for your team</PricingHeader>
+        <PlanDesc>Pay by month or the year, and cancel at any time.</PlanDesc>
         <CardsWrapper>
           <Card>
             <CardTitle>Individuals</CardTitle>
