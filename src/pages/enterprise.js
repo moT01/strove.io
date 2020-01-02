@@ -329,6 +329,11 @@ const CardTitle = styled(ImportantPricingInfo)`
   font-size: 36px;
 `
 
+const Divider = styled.div`
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c2};
+`
+
 const PricingHeader = styled(CardTitle)`
   margin: 40px 10px 0;
   color: ${({ theme }) => theme.colors.c3};
@@ -382,12 +387,14 @@ const PricingPage = () => {
             <PricingSection>
               <PricingWrapper>
                 <CardTitle team>Team</CardTitle>
+                <Divider />
                 <PlanDesc team>
                   For small and medium sized teams and businesses
                 </PlanDesc>
                 <Price team>40$</Price>
                 <PricingDetails>per person, per month, when billed yearly<br />$50 USD/person, per month, when billed monthly</PricingDetails>
                 <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
+                <Divider />
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
                 <Feature team>Private repositories</Feature>
@@ -410,11 +417,13 @@ const PricingPage = () => {
             <PricingSection>
               <PricingWrapper>
                 <CardTitle team>Enterprise</CardTitle>
+                <Divider enterprise/>
                 <PlanDesc team>
                   For larger enterprises or those with custom requirements
                 </PlanDesc>
                 <PricingDetails>To get a price estimate for Enterprise plan, please contact our Sales team</PricingDetails>
                 <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
+                <Divider />
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
                 <Feature team>Private repositories</Feature>
