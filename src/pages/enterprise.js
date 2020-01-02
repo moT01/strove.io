@@ -383,9 +383,9 @@ const PricingPage = () => {
         <PlanDesc>Pay by month or the year, and cancel at any time.</PlanDesc>
         <CardsWrapper>
           <Card>
-            <CardTitle>Individuals</CardTitle>
             <PricingSection>
               <PricingWrapper>
+                <CardTitle>Individuals</CardTitle>
                 <ImportantPricingInfo>Free</ImportantPricingInfo>
                 <PlanDesc>The basic plan for individual developers</PlanDesc>
                 <Feature>Public repositories</Feature>
@@ -402,9 +402,9 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
           <Card team>
-            <CardTitle team>Team</CardTitle>
             <PricingSection>
               <PricingWrapper>
+                <CardTitle team>Team</CardTitle>
                 <PlanDesc team>
                   For small and medium sized teams and businesses
                 </PlanDesc>
@@ -428,9 +428,9 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
           <Card enterprise team>
-            <CardTitle team>Enterprise</CardTitle>
             <PricingSection>
               <PricingWrapper>
+                <CardTitle team>Enterprise</CardTitle>
                 <PlanDesc team>
                   For larger enterprises or those with custom requirements
                 </PlanDesc>
@@ -466,7 +466,7 @@ const PricingPage = () => {
                     )
                   }}
                 >
-                  {({ errors, touched, values }) => (
+                  {({ errors, values }) => (
                     <Form>
                       <EmailFormWrapper
                         disabled={errors.email || !values.email}
