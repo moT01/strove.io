@@ -221,6 +221,8 @@ const Card = styled.div`
   padding: 50px 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
   flex-grow: 1;
+  flex-basis: 100%;
+  margin: 0 20px;
   @media (max-width: 1366px) {
     margin: 10px 0;
   }
