@@ -356,7 +356,7 @@ const PlanDesc = styled(Feature)`
 `
 
 const CancelationInfo = styled(PlanDesc)`
-  color: ${({ theme }) => theme.colors.c3};
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const CardTitle = styled(ImportantPricingInfo)`
@@ -370,8 +370,8 @@ const Divider = styled.div`
 `
 
 const PricingHeader = styled(CardTitle)`
-  margin: 40px 10px 0;
-  color: ${({ theme }) => theme.colors.c3};
+  margin: 60px 10px 20px;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const validate = values => {
@@ -415,9 +415,8 @@ const PricingPage = () => {
       <>
         <SEO title="Pricing" />
         <Header />
-        <PricingHeader>
-          Choose the plan that’s right for your team
-        </PricingHeader>
+        <PricingHeader>Choose the plan that fits your team</PricingHeader>
+        <Divider blue />
         <CancelationInfo>
           Pay by month or the year, and cancel at any time.
         </CancelationInfo>
@@ -554,7 +553,7 @@ const PricingPage = () => {
         </CardsWrapper>
         <EducationSectionWrapper>
           <ImportantPricingInfo>
-            Do you work in an educational institution?
+            Do you work for an educational institution?
           </ImportantPricingInfo>
           <Divider blue />
           <StyledText>
