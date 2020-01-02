@@ -234,10 +234,8 @@ const PricingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  height: 80%;
   @media (max-width: 1366px) {
     width: 90%;
-    height: auto;
   }
 
   h1 {
