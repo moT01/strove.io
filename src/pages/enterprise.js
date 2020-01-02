@@ -39,7 +39,6 @@ const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   padding: 3vh;
   animation: ${ButtonFadeIn} 0.3s ease-out;
   @media (max-width: 1366px) {
@@ -217,7 +216,6 @@ const Card = styled.div`
   align-items: center;
   background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2)};
   margin-left: ${props => (props.team ? '-3vw' : 0)};
-  margin-top: ${props => (props.team ? '5vh' : 0)};
   z-index: auto;
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
