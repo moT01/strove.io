@@ -44,6 +44,7 @@ const CardsWrapper = styled.div`
   animation: ${ButtonFadeIn} 0.3s ease-out;
   @media (max-width: 1366px) {
     flex-direction: column;
+    padding:
   }
 `
 
@@ -221,7 +222,6 @@ const Card = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
   flex-grow: 1;
   @media (max-width: 1366px) {
-    width: 80vw;
     margin: 10px 0;
   }
 `
