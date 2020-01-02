@@ -324,7 +324,7 @@ const CardTitle = styled(ImportantPricingInfo)`
 `
 
 const PricingHeader = styled(CardTitle)`
-  margin-top: 40px;
+  margin: 40px 10px 0;
 `
 
 const validate = values => {
