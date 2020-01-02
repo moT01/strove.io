@@ -44,7 +44,7 @@ const CardsWrapper = styled.div`
   animation: ${ButtonFadeIn} 0.3s ease-out;
   @media (max-width: 1366px) {
     flex-direction: column;
-    padding:
+    padding: ;
   }
 `
 
@@ -184,12 +184,14 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  background-color: ${({ team, theme }) =>
+    team ? theme.colors.c2 : theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   color: ${({ team, theme }) => (team ? theme.colors.c1 : theme.colors.c2)};
   border-radius: 4px;
-  border-color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  border-color: ${({ team, theme }) =>
+    team ? theme.colors.c2 : theme.colors.c1};
   box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
   &:disabled {
@@ -212,14 +214,16 @@ const Button = styled.button`
 `
 
 const Card = styled.div`
-  background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2)};
+  background-color: ${({ team, enterprise, theme }) =>
+    enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2};
   z-index: auto;
   border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
+  border-color: ${({ enterprise, theme }) =>
+    enterprise ? theme.colors.c3 : theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
   flex-grow: 1;
   flex-basis: 100%;
   margin: 0 20px;
@@ -375,8 +379,12 @@ const PricingPage = () => {
       <>
         <SEO title="Pricing" />
         <Header />
-        <PricingHeader>Choose the plan that’s right for your team</PricingHeader>
-        <CancelationInfo>Pay by month or the year, and cancel at any time.</CancelationInfo>
+        <PricingHeader>
+          Choose the plan that’s right for your team
+        </PricingHeader>
+        <CancelationInfo>
+          Pay by month or the year, and cancel at any time.
+        </CancelationInfo>
         <CardsWrapper>
           <Card team>
             <PricingSection>
@@ -386,7 +394,11 @@ const PricingPage = () => {
                   For small and medium sized teams and businesses
                 </PlanDesc>
                 <Price team>40$</Price>
-                <PricingDetails>per person, per month, when billed yearly<br />$50 USD/person, per month, when billed monthly</PricingDetails>
+                <PricingDetails>
+                  per person, per month, when billed yearly
+                  <br />
+                  $50 USD/person, per month, when billed monthly
+                </PricingDetails>
                 <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
@@ -413,7 +425,10 @@ const PricingPage = () => {
                 <PlanDesc team>
                   For larger enterprises or those with custom requirements
                 </PlanDesc>
-                <PricingDetails>To get a price estimate for Enterprise plan, please contact our Sales team</PricingDetails>
+                <PricingDetails>
+                  To get a price estimate for Enterprise plan, please contact
+                  our Sales team
+                </PricingDetails>
                 <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
@@ -482,7 +497,9 @@ const PricingPage = () => {
                         </button>
                       </EmailFormWrapper>
                       {emailSent && (
-                        <StyledEmailConfirmation>Thank you, we'll get in touch soon!</StyledEmailConfirmation>
+                        <StyledEmailConfirmation>
+                          Thank you, we'll get in touch soon!
+                        </StyledEmailConfirmation>
                       )}
                     </Form>
                   )}
