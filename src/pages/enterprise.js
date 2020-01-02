@@ -295,6 +295,12 @@ const Feature = styled.p`
   font-size: 15px;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
+
+  &:before {
+    margin-right: 0.3em;
+    content: '✔';
+    color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  }
 `
 const ImportantPricingInfo = styled.span`
   margin: 10px 0;
@@ -318,6 +324,10 @@ const ButtonText = styled(ImportantPricingInfo)`
 
 const PlanDesc = styled(Feature)`
   font-size: 15px;
+
+  &:before {
+    content: none;
+  }
 `
 
 const CardTitle = styled(ImportantPricingInfo)`
