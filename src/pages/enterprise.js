@@ -314,7 +314,7 @@ const Price = styled(ImportantPricingInfo)`
 
 const PricingDetails = styled(ImportantPricingInfo)`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.c14};
+  color: ${({ theme }) => theme.colors.c15};
 `
 
 const ButtonText = styled(ImportantPricingInfo)`
