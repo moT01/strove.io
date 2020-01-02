@@ -356,7 +356,7 @@ export default memo(
     }, [loginData, loginError])
 
     useEffect(() => {
-      token &&
+      if (token) {
         dispatch(
           query({
             name: 'myProjects',
@@ -364,6 +364,10 @@ export default memo(
             query: MY_PROJECTS,
           })
         )
+
+        history.push('/app/dashboard')
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
 
