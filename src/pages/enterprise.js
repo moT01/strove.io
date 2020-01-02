@@ -396,9 +396,8 @@ const PricingPage = () => {
                   For small and medium sized teams and businesses
                 </PlanDesc>
                 <Price team>40$</Price>
-                <PricingDetails>per person, per month, when billed yearly
-$15 USD/person, per month, when billed monthly</PricingDetails>
-                <ImportantPricingInfo team>Benefits:</ImportantPricingInfo>
+                <PricingDetails>per person, per month, when billed yearly<br />$50 USD/person, per month, when billed monthly</PricingDetails>
+                <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
                 <Feature team>Unlimited coding time</Feature>
                 <Feature team>Team management</Feature>
                 <Feature team>Private repositories</Feature>
@@ -422,7 +421,8 @@ $15 USD/person, per month, when billed monthly</PricingDetails>
                 <PlanDesc team>
                   For larger enterprises or those with custom requirements
                 </PlanDesc>
-                <ImportantPricingInfo team>Benefits:</ImportantPricingInfo>
+                <PricingDetails>To get a price estimate for Enterprise plan, please contact our Sales team</PricingDetails>
+                <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
                 <Feature team>Private cloud</Feature>
                 <Feature team>Private repositories</Feature>
                 <Feature team>
