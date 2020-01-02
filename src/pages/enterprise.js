@@ -218,7 +218,7 @@ const Card = styled.div`
   border-style: solid;
   padding: 50px 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-  width: ${({ enterprise }) => enterprise ? '38vw' : '30vw'};
+  width: ${({ enterprise }) => enterprise ? '45vw' : '45vw'};
   height: auto;
   @media (max-width: 1366px) {
     width: 80vw;
