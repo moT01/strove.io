@@ -215,7 +215,7 @@ const Card = styled.div`
   background-color: ${({ team, enterprise, theme }) => (enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2)};
   z-index: auto;
   border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
+  border-color: ${({ theme, enterprise }) => enterprise ? theme.colors.c3 :  theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
