@@ -39,6 +39,7 @@ const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
   padding: 20px;
   animation: ${ButtonFadeIn} 0.3s ease-out;
   @media (max-width: 1366px) {
@@ -218,8 +219,7 @@ const Card = styled.div`
   border-style: solid;
   padding: 50px 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-  width: ${({ enterprise }) => enterprise ? '45vw' : '45vw'};
-  height: auto;
+  flex-grow: 1;
   @media (max-width: 1366px) {
     width: 80vw;
     margin: 10px 0;
