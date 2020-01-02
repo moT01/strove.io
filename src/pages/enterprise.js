@@ -48,7 +48,7 @@ const CardsWrapper = styled.div`
   }
 `
 
-const StyledH6 = styled.h6`
+const StyledEmailConfirmation = styled.div`
   margin: 20px;
   color: ${({ theme }) => theme.colors.c1};
 `
@@ -473,7 +473,7 @@ const PricingPage = () => {
                         </button>
                       </EmailFormWrapper>
                       {emailSent && (
-                        <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
+                        <StyledEmailConfirmation>Thank you, we'll get in touch soon!</StyledEmailConfirmation>
                       )}
                     </Form>
                   )}
