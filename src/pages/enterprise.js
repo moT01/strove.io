@@ -271,7 +271,6 @@ const PricingSection = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 100%;
   @media (max-width: 1366px) {
     flex-direction: column;
   }
@@ -372,25 +371,6 @@ const PricingPage = () => {
         <PricingHeader>Choose the plan that’s right for your team</PricingHeader>
         <PlanDesc>Pay by month or the year, and cancel at any time.</PlanDesc>
         <CardsWrapper>
-          <Card>
-            <PricingSection>
-              <PricingWrapper>
-                <CardTitle>Individuals</CardTitle>
-                <ImportantPricingInfo>Free</ImportantPricingInfo>
-                <PlanDesc>The basic plan for individual developers</PlanDesc>
-                <Feature>Public repositories</Feature>
-                <Feature>5 GB of RAM</Feature>
-                <Feature>35 hours/month</Feature>
-                <Feature>No commercial use</Feature>
-                <Button disabled>
-                  <ButtonText team>Already subscribed</ButtonText>
-                </Button>
-                <StyledTrialInfo>
-                  <li>Free for non-commercial use</li>
-                </StyledTrialInfo>
-              </PricingWrapper>
-            </PricingSection>
-          </Card>
           <Card team>
             <PricingSection>
               <PricingWrapper>
