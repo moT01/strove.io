@@ -406,8 +406,12 @@ const PricingPage = () => {
                 </PlanDesc>
                 <PricingDetails>To get a price estimate for Enterprise plan, please contact our Sales team</PricingDetails>
                 <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
-                <Feature team>Private cloud</Feature>
+                <Feature team>Unlimited coding time</Feature>
+                <Feature team>Team management</Feature>
                 <Feature team>Private repositories</Feature>
+                <Feature team>Access restriction</Feature>
+                <Feature team>Priority support</Feature>
+                <Feature team>Private cloud</Feature>
                 <Feature team>
                   RAM, hard drive and speed adjusted to team's needs
                 </Feature>
@@ -417,8 +421,6 @@ const PricingPage = () => {
                 <Feature team>
                   Extensive docker support - multiple containers, custom images
                 </Feature>
-                <Feature team>Access restriction</Feature>
-                <Feature team>Priority support</Feature>
                 <Formik
                   initialValues={{
                     email: '',
