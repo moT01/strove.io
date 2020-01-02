@@ -133,7 +133,7 @@ const EmailFormWrapper = styled.div`
     width: 156px;
     height: 56px;
     color: ${({ theme }) => theme.colors.c2};
-    background: ${({ theme }) => theme.colors.c3};
+    background: ${({ theme }) => theme.colors.c1};
     text-transform: uppercase;
     display: block;
     text-align: center;
