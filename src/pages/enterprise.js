@@ -224,8 +224,9 @@ const Card = styled.div`
   border-style: solid;
   padding: 50px 20px;
   box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
-  flex-grow: 1;
-  flex-basis: 100%;
+  /* flex-grow: 1;
+  flex-basis: 100%; */
+  width: 40%;
   margin: 0 20px;
   @media (max-width: 1366px) {
     margin: 10px 0;
@@ -236,6 +237,7 @@ const PricingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
+  width: 90%;
   @media (max-width: 1366px) {
     width: 90%;
   }
@@ -429,7 +431,7 @@ const PricingPage = () => {
             <PricingSection>
               <PricingWrapper>
                 <CardTitle team>Enterprise</CardTitle>
-                <Divider enterprise/>
+                <Divider enterprise />
                 <PlanDesc team>
                   For larger enterprises or those with custom requirements
                 </PlanDesc>
