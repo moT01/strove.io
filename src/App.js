@@ -15,6 +15,7 @@ import {
   RunProject,
   Pricing,
   Editor,
+  FromEmailInvitation,
 } from 'pages'
 
 import { PrivateRoute, Dashboard } from 'components'
@@ -43,6 +44,7 @@ const Strove = () => (
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
+      <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
   </Wrapper>

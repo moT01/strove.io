@@ -441,7 +441,6 @@ const PricingPage = () => {
                 <Feature team>Priority support</Feature>
                 <Feature team>5 GB of RAM and 10 GB of HDD/project</Feature>
                 <Feature team>Upgrade to Enterprise Plan if needed</Feature>
-
               </PricingWrapper>
             </PricingSection>
             <ButtonWrapper>

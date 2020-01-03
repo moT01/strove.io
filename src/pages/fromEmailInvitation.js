@@ -2,10 +2,7 @@ import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
-import {
-  NoRepoUrlInfo,
-  ExternalLink,
-} from 'components'
+import { ExternalLink } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
@@ -34,25 +31,21 @@ const Wrapper = styled.div`
 `
 
 const FromEmailInvitaiton = () => {
-	const searchParams = getWindowSearchParams()
-	const token = useSelector(getToken)
-	
-	const teamName = searchParams.get('teamName')
+  const searchParams = getWindowSearchParams()
+  const token = useSelector(getToken)
+
+  const teamName = searchParams.get('teamName')
   const email = searchParams.get('email')
 
   return (
     <Wrapper>
       <MenuWrapper invert>
-				{loginOptions.map(loginOption => (
-				<ExternalLink
-				primary
-				href={`${loginOption.href}`}
-			>
-				{loginProvider.icon}
-				<LoginText invert>Login with {loginProvider.label}</LoginText>
-			</ExternalLink>
-				))}
-
+        {loginOptions.map(loginOption => (
+          <ExternalLink primary href={`${loginOption.href}`}>
+            {loginOption.icon}
+            <LoginText invert>Login with {loginOption.label}</LoginText>
+          </ExternalLink>
+        ))}
       </MenuWrapper>
     </Wrapper>
   )
