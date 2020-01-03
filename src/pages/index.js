@@ -7,7 +7,7 @@ import PrivacyPolicy from './privacyPolicy'
 import TermsAndConditions from './termsAndConditions'
 import { GoBackTo, Login } from './fromEmbed'
 import RunProject from './runProject'
-import Enterprise from './enterprise'
+import Pricing from './pricing'
 import Editor from './editor'
 
 export {
@@ -21,6 +21,6 @@ export {
   GoBackTo,
   Login,
   RunProject,
-  Enterprise,
+  Pricing,
   Editor,
 }
