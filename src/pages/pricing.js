@@ -18,23 +18,6 @@ const ButtonFadeIn = keyframes`
   }
 `
 
-const StyledTrialInfo = styled.ul`
-  font-size: 13px;
-  padding: 0;
-  margin: 0;
-  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
-  li {
-    display: inline-block;
-    margin-right: 8px;
-    list-style: none;
-    &:before {
-      margin-right: 0.3em;
-      content: '✔';
-      color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
-    }
-  }
-`
-
 const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -457,9 +440,6 @@ const PricingPage = () => {
                   <Button team>
                     <ButtonText>Get started</ButtonText>
                   </Button>
-                  <StyledTrialInfo team>
-                    <li>No setup needed</li>
-                  </StyledTrialInfo>
                 </ButtonWrapper>
               </PricingWrapper>
             </PricingSection>
