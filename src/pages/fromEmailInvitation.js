@@ -38,6 +38,18 @@ const InvitationTitle = styled.div`
   margin-bottom: 20px;
 `
 
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const InvitationDetails = styled.div`
+  color: ${({ theme }) => theme.colors.c11};
+  font-size: 18px;
+  margin-bottom: 10px;
+`
+
 const FromEmailInvitaiton = () => {
   const searchParams = getWindowSearchParams()
   const token = useSelector(getToken)
@@ -54,14 +66,18 @@ const FromEmailInvitaiton = () => {
     <Wrapper>
       <MenuWrapper invert>
         <InvitationTitle>You're invited to {teamName}</InvitationTitle>
-        {fromEmail} has invited you to join the Strove team <b>{teamName}</b>.
-        Login to start collaborating!
-        {loginOptions.map(loginOption => (
-          <ExternalLink primary href={`${loginOption.href}`}>
-            {loginOption.icon}
-            <LoginText invert>Login with {loginOption.label}</LoginText>
-          </ExternalLink>
-        ))}
+        <InvitationDetails>
+          {fromEmail} has invited you to join the Strove team <b>{teamName}</b>.
+          Login to start collaborating!
+        </InvitationDetails>
+        <LoginWrapper>
+          {loginOptions.map(loginOption => (
+            <ExternalLink primary href={`${loginOption.href}`}>
+              {loginOption.icon}
+              <LoginText invert>Login with {loginOption.label}</LoginText>
+            </ExternalLink>
+          ))}
+        </LoginWrapper>
       </MenuWrapper>
     </Wrapper>
   )
