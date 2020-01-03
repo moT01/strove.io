@@ -285,6 +285,9 @@ const Auth = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
+  if (window.location.pathname.includes('/embed/')) {
+    return null
+  }
   return !user.username && !isLoading ? (
     <LoginDropdown {...props} />
   ) : (

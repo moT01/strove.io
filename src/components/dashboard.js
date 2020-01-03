@@ -148,6 +148,27 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
+const TrialInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.c4};
+  border-radius: 5px;
+  border-color: ${({ theme }) => theme.colors.c1};
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+  margin-bottom: 0;
+  height: auto;
+  width: auto;
+  min-width: 50vw;
+  max-width: 100vw;
+  margin-bottom: 20px;
+  color: ${({ theme }) => theme.colors.c11};
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -219,6 +240,7 @@ const Dashboard = ({ history }) => {
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
+        <TrialInfoWrapper>Your workspace</TrialInfoWrapper>
         <GetStarted />
         <TilesWrapper>
           <ProjectTitle>
