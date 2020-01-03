@@ -285,7 +285,7 @@ const Auth = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
-  if (window.location.pathname.includes('/embed/')) {
+  if (window.location.pathname.includes('/embed/') || window.location.pathname.includes('/app/editor')) {
     return null
   }
   return !user.username && !isLoading ? (
