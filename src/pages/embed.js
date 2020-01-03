@@ -28,7 +28,6 @@ const LoginText = styled.span`
 
 const Wrapper = styled.div`
   display: flex;
-  height: 97vh;
   display: flex;
   align-items: center;
   justify-content: center;
