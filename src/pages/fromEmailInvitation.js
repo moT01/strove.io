@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
+import { Redirect } from 'react-router-dom'
 
 import { ExternalLink } from 'components'
 import { selectors } from 'state'
@@ -36,6 +37,10 @@ const FromEmailInvitaiton = () => {
 
   const teamName = searchParams.get('teamName')
   const email = searchParams.get('email')
+
+  if (token) {
+    return <Redirect to="/app/dashboard" />
+  }
 
   return (
     <Wrapper>
