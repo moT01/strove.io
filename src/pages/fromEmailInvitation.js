@@ -1,14 +1,14 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
-import { Redirect } from 'react-router-dom'
 
 import {
   NoRepoUrlInfo,
   ExternalLink,
 } from 'components'
 import { selectors } from 'state'
-import { getWindowSearchParams, getRepoUrl } from 'utils'
+import { getWindowSearchParams } from 'utils'
+import { loginOptions } from 'consts'
 
 const getToken = selectors.api.getUserField('siliskyToken')
 
@@ -43,18 +43,16 @@ const FromEmailInvitaiton = () => {
   return (
     <Wrapper>
       <MenuWrapper invert>
-        {repoUrl ? (
-          <ExternalLink
-            primary
-            href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LoginText invert>Login to start coding</LoginText>
-          </ExternalLink>
-        ) : (
-          <NoRepoUrlInfo />
-        )}
+				{loginOptions.map(loginOption => (
+				<ExternalLink
+				primary
+				href={`${loginOption.href}`}
+			>
+				{loginProvider.icon}
+				<LoginText invert>Login with {loginProvider.label}</LoginText>
+			</ExternalLink>
+				))}
+
       </MenuWrapper>
     </Wrapper>
   )
