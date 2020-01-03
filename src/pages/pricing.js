@@ -227,6 +227,8 @@ const Card = styled.div`
     enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2};
   z-index: auto;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
   border-color: ${({ enterprise, theme }) =>
     enterprise ? theme.colors.c3 : theme.colors.c1};
   border-width: 1px;
@@ -287,6 +289,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: auto;
 `
 
 const PricingSection = styled.div`
@@ -436,13 +439,14 @@ const PricingPage = () => {
                 <Feature team>Priority support</Feature>
                 <Feature team>5 GB of RAM and 10 GB of HDD/project</Feature>
                 <Feature team>Upgrade to Enterprise Plan if needed</Feature>
-                <ButtonWrapper>
-                  <Button team>
-                    <ButtonText>Get started</ButtonText>
-                  </Button>
-                </ButtonWrapper>
+
               </PricingWrapper>
             </PricingSection>
+            <ButtonWrapper>
+              <Button team>
+                <ButtonText>Get started</ButtonText>
+              </Button>
+            </ButtonWrapper>
           </Card>
           <Card enterprise team>
             <PricingSection>
