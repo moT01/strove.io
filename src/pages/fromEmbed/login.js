@@ -1,10 +1,8 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-import { ThemeProvider } from 'styled-components/macro'
 
-import { theme } from 'consts'
 import { loginOptions } from 'consts'
-import { GlobalStyles, NoRepoUrlInfo, ExternalLink } from 'components'
+import { NoRepoUrlInfo, ExternalLink } from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
 const MenuWrapper = styled.div`
@@ -55,36 +53,33 @@ const Login = () => {
   )
 
   return (
-    <ThemeProvider theme={theme}>
-      <Wrapper>
-        <MenuWrapper invert>
-          {loginProvider ? (
-            <>
-              <ExternalLink
-                primary
-                href={`${loginProvider.embedHref}?goBackTo=${goBackTo}&repoUrl=${repoUrl}`}
-              >
-                {loginProvider.icon}
-                <LoginText invert>Login with {loginProvider.label}</LoginText>
-              </ExternalLink>
-              {goBackTo ? (
-                <RedirectInfoWrapper>
-                  You'll be redirected back to <Url>{getDomain(goBackTo)}</Url>{' '}
-                  once you log in
-                </RedirectInfoWrapper>
-              ) : (
-                <NoRedirectUrlInfo>
-                  Ops! No redirect link available!
-                </NoRedirectUrlInfo>
-              )}
-            </>
-          ) : (
-            <NoRepoUrlInfo />
-          )}
-        </MenuWrapper>
-      </Wrapper>
-      <GlobalStyles />
-    </ThemeProvider>
+    <Wrapper>
+      <MenuWrapper invert>
+        {loginProvider ? (
+          <>
+            <ExternalLink
+              primary
+              href={`${loginProvider.embedHref}?goBackTo=${goBackTo}&repoUrl=${repoUrl}`}
+            >
+              {loginProvider.icon}
+              <LoginText invert>Login with {loginProvider.label}</LoginText>
+            </ExternalLink>
+            {goBackTo ? (
+              <RedirectInfoWrapper>
+                You'll be redirected back to <Url>{getDomain(goBackTo)}</Url>{' '}
+                once you log in
+              </RedirectInfoWrapper>
+            ) : (
+              <NoRedirectUrlInfo>
+                Ops! No redirect link available!
+              </NoRedirectUrlInfo>
+            )}
+          </>
+        ) : (
+          <NoRepoUrlInfo />
+        )}
+      </MenuWrapper>
+    </Wrapper>
   )
 }
 
