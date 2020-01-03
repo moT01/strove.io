@@ -420,9 +420,7 @@ const Banner = () => {
                     />
                   </EmailFormWrapper>
                   <StyledTrialInfo>
-                    <li>Free 14-day Demo</li>
-                    <li>No credit card needed</li>
-                    <li>No setup</li>
+                    <li>No setup needed</li>
                   </StyledTrialInfo>
                   {emailSent && (
                     <StyledInfo>Thank you, we'll get in touch soon!</StyledInfo>

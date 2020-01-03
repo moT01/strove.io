@@ -458,9 +458,7 @@ const PricingPage = () => {
                     <ButtonText>Get started</ButtonText>
                   </Button>
                   <StyledTrialInfo team>
-                    <li>Free 14-day Trial</li>
-                    <li>No credit card needed</li>
-                    <li>No setup</li>
+                    <li>No setup needed</li>
                   </StyledTrialInfo>
                 </ButtonWrapper>
               </PricingWrapper>

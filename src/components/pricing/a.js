@@ -473,9 +473,7 @@ const PricingPage = () => {
                         </button>
                       </EmailFormWrapper>
                       <StyledTrialInfo team>
-                        <li>Free 14-day Demo</li>
-                        <li>No credit card needed</li>
-                        <li>No setup</li>
+                        <li>No setup needed</li>
                       </StyledTrialInfo>
                       {emailSent && (
                         <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
