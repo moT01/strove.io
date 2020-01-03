@@ -31,20 +31,29 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
+const InvitationTitle = styled.div`
+  color: ${({ theme }) => theme.colors.c1};
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 20px;
+`
+
 const FromEmailInvitaiton = () => {
   const searchParams = getWindowSearchParams()
   const token = useSelector(getToken)
 
   const teamName = searchParams.get('teamName')
-  const email = searchParams.get('email')
+  const invitedEmail = searchParams.get('invitedEmail')
+  const fromEmail = searchParams.get('fromEmail')
 
-  if (token) {
-    return <Redirect to="/app/dashboard" />
-  }
+  // if (token) {
+  //   return <Redirect to="/app/dashboard" />
+  // }
 
   return (
     <Wrapper>
       <MenuWrapper invert>
+        <InvitationTitle>You're invited to {teamName}</InvitationTitle>
         {loginOptions.map(loginOption => (
           <ExternalLink primary href={`${loginOption.href}`}>
             {loginOption.icon}
