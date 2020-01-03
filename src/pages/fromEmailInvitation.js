@@ -34,7 +34,7 @@ const Wrapper = styled.div`
 const InvitationTitle = styled.div`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 21px;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 20px;
 `
 
@@ -65,7 +65,9 @@ const FromEmailInvitaiton = () => {
   return (
     <Wrapper>
       <MenuWrapper invert>
-        <InvitationTitle>You're invited to {teamName}</InvitationTitle>
+        <InvitationTitle>
+          You're invited to <b>{teamName}</b>
+        </InvitationTitle>
         <InvitationDetails>
           {fromEmail} has invited you to join the Strove team <b>{teamName}</b>.
           Login to start collaborating!
