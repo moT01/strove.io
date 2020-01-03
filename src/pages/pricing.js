@@ -55,6 +55,7 @@ const EducationSectionWrapper = styled(CardsWrapper)`
 
 const FaqSectionWrapper = styled(EducationSectionWrapper)`
   flex-direction: row;
+  align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
 `
 
@@ -570,7 +571,7 @@ const PricingPage = () => {
         </EducationSectionWrapper>
         <FaqSectionWrapper>
           <FaqColumn>
-            <ImportantPricingInfo team>
+            {/* <ImportantPricingInfo team>
               How does trial work?
             </ImportantPricingInfo>
             <StyledText team>
@@ -578,7 +579,7 @@ const PricingPage = () => {
               features of Team plan for 14 days. The trial does not require
               payment information and you will not be charged anything.
             </StyledText>
-            <Divider />
+            <Divider /> */}
             <ImportantPricingInfo team>
               What are the billing options?
             </ImportantPricingInfo>
@@ -589,7 +590,7 @@ const PricingPage = () => {
             </StyledText>
           </FaqColumn>
           <FaqColumn>
-            <ImportantPricingInfo team>
+            {/* <ImportantPricingInfo team>
               What happens at the Trial period end?
             </ImportantPricingInfo>
             <StyledText team>
@@ -599,7 +600,7 @@ const PricingPage = () => {
               during the Trial period your it will revert to the Free version of
               Strove.io once the Trial ends.
             </StyledText>
-            <Divider />
+            <Divider /> */}
             <ImportantPricingInfo team>
               Can I upgrade from Team plan to Enterprise?
             </ImportantPricingInfo>
