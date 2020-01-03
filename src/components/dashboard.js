@@ -4,7 +4,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -169,6 +169,12 @@ const TrialInfoWrapper = styled.div`
   color: ${({ theme }) => theme.colors.c11};
 `
 
+const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.c1};
+  text-decoration: none;
+  display: flex;
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -240,7 +246,7 @@ const Dashboard = ({ history }) => {
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
-        <TrialInfoWrapper>Your workspace is currently on the free version of Strove.</TrialInfoWrapper>
+        <TrialInfoWrapper>Your workspace is currently on the free version of Strove. <StyledLink to="/enterprise">See upgrade options</StyledLink></TrialInfoWrapper>
         <GetStarted />
         <TilesWrapper>
           <ProjectTitle>
