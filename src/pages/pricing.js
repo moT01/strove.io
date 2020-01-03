@@ -270,6 +270,7 @@ const Text = styled.p`
   text-overflow: wrap;
   overflow: visible;
 `
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -321,12 +322,13 @@ const Feature = styled(StyledText)`
     color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   }
 `
-const ImportantPricingInfo = styled.span`
+const ImportantPricingInfo = styled.div`
   margin: 10px 0;
   font-size: 26px;
   color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-weight: 500;
 `
+
 const Price = styled(ImportantPricingInfo)`
   margin: 0;
 `
