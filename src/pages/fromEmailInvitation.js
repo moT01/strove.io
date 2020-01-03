@@ -54,6 +54,8 @@ const FromEmailInvitaiton = () => {
     <Wrapper>
       <MenuWrapper invert>
         <InvitationTitle>You're invited to {teamName}</InvitationTitle>
+        {fromEmail} has invited you to join the Strove team <b>{teamName}</b>.
+        Login to start collaborating!
         {loginOptions.map(loginOption => (
           <ExternalLink primary href={`${loginOption.href}`}>
             {loginOption.icon}
