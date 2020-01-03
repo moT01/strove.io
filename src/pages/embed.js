@@ -1,12 +1,9 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
-import { ThemeProvider } from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 
-import { theme } from 'consts'
 import {
-  GlobalStyles,
   NoRepoUrlInfo,
   PoweredBy,
   ExternalLink,
@@ -68,26 +65,23 @@ const EmbedWrapper = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Wrapper>
-        <MenuWrapper invert>
-          {repoUrl ? (
-            <ExternalLink
-              primary
-              href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LoginText invert>Login to start coding</LoginText>
-            </ExternalLink>
-          ) : (
-            <NoRepoUrlInfo />
-          )}
-          <PoweredBy />
-        </MenuWrapper>
-      </Wrapper>
-      <GlobalStyles />
-    </ThemeProvider>
+    <Wrapper>
+      <MenuWrapper invert>
+        {repoUrl ? (
+          <ExternalLink
+            primary
+            href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LoginText invert>Login to start coding</LoginText>
+          </ExternalLink>
+        ) : (
+          <NoRepoUrlInfo />
+        )}
+        <PoweredBy />
+      </MenuWrapper>
+    </Wrapper>
   )
 }
 
