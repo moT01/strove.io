@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { useSelector } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { selectors } from 'state'
 import { StroveButton, AddProjectProvider, PoweredBy, NoRepoUrlInfo } from 'components'
@@ -76,8 +77,8 @@ const Run = ({ addProject, history }) => {
   For example, to open strove website use:
   https://strove.io/embed/runProject/?repoUrl=https://github.com/stroveio/strove.io
 */
-export default memo(() => (
+export default memo(withRouter(({ history }) => (
   <AddProjectProvider>
-    {({ addProject }) => <Run addProject={addProject} />}
+    {({ addProject }) => <Run addProject={addProject} history={history} />}
   </AddProjectProvider>
-))
+)))
