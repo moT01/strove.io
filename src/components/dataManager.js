@@ -355,8 +355,6 @@ export default memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loginData, loginError])
 
-    console.log('history', history)
-
     useEffect(() => {
       if (token) {
         dispatch(

@@ -240,7 +240,7 @@ const Dashboard = ({ history }) => {
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
-        <TrialInfoWrapper>Your workspace</TrialInfoWrapper>
+        <TrialInfoWrapper>Your workspace is currently on the free version of Strove.</TrialInfoWrapper>
         <GetStarted />
         <TilesWrapper>
           <ProjectTitle>
