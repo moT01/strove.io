@@ -1,11 +1,9 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-import { ThemeProvider } from 'styled-components/macro'
 import { useSelector } from 'react-redux'
 
-import { theme } from 'consts'
 import { selectors } from 'state'
-import { StroveButton, AddProjectProvider, GlobalStyles, PoweredBy, NoRepoUrlInfo } from 'components'
+import { StroveButton, AddProjectProvider, PoweredBy, NoRepoUrlInfo } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
@@ -79,10 +77,7 @@ const Run = ({ addProject, history }) => {
   https://strove.io/embed/runProject/?repoUrl=https://github.com/stroveio/strove.io
 */
 export default memo(() => (
-  <ThemeProvider theme={theme}>
-    <AddProjectProvider>
-      {({ addProject }) => <Run addProject={addProject} />}
-    </AddProjectProvider>
-    <GlobalStyles />
-  </ThemeProvider>
+  <AddProjectProvider>
+    {({ addProject }) => <Run addProject={addProject} />}
+  </AddProjectProvider>
 ))
