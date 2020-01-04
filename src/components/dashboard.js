@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -39,6 +39,12 @@ const PageWrapper = styled(Wrapper)`
   flex-direction: ${({ isAdmin }) => (isAdmin ? 'row' : 'column')};
 `
 
+const TeamTileWrapper = styled(Wrapper)`
+  transition: all 0.2s;
+  width: 50%;
+  height: ${({ expanded }) => (expanded ? '25vh' : '2.5rem')};
+`
+
 const TilesWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,20 +78,16 @@ const Tile = styled.div`
   width: 50%;
   transition: all 0.2s;
 
-  @media (max-width: 1365px) {
+  /* @media (max-width: 1365px) {
     width: 80vw;
     height: auto;
-  }
+  } */
 `
 
-const TeamTileHeader = styled(Tile)`
-  :hover {
-    background-color: ${({ theme }) => theme.colors.c1};
-    cursor: pointer;
-    ${ProjectTitle} {
-      color: ${({ theme }) => theme.colors.c2};
-    }
-  }
+const TeamTile = styled(Tile)`
+  padding: 0;
+  padding-top: ${({ expanded }) => (expanded ? '2.5vh' : '0px')};
+  height: ${({ expanded }) => (expanded ? '25vh' : '2.5vh')};
 `
 
 const ModalButton = styled(StroveButton)`
@@ -117,6 +119,10 @@ const VerticalDivider = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+`
+
+const TeamHeaderDivider = styled(VerticalDivider)`
+  justify-content: space-between;
 `
 
 const FlexWrapper = styled.div`
@@ -161,6 +167,44 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
+const ExpandIcon = styled(StyledIcon)`
+  font-size: 1rem;
+  transform: ${({ expanded }) =>
+    expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
+  color: ${({ theme, expanded }) =>
+    expanded ? theme.colors.c2 : theme.colors.c1};
+  transition: all 0.2s;
+`
+
+const TeamTileHeader = styled(Tile)`
+  width: 100%;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s;
+  border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
+  border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
+  background-color: ${({ theme, expanded }) =>
+    expanded ? theme.colors.c1 : theme.colors.c2};
+
+  ${ProjectTitle} {
+    color: ${({ theme, expanded }) =>
+      expanded ? theme.colors.c2 : theme.colors.c1};
+    transition: all 0.2s;
+  }
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.c1};
+    cursor: pointer;
+    ${ProjectTitle} {
+      color: ${({ theme }) => theme.colors.c2};
+    }
+    ${ExpandIcon} {
+      color: ${({ theme }) => theme.colors.c2};
+    }
+  }
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -195,19 +239,24 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => (
-            <TeamTileHeader
-              key={team.name}
-              isAdmin
-              onClick={() =>
-                setExpandedTile(expandedTile !== team.name ? team.name : null)
-              }
-            >
-              <VerticalDivider>
-                <InfoWrapper>
+            <TeamTileWrapper expanded={expandedTile === team.name}>
+              <TeamTileHeader
+                key={team.name}
+                isAdmin={isAdmin}
+                expanded={expandedTile === team.name}
+                onClick={() =>
+                  setExpandedTile(expandedTile !== team.name ? team.name : null)
+                }
+              >
+                <TeamHeaderDivider>
                   <ProjectTitle>{team.name}</ProjectTitle>
-                </InfoWrapper>
-              </VerticalDivider>
-            </TeamTileHeader>
+                  <ExpandIcon
+                    type="down"
+                    expanded={expandedTile === team.name}
+                  />
+                </TeamHeaderDivider>
+              </TeamTileHeader>
+            </TeamTileWrapper>
           ))}
         </TilesWrapper>
       ),
