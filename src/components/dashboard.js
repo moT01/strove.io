@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -39,10 +39,6 @@ const PageWrapper = styled(Wrapper)`
   flex-direction: ${({ isAdmin }) => (isAdmin ? 'row' : 'column')};
 `
 
-const SectionWrapper = styled(Wrapper)`
-  width: ${({ menu }) => (menu ? '30%' : '70%')};
-`
-
 const TilesWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,11 +64,24 @@ const Tile = styled.div`
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
   margin: 15px;
   width: 50%;
+  transition: all 0.2s;
 
   @media (max-width: 1365px) {
     width: 80vw;
     height: auto;
   }
+
+  ${({ isAdmin }) =>
+    isAdmin &&
+    css`
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.c1};
+        cursor: pointer;
+         ${ProjectTitle} {
+          color: ${({ theme }) => theme.colors.c2};
+        }
+      }
+    `}
 `
 
 const ModalButton = styled(StroveButton)`
@@ -185,8 +194,9 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <TilesWrapper>
+          <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => (
-            <Tile key={team.name}>
+            <Tile key={team.name} isAdmin>
               <VerticalDivider>
                 <InfoWrapper>
                   <ProjectTitle>{team.name}</ProjectTitle>
