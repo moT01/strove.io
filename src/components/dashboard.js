@@ -40,6 +40,7 @@ const PageWrapper = styled(Wrapper)`
 `
 
 const TeamTileWrapper = styled(Wrapper)`
+  margin: 20px 0px;
   transition: all 0.2s;
   width: 50%;
   height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
@@ -230,9 +231,13 @@ const Dashboard = ({ history }) => {
     { name: 'Member 4', teams: ['234'] },
   ]
 
-  const team1Members = [members[0], members[1]]
+  const team1Members = members.filter(
+    member => member.teams.indexOf('123') !== -1
+  )
 
-  const team2Members = [members[2], members[3]]
+  const team2Members = members.filter(
+    member => member.teams.indexOf('234') !== -1
+  )
 
   const teams = [
     { name: 'Team 1', members: team1Members },
