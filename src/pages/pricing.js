@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly, isTablet } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
@@ -18,41 +18,47 @@ const ButtonFadeIn = keyframes`
   }
 `
 
-const StyledTrialInfo = styled.ul`
-  font-size: 13px;
-  padding: 0;
-  margin: 0;
-  color: ${({ team }) => (team ? '#fff' : '#0072ce')};
-
-  li {
-    display: inline-block;
-    margin-right: 8px;
-    list-style: none;
-
-    &:before {
-      margin-right: 0.3em;
-      content: '✔';
-      color: ${({ team }) => (team ? '#fff' : '#0072ce')};
-    }
-  }
-`
-
 const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding: 3vh;
+  width: 100%;
+  padding: 20px;
   animation: ${ButtonFadeIn} 0.3s ease-out;
-
   @media (max-width: 1366px) {
     flex-direction: column;
   }
 `
 
-const StyledH6 = styled.h6`
+const EducationSectionWrapper = styled(CardsWrapper)`
+  margin-top: 3vh;
+  flex-direction: column;
+  align-items: center;
+`
+
+const FaqSectionWrapper = styled(EducationSectionWrapper)`
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: ${({ theme }) => theme.colors.c1};
+`
+
+const FaqColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 10px 20px;
+  width: 40%;
+  height: 90%;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+  }
+`
+
+const StyledEmailConfirmation = styled.div`
   margin: 20px;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const EmailFormWrapper = styled.div`
@@ -60,7 +66,6 @@ const EmailFormWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   min-width: 400px;
-
   flex-wrap: wrap;
   margin: 10px 0 5px;
   position: relative;
@@ -74,7 +79,6 @@ const EmailFormWrapper = styled.div`
   opacity: 0.9;
   align-items: center;
   background: ${({ theme }) => theme.colors.c1};
-
   ${({ isMobile }) =>
     isMobile &&
     css`
@@ -83,19 +87,16 @@ const EmailFormWrapper = styled.div`
       min-width: 100px;
       border-radius: 5px;
     `}
-
   &:hover {
     opacity: 1;
     box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
       0 9px 26px 0 rgba(174, 174, 186, 0.16);
-
     ${({ isMobile }) =>
       isMobile &&
       css`
         box-shadow: none;
       `}
   }
-
   input {
     box-shadow: none;
     color: ${({ theme }) => theme.colors.c12};
@@ -117,7 +118,6 @@ const EmailFormWrapper = styled.div`
     border-radius: 5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-
     ${({ isMobile }) =>
       isMobile &&
       css`
@@ -128,24 +128,21 @@ const EmailFormWrapper = styled.div`
         width: 100%;
       `}
   }
-
   svg {
     position: absolute;
     top: 18px;
     left: 20px;
     height: 24px;
     width: 24px;
-
     g {
       stroke: ${({ theme }) => theme.colors.c1};
     }
   }
-
   button {
     width: 156px;
     height: 56px;
     color: ${({ theme }) => theme.colors.c2};
-    background: ${({ theme }) => theme.colors.c3};
+    background: ${({ theme }) => theme.colors.c1};
     text-transform: uppercase;
     display: block;
     text-align: center;
@@ -160,7 +157,6 @@ const EmailFormWrapper = styled.div`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     outline: none;
-
     ${({ isMobile }) =>
       isMobile &&
       css`
@@ -170,7 +166,6 @@ const EmailFormWrapper = styled.div`
         width: 100%;
         margin-top: 10px;
       `}
-
     ${props =>
       !props.disabled
         ? css`
@@ -191,25 +186,25 @@ const Button = styled.button`
   display: flex;
   flex-direction: row;
   height: auto;
-  width: 75%;
+  width: ${({ team }) => (team ? '40%' : '75%')};
   margin: 15px 0 5px;
   padding: 0.5vh;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
+  background-color: ${({ team, theme }) =>
+    team ? theme.colors.c2 : theme.colors.c1};
   border-width: 1px;
   border-style: solid;
-  color: ${props => (!props.team ? '#ffffff' : '#0072ce')};
+  color: ${({ team, theme }) => (team ? theme.colors.c1 : theme.colors.c2)};
   border-radius: 4px;
-  border-color: ${props => (props.team ? '#ffffff' : '#0072ce')};
-  box-shadow: 0 1.1vh 1.1vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+  border-color: ${({ team, theme }) =>
+    team ? theme.colors.c2 : theme.colors.c1};
+  box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
-
   &:disabled {
     opacity: 0.4;
   }
-
   ${props =>
     !props.disabled &&
     css`
@@ -217,50 +212,44 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.3vh 1.3vh -1.3vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+        box-shadow: 0 1.3vh 1.3vh -1.3vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
         transform: translateY(-3px);
       }
     `}
-
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${props => (props.team ? '#ffffff' : '#0072ce')};
+    box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+    width: 100%;
   }
 `
 
 const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${props => (props.team ? '#0072ce' : '#ffffff')};
-  margin-left: ${props => (props.team ? '-3vw' : 0)};
-  margin-top: ${props => (props.team ? '9vh' : 0)};
+  background-color: ${({ team, enterprise, theme }) =>
+    enterprise ? theme.colors.c3 : team ? theme.colors.c1 : theme.colors.c2};
   z-index: auto;
   border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
+  display: flex;
+  flex-direction: column;
+  border-color: ${({ enterprise, theme }) =>
+    enterprise ? theme.colors.c3 : theme.colors.c1};
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-
-  width: 40vw;
+  box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
+  width: 40%;
+  margin: 0 20px;
   @media (max-width: 1366px) {
-    width: 80vw;
-    height: auto;
+    margin: 10px 0;
+    width: 100%;
   }
 `
 
 const PricingWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-
-  height: 80%;
-
+  text-align: left;
+  width: 90%;
   @media (max-width: 1366px) {
     width: 90%;
-    height: auto;
   }
 `
 
@@ -276,13 +265,12 @@ const ModalWrapper = styled.div`
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 15px;
-  margin-left: 2%;
   margin-bottom: 12px;
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
-  text-align: center;
 `
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -296,52 +284,90 @@ const ButtonsWrapper = styled.div`
       : '45%'};
 `
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+`
+
 const PricingSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
   width: 100%;
-  height: 100%;
   @media (max-width: 1366px) {
     flex-direction: column;
   }
-
   span {
     width: 75%;
   }
 `
 
-const Feature = styled.p`
-  color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
+const StyledText = styled.p`
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-size: 15px;
   margin-top: 0.7vh;
   margin-bottom: 0.7vh;
+  text-align: justify;
 `
-const PlanTitle = styled.h1`
-  margin: 10px;
+
+const Feature = styled(StyledText)`
+  &:before {
+    margin-right: 0.3em;
+    content: '✔';
+    color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  }
+`
+const ImportantPricingInfo = styled.div`
+  margin: 10px 0;
   font-size: 26px;
-  color: ${props => (!props.team ? '#0072ce' : '#ffffff')};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-weight: 500;
 `
-const Contact = styled(PlanTitle)`
-  width: 75%;
+
+const Price = styled(ImportantPricingInfo)`
+  margin: 0;
 `
-const Price = styled(PlanTitle)`
-  font-size: 30px;
+
+const PricingDetails = styled(ImportantPricingInfo)`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.c2};
 `
-const PlanSubTitle = styled(PlanTitle)`
-  font-size: 20px;
-`
-const ButtonText = styled(PlanTitle)`
+
+const ButtonText = styled(ImportantPricingInfo)`
   font-size: 16px;
+  cursor: pointer;
 `
+
 const PlanDesc = styled(Feature)`
   font-size: 15px;
+
+  &:before {
+    content: none;
+  }
 `
-const CardTitle = styled(PlanTitle)`
-  font-size: 40px;
+
+const CancelationInfo = styled(PlanDesc)`
+  color: ${({ theme }) => theme.colors.c1};
+`
+
+const CardTitle = styled(ImportantPricingInfo)`
+  font-size: 36px;
+`
+
+const Divider = styled.div`
+  width: ${({ blue }) => (blue ? '30%' : '100%')};
+  border-bottom: 1px solid
+    ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
+`
+
+const PricingHeader = styled(CardTitle)`
+  margin: 60px 10px 20px;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 const validate = values => {
@@ -385,42 +411,74 @@ const PricingPage = () => {
       <>
         <SEO title="Pricing" />
         <Header />
+        <PricingHeader>Choose the plan that fits your team</PricingHeader>
+        <Divider blue />
+        <CancelationInfo>
+          Pay by month or the year, and cancel at any time.
+        </CancelationInfo>
         <CardsWrapper>
-          <Card>
-            <CardTitle>Individuals</CardTitle>
+          <Card team>
             <PricingSection>
               <PricingWrapper>
-                <PlanTitle>Free</PlanTitle>
-                <PlanDesc>The basic plan for individual developers</PlanDesc>
-                <Price>$0</Price>
-                <PlanSubTitle>Per month</PlanSubTitle>
-                <Feature>Public repositories</Feature>
-                <Feature>6 GB of RAM</Feature>
-                <Feature>No commercial use</Feature>
-                <Button disabled>
-                  <ButtonText team>Already subscribed</ButtonText>
-                </Button>
-                <StyledTrialInfo>
-                  <li>Free for non-commercial use</li>
-                </StyledTrialInfo>
+                <CardTitle team>Team</CardTitle>
+                <Divider />
+                <PlanDesc team>
+                  For small and medium sized teams and businesses
+                </PlanDesc>
+                <Price team>40$</Price>
+                <PricingDetails>
+                  per person, per month, when billed yearly
+                  <br />
+                  <strong>$50 USD</strong>/person, per month, when billed
+                  monthly
+                </PricingDetails>
+                <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
+                <Divider />
+                <Feature team>Unlimited coding time</Feature>
+                <Feature team>Team management</Feature>
+                <Feature team>Private repositories</Feature>
+                <Feature team>Access restriction</Feature>
+                <Feature team>Priority support</Feature>
+                <Feature team>5 GB of RAM and 10 GB of HDD/project</Feature>
+                <Feature team>Upgrade to Enterprise Plan if needed</Feature>
               </PricingWrapper>
             </PricingSection>
+            <ButtonWrapper>
+              <Button team>
+                <ButtonText>Get started</ButtonText>
+              </Button>
+            </ButtonWrapper>
           </Card>
-          <Card team>
-            <CardTitle team>Teams</CardTitle>
+          <Card enterprise team>
             <PricingSection>
               <PricingWrapper>
-                <PlanTitle team>Enterprise</PlanTitle>
+                <CardTitle team>Enterprise</CardTitle>
+                <Divider enterprise />
                 <PlanDesc team>
-                  Plan aimed for developer teams and companies
+                  For larger enterprises or those with custom requirements
                 </PlanDesc>
-                <Contact team>Contact Sales for pricing</Contact>
-                <Feature team>Private and Public repositories</Feature>
-                <Feature team>
-                  RAM, hard drive and speed adjusted to team's needs
-                </Feature>
-                <Feature team>Commercial use</Feature>
+                <PricingDetails>
+                  To get a price estimate for Enterprise plan, please contact
+                  our Sales team
+                </PricingDetails>
+                <ImportantPricingInfo team>Top features:</ImportantPricingInfo>
+                <Divider />
+                <Feature team>Unlimited coding time</Feature>
+                <Feature team>Team management</Feature>
+                <Feature team>Private repositories</Feature>
+                <Feature team>Access restriction</Feature>
                 <Feature team>Priority support</Feature>
+                <Feature team>Private cloud</Feature>
+                <Feature team>
+                  Specs (RAM, HDD, CPUs and more) adjusted to team's needs
+                </Feature>
+                <Feature team>
+                  Azure Active directory integration - highest code security and
+                  control
+                </Feature>
+                <Feature team>
+                  Extensive docker support - multiple containers, custom images
+                </Feature>
                 <Formik
                   initialValues={{
                     email: '',
@@ -438,7 +496,7 @@ const PricingPage = () => {
                     )
                   }}
                 >
-                  {({ errors, touched, values }) => (
+                  {({ errors, values }) => (
                     <Form>
                       <EmailFormWrapper
                         disabled={errors.email || !values.email}
@@ -472,13 +530,10 @@ const PricingPage = () => {
                           Request demo
                         </button>
                       </EmailFormWrapper>
-                      <StyledTrialInfo team>
-                        <li>Free 14-day Demo</li>
-                        <li>No credit card needed</li>
-                        <li>No setup</li>
-                      </StyledTrialInfo>
                       {emailSent && (
-                        <StyledH6>Thank you, we'll get in touch soon!</StyledH6>
+                        <StyledEmailConfirmation>
+                          Thank you, we'll get in touch soon!
+                        </StyledEmailConfirmation>
                       )}
                     </Form>
                   )}
@@ -487,6 +542,56 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
         </CardsWrapper>
+        <EducationSectionWrapper>
+          <ImportantPricingInfo>
+            Do you work for an educational institution?
+          </ImportantPricingInfo>
+          <Divider blue />
+          <StyledText>
+            We have special plans tailored for schools, universities and other
+            educational institutions. Contact us and learn how we can help you.
+          </StyledText>
+        </EducationSectionWrapper>
+        <FaqSectionWrapper>
+          <FaqColumn>
+            {/* <ImportantPricingInfo team>
+              How does trial work?
+            </ImportantPricingInfo>
+            <StyledText team>
+              Once you sign up for Trial you will get instant access to all the
+              features of Team plan for 14 days. The trial does not require
+              payment information and you will not be charged anything.
+            </StyledText>
+            <Divider /> */}
+            <ImportantPricingInfo team>
+              What are the billing options?
+            </ImportantPricingInfo>
+            <StyledText team>
+              We offer billing monthly or billing annually. You can pay by Visa,
+              MasterCard, Discover and American Express credit cards or by
+              Stripe. For further information feel free to contact us.
+            </StyledText>
+          </FaqColumn>
+          <FaqColumn>
+            {/* <ImportantPricingInfo team>
+              What happens at the Trial period end?
+            </ImportantPricingInfo>
+            <StyledText team>
+              Three days before your trial ends you will receive an email
+              reminder. At that time or any time before that you are free to
+              upgrade to the Team plan. If you do not upgrade your account
+              during the Trial period your it will revert to the Free version of
+              Strove.io once the Trial ends.
+            </StyledText>
+            <Divider /> */}
+            <ImportantPricingInfo team>
+              Can I upgrade from Team plan to Enterprise?
+            </ImportantPricingInfo>
+            <StyledText team>
+              Yes, it is possible. In order to upgrade contact us.
+            </StyledText>
+          </FaqColumn>
+        </FaqSectionWrapper>
       </>
     </>
   )

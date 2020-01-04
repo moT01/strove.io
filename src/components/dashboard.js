@@ -4,7 +4,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -148,6 +148,33 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
+const TrialInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.c4};
+  border-radius: 5px;
+  border-color: ${({ theme }) => theme.colors.c1};
+  border-width: 1px;
+  border-style: solid;
+  padding: 20px;
+  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+  margin-bottom: 0;
+  height: auto;
+  width: auto;
+  min-width: 50vw;
+  max-width: 100vw;
+  margin-bottom: 20px;
+  color: ${({ theme }) => theme.colors.c11};
+`
+
+const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.c1};
+  text-decoration: none;
+  display: flex;
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -219,6 +246,7 @@ const Dashboard = ({ history }) => {
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
+        <TrialInfoWrapper>Your workspace is currently on the free version of Strove. <StyledLink to="/pricing">See upgrade options</StyledLink></TrialInfoWrapper>
         <GetStarted />
         <TilesWrapper>
           <ProjectTitle>

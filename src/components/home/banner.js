@@ -225,22 +225,6 @@ const StyledIcon = styled(Icon)`
   }
 `
 
-const StyledTrialInfo = styled.ul`
-  font-size: 13px;
-  padding: 0;
-  margin: 0;
-  li {
-    display: inline-block;
-    margin-right: 8px;
-    list-style: none;
-    &:before {
-      margin-right: 0.3em;
-      content: '✔';
-      color: ${({ theme }) => theme.colors.c1};
-    }
-  }
-`
-
 const StyledForm = styled(Form)`
   width: 100%;
 `
@@ -364,9 +348,6 @@ const Banner = () => {
               letterSpacing="0.8px"
               onClick={() => setModalVisible(true)}
             />
-            <StyledTrialInfo>
-              <li>Free for non-commercial use</li>
-            </StyledTrialInfo>
             <StyledInfo>Or, if you're a corporate user:</StyledInfo>
             <Formik
               initialValues={{
@@ -419,11 +400,6 @@ const Banner = () => {
                       disabled={errors.email || !values.email}
                     />
                   </EmailFormWrapper>
-                  <StyledTrialInfo>
-                    <li>Free 14-day Demo</li>
-                    <li>No credit card needed</li>
-                    <li>No setup</li>
-                  </StyledTrialInfo>
                   {emailSent && (
                     <StyledInfo>Thank you, we'll get in touch soon!</StyledInfo>
                   )}

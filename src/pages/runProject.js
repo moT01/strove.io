@@ -1,11 +1,10 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-import { ThemeProvider } from 'styled-components/macro'
 import { useSelector } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import { theme } from 'consts'
 import { selectors } from 'state'
-import { StroveButton, AddProjectProvider, GlobalStyles, PoweredBy } from 'components'
+import { StroveButton, AddProjectProvider, PoweredBy, NoRepoUrlInfo } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
@@ -24,8 +23,8 @@ const LoginText = styled.span`
 
 const Wrapper = styled.div`
   display: flex;
-  height: 97vh;
   display: flex;
+  height: 100vh;
   align-items: center;
   justify-content: center;
 `
@@ -61,9 +60,13 @@ const Run = ({ addProject, history }) => {
   return (
     <Wrapper>
       <MenuWrapper invert>
-        <StyledButton isPrimary onClick={onClick}>
-          <LoginText invert>Run with Strove</LoginText>
-        </StyledButton>
+        {!repoUrl ? (
+          <NoRepoUrlInfo/>
+        ) :(
+          <StyledButton isPrimary onClick={onClick}>
+            <LoginText invert>Run with Strove</LoginText>
+          </StyledButton>
+        )}
         <PoweredBy />
       </MenuWrapper>
     </Wrapper>
@@ -75,11 +78,8 @@ const Run = ({ addProject, history }) => {
   For example, to open strove website use:
   https://strove.io/embed/runProject/?repoUrl=https://github.com/stroveio/strove.io
 */
-export default memo(() => (
-  <ThemeProvider theme={theme}>
-    <AddProjectProvider>
-      {({ addProject }) => <Run addProject={addProject} />}
-    </AddProjectProvider>
-    <GlobalStyles />
-  </ThemeProvider>
-))
+export default memo(withRouter(({ history }) => (
+  <AddProjectProvider>
+    {({ addProject }) => <Run addProject={addProject} history={history} />}
+  </AddProjectProvider>
+)))
