@@ -86,8 +86,8 @@ const Tile = styled.div`
 
 const TeamTile = styled(Tile)`
   width: 100%;
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin-top: -10px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 `
@@ -184,6 +184,7 @@ const TeamTileHeader = styled(Tile)`
   margin: 0;
   padding: 0;
   transition: all 0.2s;
+  z-index: 2;
   border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   background-color: ${({ theme, expanded }) =>
@@ -240,30 +241,37 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
-          {teams.map(team => (
-            <TeamTileWrapper expanded={expandedTile === team.name}>
-              <TeamTileHeader
+          {teams.map(team => {
+            const isExpanded = expandedTile === team.name
+            return (
+              <TeamTileWrapper
                 key={team.name}
-                isAdmin={isAdmin}
-                expanded={expandedTile === team.name}
-                onClick={() =>
-                  setExpandedTile(expandedTile !== team.name ? team.name : null)
-                }
+                expanded={isExpanded}
               >
-                <TeamHeaderDivider>
-                  <ProjectTitle>{team.name}</ProjectTitle>
-                  <ExpandIcon
-                    type="down"
-                    expanded={expandedTile === team.name}
-                  />
-                </TeamHeaderDivider>
-              </TeamTileHeader>
-              <TeamTile>
-                {expandedTile === team.name &&
-                  team.members.map(member => <Text>{member.name}</Text>)}
-              </TeamTile>
-            </TeamTileWrapper>
-          ))}
+                <TeamTileHeader
+                  isAdmin={isAdmin}
+                  expanded={isExpanded}
+                  onClick={() =>
+                    setExpandedTile(
+                      expandedTile !== team.name ? team.name : null
+                    )
+                  }
+                >
+                  <TeamHeaderDivider>
+                    <ProjectTitle>{team.name}</ProjectTitle>
+                    <ExpandIcon
+                      type="down"
+                      expanded={isExpanded}
+                    />
+                  </TeamHeaderDivider>
+                </TeamTileHeader>
+                <TeamTile>
+                  {isExpanded &&
+                    team.members.map(member => <Text>{member.name}</Text>)}
+                </TeamTile>
+              </TeamTileWrapper>
+            )
+          })}
         </TilesWrapper>
       ),
     },
