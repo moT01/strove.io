@@ -87,7 +87,7 @@ const Tile = styled.div`
 const TeamTile = styled(Tile)`
   width: 100%;
   padding: 0px;
-  margin-top: -10px;
+  margin-top: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 `
@@ -265,10 +265,10 @@ const Dashboard = ({ history }) => {
                     />
                   </TeamHeaderDivider>
                 </TeamTileHeader>
-                <TeamTile>
                   {isExpanded &&
-                    team.members.map(member => <Text>{member.name}</Text>)}
-                </TeamTile>
+                <TeamTile>
+                    {team.members.map(member => <Text>{member.name}</Text>)}
+                </TeamTile>}
               </TeamTileWrapper>
             )
           })}
