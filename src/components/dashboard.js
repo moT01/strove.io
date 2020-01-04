@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: ${({ isAdmin }) => (isAdmin ? 'flex-start' : 'center')};
+  align-items: center;
 `
 
 const PageWrapper = styled(Wrapper)`
@@ -42,7 +42,7 @@ const PageWrapper = styled(Wrapper)`
 const TeamTileWrapper = styled(Wrapper)`
   transition: all 0.2s;
   width: 50%;
-  height: ${({ expanded }) => (expanded ? '25vh' : '2.5rem')};
+  height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
 `
 
 const TilesWrapper = styled.div`
@@ -85,9 +85,11 @@ const Tile = styled.div`
 `
 
 const TeamTile = styled(Tile)`
+  width: 100%;
   padding: 0;
-  padding-top: ${({ expanded }) => (expanded ? '2.5vh' : '0px')};
-  height: ${({ expanded }) => (expanded ? '25vh' : '2.5vh')};
+  margin: 0;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 `
 
 const ModalButton = styled(StroveButton)`
@@ -256,6 +258,10 @@ const Dashboard = ({ history }) => {
                   />
                 </TeamHeaderDivider>
               </TeamTileHeader>
+              <TeamTile>
+                {expandedTile === team.name &&
+                  team.members.map(member => <Text>{member.name}</Text>)}
+              </TeamTile>
             </TeamTileWrapper>
           ))}
         </TilesWrapper>
