@@ -223,15 +223,22 @@ const Dashboard = ({ history }) => {
   const projectsLimit = 20
   const isAdmin = true
 
+  const members = [
+    { name: 'Member 1', teams: ['123', '234'] },
+    { name: 'Member 2', teams: ['123'] },
+    { name: 'Member 3', teams: ['234'] },
+    { name: 'Member 4', teams: ['234'] },
+  ]
+
+  const team1Members = [members[0], members[1]]
+
+  const team2Members = [members[2], members[3]]
+
   const teams = [
-    { name: 'Team 1', members: [{ name: 'Member 1' }, { name: 'Member 2' }] },
+    { name: 'Team 1', members: team1Members },
     {
       name: 'Team 2',
-      members: [
-        { name: 'Member 1' },
-        { name: 'Member 2' },
-        { name: 'Member 2' },
-      ],
+      members: team2Members,
     },
   ]
 
@@ -244,10 +251,7 @@ const Dashboard = ({ history }) => {
           {teams.map(team => {
             const isExpanded = expandedTile === team.name
             return (
-              <TeamTileWrapper
-                key={team.name}
-                expanded={isExpanded}
-              >
+              <TeamTileWrapper key={team.name} expanded={isExpanded}>
                 <TeamTileHeader
                   isAdmin={isAdmin}
                   expanded={isExpanded}
@@ -259,16 +263,16 @@ const Dashboard = ({ history }) => {
                 >
                   <TeamHeaderDivider>
                     <ProjectTitle>{team.name}</ProjectTitle>
-                    <ExpandIcon
-                      type="down"
-                      expanded={isExpanded}
-                    />
+                    <ExpandIcon type="down" expanded={isExpanded} />
                   </TeamHeaderDivider>
                 </TeamTileHeader>
-                  {isExpanded &&
-                <TeamTile>
-                    {team.members.map(member => <Text>{member.name}</Text>)}
-                </TeamTile>}
+                {isExpanded && (
+                  <TeamTile>
+                    {team.members.map(member => (
+                      <Text>{member.name}</Text>
+                    ))}
+                  </TeamTile>
+                )}
               </TeamTileWrapper>
             )
           })}
