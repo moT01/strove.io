@@ -50,6 +50,12 @@ const TilesWrapper = styled.div`
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
+const ProjectTitle = styled.h3`
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.colors.c1};
+  margin: 0.3vh 0.3vh 0.3vh 0;
+`
+
 const Tile = styled.div`
   display: flex;
   flex-direction: column;
@@ -70,30 +76,22 @@ const Tile = styled.div`
     width: 80vw;
     height: auto;
   }
+`
 
-  ${({ isAdmin }) =>
-    isAdmin &&
-    css`
-      &:hover {
-        background-color: ${({ theme }) => theme.colors.c1};
-        cursor: pointer;
-         ${ProjectTitle} {
-          color: ${({ theme }) => theme.colors.c2};
-        }
-      }
-    `}
+const TeamTileHeader = styled(Tile)`
+  :hover {
+    background-color: ${({ theme }) => theme.colors.c1};
+    cursor: pointer;
+    ${ProjectTitle} {
+      color: ${({ theme }) => theme.colors.c2};
+    }
+  }
 `
 
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
   max-width: 150px;
   padding: 0.5vh;
-`
-
-const ProjectTitle = styled.h3`
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.colors.c1};
-  margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
 const Text = styled.p`
@@ -196,13 +194,13 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => (
-            <Tile key={team.name} isAdmin>
+            <TeamTileHeader key={team.name} isAdmin>
               <VerticalDivider>
                 <InfoWrapper>
                   <ProjectTitle>{team.name}</ProjectTitle>
                 </InfoWrapper>
               </VerticalDivider>
-            </Tile>
+            </TeamTileHeader>
           ))}
         </TilesWrapper>
       ),
