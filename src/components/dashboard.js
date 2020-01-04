@@ -88,14 +88,14 @@ const Tile = styled.div`
 
 const TeamTile = styled(Tile)`
   width: 100%;
-  padding: 0px;
-  margin-top: 0px;
+  padding: 10px;
+  margin: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 `
 
 const TeamTileSection = styled(Tile)`
-  flex-direction: row;
+  width: 100%;
   box-shadow: 0;
 `
 
