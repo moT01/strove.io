@@ -94,6 +94,11 @@ const TeamTile = styled(Tile)`
   border-top-right-radius: 0px;
 `
 
+const TeamTileSection = styled(Tile)`
+  flex-direction: row;
+  box-shadow: 0;
+`
+
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
   max-width: 150px;
@@ -186,7 +191,6 @@ const TeamTileHeader = styled(Tile)`
   margin: 0;
   padding: 0;
   transition: all 0.2s;
-  z-index: 2;
   border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   background-color: ${({ theme, expanded }) =>
@@ -215,6 +219,7 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
+  const [addMemberModal, setAddMemberModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTile, setExpandedTile] = useState(null)
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
@@ -274,17 +279,19 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <ProjectTitle>Members</ProjectTitle>
-                    <StroveButton
-                      isPrimary
-                      padding="0.5vh"
-                      width="20%"
-                      onClick={() => alert('Hi')}
-                      text="Add member"
-                    />
-                    {team.members.map(member => (
-                      <Text>{member.name}</Text>
-                    ))}
+                    <TeamTileSection>
+                      <ProjectTitle>Members</ProjectTitle>
+                      <StroveButton
+                        isPrimary
+                        padding="0.5vh"
+                        width="20%"
+                        onClick={() => setAddMemberModal(true)}
+                        text="Add member"
+                      />
+                      {team.members.map(member => (
+                        <Text key={member.name}>{member.name}</Text>
+                      ))}
+                    </TeamTileSection>
                   </TeamTile>
                 )}
               </TeamTileWrapper>
@@ -444,6 +451,8 @@ const Dashboard = ({ history }) => {
     setModalVisible(false)
   }
 
+  const handleAddMember = () => console.log('Add member, please')
+
   return (
     <>
       <SEO title="Dashboard" />
@@ -512,6 +521,32 @@ const Dashboard = ({ history }) => {
         />
         <ModalButton
           onClick={() => setStopModal(false)}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+      <Modal
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={addMemberModal}
+        onRequestClose={() => setAddMemberModal(false)}
+        contentLabel="Stop project?"
+        ariaHideApp={false}
+      >
+        <ModalText>This modal will help you add new member. Soon</ModalText>
+        <ModalButton
+          isPrimary
+          onClick={() => {
+            handleAddMember()
+            setAddMemberModal(false)
+          }}
+          text="Confirm"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+        <ModalButton
+          onClick={() => setAddMemberModal(false)}
           text="Close"
           padding="0.5vh"
           maxWidth="150px"
