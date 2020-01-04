@@ -74,7 +74,8 @@ const Tile = styled.div`
   border-width: 1px;
   border-style: solid;
   padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: ${({ expanded, theme }) =>
+    expanded ? '0' : ` 0 1.5vh 1.5vh -1.5vh ${theme.colors.c1}`};
   margin: 15px;
   width: 50%;
   transition: all 0.2s;
@@ -273,6 +274,14 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
+                    <ProjectTitle>Members</ProjectTitle>
+                    <StroveButton
+                      isPrimary
+                      padding="0.5vh"
+                      width="20%"
+                      onClick={() => alert('Hi')}
+                      text="Add member"
+                    />
                     {team.members.map(member => (
                       <Text>{member.name}</Text>
                     ))}
