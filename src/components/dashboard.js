@@ -204,9 +204,7 @@ const Dashboard = ({ history }) => {
             >
               <VerticalDivider>
                 <InfoWrapper>
-                  {expandedTile === team.name && (
-                    <ProjectTitle>{team.name}</ProjectTitle>
-                  )}
+                  <ProjectTitle>{team.name}</ProjectTitle>
                 </InfoWrapper>
               </VerticalDivider>
             </TeamTileHeader>
