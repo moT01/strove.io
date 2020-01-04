@@ -42,7 +42,7 @@ const Strove = () => (
       <Route path="/embed/runProject" component={RunProject} />
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
-      <PrivateRoute path="/app/dashboard" component={Dashboard} />
+      <Route path="/app/dashboard" component={Dashboard} />
       <Route component={NotFound} />
     </Switch>
   </Wrapper>

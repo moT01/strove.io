@@ -30,14 +30,13 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: ${({ isAdmin }) => (isAdmin ? 'flex-start' : 'center')};
 `
 
 const PageWrapper = styled(Wrapper)`
   width: 100%;
   padding-top: 5vh;
   flex-direction: ${({ isAdmin }) => (isAdmin ? 'row' : 'column')};
-  ${({ isAdmin }) => console.log('Yeeeeeet', isAdmin)}
 `
 
 const SectionWrapper = styled(Wrapper)`
@@ -49,6 +48,7 @@ const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   padding: 2vh;
   margin: 2vh;
   animation: ${FullFadeIn} 0.5s ease-out;
@@ -67,9 +67,9 @@ const Tile = styled.div`
   padding: 20px;
   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
   margin: 15px;
-  width: 50vw;
+  width: 50%;
 
-  @media (max-width: 1366px) {
+  @media (max-width: 1365px) {
     width: 80vw;
     height: auto;
   }
@@ -168,11 +168,38 @@ const Dashboard = ({ history }) => {
   const projectsLimit = 20
   const isAdmin = true
 
+  const teams = [
+    { name: 'Team 1', members: [{ name: 'Member 1' }, { name: 'Member 2' }] },
+    {
+      name: 'Team 2',
+      members: [
+        { name: 'Member 1' },
+        { name: 'Member 2' },
+        { name: 'Member 2' },
+      ],
+    },
+  ]
+
   const tabs = [
-    { name: 'Teams' },
+    {
+      name: 'Teams',
+      content: (
+        <TilesWrapper>
+          {teams.map(team => (
+            <Tile key={team.name}>
+              <VerticalDivider>
+                <InfoWrapper>
+                  <ProjectTitle>{team.name}</ProjectTitle>
+                </InfoWrapper>
+              </VerticalDivider>
+            </Tile>
+          ))}
+        </TilesWrapper>
+      ),
+    },
     {
       name: 'Projects',
-      value: (
+      content: (
         <TilesWrapper>
           <ProjectTitle>
             Projects count: {projects.length}/{projectsLimit}
@@ -268,8 +295,6 @@ const Dashboard = ({ history }) => {
     },
   ]
 
-  const [selectedTab, setSelectedTab] = useState(tabs[0])
-
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
@@ -327,26 +352,13 @@ const Dashboard = ({ history }) => {
     <>
       <SEO title="Dashboard" />
       <Header />
-      {console.log('Non yeeeet', isAdmin)}
       <PageWrapper isAdmin={isAdmin}>
         {isAdmin ? (
-          <>
-            <SectionWrapper menu>
-              {tabs.map((tab, index) => (
-                <StroveButton
-                  onClick={() => setSelectedTab(tabs[index])}
-                  text={tab.name}
-                />
-              ))}
-            </SectionWrapper>
-            <SectionWrapper>
-              {tabs[tabs.findIndex(tab => tab.name === selectedTab.name)].value}
-            </SectionWrapper>
-          </>
+          <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
         ) : (
           <>
             <GetStarted />
-            {tabs[tabs.findIndex(tab => tab.name === 'Projects')].value}
+            {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
           </>
         )}
       </PageWrapper>
