@@ -167,6 +167,7 @@ const Dashboard = ({ history }) => {
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
+  const [expandedTile, setExpandedTile] = useState(null)
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -194,10 +195,18 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => (
-            <TeamTileHeader key={team.name} isAdmin>
+            <TeamTileHeader
+              key={team.name}
+              isAdmin
+              onClick={() =>
+                setExpandedTile(expandedTile !== team.name ? team.name : null)
+              }
+            >
               <VerticalDivider>
                 <InfoWrapper>
-                  <ProjectTitle>{team.name}</ProjectTitle>
+                  {expandedTile === team.name && (
+                    <ProjectTitle>{team.name}</ProjectTitle>
+                  )}
                 </InfoWrapper>
               </VerticalDivider>
             </TeamTileHeader>
