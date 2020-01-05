@@ -25,7 +25,6 @@ const LoginText = styled.span`
 
 const Wrapper = styled.div`
   display: flex;
-  display: flex;
   height: 100vh;
   align-items: center;
   justify-content: center;
@@ -47,7 +46,7 @@ const LoginWrapper = styled.div`
 const InvitationDetails = styled.div`
   color: ${({ theme }) => theme.colors.c11};
   font-size: 18px;
-  margin-bottom: 10px;
+  margin: 10px;
 `
 
 const FromEmailInvitaiton = () => {
@@ -80,6 +79,9 @@ const FromEmailInvitaiton = () => {
             </ExternalLink>
           ))}
         </LoginWrapper>
+        <InvitationDetails>
+          Your sign email is <b>{invitedEmail}</b>
+        </InvitationDetails>
       </MenuWrapper>
     </Wrapper>
   )
