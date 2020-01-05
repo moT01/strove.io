@@ -57,9 +57,9 @@ const FromEmailInvitaiton = () => {
   const invitedEmail = searchParams.get('invitedEmail')
   const fromEmail = searchParams.get('fromEmail')
 
-  // if (token) {
-  //   return <Redirect to="/app/dashboard" />
-  // }
+  if (token) {
+    return <Redirect to="/app/dashboard" />
+  }
 
   return (
     <Wrapper>
