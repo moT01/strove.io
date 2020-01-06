@@ -25,15 +25,17 @@ const GoBackTo = () => {
   const searchParams = getWindowSearchParams()
   const goBackTo = searchParams.get('goBackTo')
 
-  if (goBackTo && token) {
-    /*
-      Redirect logged in users
-      Redirect should only happen once logged in state is saved to localStorage.
-      ToDo: Find a better way to do this. One of the ways includes reacting to storage events:
-      https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent
-    */
-    setTimeout(() => window.location.replace(goBackTo), 1000)
-  }
+  // if (goBackTo && token) {
+  //   /*
+  //     Redirect logged in users
+  //     Redirect should only happen once logged in state is saved to localStorage.
+  //     ToDo: Find a better way to do this. One of the ways includes reacting to storage events:
+  //     https://developer.mozilla.org/en-US/docs/Web/API/StorageEvent
+  //   */
+  //   console.log('token', token, 'goBackTo', goBackTo)
+
+  //   // setTimeout(() => window.location.replace(goBackTo), 1000)
+  // }
 
   return (
     <Wrapper>
