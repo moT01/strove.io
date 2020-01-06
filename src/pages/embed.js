@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
@@ -53,7 +53,6 @@ const EmbedWrapper = () => {
    */
 
   if (token && repoUrl) {
-    console.log('embedLoginTab', embedLoginTab)
     embedLoginTab && embedLoginTab.close()
     // If user is logged in, redirect to the embed project run
     return (
@@ -76,11 +75,7 @@ const EmbedWrapper = () => {
                 '320',
                 '400'
               )
-              console.log('embedLoginTab', embedLoginTab)
             }}
-            // href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
-            // target="_blank"
-            // rel="noopener noreferrer"
           >
             <LoginText invert>Login to start coding</LoginText>
           </StroveButton>
