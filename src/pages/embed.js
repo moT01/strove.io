@@ -1,13 +1,9 @@
-import React, { memo } from 'react'
+import React, { memo, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 
-import {
-  NoRepoUrlInfo,
-  PoweredBy,
-  ExternalLink,
-} from 'components'
+import { NoRepoUrlInfo, PoweredBy, StroveButton } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getRepoUrl } from 'utils'
 
@@ -34,6 +30,7 @@ const Wrapper = styled.div`
   justify-content: center;
 `
 
+let embedLoginTab
 const EmbedWrapper = () => {
   const token = useSelector(getToken)
 
@@ -56,6 +53,7 @@ const EmbedWrapper = () => {
    */
 
   if (token && repoUrl) {
+    embedLoginTab.close()
     // If user is logged in, redirect to the embed project run
     return (
       <Redirect
@@ -68,14 +66,19 @@ const EmbedWrapper = () => {
     <Wrapper>
       <MenuWrapper invert>
         {repoUrl ? (
-          <ExternalLink
+          <StroveButton
             primary
-            href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={() =>
+              embedLoginTab = window.open(
+                `/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`
+              )
+            }
+            // href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
+            // target="_blank"
+            // rel="noopener noreferrer"
           >
             <LoginText invert>Login to start coding</LoginText>
-          </ExternalLink>
+          </StroveButton>
         ) : (
           <NoRepoUrlInfo />
         )}
