@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 import { NoRepoUrlInfo, PoweredBy, StroveButton } from 'components'
 import { selectors } from 'state'
-import { getWindowSearchParams, getRepoUrl } from 'utils'
+import { getWindowSearchParams, getRepoUrl, openPopup } from 'utils'
 
 const getToken = selectors.api.getUserField('siliskyToken')
 
@@ -53,7 +53,8 @@ const EmbedWrapper = () => {
    */
 
   if (token && repoUrl) {
-    embedLoginTab.close()
+    console.log('embedLoginTab', embedLoginTab)
+    embedLoginTab && embedLoginTab.close()
     // If user is logged in, redirect to the embed project run
     return (
       <Redirect
@@ -68,11 +69,15 @@ const EmbedWrapper = () => {
         {repoUrl ? (
           <StroveButton
             primary
-            onClick={() =>
-              embedLoginTab = window.open(
-                `/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`
+            onClick={() => {
+              embedLoginTab = openPopup(
+                `/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`,
+                '_blank',
+                '320',
+                '400'
               )
-            }
+              console.log('embedLoginTab', embedLoginTab)
+            }}
             // href={`/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`}
             // target="_blank"
             // rel="noopener noreferrer"

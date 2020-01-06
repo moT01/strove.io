@@ -317,6 +317,7 @@ export default memo(
     const loginError = loginSubscription?.error
 
     useEffect(() => {
+      console.log('loginData', loginData)
       if (loginError) {
         dispatch(
           actions.api.fetchError({

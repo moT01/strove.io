@@ -60,7 +60,7 @@ const Login = () => {
           <>
             <ExternalLink
               primary
-              href={`${loginProvider.embedHref}?goBackTo=${goBackTo}&repoUrl=${repoUrl}`}
+              href={`${loginProvider.href}?goBackTo=${goBackTo}&repoUrl=${repoUrl}`}
             >
               {loginProvider.icon}
               <LoginText invert>Login with {loginProvider.label}</LoginText>
