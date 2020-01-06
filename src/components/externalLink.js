@@ -24,7 +24,7 @@ export default styled.a`
   height: 60px;
   width: 300px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   text-align: center;

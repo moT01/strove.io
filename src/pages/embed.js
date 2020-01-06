@@ -68,6 +68,7 @@ const EmbedWrapper = () => {
         {repoUrl ? (
           <StroveButton
             primary
+            padding="15px 30px"
             onClick={() => {
               embedLoginTab = openPopup(
                 `/fromEmbed/login/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`,
