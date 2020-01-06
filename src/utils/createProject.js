@@ -122,11 +122,20 @@ const createProject = async ({
       repoData = { name: customName, description: '' }
     }
 
+    /* Check if new project is embedded */
+    const originDomain =
+      window.location !== window.parent.location
+        ? document.referrer
+        : document.location.href
+
+    /* ToDo: Make this scallable and work with other sites as well */
+    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : 'standard'
+
     const { description, name /* add language and color */ } = repoData
     dispatch(
       mutation({
         name: 'addProject',
-        variables: { repoLink, name, description },
+        variables: { repoLink, name, description, type },
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: error => {
