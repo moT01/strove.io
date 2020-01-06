@@ -65,15 +65,10 @@ const Login = () => {
               {loginProvider.icon}
               <LoginText invert>Login with {loginProvider.label}</LoginText>
             </ExternalLink>
-            {goBackTo ? (
-              <RedirectInfoWrapper>
-                This window will close after login
-              </RedirectInfoWrapper>
-            ) : (
-              <NoRedirectUrlInfo>
-                Ops! No redirect link available!
-              </NoRedirectUrlInfo>
-            )}
+            <RedirectInfoWrapper>
+              This window will close after login
+            </RedirectInfoWrapper>
+            <PoweredBy />
           </>
         ) : (
           <div>
