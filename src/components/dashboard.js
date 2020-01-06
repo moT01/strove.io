@@ -246,7 +246,10 @@ const Dashboard = ({ history }) => {
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
-        <TrialInfoWrapper>Your workspace is currently on the free version of Strove. <StyledLink to="/pricing">See upgrade options</StyledLink></TrialInfoWrapper>
+        {/* <TrialInfoWrapper>
+          Your workspace is currently on the free version of Strove.{' '}
+          <StyledLink to="/pricing">See upgrade options</StyledLink>
+        </TrialInfoWrapper> */}
         <GetStarted />
         <TilesWrapper>
           <ProjectTitle>
