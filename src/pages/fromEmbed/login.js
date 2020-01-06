@@ -18,7 +18,7 @@ const LoginText = styled.span`
   font-size: 20px;
 `
 
-const RedirectInfoWrapper = styled.div`
+const LoginInfoWrapper = styled.div`
   font-size: 16px;
   text-align: center;
   width: 300px;
@@ -65,16 +65,16 @@ const Login = () => {
               {loginProvider.icon}
               <LoginText invert>Login with {loginProvider.label}</LoginText>
             </ExternalLink>
-            <RedirectInfoWrapper>
+            <LoginInfoWrapper>
               This window will close after login
-            </RedirectInfoWrapper>
+            </LoginInfoWrapper>
             <PoweredBy />
           </>
         ) : (
-          <div>
+          <LoginInfoWrapper>
             Loggin in...
             <PoweredBy />
-          </div>
+          </LoginInfoWrapper>
         )}
       </MenuWrapper>
     </Wrapper>
