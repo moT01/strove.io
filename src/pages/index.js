@@ -5,7 +5,7 @@ import NotFound from './notFound'
 import Cookies from './cookies'
 import PrivacyPolicy from './privacyPolicy'
 import TermsAndConditions from './termsAndConditions'
-import { GoBackTo, Login } from './fromEmbed'
+import { Login } from './fromEmbed'
 import RunProject from './runProject'
 import Pricing from './pricing'
 import Editor from './editor'
@@ -19,7 +19,6 @@ export {
   Cookies,
   PrivacyPolicy,
   TermsAndConditions,
-  GoBackTo,
   Login,
   RunProject,
   Pricing,
