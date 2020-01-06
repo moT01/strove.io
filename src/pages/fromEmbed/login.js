@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { loginOptions } from 'consts'
-import { NoRepoUrlInfo, ExternalLink } from 'components'
+import { NoRepoUrlInfo, ExternalLink, PoweredBy } from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
 const MenuWrapper = styled.div`
@@ -67,8 +67,7 @@ const Login = () => {
             </ExternalLink>
             {goBackTo ? (
               <RedirectInfoWrapper>
-                You'll be redirected back to <Url>{getDomain(goBackTo)}</Url>{' '}
-                once you log in
+                This window will close after login
               </RedirectInfoWrapper>
             ) : (
               <NoRedirectUrlInfo>
@@ -77,7 +76,10 @@ const Login = () => {
             )}
           </>
         ) : (
-          <NoRepoUrlInfo />
+          <div>
+            Loggin in...
+            <PoweredBy />
+          </div>
         )}
       </MenuWrapper>
     </Wrapper>
