@@ -2,8 +2,8 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { loginOptions } from 'consts'
-import { NoRepoUrlInfo, ExternalLink, PoweredBy } from 'components'
-import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
+import { ExternalLink, PoweredBy } from 'components'
+import { getRepoProvider, getWindowSearchParams } from 'utils'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -24,24 +24,12 @@ const LoginInfoWrapper = styled.div`
   width: 300px;
 `
 
-const Url = styled.span`
-  font-style: italic;
-  font-weight: 600;
-`
-
 const Wrapper = styled.div`
   display: flex;
   display: flex;
   height: 100vh;
   align-items: center;
   justify-content: center;
-`
-
-const NoRedirectUrlInfo = styled.div`
-  font-size: 18px;
-  text-align: center;
-  font-style: italic;
-  margin-top: 10px;
 `
 
 const Login = () => {
