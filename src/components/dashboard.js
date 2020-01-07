@@ -95,8 +95,12 @@ const TeamTile = styled(Tile)`
 `
 
 const TeamTileSection = styled(Tile)`
-  border-radius: 0px;
-  border-width: 1px 0px;
+  align-items: flex-start;
+  margin: 0px;
+  padding: 5px;
+  border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
+  border-width: ${({ isLast }) =>
+    isLast ? '1px 0px 0px 0px' : ' 1px 0px 1px 0px'};
   border-color: rgba(0, 114, 206, 0.4);
   width: 100%;
   box-shadow: none;
@@ -217,6 +221,35 @@ const TeamTileHeader = styled(Tile)`
   }
 `
 
+const TileSectionHeader = styled(TeamTileHeader)`
+  flex-direction: row;
+  justify-content: flex-start;
+  border-width: 0px;
+  border-color: rgba(0, 114, 206, 0.6);
+  border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
+  box-shadow: none;
+
+  background-color: ${({ theme, expanded }) =>
+    expanded ? theme.colors.c1 : theme.colors.c2};
+
+  ${ProjectTitle} {
+    color: ${({ theme, expanded }) =>
+      expanded ? theme.colors.c2 : theme.colors.c1};
+    transition: all 0.2s;
+  }
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.c2};
+    cursor: pointer;
+    ${ProjectTitle} {
+      color: ${({ theme }) => theme.colors.c1};
+    }
+    ${ExpandIcon} {
+      color: ${({ theme }) => theme.colors.c1};
+    }
+  }
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -279,11 +312,11 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <ProjectTitle
+                    <TileSectionHeader
                       onClick={() => handleExpandSection('Members')}
                     >
-                      Members
-                    </ProjectTitle>
+                      <ProjectTitle>Members</ProjectTitle>
+                    </TileSectionHeader>
                     {isExpanded && expandedSection === 'Members' && (
                       <TeamTileSection>
                         <StroveButton
@@ -298,13 +331,14 @@ const Dashboard = ({ history }) => {
                         ))}
                       </TeamTileSection>
                     )}
-                    <ProjectTitle
+                    <TileSectionHeader
                       onClick={() => handleExpandSection('Projects')}
+                      isLast
                     >
-                      Projects
-                    </ProjectTitle>
+                      <ProjectTitle>Projects</ProjectTitle>
+                    </TileSectionHeader>
                     {isExpanded && expandedSection === 'Projects' && (
-                      <TeamTileSection>
+                      <TeamTileSection isLast>
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
