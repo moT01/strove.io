@@ -32,12 +32,15 @@ const CardsWrapper = styled.div`
 
 const EducationSectionWrapper = styled(CardsWrapper)`
   margin-top: 3vh;
+  width: 80%;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 `
 
 const FaqSectionWrapper = styled(EducationSectionWrapper)`
   flex-direction: row;
+  width: 100%;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
 `
@@ -237,6 +240,7 @@ const Card = styled.div`
   box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
   width: 40%;
   margin: 0 20px;
+  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '40%')};
   @media (max-width: 1366px) {
     margin: 10px 0;
     width: 100%;
@@ -361,8 +365,8 @@ const CardTitle = styled(ImportantPricingInfo)`
 
 const Divider = styled.div`
   width: 100%;
-  border-bottom: 1px solid;
-  ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
+  border-bottom: 1px solid
+    ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
 `
 
 const PricingHeader = styled(CardTitle)`
@@ -543,7 +547,7 @@ const PricingPage = () => {
           </Card>
         </CardsWrapper>
         <EducationSectionWrapper>
-          <Card>
+          <Card isFullWidth>
             <ImportantPricingInfo>
               Do you work for an educational institution?
             </ImportantPricingInfo>
