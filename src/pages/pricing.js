@@ -554,8 +554,8 @@ const PricingPage = () => {
             <Divider blue />
             <StyledText>
               We have special plans tailored for schools, universities and other
-              educational institutions. Contact us and learn how we can help
-              you.
+              educational institutions. Contact us and learn how we can help at{' '}
+              <b>contact@strove.io</b>.
             </StyledText>
           </Card>
         </EducationSectionWrapper>
@@ -576,8 +576,7 @@ const PricingPage = () => {
             <StyledText team>
               We offer billing monthly or billing annually. You can pay by Visa,
               MasterCard, Discover and American Express credit cards or by
-              Stripe. For further information feel free to contact us as{' '}
-              <b>contact@strove.io</b>
+              Stripe. For further information feel free to contact us.
             </StyledText>
           </FaqColumn>
           <FaqColumn>
