@@ -360,14 +360,15 @@ const CardTitle = styled(ImportantPricingInfo)`
 `
 
 const Divider = styled.div`
-  width: ${({ blue }) => (blue ? '30%' : '100%')};
-  border-bottom: 1px solid
-    ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
+  width: 100%;
+  border-bottom: 1px solid;
+  ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
 `
 
 const PricingHeader = styled(CardTitle)`
-  margin: 60px 10px 20px;
+  padding: 60px 10px 20px;
   color: ${({ theme }) => theme.colors.c1};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
 `
 
 const validate = values => {
@@ -412,7 +413,6 @@ const PricingPage = () => {
         <SEO title="Pricing" />
         <Header />
         <PricingHeader>Choose the plan that fits your team</PricingHeader>
-        <Divider blue />
         <CancelationInfo>
           Pay by month or the year, and cancel at any time.
         </CancelationInfo>
@@ -543,14 +543,17 @@ const PricingPage = () => {
           </Card>
         </CardsWrapper>
         <EducationSectionWrapper>
-          <ImportantPricingInfo>
-            Do you work for an educational institution?
-          </ImportantPricingInfo>
-          <Divider blue />
-          <StyledText>
-            We have special plans tailored for schools, universities and other
-            educational institutions. Contact us and learn how we can help you.
-          </StyledText>
+          <Card>
+            <ImportantPricingInfo>
+              Do you work for an educational institution?
+            </ImportantPricingInfo>
+            <Divider blue />
+            <StyledText>
+              We have special plans tailored for schools, universities and other
+              educational institutions. Contact us and learn how we can help
+              you.
+            </StyledText>
+          </Card>
         </EducationSectionWrapper>
         <FaqSectionWrapper>
           <FaqColumn>
