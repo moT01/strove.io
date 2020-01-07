@@ -32,12 +32,15 @@ const CardsWrapper = styled.div`
 
 const EducationSectionWrapper = styled(CardsWrapper)`
   margin-top: 3vh;
+  width: 80%;
   flex-direction: column;
   align-items: center;
+  padding: 0;
 `
 
 const FaqSectionWrapper = styled(EducationSectionWrapper)`
   flex-direction: row;
+  width: 100%;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
 `
@@ -237,6 +240,7 @@ const Card = styled.div`
   box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
   width: 40%;
   margin: 0 20px;
+  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '40%')};
   @media (max-width: 1366px) {
     margin: 10px 0;
     width: 100%;
@@ -360,14 +364,15 @@ const CardTitle = styled(ImportantPricingInfo)`
 `
 
 const Divider = styled.div`
-  width: ${({ blue }) => (blue ? '30%' : '100%')};
+  width: 100%;
   border-bottom: 1px solid
     ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
 `
 
 const PricingHeader = styled(CardTitle)`
-  margin: 60px 10px 20px;
+  padding: 60px 10px 20px;
   color: ${({ theme }) => theme.colors.c1};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
 `
 
 const validate = values => {
@@ -412,7 +417,6 @@ const PricingPage = () => {
         <SEO title="Pricing" />
         <Header />
         <PricingHeader>Choose the plan that fits your team</PricingHeader>
-        <Divider blue />
         <CancelationInfo>
           Pay by month or the year, and cancel at any time.
         </CancelationInfo>
@@ -543,14 +547,17 @@ const PricingPage = () => {
           </Card>
         </CardsWrapper>
         <EducationSectionWrapper>
-          <ImportantPricingInfo>
-            Do you work for an educational institution?
-          </ImportantPricingInfo>
-          <Divider blue />
-          <StyledText>
-            We have special plans tailored for schools, universities and other
-            educational institutions. Contact us and learn how we can help you.
-          </StyledText>
+          <Card isFullWidth>
+            <ImportantPricingInfo>
+              Do you work for an educational institution?
+            </ImportantPricingInfo>
+            <Divider blue />
+            <StyledText>
+              We have special plans tailored for schools, universities and other
+              educational institutions. Contact us and learn how we can help at{' '}
+              <b>contact@strove.io</b>.
+            </StyledText>
+          </Card>
         </EducationSectionWrapper>
         <FaqSectionWrapper>
           <FaqColumn>

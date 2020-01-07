@@ -30,7 +30,7 @@ const Legal = () => (
     <Header />
     <TextWell>
       <StyledH1>About Cookies</StyledH1>
-      <h6>Last Edited on 2019-11–17</h6>
+      <h6>Last Edited on 2020-01–05</h6>
       <h3>What are cookies?</h3>
       <p>
         Cookies are small text files containing a string of characters that can
