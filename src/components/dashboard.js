@@ -88,15 +88,18 @@ const Tile = styled.div`
 
 const TeamTile = styled(Tile)`
   width: 100%;
-  padding: 10px;
+  padding: 0px;
   margin: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 `
 
 const TeamTileSection = styled(Tile)`
+  border-radius: 0px;
+  border-width: 1px 0px;
+  border-color: rgba(0, 114, 206, 0.4);
   width: 100%;
-  box-shadow: 0;
+  box-shadow: none;
 `
 
 const ModalButton = styled(StroveButton)`
@@ -222,6 +225,7 @@ const Dashboard = ({ history }) => {
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTile, setExpandedTile] = useState(null)
+  const [expandedSection, setExpandedSection] = useState(null)
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -266,11 +270,7 @@ const Dashboard = ({ history }) => {
                 <TeamTileHeader
                   isAdmin={isAdmin}
                   expanded={isExpanded}
-                  onClick={() =>
-                    setExpandedTile(
-                      expandedTile !== team.name ? team.name : null
-                    )
-                  }
+                  onClick={() => handleExpandTile(team)}
                 >
                   <TeamHeaderDivider>
                     <ProjectTitle>{team.name}</ProjectTitle>
@@ -279,19 +279,44 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <TeamTileSection>
-                      <ProjectTitle>Members</ProjectTitle>
-                      <StroveButton
-                        isPrimary
-                        padding="0.5vh"
-                        width="20%"
-                        onClick={() => setAddMemberModal(true)}
-                        text="Add member"
-                      />
-                      {team.members.map(member => (
-                        <Text key={member.name}>{member.name}</Text>
-                      ))}
-                    </TeamTileSection>
+                    <ProjectTitle
+                      onClick={() => handleExpandSection('Members')}
+                    >
+                      Members
+                    </ProjectTitle>
+                    {isExpanded && expandedSection === 'Members' && (
+                      <TeamTileSection>
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => setAddMemberModal(true)}
+                          text="Add member"
+                        />
+                        {team.members.map(member => (
+                          <Text key={member.name}>{member.name}</Text>
+                        ))}
+                      </TeamTileSection>
+                    )}
+                    <ProjectTitle
+                      onClick={() => handleExpandSection('Projects')}
+                    >
+                      Projects
+                    </ProjectTitle>
+                    {isExpanded && expandedSection === 'Projects' && (
+                      <TeamTileSection>
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => setAddMemberModal(true)}
+                          text="Add member"
+                        />
+                        {team.members.map(member => (
+                          <Text key={member.name}>{member.name}</Text>
+                        ))}
+                      </TeamTileSection>
+                    )}
                   </TeamTile>
                 )}
               </TeamTileWrapper>
@@ -452,6 +477,14 @@ const Dashboard = ({ history }) => {
   }
 
   const handleAddMember = () => console.log('Add member, please')
+
+  const handleExpandTile = team => {
+    setExpandedTile(expandedTile !== team.name ? team.name : null)
+    setExpandedSection(null)
+  }
+
+  const handleExpandSection = section =>
+    setExpandedSection(expandedSection !== section ? section : null)
 
   return (
     <>
