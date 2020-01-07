@@ -3,17 +3,17 @@
   "name":"Strove - create software in the cloud",
   "icons":[
      {
-        "src":"favicons/icon-16.png",
+        "src":"favicons/favicon-16.png",
         "sizes":"16x16",
         "type":"image/png"
      },
      {
-        "src":"favicons/icon-32.png",
+        "src":"favicons/favicon-32.png",
         "sizes":"32x32",
         "type":"image/png"
      },
      {
-        "src":"favicons/icon-180.png",
+        "src":"favicons/favicon-180.png",
         "sizes":"180x180",
         "type":"image/png"
      }
