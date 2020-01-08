@@ -65,6 +65,7 @@ const FaqColumn = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin: 10px 20px;
+  flex: 1 1 0px;
 `
 
 const StyledEmailConfirmation = styled.div`
