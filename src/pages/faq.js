@@ -73,13 +73,18 @@ const QuestionHeader = styled.h3`
 
 const topics = [
   {
-    header: 'Why should I use Strove.io?',
-    paragraph: `Strove.io solves 3 problems programmers face:
-      1. Programmers waste a lot of time on setting up the environment - this problem is very troublesome for many teams and has been our initial inspiration to start working on this project.
-      Strove.io can cut the time to set a programming environment to seconds.
+    header:
+      'How is Strove.io any better than running code on the personal computer?',
+    paragraph: `There are several problems programmers face that can be solved by using a remote approach:
+      1. Companies need to buy and manage expensive equipment for each developer.
+      Strove allows developers to work on their own computers while still allowing companies to secure code or even, recover it.
+      2. It's hard to secure the code.
+      Storing code on remote servers allows to easily restrict access or recover code.
+      3. Programmers often waste a lot of time on setting up the environment.
+      Strove.io removed the need to set a programming environment for each and every developer.
       2. It is hard to use different computers when working on a project and code breaks across different devices and operating systems.
       In Strove.io the code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access.
-      3. 'It works on my machine' problem.
+      3. 'It works on my machine'.
       Strove.io lets programmers use their favorite devices without sacrificing productivity. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
     `,
   },
