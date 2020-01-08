@@ -37,12 +37,11 @@ const EducationSectionWrapper = styled.div`
   width: 80%;
   flex-direction: column;
   align-items: center;
-  /* padding: 20px; */
+  margin: 20px 0;
 
   @media (max-width: 1366px) {
     width: 100%;
     padding: 20px;
-    /* padding: 0; */
   }
 `
 
