@@ -25,24 +25,38 @@ const CardsWrapper = styled.div`
   width: 100%;
   padding: 20px;
   animation: ${ButtonFadeIn} 0.3s ease-out;
+
   @media (max-width: 1366px) {
     flex-direction: column;
   }
 `
 
-const EducationSectionWrapper = styled(CardsWrapper)`
-  margin-top: 3vh;
+const EducationSectionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 80%;
   flex-direction: column;
   align-items: center;
-  padding: 0;
+  margin: 20px 0;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+    padding: 20px;
+  }
 `
 
-const FaqSectionWrapper = styled(EducationSectionWrapper)`
+const FaqSectionWrapper = styled.div`
+  display: flex;
+  padding: 20px 10%;
+  justify-content: center;
   flex-direction: row;
-  width: 100%;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
+
+  @media (max-width: 1366px) {
+    padding: 20px;
+    flex-direction: column;
+  }
 `
 
 const FaqColumn = styled.div`
@@ -51,12 +65,7 @@ const FaqColumn = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin: 10px 20px;
-  width: 40%;
-  height: 90%;
-
-  @media (max-width: 1366px) {
-    width: 100%;
-  }
+  flex: 1 1 0px;
 `
 
 const StyledEmailConfirmation = styled.div`
@@ -205,9 +214,11 @@ const Button = styled.button`
     team ? theme.colors.c2 : theme.colors.c1};
   box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
+
   &:disabled {
     opacity: 0.4;
   }
+
   ${props =>
     !props.disabled &&
     css`
@@ -215,12 +226,13 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.3vh 1.3vh -1.3vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+        box-shadow: 0 10px 10px -10px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
         transform: translateY(-3px);
       }
     `}
+
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+    box-shadow: 0 10px 10px -12px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
     width: 100%;
   }
 `
@@ -266,7 +278,7 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-const Text = styled.p`
+const Text = styled.div`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 15px;
   margin-bottom: 12px;
@@ -311,17 +323,16 @@ const PricingSection = styled.div`
   }
 `
 
-const StyledText = styled.p`
+const StyledText = styled.div`
   color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-size: 15px;
-  margin-top: 0.7vh;
-  margin-bottom: 0.7vh;
+  margin: 10px 0;
   text-align: justify;
 `
 
 const Feature = styled(StyledText)`
   &:before {
-    margin-right: 0.3em;
+    margin-right: 3px;
     content: '✔';
     color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   }
@@ -373,6 +384,7 @@ const PricingHeader = styled(CardTitle)`
   padding: 60px 10px 20px;
   color: ${({ theme }) => theme.colors.c1};
   border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
+  line-height: 1.1;
 `
 
 const validate = values => {

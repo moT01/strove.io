@@ -7,10 +7,9 @@ import { SEO, Header } from 'components'
 
 const TextWell = styled.div`
   color: ${({ theme }) => theme.colors.c3};
-  height: auto;
   width: 60vw;
-  margin: 3vw 7.5vw 0 7.5vw;
-  padding: 3vh;
+  margin: 40px 20px;
+  padding: 20px;
   flex-direction: column;
   align-items: center;
   justify-items: center;
@@ -18,6 +17,10 @@ const TextWell = styled.div`
   text-justify: inter-word;
   background-color: ${({ theme }) => theme.colors.c2};
   font-size: 20px;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+  }
 `
 
 const StyledH1 = styled.h1`

@@ -18,6 +18,7 @@ import StroveButton from './stroveButton'
 import NoRepoUrlInfo from './NoRepoUrlInfo'
 import PoweredBy from './poweredBy'
 import ExternalLink from './externalLink'
+import ScrollToTop from './scrollToTop'
 
 export {
   SmallCloud,
@@ -42,4 +43,5 @@ export {
   NoRepoUrlInfo,
   PoweredBy,
   ExternalLink,
+  ScrollToTop,
 }
