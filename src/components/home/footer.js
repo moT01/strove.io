@@ -67,7 +67,7 @@ const StyledAnchor = styled.a`
 `
 
 const StyledGithub = styled(Github)`
-  fill: #fff;
+  fill: ${({ theme }) => theme.colors.c2};
 `
 
 const Footer = () => {
