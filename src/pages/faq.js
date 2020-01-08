@@ -72,6 +72,10 @@ const QuestionHeader = styled.h3`
   display: inline-block;
 `
 
+const StyledAccordionItemPanel = styled(AccordionItemPanel)`
+  padding-top: 10px;
+`
+
 const topics = [
   {
     header:
@@ -190,9 +194,9 @@ const FAQ = () => (
 
             {typeof topic.paragraph === 'string' ? (
               topic.paragraph.split('\n').map((item, i) => (
-                <AccordionItemPanel>
+                <StyledAccordionItemPanel>
                   <Paragraph key={i}>{item}</Paragraph>
-                </AccordionItemPanel>
+                </StyledAccordionItemPanel>
               ))
             ) : (
               <AccordionItemPanel>
