@@ -80,24 +80,26 @@ const StyledAccordionItemPanel = styled(AccordionItemPanel)`
 
 const topics = [
   {
+    header: 'What is Strove.io?',
+    paragraph: `It allows you to write, run and build code using cloud servers.
+    Strove uses the most popular code editor VSCode. This means that it can provide a local-quality development experience — including full IntelliSense (completions), debugging, and more.
+    Due to it's cloud nature, Strove provides consistent development, removing the need to buy each developer a computer or worrying about 'it works on my machine' issue.`,
+  },
+  {
     header:
       'How is Strove.io any better than running code on the personal computer?',
     paragraph: `There are several problems programmers face that can be solved by using a remote approach:
-      1. Companies need to buy and manage expensive equipment for each developer.
-      Strove allows developers to work on their own computers while still allowing companies to secure code or even, recover it.
-      2. It's hard to secure the code.
-      Storing code on remote servers allows to recover code or restrict access.
-      3. Programmers often waste a lot of time on setting up the environment.
-      Strove.io removes the need to set a programming environment for each and every developer.
-      4. 'It works on my machine'.
-      Because all team members access instances of the same programming environment the code works the same way no matter the computer used.
+      1. Companies need to buy and manage expensive equipment for each developer. Strove allows developers to work on their own computers while still allowing companies to secure code or even, recover it.
+      2. It's hard to secure the code. Storing code on remote servers allows to recover code or restrict access.
+      3. Programmers often waste a lot of time on setting up an environment. Strove.io removes this need for each and every developer.
+      4. 'It works on my machine'. All team members access instances of the same programming environment. The code works the same way no matter the computer used.
     `,
   },
   {
     header: 'Is Strove.io secure?',
-    paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections to the it are encrypted using SSL to prevent third parties from hijacking any kind of information.
+    paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections are encrypted using SSL to prevent third parties from hijacking any kind of information.
       Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
-      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on Strove.io.`,
+      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on this project.`,
   },
   {
     header: 'Why do I need to log in with Github/Gitlab/Bitbucket?',
