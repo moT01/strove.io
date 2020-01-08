@@ -31,7 +31,7 @@ const StyledAccordion = styled(Accordion)`
   }
 
   .accordion__panel {
-    padding: 0 20px 30px;
+    padding: 0 0px 30px;
     animation: fadein 0.35s ease-in;
   }
 
@@ -59,11 +59,12 @@ const TextWell = styled.div`
   text-justify: inter-word;
   background-color: ${({ theme }) => theme.colors.c2};
 `
-const Paragraph = styled.p`
+const Paragraph = styled.div`
   text-indent: 30px;
   font-size: 20px;
   display: inline-block;
   padding-top: 0;
+  margin: 0;
 `
 
 const QuestionHeader = styled.h3`
