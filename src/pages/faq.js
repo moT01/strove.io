@@ -126,7 +126,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
   {
     header: 'Can I use Docker inside my project?',
     paragraph:
-      'Strove.io is built with Docker and we value this technology greatly. Supporting it requires some additional work on our side but it\x27s one of the most important features on our roadmap.',
+      'Strove.io is built with Docker and we value this technology greatly.',
   },
   {
     header: 'Where should I report a bug or request a feature?',
@@ -140,15 +140,6 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
         >
           link here
         </a>
-      </span>
-    ),
-  },
-  {
-    header: 'Why is the company not called Strove but Codengo',
-    paragraph: (
-      <span>
-        We made a company before we had a good idea for a name. We are currently
-        procrastinating on updading our company name to Strove.
       </span>
     ),
   },
