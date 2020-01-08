@@ -122,7 +122,7 @@ const topics = [
     header: 'Can I work on mobile apps or Windows/MacOS apps?',
     paragraph: `Yes and no. Here is an overview:
 Strove runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Strove as well.
-Mobile development using solutions such as React Native and Expo or native desktop development using solutions such as Electorn is possible.
+Mobile development using solutions such as React Native and Expo or native desktop development using likes of Electron framework is possible.
 You won't be able to use Strove if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
     `,
   },
@@ -130,7 +130,7 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
     header:
       'I want a particular language version that\x27s not yet supported. What should I do to make it work?',
     paragraph:
-      'Right now they only way is to contact us on contact@strove.io. We will add it as soon as possible. We plan to add servers tailored for company needs with predefined language versions in the future.',
+      'Right now the only way is to contact us on contact@strove.io. We plan to add servers tailored for company needs with predefined language versions in the future.',
   },
   {
     header: 'Can I use Docker inside my project?',
@@ -149,19 +149,6 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
         >
           link here
         </a>
-      </span>
-    ),
-  },
-  {
-    header: 'Why am I only limited to 4 ports by default?',
-    paragraph: (
-      <span>
-        We run multiple projects on one machine using Docker and two users could
-        use the same ports if we did not implement the limit. Docker requires
-        specifying which ports should the user take so to support any number of
-        ports, we would have to let the first user take all the ports. If this
-        number proves too small for you please, do let us know at{' '}
-        <a href="mailto:contact@strove.io">contact@strove.io</a>.
       </span>
     ),
   },
