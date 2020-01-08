@@ -18,7 +18,7 @@ import {
   FromEmailInvitation,
 } from 'pages'
 
-import { PrivateRoute, Dashboard } from 'components'
+import { PrivateRoute, Dashboard, ScrollToTop } from 'components'
 
 import Wrapper from './wrapper'
 
@@ -30,6 +30,7 @@ import Wrapper from './wrapper'
 
 const Strove = () => (
   <Wrapper>
+    <ScrollToTop />
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/faq" component={Faq} />
