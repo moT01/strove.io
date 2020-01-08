@@ -32,7 +32,7 @@ const CardsWrapper = styled.div`
 `
 
 const EducationSectionWrapper = styled(CardsWrapper)`
-  margin-top: 3vh;
+  margin-top: ;
   width: 80%;
   flex-direction: column;
   align-items: center;
@@ -216,7 +216,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.3vh 1.3vh -1.3vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+        box-shadow: 0 10px 10px -10px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
         transform: translateY(-3px);
       }
     `}
