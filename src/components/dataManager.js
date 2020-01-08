@@ -141,6 +141,7 @@ export default memo(
         when they are continued as well
       */
         if (queuePosition === 0 && !project && !currentProject) {
+          console.log('Yeeeeeeeet', startProjectData, startProjectError, project, currentProject)
           dispatch(
             actions.api.fetchError({
               storeKey: 'startProject',
