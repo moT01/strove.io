@@ -206,9 +206,11 @@ const Button = styled.button`
     team ? theme.colors.c2 : theme.colors.c1};
   box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
+
   &:disabled {
     opacity: 0.4;
   }
+
   ${props =>
     !props.disabled &&
     css`
@@ -220,8 +222,9 @@ const Button = styled.button`
         transform: translateY(-3px);
       }
     `}
+
   @media (max-width: 1366px) {
-    box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+    box-shadow: 0 10px 10px -12px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
     width: 100%;
   }
 `
