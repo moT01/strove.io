@@ -1,13 +1,16 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 import { withRouter } from 'react-router-dom'
+import isEmail from 'validator/lib/isEmail'
+import { Formik, Form, Field } from 'formik'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
+import { SEND_EMAIL } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
@@ -17,6 +20,18 @@ import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const FullFadeIn = keyframes`
   0% {
     opacity: 0;
@@ -24,6 +39,95 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
+`
+
+const EmailFormWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 400px;
+  flex-wrap: wrap;
+  margin: 20px 0 5px;
+  position: relative;
+  box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
+    0 8px 24px 0 rgba(174, 174, 186, 0.16);
+  background: ${({ theme }) => theme.colors.c2};
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+  align-items: center;
+  ${({ isMobile }) =>
+    isMobile &&
+    css`
+      flex-direction: column;
+      box-shadow: none;
+      min-width: 100px;
+      border-radius: 5px;
+    `}
+  &:hover {
+    opacity: 1;
+    box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
+      0 9px 26px 0 rgba(174, 174, 186, 0.16);
+    ${({ isMobile }) =>
+      isMobile &&
+      css`
+        box-shadow: none;
+      `}
+  }
+  input {
+    box-shadow: none;
+    color: ${({ theme }) => theme.colors.c12};
+    outline: 0;
+    background: ${({ theme }) => theme.colors.c2};
+    width: calc(100% - 156px);
+    height: 56px;
+    padding: 0;
+    padding-left: 64px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 36px;
+    font-size: 17px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: 0.2px;
+    border: 0;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    ${({ isMobile }) =>
+      isMobile &&
+      css`
+        flex-direction: column;
+        box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
+          0 8px 24px 0 rgba(174, 174, 186, 0.16);
+        border-radius: 5px;
+        width: 100%;
+      `}
+  }
+  svg {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    height: 24px;
+    width: 24px;
+    g {
+      stroke: ${({ theme }) => theme.colors.c1};
+    }
+  }
+`
+
+const StyledForm = styled(Form)`
+  width: 100%;
+`
+
+const StyledInfo = styled.span`
+  margin: 20px;
+  color: ${({ theme }) => theme.colors.c13};
+  font-size: 13px;
 `
 
 const Wrapper = styled.div`
@@ -253,6 +357,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
+  const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
@@ -601,17 +706,67 @@ const Dashboard = ({ history }) => {
         contentLabel="Stop project?"
         ariaHideApp={false}
       >
-        <ModalText>This modal will help you add new member. Soon</ModalText>
-        <ModalButton
-          isPrimary
-          onClick={() => {
-            handleAddMember()
-            setAddMemberModal(false)
+        <Formik
+          initialValues={{
+            email: '',
           }}
-          text="Confirm"
-          padding="0.5vh"
-          maxWidth="150px"
-        />
+          validate={validate}
+          onSubmit={values => {
+            dispatch(
+              mutation({
+                name: 'sendEmail',
+                context: null,
+                mutation: SEND_EMAIL,
+                variables: { email: values.email, isDemo: true },
+                onSuccess: () => {
+                  setEmailSent(true)
+                  setAddMemberModal(false)
+                },
+              })
+            )
+          }}
+        >
+          {({ errors, touched, values }) => (
+            <StyledForm>
+              <EmailFormWrapper
+                disabled={errors.email || !values.email}
+                isMobile={isMobileOnly}
+              >
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                ></Field>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    fillRule="evenodd"
+                    stroke="#9CA2B4"
+                    strokeWidth="2"
+                  >
+                    <path d="M2 4h20v16H2z"></path>
+                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                  </g>
+                </svg>
+                <StroveButton
+                  isPrimary
+                  type="submit"
+                  layout="form"
+                  text="Invite"
+                  disabled={errors.email || !values.email}
+                />
+              </EmailFormWrapper>
+              {emailSent && (
+                <StyledInfo>Your team invitation has been sent</StyledInfo>
+              )}
+            </StyledForm>
+          )}
+        </Formik>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
           text="Close"
