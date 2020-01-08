@@ -104,28 +104,10 @@ const topics = [
       This prevents users from accidentally sharing them even if you share your project using a link such as https://strove.io/#https://github.com/stroveio/2048-clone.`,
   },
   {
-    header: 'Is Strove free?',
-    paragraph:
-      'It is for open-source and public projects. Each user gets at least 5 GB of RAM and 4 public projects in the free plan.',
-  },
-  {
     header:
       'I am not able to preview my application from within the IDE even though server is running! What should I do?',
     paragraph:
       'This is most likely due to your app not running on host 0.0.0.0. Some frameworks and servers choose a different port and you can almost always specify that you want host 0.0.0.0 instead.',
-  },
-  {
-    header: 'Can I have more than 4 repositories?',
-    paragraph: `Yes, we have a pro plan prepared for very active developers working on multiple projects. Pro plan has a limit of 12 repositories.`,
-  },
-  {
-    header: 'Why does project load several seconds?',
-    paragraph: `Giving users access to programming environment requires virtual machine access. Here is an overview of what happens when you start a new project:
-1. We check if user has permissions to clone the repository.
-2. A new Docker container is started on one of virtual machines.
-3. Strove provides read and write access to the project folder.
-4. Your repository is cloned from a chosen git provider.
-5. Init script from strove.json is run if it's present.`,
   },
   {
     header: 'Can I work on mobile apps or Windows/MacOS apps?',
