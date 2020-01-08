@@ -13,11 +13,12 @@ import {
   GoBackTo,
   Login,
   RunProject,
-  Enterprise,
+  Pricing,
   Editor,
+  FromEmailInvitation,
 } from 'pages'
 
-import { PrivateRoute, Dashboard } from 'components'
+import { PrivateRoute, Dashboard, ScrollToTop } from 'components'
 
 import Wrapper from './wrapper'
 
@@ -29,13 +30,14 @@ import Wrapper from './wrapper'
 
 const Strove = () => (
   <Wrapper>
+    <ScrollToTop />
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/faq" component={Faq} />
       <Route path="/cookies" component={Cookies} />
       <Route path="/privacyPolicy" component={PrivacyPolicy} />
       <Route path="/termsAndConditions" component={TermsAndConditions} />
-      <Route path="/enterprise" component={Enterprise} />
+      <Route path="/pricing" component={Pricing} />
       <Route path="/fromEmbed/goBackTo" component={GoBackTo} />
       <Route path="/fromEmbed/login" component={Login} />
       <Route exact path="/embed" component={Embed} />
@@ -43,6 +45,7 @@ const Strove = () => (
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
+      <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
   </Wrapper>

@@ -39,7 +39,7 @@ const ErrorMessage = styled.span`
 const ErrorBody = styled.div`
   background-color: #081421;
   width: 100vw;
-  height: 97vh;
+  height: 100vh;
   color: #d3d7de;
   font-family: 'Courier new';
   font-size: 18px;

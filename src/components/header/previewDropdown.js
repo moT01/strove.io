@@ -33,21 +33,17 @@ const PreviewButton = styled.button`
   cursor: pointer;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-
   :focus {
     outline: 0;
   }
-
   span {
     color: ${({ theme }) => theme.colors.c2};
   }
-
   :hover {
     span {
       color: ${({ theme }) => theme.colors.c3};
     }
   }
-
   > {
     vertical-align: bottom;
   }
@@ -65,7 +61,6 @@ const LinkText = styled.div`
   font-weight: 300;
   margin: 0;
   cursor: pointer;
-
   :hover {
     color: ${({ theme }) => theme.colors.c3};
     svg {
@@ -124,7 +119,6 @@ const Option = styled.a`
   text-decoration: none;
   font-weight: 300;
   min-width: ${props => (props.isEmbed ? '0' : '150px')};
-
   svg {
     fill: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
@@ -132,7 +126,6 @@ const Option = styled.a`
     height: auto;
     margin-right: 5px;
   }
-
   :hover {
     background-color: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
@@ -144,7 +137,6 @@ const Option = styled.a`
       text-decoration: none;
     }
   }
-
   :hover svg {
     fill: ${({ theme, invert }) =>
       invert ? theme.colors.c2 : theme.colors.c1};
@@ -160,7 +152,6 @@ const PreviewLink = styled.a`
   height: ${props => (props.isEmbed ? '18px' : 'auto')};
   padding: 0;
   text-decoration: none;
-
   :hover {
     text-decoration: none;
   }
@@ -192,10 +183,25 @@ const PreviewDropdown = props => {
     if (props.isEditor) {
       if (project?.machineName) {
         setPorts(
-          project.additionalPorts.map(portPair => ({
-            label: `http://0.0.0.0:${portPair[0]}`,
-            href: `https://strove.io/vm/${project.machineName}/${portPair[1]}`,
-          }))
+          project.additionalPorts.map(portPair => {
+            let href
+            /* Env's are loaded as strings on production */
+            if (process.env.REACT_APP_IS_OPENSOURCE === 'true') {
+              href = `https://${portPair[1]}.vmopen${
+                project.machineName.match(/\d+/g)[0]
+              }.silisky.com`
+            } else if (process.env.NODE_ENV === 'development') {
+              href = `https://${portPair[1]}.vmdev${
+                project.machineName.match(/\d+/g)[0]
+              }.silisky.com`
+            } else {
+              href = `https://${portPair[1]}.${project.machineName}.silisky.com`
+            }
+            return {
+              label: `http://0.0.0.0:${portPair[0]}`,
+              href,
+            }
+          })
         )
       }
     }

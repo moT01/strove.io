@@ -4,9 +4,9 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
-import { withRouter } from 'react-router-dom'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
+import { withRouter, Link } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER } from 'queries'
@@ -352,6 +352,32 @@ const TileSectionHeader = styled(TeamTileHeader)`
     }
   }
 `
+// const TrialInfoWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   background-color: ${({ theme }) => theme.colors.c4};
+//   border-radius: 5px;
+//   border-color: ${({ theme }) => theme.colors.c1};
+//   border-width: 1px;
+//   border-style: solid;
+//   padding: 20px;
+//   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+//   margin-bottom: 0;
+//   height: auto;
+//   width: auto;
+//   min-width: 50vw;
+//   max-width: 100vw;
+//   margin-bottom: 20px;
+//   color: ${({ theme }) => theme.colors.c11};
+// `
+
+// const StyledLink = styled(Link)`
+//   color: ${({ theme }) => theme.colors.c1};
+//   text-decoration: none;
+//   display: flex;
+// `
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
@@ -377,6 +403,32 @@ const Dashboard = ({ history }) => {
     { name: 'Member 3', teams: ['234'] },
     { name: 'Member 4', teams: ['234'] },
   ]
+  // const handleStartClick = ({ id, editorPort }) => {
+  //   if (!currentProjectId || currentProjectId === id) {
+  //     if (!editorPort) {
+  //       dispatch(
+  //         mutation({
+  //           name: 'continueProject',
+  //           mutation: CONTINUE_PROJECT,
+  //           variables: { projectId: id },
+  //           onSuccessDispatch: null,
+  //         })
+  //       )
+  //     } else {
+  //       dispatch(
+  //         actions.api.fetchSuccess({
+  //           data: { currentProjectId: id },
+  //           storeKey: 'user',
+  //         })
+  //       )
+  //       if (document.visibilityState === 'visible') {
+  //         history.push('/app/editor/')
+  //       }
+  //     }
+  //   } else {
+  //     setStopModal(true)
+  //   }
+  // }
 
   const team1Members = members.filter(
     member => member.teams.indexOf('123') !== -1
@@ -631,6 +683,10 @@ const Dashboard = ({ history }) => {
           <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
         ) : (
           <>
+            {/* <TrialInfoWrapper>
+            Your workspace is currently on the free version of Strove.{' '}
+            <StyledLink to="/pricing">See upgrade options</StyledLink>
+          </TrialInfoWrapper> */}
             <GetStarted />
             {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
           </>

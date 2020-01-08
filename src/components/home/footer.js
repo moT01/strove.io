@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
@@ -67,7 +67,7 @@ const StyledAnchor = styled.a`
 `
 
 const StyledGithub = styled(Github)`
-  fill: #fff;
+  fill: ${({ theme }) => theme.colors.c2};
 `
 
 const Footer = () => {
@@ -90,9 +90,9 @@ const Footer = () => {
         </Column>
         <Column>
           <ColumnTitle>About</ColumnTitle>
-          {/* <StyledLink to="/pricing">
+          <StyledLink to="/pricing">
             <LinkText>Pricing</LinkText>
-          </StyledLink> */}
+          </StyledLink>
           <StyledLink to="/faq">
             <LinkText>FAQ</LinkText>
           </StyledLink>
@@ -114,4 +114,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default memo(Footer)

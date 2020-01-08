@@ -1,10 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-import { ThemeProvider } from 'styled-components/macro'
 import { useSelector } from 'react-redux'
 
-import { theme } from 'consts'
-import { GlobalStyles } from 'components'
 import { getWindowSearchParams } from 'utils'
 import { selectors } from 'state'
 
@@ -18,7 +15,6 @@ const MenuWrapper = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-  height: 97vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,12 +36,9 @@ const GoBackTo = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Wrapper>
-        <MenuWrapper invert>...redirecting</MenuWrapper>
-      </Wrapper>
-      <GlobalStyles />
-    </ThemeProvider>
+    <Wrapper>
+      <MenuWrapper invert>...redirecting</MenuWrapper>
+    </Wrapper>
   )
 }
 
