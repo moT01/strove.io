@@ -38,11 +38,14 @@ const EducationSectionWrapper = styled(CardsWrapper)`
   padding: 0;
 `
 
-const FaqSectionWrapper = styled(EducationSectionWrapper)`
+const FaqSectionWrapper = styled.div`
+  display: flex;
   flex-direction: row;
-  width: 100%;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
+  @media (max-width: 1366px) {
+    flex-direction: column;
+  }
 `
 
 const FaqColumn = styled.div`
@@ -51,12 +54,6 @@ const FaqColumn = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin: 10px 20px;
-  width: 40%;
-  height: 90%;
-
-  @media (max-width: 1366px) {
-    width: 100%;
-  }
 `
 
 const StyledEmailConfirmation = styled.div`
