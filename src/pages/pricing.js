@@ -25,6 +25,7 @@ const CardsWrapper = styled.div`
   width: 100%;
   padding: 20px;
   animation: ${ButtonFadeIn} 0.3s ease-out;
+
   @media (max-width: 1366px) {
     flex-direction: column;
   }
@@ -40,9 +41,11 @@ const EducationSectionWrapper = styled(CardsWrapper)`
 
 const FaqSectionWrapper = styled.div`
   display: flex;
+  padding: 20px;
   flex-direction: row;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
+
   @media (max-width: 1366px) {
     flex-direction: column;
   }
