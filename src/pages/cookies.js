@@ -9,6 +9,7 @@ const TextWell = styled.div`
   color: ${({ theme }) => theme.colors.c3};
   width: 60vw;
   margin: 40px 20px;
+  padding: 20px;
   flex-direction: column;
   align-items: center;
   justify-items: center;
