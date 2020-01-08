@@ -41,12 +41,13 @@ const EducationSectionWrapper = styled(CardsWrapper)`
 
 const FaqSectionWrapper = styled.div`
   display: flex;
-  padding: 20px;
+  padding: 20px 10%;
   flex-direction: row;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
 
   @media (max-width: 1366px) {
+    padding: 20px;
     flex-direction: column;
   }
 `
