@@ -82,10 +82,8 @@ const topics = [
       Storing code on remote servers allows to recover code or restrict access.
       3. Programmers often waste a lot of time on setting up the environment.
       Strove.io removes the need to set a programming environment for each and every developer.
-      4. It is hard to use different computers when working on a project and code breaks across different devices and operating systems.
-      In Strove.io the code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access.
-      5. 'It works on my machine'.
-      All team members access instances of the same programming environment, and the code works the same way no matter the computer they use.
+      4. 'It works on my machine'.
+      Because all team members access instances of the same programming environment the code works the same way no matter the computer used.
     `,
   },
   {
