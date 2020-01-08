@@ -14,6 +14,7 @@ import SEND_EMAIL from './sendEmail'
 import GET_BITBUCKET_TOKEN from './getBitbucketToken'
 import START_PROJECT from './startProjectSubscription'
 import LOGIN_SUBSCRIPTION from './userLoginSubscription'
+import ADD_MEMBER from './addMember'
 
 export {
   ADD_PROJECT,
@@ -32,4 +33,5 @@ export {
   GET_BITBUCKET_TOKEN,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ADD_MEMBER,
 }

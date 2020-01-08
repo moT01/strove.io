@@ -9,8 +9,7 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 
 import { mutation, handleStopProject } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
-import { SEND_EMAIL } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
 import { selectors } from 'state'
@@ -370,7 +369,7 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
-  const isAdmin = true
+  const isAdmin = false
 
   const members = [
     { name: 'Member 1', teams: ['123', '234'] },
@@ -615,8 +614,6 @@ const Dashboard = ({ history }) => {
     setModalVisible(false)
   }
 
-  const handleAddMember = () => console.log('Add member, please')
-
   const handleExpandTile = team => {
     setExpandedTile(expandedTile !== team.name ? team.name : null)
     setExpandedSection(null)
@@ -714,10 +711,10 @@ const Dashboard = ({ history }) => {
           onSubmit={values => {
             dispatch(
               mutation({
-                name: 'sendEmail',
+                name: 'addMember',
                 context: null,
-                mutation: SEND_EMAIL,
-                variables: { email: values.email, isDemo: true },
+                mutation: ADD_MEMBER,
+                variables: { memberEmail: values.email, teamId: '2' },
                 onSuccess: () => {
                   setEmailSent(true)
                   setAddMemberModal(false)
