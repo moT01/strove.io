@@ -372,6 +372,7 @@ const PricingHeader = styled(CardTitle)`
   padding: 60px 10px 20px;
   color: ${({ theme }) => theme.colors.c1};
   border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
+  line-height: 1.1;
 `
 
 const validate = values => {
