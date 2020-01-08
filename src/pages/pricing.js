@@ -31,12 +31,16 @@ const CardsWrapper = styled.div`
   }
 `
 
-const EducationSectionWrapper = styled(CardsWrapper)`
-  margin-top: ;
+const EducationSectionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 80%;
   flex-direction: column;
   align-items: center;
-  padding: 0;
+
+  @media (max-width: 1366px) {
+    width: 100%;
+  }
 `
 
 const FaqSectionWrapper = styled.div`
@@ -550,19 +554,21 @@ const PricingPage = () => {
             </PricingSection>
           </Card>
         </CardsWrapper>
-        <EducationSectionWrapper>
-          <Card isFullWidth>
-            <ImportantPricingInfo>
-              Do you work for an educational institution?
-            </ImportantPricingInfo>
-            <Divider blue />
-            <StyledText>
-              We have special plans tailored for schools, universities and other
-              educational institutions. Contact us and learn how we can help at{' '}
-              <b>contact@strove.io</b>.
-            </StyledText>
-          </Card>
-        </EducationSectionWrapper>
+        <CardsWrapper>
+          <EducationSectionWrapper>
+            <Card isFullWidth>
+              <ImportantPricingInfo>
+                Do you work for an educational institution?
+              </ImportantPricingInfo>
+              <Divider blue />
+              <StyledText>
+                We have special plans tailored for schools, universities and
+                other educational institutions. Contact us and learn how we can
+                help at <b>contact@strove.io</b>.
+              </StyledText>
+            </Card>
+          </EducationSectionWrapper>
+        </CardsWrapper>
         <FaqSectionWrapper>
           <FaqColumn>
             {/* <ImportantPricingInfo team>
