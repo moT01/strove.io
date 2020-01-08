@@ -266,7 +266,7 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-const Text = styled.p`
+const Text = styled.div`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 15px;
   margin-bottom: 12px;
@@ -311,17 +311,16 @@ const PricingSection = styled.div`
   }
 `
 
-const StyledText = styled.p`
+const StyledText = styled.div`
   color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   font-size: 15px;
-  margin-top: 0.7vh;
-  margin-bottom: 0.7vh;
+  margin: 10px 0;
   text-align: justify;
 `
 
 const Feature = styled(StyledText)`
   &:before {
-    margin-right: 0.3em;
+    margin-right: 3px;
     content: '✔';
     color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   }
