@@ -67,8 +67,9 @@ const Paragraph = styled.div`
   margin: 0;
 `
 
-const QuestionHeader = styled.h3`
-  font-size: 22;
+const QuestionHeader = styled.div`
+  font-size: 25px;
+  font-weight: 500;
   display: inline-block;
 `
 
