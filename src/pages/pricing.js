@@ -48,6 +48,7 @@ const EducationSectionWrapper = styled.div`
 const FaqSectionWrapper = styled.div`
   display: flex;
   padding: 20px 10%;
+  justify-content: center;
   flex-direction: row;
   align-items: flex-start;
   background-color: ${({ theme }) => theme.colors.c1};
