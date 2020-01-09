@@ -466,7 +466,9 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
+          {console.log('Gimme tha expandedTiles', expandedTiles)}
           {teams.map(team => {
+            console.log('Gimme tha arr', expandedTiles)
             console.log('Yeetest', expandedTiles.indexOf(team.name))
             const isExpanded = expandedTiles.indexOf(team.name) !== -1
             return (
@@ -680,16 +682,19 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = team => {
-    console.log('Yeet', expandedTiles.indexOf(team.name), team.name)
+    console.log(
+      'Yeet',
+      expandedTiles.indexOf(team.name),
+      team.name,
+      expandedTiles
+    )
     expandedTiles.indexOf(team.name) === -1
-      ? setExpandedTiles(expandedTiles.push(team.name))
+      ? setExpandedTiles([...expandedTiles, team.name])
       : setExpandedTiles(
-          expandedTiles.slice(0, expandedTiles.indexOf(team.name)) +
-            expandedTiles.indexOf(team.name)
+          expandedTiles.slice(0, expandedTiles.indexOf(team.name) - 1) +
+            expandedTiles.slice(expandedTiles.indexOf(team.name))
         )
     console.log('Yeeter', team.name, expandedTiles)
-    // setExpandedTile(expandedTile !== team.name ? team.name : null)
-    // setExpandedSection(null)
   }
 
   const handleExpandSection = section =>
