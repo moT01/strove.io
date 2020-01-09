@@ -680,14 +680,11 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = team => {
-    console.log('Yeet', team.name, expandedTiles)
+    console.log('pre Yeet', team.name, expandedTiles)
     expandedTiles.indexOf(team.name) === -1
       ? setExpandedTiles([...expandedTiles, team.name])
-      : setExpandedTiles(
-          expandedTiles.slice(0, expandedTiles.indexOf(team.name)) +
-            expandedTiles.slice(expandedTiles.indexOf(team.name) + 1)
-        )
-    console.log('Yeeter', team.name, expandedTiles)
+      : setExpandedTiles(expandedTiles.filter(tile => tile !== team.name))
+    console.log('past Yeet', team.name, expandedTiles)
   }
 
   const handleExpandSection = section =>
