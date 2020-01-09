@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -241,6 +241,7 @@ const VerticalDivider = styled.div`
 `
 
 const TeamHeaderDivider = styled(VerticalDivider)`
+  flex-direction: row;
   justify-content: space-between;
 `
 
@@ -286,6 +287,16 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
+const IconWrapper = styled(Wrapper)`
+  width: 8%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  border-width: 0px 0px 0px 1px;
+  border-color: rgba(0, 114, 206, 0.6);
+  border-style: solid;
+`
+
 const ExpandIcon = styled(StyledIcon)`
   font-size: 1rem;
   transform: ${({ expanded }) =>
@@ -293,13 +304,16 @@ const ExpandIcon = styled(StyledIcon)`
   color: ${({ theme, expanded }) =>
     expanded ? theme.colors.c2 : theme.colors.c1};
   transition: all 0.2s;
+  :focus {
+    outline: none;
+  }
 `
 
 const TeamTileHeader = styled(Tile)`
   width: 100%;
   height: 2.5rem;
   margin: 0;
-  padding: 0;
+  padding: 0px 0px 0px 10px;
   transition: all 0.2s;
   border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
@@ -387,7 +401,7 @@ const Dashboard = ({ history }) => {
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const [expandedTile, setExpandedTile] = useState(null)
+  const [expandedTiles, setExpandedTiles] = useState([])
   const [expandedSection, setExpandedSection] = useState(null)
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
@@ -395,7 +409,7 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
-  const isAdmin = false
+  const isAdmin = true
 
   const members = [
     { name: 'Member 1', teams: ['123', '234'] },
@@ -453,17 +467,16 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => {
-            const isExpanded = expandedTile === team.name
+            console.log('Yeetest', expandedTiles.indexOf(team.name))
+            const isExpanded = expandedTiles.indexOf(team.name) !== -1
             return (
               <TeamTileWrapper key={team.name} expanded={isExpanded}>
-                <TeamTileHeader
-                  isAdmin={isAdmin}
-                  expanded={isExpanded}
-                  onClick={() => handleExpandTile(team)}
-                >
+                <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
                   <TeamHeaderDivider>
                     <ProjectTitle>{team.name}</ProjectTitle>
-                    <ExpandIcon type="down" expanded={isExpanded} />
+                    <IconWrapper onClick={() => handleExpandTile(team)}>
+                      <ExpandIcon type="down" expanded={isExpanded} />
+                    </IconWrapper>
                   </TeamHeaderDivider>
                 </TeamTileHeader>
                 {isExpanded && (
@@ -667,8 +680,16 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = team => {
-    setExpandedTile(expandedTile !== team.name ? team.name : null)
-    setExpandedSection(null)
+    console.log('Yeet', expandedTiles.indexOf(team.name), team.name)
+    expandedTiles.indexOf(team.name) === -1
+      ? setExpandedTiles(expandedTiles.push(team.name))
+      : setExpandedTiles(
+          expandedTiles.slice(0, expandedTiles.indexOf(team.name)) +
+            expandedTiles.indexOf(team.name)
+        )
+    console.log('Yeeter', team.name, expandedTiles)
+    // setExpandedTile(expandedTile !== team.name ? team.name : null)
+    // setExpandedSection(null)
   }
 
   const handleExpandSection = section =>
