@@ -91,13 +91,13 @@ const topics = [
       'How is Strove.io any better than running code on the personal computer?',
     paragraph: `There are several problems programmers face that can be solved by using a remote approach:
       1. Companies need to buy and manage expensive equipment for each developer. Strove allows developers to work on their own computers while still allowing companies to secure code or even, recover it.
-      2. It's hard to secure the code.
+      2. Programmers often waste a lot of time on setting up an environment. Strove.io removes this need for each and every developer.
+      3. 'It works on my machine'. All team members access instances of the same programming environment. The code works the same way no matter the computer used.
+      4. It's hard to secure the code.
       Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices and code stored remotely can be easily recovered.
       Team plan also provides additional features for protecting intellectual property:
       Team admins are able to restrict access to projects or them to be visible for all team members.
       Team admins can recover code from any project made within the organization.
-      3. Programmers often waste a lot of time on setting up an environment. Strove.io removes this need for each and every developer.
-      4. 'It works on my machine'. All team members access instances of the same programming environment. The code works the same way no matter the computer used.
     `,
   },
   {
