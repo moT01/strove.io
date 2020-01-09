@@ -8,6 +8,7 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion'
 import { isMobile } from 'react-device-detect'
+// import { Link } from 'react-router-dom'
 
 import { SEO, Header } from 'components'
 
@@ -90,7 +91,7 @@ const topics = [
       'How is Strove.io any better than running code on the personal computer?',
     paragraph: `There are several problems programmers face that can be solved by using a remote approach:
       1. Companies need to buy and manage expensive equipment for each developer. Strove allows developers to work on their own computers while still allowing companies to secure code or even, recover it.
-      2. It's hard to secure the code. Storing code on remote servers allows to recover code or restrict access.
+      2. It's hard to secure the code. In Strove, code written within the team can be recovered any time by teams admins and only team admins are able to delete projects made within the team.
       3. Programmers often waste a lot of time on setting up an environment. Strove.io removes this need for each and every developer.
       4. 'It works on my machine'. All team members access instances of the same programming environment. The code works the same way no matter the computer used.
     `,
