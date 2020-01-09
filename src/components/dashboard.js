@@ -467,7 +467,6 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => {
-            console.log('Gimme tha arr', expandedTiles)
             const isExpanded = expandedTiles.indexOf(team.name) !== -1
             return (
               <TeamTileWrapper key={team.name} expanded={isExpanded}>
@@ -680,11 +679,9 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = team => {
-    console.log('pre Yeet', team.name, expandedTiles)
     expandedTiles.indexOf(team.name) === -1
       ? setExpandedTiles([...expandedTiles, team.name])
       : setExpandedTiles(expandedTiles.filter(tile => tile !== team.name))
-    console.log('past Yeet', team.name, expandedTiles)
   }
 
   const handleExpandSection = section =>
