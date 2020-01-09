@@ -82,7 +82,7 @@ const StyledAccordionItemPanel = styled(AccordionItemPanel)`
 const topics = [
   {
     header: 'What is Strove.io?',
-    paragraph: `Strove allows write, run, build, share and secure code using cloud servers.
+    paragraph: `Strove allows to write, run, build, share and secure code using cloud servers.
     It uses the most popular code editor VSCode. This means that it can provide a local-quality development experience — including full IntelliSense (completions), debugging, and more.
     Strove provides consistent development, allowing programmers to use any device without worrying about 'it works on my machine' issue.`,
   },
