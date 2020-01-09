@@ -133,11 +133,6 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
       'Right now the only way is to contact us on contact@strove.io. We plan to add servers tailored for company needs with predefined language versions in the future.',
   },
   {
-    header: 'Can I use Docker inside my project?',
-    paragraph:
-      'Strove.io is built with Docker and we value this technology greatly.',
-  },
-  {
     header: 'Where should I report a bug or request a feature?',
     paragraph: (
       <span>
