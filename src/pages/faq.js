@@ -92,7 +92,8 @@ const topics = [
     paragraph: `There are several problems programmers face that can be solved by using a remote approach:
       1. Companies need to buy and manage expensive equipment for each developer. Strove allows developers to work on their own computers while still allowing companies to secure code or even, recover it.
       2. It's hard to secure the code.
-      Team plan additional features for protecting intellectual property:
+      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices and code stored remotely can be easily recovered.
+      Team plan also provides additional features for protecting intellectual property:
       Team admins are able to restrict access to projects or them to be visible for all team members.
       Team admins can recover code from any project made within the organization.
       3. Programmers often waste a lot of time on setting up an environment. Strove.io removes this need for each and every developer.
@@ -103,7 +104,6 @@ const topics = [
     header: 'How does Strove.io handle secure security?',
     paragraph: `Strove stores code in state of the art cloud provider - Google Cloud. Strove uses existing, well known transports like SSH and SSL and to authenticate and secure traffic and encrypt all the connections to prevent third parties from hijacking any kind of information.
       Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
-      Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on this project.`,
   },
   {
     header: 'Why do I need to log in with Github/Gitlab/Bitbucket?',
