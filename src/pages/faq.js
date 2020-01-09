@@ -96,8 +96,8 @@ const topics = [
     `,
   },
   {
-    header: 'Is Strove.io secure?',
-    paragraph: `We wrote Strove.io with security in mind. We store code in state of the art cloud provider - Google Cloud and all the connections are encrypted using SSL to prevent third parties from hijacking any kind of information.
+    header: 'How does Strove.io handle secure security?',
+    paragraph: `Strove stores code in state of the art cloud provider - Google Cloud. Strove uses existing, well known transports like SSH and SSL and to authenticate and secure traffic and encrypt all the connections to prevent third parties from hijacking any kind of information.
       Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.
       Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices. Security advantage over using traditional way of coding is one of the reasons we started working on this project.`,
   },
