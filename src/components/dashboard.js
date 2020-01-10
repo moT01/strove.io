@@ -444,11 +444,11 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TileSectionHeader
-                      onClick={() => handleExpandSection(team, 'Members')}
+                      onClick={() => handleExpandSection(team.id, 'Members')}
                     >
                       <ProjectTitle>Members</ProjectTitle>
                     </TileSectionHeader>
-                    {isExpanded && expandedSection === 'Members' && (
+                    {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
                         <StroveButton
                           isPrimary
@@ -463,7 +463,7 @@ const Dashboard = ({ history }) => {
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
-                      onClick={() => handleExpandSection('Projects')}
+                      onClick={() => handleExpandSection(team.id, 'Projects')}
                       isLast
                     >
                       <ProjectTitle>Projects</ProjectTitle>
@@ -653,8 +653,12 @@ const Dashboard = ({ history }) => {
     setExpandedTiles({ ...expandedTiles, [teamId]: { isMembersActive: false, isProjectsActive: false } })
   }
 
-  const handleExpandSection = (team, section) => {
-
+  const handleExpandSection = (teamId, section) => {
+    if (section === 'Members') {
+      console.log('Yeet', expandedTiles, expandedTiles.teamId, expandedTiles[teamId])
+      const isMembersActive = expandedTiles[teamId].isMembersActive
+      setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isMembersActive: !isMembersActive } })
+    }
   }
 
   return (
