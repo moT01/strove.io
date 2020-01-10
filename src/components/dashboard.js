@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,7 +6,7 @@ import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER } from 'queries'
@@ -71,8 +71,8 @@ const EmailFormWrapper = styled.div`
     box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
       0 9px 26px 0 rgba(174, 174, 186, 0.16);
     ${({ isMobile }) =>
-      isMobile &&
-      css`
+    isMobile &&
+    css`
         box-shadow: none;
       `}
   }
@@ -98,8 +98,8 @@ const EmailFormWrapper = styled.div`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     ${({ isMobile }) =>
-      isMobile &&
-      css`
+    isMobile &&
+    css`
         flex-direction: column;
         box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
           0 8px 24px 0 rgba(174, 174, 186, 0.16);
@@ -322,7 +322,7 @@ const TeamTileHeader = styled(Tile)`
 
   ${ProjectTitle} {
     color: ${({ theme, expanded }) =>
-      expanded ? theme.colors.c2 : theme.colors.c1};
+    expanded ? theme.colors.c2 : theme.colors.c1};
     transition: all 0.2s;
   }
 
@@ -351,7 +351,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
 
   ${ProjectTitle} {
     color: ${({ theme, expanded }) =>
-      expanded ? theme.colors.c2 : theme.colors.c1};
+    expanded ? theme.colors.c2 : theme.colors.c1};
     transition: all 0.2s;
   }
 
@@ -375,13 +375,13 @@ const Dashboard = ({ history }) => {
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const [expandedTiles, setExpandedTiles] = useState([])
-  const [expandedSection, setExpandedSection] = useState(null)
+  const [expandedTiles, setExpandedTiles] = useState({})
+  const [expandedSection, setExpandedSection] = useState([])
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
-  const currentProjectId = currentProject?.id
+  const currentProjectId = currentProject ?.id
   const projectsLimit = 20
   const isAdmin = true
 
@@ -409,6 +409,19 @@ const Dashboard = ({ history }) => {
     },
   ]
 
+  /*
+
+  activeTiles = {
+    123: { isMembersActive: false, isTeamsActive: false },
+    234: { isMembersActive: false, isTeamsActive: false }
+  }
+
+  activeTiles = {
+    ...activeTiles,
+    234: { isMembersActive: false, isTeamsActive: true }
+  }
+  */
+
   const tabs = [
     {
       name: 'Teams',
@@ -416,7 +429,8 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => {
-            const isExpanded = expandedTiles.findIndex(x => x.id === team.id) !== -1
+            const isExpanded = expandedTiles[team.id]
+            // console.log('isExpanded', expandedTiles[team.id])
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
@@ -495,11 +509,11 @@ const Dashboard = ({ history }) => {
                       <Text>Active</Text>
                     </TextWrapper>
                   ) : (
-                    <TextWrapper>
-                      <CircleIcon />
-                      <Text>Inactive</Text>
-                    </TextWrapper>
-                  )}
+                      <TextWrapper>
+                        <CircleIcon />
+                        <Text>Inactive</Text>
+                      </TextWrapper>
+                    )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
                     <Text>
@@ -628,12 +642,23 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = teamId => {
-    expandedTiles.findIndex(x => x.id === teamId) === -1
-      ? setExpandedTiles([...expandedTiles, {id: teamId, isMA: false, isPA: false}])
-      : setExpandedTiles(expandedTiles.filter(tile => tile.id !== teamId))
+
+
+    // Object.keys(expandedTiles).findIndex(x => x.id === teamId) === -1
+
+    if (expandedTiles[teamId]) {
+      const tiles = { ...expandedTiles }
+      delete tiles[teamId]
+
+      return setExpandedTiles(tiles)
+    }
+
+    setExpandedTiles({ ...expandedTiles, [teamId]: { isMembersActive: false, isProjectsActive: false } })
   }
 
-  const handleExpandSection = (team, section) => {}
+  const handleExpandSection = (team, section) => {
+
+  }
 
   return (
     <>
@@ -643,15 +668,15 @@ const Dashboard = ({ history }) => {
         {isAdmin ? (
           <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
         ) : (
-          <>
-            {/* <TrialInfoWrapper>
+            <>
+              {/* <TrialInfoWrapper>
             Your workspace is currently on the free version of Strove.{' '}
             <StyledLink to="/pricing">See upgrade options</StyledLink>
           </TrialInfoWrapper> */}
-            <GetStarted />
-            {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
-          </>
-        )}
+              <GetStarted />
+              {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
+            </>
+          )}
       </PageWrapper>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
