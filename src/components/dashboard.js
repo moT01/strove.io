@@ -643,9 +643,6 @@ const Dashboard = ({ history }) => {
 
   const handleExpandTile = teamId => {
 
-
-    // Object.keys(expandedTiles).findIndex(x => x.id === teamId) === -1
-
     if (expandedTiles[teamId]) {
       const tiles = { ...expandedTiles }
       delete tiles[teamId]
