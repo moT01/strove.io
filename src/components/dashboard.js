@@ -416,7 +416,7 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => {
-            const isExpanded = expandedTiles.indexOf(team.id) !== -1
+            const isExpanded = expandedTiles.findIndex(x => x.id === team.id) !== -1
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
@@ -628,9 +628,9 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = teamId => {
-    expandedTiles.indexOf(teamId) === -1
-      ? setExpandedTiles([...expandedTiles, teamId])
-      : setExpandedTiles(expandedTiles.filter(tile => tile !== teamId))
+    expandedTiles.findIndex(x => x.id === teamId) === -1
+      ? setExpandedTiles([...expandedTiles, {id: teamId, isMA: false, isPA: false}])
+      : setExpandedTiles(expandedTiles.filter(tile => tile.id !== teamId))
   }
 
   const handleExpandSection = (team, section) => {}
