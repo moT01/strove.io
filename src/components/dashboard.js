@@ -366,32 +366,6 @@ const TileSectionHeader = styled(TeamTileHeader)`
     }
   }
 `
-// const TrialInfoWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: ${({ theme }) => theme.colors.c4};
-//   border-radius: 5px;
-//   border-color: ${({ theme }) => theme.colors.c1};
-//   border-width: 1px;
-//   border-style: solid;
-//   padding: 20px;
-//   box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-//   margin-bottom: 0;
-//   height: auto;
-//   width: auto;
-//   min-width: 50vw;
-//   max-width: 100vw;
-//   margin-bottom: 20px;
-//   color: ${({ theme }) => theme.colors.c11};
-// `
-
-// const StyledLink = styled(Link)`
-//   color: ${({ theme }) => theme.colors.c1};
-//   text-decoration: none;
-//   display: flex;
-// `
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
@@ -417,32 +391,6 @@ const Dashboard = ({ history }) => {
     { name: 'Member 3', teams: ['234'] },
     { name: 'Member 4', teams: ['234'] },
   ]
-  // const handleStartClick = ({ id, editorPort }) => {
-  //   if (!currentProjectId || currentProjectId === id) {
-  //     if (!editorPort) {
-  //       dispatch(
-  //         mutation({
-  //           name: 'continueProject',
-  //           mutation: CONTINUE_PROJECT,
-  //           variables: { projectId: id },
-  //           onSuccessDispatch: null,
-  //         })
-  //       )
-  //     } else {
-  //       dispatch(
-  //         actions.api.fetchSuccess({
-  //           data: { currentProjectId: id },
-  //           storeKey: 'user',
-  //         })
-  //       )
-  //       if (document.visibilityState === 'visible') {
-  //         history.push('/app/editor/')
-  //       }
-  //     }
-  //   } else {
-  //     setStopModal(true)
-  //   }
-  // }
 
   const team1Members = members.filter(
     member => member.teams.indexOf('123') !== -1
@@ -453,9 +401,10 @@ const Dashboard = ({ history }) => {
   )
 
   const teams = [
-    { name: 'Team 1', members: team1Members },
+    { name: 'Team 1', id: '123', members: team1Members },
     {
       name: 'Team 2',
+      id: '234',
       members: team2Members,
     },
   ]
@@ -467,13 +416,13 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => {
-            const isExpanded = expandedTiles.indexOf(team.name) !== -1
+            const isExpanded = expandedTiles.indexOf(team.id) !== -1
             return (
-              <TeamTileWrapper key={team.name} expanded={isExpanded}>
+              <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
                   <TeamHeaderDivider>
                     <ProjectTitle>{team.name}</ProjectTitle>
-                    <IconWrapper onClick={() => handleExpandTile(team)}>
+                    <IconWrapper onClick={() => handleExpandTile(team.id)}>
                       <ExpandIcon type="down" expanded={isExpanded} />
                     </IconWrapper>
                   </TeamHeaderDivider>
@@ -481,7 +430,7 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TileSectionHeader
-                      onClick={() => handleExpandSection('Members')}
+                      onClick={() => handleExpandSection(team, 'Members')}
                     >
                       <ProjectTitle>Members</ProjectTitle>
                     </TileSectionHeader>
@@ -678,14 +627,13 @@ const Dashboard = ({ history }) => {
     setModalVisible(false)
   }
 
-  const handleExpandTile = team => {
-    expandedTiles.indexOf(team.name) === -1
-      ? setExpandedTiles([...expandedTiles, team.name])
-      : setExpandedTiles(expandedTiles.filter(tile => tile !== team.name))
+  const handleExpandTile = teamId => {
+    expandedTiles.indexOf(teamId) === -1
+      ? setExpandedTiles([...expandedTiles, teamId])
+      : setExpandedTiles(expandedTiles.filter(tile => tile !== teamId))
   }
 
-  const handleExpandSection = section =>
-    setExpandedSection(expandedSection !== section ? section : null)
+  const handleExpandSection = (team, section) => {}
 
   return (
     <>
