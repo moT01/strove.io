@@ -17,8 +17,8 @@ const FadeIn = keyframes`
 `
 
 const StyledDashboardIcon = styled(Dashboard)`
-  height: ${props => (props.isEditor ? '16px' : '25px')};
-  width: ${props => (props.isEditor ? '16px' : '25px')};
+  height: ${props => (props.isEditor ? '16px' : '30px')};
+  width: ${props => (props.isEditor ? '16px' : '30px')};
   fill: ${({ theme }) => theme.colors.c2};
 `
 
