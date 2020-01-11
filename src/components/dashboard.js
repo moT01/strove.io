@@ -444,7 +444,7 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TileSectionHeader
-                      onClick={() => handleExpandSection(team.id, 'Members')}
+                      onClick={() => handleExpandSection({ teamId: team.id, section: 'Members' })}
                     >
                       <ProjectTitle>Members</ProjectTitle>
                     </TileSectionHeader>
@@ -463,12 +463,12 @@ const Dashboard = ({ history }) => {
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
-                      onClick={() => handleExpandSection(team.id, 'Projects')}
+                      onClick={() => handleExpandSection({ teamId: team.id, section: 'Projects' })}
                       isLast
                     >
                       <ProjectTitle>Projects</ProjectTitle>
                     </TileSectionHeader>
-                    {isExpanded && expandedSection === 'Projects' && (
+                    {isExpanded && expandedTiles[team.id].isProjectsActive && (
                       <TeamTileSection isLast>
                         <StroveButton
                           isPrimary
@@ -653,12 +653,14 @@ const Dashboard = ({ history }) => {
     setExpandedTiles({ ...expandedTiles, [teamId]: { isMembersActive: false, isProjectsActive: false } })
   }
 
-  const handleExpandSection = (teamId, section) => {
+  const handleExpandSection = ({ teamId, section }) => {
     if (section === 'Members') {
-      console.log('Yeet', expandedTiles, expandedTiles.teamId, expandedTiles[teamId])
       const isMembersActive = expandedTiles[teamId].isMembersActive
-      setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isMembersActive: !isMembersActive } })
+      return setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isMembersActive: !isMembersActive } })
     }
+    const isProjectsActive = expandedTiles[teamId].isProjectsActive
+    return setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isProjectsActive: !isProjectsActive } })
+
   }
 
   return (
