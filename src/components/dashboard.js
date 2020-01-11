@@ -402,32 +402,6 @@ const Dashboard = ({ history }) => {
   const projectsLimit = 20
   const isAdmin = true
 
-  console.log('Yeet', myTeams)
-
-  const members = [
-    { name: 'Member 1', teams: ['123', '234'] },
-    { name: 'Member 2', teams: ['123'] },
-    { name: 'Member 3', teams: ['234'] },
-    { name: 'Member 4', teams: ['234'] },
-  ]
-
-  const team1Members = members.filter(
-    member => member.teams.indexOf('123') !== -1
-  )
-
-  const team2Members = members.filter(
-    member => member.teams.indexOf('234') !== -1
-  )
-
-  const teams = [
-    { name: 'Team 1', id: '123', members: team1Members },
-    {
-      name: 'Team 2',
-      id: '234',
-      members: team2Members,
-    },
-  ]
-
   const tabs = [
     {
       name: 'Teams',
