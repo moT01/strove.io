@@ -2,7 +2,6 @@ import VSCode from './vscode'
 import Google from './google'
 import Github from './github'
 import Docker from './docker'
-import Strove from './strove'
 import Bitbucket from './bitbucket'
 import Gitlab from './gitlab'
 import Dashboard from './dashboard'
@@ -15,7 +14,6 @@ export {
   Google,
   Github,
   Docker,
-  Strove,
   Bitbucket,
   Gitlab,
   Dashboard,
