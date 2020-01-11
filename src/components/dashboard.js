@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS, CREATE_TEAM } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS, GET_TEAM, CREATE_TEAM } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -464,6 +464,13 @@ const Dashboard = ({ history }) => {
                           onClick={() => createTeam()}
                           text="Create team"
                         />
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => getTeam()}
+                          text="Get team"
+                        />
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
@@ -638,6 +645,17 @@ const Dashboard = ({ history }) => {
         name: 'getMyTeams',
         dataSelector: data => data,
         query: GET_MY_TEAMS
+      })
+    )
+  }
+
+  const getTeam = () => {
+    dispatch(
+      query({
+        name: 'getTeam',
+        dataSelector: data => data,
+        query: GET_TEAM,
+        variables: { teamId: '5e19be5da0b66201f54ba36e' }
       })
     )
   }
