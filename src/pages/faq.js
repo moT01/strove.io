@@ -8,7 +8,7 @@ import {
   AccordionItemPanel,
 } from 'react-accessible-accordion'
 import { isMobile } from 'react-device-detect'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { SEO, Header } from 'components'
 
@@ -135,6 +135,16 @@ You won't be able to use Strove if you rely on Windows or MacOS environments. Th
       'I want a particular language version that\x27s not yet supported. What should I do to make it work?',
     paragraph:
       'Right now the only way is to contact us on contact@strove.io. We plan to add servers tailored for company needs with predefined language versions in the future.',
+  },
+  {
+    header: 'I want faster projects/more CPU/HDD/RAM etc',
+    paragraph: (
+      <div>
+        We have enterprise plan form companies with specific requirements such
+        as these. Visit <Link to="/pricing">Pricing</Link> for more details
+        regarding our enterprise plan
+      </div>
+    ),
   },
   {
     header: 'Where should I report a bug or request a feature?',

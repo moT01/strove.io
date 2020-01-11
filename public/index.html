@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff">
-    <meta
-      name="description"
-      content="Strove - create software in the cloud"
-    />
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicons/favicon-180.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicons/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicons/favicon-16.png">
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Strove - create software in the cloud" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="%PUBLIC_URL%/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="%PUBLIC_URL%/favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="%PUBLIC_URL%/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="%PUBLIC_URL%/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="%PUBLIC_URL%/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicons/favicon-16x16.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="msapplication-TileImage" content="%PUBLIC_URL%/favicons/ms-icon-144x144.png">
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -28,42 +38,55 @@
     -->
 
 
-    <!--
+  <!--
       Prefetch vscode accets so they are ready once needed to reduce initial load time.
 
       Notice how the url is absolute: https://strove.io and not relative.
       Relative url would not work inside iframe where editor lives
-      
+
       TODO: Update vscode folder on each new vscode release in Strove.
     -->
-      <link data-name="workbench.web.api.css" rel="dns-prefetch" href="https://strove.io/static/out/vs/workbench/workbench.web.api.css">
-      <link data-name="loader.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/loader.js">
-      <link data-name="workbench.web.api.nls.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/workbench/workbench.web.api.nls.js">
-      <link data-name="workbench.web.api.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/workbench/workbench.web.api.js">
+  <link data-name="workbench.web.api.css" rel="dns-prefetch"
+    href="https://strove.io/static/out/vs/workbench/workbench.web.api.css">
+  <link data-name="loader.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/loader.js">
+  <link data-name="workbench.web.api.nls.js" rel="dns-prefetch"
+    href="https://strove.io/static/out/vs/workbench/workbench.web.api.nls.js">
+  <link data-name="workbench.web.api.js" rel="dns-prefetch"
+    href="https://strove.io/static/out/vs/workbench/workbench.web.api.js">
 
-      <link data-name="semver-umd.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/semver-umd/lib/semver-umd.js">
-      <link data-name="applicationinsights-web.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/@microsoft/applicationinsights-web/dist/applicationinsights-web.js">
+  <link data-name="semver-umd.js" rel="dns-prefetch"
+    href="https://strove.io/static/node_modules/semver-umd/lib/semver-umd.js">
+  <link data-name="applicationinsights-web.js" rel="dns-prefetch"
+    href="https://strove.io/static/node_modules/@microsoft/applicationinsights-web/dist/applicationinsights-web.js">
 
-      <link data-name="extensionHostWorkerMain.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/workbench/services/extensions/worker/extensionHostWorkerMain.js">
-      <link data-name="layout.contribution.darwin.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/workbench/services/keybinding/browser/keyboardLayouts/layout.contribution.darwin.js">
+  <link data-name="extensionHostWorkerMain.js" rel="dns-prefetch"
+    href="https://strove.io/static/out/vs/workbench/services/extensions/worker/extensionHostWorkerMain.js">
+  <link data-name="layout.contribution.darwin.js" rel="dns-prefetch"
+    href="https://strove.io/static/out/vs/workbench/services/keybinding/browser/keyboardLayouts/layout.contribution.darwin.js">
 
-      <link data-name="xterm.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/xterm/lib/xterm.js">
-      <link data-name="xterm-addon-web-links.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/xterm-addon-search/lib/xterm-addon-search.js">
-      <link data-name="main.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/vscode-textmate/release/main.js">
-      <link data-name="workerMain.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/base/worker/workerMain.js">
-      <link data-name="onigasm.wasm" rel="dns-prefetch" href="https://strove.io/static/node_modules/onigasm-umd/release/onigasm.wasm">
-      <link data-name="main.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/onigasm-umd/release/main.js">
-      <link data-name="xterm-addon-web-links.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js">
+  <link data-name="xterm.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/xterm/lib/xterm.js">
+  <link data-name="xterm-addon-web-links.js" rel="dns-prefetch"
+    href="https://strove.io/static/node_modules/xterm-addon-search/lib/xterm-addon-search.js">
+  <link data-name="main.js" rel="dns-prefetch"
+    href="https://strove.io/static/node_modules/vscode-textmate/release/main.js">
+  <link data-name="workerMain.js" rel="dns-prefetch" href="https://strove.io/static/out/vs/base/worker/workerMain.js">
+  <link data-name="onigasm.wasm" rel="dns-prefetch"
+    href="https://strove.io/static/node_modules/onigasm-umd/release/onigasm.wasm">
+  <link data-name="main.js" rel="dns-prefetch" href="https://strove.io/static/node_modules/onigasm-umd/release/main.js">
+  <link data-name="xterm-addon-web-links.js" rel="dns-prefetch"
+    href="https://strove.io/static/node_modules/xterm-addon-web-links/lib/xterm-addon-web-links.js">
 
-      <!-- Todo: This is probably always fetched with a new random query so prefetching might not do anything, investigate -->
-      <link data-name="codicon.ttf" rel="dns-prefetch" href="https://strove.io/static/out/vs/base/browser/ui/codiconLabel/codicon/codicon.ttf">
+  <!-- Todo: This is probably always fetched with a new random query so prefetching might not do anything, investigate -->
+  <link data-name="codicon.ttf" rel="dns-prefetch"
+    href="https://strove.io/static/out/vs/base/browser/ui/codiconLabel/codicon/codicon.ttf">
 
-    <title>Strove</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>Strove</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -73,5 +96,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>
