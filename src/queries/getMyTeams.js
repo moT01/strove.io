@@ -10,6 +10,7 @@ import { TeamFragment } from './fragments/team'
 // `
 
 export default gql`
-{ getMyTeams { projects { repoLink } } }
+{ getMyTeams { ...Team } }
 
+${TeamFragment}
 `
