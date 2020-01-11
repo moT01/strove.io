@@ -145,7 +145,7 @@ const PageWrapper = styled(Wrapper)`
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
   transition: all 0.2s;
-  width: 50%;
+  width: 70%;
   height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
 `
 
@@ -164,6 +164,11 @@ const ProjectTitle = styled.h3`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.c1};
   margin: 0.3vh 0.3vh 0.3vh 0;
+`
+
+const SectionTitle = styled(ProjectTitle)`
+  font-size: 1.2rem;
+  font-weight: 400;
 `
 
 const Tile = styled.div`
@@ -429,7 +434,7 @@ const Dashboard = ({ history }) => {
                   <TeamTile>
                     <TileSectionHeader>
                       <TeamHeaderDivider>
-                        <ProjectTitle>Members</ProjectTitle>
+                        <SectionTitle>Members</SectionTitle>
                         <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Members' })}>
                           <ExpandIcon type="down" expanded={isExpanded && expandedTiles[team.id].isMembersActive} section />
                         </IconWrapper>
@@ -437,6 +442,9 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
+                        {team.members.map(member => (
+                          <Text key={member.name}>{member.name}</Text>
+                        ))}
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
@@ -444,16 +452,13 @@ const Dashboard = ({ history }) => {
                           onClick={() => setAddMemberModal(true)}
                           text="Add member"
                         />
-                        {team.members.map(member => (
-                          <Text key={member.name}>{member.name}</Text>
-                        ))}
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
                       isLast
                     >
                       <TeamHeaderDivider>
-                        <ProjectTitle>Projects</ProjectTitle>
+                        <SectionTitle>Projects</SectionTitle>
                         <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Projects' })}>
                           <ExpandIcon type="down" expanded={isExpanded && expandedTiles[team.id].isProjectsActive} section />
                         </IconWrapper>
@@ -461,6 +466,9 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isProjectsActive && (
                       <TeamTileSection isLast>
+                        {team.members.map(member => (
+                          <Text key={member.name}>{member.name}</Text>
+                        ))}
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
@@ -468,9 +476,6 @@ const Dashboard = ({ history }) => {
                           onClick={() => setAddMemberModal(true)}
                           text="Add member"
                         />
-                        {team.members.map(member => (
-                          <Text key={member.name}>{member.name}</Text>
-                        ))}
                       </TeamTileSection>
                     )}
                   </TeamTile>
