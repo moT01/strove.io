@@ -7,9 +7,8 @@ export const TeamFragment = gql`
     id
     name
     projects { ...Project }
-    owner { ...User}
-    users { ...User}
+    owner { name, photoUrl}
+    users { email, name, photoUrl}
   }
-  ${UserFragment}
   ${ProjectFragment}
 `
