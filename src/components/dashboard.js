@@ -8,11 +8,9 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER } from 'queries'
-import { actions } from 'state'
-import { C } from 'state'
-import { selectors } from 'state'
+import { mutation, handleStopProject, query } from 'utils'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS } from 'queries'
+import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
 import SEO from './seo'
@@ -452,6 +450,13 @@ const Dashboard = ({ history }) => {
                           onClick={() => setAddMemberModal(true)}
                           text="Add member"
                         />
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => getMyTeams()}
+                          text="Test query"
+                        />
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
@@ -607,6 +612,16 @@ const Dashboard = ({ history }) => {
     } else {
       setStopModal(true)
     }
+  }
+
+  const getMyTeams = () => {
+    dispatch(
+      query({
+        name: 'getMyTeams',
+        dataSelector: data => data,
+        query: GET_MY_TEAMS
+      })
+    )
   }
 
   const handleDeleteClick = id => {
