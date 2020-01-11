@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_TEAM, CREATE_TEAM, RENAME_TEAM } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_TEAM, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -290,6 +290,30 @@ const TextWrapper = styled(FlexWrapper)`
   justify-content: flex-start;
 `
 
+const DeleteButton = styled.button`
+	box-shadow:inset 0px 1px 0px 0px #cf866c;
+	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	background-color:#d0451b;
+	border-radius:3px;
+	border:1px solid #942911;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #854629;
+}
+:hover {
+	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+	background-color:#bc3315;
+}
+/* :active {
+	position:relative;
+	top:1px; */
+`
+
 const CircleIcon = styled.div`
   height: 1.5vh;
   width: 1.5vh;
@@ -433,7 +457,10 @@ const Dashboard = ({ history }) => {
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
                         {team.users.map(member => (
-                          <Text key={member.name}>{member.name}</Text>
+                          <>
+                            <Text key={member.name}>{member.name}</Text>
+                            {member.name && <DeleteButton onClick={() => deleteMember({ memberId: member.id, teamId: team.id })}>Delete</DeleteButton>}
+                          </>
                         ))}
                         <StroveButton
                           isPrimary
@@ -449,13 +476,6 @@ const Dashboard = ({ history }) => {
                           onClick={() => setRenameTeamModal(true)}
                           text="Rename team"
                         />
-                        {/* <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => getMyTeams()}
-                          text="Test query"
-                        /> */}
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
@@ -497,11 +517,12 @@ const Dashboard = ({ history }) => {
                       </TeamTileSection>
                     )}
                   </TeamTile>
-                )}
+                )
+                }
               </TeamTileWrapper>
             )
           })}
-        </TilesWrapper>
+        </TilesWrapper >
       ),
     },
     {
@@ -658,6 +679,8 @@ const Dashboard = ({ history }) => {
       })
     )
   }
+
+  const deleteMember = ({ teamId, memberId }) => dispatch(mutation({ name: 'removeMember', mutation: REMOVE_MEMBER, variables: { teamId, memberId } }))
 
   const handleDeleteClick = id => {
     dispatch(
