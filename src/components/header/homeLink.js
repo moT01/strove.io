@@ -5,8 +5,6 @@ import { isMobileOnly } from 'react-device-detect'
 
 import strove from 'images/stroveReversed.png'
 
-// import { Strove } from 'components/svgs'
-
 const FadeIn = keyframes`
   0% {
     opacity: 0
