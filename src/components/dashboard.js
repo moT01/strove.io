@@ -376,7 +376,6 @@ const Dashboard = ({ history }) => {
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
-  const [expandedSection, setExpandedSection] = useState([])
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -409,19 +408,6 @@ const Dashboard = ({ history }) => {
     },
   ]
 
-  /*
-
-  activeTiles = {
-    123: { isMembersActive: false, isTeamsActive: false },
-    234: { isMembersActive: false, isTeamsActive: false }
-  }
-
-  activeTiles = {
-    ...activeTiles,
-    234: { isMembersActive: false, isTeamsActive: true }
-  }
-  */
-
   const tabs = [
     {
       name: 'Teams',
@@ -430,7 +416,6 @@ const Dashboard = ({ history }) => {
           <ProjectTitle>Admin console</ProjectTitle>
           {teams.map(team => {
             const isExpanded = expandedTiles[team.id]
-            // console.log('isExpanded', expandedTiles[team.id])
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
@@ -444,7 +429,7 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TileSectionHeader
-                      onClick={() => handleExpandSection({ teamId: team.id, section: 'Members' })}
+                      onClick={() => handleExpandSection({ teamId: team.id, type: 'Members' })}
                     >
                       <ProjectTitle>Members</ProjectTitle>
                     </TileSectionHeader>
@@ -463,7 +448,7 @@ const Dashboard = ({ history }) => {
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
-                      onClick={() => handleExpandSection({ teamId: team.id, section: 'Projects' })}
+                      onClick={() => handleExpandSection({ teamId: team.id, type: 'Projects' })}
                       isLast
                     >
                       <ProjectTitle>Projects</ProjectTitle>
@@ -653,8 +638,8 @@ const Dashboard = ({ history }) => {
     setExpandedTiles({ ...expandedTiles, [teamId]: { isMembersActive: false, isProjectsActive: false } })
   }
 
-  const handleExpandSection = ({ teamId, section }) => {
-    if (section === 'Members') {
+  const handleExpandSection = ({ teamId, type }) => {
+    if (type === 'Members') {
       const isMembersActive = expandedTiles[teamId].isMembersActive
       return setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isMembersActive: !isMembersActive } })
     }
