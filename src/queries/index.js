@@ -18,6 +18,7 @@ import ADD_MEMBER from './addMember'
 import GET_MY_TEAMS from './getMyTeams'
 import GET_TEAM from './getTeam'
 import CREATE_TEAM from './createTeam'
+import RENAME_TEAM from './renameTeam'
 
 export {
   ADD_PROJECT,
@@ -40,4 +41,5 @@ export {
   GET_MY_TEAMS,
   GET_TEAM,
   CREATE_TEAM,
+  RENAME_TEAM,
 }

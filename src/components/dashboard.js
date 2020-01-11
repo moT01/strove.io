@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS, GET_TEAM, CREATE_TEAM } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS, GET_TEAM, CREATE_TEAM, RENAME_TEAM } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -24,6 +24,20 @@ const validate = values => {
     errors.email = 'Required'
   } else if (!isEmail(values.email)) {
     errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
+const validateTeamName = values => {
+  let errors = {}
+
+  if (values.projectName && !values.projectName.trim()) {
+    errors.projectName = 'Add name'
+    return errors
+  } else if (values.projectName.length > 100) {
+    errors.projectName = 'Name too long'
+    return errors
   }
 
   return errors
@@ -376,6 +390,7 @@ const Dashboard = ({ history }) => {
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
+  const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
@@ -449,6 +464,13 @@ const Dashboard = ({ history }) => {
                           width="20%"
                           onClick={() => setAddMemberModal(true)}
                           text="Add member"
+                        />
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => setRenameTeamModal(true)}
+                          text="Rename team"
                         />
                         <StroveButton
                           isPrimary
@@ -857,6 +879,80 @@ const Dashboard = ({ history }) => {
         </Formik>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+      <Modal
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={renameTeamModal}
+        onRequestClose={() => setRenameTeamModal(false)}
+        contentLabel="Stop project?"
+        ariaHideApp={false}
+      >
+        <Formik
+          initialValues={{
+            name: '',
+          }}
+          validate={validateTeamName}
+          onSubmit={values => {
+            dispatch(
+              mutation({
+                name: 'renameTeam',
+                mutation: RENAME_TEAM,
+                variables: { newName: values.name, teamId: '5e19be5da0b66201f54ba36e' },
+                onSuccess: () => {
+                  setRenameTeamModal(false)
+                },
+              })
+            )
+          }}
+        >
+          {({ errors, touched, values }) => (
+            <StyledForm>
+              <EmailFormWrapper
+                disabled={errors.email || !values.email}
+                isMobile={isMobileOnly}
+              >
+                <Field
+                  type="name"
+                  name="name"
+                  placeholder="New team name"
+                ></Field>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    fillRule="evenodd"
+                    stroke="#9CA2B4"
+                    strokeWidth="2"
+                  >
+                    <path d="M2 4h20v16H2z"></path>
+                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
+                  </g>
+                </svg>
+                <StroveButton
+                  isPrimary
+                  type="submit"
+                  layout="form"
+                  text="Rename"
+                  disabled={errors.name || !values.name}
+                />
+              </EmailFormWrapper>
+              {/* {emailSent && (
+                <StyledInfo>Your team invitation has been sent</StyledInfo>
+              )} */}
+            </StyledForm>
+          )}
+        </Formik>
+        <ModalButton
+          onClick={() => setRenameTeamModal(false)}
           text="Close"
           padding="0.5vh"
           maxWidth="150px"
