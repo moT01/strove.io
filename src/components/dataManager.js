@@ -13,6 +13,7 @@ import {
   ACTIVE_PROJECT,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  GET_MY_TEAMS,
 } from 'queries'
 import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
 import { selectors } from 'state'
@@ -37,7 +38,7 @@ export default memo(
   withRouter(({ children, addProject, history }) => {
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
-    const token = user?.siliskyToken
+    const token = user ?.siliskyToken
     const currentProject = useSelector(selectors.api.getCurrentProject)
     const incomingProjectLink = useSelector(
       selectors.incomingProject.getRepoLink
@@ -60,7 +61,7 @@ export default memo(
     const deviceId = localStorage.getItem('deviceId')
 
     const activeProject = useSubscription(ACTIVE_PROJECT, {
-      variables: { email: user?.email || 'null' },
+      variables: { email: user ?.email || 'null' },
       client,
       fetchPolicy: 'no-cache',
       context: {
@@ -72,12 +73,12 @@ export default memo(
       shouldResubscribe: true,
     })
 
-    const activeProjectData = activeProject?.data?.activeProject
-    const machineId = activeProjectData?.machineId
-    const editorPort = activeProjectData?.editorPort
-    const machineName = activeProjectData?.machineName
-    const additionalPorts = activeProjectData?.additionalPorts
-    const id = activeProjectData?.id
+    const activeProjectData = activeProject ?.data ?.activeProject
+    const machineId = activeProjectData ?.machineId
+    const editorPort = activeProjectData ?.editorPort
+    const machineName = activeProjectData ?.machineName
+    const additionalPorts = activeProjectData ?.additionalPorts
+    const id = activeProjectData ?.id
 
     useEffect(() => {
       dispatch({
@@ -93,7 +94,7 @@ export default memo(
     }, [machineName, machineId, editorPort])
 
     const startProjectSubscription = useSubscription(START_PROJECT, {
-      variables: { email: user?.email || 'null' },
+      variables: { email: user ?.email || 'null' },
       client,
       fetchPolicy: 'no-cache',
       context: {
@@ -105,8 +106,8 @@ export default memo(
       shouldResubscribe: true,
     })
 
-    const startProjectData = startProjectSubscription?.data
-    const startProjectError = startProjectSubscription?.error
+    const startProjectData = startProjectSubscription ?.data
+    const startProjectError = startProjectSubscription ?.error
 
     useEffect(() => {
       if (startProjectError) {
@@ -118,7 +119,7 @@ export default memo(
         )
       }
 
-      if (startProjectData?.startProject) {
+      if (startProjectData ?.startProject) {
         const {
           startProject: { queuePosition, project, type },
         } = startProjectData
@@ -148,7 +149,7 @@ export default memo(
             })
           )
           dispatch(actions.incomingProject.removeIncomingProject())
-        } else if (queuePosition === 0 && project?.machineId) {
+        } else if (queuePosition === 0 && project ?.machineId) {
           if (type === 'continueProject') {
             try {
               dispatch({
@@ -195,12 +196,12 @@ export default memo(
       const code = getWindowHref()
         .match(/code=([a-z0-9A-Z]+)/g)
         ?.toString()
-        .split('=')[1]
+          .split('=')[1]
 
       const loginState = getWindowHref()
         ?.match(/state=(.+)/g)
-        ?.toString()
-        .split('=')[1]
+          ?.toString()
+            .split('=')[1]
 
       let gitProvider
 
@@ -313,8 +314,8 @@ export default memo(
       },
       shouldResubscribe: true,
     })
-    const loginData = loginSubscription?.data
-    const loginError = loginSubscription?.error
+    const loginData = loginSubscription ?.data
+    const loginError = loginSubscription ?.error
 
     useEffect(() => {
       if (loginError) {
@@ -325,14 +326,14 @@ export default memo(
           })
         )
       }
-      if (loginData?.userLogin) {
-        const { siliskyToken, subscription, projects } = loginData?.userLogin
+      if (loginData ?.userLogin) {
+        const { siliskyToken, subscription, projects } = loginData ?.userLogin
         localStorage.setItem('token', siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {
             storeKey: 'user',
-            data: loginData?.userLogin,
+            data: loginData ?.userLogin,
           },
         })
         subscription &&
@@ -364,6 +365,13 @@ export default memo(
             query: MY_PROJECTS,
           })
         )
+        dispatch(
+          query({
+            name: 'getMyTeams',
+            storeKey: 'myTeams',
+            query: GET_MY_TEAMS
+          })
+        )
 
         if (history.location.pathname === '/') {
           history.push('/app/dashboard')
@@ -389,7 +397,7 @@ export default memo(
       window.addEventListener('beforeunload', ev => {
         ev.preventDefault()
 
-        if (navigator?.sendBeacon && user) {
+        if (navigator ?.sendBeacon && user) {
           console.log(
             'process.env.REACT_APP_STROVE_ENDPOINT',
             process.env.REACT_APP_STROVE_ENDPOINT

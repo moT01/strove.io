@@ -14,13 +14,18 @@ export const getMessage = dataKey => getOr('', ['api', dataKey, 'message'])
 export const getCode = dataKey => getOr(null, ['api', dataKey, 'code'])
 
 export const getUserField = dataKey => state =>
-  state?.api?.user?.data?.[dataKey]
+  state ?.api ?.user ?.data ?.[dataKey]
 
 export const getUser = getApiData({ fields: 'user', defaultValue: null })
 
 export const getUserProjects = getApiData({
   fields: 'myProjects',
   defaultValue: [],
+})
+
+export const getMyTeams = getApiData({
+  fields: 'myTeams',
+  defaultValute: [],
 })
 
 export const getQueuePosition = getApiData({

@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS, GET_TEAM, CREATE_TEAM, RENAME_TEAM } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_TEAM, CREATE_TEAM, RENAME_TEAM } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -386,6 +386,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
+  const myTeams = useSelector(selectors.api.getMyTeams)
   const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -400,6 +401,8 @@ const Dashboard = ({ history }) => {
   const currentProjectId = currentProject ?.id
   const projectsLimit = 20
   const isAdmin = true
+
+  console.log('Yeet', myTeams)
 
   const members = [
     { name: 'Member 1', teams: ['123', '234'] },
@@ -431,7 +434,7 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
-          {teams.map(team => {
+          {myTeams.map(team => {
             const isExpanded = expandedTiles[team.id]
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
@@ -455,7 +458,7 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
-                        {team.members.map(member => (
+                        {team.users.map(member => (
                           <Text key={member.name}>{member.name}</Text>
                         ))}
                         <StroveButton
@@ -472,13 +475,13 @@ const Dashboard = ({ history }) => {
                           onClick={() => setRenameTeamModal(true)}
                           text="Rename team"
                         />
-                        <StroveButton
+                        {/* <StroveButton
                           isPrimary
                           padding="0.5vh"
                           width="20%"
                           onClick={() => getMyTeams()}
                           text="Test query"
-                        />
+                        /> */}
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
@@ -661,15 +664,15 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const getMyTeams = () => {
-    dispatch(
-      query({
-        name: 'getMyTeams',
-        dataSelector: data => data,
-        query: GET_MY_TEAMS
-      })
-    )
-  }
+  // const getMyTeams = () => {
+  //   dispatch(
+  //     query({
+  //       name: 'getMyTeams',
+  //       dataSelector: data => data,
+  //       query: GET_MY_TEAMS
+  //     })
+  //   )
+  // }
 
   const getTeam = () => {
     dispatch(
