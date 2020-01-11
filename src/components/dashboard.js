@@ -202,8 +202,9 @@ const TeamTileSection = styled(Tile)`
   margin: 0px;
   padding: 5px;
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
-  border-width: ${({ isLast }) =>
-    isLast ? '1px 0px 0px 0px' : ' 1px 0px 1px 0px'};
+  /* border-width: ${({ isLast }) =>
+    isLast ? '1px 0px 0px 0px' : ' 1px 0px 1px 0px'}; */
+    border-width: 1px 0px 0px 0px;
   border-color: ${({ theme }) => theme.colors.c16};
   width: 100%;
   box-shadow: none;
@@ -341,7 +342,7 @@ const TeamTileHeader = styled(Tile)`
 const TileSectionHeader = styled(TeamTileHeader)`
   flex-direction: row;
   justify-content: flex-start;
-  border-width: 0px;
+  border-width: 1px 0px 0px 0px;
   border-color: ${({ theme }) => theme.colors.c16};
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   box-shadow: none;
