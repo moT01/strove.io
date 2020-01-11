@@ -20,6 +20,7 @@ import GET_TEAM from './getTeam'
 import CREATE_TEAM from './createTeam'
 import RENAME_TEAM from './renameTeam'
 import REMOVE_MEMBER from './removeMember'
+import DELETE_TEAM from './deleteTeam'
 
 export {
   ADD_PROJECT,
@@ -44,4 +45,5 @@ export {
   CREATE_TEAM,
   RENAME_TEAM,
   REMOVE_MEMBER,
+  DELETE_TEAM,
 }

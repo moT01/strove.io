@@ -457,10 +457,10 @@ const Dashboard = ({ history }) => {
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
                         {team.users.map(member => (
-                          <>
+                          <TeamHeaderDivider>
                             <Text key={member.name}>{member.name}</Text>
                             {member.name && <DeleteButton onClick={() => deleteMember({ memberId: member.id, teamId: team.id })}>Delete</DeleteButton>}
-                          </>
+                          </TeamHeaderDivider>
                         ))}
                         <StroveButton
                           isPrimary
