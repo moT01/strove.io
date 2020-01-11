@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_TEAM, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -418,6 +418,7 @@ const Dashboard = ({ history }) => {
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
+  const [renameTeamId, setRenameTeamId] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -432,6 +433,13 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
+          <StroveButton
+            isPrimary
+            padding="0.5vh"
+            width="20%"
+            onClick={() => createTeam()}
+            text="Create team"
+          />
           {myTeams.map(team => {
             const isExpanded = expandedTiles[team.id]
             return (
@@ -445,8 +453,18 @@ const Dashboard = ({ history }) => {
                   </TeamHeaderDivider>
                 </TeamTileHeader>
                 {isExpanded && (
-                  <TeamTile>
+                  <TeamTile><TeamHeaderDivider><StroveButton
+                    isPrimary
+                    padding="0.5vh"
+                    width="20%"
+                    onClick={() => handleRenameTeamClick(team.id)}
+                    text="Rename team"
+                  />
+                    {/* Deleting team is still WIP
+                  <DeleteButton onClick={() => deleteTeam({ teamId: team.id })}>Delete team</DeleteButton>*/}
+                  </TeamHeaderDivider>
                     <TileSectionHeader>
+
                       <TeamHeaderDivider>
                         <SectionTitle>Members</SectionTitle>
                         <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Members' })}>
@@ -468,27 +486,6 @@ const Dashboard = ({ history }) => {
                           width="20%"
                           onClick={() => setAddMemberModal(true)}
                           text="Add member"
-                        />
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => setRenameTeamModal(true)}
-                          text="Rename team"
-                        />
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => createTeam()}
-                          text="Create team"
-                        />
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => getTeam()}
-                          text="Get team"
                         />
                       </TeamTileSection>
                     )}
@@ -659,28 +656,31 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  // const getMyTeams = () => {
-  //   dispatch(
-  //     query({
-  //       name: 'getMyTeams',
-  //       dataSelector: data => data,
-  //       query: GET_MY_TEAMS
-  //     })
-  //   )
+  // Deleting projects is still WIP
+  // const deleteTeam = teamId => {
+  //   dispatch(mutation({ name: 'deleteTeam', mutation: DELETE_TEAM, variables: { teamId } }))
   // }
 
-  const getTeam = () => {
+  const deleteMember = ({ teamId, memberId }) => dispatch(mutation({ name: 'removeMember', mutation: REMOVE_MEMBER, variables: { teamId, memberId } }))
+
+  const renameTeam = ({ newName, teamId }) => (
     dispatch(
-      query({
-        name: 'getTeam',
-        dataSelector: data => data,
-        query: GET_TEAM,
-        variables: { teamId: '5e19be5da0b66201f54ba36e' }
+      mutation({
+        name: 'renameTeam',
+        mutation: RENAME_TEAM,
+        variables: {
+          newName,
+          teamId
+        },
+        onSuccess: () => setRenameTeamModal(false)
       })
     )
-  }
+  )
 
-  const deleteMember = ({ teamId, memberId }) => dispatch(mutation({ name: 'removeMember', mutation: REMOVE_MEMBER, variables: { teamId, memberId } }))
+  const handleRenameTeamClick = id => {
+    setRenameTeamId(id)
+    setRenameTeamModal(true)
+  }
 
   const handleDeleteClick = id => {
     dispatch(
@@ -897,23 +897,12 @@ const Dashboard = ({ history }) => {
             name: '',
           }}
           validate={validateTeamName}
-          onSubmit={values => {
-            dispatch(
-              mutation({
-                name: 'renameTeam',
-                mutation: RENAME_TEAM,
-                variables: { newName: values.name, teamId: '5e19be5da0b66201f54ba36e' },
-                onSuccess: () => {
-                  setRenameTeamModal(false)
-                },
-              })
-            )
-          }}
+          onSubmit={values => renameTeam({ newName: values.name, teamId: renameTeamId })}
         >
           {({ errors, touched, values }) => (
             <StyledForm>
               <EmailFormWrapper
-                disabled={errors.email || !values.email}
+                disabled={errors.name || !values.name}
                 isMobile={isMobileOnly}
               >
                 <Field
