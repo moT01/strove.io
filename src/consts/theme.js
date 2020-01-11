@@ -13,6 +13,7 @@ export default {
     c12: '#333e63', // some inputs,
     c13: '#697b8c', // used in text,
     c14: '#303c42', // svg,
-    c15: '#ddd' // pricing details
+    c15: '#ddd', // pricing details
+    c16: 'rgba(0, 114, 206, 0.6)' // lighter vscode blue
   },
 }

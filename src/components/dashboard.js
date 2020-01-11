@@ -204,7 +204,7 @@ const TeamTileSection = styled(Tile)`
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   border-width: ${({ isLast }) =>
     isLast ? '1px 0px 0px 0px' : ' 1px 0px 1px 0px'};
-  border-color: rgba(0, 114, 206, 0.4);
+  border-color: ${({ theme }) => theme.colors.c16};
   width: 100%;
   box-shadow: none;
 `
@@ -293,7 +293,7 @@ const IconWrapper = styled(Wrapper)`
   justify-content: center;
   align-items: center;
   border-width: 0px 0px 0px 1px;
-  border-color: rgba(0, 114, 206, 0.6);
+  border-color: ${({ theme }) => theme.colors.c16};
   border-style: solid;
 `
 
@@ -301,8 +301,8 @@ const ExpandIcon = styled(StyledIcon)`
   font-size: 1rem;
   transform: ${({ expanded }) =>
     expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
-  color: ${({ theme, expanded }) =>
-    expanded ? theme.colors.c2 : theme.colors.c1};
+  color: ${({ theme, expanded, section }) =>
+    section ? theme.colors.c1 : expanded ? theme.colors.c2 : theme.colors.c1};
   transition: all 0.2s;
   :focus {
     outline: none;
@@ -342,7 +342,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
   flex-direction: row;
   justify-content: flex-start;
   border-width: 0px;
-  border-color: rgba(0, 114, 206, 0.6);
+  border-color: ${({ theme }) => theme.colors.c16};
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   box-shadow: none;
 
@@ -428,10 +428,13 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <TileSectionHeader
-                      onClick={() => handleExpandSection({ teamId: team.id, type: 'Members' })}
-                    >
-                      <ProjectTitle>Members</ProjectTitle>
+                    <TileSectionHeader>
+                      <TeamHeaderDivider>
+                        <ProjectTitle>Members</ProjectTitle>
+                        <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Members' })}>
+                          <ExpandIcon type="down" expanded={isExpanded && expandedTiles[team.id].isMembersActive} section />
+                        </IconWrapper>
+                      </TeamHeaderDivider>
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
@@ -448,10 +451,14 @@ const Dashboard = ({ history }) => {
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
-                      onClick={() => handleExpandSection({ teamId: team.id, type: 'Projects' })}
                       isLast
                     >
-                      <ProjectTitle>Projects</ProjectTitle>
+                      <TeamHeaderDivider>
+                        <ProjectTitle>Projects</ProjectTitle>
+                        <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Projects' })}>
+                          <ExpandIcon type="down" expanded={isExpanded && expandedTiles[team.id].isProjectsActive} section />
+                        </IconWrapper>
+                      </TeamHeaderDivider>
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isProjectsActive && (
                       <TeamTileSection isLast>
