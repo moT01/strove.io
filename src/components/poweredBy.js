@@ -1,8 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
-import { Strove } from 'components/svgs'
-import { theme } from 'consts'
+import strove from 'images/strove.png'
 
 const StroveLogoWrapper = styled.div`
   font-size: 21px;
@@ -12,13 +11,12 @@ const StroveLogoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   line-height: 1;
+`
 
-  svg {
-    margin-top: 5px;
-    margin-right: 3px;
-    height: 21px;
-    fill: ${({ theme }) => theme.colors.c1};
-  }
+const StyledImage = styled.img`
+  width: 25px;
+  height: 25px;
+  margin: 0 5px;
 `
 
 const PoweredByText = styled.div`
@@ -33,7 +31,7 @@ const PoweredBy = () => {
     <>
       <PoweredByText>Powered by:</PoweredByText>
       <StroveLogoWrapper>
-        <Strove fill={theme.colors.c1} />
+        <StyledImage src={strove} alt="logo" />
         Strove.io
       </StroveLogoWrapper>
     </>

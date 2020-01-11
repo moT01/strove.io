@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 import { isMobileOnly } from 'react-device-detect'
 
-import { Strove } from 'components/svgs'
+import strove from 'images/stroveReversed.png'
 
 const FadeIn = keyframes`
   0% {
@@ -14,15 +14,15 @@ const FadeIn = keyframes`
   }
 `
 
+const StyledImage = styled.img`
+  height: ${props => (props.isEditor ? '16px' : '25px')};
+  width: ${props => (props.isEditor ? '16px' : '25px')};
+  margin: 0 5px;
+`
+
 const LinkWrapper = styled.div`
   font-weight: ${props => (props.isEditor ? '300' : '600')};
   animation: ${FadeIn} 0.3s ease-out;
-`
-
-const StyledStroveIcon = styled(Strove)`
-  height: ${props => (props.isEditor ? '16px' : '25px')};
-  width: ${props => (props.isEditor ? '16px' : '25px')};
-  fill: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledLink = styled(Link)`
@@ -58,7 +58,7 @@ const HomeLink = props =>
     <LinkWrapper {...props}>
       <StyledLink to="/" {...props}>
         {isMobileOnly ? (
-          <StyledStroveIcon {...props} />
+          <StyledImage src={strove} {...props} />
         ) : (
           <LinkText {...props}>Strove</LinkText>
         )}

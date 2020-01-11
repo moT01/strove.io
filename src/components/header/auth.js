@@ -24,12 +24,11 @@ const AuthWrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: ${props =>
-    props.isMobileOnly ? '100%' : props.isEmbed ? '20px' : '2.5vh'};
   margin: 0;
   font-weight: 300;
   animation: ${FadeIn} 0.3s ease-out;
   cursor: pointer;
+  min-width: 40px;
   @media (max-width: 767px) {
     height: 100%;
   }
@@ -167,7 +166,6 @@ const Wrapper = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 3vh;
   width: auto;
   margin: 0;
   background: none;
@@ -175,7 +173,6 @@ const Wrapper = styled.div`
 
 const StyledDropdown = styled.div`
   color: ${({ theme }) => theme.colors.c2};
-  height: 3vh;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -285,7 +282,10 @@ const Auth = props => {
   const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
-  if (window.location.pathname.includes('/embed/') || window.location.pathname.includes('/app/editor')) {
+  if (
+    window.location.pathname.includes('/embed/') ||
+    window.location.pathname.includes('/app/editor')
+  ) {
     return null
   }
   return !user.username && !isLoading ? (
