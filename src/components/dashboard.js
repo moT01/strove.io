@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, GET_MY_TEAMS, CREATE_TEAM } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -457,6 +457,13 @@ const Dashboard = ({ history }) => {
                           onClick={() => getMyTeams()}
                           text="Test query"
                         />
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => createTeam()}
+                          text="Create team"
+                        />
                       </TeamTileSection>
                     )}
                     <TileSectionHeader
@@ -614,6 +621,17 @@ const Dashboard = ({ history }) => {
     }
   }
 
+  const createTeam = () => {
+    dispatch(
+      mutation({
+        name: 'createTeam',
+        mutation: CREATE_TEAM,
+        variables: { name: 'Test team' },
+        dataSelector: data => data,
+      })
+    )
+  }
+
   const getMyTeams = () => {
     dispatch(
       query({
@@ -768,9 +786,8 @@ const Dashboard = ({ history }) => {
             dispatch(
               mutation({
                 name: 'addMember',
-                context: null,
                 mutation: ADD_MEMBER,
-                variables: { memberEmail: values.email, teamId: '2' },
+                variables: { memberEmail: values.email, teamId: '5e19be5da0b66201f54ba36e' },
                 onSuccess: () => {
                   setEmailSent(true)
                   setAddMemberModal(false)
@@ -814,9 +831,9 @@ const Dashboard = ({ history }) => {
                   disabled={errors.email || !values.email}
                 />
               </EmailFormWrapper>
-              {emailSent && (
+              {/* {emailSent && (
                 <StyledInfo>Your team invitation has been sent</StyledInfo>
-              )}
+              )} */}
             </StyledForm>
           )}
         </Formik>
