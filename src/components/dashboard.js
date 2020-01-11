@@ -8,7 +8,7 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject, query } from 'utils'
+import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -418,7 +418,7 @@ const Dashboard = ({ history }) => {
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
-  const [renameTeamId, setRenameTeamId] = useState()
+  const [editTeamId, setEditTeamId] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -474,7 +474,7 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
-                        {team.users.map(member => (
+                        {team ?.users ?.map(member => (
                           <TeamHeaderDivider>
                             <Text key={member.name}>{member.name}</Text>
                             {member.name && <DeleteButton onClick={() => deleteMember({ memberId: member.id, teamId: team.id })}>Delete</DeleteButton>}
@@ -484,7 +484,7 @@ const Dashboard = ({ history }) => {
                           isPrimary
                           padding="0.5vh"
                           width="20%"
-                          onClick={() => setAddMemberModal(true)}
+                          onClick={() => handleAddMemberClick(team.id)}
                           text="Add member"
                         />
                       </TeamTileSection>
@@ -677,8 +677,26 @@ const Dashboard = ({ history }) => {
     )
   )
 
+  const addMember = ({ memberEmail, teamId }) => {
+    dispatch(
+      mutation({
+        name: 'addMember',
+        mutation: ADD_MEMBER,
+        variables: { memberEmail, teamId },
+        onSuccess: () => {
+          setAddMemberModal(false)
+        },
+      })
+    )
+  }
+
+  const handleAddMemberClick = id => {
+    setEditTeamId(id)
+    setAddMemberModal(true)
+  }
+
   const handleRenameTeamClick = id => {
-    setRenameTeamId(id)
+    setEditTeamId(id)
     setRenameTeamModal(true)
   }
 
@@ -822,19 +840,7 @@ const Dashboard = ({ history }) => {
             email: '',
           }}
           validate={validate}
-          onSubmit={values => {
-            dispatch(
-              mutation({
-                name: 'addMember',
-                mutation: ADD_MEMBER,
-                variables: { memberEmail: values.email, teamId: '5e19be5da0b66201f54ba36e' },
-                onSuccess: () => {
-                  setEmailSent(true)
-                  setAddMemberModal(false)
-                },
-              })
-            )
-          }}
+          onSubmit={values => addMember({ memberEmail: values.email, teamId: editTeamId })}
         >
           {({ errors, touched, values }) => (
             <StyledForm>
@@ -897,7 +903,7 @@ const Dashboard = ({ history }) => {
             name: '',
           }}
           validate={validateTeamName}
-          onSubmit={values => renameTeam({ newName: values.name, teamId: renameTeamId })}
+          onSubmit={values => renameTeam({ newName: values.name, teamId: editTeamId })}
         >
           {({ errors, touched, values }) => (
             <StyledForm>
