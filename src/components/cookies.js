@@ -9,7 +9,7 @@ const StyledCookieConsent = styled(CookieConsent)`
 
 const Cookies = () => (
   <StyledCookieConsent buttonText="Understood">
-    This website uses cookies to enhance the user experience.{' '}
+    This website uses cookies to enhance the user experience.
   </StyledCookieConsent>
 )
 
