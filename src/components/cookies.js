@@ -9,7 +9,7 @@ const StyledCookieConsent = styled(CookieConsent)`
 
 const Cookies = () =>
   !window.location.href.includes('/embed') && (
-    <StyledCookieConsent debug buttonText="Understood">
+    <StyledCookieConsent buttonText="Understood">
       This website uses cookies to enhance the user experience.
     </StyledCookieConsent>
   )
