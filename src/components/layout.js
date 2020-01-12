@@ -4,6 +4,7 @@ import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components/macro'
+import CookieConsent from 'react-cookie-consent'
 
 import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
@@ -65,6 +66,13 @@ const Layout = ({ children, browser }) => {
               )}
               <GlobalStyles />
               <MainContent>{children}</MainContent>
+              <CookieConsent
+                buttonText="Understood"
+                style={{ background: '#2B373B' }}
+                buttonStyle={{ color: '#4e503b', fontSize: '13px' }}
+              >
+                This website uses cookies to enhance the user experience.{' '}
+              </CookieConsent>
             </WithAddProject>
           </DataManager>
         )}
