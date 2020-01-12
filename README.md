@@ -37,8 +37,8 @@ Add # + github url after strove.io to get start coding right away, for example: 
 
 There are several problems programmers face make this project important in our eyes.
 
-1. Security
-   It’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
+1. Security -
+   it’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
 2. 'It works on my machine' problem. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
 3. It is hard to use different computers when working on a project. The code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access. This is especially useful for students and people who travel a lot.
 4. Programmers waste a lot of time on setting up the environment. The browser-based solution can cut the time to set a programming environment to seconds.
