@@ -7,9 +7,13 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
-Strove gives browser access to cloud with all major Linux-supported programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
+Strove brings powerful, ready in seconds, pre-configured cloud
+servers to write, run, build, share and
+secure software remotely
 
-### [Edit source code](https://strove.io/#https://github.com/stroveio/strove.io-client)
+Obviously, Strove is made with Strove as well
+
+### [Edit source code in Strove](https://strove.io/#https://github.com/stroveio/strove.io-client)
 
 or, visit our website
 
