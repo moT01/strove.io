@@ -6,7 +6,7 @@ import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 import { withRouter, Link } from 'react-router-dom'
 
-import { mutation, handleStopProject } from 'utils'
+import { mutation, handleStopProject, redirectToEditor } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
 import { actions } from 'state'
 import { C } from 'state'
@@ -206,9 +206,7 @@ const Dashboard = ({ history }) => {
             storeKey: 'user',
           })
         )
-        if (document.visibilityState === 'visible') {
-          history.push('/app/editor/')
-        }
+        redirectToEditor(dispatch, history)
       }
     } else {
       setStopModal(true)
