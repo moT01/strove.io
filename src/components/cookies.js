@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-
 import CookieConsent from 'react-cookie-consent'
 
 const StyledCookieConsent = styled(CookieConsent)`
