@@ -327,7 +327,7 @@ export default memo(
         )
       }
       if (loginData ?.userLogin) {
-        const { siliskyToken, subscription, projects } = loginData ?.userLogin
+        const { siliskyToken, subscription, projects, teams } = loginData ?.userLogin
         localStorage.setItem('token', siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
@@ -352,6 +352,12 @@ export default memo(
               data: projects,
             },
           })
+        teams && dispatch({
+          type: C.api.FETCH_SUCCESS, payload: {
+            storeKey: 'myTeams',
+            data: teams,
+          },
+        })
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loginData, loginError])
@@ -369,7 +375,8 @@ export default memo(
           query({
             name: 'getMyTeams',
             storeKey: 'myTeams',
-            query: GET_MY_TEAMS
+            query: GET_MY_TEAMS,
+            onSuccess: () => console.log('Yeet')
           })
         )
 

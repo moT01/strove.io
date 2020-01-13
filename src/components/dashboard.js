@@ -440,7 +440,7 @@ const Dashboard = ({ history }) => {
             onClick={() => createTeam()}
             text="Create team"
           />
-          {myTeams.map(team => {
+          {console.log('myTeams', myTeams) || myTeams.map(team => {
             const isExpanded = expandedTiles[team.id]
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
