@@ -371,14 +371,6 @@ export default memo(
             query: MY_PROJECTS,
           })
         )
-        dispatch(
-          query({
-            name: 'getMyTeams',
-            storeKey: 'myTeams',
-            query: GET_MY_TEAMS,
-            onSuccess: () => console.log('Yeet')
-          })
-        )
 
         if (history.location.pathname === '/') {
           history.push('/app/dashboard')
