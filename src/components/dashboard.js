@@ -419,6 +419,7 @@ const Dashboard = ({ history }) => {
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
   const [editTeamId, setEditTeamId] = useState()
+  const [editMode, setEditMode] = useState('')
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -437,7 +438,7 @@ const Dashboard = ({ history }) => {
             isPrimary
             padding="0.5vh"
             width="20%"
-            onClick={() => createTeam()}
+            onClick={() => handleCreateTeamClick()}
             text="Create team"
           />
           {console.log('myTeams', myTeams) || myTeams.map(team => {
@@ -645,13 +646,14 @@ const Dashboard = ({ history }) => {
     }
   }
 
-  const createTeam = () => {
+  const createTeam = ({ name }) => {
     dispatch(
       mutation({
         name: 'createTeam',
         mutation: CREATE_TEAM,
-        variables: { name: 'Test team' },
+        variables: { name },
         dataSelector: data => data,
+        onSuccess: () => setRenameTeamModal(false)
       })
     )
   }
@@ -697,6 +699,12 @@ const Dashboard = ({ history }) => {
 
   const handleRenameTeamClick = id => {
     setEditTeamId(id)
+    setEditMode('Rename team')
+    setRenameTeamModal(true)
+  }
+
+  const handleCreateTeamClick = () => {
+    setEditMode('Create team')
     setRenameTeamModal(true)
   }
 
@@ -903,7 +911,13 @@ const Dashboard = ({ history }) => {
             name: '',
           }}
           validate={validateTeamName}
-          onSubmit={values => renameTeam({ newName: values.name, teamId: editTeamId })}
+          onSubmit={values => {
+            if (editMode === 'Rename team')
+              renameTeam({ newName: values.name, teamId: editTeamId })
+            else if (editMode === 'Create team'
+            )
+              createTeam({ name: values.name })
+          }}
         >
           {({ errors, touched, values }) => (
             <StyledForm>
