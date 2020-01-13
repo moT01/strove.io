@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
-import Footer from './footer'
+import Footer from '../footer'
 
 const StyledWrapper = styled.div`
   width: 100vw;

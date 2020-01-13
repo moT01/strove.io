@@ -16,7 +16,7 @@ import GetStarted from './getStarted'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
-import Footer from './home/footer'
+import Footer from './footer'
 
 const FullFadeIn = keyframes`
   0% {
