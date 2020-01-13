@@ -4,7 +4,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
@@ -16,6 +16,7 @@ import GetStarted from './getStarted'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
+import Footer from './home/footer'
 
 const FullFadeIn = keyframes`
   0% {
@@ -344,6 +345,7 @@ const Dashboard = ({ history }) => {
             </Tile>
           ))}
         </TilesWrapper>
+        <Footer />
       </PageWrapper>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
