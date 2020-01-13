@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { StripeProvider } from 'react-stripe-elements'
 
 import { getWindowSearchParams } from 'utils'
 import { Layout } from 'components'
@@ -40,7 +41,9 @@ export default ({ children }) => (
       <Provider store={createStore}>
         <PersistGate loading={null} persistor={persistor}>
           <WithAnalyticsWrapper>
-            <Layout>{children}</Layout>
+            <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+              <Layout>{children}</Layout>
+            </StripeProvider>
           </WithAnalyticsWrapper>
         </PersistGate>
       </Provider>
