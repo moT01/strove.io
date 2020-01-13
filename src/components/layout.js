@@ -4,6 +4,7 @@ import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components/macro'
+import { StripeProvider } from 'react-stripe-elements'
 
 import { AddProjectProvider, WithAddProject, DataManager } from 'components'
 import { selectors } from 'state'
@@ -44,31 +45,33 @@ const Layout = ({ children, browser }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AddProjectProvider>
-        {({ addProject }) => (
-          <DataManager addProject={addProject}>
-            <WithAddProject addProject={addProject}>
-              {user ? (
-                <StyledModal
-                  isOpen={noSupportModalVisible}
-                  onRequestClose={() => setNoSupportModalVisible(false)}
-                  contentLabel="Browser not supported"
-                  ariaHideApp={false}
-                  isMobile={isMobile}
-                >
-                  {isMobile
-                    ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
-                    : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
-                </StyledModal>
-              ) : (
-                ''
-              )}
-              <GlobalStyles />
-              <MainContent>{children}</MainContent>
-            </WithAddProject>
-          </DataManager>
-        )}
-      </AddProjectProvider>
+      <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+        <AddProjectProvider>
+          {({ addProject }) => (
+            <DataManager addProject={addProject}>
+              <WithAddProject addProject={addProject}>
+                {user ? (
+                  <StyledModal
+                    isOpen={noSupportModalVisible}
+                    onRequestClose={() => setNoSupportModalVisible(false)}
+                    contentLabel="Browser not supported"
+                    ariaHideApp={false}
+                    isMobile={isMobile}
+                  >
+                    {isMobile
+                      ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
+                      : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
+                  </StyledModal>
+                ) : (
+                  ''
+                )}
+                <GlobalStyles />
+                <MainContent>{children}</MainContent>
+              </WithAddProject>
+            </DataManager>
+          )}
+        </AddProjectProvider>
+      </StripeProvider>
     </ThemeProvider>
   )
 }
