@@ -9,7 +9,15 @@ import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER, GET_MY_TEAMS } from 'queries'
+import {
+  DELETE_PROJECT,
+  CONTINUE_PROJECT,
+  ADD_MEMBER,
+  CREATE_TEAM,
+  RENAME_TEAM,
+  REMOVE_MEMBER,
+  GET_MY_TEAMS,
+} from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -83,8 +91,8 @@ const EmailFormWrapper = styled.div`
     box-shadow: 0 3px 5px 0 rgba(174, 174, 186, 0.24),
       0 9px 26px 0 rgba(174, 174, 186, 0.16);
     ${({ isMobile }) =>
-    isMobile &&
-    css`
+      isMobile &&
+      css`
         box-shadow: none;
       `}
   }
@@ -110,8 +118,8 @@ const EmailFormWrapper = styled.div`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     ${({ isMobile }) =>
-    isMobile &&
-    css`
+      isMobile &&
+      css`
         flex-direction: column;
         box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
           0 8px 24px 0 rgba(174, 174, 186, 0.16);
@@ -362,7 +370,7 @@ const TeamTileHeader = styled(Tile)`
 
   ${ProjectTitle} {
     color: ${({ theme, expanded }) =>
-    expanded ? theme.colors.c2 : theme.colors.c1};
+      expanded ? theme.colors.c2 : theme.colors.c1};
     transition: all 0.2s;
   }
 
@@ -391,7 +399,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
 
   ${ProjectTitle} {
     color: ${({ theme, expanded }) =>
-    expanded ? theme.colors.c2 : theme.colors.c1};
+      expanded ? theme.colors.c2 : theme.colors.c1};
     transition: all 0.2s;
   }
 
@@ -424,7 +432,7 @@ const Dashboard = ({ history }) => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
-  const currentProjectId = currentProject ?.id
+  const currentProjectId = currentProject?.id
   const projectsLimit = 20
   const isAdmin = true
 
@@ -441,86 +449,124 @@ const Dashboard = ({ history }) => {
             onClick={() => handleCreateTeamClick()}
             text="Create team"
           />
-          {console.log('myTeams', myTeams) || myTeams.map(team => {
-            const isExpanded = expandedTiles[team.id]
-            return (
-              <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
-                  <TeamHeaderDivider>
-                    <ProjectTitle>{team.name}</ProjectTitle>
-                    <IconWrapper onClick={() => handleExpandTile(team.id)}>
-                      <ExpandIcon type="down" expanded={isExpanded} />
-                    </IconWrapper>
-                  </TeamHeaderDivider>
-                </TeamTileHeader>
-                {isExpanded && (
-                  <TeamTile><TeamHeaderDivider><StroveButton
-                    isPrimary
-                    padding="0.5vh"
-                    width="20%"
-                    onClick={() => handleRenameTeamClick(team.id)}
-                    text="Rename team"
-                  />
-                    {/* Deleting team is still WIP
+          {console.log('myTeams', myTeams) ||
+            myTeams.map(team => {
+              const isExpanded = expandedTiles[team.id]
+              return (
+                <TeamTileWrapper key={team.id} expanded={isExpanded}>
+                  <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
+                    <TeamHeaderDivider>
+                      <ProjectTitle>{team.name}</ProjectTitle>
+                      <IconWrapper onClick={() => handleExpandTile(team.id)}>
+                        <ExpandIcon type="down" expanded={isExpanded} />
+                      </IconWrapper>
+                    </TeamHeaderDivider>
+                  </TeamTileHeader>
+                  {isExpanded && (
+                    <TeamTile>
+                      <TeamHeaderDivider>
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => handleRenameTeamClick(team.id)}
+                          text="Rename team"
+                        />
+                        {/* Deleting team is still WIP
                   <DeleteButton onClick={() => deleteTeam({ teamId: team.id })}>Delete team</DeleteButton>*/}
-                  </TeamHeaderDivider>
-                    <TileSectionHeader>
-
-                      <TeamHeaderDivider>
-                        <SectionTitle>Members</SectionTitle>
-                        <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Members' })}>
-                          <ExpandIcon type="down" expanded={isExpanded && expandedTiles[team.id].isMembersActive} section />
-                        </IconWrapper>
                       </TeamHeaderDivider>
-                    </TileSectionHeader>
-                    {isExpanded && expandedTiles[team.id].isMembersActive && (
-                      <TeamTileSection>
-                        {team ?.users ?.map(member => (
-                          <TeamHeaderDivider>
+                      <TileSectionHeader>
+                        <TeamHeaderDivider>
+                          <SectionTitle>Members</SectionTitle>
+                          <IconWrapper
+                            onClick={() =>
+                              handleExpandSection({
+                                teamId: team.id,
+                                type: 'Members',
+                              })
+                            }
+                          >
+                            <ExpandIcon
+                              type="down"
+                              expanded={
+                                isExpanded &&
+                                expandedTiles[team.id].isMembersActive
+                              }
+                              section
+                            />
+                          </IconWrapper>
+                        </TeamHeaderDivider>
+                      </TileSectionHeader>
+                      {isExpanded && expandedTiles[team.id].isMembersActive && (
+                        <TeamTileSection>
+                          {team?.users?.map(member => (
+                            <TeamHeaderDivider>
+                              <Text key={member.name}>{member.name}</Text>
+                              {member.name && (
+                                <DeleteButton
+                                  onClick={() =>
+                                    deleteMember({
+                                      memberId: member.id,
+                                      teamId: team.id,
+                                    })
+                                  }
+                                >
+                                  Delete
+                                </DeleteButton>
+                              )}
+                            </TeamHeaderDivider>
+                          ))}
+                          <StroveButton
+                            isPrimary
+                            padding="0.5vh"
+                            width="20%"
+                            onClick={() => handleAddMemberClick(team.id)}
+                            text="Add member"
+                          />
+                        </TeamTileSection>
+                      )}
+                      <TileSectionHeader isLast>
+                        <TeamHeaderDivider>
+                          <SectionTitle>Projects</SectionTitle>
+                          <IconWrapper
+                            onClick={() =>
+                              handleExpandSection({
+                                teamId: team.id,
+                                type: 'Projects',
+                              })
+                            }
+                          >
+                            <ExpandIcon
+                              type="down"
+                              expanded={
+                                isExpanded &&
+                                expandedTiles[team.id].isProjectsActive
+                              }
+                              section
+                            />
+                          </IconWrapper>
+                        </TeamHeaderDivider>
+                      </TileSectionHeader>
+                      {isExpanded && expandedTiles[team.id].isProjectsActive && (
+                        <TeamTileSection isLast>
+                          {team.members.map(member => (
                             <Text key={member.name}>{member.name}</Text>
-                            {member.name && <DeleteButton onClick={() => deleteMember({ memberId: member.id, teamId: team.id })}>Delete</DeleteButton>}
-                          </TeamHeaderDivider>
-                        ))}
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => handleAddMemberClick(team.id)}
-                          text="Add member"
-                        />
-                      </TeamTileSection>
-                    )}
-                    <TileSectionHeader
-                      isLast
-                    >
-                      <TeamHeaderDivider>
-                        <SectionTitle>Projects</SectionTitle>
-                        <IconWrapper onClick={() => handleExpandSection({ teamId: team.id, type: 'Projects' })}>
-                          <ExpandIcon type="down" expanded={isExpanded && expandedTiles[team.id].isProjectsActive} section />
-                        </IconWrapper>
-                      </TeamHeaderDivider>
-                    </TileSectionHeader>
-                    {isExpanded && expandedTiles[team.id].isProjectsActive && (
-                      <TeamTileSection isLast>
-                        {team.members.map(member => (
-                          <Text key={member.name}>{member.name}</Text>
-                        ))}
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => setAddMemberModal(true)}
-                          text="Add member"
-                        />
-                      </TeamTileSection>
-                    )}
-                  </TeamTile>
-                )
-                }
-              </TeamTileWrapper>
-            )
-          })}
-        </TilesWrapper >
+                          ))}
+                          <StroveButton
+                            isPrimary
+                            padding="0.5vh"
+                            width="20%"
+                            onClick={() => setAddMemberModal(true)}
+                            text="Add member"
+                          />
+                        </TeamTileSection>
+                      )}
+                    </TeamTile>
+                  )}
+                </TeamTileWrapper>
+              )
+            })}
+        </TilesWrapper>
       ),
     },
     {
@@ -542,11 +588,11 @@ const Dashboard = ({ history }) => {
                       <Text>Active</Text>
                     </TextWrapper>
                   ) : (
-                      <TextWrapper>
-                        <CircleIcon />
-                        <Text>Inactive</Text>
-                      </TextWrapper>
-                    )}
+                    <TextWrapper>
+                      <CircleIcon />
+                      <Text>Inactive</Text>
+                    </TextWrapper>
+                  )}
                   <TextWrapper>
                     <StyledIcon type="calendar" />
                     <Text>
@@ -656,7 +702,7 @@ const Dashboard = ({ history }) => {
         onSuccess: () => {
           updateTeams()
           setRenameTeamModal(false)
-        }
+        },
       })
     )
   }
@@ -667,31 +713,39 @@ const Dashboard = ({ history }) => {
   // }
 
   const updateTeams = () => {
-    dispatch(query({
-      name: 'getMyTeams',
-      storeKey: 'myTeams',
-      query: GET_MY_TEAMS,
-    }))
+    dispatch(
+      query({
+        name: 'getMyTeams',
+        storeKey: 'myTeams',
+        query: GET_MY_TEAMS,
+      })
+    )
   }
 
-  const deleteMember = ({ teamId, memberId }) => dispatch(mutation({ name: 'removeMember', mutation: REMOVE_MEMBER, variables: { teamId, memberId } }))
+  const deleteMember = ({ teamId, memberId }) =>
+    dispatch(
+      mutation({
+        name: 'removeMember',
+        mutation: REMOVE_MEMBER,
+        variables: { teamId, memberId },
+      })
+    )
 
-  const renameTeam = ({ newName, teamId }) => (
+  const renameTeam = ({ newName, teamId }) =>
     dispatch(
       mutation({
         name: 'renameTeam',
         mutation: RENAME_TEAM,
         variables: {
           newName,
-          teamId
+          teamId,
         },
         onSuccess: () => {
           updateTeams()
           setRenameTeamModal(false)
-        }
+        },
       })
     )
-  )
 
   const addMember = ({ memberEmail, teamId }) => {
     dispatch(
@@ -752,7 +806,6 @@ const Dashboard = ({ history }) => {
   }
 
   const handleExpandTile = teamId => {
-
     if (expandedTiles[teamId]) {
       const tiles = { ...expandedTiles }
       delete tiles[teamId]
@@ -760,17 +813,31 @@ const Dashboard = ({ history }) => {
       return setExpandedTiles(tiles)
     }
 
-    setExpandedTiles({ ...expandedTiles, [teamId]: { isMembersActive: false, isProjectsActive: false } })
+    setExpandedTiles({
+      ...expandedTiles,
+      [teamId]: { isMembersActive: false, isProjectsActive: false },
+    })
   }
 
   const handleExpandSection = ({ teamId, type }) => {
     if (type === 'Members') {
       const isMembersActive = expandedTiles[teamId].isMembersActive
-      return setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isMembersActive: !isMembersActive } })
+      return setExpandedTiles({
+        ...expandedTiles,
+        [teamId]: {
+          ...expandedTiles[teamId],
+          isMembersActive: !isMembersActive,
+        },
+      })
     }
     const isProjectsActive = expandedTiles[teamId].isProjectsActive
-    return setExpandedTiles({ ...expandedTiles, [teamId]: { ...expandedTiles[teamId], isProjectsActive: !isProjectsActive } })
-
+    return setExpandedTiles({
+      ...expandedTiles,
+      [teamId]: {
+        ...expandedTiles[teamId],
+        isProjectsActive: !isProjectsActive,
+      },
+    })
   }
 
   return (
@@ -781,15 +848,15 @@ const Dashboard = ({ history }) => {
         {isAdmin ? (
           <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
         ) : (
-            <>
-              {/* <TrialInfoWrapper>
+          <>
+            {/* <TrialInfoWrapper>
             Your workspace is currently on the free version of Strove.{' '}
             <StyledLink to="/pricing">See upgrade options</StyledLink>
           </TrialInfoWrapper> */}
-              <GetStarted />
-              {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
-            </>
-          )}
+            <GetStarted />
+            {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
+          </>
+        )}
       </PageWrapper>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
@@ -863,7 +930,9 @@ const Dashboard = ({ history }) => {
             email: '',
           }}
           validate={validate}
-          onSubmit={values => addMember({ memberEmail: values.email, teamId: editTeamId })}
+          onSubmit={values =>
+            addMember({ memberEmail: values.email, teamId: editTeamId })
+          }
         >
           {({ errors, touched, values }) => (
             <StyledForm>
@@ -929,8 +998,7 @@ const Dashboard = ({ history }) => {
           onSubmit={values => {
             if (editMode === 'Rename team')
               renameTeam({ newName: values.name, teamId: editTeamId })
-            else
-              createTeam({ name: values.name })
+            else createTeam({ name: values.name })
           }}
         >
           {({ errors, touched, values }) => (
@@ -942,7 +1010,9 @@ const Dashboard = ({ history }) => {
                 <Field
                   type="name"
                   name="name"
-                  placeholder={editMode === 'New team name' ? "Rename" : "Team name"}
+                  placeholder={
+                    editMode === 'New team name' ? 'Rename' : 'Team name'
+                  }
                 ></Field>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -964,7 +1034,7 @@ const Dashboard = ({ history }) => {
                   isPrimary
                   type="submit"
                   layout="form"
-                  text={editMode === 'Rename team' ? "Rename" : "Create"}
+                  text={editMode === 'Rename team' ? 'Rename' : 'Create'}
                   disabled={errors.name || !values.name}
                 />
               </EmailFormWrapper>
