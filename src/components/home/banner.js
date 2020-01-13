@@ -414,7 +414,8 @@ const Banner = () => {
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
             Strove brings powerful, ready in seconds, pre-configured cloud
-            servers to write, build and run code
+            servers to write, run, build, share and
+            secure software remotely
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
