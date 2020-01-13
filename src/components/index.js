@@ -19,6 +19,7 @@ import NoRepoUrlInfo from './NoRepoUrlInfo'
 import PoweredBy from './poweredBy'
 import ExternalLink from './externalLink'
 import ScrollToTop from './scrollToTop'
+import StripeCheckoutForm from './stripeCheckoutForm'
 
 export {
   SmallCloud,
@@ -44,4 +45,5 @@ export {
   PoweredBy,
   ExternalLink,
   ScrollToTop,
+  StripeCheckoutForm,
 }
