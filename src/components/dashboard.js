@@ -8,8 +8,8 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER } from 'queries'
+import { mutation, handleStopProject, query } from 'utils'
+import { DELETE_PROJECT, CONTINUE_PROJECT, ADD_MEMBER, CREATE_TEAM, RENAME_TEAM, REMOVE_MEMBER, GET_MY_TEAMS } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import GetStarted from './getStarted'
@@ -653,7 +653,10 @@ const Dashboard = ({ history }) => {
         mutation: CREATE_TEAM,
         variables: { name },
         dataSelector: data => data,
-        onSuccess: () => setRenameTeamModal(false)
+        onSuccess: () => {
+          updateTeams()
+          setRenameTeamModal(false)
+        }
       })
     )
   }
@@ -662,6 +665,14 @@ const Dashboard = ({ history }) => {
   // const deleteTeam = teamId => {
   //   dispatch(mutation({ name: 'deleteTeam', mutation: DELETE_TEAM, variables: { teamId } }))
   // }
+
+  const updateTeams = () => {
+    dispatch(query({
+      name: 'getMyTeams',
+      storeKey: 'myTeams',
+      query: GET_MY_TEAMS,
+    }))
+  }
 
   const deleteMember = ({ teamId, memberId }) => dispatch(mutation({ name: 'removeMember', mutation: REMOVE_MEMBER, variables: { teamId, memberId } }))
 
@@ -674,7 +685,10 @@ const Dashboard = ({ history }) => {
           newName,
           teamId
         },
-        onSuccess: () => setRenameTeamModal(false)
+        onSuccess: () => {
+          updateTeams()
+          setRenameTeamModal(false)
+        }
       })
     )
   )
@@ -686,6 +700,7 @@ const Dashboard = ({ history }) => {
         mutation: ADD_MEMBER,
         variables: { memberEmail, teamId },
         onSuccess: () => {
+          updateTeams()
           setAddMemberModal(false)
         },
       })
@@ -914,8 +929,7 @@ const Dashboard = ({ history }) => {
           onSubmit={values => {
             if (editMode === 'Rename team')
               renameTeam({ newName: values.name, teamId: editTeamId })
-            else if (editMode === 'Create team'
-            )
+            else
               createTeam({ name: values.name })
           }}
         >
@@ -928,7 +942,7 @@ const Dashboard = ({ history }) => {
                 <Field
                   type="name"
                   name="name"
-                  placeholder="New team name"
+                  placeholder={editMode === 'New team name' ? "Rename" : "Team name"}
                 ></Field>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -950,7 +964,7 @@ const Dashboard = ({ history }) => {
                   isPrimary
                   type="submit"
                   layout="form"
-                  text="Rename"
+                  text={editMode === 'Rename team' ? "Rename" : "Create"}
                   disabled={errors.name || !values.name}
                 />
               </EmailFormWrapper>
