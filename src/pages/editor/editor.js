@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState, useEffect, useRef } from 'react'
 import styled from 'styled-components/macro'
 
 const StyledIframe = styled.iframe`
@@ -11,19 +11,31 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const Editor = ({
-  machineName,
-  port,
-  onLoad,
-  isEmbed,
-  loaderVisible,
-}) => {
+const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
+  const iframe = useRef()
+
   const randomId = Math.random()
     .toString(36)
     .substring(7)
 
+  useEffect(() => {
+    if (iframe) {
+      const xhr = new XMLHttpRequest()
+      const src = `${process.env.REACT_APP_STROVE_URL}/vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project`
+      xhr.open('GET', src)
+      xhr.onreadystatechange = handler
+      xhr.responseType = 'blob'
+      xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+      xhr.send()
+
+      const dataUrl = URL.createObjectURL(xhr.response)
+      iframe.src = dataUrl
+    }
+  }, [iframe])
+
   return (
     <StyledIframe
+      ref={iframe}
       isEmbed={isEmbed}
       loaderVisible={loaderVisible}
       onLoad={onLoad}
