@@ -29,14 +29,12 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
   useEffect(() => {
     if (iframe && token) {
       const handler = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            // this.response is a Blob, because we set responseType above
-            const dataUrl = URL.createObjectURL(this.response)
-            iframe.src = dataUrl
-          } else {
-            console.error('Something went wrong')
-          }
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // this.response is a Blob, because we set responseType above
+          const dataUrl = URL.createObjectURL(this.response)
+          iframe.src = dataUrl
+        } else {
+          console.error('Something went wrong')
         }
       }
 
