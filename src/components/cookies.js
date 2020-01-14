@@ -13,7 +13,7 @@ const StyledLink = styled(Link)`
 
 const Cookies = () =>
   !window.location.href.includes('/embed') && (
-    <StyledCookieConsent debug buttonText="Understood">
+    <StyledCookieConsent buttonText="Understood">
       This website uses cookies to enhance the user experience. You can learn
       more about these cookies and general information about how to change your
       cookie settings by clicking <StyledLink to="/cookies">here</StyledLink>.
