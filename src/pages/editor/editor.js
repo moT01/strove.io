@@ -18,6 +18,18 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
     .toString(36)
     .substring(7)
 
+  const handler = () => {
+    if (this.readyState === this.DONE) {
+      if (this.status === 200) {
+        // this.response is a Blob, because we set responseType above
+        const dataUrl = URL.createObjectURL(this.response)
+        iframe.src = dataUrl
+      } else {
+        console.error('Something went wrong')
+      }
+    }
+  }
+
   useEffect(() => {
     if (iframe) {
       const xhr = new XMLHttpRequest()
@@ -27,9 +39,6 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
       xhr.responseType = 'blob'
       xhr.setRequestHeader('Authorization', 'Bearer ' + token)
       xhr.send()
-
-      const dataUrl = URL.createObjectURL(xhr.response)
-      iframe.src = dataUrl
     }
   }, [iframe])
 
