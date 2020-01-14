@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -46,6 +46,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
       xhr.setRequestHeader('Authorization', 'Bearer ' + token)
       xhr.send()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [iframe, token])
 
   return (
