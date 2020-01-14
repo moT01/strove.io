@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
-import Footer from 'components/home/footer'
+import Footer from 'components/footer'
 import { SEO, Header } from 'components'
 
 const TextWell = styled.div`

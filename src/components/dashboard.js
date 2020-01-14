@@ -4,6 +4,7 @@ import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
+<<<<<<< HEAD
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
@@ -19,11 +20,21 @@ import {
   GET_MY_TEAMS,
 } from 'queries'
 import { selectors, actions, C } from 'state'
+=======
+import { withRouter } from 'react-router-dom'
+
+import { mutation, handleStopProject, redirectToEditor } from 'utils'
+import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
+import { actions } from 'state'
+import { C } from 'state'
+import { selectors } from 'state'
+>>>>>>> origin
 import Modal from './modal'
 import GetStarted from './getStarted'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
+import Footer from './footer'
 
 const validate = values => {
   let errors = {}
@@ -436,6 +447,7 @@ const Dashboard = ({ history }) => {
   const projectsLimit = 20
   const isAdmin = true
 
+<<<<<<< HEAD
   const tabs = [
     {
       name: 'Teams',
@@ -572,6 +584,71 @@ const Dashboard = ({ history }) => {
     {
       name: 'Projects',
       content: (
+=======
+  const handleStartClick = ({ id, editorPort }) => {
+    if (!currentProjectId || currentProjectId === id) {
+      if (!editorPort) {
+        dispatch(
+          mutation({
+            name: 'continueProject',
+            mutation: CONTINUE_PROJECT,
+            variables: { projectId: id },
+            onSuccessDispatch: null,
+          })
+        )
+      } else {
+        dispatch(
+          actions.api.fetchSuccess({
+            data: { currentProjectId: id },
+            storeKey: 'user',
+          })
+        )
+        redirectToEditor(dispatch, history)
+      }
+    } else {
+      setStopModal(true)
+    }
+  }
+
+  const handleDeleteClick = id => {
+    dispatch(
+      mutation({
+        name: 'deleteProject',
+        mutation: DELETE_PROJECT,
+        variables: { projectId: id },
+        dataSelector: data => data,
+        onSuccess: () => setProjectToDelete(null),
+        onSuccessDispatch: [
+          () => ({
+            type: C.api.REMOVE_ITEM,
+            payload: { storeKey: 'myProjects', id },
+          }),
+          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
+        ],
+      })
+    )
+  }
+
+  const handleStopClick = id => {
+    handleStopProject({ id, dispatch })
+  }
+
+  const closeModal = () => {
+    setProjectToDelete(null)
+    setModalVisible(false)
+  }
+
+  return (
+    <>
+      <SEO title="Dashboard" />
+      <Header />
+      <PageWrapper>
+        {/* <TrialInfoWrapper>
+          Your workspace is currently on the free version of Strove.{' '}
+          <StyledLink to="/pricing">See upgrade options</StyledLink>
+        </TrialInfoWrapper> */}
+        <GetStarted />
+>>>>>>> origin
         <TilesWrapper>
           <ProjectTitle>
             Projects count: {projects.length}/{projectsLimit}
@@ -663,6 +740,7 @@ const Dashboard = ({ history }) => {
             </Tile>
           ))}
         </TilesWrapper>
+<<<<<<< HEAD
       ),
     },
   ]
@@ -857,6 +935,9 @@ const Dashboard = ({ history }) => {
             {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
           </>
         )}
+=======
+        <Footer />
+>>>>>>> origin
       </PageWrapper>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
