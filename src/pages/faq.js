@@ -15,7 +15,6 @@ import { SEO, Header } from 'components'
 const StyledAccordion = styled(Accordion)`
   .accordion__item {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
   }
 
   .accordion__button {
