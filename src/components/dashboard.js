@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
+import ReactModal from 'react-modal'
 
 import { mutation, handleStopProject, query } from 'utils'
 import {
@@ -368,6 +369,29 @@ const ExpandIcon = styled(StyledIcon)`
   transition: all 0.2s;
   :focus {
     outline: none;
+  }
+`
+
+const StyledCloseIcon = styled(Icon)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.7vh;
+  color: ${({ theme }) => theme.colors.c1};
+  cursor: pointer;
+  :focus {
+    outline: none;
+  }
+`
+
+const StyledReactModal = styled(ReactModal)`
+  display: flex;
+  height: auto;
+  width: auto;
+  position: fixed;
+  animation: ${FullFadeIn} 0.2s ease-out;
+  :focus {
+    outline: 0;
   }
 `
 
@@ -1098,16 +1122,20 @@ const Dashboard = ({ history }) => {
           maxWidth="150px"
         />
       </Modal>
-      <Modal
+      <StyledReactModal
         isOpen={addProjectModal}
         onRequestClose={closeModal}
         ariaHideApp={false}
+        isMobile={isMobileOnly}
       >
         {!isMobile && (
-          <StyledIcon type="close" onClick={() => setAddProjectModal(false)} />
+          <StyledCloseIcon
+            type="close"
+            onClick={() => setAddProjectModal(false)}
+          />
         )}
         <GetStarted closeModal={closeAddProjectModal} />
-      </Modal>
+      </StyledReactModal>
     </>
   )
 }
