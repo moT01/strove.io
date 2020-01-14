@@ -2,7 +2,7 @@ import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import { isMobileOnly } from 'react-device-detect'
+import { isMobileOnly, isMobile } from 'react-device-detect'
 import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
@@ -438,6 +438,7 @@ const Dashboard = ({ history }) => {
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
+  const [addProjectModal, setAddProjectModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
   const [editTeamId, setEditTeamId] = useState()
@@ -536,7 +537,7 @@ const Dashboard = ({ history }) => {
                               </RowWrapper>
                             )
                         )}
-                        {team.invited.map(member => (
+                        {team?.invited?.map(member => (
                           <RowWrapper key={member.name}>
                             <TeamHeaderDivider>
                               <Text>
@@ -589,15 +590,12 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isProjectsActive && (
                       <TeamTileSection isLast>
-                        {team.members.map(member => (
-                          <Text key={member.name}>{member.name}</Text>
-                        ))}
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
                           width="20%"
-                          onClick={() => setAddMemberModal(true)}
-                          text="Add member"
+                          text="Add Project"
+                          onClick={() => setAddProjectModal(true)}
                         />
                       </TeamTileSection>
                     )}
@@ -851,6 +849,8 @@ const Dashboard = ({ history }) => {
     setModalVisible(false)
   }
 
+  const closeAddProjectModal = () => setAddProjectModal(false)
+
   const handleExpandTile = teamId => {
     if (expandedTiles[teamId]) {
       const tiles = { ...expandedTiles }
@@ -1097,6 +1097,16 @@ const Dashboard = ({ history }) => {
           padding="0.5vh"
           maxWidth="150px"
         />
+      </Modal>
+      <Modal
+        isOpen={addProjectModal}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+      >
+        {!isMobile && (
+          <StyledIcon type="close" onClick={() => setAddProjectModal(false)} />
+        )}
+        <GetStarted closeModal={closeAddProjectModal} />
       </Modal>
     </>
   )
