@@ -15,7 +15,7 @@ import GET_BITBUCKET_TOKEN from './getBitbucketToken'
 import START_PROJECT from './startProjectSubscription'
 import LOGIN_SUBSCRIPTION from './userLoginSubscription'
 import ADD_MEMBER from './addMember'
-import GET_MY_TEAMS from './getMyTeams'
+import MY_TEAMS from './myTeams'
 import GET_TEAM from './getTeam'
 import CREATE_TEAM from './createTeam'
 import RENAME_TEAM from './renameTeam'
@@ -40,7 +40,7 @@ export {
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
   ADD_MEMBER,
-  GET_MY_TEAMS,
+  MY_TEAMS,
   GET_TEAM,
   CREATE_TEAM,
   RENAME_TEAM,

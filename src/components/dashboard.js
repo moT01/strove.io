@@ -16,7 +16,7 @@ import {
   CREATE_TEAM,
   RENAME_TEAM,
   REMOVE_MEMBER,
-  GET_MY_TEAMS,
+  MY_TEAMS,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -160,7 +160,8 @@ const Wrapper = styled.div`
 const PageWrapper = styled(Wrapper)`
   width: 100%;
   padding-top: 5vh;
-  flex-direction: ${({ isAdmin }) => (isAdmin ? 'row' : 'column')};
+  min-height: calc(100vh - 64px);
+  justify-content: space-between;
 `
 
 const TeamTileWrapper = styled(Wrapper)`
@@ -439,7 +440,7 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
-  const isAdmin = true
+  const isAdmin = false
 
   const tabs = [
     {
@@ -723,9 +724,9 @@ const Dashboard = ({ history }) => {
   const updateTeams = () => {
     dispatch(
       query({
-        name: 'getMyTeams',
+        name: 'myTeams',
         storeKey: 'myTeams',
-        query: GET_MY_TEAMS,
+        query: MY_TEAMS,
       })
     )
   }
@@ -865,8 +866,8 @@ const Dashboard = ({ history }) => {
             {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
           </>
         )}
+        <Footer />
       </PageWrapper>
-      <Footer />
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
         height={isMobileOnly ? '30vh' : '20vh'}
