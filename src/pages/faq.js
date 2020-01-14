@@ -14,7 +14,7 @@ import { SEO, Header } from 'components'
 
 const StyledAccordion = styled(Accordion)`
   .accordion__item + .accordion__item {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
   }
 
@@ -76,7 +76,7 @@ const QuestionHeader = styled.div`
 `
 
 const StyledAccordionItemPanel = styled(AccordionItemPanel)`
-  padding-top: 10px;
+  padding: 10px 0;
 `
 
 const topics = [
@@ -97,8 +97,7 @@ const topics = [
       Many tech-forward companies are trying to store as much code in the cloud as possible as it\x27s easier to steal it from physical devices and code stored remotely can be easily recovered.
       Team plan also provides additional features for protecting intellectual property:
       Team admins are able to restrict access to projects or them to be visible for all team members.
-      Team admins can recover code from any project made within the organization.
-    `,
+      Team admins can recover code from any project made within the organization.`,
   },
   {
     header: 'How does Strove.io handle secure security?',
@@ -127,8 +126,7 @@ const topics = [
     paragraph: `Yes and no. Here is an overview:
 Strove runs code on Linux-based virtual machines and nearly anything that works on Linux Ubuntu works on Strove as well.
 Mobile development using solutions such as React Native and Expo or native desktop development using likes of Electron framework is possible.
-You won't be able to use Strove if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.
-    `,
+You won't be able to use Strove if you rely on Windows or MacOS environments. This includes working on iPhone apps using XCode.`,
   },
   {
     header:
@@ -199,9 +197,9 @@ const FAQ = () => (
                 </StyledAccordionItemPanel>
               ))
             ) : (
-              <AccordionItemPanel>
+              <StyledAccordionItemPanel>
                 <Paragraph>{topic.paragraph}</Paragraph>
-              </AccordionItemPanel>
+              </StyledAccordionItemPanel>
             )}
           </AccordionItem>
         ))}
