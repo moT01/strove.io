@@ -1,5 +1,8 @@
 import React, { memo, useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
+
+import { selectors } from 'state'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -11,9 +14,14 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
+const getUserToken = selectors.api.getApiData({
+  fields: ['user', 'siliskyToken'],
+  defaultValue: null,
+})
+
 const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
   const iframe = useRef()
-
+  const token = useSelector(getUserToken)
   const randomId = Math.random()
     .toString(36)
     .substring(7)
@@ -31,7 +39,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
   }
 
   useEffect(() => {
-    if (iframe) {
+    if (iframe && token) {
       const xhr = new XMLHttpRequest()
       const src = `${process.env.REACT_APP_STROVE_URL}/vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project`
       xhr.open('GET', src)
@@ -40,7 +48,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
       xhr.setRequestHeader('Authorization', 'Bearer ' + token)
       xhr.send()
     }
-  }, [iframe])
+  }, [iframe, token])
 
   return (
     <StyledIframe
