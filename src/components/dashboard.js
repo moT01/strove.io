@@ -270,6 +270,13 @@ const TeamHeaderDivider = styled(VerticalDivider)`
   justify-content: space-between;
 `
 
+const RowWrapper = styled(VerticalDivider)`
+  border-width: 0px 0px 1px 0px;
+  border-color: ${({ theme }) => theme.colors.c17};
+  border-style: solid;
+  padding: 3px;
+`
+
 const FlexWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -309,8 +316,8 @@ const DeleteButton = styled.button`
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:13px;
-	padding:6px 24px;
+	font-size:0.6rem;
+	padding:3px 12px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #854629;
 }
@@ -318,9 +325,6 @@ const DeleteButton = styled.button`
 	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
 	background-color:#bc3315;
 }
-/* :active {
-	position:relative;
-	top:1px; */
 `
 
 const CircleIcon = styled.div`
@@ -500,23 +504,26 @@ const Dashboard = ({ history }) => {
                       </TileSectionHeader>
                       {isExpanded && expandedTiles[team.id].isMembersActive && (
                         <TeamTileSection>
-                          {team?.users?.map(member => (
-                            <TeamHeaderDivider>
-                              <Text key={member.name}>{member.name}</Text>
-                              {member.name && (
-                                <DeleteButton
-                                  onClick={() =>
-                                    deleteMember({
-                                      memberId: member.id,
-                                      teamId: team.id,
-                                    })
-                                  }
-                                >
-                                  Delete
-                                </DeleteButton>
-                              )}
-                            </TeamHeaderDivider>
-                          ))}
+                          {team?.users?.map(
+                            member =>
+                              member.name && (
+                                <RowWrapper>
+                                  <TeamHeaderDivider>
+                                    <Text key={member.name}>{member.name}</Text>
+                                    <DeleteButton
+                                      onClick={() =>
+                                        deleteMember({
+                                          memberId: member.id,
+                                          teamId: team.id,
+                                        })
+                                      }
+                                    >
+                                      Delete
+                                    </DeleteButton>
+                                  </TeamHeaderDivider>
+                                </RowWrapper>
+                              )
+                          )}
                           <StroveButton
                             isPrimary
                             padding="0.5vh"
