@@ -5,9 +5,23 @@ export const TeamFragment = gql`
   fragment Team on Team {
     id
     name
-    projects { ...Project }
-    owner { name, photoUrl}
-    users { name, photoUrl, id}
+    projects {
+      ...Project
+    }
+    owner {
+      name
+      photoUrl
+    }
+    users {
+      name
+      photoUrl
+      id
+    }
+    invited {
+      name
+      id
+      email
+    }
   }
   ${ProjectFragment}
 `

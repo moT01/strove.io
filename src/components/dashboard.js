@@ -17,6 +17,7 @@ import {
   RENAME_TEAM,
   REMOVE_MEMBER,
   MY_TEAMS,
+  DELETE_TEAM,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -308,6 +309,7 @@ const TextWrapper = styled(FlexWrapper)`
 `
 
 const DeleteButton = styled.button`
+width: 15%;
 	box-shadow:inset 0px 1px 0px 0px #cf866c;
 	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
 	background-color:#d0451b;
@@ -316,8 +318,9 @@ const DeleteButton = styled.button`
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+	font-family: 'Futura','Helvetica Neue For Number',-apple-system, BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Hiragino Sans GB', 'Microsoft YaHei','Helvetica Neue',Helvetica,Arial,sans-serif;
 	font-size:0.6rem;
+  font-weight: 500;
 	padding:3px 12px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #854629;
@@ -326,6 +329,11 @@ const DeleteButton = styled.button`
 	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
 	background-color:#bc3315;
 }
+`
+
+const InviteStatus = styled.span`
+  color: ${({ theme }) => theme.colors.c16};
+  margin-left: 24px;
 `
 
 const CircleIcon = styled.div`
@@ -440,7 +448,7 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
-  const isAdmin = false
+  const isAdmin = true
 
   const tabs = [
     {
@@ -455,126 +463,149 @@ const Dashboard = ({ history }) => {
             onClick={() => handleCreateTeamClick()}
             text="Create team"
           />
-          {console.log('myTeams', myTeams) ||
-            myTeams.map(team => {
-              const isExpanded = expandedTiles[team.id]
-              return (
-                <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                  <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
+          {myTeams.map(team => {
+            const isExpanded = expandedTiles[team.id]
+            return (
+              <TeamTileWrapper key={team.id} expanded={isExpanded}>
+                <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
+                  <TeamHeaderDivider>
+                    <ProjectTitle>{team.name}</ProjectTitle>
+                    <IconWrapper onClick={() => handleExpandTile(team.id)}>
+                      <ExpandIcon type="down" expanded={isExpanded} />
+                    </IconWrapper>
+                  </TeamHeaderDivider>
+                </TeamTileHeader>
+                {isExpanded && (
+                  <TeamTile>
                     <TeamHeaderDivider>
-                      <ProjectTitle>{team.name}</ProjectTitle>
-                      <IconWrapper onClick={() => handleExpandTile(team.id)}>
-                        <ExpandIcon type="down" expanded={isExpanded} />
-                      </IconWrapper>
+                      <StroveButton
+                        isPrimary
+                        padding="0.5vh"
+                        width="20%"
+                        onClick={() => handleRenameTeamClick(team.id)}
+                        text="Rename team"
+                      />
+                      {/* Deleting team is still WIP */}
+                      <DeleteButton
+                        onClick={() => deleteTeam({ teamId: team.id })}
+                      >
+                        Delete team
+                      </DeleteButton>
                     </TeamHeaderDivider>
-                  </TeamTileHeader>
-                  {isExpanded && (
-                    <TeamTile>
+                    <TileSectionHeader>
                       <TeamHeaderDivider>
+                        <SectionTitle>Members</SectionTitle>
+                        <IconWrapper
+                          onClick={() =>
+                            handleExpandSection({
+                              teamId: team.id,
+                              type: 'Members',
+                            })
+                          }
+                        >
+                          <ExpandIcon
+                            type="down"
+                            expanded={
+                              isExpanded &&
+                              expandedTiles[team.id].isMembersActive
+                            }
+                            section
+                          />
+                        </IconWrapper>
+                      </TeamHeaderDivider>
+                    </TileSectionHeader>
+                    {isExpanded && expandedTiles[team.id].isMembersActive && (
+                      <TeamTileSection>
+                        {team?.users?.map(
+                          member =>
+                            member.name && (
+                              <RowWrapper key={member.name}>
+                                <TeamHeaderDivider>
+                                  <Text>{member.name}</Text>
+                                  <DeleteButton
+                                    onClick={() =>
+                                      deleteMember({
+                                        memberId: member.id,
+                                        teamId: team.id,
+                                      })
+                                    }
+                                  >
+                                    Remove
+                                  </DeleteButton>
+                                </TeamHeaderDivider>
+                              </RowWrapper>
+                            )
+                        )}
+                        {team.invited.map(member => (
+                          <RowWrapper key={member.name}>
+                            <TeamHeaderDivider>
+                              <Text>
+                                {member.name ? member.name : member.email}{' '}
+                                <InviteStatus>Invite pending</InviteStatus>
+                              </Text>
+                              <DeleteButton
+                                onClick={() =>
+                                  deleteMember({
+                                    memberId: member.id,
+                                    teamId: team.id,
+                                  })
+                                }
+                              >
+                                Cancel
+                              </DeleteButton>
+                            </TeamHeaderDivider>
+                          </RowWrapper>
+                        ))}
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
                           width="20%"
-                          onClick={() => handleRenameTeamClick(team.id)}
-                          text="Rename team"
+                          onClick={() => handleAddMemberClick(team.id)}
+                          text="Add member"
                         />
-                        {/* Deleting team is still WIP
-                  <DeleteButton onClick={() => deleteTeam({ teamId: team.id })}>Delete team</DeleteButton>*/}
+                      </TeamTileSection>
+                    )}
+                    <TileSectionHeader isLast>
+                      <TeamHeaderDivider>
+                        <SectionTitle>Projects</SectionTitle>
+                        <IconWrapper
+                          onClick={() =>
+                            handleExpandSection({
+                              teamId: team.id,
+                              type: 'Projects',
+                            })
+                          }
+                        >
+                          <ExpandIcon
+                            type="down"
+                            expanded={
+                              isExpanded &&
+                              expandedTiles[team.id].isProjectsActive
+                            }
+                            section
+                          />
+                        </IconWrapper>
                       </TeamHeaderDivider>
-                      <TileSectionHeader>
-                        <TeamHeaderDivider>
-                          <SectionTitle>Members</SectionTitle>
-                          <IconWrapper
-                            onClick={() =>
-                              handleExpandSection({
-                                teamId: team.id,
-                                type: 'Members',
-                              })
-                            }
-                          >
-                            <ExpandIcon
-                              type="down"
-                              expanded={
-                                isExpanded &&
-                                expandedTiles[team.id].isMembersActive
-                              }
-                              section
-                            />
-                          </IconWrapper>
-                        </TeamHeaderDivider>
-                      </TileSectionHeader>
-                      {isExpanded && expandedTiles[team.id].isMembersActive && (
-                        <TeamTileSection>
-                          {team?.users?.map(
-                            member =>
-                              member.name && (
-                                <RowWrapper>
-                                  <TeamHeaderDivider>
-                                    <Text key={member.name}>{member.name}</Text>
-                                    <DeleteButton
-                                      onClick={() =>
-                                        deleteMember({
-                                          memberId: member.id,
-                                          teamId: team.id,
-                                        })
-                                      }
-                                    >
-                                      Delete
-                                    </DeleteButton>
-                                  </TeamHeaderDivider>
-                                </RowWrapper>
-                              )
-                          )}
-                          <StroveButton
-                            isPrimary
-                            padding="0.5vh"
-                            width="20%"
-                            onClick={() => handleAddMemberClick(team.id)}
-                            text="Add member"
-                          />
-                        </TeamTileSection>
-                      )}
-                      <TileSectionHeader isLast>
-                        <TeamHeaderDivider>
-                          <SectionTitle>Projects</SectionTitle>
-                          <IconWrapper
-                            onClick={() =>
-                              handleExpandSection({
-                                teamId: team.id,
-                                type: 'Projects',
-                              })
-                            }
-                          >
-                            <ExpandIcon
-                              type="down"
-                              expanded={
-                                isExpanded &&
-                                expandedTiles[team.id].isProjectsActive
-                              }
-                              section
-                            />
-                          </IconWrapper>
-                        </TeamHeaderDivider>
-                      </TileSectionHeader>
-                      {isExpanded && expandedTiles[team.id].isProjectsActive && (
-                        <TeamTileSection isLast>
-                          {team.members.map(member => (
-                            <Text key={member.name}>{member.name}</Text>
-                          ))}
-                          <StroveButton
-                            isPrimary
-                            padding="0.5vh"
-                            width="20%"
-                            onClick={() => setAddMemberModal(true)}
-                            text="Add member"
-                          />
-                        </TeamTileSection>
-                      )}
-                    </TeamTile>
-                  )}
-                </TeamTileWrapper>
-              )
-            })}
+                    </TileSectionHeader>
+                    {isExpanded && expandedTiles[team.id].isProjectsActive && (
+                      <TeamTileSection isLast>
+                        {team.members.map(member => (
+                          <Text key={member.name}>{member.name}</Text>
+                        ))}
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => setAddMemberModal(true)}
+                          text="Add member"
+                        />
+                      </TeamTileSection>
+                    )}
+                  </TeamTile>
+                )}
+              </TeamTileWrapper>
+            )
+          })}
         </TilesWrapper>
       ),
     },
@@ -717,9 +748,15 @@ const Dashboard = ({ history }) => {
   }
 
   // Deleting projects is still WIP
-  // const deleteTeam = teamId => {
-  //   dispatch(mutation({ name: 'deleteTeam', mutation: DELETE_TEAM, variables: { teamId } }))
-  // }
+  const deleteTeam = teamId => {
+    dispatch(
+      mutation({
+        name: 'deleteTeam',
+        mutation: DELETE_TEAM,
+        variables: { teamId },
+      })
+    )
+  }
 
   const updateTeams = () => {
     dispatch(
