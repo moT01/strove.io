@@ -6,13 +6,14 @@ export default gql`
     $description: String
     $isPrivate: Boolean
     $repoLink: String
+    $teamId: ID
   ) {
     addProject(
       name: $name
       description: $description
       isPrivate: $isPrivate
       repoLink: $repoLink
+      teamId: $teamId
     )
   }
-
 `

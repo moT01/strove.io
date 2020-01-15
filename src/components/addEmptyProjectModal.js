@@ -58,7 +58,7 @@ const validateProjectName = values => {
   return errors
 }
 
-const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
+const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => (
   <Modal
     width={isMobileOnly ? '60vw' : '30vw'}
     height={isMobileOnly ? '40vh' : '20vh'}
@@ -71,7 +71,8 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject }) => (
     <Formik
       onSubmit={(values, actions) => {
         handleClose()
-        addProject({ name: values.projectName.trim() })
+        addProject({ name: values.projectName.trim(), teamId })
+        console.log('TCL: teamId', teamId)
         actions.setSubmitting(false)
       }}
       validate={validateProjectName}

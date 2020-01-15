@@ -16,6 +16,7 @@ const createProject = async ({
   user,
   setModalContent,
   name,
+  teamId,
 }) => {
   let repoData = null
   const customName = name
@@ -135,10 +136,11 @@ const createProject = async ({
     dispatch(
       mutation({
         name: 'addProject',
-        variables: { repoLink, name, description, type },
+        variables: { repoLink, name, description, type, teamId },
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: error => {
+          console.log('team id', teamId)
           setModalContent('TryAgainLater')
           dispatch(actions.api.fetchError({ storeKey: 'myProjects', error }))
           dispatch(actions.incomingProject.catchIncomingError({ error }))

@@ -87,7 +87,9 @@ const validateRepoLink = values => {
   return errors
 }
 
-const GetStarted = ({ addProject }) => {
+const GetStarted = ({ addProject, teamId, closeModal }) => {
+  console.log('TCL: GetStarted -> closeModal', closeModal)
+  console.log('TCL: GetStarted -> teamId', teamId)
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (
@@ -97,7 +99,8 @@ const GetStarted = ({ addProject }) => {
       </Title>
       <Formik
         onSubmit={(values, actions) => {
-          values.repoLink.trim() && addProject({ link: values.repoLink })
+          values.repoLink.trim() &&
+            addProject({ link: values.repoLink, teamId })
           actions.setSubmitting(false)
         }}
         validate={validateRepoLink}
@@ -141,13 +144,14 @@ const GetStarted = ({ addProject }) => {
         handleClose={setAddProjectModalOpen}
         isOpen={addProjectModalOpen}
         addProject={addProject}
+        teamId={teamId}
       />
     </AddProjectWrapper>
   )
 }
 
-export default memo(() => (
+export default memo(({ teamId }) => (
   <AddProjectProvider>
-    {({ addProject }) => <GetStarted addProject={addProject} />}
+    {({ addProject }) => <GetStarted addProject={addProject} teamId={teamId} />}
   </AddProjectProvider>
 ))

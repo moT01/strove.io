@@ -22,7 +22,7 @@ const StyledModal = styled(Modal)`
   box-shadow: none;
 `
 
-const AddProjectProvider = ({ children, history }) => {
+const AddProjectProvider = ({ children, history, teamId }) => {
   const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
@@ -44,7 +44,7 @@ const AddProjectProvider = ({ children, history }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
 
-  const addProject = async ({ link, name }) => {
+  const addProject = async ({ link, name, teamId }) => {
     let repoLink
     let repoProvider
 
@@ -126,13 +126,14 @@ const AddProjectProvider = ({ children, history }) => {
       setModalContent('AnotherActiveProject')
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
     } else if (!theSameIncomingProject) {
-      createProject({ repoLink, dispatch, user, setModalContent, name })
+      createProject({ repoLink, dispatch, user, setModalContent, name, teamId })
+      console.log('TCL: addProject -> teamId', teamId)
     }
   }
 
   return (
     <>
-      {children({ addProject })}
+      {children({ addProject, teamId })}
       <AddProjectModals
         projectsLimit={projectsLimit}
         modalContent={modalContent}

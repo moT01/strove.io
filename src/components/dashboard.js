@@ -22,7 +22,7 @@ import {
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
-import GetStarted from './getStarted'
+import { GetStarted } from 'components'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
@@ -465,6 +465,7 @@ const Dashboard = ({ history }) => {
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
+  const [teamId, setTeamId] = useState('Blob')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
@@ -619,7 +620,15 @@ const Dashboard = ({ history }) => {
                           padding="0.5vh"
                           width="20%"
                           text="Add Project"
-                          onClick={() => setAddProjectModal(true)}
+                          onClick={() => {
+                            setTeamId(team.id)
+                            setAddProjectModal(true)
+                            console.log('TCL: Dashboard -> team.id', team.id)
+                            console.log(
+                              'TCL: Dashboard -> teamId blolb',
+                              teamId
+                            )
+                          }}
                         />
                       </TeamTileSection>
                     )}
@@ -1124,7 +1133,7 @@ const Dashboard = ({ history }) => {
       </Modal>
       <StyledReactModal
         isOpen={addProjectModal}
-        onRequestClose={closeModal}
+        onRequestClose={closeAddProjectModal}
         ariaHideApp={false}
         isMobile={isMobileOnly}
       >
@@ -1134,7 +1143,8 @@ const Dashboard = ({ history }) => {
             onClick={() => setAddProjectModal(false)}
           />
         )}
-        <GetStarted closeModal={closeAddProjectModal} />
+        <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
+        {console.log('TCL: teamId', teamId)}
       </StyledReactModal>
     </>
   )
