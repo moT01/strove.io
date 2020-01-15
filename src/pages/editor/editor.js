@@ -38,6 +38,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
         }
       }
 
+      /* This doesnt work due to missing Access-Control-Allow-Origin somewhere in proxy */
       const xhr = new XMLHttpRequest()
       const src = `${process.env.REACT_APP_STROVE_URL}/vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project`
       xhr.open('GET', src)
