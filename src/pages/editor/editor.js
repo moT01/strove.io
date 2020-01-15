@@ -43,7 +43,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
       xhr.open('GET', src)
       xhr.onreadystatechange = handler
       xhr.responseType = 'blob'
-      xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+      xhr.setRequestHeader('Authorization', `Bearer ${token}`)
       xhr.send()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
