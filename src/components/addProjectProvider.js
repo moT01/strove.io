@@ -45,6 +45,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
   const projectsLimit = 20
 
   const addProject = async ({ link, name, teamId }) => {
+    console.log('TCL: addProject -> teamId', teamId)
     let repoLink
     let repoProvider
 
@@ -92,6 +93,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
         repoLink,
         repoProvider,
         name,
+        teamId,
       })
     )
 
@@ -127,7 +129,6 @@ const AddProjectProvider = ({ children, history, teamId }) => {
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
     } else if (!theSameIncomingProject) {
       createProject({ repoLink, dispatch, user, setModalContent, name, teamId })
-      console.log('TCL: addProject -> teamId', teamId)
     }
   }
 

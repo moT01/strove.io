@@ -140,8 +140,20 @@ const createProject = async ({
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: error => {
-          console.log('team id', teamId)
-          setModalContent('TryAgainLater')
+          console.log('Variables', {
+            repoLink,
+            name,
+            description,
+            type,
+            teamId,
+          })
+          setModalContent('TryAgainLater', {
+            repoLink,
+            name,
+            description,
+            type,
+            teamId,
+          })
           dispatch(actions.api.fetchError({ storeKey: 'myProjects', error }))
           dispatch(actions.incomingProject.catchIncomingError({ error }))
         },

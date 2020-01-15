@@ -87,8 +87,7 @@ const validateRepoLink = values => {
   return errors
 }
 
-const GetStarted = ({ addProject, teamId, closeModal }) => {
-  console.log('TCL: GetStarted -> closeModal', closeModal)
+const GetStarted = ({ addProject, teamId }) => {
   console.log('TCL: GetStarted -> teamId', teamId)
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
