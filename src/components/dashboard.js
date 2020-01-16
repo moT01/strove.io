@@ -22,7 +22,7 @@ import {
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
-import { GetStarted } from 'components'
+import { GetStarted, Projects } from 'components'
 import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
@@ -485,7 +485,7 @@ const Dashboard = ({ history }) => {
   const projectsLimit = 20
   const [isAdmin, setIsAdmin] = useState(true)
 
-    useEffect(() => (updateTeams()), [])
+  useEffect(() => updateTeams(), [])
 
   const tabs = [
     {
@@ -647,99 +647,7 @@ const Dashboard = ({ history }) => {
     },
     {
       name: 'Projects',
-      content: (
-        <TilesWrapper>
-          <ProjectTitle>
-            Projects count: {projects.length}/{projectsLimit}
-          </ProjectTitle>
-          {projects.map(project => (
-            <Tile key={project.id}>
-              <VerticalDivider>
-                <InfoWrapper>
-                  <ProjectTitle>{project.name}</ProjectTitle>
-
-                  {currentProjectId && project.id === currentProjectId ? (
-                    <TextWrapper>
-                      <CircleIcon active />
-                      <Text>Active</Text>
-                    </TextWrapper>
-                  ) : (
-                    <TextWrapper>
-                      <CircleIcon />
-                      <Text>Inactive</Text>
-                    </TextWrapper>
-                  )}
-                  <TextWrapper>
-                    <StyledIcon type="calendar" />
-                    <Text>
-                      {dayjs(+project.createdAt).format('DD/MM/YYYY')}
-                    </Text>
-                  </TextWrapper>
-                  {project.description && (
-                    <TextWrapper>
-                      <StyledIcon type="edit" />
-                      <Text>
-                        {project.description
-                          ? project.description
-                          : 'This is the project description.. Tribute'}
-                      </Text>
-                    </TextWrapper>
-                  )}
-                  {/* <TextWrapper>
-        <StyledIcon
-          type="branches"
-        />
-        <Text> {project.branch}</Text>
-      </TextWrapper>
-      <TextWrapper>
-        <StyledIcon
-          type="code"
-        />
-        <Text>{project.language}</Text>
-      </TextWrapper> */}
-                  <TextWrapper>
-                    <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
-                    <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
-                  </TextWrapper>
-                </InfoWrapper>
-                <RightSection>
-                  <StroveButton
-                    to="/app/editor/"
-                    isDisabled={isDeleting || isContinuing || isStopping}
-                    isPrimary
-                    padding="0.5vh"
-                    onClick={() => handleStartClick(project)}
-                    text={
-                      currentProjectId && project.id === currentProjectId
-                        ? 'Continue'
-                        : 'Start'
-                    }
-                  />
-                  {currentProjectId && currentProjectId === project.id ? (
-                    <StroveButton
-                      isDisabled={isDeleting || isContinuing || isStopping}
-                      padding="0.5vh"
-                      onClick={() => {
-                        handleStopClick(project.id)
-                      }}
-                      text="Stop"
-                    />
-                  ) : null}
-                  <StroveButton
-                    isDisabled={isDeleting || isContinuing || isStopping}
-                    padding="0.5vh"
-                    onClick={() => {
-                      setModalVisible(true)
-                      setProjectToDelete(project)
-                    }}
-                    text="Delete"
-                  />
-                </RightSection>
-              </VerticalDivider>
-            </Tile>
-          ))}
-        </TilesWrapper>
-      ),
+      content: <Projects />,
     },
   ]
 
