@@ -888,6 +888,11 @@ const Dashboard = ({ history }) => {
     setModalVisible(false)
   }
 
+  const closeSettingsModal = () => {
+    setEditTeamId(null)
+    setSettingsModal(false)
+  }
+
   const closeAddProjectModal = () => setAddProjectModal(false)
 
   const handleExpandTile = teamId => {
@@ -1073,7 +1078,7 @@ const Dashboard = ({ history }) => {
         width={isMobileOnly ? '80vw' : '40vw'}
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={settingsModal}
-        onRequestClose={() => setSettingsModal(false)}
+        onRequestClose={() => closeSettingsModal()}
         contentLabel="Team settings"
         ariaHideApp={false}
       >
@@ -1097,7 +1102,7 @@ const Dashboard = ({ history }) => {
         </DeleteButton>
 
         <ModalButton
-          onClick={() => setSettingsModal(false)}
+          onClick={() => closeSettingsModal()}
           text="Close"
           padding="0.5vh"
           maxWidth="150px"
