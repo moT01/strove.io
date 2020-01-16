@@ -513,6 +513,13 @@ const Dashboard = ({ history }) => {
                         onClick={() => handleRenameTeamClick(team.id)}
                         text="Rename team"
                       />
+                      <StroveButton
+                        isPrimary
+                        padding="0.5vh"
+                        width="20%"
+                        onClick={() => handleTransferOwnershipClick(team.id)}
+                        text="Transfer ownership"
+                      />
                       {/* Deleting team is still WIP */}
                       <DeleteButton
                         onClick={() => deleteTeam({ teamId: team.id })}
@@ -852,6 +859,10 @@ const Dashboard = ({ history }) => {
   const handleCreateTeamClick = () => {
     setEditMode('Create team')
     setRenameTeamModal(true)
+  }
+
+  const handleTransferOwnershipClick = teamId => {
+    console.log('Yeet', teamId)
   }
 
   const handleDeleteClick = id => {
