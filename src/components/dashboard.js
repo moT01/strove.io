@@ -484,8 +484,9 @@ const Dashboard = ({ history }) => {
   useEffect(() => updateTeams(), [])
 
   const teamProjects = myTeams.reduce((projects, team) => {
-    projects[team.id] = team.projects
-    return projects
+    return { ...projects, [team.id]: team.projects }
+    // projects[team.id] = team.projects
+    // return projects
   }, {})
 
   console.log('Team projects', teamProjects)
