@@ -625,13 +625,11 @@ const Dashboard = ({ history }) => {
                           onClick={() => {
                             setTeamId(team.id)
                             setAddProjectModal(true)
-                            console.log('TCL: Dashboard -> team.id', team.id)
-                            console.log(
-                              'TCL: Dashboard -> teamId blolb',
-                              teamId
-                            )
                           }}
                         />
+                        {team?.projects?.map(project => (
+                          <Text>{project.name}</Text>
+                        ))}
                       </TeamTileSection>
                     )}
                   </TeamTile>
