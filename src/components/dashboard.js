@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useEffect } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
@@ -484,6 +484,8 @@ const Dashboard = ({ history }) => {
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
   const [isAdmin, setIsAdmin] = useState(true)
+
+    useEffect(() => (updateTeams()), [])
 
   const tabs = [
     {

@@ -140,13 +140,6 @@ const createProject = async ({
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: error => {
-          console.log('Variables', {
-            repoLink,
-            name,
-            description,
-            type,
-            teamId,
-          })
           setModalContent('TryAgainLater', {
             repoLink,
             name,

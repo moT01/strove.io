@@ -12,5 +12,8 @@ export const ProjectFragment = gql`
     editorPort
     additionalPorts
     machineName
+    isVisible
+    teamId
+    forkedFromId
   }
 `
