@@ -21,7 +21,7 @@ const getUserToken = selectors.api.getApiData({
 
 const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
   // const iframe = useRef()
-  const [editorContent, setEditorContent] = useState()
+  const [editorContent, setEditorContent] = useState('')
   const token = useSelector(getUserToken)
   const randomId = Math.random()
     .toString(36)
@@ -33,6 +33,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
         if (xhr.readyState === 4 && xhr.status === 200) {
           // this.response is a Blob, because we set responseType above
           const dataUrl = URL.createObjectURL(xhr.response)
+          console.log('dataUrl', dataUrl)
           setEditorContent(dataUrl)
         } else {
           console.error('Something went wrong')
@@ -41,15 +42,17 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
 
       /* This doesnt work due to missing Access-Control-Allow-Origin somewhere in proxy */
       const xhr = new XMLHttpRequest()
-      const src = `${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project`
+      const token = `Bearer ${token}`
+      const src = `${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=${token}`
       xhr.open('GET', src)
       xhr.onreadystatechange = handler
       xhr.responseType = 'blob'
-      xhr.setRequestHeader('Authorization', `Bearer ${token}`)
       xhr.send()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
+
+  console.log('editorContent', editorContent)
 
   return editorContent ? (
     <StyledIframe
