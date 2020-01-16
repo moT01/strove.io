@@ -1,5 +1,8 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
+import { useSelector } from 'react-redux'
+
+import { selectors } from 'state'
 
 const StyledIframe = styled.iframe`
   display: block;
@@ -11,7 +14,13 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
+const getUserToken = selectors.api.getApiData({
+  fields: ['user', 'siliskyToken'],
+  defaultValue: null,
+})
+
 const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
+  const token = useSelector(getUserToken)
   const randomId = Math.random()
     .toString(36)
     .substring(7)
