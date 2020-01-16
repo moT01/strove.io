@@ -465,9 +465,10 @@ const Dashboard = ({ history }) => {
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
+  const [settingsModal, setSettingsModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState({})
-  const [teamId, setTeamId] = useState('Blob')
+  const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
@@ -510,22 +511,11 @@ const Dashboard = ({ history }) => {
                         isPrimary
                         padding="0.5vh"
                         width="20%"
-                        onClick={() => handleRenameTeamClick(team.id)}
-                        text="Rename team"
+                        onClick={() => {
+                          handleSettingsClick(team.id)
+                        }}
+                        text="Settings"
                       />
-                      <StroveButton
-                        isPrimary
-                        padding="0.5vh"
-                        width="20%"
-                        onClick={() => handleTransferOwnershipClick(team.id)}
-                        text="Transfer ownership"
-                      />
-                      {/* Deleting team is still WIP */}
-                      <DeleteButton
-                        onClick={() => deleteTeam({ teamId: team.id })}
-                      >
-                        Delete team
-                      </DeleteButton>
                     </TeamHeaderDivider>
                     <TileSectionHeader>
                       <TeamHeaderDivider>
@@ -884,6 +874,11 @@ const Dashboard = ({ history }) => {
     )
   }
 
+  const handleSettingsClick = id => {
+    setEditTeamId(id)
+    setSettingsModal(true)
+  }
+
   const handleStopClick = id => {
     handleStopProject({ id, dispatch })
   }
@@ -1073,6 +1068,42 @@ const Dashboard = ({ history }) => {
           maxWidth="150px"
         />
       </Modal>
+
+      <Modal
+        width={isMobileOnly ? '80vw' : '40vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={settingsModal}
+        onRequestClose={() => setSettingsModal(false)}
+        contentLabel="Team settings"
+        ariaHideApp={false}
+      >
+        <StroveButton
+          isPrimary
+          padding="0.5vh"
+          width="20%"
+          onClick={() => handleRenameTeamClick(editTeamId)}
+          text="Rename team"
+        />
+        <StroveButton
+          isPrimary
+          padding="0.5vh"
+          width="20%"
+          onClick={() => handleTransferOwnershipClick(editTeamId)}
+          text="Transfer ownership"
+        />
+        {/* Deleting team is still WIP */}
+        <DeleteButton onClick={() => deleteTeam({ teamId: editTeamId })}>
+          Delete team
+        </DeleteButton>
+
+        <ModalButton
+          onClick={() => setSettingsModal(false)}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
         height={isMobileOnly ? '40vh' : '20vh'}
