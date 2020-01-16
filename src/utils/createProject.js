@@ -130,7 +130,7 @@ const createProject = async ({
         : document.location.href
 
     /* ToDo: Make this scallable and work with other sites as well */
-    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : 'default'
+    const type = originDomain.includes('freecodecamp.org') && 'fcc'
 
     const { description, name /* add language and color */ } = repoData
     dispatch(

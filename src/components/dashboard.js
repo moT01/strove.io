@@ -456,9 +456,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
-  console.log('TCL: Dashboard -> projects', projects)
   const myTeams = useSelector(selectors.api.getMyTeams)
-  console.log('TCL: Dashboard -> myTeams', myTeams)
   const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -467,7 +465,15 @@ const Dashboard = ({ history }) => {
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const [expandedTiles, setExpandedTiles] = useState({})
+  const [expandedTiles, setExpandedTiles] = useState(
+    myTeams.reduce((tiles, team) => {
+      tiles[team.id] = {
+        isMembersActive: false,
+        isProjectsActive: false,
+      }
+      return tiles
+    }, {})
+  )
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
