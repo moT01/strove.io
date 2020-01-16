@@ -132,9 +132,9 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
-const Projects = ({ history }) => {
+const Projects = ({ history, projects }) => {
   const dispatch = useDispatch()
-  const projects = useSelector(selectors.api.getUserProjects)
+  //   const projects = useSelector(selectors.api.getUserProjects)
   const myTeams = useSelector(selectors.api.getMyTeams)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -142,7 +142,7 @@ const Projects = ({ history }) => {
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const currentProject = projects.find(item => item.machineId)
+  const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
 
@@ -202,10 +202,12 @@ const Projects = ({ history }) => {
   return (
     <>
       <TilesWrapper>
-        <ProjectTitle>
-          Projects count: {projects.length}/{projectsLimit}
-        </ProjectTitle>
-        {projects.map(project => (
+        {projects && (
+          <ProjectTitle>
+            Projects count: {projects.length}/{projectsLimit}
+          </ProjectTitle>
+        )}
+        {projects?.map(project => (
           <Tile key={project.id}>
             <VerticalDivider>
               <InfoWrapper>

@@ -477,15 +477,18 @@ const Dashboard = ({ history }) => {
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
-  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
-  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
-  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const projectsLimit = 20
   const [isAdmin, setIsAdmin] = useState(true)
 
   useEffect(() => updateTeams(), [])
+
+  const teamProjects = myTeams.reduce((projects, team) => {
+    projects[team.id] = team.projects
+    return projects
+  }, {})
+
+  console.log('Team projects', teamProjects)
 
   const tabs = [
     {
@@ -632,9 +635,7 @@ const Dashboard = ({ history }) => {
                             setAddProjectModal(true)
                           }}
                         />
-                        {team?.projects?.map(project => (
-                          <Text>{project.name}</Text>
-                        ))}
+                        <Projects projects={teamProjects[team.id]} />
                       </TeamTileSection>
                     )}
                   </TeamTile>
@@ -647,34 +648,9 @@ const Dashboard = ({ history }) => {
     },
     {
       name: 'Projects',
-      content: <Projects />,
+      content: <Projects projects={projects} />,
     },
   ]
-
-  const handleStartClick = ({ id, editorPort }) => {
-    if (!currentProjectId || currentProjectId === id) {
-      if (!editorPort) {
-        dispatch(
-          mutation({
-            name: 'continueProject',
-            mutation: CONTINUE_PROJECT,
-            variables: { projectId: id },
-            onSuccessDispatch: null,
-          })
-        )
-      } else {
-        dispatch(
-          actions.api.fetchSuccess({
-            data: { currentProjectId: id },
-            storeKey: 'user',
-          })
-        )
-        history.push('/app/editor/')
-      }
-    } else {
-      setStopModal(true)
-    }
-  }
 
   const createTeam = ({ name }) => {
     dispatch(
