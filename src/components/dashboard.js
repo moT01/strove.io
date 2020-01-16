@@ -483,7 +483,7 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const projectsLimit = 20
-  const isAdmin = true
+  const [isAdmin, setIsAdmin] = useState(true)
 
   const tabs = [
     {
@@ -940,6 +940,13 @@ const Dashboard = ({ history }) => {
     <>
       <SEO title="Dashboard" />
       <Header />
+      <StroveButton
+        isPrimary
+        padding="0.5vh"
+        width="20%"
+        onClick={() => setIsAdmin(!isAdmin)}
+        text="Toggle Admin"
+      />
       <PageWrapper isAdmin={isAdmin}>
         {isAdmin ? (
           <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
