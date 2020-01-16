@@ -72,7 +72,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => (
       onSubmit={(values, actions) => {
         handleClose()
         addProject({ name: values.projectName.trim(), teamId })
-        console.log('TCL: teamId', teamId)
         actions.setSubmitting(false)
       }}
       validate={validateProjectName}

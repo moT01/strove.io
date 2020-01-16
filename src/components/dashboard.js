@@ -456,7 +456,9 @@ const TileSectionHeader = styled(TeamTileHeader)`
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
+  console.log('TCL: Dashboard -> projects', projects)
   const myTeams = useSelector(selectors.api.getMyTeams)
+  console.log('TCL: Dashboard -> myTeams', myTeams)
   const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -1144,7 +1146,6 @@ const Dashboard = ({ history }) => {
           />
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
-        {console.log('TCL: teamId', teamId)}
       </StyledReactModal>
     </>
   )
