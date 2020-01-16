@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
@@ -20,19 +20,20 @@ const getUserToken = selectors.api.getApiData({
 })
 
 const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
-  const iframe = useRef()
+  // const iframe = useRef()
+  const [editorContent, setEditorContent] = useState()
   const token = useSelector(getUserToken)
   const randomId = Math.random()
     .toString(36)
     .substring(7)
 
   useEffect(() => {
-    if (iframe && token) {
+    if (token) {
       const handler = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
           // this.response is a Blob, because we set responseType above
-          const dataUrl = URL.createObjectURL(this.response)
-          iframe.src = dataUrl
+          const dataUrl = URL.createObjectURL(xhr.response)
+          setEditorContent(dataUrl)
         } else {
           console.error('Something went wrong')
         }
@@ -48,16 +49,17 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
       xhr.send()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [iframe, token])
+  }, [token])
 
-  return (
+  return editorContent ? (
     <StyledIframe
-      ref={iframe}
       isEmbed={isEmbed}
       loaderVisible={loaderVisible}
       onLoad={onLoad}
-      src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project`}
+      src={editorContent}
     />
+  ) : (
+    loaderVisible
   )
 }
 
