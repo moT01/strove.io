@@ -2,10 +2,10 @@ import gql from 'graphql-tag'
 import { ProjectFragment } from './fragments/project'
 
 export default gql`
-    mutation SetVisibility($teamId: ID!) {
-        setVisibility(teamId: $teamId){
-            ...Project
-        }
-        ${ProjectFragment}
+  mutation SetVisibility($projectId: ID!, $isVisible: Boolean!) {
+    setVisibility(projectId: $projectId, isVisible: $isVisible) {
+      ...Project
     }
+  }
+  ${ProjectFragment}
 `

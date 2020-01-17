@@ -192,17 +192,6 @@ const Projects = ({ history, projects }) => {
     handleStopProject({ id, dispatch })
   }
 
-  const handleVisibilityClick = projectId => {
-    dispatch(
-      mutation({
-        name: 'setVisibility',
-        mutation: SET_VISIBILITY,
-        variables: { projectId },
-        dataSelector: data => data,
-      })
-    )
-  }
-
   const closeModal = () => {
     setProjectToDelete(null)
     setModalVisible(false)
@@ -319,7 +308,17 @@ const Projects = ({ history, projects }) => {
                       margin="0px 0px 5px 0px"
                       font-size="0.8rem"
                       onClick={() => {
-                        handleVisibilityClick(project.id)
+                        dispatch(
+                          mutation({
+                            name: 'setVisibility',
+                            mutation: SET_VISIBILITY,
+                            variables: {
+                              projectId: project.id,
+                              isVisible: !project.isVisible,
+                            },
+                            dataSelector: data => data,
+                          })
+                        )
                       }}
                       text="Show"
                     />
