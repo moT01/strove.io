@@ -79,7 +79,7 @@ const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
 `
@@ -122,7 +122,10 @@ const CircleIcon = styled.div`
 `
 
 const StyledIcon = styled(Icon)`
-  font-size: 1.7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
   color: ${({ theme }) => theme.colors.c1};
 `
 
@@ -244,8 +247,10 @@ const Projects = ({ history, projects }) => {
         <Text>{project.language}</Text>
       </TextWrapper> */}
                 <TextWrapper>
-                  <StyledIcon type={project.isPrivate ? 'lock' : 'unlock'} />
-                  <Text>{project.isPrivate ? 'Private' : 'Public'}</Text>
+                  <StyledIcon
+                    type={project.isVisible ? 'eye' : 'eye-invisible'}
+                  />
+                  <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                 </TextWrapper>
               </InfoWrapper>
               <RightSection>
@@ -254,6 +259,7 @@ const Projects = ({ history, projects }) => {
                   isDisabled={isDeleting || isContinuing || isStopping}
                   isPrimary
                   padding="0.5vh"
+                  margin="0px 0px 5px 0px"
                   onClick={() => handleStartClick(project)}
                   text={
                     currentProjectId && project.id === currentProjectId
@@ -265,6 +271,7 @@ const Projects = ({ history, projects }) => {
                   <StroveButton
                     isDisabled={isDeleting || isContinuing || isStopping}
                     padding="0.5vh"
+                    margin="0px 0px 5px 0px"
                     onClick={() => {
                       handleStopClick(project.id)
                     }}

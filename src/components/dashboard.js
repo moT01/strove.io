@@ -287,28 +287,6 @@ const FlexWrapper = styled.div`
   align-items: center;
 `
 
-const RightSection = styled(FlexWrapper)`
-  width: 20%;
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0.5%;
-`
-
-const InfoWrapper = styled(FlexWrapper)`
-  width: 80%;
-  align-items: flex-start;
-`
-
-const TextWrapper = styled(FlexWrapper)`
-  flex-direction: row;
-  margin-top: 0.3vh;
-  margin-bottom: 0.3vh;
-  width: 90%;
-  height: auto;
-  justify-content: flex-start;
-`
-
 const DeleteButton = styled.button`
 width: 15%;
 	box-shadow:inset 0px 1px 0px 0px #cf866c;
@@ -335,14 +313,6 @@ width: 15%;
 const InviteStatus = styled.span`
   color: ${({ theme }) => theme.colors.c16};
   margin-left: 24px;
-`
-
-const CircleIcon = styled.div`
-  height: 1.5vh;
-  width: 1.5vh;
-  border-radius: 50%;
-  background: ${({ theme, active }) =>
-    active ? theme.colors.c8 : theme.colors.c9};
 `
 
 const StyledIcon = styled(Icon)`
@@ -466,13 +436,15 @@ const Dashboard = ({ history }) => {
   const [settingsModal, setSettingsModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState(
-    myTeams?.reduce((tiles, team) => {
-      tiles[team.id] = {
-        isMembersActive: false,
-        isProjectsActive: false,
-      }
-      return tiles
-    }, {})
+    myTeams
+      ? myTeams.reduce((tiles, team) => {
+          tiles[team.id] = {
+            isMembersActive: false,
+            isProjectsActive: false,
+          }
+          return tiles
+        }, {})
+      : {}
   )
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
@@ -493,13 +465,6 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <ProjectTitle>Admin console</ProjectTitle>
-          <StroveButton
-            isPrimary
-            padding="0.5vh"
-            width="20%"
-            onClick={() => handleCreateTeamClick()}
-            text="Create team"
-          />
           {myTeams.map(team => {
             const isExpanded = expandedTiles[team.id]
             return (
@@ -640,6 +605,13 @@ const Dashboard = ({ history }) => {
               </TeamTileWrapper>
             )
           })}
+          <StroveButton
+            isPrimary
+            padding="0.5vh"
+            width="20%"
+            onClick={() => handleCreateTeamClick()}
+            text="Create new team"
+          />
         </TilesWrapper>
       ),
     },
@@ -823,26 +795,19 @@ const Dashboard = ({ history }) => {
     <>
       <SEO title="Dashboard" />
       <Header />
-      <StroveButton
-        isPrimary
-        padding="0.5vh"
-        width="20%"
-        onClick={() => setIsAdmin(!isAdmin)}
-        text="Toggle Admin"
-      />
-      <PageWrapper isAdmin={isAdmin}>
-        {isAdmin ? (
-          <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
-        ) : (
+      <PageWrapper>
+        {/* {isAdmin ? ( */}
+        <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
+        {/* ) : (
           <>
-            {/* <TrialInfoWrapper>
+            <TrialInfoWrapper>
             Your workspace is currently on the free version of Strove.{' '}
             <StyledLink to="/pricing">See upgrade options</StyledLink>
-          </TrialInfoWrapper> */}
+          </TrialInfoWrapper>
             <GetStarted />
             {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
           </>
-        )}
+        )} */}
         <Footer />
       </PageWrapper>
       <Modal
