@@ -184,13 +184,13 @@ const TilesWrapper = styled.div`
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
-const ProjectTitle = styled.h3`
+const Title = styled.h3`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.c1};
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
-const SectionTitle = styled(ProjectTitle)`
+const SectionTitle = styled(Title)`
   font-size: 1.2rem;
   font-weight: 400;
 `
@@ -376,7 +376,7 @@ const TeamTileHeader = styled(Tile)`
   background-color: ${({ theme, expanded }) =>
     expanded ? theme.colors.c1 : theme.colors.c2};
 
-  ${ProjectTitle} {
+  ${Title} {
     color: ${({ theme, expanded }) =>
       expanded ? theme.colors.c2 : theme.colors.c1};
     transition: all 0.2s;
@@ -385,7 +385,7 @@ const TeamTileHeader = styled(Tile)`
   :hover {
     background-color: ${({ theme }) => theme.colors.c1};
     cursor: pointer;
-    ${ProjectTitle} {
+    ${Title} {
       color: ${({ theme }) => theme.colors.c2};
     }
     ${ExpandIcon} {
@@ -405,7 +405,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
   background-color: ${({ theme, expanded }) =>
     expanded ? theme.colors.c1 : theme.colors.c2};
 
-  ${ProjectTitle} {
+  ${Title} {
     color: ${({ theme, expanded }) =>
       expanded ? theme.colors.c2 : theme.colors.c1};
     transition: all 0.2s;
@@ -414,7 +414,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
   :hover {
     background-color: ${({ theme }) => theme.colors.c2};
     cursor: pointer;
-    ${ProjectTitle} {
+    ${Title} {
       color: ${({ theme }) => theme.colors.c1};
     }
     ${ExpandIcon} {
@@ -451,7 +451,6 @@ const Dashboard = ({ history }) => {
   const [editMode, setEditMode] = useState('')
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const [isAdmin, setIsAdmin] = useState(true)
 
   useEffect(() => updateTeams(), [])
 
@@ -464,14 +463,14 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <TilesWrapper>
-          <ProjectTitle>Admin console</ProjectTitle>
+          <Title>Admin console</Title>
           {myTeams.map(team => {
             const isExpanded = expandedTiles[team.id]
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                <TeamTileHeader isAdmin={isAdmin} expanded={isExpanded}>
+                <TeamTileHeader expanded={isExpanded}>
                   <TeamHeaderDivider>
-                    <ProjectTitle>{team.name}</ProjectTitle>
+                    <Title>{team.name}</Title>
                     <IconWrapper onClick={() => handleExpandTile(team.id)}>
                       <ExpandIcon type="down" expanded={isExpanded} />
                     </IconWrapper>
@@ -796,18 +795,7 @@ const Dashboard = ({ history }) => {
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
-        {/* {isAdmin ? ( */}
-        <>{tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}</>
-        {/* ) : (
-          <>
-            <TrialInfoWrapper>
-            Your workspace is currently on the free version of Strove.{' '}
-            <StyledLink to="/pricing">See upgrade options</StyledLink>
-          </TrialInfoWrapper>
-            <GetStarted />
-            {tabs[tabs.findIndex(tab => tab.name === 'Projects')].content}
-          </>
-        )} */}
+        {tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}
         <Footer />
       </PageWrapper>
       <Modal
@@ -943,6 +931,7 @@ const Dashboard = ({ history }) => {
         contentLabel="Team settings"
         ariaHideApp={false}
       >
+        <Title>Team settings</Title>
         <StroveButton
           isPrimary
           padding="0.5vh"

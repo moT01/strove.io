@@ -21,6 +21,7 @@ import CREATE_TEAM from './createTeam'
 import RENAME_TEAM from './renameTeam'
 import REMOVE_MEMBER from './removeMember'
 import DELETE_TEAM from './deleteTeam'
+import SET_VISIBILITY from './setVisibility'
 
 export {
   ADD_PROJECT,
@@ -46,4 +47,5 @@ export {
   RENAME_TEAM,
   REMOVE_MEMBER,
   DELETE_TEAM,
+  SET_VISIBILITY,
 }

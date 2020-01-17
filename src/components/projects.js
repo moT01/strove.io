@@ -6,7 +6,7 @@ import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
 import { mutation, handleStopProject, query } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT } from 'queries'
+import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
@@ -96,7 +96,7 @@ const RightSection = styled(FlexWrapper)`
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0.5%;
+  align-items: flex-end;
 `
 
 const InfoWrapper = styled(FlexWrapper)`
@@ -258,8 +258,10 @@ const Projects = ({ history, projects }) => {
                   to="/app/editor/"
                   isDisabled={isDeleting || isContinuing || isStopping}
                   isPrimary
-                  padding="0.5vh"
+                  padding="3px 15px"
+                  width="70%"
                   margin="0px 0px 5px 0px"
+                  font-size="0.8rem"
                   onClick={() => handleStartClick(project)}
                   text={
                     currentProjectId && project.id === currentProjectId
@@ -270,8 +272,10 @@ const Projects = ({ history, projects }) => {
                 {currentProjectId && currentProjectId === project.id ? (
                   <StroveButton
                     isDisabled={isDeleting || isContinuing || isStopping}
-                    padding="0.5vh"
+                    padding="3px 15px"
+                    width="70%"
                     margin="0px 0px 5px 0px"
+                    font-size="0.8rem"
                     onClick={() => {
                       handleStopClick(project.id)
                     }}
@@ -280,7 +284,10 @@ const Projects = ({ history, projects }) => {
                 ) : null}
                 <StroveButton
                   isDisabled={isDeleting || isContinuing || isStopping}
-                  padding="0.5vh"
+                  padding="3px 15px"
+                  width="70%"
+                  margin="0px 0px 5px 0px"
+                  font-size="0.8rem"
                   onClick={() => {
                     setModalVisible(true)
                     setProjectToDelete(project)
