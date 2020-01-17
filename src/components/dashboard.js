@@ -616,7 +616,7 @@ const Dashboard = ({ history }) => {
     },
     {
       name: 'Projects',
-      content: <Projects projects={projects} />,
+      content: <Projects projects={projects} history={history}/>,
     },
   ]
 
