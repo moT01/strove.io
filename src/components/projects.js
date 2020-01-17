@@ -25,13 +25,11 @@ const TilesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 2vh;
-  margin: 2vh;
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
 const ProjectTitle = styled.h3`
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.c1};
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
@@ -42,15 +40,11 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.c17};
+  border-width: 0px 0px 1px 0px;
   border-style: solid;
   padding: 20px;
-  box-shadow: ${({ expanded, theme }) =>
-    expanded ? '0' : ` 0 1.5vh 1.5vh -1.5vh ${theme.colors.c1}`};
-  margin: 15px;
-  width: 50%;
+  width: 100%;
   transition: all 0.2s;
 
   /* @media (max-width: 1365px) {
@@ -134,7 +128,6 @@ const StyledIcon = styled(Icon)`
 
 const Projects = ({ history, projects }) => {
   const dispatch = useDispatch()
-  //   const projects = useSelector(selectors.api.getUserProjects)
   const myTeams = useSelector(selectors.api.getMyTeams)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -202,11 +195,11 @@ const Projects = ({ history, projects }) => {
   return (
     <>
       <TilesWrapper>
-        {projects && (
+        {/* {projects && (
           <ProjectTitle>
             Projects count: {projects.length}/{projectsLimit}
           </ProjectTitle>
-        )}
+        )} */}
         {projects?.map(project => (
           <Tile key={project.id}>
             <VerticalDivider>

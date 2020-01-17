@@ -622,6 +622,7 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isProjectsActive && (
                       <TeamTileSection isLast>
+                        <Projects projects={teamProjects[team.id]} />
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
@@ -632,7 +633,6 @@ const Dashboard = ({ history }) => {
                             setAddProjectModal(true)
                           }}
                         />
-                        <Projects projects={teamProjects[team.id]} />
                       </TeamTileSection>
                     )}
                   </TeamTile>
