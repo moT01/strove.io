@@ -485,11 +485,7 @@ const Dashboard = ({ history }) => {
 
   const teamProjects = myTeams?.reduce((projects, team) => {
     return { ...projects, [team.id]: team.projects }
-    // projects[team.id] = team.projects
-    // return projects
   }, {})
-
-  console.log('Team projects', teamProjects)
 
   const tabs = [
     {
