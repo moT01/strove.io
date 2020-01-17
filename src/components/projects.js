@@ -209,6 +209,12 @@ const Projects = ({ history, projects }) => {
           project =>
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>
+                {console.log(
+                  'TCL: project.isVisible',
+                  project.isVisible,
+                  'TCL: isOwner',
+                  isOwner
+                )}
                 <VerticalDivider>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
