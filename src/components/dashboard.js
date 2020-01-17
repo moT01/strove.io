@@ -466,7 +466,7 @@ const Dashboard = ({ history }) => {
   const [settingsModal, setSettingsModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState(
-    myTeams.reduce((tiles, team) => {
+    myTeams?.reduce((tiles, team) => {
       tiles[team.id] = {
         isMembersActive: false,
         isProjectsActive: false,
@@ -483,7 +483,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => updateTeams(), [])
 
-  const teamProjects = myTeams.reduce((projects, team) => {
+  const teamProjects = myTeams?.reduce((projects, team) => {
     return { ...projects, [team.id]: team.projects }
     // projects[team.id] = team.projects
     // return projects
