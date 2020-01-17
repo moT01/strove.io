@@ -132,6 +132,7 @@ const StyledIcon = styled(Icon)`
 const Projects = ({ history, projects }) => {
   const dispatch = useDispatch()
   const myTeams = useSelector(selectors.api.getMyTeams)
+  const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -140,6 +141,7 @@ const Projects = ({ history, projects }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
+  const isOwner = projects.owner === user.id
   const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort }) => {
@@ -190,6 +192,17 @@ const Projects = ({ history, projects }) => {
     handleStopProject({ id, dispatch })
   }
 
+  const handleVisibilityClick = projectId => {
+    dispatch(
+      mutation({
+        name: 'setVisibility',
+        mutation: SET_VISIBILITY,
+        variables: { projectId },
+        dataSelector: data => data,
+      })
+    )
+  }
+
   const closeModal = () => {
     setProjectToDelete(null)
     setModalVisible(false)
@@ -203,38 +216,42 @@ const Projects = ({ history, projects }) => {
             Projects count: {projects.length}/{projectsLimit}
           </ProjectTitle>
         )} */}
-        {projects?.map(project => (
-          <Tile key={project.id}>
-            <VerticalDivider>
-              <InfoWrapper>
-                <ProjectTitle>{project.name}</ProjectTitle>
+        {projects?.map(
+          project =>
+            (project.isVisible || isOwner) && (
+              <Tile key={project.id}>
+                <VerticalDivider>
+                  <InfoWrapper>
+                    <ProjectTitle>{project.name}</ProjectTitle>
 
-                {currentProjectId && project.id === currentProjectId ? (
-                  <TextWrapper>
-                    <CircleIcon active />
-                    <Text>Active</Text>
-                  </TextWrapper>
-                ) : (
-                  <TextWrapper>
-                    <CircleIcon />
-                    <Text>Inactive</Text>
-                  </TextWrapper>
-                )}
-                <TextWrapper>
-                  <StyledIcon type="calendar" />
-                  <Text>{dayjs(+project.createdAt).format('DD/MM/YYYY')}</Text>
-                </TextWrapper>
-                {project.description && (
-                  <TextWrapper>
-                    <StyledIcon type="edit" />
-                    <Text>
-                      {project.description
-                        ? project.description
-                        : 'This is the project description.. Tribute'}
-                    </Text>
-                  </TextWrapper>
-                )}
-                {/* <TextWrapper>
+                    {currentProjectId && project.id === currentProjectId ? (
+                      <TextWrapper>
+                        <CircleIcon active />
+                        <Text>Active</Text>
+                      </TextWrapper>
+                    ) : (
+                      <TextWrapper>
+                        <CircleIcon />
+                        <Text>Inactive</Text>
+                      </TextWrapper>
+                    )}
+                    <TextWrapper>
+                      <StyledIcon type="calendar" />
+                      <Text>
+                        {dayjs(+project.createdAt).format('DD/MM/YYYY')}
+                      </Text>
+                    </TextWrapper>
+                    {project.description && (
+                      <TextWrapper>
+                        <StyledIcon type="edit" />
+                        <Text>
+                          {project.description
+                            ? project.description
+                            : 'This is the project description.. Tribute'}
+                        </Text>
+                      </TextWrapper>
+                    )}
+                    {/* <TextWrapper>
         <StyledIcon
           type="branches"
         />
@@ -246,58 +263,71 @@ const Projects = ({ history, projects }) => {
         />
         <Text>{project.language}</Text>
       </TextWrapper> */}
-                <TextWrapper>
-                  <StyledIcon
-                    type={project.isVisible ? 'eye' : 'eye-invisible'}
-                  />
-                  <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
-                </TextWrapper>
-              </InfoWrapper>
-              <RightSection>
-                <StroveButton
-                  to="/app/editor/"
-                  isDisabled={isDeleting || isContinuing || isStopping}
-                  isPrimary
-                  padding="3px 15px"
-                  width="70%"
-                  margin="0px 0px 5px 0px"
-                  font-size="0.8rem"
-                  onClick={() => handleStartClick(project)}
-                  text={
-                    currentProjectId && project.id === currentProjectId
-                      ? 'Continue'
-                      : 'Start'
-                  }
-                />
-                {currentProjectId && currentProjectId === project.id ? (
-                  <StroveButton
-                    isDisabled={isDeleting || isContinuing || isStopping}
-                    padding="3px 15px"
-                    width="70%"
-                    margin="0px 0px 5px 0px"
-                    font-size="0.8rem"
-                    onClick={() => {
-                      handleStopClick(project.id)
-                    }}
-                    text="Stop"
-                  />
-                ) : null}
-                <StroveButton
-                  isDisabled={isDeleting || isContinuing || isStopping}
-                  padding="3px 15px"
-                  width="70%"
-                  margin="0px 0px 5px 0px"
-                  font-size="0.8rem"
-                  onClick={() => {
-                    setModalVisible(true)
-                    setProjectToDelete(project)
-                  }}
-                  text="Delete"
-                />
-              </RightSection>
-            </VerticalDivider>
-          </Tile>
-        ))}
+                    <TextWrapper>
+                      <StyledIcon
+                        type={project.isVisible ? 'eye' : 'eye-invisible'}
+                      />
+                      <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
+                    </TextWrapper>
+                  </InfoWrapper>
+                  <RightSection>
+                    <StroveButton
+                      to="/app/editor/"
+                      isDisabled={isDeleting || isContinuing || isStopping}
+                      isPrimary
+                      padding="3px 15px"
+                      width="70%"
+                      margin="0px 0px 5px 0px"
+                      font-size="0.8rem"
+                      onClick={() => handleStartClick(project)}
+                      text={
+                        currentProjectId && project.id === currentProjectId
+                          ? 'Continue'
+                          : 'Start'
+                      }
+                    />
+                    {currentProjectId && currentProjectId === project.id ? (
+                      <StroveButton
+                        isDisabled={isDeleting || isContinuing || isStopping}
+                        padding="3px 15px"
+                        width="70%"
+                        margin="0px 0px 5px 0px"
+                        font-size="0.8rem"
+                        onClick={() => {
+                          handleStopClick(project.id)
+                        }}
+                        text="Stop"
+                      />
+                    ) : (
+                      <StroveButton
+                        isDisabled={isDeleting || isContinuing || isStopping}
+                        padding="3px 15px"
+                        width="70%"
+                        margin="0px 0px 5px 0px"
+                        font-size="0.8rem"
+                        onClick={() => {
+                          setModalVisible(true)
+                          setProjectToDelete(project)
+                        }}
+                        text="Delete"
+                      />
+                    )}
+                    <StroveButton
+                      isDisabled={isDeleting || isContinuing || isStopping}
+                      padding="3px 15px"
+                      width="70%"
+                      margin="0px 0px 5px 0px"
+                      font-size="0.8rem"
+                      onClick={() => {
+                        handleVisibilityClick(project.id)
+                      }}
+                      text="Show"
+                    />
+                  </RightSection>
+                </VerticalDivider>
+              </Tile>
+            )
+        )}
       </TilesWrapper>
 
       <Modal
