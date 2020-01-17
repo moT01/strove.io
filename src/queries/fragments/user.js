@@ -5,6 +5,7 @@ import { TeamFragment } from './team'
 
 export const UserFragment = gql`
   fragment User on User {
+    id
     email
     name
     fullName

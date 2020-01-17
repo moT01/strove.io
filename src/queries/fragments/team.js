@@ -9,6 +9,7 @@ export const TeamFragment = gql`
       ...Project
     }
     owner {
+      id
       name
       photoUrl
     }

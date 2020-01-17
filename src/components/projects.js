@@ -141,7 +141,6 @@ const Projects = ({ history, projects }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const isOwner = projects.owner === user.id
   const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort }) => {
@@ -205,16 +204,18 @@ const Projects = ({ history, projects }) => {
             Projects count: {projects.length}/{projectsLimit}
           </ProjectTitle>
         )} */}
-        {projects?.map(
-          project =>
+        {projects?.map((project, index) => {
+          const isOwner =
+            myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)]
+              .owner.id === user.id
+          console.log(
+            myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)],
+            projects[index].teamId,
+            user.id
+          )
+          return (
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>
-                {console.log(
-                  'TCL: project.isVisible',
-                  project.isVisible,
-                  'TCL: isOwner',
-                  isOwner
-                )}
                 <VerticalDivider>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
@@ -332,7 +333,8 @@ const Projects = ({ history, projects }) => {
                 </VerticalDivider>
               </Tile>
             )
-        )}
+          )
+        })}
       </TilesWrapper>
 
       <Modal
