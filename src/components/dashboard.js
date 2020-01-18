@@ -439,8 +439,8 @@ const Dashboard = ({ history }) => {
     myTeams
       ? myTeams.reduce((tiles, team) => {
           tiles[team.id] = {
-            isMembersActive: false,
-            isProjectsActive: false,
+            isMembersActive: true,
+            isProjectsActive: true,
           }
           return tiles
         }, {})
