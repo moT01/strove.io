@@ -430,21 +430,21 @@ const SettingWrapper = styled.div`
 `
 
 const DropdownWrapper = styled.div`
-  width: 80%;
+  width: 20vw;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.colors.c1};
 `
 
 const StyledSelect = styled(Select)`
-  width: ${props => (props.isLang ? '40%' : '10%')};
+  width: 100%;
 `
 
 const Setting = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   margin: 5px 0;
@@ -488,7 +488,6 @@ const Dashboard = ({ history }) => {
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const [users, setUsers] = useState([])
   const teamsObj = myTeams.reduce((teams, team) => {
     return { ...teams, [team.id]: team }
   }, {})
@@ -1107,7 +1106,12 @@ const Dashboard = ({ history }) => {
                 isLang
                 value={newOwnerSelect}
                 onChange={handleNewOwnerSelect}
-                options={users}
+                options={teamsObj[editTeamId]?.users
+                  .map(user => ({
+                    values: user.id,
+                    label: user.name,
+                  }))
+                  .filter(user => user.label)}
                 theme={theme => ({
                   ...theme,
                   borderRadius: 0,
