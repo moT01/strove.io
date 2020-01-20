@@ -208,11 +208,6 @@ const Projects = ({ history, projects }) => {
           const isOwner =
             myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)]
               .owner.id === user.id
-          console.log(
-            myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)],
-            projects[index].teamId,
-            user.id
-          )
           return (
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>
