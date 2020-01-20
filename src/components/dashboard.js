@@ -18,6 +18,7 @@ import {
   REMOVE_MEMBER,
   MY_TEAMS,
   DELETE_TEAM,
+  TRANSFER_OWNERSHIP,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -776,6 +777,17 @@ const Dashboard = ({ history }) => {
     console.log('Yeet', teamId)
   }
 
+  const transferOwnership = ({ teamId, newOwnerId }) => {
+    dispatch(
+      mutation({
+        name: 'transferOwnership',
+        mutation: TRANSFER_OWNERSHIP,
+        variables: { teamId, newOwnerId },
+        onScucess: () => console.log('Yeet'),
+      })
+    )
+  }
+
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleDeleteClick = id => {
@@ -1014,7 +1026,7 @@ const Dashboard = ({ history }) => {
           padding="0.5vh"
           margin="0px 0px 5px 0px"
           width="80%"
-          onClick={() => handleTransferOwnershipClick(editTeamId)}
+          onClick={() => handleTransferOwnershipClick(false)}
           text="Transfer ownership"
         />
         {/* Deleting team is still WIP */}
@@ -1103,7 +1115,6 @@ const Dashboard = ({ history }) => {
           <Setting>
             <DropdownWrapper>
               <StyledSelect
-                isLang
                 value={newOwnerSelect}
                 onChange={handleNewOwnerSelect}
                 options={teamsObj[editTeamId]?.users
@@ -1134,6 +1145,17 @@ const Dashboard = ({ history }) => {
             </DropdownWrapper>
           </Setting>
         </SettingWrapper>
+        <ModalButton
+          onClick={() =>
+            transferOwnership({
+              teamId: editTeamId,
+              newOwnerId: newOwnerSelect.values,
+            })
+          }
+          text="Transfer ownership"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
         <ModalButton
           onClick={() => setOwnershipModal(false)}
           text="Close"

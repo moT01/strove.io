@@ -22,6 +22,7 @@ import RENAME_TEAM from './renameTeam'
 import REMOVE_MEMBER from './removeMember'
 import DELETE_TEAM from './deleteTeam'
 import SET_VISIBILITY from './setVisibility'
+import TRANSFER_OWNERSHIP from './transferOwnership'
 
 export {
   ADD_PROJECT,
@@ -48,4 +49,5 @@ export {
   REMOVE_MEMBER,
   DELETE_TEAM,
   SET_VISIBILITY,
+  TRANSFER_OWNERSHIP,
 }
