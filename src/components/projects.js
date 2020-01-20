@@ -1,11 +1,11 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
-import { mutation, handleStopProject, query } from 'utils'
+import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'

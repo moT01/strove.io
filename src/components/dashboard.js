@@ -3,7 +3,6 @@ import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
@@ -12,7 +11,6 @@ import ReactModal from 'react-modal'
 import { mutation, handleStopProject, query } from 'utils'
 import {
   DELETE_PROJECT,
-  CONTINUE_PROJECT,
   ADD_MEMBER,
   CREATE_TEAM,
   RENAME_TEAM,
@@ -27,6 +25,7 @@ import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
 import Footer from './footer'
+import StroveLogo from 'images/strove.png'
 
 const validate = values => {
   let errors = {}
@@ -146,11 +145,11 @@ const StyledForm = styled(Form)`
   width: 100%;
 `
 
-const StyledInfo = styled.span`
-  margin: 20px;
-  color: ${({ theme }) => theme.colors.c13};
-  font-size: 13px;
-`
+// const StyledInfo = styled.span`
+//   margin: 20px;
+//   color: ${({ theme }) => theme.colors.c13};
+//   font-size: 13px;
+// `
 
 const Wrapper = styled.div`
   display: flex;
@@ -278,13 +277,6 @@ const RowWrapper = styled(VerticalDivider)`
   border-color: ${({ theme }) => theme.colors.c17};
   border-style: solid;
   padding: 3px;
-`
-
-const FlexWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `
 
 const DeleteButton = styled.button`
@@ -423,6 +415,13 @@ const TileSectionHeader = styled(TeamTileHeader)`
   }
 `
 
+const UserPhoto = styled.img`
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 5px;
+  margin: 0;
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -518,7 +517,16 @@ const Dashboard = ({ history }) => {
                             member.name && (
                               <RowWrapper key={member.name}>
                                 <TeamHeaderDivider>
+                                  <VerticalDivider>
+                                  <UserPhoto
+                                    src={
+                                      member.photoUrl
+                                        ? member.photoUrl
+                                        : StroveLogo
+                                    }
+                                  />
                                   <Text>{member.name}</Text>
+                                  </VerticalDivider>
                                   <DeleteButton
                                     onClick={() =>
                                       deleteMember({
@@ -536,10 +544,19 @@ const Dashboard = ({ history }) => {
                         {team?.invited?.map(member => (
                           <RowWrapper key={member.name}>
                             <TeamHeaderDivider>
+                              <VerticalDivider>
+                                  <UserPhoto
+                                    src={
+                                      member.photoUrl
+                                        ? member.photoUrl
+                                        : StroveLogo
+                                    }
+                                  />
                               <Text>
-                                {member.name ? member.name : member.email}{' '}
+                                {member.name ? member.name : member.email}
                                 <InviteStatus>Invite pending</InviteStatus>
                               </Text>
+                              </VerticalDivider>
                               <DeleteButton
                                 onClick={() =>
                                   deleteMember({
