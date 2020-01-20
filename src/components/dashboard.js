@@ -697,7 +697,7 @@ const Dashboard = ({ history }) => {
   }
 
   // Deleting projects is still WIP
-  const deleteTeam = teamId => {
+  const deleteTeam = ({ teamId }) => {
     dispatch(
       mutation({
         name: 'deleteTeam',
@@ -705,6 +705,7 @@ const Dashboard = ({ history }) => {
         variables: { teamId },
       })
     )
+    console.log('TeamId', teamId)
   }
 
   const updateTeams = () => {
@@ -1118,7 +1119,7 @@ const Dashboard = ({ history }) => {
                 value={newOwnerSelect}
                 onChange={handleNewOwnerSelect}
                 options={teamsObj[editTeamId]?.users
-                  .map(user => ({
+                  ?.map(user => ({
                     values: user.id,
                     label: user.name,
                   }))
