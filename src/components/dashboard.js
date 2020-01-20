@@ -7,6 +7,7 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 import ReactModal from 'react-modal'
+import Select from 'react-select'
 
 import { mutation, handleStopProject, query } from 'utils'
 import {
@@ -419,12 +420,83 @@ const TileSectionHeader = styled(TeamTileHeader)`
   }
 `
 
+const SettingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2vh 0 0;
+`
+
+const DropdownWrapper = styled.div`
+  width: 80%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.c1};
+`
+
+const StyledSelect = styled(Select)`
+  width: ${props => (props.isLang ? '40%' : '10%')};
+`
+
+const Setting = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+`
+
 const UserPhoto = styled.img`
   width: 1.2rem;
   height: 1.2rem;
   border-radius: 5px;
   margin: 0;
 `
+
+const UsersDrodown = ({ team }) => {
+  const [newOwnerSelect, setNewOwnerSelect] = useState('')
+  const options = team.users
+
+  const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
+
+  return (
+    <SettingWrapper>
+      <Setting>
+        <DropdownWrapper>
+          <StyledSelect
+            isLang
+            value={newOwnerSelect}
+            onChange={handleNewOwnerSelect}
+            options={options}
+            theme={theme => ({
+              ...theme,
+              borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary: '#0072ce',
+                neutral5: '#0072ce',
+                neutral10: '#0072ce',
+                neutral20: '#0072ce',
+                neutral30: '#0072ce',
+                neutral40: '#0072ce',
+                neutral50: '#0072ce',
+                neutral60: '#0072ce',
+                neutral70: '#0072ce',
+                neutral80: '#0072ce',
+                neutral90: '#0072ce',
+              },
+            })}
+          />
+        </DropdownWrapper>
+      </Setting>
+    </SettingWrapper>
+  )
+}
 
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
@@ -437,6 +509,7 @@ const Dashboard = ({ history }) => {
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
+  const [ownershipModal, setOwnershipModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState(
     myTeams
@@ -736,6 +809,7 @@ const Dashboard = ({ history }) => {
   }
 
   const handleTransferOwnershipClick = teamId => {
+    setOwnershipModal(true)
     console.log('Yeet', teamId)
   }
 
@@ -1000,7 +1074,9 @@ const Dashboard = ({ history }) => {
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={renameTeamModal}
         onRequestClose={() => setRenameTeamModal(false)}
-        contentLabel="Stop project?"
+        contentLabel={
+          editMode === 'Rename team' ? 'Rename team' : 'Create team'
+        }
         ariaHideApp={false}
       >
         <Formik
@@ -1048,6 +1124,25 @@ const Dashboard = ({ history }) => {
           maxWidth="150px"
         />
       </Modal>
+
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={ownershipModal}
+        onRequestClose={() => setOwnershipModal(false)}
+        contentLabel="Transfer ownership"
+        ariaHideApp={false}
+      >
+        <UsersDrodown team={myTeams[myTeams.findIndex(x => x.id ===editTeamId)]}></UsersDrodown>
+        <ModalButton
+          onClick={() => setOwnershipModal(false)}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+
       <StyledReactModal
         isOpen={addProjectModal}
         onRequestClose={closeAddProjectModal}
