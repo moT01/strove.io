@@ -458,46 +458,6 @@ const UserPhoto = styled.img`
   margin: 0;
 `
 
-const UsersDrodown = ({ team }) => {
-  const [newOwnerSelect, setNewOwnerSelect] = useState('')
-  const options = team.users
-
-  const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
-
-  return (
-    <SettingWrapper>
-      <Setting>
-        <DropdownWrapper>
-          <StyledSelect
-            isLang
-            value={newOwnerSelect}
-            onChange={handleNewOwnerSelect}
-            options={options}
-            theme={theme => ({
-              ...theme,
-              borderRadius: 0,
-              colors: {
-                ...theme.colors,
-                primary: '#0072ce',
-                neutral5: '#0072ce',
-                neutral10: '#0072ce',
-                neutral20: '#0072ce',
-                neutral30: '#0072ce',
-                neutral40: '#0072ce',
-                neutral50: '#0072ce',
-                neutral60: '#0072ce',
-                neutral70: '#0072ce',
-                neutral80: '#0072ce',
-                neutral90: '#0072ce',
-              },
-            })}
-          />
-        </DropdownWrapper>
-      </Setting>
-    </SettingWrapper>
-  )
-}
-
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -525,9 +485,13 @@ const Dashboard = ({ history }) => {
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
+  const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-
+  const [users, setUsers] = useState([])
+  const teamsObj = myTeams.reduce((teams, team) => {
+    return { ...teams, [team.id]: team }
+  }, {})
   useEffect(() => updateTeams(), [])
 
   const teamProjects = myTeams?.reduce((projects, team) => {
@@ -540,7 +504,7 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <Title>Admin console</Title>
-          {myTeams.map(team => {
+          {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
@@ -812,6 +776,8 @@ const Dashboard = ({ history }) => {
     setOwnershipModal(true)
     console.log('Yeet', teamId)
   }
+
+  const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleDeleteClick = id => {
     dispatch(
@@ -1134,7 +1100,36 @@ const Dashboard = ({ history }) => {
         contentLabel="Transfer ownership"
         ariaHideApp={false}
       >
-        <UsersDrodown team={myTeams[myTeams.findIndex(x => x.id ===editTeamId)]}></UsersDrodown>
+        <SettingWrapper>
+          <Setting>
+            <DropdownWrapper>
+              <StyledSelect
+                isLang
+                value={newOwnerSelect}
+                onChange={handleNewOwnerSelect}
+                options={users}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary: '#0072ce',
+                    neutral5: '#0072ce',
+                    neutral10: '#0072ce',
+                    neutral20: '#0072ce',
+                    neutral30: '#0072ce',
+                    neutral40: '#0072ce',
+                    neutral50: '#0072ce',
+                    neutral60: '#0072ce',
+                    neutral70: '#0072ce',
+                    neutral80: '#0072ce',
+                    neutral90: '#0072ce',
+                  },
+                })}
+              />
+            </DropdownWrapper>
+          </Setting>
+        </SettingWrapper>
         <ModalButton
           onClick={() => setOwnershipModal(false)}
           text="Close"
