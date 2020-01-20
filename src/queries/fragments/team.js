@@ -22,6 +22,7 @@ export const TeamFragment = gql`
       name
       id
       email
+      photoUrl
     }
   }
   ${ProjectFragment}
