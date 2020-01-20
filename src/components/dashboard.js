@@ -35,8 +35,10 @@ const Wrapper = styled.div`
 `
 
 const PageWrapper = styled(Wrapper)`
+  min-height: calc(100vh - 64px);
   width: 100vw;
   padding-top: 5vh;
+  justify-content: space-between;
 `
 
 const TilesWrapper = styled.div`
