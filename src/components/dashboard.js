@@ -258,6 +258,10 @@ const ModalText = styled(Text)`
   overflow: visible;
 `
 
+const WarningText = styled(ModalText)`
+  color: ${({ theme }) => theme.colors.c5};
+`
+
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
@@ -280,7 +284,7 @@ const RowWrapper = styled(VerticalDivider)`
 `
 
 const DeleteButton = styled.button`
-width: 15%;
+width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
 	box-shadow:inset 0px 1px 0px 0px #cf866c;
 	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
 	background-color:#d0451b;
@@ -518,14 +522,14 @@ const Dashboard = ({ history }) => {
                               <RowWrapper key={member.name}>
                                 <TeamHeaderDivider>
                                   <VerticalDivider>
-                                  <UserPhoto
-                                    src={
-                                      member.photoUrl
-                                        ? member.photoUrl
-                                        : StroveLogo
-                                    }
-                                  />
-                                  <Text>{member.name}</Text>
+                                    <UserPhoto
+                                      src={
+                                        member.photoUrl
+                                          ? member.photoUrl
+                                          : StroveLogo
+                                      }
+                                    />
+                                    <Text>{member.name}</Text>
                                   </VerticalDivider>
                                   <DeleteButton
                                     onClick={() =>
@@ -545,17 +549,17 @@ const Dashboard = ({ history }) => {
                           <RowWrapper key={member.name}>
                             <TeamHeaderDivider>
                               <VerticalDivider>
-                                  <UserPhoto
-                                    src={
-                                      member.photoUrl
-                                        ? member.photoUrl
-                                        : StroveLogo
-                                    }
-                                  />
-                              <Text>
-                                {member.name ? member.name : member.email}
-                                <InviteStatus>Invite pending</InviteStatus>
-                              </Text>
+                                <UserPhoto
+                                  src={
+                                    member.photoUrl
+                                      ? member.photoUrl
+                                      : StroveLogo
+                                  }
+                                />
+                                <Text>
+                                  {member.name ? member.name : member.email}
+                                  <InviteStatus>Invite pending</InviteStatus>
+                                </Text>
                               </VerticalDivider>
                               <DeleteButton
                                 onClick={() =>
@@ -952,22 +956,31 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <Title>Team settings</Title>
+        <WarningText>
+          This section contains dangerous settings. Be careful while working
+          with them.
+        </WarningText>
         <StroveButton
           isPrimary
           padding="0.5vh"
-          width="20%"
+          margin="0px 0px 5px 0px"
+          width="80%"
           onClick={() => handleRenameTeamClick(editTeamId)}
           text="Rename team"
         />
         <StroveButton
           isPrimary
           padding="0.5vh"
-          width="20%"
+          margin="0px 0px 5px 0px"
+          width="80%"
           onClick={() => handleTransferOwnershipClick(editTeamId)}
           text="Transfer ownership"
         />
         {/* Deleting team is still WIP */}
-        <DeleteButton onClick={() => deleteTeam({ teamId: editTeamId })}>
+        <DeleteButton
+          isSettings
+          onClick={() => deleteTeam({ teamId: editTeamId })}
+        >
           Delete team
         </DeleteButton>
 
