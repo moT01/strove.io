@@ -14,6 +14,7 @@ const FullFadeIn = keyframes`
 const sizeProps = props =>
   css`
     ${props.width && `width: ${props.width}`};
+    ${props.minWidth && `min-width: ${props.minWidth}`}
   `
 
 export default memo(styled(Modal)`

@@ -106,7 +106,7 @@ const EmailFormWrapper = styled.div`
     width: calc(100% - 156px);
     height: 56px;
     padding: 0;
-    padding-left: 64px;
+    padding-left: ${({ isInvite }) => (isInvite ? '64px' : '8px')};
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 36px;
@@ -882,11 +882,12 @@ const Dashboard = ({ history }) => {
         />
       </Modal>
       <Modal
-        width={isMobileOnly ? '80vw' : '40vw'}
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={addMemberModal}
         onRequestClose={() => setAddMemberModal(false)}
-        contentLabel="Stop project?"
+        contentLabel="Add member"
         ariaHideApp={false}
       >
         <Formik
@@ -901,13 +902,14 @@ const Dashboard = ({ history }) => {
           {({ errors, touched, values }) => (
             <StyledForm>
               <EmailFormWrapper
+                isInvite
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
               >
                 <Field
                   type="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder="Member email"
                 ></Field>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -993,7 +995,8 @@ const Dashboard = ({ history }) => {
       </Modal>
 
       <Modal
-        width={isMobileOnly ? '80vw' : '40vw'}
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={renameTeamModal}
         onRequestClose={() => setRenameTeamModal(false)}
@@ -1021,25 +1024,9 @@ const Dashboard = ({ history }) => {
                   type="name"
                   name="name"
                   placeholder={
-                    editMode === 'New team name' ? 'Rename' : 'Team name'
+                    editMode === 'Rename team' ? 'New team name' : 'Team name'
                   }
                 ></Field>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#9CA2B4"
-                    strokeWidth="2"
-                  >
-                    <path d="M2 4h20v16H2z"></path>
-                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                  </g>
-                </svg>
                 <StroveButton
                   isPrimary
                   type="submit"
