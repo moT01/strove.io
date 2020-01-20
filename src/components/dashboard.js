@@ -463,6 +463,7 @@ const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const myTeams = useSelector(selectors.api.getMyTeams)
+  const user = useSelector(selectors.api.getUser)
   const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -489,14 +490,14 @@ const Dashboard = ({ history }) => {
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const teamsObj = myTeams.reduce((teams, team) => {
+  const teamsObj = myTeams?.reduce((teams, team) => {
     return { ...teams, [team.id]: team }
   }, {})
-  useEffect(() => updateTeams(), [])
-
   const teamProjects = myTeams?.reduce((projects, team) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
+
+  useEffect(() => updateTeams(), [])
 
   const tabs = [
     {
@@ -506,6 +507,8 @@ const Dashboard = ({ history }) => {
           <Title>Admin console</Title>
           {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
+            const isOwner = team.owner.id === user.id
+            console.log('TCL: Dashboard -> isOwner', isOwner)
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>
@@ -519,15 +522,17 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TeamHeaderDivider>
-                      <StroveButton
-                        isPrimary
-                        padding="0.5vh"
-                        width="20%"
-                        onClick={() => {
-                          handleSettingsClick(team.id)
-                        }}
-                        text="Settings"
-                      />
+                      {isOwner && (
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => {
+                            handleSettingsClick(team.id)
+                          }}
+                          text="Settings"
+                        />
+                      )}
                     </TeamHeaderDivider>
                     <TileSectionHeader>
                       <TeamHeaderDivider>
