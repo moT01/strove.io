@@ -51,7 +51,7 @@ const InvitationDetails = styled.div`
   margin: 10px;
 `
 
-const FromEmailInvitaiton = () => {
+const FromEmailInvitation = () => {
   const searchParams = getWindowSearchParams()
   const token = useSelector(getToken)
 
@@ -89,4 +89,4 @@ const FromEmailInvitaiton = () => {
   )
 }
 
-export default memo(FromEmailInvitaiton)
+export default memo(FromEmailInvitation)
