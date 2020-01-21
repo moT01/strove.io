@@ -12,10 +12,6 @@ import {
 } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
 
-const getToken =
-  selectors.api.getUserField('token') ||
-  selectors.api.getUserField('siliskyToken')
-
 const MenuWrapper = styled.div`
   padding: 20px;
   background-color: ${({ theme, invert }) =>
@@ -48,7 +44,7 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject, history }) => {
-  const token = useSelector(getToken)
+  const token = useSelector(selectors.getToken)
 
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
