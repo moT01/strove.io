@@ -4,7 +4,9 @@ import { Redirect } from 'react-router-dom'
 
 import { selectors } from 'state'
 
-const getToken = selectors.api.getUserField('siliskyToken')
+const getToken =
+  selectors.api.getUserField('token') ||
+  selectors.api.getUserField('siliskyToken')
 
 const PrivateRoute = ({
   component: Component,
