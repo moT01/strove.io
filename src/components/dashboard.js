@@ -750,20 +750,6 @@ const Dashboard = ({ history }) => {
     )
 
   const addMember = ({ memberEmail, teamId }) => {
-    console.log(
-      'user email',
-      teamsObj[teamId].users,
-      'teamsObj[teamId].users.findIndex(user => user.email === memberEmail)',
-      teamsObj[teamId].users.findIndex(user => user.email === memberEmail),
-      'teamsObj[teamId].invited.findIndex(user => user.email === memberEmail)',
-      teamsObj[teamId].invited.findIndex(user => user.email === memberEmail),
-      'Condition',
-      teamsObj[teamId].users.findIndex(user => user.email === memberEmail) ===
-        -1 &&
-        teamsObj[teamId].invited.findIndex(
-          user => user.email === memberEmail
-        ) === -1
-    )
     if (
       teamsObj[teamId].users.findIndex(user => user.email === memberEmail) ===
         -1 &&
