@@ -21,7 +21,10 @@ const Wrapper = styled.div`
 `
 
 const GoBackTo = () => {
-  const token = useSelector(selectors.api.getUser)?.siliskyToken
+  const getToken =
+    selectors.api.getUserField('token') ||
+    selectors.api.getUserField('siliskyToken')
+  const token = useSelector(getToken)
   const searchParams = getWindowSearchParams()
   const goBackTo = searchParams.get('goBackTo')
 
