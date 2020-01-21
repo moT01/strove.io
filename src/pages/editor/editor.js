@@ -14,18 +14,12 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const getUserToken =
-  selectors.api.getApiData({
-    fields: ['user', 'token'],
-    defaultValue: null,
-  }) ||
-  selectors.api.getApiData({
-    fields: ['user', 'siliskyToken'],
-    defaultValue: null,
-  })
+const getToken =
+  selectors.api.getUserField('token') ||
+  selectors.api.getUserField('siliskyToken')
 
 const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
-  const token = useSelector(getUserToken)
+  const token = useSelector(getToken)
   const randomId = Math.random()
     .toString(36)
     .substring(7)
