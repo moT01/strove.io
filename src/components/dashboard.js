@@ -488,7 +488,7 @@ const Dashboard = ({ history }) => {
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
-  const [warningModal, setWarningModal] = useState({})
+  const [warningModal, setWarningModal] = useState({ visible: false })
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const teamsObj = myTeams?.reduce((teams, team) => {
@@ -750,9 +750,25 @@ const Dashboard = ({ history }) => {
     )
 
   const addMember = ({ memberEmail, teamId }) => {
+    console.log(
+      'user email',
+      teamsObj[teamId].users,
+      'teamsObj[teamId].users.findIndex(user => user.email === memberEmail)',
+      teamsObj[teamId].users.findIndex(user => user.email === memberEmail),
+      'teamsObj[teamId].invited.findIndex(user => user.email === memberEmail)',
+      teamsObj[teamId].invited.findIndex(user => user.email === memberEmail),
+      'Condition',
+      teamsObj[teamId].users.findIndex(user => user.email === memberEmail) ===
+        -1 &&
+        teamsObj[teamId].invited.findIndex(
+          user => user.email === memberEmail
+        ) === -1
+    )
     if (
-      teamsObj[teamId].users.findIndex(user => user.email === memberEmail) !==
-      -1
+      teamsObj[teamId].users.findIndex(user => user.email === memberEmail) ===
+        -1 &&
+      teamsObj[teamId].invited.findIndex(user => user.email === memberEmail) ===
+        -1
     ) {
       dispatch(
         mutation({
@@ -1175,6 +1191,26 @@ const Dashboard = ({ history }) => {
         />
         <ModalButton
           onClick={() => setOwnershipModal(false)}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '30vh' : '20vh'}
+        isOpen={warningModal.visible}
+        onRequestClose={() =>
+          setWarningModal({ visible: false, content: null })
+        }
+        contentLabel="Warning"
+        ariaHideApp={false}
+      >
+        <ModalText>{warningModal.content}</ModalText>
+        <ModalButton
+          onClick={() => setWarningModal({ visible: false, content: null })}
           text="Close"
           padding="0.5vh"
           maxWidth="150px"
