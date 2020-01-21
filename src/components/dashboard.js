@@ -588,42 +588,45 @@ const Dashboard = ({ history }) => {
                               </RowWrapper>
                             )
                         )}
-                        {team?.invited?.map(member => (
-                          <RowWrapper key={member.name}>
-                            <TeamHeaderDivider>
-                              <VerticalDivider>
-                                <UserPhoto
-                                  src={
-                                    member.photoUrl
-                                      ? member.photoUrl
-                                      : StroveLogo
+                        {isOwner &&
+                          team?.invited?.map(member => (
+                            <RowWrapper key={member.name}>
+                              <TeamHeaderDivider>
+                                <VerticalDivider>
+                                  <UserPhoto
+                                    src={
+                                      member.photoUrl
+                                        ? member.photoUrl
+                                        : StroveLogo
+                                    }
+                                  />
+                                  <Text>
+                                    {member.name ? member.name : member.email}
+                                    <InviteStatus>Invite pending</InviteStatus>
+                                  </Text>
+                                </VerticalDivider>
+                                <DeleteButton
+                                  onClick={() =>
+                                    deleteMember({
+                                      memberId: member.id,
+                                      teamId: team.id,
+                                    })
                                   }
-                                />
-                                <Text>
-                                  {member.name ? member.name : member.email}
-                                  <InviteStatus>Invite pending</InviteStatus>
-                                </Text>
-                              </VerticalDivider>
-                              <DeleteButton
-                                onClick={() =>
-                                  deleteMember({
-                                    memberId: member.id,
-                                    teamId: team.id,
-                                  })
-                                }
-                              >
-                                Cancel
-                              </DeleteButton>
-                            </TeamHeaderDivider>
-                          </RowWrapper>
-                        ))}
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => handleAddMemberClick(team.id)}
-                          text="Add member"
-                        />
+                                >
+                                  Cancel
+                                </DeleteButton>
+                              </TeamHeaderDivider>
+                            </RowWrapper>
+                          ))}
+                        {isOwner && (
+                          <StroveButton
+                            isPrimary
+                            padding="0.5vh"
+                            width="20%"
+                            onClick={() => handleAddMemberClick(team.id)}
+                            text="Add member"
+                          />
+                        )}
                       </TeamTileSection>
                     )}
                     <TileSectionHeader isLast>
@@ -654,16 +657,18 @@ const Dashboard = ({ history }) => {
                           projects={teamProjects[team.id]}
                           history={history}
                         />
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          text="Add Project"
-                          onClick={() => {
-                            setTeamId(team.id)
-                            setAddProjectModal(true)
-                          }}
-                        />
+                        {isOwner && (
+                          <StroveButton
+                            isPrimary
+                            padding="0.5vh"
+                            width="20%"
+                            text="Add Project"
+                            onClick={() => {
+                              setTeamId(team.id)
+                              setAddProjectModal(true)
+                            }}
+                          />
+                        )}
                       </TeamTileSection>
                     )}
                   </TeamTile>
