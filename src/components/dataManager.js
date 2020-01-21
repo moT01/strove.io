@@ -328,12 +328,13 @@ export default memo(
       }
       if (loginData?.userLogin) {
         const {
+          token,
           siliskyToken,
           subscription,
           projects,
           teams,
         } = loginData?.userLogin
-        localStorage.setItem('token', siliskyToken)
+        localStorage.setItem('token', token || siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {
