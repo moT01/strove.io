@@ -3,15 +3,13 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 
-import {
-  NoRepoUrlInfo,
-  PoweredBy,
-  ExternalLink,
-} from 'components'
+import { NoRepoUrlInfo, PoweredBy, ExternalLink } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getRepoUrl } from 'utils'
 
-const getToken = selectors.api.getUserField('siliskyToken')
+const getToken =
+  selectors.api.getUserField('token') ||
+  selectors.api.getUserField('siliskyToken')
 
 const MenuWrapper = styled.div`
   padding: 20px;
