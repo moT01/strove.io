@@ -4,10 +4,6 @@ import { Redirect } from 'react-router-dom'
 
 import { selectors } from 'state'
 
-const getToken =
-  selectors.api.getUserField('token') ||
-  selectors.api.getUserField('siliskyToken')
-
 const PrivateRoute = ({
   component: Component,
   location,
@@ -15,7 +11,7 @@ const PrivateRoute = ({
   history,
   ...rest
 }) => {
-  const token = useSelector(getToken)
+  const token = useSelector(selectors.getToken)
 
   if (!token && location.pathname !== `/`) {
     // If we’re not logged in, redirect to the home page.

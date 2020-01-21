@@ -8,10 +8,6 @@ import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
 
-const getToken =
-  selectors.api.getUserField('token') ||
-  selectors.api.getUserField('siliskyToken')
-
 const MenuWrapper = styled.div`
   padding: 20px;
   background-color: ${({ theme, invert }) =>
@@ -53,7 +49,7 @@ const InvitationDetails = styled.div`
 
 const FromEmailInvitation = () => {
   const searchParams = getWindowSearchParams()
-  const token = useSelector(getToken)
+  const token = useSelector(selectors.getToken)
 
   const teamName = searchParams.get('teamName')
   const invitedEmail = searchParams.get('invitedEmail')
