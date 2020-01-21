@@ -574,16 +574,18 @@ const Dashboard = ({ history }) => {
                                     />
                                     <Text>{member.name}</Text>
                                   </VerticalDivider>
-                                  <DeleteButton
-                                    onClick={() =>
-                                      deleteMember({
-                                        memberId: member.id,
-                                        teamId: team.id,
-                                      })
-                                    }
-                                  >
-                                    Remove
-                                  </DeleteButton>
+                                  {isOwner && (
+                                    <DeleteButton
+                                      onClick={() =>
+                                        deleteMember({
+                                          memberId: member.id,
+                                          teamId: team.id,
+                                        })
+                                      }
+                                    >
+                                      Remove
+                                    </DeleteButton>
+                                  )}
                                 </TeamHeaderDivider>
                               </RowWrapper>
                             )
