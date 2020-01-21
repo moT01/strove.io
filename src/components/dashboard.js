@@ -464,7 +464,7 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const myTeams = useSelector(selectors.api.getMyTeams)
   const user = useSelector(selectors.api.getUser)
-  const [emailSent, setEmailSent] = useState(false)
+  // const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
@@ -488,6 +488,7 @@ const Dashboard = ({ history }) => {
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
+  const [warningModal, setWarningModal] = useState({})
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const teamsObj = myTeams?.reduce((teams, team) => {
@@ -497,6 +498,7 @@ const Dashboard = ({ history }) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateTeams(), [])
 
   const tabs = [
@@ -508,7 +510,6 @@ const Dashboard = ({ history }) => {
           {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
             const isOwner = team.owner.id === user.id
-            console.log('TCL: Dashboard -> isOwner', isOwner)
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>
@@ -749,17 +750,27 @@ const Dashboard = ({ history }) => {
     )
 
   const addMember = ({ memberEmail, teamId }) => {
-    dispatch(
-      mutation({
-        name: 'addMember',
-        mutation: ADD_MEMBER,
-        variables: { memberEmail, teamId },
-        onSuccess: () => {
-          updateTeams()
-          setAddMemberModal(false)
-        },
+    if (
+      teamsObj[teamId].users.findIndex(user => user.email === memberEmail) !==
+      -1
+    ) {
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          variables: { memberEmail, teamId },
+          onSuccess: () => {
+            updateTeams()
+            setAddMemberModal(false)
+          },
+        })
+      )
+    } else {
+      setWarningModal({
+        visible: true,
+        content: 'This user has already been invited to your team',
       })
-    )
+    }
   }
 
   const handleAddMemberClick = id => {

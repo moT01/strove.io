@@ -141,7 +141,6 @@ const Projects = ({ history, projects }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
