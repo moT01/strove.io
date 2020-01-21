@@ -8,7 +8,9 @@ import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
 
-const getToken = selectors.api.getUserField('siliskyToken')
+const getToken =
+  selectors.api.getUserField('token') ||
+  selectors.api.getUserField('siliskyToken')
 
 const MenuWrapper = styled.div`
   padding: 20px;
