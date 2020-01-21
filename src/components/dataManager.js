@@ -38,7 +38,7 @@ export default memo(
   withRouter(({ children, addProject, history }) => {
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
-    const token = user?.siliskyToken
+    const token = user?.token || user?.siliskyToken
     const currentProject = useSelector(selectors.api.getCurrentProject)
     const incomingProjectLink = useSelector(
       selectors.incomingProject.getRepoLink
