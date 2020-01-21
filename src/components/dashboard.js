@@ -19,6 +19,7 @@ import {
   MY_TEAMS,
   DELETE_TEAM,
   TRANSFER_OWNERSHIP,
+  LEAVE_TEAM,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -523,7 +524,7 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TeamHeaderDivider>
-                      {isOwner && (
+                      {isOwner ? (
                         <StroveButton
                           isPrimary
                           padding="0.5vh"
@@ -532,6 +533,16 @@ const Dashboard = ({ history }) => {
                             handleSettingsClick(team.id)
                           }}
                           text="Settings"
+                        />
+                      ) : (
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => {
+                            handleLeaveClick(team.id)
+                          }}
+                          text="Leave"
                         />
                       )}
                     </TeamHeaderDivider>
@@ -842,6 +853,24 @@ const Dashboard = ({ history }) => {
 
   const handleStopClick = id => {
     handleStopProject({ id, dispatch })
+  }
+
+  const handleLeaveClick = teamId => {
+    setEditTeamId(teamId)
+    setWarningModal({
+      visible: true,
+      content: `Are you sure you want to leave team ${teamsObj[teamId].name}?`,
+    })
+  }
+
+  const handleLeaveTeam = () => {
+    dispatch(
+      mutation({
+        name: 'leaveTeam',
+        mutation: LEAVE_TEAM,
+        variables: { teamId: editTeamId },
+      })
+    )
   }
 
   const closeModal = () => {
