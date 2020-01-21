@@ -37,7 +37,7 @@ export default memo(
   withRouter(({ children, addProject, history }) => {
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
-    const token = user?.siliskyToken
+    const token = useSelector(selectors.getToken)
     const currentProject = useSelector(selectors.api.getCurrentProject)
     const incomingProjectLink = useSelector(
       selectors.incomingProject.getRepoLink
@@ -327,12 +327,13 @@ export default memo(
       }
       if (loginData?.userLogin) {
         const {
+          token,
           siliskyToken,
           subscription,
           projects,
           teams,
         } = loginData?.userLogin
-        localStorage.setItem('token', siliskyToken)
+        localStorage.setItem('token', token || siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {

@@ -19,6 +19,7 @@ export const UserFragment = gql`
     bitbucketName
     scopes
     siliskyToken
+    token
     currentProjectId
     teams {
       ...Team
