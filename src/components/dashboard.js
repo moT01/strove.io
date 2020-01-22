@@ -1258,13 +1258,13 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <ModalText>{warningModal.content}</ModalText>
-        <ModalButton
+        {warningModal.buttonLabel && <ModalButton
           isPrimary
           onClick={warningModal.onSubmit}
           text={warningModal.buttonLabel}
           padding="0.5vh"
           maxWidth="150px"
-        />
+        />}
         <ModalButton
           onClick={() =>
             setWarningModal({
