@@ -489,7 +489,12 @@ const Dashboard = ({ history }) => {
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
-  const [warningModal, setWarningModal] = useState({ visible: false })
+  const [warningModal, setWarningModal] = useState({
+    visible: false,
+    content: null,
+    onSubmit: null,
+    buttonLabel: '',
+  })
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const teamsObj = myTeams?.reduce((teams, team) => {
@@ -540,6 +545,7 @@ const Dashboard = ({ history }) => {
                           padding="0.5vh"
                           width="20%"
                           onClick={() => {
+                            setEditTeamId(team.id)
                             handleLeaveClick(team.id)
                           }}
                           text="Leave"
@@ -729,7 +735,6 @@ const Dashboard = ({ history }) => {
         variables: { teamId },
       })
     )
-    console.log('TeamId', teamId)
   }
 
   const updateTeams = () => {
@@ -811,7 +816,6 @@ const Dashboard = ({ history }) => {
 
   const handleTransferOwnershipClick = teamId => {
     setOwnershipModal(true)
-    console.log('Yeet', teamId)
   }
 
   const transferOwnership = ({ teamId, newOwnerId }) => {
@@ -820,7 +824,6 @@ const Dashboard = ({ history }) => {
         name: 'transferOwnership',
         mutation: TRANSFER_OWNERSHIP,
         variables: { teamId, newOwnerId },
-        onScucess: () => console.log('Yeet'),
       })
     )
   }
@@ -855,20 +858,22 @@ const Dashboard = ({ history }) => {
     handleStopProject({ id, dispatch })
   }
 
-  const handleLeaveClick = teamId => {
-    setEditTeamId(teamId)
+  const handleLeaveClick = id => {
+    setEditTeamId(id)
     setWarningModal({
       visible: true,
-      content: `Are you sure you want to leave team ${teamsObj[teamId].name}?`,
+      content: `Are you sure you want to leave team ${teamsObj[id].name}?`,
+      onSubmit: () => handleLeaveTeam(id),
+      buttonLabel: 'Leave',
     })
   }
 
-  const handleLeaveTeam = () => {
+  const handleLeaveTeam = id => {
     dispatch(
       mutation({
         name: 'leaveTeam',
         mutation: LEAVE_TEAM,
-        variables: { teamId: editTeamId },
+        variables: { teamId: id },
       })
     )
   }
@@ -1225,14 +1230,33 @@ const Dashboard = ({ history }) => {
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={warningModal.visible}
         onRequestClose={() =>
-          setWarningModal({ visible: false, content: null })
+          setWarningModal({
+            visible: false,
+            content: null,
+            onSubmit: null,
+            buttonLabel: '',
+          })
         }
         contentLabel="Warning"
         ariaHideApp={false}
       >
         <ModalText>{warningModal.content}</ModalText>
         <ModalButton
-          onClick={() => setWarningModal({ visible: false, content: null })}
+          isPrimary
+          onClick={warningModal.onSubmit}
+          text={warningModal.buttonLabel}
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+        <ModalButton
+          onClick={() =>
+            setWarningModal({
+              visible: false,
+              content: null,
+              onSubmit: null,
+              buttonLabel: '',
+            })
+          }
           text="Close"
           padding="0.5vh"
           maxWidth="150px"
