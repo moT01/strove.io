@@ -773,12 +773,34 @@ const Dashboard = ({ history }) => {
     )
 
   const addMember = ({ memberEmail, teamId }) => {
+    const users = teamsObj[teamId].users
+    const invited = teamsObj[teamId].invited
+
+    console.log(
+      teamsObj[teamId]?.users?.findIndex(user => user.email === memberEmail) !==
+        -1 ||
+        teamsObj[teamId]?.invited?.findIndex(
+          user => user.email === memberEmail
+        ) !== -1,
+      teamsObj[teamId]?.users?.findIndex(user => user.email === memberEmail) !==
+        -1,
+      teamsObj[teamId]?.invited?.findIndex(
+        user => user.email === memberEmail
+      ) !== -1,
+      teamsObj[teamId],
+      teamsObj[teamId].users,
+      teamsObj[teamId]?.users?.findIndex(user => user.email === memberEmail)
+    )
+
     if (
-      teamsObj[teamId].users.findIndex(user => user.email === memberEmail) ===
-        -1 &&
-      teamsObj[teamId].invited.findIndex(user => user.email === memberEmail) ===
-        -1
+      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
+      (invited && invited.findIndex(user => user.email === memberEmail) !== -1)
     ) {
+      setWarningModal({
+        visible: true,
+        content: 'This user has already been invited to your team',
+      })
+    } else {
       dispatch(
         mutation({
           name: 'addMember',
@@ -790,11 +812,6 @@ const Dashboard = ({ history }) => {
           },
         })
       )
-    } else {
-      setWarningModal({
-        visible: true,
-        content: 'This user has already been invited to your team',
-      })
     }
   }
 
