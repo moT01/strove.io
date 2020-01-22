@@ -798,7 +798,9 @@ const Dashboard = ({ history }) => {
     ) {
       setWarningModal({
         visible: true,
-        content: 'This user has already been invited to your team',
+        content: (
+          <ModalText>This user has already been invited to your team</ModalText>
+        ),
       })
     } else {
       dispatch(
@@ -879,7 +881,11 @@ const Dashboard = ({ history }) => {
     setEditTeamId(id)
     setWarningModal({
       visible: true,
-      content: `Are you sure you want to leave team ${teamsObj[id].name}?`,
+      content: (
+        <ModalText>
+          Are you sure you want to leave team {teamsObj[id].name}?
+        </ModalText>
+      ),
       onSubmit: () => handleLeaveTeam(id),
       buttonLabel: 'Leave',
     })
@@ -1257,14 +1263,16 @@ const Dashboard = ({ history }) => {
         contentLabel="Warning"
         ariaHideApp={false}
       >
-        <ModalText>{warningModal.content}</ModalText>
-        {warningModal.buttonLabel && <ModalButton
-          isPrimary
-          onClick={warningModal.onSubmit}
-          text={warningModal.buttonLabel}
-          padding="0.5vh"
-          maxWidth="150px"
-        />}
+        {warningModal.content}
+        {warningModal.buttonLabel && (
+          <ModalButton
+            isPrimary
+            onClick={warningModal.onSubmit}
+            text={warningModal.buttonLabel}
+            padding="0.5vh"
+            maxWidth="150px"
+          />
+        )}
         <ModalButton
           onClick={() =>
             setWarningModal({
