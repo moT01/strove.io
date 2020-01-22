@@ -594,9 +594,9 @@ const Dashboard = ({ history }) => {
                                   {isOwner && (
                                     <DeleteButton
                                       onClick={() =>
-                                        deleteMember({
-                                          memberId: member.id,
-                                          teamId: team.id,
+                                        handleDeleteMemberClick({
+                                          team,
+                                          member,
                                         })
                                       }
                                     >
@@ -626,10 +626,7 @@ const Dashboard = ({ history }) => {
                                 </VerticalDivider>
                                 <DeleteButton
                                   onClick={() =>
-                                    deleteMember({
-                                      memberId: member.id,
-                                      teamId: team.id,
-                                    })
+                                    handleDeleteMemberClick({ team, member })
                                   }
                                 >
                                   Cancel
@@ -733,6 +730,7 @@ const Dashboard = ({ history }) => {
         name: 'deleteTeam',
         mutation: DELETE_TEAM,
         variables: { teamId },
+        onSuccess: () => updateTeams(),
       })
     )
   }
@@ -747,12 +745,23 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const deleteMember = ({ teamId, memberId }) =>
+  const deleteMember = ({ team, member }) =>
     dispatch(
       mutation({
         name: 'removeMember',
         mutation: REMOVE_MEMBER,
-        variables: { teamId, memberId },
+        variables: { teamId: team.id, memberId: member.id },
+        onSuccess: () => {
+          updateTeams()
+          setWarningModal({
+            visible: true,
+            content: (
+              <ModalText>
+                {member.name} has been successfully removed from {team.name}
+              </ModalText>
+            ),
+          })
+        },
       })
     )
 
@@ -775,22 +784,6 @@ const Dashboard = ({ history }) => {
   const addMember = ({ memberEmail, teamId }) => {
     const users = teamsObj[teamId].users
     const invited = teamsObj[teamId].invited
-
-    console.log(
-      teamsObj[teamId]?.users?.findIndex(user => user.email === memberEmail) !==
-        -1 ||
-        teamsObj[teamId]?.invited?.findIndex(
-          user => user.email === memberEmail
-        ) !== -1,
-      teamsObj[teamId]?.users?.findIndex(user => user.email === memberEmail) !==
-        -1,
-      teamsObj[teamId]?.invited?.findIndex(
-        user => user.email === memberEmail
-      ) !== -1,
-      teamsObj[teamId],
-      teamsObj[teamId].users,
-      teamsObj[teamId]?.users?.findIndex(user => user.email === memberEmail)
-    )
 
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
@@ -835,6 +828,23 @@ const Dashboard = ({ history }) => {
 
   const handleTransferOwnershipClick = teamId => {
     setOwnershipModal(true)
+  }
+
+  const handleDeleteMemberClick = ({ member, team }) => {
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure you want to remove {member.name} from {team.name}?
+        </ModalText>
+      ),
+      onSubmit: () =>
+        deleteMember({
+          member,
+          team,
+        }),
+      buttonLabel: 'Remove',
+    })
   }
 
   const transferOwnership = ({ teamId, newOwnerId }) => {
@@ -904,6 +914,15 @@ const Dashboard = ({ history }) => {
   const closeModal = () => {
     setProjectToDelete(null)
     setModalVisible(false)
+  }
+
+  const closeWarningModal = () => {
+    setWarningModal({
+      visible: false,
+      content: null,
+      onSubmit: null,
+      buttonLabel: '',
+    })
   }
 
   const closeSettingsModal = () => {
@@ -1274,14 +1293,7 @@ const Dashboard = ({ history }) => {
           />
         )}
         <ModalButton
-          onClick={() =>
-            setWarningModal({
-              visible: false,
-              content: null,
-              onSubmit: null,
-              buttonLabel: '',
-            })
-          }
+          onClick={() => closeWarningModal()}
           text="Close"
           padding="0.5vh"
           maxWidth="150px"
