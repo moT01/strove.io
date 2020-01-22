@@ -41,7 +41,7 @@ export default ({ children }) => (
       <Provider store={createStore}>
         <PersistGate loading={null} persistor={persistor}>
           <WithAnalyticsWrapper>
-            <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+            <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
               <Layout>{children}</Layout>
             </StripeProvider>
           </WithAnalyticsWrapper>

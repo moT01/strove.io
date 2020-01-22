@@ -9,6 +9,8 @@ import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
 import { SEO, Modal, Header } from 'components'
 
+import { StripeCheckoutForm } from 'components'
+
 const ButtonFadeIn = keyframes`
   0% {
     opacity: 0;
@@ -465,6 +467,7 @@ const PricingPage = () => {
               </Button>
             </ButtonWrapper>
           </Card>
+          <StripeCheckoutForm />
           <Card enterprise team>
             <PricingSection>
               <PricingWrapper>
