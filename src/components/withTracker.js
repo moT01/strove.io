@@ -3,7 +3,7 @@ import ReactGA from 'react-ga'
 
 ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID)
 
-export const withTracker = (WrappedComponent, options = {}) => {
+const withTracker = (WrappedComponent, options = {}) => {
   const trackPage = page => {
     ReactGA.set({
       page,
@@ -22,3 +22,5 @@ export const withTracker = (WrappedComponent, options = {}) => {
 
   return HOC
 }
+
+export default withTracker
