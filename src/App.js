@@ -2,7 +2,6 @@ import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
 import { Switch, Route } from 'react-router-dom'
-import ReactGA from 'react-ga'
 import {
   Home,
   Faq,
@@ -28,8 +27,6 @@ import Wrapper from './wrapper'
 //     .use(reactotronRedux())
 //     .connect()
 // }
-
-ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID)
 
 const Strove = () => (
   <Wrapper>
