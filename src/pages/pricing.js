@@ -489,7 +489,7 @@ const PricingPage = () => {
                   Specs (RAM, HDD, CPUs and more) adjusted to team's needs
                 </Feature>
                 <Feature team>
-                  Azure Active directory integration - highest code security and
+                  Azure Active Directory integration - highest code security and
                   control
                 </Feature>
                 <Feature team>

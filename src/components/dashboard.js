@@ -162,9 +162,9 @@ const Wrapper = styled.div`
 `
 
 const PageWrapper = styled(Wrapper)`
-  width: 100%;
-  padding-top: 5vh;
   min-height: calc(100vh - 64px);
+  width: 100vw;
+  padding-top: 5vh;
   justify-content: space-between;
 `
 
@@ -708,6 +708,21 @@ const Dashboard = ({ history }) => {
     },
   ]
 
+  const updateTeams = () => {
+    dispatch(
+      query({
+        name: 'myTeams',
+        storeKey: 'myTeams',
+        query: MY_TEAMS,
+      })
+    )
+  }
+
+  const handleCreateTeamClick = () => {
+    setEditMode('Create team')
+    setRenameTeamModal(true)
+  }
+
   const createTeam = ({ name }) => {
     dispatch(
       mutation({
@@ -723,7 +738,6 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  // Deleting projects is still WIP
   const deleteTeam = ({ teamId }) => {
     dispatch(
       mutation({
@@ -735,14 +749,21 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const updateTeams = () => {
-    dispatch(
-      query({
-        name: 'myTeams',
-        storeKey: 'myTeams',
-        query: MY_TEAMS,
-      })
-    )
+  const handleDeleteMemberClick = ({ member, team }) => {
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure you want to remove {member.name} from {team.name}?
+        </ModalText>
+      ),
+      onSubmit: () =>
+        deleteMember({
+          member,
+          team,
+        }),
+      buttonLabel: 'Remove',
+    })
   }
 
   const deleteMember = ({ team, member }) =>
@@ -765,6 +786,12 @@ const Dashboard = ({ history }) => {
       })
     )
 
+  const handleRenameTeamClick = id => {
+    setEditTeamId(id)
+    setEditMode('Rename team')
+    setRenameTeamModal(true)
+  }
+
   const renameTeam = ({ newName, teamId }) =>
     dispatch(
       mutation({
@@ -780,6 +807,11 @@ const Dashboard = ({ history }) => {
         },
       })
     )
+
+  const handleAddMemberClick = id => {
+    setEditTeamId(id)
+    setAddMemberModal(true)
+  }
 
   const addMember = ({ memberEmail, teamId }) => {
     const users = teamsObj[teamId].users
@@ -810,73 +842,33 @@ const Dashboard = ({ history }) => {
     }
   }
 
-  const handleAddMemberClick = id => {
-    setEditTeamId(id)
-    setAddMemberModal(true)
-  }
-
-  const handleRenameTeamClick = id => {
-    setEditTeamId(id)
-    setEditMode('Rename team')
-    setRenameTeamModal(true)
-  }
-
-  const handleCreateTeamClick = () => {
-    setEditMode('Create team')
-    setRenameTeamModal(true)
-  }
-
-  const handleTransferOwnershipClick = teamId => {
+  const handleTransferOwnershipClick = () => {
     setOwnershipModal(true)
   }
 
-  const handleDeleteMemberClick = ({ member, team }) => {
+  const transferOwnership = ({ teamId, newOwner }) => {
+    console.log(teamId, newOwner)
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to remove {member.name} from {team.name}?
+          Are you sure youn want to transfer ownership of{' '}
+          {teamsObj[teamId].name} to {newOwner.label}
         </ModalText>
       ),
+      buttonLabel: 'Transfer',
       onSubmit: () =>
-        deleteMember({
-          member,
-          team,
-        }),
-      buttonLabel: 'Remove',
+        dispatch(
+          mutation({
+            name: 'transferOwnership',
+            mutation: TRANSFER_OWNERSHIP,
+            variables: { teamId, newOwnerId: newOwner.values },
+          })
+        ),
     })
   }
 
-  const transferOwnership = ({ teamId, newOwnerId }) => {
-    dispatch(
-      mutation({
-        name: 'transferOwnership',
-        mutation: TRANSFER_OWNERSHIP,
-        variables: { teamId, newOwnerId },
-      })
-    )
-  }
-
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
-
-  const handleDeleteClick = id => {
-    dispatch(
-      mutation({
-        name: 'deleteProject',
-        mutation: DELETE_PROJECT,
-        variables: { projectId: id },
-        dataSelector: data => data,
-        onSuccess: () => setProjectToDelete(null),
-        onSuccessDispatch: [
-          () => ({
-            type: C.api.REMOVE_ITEM,
-            payload: { storeKey: 'myProjects', id },
-          }),
-          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
-        ],
-      })
-    )
-  }
 
   const handleSettingsClick = id => {
     setEditTeamId(id)
@@ -911,11 +903,6 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const closeModal = () => {
-    setProjectToDelete(null)
-    setModalVisible(false)
-  }
-
   const closeWarningModal = () => {
     setWarningModal({
       visible: false,
@@ -931,6 +918,30 @@ const Dashboard = ({ history }) => {
   }
 
   const closeAddProjectModal = () => setAddProjectModal(false)
+
+  const handleDeleteClick = id => {
+    dispatch(
+      mutation({
+        name: 'deleteProject',
+        mutation: DELETE_PROJECT,
+        variables: { projectId: id },
+        dataSelector: data => data,
+        onSuccess: () => setProjectToDelete(null),
+        onSuccessDispatch: [
+          () => ({
+            type: C.api.REMOVE_ITEM,
+            payload: { storeKey: 'myProjects', id },
+          }),
+          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
+        ],
+      })
+    )
+  }
+
+  const closeModal = () => {
+    setProjectToDelete(null)
+    setModalVisible(false)
+  }
 
   const handleExpandTile = teamId => {
     if (expandedTiles[teamId]) {
@@ -1251,7 +1262,7 @@ const Dashboard = ({ history }) => {
           onClick={() =>
             transferOwnership({
               teamId: editTeamId,
-              newOwnerId: newOwnerSelect.values,
+              newOwner: newOwnerSelect,
             })
           }
           text="Transfer ownership"
