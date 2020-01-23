@@ -1,11 +1,11 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
-import { mutation, handleStopProject, query } from 'utils'
+import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -141,7 +141,6 @@ const Projects = ({ history, projects }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const projectsLimit = 20
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -208,11 +207,6 @@ const Projects = ({ history, projects }) => {
           const isOwner =
             myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)]
               .owner.id === user.id
-          console.log(
-            myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)],
-            projects[index].teamId,
-            user.id
-          )
           return (
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>

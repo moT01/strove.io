@@ -3,22 +3,23 @@ import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import dayjs from 'dayjs'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Form, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 import ReactModal from 'react-modal'
+import Select from 'react-select'
 
 import { mutation, handleStopProject, query } from 'utils'
 import {
   DELETE_PROJECT,
-  CONTINUE_PROJECT,
   ADD_MEMBER,
   CREATE_TEAM,
   RENAME_TEAM,
   REMOVE_MEMBER,
   MY_TEAMS,
   DELETE_TEAM,
+  TRANSFER_OWNERSHIP,
+  LEAVE_TEAM,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
@@ -27,6 +28,7 @@ import SEO from './seo'
 import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
 import Footer from './footer'
+import StroveLogo from 'images/strove.png'
 
 const validate = values => {
   let errors = {}
@@ -107,7 +109,7 @@ const EmailFormWrapper = styled.div`
     width: calc(100% - 156px);
     height: 56px;
     padding: 0;
-    padding-left: 64px;
+    padding-left: ${({ isInvite }) => (isInvite ? '64px' : '8px')};
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 36px;
@@ -146,11 +148,11 @@ const StyledForm = styled(Form)`
   width: 100%;
 `
 
-const StyledInfo = styled.span`
-  margin: 20px;
-  color: ${({ theme }) => theme.colors.c13};
-  font-size: 13px;
-`
+// const StyledInfo = styled.span`
+//   margin: 20px;
+//   color: ${({ theme }) => theme.colors.c13};
+//   font-size: 13px;
+// `
 
 const Wrapper = styled.div`
   display: flex;
@@ -259,6 +261,10 @@ const ModalText = styled(Text)`
   overflow: visible;
 `
 
+const WarningText = styled(ModalText)`
+  color: ${({ theme }) => theme.colors.c5};
+`
+
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
@@ -280,15 +286,8 @@ const RowWrapper = styled(VerticalDivider)`
   padding: 3px;
 `
 
-const FlexWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
 const DeleteButton = styled.button`
-width: 15%;
+width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
 	box-shadow:inset 0px 1px 0px 0px #cf866c;
 	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
 	background-color:#d0451b;
@@ -423,24 +422,64 @@ const TileSectionHeader = styled(TeamTileHeader)`
   }
 `
 
+const SettingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2vh 0 0;
+`
+
+const DropdownWrapper = styled.div`
+  width: 20vw;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.c1};
+`
+
+const StyledSelect = styled(Select)`
+  width: 100%;
+`
+
+const Setting = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+`
+
+const UserPhoto = styled.img`
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 5px;
+  margin: 0;
+`
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const myTeams = useSelector(selectors.api.getMyTeams)
-  const [emailSent, setEmailSent] = useState(false)
+  const user = useSelector(selectors.api.getUser)
+  // const [emailSent, setEmailSent] = useState(false)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
+  const [ownershipModal, setOwnershipModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState(
     myTeams
       ? myTeams.reduce((tiles, team) => {
           tiles[team.id] = {
-            isMembersActive: false,
-            isProjectsActive: false,
+            isMembersActive: true,
+            isProjectsActive: true,
           }
           return tiles
         }, {})
@@ -449,14 +488,24 @@ const Dashboard = ({ history }) => {
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
+  const [newOwnerSelect, setNewOwnerSelect] = useState('')
+  const [warningModal, setWarningModal] = useState({
+    visible: false,
+    content: null,
+    onSubmit: null,
+    buttonLabel: '',
+  })
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-
-  useEffect(() => updateTeams(), [])
-
+  const teamsObj = myTeams?.reduce((teams, team) => {
+    return { ...teams, [team.id]: team }
+  }, {})
   const teamProjects = myTeams?.reduce((projects, team) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => updateTeams(), [])
 
   const tabs = [
     {
@@ -464,8 +513,9 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           <Title>Admin console</Title>
-          {myTeams.map(team => {
+          {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
+            const isOwner = team.owner.id === user.id
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>
@@ -479,15 +529,28 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TeamHeaderDivider>
-                      <StroveButton
-                        isPrimary
-                        padding="0.5vh"
-                        width="20%"
-                        onClick={() => {
-                          handleSettingsClick(team.id)
-                        }}
-                        text="Settings"
-                      />
+                      {isOwner ? (
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => {
+                            handleSettingsClick(team.id)
+                          }}
+                          text="Settings"
+                        />
+                      ) : (
+                        <StroveButton
+                          isPrimary
+                          padding="0.5vh"
+                          width="20%"
+                          onClick={() => {
+                            setEditTeamId(team.id)
+                            handleLeaveClick(team.id)
+                          }}
+                          text="Leave"
+                        />
+                      )}
                     </TeamHeaderDivider>
                     <TileSectionHeader>
                       <TeamHeaderDivider>
@@ -518,48 +581,68 @@ const Dashboard = ({ history }) => {
                             member.name && (
                               <RowWrapper key={member.name}>
                                 <TeamHeaderDivider>
-                                  <Text>{member.name}</Text>
-                                  <DeleteButton
-                                    onClick={() =>
-                                      deleteMember({
-                                        memberId: member.id,
-                                        teamId: team.id,
-                                      })
-                                    }
-                                  >
-                                    Remove
-                                  </DeleteButton>
+                                  <VerticalDivider>
+                                    <UserPhoto
+                                      src={
+                                        member.photoUrl
+                                          ? member.photoUrl
+                                          : StroveLogo
+                                      }
+                                    />
+                                    <Text>{member.name}</Text>
+                                  </VerticalDivider>
+                                  {isOwner && (
+                                    <DeleteButton
+                                      onClick={() =>
+                                        handleDeleteMemberClick({
+                                          team,
+                                          member,
+                                        })
+                                      }
+                                    >
+                                      Remove
+                                    </DeleteButton>
+                                  )}
                                 </TeamHeaderDivider>
                               </RowWrapper>
                             )
                         )}
-                        {team?.invited?.map(member => (
-                          <RowWrapper key={member.name}>
-                            <TeamHeaderDivider>
-                              <Text>
-                                {member.name ? member.name : member.email}{' '}
-                                <InviteStatus>Invite pending</InviteStatus>
-                              </Text>
-                              <DeleteButton
-                                onClick={() =>
-                                  deleteMember({
-                                    memberId: member.id,
-                                    teamId: team.id,
-                                  })
-                                }
-                              >
-                                Cancel
-                              </DeleteButton>
-                            </TeamHeaderDivider>
-                          </RowWrapper>
-                        ))}
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          onClick={() => handleAddMemberClick(team.id)}
-                          text="Add member"
-                        />
+                        {isOwner &&
+                          team?.invited?.map(member => (
+                            <RowWrapper key={member.name}>
+                              <TeamHeaderDivider>
+                                <VerticalDivider>
+                                  <UserPhoto
+                                    src={
+                                      member.photoUrl
+                                        ? member.photoUrl
+                                        : StroveLogo
+                                    }
+                                  />
+                                  <Text>
+                                    {member.name ? member.name : member.email}
+                                    <InviteStatus>Invite pending</InviteStatus>
+                                  </Text>
+                                </VerticalDivider>
+                                <DeleteButton
+                                  onClick={() =>
+                                    handleDeleteMemberClick({ team, member })
+                                  }
+                                >
+                                  Cancel
+                                </DeleteButton>
+                              </TeamHeaderDivider>
+                            </RowWrapper>
+                          ))}
+                        {isOwner && (
+                          <StroveButton
+                            isPrimary
+                            padding="0.5vh"
+                            width="20%"
+                            onClick={() => handleAddMemberClick(team.id)}
+                            text="Add member"
+                          />
+                        )}
                       </TeamTileSection>
                     )}
                     <TileSectionHeader isLast>
@@ -590,16 +673,18 @@ const Dashboard = ({ history }) => {
                           projects={teamProjects[team.id]}
                           history={history}
                         />
-                        <StroveButton
-                          isPrimary
-                          padding="0.5vh"
-                          width="20%"
-                          text="Add Project"
-                          onClick={() => {
-                            setTeamId(team.id)
-                            setAddProjectModal(true)
-                          }}
-                        />
+                        {isOwner && (
+                          <StroveButton
+                            isPrimary
+                            padding="0.5vh"
+                            width="20%"
+                            text="Add Project"
+                            onClick={() => {
+                              setTeamId(team.id)
+                              setAddProjectModal(true)
+                            }}
+                          />
+                        )}
                       </TeamTileSection>
                     )}
                   </TeamTile>
@@ -639,12 +724,13 @@ const Dashboard = ({ history }) => {
   }
 
   // Deleting projects is still WIP
-  const deleteTeam = teamId => {
+  const deleteTeam = ({ teamId }) => {
     dispatch(
       mutation({
         name: 'deleteTeam',
         mutation: DELETE_TEAM,
         variables: { teamId },
+        onSuccess: () => updateTeams(),
       })
     )
   }
@@ -659,12 +745,23 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const deleteMember = ({ teamId, memberId }) =>
+  const deleteMember = ({ team, member }) =>
     dispatch(
       mutation({
         name: 'removeMember',
         mutation: REMOVE_MEMBER,
-        variables: { teamId, memberId },
+        variables: { teamId: team.id, memberId: member.id },
+        onSuccess: () => {
+          updateTeams()
+          setWarningModal({
+            visible: true,
+            content: (
+              <ModalText>
+                {member.name} has been successfully removed from {team.name}
+              </ModalText>
+            ),
+          })
+        },
       })
     )
 
@@ -685,17 +782,32 @@ const Dashboard = ({ history }) => {
     )
 
   const addMember = ({ memberEmail, teamId }) => {
-    dispatch(
-      mutation({
-        name: 'addMember',
-        mutation: ADD_MEMBER,
-        variables: { memberEmail, teamId },
-        onSuccess: () => {
-          updateTeams()
-          setAddMemberModal(false)
-        },
+    const users = teamsObj[teamId].users
+    const invited = teamsObj[teamId].invited
+
+    if (
+      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
+      (invited && invited.findIndex(user => user.email === memberEmail) !== -1)
+    ) {
+      setWarningModal({
+        visible: true,
+        content: (
+          <ModalText>This user has already been invited to your team</ModalText>
+        ),
       })
-    )
+    } else {
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          variables: { memberEmail, teamId },
+          onSuccess: () => {
+            updateTeams()
+            setAddMemberModal(false)
+          },
+        })
+      )
+    }
   }
 
   const handleAddMemberClick = id => {
@@ -715,8 +827,37 @@ const Dashboard = ({ history }) => {
   }
 
   const handleTransferOwnershipClick = teamId => {
-    console.log('Yeet', teamId)
+    setOwnershipModal(true)
   }
+
+  const handleDeleteMemberClick = ({ member, team }) => {
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure you want to remove {member.name} from {team.name}?
+        </ModalText>
+      ),
+      onSubmit: () =>
+        deleteMember({
+          member,
+          team,
+        }),
+      buttonLabel: 'Remove',
+    })
+  }
+
+  const transferOwnership = ({ teamId, newOwnerId }) => {
+    dispatch(
+      mutation({
+        name: 'transferOwnership',
+        mutation: TRANSFER_OWNERSHIP,
+        variables: { teamId, newOwnerId },
+      })
+    )
+  }
+
+  const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleDeleteClick = id => {
     dispatch(
@@ -746,9 +887,42 @@ const Dashboard = ({ history }) => {
     handleStopProject({ id, dispatch })
   }
 
+  const handleLeaveClick = id => {
+    setEditTeamId(id)
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure you want to leave team {teamsObj[id].name}?
+        </ModalText>
+      ),
+      onSubmit: () => handleLeaveTeam(id),
+      buttonLabel: 'Leave',
+    })
+  }
+
+  const handleLeaveTeam = id => {
+    dispatch(
+      mutation({
+        name: 'leaveTeam',
+        mutation: LEAVE_TEAM,
+        variables: { teamId: id },
+      })
+    )
+  }
+
   const closeModal = () => {
     setProjectToDelete(null)
     setModalVisible(false)
+  }
+
+  const closeWarningModal = () => {
+    setWarningModal({
+      visible: false,
+      content: null,
+      onSubmit: null,
+      buttonLabel: '',
+    })
   }
 
   const closeSettingsModal = () => {
@@ -861,11 +1035,12 @@ const Dashboard = ({ history }) => {
         />
       </Modal>
       <Modal
-        width={isMobileOnly ? '80vw' : '40vw'}
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={addMemberModal}
         onRequestClose={() => setAddMemberModal(false)}
-        contentLabel="Stop project?"
+        contentLabel="Add member"
         ariaHideApp={false}
       >
         <Formik
@@ -880,13 +1055,14 @@ const Dashboard = ({ history }) => {
           {({ errors, touched, values }) => (
             <StyledForm>
               <EmailFormWrapper
+                isInvite
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
               >
                 <Field
                   type="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder="Member email"
                 ></Field>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -935,22 +1111,31 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <Title>Team settings</Title>
+        <WarningText>
+          This section contains dangerous settings. Be careful while working
+          with them.
+        </WarningText>
         <StroveButton
           isPrimary
           padding="0.5vh"
-          width="20%"
+          margin="0px 0px 5px 0px"
+          width="80%"
           onClick={() => handleRenameTeamClick(editTeamId)}
           text="Rename team"
         />
         <StroveButton
           isPrimary
           padding="0.5vh"
-          width="20%"
-          onClick={() => handleTransferOwnershipClick(editTeamId)}
+          margin="0px 0px 5px 0px"
+          width="80%"
+          onClick={() => handleTransferOwnershipClick(false)}
           text="Transfer ownership"
         />
         {/* Deleting team is still WIP */}
-        <DeleteButton onClick={() => deleteTeam({ teamId: editTeamId })}>
+        <DeleteButton
+          isSettings
+          onClick={() => deleteTeam({ teamId: editTeamId })}
+        >
           Delete team
         </DeleteButton>
 
@@ -963,11 +1148,14 @@ const Dashboard = ({ history }) => {
       </Modal>
 
       <Modal
-        width={isMobileOnly ? '80vw' : '40vw'}
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={renameTeamModal}
         onRequestClose={() => setRenameTeamModal(false)}
-        contentLabel="Stop project?"
+        contentLabel={
+          editMode === 'Rename team' ? 'Rename team' : 'Create team'
+        }
         ariaHideApp={false}
       >
         <Formik
@@ -991,25 +1179,9 @@ const Dashboard = ({ history }) => {
                   type="name"
                   name="name"
                   placeholder={
-                    editMode === 'New team name' ? 'Rename' : 'Team name'
+                    editMode === 'Rename team' ? 'New team name' : 'Team name'
                   }
                 ></Field>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#9CA2B4"
-                    strokeWidth="2"
-                  >
-                    <path d="M2 4h20v16H2z"></path>
-                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                  </g>
-                </svg>
                 <StroveButton
                   isPrimary
                   type="submit"
@@ -1031,6 +1203,103 @@ const Dashboard = ({ history }) => {
           maxWidth="150px"
         />
       </Modal>
+
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={ownershipModal}
+        onRequestClose={() => setOwnershipModal(false)}
+        contentLabel="Transfer ownership"
+        ariaHideApp={false}
+      >
+        <SettingWrapper>
+          <Setting>
+            <DropdownWrapper>
+              <StyledSelect
+                value={newOwnerSelect}
+                onChange={handleNewOwnerSelect}
+                options={teamsObj[editTeamId]?.users
+                  ?.map(user => ({
+                    values: user.id,
+                    label: user.name,
+                  }))
+                  .filter(user => user.label)}
+                theme={theme => ({
+                  ...theme,
+                  borderRadius: 0,
+                  colors: {
+                    ...theme.colors,
+                    primary: '#0072ce',
+                    neutral5: '#0072ce',
+                    neutral10: '#0072ce',
+                    neutral20: '#0072ce',
+                    neutral30: '#0072ce',
+                    neutral40: '#0072ce',
+                    neutral50: '#0072ce',
+                    neutral60: '#0072ce',
+                    neutral70: '#0072ce',
+                    neutral80: '#0072ce',
+                    neutral90: '#0072ce',
+                  },
+                })}
+              />
+            </DropdownWrapper>
+          </Setting>
+        </SettingWrapper>
+        <ModalButton
+          onClick={() =>
+            transferOwnership({
+              teamId: editTeamId,
+              newOwnerId: newOwnerSelect.values,
+            })
+          }
+          text="Transfer ownership"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+        <ModalButton
+          onClick={() => setOwnershipModal(false)}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '30vh' : '20vh'}
+        isOpen={warningModal.visible}
+        onRequestClose={() =>
+          setWarningModal({
+            visible: false,
+            content: null,
+            onSubmit: null,
+            buttonLabel: '',
+          })
+        }
+        contentLabel="Warning"
+        ariaHideApp={false}
+      >
+        {warningModal.content}
+        {warningModal.buttonLabel && (
+          <ModalButton
+            isPrimary
+            onClick={warningModal.onSubmit}
+            text={warningModal.buttonLabel}
+            padding="0.5vh"
+            maxWidth="150px"
+          />
+        )}
+        <ModalButton
+          onClick={() => closeWarningModal()}
+          text="Close"
+          padding="0.5vh"
+          maxWidth="150px"
+        />
+      </Modal>
+
       <StyledReactModal
         isOpen={addProjectModal}
         onRequestClose={closeAddProjectModal}

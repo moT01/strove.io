@@ -20,6 +20,7 @@ export const UserFragment = gql`
     scopes
     token
     siliskyToken
+    token
     currentProjectId
     teams {
       ...Team

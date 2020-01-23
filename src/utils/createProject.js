@@ -79,7 +79,7 @@ const createProject = async ({
             query: GET_BITBUCKET_TOKEN,
             context: {
               headers: {
-                Authorization: `Bearer ${user.siliskyToken}`,
+                Authorization: `Bearer ${user.token || user.siliskyToken}`,
                 'User-Agent': 'node',
               },
             },
