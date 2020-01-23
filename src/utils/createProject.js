@@ -16,6 +16,7 @@ const createProject = async ({
   user,
   setModalContent,
   name,
+  teamId,
 }) => {
   let repoData = null
   const customName = name
@@ -78,7 +79,7 @@ const createProject = async ({
             query: GET_BITBUCKET_TOKEN,
             context: {
               headers: {
-                Authorization: `Bearer ${user.siliskyToken}`,
+                Authorization: `Bearer ${user.token || user.siliskyToken}`,
                 'User-Agent': 'node',
               },
             },
@@ -129,17 +130,23 @@ const createProject = async ({
         : document.location.href
 
     /* ToDo: Make this scallable and work with other sites as well */
-    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : 'standard'
+    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
 
     const { description, name /* add language and color */ } = repoData
     dispatch(
       mutation({
         name: 'addProject',
-        variables: { repoLink, name, description, type },
+        variables: { repoLink, name, description, type, teamId },
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
         onError: error => {
-          setModalContent('TryAgainLater')
+          setModalContent('TryAgainLater', {
+            repoLink,
+            name,
+            description,
+            type,
+            teamId,
+          })
           dispatch(actions.api.fetchError({ storeKey: 'myProjects', error }))
           dispatch(actions.incomingProject.catchIncomingError({ error }))
         },

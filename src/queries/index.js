@@ -14,6 +14,16 @@ import SEND_EMAIL from './sendEmail'
 import GET_BITBUCKET_TOKEN from './getBitbucketToken'
 import START_PROJECT from './startProjectSubscription'
 import LOGIN_SUBSCRIPTION from './userLoginSubscription'
+import ADD_MEMBER from './addMember'
+import MY_TEAMS from './myTeams'
+import GET_TEAM from './getTeam'
+import CREATE_TEAM from './createTeam'
+import RENAME_TEAM from './renameTeam'
+import REMOVE_MEMBER from './removeMember'
+import DELETE_TEAM from './deleteTeam'
+import SET_VISIBILITY from './setVisibility'
+import TRANSFER_OWNERSHIP from './transferOwnership'
+import LEAVE_TEAM from './leaveTeam'
 
 export {
   ADD_PROJECT,
@@ -32,4 +42,14 @@ export {
   GET_BITBUCKET_TOKEN,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ADD_MEMBER,
+  MY_TEAMS,
+  GET_TEAM,
+  CREATE_TEAM,
+  RENAME_TEAM,
+  REMOVE_MEMBER,
+  DELETE_TEAM,
+  SET_VISIBILITY,
+  TRANSFER_OWNERSHIP,
+  LEAVE_TEAM,
 }

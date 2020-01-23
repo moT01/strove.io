@@ -21,6 +21,7 @@ import ExternalLink from './externalLink'
 import ScrollToTop from './scrollToTop'
 import Cookies from './cookies'
 import WithTracker from './withTracker'
+import Projects from './projects'
 
 export {
   SmallCloud,
@@ -48,4 +49,5 @@ export {
   ExternalLink,
   ScrollToTop,
   Cookies,
+  Projects,
 }

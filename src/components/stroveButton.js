@@ -36,7 +36,7 @@ const Button = styled.button`
   width: ${props => (props.width ? props.width : '100%')};
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  margin: ${props => (props.margin ? props.margin : '5px')};
   padding: ${props => (props.padding ? props.padding : '10px 30px')};
   align-items: center;
   justify-content: center;

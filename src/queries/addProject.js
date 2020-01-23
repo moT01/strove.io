@@ -5,14 +5,15 @@ export default gql`
     $name: String!
     $description: String
     $isPrivate: Boolean
-    $repoLink: String
+    $repoLink: String!
+    $teamId: ID!
   ) {
     addProject(
       name: $name
       description: $description
       isPrivate: $isPrivate
       repoLink: $repoLink
+      teamId: $teamId
     )
   }
-
 `
