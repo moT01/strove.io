@@ -842,18 +842,30 @@ const Dashboard = ({ history }) => {
     }
   }
 
-  const handleTransferOwnershipClick = teamId => {
+  const handleTransferOwnershipClick = () => {
     setOwnershipModal(true)
   }
 
-  const transferOwnership = ({ teamId, newOwnerId }) => {
-    dispatch(
-      mutation({
-        name: 'transferOwnership',
-        mutation: TRANSFER_OWNERSHIP,
-        variables: { teamId, newOwnerId },
-      })
-    )
+  const transferOwnership = ({ teamId, newOwner }) => {
+    console.log(teamId, newOwner)
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure youn want to transfer ownership of{' '}
+          {teamsObj[teamId].name} to {newOwner.label}
+        </ModalText>
+      ),
+      buttonLabel: 'Transfer',
+      onSubmit: () =>
+        dispatch(
+          mutation({
+            name: 'transferOwnership',
+            mutation: TRANSFER_OWNERSHIP,
+            variables: { teamId, newOwnerId: newOwner.values },
+          })
+        ),
+    })
   }
 
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
@@ -890,7 +902,6 @@ const Dashboard = ({ history }) => {
       })
     )
   }
-
 
   const closeWarningModal = () => {
     setWarningModal({
@@ -931,7 +942,7 @@ const Dashboard = ({ history }) => {
     setProjectToDelete(null)
     setModalVisible(false)
   }
-  
+
   const handleExpandTile = teamId => {
     if (expandedTiles[teamId]) {
       const tiles = { ...expandedTiles }
@@ -1251,7 +1262,7 @@ const Dashboard = ({ history }) => {
           onClick={() =>
             transferOwnership({
               teamId: editTeamId,
-              newOwnerId: newOwnerSelect.values,
+              newOwner: newOwnerSelect,
             })
           }
           text="Transfer ownership"
