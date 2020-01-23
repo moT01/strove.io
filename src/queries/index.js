@@ -6,7 +6,6 @@ import MY_PROJECTS from './myProjects'
 import DELETE_PROJECT from './deleteProject'
 import STOP_PROJECT from './stopProject'
 import CONTINUE_PROJECT from './continueProject'
-import BUY_SUBSCRIPTION from './buySubscription'
 import RESET_CRON from './resetCron'
 import ACTIVE_PROJECT from './activeProjectSubscription'
 import BITBUCKET_LOGIN from './bitbucketAuth'
@@ -25,7 +24,6 @@ export {
   DELETE_PROJECT,
   STOP_PROJECT,
   CONTINUE_PROJECT,
-  BUY_SUBSCRIPTION,
   RESET_CRON,
   ACTIVE_PROJECT,
   BITBUCKET_LOGIN,

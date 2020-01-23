@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { ProjectFragment } from './project'
-import { SubscriptionFragment } from './subscription'
 
 export const UserFragment = gql`
   fragment User on User {
@@ -18,14 +17,11 @@ export const UserFragment = gql`
     scopes
     siliskyToken
     currentProjectId
-    subscription {
-      ...Subscription
-    }
+    subscriptionId
     projects {
       ...Project
     }
   }
 
   ${ProjectFragment}
-  ${SubscriptionFragment}
 `
