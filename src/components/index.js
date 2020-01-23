@@ -20,6 +20,7 @@ import PoweredBy from './poweredBy'
 import ExternalLink from './externalLink'
 import ScrollToTop from './scrollToTop'
 import Cookies from './cookies'
+import WithTracker from './withTracker'
 
 export {
   SmallCloud,
@@ -39,6 +40,7 @@ export {
   GlobalStyles,
   DataManager,
   WithAddProject,
+  WithTracker,
   Home,
   StroveButton,
   NoRepoUrlInfo,
@@ -46,4 +48,5 @@ export {
   ExternalLink,
   ScrollToTop,
   Cookies,
+  WithTracker,
 }
