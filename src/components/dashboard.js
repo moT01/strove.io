@@ -166,7 +166,7 @@ const PageWrapper = styled(Wrapper)`
   width: 100vw;
   padding-top: 5vh;
   justify-content: space-between;
-
+`
 
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
