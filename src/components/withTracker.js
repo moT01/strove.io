@@ -1,38 +1,24 @@
-import React, { Component } from 'react'
-import GoogleAnalytics from 'react-ga'
+import React, { useEffect } from 'react'
+import ReactGA from 'react-ga'
 
-GoogleAnalytics.initialize(process.env.REACT_APP_GA_TRACKING_ID)
+ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID)
 
-const withTracker = (WrappedComponent, options = {}) => {
+export const withTracker = (WrappedComponent, options = {}) => {
   const trackPage = page => {
-    GoogleAnalytics.set({
+    ReactGA.set({
       page,
       ...options,
     })
-    GoogleAnalytics.pageview(page)
+    ReactGA.pageview(page)
   }
 
-  const HOC = class extends Component {
-    componentDidMount() {
-      const page = this.props.location.pathname
-      trackPage(page)
-    }
+  const HOC = props => {
+    useEffect(() => trackPage(props.location.pathname), [
+      props.location.pathname,
+    ])
 
-    componentWillReceiveProps(nextProps) {
-      const currentPage = this.props.location.pathname
-      const nextPage = nextProps.location.pathname
-
-      if (currentPage !== nextPage) {
-        trackPage(nextPage)
-      }
-    }
-
-    render() {
-      return <WrappedComponent {...this.props} />
-    }
+    return <WrappedComponent {...props} />
   }
 
   return HOC
 }
-
-export default withTracker
