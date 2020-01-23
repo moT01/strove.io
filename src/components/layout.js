@@ -4,12 +4,14 @@ import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'styled-components/macro'
+import { Route } from 'react-router-dom'
 
 import {
   AddProjectProvider,
   WithAddProject,
   DataManager,
   Cookies,
+  WithTracker,
 } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
@@ -69,7 +71,13 @@ const Layout = ({ children, browser }) => {
                 ''
               )}
               <GlobalStyles />
-              <MainContent>{children}</MainContent>
+              <MainContent>
+                <Route
+                  component={WithTracker(children, {
+                    /* additional attributes */
+                  })}
+                />
+              </MainContent>
               <Cookies />
             </WithAddProject>
           </DataManager>
