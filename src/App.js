@@ -3,7 +3,7 @@ import React from 'react'
 // import { reactotronRedux } from 'reactotron-redux'
 import { Route } from 'react-router-dom'
 
-import { PrivateRoute, Dashboard, WithTracker } from 'components'
+import { WithTracker } from 'components'
 
 import Wrapper from './wrapper'
 import Routes from './routes'
@@ -16,7 +16,7 @@ import Routes from './routes'
 
 const Strove = () => (
   <Wrapper>
-    <Routes />
+    <Route component={WithTracker(Routes, {})} />
   </Wrapper>
 )
 
