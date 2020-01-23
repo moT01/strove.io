@@ -48,5 +48,4 @@ export {
   ExternalLink,
   ScrollToTop,
   Cookies,
-  WithTracker,
 }
