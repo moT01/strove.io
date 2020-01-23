@@ -162,11 +162,11 @@ const Wrapper = styled.div`
 `
 
 const PageWrapper = styled(Wrapper)`
-  width: 100%;
-  padding-top: 5vh;
   min-height: calc(100vh - 64px);
+  width: 100vw;
+  padding-top: 5vh;
   justify-content: space-between;
-`
+
 
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
