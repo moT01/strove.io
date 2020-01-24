@@ -586,10 +586,11 @@ const Dashboard = ({ history }) => {
                                     : StroveLogo
                                 }
                               />
-                              <Text>{team.owner.name}
-                                      <InviteStatus>Team leader</InviteStatus></Text>
+                              <Text>
+                                {team.owner.name}
+                                <InviteStatus>Team leader</InviteStatus>
+                              </Text>
                             </VerticalDivider>
-                          
                           </TeamHeaderDivider>
                         </RowWrapper>
                         {team?.users?.map(
@@ -605,9 +606,7 @@ const Dashboard = ({ history }) => {
                                           : StroveLogo
                                       }
                                     />
-                                    <Text>
-                                      {member.name}
-                                    </Text>
+                                    <Text>{member.name}</Text>
                                   </VerticalDivider>
                                   {isOwner && (
                                     <DeleteButton
@@ -811,20 +810,31 @@ const Dashboard = ({ history }) => {
   }
 
   const renameTeam = ({ newName, teamId }) =>
-    dispatch(
-      mutation({
-        name: 'renameTeam',
-        mutation: RENAME_TEAM,
-        variables: {
-          newName,
-          teamId,
-        },
-        onSuccess: () => {
-          updateTeams()
-          setRenameTeamModal(false)
-        },
-      })
-    )
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure you want to rename {teamsObj[teamId].name} to {newName}?
+        </ModalText>
+      ),
+      buttonLabel: 'Rename',
+      onSubmit: () =>
+        dispatch(
+          mutation({
+            name: 'renameTeam',
+            mutation: RENAME_TEAM,
+            variables: {
+              newName,
+              teamId,
+            },
+            onSuccess: () => {
+              updateTeams()
+              setRenameTeamModal(false)
+              closeWarningModal()
+            },
+          })
+        ),
+    })
 
   const handleAddMemberClick = id => {
     setEditTeamId(id)
@@ -928,6 +938,10 @@ const Dashboard = ({ history }) => {
         name: 'leaveTeam',
         mutation: LEAVE_TEAM,
         variables: { teamId: id },
+        onSuccess: () => {
+          updateTeams()
+          closeWarningModal()
+        },
       })
     )
   }
