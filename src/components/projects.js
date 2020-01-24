@@ -286,6 +286,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                       }
                     />
                     {isOwner &&
+                      !project.forkedFromId &&
                       (currentProjectId && currentProjectId === project.id ? (
                         <StroveButton
                           isDisabled={isDeleting || isContinuing || isStopping}
@@ -312,28 +313,30 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                           text="Delete"
                         />
                       ))}
-                    <StroveButton
-                      isDisabled={isDeleting || isContinuing || isStopping}
-                      padding="3px 15px"
-                      width="70%"
-                      margin="0px 0px 5px 0px"
-                      font-size="0.8rem"
-                      onClick={() => {
-                        dispatch(
-                          mutation({
-                            name: 'setVisibility',
-                            mutation: SET_VISIBILITY,
-                            variables: {
-                              projectId: project.id,
-                              isVisible: !project.isVisible,
-                            },
-                            dataSelector: data => data,
-                            onSuccess: () => updateTeams(),
-                          })
-                        )
-                      }}
-                      text="Show"
-                    />
+                    {isOwner && !project.forkedFromId && (
+                      <StroveButton
+                        isDisabled={isDeleting || isContinuing || isStopping}
+                        padding="3px 15px"
+                        width="70%"
+                        margin="0px 0px 5px 0px"
+                        font-size="0.8rem"
+                        onClick={() => {
+                          dispatch(
+                            mutation({
+                              name: 'setVisibility',
+                              mutation: SET_VISIBILITY,
+                              variables: {
+                                projectId: project.id,
+                                isVisible: !project.isVisible,
+                              },
+                              dataSelector: data => data,
+                              onSuccess: () => updateTeams(),
+                            })
+                          )
+                        }}
+                        text={project.isVisible ? 'Hide' : 'Show'}
+                      />
+                    )}
                   </RightSection>
                 </VerticalDivider>
               </Tile>
