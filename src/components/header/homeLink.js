@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes } from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 import { isMobileOnly } from 'react-device-detect'
@@ -68,4 +68,4 @@ const HomeLink = props =>
     </LinkWrapper>
   )
 
-export default HomeLink
+export default memo(HomeLink)
