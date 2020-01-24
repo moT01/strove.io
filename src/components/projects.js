@@ -10,6 +10,7 @@ import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
+import AddProjectProvider from './addProjectProvider'
 
 const FullFadeIn = keyframes`
     0% {
@@ -131,7 +132,6 @@ const StyledIcon = styled(Icon)`
 
 const Projects = ({ history, projects }) => {
   const dispatch = useDispatch()
-  const myTeams = useSelector(selectors.api.getMyTeams)
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
@@ -204,9 +204,7 @@ const Projects = ({ history, projects }) => {
           </ProjectTitle>
         )} */}
         {projects?.map((project, index) => {
-          const isOwner =
-            myTeams[myTeams.findIndex(x => x.id === projects[index].teamId)]
-              .owner.id === user.id
+          const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>
@@ -269,7 +267,7 @@ const Projects = ({ history, projects }) => {
                       width="70%"
                       margin="0px 0px 5px 0px"
                       font-size="0.8rem"
-                      onClick={() => handleStartClick(project)}
+                      onClick={() => (isOwner ? handleStartClick(project) : '')}
                       text={
                         currentProjectId && project.id === currentProjectId
                           ? 'Continue'
@@ -394,4 +392,10 @@ const Projects = ({ history, projects }) => {
   )
 }
 
-export default memo(Projects)
+export default memo(({ history, projects }) => (
+  <AddProjectProvider>
+    {({ addProject }) => (
+      <Projects addProject={addProject} history={history} projects={projects} />
+    )}
+  </AddProjectProvider>
+))

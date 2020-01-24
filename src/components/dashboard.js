@@ -11,7 +11,6 @@ import Select from 'react-select'
 
 import { mutation, handleStopProject, query } from 'utils'
 import {
-  DELETE_PROJECT,
   ADD_MEMBER,
   CREATE_TEAM,
   RENAME_TEAM,
@@ -21,7 +20,7 @@ import {
   TRANSFER_OWNERSHIP,
   LEAVE_TEAM,
 } from 'queries'
-import { selectors, actions, C } from 'state'
+import { selectors } from 'state'
 import Modal from './modal'
 import { GetStarted, Projects } from 'components'
 import SEO from './seo'
@@ -466,14 +465,12 @@ const Dashboard = ({ history }) => {
   const myTeams = useSelector(selectors.api.getMyTeams)
   const user = useSelector(selectors.api.getUser)
   // const [emailSent, setEmailSent] = useState(false)
-  const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [ownershipModal, setOwnershipModal] = useState(false)
-  const [projectToDelete, setProjectToDelete] = useState()
   const [expandedTiles, setExpandedTiles] = useState(
     myTeams
       ? myTeams.reduce((tiles, team) => {
@@ -516,6 +513,7 @@ const Dashboard = ({ history }) => {
           {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
             const isOwner = team.owner.id === user.id
+            const isLast = isOwner
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>
@@ -976,30 +974,6 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const handleDeleteClick = id => {
-    dispatch(
-      mutation({
-        name: 'deleteProject',
-        mutation: DELETE_PROJECT,
-        variables: { projectId: id },
-        dataSelector: data => data,
-        onSuccess: () => setProjectToDelete(null),
-        onSuccessDispatch: [
-          () => ({
-            type: C.api.REMOVE_ITEM,
-            payload: { storeKey: 'myProjects', id },
-          }),
-          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
-        ],
-      })
-    )
-  }
-
-  const closeModal = () => {
-    setProjectToDelete(null)
-    setModalVisible(false)
-  }
-
   const closeWarningModal = () => {
     setWarningModal({
       visible: false,
@@ -1059,35 +1033,6 @@ const Dashboard = ({ history }) => {
         {tabs[tabs.findIndex(tab => tab.name === 'Teams')].content}
         <Footer />
       </PageWrapper>
-      <Modal
-        width={isMobileOnly ? '80vw' : '40vw'}
-        height={isMobileOnly ? '30vh' : '20vh'}
-        isOpen={isModalVisible}
-        onRequestClose={() => setModalVisible(false)}
-        contentLabel="Delete project?"
-        ariaHideApp={false}
-      >
-        <ModalText>
-          Are you sure you want to delete this project? This operation cannot be
-          undone.
-        </ModalText>
-        <ModalButton
-          isDelete={true}
-          onClick={() => {
-            handleDeleteClick(projectToDelete.id)
-            setModalVisible(false)
-          }}
-          padding="0.5vh"
-          text="Confirm"
-          maxWidth="150px"
-        />
-        <ModalButton
-          onClick={closeModal}
-          text="Close"
-          padding="0.5vh"
-          maxWidth="150px"
-        />
-      </Modal>
       <Modal
         width={isMobileOnly ? '80vw' : '40vw'}
         height={isMobileOnly ? '40vh' : '20vh'}

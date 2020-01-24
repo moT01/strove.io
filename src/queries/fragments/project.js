@@ -4,6 +4,7 @@ export const ProjectFragment = gql`
   fragment Project on Project {
     id
     name
+    userId
     description
     isPrivate
     createdAt
