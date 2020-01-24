@@ -286,7 +286,8 @@ const RowWrapper = styled(VerticalDivider)`
 `
 
 const DeleteButton = styled.button`
-width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
+  width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
+  min-width: 150px;
 	box-shadow:inset 0px 1px 0px 0px #cf866c;
 	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
 	background-color:#d0451b;
