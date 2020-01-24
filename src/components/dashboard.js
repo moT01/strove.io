@@ -755,15 +755,44 @@ const Dashboard = ({ history }) => {
     )
   }
 
+  const handleDeleteTeamClick = ({ teamId }) => {
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Are you sure you want to delete {teamsObj[teamId].name}? This process
+          is irreversible.
+        </ModalText>
+      ),
+      buttonLabel: 'Delete',
+      onSubmit: () => deleteTeam({ teamId }),
+    })
+  }
+
   const deleteTeam = ({ teamId }) => {
-    dispatch(
-      mutation({
-        name: 'deleteTeam',
-        mutation: DELETE_TEAM,
-        variables: { teamId },
-        onSuccess: () => updateTeams(),
-      })
-    )
+    console.log('Second modal')
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          Deleting the team will also cause deleting all of the team projects.
+          Are you sure you want to proceed and delete {teamsObj[teamId].name}?
+        </ModalText>
+      ),
+      buttonLabel: 'Delete',
+      onSubmit: () =>
+        dispatch(
+          mutation({
+            name: 'deleteTeam',
+            mutation: DELETE_TEAM,
+            variables: { teamId },
+            onSuccess: () => {
+              updateTeams()
+              closeWarningModal()
+            },
+          })
+        ),
+    })
   }
 
   const handleDeleteMemberClick = ({ member, team }) => {
@@ -1185,10 +1214,9 @@ const Dashboard = ({ history }) => {
           onClick={() => handleTransferOwnershipClick(false)}
           text="Transfer ownership"
         />
-        {/* Deleting team is still WIP */}
         <DeleteButton
           isSettings
-          onClick={() => deleteTeam({ teamId: editTeamId })}
+          onClick={() => handleDeleteTeamClick({ teamId: editTeamId })}
         >
           Delete team
         </DeleteButton>
