@@ -504,6 +504,16 @@ const Dashboard = ({ history }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateTeams(), [])
 
+  const updateTeams = () => {
+    dispatch(
+      query({
+        name: 'myTeams',
+        storeKey: 'myTeams',
+        query: MY_TEAMS,
+      })
+    )
+  }
+
   const tabs = [
     {
       name: 'Teams',
@@ -687,6 +697,7 @@ const Dashboard = ({ history }) => {
                         <Projects
                           projects={teamProjects[team.id]}
                           history={history}
+                          updateTeams={updateTeams}
                         />
                         {isOwner && (
                           <StroveButton
@@ -722,16 +733,6 @@ const Dashboard = ({ history }) => {
       content: <Projects projects={projects} history={history} />,
     },
   ]
-
-  const updateTeams = () => {
-    dispatch(
-      query({
-        name: 'myTeams',
-        storeKey: 'myTeams',
-        query: MY_TEAMS,
-      })
-    )
-  }
 
   const handleCreateTeamClick = () => {
     setEditMode('Create team')

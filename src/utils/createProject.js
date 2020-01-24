@@ -17,6 +17,7 @@ const createProject = async ({
   setModalContent,
   name,
   teamId,
+  forkedFromId,
 }) => {
   let repoData = null
   const customName = name
@@ -146,6 +147,7 @@ const createProject = async ({
             description,
             type,
             teamId,
+            forkedFromId,
           })
           dispatch(actions.api.fetchError({ storeKey: 'myProjects', error }))
           dispatch(actions.incomingProject.catchIncomingError({ error }))

@@ -130,7 +130,7 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
-const Projects = ({ history, projects }) => {
+const Projects = ({ history, projects, addProject, updateTeams }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -267,39 +267,51 @@ const Projects = ({ history, projects }) => {
                       width="70%"
                       margin="0px 0px 5px 0px"
                       font-size="0.8rem"
-                      onClick={() => (isOwner ? handleStartClick(project) : '')}
+                      onClick={() =>
+                        isOwner
+                          ? handleStartClick(project)
+                          : addProject({
+                              link: project.repoLink,
+                              name: project.name,
+                              teamId: project.teamId,
+                              forkedFromId: project.id,
+                            })
+                      }
                       text={
-                        currentProjectId && project.id === currentProjectId
-                          ? 'Continue'
-                          : 'Start'
+                        isOwner
+                          ? currentProjectId && project.id === currentProjectId
+                            ? 'Continue'
+                            : 'Start'
+                          : 'Fork'
                       }
                     />
-                    {currentProjectId && currentProjectId === project.id ? (
-                      <StroveButton
-                        isDisabled={isDeleting || isContinuing || isStopping}
-                        padding="3px 15px"
-                        width="70%"
-                        margin="0px 0px 5px 0px"
-                        font-size="0.8rem"
-                        onClick={() => {
-                          handleStopClick(project.id)
-                        }}
-                        text="Stop"
-                      />
-                    ) : (
-                      <StroveButton
-                        isDisabled={isDeleting || isContinuing || isStopping}
-                        padding="3px 15px"
-                        width="70%"
-                        margin="0px 0px 5px 0px"
-                        font-size="0.8rem"
-                        onClick={() => {
-                          setModalVisible(true)
-                          setProjectToDelete(project)
-                        }}
-                        text="Delete"
-                      />
-                    )}
+                    {isOwner &&
+                      (currentProjectId && currentProjectId === project.id ? (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="3px 15px"
+                          width="70%"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          onClick={() => {
+                            handleStopClick(project.id)
+                          }}
+                          text="Stop"
+                        />
+                      ) : (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="3px 15px"
+                          width="70%"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          onClick={() => {
+                            setModalVisible(true)
+                            setProjectToDelete(project)
+                          }}
+                          text="Delete"
+                        />
+                      ))}
                     <StroveButton
                       isDisabled={isDeleting || isContinuing || isStopping}
                       padding="3px 15px"
@@ -316,6 +328,7 @@ const Projects = ({ history, projects }) => {
                               isVisible: !project.isVisible,
                             },
                             dataSelector: data => data,
+                            onSuccess: () => updateTeams(),
                           })
                         )
                       }}
@@ -392,10 +405,15 @@ const Projects = ({ history, projects }) => {
   )
 }
 
-export default memo(({ history, projects }) => (
+export default memo(({ history, projects, updateTeams }) => (
   <AddProjectProvider>
     {({ addProject }) => (
-      <Projects addProject={addProject} history={history} projects={projects} />
+      <Projects
+        addProject={addProject}
+        history={history}
+        projects={projects}
+        updateTeams={updateTeams}
+      />
     )}
   </AddProjectProvider>
 ))
