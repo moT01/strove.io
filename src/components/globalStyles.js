@@ -17,6 +17,7 @@ export default createGlobalStyle`
   }
 
   body {
+    width: 100%;
     position: absolute;
     background-color: #fff;
     margin: 0;
