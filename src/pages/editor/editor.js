@@ -25,7 +25,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
     <>
       <Prompt
         message={location =>
-          `Are you sure you want to go to ${location.pathname}`
+          `Are you sure you want to leave editor? This will stop your running processes.`
         }
       />
       <StyledIframe
