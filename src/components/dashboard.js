@@ -847,13 +847,12 @@ const Dashboard = ({ history }) => {
   }
 
   const transferOwnership = ({ teamId, newOwner }) => {
-    console.log(teamId, newOwner)
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure youn want to transfer ownership of{' '}
-          {teamsObj[teamId].name} to {newOwner.label}
+          Are you sure you want to transfer ownership of {teamsObj[teamId].name}{' '}
+          to {newOwner.label}
         </ModalText>
       ),
       buttonLabel: 'Transfer',
@@ -863,6 +862,18 @@ const Dashboard = ({ history }) => {
             name: 'transferOwnership',
             mutation: TRANSFER_OWNERSHIP,
             variables: { teamId, newOwnerId: newOwner.values },
+            onSuccess: () => {
+              setWarningModal({
+                visible: true,
+                content: (
+                  <ModalText>
+                    You have successfully transfered ownership of{' '}
+                    {teamsObj[teamId].name} to {newOwner.label}
+                  </ModalText>
+                ),
+              })
+              setOwnershipModal(false)
+            },
           })
         ),
     })
@@ -903,22 +914,6 @@ const Dashboard = ({ history }) => {
     )
   }
 
-  const closeWarningModal = () => {
-    setWarningModal({
-      visible: false,
-      content: null,
-      onSubmit: null,
-      buttonLabel: '',
-    })
-  }
-
-  const closeSettingsModal = () => {
-    setEditTeamId(null)
-    setSettingsModal(false)
-  }
-
-  const closeAddProjectModal = () => setAddProjectModal(false)
-
   const handleDeleteClick = id => {
     dispatch(
       mutation({
@@ -942,6 +937,22 @@ const Dashboard = ({ history }) => {
     setProjectToDelete(null)
     setModalVisible(false)
   }
+
+  const closeWarningModal = () => {
+    setWarningModal({
+      visible: false,
+      content: null,
+      onSubmit: null,
+      buttonLabel: '',
+    })
+  }
+
+  const closeSettingsModal = () => {
+    setEditTeamId(null)
+    setSettingsModal(false)
+  }
+
+  const closeAddProjectModal = () => setAddProjectModal(false)
 
   const handleExpandTile = teamId => {
     if (expandedTiles[teamId]) {
