@@ -576,6 +576,22 @@ const Dashboard = ({ history }) => {
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
+                        <RowWrapper>
+                          <TeamHeaderDivider>
+                            <VerticalDivider>
+                              <UserPhoto
+                                src={
+                                  team.owner.photoUrl
+                                    ? team.owner.photoUrl
+                                    : StroveLogo
+                                }
+                              />
+                              <Text>{team.owner.name}
+                                      <InviteStatus>Team leader</InviteStatus></Text>
+                            </VerticalDivider>
+                          
+                          </TeamHeaderDivider>
+                        </RowWrapper>
                         {team?.users?.map(
                           member =>
                             member.name && (
@@ -589,7 +605,9 @@ const Dashboard = ({ history }) => {
                                           : StroveLogo
                                       }
                                     />
-                                    <Text>{member.name}</Text>
+                                    <Text>
+                                      {member.name}
+                                    </Text>
                                   </VerticalDivider>
                                   {isOwner && (
                                     <DeleteButton
