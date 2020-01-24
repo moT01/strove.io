@@ -1,26 +1,12 @@
 import React from 'react'
 // import Reactotron from 'reactotron-react-js'
 // import { reactotronRedux } from 'reactotron-redux'
-import { Switch, Route } from 'react-router-dom'
-import {
-  Home,
-  Faq,
-  Embed,
-  NotFound,
-  Cookies,
-  PrivacyPolicy,
-  TermsAndConditions,
-  GoBackTo,
-  Login,
-  RunProject,
-  Pricing,
-  Editor,
-  FromEmailInvitation,
-} from 'pages'
+import { Route } from 'react-router-dom'
 
-import { PrivateRoute, Dashboard, ScrollToTop } from 'components'
+import { WithTracker } from 'components'
 
 import Wrapper from './wrapper'
+import Routes from './routes'
 
 // if (process.env.NODE_ENV !== 'production') {
 //   Reactotron.configure()
@@ -30,24 +16,7 @@ import Wrapper from './wrapper'
 
 const Strove = () => (
   <Wrapper>
-    <ScrollToTop />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/faq" component={Faq} />
-      <Route path="/cookies" component={Cookies} />
-      <Route path="/privacyPolicy" component={PrivacyPolicy} />
-      <Route path="/termsAndConditions" component={TermsAndConditions} />
-      <Route path="/pricing" component={Pricing} />
-      <Route path="/fromEmbed/goBackTo" component={GoBackTo} />
-      <Route path="/fromEmbed/login" component={Login} />
-      <Route exact path="/embed" component={Embed} />
-      <Route path="/embed/runProject" component={RunProject} />
-      <Route path="/embed/editor" component={Editor} />
-      <PrivateRoute path="/app/editor" component={Editor} />
-      <PrivateRoute path="/app/dashboard" component={Dashboard} />
-      <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
-      <Route component={NotFound} />
-    </Switch>
+    <Route component={WithTracker(Routes, {})} />
   </Wrapper>
 )
 

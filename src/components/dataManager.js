@@ -37,7 +37,7 @@ export default memo(
   withRouter(({ children, addProject, history }) => {
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
-    const token = user?.siliskyToken
+    const token = useSelector(selectors.getToken)
     const currentProject = useSelector(selectors.api.getCurrentProject)
     const incomingProjectLink = useSelector(
       selectors.incomingProject.getRepoLink
@@ -326,8 +326,14 @@ export default memo(
         )
       }
       if (loginData?.userLogin) {
-        const { siliskyToken, subscription, projects } = loginData?.userLogin
-        localStorage.setItem('token', siliskyToken)
+        const {
+          token,
+          siliskyToken,
+          subscription,
+          projects,
+          teams,
+        } = loginData?.userLogin
+        localStorage.setItem('token', token || siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {
@@ -349,6 +355,14 @@ export default memo(
             payload: {
               storeKey: 'myProjects',
               data: projects,
+            },
+          })
+        teams &&
+          dispatch({
+            type: C.api.FETCH_SUCCESS,
+            payload: {
+              storeKey: 'myTeams',
+              data: teams,
             },
           })
       }
@@ -390,10 +404,6 @@ export default memo(
         ev.preventDefault()
 
         if (navigator?.sendBeacon && user) {
-          console.log(
-            'process.env.REACT_APP_STROVE_ENDPOINT',
-            process.env.REACT_APP_STROVE_ENDPOINT
-          )
           navigator.sendBeacon(
             `${process.env.REACT_APP_STROVE_ENDPOINT}/beacon`,
             JSON.stringify({ token: localStorage.getItem('token') })

@@ -89,7 +89,6 @@ const MenuWrapper = styled.div`
   border-color: ${({ theme }) => theme.colors.c1};
   border-style: solid;
   background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
   position: relative;
 `
 
@@ -101,6 +100,7 @@ const OptionText = styled(Text)`
     color: ${({ theme }) => theme.colors.c2};
     transition: color 0.1s;
     text-decoration: none;
+    cursor: pointer;
   }
 `
 
@@ -116,7 +116,6 @@ const Option = styled.a`
   font-size: 16px;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
-  z-index: 4;
   text-decoration: none;
   font-weight: 300;
   min-width: ${props => (props.isEmbed ? '0' : '150px')};

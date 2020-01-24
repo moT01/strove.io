@@ -10,11 +10,6 @@ import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 import Editor from './editor'
 
-const getUserToken = selectors.api.getApiData({
-  fields: ['user', 'siliskyToken'],
-  defaultValue: null,
-})
-
 const EditorWrapper = ({ history }) => {
   const dispatch = useDispatch()
 
@@ -25,7 +20,7 @@ const EditorWrapper = ({ history }) => {
   const port = currentProject && currentProject.editorPort
   const isEmbed = getWindowPathName().includes('embed')
 
-  const token = useSelector(getUserToken)
+  const token = useSelector(selectors.getToken)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {

@@ -7,9 +7,13 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
-Strove gives browser access to cloud with all major Linux-supported programming languages and tools such as Python and git. You can now work on your projects from any computer you want. Naturally, we made Strove with Strove as well
+Strove brings powerful, ready in seconds, pre-configured cloud
+servers to write, run, build, share and
+secure software remotely
 
-### [Edit source code](https://strove.io/#https://github.com/stroveio/strove.io-client)
+Obviously, Strove is made with Strove as well
+
+### [Edit source code in Strove](https://strove.io/#https://github.com/stroveio/strove.io-client)
 
 or, visit our website
 
@@ -33,8 +37,8 @@ Add # + github url after strove.io to get start coding right away, for example: 
 
 There are several problems programmers face make this project important in our eyes.
 
-1. Security
-   It’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
+1. Security -
+   it’s safer to store code in the cloud as it reduces the vector of physical attacks and chance of stealing the source. If the machine gets stolen, all the company has to do is deny the access from the stolen device.
 2. 'It works on my machine' problem. All team members access instances of the same programming environment, no matter if they use Macbook or an old PC.
 3. It is hard to use different computers when working on a project. The code lives in a cloud. This makes it possible to resume working on a project from any computer with internet access. This is especially useful for students and people who travel a lot.
 4. Programmers waste a lot of time on setting up the environment. The browser-based solution can cut the time to set a programming environment to seconds.

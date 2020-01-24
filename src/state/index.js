@@ -25,6 +25,10 @@ export const selectors = {
   incomingProject: incomingProject.selectors,
   latency: latency.selectors,
   feature: feature.selectors,
+  // ToDo Remove siliskyToken later on
+  getToken:
+    api.selectors.getUserField('token') ||
+    api.selectors.getUserField('siliskyToken'),
 }
 export const actions = {
   api: api.actions,
