@@ -2,7 +2,9 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 import { isMobileOnly } from 'react-device-detect'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { selectors } from 'state'
 import strove from 'images/stroveReversed.png'
 
 const FadeIn = keyframes`
