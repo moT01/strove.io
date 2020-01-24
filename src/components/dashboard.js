@@ -930,6 +930,7 @@ const Dashboard = ({ history }) => {
                 ),
               })
               setOwnershipModal(false)
+              updateTeams()
             },
           })
         ),
