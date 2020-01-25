@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { useSelector } from 'react-redux'
+import { Prompt } from 'react-router-dom'
 
 import { selectors } from 'state'
 
@@ -26,12 +27,19 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
     .substring(7)
 
   return (
-    <StyledIframe
-      isEmbed={isEmbed}
-      loaderVisible={loaderVisible}
-      onLoad={onLoad}
-      src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=Bearer ${token}`}
-    />
+    <>
+      <Prompt
+        message={location =>
+          `Are you sure you want to leave editor? This will stop your running processes.`
+        }
+      />
+      <StyledIframe
+        isEmbed={isEmbed}
+        loaderVisible={loaderVisible}
+        onLoad={onLoad}
+        src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=Bearer ${token}`}
+      />
+    </>
   )
 }
 
