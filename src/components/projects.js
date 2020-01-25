@@ -67,6 +67,7 @@ const Text = styled.p`
   margin-bottom: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
+  word-wrap: break-word;
   overflow: hidden;
 `
 
@@ -103,7 +104,7 @@ const RightSection = styled(FlexWrapper)`
 `
 
 const InfoWrapper = styled(FlexWrapper)`
-  width: 80%;
+  margin: 0;
   align-items: flex-start;
 `
 
