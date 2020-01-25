@@ -141,15 +141,15 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const myProjects = projects?.filter(project => project.userId === user.id)
   const displayedProjects = projects?.map(project =>
-    myProjects.findIndex(x => x.name === project.name) !== -1
+    projects
+      ?.filter(project => project.userId === user.id)
+      .findIndex(x => x.name === project.name) !== -1
       ? project.userId === user.id && project
       : project
   )
   console.log('TCL: Projects -> displayedProjects', displayedProjects)
   console.log('TCL: Projects -> projects', projects)
-  console.log('TCL: Projects -> myProjects', myProjects)
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
