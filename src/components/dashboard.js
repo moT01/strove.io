@@ -170,7 +170,7 @@ const PageWrapper = styled(Wrapper)`
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
   transition: all 0.2s;
-  width: 70%;
+  width: calc(100% - 40px);
   height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
 `
 
