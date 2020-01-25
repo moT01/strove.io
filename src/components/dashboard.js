@@ -162,15 +162,16 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   min-height: calc(100vh - 64px);
-  width: 100vw;
-  padding-top: 5vh;
+  width: calc(100vw - 20px);
+  padding-top: 10px;
+  margin: 0 20px;
   justify-content: space-between;
 `
 
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
   transition: all 0.2s;
-  width: calc(100% - 40px);
+  width: 100%;
   height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
 `
 
