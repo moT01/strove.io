@@ -83,6 +83,8 @@ const VerticalDivider = styled.div`
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  flex-direction: ${({ columnOnMobile }) =>
+    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const FlexWrapper = styled.div`
@@ -217,7 +219,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
           return (
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>
-                <VerticalDivider>
+                <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
 
