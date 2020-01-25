@@ -327,6 +327,7 @@ const IconWrapper = styled(Wrapper)`
   border-width: 0px 0px 0px 1px;
   border-color: ${({ theme }) => theme.colors.c16};
   border-style: solid;
+  cursor: pointer;
 `
 
 const ExpandIcon = styled(StyledIcon)`
@@ -383,7 +384,6 @@ const TeamTileHeader = styled(Tile)`
 
   :hover {
     background-color: ${({ theme }) => theme.colors.c1};
-    cursor: pointer;
     ${Title} {
       color: ${({ theme }) => theme.colors.c2};
     }
