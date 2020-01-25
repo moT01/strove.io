@@ -67,6 +67,7 @@ const Text = styled.p`
   margin-bottom: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
+  word-wrap: break-word;
   overflow: hidden;
 `
 
@@ -83,6 +84,8 @@ const VerticalDivider = styled.div`
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  flex-direction: ${({ columnOnMobile }) =>
+    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const FlexWrapper = styled.div`
@@ -101,7 +104,7 @@ const RightSection = styled(FlexWrapper)`
 `
 
 const InfoWrapper = styled(FlexWrapper)`
-  width: 80%;
+  margin: 0;
   align-items: flex-start;
 `
 
@@ -217,7 +220,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
           return (
             (project.isVisible || isOwner) && (
               <Tile key={project.id}>
-                <VerticalDivider>
+                <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
 

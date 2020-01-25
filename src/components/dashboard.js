@@ -162,15 +162,16 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled(Wrapper)`
   min-height: calc(100vh - 64px);
-  width: 100vw;
-  padding-top: 5vh;
+  width: calc(100vw - 20px);
+  padding-top: 10px;
+  margin: 0 20px;
   justify-content: space-between;
 `
 
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
   transition: all 0.2s;
-  width: 70%;
+  width: 100%;
   height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
 `
 
@@ -180,8 +181,6 @@ const TilesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 2vh;
-  margin: 2vh;
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
@@ -273,9 +272,10 @@ const VerticalDivider = styled.div`
   height: 100%;
 `
 
-const TeamHeaderDivider = styled(VerticalDivider)`
-  flex-direction: row;
+const Divider = styled(VerticalDivider)`
   justify-content: space-between;
+  flex-direction: ${({ columnOnMobile }) =>
+    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const RowWrapper = styled(VerticalDivider)`
@@ -286,7 +286,8 @@ const RowWrapper = styled(VerticalDivider)`
 `
 
 const DeleteButton = styled.button`
-width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
+  width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
+  min-width: 150px;
 	box-shadow:inset 0px 1px 0px 0px #cf866c;
 	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
 	background-color:#d0451b;
@@ -527,16 +528,16 @@ const Dashboard = ({ history }) => {
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>
-                  <TeamHeaderDivider>
+                  <Divider>
                     <Title>{team.name}</Title>
                     <IconWrapper onClick={() => handleExpandTile(team.id)}>
                       <ExpandIcon type="down" expanded={isExpanded} />
                     </IconWrapper>
-                  </TeamHeaderDivider>
+                  </Divider>
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <TeamHeaderDivider>
+                    <Divider>
                       {isOwner ? (
                         <StroveButton
                           isPrimary
@@ -559,9 +560,9 @@ const Dashboard = ({ history }) => {
                           text="Leave"
                         />
                       )}
-                    </TeamHeaderDivider>
+                    </Divider>
                     <TileSectionHeader>
-                      <TeamHeaderDivider>
+                      <Divider>
                         <SectionTitle>Members</SectionTitle>
                         <IconWrapper
                           onClick={() =>
@@ -580,12 +581,12 @@ const Dashboard = ({ history }) => {
                             section
                           />
                         </IconWrapper>
-                      </TeamHeaderDivider>
+                      </Divider>
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
                         <RowWrapper>
-                          <TeamHeaderDivider>
+                          <Divider>
                             <VerticalDivider>
                               <UserPhoto
                                 src={
@@ -599,13 +600,13 @@ const Dashboard = ({ history }) => {
                                 <InviteStatus>Team leader</InviteStatus>
                               </Text>
                             </VerticalDivider>
-                          </TeamHeaderDivider>
+                          </Divider>
                         </RowWrapper>
                         {team?.users?.map(
                           member =>
                             member.name && (
                               <RowWrapper key={member.name}>
-                                <TeamHeaderDivider>
+                                <Divider>
                                   <VerticalDivider>
                                     <UserPhoto
                                       src={
@@ -628,14 +629,14 @@ const Dashboard = ({ history }) => {
                                       Remove
                                     </DeleteButton>
                                   )}
-                                </TeamHeaderDivider>
+                                </Divider>
                               </RowWrapper>
                             )
                         )}
                         {isOwner &&
                           team?.invited?.map(member => (
                             <RowWrapper key={member.name}>
-                              <TeamHeaderDivider>
+                              <Divider columnOnMobile>
                                 <VerticalDivider>
                                   <UserPhoto
                                     src={
@@ -656,7 +657,7 @@ const Dashboard = ({ history }) => {
                                 >
                                   Cancel
                                 </DeleteButton>
-                              </TeamHeaderDivider>
+                              </Divider>
                             </RowWrapper>
                           ))}
                         {isOwner && (
@@ -671,7 +672,7 @@ const Dashboard = ({ history }) => {
                       </TeamTileSection>
                     )}
                     <TileSectionHeader isLast>
-                      <TeamHeaderDivider>
+                      <Divider>
                         <SectionTitle>Projects</SectionTitle>
                         <IconWrapper
                           onClick={() =>
@@ -690,7 +691,7 @@ const Dashboard = ({ history }) => {
                             section
                           />
                         </IconWrapper>
-                      </TeamHeaderDivider>
+                      </Divider>
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isProjectsActive && (
                       <TeamTileSection isLast>
