@@ -274,7 +274,8 @@ const VerticalDivider = styled.div`
 
 const Divider = styled(VerticalDivider)`
   justify-content: space-between;
-  flex-direction: ${isMobileOnly ? 'column' : 'row'};
+  flex-direction: ${({ columnOnMobile }) =>
+    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const RowWrapper = styled(VerticalDivider)`
@@ -635,7 +636,7 @@ const Dashboard = ({ history }) => {
                         {isOwner &&
                           team?.invited?.map(member => (
                             <RowWrapper key={member.name}>
-                              <Divider>
+                              <Divider columnOnMobile>
                                 <VerticalDivider>
                                   <UserPhoto
                                     src={
