@@ -273,15 +273,8 @@ const VerticalDivider = styled.div`
 `
 
 const Divider = styled(VerticalDivider)`
-  flex-direction: row;
   justify-content: space-between;
-  flex-direction: column;
-`
-
-const Divider2 = styled(VerticalDivider)`
-  flex-direction: row;
-  justify-content: space-between;
-  flex-direction: column;
+  flex-direction: ${isMobileOnly ? 'column' : 'row'};
 `
 
 const RowWrapper = styled(VerticalDivider)`
