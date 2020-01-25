@@ -181,8 +181,6 @@ const TilesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 2vh;
-  margin: 2vh;
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
