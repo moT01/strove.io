@@ -45,6 +45,7 @@ const Tile = styled.div`
   border-width: 0px 0px 1px 0px;
   border-style: solid;
   padding: 20px;
+  margin: 5px;
   width: 100%;
   transition: all 0.2s;
 
@@ -57,7 +58,7 @@ const Tile = styled.div`
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
   max-width: 150px;
-  padding: 0.5vh;
+  padding: 5px 0px;
 `
 
 const Text = styled.p`
@@ -377,13 +378,11 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
             setStopModal(false)
           }}
           text="Confirm"
-          padding="0.5vh"
           maxWidth="150px"
         />
         <ModalButton
           onClick={() => setStopModal(false)}
           text="Close"
-          padding="0.5vh"
           maxWidth="150px"
         />
       </Modal>
@@ -405,16 +404,10 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
-          padding="0.5vh"
           text="Confirm"
           maxWidth="150px"
         />
-        <ModalButton
-          onClick={closeModal}
-          text="Close"
-          padding="0.5vh"
-          maxWidth="150px"
-        />
+        <ModalButton onClick={closeModal} text="Close" maxWidth="150px" />
       </Modal>
     </>
   )

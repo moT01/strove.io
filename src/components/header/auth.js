@@ -71,7 +71,7 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c2};
+  box-shadow: 0 12px 12px -15px ${({ theme }) => theme.colors.c2};
   border-radius: 5px;
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.c1};
@@ -87,7 +87,7 @@ const Option = styled.a`
   justify-content: flex-start;
   align-items: center;
   padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  margin: ${props => (props.isLast ? `0` : `0 0 2px`)};
   width: auto;
   height: 32px;
   font-size: 16px;
@@ -100,7 +100,7 @@ const Option = styled.a`
 
   svg {
     fill: ${({ theme }) => theme.colors.c2};
-    width: 2.2vh;
+    width: 22px;
     height: auto;
     margin-right: 5px;
   }
@@ -236,7 +236,7 @@ const UserDropdown = props => {
 
   if (isLoading)
     return (
-      <FullScreenLoader isFullscreen={false} height="3vh" color="#ffffff" />
+      <FullScreenLoader isFullscreen={false} height="30px" color="#ffffff" />
     )
 
   return (

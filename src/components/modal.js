@@ -29,7 +29,7 @@ export default memo(styled(Modal)`
   border-width: 1px;
   border-style: solid;
   padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c1};
   position: fixed;
   animation: ${FullFadeIn} 0.2s ease-out;
 

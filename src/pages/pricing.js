@@ -200,7 +200,7 @@ const Button = styled.button`
   height: auto;
   width: ${({ team }) => (team ? '40%' : '75%')};
   margin: 15px 0 5px;
-  padding: 0.5vh;
+  padding: 5px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -212,7 +212,7 @@ const Button = styled.button`
   border-radius: 4px;
   border-color: ${({ team, theme }) =>
     team ? theme.colors.c2 : theme.colors.c1};
-  box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  box-shadow: 0 11px 11px -15px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
 
   &:disabled {
