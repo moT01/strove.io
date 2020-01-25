@@ -524,7 +524,6 @@ const Dashboard = ({ history }) => {
           {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
             const isOwner = team.owner.id === user.id
-            const isLast = isOwner
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>

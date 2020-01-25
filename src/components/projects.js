@@ -81,7 +81,7 @@ const ModalText = styled(Text)`
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   height: 100%;
@@ -105,6 +105,7 @@ const RightSection = styled(FlexWrapper)`
 `
 
 const InfoWrapper = styled(FlexWrapper)`
+  width: 80%;
   margin: 0;
   align-items: flex-start;
 `
