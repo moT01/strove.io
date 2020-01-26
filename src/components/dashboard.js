@@ -244,7 +244,7 @@ const ModalButton = styled(StroveButton)`
 `
 
 const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c4};
   font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
@@ -316,7 +316,7 @@ const InviteStatus = styled.span`
 
 const StyledIcon = styled(Icon)`
   font-size: 1.7vh;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const IconWrapper = styled(Wrapper)`
@@ -334,8 +334,7 @@ const ExpandIcon = styled(StyledIcon)`
   font-size: 1rem;
   transform: ${({ expanded }) =>
     expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
-  color: ${({ theme, expanded, section }) =>
-    section ? theme.colors.c1 : expanded ? theme.colors.c2 : theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   transition: all 0.2s;
   :focus {
     outline: none;
