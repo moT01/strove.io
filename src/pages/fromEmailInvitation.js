@@ -76,6 +76,7 @@ const FromEmailInvitation = () => {
         <LoginWrapper>
           {loginOptions.map(loginOption => (
             <ExternalLink
+              key={loginOption.label}
               primary
               href={`${loginOption.href}`}
               onClick={() =>
