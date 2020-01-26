@@ -2,11 +2,13 @@ import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { ExternalLink } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
+import { actions } from 'state'
 
 const MenuWrapper = styled.div`
   padding: 20px;
@@ -50,8 +52,10 @@ const InvitationDetails = styled.div`
 const FromEmailInvitation = () => {
   const searchParams = getWindowSearchParams()
   const token = useSelector(selectors.getToken)
+  const dispatch = useDispatch()
 
   const teamName = searchParams.get('teamName')
+  const teamId = searchParams.get('teamId')
   const invitedEmail = searchParams.get('invitedEmail')
   const fromEmail = searchParams.get('fromEmail')
 
@@ -71,7 +75,15 @@ const FromEmailInvitation = () => {
         </InvitationDetails>
         <LoginWrapper>
           {loginOptions.map(loginOption => (
-            <ExternalLink primary href={`${loginOption.href}`}>
+            <ExternalLink
+              primary
+              href={`${loginOption.href}`}
+              onClick={() =>
+                dispatch(
+                  actions.invitations.addIncomingAccept({ teamId, teamName })
+                )
+              }
+            >
               {loginOption.icon}
               <LoginText invert>Login with {loginOption.label}</LoginText>
             </ExternalLink>

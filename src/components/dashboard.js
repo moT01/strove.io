@@ -187,7 +187,7 @@ const TilesWrapper = styled.div`
 const Title = styled.h3`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.c1};
-  margin: 0.3vh 0.3vh 0.3vh 0;
+  margin: 3px 3px 3px 0;
 `
 
 const SectionTitle = styled(Title)`
@@ -207,7 +207,7 @@ const Tile = styled.div`
   border-style: solid;
   padding: 20px;
   box-shadow: ${({ expanded, theme }) =>
-    expanded ? '0' : ` 0 1.5vh 1.5vh -1.5vh ${theme.colors.c1}`};
+    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c1}`};
   margin: 15px;
   width: 50%;
   transition: all 0.2s;
@@ -240,7 +240,7 @@ const TeamTileSection = styled(Tile)`
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
   max-width: 150px;
-  padding: 0.5vh;
+  padding: 5px;
 `
 
 const Text = styled.p`
@@ -327,6 +327,7 @@ const IconWrapper = styled(Wrapper)`
   border-width: 0px 0px 0px 1px;
   border-color: ${({ theme }) => theme.colors.c16};
   border-style: solid;
+  cursor: pointer;
 `
 
 const ExpandIcon = styled(StyledIcon)`
@@ -383,7 +384,6 @@ const TeamTileHeader = styled(Tile)`
 
   :hover {
     background-color: ${({ theme }) => theme.colors.c1};
-    cursor: pointer;
     ${Title} {
       color: ${({ theme }) => theme.colors.c2};
     }
@@ -428,7 +428,7 @@ const SettingWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 2vh 0 0;
+  margin: 20px 0 0;
 `
 
 const DropdownWrapper = styled.div`
@@ -524,7 +524,6 @@ const Dashboard = ({ history }) => {
           {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
             const isOwner = team.owner.id === user.id
-            const isLast = isOwner
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded}>
@@ -541,7 +540,7 @@ const Dashboard = ({ history }) => {
                       {isOwner ? (
                         <StroveButton
                           isPrimary
-                          padding="0.5vh"
+                          padding="5px"
                           width="20%"
                           onClick={() => {
                             handleSettingsClick(team.id)
@@ -551,7 +550,7 @@ const Dashboard = ({ history }) => {
                       ) : (
                         <StroveButton
                           isPrimary
-                          padding="0.5vh"
+                          padding="5px"
                           width="20%"
                           onClick={() => {
                             setEditTeamId(team.id)
@@ -663,7 +662,7 @@ const Dashboard = ({ history }) => {
                         {isOwner && (
                           <StroveButton
                             isPrimary
-                            padding="0.5vh"
+                            padding="5px"
                             width="20%"
                             onClick={() => handleAddMemberClick(team.id)}
                             text="Add member"
@@ -703,7 +702,7 @@ const Dashboard = ({ history }) => {
                         {isOwner && (
                           <StroveButton
                             isPrimary
-                            padding="0.5vh"
+                            padding="5px"
                             width="20%"
                             text="Add Project"
                             onClick={() => {
@@ -721,7 +720,7 @@ const Dashboard = ({ history }) => {
           })}
           <StroveButton
             isPrimary
-            padding="0.5vh"
+            padding="5px"
             width="20%"
             onClick={() => handleCreateTeamClick()}
             text="Create new team"
@@ -1055,13 +1054,13 @@ const Dashboard = ({ history }) => {
             setStopModal(false)
           }}
           text="Confirm"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
         <ModalButton
           onClick={() => setStopModal(false)}
           text="Close"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
       </Modal>
@@ -1128,7 +1127,7 @@ const Dashboard = ({ history }) => {
         <ModalButton
           onClick={() => setAddMemberModal(false)}
           text="Close"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
       </Modal>
@@ -1148,7 +1147,7 @@ const Dashboard = ({ history }) => {
         </WarningText>
         <StroveButton
           isPrimary
-          padding="0.5vh"
+          padding="5px"
           margin="0px 0px 5px 0px"
           width="80%"
           onClick={() => handleRenameTeamClick(editTeamId)}
@@ -1156,7 +1155,7 @@ const Dashboard = ({ history }) => {
         />
         <StroveButton
           isPrimary
-          padding="0.5vh"
+          padding="5px"
           margin="0px 0px 5px 0px"
           width="80%"
           onClick={() => handleTransferOwnershipClick(false)}
@@ -1172,7 +1171,7 @@ const Dashboard = ({ history }) => {
         <ModalButton
           onClick={() => closeSettingsModal()}
           text="Close"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
       </Modal>
@@ -1229,7 +1228,7 @@ const Dashboard = ({ history }) => {
         <ModalButton
           onClick={() => setRenameTeamModal(false)}
           text="Close"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
       </Modal>
@@ -1285,13 +1284,13 @@ const Dashboard = ({ history }) => {
             })
           }
           text="Transfer ownership"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
         <ModalButton
           onClick={() => setOwnershipModal(false)}
           text="Close"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
       </Modal>
@@ -1318,14 +1317,14 @@ const Dashboard = ({ history }) => {
             isPrimary
             onClick={warningModal.onSubmit}
             text={warningModal.buttonLabel}
-            padding="0.5vh"
+            padding="5px"
             maxWidth="150px"
           />
         )}
         <ModalButton
           onClick={() => closeWarningModal()}
           text="Close"
-          padding="0.5vh"
+          padding="5px"
           maxWidth="150px"
         />
       </Modal>

@@ -45,6 +45,7 @@ const Tile = styled.div`
   border-width: 0px 0px 1px 0px;
   border-style: solid;
   padding: 20px;
+  margin: 5px;
   width: 100%;
   transition: all 0.2s;
 
@@ -57,7 +58,7 @@ const Tile = styled.div`
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
   max-width: 150px;
-  padding: 0.5vh;
+  padding: 5px 0px;
 `
 
 const Text = styled.p`
@@ -80,7 +81,7 @@ const ModalText = styled(Text)`
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   height: 100%;
@@ -104,6 +105,7 @@ const RightSection = styled(FlexWrapper)`
 `
 
 const InfoWrapper = styled(FlexWrapper)`
+  width: 80%;
   margin: 0;
   align-items: flex-start;
 `
@@ -144,15 +146,15 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const myProjects = projects?.filter(project => project.userId === user.id)
   const displayedProjects = projects?.map(project =>
-    myProjects.findIndex(x => x.name === project.name) !== -1
+    projects
+      ?.filter(project => project.userId === user.id)
+      .findIndex(x => x.name === project.name) !== -1
       ? project.userId === user.id && project
       : project
   )
   console.log('TCL: Projects -> displayedProjects', displayedProjects)
   console.log('TCL: Projects -> projects', projects)
-  console.log('TCL: Projects -> myProjects', myProjects)
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -377,13 +379,11 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
             setStopModal(false)
           }}
           text="Confirm"
-          padding="0.5vh"
           maxWidth="150px"
         />
         <ModalButton
           onClick={() => setStopModal(false)}
           text="Close"
-          padding="0.5vh"
           maxWidth="150px"
         />
       </Modal>
@@ -405,16 +405,10 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
             handleDeleteClick(projectToDelete.id)
             setModalVisible(false)
           }}
-          padding="0.5vh"
           text="Confirm"
           maxWidth="150px"
         />
-        <ModalButton
-          onClick={closeModal}
-          text="Close"
-          padding="0.5vh"
-          maxWidth="150px"
-        />
+        <ModalButton onClick={closeModal} text="Close" maxWidth="150px" />
       </Modal>
     </>
   )

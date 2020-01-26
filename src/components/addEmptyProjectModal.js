@@ -9,7 +9,7 @@ import StroveButton from 'components/stroveButton.js'
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: ${({ theme }) => theme.colors.c1};
-  margin: 0.3vh 0.3vh 0.3vh 0;
+  margin: 3px 3px 3px 0;
   text-align: center;
 `
 
@@ -20,10 +20,10 @@ const GithubLinkInput = styled.input`
   color: ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-align: center;
   font-size: 1rem;
-  padding: 0.5vh 0;
+  padding: 5px 0;
 
   :focus {
     outline: none;
@@ -37,7 +37,7 @@ const GithubLinkForm = styled.form`
   align-items: center;
   width: 100%;
   height: 100%;
-  margin: 2vh 0 0;
+  margin: 20px 0 0;
 `
 
 const StyledErrors = styled.span`

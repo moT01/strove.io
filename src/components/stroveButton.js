@@ -54,7 +54,7 @@ const Button = styled.button`
   border-radius: ${props => (props.borderRadius ? props.borderRadius : '5px')};
   border-color: ${({ theme, isDelete }) =>
     !isDelete ? theme.colors.c1 : theme.colors.c3};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0, 5s ease-out;
@@ -72,7 +72,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme }) => theme.colors.c1};
         transform: translateY(-1px);
       }
     `}
