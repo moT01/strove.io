@@ -280,7 +280,7 @@ const Divider = styled(VerticalDivider)`
 
 const RowWrapper = styled(VerticalDivider)`
   border-width: 0px 0px 1px 0px;
-  border-color: ${({ theme }) => theme.colors.c17};
+  border-color: ${({ theme }) => theme.colors.c4};
   border-style: solid;
   padding: 3px;
 `
