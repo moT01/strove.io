@@ -406,7 +406,6 @@ const TileSectionHeader = styled(TeamTileHeader)`
 
   :hover {
     background-color: ${({ theme }) => theme.colors.c2};
-    cursor: pointer;
     ${Title} {
       color: ${({ theme }) => theme.colors.c3};
     }
