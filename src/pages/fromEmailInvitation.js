@@ -81,7 +81,7 @@ const FromEmailInvitation = () => {
               href={`${loginOption.href}`}
               onClick={() =>
                 dispatch(
-                  actions.invitations.addIncomingAccept({ teamId, teamName })
+                  actions.invitations.addInvitation({ teamId, teamName })
                 )
               }
             >

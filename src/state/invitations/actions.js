@@ -1,13 +1,11 @@
 import * as C from './consts'
-
-export const addIncomingAccept = ({ teamId, teamName }) => ({
+export const addInvitation = ({ teamId, teamName }) => ({
   type: C.ADD_INVITATION,
   payload: {
     teamId,
     teamName,
   },
 })
-
-export const removeIncomingAccept = () => ({
+export const acceptInvitation = () => ({
   type: C.ACCEPT_INVITATION,
 })
