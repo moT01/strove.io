@@ -374,13 +374,15 @@ const TeamTileHeader = styled(Tile)`
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
 
   ${Title} {
-    color: ${({ theme, expanded }) => theme.colors.c3};
+    color: ${({ theme }) => theme.colors.c3};
     transition: all 0.2s;
   }
 
-  :hover {
-    background-color: ${({ theme }) => theme.colors.c4};
-  }
+  ${({ shouldTabsBeCollapsable }) => shouldTabsBeCollapsable && `
+    :hover {
+      background-color: ${({ theme }) => theme.colors.c4};
+    }
+  `}
 `
 
 const TileSectionHeader = styled(TeamTileHeader)`
@@ -505,6 +507,8 @@ const Dashboard = ({ history }) => {
     )
   }
 
+  const shouldTabsBeCollapsable = Object.keys(teamsObj).length > 1
+
   const tabs = [
     {
       name: 'Teams',
@@ -516,7 +520,7 @@ const Dashboard = ({ history }) => {
             const isOwner = team.owner.id === user.id
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                <TeamTileHeader expanded={isExpanded}>
+                <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
                   <Divider>
                     <Title>{team.name}</Title>
                     {Object.keys(teamsObj).length > 1 && (
