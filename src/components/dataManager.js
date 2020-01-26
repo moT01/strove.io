@@ -83,13 +83,14 @@ export default memo(
     const id = activeProjectData?.id
 
     useEffect(() => {
-      console.log('invitedByTeamId && token', invitedByTeamId, token)
       if (invitedByTeamId && token) {
-        console.log('ACCEPTED', invitedByTeamId, token)
         dispatch(
           mutation({
             name: 'acceptTeamInvitation',
             dataSelector: data => data,
+            variables: {
+              teamId: invitedByTeamId,
+            },
             mutation: ACCEPT_TEAM_INVITATION,
             onSuccessDispatch: () => actions.invitations.acceptInvitation(),
           })
