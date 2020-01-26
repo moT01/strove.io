@@ -55,6 +55,10 @@ export default memo(
       selectors.incomingProject.isProjectBeingStarted
     )
 
+    const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
+
+    console.log('invitedByTeamId', invitedByTeamId)
+
     if (!localStorage.getItem('deviceId'))
       localStorage.setItem('deviceId', generateDeviceID())
     const deviceId = localStorage.getItem('deviceId')
@@ -78,6 +82,12 @@ export default memo(
     const machineName = activeProjectData?.machineName
     const additionalPorts = activeProjectData?.additionalPorts
     const id = activeProjectData?.id
+
+    useEffect(() => {
+      if (invitedByTeamId) {
+        console.log('yeye')
+      }
+    }, [invitedByTeamId])
 
     useEffect(() => {
       dispatch({
