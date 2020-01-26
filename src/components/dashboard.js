@@ -317,18 +317,15 @@ const InviteStatus = styled.span`
 `
 
 const StyledIcon = styled(Icon)`
-  font-size: 1.7vh;
+  font-size: 16px;
   color: ${({ theme }) => theme.colors.c3};
 `
 
 const IconWrapper = styled(Wrapper)`
-  width: 8%;
+  min-width: 50px;
   height: 100%;
   justify-content: center;
   align-items: center;
-  border-width: 0px 0px 0px 1px;
-  border-color: ${({ theme }) => theme.colors.c4};
-  border-style: solid;
   cursor: pointer;
 `
 
