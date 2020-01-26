@@ -52,6 +52,7 @@ const FromEmailInvitation = () => {
   const token = useSelector(selectors.getToken)
 
   const teamName = searchParams.get('teamName')
+  const teamId = searchParams.get('teamId')
   const invitedEmail = searchParams.get('invitedEmail')
   const fromEmail = searchParams.get('fromEmail')
 
