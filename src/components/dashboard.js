@@ -290,24 +290,23 @@ const RowWrapper = styled(VerticalDivider)`
 const DeleteButton = styled.button`
   width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
   min-width: 150px;
-	box-shadow:inset 0px 1px 0px 0px #cf866c;
-	background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
-	background-color:#d0451b;
-	border-radius:3px;
-	border:1px solid #942911;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family: 'Futura','Helvetica Neue For Number',-apple-system, BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Hiragino Sans GB', 'Microsoft YaHei','Helvetica Neue',Helvetica,Arial,sans-serif;
-	font-size:0.6rem;
+	box-shadow: inset 0px 1px 0px 0px #cf866c;
+	background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	background-color: #d0451b;
+	border-radius: 3px;
+	border: 1px solid #942911;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 0.6rem;
   font-weight: 500;
-	padding:3px 12px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #854629;
+	padding: 3px 12px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #854629;
 }
 :hover {
-	background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
-	background-color:#bc3315;
+	background: linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+	background-color: #bc3315;
 }
 `
 
@@ -1149,7 +1148,6 @@ const Dashboard = ({ history }) => {
           isPrimary
           padding="5px"
           margin="0px 0px 5px 0px"
-          width="80%"
           onClick={() => handleRenameTeamClick(editTeamId)}
           text="Rename team"
         />
@@ -1157,16 +1155,16 @@ const Dashboard = ({ history }) => {
           isPrimary
           padding="5px"
           margin="0px 0px 5px 0px"
-          width="80%"
           onClick={() => handleTransferOwnershipClick(false)}
           text="Transfer ownership"
         />
-        <DeleteButton
-          isSettings
-          onClick={() => handleDeleteTeamClick({ teamId: editTeamId })}
-        >
-          Delete team
-        </DeleteButton>
+        <StroveButton
+          isDelete
+          padding="5px"
+          margin="0px 0px 5px 0px"
+          onClick={() => handleTransferOwnershipClick(false)}
+          text="Delete team"
+        />
 
         <ModalButton
           onClick={() => closeSettingsModal()}
