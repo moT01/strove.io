@@ -1,5 +1,4 @@
 import * as C from './consts'
-import { REHYDRATE } from 'redux-persist'
 
 const initialState = null
 
@@ -20,11 +19,6 @@ export default (state = initialState, action) => {
     case C.CATCH_INCOMING_ACCEPT_ERROR: {
       const { error } = action.payload
       return { error }
-    }
-    case REHYDRATE: {
-      return {
-        ...state,
-      }
     }
     default:
       return state

@@ -11,8 +11,8 @@ import feature from './feature'
 
 const rootConfig = {
   key: 'root',
-  storage: storage,
-  blacklist: 'api',
+  storage,
+  blacklist: ['api', 'invitations'],
 }
 
 const persistConfig = {
@@ -20,6 +20,11 @@ const persistConfig = {
   storage,
   stateReconciler: autoMergeLevel2,
 }
+
+// const persistInvitationConfig = {
+//   key: 'invitations',
+//   storage,
+// }
 
 export const selectors = {
   api: api.selectors,
@@ -49,11 +54,11 @@ export const C = {
 }
 
 const appReducer = combineReducers({
+  // invitations: persistReducer(persistInvitationConfig, invitations.reducer),
   api: persistReducer(persistConfig, api.reducer),
   incomingProject: incomingProject.reducer,
   latency: latency.reducer,
   feature: feature.reducer,
-  invitations: invitations.reducer,
 })
 
 export default persistReducer(rootConfig, (state, action) => {
