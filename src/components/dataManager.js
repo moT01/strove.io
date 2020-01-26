@@ -90,6 +90,7 @@ export default memo(
             name: 'acceptTeamInvitation',
             dataSelector: data => data,
             query: ACCEPT_TEAM_INVITATION,
+            onSuccessDispatch: () => actions.invitations.latencyMeasureEnd(),
           })
         )
       }

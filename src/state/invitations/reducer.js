@@ -4,7 +4,7 @@ const initialState = null
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case C.ADD_INCOMING_ACCEPT: {
+    case C.ADD_INVITATION: {
       const { teamId, teamName } = action.payload
       return {
         ...state,
@@ -12,14 +12,10 @@ export default (state = initialState, action) => {
         teamName,
       }
     }
-    case C.REMOVE_INCOMING_ACCEPT: {
+    case C.ACCEPT_INVITATION: {
       return initialState
     }
 
-    case C.CATCH_INCOMING_ACCEPT_ERROR: {
-      const { error } = action.payload
-      return { error }
-    }
     default:
       return state
   }
