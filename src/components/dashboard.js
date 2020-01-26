@@ -184,9 +184,9 @@ const TilesWrapper = styled.div`
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
-const Title = styled.h3`
+const Title = styled.div`
   font-size: 1.4rem;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   margin: 3px 3px 3px 0;
 `
 
@@ -202,12 +202,12 @@ const Tile = styled.div`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c2};
   border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
+  border-color: ${({ theme }) => theme.colors.c4};
   border-width: 1px;
   border-style: solid;
   padding: 20px;
   box-shadow: ${({ expanded, theme }) =>
-    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c1}`};
+    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c4}`};
   margin: 15px;
   width: 50%;
   transition: all 0.2s;
@@ -375,8 +375,7 @@ const TeamTileHeader = styled(Tile)`
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
 
   ${Title} {
-    color: ${({ theme, expanded }) =>
-      theme.colors.c3};
+    color: ${({ theme, expanded }) => theme.colors.c3};
     transition: all 0.2s;
   }
 
