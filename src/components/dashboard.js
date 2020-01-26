@@ -256,10 +256,13 @@ const ModalText = styled(Text)`
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
+  word-break: break-word;
 `
 
 const WarningText = styled(ModalText)`
   color: ${({ theme }) => theme.colors.c5};
+  margin-bottom: 5px;
+  word-break: break-word;
 `
 
 const VerticalDivider = styled.div`
@@ -371,6 +374,7 @@ const TeamTileHeader = styled(Tile)`
   transition: all 0.2s;
   border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
+  ${({ expanded }) => expanded && 'border-bottom: none;'}
 
   ${Title} {
     color: ${({ theme }) => theme.colors.c3};
