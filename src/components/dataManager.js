@@ -83,16 +83,17 @@ export default memo(
     const id = activeProjectData?.id
 
     useEffect(() => {
-      if (invitedByTeamId) {
+      console.log('invitedByTeamId && token', invitedByTeamId, token)
+      if (invitedByTeamId && token) {
         dispatch(
-          query({
+          mutation({
             name: 'acceptTeamInvitation',
             dataSelector: data => data,
             query: ACCEPT_TEAM_INVITATION,
           })
         )
       }
-    }, [invitedByTeamId])
+    }, [invitedByTeamId, token])
 
     useEffect(() => {
       dispatch({
