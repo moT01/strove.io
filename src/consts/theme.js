@@ -16,5 +16,7 @@ export default {
     c15: '#ddd', // pricing details
     c16: 'rgba(0, 114, 206, 0.6)', // lighter vscode blue
     c17: 'rgba(0, 114, 206, 0.3)', // very light vscode blue
+    c18: 'rgba(0, 114, 206, 0.15)', // very light vscode blue
+    c19: 'rgba(200,200,200,0.5)',
   },
 }
