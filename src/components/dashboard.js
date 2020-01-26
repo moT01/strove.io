@@ -376,7 +376,7 @@ const TeamTileHeader = styled(Tile)`
 
   ${Title} {
     color: ${({ theme, expanded }) =>
-      expanded ? theme.colors.c2 : theme.colors.c1};
+      theme.colors.c3};
     transition: all 0.2s;
   }
 
@@ -398,7 +398,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
 
   ${Title} {
     color: ${({ theme, expanded }) =>
-      expanded ? theme.colors.c2 : theme.colors.c1};
+      expanded ? theme.colors.c2 : theme.colors.c3};
     transition: all 0.2s;
   }
 
@@ -406,10 +406,10 @@ const TileSectionHeader = styled(TeamTileHeader)`
     background-color: ${({ theme }) => theme.colors.c2};
     cursor: pointer;
     ${Title} {
-      color: ${({ theme }) => theme.colors.c1};
+      color: ${({ theme }) => theme.colors.c3};
     }
     ${ExpandIcon} {
-      color: ${({ theme }) => theme.colors.c1};
+      color: ${({ theme }) => theme.colors.c3};
     }
   }
 `
@@ -428,7 +428,7 @@ const DropdownWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const StyledSelect = styled(Select)`
