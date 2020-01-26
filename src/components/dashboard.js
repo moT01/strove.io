@@ -180,7 +180,7 @@ const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: ${() => (isMobileOnly ? '100%' : '80%')};
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
@@ -201,13 +201,13 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c4};
+  border-radius: 2px;
+  border-color: ${({ theme }) => theme.colors.c19};
   border-width: 1px;
   border-style: solid;
   padding: 20px;
   box-shadow: ${({ expanded, theme }) =>
-    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c4}`};
+    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c19}`};
   margin: 15px;
   width: 50%;
   transition: all 0.2s;
@@ -231,7 +231,7 @@ const TeamTileSection = styled(Tile)`
   padding: 5px;
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c4};
+  border-color: ${({ theme }) => theme.colors.c19};
   width: 100%;
   box-shadow: none;
 `
@@ -282,7 +282,7 @@ const Divider = styled(VerticalDivider)`
 
 const RowWrapper = styled(VerticalDivider)`
   border-width: 0px 0px 1px 0px;
-  border-color: ${({ theme }) => theme.colors.c4};
+  border-color: ${({ theme }) => theme.colors.c19};
   border-style: solid;
   padding: 3px;
 `
@@ -386,7 +386,7 @@ const TeamTileHeader = styled(Tile)`
     shouldTabsBeCollapsable &&
     `
     :hover {
-      background-color: ${({ theme }) => theme.colors.c4};
+      background-color: ${({ theme }) => theme.colors.c19};
     }
   `}
 `
@@ -395,7 +395,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
   flex-direction: row;
   justify-content: flex-start;
   border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c4};
+  border-color: ${({ theme }) => theme.colors.c19};
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   box-shadow: none;
 
@@ -499,6 +499,26 @@ const Dashboard = ({ history }) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
 
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
+
+  const options = [
+    'None',
+    'Atria',
+    'Callisto',
+    'Dione',
+    'Ganymede',
+    'Hangouts Call',
+    'Luna',
+    'Oberon',
+    'Phobos',
+    'Pyxis',
+    'Sedna',
+    'Titania',
+    'Triton',
+    'Umbriel',
+  ]
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateTeams(), [])
 
@@ -514,6 +534,14 @@ const Dashboard = ({ history }) => {
 
   const shouldTabsBeCollapsable = Object.keys(teamsObj).length > 1
 
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   const tabs = [
     {
       name: 'Teams',
@@ -526,7 +554,33 @@ const Dashboard = ({ history }) => {
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
                   <Divider>
-                    <Title>{team.name}</Title>
+                    <RowWrapper>
+                      <Title>{team.name}</Title>
+                      {isExpanded &&
+                        (isOwner ? (
+                          <StroveButton
+                            isDashboard
+                            padding="5px"
+                            width="120px"
+                            fontSize='12px'
+                            onClick={() => {
+                              handleSettingsClick(team.id)
+                            }}
+                            text="Settings"
+                          />
+                        ) : (
+                          <StroveButton
+                            isPrimary
+                            padding="5px"
+                            width="120px"
+                            onClick={() => {
+                              setEditTeamId(team.id)
+                              handleLeaveClick(team.id)
+                            }}
+                            text="Leave"
+                          />
+                        ))}
+                    </RowWrapper>
                     {Object.keys(teamsObj).length > 1 && (
                       <IconWrapper onClick={() => handleExpandTile(team.id)}>
                         <ExpandIcon type="down" expanded={isExpanded} />
@@ -536,30 +590,6 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <Divider>
-                      {isOwner ? (
-                        <StroveButton
-                          isPrimary
-                          padding="5px"
-                          width="20%"
-                          onClick={() => {
-                            handleSettingsClick(team.id)
-                          }}
-                          text="Settings"
-                        />
-                      ) : (
-                        <StroveButton
-                          isPrimary
-                          padding="5px"
-                          width="20%"
-                          onClick={() => {
-                            setEditTeamId(team.id)
-                            handleLeaveClick(team.id)
-                          }}
-                          text="Leave"
-                        />
-                      )}
-                    </Divider>
                     <TileSectionHeader>
                       <Divider>
                         <SectionTitle>Members</SectionTitle>
@@ -663,7 +693,7 @@ const Dashboard = ({ history }) => {
                           <StroveButton
                             isPrimary
                             padding="5px"
-                            width="20%"
+                            width="120px"
                             onClick={() => handleAddMemberClick(team.id)}
                             text="Add member"
                           />
@@ -703,7 +733,7 @@ const Dashboard = ({ history }) => {
                           <StroveButton
                             isPrimary
                             padding="5px"
-                            width="20%"
+                            width="120px"
                             text="Add Project"
                             onClick={() => {
                               setTeamId(team.id)
@@ -721,7 +751,7 @@ const Dashboard = ({ history }) => {
           <StroveButton
             isPrimary
             padding="5px"
-            width="20%"
+            width="120px"
             onClick={() => handleCreateTeamClick()}
             text="Create new team"
           />

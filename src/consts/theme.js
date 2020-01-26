@@ -17,6 +17,7 @@ export default {
     c16: 'rgba(0, 114, 206, 0.6)', // lighter vscode blue
     c17: 'rgba(0, 114, 206, 0.3)', // very light vscode blue
     c18: 'rgba(0, 114, 206, 0.15)', // very light vscode blue
-    c19: 'rgba(200,200,200,0.5)',
+    c19: 'rgba(200,200,200,0.65)',
+    c20: '#101010',
   },
 }
