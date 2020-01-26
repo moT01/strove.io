@@ -222,8 +222,7 @@ const TeamTile = styled(Tile)`
   width: 100%;
   padding: 0px;
   margin: 0px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-top: none;
 `
 
 const TeamTileSection = styled(Tile)`
@@ -378,7 +377,9 @@ const TeamTileHeader = styled(Tile)`
     transition: all 0.2s;
   }
 
-  ${({ shouldTabsBeCollapsable }) => shouldTabsBeCollapsable && `
+  ${({ shouldTabsBeCollapsable }) =>
+    shouldTabsBeCollapsable &&
+    `
     :hover {
       background-color: ${({ theme }) => theme.colors.c4};
     }
