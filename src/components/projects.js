@@ -31,7 +31,7 @@ const TilesWrapper = styled.div`
 
 const ProjectTitle = styled.h3`
   font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   margin: 0.3vh 0.3vh 0.3vh 0;
 `
 
@@ -41,7 +41,7 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c2};
-  border-color: ${({ theme }) => theme.colors.c17};
+  border-color: ${({ theme }) => theme.colors.c4};
   border-width: 0px 0px 1px 0px;
   border-style: solid;
   padding: 20px;
@@ -62,7 +62,7 @@ const ModalButton = styled(StroveButton)`
 `
 
 const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
   margin-left: 2%;
   margin-bottom: 0;
