@@ -232,7 +232,7 @@ const TeamTileSection = styled(Tile)`
   padding: 5px;
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c16};
+  border-color: ${({ theme }) => theme.colors.c4};
   width: 100%;
   box-shadow: none;
 `
@@ -244,9 +244,9 @@ const ModalButton = styled(StroveButton)`
 `
 
 const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c4};
+  color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
-  margin-left: 2%;
+  margin-left: 10px;
   margin-bottom: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -325,7 +325,7 @@ const IconWrapper = styled(Wrapper)`
   justify-content: center;
   align-items: center;
   border-width: 0px 0px 0px 1px;
-  border-color: ${({ theme }) => theme.colors.c16};
+  border-color: ${({ theme }) => theme.colors.c4};
   border-style: solid;
   cursor: pointer;
 `
@@ -387,7 +387,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
   flex-direction: row;
   justify-content: flex-start;
   border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c16};
+  border-color: ${({ theme }) => theme.colors.c4};
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   box-shadow: none;
 
