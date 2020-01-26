@@ -519,9 +519,11 @@ const Dashboard = ({ history }) => {
                 <TeamTileHeader expanded={isExpanded}>
                   <Divider>
                     <Title>{team.name}</Title>
-                    <IconWrapper onClick={() => handleExpandTile(team.id)}>
-                      <ExpandIcon type="down" expanded={isExpanded} />
-                    </IconWrapper>
+                    {Object.keys(teamsObj).length > 1 && (
+                      <IconWrapper onClick={() => handleExpandTile(team.id)}>
+                        <ExpandIcon type="down" expanded={isExpanded} />
+                      </IconWrapper>
+                    )}
                   </Divider>
                 </TeamTileHeader>
                 {isExpanded && (
