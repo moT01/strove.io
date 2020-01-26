@@ -13,6 +13,7 @@ import {
   ACTIVE_PROJECT,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ACCEPT_TEAM_INVITATION,
 } from 'queries'
 import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
 import { selectors } from 'state'
@@ -57,8 +58,6 @@ export default memo(
 
     const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
 
-    console.log('invitedByTeamId', invitedByTeamId)
-
     if (!localStorage.getItem('deviceId'))
       localStorage.setItem('deviceId', generateDeviceID())
     const deviceId = localStorage.getItem('deviceId')
@@ -85,7 +84,13 @@ export default memo(
 
     useEffect(() => {
       if (invitedByTeamId) {
-        console.log('yeye')
+        dispatch(
+          query({
+            name: 'acceptTeamInvitation',
+            dataSelector: data => data,
+            query: ACCEPT_TEAM_INVITATION,
+          })
+        )
       }
     }, [invitedByTeamId])
 
