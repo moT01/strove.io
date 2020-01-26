@@ -21,10 +21,10 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 }
 
-// const persistInvitationConfig = {
-//   key: 'invitations',
-//   storage,
-// }
+const persistInvitationConfig = {
+  key: 'invitations',
+  storage,
+}
 
 export const selectors = {
   api: api.selectors,
@@ -54,7 +54,7 @@ export const C = {
 }
 
 const appReducer = combineReducers({
-  // invitations: persistReducer(persistInvitationConfig, invitations.reducer),
+  invitations: persistReducer(persistInvitationConfig, invitations.reducer),
   api: persistReducer(persistConfig, api.reducer),
   incomingProject: incomingProject.reducer,
   latency: latency.reducer,
