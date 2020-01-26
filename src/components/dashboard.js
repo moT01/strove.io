@@ -327,6 +327,10 @@ const IconWrapper = styled(Wrapper)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  i {
+    line-height: 0;
+  }
 `
 
 const ExpandIcon = styled(StyledIcon)`
