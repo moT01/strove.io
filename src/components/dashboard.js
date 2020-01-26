@@ -373,8 +373,6 @@ const TeamTileHeader = styled(Tile)`
   transition: all 0.2s;
   border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
-  background-color: ${({ theme, expanded }) =>
-    expanded ? theme.colors.c1 : theme.colors.c2};
 
   ${Title} {
     color: ${({ theme, expanded }) =>
@@ -383,13 +381,7 @@ const TeamTileHeader = styled(Tile)`
   }
 
   :hover {
-    background-color: ${({ theme }) => theme.colors.c1};
-    ${Title} {
-      color: ${({ theme }) => theme.colors.c2};
-    }
-    ${ExpandIcon} {
-      color: ${({ theme }) => theme.colors.c2};
-    }
+    background-color: ${({ theme }) => theme.colors.c4};
   }
 `
 
