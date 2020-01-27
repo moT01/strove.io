@@ -326,12 +326,6 @@ const StyledIcon = styled(Icon)`
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
-const SettingsIcon = styled(StyledIcon)`
-  margin-left: 5px;
-  font-size: 18px;
-  color: ${({ theme }) => theme.colors.c2};
-`
-
 const IconWrapper = styled(Wrapper)`
   min-width: 50px;
   height: 100%;
@@ -657,16 +651,15 @@ const Dashboard = ({ history }) => {
                                     <Text>{member.name}</Text>
                                   </VerticalDivider>
                                   {isOwner && (
-                                    <DeleteButton
-                                      onClick={() =>
-                                        handleDeleteMemberClick({
-                                          team,
-                                          member,
-                                        })
-                                      }
-                                    >
-                                      Remove
-                                    </DeleteButton>
+                                    <StroveButton
+                                      isDelete
+                                      padding="0px"
+                                      width="120px"
+                                      text="Remove"
+                                      onClick={() => {
+                                        handleSettingsClick(team.id)
+                                      }}
+                                    />
                                   )}
                                 </Divider>
                               </RowWrapper>

@@ -56,7 +56,7 @@ const Button = styled.button`
   border-radius: ${({ borderRadius, isDashboard }) =>
     borderRadius || (isDashboard && '2px') || '5px'};
   border-color: ${({ theme, isDelete, isDashboard }) =>
-    (isDelete && theme.colors.c3) ||
+    (isDelete && theme.colors.c2) ||
     (isDashboard && theme.colors.c21) ||
     theme.colors.c1};
   box-shadow: 0 10px 10px -15px ${({ theme, isDashboard }) => (isDashboard && theme.colors.c21) || theme.colors.c1};
