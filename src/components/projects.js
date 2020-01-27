@@ -52,6 +52,7 @@ const Tile = styled.div`
 
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
+  border-radius: 2px;
   max-width: 150px;
   padding: 5px 0px;
 `
@@ -270,11 +271,12 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                       to="/app/editor/"
                       isDisabled={isDeleting || isContinuing || isStopping}
                       isPrimary
+                      borderRadius="2px"
                       padding="3px 15px"
-                      width="70%"
+                      minWidth="150px"
+                      maxWidth="150px"
                       margin="0px 0px 5px 0px"
                       font-size="0.8rem"
-                      minWidth="150px"
                       onClick={() =>
                         isOwner
                           ? handleStartClick(project)
@@ -299,7 +301,9 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                         <StroveButton
                           isDisabled={isDeleting || isContinuing || isStopping}
                           padding="3px 15px"
-                          width="70%"
+                          borderRadius="2px"
+                          minWidth="150px"
+                          maxWidth="150px"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
                           minWidth="150px"
@@ -312,10 +316,11 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                         <StroveButton
                           isDisabled={isDeleting || isContinuing || isStopping}
                           padding="3px 15px"
-                          width="70%"
+                          borderRadius="2px"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
                           minWidth="150px"
+                          maxWidth="150px"
                           onClick={() => {
                             setModalVisible(true)
                             setProjectToDelete(project)
@@ -327,10 +332,11 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                       <StroveButton
                         isDisabled={isDeleting || isContinuing || isStopping}
                         padding="3px 15px"
-                        width="70%"
+                        borderRadius="2px"
                         margin="0px 0px 5px 0px"
                         font-size="0.8rem"
                         minWidth="150px"
+                        maxWidth="150px"
                         onClick={() => {
                           dispatch(
                             mutation({

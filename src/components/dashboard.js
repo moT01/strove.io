@@ -234,6 +234,7 @@ const TeamTileSection = styled(Tile)`
 
 const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
+  border-radius: 2px;
   max-width: 150px;
   padding: 5px;
 `
@@ -284,29 +285,6 @@ const RowWrapper = styled(VerticalDivider)`
 
   ${({ isLast }) => isLast && 'border: none'};
 `
-
-// const DeleteButton = styled.button`
-//   width: ${({ isSettings }) => (isSettings ? '80%' : '15%')};
-//   min-width: 150px;
-// 	box-shadow: inset 0px 1px 0px 0px #cf866c;
-// 	background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
-// 	background-color: #d0451b;
-// 	border-radius: 3px;
-// 	border: 1px solid #942911;
-// 	display: inline-block;
-// 	cursor: pointer;
-// 	color: #ffffff;
-// 	font-size: 0.6rem;
-//   font-weight: 500;
-// 	padding: 3px 12px;
-// 	text-decoration: none;
-// 	text-shadow: 0px 1px 0px #854629;
-// }
-// :hover {
-// 	background: linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
-// 	background-color: #bc3315;
-// }
-// `
 
 const InviteStatus = styled.span`
   color: ${({ theme }) => theme.colors.c16};
@@ -551,8 +529,10 @@ const Dashboard = ({ history }) => {
                         <StroveButton
                           isPrimary
                           padding="5px"
-                          width="120px"
+                          minWidth="150px"
+                          maxWidth="150px"
                           margin="10px"
+                          borderRadius="2px"
                           onClick={() => handleAddMemberClick(team.id)}
                           text="Add member"
                         />
@@ -562,7 +542,9 @@ const Dashboard = ({ history }) => {
                           <StroveButton
                             isDashboard
                             padding="5px"
-                            width="120px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            borderRadius="2px"
                             margin="0 0 0 10px"
                             text="Settings"
                             onClick={() => {
@@ -573,7 +555,9 @@ const Dashboard = ({ history }) => {
                           <StroveButton
                             isPrimary
                             padding="5px"
-                            width="120px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            borderRadius="2px"
                             onClick={() => {
                               setEditTeamId(team.id)
                               handleLeaveClick(team.id)
@@ -634,7 +618,9 @@ const Dashboard = ({ history }) => {
                                       isDelete
                                       padding="5px"
                                       margin="0"
-                                      width="120px"
+                                      minWidth="150px"
+                                      maxWidth="150px"
+                                      borderRadius="2px"
                                       text="Remove"
                                       onClick={() => {
                                         handleSettingsClick(team.id)
@@ -666,7 +652,9 @@ const Dashboard = ({ history }) => {
                                   isDelete
                                   padding="5px"
                                   margin="0"
-                                  width="120px"
+                                  minWidth="150px"
+                                  maxWidth="150px"
+                                  borderRadius="2px"
                                   text="Cancel"
                                   onClick={() =>
                                     handleDeleteMemberClick({ team, member })
@@ -710,8 +698,10 @@ const Dashboard = ({ history }) => {
                           <StroveButton
                             isPrimary
                             padding="5px"
-                            width="120px"
+                            minWidth="150px"
+                            maxWidth="150px"
                             margin="10px"
+                            borderRadius="2px"
                             text="Add Project"
                             onClick={() => {
                               setTeamId(team.id)
@@ -731,6 +721,7 @@ const Dashboard = ({ history }) => {
             padding="5px"
             margin="10px 0 40px"
             width="200px"
+            borderRadius="2px"
             onClick={() => handleCreateTeamClick()}
             text="Create new team"
           />
@@ -1140,6 +1131,7 @@ const Dashboard = ({ history }) => {
         </WarningText>
         <StroveButton
           isPrimary
+          borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
           onClick={() => handleRenameTeamClick(editTeamId)}
@@ -1147,6 +1139,7 @@ const Dashboard = ({ history }) => {
         />
         <StroveButton
           isPrimary
+          borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
           onClick={() => handleTransferOwnershipClick(false)}
@@ -1154,6 +1147,7 @@ const Dashboard = ({ history }) => {
         />
         <StroveButton
           isDelete
+          borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
           onClick={() => deleteTeam(editTeamId)}

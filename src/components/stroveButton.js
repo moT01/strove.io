@@ -53,7 +53,7 @@ const Button = styled.button`
     theme.colors.c2};
   border-width: 1px;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => borderRadius || '5px'};
   border-color: ${({ theme, isDelete, isDashboard }) =>
     (isDelete && theme.colors.c23) ||
     (isDashboard && theme.colors.c21) ||
