@@ -653,7 +653,7 @@ const Dashboard = ({ history }) => {
                                   {isOwner && (
                                     <StroveButton
                                       isDelete
-                                      padding="0px"
+                                      padding="5px"
                                       width="120px"
                                       text="Remove"
                                       onClick={() => {
