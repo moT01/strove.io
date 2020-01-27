@@ -19,6 +19,7 @@ import {
   DELETE_TEAM,
   TRANSFER_OWNERSHIP,
   LEAVE_TEAM,
+  MY_ORGANIZATIONS,
 } from 'queries'
 import { selectors } from 'state'
 import Modal from './modal'
@@ -504,8 +505,11 @@ const Dashboard = ({ history }) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => updateTeams(), [])
+  useEffect(() => {
+    updateTeams()
+    updateOrganizations()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const updateTeams = () => {
     dispatch(
@@ -513,6 +517,16 @@ const Dashboard = ({ history }) => {
         name: 'myTeams',
         storeKey: 'myTeams',
         query: MY_TEAMS,
+      })
+    )
+  }
+
+  const updateOrganizations = () => {
+    dispatch(
+      query({
+        name: 'myOrganizations',
+        storeKey: 'myOrganizations',
+        query: MY_ORGANIZATIONS,
       })
     )
   }
