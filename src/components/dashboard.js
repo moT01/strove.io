@@ -279,7 +279,6 @@ const RowWrapper = styled(VerticalDivider)`
   border-width: 0px 0px 1px 0px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-style: solid;
-  padding: 0 8px;
   min-height: 60px;
 
   ${({ isLast }) => isLast && 'border: none'};
@@ -459,6 +458,7 @@ const UserPhoto = styled.img`
   height: 35px;
   border-radius: 5px;
   margin: 0;
+  margin-left: 10px;
 `
 
 const Dashboard = ({ history }) => {
