@@ -48,6 +48,10 @@ const Tile = styled.div`
   padding-left: 10px;
   width: 100%;
   transition: all 0.2s;
+
+  :last-of-type {
+    border: none;
+  }
 `
 
 const ModalButton = styled(StroveButton)`
