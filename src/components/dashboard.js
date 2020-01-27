@@ -234,7 +234,7 @@ const TeamTileSection = styled(Tile)`
   border-color: ${({ theme }) => theme.colors.c19};
   width: 100%;
   box-shadow: none;
-  padding-bottom: 0
+  padding-bottom: 0;
 `
 
 const ModalButton = styled(StroveButton)`
@@ -761,7 +761,8 @@ const Dashboard = ({ history }) => {
           <StroveButton
             isPrimary
             padding="5px"
-            width="120px"
+            margin="10px 0 40px"
+            width="200px"
             onClick={() => handleCreateTeamClick()}
             text="Create new team"
           />
