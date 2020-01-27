@@ -23,16 +23,12 @@ export default memo(styled(Modal)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-style: solid;
+  background: #fafafa;
+  border: none;
   padding: 20px;
-  box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c4};
   position: fixed;
   animation: ${FullFadeIn} 0.2s ease-out;
-
   :focus {
     outline: 0;
   }
