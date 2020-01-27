@@ -45,13 +45,6 @@ const AddProjectProvider = ({ children, history, teamId }) => {
   const projectsLimit = 20
 
   const addProject = async ({ link, name, teamId, forkedFromId }) => {
-    console.log(
-      'TCL: addProject -> link, name, teamId, forkedFromId',
-      link,
-      name,
-      teamId,
-      forkedFromId
-    )
     let repoLink
     let repoProvider
 

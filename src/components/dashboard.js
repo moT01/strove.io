@@ -743,7 +743,6 @@ const Dashboard = ({ history }) => {
     )
   }
   const deleteTeam = teamId => {
-    console.log('Second modal')
     setWarningModal({
       visible: true,
       content: (

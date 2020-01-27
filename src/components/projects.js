@@ -153,8 +153,6 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
       ? project.userId === user.id && project
       : project
   )
-  console.log('TCL: Projects -> displayedProjects', displayedProjects)
-  console.log('TCL: Projects -> projects', projects)
 
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {

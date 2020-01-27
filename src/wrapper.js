@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
