@@ -48,17 +48,17 @@ const Button = styled.button`
     theme.colors.c1};
   background-color: ${({ theme, primary, isDelete, isDashboard }) =>
     (primary && theme.colors.c1) ||
-    (isDelete && theme.colors.c5) ||
+    (isDelete && theme.colors.c23) ||
     (isDashboard && theme.colors.c21) ||
     theme.colors.c2};
   border-width: 1px;
   border-style: solid;
   border-radius: 5px;
   border-color: ${({ theme, isDelete, isDashboard }) =>
-    (isDelete && theme.colors.c2) ||
+    (isDelete && theme.colors.c23) ||
     (isDashboard && theme.colors.c21) ||
     theme.colors.c1};
-  box-shadow: 0 10px 10px -15px ${({ theme, isDashboard }) => (isDashboard && theme.colors.c21) || theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0, 5s ease-out;
@@ -76,7 +76,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 12px 12px -13px ${({ theme, isDashboard }) => (isDashboard && theme.colors.c21) || theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
         transform: translateY(-1px);
       }
     `}

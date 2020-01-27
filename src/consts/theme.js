@@ -21,5 +21,6 @@ export default {
     c20: '#101010',
     c21: '#202020',
     c22: 'rgba(0, 0, 0, 0.1)',
+    c23: '#d0451b', // cool red color for delete buttons,
   },
 }
