@@ -597,10 +597,11 @@ const Dashboard = ({ history }) => {
                         </RowWrapper>
                         {team?.users?.map(
                           (member, index) =>
-                            member.name && (
+                            member.name &&
+                            member.id !== team.owner.id && (
                               <RowWrapper
                                 key={member.name}
-                                isLast={team.users.length === index + 1}
+                                isLast={team.users.length === index + 2}
                               >
                                 <Divider>
                                   <VerticalDivider>
