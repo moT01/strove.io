@@ -147,12 +147,6 @@ const StyledForm = styled(Form)`
   width: 100%;
 `
 
-// const StyledInfo = styled.span`
-//   margin: 20px;
-//   color: ${({ theme }) => theme.colors.c13};
-//   font-size: 13px;
-// `
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -375,9 +369,8 @@ const StyledReactModal = styled(ReactModal)`
 
 const TeamTileHeader = styled(Tile)`
   width: 100%;
-  height: 2.5rem;
   margin: 0;
-  padding: 0px 0px 0px 10px;
+  padding: 10px;
   transition: all 0.2s;
   border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
   border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
@@ -566,8 +559,9 @@ const Dashboard = ({ history }) => {
                         (isOwner ? (
                           <StroveButton
                             isDashboard
-                            padding="0px"
+                            padding="2px"
                             width="120px"
+                            margin="0 0 0 10px"
                             text="Settings"
                             onClick={() => {
                               handleSettingsClick(team.id)
