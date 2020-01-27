@@ -711,6 +711,7 @@ const Dashboard = ({ history }) => {
                             isPrimary
                             padding="5px"
                             width="120px"
+                            margin="10px"
                             text="Add Project"
                             onClick={() => {
                               setTeamId(team.id)
