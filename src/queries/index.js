@@ -27,6 +27,7 @@ import LEAVE_TEAM from './leaveTeam'
 import ACCEPT_TEAM_INVITATION from './acceptTeamInvitation'
 import MY_ORGANIZATIONS from './myOrganizations'
 import GET_ORGANIZATION from './getOrganization'
+import RENAME_ORGANIZATION from './renameOrganization'
 
 export {
   ADD_PROJECT,
@@ -58,4 +59,5 @@ export {
   ACCEPT_TEAM_INVITATION,
   MY_ORGANIZATIONS,
   GET_ORGANIZATION,
+  RENAME_ORGANIZATION,
 }
