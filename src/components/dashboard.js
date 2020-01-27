@@ -742,22 +742,7 @@ const Dashboard = ({ history }) => {
       })
     )
   }
-
-  const handleDeleteTeamClick = ({ teamId }) => {
-    setWarningModal({
-      visible: true,
-      content: (
-        <ModalText>
-          Are you sure you want to delete {teamsObj[teamId].name}? This process
-          is irreversible.
-        </ModalText>
-      ),
-      buttonLabel: 'Delete',
-      onSubmit: () => deleteTeam({ teamId }),
-    })
-  }
-
-  const deleteTeam = ({ teamId }) => {
+  const deleteTeam = teamId => {
     console.log('Second modal')
     setWarningModal({
       visible: true,
@@ -1152,7 +1137,7 @@ const Dashboard = ({ history }) => {
           isDelete
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleTransferOwnershipClick(false)}
+          onClick={() => deleteTeam(editTeamId)}
           text="Delete team"
         />
 
