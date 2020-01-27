@@ -281,6 +281,8 @@ const RowWrapper = styled(VerticalDivider)`
   border-style: solid;
   padding: 0 8px;
   min-height: 60px;
+
+  ${({ isLast }) => isLast && 'border: none'};
 `
 
 const DeleteButton = styled.button`
@@ -614,9 +616,12 @@ const Dashboard = ({ history }) => {
                           </Divider>
                         </RowWrapper>
                         {team?.users?.map(
-                          member =>
+                          (member, index) =>
                             member.name && (
-                              <RowWrapper key={member.name}>
+                              <RowWrapper
+                                key={member.name}
+                                isLast={team.users.length === index + 1}
+                              >
                                 <Divider>
                                   <VerticalDivider>
                                     <UserPhoto
