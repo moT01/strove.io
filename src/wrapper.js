@@ -1,6 +1,6 @@
-import React, { useEffect, memo } from 'react'
+import React, { memo } from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
 import { createStore as reduxCreateStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
@@ -8,9 +8,7 @@ import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import { getWindowSearchParams } from 'utils'
 import { Layout } from 'components'
-import { actions } from 'state'
 import client from './client'
 import rootReducer from './state'
 
