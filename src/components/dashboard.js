@@ -234,6 +234,7 @@ const TeamTileSection = styled(Tile)`
   border-color: ${({ theme }) => theme.colors.c19};
   width: 100%;
   box-shadow: none;
+  padding-bottom: 0
 `
 
 const ModalButton = styled(StroveButton)`
