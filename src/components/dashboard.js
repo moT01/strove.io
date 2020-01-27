@@ -286,7 +286,6 @@ const RowWrapper = styled(VerticalDivider)`
   :last-of-type {
     border: none;
   }
-
 `
 
 const InviteStatus = styled.span`
@@ -600,12 +599,10 @@ const Dashboard = ({ history }) => {
                           </Divider>
                         </RowWrapper>
                         {team?.users?.map(
-                          (member, index) =>
+                          member =>
                             member.name &&
                             member.id !== team.teamLeader?.id && (
-                              <RowWrapper
-                                key={member.name}
-                              >
+                              <RowWrapper key={member.name}>
                                 <Divider>
                                   <VerticalDivider>
                                     <UserPhoto
