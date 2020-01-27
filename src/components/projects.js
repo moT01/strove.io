@@ -97,7 +97,6 @@ const FlexWrapper = styled.div`
 `
 
 const RightSection = styled(FlexWrapper)`
-  width: 20%;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -281,6 +280,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                       width="70%"
                       margin="0px 0px 5px 0px"
                       font-size="0.8rem"
+                      minWidth="150px"
                       onClick={() =>
                         isOwner
                           ? handleStartClick(project)
@@ -308,6 +308,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                           width="70%"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
+                          minWidth="150px"
                           onClick={() => {
                             handleStopClick(project.id)
                           }}
@@ -320,6 +321,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                           width="70%"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
+                          minWidth="150px"
                           onClick={() => {
                             setModalVisible(true)
                             setProjectToDelete(project)
@@ -334,6 +336,7 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                         width="70%"
                         margin="0px 0px 5px 0px"
                         font-size="0.8rem"
+                        minWidth="150px"
                         onClick={() => {
                           dispatch(
                             mutation({
