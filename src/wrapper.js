@@ -27,7 +27,7 @@ const WithAnalyticsWrapper = memo(({ children }) => {
   useEffect(() => {
     const searchParams = getWindowSearchParams()
     const feature = searchParams?.get('feature') || ''
-    feature && dispatch(actions.feature.displayFeature(feature))
+    if (feature) dispatch(actions.feature.displayFeature(feature))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
