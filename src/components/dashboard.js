@@ -283,7 +283,10 @@ const RowWrapper = styled(VerticalDivider)`
   border-style: solid;
   min-height: 60px;
 
-  ${({ isLast }) => isLast && 'border: none'};
+  :last-of-type {
+    border: none;
+  }
+
 `
 
 const InviteStatus = styled.span`
