@@ -600,7 +600,7 @@ const Dashboard = ({ history }) => {
                             member.id !== team.teamLeader?.id && (
                               <RowWrapper
                                 key={member.name}
-                                isLast={team.users.length === index + 2}
+                                isLast={team.users.length === index + 1}
                               >
                                 <Divider>
                                   <VerticalDivider>
