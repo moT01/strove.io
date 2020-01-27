@@ -25,6 +25,8 @@ import SET_VISIBILITY from './setVisibility'
 import TRANSFER_OWNERSHIP from './transferOwnership'
 import LEAVE_TEAM from './leaveTeam'
 import ACCEPT_TEAM_INVITATION from './acceptTeamInvitation'
+import MY_ORGANIZATIONS from './myOrganizations'
+import GET_ORGANIZATION from './getOrganization'
 
 export {
   ADD_PROJECT,
@@ -54,4 +56,6 @@ export {
   TRANSFER_OWNERSHIP,
   LEAVE_TEAM,
   ACCEPT_TEAM_INVITATION,
+  MY_ORGANIZATIONS,
+  GET_ORGANIZATION,
 }

@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { UserFragment } from './user'
 import { TeamFragment } from './team'
 
 export const OrganizationFragment = gql`
