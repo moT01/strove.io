@@ -285,7 +285,8 @@ const RowWrapper = styled(VerticalDivider)`
   border-width: 0px 0px 1px 0px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-style: solid;
-  padding: 10px 8px;
+  padding: 0 8px;
+  min-height: 60px;
 `
 
 const DeleteButton = styled.button`
