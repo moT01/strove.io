@@ -161,10 +161,10 @@ const Wrapper = styled.div`
 `
 
 const PageWrapper = styled(Wrapper)`
+  width: 100vw;
   min-height: calc(100vh - 64px);
-  width: calc(100vw - 20px);
   padding-top: 10px;
-  margin: 0 20px;
+  padding: 0 20px;
   justify-content: space-between;
 `
 
