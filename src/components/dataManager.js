@@ -96,6 +96,7 @@ export default memo(
           })
         )
       }
+      /* eslint-disable-next-line */
     }, [invitedByTeamId, token])
 
     useEffect(() => {
