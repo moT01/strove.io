@@ -222,7 +222,7 @@ const TeamTile = styled(Tile)`
 const TeamTileSection = styled(Tile)`
   align-items: flex-start;
   margin: 0px;
-  padding: 5px;
+  padding: 10px;
   border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
   border-width: 1px 0px 0px 0px;
   border-color: ${({ theme }) => theme.colors.c19};
@@ -409,6 +409,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
     color: ${({ theme, expanded }) =>
       expanded ? theme.colors.c2 : theme.colors.c3};
     transition: all 0.2s;
+    padding: 0;
   }
 
   :hover {
@@ -618,6 +619,7 @@ const Dashboard = ({ history }) => {
                                     <StroveButton
                                       isDelete
                                       padding="5px"
+                                      margin="0"
                                       width="120px"
                                       text="Remove"
                                       onClick={() => {

@@ -44,7 +44,6 @@ const Tile = styled.div`
   border-color: ${({ theme }) => theme.colors.c4};
   border-width: 0px 0px 1px 0px;
   border-style: solid;
-  padding: 20px;
   margin: 5px;
   width: 100%;
   transition: all 0.2s;
