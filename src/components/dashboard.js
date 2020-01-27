@@ -518,26 +518,25 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           {Object.values(teamsObj).map(team => {
             const isExpanded = expandedTiles[team.id]
-            const isOwner = team.owner.id === user.id
+            const isOwner = team.teamLeader?.id === user.id
             return (
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
                   <Divider>
                     <VerticalDivider>
                       <Title>{team.name}</Title>
-                      {isExpanded &&
-                        isOwner && (
-                          <StroveButton
-                            isPrimary
-                            padding="5px"
-                            minWidth="150px"
-                            maxWidth="150px"
-                            margin="10px"
-                            borderRadius="2px"
-                            onClick={() => handleAddMemberClick(team.id)}
-                            text="Add member"
-                          />
-                        )}
+                      {isExpanded && isOwner && (
+                        <StroveButton
+                          isPrimary
+                          padding="5px"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          margin="10px"
+                          borderRadius="2px"
+                          onClick={() => handleAddMemberClick(team.id)}
+                          text="Add member"
+                        />
+                      )}
                       {isExpanded &&
                         (isOwner ? (
                           <StroveButton
@@ -583,13 +582,13 @@ const Dashboard = ({ history }) => {
                             <VerticalDivider>
                               <UserPhoto
                                 src={
-                                  team.owner.photoUrl
-                                    ? team.owner.photoUrl
+                                  team.teamLeader?.photoUrl
+                                    ? team.teamLeader?.photoUrl
                                     : StroveLogo
                                 }
                               />
                               <Text>
-                                {team.owner.name}
+                                {team.teamLeader?.name}
                                 <InviteStatus>Team leader</InviteStatus>
                               </Text>
                             </VerticalDivider>
@@ -598,7 +597,7 @@ const Dashboard = ({ history }) => {
                         {team?.users?.map(
                           (member, index) =>
                             member.name &&
-                            member.id !== team.owner.id && (
+                            member.id !== team.teamLeader?.id && (
                               <RowWrapper
                                 key={member.name}
                                 isLast={team.users.length === index + 2}

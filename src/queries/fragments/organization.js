@@ -5,7 +5,10 @@ export const OrganizationFragment = gql`
   fragment Organization on Organization {
     id
     name
-    owner
+    owner {
+      id
+      name
+    }
     users {
       id
       name

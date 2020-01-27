@@ -8,7 +8,7 @@ export const TeamFragment = gql`
     projects {
       ...Project
     }
-    owner {
+    teamLeader {
       id
       name
       photoUrl
