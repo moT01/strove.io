@@ -17,7 +17,7 @@ import {
   REMOVE_MEMBER,
   MY_TEAMS,
   DELETE_TEAM,
-  TRANSFER_OWNERSHIP,
+  SET_ADMIN,
   LEAVE_TEAM,
   MY_ORGANIZATIONS,
 } from 'queries'
@@ -882,33 +882,33 @@ const Dashboard = ({ history }) => {
     }
   }
 
-  const handleTransferOwnershipClick = () => {
+  const handleSetAdminOwnershipClick = () => {
     setOwnershipModal(true)
   }
 
-  const transferOwnership = ({ teamId, newOwner }) => {
+  const setAdmin = ({ teamId, newOwner }) => {
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to transfer ownership of {teamsObj[teamId].name}{' '}
-          to {newOwner.label}
+          Are you sure you want to set {newOwner.label} to be team leader of{' '}
+          {teamsObj[teamId].name}
         </ModalText>
       ),
-      buttonLabel: 'Transfer',
+      buttonLabel: 'Set team leader',
       onSubmit: () =>
         dispatch(
           mutation({
-            name: 'transferOwnership',
-            mutation: TRANSFER_OWNERSHIP,
+            name: 'setAdmin',
+            mutation: SET_ADMIN,
             variables: { teamId, newOwnerId: newOwner.values },
             onSuccess: () => {
               setWarningModal({
                 visible: true,
                 content: (
                   <ModalText>
-                    You have successfully transfered ownership of{' '}
-                    {teamsObj[teamId].name} to {newOwner.label}
+                    You have successfully set {newOwner.label} to be team leader
+                    of {teamsObj[teamId].name}
                   </ModalText>
                 ),
               })
@@ -1142,8 +1142,8 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleTransferOwnershipClick(false)}
-          text="Transfer ownership"
+          onClick={() => handleSetAdminOwnershipClick(false)}
+          text="Set team leader"
         />
         <StroveButton
           isDelete
@@ -1225,7 +1225,7 @@ const Dashboard = ({ history }) => {
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={ownershipModal}
         onRequestClose={() => setOwnershipModal(false)}
-        contentLabel="Transfer ownership"
+        contentLabel="Set team leader"
         ariaHideApp={false}
       >
         <SettingWrapper>
@@ -1264,12 +1264,12 @@ const Dashboard = ({ history }) => {
         </SettingWrapper>
         <ModalButton
           onClick={() =>
-            transferOwnership({
+            setAdmin({
               teamId: editTeamId,
               newOwner: newOwnerSelect,
             })
           }
-          text="Transfer ownership"
+          text="Set team leader"
           padding="5px"
           maxWidth="150px"
         />

@@ -22,7 +22,7 @@ import RENAME_TEAM from './renameTeam'
 import REMOVE_MEMBER from './removeMember'
 import DELETE_TEAM from './deleteTeam'
 import SET_VISIBILITY from './setVisibility'
-import TRANSFER_OWNERSHIP from './transferOwnership'
+import SET_ADMIN from './setAdmin'
 import LEAVE_TEAM from './leaveTeam'
 import ACCEPT_TEAM_INVITATION from './acceptTeamInvitation'
 import MY_ORGANIZATIONS from './myOrganizations'
@@ -57,7 +57,7 @@ export {
   REMOVE_MEMBER,
   DELETE_TEAM,
   SET_VISIBILITY,
-  TRANSFER_OWNERSHIP,
+  SET_ADMIN,
   LEAVE_TEAM,
   ACCEPT_TEAM_INVITATION,
   MY_ORGANIZATIONS,
