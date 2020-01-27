@@ -317,8 +317,19 @@ const InviteStatus = styled.span`
 `
 
 const StyledIcon = styled(Icon)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 16px;
   color: ${({ theme }) => theme.colors.c3};
+  cursor: pointer;
+  animation: ${FullFadeIn} 0.5s ease-out;
+`
+
+const SettingsIcon = styled(StyledIcon)`
+  margin-left: 5px;
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const IconWrapper = styled(Wrapper)`
@@ -554,19 +565,18 @@ const Dashboard = ({ history }) => {
               <TeamTileWrapper key={team.id} expanded={isExpanded}>
                 <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
                   <Divider>
-                    <RowWrapper>
+                    <VerticalDivider>
                       <Title>{team.name}</Title>
                       {isExpanded &&
                         (isOwner ? (
                           <StroveButton
                             isDashboard
-                            padding="5px"
+                            padding="0px"
                             width="120px"
-                            fontSize='12px'
+                            text="Settings"
                             onClick={() => {
                               handleSettingsClick(team.id)
                             }}
-                            text="Settings"
                           />
                         ) : (
                           <StroveButton
@@ -580,7 +590,7 @@ const Dashboard = ({ history }) => {
                             text="Leave"
                           />
                         ))}
-                    </RowWrapper>
+                    </VerticalDivider>
                     {Object.keys(teamsObj).length > 1 && (
                       <IconWrapper onClick={() => handleExpandTile(team.id)}>
                         <ExpandIcon type="down" expanded={isExpanded} />
