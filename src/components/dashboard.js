@@ -525,18 +525,19 @@ const Dashboard = ({ history }) => {
                   <Divider>
                     <VerticalDivider>
                       <Title>{team.name}</Title>
-                      {isOwner && (
-                        <StroveButton
-                          isPrimary
-                          padding="5px"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          margin="10px"
-                          borderRadius="2px"
-                          onClick={() => handleAddMemberClick(team.id)}
-                          text="Add member"
-                        />
-                      )}
+                      {isExpanded &&
+                        isOwner && (
+                          <StroveButton
+                            isPrimary
+                            padding="5px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            margin="10px"
+                            borderRadius="2px"
+                            onClick={() => handleAddMemberClick(team.id)}
+                            text="Add member"
+                          />
+                        )}
                       {isExpanded &&
                         (isOwner ? (
                           <StroveButton
