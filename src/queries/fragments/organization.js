@@ -14,6 +14,12 @@ export const OrganizationFragment = gql`
     teams {
       ...Team
     }
+
+    paymentId
+    customerId
+    subscriptionId
+    subscriptionStatus
+    subscriptionQuantity
   }
   ${TeamFragment}
 `

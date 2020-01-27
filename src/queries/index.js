@@ -29,6 +29,7 @@ import MY_ORGANIZATIONS from './myOrganizations'
 import GET_ORGANIZATION from './getOrganization'
 import RENAME_ORGANIZATION from './renameOrganization'
 import CREATE_ORGANIZATION from './createOrganization'
+import DELETE_ORGANIZATION from './deleteOrganization'
 
 export {
   ADD_PROJECT,
@@ -62,4 +63,5 @@ export {
   GET_ORGANIZATION,
   RENAME_ORGANIZATION,
   CREATE_ORGANIZATION,
+  DELETE_ORGANIZATION,
 }
