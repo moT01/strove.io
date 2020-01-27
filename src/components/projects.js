@@ -101,6 +101,7 @@ const RightSection = styled(FlexWrapper)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
+  flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
 `
 
 const InfoWrapper = styled(FlexWrapper)`
