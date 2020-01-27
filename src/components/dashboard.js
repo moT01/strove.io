@@ -195,7 +195,7 @@ const Tile = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 2px;
+  border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-width: 1px;
   border-style: solid;
@@ -502,26 +502,6 @@ const Dashboard = ({ history }) => {
   const teamProjects = myTeams?.reduce((projects, team) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
-
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
-
-  const options = [
-    'None',
-    'Atria',
-    'Callisto',
-    'Dione',
-    'Ganymede',
-    'Hangouts Call',
-    'Luna',
-    'Oberon',
-    'Phobos',
-    'Pyxis',
-    'Sedna',
-    'Titania',
-    'Triton',
-    'Umbriel',
-  ]
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateTeams(), [])
