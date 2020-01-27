@@ -457,8 +457,8 @@ const Setting = styled.div`
 `
 
 const UserPhoto = styled.img`
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 35px;
+  height: 35px;
   border-radius: 5px;
   margin: 0;
 `
