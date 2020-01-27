@@ -339,6 +339,7 @@ const ExpandIcon = styled(StyledIcon)`
     expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
   color: ${({ theme }) => theme.colors.c3};
   transition: all 0.2s;
+
   :focus {
     outline: none;
   }
@@ -590,8 +591,18 @@ const Dashboard = ({ history }) => {
                 {isExpanded && (
                   <TeamTile>
                     <TileSectionHeader>
-                      <Divider>
+                      <VerticalDivider>
                         <SectionTitle>Members</SectionTitle>
+                        {isOwner && (
+                          <StroveButton
+                            isPrimary
+                            padding="5px"
+                            width="120px"
+                            margin="10px"
+                            onClick={() => handleAddMemberClick(team.id)}
+                            text="Add member"
+                          />
+                        )}
                         <IconWrapper
                           onClick={() =>
                             handleExpandSection({
@@ -609,7 +620,7 @@ const Dashboard = ({ history }) => {
                             section
                           />
                         </IconWrapper>
-                      </Divider>
+                      </VerticalDivider>
                     </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
@@ -687,16 +698,6 @@ const Dashboard = ({ history }) => {
                               </Divider>
                             </RowWrapper>
                           ))}
-                        {isOwner && (
-                          <StroveButton
-                            isPrimary
-                            padding="5px"
-                            width="120px"
-                            margin="10px"
-                            onClick={() => handleAddMemberClick(team.id)}
-                            text="Add member"
-                          />
-                        )}
                       </TeamTileSection>
                     )}
                     <TileSectionHeader isLast>
