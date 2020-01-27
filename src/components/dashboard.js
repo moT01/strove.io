@@ -550,11 +550,21 @@ const Dashboard = ({ history }) => {
                   <Divider>
                     <VerticalDivider>
                       <Title>{team.name}</Title>
+                      {isOwner && (
+                        <StroveButton
+                          isPrimary
+                          padding="5px"
+                          width="120px"
+                          margin="10px"
+                          onClick={() => handleAddMemberClick(team.id)}
+                          text="Add member"
+                        />
+                      )}
                       {isExpanded &&
                         (isOwner ? (
                           <StroveButton
                             isDashboard
-                            padding="2px"
+                            padding="5px"
                             width="120px"
                             margin="0 0 0 10px"
                             text="Settings"
@@ -584,38 +594,6 @@ const Dashboard = ({ history }) => {
                 </TeamTileHeader>
                 {isExpanded && (
                   <TeamTile>
-                    <TileSectionHeader>
-                      <VerticalDivider>
-                        <SectionTitle>Members</SectionTitle>
-                        {isOwner && (
-                          <StroveButton
-                            isPrimary
-                            padding="5px"
-                            width="120px"
-                            margin="10px"
-                            onClick={() => handleAddMemberClick(team.id)}
-                            text="Add member"
-                          />
-                        )}
-                        <IconWrapper
-                          onClick={() =>
-                            handleExpandSection({
-                              teamId: team.id,
-                              type: 'Members',
-                            })
-                          }
-                        >
-                          <ExpandIcon
-                            type="down"
-                            expanded={
-                              isExpanded &&
-                              expandedTiles[team.id].isMembersActive
-                            }
-                            section
-                          />
-                        </IconWrapper>
-                      </VerticalDivider>
-                    </TileSectionHeader>
                     {isExpanded && expandedTiles[team.id].isMembersActive && (
                       <TeamTileSection>
                         <RowWrapper>
