@@ -15,7 +15,14 @@ import {
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
 } from 'queries'
-import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
+import {
+  mutation,
+  query,
+  window,
+  getWindowHref,
+  redirectToEditor,
+  getWindowSearchParams,
+} from 'utils'
 import { selectors } from 'state'
 import { C } from 'state'
 import { actions } from 'state'
@@ -430,6 +437,10 @@ export default memo(
           )
         }
       })
+
+      const searchParams = getWindowSearchParams()
+      const feature = searchParams?.get('feature') || ''
+      if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

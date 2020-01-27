@@ -21,27 +21,12 @@ const createStore = reduxCreateStore(
 
 export const persistor = persistStore(createStore)
 
-const WithAnalyticsWrapper = memo(({ children }) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const searchParams = getWindowSearchParams()
-    const feature = searchParams?.get('feature') || ''
-    if (feature) dispatch(actions.feature.displayFeature(feature))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return children
-})
-
 export default ({ children }) => (
   <Router>
     <ApolloProvider client={client}>
       <Provider store={createStore}>
         <PersistGate loading={null} persistor={persistor}>
-          <WithAnalyticsWrapper>
-            <Layout>{children}</Layout>
-          </WithAnalyticsWrapper>
+          <Layout>{children}</Layout>
         </PersistGate>
       </Provider>
     </ApolloProvider>
