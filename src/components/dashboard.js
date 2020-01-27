@@ -327,6 +327,8 @@ const IconWrapper = styled(Wrapper)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-left: auto;
+  margin-right: 5px;
 
   i {
     line-height: 0;
@@ -534,14 +536,6 @@ const Dashboard = ({ history }) => {
 
   const shouldTabsBeCollapsable = Object.keys(teamsObj).length > 1
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
   const tabs = [
     {
       name: 'Teams',
@@ -581,7 +575,7 @@ const Dashboard = ({ history }) => {
                           />
                         ))}
                     </VerticalDivider>
-                    {Object.keys(teamsObj).length > 1 && (
+                    {shouldTabsBeCollapsable && (
                       <IconWrapper onClick={() => handleExpandTile(team.id)}>
                         <ExpandIcon type="down" expanded={isExpanded} />
                       </IconWrapper>
