@@ -28,6 +28,7 @@ export default memo(styled(Modal)`
   border-color: ${({ theme }) => 'rgba(0, 0, 0, 0.1)'};
   border-width: 1px;
   border-style: solid;
+  word-break: break-word;
   padding: 20px;
   box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c1};
   position: fixed;
