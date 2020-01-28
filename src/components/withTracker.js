@@ -23,13 +23,15 @@ const withTracker = (WrappedComponent, options = {}) => {
         list.forEach(entry => {
           if (entry.isIntersecting) {
             ReactGA.event({
-              category: 'Scroll',
-              action: 'Scrolled to heading 2',
-              value: entry.intersectionRatio,
+              category: 'Rendering',
+              variable: entry.name,
+              value: entry.startTime,
             })
           }
-          console.log('entry.intersectionRatio', entry.intersectionRatio)
+          console.log('entry.intersectionRatio', entry.startTime)
         })
+        var observer = new PerformanceObserver(callback)
+        observer.observe({ entryTypes: ['paint'] })
       }
     }, [])
 
