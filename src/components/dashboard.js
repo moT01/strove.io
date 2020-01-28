@@ -543,17 +543,20 @@ const Dashboard = ({ history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const displayHandler = ({ orgId, teamId, section }) => {
+  const displayHandler = ({ organizationId, teamId, section }) => {
     let newTiles = expandedTiles
     if (section) {
-      newTiles[orgId][teamId][section].visible = !newTiles[orgId][teamId][
-        section
-      ].visible
+      newTiles[organizationId][teamId][section].visible = !newTiles[
+        organizationId
+      ][teamId][section].visible
     } else if (teamId) {
       teamId &&
-        (newTiles[orgId][teamId].visible = !newTiles[orgId][teamId].visible)
-    } else if (orgId) {
-      orgId && (newTiles[orgId].visible = !newTiles[orgId].visible)
+        (newTiles[organizationId][teamId].visible = !newTiles[organizationId][
+          teamId
+        ].visible)
+    } else if (organizationId) {
+      organizationId &&
+        (newTiles[organizationId].visible = !newTiles[organizationId].visible)
     }
 
     console.log('TCL: displayHandler -> newTiles', newTiles)
@@ -589,7 +592,15 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           {myOrganizations.map(organization =>
             Object.values(teamsObj[organization.id]).map(team => {
-              const isExpanded = expandedTiles[team.id]
+              const isExpanded =
+                expandedTiles[organization.id].teams[team.id].visible
+              console.log(
+                'TCL: Dashboard -> isExpanded',
+                isExpanded,
+                'team',
+                team,
+                expandedTiles[organization.id].teams[team.id]
+              )
               const isOwner = team.teamLeader?.id === user.id
               return (
                 <TeamTileWrapper key={team.id} expanded={isExpanded}>
@@ -638,16 +649,16 @@ const Dashboard = ({ history }) => {
                             />
                           ))}
                       </VerticalDivider>
-                      {shouldTabsBeCollapsable && (
-                        <IconWrapper onClick={() => handleExpandTile(team.id)}>
-                          <ExpandIcon type="down" expanded={isExpanded} />
-                        </IconWrapper>
-                      )}
+                      {/* {shouldTabsBeCollapsable && ( */}
+                      <IconWrapper onClick={() => handleExpandTile(team.id)}>
+                        <ExpandIcon type="down" expanded={isExpanded} />
+                      </IconWrapper>
+                      {/* )} */}
                     </Divider>
                   </TeamTileHeader>
                   {isExpanded && (
                     <TeamTile>
-                      {isExpanded && expandedTiles[team.id].isMembersActive && (
+                      {isExpanded && expandedTiles[organization.id].teams[team.id].sections.members && (
                         <TeamTileSection>
                           <RowWrapper>
                             <Divider>
@@ -740,25 +751,26 @@ const Dashboard = ({ history }) => {
                         <Divider>
                           <SectionTitle>Projects</SectionTitle>
                           <IconWrapper
-                            onClick={() =>
-                              handleExpandSection({
-                                teamId: team.id,
-                                type: 'Projects',
-                              })
-                            }
+                            // onClick={() =>
+                            //   handleExpandSection({
+                            //     teamId: team.id,
+                            //     type: 'Projects',
+                            //   })
+                            // }
                           >
                             <ExpandIcon
                               type="down"
                               expanded={
                                 isExpanded &&
-                                expandedTiles[team.id].isProjectsActive
+                                expandedTiles[organization.id].teams[team.id].sections.projects
                               }
                               section
                             />
                           </IconWrapper>
                         </Divider>
                       </TileSectionHeader>
-                      {isExpanded && expandedTiles[team.id].isProjectsActive && (
+                      {isExpanded && 
+                                expandedTiles[organization.id].teams[team.id].sections.projects && (
                         <TeamTileSection isLast>
                           <Projects
                             projects={teamProjects[team.id]}
@@ -1050,32 +1062,32 @@ const Dashboard = ({ history }) => {
       return setExpandedTiles(tiles)
     }
 
-    setExpandedTiles({
-      ...expandedTiles,
-      [teamId]: { isMembersActive: true, isProjectsActive: false },
-    })
+    // setExpandedTiles({
+    //   ...expandedTiles,
+    //   [teamId]: { isMembersActive: true, isProjectsActive: false },
+    // })
   }
 
-  const handleExpandSection = ({ teamId, type }) => {
-    if (type === 'Members') {
-      const isMembersActive = expandedTiles[teamId].isMembersActive
-      return setExpandedTiles({
-        ...expandedTiles,
-        [teamId]: {
-          ...expandedTiles[teamId],
-          isMembersActive: !isMembersActive,
-        },
-      })
-    }
-    const isProjectsActive = expandedTiles[teamId].isProjectsActive
-    return setExpandedTiles({
-      ...expandedTiles,
-      [teamId]: {
-        ...expandedTiles[teamId],
-        isProjectsActive: !isProjectsActive,
-      },
-    })
-  }
+  // const handleExpandSection = ({ teamId, type }) => {
+  //   if (type === 'Members') {
+  //     const isMembersActive = expandedTiles[teamId].isMembersActive
+  //     return setExpandedTiles({
+  //       ...expandedTiles,
+  //       [teamId]: {
+  //         ...expandedTiles[teamId],
+  //         isMembersActive: !isMembersActive,
+  //       },
+  //     })
+  //   }
+  //   const isProjectsActive = expandedTiles[teamId].isProjectsActive
+  //   return setExpandedTiles({
+  //     ...expandedTiles,
+  //     [teamId]: {
+  //       ...expandedTiles[teamId],
+  //       isProjectsActive: !isProjectsActive,
+  //     },
+  //   })
+  // }
 
   return (
     <>
