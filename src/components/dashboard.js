@@ -477,20 +477,9 @@ const Dashboard = ({ history }) => {
           organization.teams
             .filter(
               team =>
-                console.log(
-                  'OrgId',
-                  organization.id,
-                  'team',
-                  team,
-                  'stuff',
-                  organization.teams.filter(team =>
-                    team.users.findIndex(member => member.id === user.id)
-                  )
-                ) ||
                 team.users.findIndex(member => member.id === user.id) !== -1 ||
                 team.owner?.id === user.id
             )
-
             .reduce((tiles, team) => {
               console.log('Readuce team', team)
               tiles[team.id] = {
@@ -510,13 +499,29 @@ const Dashboard = ({ history }) => {
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  // const organizationsObj = myOrganizations.reduce(
-  //   (organizations, organization) => {
-  //     return { ...organizations, [organization.id]: organization }
-  //   },
-  //   {}
-  // )
-  // console.log('TCL: organizationsObj -> organizationsObj', organizationsObj)
+  const organizationsObj = myOrganizations.reduce(
+    (organizations, organization) => {
+      return {
+        ...organizations,
+        [organization.id]: {
+          ...organization,
+          teams: organization.teams.reduce((teams, team) => {
+            return {
+              ...teams,
+              [team.id]: {
+                ...team,
+                projects: team.projects?.reduce((projects, project) => {
+                  return { ...projects, [project.id]: project }
+                }, {}),
+              },
+            }
+          }, {}),
+        },
+      }
+    },
+    {}
+  )
+  console.log('TCL: organizationsObj -> organizationsObj', organizationsObj)
   const teamsObj = myOrganizations?.reduce((organizations, organization) => {
     return {
       ...organizations,
