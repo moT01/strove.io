@@ -283,7 +283,9 @@ const RowWrapper = styled(VerticalDivider)`
   border-style: solid;
   min-height: 60px;
 
-  ${({ isLast }) => isLast && 'border: none'};
+  :last-of-type {
+    border: none;
+  }
 `
 
 const InviteStatus = styled.span`
@@ -441,6 +443,13 @@ const UserPhoto = styled.img`
   margin-left: 10px;
 `
 
+const emptyWarningModalContent = {
+  visible: false,
+  content: null,
+  onSubmit: null,
+  buttonLabel: '',
+}
+
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -468,12 +477,7 @@ const Dashboard = ({ history }) => {
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
-  const [warningModal, setWarningModal] = useState({
-    visible: false,
-    content: null,
-    onSubmit: null,
-    buttonLabel: '',
-  })
+  const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const teamsObj = myTeams?.reduce((teams, team) => {
@@ -595,13 +599,10 @@ const Dashboard = ({ history }) => {
                           </Divider>
                         </RowWrapper>
                         {team?.users?.map(
-                          (member, index) =>
+                          member =>
                             member.name &&
                             member.id !== team.teamLeader?.id && (
-                              <RowWrapper
-                                key={member.name}
-                                isLast={team.users.length === index + 2}
-                              >
+                              <RowWrapper key={member.name}>
                                 <Divider>
                                   <VerticalDivider>
                                     <UserPhoto
@@ -960,12 +961,7 @@ const Dashboard = ({ history }) => {
   }
 
   const closeWarningModal = () => {
-    setWarningModal({
-      visible: false,
-      content: null,
-      onSubmit: null,
-      buttonLabel: '',
-    })
+    setWarningModal(emptyWarningModalContent)
   }
 
   const closeSettingsModal = () => {
@@ -1286,14 +1282,7 @@ const Dashboard = ({ history }) => {
         mindWidth="40vw"
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={warningModal.visible}
-        onRequestClose={() =>
-          setWarningModal({
-            visible: false,
-            content: null,
-            onSubmit: null,
-            buttonLabel: '',
-          })
-        }
+        onRequestClose={() => setWarningModal(emptyWarningModalContent)}
         contentLabel="Warning"
         ariaHideApp={false}
       >

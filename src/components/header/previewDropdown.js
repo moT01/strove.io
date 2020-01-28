@@ -83,7 +83,6 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
-  box-shadow: 0 12px 12px -1.5px ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.c1};

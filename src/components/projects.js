@@ -48,6 +48,10 @@ const Tile = styled.div`
   padding-left: 10px;
   width: 100%;
   transition: all 0.2s;
+
+  :last-of-type {
+    border: none;
+  }
 `
 
 const ModalButton = styled(StroveButton)`
@@ -306,7 +310,6 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                           maxWidth="150px"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
-                          minWidth="150px"
                           onClick={() => {
                             handleStopClick(project.id)
                           }}
