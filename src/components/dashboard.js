@@ -985,7 +985,7 @@ const Dashboard = ({ history }) => {
 
     setExpandedTiles({
       ...expandedTiles,
-      [teamId]: { isMembersActive: false, isProjectsActive: false },
+      [teamId]: { isMembersActive: true, isProjectsActive: false },
     })
   }
 
