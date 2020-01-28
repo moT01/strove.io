@@ -472,16 +472,37 @@ const Dashboard = ({ history }) => {
   const [settingsModal, setSettingsModal] = useState(false)
   const [ownershipModal, setOwnershipModal] = useState(false)
   const [expandedTiles, setExpandedTiles] = useState(
-    myTeams
-      ? myTeams.reduce((tiles, team) => {
-          tiles[team.id] = {
-            isMembersActive: true,
-            isProjectsActive: true,
-          }
-          return tiles
-        }, {})
+    myOrganizations
+      ? myOrganizations.map(organization =>
+          organization.teams
+            .filter(
+              team =>
+                console.log(
+                  'OrgId',
+                  organization.id,
+                  'team',
+                  team,
+                  'stuff',
+                  organization.teams.filter(team =>
+                    team.users.findIndex(member => member.id === user.id)
+                  )
+                ) ||
+                team.users.findIndex(member => member.id === user.id) !== -1 ||
+                team.owner?.id === user.id
+            )
+
+            .reduce((tiles, team) => {
+              console.log('Readuce team', team)
+              tiles[team.id] = {
+                isMembersActive: true,
+                isProjectsActive: true,
+              }
+              return tiles
+            }, {})
+        )
       : {}
   )
+  console.log('TCL: Dashboard -> expandedTiles', expandedTiles)
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
