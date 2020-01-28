@@ -471,27 +471,6 @@ const Dashboard = ({ history }) => {
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [ownershipModal, setOwnershipModal] = useState(false)
-  const [expandedTiles, setExpandedTiles] = useState(
-    myOrganizations
-      ? myOrganizations.map(organization =>
-          organization.teams
-            .filter(
-              team =>
-                team.users.findIndex(member => member.id === user.id) !== -1 ||
-                team.owner?.id === user.id
-            )
-            .reduce((tiles, team) => {
-              console.log('Readuce team', team)
-              tiles[team.id] = {
-                isMembersActive: true,
-                isProjectsActive: true,
-              }
-              return tiles
-            }, {})
-        )
-      : {}
-  )
-  console.log('TCL: Dashboard -> expandedTiles', expandedTiles)
   const [teamId, setTeamId] = useState('')
   const [editTeamId, setEditTeamId] = useState()
   const [editMode, setEditMode] = useState('')
@@ -522,6 +501,29 @@ const Dashboard = ({ history }) => {
     {}
   )
   console.log('TCL: organizationsObj -> organizationsObj', organizationsObj)
+  const [expandedTiles, setExpandedTiles] = useState(() =>
+    myOrganizations.reduce((organizations, organization) => {
+      return {
+        ...organizations,
+        [organization.id]: {
+          visible: true,
+          teams: organization.teams.reduce((teams, team) => {
+            return {
+              ...teams,
+              [team.id]: {
+                visible: true,
+                sections: {
+                  members: true,
+                  projects: true,
+                },
+              },
+            }
+          }, {}),
+        },
+      }
+    }, {})
+  )
+  console.log('TCL: Dashboard -> expandedTiles', expandedTiles)
   const teamsObj = myOrganizations?.reduce((organizations, organization) => {
     return {
       ...organizations,
@@ -540,6 +542,23 @@ const Dashboard = ({ history }) => {
     updateOrganizations()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const displayHandler = ({ orgId, teamId, section }) => {
+    let newTiles = expandedTiles
+    if (section) {
+      newTiles[orgId][teamId][section].visible = !newTiles[orgId][teamId][
+        section
+      ].visible
+    } else if (teamId) {
+      teamId &&
+        (newTiles[orgId][teamId].visible = !newTiles[orgId][teamId].visible)
+    } else if (orgId) {
+      orgId && (newTiles[orgId].visible = !newTiles[orgId].visible)
+    }
+
+    console.log('TCL: displayHandler -> newTiles', newTiles)
+    return newTiles
+  }
 
   const updateTeams = () => {
     dispatch(
