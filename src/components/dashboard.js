@@ -456,9 +456,9 @@ const Dashboard = ({ history }) => {
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = user?.organizations
   const myTeams = myOrganizations?.map(organization =>
-    organization.teams.filter(
+    organization.teams?.filter(
       team =>
-        team.users.findIndex(member => member.id === user.id) !== -1 ||
+        team.users?.findIndex(member => member.id === user.id) !== -1 ||
         team.owner?.id === user.id
     )
   )
@@ -482,7 +482,7 @@ const Dashboard = ({ history }) => {
         ...organizations,
         [organization.id]: {
           ...organization,
-          teams: organization.teams.reduce((teams, team) => {
+          teams: organization.teams?.reduce((teams, team) => {
             return {
               ...teams,
               [team.id]: {
@@ -504,7 +504,7 @@ const Dashboard = ({ history }) => {
         ...organizations,
         [organization.id]: {
           visible: true,
-          teams: organization.teams.reduce((teams, team) => {
+          teams: organization.teams?.reduce((teams, team) => {
             return {
               ...teams,
               [team.id]: {
@@ -523,7 +523,7 @@ const Dashboard = ({ history }) => {
   const teamsObj = myOrganizations?.reduce((organizations, organization) => {
     return {
       ...organizations,
-      [organization.id]: organization.teams.reduce((teams, team) => {
+      [organization.id]: organization.teams?.reduce((teams, team) => {
         return { ...teams, [team.id]: team }
       }, {}),
     }
@@ -606,7 +606,7 @@ const Dashboard = ({ history }) => {
                           />
                         )}
                         {isExpanded &&
-                          ((isOwner || isOrganizationOwner) ? (
+                          (isOwner || isOrganizationOwner ? (
                             <StroveButton
                               isDashboard
                               padding="5px"
