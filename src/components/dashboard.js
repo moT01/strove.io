@@ -551,7 +551,6 @@ const Dashboard = ({ history }) => {
       newTiles[organizationId].visible = !oldValue
     }
     setExpandedTiles(newTiles)
-    console.log(expandedTiles)
   }
 
   const updateTeams = () => {
@@ -634,7 +633,7 @@ const Dashboard = ({ history }) => {
                           ))}
                       </VerticalDivider>
                       {/* {shouldTabsBeCollapsable && ( */}
-                      <IconWrapper>
+                      <IconWrapper onClick={() => displayHandler({organizationId: organization.id, teamId: team.id})}>
                         <ExpandIcon type="down" expanded={isExpanded} />
                       </IconWrapper>
                       {/* )} */}
@@ -759,8 +758,6 @@ const Dashboard = ({ history }) => {
                               }
                               section
                             />
-                            {console.log('Hola', expandedTiles[organization.id].teams[team.id]
-                                  .sections.projects)}
                           </IconWrapper>
                         </Divider>
                       </TileSectionHeader>
@@ -768,10 +765,6 @@ const Dashboard = ({ history }) => {
                         expandedTiles[organization.id].teams[team.id].sections
                           .projects && (
                           <TeamTileSection isLast>
-                            {console.log(
-                              organizationsObj[organization.id].teams[team.id]
-                                .projects
-                            )}
                             <Projects
                               projects={
                                 organizationsObj[organization.id].teams[team.id]
