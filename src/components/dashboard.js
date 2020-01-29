@@ -628,7 +628,7 @@ const Dashboard = ({ history }) => {
                               borderRadius="2px"
                               onClick={() => {
                                 setEditTeamId(team.id)
-                                handleLeaveClick(team.id)
+                                handleLeaveClick(team)
                               }}
                               text="Leave"
                             />
@@ -1022,26 +1022,26 @@ const Dashboard = ({ history }) => {
     handleStopProject({ id, dispatch })
   }
 
-  const handleLeaveClick = id => {
-    setEditTeamId(id)
+  const handleLeaveClick = team => {
+    setEditTeamId(team.id)
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to leave team {teamsObj[id].name}?
+          Are you sure you want to leave team {organizationsObj[team.organizationId].teams[team.id].name}?
         </ModalText>
       ),
-      onSubmit: () => handleLeaveTeam(id),
+      onSubmit: () => handleLeaveTeam({teamId: team.id}),
       buttonLabel: 'Leave',
     })
   }
 
-  const handleLeaveTeam = id => {
+  const handleLeaveTeam = ({teamId} )=> {
     dispatch(
       mutation({
         name: 'leaveTeam',
         mutation: LEAVE_TEAM,
-        variables: { teamId: id },
+        variables: { teamId },
         onSuccess: () => {
           updateTeams()
           closeWarningModal()
