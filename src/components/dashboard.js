@@ -539,7 +539,7 @@ const Dashboard = ({ history }) => {
   }, [])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
-    let newTiles = expandedTiles
+    let newTiles = {...expandedTiles}
     if (section) {
       const oldValue = newTiles[organizationId].teams[teamId].sections[section]
       newTiles[organizationId].teams[teamId].sections[section] = !oldValue
@@ -550,8 +550,8 @@ const Dashboard = ({ history }) => {
       const oldValue = newTiles[organizationId].visible
       newTiles[organizationId].visible = !oldValue
     }
-
     setExpandedTiles(newTiles)
+    console.log(expandedTiles)
   }
 
   const updateTeams = () => {
@@ -753,16 +753,18 @@ const Dashboard = ({ history }) => {
                             <ExpandIcon
                               type="down"
                               expanded={
-                                isExpanded &&
+                                
                                 expandedTiles[organization.id].teams[team.id]
                                   .sections.projects
                               }
                               section
                             />
+                            {console.log('Hola', expandedTiles[organization.id].teams[team.id]
+                                  .sections.projects)}
                           </IconWrapper>
                         </Divider>
                       </TileSectionHeader>
-                      {isExpanded &&
+                      {
                         expandedTiles[organization.id].teams[team.id].sections
                           .projects && (
                           <TeamTileSection isLast>
