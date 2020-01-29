@@ -11,6 +11,7 @@ const MenuWrapper = styled.div`
     invert ? theme.colors.c2 : theme.colors.c1};
   z-index: 3;
   position: relative;
+  word-break: initial;
 `
 
 const Wrapper = styled.div`
