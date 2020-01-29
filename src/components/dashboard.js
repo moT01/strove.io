@@ -543,6 +543,12 @@ const Dashboard = ({ history }) => {
     if (section) {
       const oldValue = newTiles[organizationId].teams[teamId].sections[section]
       newTiles[organizationId].teams[teamId].sections[section] = !oldValue
+    } else if (teamId) {
+      const oldValue = newTiles[organizationId].teams[teamId].visible
+      newTiles[organizationId].teams[teamId].visible = !oldValue
+    } else if (organizationId) {
+      const oldValue = newTiles[organizationId].visible
+      newTiles[organizationId].visible = !oldValue
     }
 
     setExpandedTiles(newTiles)
@@ -579,13 +585,6 @@ const Dashboard = ({ history }) => {
             Object.values(teamsObj[organization.id]).map(team => {
               const isExpanded =
                 expandedTiles[organization.id].teams[team.id].visible
-              // console.log(
-              //   'TCL: Dashboard -> isExpanded',
-              //   isExpanded,
-              //   'team',
-              //   team,
-              //   expandedTiles[organization.id].teams[team.id]
-              // )
               const isOwner = team.teamLeader?.id === user.id
               return (
                 <TeamTileWrapper key={team.id} expanded={isExpanded}>
