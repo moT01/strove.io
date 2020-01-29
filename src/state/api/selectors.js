@@ -23,6 +23,11 @@ export const getUserProjects = getApiData({
   defaultValue: [],
 })
 
+export const getMyTeams = getApiData({
+  fields: 'myTeams',
+  defaultValute: [],
+})
+
 export const getQueuePosition = getApiData({
   fields: ['user', 'queuePosition'],
 })

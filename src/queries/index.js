@@ -14,6 +14,23 @@ import SEND_EMAIL from './sendEmail'
 import GET_BITBUCKET_TOKEN from './getBitbucketToken'
 import START_PROJECT from './startProjectSubscription'
 import LOGIN_SUBSCRIPTION from './userLoginSubscription'
+import ADD_MEMBER from './addMember'
+import MY_TEAMS from './myTeams'
+import GET_TEAM from './getTeam'
+import CREATE_TEAM from './createTeam'
+import RENAME_TEAM from './renameTeam'
+import REMOVE_MEMBER from './removeMember'
+import DELETE_TEAM from './deleteTeam'
+import SET_VISIBILITY from './setVisibility'
+import SET_ADMIN from './setAdmin'
+import LEAVE_TEAM from './leaveTeam'
+import ACCEPT_TEAM_INVITATION from './acceptTeamInvitation'
+import MY_ORGANIZATIONS from './myOrganizations'
+import GET_ORGANIZATION from './getOrganization'
+import RENAME_ORGANIZATION from './renameOrganization'
+import CREATE_ORGANIZATION from './createOrganization'
+import DELETE_ORGANIZATION from './deleteOrganization'
+import TRANSFER_ORGANIZATION from './transferOrganization'
 
 export {
   ADD_PROJECT,
@@ -32,4 +49,21 @@ export {
   GET_BITBUCKET_TOKEN,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ADD_MEMBER,
+  MY_TEAMS,
+  GET_TEAM,
+  CREATE_TEAM,
+  RENAME_TEAM,
+  REMOVE_MEMBER,
+  DELETE_TEAM,
+  SET_VISIBILITY,
+  SET_ADMIN,
+  LEAVE_TEAM,
+  ACCEPT_TEAM_INVITATION,
+  MY_ORGANIZATIONS,
+  GET_ORGANIZATION,
+  RENAME_ORGANIZATION,
+  CREATE_ORGANIZATION,
+  DELETE_ORGANIZATION,
+  TRANSFER_ORGANIZATION,
 }

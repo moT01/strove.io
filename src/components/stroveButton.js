@@ -25,7 +25,7 @@ const ButtonFadeIn = keyframes`
 `
 
 const Button = styled.button`
-  font-size: ${props => (props.fontSize ? props.fontSize : '14px')};
+  font-size: ${({ fontSize }) => fontSize || '14px'};
   font-weight: ${props => (props.fontWeight ? props.fontWeight : '400')};
   line-height: ${props => (props.lineHeight ? props.lineHeight : 'inherit')};
   letter-spacing: ${props =>
@@ -36,25 +36,29 @@ const Button = styled.button`
   width: ${props => (props.width ? props.width : '100%')};
   display: flex;
   flex-direction: row;
-  margin: 5px;
+  margin: ${props => (props.margin ? props.margin : '5px')};
   padding: ${props => (props.padding ? props.padding : '10px 30px')};
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: ${({ primary, theme, isDelete }) =>
+  color: ${({ primary, theme, isDelete, isDashboard }) =>
     (primary && theme.colors.c2) ||
     (isDelete && theme.colors.c2) ||
+    (isDashboard && theme.colors.c2) ||
     theme.colors.c1};
-  background-color: ${({ theme, primary, isDelete }) =>
+  background-color: ${({ theme, primary, isDelete, isDashboard }) =>
     (primary && theme.colors.c1) ||
-    (isDelete && theme.colors.c5) ||
+    (isDelete && theme.colors.c23) ||
+    (isDashboard && theme.colors.c21) ||
     theme.colors.c2};
   border-width: 1px;
   border-style: solid;
-  border-radius: ${props => (props.borderRadius ? props.borderRadius : '5px')};
-  border-color: ${({ theme, isDelete }) =>
-    !isDelete ? theme.colors.c1 : theme.colors.c3};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  border-radius: ${({ borderRadius }) => borderRadius || '5px'};
+  border-color: ${({ theme, isDelete, isDashboard }) =>
+    (isDelete && theme.colors.c23) ||
+    (isDashboard && theme.colors.c21) ||
+    theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0, 5s ease-out;
@@ -72,7 +76,7 @@ const Button = styled.button`
       cursor: pointer;
       &:hover {
         opacity: 1;
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
         transform: translateY(-1px);
       }
     `}

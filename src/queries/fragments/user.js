@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
 import { ProjectFragment } from './project'
-import { SubscriptionFragment } from './subscription'
+import { TeamFragment } from './team'
+import { OrganizationFragment } from './organization'
 
 export const UserFragment = gql`
   fragment User on User {
+    id
     email
     name
     fullName
@@ -16,16 +18,22 @@ export const UserFragment = gql`
     bitbucketRefreshToken
     bitbucketName
     scopes
+    token
     siliskyToken
+    token
     currentProjectId
-    subscription {
-      ...Subscription
+    teams {
+      ...Team
     }
     projects {
       ...Project
     }
+    organizations {
+      ...Organization
+    }
   }
 
   ${ProjectFragment}
-  ${SubscriptionFragment}
+  ${TeamFragment}
+  ${OrganizationFragment}
 `

@@ -14,6 +14,7 @@ const FullFadeIn = keyframes`
 const sizeProps = props =>
   css`
     ${props.width && `width: ${props.width}`};
+    ${props.minWidth && `min-width: ${props.minWidth}`}
   `
 
 export default memo(styled(Modal)`
@@ -24,11 +25,12 @@ export default memo(styled(Modal)`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.c2};
   border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
+  border-color: ${({ theme }) => 'rgba(0, 0, 0, 0.1)'};
   border-width: 1px;
   border-style: solid;
+  word-break: break-word;
   padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c22};
   position: fixed;
   animation: ${FullFadeIn} 0.2s ease-out;
 

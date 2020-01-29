@@ -7,8 +7,6 @@ import { NoRepoUrlInfo, PoweredBy, ExternalLink } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getRepoUrl } from 'utils'
 
-const getToken = selectors.api.getUserField('siliskyToken')
-
 const MenuWrapper = styled.div`
   padding: 20px;
   background-color: ${({ theme, invert }) =>
@@ -31,7 +29,7 @@ const Wrapper = styled.div`
 `
 
 const EmbedWrapper = () => {
-  const token = useSelector(getToken)
+  const token = useSelector(selectors.getToken)
 
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()

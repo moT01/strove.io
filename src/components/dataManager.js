@@ -13,8 +13,16 @@ import {
   ACTIVE_PROJECT,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ACCEPT_TEAM_INVITATION,
 } from 'queries'
-import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
+import {
+  mutation,
+  query,
+  window,
+  getWindowHref,
+  redirectToEditor,
+  getWindowSearchParams,
+} from 'utils'
 import { selectors } from 'state'
 import { C } from 'state'
 import { actions } from 'state'
@@ -37,7 +45,7 @@ export default memo(
   withRouter(({ children, addProject, history }) => {
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
-    const token = user?.siliskyToken
+    const token = useSelector(selectors.getToken)
     const currentProject = useSelector(selectors.api.getCurrentProject)
     const incomingProjectLink = useSelector(
       selectors.incomingProject.getRepoLink
@@ -54,6 +62,8 @@ export default memo(
     const isProjectBeingStarted = useSelector(
       selectors.incomingProject.isProjectBeingStarted
     )
+
+    const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
 
     if (!localStorage.getItem('deviceId'))
       localStorage.setItem('deviceId', generateDeviceID())
@@ -78,6 +88,23 @@ export default memo(
     const machineName = activeProjectData?.machineName
     const additionalPorts = activeProjectData?.additionalPorts
     const id = activeProjectData?.id
+
+    useEffect(() => {
+      if (invitedByTeamId && token) {
+        dispatch(
+          mutation({
+            name: 'acceptTeamInvitation',
+            dataSelector: data => data,
+            variables: {
+              teamId: invitedByTeamId,
+            },
+            mutation: ACCEPT_TEAM_INVITATION,
+            onSuccessDispatch: () => actions.invitations.acceptInvitation(),
+          })
+        )
+      }
+      /* eslint-disable-next-line */
+    }, [invitedByTeamId, token])
 
     useEffect(() => {
       dispatch({
@@ -326,8 +353,14 @@ export default memo(
         )
       }
       if (loginData?.userLogin) {
-        const { siliskyToken, subscription, projects } = loginData?.userLogin
-        localStorage.setItem('token', siliskyToken)
+        const {
+          token,
+          siliskyToken,
+          subscription,
+          projects,
+          teams,
+        } = loginData?.userLogin
+        localStorage.setItem('token', token || siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {
@@ -349,6 +382,14 @@ export default memo(
             payload: {
               storeKey: 'myProjects',
               data: projects,
+            },
+          })
+        teams &&
+          dispatch({
+            type: C.api.FETCH_SUCCESS,
+            payload: {
+              storeKey: 'myTeams',
+              data: teams,
             },
           })
       }
@@ -390,16 +431,16 @@ export default memo(
         ev.preventDefault()
 
         if (navigator?.sendBeacon && user) {
-          console.log(
-            'process.env.REACT_APP_STROVE_ENDPOINT',
-            process.env.REACT_APP_STROVE_ENDPOINT
-          )
           navigator.sendBeacon(
             `${process.env.REACT_APP_STROVE_ENDPOINT}/beacon`,
             JSON.stringify({ token: localStorage.getItem('token') })
           )
         }
       })
+
+      const searchParams = getWindowSearchParams()
+      const feature = searchParams?.get('feature') || ''
+      if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
