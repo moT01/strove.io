@@ -91,6 +91,7 @@ const MenuWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.c2};
   z-index: 3;
   position: relative;
+  word-break: initial;
 `
 
 const OptionText = styled(Text)`
