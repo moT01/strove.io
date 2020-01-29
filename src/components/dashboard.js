@@ -453,7 +453,6 @@ const emptyWarningModalContent = {
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
-  // const myTeams = useSelector(selectors.api.getMyTeams)
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = user?.organizations
   const myTeams = myOrganizations?.map(organization =>
@@ -463,7 +462,6 @@ const Dashboard = ({ history }) => {
         team.owner?.id === user.id
     )
   )
-  console.log('TCL: Dashboard -> myTeams', myTeams)
   // const [emailSent, setEmailSent] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
@@ -500,7 +498,6 @@ const Dashboard = ({ history }) => {
     },
     {}
   )
-  console.log('TCL: organizationsObj -> organizationsObj', organizationsObj)
   const [expandedTiles, setExpandedTiles] = useState(() =>
     myOrganizations.reduce((organizations, organization) => {
       return {
@@ -523,7 +520,6 @@ const Dashboard = ({ history }) => {
       }
     }, {})
   )
-  console.log('TCL: Dashboard -> expandedTiles', expandedTiles)
   const teamsObj = myOrganizations?.reduce((organizations, organization) => {
     return {
       ...organizations,
@@ -532,7 +528,6 @@ const Dashboard = ({ history }) => {
       }, {}),
     }
   }, {})
-  console.log('TCL: Dashboard -> teamsObj', teamsObj)
   const teamProjects = myTeams?.reduce((projects, team) => {
     return { ...projects, [team.id]: team.projects }
   }, {})
@@ -544,31 +539,12 @@ const Dashboard = ({ history }) => {
   }, [])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
-    console.log(
-      'TCL: displayHandler -> organizationId',
-      organizationId,
-      'teamId',
-      teamId,
-      'section',
-      section
-    )
     let newTiles = expandedTiles
     if (section) {
       const oldValue = newTiles[organizationId].teams[teamId].sections[section]
       newTiles[organizationId].teams[teamId].sections[section] = !oldValue
-      console.log('TCL: displayHandler -> oldValue', oldValue)
     }
-    //  else if (teamId) {
-    //   teamId &&
-    //     (newTiles[organizationId].teams[teamId].visible = !newTiles[
-    //       organizationId
-    //     ].teams[teamId].visible)
-    // } else if (organizationId) {
-    //   organizationId &&
-    //     (newTiles[organizationId].visible = !newTiles[organizationId].visible)
-    // }
 
-    console.log('TCL: displayHandler -> newTiles', newTiles)
     setExpandedTiles(newTiles)
   }
 
