@@ -28,6 +28,7 @@ const Wrapper = styled.div`
   height: 100vh;
   align-items: center;
   justify-content: center;
+  word-break: initial;
 `
 
 const EmbedWrapper = () => {
