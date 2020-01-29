@@ -766,8 +766,20 @@ const Dashboard = ({ history }) => {
                         expandedTiles[organization.id].teams[team.id].sections
                           .projects && (
                           <TeamTileSection isLast>
+                            {console.log(
+                              organizationsObj[organization.id].teams[team.id]
+                                .projects
+                            )}
                             <Projects
-                              projects={teamProjects[team.id]}
+                              projects={
+                                organizationsObj[organization.id].teams[team.id]
+                                  .projects &&
+                                Object.values(
+                                  organizationsObj[organization.id].teams[
+                                    team.id
+                                  ].projects
+                                )
+                              }
                               history={history}
                               updateTeams={updateTeams}
                             />

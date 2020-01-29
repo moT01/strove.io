@@ -136,6 +136,7 @@ const StyledIcon = styled(Icon)`
 `
 
 const Projects = ({ history, projects, addProject, updateTeams }) => {
+  console.log('TCL: Projects -> projects', projects)
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
