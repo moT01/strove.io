@@ -539,7 +539,7 @@ const Dashboard = ({ history }) => {
   }, [])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
-    let newTiles = {...expandedTiles}
+    let newTiles = { ...expandedTiles }
     if (section) {
       const oldValue = newTiles[organizationId].teams[teamId].sections[section]
       newTiles[organizationId].teams[teamId].sections[section] = !oldValue
@@ -581,17 +581,19 @@ const Dashboard = ({ history }) => {
       content: (
         <TilesWrapper>
           {myOrganizations.map(organization =>
-            Object.values(teamsObj[organization.id]).map(team => {
+            Object.values(organizationsObj[organization.id].teams).map(team => {
               const isExpanded =
                 expandedTiles[organization.id].teams[team.id].visible
               const isOwner = team.teamLeader?.id === user.id
+              const isOrganizationOwner =
+                organizationsObj[organization.id].owner.id === user.id
               return (
                 <TeamTileWrapper key={team.id} expanded={isExpanded}>
                   <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
                     <Divider>
                       <VerticalDivider>
                         <Title>{team.name}</Title>
-                        {isExpanded && isOwner && (
+                        {isExpanded && (isOwner || isOrganizationOwner) && (
                           <StroveButton
                             isPrimary
                             padding="5px"
@@ -604,7 +606,7 @@ const Dashboard = ({ history }) => {
                           />
                         )}
                         {isExpanded &&
-                          (isOwner ? (
+                          ((isOwner || isOrganizationOwner) ? (
                             <StroveButton
                               isDashboard
                               padding="5px"
@@ -633,7 +635,14 @@ const Dashboard = ({ history }) => {
                           ))}
                       </VerticalDivider>
                       {/* {shouldTabsBeCollapsable && ( */}
-                      <IconWrapper onClick={() => displayHandler({organizationId: organization.id, teamId: team.id})}>
+                      <IconWrapper
+                        onClick={() =>
+                          displayHandler({
+                            organizationId: organization.id,
+                            teamId: team.id,
+                          })
+                        }
+                      >
                         <ExpandIcon type="down" expanded={isExpanded} />
                       </IconWrapper>
                       {/* )} */}
@@ -696,7 +705,7 @@ const Dashboard = ({ history }) => {
                                   </RowWrapper>
                                 )
                             )}
-                            {isOwner &&
+                            {(isOwner || isOrganizationOwner) &&
                               team?.invited?.map(member => (
                                 <RowWrapper key={member.name}>
                                   <Divider columnOnMobile>
@@ -752,7 +761,6 @@ const Dashboard = ({ history }) => {
                             <ExpandIcon
                               type="down"
                               expanded={
-                                
                                 expandedTiles[organization.id].teams[team.id]
                                   .sections.projects
                               }
@@ -761,40 +769,38 @@ const Dashboard = ({ history }) => {
                           </IconWrapper>
                         </Divider>
                       </TileSectionHeader>
-                      {
-                        expandedTiles[organization.id].teams[team.id].sections
-                          .projects && (
-                          <TeamTileSection isLast>
-                            <Projects
-                              projects={
+                      {expandedTiles[organization.id].teams[team.id].sections
+                        .projects && (
+                        <TeamTileSection isLast>
+                          <Projects
+                            projects={
+                              organizationsObj[organization.id].teams[team.id]
+                                .projects &&
+                              Object.values(
                                 organizationsObj[organization.id].teams[team.id]
-                                  .projects &&
-                                Object.values(
-                                  organizationsObj[organization.id].teams[
-                                    team.id
-                                  ].projects
-                                )
-                              }
-                              history={history}
-                              updateTeams={updateTeams}
+                                  .projects
+                              )
+                            }
+                            history={history}
+                            updateTeams={updateTeams}
+                          />
+                          {isOwner && (
+                            <StroveButton
+                              isPrimary
+                              padding="5px"
+                              minWidth="150px"
+                              maxWidth="150px"
+                              margin="10px"
+                              borderRadius="2px"
+                              text="Add Project"
+                              onClick={() => {
+                                setTeamId(team.id)
+                                setAddProjectModal(true)
+                              }}
                             />
-                            {isOwner && (
-                              <StroveButton
-                                isPrimary
-                                padding="5px"
-                                minWidth="150px"
-                                maxWidth="150px"
-                                margin="10px"
-                                borderRadius="2px"
-                                text="Add Project"
-                                onClick={() => {
-                                  setTeamId(team.id)
-                                  setAddProjectModal(true)
-                                }}
-                              />
-                            )}
-                          </TeamTileSection>
-                        )}
+                          )}
+                        </TeamTileSection>
+                      )}
                     </TeamTile>
                   )}
                 </TeamTileWrapper>
