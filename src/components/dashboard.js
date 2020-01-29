@@ -850,7 +850,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           Deleting the team will also cause deleting all of the team projects.
-          Are you sure you want to proceed and delete {teamsObj[teamId].name}?
+          {/* Are you sure you want to proceed and delete {teamsObj[teamId].name}? */}
         </ModalText>
       ),
       buttonLabel: 'Delete',
