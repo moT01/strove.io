@@ -470,7 +470,7 @@ const Dashboard = ({ history }) => {
   const [settingsModal, setSettingsModal] = useState(false)
   const [ownershipModal, setOwnershipModal] = useState(false)
   const [teamId, setTeamId] = useState('')
-  const [editTeamId, setEditTeamId] = useState()
+  const [editTeam, setEditTeam] = useState()
   const [editMode, setEditMode] = useState('')
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
@@ -601,7 +601,7 @@ const Dashboard = ({ history }) => {
                             maxWidth="150px"
                             margin="10px"
                             borderRadius="2px"
-                            onClick={() => handleAddMemberClick(team.id)}
+                            onClick={() => handleAddMemberClick(team)}
                             text="Add member"
                           />
                         )}
@@ -627,7 +627,7 @@ const Dashboard = ({ history }) => {
                               maxWidth="150px"
                               borderRadius="2px"
                               onClick={() => {
-                                setEditTeamId(team.id)
+                                setEditTeam(team.id)
                                 handleLeaveClick(team)
                               }}
                               text="Leave"
@@ -907,7 +907,7 @@ const Dashboard = ({ history }) => {
     )
 
   const handleRenameTeamClick = id => {
-    setEditTeamId(id)
+    setEditTeam(id)
     setEditMode('Rename team')
     setRenameTeamModal(true)
   }
@@ -939,14 +939,16 @@ const Dashboard = ({ history }) => {
         ),
     })
 
-  const handleAddMemberClick = id => {
-    setEditTeamId(id)
+  const handleAddMemberClick = team => {
+    setEditTeam(team)
     setAddMemberModal(true)
   }
 
-  const addMember = ({ memberEmail, teamId }) => {
-    const users = teamsObj[teamId].users
-    const invited = teamsObj[teamId].invited
+  const addMember = ({ memberEmail }) => {
+    const users =
+      organizationsObj[editTeam.organizationId].teams[editTeam.id].users
+    const invited =
+      organizationsObj[editTeam.organizationId].teams[editTeam.id].users
 
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
@@ -963,7 +965,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmail, teamId },
+          variables: { memberEmail, teamId: editTeam.id },
           onSuccess: () => {
             updateTeams()
             setAddMemberModal(false)
@@ -1014,7 +1016,7 @@ const Dashboard = ({ history }) => {
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleSettingsClick = id => {
-    setEditTeamId(id)
+    setEditTeam(id)
     setSettingsModal(true)
   }
 
@@ -1023,20 +1025,21 @@ const Dashboard = ({ history }) => {
   }
 
   const handleLeaveClick = team => {
-    setEditTeamId(team.id)
+    setEditTeam(team.id)
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to leave team {organizationsObj[team.organizationId].teams[team.id].name}?
+          Are you sure you want to leave team{' '}
+          {organizationsObj[team.organizationId].teams[team.id].name}?
         </ModalText>
       ),
-      onSubmit: () => handleLeaveTeam({teamId: team.id}),
+      onSubmit: () => handleLeaveTeam({ teamId: team.id }),
       buttonLabel: 'Leave',
     })
   }
 
-  const handleLeaveTeam = ({teamId} )=> {
+  const handleLeaveTeam = ({ teamId }) => {
     dispatch(
       mutation({
         name: 'leaveTeam',
@@ -1055,7 +1058,7 @@ const Dashboard = ({ history }) => {
   }
 
   const closeSettingsModal = () => {
-    setEditTeamId(null)
+    setEditTeam(null)
     setSettingsModal(false)
   }
 
@@ -1113,9 +1116,7 @@ const Dashboard = ({ history }) => {
             email: '',
           }}
           validate={validate}
-          onSubmit={values =>
-            addMember({ memberEmail: values.email, teamId: editTeamId })
-          }
+          onSubmit={values => addMember({ memberEmail: values.email })}
         >
           {({ errors, touched, values }) => (
             <StyledForm>
@@ -1185,7 +1186,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleRenameTeamClick(editTeamId)}
+          onClick={() => handleRenameTeamClick(editTeam.dd)}
           text="Rename team"
         />
         <StroveButton
@@ -1201,7 +1202,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => deleteTeam(editTeamId)}
+          onClick={() => deleteTeam(editTeam.id)}
           text="Delete team"
         />
 
@@ -1231,7 +1232,7 @@ const Dashboard = ({ history }) => {
           validate={validateTeamName}
           onSubmit={values => {
             if (editMode === 'Rename team')
-              renameTeam({ newName: values.name, teamId: editTeamId })
+              renameTeam({ newName: values.name, teamId: editTeam.id })
             else createTeam({ name: values.name })
           }}
         >
@@ -1285,12 +1286,17 @@ const Dashboard = ({ history }) => {
               <StyledSelect
                 value={newOwnerSelect}
                 onChange={handleNewOwnerSelect}
-                options={teamsObj[editTeamId]?.users
-                  ?.map(user => ({
-                    values: user.id,
-                    label: user.name,
-                  }))
-                  .filter(user => user.label)}
+                options={() =>
+                  Object.values(
+                    organizationsObj[editTeam.organizationId].teams[editTeam.id]
+                      ?.users
+                  )
+                    ?.map(user => ({
+                      values: user.id,
+                      label: user.name,
+                    }))
+                    .filter(user => user.label)
+                }
                 theme={theme => ({
                   ...theme,
                   borderRadius: 0,
@@ -1316,7 +1322,7 @@ const Dashboard = ({ history }) => {
         <ModalButton
           onClick={() =>
             setAdmin({
-              teamId: editTeamId,
+              teamId: editTeam.id,
               newOwner: newOwnerSelect,
             })
           }
