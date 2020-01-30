@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { ProjectFragment } from './project'
-import { SubscriptionFragment } from './subscription'
 import { TeamFragment } from './team'
 
 export const UserFragment = gql`
