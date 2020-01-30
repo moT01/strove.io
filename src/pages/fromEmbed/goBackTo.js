@@ -7,8 +7,7 @@ import { selectors } from 'state'
 
 const MenuWrapper = styled.div`
   padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
+  background-color: ${({ theme }) => theme.colors.c2};
   z-index: 3;
   position: relative;
   word-break: initial;
@@ -38,7 +37,7 @@ const GoBackTo = () => {
 
   return (
     <Wrapper>
-      <MenuWrapper invert>...redirecting</MenuWrapper>
+      <MenuWrapper>...redirecting</MenuWrapper>
     </Wrapper>
   )
 }
