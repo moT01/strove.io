@@ -454,11 +454,8 @@ const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
-  console.log('TCL: Dashboard -> user', user)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
-  console.log('TCL: Dashboard -> myOrganizations', myOrganizations)
   const myTeams = useSelector(selectors.api.getMyTeams)
-  console.log('TCL: Dashboard -> myTeams', myTeams)
   // const [emailSent, setEmailSent] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
@@ -475,28 +472,25 @@ const Dashboard = ({ history }) => {
   const currentProjectId = currentProject?.id
   const organizationsObj =
     myOrganizations &&
-    console.log('TCL: Dashboard -> myOrganizations', myOrganizations)
-  myOrganizations.reduce((organizations, organization) => {
-    return {
-      ...organizations,
-      [organization.id]: {
-        ...organization,
-        teams: organization.teams?.reduce((teams, team) => {
-          return {
-            ...teams,
-            [team.id]: {
-              ...team,
-              projects: team.projects?.reduce((projects, project) => {
-                return { ...projects, [project.id]: project }
-              }, {}),
-            },
-          }
-        }, {}),
-      },
-    }
-  }, {})
-  console.log('TCL: Dashboard -> myOrganizations', myOrganizations)
-  console.log('TCL: Dashboard -> organizationsObj', organizationsObj)
+    myOrganizations.reduce((organizations, organization) => {
+      return {
+        ...organizations,
+        [organization.id]: {
+          ...organization,
+          teams: organization.teams?.reduce((teams, team) => {
+            return {
+              ...teams,
+              [team.id]: {
+                ...team,
+                projects: team.projects?.reduce((projects, project) => {
+                  return { ...projects, [project.id]: project }
+                }, {}),
+              },
+            }
+          }, {}),
+        },
+      }
+    }, {})
   const [expandedTiles, setExpandedTiles] = useState(() =>
     myOrganizations.reduce((organizations, organization) => {
       return {
@@ -586,8 +580,14 @@ const Dashboard = ({ history }) => {
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
                   team => {
+                    console.log(
+                      'TCL: Dashboard -> organizationsObj[organization.id]',
+                      organizationsObj[organization.id],
+                      'TCL: Dashboard -> expandedTiles[organization.id]',
+                      expandedTiles[organization.id]
+                    )
                     const isExpanded =
-                      expandedTiles[organization.id].teams[team.id].visible
+                      expandedTiles[organization.id]?.teams[team.id]?.visible
                     const isOwner = team.teamLeader?.id === user.id
                     const isOrganizationOwner =
                       organizationsObj[organization.id].owner.id === user.id
@@ -857,7 +857,7 @@ const Dashboard = ({ history }) => {
         dataSelector: data => data,
         onSuccess: () => {
           updateTeams()
-          console.log('EditTeam', editTeam, name)
+          console.log('We have created a team', editTeam, name)
           setRenameTeamModal(false)
         },
       })
