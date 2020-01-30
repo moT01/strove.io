@@ -104,7 +104,7 @@ const topics = [
       Projects in Strove.io are run within Docker containers and because of that files used within a project are not accessible to unauthorized users.`,
   },
   {
-    header: 'Why do I need to log in with Github/Gitlab/Bitbucket?',
+    header: 'Why do I need to log in with Github/Gitlab?',
     paragraph:
       'Aforementioned providers only allow apps to clone if the user is logged in.',
   },

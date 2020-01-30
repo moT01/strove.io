@@ -99,7 +99,7 @@ const Option = styled.a`
   color: ${({ theme }) => theme.colors.c1};
 
   svg {
-    fill: ${({ theme }) => theme.colors.c2};
+    fill: ${({ theme }) => theme.colors.c1};
     width: 22px;
     height: auto;
     margin-right: 5px;
