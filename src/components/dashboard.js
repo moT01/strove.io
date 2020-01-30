@@ -450,8 +450,6 @@ const emptyWarningModalContent = {
   buttonLabel: '',
 }
 
-const PersonalTeam = () => {}
-
 const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
@@ -554,7 +552,6 @@ const Dashboard = ({ history }) => {
         name: 'myTeams',
         storeKey: 'myTeams',
         query: MY_TEAMS,
-        onSuccess: data => console.log('data', data),
       })
     )
   }
@@ -565,9 +562,23 @@ const Dashboard = ({ history }) => {
         name: 'myOrganizations',
         storeKey: 'myOrganizations',
         query: MY_ORGANIZATIONS,
-        onSuccess: data => console.log('Organizations', data),
       })
     )
+  }
+
+  const updateExpandedTiles = newTeam => {
+    let newTiles = { ...expandedTiles }
+    newTiles[newTeam.organizationId].teams = {
+      ...newTiles[newTeam.organizationId].teams,
+      [newTeam.id]: {
+        visible: true,
+        sections: {
+          members: true,
+          projects: true,
+        },
+      },
+    }
+    setExpandedTiles(newTiles)
   }
 
   const shouldTabsBeCollapsable = Object.keys(teamsObj).length > 1
@@ -582,12 +593,6 @@ const Dashboard = ({ history }) => {
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
                   team => {
-                    console.log(
-                      'TCL: Dashboard -> organizationsObj[organization.id]',
-                      organizationsObj[organization.id],
-                      'TCL: Dashboard -> expandedTiles[organization.id]',
-                      expandedTiles[organization.id]
-                    )
                     const isExpanded =
                       expandedTiles[organization.id]?.teams[team.id]?.visible
                     const isOwner = team.teamLeader?.id === user.id
@@ -856,11 +861,12 @@ const Dashboard = ({ history }) => {
         name: 'createTeam',
         mutation: CREATE_TEAM,
         variables: { name, organizationId: editTeam.organizationId },
-        dataSelector: data => data,
-        onSuccess: () => {
+        // dataSelector: data => data,
+        onSuccess: data => {
           updateTeams()
-          console.log('We have created a team', editTeam, name)
+          updateOrganizations()
           setRenameTeamModal(false)
+          updateExpandedTiles(data)
         },
       })
     )
