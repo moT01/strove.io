@@ -52,7 +52,7 @@ export default [
     type: 'github',
   },
   {
-    title: 'Push straight to GitHub, Gitlab or Bitbucket',
+    title: 'Push straight to GitHub or Gitlab',
     content: 'Strove is made with seamless git experience in mind',
     color: '#1AC44D',
     shadowColor: 'rgba(26,196,77,.12)',
