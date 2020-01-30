@@ -878,7 +878,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           Deleting the team will cause deleting all of the team projects. Are
-          you sure you want to delete
+          you sure you want to delete{' '}
           {organizationsObj[editTeam.organizationId].teams[editTeam.id].name}?
         </ModalText>
       ),
@@ -893,12 +893,12 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           This operation is irreversible. Are you absolutely sure you want to
-          delete
+          delete{' '}
           {organizationsObj[editTeam.organizationId].teams[editTeam.id].name}?
         </ModalText>
       ),
       buttonLabel: 'Delete',
-      onSubmit: () =>
+      onSubmit: () => {
         dispatch(
           mutation({
             name: 'deleteTeam',
@@ -909,7 +909,8 @@ const Dashboard = ({ history }) => {
               closeWarningModal()
             },
           })
-        ),
+        )
+      },
     })
   }
 
