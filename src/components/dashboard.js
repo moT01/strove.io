@@ -530,31 +530,6 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     updateOrganizations()
     updateTeams()
-    // setExpandedTiles(() =>
-    //   myOrganizations.reduce((organizations, organization) => {
-    //     console.log('TCL: organization', organization)
-    //     console.log('TCL: myOrganizations', myOrganizations)
-    //     return {
-    //       ...organizations,
-    //       [organization.id]: {
-    //         visible: true,
-    //         teams: organization.teams?.reduce((teams, team) => {
-    //           return {
-    //             ...teams,
-    //             [team.id]: {
-    //               visible: true,
-    //               sections: {
-    //                 members: true,
-    //                 projects: true,
-    //               },
-    //             },
-    //           }
-    //         }, {}),
-    //       },
-    //     }
-    //   }, {})
-    // )
-    console.log('Expanded tiles', expandedTiles)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
