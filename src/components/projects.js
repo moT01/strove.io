@@ -135,6 +135,14 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
+const sortByActiveProjects = projects =>
+  projects.reduce((acc, element) => {
+    if (element.machineId) {
+      return [element, ...acc]
+    }
+    return [...acc, element]
+  }, [])
+
 const Projects = ({
   history,
   projects,
@@ -153,8 +161,8 @@ const Projects = ({
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const displayedProjects = projects?.map(project =>
-    projects
-      ?.filter(project => project.userId === user.id)
+    sortByActiveProjects(projects)
+      .filter(project => project.userId === user.id)
       .findIndex(x => x.name === project.name) !== -1
       ? project.userId === user.id && project
       : project
