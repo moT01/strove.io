@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import ReactGA from 'react-ga'
 
 export default () => {
+  console.log('hello')
   const ref = useRef()
   useEffect(() => {
     const callback = list => {
