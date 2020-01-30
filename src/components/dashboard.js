@@ -952,18 +952,19 @@ const Dashboard = ({ history }) => {
       })
     )
 
-  const handleRenameTeamClick = id => {
-    setEditTeam(id)
+  const handleRenameTeamClick = () => {
     setEditMode('Rename team')
     setRenameTeamModal(true)
   }
 
-  const renameTeam = ({ newName, teamId }) =>
+  const renameTeam = ({ newName }) =>
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to rename {teamsObj[teamId].name} to {newName}?
+          Are you sure you want to rename{' '}
+          {organizationsObj[editTeam.organizationId].teams[editTeam.id].name} to{' '}
+          {newName}?
         </ModalText>
       ),
       buttonLabel: 'Rename',
@@ -974,10 +975,11 @@ const Dashboard = ({ history }) => {
             mutation: RENAME_TEAM,
             variables: {
               newName,
-              teamId,
+              teamId: editTeam.id,
             },
             onSuccess: () => {
               updateTeams()
+              updateOrganizations()
               setRenameTeamModal(false)
               closeWarningModal()
             },
@@ -987,6 +989,7 @@ const Dashboard = ({ history }) => {
 
   const handleAddMemberClick = team => {
     setEditTeam(team)
+    console.log('Team', team)
     setAddMemberModal(true)
   }
 
@@ -1063,6 +1066,7 @@ const Dashboard = ({ history }) => {
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleSettingsClick = team => {
+    console.log('TCL: Dashboard -> team', team)
     setEditTeam(team)
     setSettingsModal(true)
   }
@@ -1219,7 +1223,7 @@ const Dashboard = ({ history }) => {
         width={isMobileOnly ? '80vw' : '40vw'}
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={settingsModal}
-        onRequestClose={() => closeSettingsModal()}
+        onRequestClose={closeSettingsModal}
         contentLabel="Team settings"
         ariaHideApp={false}
       >
@@ -1233,7 +1237,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleRenameTeamClick(editTeam.dd)}
+          onClick={handleRenameTeamClick}
           text="Rename team"
         />
         <StroveButton
@@ -1241,7 +1245,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleSetAdminClick()}
+          onClick={handleSetAdminClick}
           text="Set team leader"
         />
         <StroveButton
@@ -1249,12 +1253,12 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleDeleteTeamClick()}
+          onClick={handleDeleteTeamClick}
           text="Delete team"
         />
 
         <ModalButton
-          onClick={() => closeSettingsModal()}
+          onClick={closeSettingsModal}
           text="Close"
           padding="5px"
           maxWidth="150px"
@@ -1278,9 +1282,12 @@ const Dashboard = ({ history }) => {
           }}
           validate={validateTeamName}
           onSubmit={values => {
-            if (editMode === 'Rename team')
+            if (editMode === 'Rename team') {
+              console.log('Edit team', editTeam)
               renameTeam({ newName: values.name, teamId: editTeam.id })
-            else createTeam({ name: values.name, organizationId: editTeam.id })
+            } else {
+              createTeam({ name: values.name, organizationId: editTeam.id })
+            }
           }}
         >
           {({ errors, touched, values }) => (
