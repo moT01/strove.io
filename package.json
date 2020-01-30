@@ -74,6 +74,7 @@
     "styled-components": "5.0.0-beta.11-cgsmulti",
     "styled-normalize": "^8.0.6",
     "subscriptions-transport-ws": "^0.9.16",
+    "tti-polyfill": "^0.2.2",
     "validator": "^11.1.0"
   },
   "devDependencies": {
