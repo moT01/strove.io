@@ -35,11 +35,7 @@ const GoBackTo = () => {
     setTimeout(() => window.location.replace(goBackTo), 1000)
   }
 
-  return (
-    <Wrapper>
-      <MenuWrapper>...redirecting</MenuWrapper>
-    </Wrapper>
-  )
+  return null
 }
 
 export default memo(GoBackTo)
