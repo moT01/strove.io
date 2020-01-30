@@ -24,6 +24,8 @@ import DELETE_TEAM from './deleteTeam'
 import SET_VISIBILITY from './setVisibility'
 import TRANSFER_OWNERSHIP from './transferOwnership'
 import LEAVE_TEAM from './leaveTeam'
+import STRIPE_CLIENT_SECRET from './stripeClientSecret'
+import CHANGE_PAYMENT_INFO from './changePaymentInfo'
 
 export {
   ADD_PROJECT,
@@ -52,4 +54,6 @@ export {
   SET_VISIBILITY,
   TRANSFER_OWNERSHIP,
   LEAVE_TEAM,
+  STRIPE_CLIENT_SECRET,
+  CHANGE_PAYMENT_INFO,
 }

@@ -21,7 +21,6 @@ export const UserFragment = gql`
     siliskyToken
     token
     currentProjectId
-    subscriptionId
     teams {
       ...Team
     }
