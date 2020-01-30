@@ -528,9 +528,9 @@ const Dashboard = ({ history }) => {
       }, {}),
     }
   }, {})
-  const teamProjects = myTeams?.reduce((projects, team) => {
-    return { ...projects, [team.id]: team.projects }
-  }, {})
+  // const teamProjects = myTeams?.reduce((projects, team) => {
+  //   return { ...projects, [team.id]: team.projects }
+  // }, {})
 
   useEffect(() => {
     updateTeams()
@@ -616,7 +616,7 @@ const Dashboard = ({ history }) => {
                               margin="0 0 0 10px"
                               text="Settings"
                               onClick={() => {
-                                handleSettingsClick(team.id)
+                                handleSettingsClick(team)
                               }}
                             />
                           ) : (
@@ -697,7 +697,7 @@ const Dashboard = ({ history }) => {
                                           borderRadius="2px"
                                           text="Remove"
                                           onClick={() => {
-                                            handleSettingsClick(team.id)
+                                            handleSettingsClick(team)
                                           }}
                                         />
                                       )}
@@ -844,13 +844,30 @@ const Dashboard = ({ history }) => {
       })
     )
   }
-  const deleteTeam = teamId => {
+
+  const handleDeleteTeamClick = () => {
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Deleting the team will also cause deleting all of the team projects.
-          {/* Are you sure you want to proceed and delete {teamsObj[teamId].name}? */}
+          Deleting the team will cause deleting all of the team projects. Are
+          you sure you want to delete
+          {organizationsObj[editTeam.organizationId].teams[editTeam.id].name}?
+        </ModalText>
+      ),
+      buttonLabel: 'Delete',
+      onSubmit: () => deleteTeam(),
+    })
+  }
+
+  const deleteTeam = () => {
+    setWarningModal({
+      visible: true,
+      content: (
+        <ModalText>
+          This operation is irreversible. Are you absolutely sure you want to
+          delete
+          {organizationsObj[editTeam.organizationId].teams[editTeam.id].name}?
         </ModalText>
       ),
       buttonLabel: 'Delete',
@@ -859,9 +876,9 @@ const Dashboard = ({ history }) => {
           mutation({
             name: 'deleteTeam',
             mutation: DELETE_TEAM,
-            variables: { teamId },
+            variables: { teamId: editTeam.id },
             onSuccess: () => {
-              updateTeams()
+              updateOrganizations()
               closeWarningModal()
             },
           })
@@ -1015,8 +1032,8 @@ const Dashboard = ({ history }) => {
 
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
-  const handleSettingsClick = id => {
-    setEditTeam(id)
+  const handleSettingsClick = team => {
+    setEditTeam(team)
     setSettingsModal(true)
   }
 
@@ -1202,7 +1219,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => deleteTeam(editTeam.id)}
+          onClick={() => handleDeleteTeamClick()}
           text="Delete team"
         />
 
@@ -1233,7 +1250,7 @@ const Dashboard = ({ history }) => {
           onSubmit={values => {
             if (editMode === 'Rename team')
               renameTeam({ newName: values.name, teamId: editTeam.id })
-            else createTeam({ name: values.name })
+            else createTeam({ name: values.name, organizationId: editTeam.id })
           }}
         >
           {({ errors, touched, values }) => (
