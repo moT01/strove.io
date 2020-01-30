@@ -92,9 +92,7 @@ const GetStarted = ({ addProject, teamId }) => {
 
   return (
     <AddProjectWrapper mobile={isMobile}>
-      <Title mobile={isMobile}>
-        Add project from Github, Gitlab or Bitbucket
-      </Title>
+      <Title mobile={isMobile}>Add project from Github or Gitlab</Title>
       <Formik
         onSubmit={(values, actions) => {
           values.repoLink.trim() &&
