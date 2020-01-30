@@ -714,7 +714,10 @@ const Dashboard = ({ history }) => {
                                                 borderRadius="2px"
                                                 text="Remove"
                                                 onClick={() => {
-                                                  handleSettingsClick(team)
+                                                  handleDeleteMemberClick({
+                                                    team,
+                                                    member,
+                                                  })
                                                 }}
                                               />
                                             )}
@@ -924,33 +927,21 @@ const Dashboard = ({ history }) => {
         </ModalText>
       ),
       onSubmit: () =>
-        deleteMember({
-          member,
-          team,
-        }),
+        dispatch(
+          mutation({
+            name: 'removeMember',
+            mutation: REMOVE_MEMBER,
+            variables: { teamId: team.id, memberId: member.id },
+            onSuccess: () => {
+              updateTeams()
+              updateOrganizations()
+              closeWarningModal()
+            },
+          })
+        ),
       buttonLabel: 'Remove',
     })
   }
-
-  const deleteMember = ({ team, member }) =>
-    dispatch(
-      mutation({
-        name: 'removeMember',
-        mutation: REMOVE_MEMBER,
-        variables: { teamId: team.id, memberId: member.id },
-        onSuccess: () => {
-          updateTeams()
-          setWarningModal({
-            visible: true,
-            content: (
-              <ModalText>
-                {member.name} has been successfully removed from {team.name}
-              </ModalText>
-            ),
-          })
-        },
-      })
-    )
 
   const handleRenameTeamClick = () => {
     setEditMode('Rename team')
