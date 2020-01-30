@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react'
 import ReactGA from 'react-ga'
 
 export default () => {
-  const ref = useRef()
+  console.log('hello')
+  const ref = useRef(null)
   useEffect(() => {
     const callback = list => {
-      list.forEach(entry => {
+      list.getEntries().forEach(entry => {
         if (entry.isIntersecting) {
           ReactGA.event({
             category: 'Rendering',
@@ -15,9 +16,9 @@ export default () => {
         }
         console.log('entry.intersectionRatio', entry.startTime)
       })
-      const observer = new PerformanceObserver(callback)
-      observer.observe({ entryTypes: ['paint'] })
     }
+    const observer = new PerformanceObserver(callback)
+    observer.observe({ entryTypes: ['paint'] })
   }, [])
 
   return ref
