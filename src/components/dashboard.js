@@ -1013,6 +1013,7 @@ const Dashboard = ({ history }) => {
           variables: { memberEmail, teamId: editTeam.id },
           onSuccess: () => {
             updateTeams()
+            updateOrganizations()
             setAddMemberModal(false)
           },
         })
@@ -1020,7 +1021,7 @@ const Dashboard = ({ history }) => {
     }
   }
 
-  const handleSetAdminOwnershipClick = () => {
+  const handleSetAdminClick = () => {
     setOwnershipModal(true)
   }
 
@@ -1239,7 +1240,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          onClick={() => handleSetAdminOwnershipClick(false)}
+          onClick={() => handleSetAdminClick()}
           text="Set team leader"
         />
         <StroveButton

@@ -25,12 +25,12 @@ export const getUserProjects = getApiData({
 
 export const getMyTeams = getApiData({
   fields: 'myTeams',
-  defaultValute: [],
+  defaultValue: [],
 })
 
 export const getMyOrganizations = getApiData({
   fields: 'myOrganizations',
-  defaultValute: [],
+  defaultValue: [],
 })
 
 export const getQueuePosition = getApiData({
