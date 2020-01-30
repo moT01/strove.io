@@ -21,7 +21,7 @@ const GoBackTo = () => {
     setTimeout(() => window.location.replace(goBackTo), 1000)
   }
 
-  return <FullScreenLoader type="addProject" isFullScreen color="#0072ce" />
+  return <FullScreenLoader type="redirecting" isFullScreen color="#0072ce" />
 }
 
 export default memo(GoBackTo)
