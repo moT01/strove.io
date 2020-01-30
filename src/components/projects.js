@@ -136,12 +136,12 @@ const StyledIcon = styled(Icon)`
 `
 
 const sortByActiveProjects = projects =>
-  projects.reduce((acc, element) => {
+  projects?.reduce((acc, element) => {
     if (element.machineId) {
       return [element, ...acc]
     }
     return [...acc, element]
-  }, [])
+  }, []) || []
 
 const Projects = ({
   history,
@@ -160,8 +160,8 @@ const Projects = ({
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
-  const displayedProjects = projects?.map(project =>
-    sortByActiveProjects(projects)
+  const displayedProjects = sortByActiveProjects(projects).map(project =>
+    projects
       .filter(project => project.userId === user.id)
       .findIndex(x => x.name === project.name) !== -1
       ? project.userId === user.id && project
