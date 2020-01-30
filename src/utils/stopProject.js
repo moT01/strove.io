@@ -1,5 +1,5 @@
 import { query, mutation } from 'utils'
-import { STOP_PROJECT, MY_PROJECTS } from 'queries'
+import { STOP_PROJECT, MY_PROJECTS, MY_ORGANIZATIONS } from 'queries'
 import { actions } from 'state'
 
 const handleStopProject = ({ id, dispatch }) => {
@@ -9,6 +9,14 @@ const handleStopProject = ({ id, dispatch }) => {
       mutation: STOP_PROJECT,
       dataSelector: data => data,
       variables: { projectId: id },
+      onSuccess: () =>
+        dispatch(
+          query({
+            name: 'myOrganizations',
+            storeKey: 'myOrganizations',
+            query: MY_ORGANIZATIONS,
+          })
+        ),
       onSuccessDispatch: [
         () =>
           actions.api.fetchSuccess({

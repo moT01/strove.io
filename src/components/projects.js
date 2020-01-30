@@ -135,7 +135,13 @@ const StyledIcon = styled(Icon)`
   color: ${({ theme }) => theme.colors.c1};
 `
 
-const Projects = ({ history, projects, addProject, updateTeams }) => {
+const Projects = ({
+  history,
+  projects,
+  addProject,
+  updateTeams,
+  updateOrganizations,
+}) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -186,7 +192,11 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
         mutation: DELETE_PROJECT,
         variables: { projectId: id },
         dataSelector: data => data,
-        onSuccess: () => setProjectToDelete(null),
+        onSuccess: () => {
+          setProjectToDelete(null)
+          updateOrganizations()
+          updateTeams()
+        },
         onSuccessDispatch: [
           () => ({
             type: C.api.REMOVE_ITEM,
@@ -350,7 +360,10 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
                                 isVisible: !project.isVisible,
                               },
                               dataSelector: data => data,
-                              onSuccess: () => updateTeams(),
+                              onSuccess: () => {
+                                updateTeams()
+                                updateOrganizations()
+                              },
                             })
                           )
                         }}
@@ -420,15 +433,18 @@ const Projects = ({ history, projects, addProject, updateTeams }) => {
   )
 }
 
-export default memo(({ history, projects, updateTeams }) => (
-  <AddProjectProvider>
-    {({ addProject }) => (
-      <Projects
-        addProject={addProject}
-        history={history}
-        projects={projects}
-        updateTeams={updateTeams}
-      />
-    )}
-  </AddProjectProvider>
-))
+export default memo(
+  ({ history, projects, updateTeams, updateOrganizations }) => (
+    <AddProjectProvider>
+      {({ addProject }) => (
+        <Projects
+          addProject={addProject}
+          history={history}
+          projects={projects}
+          updateTeams={updateTeams}
+          updateOrganizations={updateOrganizations}
+        />
+      )}
+    </AddProjectProvider>
+  )
+)

@@ -803,6 +803,7 @@ const Dashboard = ({ history }) => {
                                   }
                                   history={history}
                                   updateTeams={updateTeams}
+                                  updateOrganizations={updateOrganizations}
                                 />
                                 {isOwner && (
                                   <StroveButton
