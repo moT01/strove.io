@@ -462,10 +462,11 @@ const Dashboard = ({ history }) => {
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
-  const [ownershipModal, setOwnershipModal] = useState(false)
+  const [teamLeaderModal, setTeamLeaderModal] = useState(false)
   const [teamId, setTeamId] = useState('')
   const [editTeam, setEditTeam] = useState()
   const [editMode, setEditMode] = useState('')
+  const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const currentProject = projects.find(item => item.machineId)
@@ -865,7 +866,6 @@ const Dashboard = ({ history }) => {
         name: 'createTeam',
         mutation: CREATE_TEAM,
         variables: { name, organizationId: editTeam.organizationId },
-        // dataSelector: data => data,
         onSuccess: data => {
           updateTeams()
           updateOrganizations()
@@ -882,8 +882,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           Deleting the team will cause deleting all of the team projects. Are
-          you sure you want to delete{' '}
-          {organizationsObj[editTeam.organizationId].teams[editTeam.id].name}?
+          you sure you want to delete {editTeam.name}?
         </ModalText>
       ),
       buttonLabel: 'Delete',
@@ -897,8 +896,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           This operation is irreversible. Are you absolutely sure you want to
-          delete{' '}
-          {organizationsObj[editTeam.organizationId].teams[editTeam.id].name}?
+          delete {editTeam.name}?
         </ModalText>
       ),
       buttonLabel: 'Delete',
@@ -953,9 +951,7 @@ const Dashboard = ({ history }) => {
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to rename{' '}
-          {organizationsObj[editTeam.organizationId].teams[editTeam.id].name} to{' '}
-          {newName}?
+          Are you sure you want to rename {editTeam.name} to {newName}?
         </ModalText>
       ),
       buttonLabel: 'Rename',
@@ -985,10 +981,8 @@ const Dashboard = ({ history }) => {
   }
 
   const addMember = ({ memberEmail }) => {
-    const users =
-      organizationsObj[editTeam.organizationId].teams[editTeam.id].users
-    const invited =
-      organizationsObj[editTeam.organizationId].teams[editTeam.id].users
+    const users = editTeam.users
+    const invited = editTeam.users
 
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
@@ -1017,47 +1011,53 @@ const Dashboard = ({ history }) => {
   }
 
   const handleSetAdminClick = () => {
-    setOwnershipModal(true)
+    setTeamLeaderModal(true)
+    setLeaderOptions(() => {
+      if (editTeam.users) {
+        return editTeam.users.map(user => ({
+          values: user.id,
+          label: user.name,
+        }))
+      } else {
+        return []
+      }
+    })
   }
 
-  const setAdmin = ({ teamId, newOwner }) => {
+  const setAdmin = ({ newOwner }) => {
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
           Are you sure you want to set {newOwner.label} to be team leader of{' '}
-          {teamsObj[teamId].name}
+          {editTeam.name}
         </ModalText>
       ),
       buttonLabel: 'Set team leader',
-      onSubmit: () =>
+      onSubmit: () => {
+        console.log('NewOwner', newOwner)
         dispatch(
           mutation({
             name: 'setAdmin',
             mutation: SET_ADMIN,
-            variables: { teamId, newOwnerId: newOwner.values },
+            variables: {
+              teamId: editTeam.id,
+              newTeamLeaderId: newOwner.values,
+            },
             onSuccess: () => {
-              setWarningModal({
-                visible: true,
-                content: (
-                  <ModalText>
-                    You have successfully set {newOwner.label} to be team leader
-                    of {teamsObj[teamId].name}
-                  </ModalText>
-                ),
-              })
-              setOwnershipModal(false)
               updateTeams()
+              updateOrganizations()
+              setTeamLeaderModal(false)
             },
           })
-        ),
+        )
+      },
     })
   }
 
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleSettingsClick = team => {
-    console.log('TCL: Dashboard -> team', team)
     setEditTeam(team)
     setSettingsModal(true)
   }
@@ -1320,8 +1320,8 @@ const Dashboard = ({ history }) => {
         width={isMobileOnly && '80vw'}
         mindWidth="40vw"
         height={isMobileOnly ? '40vh' : '20vh'}
-        isOpen={ownershipModal}
-        onRequestClose={() => setOwnershipModal(false)}
+        isOpen={teamLeaderModal}
+        onRequestClose={() => setTeamLeaderModal(false)}
         contentLabel="Set team leader"
         ariaHideApp={false}
       >
@@ -1331,17 +1331,7 @@ const Dashboard = ({ history }) => {
               <StyledSelect
                 value={newOwnerSelect}
                 onChange={handleNewOwnerSelect}
-                options={() =>
-                  Object.values(
-                    organizationsObj[editTeam.organizationId].teams[editTeam.id]
-                      ?.users
-                  )
-                    ?.map(user => ({
-                      values: user.id,
-                      label: user.name,
-                    }))
-                    .filter(user => user.label)
-                }
+                options={leaderOptions}
                 theme={theme => ({
                   ...theme,
                   borderRadius: 0,
@@ -1367,7 +1357,6 @@ const Dashboard = ({ history }) => {
         <ModalButton
           onClick={() =>
             setAdmin({
-              teamId: editTeam.id,
               newOwner: newOwnerSelect,
             })
           }
@@ -1376,7 +1365,7 @@ const Dashboard = ({ history }) => {
           maxWidth="150px"
         />
         <ModalButton
-          onClick={() => setOwnershipModal(false)}
+          onClick={() => setTeamLeaderModal(false)}
           text="Close"
           padding="5px"
           maxWidth="150px"
