@@ -98,7 +98,7 @@ const CheckoutForm = props => {
     )
   }
 
-  // Function continuing flow from function above
+  // Function continuing flow from function above, also use it for renewSubscription - probably not necessary but do it just in case
   const handleResponse = async response => {
     const { client_secret, status } = response
 
