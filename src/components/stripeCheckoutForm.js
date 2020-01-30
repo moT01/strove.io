@@ -89,6 +89,8 @@ const CheckoutForm = props => {
         variables: {
           paymentMethod: paymentMethod.id,
           plan: 'plan_GYjzUWz4PmzdMg',
+          // this is test plan for yearly subscription, work with this for now, will provide monthly later
+          // also I would prefer to keep them in .env on frontend
         },
         dataSelector: data => data.stripeSubscribe,
         onSuccess: data => handleResponse(data),
