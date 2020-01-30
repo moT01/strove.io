@@ -160,6 +160,7 @@ const Projects = ({
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const currentProject = projects?.find(item => item.machineId)
   const currentProjectId = currentProject?.id
+  // This code filters other users' and already forked projects
   const displayedProjects = sortByActiveProjects(projects).map(project =>
     projects
       .filter(project => project.userId === user.id)
