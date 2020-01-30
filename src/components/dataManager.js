@@ -398,7 +398,7 @@ export default memo(
             type: C.api.FETCH_SUCCESS,
             payload: {
               storeKey: 'myOrganizations',
-              data: teams,
+              data: organizations,
             },
           })
       }
