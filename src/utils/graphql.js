@@ -1,5 +1,5 @@
 import ReactGA from 'react-ga'
-import { C } from 'state'
+import { C, actions } from 'state'
 
 import defaultClient from 'client'
 
@@ -72,14 +72,15 @@ export const mutation = ({
 
       if (result) {
         const requestEndTime = performance.now()
-
+        const requestTime = requestEndTime - requestStartTime
+        dispatch(actions.latency.fullLatencyMeasurement(requestTime))
         ReactGA.timing({
           category: 'Request Performace',
           variable: name,
-          value: requestEndTime - requestStartTime,
+          value: requestTime,
         })
 
-        console.log('Request Performace', name)
+        console.log('Request Performace', requestTime)
       }
 
       if (onSuccess) {
@@ -225,18 +226,15 @@ export const query = ({
 
       if (result) {
         const requestEndTime = performance.now()
-
+        const requestTime = requestEndTime - requestStartTime
+        dispatch(actions.latency.fullLatencyMeasurement(requestTime))
         ReactGA.timing({
           category: 'Request Performace',
           variable: name,
-          value: requestEndTime - requestStartTime,
+          value: requestTime,
         })
 
-        console.log(
-          'Request Performace',
-          requestEndTime - requestStartTime,
-          name
-        )
+        console.log('Request Performace', requestTime)
       }
 
       if (onSuccess) {
