@@ -18,6 +18,13 @@ export default (state = initialState, action) => {
       }
     }
 
+    case C.FULL_LATENCY_MEASUREMENT: {
+      return {
+        ...state,
+        latency: action.payload,
+      }
+    }
+
     default:
       return state
   }
