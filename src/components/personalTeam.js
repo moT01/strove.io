@@ -343,7 +343,7 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                       maxWidth="150px"
                       margin="10px"
                       borderRadius="2px"
-                      onClick={() => handleAddMemberClick()}
+                      onClick={handleAddMemberClick}
                       text="Add member"
                     />
                   )}
