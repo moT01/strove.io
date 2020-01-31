@@ -23,13 +23,8 @@ import {
   MY_ORGANIZATIONS,
 } from 'queries'
 import { selectors } from 'state'
-import Modal from './modal'
-import { GetStarted, Projects } from 'components'
-import SEO from './seo'
-import StroveButton from 'components/stroveButton.js'
-import Header from './header/header'
-import Footer from './footer'
 import StroveLogo from 'images/strove.png'
+import { Modal, StroveButton, GetStarted, Projects } from 'components'
 
 const FullFadeIn = keyframes`
   0% {

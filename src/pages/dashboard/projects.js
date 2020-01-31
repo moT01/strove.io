@@ -8,9 +8,7 @@ import dayjs from 'dayjs'
 import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
-import Modal from './modal'
-import StroveButton from 'components/stroveButton.js'
-import AddProjectProvider from './addProjectProvider'
+import { Modal, StroveButton, AddProjectProvider } from 'components'
 
 const FullFadeIn = keyframes`
     0% {
