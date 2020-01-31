@@ -128,6 +128,7 @@ export const mutation = ({
           payload: { error, storeKey },
         })
       }
+
       const requestEndTime = performance.now()
       ReactGA.timing({
         category: 'Request Error Performance',
@@ -261,6 +262,14 @@ export const query = ({
           payload: { error, storeKey },
         })
       }
+
+      const requestEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Error Performance',
+        variable: name,
+        value: requestEndTime - requestStartTime,
+      })
+
       return null
     }
   }
