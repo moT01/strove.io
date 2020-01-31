@@ -305,7 +305,12 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
 
   const closeAddProjectModal = () => setAddProjectModal(false)
 
-  const handleAddMemberClick = () => {}
+  const handleAddMemberClick = () => {
+    setWarningModal({
+      visible: true,
+      content: <ModalText>Adding users </ModalText>
+    })
+  }
 
   const handleSettingsClick = team => {
     setEditTeam(team)
