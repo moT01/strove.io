@@ -41,11 +41,21 @@ export default () => {
           })
           console.log('Total load time', entry.responseEnd - entry.requestStart)
         }
+
+        if (entry.isIntersecting) {
+          ReactGA.event({
+            category: 'Scroll',
+            action: 'Scrolled',
+            value: entry.intersectionRatio,
+          })
+          console.log('entry.intersectionRatio', entry.intersectionRatio)
+        }
       })
     }
     const observer = new PerformanceObserver(measurePerformance)
     /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
     observer.observe({ entryTypes: ['paint', 'navigation'] })
+
   }, [])
 
   return ref
