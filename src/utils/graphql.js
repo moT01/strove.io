@@ -1,4 +1,5 @@
-import { C } from 'state/'
+import ReactGA from 'react-ga'
+import { C } from 'state'
 
 import defaultClient from 'client'
 
@@ -168,6 +169,8 @@ export const query = ({
       })
     }
 
+    const requestStartTime = performance.now()
+
     try {
       const { data } = await client.query({
         query,
@@ -178,6 +181,16 @@ export const query = ({
       })
 
       const result = dataSelector(data)
+
+      if (result) {
+        const requestEndTime = performance.now()
+
+        ReactGA.timing({
+          category: 'Request Performace',
+          variable: 'Total request time',
+          value: requestEndTime - requestStartTime,
+        })
+      }
 
       if (onSuccess) {
         if (Array.isArray(onSuccess)) {
