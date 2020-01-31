@@ -526,6 +526,8 @@ const Dashboard = ({ history }) => {
     }
   }, {})
 
+  const personalTeam = myTeams.filter(team => !team.organizationId)
+
   useEffect(() => {
     updateOrganizations()
     updateTeams()
@@ -589,7 +591,11 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <TilesWrapper>
-          <PersonalTeam></PersonalTeam>
+          <PersonalTeam
+            history={history}
+            teams={personalTeam}
+            updateTeams={updateTeams}
+          ></PersonalTeam>
           {myOrganizations.map(organization => (
             <>
               <Text>{organization.name}</Text>

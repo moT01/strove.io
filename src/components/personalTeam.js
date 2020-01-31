@@ -31,6 +31,37 @@ import Header from './header/header'
 import Footer from './footer'
 import StroveLogo from 'images/strove.png'
 
+const FullFadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+    `
+
+const StyledIcon = styled(Icon)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: ${({ theme }) => theme.colors.c3};
+  cursor: pointer;
+  animation: ${FullFadeIn} 0.5s ease-out;
+`
+
+const ExpandIcon = styled(StyledIcon)`
+  font-size: 1rem;
+  transform: ${({ expanded }) =>
+    expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
+  color: ${({ theme }) => theme.colors.c3};
+  transition: all 0.2s;
+
+  :focus {
+    outline: none;
+  }
+`
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,6 +97,17 @@ const Tile = styled.div`
     width: 80vw;
     height: auto;
   } */
+`
+
+const Title = styled.div`
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.colors.c3};
+  margin: 3px 3px 3px 0;
+`
+
+const SectionTitle = styled(Title)`
+  font-size: 1.2rem;
+  font-weight: 400;
 `
 
 const TeamTileHeader = styled(Tile)`
@@ -120,112 +162,304 @@ const TileSectionHeader = styled(TeamTileHeader)`
   }
 `
 
-const PersonalTeam = ({ history, team }) => {
+const TeamTile = styled(Tile)`
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  border-top: none;
+`
+
+const TeamTileSection = styled(Tile)`
+  align-items: flex-start;
+  margin: 0px;
+  padding: 10px;
+  border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
+  border-width: 1px 0px 0px 0px;
+  border-color: ${({ theme }) => theme.colors.c19};
+  width: 100%;
+  box-shadow: none;
+  padding-bottom: 0;
+`
+
+const IconWrapper = styled(Wrapper)`
+  min-width: 50px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 5px;
+
+  i {
+    line-height: 0;
+  }
+`
+
+const VerticalDivider = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
+const Divider = styled(VerticalDivider)`
+  justify-content: space-between;
+  flex-direction: ${({ columnOnMobile }) =>
+    columnOnMobile && isMobileOnly ? 'column' : 'row'};
+`
+
+const Text = styled.p`
+  color: ${({ theme }) => theme.colors.c3};
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-bottom: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
+const ModalText = styled(Text)`
+  white-space: normal;
+  text-overflow: wrap;
+  overflow: visible;
+  word-break: break-word;
+`
+
+const ModalButton = styled(StroveButton)`
+  animation: ${FullFadeIn} 0.2s ease-out;
+  border-radius: 2px;
+  max-width: 150px;
+  padding: 5px;
+`
+
+const WarningText = styled(ModalText)`
+  color: ${({ theme }) => theme.colors.c5};
+  margin-bottom: 5px;
+  word-break: break-word;
+`
+
+const RowWrapper = styled(VerticalDivider)`
+  border-width: 0px 0px 1px 0px;
+  border-color: ${({ theme }) => theme.colors.c19};
+  border-style: solid;
+  min-height: 60px;
+
+  :last-of-type {
+    border: none;
+  }
+`
+
+const StyledCloseIcon = styled(Icon)`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.7vh;
+  color: ${({ theme }) => theme.colors.c1};
+  cursor: pointer;
+  :focus {
+    outline: none;
+  }
+`
+
+const StyledReactModal = styled(ReactModal)`
+  display: flex;
+  height: auto;
+  width: auto;
+  position: fixed;
+  animation: ${FullFadeIn} 0.2s ease-out;
+  :focus {
+    outline: 0;
+  }
+`
+
+const UserPhoto = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  margin: 0;
+  margin-left: 10px;
+`
+
+const emptyWarningModalContent = {
+  visible: false,
+  content: null,
+  onSubmit: null,
+  buttonLabel: '',
+}
+
+const PersonalTeam = ({ history, teams, updateTeams }) => {
   const [display, setDisplay] = useState()
+  const [addProjectModal, setAddProjectModal] = useState(false)
+  const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
+  const [editTeam, setEditTeam] = useState()
+  const [settingsModal, setSettingsModal] = useState()
+  const [teamId, setTeamId] = useState()
+
   const displayHandler = section => {
     section
       ? setDisplay({ team: true, section: !display.section })
       : setDisplay({ team: !display.team, section: false })
   }
 
+  const closeAddProjectModal = () => setAddProjectModal(false)
+
+  const handleAddMemberClick = () => {}
+
+  const handleSettingsClick = team => {
+    setEditTeam(team)
+    setSettingsModal(true)
+  }
+
+  const closeWarningModal = () => {
+    setWarningModal(emptyWarningModalContent)
+  }
+
   return (
-    <TeamTileWrapper expanded={isExpanded}>
-      <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
-        <Divider>
-          <VerticalDivider>
-            <Title>{team.name}</Title>
-            {isExpanded && (
-              <StroveButton
-                isPrimary
-                padding="5px"
-                minWidth="150px"
-                maxWidth="150px"
-                margin="10px"
-                borderRadius="2px"
-                onClick={() => handleAddMemberClick()}
-                text="Add member"
-              />
-            )}
-            {isExpanded && (
-              <StroveButton
-                isDashboard
-                padding="5px"
-                minWidth="150px"
-                maxWidth="150px"
-                borderRadius="2px"
-                margin="0 0 0 10px"
-                text="Settings"
-                onClick={() => {
-                  handleSettingsClick(team)
-                }}
-              />
-            )}
-          </VerticalDivider>
-          {/* {shouldTabsBeCollapsable && ( */}
-          <IconWrapper onClick={() => displayHandler()}>
-            <ExpandIcon type="down" expanded={isExpanded} />
-          </IconWrapper>
-          {/* )} */}
-        </Divider>
-      </TeamTileHeader>
-      {isExpanded && (
-        <TeamTile>
-          {isExpanded && (
-            <TeamTileSection>
-              <RowWrapper>
-                <Divider>
-                  <VerticalDivider>
-                    <UserPhoto
-                      src={
-                        team.teamLeader?.photoUrl
-                          ? team.teamLeader?.photoUrl
-                          : StroveLogo
-                      }
+    <>
+      {teams.map(team => {
+        const teamProjects = team.projects
+        return (
+          <TeamTileWrapper expanded={display}>
+            <TeamTileHeader expanded={display} shouldTabsBeCollapsable>
+              <Divider>
+                <VerticalDivider>
+                  <Title>{team.name}</Title>
+                  {display && (
+                    <StroveButton
+                      isPrimary
+                      padding="5px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="10px"
+                      borderRadius="2px"
+                      onClick={() => handleAddMemberClick()}
+                      text="Add member"
                     />
-                    <Text>{team.teamLeader?.name}</Text>
-                  </VerticalDivider>
-                </Divider>
-              </RowWrapper>
-            </TeamTileSection>
-          )}
-          <TileSectionHeader isLast>
-            <Divider>
-              <SectionTitle>Projects</SectionTitle>
-              <IconWrapper onClick={() => displayHandler('projects')}>
-                <ExpandIcon
-                  type="down"
-                  expanded={isExpanded.projects}
-                  section
-                />
-              </IconWrapper>
-            </Divider>
-          </TileSectionHeader>
-          {isExpanded.projects && (
-            <TeamTileSection isLast>
-              <Projects
-                projects={teamProjects}
-                history={history}
-                updateTeams={updateTeams}
-                updateOrganizations={updateOrganizations}
-              />
-              <StroveButton
-                isPrimary
-                padding="5px"
-                minWidth="150px"
-                maxWidth="150px"
-                margin="10px"
-                borderRadius="2px"
-                text="Add Project"
-                onClick={() => {
-                  setTeamId(team.id)
-                  setAddProjectModal(true)
-                }}
-              />
-            </TeamTileSection>
-          )}
-        </TeamTile>
-      )}
-    </TeamTileWrapper>
+                  )}
+                  {display && (
+                    <StroveButton
+                      isDashboard
+                      padding="5px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      borderRadius="2px"
+                      margin="0 0 0 10px"
+                      text="Settings"
+                      onClick={() => {
+                        handleSettingsClick(team)
+                      }}
+                    />
+                  )}
+                </VerticalDivider>
+                {/* {shouldTabsBeCollapsable && ( */}
+                <IconWrapper onClick={() => displayHandler()}>
+                  <ExpandIcon type="down" expanded={display} />
+                </IconWrapper>
+                {/* )} */}
+              </Divider>
+            </TeamTileHeader>
+            {display && (
+              <TeamTile>
+                {display && (
+                  <TeamTileSection>
+                    <RowWrapper>
+                      <Divider>
+                        <VerticalDivider>
+                          <UserPhoto
+                            src={
+                              team.teamLeader?.photoUrl
+                                ? team.teamLeader?.photoUrl
+                                : StroveLogo
+                            }
+                          />
+                          <Text>{team.teamLeader?.name}</Text>
+                        </VerticalDivider>
+                      </Divider>
+                    </RowWrapper>
+                  </TeamTileSection>
+                )}
+                <TileSectionHeader isLast>
+                  <Divider>
+                    <SectionTitle>Projects</SectionTitle>
+                    <IconWrapper onClick={() => displayHandler('projects')}>
+                      <ExpandIcon
+                        type="down"
+                        expanded={display.projects}
+                        section
+                      />
+                    </IconWrapper>
+                  </Divider>
+                </TileSectionHeader>
+                {display.projects && (
+                  <TeamTileSection isLast>
+                    <Projects
+                      projects={teamProjects}
+                      history={history}
+                      updateTeams={updateTeams}
+                    />
+                    <StroveButton
+                      isPrimary
+                      padding="5px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="10px"
+                      borderRadius="2px"
+                      text="Add Project"
+                      onClick={() => {
+                        setTeamId(team.id)
+                        setAddProjectModal(true)
+                      }}
+                    />
+                  </TeamTileSection>
+                )}
+              </TeamTile>
+            )}
+          </TeamTileWrapper>
+        )
+      })}
+      <StyledReactModal
+        isOpen={addProjectModal}
+        onRequestClose={closeAddProjectModal}
+        ariaHideApp={false}
+        isMobile={isMobileOnly}
+      >
+        {!isMobile && (
+          <StyledCloseIcon
+            type="close"
+            onClick={() => setAddProjectModal(false)}
+          />
+        )}
+        <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
+      </StyledReactModal>
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '30vh' : '20vh'}
+        isOpen={warningModal.visible}
+        onRequestClose={() => setWarningModal(emptyWarningModalContent)}
+        contentLabel="Warning"
+        ariaHideApp={false}
+      >
+        {warningModal.content}
+        {warningModal.buttonLabel && (
+          <ModalButton
+            isPrimary
+            onClick={warningModal.onSubmit}
+            text={warningModal.buttonLabel}
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
+        <ModalButton
+          onClick={() => closeWarningModal()}
+          text="Close"
+          padding="5px"
+          maxWidth="150px"
+        />
+      </Modal>
+    </>
   )
 }
 
