@@ -110,7 +110,7 @@ export const mutation = ({
         value: requestHandlingEndTime - requestStartTime,
       })
 
-      return dataSelector(data)
+      return result
     } catch (error) {
       console.log('Error', error)
       onError && onError(error)
