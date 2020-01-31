@@ -202,6 +202,8 @@ const VerticalDivider = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  flex-direction: ${({ columnOnMobile }) =>
+    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const Divider = styled(VerticalDivider)`
@@ -331,7 +333,7 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
           <TeamTileWrapper expanded={isExpanded}>
             <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
               <Divider>
-                <VerticalDivider>
+                <VerticalDivider columnOnMobile>
                   <Title>{team.name}</Title>
                   {isExpanded && (
                     <StroveButton
