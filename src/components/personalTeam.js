@@ -321,6 +321,8 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
     setWarningModal(emptyWarningModalContent)
   }
 
+  const shouldTabsBeCollapsable = Object.keys(teams).length > 1
+
   return (
     <>
       {teams.map(team => {
@@ -358,11 +360,11 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                     />
                   )}
                 </VerticalDivider>
-                {/* {shouldTabsBeCollapsable && ( */}
-                <IconWrapper onClick={() => setIsExpanded(!isExpanded)}>
-                  <ExpandIcon type="down" expanded={isExpanded} />
-                </IconWrapper>
-                {/* )} */}
+                {shouldTabsBeCollapsable && (
+                  <IconWrapper onClick={() => setIsExpanded(!isExpanded)}>
+                    <ExpandIcon type="down" expanded={isExpanded} />
+                  </IconWrapper>
+                )}
               </Divider>
             </TeamTileHeader>
             {isExpanded && (

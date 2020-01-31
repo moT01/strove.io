@@ -584,8 +584,6 @@ const Dashboard = ({ history }) => {
     setExpandedTiles(newTiles)
   }
 
-  const shouldTabsBeCollapsable = Object.keys(teamsObj).length > 1
-
   const tabs = [
     {
       name: 'Teams',
@@ -658,7 +656,6 @@ const Dashboard = ({ history }) => {
                                   />
                                 ))}
                             </VerticalDivider>
-                            {/* {shouldTabsBeCollapsable && ( */}
                             <IconWrapper
                               onClick={() =>
                                 displayHandler({
@@ -669,7 +666,6 @@ const Dashboard = ({ history }) => {
                             >
                               <ExpandIcon type="down" expanded={isExpanded} />
                             </IconWrapper>
-                            {/* )} */}
                           </Divider>
                         </TeamTileHeader>
                         {isExpanded && (
