@@ -465,7 +465,6 @@ const Dashboard = ({ history }) => {
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const myTeams = useSelector(selectors.api.getMyTeams)
-  // const [emailSent, setEmailSent] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
