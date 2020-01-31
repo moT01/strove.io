@@ -4,13 +4,18 @@ import ReactGA from 'react-ga'
 export default () => {
   const ref = useRef(null)
   useEffect(() => {
-    const callback = list => {
-      list.getEntries().forEach(entry => {
-        console.log('entry', entry)
+    const measurePerformance = performanceEntries => {
+      performanceEntries.getEntries().forEach(entry => {
+        console.log(
+          'entry',
+          entry,
+          'entry.isIntersecting',
+          entry.isIntersecting
+        )
         if (entry.isIntersecting) {
           ReactGA.event({
-            category: 'Paint',
-            variable: entry.name,
+            category: 'Load Performace',
+            variable: 'Paint time',
             value: entry.startTime,
           })
           console.log(
@@ -47,7 +52,7 @@ export default () => {
         }
       })
     }
-    const observer = new PerformanceObserver(callback)
+    const observer = new PerformanceObserver(measurePerformance)
     /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
     observer.observe({ entryTypes: ['paint', 'navigation'] })
   }, [])
