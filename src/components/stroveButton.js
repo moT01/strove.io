@@ -169,7 +169,6 @@ const StroveButton = props => {
       primary={props.isPrimary}
       mobile={isMobileOnly}
       onClick={event => {
-        props.onClick(event)
         ReactGA.event({
           category: 'Interaction',
           action: 'Click',
@@ -177,6 +176,7 @@ const StroveButton = props => {
             ? `${props.name}`
             : `Unamed button at ${window.location.href}`,
         })
+        props.onClick(event)
       }}
       {...props}
     >
