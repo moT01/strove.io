@@ -6,25 +6,14 @@ export default () => {
   useEffect(() => {
     const measurePerformance = performanceEntries => {
       performanceEntries.getEntries().forEach(entry => {
-        console.log(
-          'entry',
-          entry,
-          'entry.isIntersecting',
-          entry.isIntersecting
-        )
+        console.log('entry', entry)
         if (entry.entryType === 'paint') {
-          ReactGA.event({
+          ReactGA.timing({
             category: 'Load Performace',
             variable: 'Paint time',
             value: entry.startTime,
           })
-          console.log(
-            'Paint',
-            'entry.intersectionRatio',
-            entry.startTime,
-            'entry.name',
-            entry.name
-          )
+          console.log('Paint', entry.startTime)
         }
 
         if (entry.entryType === 'navigation') {
