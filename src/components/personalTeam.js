@@ -290,25 +290,25 @@ const emptyWarningModalContent = {
 }
 
 const PersonalTeam = ({ history, teams, updateTeams }) => {
-  const [display, setDisplay] = useState({ team: true, section: true })
+  const [isExpanded, setIsExpanded] = useState(true)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [editTeam, setEditTeam] = useState()
   const [settingsModal, setSettingsModal] = useState()
   const [teamId, setTeamId] = useState()
 
-  const displayHandler = subsection => {
-    subsection
-      ? setDisplay({ team: true, section: !display.section })
-      : setDisplay({ team: !display.team, section: false })
-  }
-
   const closeAddProjectModal = () => setAddProjectModal(false)
 
+  // add pricing button
   const handleAddMemberClick = () => {
     setWarningModal({
       visible: true,
-      content: <ModalText>Adding users </ModalText>
+      content: (
+        <ModalText>
+          Adding team members is not available in free plan. Please visit our
+          pricing page for more information
+        </ModalText>
+      ),
     })
   }
 
@@ -326,12 +326,12 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
       {teams.map(team => {
         const teamProjects = team.projects
         return (
-          <TeamTileWrapper expanded={display.team}>
-            <TeamTileHeader expanded={display.team} shouldTabsBeCollapsable>
+          <TeamTileWrapper expanded={isExpanded}>
+            <TeamTileHeader expanded={isExpanded} shouldTabsBeCollapsable>
               <Divider>
                 <VerticalDivider>
                   <Title>{team.name}</Title>
-                  {display && (
+                  {isExpanded && (
                     <StroveButton
                       isPrimary
                       padding="5px"
@@ -343,7 +343,7 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                       text="Add member"
                     />
                   )}
-                  {display.team && (
+                  {isExpanded && (
                     <StroveButton
                       isDashboard
                       padding="5px"
@@ -359,45 +359,20 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                   )}
                 </VerticalDivider>
                 {/* {shouldTabsBeCollapsable && ( */}
-                <IconWrapper onClick={() => displayHandler()}>
-                  <ExpandIcon type="down" expanded={display.team} />
+                <IconWrapper onClick={() => setIsExpanded(!isExpanded)}>
+                  <ExpandIcon type="down" expanded={isExpanded} />
                 </IconWrapper>
                 {/* )} */}
               </Divider>
             </TeamTileHeader>
-            {display.team && (
+            {isExpanded && (
               <TeamTile>
-                {display.team && (
-                  <TeamTileSection>
-                    <RowWrapper>
-                      <Divider>
-                        <VerticalDivider>
-                          <UserPhoto
-                            src={
-                              team.teamLeader?.photoUrl
-                                ? team.teamLeader?.photoUrl
-                                : StroveLogo
-                            }
-                          />
-                          <Text>{team.teamLeader?.name}</Text>
-                        </VerticalDivider>
-                      </Divider>
-                    </RowWrapper>
-                  </TeamTileSection>
-                )}
                 <TileSectionHeader isLast>
                   <Divider>
                     <SectionTitle>Projects</SectionTitle>
-                    <IconWrapper onClick={() => displayHandler('projects')}>
-                      <ExpandIcon
-                        type="down"
-                        expanded={display.section}
-                        section
-                      />
-                    </IconWrapper>
                   </Divider>
                 </TileSectionHeader>
-                {display.section && (
+                {isExpanded && (
                   <TeamTileSection isLast>
                     <Projects
                       projects={teamProjects}
