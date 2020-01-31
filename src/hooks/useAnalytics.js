@@ -12,7 +12,7 @@ export default () => {
           'entry.isIntersecting',
           entry.isIntersecting
         )
-        if (entry.isIntersecting) {
+        if (entry.entryType === 'paint') {
           ReactGA.event({
             category: 'Load Performace',
             variable: 'Paint time',
@@ -25,7 +25,9 @@ export default () => {
             'entry.name',
             entry.name
           )
+        }
 
+        if (entry.entryType === 'navigation') {
           ReactGA.timing({
             category: 'Load Performace',
             variable: 'Server Latency',
