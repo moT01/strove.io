@@ -524,9 +524,6 @@ const Dashboard = ({ history }) => {
       }, {}),
     }
   }, {})
-  // const teamProjects = myTeams?.reduce((projects, team) => {
-  //   return { ...projects, [team.id]: team.projects }
-  // }, {})
 
   useEffect(() => {
     updateOrganizations()
@@ -593,6 +590,7 @@ const Dashboard = ({ history }) => {
         <TilesWrapper>
           {myOrganizations.map(organization => (
             <>
+            <Text>{organization.name}</Text>
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
                   team => {
