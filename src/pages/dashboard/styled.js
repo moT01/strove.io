@@ -7,7 +7,7 @@ import Select from 'react-select'
 
 import { StroveButton } from 'components'
 
-const FullFadeIn = keyframes`
+export const FullFadeIn = keyframes`
   0% {
     opacity: 0;
   }
@@ -16,7 +16,7 @@ const FullFadeIn = keyframes`
   }
 `
 
-const EmailFormWrapper = styled.div`
+export const EmailFormWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -95,18 +95,18 @@ const EmailFormWrapper = styled.div`
   }
 `
 
-const StyledForm = styled(Form)`
+export const StyledForm = styled(Form)`
   width: 100%;
 `
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 `
 
-const PageWrapper = styled(Wrapper)`
+export const PageWrapper = styled(Wrapper)`
   width: 100vw;
   min-height: calc(100vh - 64px);
   padding-top: 10px;
@@ -114,14 +114,14 @@ const PageWrapper = styled(Wrapper)`
   justify-content: space-between;
 `
 
-const TeamTileWrapper = styled(Wrapper)`
+export const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
   transition: all 0.2s;
   width: 100%;
   height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
 `
 
-const TilesWrapper = styled.div`
+export const TilesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -130,18 +130,18 @@ const TilesWrapper = styled.div`
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
-const Title = styled.div`
+export const Title = styled.div`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.c3};
   margin: 3px 3px 3px 0;
 `
 
-const SectionTitle = styled(Title)`
+export const SectionTitle = styled(Title)`
   font-size: 1.2rem;
   font-weight: 400;
 `
 
-const Tile = styled.div`
+export const Tile = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,14 +164,14 @@ const Tile = styled.div`
   } */
 `
 
-const TeamTile = styled(Tile)`
+export const TeamTile = styled(Tile)`
   width: 100%;
   padding: 0px;
   margin: 0px;
   border-top: none;
 `
 
-const TeamTileSection = styled(Tile)`
+export const TeamTileSection = styled(Tile)`
   align-items: flex-start;
   margin: 0px;
   padding: 10px;
@@ -183,14 +183,14 @@ const TeamTileSection = styled(Tile)`
   padding-bottom: 0;
 `
 
-const ModalButton = styled(StroveButton)`
+export const ModalButton = styled(StroveButton)`
   animation: ${FullFadeIn} 0.2s ease-out;
   border-radius: 2px;
   max-width: 150px;
   padding: 5px;
 `
 
-const Text = styled.p`
+export const Text = styled.p`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
   margin-left: 10px;
@@ -200,20 +200,20 @@ const Text = styled.p`
   overflow: hidden;
 `
 
-const ModalText = styled(Text)`
+export const ModalText = styled(Text)`
   white-space: normal;
   text-overflow: wrap;
   overflow: visible;
   word-break: break-word;
 `
 
-const WarningText = styled(ModalText)`
+export const WarningText = styled(ModalText)`
   color: ${({ theme }) => theme.colors.c5};
   margin-bottom: 5px;
   word-break: break-word;
 `
 
-const VerticalDivider = styled.div`
+export const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -224,13 +224,13 @@ const VerticalDivider = styled.div`
     columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
-const Divider = styled(VerticalDivider)`
+export const Divider = styled(VerticalDivider)`
   justify-content: space-between;
   flex-direction: ${({ columnOnMobile }) =>
     columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
-const RowWrapper = styled(VerticalDivider)`
+export const RowWrapper = styled(VerticalDivider)`
   border-width: 0px 0px 1px 0px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-style: solid;
@@ -241,12 +241,12 @@ const RowWrapper = styled(VerticalDivider)`
   }
 `
 
-const InviteStatus = styled.span`
+export const InviteStatus = styled.span`
   color: ${({ theme }) => theme.colors.c16};
   margin-left: 24px;
 `
 
-const StyledIcon = styled(Icon)`
+export const StyledIcon = styled(Icon)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -256,7 +256,7 @@ const StyledIcon = styled(Icon)`
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
-const IconWrapper = styled(Wrapper)`
+export const IconWrapper = styled(Wrapper)`
   min-width: 50px;
   height: 100%;
   justify-content: center;
@@ -270,7 +270,7 @@ const IconWrapper = styled(Wrapper)`
   }
 `
 
-const ExpandIcon = styled(StyledIcon)`
+export const ExpandIcon = styled(StyledIcon)`
   font-size: 1rem;
   transform: ${({ expanded }) =>
     expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
@@ -282,7 +282,7 @@ const ExpandIcon = styled(StyledIcon)`
   }
 `
 
-const StyledCloseIcon = styled(Icon)`
+export const StyledCloseIcon = styled(Icon)`
   position: absolute;
   top: 15px;
   right: 15px;
@@ -294,7 +294,7 @@ const StyledCloseIcon = styled(Icon)`
   }
 `
 
-const StyledReactModal = styled(ReactModal)`
+export const StyledReactModal = styled(ReactModal)`
   display: flex;
   height: auto;
   width: auto;
@@ -305,7 +305,7 @@ const StyledReactModal = styled(ReactModal)`
   }
 `
 
-const TeamTileHeader = styled(Tile)`
+export const TeamTileHeader = styled(Tile)`
   width: 100%;
   margin: 0;
   padding: 10px;
@@ -328,7 +328,7 @@ const TeamTileHeader = styled(Tile)`
   `}
 `
 
-const TileSectionHeader = styled(TeamTileHeader)`
+export const TileSectionHeader = styled(TeamTileHeader)`
   flex-direction: row;
   justify-content: flex-start;
   border-width: 1px 0px 0px 0px;
@@ -357,7 +357,7 @@ const TileSectionHeader = styled(TeamTileHeader)`
   }
 `
 
-const SettingWrapper = styled.div`
+export const SettingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -366,7 +366,7 @@ const SettingWrapper = styled.div`
   margin: 20px 0 0;
 `
 
-const DropdownWrapper = styled.div`
+export const DropdownWrapper = styled.div`
   width: 20vw;
   flex-direction: row;
   justify-content: center;
@@ -374,11 +374,11 @@ const DropdownWrapper = styled.div`
   color: ${({ theme }) => theme.colors.c3};
 `
 
-const StyledSelect = styled(Select)`
+export const StyledSelect = styled(Select)`
   width: 100%;
 `
 
-const Setting = styled.div`
+export const Setting = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -388,7 +388,7 @@ const Setting = styled.div`
   padding: 5px;
 `
 
-const UserPhoto = styled.img`
+export const UserPhoto = styled.img`
   width: 35px;
   height: 35px;
   border-radius: 5px;
