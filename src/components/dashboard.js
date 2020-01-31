@@ -1398,7 +1398,7 @@ const Dashboard = ({ history }) => {
           />
         )}
         <ModalButton
-          onClick={() => closeWarningModal()}
+          onClick={closeWarningModal}
           text="Close"
           padding="5px"
           maxWidth="150px"
