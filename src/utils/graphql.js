@@ -78,6 +78,8 @@ export const mutation = ({
           variable: name,
           value: requestEndTime - requestStartTime,
         })
+
+        console.log('Request Performace', name)
       }
 
       if (onSuccess) {
@@ -101,6 +103,13 @@ export const mutation = ({
         })
       }
 
+      const requestHandlingEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Handling Performance',
+        variable: name,
+        value: requestHandlingEndTime - requestStartTime,
+      })
+
       return dataSelector(data)
     } catch (error) {
       console.log('Error', error)
@@ -119,6 +128,13 @@ export const mutation = ({
           payload: { error, storeKey },
         })
       }
+      const requestEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Error Performance',
+        variable: name,
+        value: requestEndTime - requestStartTime,
+      })
+
       return null
     }
   }
@@ -202,6 +218,8 @@ export const query = ({
           variable: name,
           value: requestEndTime - requestStartTime,
         })
+
+        console.log('Request Performace', name)
       }
 
       if (onSuccess) {
