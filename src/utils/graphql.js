@@ -110,6 +110,12 @@ export const mutation = ({
         value: requestHandlingEndTime - requestStartTime,
       })
 
+      console.log(
+        'Request Handling Performace',
+        requestHandlingEndTime - requestStartTime,
+        name
+      )
+
       return result
     } catch (error) {
       console.log('Error', error)
@@ -135,6 +141,12 @@ export const mutation = ({
         variable: name,
         value: requestEndTime - requestStartTime,
       })
+
+      console.log(
+        'Request Error Performace',
+        requestEndTime - requestStartTime,
+        name
+      )
 
       return null
     }
@@ -220,7 +232,11 @@ export const query = ({
           value: requestEndTime - requestStartTime,
         })
 
-        console.log('Request Performace', name)
+        console.log(
+          'Request Performace',
+          requestEndTime - requestStartTime,
+          name
+        )
       }
 
       if (onSuccess) {
@@ -250,6 +266,11 @@ export const query = ({
         variable: name,
         value: requestHandlingEndTime - requestStartTime,
       })
+      console.log(
+        'Request Handling Performace',
+        requestHandlingEndTime - requestStartTime,
+        name
+      )
 
       return result
     } catch (error) {
@@ -276,6 +297,12 @@ export const query = ({
         variable: name,
         value: requestEndTime - requestStartTime,
       })
+
+      console.log(
+        'Request Error Performace',
+        requestEndTime - requestStartTime,
+        name
+      )
 
       return null
     }
