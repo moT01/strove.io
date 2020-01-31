@@ -25,6 +25,12 @@ export default () => {
             variable: 'Download time',
             value: entry.responseEnd - entry.responseStart,
           })
+
+          ReactGA.timing({
+            category: 'Load Performace',
+            variable: 'Total load time',
+            value: entry.responseEnd - entry.requestStart,
+          })
         }
         console.log('entry.intersectionRatio', entry.startTime)
       })
