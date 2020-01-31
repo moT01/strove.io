@@ -10,6 +10,7 @@ import ReactModal from 'react-modal'
 import Select from 'react-select'
 
 import { mutation, handleStopProject, query } from 'utils'
+import { useAnalytics } from 'hooks'
 import {
   ADD_MEMBER,
   CREATE_TEAM,
@@ -451,6 +452,7 @@ const emptyWarningModalContent = {
 }
 
 const Dashboard = ({ history }) => {
+  const ref = useAnalytics()
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
@@ -1107,7 +1109,7 @@ const Dashboard = ({ history }) => {
   const closeAddProjectModal = () => setAddProjectModal(false)
 
   return (
-    <>
+    <div ref={ref}>
       <SEO title="Dashboard" />
       <Header />
       <PageWrapper>
@@ -1413,7 +1415,7 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
       </StyledReactModal>
-    </>
+    </div>
   )
 }
 
