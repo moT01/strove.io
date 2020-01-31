@@ -57,6 +57,8 @@ export const mutation = ({
       })
     }
 
+    const requestStartTime = performance.now()
+
     try {
       const { data } = await client.mutate({
         mutation,
@@ -67,6 +69,16 @@ export const mutation = ({
       })
 
       const result = dataSelector(data)
+
+      if (result) {
+        const requestEndTime = performance.now()
+
+        ReactGA.timing({
+          category: 'Request Performace',
+          variable: 'Total request time',
+          value: requestEndTime - requestStartTime,
+        })
+      }
 
       if (onSuccess) {
         if (Array.isArray(onSuccess)) {
