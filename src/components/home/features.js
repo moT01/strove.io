@@ -172,9 +172,7 @@ const Features = () => {
             onMouseEnter={() => {
               onMouseOver(i)
             }}
-            onMouseLeave={() => {
-              onMouseOut()
-            }}
+            onMouseLeave={onMouseOut}
           >
             {child}
           </div>
