@@ -63,7 +63,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => (
     width={isMobileOnly ? '60vw' : '30vw'}
     height={isMobileOnly ? '40vh' : '20vh'}
     isOpen={isOpen}
-    onRequestClose={() => handleClose()}
+    onRequestClose={handleClose}
     contentLabel="Name project"
     ariaHideApp={false}
   >
