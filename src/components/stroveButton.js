@@ -172,8 +172,8 @@ const StroveButton = props => {
         ReactGA.event({
           category: 'Interaction',
           action: 'Click',
-          value: props.name
-            ? `${props.name}`
+          value: props.text
+            ? `${props.text}`
             : `Unamed button at ${window.location.href}`,
         })
         props.onClick(event)
