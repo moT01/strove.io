@@ -75,7 +75,7 @@ export const mutation = ({
 
         ReactGA.timing({
           category: 'Request Performace',
-          variable: 'Total request time',
+          variable: name,
           value: requestEndTime - requestStartTime,
         })
       }
@@ -199,7 +199,7 @@ export const query = ({
 
         ReactGA.timing({
           category: 'Request Performace',
-          variable: 'Total request time',
+          variable: name,
           value: requestEndTime - requestStartTime,
         })
       }
