@@ -1,29 +1,10 @@
-import React, { useState, memo, useEffect } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import React, { useState, memo } from 'react'
+import styled, { keyframes } from 'styled-components/macro'
 import { Icon } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import isEmail from 'validator/lib/isEmail'
-import { Formik, Form, Field } from 'formik'
+
 import { withRouter } from 'react-router-dom'
 import ReactModal from 'react-modal'
-import Select from 'react-select'
-
-import { mutation, handleStopProject, query } from 'utils'
-import { useAnalytics } from 'hooks'
-import {
-  ADD_MEMBER,
-  CREATE_TEAM,
-  RENAME_TEAM,
-  REMOVE_MEMBER,
-  MY_TEAMS,
-  DELETE_TEAM,
-  SET_ADMIN,
-  LEAVE_TEAM,
-  MY_ORGANIZATIONS,
-} from 'queries'
-import { selectors } from 'state'
-import StroveLogo from 'images/strove.png'
 import { Modal, StroveButton, GetStarted, Projects } from 'components'
 
 const FullFadeIn = keyframes`
