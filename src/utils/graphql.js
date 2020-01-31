@@ -244,6 +244,13 @@ export const query = ({
         })
       }
 
+      const requestHandlingEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Handling Performance',
+        variable: name,
+        value: requestHandlingEndTime - requestStartTime,
+      })
+
       return result
     } catch (error) {
       console.log('fetch error: ', error)
