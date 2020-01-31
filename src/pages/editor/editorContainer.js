@@ -45,8 +45,6 @@ const EditorWrapper = ({ history }) => {
           name: 'resetCron',
           mutation: RESET_CRON,
           variables: { projectId },
-          onLoadingDispatch: () => actions.latency.latencyMeasureStart(dayjs()),
-          onSuccessDispatch: () => actions.latency.latencyMeasureEnd(dayjs()),
         })
       )
     projectId && resetCron()
