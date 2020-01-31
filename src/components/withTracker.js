@@ -5,6 +5,7 @@ import ttiPolyfill from 'tti-polyfill'
 ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID)
 
 ttiPolyfill.getFirstConsistentlyInteractive().then(tti => {
+  console.log('tti', tti)
   ReactGA.timing({
     category: 'Load Performace',
     variable: 'Time to Interactive',
