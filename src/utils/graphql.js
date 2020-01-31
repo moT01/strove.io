@@ -73,7 +73,9 @@ export const mutation = ({
       if (result) {
         const requestEndTime = performance.now()
         const requestTime = requestEndTime - requestStartTime
-        dispatch(actions.latency.fullLatencyMeasurement(requestTime))
+        if (name === 'resetCron') {
+          dispatch(actions.latency.fullLatencyMeasurement(requestTime))
+        }
         ReactGA.timing({
           category: 'Request Performace',
           variable: name,
@@ -227,7 +229,9 @@ export const query = ({
       if (result) {
         const requestEndTime = performance.now()
         const requestTime = requestEndTime - requestStartTime
-        dispatch(actions.latency.fullLatencyMeasurement(requestTime))
+        if (name === 'resetCron') {
+          dispatch(actions.latency.fullLatencyMeasurement(requestTime))
+        }
         ReactGA.timing({
           category: 'Request Performace',
           variable: name,
