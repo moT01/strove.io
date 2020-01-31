@@ -6,7 +6,11 @@ export default () => {
   useEffect(() => {
     const measurePerformance = performanceEntries => {
       performanceEntries.getEntries().forEach(entry => {
-        console.log('entry', entry)
+        /*
+          This log is useful when toying with PerformanceObserver.
+          Remove only if you don't like nice things
+          console.log('entry', entry)
+        */
         if (entry.entryType === 'paint') {
           ReactGA.timing({
             category: 'Load Performace',
