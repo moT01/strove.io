@@ -1,4 +1,5 @@
-import { C } from 'state/'
+import ReactGA from 'react-ga'
+import { C } from 'state'
 
 import defaultClient from 'client'
 
@@ -56,6 +57,8 @@ export const mutation = ({
       })
     }
 
+    const requestStartTime = performance.now()
+
     try {
       const { data } = await client.mutate({
         mutation,
@@ -66,6 +69,18 @@ export const mutation = ({
       })
 
       const result = dataSelector(data)
+
+      if (result) {
+        const requestEndTime = performance.now()
+
+        ReactGA.timing({
+          category: 'Request Performace',
+          variable: name,
+          value: requestEndTime - requestStartTime,
+        })
+
+        console.log('Request Performace', name)
+      }
 
       if (onSuccess) {
         if (Array.isArray(onSuccess)) {
@@ -88,7 +103,20 @@ export const mutation = ({
         })
       }
 
-      return dataSelector(data)
+      const requestHandlingEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Handling Performance',
+        variable: name,
+        value: requestHandlingEndTime - requestStartTime,
+      })
+
+      console.log(
+        'Request Handling Performace',
+        requestHandlingEndTime - requestStartTime,
+        name
+      )
+
+      return result
     } catch (error) {
       console.log('Error', error)
       onError && onError(error)
@@ -106,6 +134,20 @@ export const mutation = ({
           payload: { error, storeKey },
         })
       }
+
+      const requestEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Error Performance',
+        variable: name,
+        value: requestEndTime - requestStartTime,
+      })
+
+      console.log(
+        'Request Error Performace',
+        requestEndTime - requestStartTime,
+        name
+      )
+
       return null
     }
   }
@@ -168,6 +210,8 @@ export const query = ({
       })
     }
 
+    const requestStartTime = performance.now()
+
     try {
       const { data } = await client.query({
         query,
@@ -178,6 +222,22 @@ export const query = ({
       })
 
       const result = dataSelector(data)
+
+      if (result) {
+        const requestEndTime = performance.now()
+
+        ReactGA.timing({
+          category: 'Request Performace',
+          variable: name,
+          value: requestEndTime - requestStartTime,
+        })
+
+        console.log(
+          'Request Performace',
+          requestEndTime - requestStartTime,
+          name
+        )
+      }
 
       if (onSuccess) {
         if (Array.isArray(onSuccess)) {
@@ -200,6 +260,18 @@ export const query = ({
         })
       }
 
+      const requestHandlingEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Handling Performance',
+        variable: name,
+        value: requestHandlingEndTime - requestStartTime,
+      })
+      console.log(
+        'Request Handling Performace',
+        requestHandlingEndTime - requestStartTime,
+        name
+      )
+
       return result
     } catch (error) {
       console.log('fetch error: ', error)
@@ -218,6 +290,20 @@ export const query = ({
           payload: { error, storeKey },
         })
       }
+
+      const requestEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Error Performance',
+        variable: name,
+        value: requestEndTime - requestStartTime,
+      })
+
+      console.log(
+        'Request Error Performace',
+        requestEndTime - requestStartTime,
+        name
+      )
+
       return null
     }
   }

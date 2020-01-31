@@ -30,6 +30,7 @@ import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
 import Footer from './footer'
 import StroveLogo from 'images/strove.png'
+import PersonalTeam from './personalTeam'
 
 const validate = values => {
   let errors = {}
@@ -524,9 +525,8 @@ const Dashboard = ({ history }) => {
       }, {}),
     }
   }, {})
-  // const teamProjects = myTeams?.reduce((projects, team) => {
-  //   return { ...projects, [team.id]: team.projects }
-  // }, {})
+
+  const personalTeam = myTeams.filter(team => !team.organizationId)
 
   useEffect(() => {
     updateOrganizations()
@@ -591,8 +591,14 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <TilesWrapper>
+          <PersonalTeam
+            history={history}
+            teams={personalTeam}
+            updateTeams={updateTeams}
+          ></PersonalTeam>
           {myOrganizations.map(organization => (
             <>
+              <Text>{organization.name}</Text>
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
                   team => {
