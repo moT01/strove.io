@@ -290,15 +290,15 @@ const emptyWarningModalContent = {
 }
 
 const PersonalTeam = ({ history, teams, updateTeams }) => {
-  const [display, setDisplay] = useState()
+  const [display, setDisplay] = useState({ team: true, section: true })
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [editTeam, setEditTeam] = useState()
   const [settingsModal, setSettingsModal] = useState()
   const [teamId, setTeamId] = useState()
 
-  const displayHandler = section => {
-    section
+  const displayHandler = subsection => {
+    subsection
       ? setDisplay({ team: true, section: !display.section })
       : setDisplay({ team: !display.team, section: false })
   }
@@ -321,8 +321,8 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
       {teams.map(team => {
         const teamProjects = team.projects
         return (
-          <TeamTileWrapper expanded={display}>
-            <TeamTileHeader expanded={display} shouldTabsBeCollapsable>
+          <TeamTileWrapper expanded={display.team}>
+            <TeamTileHeader expanded={display.team} shouldTabsBeCollapsable>
               <Divider>
                 <VerticalDivider>
                   <Title>{team.name}</Title>
@@ -338,7 +338,7 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                       text="Add member"
                     />
                   )}
-                  {display && (
+                  {display.team && (
                     <StroveButton
                       isDashboard
                       padding="5px"
@@ -355,14 +355,14 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                 </VerticalDivider>
                 {/* {shouldTabsBeCollapsable && ( */}
                 <IconWrapper onClick={() => displayHandler()}>
-                  <ExpandIcon type="down" expanded={display} />
+                  <ExpandIcon type="down" expanded={display.team} />
                 </IconWrapper>
                 {/* )} */}
               </Divider>
             </TeamTileHeader>
-            {display && (
+            {display.team && (
               <TeamTile>
-                {display && (
+                {display.team && (
                   <TeamTileSection>
                     <RowWrapper>
                       <Divider>
@@ -386,13 +386,13 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
                     <IconWrapper onClick={() => displayHandler('projects')}>
                       <ExpandIcon
                         type="down"
-                        expanded={display.projects}
+                        expanded={display.section}
                         section
                       />
                     </IconWrapper>
                   </Divider>
                 </TileSectionHeader>
-                {display.projects && (
+                {display.section && (
                   <TeamTileSection isLast>
                     <Projects
                       projects={teamProjects}
