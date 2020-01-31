@@ -5,7 +5,9 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 
 import { withRouter } from 'react-router-dom'
 import ReactModal from 'react-modal'
-import { Modal, StroveButton, GetStarted, Projects } from 'components'
+import { Modal, StroveButton, GetStarted } from 'components'
+
+import Projects from './projects'
 
 const FullFadeIn = keyframes`
   0% {
