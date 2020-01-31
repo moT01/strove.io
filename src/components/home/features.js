@@ -152,9 +152,7 @@ const Features = () => {
             onMouseEnter={() => {
               onMouseOver(i)
             }}
-            onMouseLeave={() => {
-              onMouseOut()
-            }}
+            onMouseLeave={onMouseOut}
           >
             <StyledAnchor
               rel="noopener noreferrer"
