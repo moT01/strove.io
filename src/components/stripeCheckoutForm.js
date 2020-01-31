@@ -16,8 +16,6 @@ const CheckoutForm = props => {
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
 
-  console.log(props.stripe)
-
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
     dispatch(
@@ -89,8 +87,8 @@ const CheckoutForm = props => {
         variables: {
           paymentMethod: paymentMethod.id,
           plan: 'plan_GYjzUWz4PmzdMg',
-          // this is test plan for yearly subscription, work with this for now, will provide monthly later
-          // also I would prefer to keep them in .env on frontend
+          // ^ this plan is should be replaced with the one customer chose
+          // both plans are stored in .env file
         },
         dataSelector: data => data.stripeSubscribe,
         onSuccess: data => handleResponse(data),
@@ -119,6 +117,7 @@ const CheckoutForm = props => {
     }
   }
 
+  // Necessary to load up data from card Element
   const handleReady = element => {
     setCardElement(element)
   }
