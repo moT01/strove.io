@@ -254,14 +254,6 @@ const StyledReactModal = styled(ReactModal)`
   }
 `
 
-const UserPhoto = styled.img`
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  margin: 0;
-  margin-left: 10px;
-`
-
 const emptyWarningModalContent = {
   visible: false,
   content: null,

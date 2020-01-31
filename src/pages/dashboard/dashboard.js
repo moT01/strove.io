@@ -522,14 +522,6 @@ const Dashboard = ({ history }) => {
       }
     }, {})
   )
-  const teamsObj = myOrganizations?.reduce((organizations, organization) => {
-    return {
-      ...organizations,
-      [organization.id]: organization.teams?.reduce((teams, team) => {
-        return { ...teams, [team.id]: team }
-      }, {}),
-    }
-  }, {})
 
   const personalTeam = myTeams.filter(team => !team.organizationId)
 
