@@ -1,11 +1,9 @@
 import React, { useState, useEffect, memo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import dayjs from 'dayjs'
 import { withRouter } from 'react-router-dom'
 
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
-import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 import Editor from './editor'
