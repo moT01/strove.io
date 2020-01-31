@@ -54,7 +54,8 @@ export default () => {
     }
 
     const measureScroll = scrollEntries => {
-      scrollEntries.getEntries().forEach(entry => {
+      console.log('scrollEntries', scrollEntries)
+      scrollEntries.forEach(entry => {
         console.log('entry', entry)
 
         if (entry.isIntersecting) {
@@ -71,13 +72,13 @@ export default () => {
     /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
     perfObserver.observe({ entryTypes: ['paint', 'navigation'] })
 
-    // const scrollObserver = new IntersectionObserver(measureScroll, {
-    //   root: null,
-    //   rootMargin: '0px',
-    //   threshold: 0,
-    // })
+    const scrollObserver = new IntersectionObserver(measureScroll, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0,
+    })
 
-    // scrollObserver.observe(ref.current)
+    scrollObserver.observe(ref.current)
   }, [])
 
   return ref
