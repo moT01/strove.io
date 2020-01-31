@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { getWindowHref } from 'utils'
-import { Github, Bitbucket, Gitlab } from 'components/svgs'
+import { Github, Gitlab /* Bitbucket */ } from 'components/svgs'
 
 const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
-const REACT_APP_BITBUCKET_CLIENT_ID = process.env.REACT_APP_BITBUCKET_CLIENT_ID
+// const REACT_APP_BITBUCKET_CLIENT_ID = process.env.REACT_APP_BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 const REACT_APP_IS_OPENSOURCE = process.env.REACT_APP_IS_OPENSOURCE
 const REACT_APP_STROVE_URL = process.env.REACT_APP_STROVE_URL
