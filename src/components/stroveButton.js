@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
+import ReactGA from 'react-ga'
 
 import { FullScreenLoader } from 'components'
 import { selectors } from 'state'
@@ -167,6 +168,16 @@ const StroveButton = props => {
       disabled={isLoading || props.isDisabled}
       primary={props.isPrimary}
       mobile={isMobileOnly}
+      onClick={event => {
+        props.onClick(event)
+        ReactGA.event({
+          category: 'Interaction',
+          action: 'Click',
+          value: props.name
+            ? `${props.name}`
+            : `Unamed button at ${window.location.href}`,
+        })
+      }}
       {...props}
     >
       {isLoading || isDeleting || isContinuing || isStopping ? (
