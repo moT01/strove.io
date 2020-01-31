@@ -14,9 +14,10 @@ import {
   Pricing,
   Editor,
   FromEmailInvitation,
+  Dashboard,
 } from 'pages'
 
-import { PrivateRoute, Dashboard, ScrollToTop } from 'components'
+import { PrivateRoute, ScrollToTop } from 'components'
 
 const Strove = () => (
   <>
