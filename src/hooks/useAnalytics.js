@@ -9,9 +9,15 @@ export default () => {
       list.getEntries().forEach(entry => {
         if (entry.isIntersecting) {
           ReactGA.event({
-            category: 'Rendering',
+            category: 'Paint',
             variable: entry.name,
             value: entry.startTime,
+          })
+
+          ReactGA.timing({
+            category: 'Load Performace',
+            variable: 'Server Latency',
+            value: entry.responseStart - entry.requestStart,
           })
         }
         console.log('entry.intersectionRatio', entry.startTime)
