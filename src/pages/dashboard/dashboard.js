@@ -25,7 +25,6 @@ import {
 import { selectors } from 'state'
 import {
   GetStarted,
-  Projects,
   StroveButton,
   SEO,
   Header,
@@ -35,6 +34,7 @@ import {
 import StroveLogo from 'images/strove.png'
 
 import PersonalTeam from './personalTeam'
+import Projects from './projects'
 
 const validate = values => {
   let errors = {}
