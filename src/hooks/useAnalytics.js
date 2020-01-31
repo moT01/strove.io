@@ -53,32 +53,9 @@ export default () => {
       })
     }
 
-    const measureScroll = scrollEntries => {
-      console.log('scrollEntries', scrollEntries)
-      scrollEntries.forEach(entry => {
-        console.log('entry', entry)
-
-        if (entry.isIntersecting) {
-          ReactGA.event({
-            category: 'Scroll',
-            action: 'Scrolled',
-            value: entry.intersectionRatio,
-          })
-          console.log('entry.intersectionRatio', entry.intersectionRatio)
-        }
-      })
-    }
     const perfObserver = new PerformanceObserver(measurePerformance)
     /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
     perfObserver.observe({ entryTypes: ['paint', 'navigation'] })
-
-    const scrollObserver = new IntersectionObserver(measureScroll, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0,
-    })
-
-    scrollObserver.observe(ref.current)
   }, [])
 
   return ref
