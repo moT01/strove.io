@@ -18,7 +18,8 @@ export default () => {
       })
     }
     const observer = new PerformanceObserver(callback)
-    observer.observe({ entryTypes: ['paint'] })
+    /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
+    observer.observe({ entryTypes: ['paint', 'navigation'] })
   }, [])
 
   return ref
