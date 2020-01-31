@@ -30,6 +30,7 @@ import StroveButton from 'components/stroveButton.js'
 import Header from './header/header'
 import Footer from './footer'
 import StroveLogo from 'images/strove.png'
+import PersonalTeam from './personalTeam'
 
 const validate = values => {
   let errors = {}
@@ -588,9 +589,10 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <TilesWrapper>
+          <PersonalTeam></PersonalTeam>
           {myOrganizations.map(organization => (
             <>
-            <Text>{organization.name}</Text>
+              <Text>{organization.name}</Text>
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
                   team => {
