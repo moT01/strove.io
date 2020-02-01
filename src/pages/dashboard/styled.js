@@ -393,5 +393,4 @@ export const UserPhoto = styled.img`
   height: 35px;
   border-radius: 5px;
   margin: 0;
-  margin-left: 10px;
 `

@@ -209,6 +209,7 @@ const Projects = ({
                     <ProjectTitle>{project.name}</ProjectTitle>
                     <TextWrapper>
                       <UserPhoto src={project.user.photoUrl || StroveLogo} />
+                      <Text>{project.user.name}</Text>
                     </TextWrapper>
 
                     {currentProjectId && project.id === currentProjectId ? (
