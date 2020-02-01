@@ -18,20 +18,9 @@ import {
   ModalText,
   VerticalDivider,
   UserPhoto,
+  ProjectTitle,
+  FlexWrapper,
 } from './styled'
-
-const ProjectTitle = styled.h3`
-  font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.c3};
-  margin: 5px 5px 5px 0;
-`
-
-const FlexWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
 
 const RightSection = styled(FlexWrapper)`
   opacity: 0;
