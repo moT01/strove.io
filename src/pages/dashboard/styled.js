@@ -442,3 +442,22 @@ export const ProjectsTile = styled.div`
     border: none;
   }
 `
+
+export const InfoWrapper = styled(FlexWrapper)`
+  width: 100%;
+  margin: 0;
+  padding-left: 10px;
+  align-items: flex-start;
+  overflow: hidden;
+`
+
+export const TextWrapper = styled(FlexWrapper)`
+  flex-direction: row;
+  margin-bottom: 3px;
+  height: auto;
+  justify-content: flex-start;
+
+  :last-of-type {
+    margin: 0;
+  }
+`

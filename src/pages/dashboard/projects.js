@@ -22,26 +22,9 @@ import {
   FlexWrapper,
   RightSection,
   ProjectsTile,
+  InfoWrapper,
+  TextWrapper
 } from './styled'
-
-const InfoWrapper = styled(FlexWrapper)`
-  width: 100%;
-  margin: 0;
-  padding-left: 10px;
-  align-items: flex-start;
-  overflow: hidden;
-`
-
-const TextWrapper = styled(FlexWrapper)`
-  flex-direction: row;
-  margin-bottom: 3px;
-  height: auto;
-  justify-content: flex-start;
-
-  :last-of-type {
-    margin: 0;
-  }
-`
 
 const CircleIcon = styled.div`
   height: 1.5vh;
