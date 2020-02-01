@@ -70,11 +70,13 @@ const InfoWrapper = styled(FlexWrapper)`
 
 const TextWrapper = styled(FlexWrapper)`
   flex-direction: row;
-  margin-top: 0.3vh;
-  margin-bottom: 0.3vh;
-  width: 90%;
+  margin-bottom: 3px;
   height: auto;
   justify-content: flex-start;
+
+  :last-of-type {
+    margin: 0;
+  }
 `
 
 const CircleIcon = styled.div`
@@ -204,8 +206,10 @@ const Projects = ({
               >
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
-                    {/* <UserPhoto src={project.user.photoUrl || StroveLogo} /> */}
                     <ProjectTitle>{project.name}</ProjectTitle>
+                    <TextWrapper>
+                      <UserPhoto src={project.user.photoUrl || StroveLogo} />
+                    </TextWrapper>
 
                     {currentProjectId && project.id === currentProjectId ? (
                       <TextWrapper>
