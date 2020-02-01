@@ -21,7 +21,7 @@ import {
 const ProjectTitle = styled.h3`
   font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.c3};
-  margin: 0.3vh 0.3vh 0.3vh 0;
+  margin: 5px 5px 5px 0;
 `
 
 const Tile = styled.div`
