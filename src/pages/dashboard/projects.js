@@ -227,18 +227,6 @@ const Projects = ({
                         </Text>
                       </TextWrapper>
                     )}
-                    {/* <TextWrapper>
-        <StyledIcon
-          type="branches"
-        />
-        <Text> {project.branch}</Text>
-      </TextWrapper>
-      <TextWrapper>
-        <StyledIcon
-          type="code"
-        />
-        <Text>{project.language}</Text>
-      </TextWrapper> */}
                     <TextWrapper>
                       <StyledIcon
                         type={project.isVisible ? 'eye' : 'eye-invisible'}
@@ -246,7 +234,7 @@ const Projects = ({
                       <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                     </TextWrapper>
                   </InfoWrapper>
-                  {hoveredIndex === index && (
+                  {(hoveredIndex === index || isMobileOnly) && (
                     <RightSection>
                       <StroveButton
                         to="/app/editor/"
