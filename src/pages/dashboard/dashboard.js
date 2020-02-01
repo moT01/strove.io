@@ -59,7 +59,10 @@ import {
   InviteStatus,
   StyledIcon,
   IconWrapper,
-  ExpandIcon
+  ExpandIcon,
+  StyledCloseIcon,
+  StyledReactModal,
+  TeamTileHeader,
 } from './styled'
 
 const validate = values => {
@@ -87,52 +90,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const StyledCloseIcon = styled(Icon)`
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.7vh;
-  color: ${({ theme }) => theme.colors.c1};
-  cursor: pointer;
-  :focus {
-    outline: none;
-  }
-`
-
-const StyledReactModal = styled(ReactModal)`
-  display: flex;
-  height: auto;
-  width: auto;
-  position: fixed;
-  animation: ${FullFadeIn} 0.2s ease-out;
-  :focus {
-    outline: 0;
-  }
-`
-
-const TeamTileHeader = styled(Tile)`
-  width: 100%;
-  margin: 0;
-  padding: 10px;
-  transition: all 0.2s;
-  border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
-  border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
-  ${({ expanded }) => expanded && 'border-bottom: none;'}
-
-  ${Title} {
-    color: ${({ theme }) => theme.colors.c3};
-    transition: all 0.2s;
-  }
-
-  ${({ shouldTabsBeCollapsable }) =>
-    shouldTabsBeCollapsable &&
-    `
-    :hover {
-      background-color: ${({ theme }) => theme.colors.c19};
-    }
-  `}
-`
 
 const TileSectionHeader = styled(TeamTileHeader)`
   flex-direction: row;
