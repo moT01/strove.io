@@ -65,6 +65,7 @@ const RightSection = styled(FlexWrapper)`
 const InfoWrapper = styled(FlexWrapper)`
   width: 100%;
   margin: 0;
+  padding-left: 10px;
   align-items: flex-start;
 `
 
