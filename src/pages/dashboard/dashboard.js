@@ -33,9 +33,7 @@ import PersonalTeam from './personalTeam'
 import Projects from './projects'
 
 import {
-  FullFadeIn,
   EmailFormWrapper,
-  Wrapper,
   StyledForm,
   PageWrapper,
   TeamTileWrapper,
@@ -43,7 +41,6 @@ import {
   Title,
   SectionTitle,
   TeamTile,
-  Tile,
   TeamTileSection,
   ModalButton,
   Text,
@@ -53,7 +50,6 @@ import {
   Divider,
   RowWrapper,
   InviteStatus,
-  StyledIcon,
   IconWrapper,
   ExpandIcon,
   StyledCloseIcon,
