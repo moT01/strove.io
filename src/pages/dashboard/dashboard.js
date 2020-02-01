@@ -54,6 +54,9 @@ import {
   ModalText,
   WarningText,
   VerticalDivider,
+  Divider,
+  RowWrapper,
+  InviteStatus,
 } from './styled'
 
 const validate = values => {
@@ -81,28 +84,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const Divider = styled(VerticalDivider)`
-  justify-content: space-between;
-  flex-direction: ${({ columnOnMobile }) =>
-    columnOnMobile && isMobileOnly ? 'column' : 'row'};
-`
-
-const RowWrapper = styled(VerticalDivider)`
-  border-width: 0px 0px 1px 0px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-style: solid;
-  min-height: 60px;
-
-  :last-of-type {
-    border: none;
-  }
-`
-
-const InviteStatus = styled.span`
-  color: ${({ theme }) => theme.colors.c16};
-  margin-left: 24px;
-`
 
 const StyledIcon = styled(Icon)`
   display: flex;
