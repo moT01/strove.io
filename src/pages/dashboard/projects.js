@@ -16,7 +16,7 @@ import {
   Text,
   ModalText,
   VerticalDivider,
-  FullFadeIn
+  FullFadeIn,
 } from './styled'
 
 const ProjectTitle = styled.h3`
@@ -60,7 +60,7 @@ const RightSection = styled(FlexWrapper)`
 `
 
 const InfoWrapper = styled(FlexWrapper)`
-  width: 80%;
+  width: 100%;
   margin: 0;
   align-items: flex-start;
 `
