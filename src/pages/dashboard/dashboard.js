@@ -1,10 +1,10 @@
 import React, { useState, memo, useEffect } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 import ReactModal from 'react-modal'
 import Select from 'react-select'
@@ -52,6 +52,8 @@ import {
   ModalButton,
   Text,
   ModalText,
+  WarningText,
+  VerticalDivider,
 } from './styled'
 
 const validate = values => {
@@ -79,23 +81,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const WarningText = styled(ModalText)`
-  color: ${({ theme }) => theme.colors.c5};
-  margin-bottom: 5px;
-  word-break: break-word;
-`
-
-const VerticalDivider = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  flex-direction: ${({ columnOnMobile }) =>
-    columnOnMobile && isMobileOnly ? 'column' : 'row'};
-`
 
 const Divider = styled(VerticalDivider)`
   justify-content: space-between;
