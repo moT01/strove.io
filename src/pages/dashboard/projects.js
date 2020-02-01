@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -61,7 +61,7 @@ const RightSection = styled(FlexWrapper)`
 `
 
 const InfoWrapper = styled(FlexWrapper)`
-  width: 80%;
+  width: 100%;
   margin: 0;
   align-items: flex-start;
 `
