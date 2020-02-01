@@ -141,7 +141,7 @@ export const SectionTitle = styled(Title)`
   font-weight: 400;
 `
 
-export const Tile = styled.div`
+const Tile = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -409,13 +409,38 @@ export const FlexWrapper = styled.div`
 `
 
 export const RightSection = styled(FlexWrapper)`
-opacity: 0;
-height: 100%;
-padding-right: 10px;
-flex-direction: column;
-justify-content: flex-start;
-align-items: flex-end;
-flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
-transition: all 0.4s;
+  opacity: 0;
+  height: 100%;
+  padding-right: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
+  transition: all 0.4s;
 `
 
+const ProjectsTile = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.c2};
+  border-color: ${({ theme }) => theme.colors.c4};
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  width: 100%;
+  transition: all 0.2s;
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.c24};
+    ${RightSection} {
+      opacity: 1;
+    }
+  }
+
+  :last-of-type {
+    border: none;
+  }
+`
+
+export { ProjectsTile as Tile }

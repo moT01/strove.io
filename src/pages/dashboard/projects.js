@@ -20,32 +20,9 @@ import {
   UserPhoto,
   ProjectTitle,
   FlexWrapper,
-  RightSection
+  RightSection,
+  Tile
 } from './styled'
-
-const Tile = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.c2};
-  border-color: ${({ theme }) => theme.colors.c4};
-  border-width: 0px 0px 1px 0px;
-  border-style: solid;
-  width: 100%;
-  transition: all 0.2s;
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.c24};
-    ${RightSection} {
-      opacity: 1;
-    }
-  }
-
-  :last-of-type {
-    border: none;
-  }
-`
 
 const InfoWrapper = styled(FlexWrapper)`
   width: 100%;
