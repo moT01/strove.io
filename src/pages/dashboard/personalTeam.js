@@ -9,6 +9,8 @@ import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
 
+import { Wrapper } from './styled'
+
 const FullFadeIn = keyframes`
   0% {
     opacity: 0;
@@ -38,13 +40,6 @@ const ExpandIcon = styled(StyledIcon)`
   :focus {
     outline: none;
   }
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 `
 
 const TeamTileWrapper = styled(Wrapper)`

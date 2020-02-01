@@ -36,7 +36,7 @@ import StroveLogo from 'images/strove.png'
 import PersonalTeam from './personalTeam'
 import Projects from './projects'
 
-import { EmailFormWrapper } from './styled'
+import { EmailFormWrapper, Wrapper } from './styled'
 
 const validate = values => {
   let errors = {}
@@ -75,13 +75,6 @@ const FullFadeIn = keyframes`
 
 const StyledForm = styled(Form)`
   width: 100%;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
 `
 
 const PageWrapper = styled(Wrapper)`
