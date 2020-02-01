@@ -16,7 +16,6 @@ import {
   Text,
   ModalText,
   VerticalDivider,
-  FullFadeIn
 } from './styled'
 
 const ProjectTitle = styled.h3`
@@ -107,6 +106,7 @@ const Projects = ({
 }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const [hoveredProject, hoverProject] = useState()
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -193,7 +193,7 @@ const Projects = ({
           const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
-              <Tile key={project.id}>
+              <Tile key={project.id} onMouseOver={() => hoverProject(index)}>
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
@@ -244,97 +244,104 @@ const Projects = ({
                       <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                     </TextWrapper>
                   </InfoWrapper>
-                  <RightSection>
-                    <StroveButton
-                      to="/app/editor/"
-                      isDisabled={isDeleting || isContinuing || isStopping}
-                      isPrimary
-                      borderRadius="2px"
-                      padding="3px 15px"
-                      minWidth="150px"
-                      maxWidth="150px"
-                      margin="0px 0px 5px 0px"
-                      font-size="0.8rem"
-                      onClick={() =>
-                        isOwner
-                          ? handleStartClick(project)
-                          : addProject({
-                              link: project.repoLink,
-                              name: project.name,
-                              teamId: project.teamId,
-                              forkedFromId: project.id,
-                            })
-                      }
-                      text={
-                        isOwner
-                          ? currentProjectId && project.id === currentProjectId
-                            ? 'Continue'
-                            : 'Start'
-                          : 'Fork'
-                      }
-                    />
-                    {isOwner &&
-                      !project.forkedFromId &&
-                      (currentProjectId && currentProjectId === project.id ? (
-                        <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
-                          padding="3px 15px"
-                          borderRadius="2px"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          margin="0px 0px 5px 0px"
-                          font-size="0.8rem"
-                          onClick={() => {
-                            handleStopClick(project.id)
-                          }}
-                          text="Stop"
-                        />
-                      ) : (
-                        <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
-                          padding="3px 15px"
-                          borderRadius="2px"
-                          margin="0px 0px 5px 0px"
-                          font-size="0.8rem"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          onClick={() => {
-                            setModalVisible(true)
-                            setProjectToDelete(project)
-                          }}
-                          text="Delete"
-                        />
-                      ))}
-                    {isOwner && !project.forkedFromId && (
+                  {hoveredProject === index && (
+                    <RightSection>
                       <StroveButton
+                        to="/app/editor/"
                         isDisabled={isDeleting || isContinuing || isStopping}
-                        padding="3px 15px"
+                        isPrimary
                         borderRadius="2px"
-                        margin="0px 0px 5px 0px"
-                        font-size="0.8rem"
+                        padding="3px 15px"
                         minWidth="150px"
                         maxWidth="150px"
-                        onClick={() => {
-                          dispatch(
-                            mutation({
-                              name: 'setVisibility',
-                              mutation: SET_VISIBILITY,
-                              variables: {
-                                projectId: project.id,
-                                isVisible: !project.isVisible,
-                              },
-                              dataSelector: data => data,
-                              onSuccess: () => {
-                                updateTeams()
-                                updateOrganizations()
-                              },
-                            })
-                          )
-                        }}
-                        text={project.isVisible ? 'Hide' : 'Show'}
+                        margin="0px 0px 5px 0px"
+                        font-size="0.8rem"
+                        onClick={() =>
+                          isOwner
+                            ? handleStartClick(project)
+                            : addProject({
+                                link: project.repoLink,
+                                name: project.name,
+                                teamId: project.teamId,
+                                forkedFromId: project.id,
+                              })
+                        }
+                        text={
+                          isOwner
+                            ? currentProjectId &&
+                              project.id === currentProjectId
+                              ? 'Continue'
+                              : 'Start'
+                            : 'Fork'
+                        }
                       />
-                    )}
-                  </RightSection>
+                      {isOwner &&
+                        !project.forkedFromId &&
+                        (currentProjectId && currentProjectId === project.id ? (
+                          <StroveButton
+                            isDisabled={
+                              isDeleting || isContinuing || isStopping
+                            }
+                            padding="3px 15px"
+                            borderRadius="2px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            margin="0px 0px 5px 0px"
+                            font-size="0.8rem"
+                            onClick={() => {
+                              handleStopClick(project.id)
+                            }}
+                            text="Stop"
+                          />
+                        ) : (
+                          <StroveButton
+                            isDisabled={
+                              isDeleting || isContinuing || isStopping
+                            }
+                            padding="3px 15px"
+                            borderRadius="2px"
+                            margin="0px 0px 5px 0px"
+                            font-size="0.8rem"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            onClick={() => {
+                              setModalVisible(true)
+                              setProjectToDelete(project)
+                            }}
+                            text="Delete"
+                          />
+                        ))}
+                      {isOwner && !project.forkedFromId && (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="3px 15px"
+                          borderRadius="2px"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          onClick={() => {
+                            dispatch(
+                              mutation({
+                                name: 'setVisibility',
+                                mutation: SET_VISIBILITY,
+                                variables: {
+                                  projectId: project.id,
+                                  isVisible: !project.isVisible,
+                                },
+                                dataSelector: data => data,
+                                onSuccess: () => {
+                                  updateTeams()
+                                  updateOrganizations()
+                                },
+                              })
+                            )
+                          }}
+                          text={project.isVisible ? 'Hide' : 'Show'}
+                        />
+                      )}
+                    </RightSection>
+                  )}
                 </VerticalDivider>
               </Tile>
             )
