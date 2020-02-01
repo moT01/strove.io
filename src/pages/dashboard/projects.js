@@ -195,7 +195,11 @@ const Projects = ({
           const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
-              <Tile key={project.id} onMouseOver={() => setHoveredIndex(index)}>
+              <Tile
+                key={project.id}
+                onMouseOver={() => setHoveredIndex(index)}
+                onMouseLeave={setHoveredIndex}
+              >
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
