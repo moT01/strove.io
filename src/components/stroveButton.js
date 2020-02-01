@@ -63,7 +63,7 @@ const sharedStyles = css`
   box-shadow: 0 10px 10px -15px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${FadeIn} 0, 5s ease-out;
+  #animation: ${FadeIn} 0, 5s ease-out;
   opacity: 0.9;
   :focus {
     outline: 0;
@@ -74,7 +74,7 @@ const sharedStyles = css`
   ${props =>
     !props.disabled &&
     css`
-      animation: ${ButtonFadeIn} 1s ease-out;
+      #animation: ${ButtonFadeIn} 1s ease-out;
       cursor: pointer;
       &:hover {
         opacity: 1;
@@ -125,7 +125,7 @@ const Button = styled.button`
   box-shadow: 0 10px 10px -15px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
-  animation: ${FadeIn} 0, 5s ease-out;
+  #animation: ${FadeIn} 0, 5s ease-out;
   opacity: 0.9;
   :focus {
     outline: 0;
@@ -136,7 +136,7 @@ const Button = styled.button`
   ${props =>
     !props.disabled &&
     css`
-      animation: ${ButtonFadeIn} 1s ease-out;
+      #animation: ${ButtonFadeIn} 1s ease-out;
       cursor: pointer;
       &:hover {
         opacity: 1;

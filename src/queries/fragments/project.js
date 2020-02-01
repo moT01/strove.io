@@ -5,6 +5,10 @@ export const ProjectFragment = gql`
     id
     name
     userId
+    user {
+      name
+      photoUrl
+    }
     description
     isPrivate
     createdAt

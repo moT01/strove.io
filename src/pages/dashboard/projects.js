@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
@@ -9,6 +9,7 @@ import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
+import StroveLogo from 'images/strove.png'
 
 import {
   TilesWrapper,
@@ -16,13 +17,31 @@ import {
   Text,
   ModalText,
   VerticalDivider,
-  FullFadeIn,
+  UserPhoto,
 } from './styled'
 
 const ProjectTitle = styled.h3`
   font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.c3};
-  margin: 0.3vh 0.3vh 0.3vh 0;
+  margin: 5px 5px 5px 0;
+`
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const RightSection = styled(FlexWrapper)`
+  opacity: 0;
+  height: 100%;
+  padding-right: 10px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
+  transition: all 0.4s;
 `
 
 const Tile = styled.div`
@@ -34,46 +53,38 @@ const Tile = styled.div`
   border-color: ${({ theme }) => theme.colors.c4};
   border-width: 0px 0px 1px 0px;
   border-style: solid;
-  margin: 5px;
-  padding-left: 10px;
   width: 100%;
   transition: all 0.2s;
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.c24};
+    ${RightSection} {
+      opacity: 1;
+    }
+  }
 
   :last-of-type {
     border: none;
   }
 `
 
-const FlexWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-const RightSection = styled(FlexWrapper)`
-  opacity: ${({ isVisible }) => (isVisible ? '1' : '0')};
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
-  flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
-  transition: all 0.4s;
-`
-
 const InfoWrapper = styled(FlexWrapper)`
   width: 100%;
   margin: 0;
+  padding-left: 10px;
   align-items: flex-start;
+  overflow: hidden;
 `
 
 const TextWrapper = styled(FlexWrapper)`
   flex-direction: row;
-  margin-top: 0.3vh;
-  margin-bottom: 0.3vh;
-  width: 90%;
+  margin-bottom: 3px;
   height: auto;
   justify-content: flex-start;
+
+  :last-of-type {
+    margin: 0;
+  }
 `
 
 const CircleIcon = styled.div`
@@ -109,10 +120,10 @@ const Projects = ({
 }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const [hoveredIndex, setHoveredIndex] = useState()
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
-  const [hoverProject, setHoverProject] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -198,12 +209,16 @@ const Projects = ({
             (project.isVisible || isOwner) && (
               <Tile
                 key={project.id}
-                onMouseEnter={() => setHoverProject(project.id)}
-                onMouseLeave={() => setHoverProject(null)}
+                onMouseOver={() => setHoveredIndex(index)}
+                onMouseLeave={setHoveredIndex}
               >
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
+                    <TextWrapper>
+                      <UserPhoto src={project?.user?.photoUrl || StroveLogo} />
+                      <Text>{project.user.name}</Text>
+                    </TextWrapper>
 
                     {currentProjectId && project.id === currentProjectId ? (
                       <TextWrapper>
@@ -232,18 +247,6 @@ const Projects = ({
                         </Text>
                       </TextWrapper>
                     )}
-                    {/* <TextWrapper>
-        <StyledIcon
-          type="branches"
-        />
-        <Text> {project.branch}</Text>
-      </TextWrapper>
-      <TextWrapper>
-        <StyledIcon
-          type="code"
-        />
-        <Text>{project.language}</Text>
-      </TextWrapper> */}
                     <TextWrapper>
                       <StyledIcon
                         type={project.isVisible ? 'eye' : 'eye-invisible'}
@@ -251,97 +254,104 @@ const Projects = ({
                       <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                     </TextWrapper>
                   </InfoWrapper>
-                  <RightSection isVisible={hoverProject === project.id}>
-                    <StroveButton
-                      to="/app/editor/"
-                      isDisabled={isDeleting || isContinuing || isStopping}
-                      isPrimary
-                      borderRadius="2px"
-                      padding="3px 15px"
-                      minWidth="150px"
-                      maxWidth="150px"
-                      margin="0px 0px 5px 0px"
-                      font-size="0.8rem"
-                      onClick={() =>
-                        isOwner
-                          ? handleStartClick(project)
-                          : addProject({
-                              link: project.repoLink,
-                              name: project.name,
-                              teamId: project.teamId,
-                              forkedFromId: project.id,
-                            })
-                      }
-                      text={
-                        isOwner
-                          ? currentProjectId && project.id === currentProjectId
-                            ? 'Continue'
-                            : 'Start'
-                          : 'Fork'
-                      }
-                    />
-                    {isOwner &&
-                      !project.forkedFromId &&
-                      (currentProjectId && currentProjectId === project.id ? (
-                        <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
-                          padding="3px 15px"
-                          borderRadius="2px"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          margin="0px 0px 5px 0px"
-                          font-size="0.8rem"
-                          onClick={() => {
-                            handleStopClick(project.id)
-                          }}
-                          text="Stop"
-                        />
-                      ) : (
-                        <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
-                          padding="3px 15px"
-                          borderRadius="2px"
-                          margin="0px 0px 5px 0px"
-                          font-size="0.8rem"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          onClick={() => {
-                            setModalVisible(true)
-                            setProjectToDelete(project)
-                          }}
-                          text="Delete"
-                        />
-                      ))}
-                    {isOwner && !project.forkedFromId && (
+                  {(hoveredIndex === index || isMobileOnly) && (
+                    <RightSection>
                       <StroveButton
+                        to="/app/editor/"
                         isDisabled={isDeleting || isContinuing || isStopping}
-                        padding="3px 15px"
+                        isPrimary
                         borderRadius="2px"
-                        margin="0px 0px 5px 0px"
-                        font-size="0.8rem"
+                        padding="3px 15px"
                         minWidth="150px"
                         maxWidth="150px"
-                        onClick={() => {
-                          dispatch(
-                            mutation({
-                              name: 'setVisibility',
-                              mutation: SET_VISIBILITY,
-                              variables: {
-                                projectId: project.id,
-                                isVisible: !project.isVisible,
-                              },
-                              dataSelector: data => data,
-                              onSuccess: () => {
-                                updateTeams()
-                                updateOrganizations()
-                              },
-                            })
-                          )
-                        }}
-                        text={project.isVisible ? 'Hide' : 'Show'}
+                        margin="0px 0px 5px 0px"
+                        font-size="0.8rem"
+                        onClick={() =>
+                          isOwner
+                            ? handleStartClick(project)
+                            : addProject({
+                                link: project.repoLink,
+                                name: project.name,
+                                teamId: project.teamId,
+                                forkedFromId: project.id,
+                              })
+                        }
+                        text={
+                          isOwner
+                            ? currentProjectId &&
+                              project.id === currentProjectId
+                              ? 'Continue'
+                              : 'Start'
+                            : 'Fork'
+                        }
                       />
-                    )}
-                  </RightSection>
+                      {isOwner &&
+                        !project.forkedFromId &&
+                        (currentProjectId && currentProjectId === project.id ? (
+                          <StroveButton
+                            isDisabled={
+                              isDeleting || isContinuing || isStopping
+                            }
+                            padding="3px 15px"
+                            borderRadius="2px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            margin="0px 0px 5px 0px"
+                            font-size="0.8rem"
+                            onClick={() => {
+                              handleStopClick(project.id)
+                            }}
+                            text="Stop"
+                          />
+                        ) : (
+                          <StroveButton
+                            isDisabled={
+                              isDeleting || isContinuing || isStopping
+                            }
+                            padding="3px 15px"
+                            borderRadius="2px"
+                            margin="0px 0px 5px 0px"
+                            font-size="0.8rem"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            onClick={() => {
+                              setModalVisible(true)
+                              setProjectToDelete(project)
+                            }}
+                            text="Delete"
+                          />
+                        ))}
+                      {isOwner && !project.forkedFromId && (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="3px 15px"
+                          borderRadius="2px"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          onClick={() => {
+                            dispatch(
+                              mutation({
+                                name: 'setVisibility',
+                                mutation: SET_VISIBILITY,
+                                variables: {
+                                  projectId: project.id,
+                                  isVisible: !project.isVisible,
+                                },
+                                dataSelector: data => data,
+                                onSuccess: () => {
+                                  updateTeams()
+                                  updateOrganizations()
+                                },
+                              })
+                            )
+                          }}
+                          text={project.isVisible ? 'Hide' : 'Show'}
+                        />
+                      )}
+                    </RightSection>
+                  )}
                 </VerticalDivider>
               </Tile>
             )
