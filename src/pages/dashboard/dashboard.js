@@ -44,6 +44,9 @@ import {
   TeamTileWrapper,
   TilesWrapper,
   Title,
+  SectionTitle,
+  TeamTile,
+  Tile,
 } from './styled'
 
 const validate = values => {
@@ -79,41 +82,6 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
-`
-
-const SectionTitle = styled(Title)`
-  font-size: 1.2rem;
-  font-weight: 400;
-`
-
-const Tile = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-width: 1px;
-  border-style: solid;
-  padding: 20px;
-  box-shadow: ${({ expanded, theme }) =>
-    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c19}`};
-  margin: 15px;
-  width: 50%;
-  transition: all 0.2s;
-
-  /* @media (max-width: 1365px) {
-    width: 80vw;
-    height: auto;
-  } */
-`
-
-const TeamTile = styled(Tile)`
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-  border-top: none;
 `
 
 const TeamTileSection = styled(Tile)`
