@@ -271,10 +271,23 @@ const PersonalTeam = ({ history, teams, updateTeams }) => {
     setWarningModal({
       visible: true,
       content: (
-        <ModalText>
-          Adding team members is not available in free plan. Please visit our
-          pricing page for more information
-        </ModalText>
+        <TeamTileWrapper>
+          <ModalText>
+            Adding team members is not available in free plan. Please visit our
+            pricing page for more information
+          </ModalText>
+          <StroveButton
+            isDashboard
+            isLink
+            padding="5px"
+            minWidth="150px"
+            maxWidth="150px"
+            borderRadius="2px"
+            margin="0 0 0 10px"
+            to="/pricing"
+            text="Pricing"
+          />
+        </TeamTileWrapper>
       ),
     })
   }
