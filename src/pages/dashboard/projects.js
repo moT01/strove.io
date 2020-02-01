@@ -9,6 +9,7 @@ import { mutation, handleStopProject } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
+import StroveLogo from 'images/strove.png'
 
 import {
   TilesWrapper,
@@ -16,6 +17,7 @@ import {
   Text,
   ModalText,
   VerticalDivider,
+  UserPhoto,
 } from './styled'
 
 const ProjectTitle = styled.h3`
@@ -202,6 +204,7 @@ const Projects = ({
               >
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
+                    {/* <UserPhoto src={project.user.photoUrl || StroveLogo} /> */}
                     <ProjectTitle>{project.name}</ProjectTitle>
 
                     {currentProjectId && project.id === currentProjectId ? (
