@@ -63,6 +63,10 @@ import {
   StyledCloseIcon,
   StyledReactModal,
   TeamTileHeader,
+  TileSectionHeader,
+  SettingWrapper,
+  DropdownWrapper,
+  StyledSelect,
 } from './styled'
 
 const validate = values => {
@@ -90,56 +94,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const TileSectionHeader = styled(TeamTileHeader)`
-  flex-direction: row;
-  justify-content: flex-start;
-  border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
-  box-shadow: none;
-
-  background-color: ${({ theme, expanded }) =>
-    expanded ? theme.colors.c1 : theme.colors.c2};
-
-  ${Title} {
-    color: ${({ theme, expanded }) =>
-      expanded ? theme.colors.c2 : theme.colors.c3};
-    transition: all 0.2s;
-    padding: 0;
-  }
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.c2};
-    ${Title} {
-      color: ${({ theme }) => theme.colors.c3};
-    }
-    ${ExpandIcon} {
-      color: ${({ theme }) => theme.colors.c3};
-    }
-  }
-`
-
-const SettingWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 20px 0 0;
-`
-
-const DropdownWrapper = styled.div`
-  width: 20vw;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: ${({ theme }) => theme.colors.c3};
-`
-
-const StyledSelect = styled(Select)`
-  width: 100%;
-`
 
 const Setting = styled.div`
   display: flex;
