@@ -273,7 +273,9 @@ export const ExpandIcon = styled(StyledIcon)`
   transform: ${({ expanded }) =>
     expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
   color: ${({ theme }) => theme.colors.c3};
+  animation: ${FullFadeIn} 0.5s ease-out;
   transition: all 0.2s;
+  cursor: pointer;
 
   :focus {
     outline: none;
