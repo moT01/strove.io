@@ -1,13 +1,9 @@
 import React, { useState, memo, useEffect } from 'react'
-import styled from 'styled-components/macro'
-import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
-import ReactModal from 'react-modal'
-import Select from 'react-select'
 
 import { mutation, handleStopProject, query } from 'utils'
 import { useAnalytics } from 'hooks'
@@ -67,6 +63,8 @@ import {
   SettingWrapper,
   DropdownWrapper,
   StyledSelect,
+  Setting,
+  UserPhoto,
 } from './styled'
 
 const validate = values => {
@@ -94,24 +92,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const Setting = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 5px 0;
-  padding: 5px;
-`
-
-const UserPhoto = styled.img`
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  margin: 0;
-  margin-left: 10px;
-`
 
 const emptyWarningModalContent = {
   visible: false,
