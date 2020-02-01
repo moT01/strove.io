@@ -36,7 +36,15 @@ import StroveLogo from 'images/strove.png'
 import PersonalTeam from './personalTeam'
 import Projects from './projects'
 
-import { EmailFormWrapper, Wrapper } from './styled'
+import {
+  EmailFormWrapper,
+  Wrapper,
+  StyledForm,
+  PageWrapper,
+  TeamTileWrapper,
+  TilesWrapper,
+  Title,
+} from './styled'
 
 const validate = values => {
   let errors = {}
@@ -71,40 +79,6 @@ const FullFadeIn = keyframes`
   100% {
     opacity: 1;
   }
-`
-
-const StyledForm = styled(Form)`
-  width: 100%;
-`
-
-const PageWrapper = styled(Wrapper)`
-  width: 100vw;
-  min-height: calc(100vh - 64px);
-  padding-top: 10px;
-  padding: 0 20px;
-  justify-content: space-between;
-`
-
-const TeamTileWrapper = styled(Wrapper)`
-  margin: 20px 0px;
-  transition: all 0.2s;
-  width: 100%;
-  height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
-`
-
-const TilesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: ${isMobileOnly ? '100%' : '80%'};
-  animation: ${FullFadeIn} 0.5s ease-out;
-`
-
-const Title = styled.div`
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.colors.c3};
-  margin: 3px 3px 3px 0;
 `
 
 const SectionTitle = styled(Title)`
