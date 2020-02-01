@@ -56,6 +56,7 @@ const FlexWrapper = styled.div`
 
 const RightSection = styled(FlexWrapper)`
   height: 100%;
+  padding-right: 10px;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
@@ -67,6 +68,7 @@ const InfoWrapper = styled(FlexWrapper)`
   margin: 0;
   padding-left: 10px;
   align-items: flex-start;
+  overflow: hidden;
 `
 
 const TextWrapper = styled(FlexWrapper)`

@@ -190,7 +190,7 @@ export const ModalButton = styled(StroveButton)`
   padding: 5px;
 `
 
-export const Text = styled.p`
+export const Text = styled.div`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
   margin-left: 10px;
