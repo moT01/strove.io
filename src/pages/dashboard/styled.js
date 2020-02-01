@@ -473,8 +473,8 @@ export const TextWrapper = styled(FlexWrapper)`
 `
 
 export const CircleIcon = styled.div`
-  height: 1.5vh;
-  width: 1.5vh;
+  height: 1rem;
+  width: 1rem;
   border-radius: 50%;
   background: ${({ theme, active }) =>
     active ? theme.colors.c8 : theme.colors.c9};
