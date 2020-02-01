@@ -31,7 +31,6 @@ import StroveLogo from 'images/strove.png'
 
 import PersonalTeam from './personalTeam'
 import Projects from './projects'
-
 import {
   EmailFormWrapper,
   StyledForm,

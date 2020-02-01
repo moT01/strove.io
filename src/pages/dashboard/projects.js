@@ -10,22 +10,14 @@ import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 
-const FullFadeIn = keyframes`
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  `
-const TilesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  animation: ${FullFadeIn} 0.5s ease-out;
-`
+import {
+  TilesWrapper,
+  ModalButton,
+  Text,
+  ModalText,
+  VerticalDivider,
+  FullFadeIn
+} from './styled'
 
 const ProjectTitle = styled.h3`
   font-size: 1.1rem;
@@ -50,41 +42,6 @@ const Tile = styled.div`
   :last-of-type {
     border: none;
   }
-`
-
-const ModalButton = styled(StroveButton)`
-  animation: ${FullFadeIn} 0.2s ease-out;
-  border-radius: 2px;
-  max-width: 150px;
-  padding: 5px 0px;
-`
-
-const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c3};
-  font-size: 1rem;
-  margin-left: 2%;
-  margin-bottom: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-  overflow: hidden;
-`
-
-const ModalText = styled(Text)`
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-`
-
-const VerticalDivider = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  height: 100%;
-  flex-direction: ${({ columnOnMobile }) =>
-    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const FlexWrapper = styled.div`
