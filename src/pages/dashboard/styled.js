@@ -409,17 +409,6 @@ export const FlexWrapper = styled.div`
 `
 
 export const RightSection = styled(FlexWrapper)`
-  ${isMobileOnly &&
-    `
-  opacity: 0;
-  width: 100%;
-  opacity: 1;
-
-  button {
-    width: 100%;
-    max-width: 100%;
-  }
-  `}
   height: 100%;
   padding-right: 10px;
   flex-direction: column;
@@ -427,6 +416,17 @@ export const RightSection = styled(FlexWrapper)`
   align-items: flex-end;
   flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
   transition: all 0.4s;
+
+  ${isMobileOnly &&
+    `
+  width: 100%;
+  padding-right: 0;
+
+  button {
+    width: 100%;
+    max-width: 100%;
+  }
+  `}
 `
 
 export const ProjectsTile = styled.div`
