@@ -49,6 +49,9 @@ import {
   TeamTile,
   Tile,
   TeamTileSection,
+  ModalButton,
+  Text,
+  ModalText,
 } from './styled'
 
 const validate = values => {
@@ -76,30 +79,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const ModalButton = styled(StroveButton)`
-  animation: ${FullFadeIn} 0.2s ease-out;
-  border-radius: 2px;
-  max-width: 150px;
-  padding: 5px;
-`
-
-const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c3};
-  font-size: 1rem;
-  margin-left: 10px;
-  margin-bottom: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`
-
-const ModalText = styled(Text)`
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-  word-break: break-word;
-`
 
 const WarningText = styled(ModalText)`
   color: ${({ theme }) => theme.colors.c5};
