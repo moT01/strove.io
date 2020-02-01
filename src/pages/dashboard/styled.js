@@ -246,16 +246,6 @@ export const InviteStatus = styled.span`
   margin-left: 24px;
 `
 
-export const StyledIcon = styled(Icon)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.c3};
-  cursor: pointer;
-  animation: ${FullFadeIn} 0.5s ease-out;
-`
-
 export const IconWrapper = styled(Wrapper)`
   min-width: 50px;
   height: 100%;
@@ -268,6 +258,14 @@ export const IconWrapper = styled(Wrapper)`
   i {
     line-height: 0;
   }
+`
+
+export const StyledIcon = styled(Icon)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.c1};
 `
 
 export const ExpandIcon = styled(StyledIcon)`
@@ -460,4 +458,12 @@ export const TextWrapper = styled(FlexWrapper)`
   :last-of-type {
     margin: 0;
   }
+`
+
+export const CircleIcon = styled.div`
+  height: 1.5vh;
+  width: 1.5vh;
+  border-radius: 50%;
+  background: ${({ theme, active }) =>
+    active ? theme.colors.c8 : theme.colors.c9};
 `

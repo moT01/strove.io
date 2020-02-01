@@ -19,28 +19,13 @@ import {
   VerticalDivider,
   UserPhoto,
   ProjectTitle,
-  FlexWrapper,
   RightSection,
   ProjectsTile,
   InfoWrapper,
-  TextWrapper
+  TextWrapper,
+  CircleIcon,
+  StyledIcon,
 } from './styled'
-
-const CircleIcon = styled.div`
-  height: 1.5vh;
-  width: 1.5vh;
-  border-radius: 50%;
-  background: ${({ theme, active }) =>
-    active ? theme.colors.c8 : theme.colors.c9};
-`
-
-const StyledIcon = styled(Icon)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.c1};
-`
 
 const sortByActiveProjects = projects =>
   projects?.reduce((acc, element) => {
