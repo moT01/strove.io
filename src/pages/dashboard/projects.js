@@ -52,11 +52,13 @@ const FlexWrapper = styled.div`
 `
 
 const RightSection = styled(FlexWrapper)`
+  opacity: ${({ isVisible }) => (isVisible ? '1' : '0')};
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
   flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
+  transition: all 0.4s;
 `
 
 const InfoWrapper = styled(FlexWrapper)`
@@ -110,6 +112,7 @@ const Projects = ({
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
+  const [hoverProject, setHoverProject] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
@@ -193,7 +196,11 @@ const Projects = ({
           const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
-              <Tile key={project.id}>
+              <Tile
+                key={project.id}
+                onMouseEnter={() => setHoverProject(project.id)}
+                onMouseLeave={() => setHoverProject(null)}
+              >
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
@@ -244,7 +251,7 @@ const Projects = ({
                       <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                     </TextWrapper>
                   </InfoWrapper>
-                  <RightSection>
+                  <RightSection isVisible={hoverProject === project.id}>
                     <StroveButton
                       to="/app/editor/"
                       isDisabled={isDeleting || isContinuing || isStopping}
