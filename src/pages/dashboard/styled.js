@@ -409,7 +409,17 @@ export const FlexWrapper = styled.div`
 `
 
 export const RightSection = styled(FlexWrapper)`
-  ${!isMobileOnly && 'opacity: 0;'}
+  ${isMobileOnly &&
+    `
+  opacity: 0;
+  width: 100%;
+  opacity: 1;
+
+  button {
+    width: 100%;
+    max-width: 100%;
+  }
+  `}
   height: 100%;
   padding-right: 10px;
   flex-direction: column;
