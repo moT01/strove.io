@@ -407,3 +407,15 @@ export const FlexWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const RightSection = styled(FlexWrapper)`
+opacity: 0;
+height: 100%;
+padding-right: 10px;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-end;
+flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
+transition: all 0.4s;
+`
+
