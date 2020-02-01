@@ -57,6 +57,9 @@ import {
   Divider,
   RowWrapper,
   InviteStatus,
+  StyledIcon,
+  IconWrapper,
+  ExpandIcon
 } from './styled'
 
 const validate = values => {
@@ -84,42 +87,6 @@ const validateTeamName = values => {
 
   return errors
 }
-
-const StyledIcon = styled(Icon)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.c3};
-  cursor: pointer;
-  animation: ${FullFadeIn} 0.5s ease-out;
-`
-
-const IconWrapper = styled(Wrapper)`
-  min-width: 50px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: 5px;
-
-  i {
-    line-height: 0;
-  }
-`
-
-const ExpandIcon = styled(StyledIcon)`
-  font-size: 1rem;
-  transform: ${({ expanded }) =>
-    expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
-  color: ${({ theme }) => theme.colors.c3};
-  transition: all 0.2s;
-
-  :focus {
-    outline: none;
-  }
-`
 
 const StyledCloseIcon = styled(Icon)`
   position: absolute;
