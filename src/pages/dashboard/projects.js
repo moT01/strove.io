@@ -21,7 +21,7 @@ import {
   ProjectTitle,
   FlexWrapper,
   RightSection,
-  Tile
+  ProjectsTile,
 } from './styled'
 
 const InfoWrapper = styled(FlexWrapper)`
@@ -162,7 +162,7 @@ const Projects = ({
           const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
-              <Tile key={project.id}>
+              <ProjectsTile key={project.id}>
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
@@ -297,7 +297,7 @@ const Projects = ({
                     )}
                   </RightSection>
                 </VerticalDivider>
-              </Tile>
+              </ProjectsTile>
             )
           )
         })}

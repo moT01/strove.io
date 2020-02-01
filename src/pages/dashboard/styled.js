@@ -419,7 +419,7 @@ export const RightSection = styled(FlexWrapper)`
   transition: all 0.4s;
 `
 
-const ProjectsTile = styled.div`
+export const ProjectsTile = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -442,5 +442,3 @@ const ProjectsTile = styled.div`
     border: none;
   }
 `
-
-export { ProjectsTile as Tile }
