@@ -1,6 +1,4 @@
 import React, { useState, memo } from 'react'
-import styled from 'styled-components/macro'
-import { Icon } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
