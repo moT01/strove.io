@@ -108,7 +108,7 @@ const Projects = ({
 }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
-  const [hoveredProject, hoverProject] = useState()
+  const [hoveredIndex, setHoveredIndex] = useState()
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
@@ -195,7 +195,7 @@ const Projects = ({
           const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
-              <Tile key={project.id} onMouseOver={() => hoverProject(index)}>
+              <Tile key={project.id} onMouseOver={() => setHoveredIndex(index)}>
                 <VerticalDivider columnOnMobile>
                   <InfoWrapper>
                     <ProjectTitle>{project.name}</ProjectTitle>
@@ -246,7 +246,7 @@ const Projects = ({
                       <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                     </TextWrapper>
                   </InfoWrapper>
-                  {hoveredProject === index && (
+                  {hoveredIndex === index && (
                     <RightSection>
                       <StroveButton
                         to="/app/editor/"
