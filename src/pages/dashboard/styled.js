@@ -409,7 +409,7 @@ export const FlexWrapper = styled.div`
 `
 
 export const RightSection = styled(FlexWrapper)`
-  opacity: 0;
+  ${!isMobileOnly && 'opacity: 0;'}
   height: 100%;
   padding-right: 10px;
   flex-direction: column;
