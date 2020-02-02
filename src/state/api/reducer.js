@@ -2,7 +2,7 @@ import { REHYDRATE } from 'redux-persist'
 import * as C from './consts'
 
 const initialState = {
-  user: { data: null },
+  user: { data: {} },
   sendEmail: null,
   myProjects: { data: [] },
   subscription: { data: {} },

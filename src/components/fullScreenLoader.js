@@ -40,7 +40,6 @@ const LoaderWrapper = styled.div`
 
 const LoaderContainer = styled(SmallLoaderWrapper)`
   width: ${props => (props.isFullScreen ? '15vw' : '100%')};
-  top: ${props => props.isFullScreen && '3vh'};
   height: auto;
   animation: ${SpinToWin} 3.5s linear infinite;
 `
