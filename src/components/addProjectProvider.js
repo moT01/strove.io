@@ -151,7 +151,10 @@ const AddProjectProvider = ({ children, history, teamId }) => {
         currentProjectId={currentProjectId}
       />
       <StyledModal
-        isOpen={(isLoading && !isAdding) || isDeleting || isStopping}
+        isOpen={
+          ((isLoading && !isAdding) || isDeleting || isStopping) &&
+          !window.location.href.includes('editor')
+        }
         contentLabel="Loading"
         ariaHideApp={false}
       >

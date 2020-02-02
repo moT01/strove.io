@@ -14,14 +14,14 @@ export default (state = initialState, { payload, type }) => {
     case C.LATENCY_MEASURE_END: {
       return {
         ...state,
-        latency: payload - state.timeStart,
+        latency: Math.round(payload - state.timeStart),
       }
     }
 
     case C.FULL_LATENCY_MEASUREMENT: {
       return {
         ...state,
-        latency: payload,
+        latency: Math.round(payload),
       }
     }
 
