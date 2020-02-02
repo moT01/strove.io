@@ -21,10 +21,7 @@ const SmallLoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${props =>
-    props.isFullScreen
-      ? `calc(100vh - ${props.type === 'openProject' ? '20px' : '64px'})`
-      : props.height};
+  height: ${props => (props.isFullScreen ? '100vh' : props.height)};
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
 `
 
@@ -37,10 +34,7 @@ const LoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${props =>
-    props.isFullScreen
-      ? `calc(100vh - ${props.type === 'openProject' ? '20px' : '64px'})`
-      : props.height};
+  height: ${props => (props.isFullScreen ? '100vh' : props.height)};
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
 `
 
