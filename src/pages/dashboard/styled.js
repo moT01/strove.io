@@ -416,11 +416,13 @@ export const RightSection = styled(FlexWrapper)`
   align-items: flex-end;
   flex-direction: ${isMobileOnly ? 'flex-start' : 'flex-end'};
   transition: all 0.4s;
+  opacity: 0;
 
   ${isMobileOnly &&
     `
   width: 100%;
   padding-right: 0;
+  opacity: 1;
 
   button {
     width: 100%;
