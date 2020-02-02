@@ -420,13 +420,15 @@ export const RightSection = styled(FlexWrapper)`
 
   ${isMobileOnly &&
     `
+  margin-top: 10px;
   width: 100%;
   padding-right: 0;
   opacity: 1;
 
   button {
+    align-self: center;
     width: 100%;
-    max-width: 100%;
+    max-width: 250px;
   }
   `}
 `
