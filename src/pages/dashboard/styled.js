@@ -200,6 +200,14 @@ export const Text = styled.div`
   overflow: hidden;
 `
 
+export const OrganizationName = styled(Text)`
+  align-self: flex-start;
+  color: ${({ theme }) => theme.colors.c25};
+  margin-top: 10px;
+  font-size: 1.8rem;
+  height: 1.8rem;
+`
+
 export const ModalText = styled(Text)`
   white-space: normal;
   text-overflow: wrap;

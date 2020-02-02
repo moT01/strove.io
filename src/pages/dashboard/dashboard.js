@@ -60,6 +60,7 @@ import {
   StyledSelect,
   Setting,
   UserPhoto,
+  OrganizationName,
 } from './styled'
 
 const validate = values => {
@@ -230,7 +231,7 @@ const Dashboard = ({ history }) => {
           ></PersonalTeam>
           {myOrganizations.map(organization => (
             <>
-              <Text>{organization.name}</Text>
+              <OrganizationName>{organization.name}</OrganizationName>
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
                   team => {
