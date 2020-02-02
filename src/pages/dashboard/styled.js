@@ -265,7 +265,7 @@ export const StyledIcon = styled(Icon)`
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c11};
 `
 
 export const ExpandIcon = styled(StyledIcon)`
