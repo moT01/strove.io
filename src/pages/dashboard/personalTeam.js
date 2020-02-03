@@ -18,6 +18,8 @@ import {
   SectionTitle,
   TeamTileHeader,
   TileSectionHeader,
+  TeamTile,
+  TeamTileSection
 } from './styled'
 
 const FullFadeIn = keyframes`
@@ -28,26 +30,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const TeamTile = styled(Tile)`
-  width: 100%;
-  padding: 0px;
-  margin: 0px;
-  border-top: none;
-`
-
-const TeamTileSection = styled(Tile)`
-  align-items: flex-start;
-  margin: 0px;
-  padding: 10px;
-  border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
-  border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  width: 100%;
-  box-shadow: none;
-  padding-bottom: 0;
-`
-
 const IconWrapper = styled(Wrapper)`
   min-width: 50px;
   height: 100%;
