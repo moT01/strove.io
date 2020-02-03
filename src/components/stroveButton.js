@@ -240,6 +240,7 @@ const StroveButton = props => {
             : `Unamed button at ${window.location.href}`,
         })
         // props.onClick(event)
+        console.log('TCL: props.onClick(event)', props.onClick(event))
       }}
       {...props}
     >
@@ -266,7 +267,7 @@ const StroveButton = props => {
             ? `${props.text}`
             : `Unamed button at ${window.location.href}`,
         })
-        props.onClick(event)
+        props.onClick && props.onClick(event)
       }}
       {...props}
     >
