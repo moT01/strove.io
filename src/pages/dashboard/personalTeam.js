@@ -37,23 +37,6 @@ const FullFadeIn = keyframes`
   }
     `
 
-const WarningText = styled(ModalText)`
-  color: ${({ theme }) => theme.colors.c5};
-  margin-bottom: 5px;
-  word-break: break-word;
-`
-
-const RowWrapper = styled(VerticalDivider)`
-  border-width: 0px 0px 1px 0px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-style: solid;
-  min-height: 60px;
-
-  :last-of-type {
-    border: none;
-  }
-`
-
 const StyledCloseIcon = styled(Icon)`
   position: absolute;
   top: 15px;
