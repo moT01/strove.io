@@ -44,6 +44,7 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject, history }) => {
+  const myTeams = useSelector(selectors.api.getMyTeams)
   const token = useSelector(selectors.getToken)
 
   const searchParams = getWindowSearchParams()
@@ -57,7 +58,7 @@ const Run = ({ addProject, history }) => {
   }
 
   const onClick = () => {
-    addProject({ link: repoUrl })
+    addProject({ link: repoUrl, teamId: myTeams[0].id })
   }
 
   return (
