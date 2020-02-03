@@ -25,7 +25,9 @@ import {
   IconWrapper,
   Text,
   ModalText,
-  ModalButton
+  ModalButton,
+  StyledCloseIcon,
+  StyledReactModal
 } from './styled'
 
 const FullFadeIn = keyframes`
@@ -36,29 +38,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const StyledCloseIcon = styled(Icon)`
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.7vh;
-  color: ${({ theme }) => theme.colors.c1};
-  cursor: pointer;
-  :focus {
-    outline: none;
-  }
-`
-
-const StyledReactModal = styled(ReactModal)`
-  display: flex;
-  height: auto;
-  width: auto;
-  position: fixed;
-  animation: ${FullFadeIn} 0.2s ease-out;
-  :focus {
-    outline: 0;
-  }
-`
 
 const emptyWarningModalContent = {
   visible: false,
