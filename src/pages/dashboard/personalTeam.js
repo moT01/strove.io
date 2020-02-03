@@ -9,7 +9,7 @@ import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
 
-import { Wrapper, ExpandIcon, TeamTileWrapper, Tile } from './styled'
+import { Wrapper, ExpandIcon, TeamTileWrapper, Tile, Title, SectionTitle } from './styled'
 
 const FullFadeIn = keyframes`
   0% {
@@ -19,17 +19,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const Title = styled.div`
-  font-size: 1.4rem;
-  color: ${({ theme }) => theme.colors.c3};
-  margin: 3px 3px 3px 0;
-`
-
-const SectionTitle = styled(Title)`
-  font-size: 1.2rem;
-  font-weight: 400;
-`
 
 const TeamTileHeader = styled(Tile)`
   width: 100%;
