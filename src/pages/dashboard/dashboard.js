@@ -29,7 +29,6 @@ import {
 } from 'components'
 import StroveLogo from 'images/strove.png'
 
-import PersonalTeam from './personalTeam'
 import Projects from './projects'
 import {
   EmailFormWrapper,
@@ -161,8 +160,6 @@ const Dashboard = ({ history }) => {
     }, {})
   )
 
-  const personalTeam = myTeams.filter(team => !team.organizationId)
-
   useEffect(() => {
     updateOrganizations()
     updateTeams()
@@ -224,11 +221,6 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <TilesWrapper>
-          <PersonalTeam
-            history={history}
-            teams={personalTeam}
-            updateTeams={updateTeams}
-          ></PersonalTeam>
           {myOrganizations.map(organization => (
             <>
               <OrganizationName>{organization.name}</OrganizationName>
