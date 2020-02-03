@@ -22,6 +22,8 @@ import {
   TeamTileSection,
   Divider,
   VerticalDivider,
+  IconWrapper,
+  Text
 } from './styled'
 
 const FullFadeIn = keyframes`
@@ -32,29 +34,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-const IconWrapper = styled(Wrapper)`
-  min-width: 50px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: 5px;
-
-  i {
-    line-height: 0;
-  }
-`
-
-const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c3};
-  font-size: 1rem;
-  margin-left: 10px;
-  margin-bottom: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-`
 
 const ModalText = styled(Text)`
   white-space: normal;
