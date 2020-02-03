@@ -9,7 +9,16 @@ import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
 
-import { Wrapper, ExpandIcon, TeamTileWrapper, Tile, Title, SectionTitle } from './styled'
+import {
+  Wrapper,
+  ExpandIcon,
+  TeamTileWrapper,
+  Tile,
+  Title,
+  SectionTitle,
+  TeamTileHeader,
+  TileSectionHeader,
+} from './styled'
 
 const FullFadeIn = keyframes`
   0% {
@@ -19,58 +28,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const TeamTileHeader = styled(Tile)`
-  width: 100%;
-  margin: 0;
-  padding: 10px;
-  transition: all 0.2s;
-  border-bottom-left-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
-  border-bottom-right-radius: ${({ expanded }) => (expanded ? '0px' : '5px')};
-  ${({ expanded }) => expanded && 'border-bottom: none;'}
-
-  ${Title} {
-    color: ${({ theme }) => theme.colors.c3};
-    transition: all 0.2s;
-  }
-
-  ${({ shouldTabsBeCollapsable }) =>
-    shouldTabsBeCollapsable &&
-    `
-    :hover {
-      background-color: ${({ theme }) => theme.colors.c19};
-    }
-  `}
-`
-
-const TileSectionHeader = styled(TeamTileHeader)`
-  flex-direction: row;
-  justify-content: flex-start;
-  border-width: 1px 0px 0px 0px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-radius: ${({ isLast }) => (isLast ? '0px 0px 5px 5px' : '0px')};
-  box-shadow: none;
-
-  background-color: ${({ theme, expanded }) =>
-    expanded ? theme.colors.c1 : theme.colors.c2};
-
-  ${Title} {
-    color: ${({ theme, expanded }) =>
-      expanded ? theme.colors.c2 : theme.colors.c3};
-    transition: all 0.2s;
-    padding: 0;
-  }
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.c2};
-    ${Title} {
-      color: ${({ theme }) => theme.colors.c3};
-    }
-    ${ExpandIcon} {
-      color: ${({ theme }) => theme.colors.c3};
-    }
-  }
-`
 
 const TeamTile = styled(Tile)`
   width: 100%;
