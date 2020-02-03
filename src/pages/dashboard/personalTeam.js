@@ -23,7 +23,9 @@ import {
   Divider,
   VerticalDivider,
   IconWrapper,
-  Text
+  Text,
+  ModalText,
+  ModalButton
 } from './styled'
 
 const FullFadeIn = keyframes`
@@ -34,20 +36,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const ModalText = styled(Text)`
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-  word-break: break-word;
-`
-
-const ModalButton = styled(StroveButton)`
-  animation: ${FullFadeIn} 0.2s ease-out;
-  border-radius: 2px;
-  max-width: 150px;
-  padding: 5px;
-`
 
 const WarningText = styled(ModalText)`
   color: ${({ theme }) => theme.colors.c5};
