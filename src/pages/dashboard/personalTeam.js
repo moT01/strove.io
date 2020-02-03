@@ -9,7 +9,7 @@ import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
 
-import { Wrapper, ExpandIcon } from './styled'
+import { Wrapper, ExpandIcon, TeamTileWrapper, Tile } from './styled'
 
 const FullFadeIn = keyframes`
   0% {
@@ -19,36 +19,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const TeamTileWrapper = styled(Wrapper)`
-  margin: 20px 0px;
-  transition: all 0.2s;
-  width: 100%;
-  height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
-`
-
-const Tile = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-width: 1px;
-  border-style: solid;
-  padding: 20px;
-  box-shadow: ${({ expanded, theme }) =>
-    expanded ? '0' : ` 0 15px 15px -15px ${theme.colors.c19}`};
-  margin: 15px;
-  width: 50%;
-  transition: all 0.2s;
-
-  /* @media (max-width: 1365px) {
-    width: 80vw;
-    height: auto;
-  } */
-`
 
 const Title = styled.div`
   font-size: 1.4rem;
