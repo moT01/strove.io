@@ -1,19 +1,13 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
-import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-
 import { withRouter } from 'react-router-dom'
-import ReactModal from 'react-modal'
+
 import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
-
 import {
-  Wrapper,
   ExpandIcon,
   TeamTileWrapper,
-  Tile,
   Title,
   SectionTitle,
   TeamTileHeader,
@@ -23,21 +17,11 @@ import {
   Divider,
   VerticalDivider,
   IconWrapper,
-  Text,
   ModalText,
   ModalButton,
   StyledCloseIcon,
-  StyledReactModal
+  StyledReactModal,
 } from './styled'
-
-const FullFadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-    `
 
 const emptyWarningModalContent = {
   visible: false,
