@@ -19,7 +19,9 @@ import {
   TeamTileHeader,
   TileSectionHeader,
   TeamTile,
-  TeamTileSection
+  TeamTileSection,
+  Divider,
+  VerticalDivider,
 } from './styled'
 
 const FullFadeIn = keyframes`
@@ -42,23 +44,6 @@ const IconWrapper = styled(Wrapper)`
   i {
     line-height: 0;
   }
-`
-
-const VerticalDivider = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  flex-direction: ${({ columnOnMobile }) =>
-    columnOnMobile && isMobileOnly ? 'column' : 'row'};
-`
-
-const Divider = styled(VerticalDivider)`
-  justify-content: space-between;
-  flex-direction: ${({ columnOnMobile }) =>
-    columnOnMobile && isMobileOnly ? 'column' : 'row'};
 `
 
 const Text = styled.p`
