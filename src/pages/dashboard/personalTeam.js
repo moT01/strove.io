@@ -9,7 +9,7 @@ import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
 
-import { Wrapper, StyledIcon } from './styled'
+import { Wrapper, ExpandIcon } from './styled'
 
 const FullFadeIn = keyframes`
   0% {
@@ -19,18 +19,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const ExpandIcon = styled(StyledIcon)`
-  font-size: 1rem;
-  transform: ${({ expanded }) =>
-    expanded ? ' rotate(180deg)' : 'rotate(0deg)'};
-  color: ${({ theme }) => theme.colors.c3};
-  transition: all 0.2s;
-
-  :focus {
-    outline: none;
-  }
-`
 
 const TeamTileWrapper = styled(Wrapper)`
   margin: 20px 0px;
