@@ -9,7 +9,7 @@ import { Modal, StroveButton, GetStarted } from 'components'
 
 import Projects from './projects'
 
-import { Wrapper } from './styled'
+import { Wrapper, StyledIcon } from './styled'
 
 const FullFadeIn = keyframes`
   0% {
@@ -19,16 +19,6 @@ const FullFadeIn = keyframes`
     opacity: 1;
   }
     `
-
-const StyledIcon = styled(Icon)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  color: ${({ theme }) => theme.colors.c3};
-  cursor: pointer;
-  animation: ${FullFadeIn} 0.5s ease-out;
-`
 
 const ExpandIcon = styled(StyledIcon)`
   font-size: 1rem;
