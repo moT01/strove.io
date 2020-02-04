@@ -1,14 +1,20 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 import { isMobileOnly, isTablet } from 'react-device-detect'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import isEmail from 'validator/lib/isEmail'
 
 import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
-import { SEO, Modal, Header } from 'components'
-import { StripeCheckoutForm } from 'components'
+import {
+  SEO,
+  Modal,
+  Header,
+  StripeCheckoutForm,
+  StroveButton,
+} from 'components'
+import { selectors } from 'state'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -404,6 +410,7 @@ const PricingPage = () => {
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
+  const user = useSelector(selectors.api.getUser)
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
 
@@ -462,9 +469,18 @@ const PricingPage = () => {
               </PricingWrapper>
             </PricingSection>
             <ButtonWrapper>
-              <Button team onClick={() => setModalVisible(true)}>
-                <ButtonText>Get started</ButtonText>
-              </Button>
+              <StroveButton
+                isLink={user?.token ? true : false}
+                to="/app/payments"
+                text="Get started"
+                padding="15px"
+                minWidth="250px"
+                maxWidth="250px"
+                margin="10px"
+                fontSize="1.4rem"
+                borderRadius="2px"
+                // onClick={() => handleAddMemberClick(team)}
+              />
             </ButtonWrapper>
           </Card>
           {/* <StripeCheckoutForm /> */}
