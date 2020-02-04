@@ -33,6 +33,7 @@ const StyledModal = styled(Modal)`
 
 const Layout = ({ children, browser }) => {
   const [noSupportModalVisible, setNoSupportModalVisible] = useState(false)
+  const [isOldUser, setIsOldUser] = useState(false)
   const user = useSelector(selectors.api.getUser)
 
   useEffect(() => {
@@ -46,6 +47,10 @@ const Layout = ({ children, browser }) => {
       setNoSupportModalVisible(true)
     }
   }, [browser])
+
+  useEffect(() => {
+    user.token && !user?.organizations && setIsOldUser(true)
+  }, [user])
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,6 +73,7 @@ const Layout = ({ children, browser }) => {
               ) : (
                 ''
               )}
+
               <GlobalStyles />
               <MainContent>{children}</MainContent>
               <Cookies />
@@ -75,6 +81,15 @@ const Layout = ({ children, browser }) => {
           </DataManager>
         )}
       </AddProjectProvider>
+      <StyledModal
+        isOpen={isOldUser}
+        contentLabel="Old user"
+        ariaHideApp={false}
+        isMobile={isMobile}
+      >
+        It seems your account has been created before important update and is
+        outdate. Please relog to update your account.
+      </StyledModal>
     </ThemeProvider>
   )
 }
