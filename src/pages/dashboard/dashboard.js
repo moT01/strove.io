@@ -905,14 +905,13 @@ const Dashboard = ({ history }) => {
           validate={validateTeamName}
           onSubmit={values => {
             if (editMode === 'Rename team') {
-              console.log('Edit team', editTeam)
               renameTeam({ newName: values.name, teamId: editTeam.id })
             } else {
               createTeam({ name: values.name, organizationId: editTeam.id })
             }
           }}
         >
-          {({ errors, touched, values }) => (
+          {({ errors, values }) => (
             <StyledForm>
               <EmailFormWrapper
                 disabled={errors.name || !values.name}
@@ -933,9 +932,6 @@ const Dashboard = ({ history }) => {
                   disabled={errors.name || !values.name}
                 />
               </EmailFormWrapper>
-              {/* {emailSent && (
-                <StyledInfo>Your team invitation has been sent</StyledInfo>
-              )} */}
             </StyledForm>
           )}
         </Formik>
