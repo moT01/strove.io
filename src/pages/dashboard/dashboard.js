@@ -284,7 +284,7 @@ const Dashboard = ({ history }) => {
                                   />
                                 ))}
                             </VerticalDivider>
-                            {true && (
+                            {team.projects?.length > 1 && (
                               <IconWrapper
                                 onClick={() =>
                                   displayHandler({
