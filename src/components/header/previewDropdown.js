@@ -90,6 +90,7 @@ const MenuWrapper = styled.div`
   border-style: solid;
   background-color: ${({ theme }) => theme.colors.c2};
   position: relative;
+  word-break: initial;
 `
 
 const OptionText = styled(Text)`
@@ -189,13 +190,13 @@ const PreviewDropdown = props => {
             if (process.env.REACT_APP_IS_OPENSOURCE === 'true') {
               href = `https://${portPair[1]}.vmopen${
                 project.machineName.match(/\d+/g)[0]
-              }.silisky.com`
+              }.strove.io`
             } else if (process.env.NODE_ENV === 'development') {
               href = `https://${portPair[1]}.vmdev${
                 project.machineName.match(/\d+/g)[0]
-              }.silisky.com`
+              }.strove.io`
             } else {
-              href = `https://${portPair[1]}.${project.machineName}.silisky.com`
+              href = `https://${portPair[1]}.${project.machineName}.strove.io`
             }
             return {
               label: `http://0.0.0.0:${portPair[0]}`,
