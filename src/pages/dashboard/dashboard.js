@@ -101,7 +101,6 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
-  const myTeams = useSelector(selectors.api.getMyTeams)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
@@ -117,7 +116,6 @@ const Dashboard = ({ history }) => {
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
-  console.log('createTeamError', createTeamError)
   const organizationsObj =
     myOrganizations &&
     myOrganizations.reduce((organizations, organization) => {
