@@ -939,9 +939,12 @@ const Dashboard = ({ history }) => {
           padding="5px"
           maxWidth="150px"
         />
-        <StyledErrors>
-          Ops! We got the following error: {createTeamError}
-        </StyledErrors>
+        {createTeamError && (
+          <>
+            <Text>Ops! The following error happened during team creation:</Text>
+            <StyledErrors>njdnvjd {createTeamError}</StyledErrors>
+          </>
+        )}
       </Modal>
 
       <Modal
