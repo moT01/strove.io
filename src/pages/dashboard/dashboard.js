@@ -31,7 +31,7 @@ import StroveLogo from 'images/strove.png'
 
 import Projects from './projects'
 import {
-  EmailFormWrapper,
+  FormWrapper,
   StyledForm,
   PageWrapper,
   TeamTileWrapper,
@@ -794,7 +794,7 @@ const Dashboard = ({ history }) => {
         >
           {({ errors, values }) => (
             <StyledForm>
-              <EmailFormWrapper
+              <FormWrapper
                 isInvite
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
@@ -827,7 +827,7 @@ const Dashboard = ({ history }) => {
                   text="Invite"
                   disabled={errors.email || !values.email}
                 />
-              </EmailFormWrapper>
+              </FormWrapper>
             </StyledForm>
           )}
         </Formik>
@@ -911,7 +911,7 @@ const Dashboard = ({ history }) => {
         >
           {({ errors, values }) => (
             <StyledForm>
-              <EmailFormWrapper
+              <FormWrapper
                 disabled={errors.name || !values.name}
                 isMobile={isMobileOnly}
               >
@@ -929,7 +929,7 @@ const Dashboard = ({ history }) => {
                   text={editMode === 'Rename team' ? 'Rename' : 'Create'}
                   disabled={errors.name || !values.name}
                 />
-              </EmailFormWrapper>
+              </FormWrapper>
             </StyledForm>
           )}
         </Formik>

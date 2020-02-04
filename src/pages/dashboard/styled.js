@@ -16,7 +16,7 @@ export const FullFadeIn = keyframes`
   }
 `
 
-export const EmailFormWrapper = styled.div`
+export const FormWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
