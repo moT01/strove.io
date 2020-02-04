@@ -404,25 +404,27 @@ const Dashboard = ({ history }) => {
                             <TileSectionHeader isLast>
                               <Divider>
                                 <SectionTitle>Projects</SectionTitle>
-                                <IconWrapper
-                                  onClick={() =>
-                                    displayHandler({
-                                      organizationId: organization.id,
-                                      teamId: team.id,
-                                      section: 'projects',
-                                    })
-                                  }
-                                >
-                                  <ExpandIcon
-                                    type="down"
-                                    expanded={
-                                      expandedTiles[organization.id].teams[
-                                        team.id
-                                      ].sections.projects
+                                {team.projects?.length > 1 && (
+                                  <IconWrapper
+                                    onClick={() =>
+                                      displayHandler({
+                                        organizationId: organization.id,
+                                        teamId: team.id,
+                                        section: 'projects',
+                                      })
                                     }
-                                    section
-                                  />
-                                </IconWrapper>
+                                  >
+                                    <ExpandIcon
+                                      type="down"
+                                      expanded={
+                                        expandedTiles[organization.id].teams[
+                                          team.id
+                                        ].sections.projects
+                                      }
+                                      section
+                                    />
+                                  </IconWrapper>
+                                )}
                               </Divider>
                             </TileSectionHeader>
                             {expandedTiles[organization.id].teams[team.id]
