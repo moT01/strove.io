@@ -284,16 +284,18 @@ const Dashboard = ({ history }) => {
                                   />
                                 ))}
                             </VerticalDivider>
-                            <IconWrapper
-                              onClick={() =>
-                                displayHandler({
-                                  organizationId: organization.id,
-                                  teamId: team.id,
-                                })
-                              }
-                            >
-                              <ExpandIcon type="down" expanded={isExpanded} />
-                            </IconWrapper>
+                            {true && (
+                              <IconWrapper
+                                onClick={() =>
+                                  displayHandler({
+                                    organizationId: organization.id,
+                                    teamId: team.id,
+                                  })
+                                }
+                              >
+                                <ExpandIcon type="down" expanded={isExpanded} />
+                              </IconWrapper>
+                            )}
                           </Divider>
                         </TeamTileHeader>
                         {isExpanded && (
@@ -427,16 +429,7 @@ const Dashboard = ({ history }) => {
                               .sections.projects && (
                               <TeamTileSection isLast>
                                 <Projects
-                                  projects={
-                                    organizationsObj[organization.id].teams[
-                                      team.id
-                                    ].projects &&
-                                    Object.values(
-                                      organizationsObj[organization.id].teams[
-                                        team.id
-                                      ].projects
-                                    )
-                                  }
+                                  projects={team.projects}
                                   history={history}
                                   updateTeams={updateTeams}
                                   updateOrganizations={updateOrganizations}
