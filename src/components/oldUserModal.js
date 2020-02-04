@@ -22,7 +22,7 @@ const OldUserModal = () => {
   }
 
   useEffect(() => {
-    user.token && user?.organizations && setIsOldUser(true)
+    user.token && !user?.organizations && setIsOldUser(true)
   }, [user])
 
   return (
@@ -30,7 +30,8 @@ const OldUserModal = () => {
       isOpen={isOldUser}
       contentLabel="Old user"
       ariaHideApp={false}
-      isMobile={isMobile}
+      width={isMobile ? '70vw' : '30vw'}
+      minWidth={isMobile ? '70vw' : '30vw'}
     >
       It seems your account has been created before important update and is
       outdate. Please relog to update your account.
