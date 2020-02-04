@@ -11,6 +11,7 @@ import Pricing from './pricing'
 import Editor from './editor'
 import FromEmailInvitation from './fromEmailInvitation'
 import Dashboard from './dashboard'
+import Payments from './payments'
 
 export {
   Home,
@@ -27,4 +28,5 @@ export {
   Editor,
   FromEmailInvitation,
   Dashboard,
+  Payments,
 }

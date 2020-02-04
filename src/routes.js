@@ -15,6 +15,7 @@ import {
   Editor,
   FromEmailInvitation,
   Dashboard,
+  Payments,
 } from 'pages'
 
 import { PrivateRoute, ScrollToTop } from 'components'
@@ -36,6 +37,7 @@ const Strove = () => (
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
+      <PrivateRoute path="/app/payments" component={Payments} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
