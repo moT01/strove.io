@@ -10,6 +10,7 @@ import {
   WithAddProject,
   DataManager,
   Cookies,
+  OldUserModal,
 } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
@@ -68,6 +69,7 @@ const Layout = ({ children, browser }) => {
               ) : (
                 ''
               )}
+
               <GlobalStyles />
               <MainContent>{children}</MainContent>
               <Cookies />
@@ -75,6 +77,7 @@ const Layout = ({ children, browser }) => {
           </DataManager>
         )}
       </AddProjectProvider>
+      <OldUserModal />
     </ThemeProvider>
   )
 }

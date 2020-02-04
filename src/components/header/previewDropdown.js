@@ -83,6 +83,7 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: auto;
+  word-break: initial;
   box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-width: 1px;
@@ -111,7 +112,7 @@ const Option = styled.a`
   justify-content: flex-start;
   align-items: center;
   padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  margin: ${props => (props.isLast ? `0` : `0 0 2px`)};
   width: auto;
   height: 32px;
   font-size: 16px;
@@ -123,7 +124,7 @@ const Option = styled.a`
   svg {
     fill: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
+    width: 22px;
     height: auto;
     margin-right: 5px;
   }

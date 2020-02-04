@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { ProjectFragment } from './project'
 import { TeamFragment } from './team'
+import { OrganizationFragment } from './organization'
 
 export const UserFragment = gql`
   fragment User on User {
@@ -27,8 +28,12 @@ export const UserFragment = gql`
     projects {
       ...Project
     }
+    organizations {
+      ...Organization
+    }
   }
 
   ${ProjectFragment}
   ${TeamFragment}
+  ${OrganizationFragment}
 `

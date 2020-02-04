@@ -5,6 +5,7 @@ export const TeamFragment = gql`
   fragment Team on Team {
     id
     name
+    organizationId
     projects {
       ...Project
     }

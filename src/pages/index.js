@@ -10,6 +10,7 @@ import RunProject from './runProject'
 import Pricing from './pricing'
 import Editor from './editor'
 import FromEmailInvitation from './fromEmailInvitation'
+import Dashboard from './dashboard'
 
 export {
   Home,
@@ -25,4 +26,5 @@ export {
   Pricing,
   Editor,
   FromEmailInvitation,
+  Dashboard,
 }

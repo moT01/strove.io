@@ -1,6 +1,8 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
+import { useAnalytics } from 'hooks'
+
 import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
@@ -15,13 +17,17 @@ const StyledWrapper = styled.div`
   align-items: center;
 `
 
-const Home = () => (
-  <StyledWrapper>
-    <Banner />
-    <Features />
-    <Technologies />
-    <Footer />
-  </StyledWrapper>
-)
+const Home = () => {
+  const ref = useAnalytics()
+
+  return (
+    <StyledWrapper ref={ref}>
+      <Banner />
+      <Features />
+      <Technologies />
+      <Footer />
+    </StyledWrapper>
+  )
+}
 
 export default memo(Home)

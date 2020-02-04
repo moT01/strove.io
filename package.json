@@ -68,12 +68,13 @@
     "react-transition-group": "^4.1.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-persist": "^5.10.0",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "5.0.0-beta.11-cgsmulti",
     "styled-normalize": "^8.0.6",
     "subscriptions-transport-ws": "^0.9.16",
+    "tti-polyfill": "^0.2.2",
     "validator": "^11.1.0"
   },
   "devDependencies": {

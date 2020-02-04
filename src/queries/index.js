@@ -22,10 +22,17 @@ import RENAME_TEAM from './renameTeam'
 import REMOVE_MEMBER from './removeMember'
 import DELETE_TEAM from './deleteTeam'
 import SET_VISIBILITY from './setVisibility'
-import TRANSFER_OWNERSHIP from './transferOwnership'
+import SET_ADMIN from './setAdmin'
 import LEAVE_TEAM from './leaveTeam'
 import STRIPE_CLIENT_SECRET from './stripeClientSecret'
 import CHANGE_PAYMENT_INFO from './changePaymentInfo'
+import ACCEPT_TEAM_INVITATION from './acceptTeamInvitation'
+import MY_ORGANIZATIONS from './myOrganizations'
+import GET_ORGANIZATION from './getOrganization'
+import RENAME_ORGANIZATION from './renameOrganization'
+import CREATE_ORGANIZATION from './createOrganization'
+import DELETE_ORGANIZATION from './deleteOrganization'
+import TRANSFER_ORGANIZATION from './transferOrganization'
 
 export {
   ADD_PROJECT,
@@ -52,8 +59,15 @@ export {
   REMOVE_MEMBER,
   DELETE_TEAM,
   SET_VISIBILITY,
-  TRANSFER_OWNERSHIP,
+  SET_ADMIN,
   LEAVE_TEAM,
   STRIPE_CLIENT_SECRET,
   CHANGE_PAYMENT_INFO,
+  ACCEPT_TEAM_INVITATION,
+  MY_ORGANIZATIONS,
+  GET_ORGANIZATION,
+  RENAME_ORGANIZATION,
+  CREATE_ORGANIZATION,
+  DELETE_ORGANIZATION,
+  TRANSFER_ORGANIZATION,
 }

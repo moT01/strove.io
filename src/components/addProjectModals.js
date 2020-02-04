@@ -72,7 +72,7 @@ const StyledAnchor = styled.a`
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -81,7 +81,7 @@ const StyledAnchor = styled.a`
   svg {
     fill: ${({ invert, theme }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
+    width: 22px;
     height: auto;
     margin-left: 5px;
   }
@@ -102,7 +102,7 @@ const StyledAnchor = styled.a`
       &:hover {
         opacity: 1;
         transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme }) => theme.colors.c1};
       }
     `}
 `
@@ -127,7 +127,7 @@ const StyledLink = styled(Link)`
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -149,7 +149,7 @@ const StyledLink = styled(Link)`
       &:hover {
         opacity: 1;
         transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme }) => theme.colors.c1};
       }
     `}
 `

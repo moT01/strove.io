@@ -44,7 +44,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
 
-  const addProject = async ({ link, name, teamId }) => {
+  const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
     let repoProvider
 
@@ -93,6 +93,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
         repoProvider,
         name,
         teamId,
+        forkedFromId,
       })
     )
 
@@ -127,7 +128,15 @@ const AddProjectProvider = ({ children, history, teamId }) => {
       setModalContent('AnotherActiveProject')
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
     } else if (!theSameIncomingProject) {
-      createProject({ repoLink, dispatch, user, setModalContent, name, teamId })
+      createProject({
+        repoLink,
+        dispatch,
+        user,
+        setModalContent,
+        name,
+        teamId,
+        forkedFromId,
+      })
     }
   }
 
@@ -142,7 +151,10 @@ const AddProjectProvider = ({ children, history, teamId }) => {
         currentProjectId={currentProjectId}
       />
       <StyledModal
-        isOpen={(isLoading && !isAdding) || isDeleting || isStopping}
+        isOpen={
+          ((isLoading && !isAdding) || isDeleting || isStopping) &&
+          !window.location.href.includes('editor')
+        }
         contentLabel="Loading"
         ariaHideApp={false}
       >
@@ -156,7 +168,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
           queuePosition={queuePosition}
         />
       )}
-      {(isAdding || isLoading) && (
+      {isAdding && (
         <FullScreenLoader
           type="addProject"
           isFullScreen

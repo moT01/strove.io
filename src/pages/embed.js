@@ -9,8 +9,7 @@ import { getWindowSearchParams, getRepoUrl } from 'utils'
 
 const MenuWrapper = styled.div`
   padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
+  background-color: ${({ theme }) => theme.colors.c2};
   z-index: 3;
   position: relative;
 `
@@ -61,7 +60,7 @@ const EmbedWrapper = () => {
 
   return (
     <Wrapper>
-      <MenuWrapper invert>
+      <MenuWrapper>
         {repoUrl ? (
           <ExternalLink
             primary
@@ -69,7 +68,7 @@ const EmbedWrapper = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <LoginText invert>Login to start coding</LoginText>
+            <LoginText>Login to start coding</LoginText>
           </ExternalLink>
         ) : (
           <NoRepoUrlInfo />

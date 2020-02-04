@@ -13,8 +13,16 @@ import {
   ACTIVE_PROJECT,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ACCEPT_TEAM_INVITATION,
 } from 'queries'
-import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
+import {
+  mutation,
+  query,
+  window,
+  getWindowHref,
+  redirectToEditor,
+  getWindowSearchParams,
+} from 'utils'
 import { selectors } from 'state'
 import { C } from 'state'
 import { actions } from 'state'
@@ -55,6 +63,8 @@ export default memo(
       selectors.incomingProject.isProjectBeingStarted
     )
 
+    const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
+
     if (!localStorage.getItem('deviceId'))
       localStorage.setItem('deviceId', generateDeviceID())
     const deviceId = localStorage.getItem('deviceId')
@@ -78,6 +88,23 @@ export default memo(
     const machineName = activeProjectData?.machineName
     const additionalPorts = activeProjectData?.additionalPorts
     const id = activeProjectData?.id
+
+    useEffect(() => {
+      if (invitedByTeamId && token) {
+        dispatch(
+          mutation({
+            name: 'acceptTeamInvitation',
+            dataSelector: data => data,
+            variables: {
+              teamId: invitedByTeamId,
+            },
+            mutation: ACCEPT_TEAM_INVITATION,
+            onSuccessDispatch: () => actions.invitations.acceptInvitation(),
+          })
+        )
+      }
+      /* eslint-disable-next-line */
+    }, [invitedByTeamId, token])
 
     useEffect(() => {
       dispatch({
@@ -332,6 +359,7 @@ export default memo(
           subscription,
           projects,
           teams,
+          organizations,
         } = loginData?.userLogin
         localStorage.setItem('token', token || siliskyToken)
         dispatch({
@@ -363,6 +391,14 @@ export default memo(
             payload: {
               storeKey: 'myTeams',
               data: teams,
+            },
+          })
+        organizations &&
+          dispatch({
+            type: C.api.FETCH_SUCCESS,
+            payload: {
+              storeKey: 'myOrganizations',
+              data: organizations,
             },
           })
       }
@@ -410,6 +446,10 @@ export default memo(
           )
         }
       })
+
+      const searchParams = getWindowSearchParams()
+      const feature = searchParams?.get('feature') || ''
+      if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

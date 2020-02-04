@@ -21,7 +21,7 @@ const SmallLoaderWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${props => (props.isFullScreen ? '93vh' : props.height)};
+  height: ${props => (props.isFullScreen ? '100vh' : props.height)};
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
 `
 
@@ -40,7 +40,6 @@ const LoaderWrapper = styled.div`
 
 const LoaderContainer = styled(SmallLoaderWrapper)`
   width: ${props => (props.isFullScreen ? '15vw' : '100%')};
-  top: ${props => props.isFullScreen && '3vh'};
   height: auto;
   animation: ${SpinToWin} 3.5s linear infinite;
 `
@@ -84,6 +83,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
     ],
     openProject: ['Launching editor'],
     continueProject: ['Reserving resources', 'Starting virtual machine'],
+    redirecting: ['Redirecting back to origin site...'],
   }
 
   useInterval(

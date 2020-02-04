@@ -5,13 +5,14 @@ import storage from 'redux-persist/lib/storage'
 
 import api from './api'
 import incomingProject from './incomingProject'
+import invitations from './invitations'
 import latency from './latency'
 import feature from './feature'
 
 const rootConfig = {
   key: 'root',
-  storage: storage,
-  blacklist: 'api',
+  storage,
+  blacklist: ['api', 'invitations'],
 }
 
 const persistConfig = {
@@ -20,11 +21,17 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 }
 
+const persistInvitationConfig = {
+  key: 'invitations',
+  storage,
+}
+
 export const selectors = {
   api: api.selectors,
   incomingProject: incomingProject.selectors,
   latency: latency.selectors,
   feature: feature.selectors,
+  invitations: invitations.selectors,
   // ToDo Remove siliskyToken later on
   getToken:
     api.selectors.getUserField('token') ||
@@ -35,6 +42,7 @@ export const actions = {
   incomingProject: incomingProject.actions,
   latency: latency.actions,
   feature: feature.actions,
+  invitations: invitations.actions,
 }
 
 export const C = {
@@ -42,9 +50,11 @@ export const C = {
   incomingProject: incomingProject.C,
   latency: latency.C,
   feature: feature.C,
+  invitations: invitations.C,
 }
 
 const appReducer = combineReducers({
+  invitations: persistReducer(persistInvitationConfig, invitations.reducer),
   api: persistReducer(persistConfig, api.reducer),
   incomingProject: incomingProject.reducer,
   latency: latency.reducer,

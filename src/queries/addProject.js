@@ -7,6 +7,7 @@ export default gql`
     $isPrivate: Boolean
     $repoLink: String!
     $teamId: ID!
+    $forkedFromId: ID
   ) {
     addProject(
       name: $name
@@ -14,6 +15,7 @@ export default gql`
       isPrivate: $isPrivate
       repoLink: $repoLink
       teamId: $teamId
+      forkedFromId: $forkedFromId
     )
   }
 `

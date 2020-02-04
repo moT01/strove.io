@@ -4,7 +4,6 @@ import SEO from './seo'
 import AddProjectModals from './addProjectModals'
 import AddProjectProvider from './addProjectProvider'
 import FullScreenLoader from './fullScreenLoader'
-import Dashboard from './dashboard'
 import GetStarted from './getStarted'
 import Layout from './layout'
 import Logos from './logos.js'
@@ -22,7 +21,8 @@ import ScrollToTop from './scrollToTop'
 import StripeCheckoutForm from './stripeCheckoutForm'
 import Cookies from './cookies'
 import WithTracker from './withTracker'
-import Projects from './projects'
+import Footer from './footer'
+import OldUserModal from './oldUserModal'
 
 export {
   SmallCloud,
@@ -33,7 +33,6 @@ export {
   AddProjectModals,
   AddProjectProvider,
   FullScreenLoader,
-  Dashboard,
   GetStarted,
   Layout,
   Logos,
@@ -51,5 +50,6 @@ export {
   ScrollToTop,
   StripeCheckoutForm,
   Cookies,
-  Projects,
+  Footer,
+  OldUserModal,
 }

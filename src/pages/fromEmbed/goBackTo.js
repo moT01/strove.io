@@ -1,24 +1,9 @@
 import React, { memo } from 'react'
-import styled from 'styled-components/macro'
 import { useSelector } from 'react-redux'
 
 import { getWindowSearchParams } from 'utils'
 import { selectors } from 'state'
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
-  position: relative;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+import { FullScreenLoader } from 'components'
 
 const GoBackTo = () => {
   const token = useSelector(selectors.getToken)
@@ -35,11 +20,7 @@ const GoBackTo = () => {
     setTimeout(() => window.location.replace(goBackTo), 1000)
   }
 
-  return (
-    <Wrapper>
-      <MenuWrapper invert>...redirecting</MenuWrapper>
-    </Wrapper>
-  )
+  return <FullScreenLoader type="redirecting" isFullScreen color="#0072ce" />
 }
 
 export default memo(GoBackTo)
