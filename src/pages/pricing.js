@@ -8,7 +8,6 @@ import isEmail from 'validator/lib/isEmail'
 import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
 import { SEO, Modal, Header } from 'components'
-
 import { StripeCheckoutForm } from 'components'
 
 const ButtonFadeIn = keyframes`
@@ -420,8 +419,9 @@ const PricingPage = () => {
         zIndex={99}
       >
         <ModalWrapper>
-          <CardTitle>Congratulations!</CardTitle>
-          <Text>Your purchase has been successfully completed.</Text>
+          {/* <CardTitle>Congratulations!</CardTitle>
+          <Text>Your purchase has been successfully completed.</Text> */}
+          <StripeCheckoutForm />
           <ButtonsWrapper mobile={device}>
             <Button onClick={() => setModalVisible(false)}>Close</Button>
           </ButtonsWrapper>
@@ -462,12 +462,12 @@ const PricingPage = () => {
               </PricingWrapper>
             </PricingSection>
             <ButtonWrapper>
-              <Button team>
+              <Button team onClick={() => setModalVisible(true)}>
                 <ButtonText>Get started</ButtonText>
               </Button>
             </ButtonWrapper>
           </Card>
-          <StripeCheckoutForm />
+          {/* <StripeCheckoutForm /> */}
           <Card enterprise team>
             <PricingSection>
               <PricingWrapper>
