@@ -487,3 +487,7 @@ export const CircleIcon = styled.div`
   background: ${({ theme, active }) =>
     active ? theme.colors.c8 : theme.colors.c9};
 `
+
+export const StyledErrors = styled(Text)`
+  color: ${({ theme }) => theme.colors.c5};
+`

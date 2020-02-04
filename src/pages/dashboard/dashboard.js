@@ -60,6 +60,7 @@ import {
   Setting,
   UserPhoto,
   OrganizationName,
+  StyledErrors,
 } from './styled'
 
 const validate = values => {
@@ -938,6 +939,9 @@ const Dashboard = ({ history }) => {
           padding="5px"
           maxWidth="150px"
         />
+        <StyledErrors>
+          Ops! We got the following error: {createTeamError}
+        </StyledErrors>
       </Modal>
 
       <Modal
