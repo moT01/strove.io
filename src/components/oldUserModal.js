@@ -5,14 +5,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectors } from 'state'
 import Modal from './modal'
 import StroveButton from './stroveButton'
+import { persistor } from 'wrapper'
 
 const OldUserModal = () => {
   const dispatch = useDispatch()
   const [isOldUser, setIsOldUser] = useState(false)
   const user = useSelector(selectors.api.getUser)
 
+  const logout = () => {
+    persistor.purge()
+    localStorage.removeItem('token')
+    dispatch({
+      type: 'LOGOUT',
+    })
+    setIsOldUser(false)
+  }
+
   useEffect(() => {
-    user.token && !user?.organizations && setIsOldUser(true)
+    user.token && user?.organizations && setIsOldUser(true)
   }, [user])
 
   return (
@@ -30,8 +40,8 @@ const OldUserModal = () => {
         minWidth="150px"
         maxWidth="150px"
         borderRadius="2px"
-        onClick={() => {}}
-        text="Leave"
+        onClick={logout}
+        text="Log out"
       />
     </Modal>
   )
