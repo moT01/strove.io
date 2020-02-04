@@ -791,7 +791,7 @@ const Dashboard = ({ history }) => {
           validate={validate}
           onSubmit={values => addMember({ memberEmail: values.email })}
         >
-          {({ errors, touched, values }) => (
+          {({ errors, values }) => (
             <StyledForm>
               <EmailFormWrapper
                 isInvite
@@ -827,9 +827,6 @@ const Dashboard = ({ history }) => {
                   disabled={errors.email || !values.email}
                 />
               </EmailFormWrapper>
-              {/* {emailSent && (
-                <StyledInfo>Your team invitation has been sent</StyledInfo>
-              )} */}
             </StyledForm>
           )}
         </Formik>
