@@ -22,7 +22,7 @@ const OldUserModal = () => {
   }
 
   useEffect(() => {
-    user.token && !user?.organizations && setIsOldUser(true)
+    user?.token && !user?.organizations && setIsOldUser(true)
   }, [user])
 
   return (
