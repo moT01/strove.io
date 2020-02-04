@@ -21,6 +21,7 @@ import ScrollToTop from './scrollToTop'
 import Cookies from './cookies'
 import WithTracker from './withTracker'
 import Footer from './footer'
+import OldUserModal from './oldUserModal'
 
 export {
   SmallCloud,
@@ -48,4 +49,5 @@ export {
   ScrollToTop,
   Cookies,
   Footer,
+  OldUserModal,
 }
