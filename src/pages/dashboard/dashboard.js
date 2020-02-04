@@ -116,6 +116,8 @@ const Dashboard = ({ history }) => {
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
+  const createTeamError = useSelector(selectors.api.getError('createTeam'))
+  console.log('createTeamError', createTeamError)
   const organizationsObj =
     myOrganizations &&
     myOrganizations.reduce((organizations, organization) => {
@@ -923,7 +925,7 @@ const Dashboard = ({ history }) => {
                   placeholder={
                     editMode === 'Rename team' ? 'New team name' : 'Team name'
                   }
-                ></Field>
+                />
                 <StroveButton
                   isPrimary
                   type="submit"
