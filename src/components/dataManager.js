@@ -357,8 +357,6 @@ export default memo(
           token,
           siliskyToken,
           subscription,
-          projects,
-          teams,
           organizations,
         } = loginData?.userLogin
         localStorage.setItem('token', token || siliskyToken)
