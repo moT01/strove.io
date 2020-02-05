@@ -413,12 +413,6 @@ const Dashboard = ({ history }) => {
                             {expandedTiles[organization.id].teams[team.id]
                               .sections.projects && (
                               <TeamTileSection isLast>
-                                {console.log(
-                                  'team.projects',
-                                  team.projects,
-                                  'team',
-                                  team
-                                )}
                                 <Projects
                                   projects={team.projects}
                                   history={history}

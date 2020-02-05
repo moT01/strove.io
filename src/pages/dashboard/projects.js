@@ -34,7 +34,6 @@ const sortByActiveProjects = projects =>
   }, []) || []
 
 const Projects = ({ history, projects, addProject, updateOrganizations }) => {
-  console.log('projectsprojects', projects)
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
