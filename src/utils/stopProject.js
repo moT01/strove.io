@@ -17,13 +17,6 @@ const handleStopProject = ({ id, dispatch }) => {
             query: MY_ORGANIZATIONS,
           })
         )
-        dispatch(
-          query({
-            name: 'myTeams',
-            storeKey: 'myTeams',
-            query: MY_TEAMS,
-          })
-        )
       },
       onSuccessDispatch: [
         () =>

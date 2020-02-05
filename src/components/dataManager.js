@@ -377,22 +377,6 @@ export default memo(
               data: subscription,
             },
           })
-        projects &&
-          dispatch({
-            type: C.api.FETCH_SUCCESS,
-            payload: {
-              storeKey: 'myProjects',
-              data: projects,
-            },
-          })
-        teams &&
-          dispatch({
-            type: C.api.FETCH_SUCCESS,
-            payload: {
-              storeKey: 'myTeams',
-              data: teams,
-            },
-          })
         organizations &&
           dispatch({
             type: C.api.FETCH_SUCCESS,
