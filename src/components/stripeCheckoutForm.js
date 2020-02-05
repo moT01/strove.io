@@ -17,6 +17,7 @@ import {
   STRIPE_CLIENT_SECRET,
   CHANGE_PAYMENT_INFO,
 } from 'queries'
+import StroveButton from 'components/stroveButton.js'
 
 const CardInfoWrapper = styled.div`
   display: flex;
@@ -210,7 +211,17 @@ const CheckoutForm = props => {
                 <CardCVCElement style={cardStyle} />
               </StripeCcvSontainer>
             </VerticalDivider>
-            <button onClick={submit}>Purchase</button>
+            <StroveButton
+              isPrimary
+              fontSize="0.8rem"
+              padding="3px"
+              minWidth="80px"
+              maxWidth="80px"
+              margin="0px"
+              borderRadius="2px"
+              onClick={submit}
+              text="Purchase"
+            />
           </CardInfoWrapper>
         </div>
       )}
