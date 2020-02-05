@@ -79,7 +79,7 @@ const cardStyle = {
 }
 
 const CheckoutForm = props => {
-  const [cardElement, setCardElement] = useState()
+  const [cardNumber, setCardNumber] = useState()
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
@@ -103,7 +103,7 @@ const CheckoutForm = props => {
       clientSecret,
       {
         payment_method: {
-          card: cardElement,
+          card: cardNumber,
           billing_details: {
             email: user.email,
           },
@@ -138,7 +138,7 @@ const CheckoutForm = props => {
   const submit = async event => {
     const { paymentMethod, error } = await props.stripe.createPaymentMethod({
       type: 'card',
-      card: cardElement,
+      card: cardNumber,
       billing_details: {
         email: user.email,
       },
@@ -188,7 +188,8 @@ const CheckoutForm = props => {
 
   // Necessary to load up data from card Element
   const handleReady = element => {
-    setCardElement(element)
+    setCardNumber(element)
+    console.log('TCL: element', element)
   }
 
   // Needs improvemnts look-wise, good luck Matthew :)
@@ -200,7 +201,7 @@ const CheckoutForm = props => {
             <p>Would you like to complete the purchase?</p>
             {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
             <StripeElementContainer>
-              <CardNumberElement style={cardStyle} />
+              <CardNumberElement style={cardStyle} onReady={handleReady} />
             </StripeElementContainer>
             <VerticalDivider>
               <StripeExpiryContainer>
@@ -214,7 +215,7 @@ const CheckoutForm = props => {
             <StroveButton
               isPrimary
               fontSize="0.8rem"
-              padding="3px"
+              padding="1px 3px"
               minWidth="80px"
               maxWidth="80px"
               margin="0px"
