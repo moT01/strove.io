@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { CardElement, injectStripe, Elements } from 'react-stripe-elements'
+import styled from 'styled-components/macro'
+import {
+  CardElement,
+  injectStripe,
+  Elements,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCVCElement,
+} from 'react-stripe-elements'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { selectors } from 'state'
@@ -10,15 +18,22 @@ import {
   CHANGE_PAYMENT_INFO,
 } from 'queries'
 
+const CardInfoWrapper = styled.div``
+
+const StripeElementContainer = styled.div`
+  margin: 5px;
+  padding: 1px;
+  border-radius: 2px;
+  border-color: ${({ theme }) => theme.colors.c19};
+  border-width: 1px;
+  border-style: solid;
+`
+
 const cardStyle = {
   base: {
     height: '200px',
     iconColor: '#c4f0ff',
-    color: '#fff',
-    borderRadius: '5px',
-    borderColor: '#0072ce',
-    borderWidth: '1px',
-    borderStyle: 'solid',
+    color: '##0072ce',
     fontWeight: 500,
     fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
     fontSize: '16px',
@@ -27,7 +42,10 @@ const cardStyle = {
       color: '#fce883',
     },
     '::placeholder': {
-      color: '#87BBFD',
+      color: 'rgba(185,185,185,0.65)',
+    },
+    '.inputContainer': {
+      border: '5px solid red',
     },
   },
   invalid: {
@@ -155,7 +173,18 @@ const CheckoutForm = props => {
       {user?.email && !success && (
         <div className="checkout">
           <p>Would you like to complete the purchase?</p>
-          <CardElement onReady={handleReady} style={cardStyle} />
+          {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
+          <StripeElementContainer>
+            <CardNumberElement style={cardStyle} />
+          </StripeElementContainer>
+
+          <StripeElementContainer>
+            <CardExpiryElement style={cardStyle} />
+          </StripeElementContainer>
+
+          <StripeElementContainer>
+            <CardCVCElement style={cardStyle} />
+          </StripeElementContainer>
           <button onClick={submit}>Purchase</button>
         </div>
       )}
