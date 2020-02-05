@@ -129,8 +129,8 @@ const Dashboard = ({ history }) => {
               [team.id]: {
                 ...team,
                 projects: team.projects?.reduce((projects, project) => {
-                  return { ...projects, [project.id]: project }
-                }, {}),
+                  return [...projects, project]
+                }, []),
               },
             }
           }, {}),
