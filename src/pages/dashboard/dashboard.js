@@ -182,16 +182,6 @@ const Dashboard = ({ history }) => {
     setExpandedTiles(newTiles)
   }
 
-  const updateTeams = () => {
-    dispatch(
-      query({
-        name: 'myTeams',
-        storeKey: 'myTeams',
-        query: MY_TEAMS,
-      })
-    )
-  }
-
   const updateOrganizations = () => {
     dispatch(
       query({
@@ -433,7 +423,6 @@ const Dashboard = ({ history }) => {
                                 <Projects
                                   projects={team.projects}
                                   history={history}
-                                  updateTeams={updateTeams}
                                   updateOrganizations={updateOrganizations}
                                 />
                                 {isOwner && (
@@ -494,7 +483,6 @@ const Dashboard = ({ history }) => {
         mutation: CREATE_TEAM,
         variables: { name, organizationId: editTeam.organizationId },
         onSuccess: data => {
-          updateTeams()
           updateOrganizations()
           setRenameTeamModal(false)
           updateExpandedTiles(data)
@@ -558,7 +546,6 @@ const Dashboard = ({ history }) => {
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
             onSuccess: () => {
-              updateTeams()
               updateOrganizations()
               closeWarningModal()
             },
@@ -592,7 +579,6 @@ const Dashboard = ({ history }) => {
               teamId: editTeam.id,
             },
             onSuccess: () => {
-              updateTeams()
               updateOrganizations()
               setRenameTeamModal(false)
               closeWarningModal()
@@ -628,7 +614,6 @@ const Dashboard = ({ history }) => {
           mutation: ADD_MEMBER,
           variables: { memberEmail, teamId: editTeam.id },
           onSuccess: () => {
-            updateTeams()
             updateOrganizations()
             setAddMemberModal(false)
           },
@@ -672,7 +657,6 @@ const Dashboard = ({ history }) => {
               newTeamLeaderId: newOwner.values,
             },
             onSuccess: () => {
-              updateTeams()
               updateOrganizations()
               setTeamLeaderModal(false)
             },
@@ -715,7 +699,7 @@ const Dashboard = ({ history }) => {
         mutation: LEAVE_TEAM,
         variables: { teamId },
         onSuccess: () => {
-          updateTeams()
+          updateOrganizations()
           closeWarningModal()
         },
       })
