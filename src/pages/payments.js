@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobile } from 'react-device-detect'
 import Select from 'react-select'
-import countryList from 'react-select-country-list'
 
 import { selectors } from 'state'
 import {
@@ -13,6 +12,7 @@ import {
   Footer,
   Modal,
 } from 'components'
+import StripeCheckoutForm from 'components/stripeCheckoutForm'
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,6 @@ const PageWrapper = styled(Wrapper)`
 
 const PaymentInfoColum = styled(Wrapper)`
   align-items: flex-start;
-  height: 200px;
   width: 60%;
   padding: 40px;
   margin: 0px 10px 0px 20px;
@@ -82,6 +81,8 @@ const Payments = () => {
       <PageWrapper>
         <PaymentInfoColum>
           <Title>1. Company info</Title>
+          <Title>2. Card info</Title>
+          <StripeCheckoutForm />
         </PaymentInfoColum>
         <PaymentSummarySection>
           <PaymentSummaryHeader></PaymentSummaryHeader>

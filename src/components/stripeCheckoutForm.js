@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { CardElement, injectStripe, Elements } from 'react-stripe-elements'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { selectors } from 'state'
 import { mutation } from 'utils'
 import {
@@ -8,6 +9,32 @@ import {
   STRIPE_CLIENT_SECRET,
   CHANGE_PAYMENT_INFO,
 } from 'queries'
+
+const cardStyle = {
+  base: {
+    height: '200px',
+    iconColor: '#c4f0ff',
+    color: '#fff',
+    borderRadius: '5px',
+    borderColor: '#0072ce',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    fontWeight: 500,
+    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+    fontSize: '16px',
+    fontSmoothing: 'antialiased',
+    ':-webkit-autofill': {
+      color: '#fce883',
+    },
+    '::placeholder': {
+      color: '#87BBFD',
+    },
+  },
+  invalid: {
+    iconColor: '#FFC7EE',
+    color: '#FFC7EE',
+  },
+}
 
 const CheckoutForm = props => {
   const [cardElement, setCardElement] = useState()
@@ -128,7 +155,7 @@ const CheckoutForm = props => {
       {user?.email && !success && (
         <div className="checkout">
           <p>Would you like to complete the purchase?</p>
-          <CardElement onReady={handleReady} />
+          <CardElement onReady={handleReady} style={cardStyle} />
           <button onClick={submit}>Purchase</button>
         </div>
       )}
