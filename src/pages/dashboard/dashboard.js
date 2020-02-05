@@ -163,7 +163,6 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     updateOrganizations()
-    updateTeams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

@@ -33,13 +33,7 @@ const sortByActiveProjects = projects =>
     return [...acc, element]
   }, []) || []
 
-const Projects = ({
-  history,
-  projects,
-  addProject,
-  updateTeams,
-  updateOrganizations,
-}) => {
+const Projects = ({ history, projects, addProject, updateOrganizations }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -94,7 +88,6 @@ const Projects = ({
         onSuccess: () => {
           setProjectToDelete(null)
           updateOrganizations()
-          updateTeams()
         },
         onSuccessDispatch: [
           () => ({
@@ -252,7 +245,6 @@ const Projects = ({
                               },
                               dataSelector: data => data,
                               onSuccess: () => {
-                                updateTeams()
                                 updateOrganizations()
                               },
                             })
@@ -324,18 +316,15 @@ const Projects = ({
   )
 }
 
-export default memo(
-  ({ history, projects, updateTeams, updateOrganizations }) => (
-    <AddProjectProvider>
-      {({ addProject }) => (
-        <Projects
-          addProject={addProject}
-          history={history}
-          projects={projects}
-          updateTeams={updateTeams}
-          updateOrganizations={updateOrganizations}
-        />
-      )}
-    </AddProjectProvider>
-  )
-)
+export default memo(({ history, projects, updateOrganizations }) => (
+  <AddProjectProvider>
+    {({ addProject }) => (
+      <Projects
+        addProject={addProject}
+        history={history}
+        projects={projects}
+        updateOrganizations={updateOrganizations}
+      />
+    )}
+  </AddProjectProvider>
+))
