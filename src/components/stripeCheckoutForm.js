@@ -18,15 +18,38 @@ import {
   CHANGE_PAYMENT_INFO,
 } from 'queries'
 
-const CardInfoWrapper = styled.div``
+const CardInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+`
 
 const StripeElementContainer = styled.div`
-  margin: 5px;
+  width: 100%;
+  margin: 5px 0px;
   padding: 1px;
   border-radius: 2px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-width: 1px;
   border-style: solid;
+`
+
+const StripeCcvSontainer = styled(StripeElementContainer)`
+  width: 30%;
+`
+
+const StripeExpiryContainer = styled(StripeElementContainer)`
+  width: 50%;
+`
+
+const VerticalDivider = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `
 
 const cardStyle = {
@@ -172,20 +195,23 @@ const CheckoutForm = props => {
     <div>
       {user?.email && !success && (
         <div className="checkout">
-          <p>Would you like to complete the purchase?</p>
-          {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
-          <StripeElementContainer>
-            <CardNumberElement style={cardStyle} />
-          </StripeElementContainer>
+          <CardInfoWrapper>
+            <p>Would you like to complete the purchase?</p>
+            {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
+            <StripeElementContainer>
+              <CardNumberElement style={cardStyle} />
+            </StripeElementContainer>
+            <VerticalDivider>
+              <StripeExpiryContainer>
+                <CardExpiryElement style={cardStyle} />
+              </StripeExpiryContainer>
 
-          <StripeElementContainer>
-            <CardExpiryElement style={cardStyle} />
-          </StripeElementContainer>
-
-          <StripeElementContainer>
-            <CardCVCElement style={cardStyle} />
-          </StripeElementContainer>
-          <button onClick={submit}>Purchase</button>
+              <StripeCcvSontainer>
+                <CardCVCElement style={cardStyle} />
+              </StripeCcvSontainer>
+            </VerticalDivider>
+            <button onClick={submit}>Purchase</button>
+          </CardInfoWrapper>
         </div>
       )}
       {error && (
