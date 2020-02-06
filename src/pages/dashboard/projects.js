@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
-import { mutation, handleStopProject } from 'utils'
+import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
@@ -33,7 +33,7 @@ const sortByActiveProjects = projects =>
     return [...acc, element]
   }, []) || []
 
-const Projects = ({ history, projects, addProject, updateOrganizations }) => {
+const Projects = ({ history, projects, addProject }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -87,7 +87,7 @@ const Projects = ({ history, projects, addProject, updateOrganizations }) => {
         dataSelector: data => data,
         onSuccess: () => {
           setProjectToDelete(null)
-          updateOrganizations()
+          updateOrganizations(dispatch)
         },
         onSuccessDispatch: [
           () => ({
@@ -245,7 +245,7 @@ const Projects = ({ history, projects, addProject, updateOrganizations }) => {
                               },
                               dataSelector: data => data,
                               onSuccess: () => {
-                                updateOrganizations()
+                                updateOrganizations(dispatch)
                               },
                             })
                           )
@@ -316,14 +316,13 @@ const Projects = ({ history, projects, addProject, updateOrganizations }) => {
   )
 }
 
-export default memo(({ history, projects, updateOrganizations }) => (
+export default memo(({ history, projects }) => (
   <AddProjectProvider>
     {({ addProject }) => (
       <Projects
         addProject={addProject}
         history={history}
         projects={projects}
-        updateOrganizations={updateOrganizations}
       />
     )}
   </AddProjectProvider>
