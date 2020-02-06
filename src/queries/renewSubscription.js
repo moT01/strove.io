@@ -12,8 +12,8 @@ export default gql`
       plan: $plan
       quantity: $quantity
     ) {
-      ...Organization
+      client_secret
+      status
     }
   }
-  ${OrganizationFragment}
 `

@@ -15,7 +15,12 @@ import {
 } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
-import { CANCEL_SUBSCRIPTION, MY_ORGANIZATIONS } from 'queries'
+import {
+  CANCEL_SUBSCRIPTION,
+  MY_ORGANIZATIONS,
+  UPGRADE_SUBSCRIPTION,
+  RENEW_SUBSCRIPTION,
+} from 'queries'
 import { mutation, query } from 'utils'
 
 export const FadeInAnimation = keyframes`
@@ -189,6 +194,30 @@ const Payments = () => {
                   )
                 }
                 text="Cancel subscription"
+              />
+            ) : organization.value.subscriptionStatus === 'canceled' ? (
+              <StroveButton
+                isPrimary
+                padding="5px"
+                minWidth="150px"
+                maxWidth="150px"
+                margin="10px"
+                borderRadius="2px"
+                onClick={() =>
+                  dispatch(
+                    mutation({
+                      name: 'renewSubscription',
+                      mutation: RENEW_SUBSCRIPTION,
+                      variables: {
+                        organizationId: organization.value.id,
+                        plan: subscriptionPlan.value,
+                        quantity: quantity,
+                      },
+                      onSuccess: updateOrganizations(),
+                    })
+                  )
+                }
+                text="Renew subscription"
               />
             ) : (
               <SectionWrapper>
