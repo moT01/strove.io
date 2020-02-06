@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobile } from 'react-device-detect'
@@ -15,7 +15,13 @@ import {
 } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
-import { CANCEL_SUBSCRIPTION, MY_ORGANIZATIONS } from 'queries'
+import {
+  CANCEL_SUBSCRIPTION,
+  MY_ORGANIZATIONS,
+  UPGRADE_SUBSCRIPTION,
+  RENEW_SUBSCRIPTION,
+  REVERT_CANCEL,
+} from 'queries'
 import { mutation, query } from 'utils'
 
 export const FadeInAnimation = keyframes`
@@ -134,6 +140,10 @@ const Payments = () => {
     )
   }
 
+  useEffect(() => {
+    updateOrganizations()
+  }, [])
+
   return (
     <>
       <SEO title="Dashboard" />
@@ -169,6 +179,52 @@ const Payments = () => {
           </SectionWrapper>
           {!!organization.value &&
             (organization.value.subscriptionStatus === 'active' ? (
+              <>
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() =>
+                    dispatch(
+                      mutation({
+                        name: 'cancelSubscription',
+                        mutation: CANCEL_SUBSCRIPTION,
+                        variables: {
+                          organizationId: organization.value.id,
+                        },
+                        onSuccess: updateOrganizations(),
+                      })
+                    )
+                  }
+                  text="Cancel subscription"
+                />
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    console.log('TCL: Payments -> organization', organization)
+                    dispatch(
+                      mutation({
+                        name: 'upgradeSubscription',
+                        mutation: UPGRADE_SUBSCRIPTION,
+                        variables: {
+                          subscriptionId: organization.value.subscriptionId,
+                        },
+                        onSuccess: updateOrganizations(),
+                      })
+                    )
+                  }}
+                  text="Upgrade subscription"
+                />
+              </>
+            ) : organization.value.subscriptionStatus === 'canceled' ? (
               <StroveButton
                 isPrimary
                 padding="5px"
@@ -176,21 +232,45 @@ const Payments = () => {
                 maxWidth="150px"
                 margin="10px"
                 borderRadius="2px"
-                onClick={() =>
+                onClick={() => {
+                  console.log('TCL: Payments -> organization', organization)
                   dispatch(
                     mutation({
-                      name: 'cancelSubscription',
-                      mutation: CANCEL_SUBSCRIPTION,
+                      name: 'revertCancel',
+                      mutation: REVERT_CANCEL,
                       variables: {
                         organizationId: organization.value.id,
                       },
                       onSuccess: updateOrganizations(),
                     })
                   )
-                }
-                text="Cancel subscription"
+                }}
+                text="Revert subscription cancel"
               />
             ) : (
+              //   <StroveButton
+              //   isPrimary
+              //   padding="5px"
+              //   minWidth="150px"
+              //   maxWidth="150px"
+              //   margin="10px"
+              //   borderRadius="2px"
+              //   onClick={() =>
+              //     dispatch(
+              //       mutation({
+              //         name: 'renewSubscription',
+              //         mutation: RENEW_SUBSCRIPTION,
+              //         variables: {
+              //           organizationId: organization.value.id,
+              //           plan: subscriptionPlan.value,
+              //           quantity: quantity,
+              //         },
+              //         onSuccess: updateOrganizations(),
+              //       })
+              //     )
+              //   }
+              //   text="Renew subscription"
+              // />
               <SectionWrapper>
                 <Title>2. Payment info</Title>
                 <StripeCheckoutForm
