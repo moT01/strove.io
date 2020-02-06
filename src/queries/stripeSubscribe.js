@@ -7,6 +7,7 @@ export default gql`
     $name: String!
     $organizationId: ID!
     $email: String!
+    $quantity: Number
   ) {
     stripeSubscribe(
       plan: $plan
@@ -14,6 +15,7 @@ export default gql`
       name: $name
       organizationId: $organizationId
       email: $email
+      quantity: $quantity
     ) {
       client_secret
       status

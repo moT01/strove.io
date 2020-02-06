@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobile } from 'react-device-detect'
-import Select from 'react-select'
+import { Formik, Form, Field } from 'formik'
 
 import { selectors } from 'state'
 import {
@@ -104,7 +104,11 @@ const optionColor = 'rgba(185,185,185,0.65)'
 const Payments = () => {
   const user = useSelector(selectors.api.getUser)
   const [organization, setOrganization] = useState({})
-  const [subscriptionPlan, setSubscriptionPlan] = useState()
+  const [subscriptionPlan, setSubscriptionPlan] = useState({
+    value: process.env.REACT_APP_MONTHLY_PLAN,
+    label: 'Monthly',
+  })
+  const [quantity, setQuantity] = useState(1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
     .filter(organization => organization.owner.id === user.id)
@@ -153,13 +157,18 @@ const Payments = () => {
           {!!organization.value && (
             <SectionWrapper>
               <Title>2. Card info</Title>
-              <StripeCheckoutForm organization={organization.value} />
+              <StripeCheckoutForm
+                organization={organization.value}
+                quantity={quantity}
+                plan={subscriptionPlan.value}
+              />
             </SectionWrapper>
           )}
         </PaymentInfoColum>
         <PaymentSummarySection>
           <PaymentSummaryHeader>
             <SubscriptionsSelect
+              defaultValue={'Monthly'}
               value={subscriptionPlan}
               onChange={plan => setSubscriptionPlan(plan)}
               options={subscriptionPlans}
@@ -168,17 +177,60 @@ const Payments = () => {
                 control: styles => ({
                   ...styles,
                   backgroundColor: '#0072ce',
-                  border: '1px solid #fff',
-                  borderRadius: '2px',
+                  borderStyle: 'none',
                 }),
                 menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
                 dropdownIndicator: styles => ({ styles, color: '#fff' }),
                 indicatorSeparator: styles => ({ styles, color: '#fff' }),
                 input: styles => ({ styles, color: '#fff' }),
                 placeholder: styles => ({ styles, color: '#fff' }),
+                option: styles => ({ ...styles, color: '#fff' }),
+                singleValue: styles => ({ ...styles, color: '#fff' }),
               }}
             />
           </PaymentSummaryHeader>
+          <Formik
+            initialValues={{
+              quantity: 1,
+            }}
+            // validate={validate}
+            onSubmit={values => {
+              console.log(
+                'Values',
+                values,
+                'Subscription plan',
+                subscriptionPlan
+              )
+              setQuantity(values.quantity)
+            }}
+          >
+            {({ errors, touched, values }) => (
+              <Form>
+                <Field name="quantity"></Field>
+                <StroveButton
+                  layout="form"
+                  type="submit"
+                  text="Set quantity"
+                  // disabled={errors.quantity || !values.quantity}
+                />
+              </Form>
+            )}
+          </Formik>
+          {subscriptionPlan && (
+            <>
+              <Text>Order summary</Text>
+              <Text>
+                {quantity} users x{' '}
+                {subscriptionPlan.label === 'Yearly'
+                  ? '$40 x 12 months'
+                  : '$50'}{' '}
+                ={' '}
+                {subscriptionPlan.label === 'Yearly'
+                  ? `$${quantity * 40 * 12}`
+                  : `$${quantity * 50}`}
+              </Text>
+            </>
+          )}
         </PaymentSummarySection>
       </PageWrapper>
     </>

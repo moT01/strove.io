@@ -97,12 +97,14 @@ const cardStyle = {
 }
 
 const CheckoutForm = props => {
+  console.log('TCL: props', props)
   const [cardNumber, setCardNumber] = useState()
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
-  const organizationId = props.organization?.organization?.id
+  const organizationId = props.organization?.id
+  console.log('TCL: organizationId', organizationId)
 
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
@@ -175,7 +177,7 @@ const CheckoutForm = props => {
         mutation: STRIPE_SUBSCRIBE,
         variables: {
           paymentMethod: paymentMethod.id,
-          plan: 'plan_GYjzUWz4PmzdMg',
+          plan: props.plan,
           name: 'John Cena',
           email: 'mateusz@strove.io',
           organizationId,
@@ -270,8 +272,12 @@ const CheckoutForm = props => {
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default organization => (
+export default ({ organization, quantity, plan }) => (
   <Elements>
-    <FormWithStripe organization={organization} />
+    <FormWithStripe
+      organization={organization}
+      quantity={quantity}
+      plan={plan}
+    />
   </Elements>
 )
