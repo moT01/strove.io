@@ -44,6 +44,15 @@ const StripeExpiryContainer = styled(StripeElementContainer)`
   width: 50%;
 `
 
+const Text = styled.div`
+  color: ${({ theme }) => theme.colors.c3};
+  font-size: 1rem;
+  margin: 0px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
 const VerticalDivider = styled.div`
   display: flex;
   flex-direction: row;
@@ -198,7 +207,7 @@ const CheckoutForm = props => {
       {user?.email && !success && (
         <div className="checkout">
           <CardInfoWrapper>
-            <p>Would you like to complete the purchase?</p>
+            <Text>Would you like to complete the purchase?</Text>
             {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
             <StripeElementContainer>
               <CardNumberElement style={cardStyle} onReady={handleReady} />

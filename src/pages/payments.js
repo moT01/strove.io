@@ -62,18 +62,19 @@ const PaymentSummaryHeader = styled(Wrapper)`
 const Title = styled.div`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.c3};
-  margin: 3px 3px 3px 0;
+  margin: 30px 0px;
 `
 
 const Text = styled.div`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
-  margin-left: 10px;
-  margin-bottom: 0;
+  margin: 0px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 `
+
+const optionColor = 'rgba(185,185,185,0.65)'
 
 const Payments = () => {
   const user = useSelector(selectors.api.getUser)
@@ -99,20 +100,20 @@ const Payments = () => {
             options={organizationOptions}
             theme={theme => ({
               ...theme,
-              borderRadius: 0,
+              borderRadius: '2px',
               colors: {
                 ...theme.colors,
-                primary: '#0072ce',
-                neutral5: '#0072ce',
-                neutral10: '#0072ce',
-                neutral20: '#0072ce',
-                neutral30: '#0072ce',
-                neutral40: '#0072ce',
-                neutral50: '#0072ce',
+                primary: optionColor,
+                neutral5: optionColor,
+                neutral10: optionColor,
+                neutral20: optionColor,
+                neutral30: optionColor,
+                neutral40: optionColor,
+                neutral50: optionColor,
                 neutral60: '#0072ce',
-                neutral70: '#0072ce',
+                neutral70: optionColor,
                 neutral80: '#0072ce',
-                neutral90: '#0072ce',
+                neutral90: optionColor,
               },
             })}
           />
