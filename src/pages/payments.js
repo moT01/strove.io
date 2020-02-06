@@ -15,6 +15,8 @@ import {
 } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
+import { CANCEL_SUBSCRIPTION, MY_ORGANIZATIONS } from 'queries'
+import { mutation, query } from 'utils'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -102,6 +104,7 @@ const OrganizationSelect = styled(StyledSelect)`
 const optionColor = 'rgba(185,185,185,0.65)'
 
 const Payments = () => {
+  const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [organization, setOrganization] = useState({})
   const [subscriptionPlan, setSubscriptionPlan] = useState({
@@ -120,6 +123,16 @@ const Payments = () => {
     { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
     { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
   ]
+
+  const updateOrganizations = () => {
+    dispatch(
+      query({
+        name: 'myOrganizations',
+        storeKey: 'myOrganizations',
+        query: MY_ORGANIZATIONS,
+      })
+    )
+  }
 
   return (
     <>
@@ -154,16 +167,39 @@ const Payments = () => {
               })}
             />
           </SectionWrapper>
-          {!!organization.value && (
-            <SectionWrapper>
-              <Title>2. Card info</Title>
-              <StripeCheckoutForm
-                organization={organization.value}
-                quantity={quantity}
-                plan={subscriptionPlan.value}
+          {!!organization.value &&
+            (organization.value.subscriptionStatus === 'active' ? (
+              <StroveButton
+                isPrimary
+                padding="5px"
+                minWidth="150px"
+                maxWidth="150px"
+                margin="10px"
+                borderRadius="2px"
+                onClick={() =>
+                  dispatch(
+                    mutation({
+                      name: 'cancelSubscription',
+                      mutation: CANCEL_SUBSCRIPTION,
+                      variables: {
+                        organizationId: organization.value.id,
+                      },
+                      onSuccess: updateOrganizations(),
+                    })
+                  )
+                }
+                text="Cancel subscription"
               />
-            </SectionWrapper>
-          )}
+            ) : (
+              <SectionWrapper>
+                <Title>2. Payment info</Title>
+                <StripeCheckoutForm
+                  organization={organization.value}
+                  quantity={quantity}
+                  plan={subscriptionPlan.value}
+                />
+              </SectionWrapper>
+            ))}
         </PaymentInfoColum>
         <PaymentSummarySection>
           <PaymentSummaryHeader>

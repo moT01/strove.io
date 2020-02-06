@@ -33,6 +33,7 @@ import RENAME_ORGANIZATION from './renameOrganization'
 import CREATE_ORGANIZATION from './createOrganization'
 import DELETE_ORGANIZATION from './deleteOrganization'
 import TRANSFER_ORGANIZATION from './transferOrganization'
+import CANCEL_SUBSCRIPTION from './cancelSubscription'
 
 export {
   ADD_PROJECT,
@@ -70,4 +71,5 @@ export {
   CREATE_ORGANIZATION,
   DELETE_ORGANIZATION,
   TRANSFER_ORGANIZATION,
+  CANCEL_SUBSCRIPTION,
 }

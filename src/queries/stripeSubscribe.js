@@ -7,7 +7,7 @@ export default gql`
     $name: String!
     $organizationId: ID!
     $email: String!
-    $quantity: Number
+    $quantity: Int
   ) {
     stripeSubscribe(
       plan: $plan
