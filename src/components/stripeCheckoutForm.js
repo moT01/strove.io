@@ -93,6 +93,7 @@ const CheckoutForm = props => {
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
+  const organizationId = props.organization?.organization?.id
 
   console.log('Organization', props.organization?.organization?.id)
 
@@ -135,7 +136,7 @@ const CheckoutForm = props => {
             mutation: CHANGE_PAYMENT_INFO,
             variables: {
               paymentMethod: setupIntent.payment_method,
-              // organizationId: props.organization.id
+              organizationId,
             },
             dataSelector: data => data.changePaymentInfo,
             onSuccess: data => console.log(data),
@@ -147,6 +148,7 @@ const CheckoutForm = props => {
 
   // This starts the flow for getting new subscription
   const submit = async event => {
+    console.log('TCL: event', event)
     const { paymentMethod, error } = await props.stripe.createPaymentMethod({
       type: 'card',
       card: cardNumber,
@@ -167,6 +169,9 @@ const CheckoutForm = props => {
         variables: {
           paymentMethod: paymentMethod.id,
           plan: 'plan_GYjzUWz4PmzdMg',
+          name: 'John Cena',
+          email: 'mateusz@strove.io',
+          organizationId,
           // ^ this plan is should be replaced with the one customer chose
           // both plans are stored in .env file
         },
@@ -200,7 +205,6 @@ const CheckoutForm = props => {
   // Necessary to load up data from card Element
   const handleReady = element => {
     setCardNumber(element)
-    console.log('TCL: element', element)
   }
 
   // Needs improvemnts look-wise, good luck Matthew :)
@@ -225,7 +229,7 @@ const CheckoutForm = props => {
             </VerticalDivider>
             <StroveButton
               isPrimary
-              isDisabled={!props.organization?.organization?.id}
+              isDisabled={!organizationId}
               fontSize="0.8rem"
               padding="1px 3px"
               minWidth="80px"
