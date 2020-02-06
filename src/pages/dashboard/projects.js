@@ -87,7 +87,6 @@ const Projects = ({ history, projects, addProject }) => {
         dataSelector: data => data,
         onSuccess: () => {
           setProjectToDelete(null)
-          updateOrganizations(dispatch)
         },
         onSuccessDispatch: [
           () => ({
@@ -95,6 +94,7 @@ const Projects = ({ history, projects, addProject }) => {
             payload: { storeKey: 'myProjects', id },
           }),
           () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
+          updateOrganizations,
         ],
       })
     )
@@ -244,9 +244,7 @@ const Projects = ({ history, projects, addProject }) => {
                                 isVisible: !project.isVisible,
                               },
                               dataSelector: data => data,
-                              onSuccess: () => {
-                                updateOrganizations(dispatch)
-                              },
+                              onSuccessDispatch: updateOrganizations,
                             })
                           )
                         }}
@@ -319,11 +317,7 @@ const Projects = ({ history, projects, addProject }) => {
 export default memo(({ history, projects }) => (
   <AddProjectProvider>
     {({ addProject }) => (
-      <Projects
-        addProject={addProject}
-        history={history}
-        projects={projects}
-      />
+      <Projects addProject={addProject} history={history} projects={projects} />
     )}
   </AddProjectProvider>
 ))
