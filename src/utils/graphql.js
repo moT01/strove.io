@@ -120,7 +120,8 @@ export const mutation = ({
       )
 
       return result
-    } catch (error) {
+    } catch (errorObj) {
+      const error = errorObj.toString()
       console.log('Error', error)
       onError && onError(error)
 
@@ -275,7 +276,8 @@ export const query = ({
       )
 
       return result
-    } catch (error) {
+    } catch (errorObj) {
+      const error = errorObj.toString()
       console.log('fetch error: ', error)
 
       onError && onError(error)

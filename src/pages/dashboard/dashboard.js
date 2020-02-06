@@ -12,7 +12,6 @@ import {
   CREATE_TEAM,
   RENAME_TEAM,
   REMOVE_MEMBER,
-  MY_TEAMS,
   DELETE_TEAM,
   SET_ADMIN,
   LEAVE_TEAM,
@@ -31,7 +30,7 @@ import StroveLogo from 'images/strove.png'
 
 import Projects from './projects'
 import {
-  EmailFormWrapper,
+  FormWrapper,
   StyledForm,
   PageWrapper,
   TeamTileWrapper,
@@ -60,6 +59,7 @@ import {
   Setting,
   UserPhoto,
   OrganizationName,
+  StyledErrors,
 } from './styled'
 
 const validate = values => {
@@ -101,7 +101,6 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
-  const myTeams = useSelector(selectors.api.getMyTeams)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
@@ -116,6 +115,7 @@ const Dashboard = ({ history }) => {
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
+  const createTeamError = useSelector(selectors.api.getError('createTeam'))
   const organizationsObj =
     myOrganizations &&
     myOrganizations.reduce((organizations, organization) => {
@@ -126,12 +126,7 @@ const Dashboard = ({ history }) => {
           teams: organization.teams?.reduce((teams, team) => {
             return {
               ...teams,
-              [team.id]: {
-                ...team,
-                projects: team.projects?.reduce((projects, project) => {
-                  return { ...projects, [project.id]: project }
-                }, {}),
-              },
+              [team.id]: team,
             }
           }, {}),
         },
@@ -162,7 +157,6 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     updateOrganizations()
-    updateTeams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -179,16 +173,6 @@ const Dashboard = ({ history }) => {
       newTiles[organizationId].visible = !oldValue
     }
     setExpandedTiles(newTiles)
-  }
-
-  const updateTeams = () => {
-    dispatch(
-      query({
-        name: 'myTeams',
-        storeKey: 'myTeams',
-        query: MY_TEAMS,
-      })
-    )
   }
 
   const updateOrganizations = () => {
@@ -283,16 +267,18 @@ const Dashboard = ({ history }) => {
                                   />
                                 ))}
                             </VerticalDivider>
-                            <IconWrapper
-                              onClick={() =>
-                                displayHandler({
-                                  organizationId: organization.id,
-                                  teamId: team.id,
-                                })
-                              }
-                            >
-                              <ExpandIcon type="down" expanded={isExpanded} />
-                            </IconWrapper>
+                            {team.projects?.length > 1 && (
+                              <IconWrapper
+                                onClick={() =>
+                                  displayHandler({
+                                    organizationId: organization.id,
+                                    teamId: team.id,
+                                  })
+                                }
+                              >
+                                <ExpandIcon type="down" expanded={isExpanded} />
+                              </IconWrapper>
+                            )}
                           </Divider>
                         </TeamTileHeader>
                         {isExpanded && (
@@ -401,43 +387,35 @@ const Dashboard = ({ history }) => {
                             <TileSectionHeader isLast>
                               <Divider>
                                 <SectionTitle>Projects</SectionTitle>
-                                <IconWrapper
-                                  onClick={() =>
-                                    displayHandler({
-                                      organizationId: organization.id,
-                                      teamId: team.id,
-                                      section: 'projects',
-                                    })
-                                  }
-                                >
-                                  <ExpandIcon
-                                    type="down"
-                                    expanded={
-                                      expandedTiles[organization.id].teams[
-                                        team.id
-                                      ].sections.projects
+                                {team.projects?.length > 1 && (
+                                  <IconWrapper
+                                    onClick={() =>
+                                      displayHandler({
+                                        organizationId: organization.id,
+                                        teamId: team.id,
+                                        section: 'projects',
+                                      })
                                     }
-                                    section
-                                  />
-                                </IconWrapper>
+                                  >
+                                    <ExpandIcon
+                                      type="down"
+                                      expanded={
+                                        expandedTiles[organization.id].teams[
+                                          team.id
+                                        ].sections.projects
+                                      }
+                                      section
+                                    />
+                                  </IconWrapper>
+                                )}
                               </Divider>
                             </TileSectionHeader>
                             {expandedTiles[organization.id].teams[team.id]
                               .sections.projects && (
                               <TeamTileSection isLast>
                                 <Projects
-                                  projects={
-                                    organizationsObj[organization.id].teams[
-                                      team.id
-                                    ].projects &&
-                                    Object.values(
-                                      organizationsObj[organization.id].teams[
-                                        team.id
-                                      ].projects
-                                    )
-                                  }
+                                  projects={team.projects}
                                   history={history}
-                                  updateTeams={updateTeams}
                                   updateOrganizations={updateOrganizations}
                                 />
                                 {isOwner && (
@@ -498,7 +476,6 @@ const Dashboard = ({ history }) => {
         mutation: CREATE_TEAM,
         variables: { name, organizationId: editTeam.organizationId },
         onSuccess: data => {
-          updateTeams()
           updateOrganizations()
           setRenameTeamModal(false)
           updateExpandedTiles(data)
@@ -562,7 +539,6 @@ const Dashboard = ({ history }) => {
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
             onSuccess: () => {
-              updateTeams()
               updateOrganizations()
               closeWarningModal()
             },
@@ -596,7 +572,6 @@ const Dashboard = ({ history }) => {
               teamId: editTeam.id,
             },
             onSuccess: () => {
-              updateTeams()
               updateOrganizations()
               setRenameTeamModal(false)
               closeWarningModal()
@@ -632,7 +607,6 @@ const Dashboard = ({ history }) => {
           mutation: ADD_MEMBER,
           variables: { memberEmail, teamId: editTeam.id },
           onSuccess: () => {
-            updateTeams()
             updateOrganizations()
             setAddMemberModal(false)
           },
@@ -676,7 +650,6 @@ const Dashboard = ({ history }) => {
               newTeamLeaderId: newOwner.values,
             },
             onSuccess: () => {
-              updateTeams()
               updateOrganizations()
               setTeamLeaderModal(false)
             },
@@ -719,7 +692,7 @@ const Dashboard = ({ history }) => {
         mutation: LEAVE_TEAM,
         variables: { teamId },
         onSuccess: () => {
-          updateTeams()
+          updateOrganizations()
           closeWarningModal()
         },
       })
@@ -791,9 +764,9 @@ const Dashboard = ({ history }) => {
           validate={validate}
           onSubmit={values => addMember({ memberEmail: values.email })}
         >
-          {({ errors, touched, values }) => (
+          {({ errors, values }) => (
             <StyledForm>
-              <EmailFormWrapper
+              <FormWrapper
                 isInvite
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
@@ -826,10 +799,7 @@ const Dashboard = ({ history }) => {
                   text="Invite"
                   disabled={errors.email || !values.email}
                 />
-              </EmailFormWrapper>
-              {/* {emailSent && (
-                <StyledInfo>Your team invitation has been sent</StyledInfo>
-              )} */}
+              </FormWrapper>
             </StyledForm>
           )}
         </Formik>
@@ -905,16 +875,15 @@ const Dashboard = ({ history }) => {
           validate={validateTeamName}
           onSubmit={values => {
             if (editMode === 'Rename team') {
-              console.log('Edit team', editTeam)
               renameTeam({ newName: values.name, teamId: editTeam.id })
             } else {
               createTeam({ name: values.name, organizationId: editTeam.id })
             }
           }}
         >
-          {({ errors, touched, values }) => (
+          {({ errors, values }) => (
             <StyledForm>
-              <EmailFormWrapper
+              <FormWrapper
                 disabled={errors.name || !values.name}
                 isMobile={isMobileOnly}
               >
@@ -924,7 +893,7 @@ const Dashboard = ({ history }) => {
                   placeholder={
                     editMode === 'Rename team' ? 'New team name' : 'Team name'
                   }
-                ></Field>
+                />
                 <StroveButton
                   isPrimary
                   type="submit"
@@ -932,10 +901,7 @@ const Dashboard = ({ history }) => {
                   text={editMode === 'Rename team' ? 'Rename' : 'Create'}
                   disabled={errors.name || !values.name}
                 />
-              </EmailFormWrapper>
-              {/* {emailSent && (
-                <StyledInfo>Your team invitation has been sent</StyledInfo>
-              )} */}
+              </FormWrapper>
             </StyledForm>
           )}
         </Formik>
@@ -945,6 +911,12 @@ const Dashboard = ({ history }) => {
           padding="5px"
           maxWidth="150px"
         />
+        {createTeamError && (
+          <>
+            <Text>Ops! The following error happened during team creation:</Text>
+            <StyledErrors>njdnvjd {createTeamError}</StyledErrors>
+          </>
+        )}
       </Modal>
 
       <Modal

@@ -17,7 +17,7 @@ export default createGlobalStyle`
   }
 
   body {
-    word-break: break-all;
+    word-break: break-word;
     width: 100%;
     position: absolute;
     background-color: #fff;

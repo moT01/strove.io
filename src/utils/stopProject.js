@@ -1,5 +1,5 @@
 import { query, mutation } from 'utils'
-import { STOP_PROJECT, MY_PROJECTS, MY_ORGANIZATIONS, MY_TEAMS } from 'queries'
+import { STOP_PROJECT, MY_PROJECTS, MY_ORGANIZATIONS } from 'queries'
 import { actions } from 'state'
 
 const handleStopProject = ({ id, dispatch }) => {
@@ -15,13 +15,6 @@ const handleStopProject = ({ id, dispatch }) => {
             name: 'myOrganizations',
             storeKey: 'myOrganizations',
             query: MY_ORGANIZATIONS,
-          })
-        )
-        dispatch(
-          query({
-            name: 'myTeams',
-            storeKey: 'myTeams',
-            query: MY_TEAMS,
           })
         )
       },

@@ -357,8 +357,6 @@ export default memo(
           token,
           siliskyToken,
           subscription,
-          projects,
-          teams,
           organizations,
         } = loginData?.userLogin
         localStorage.setItem('token', token || siliskyToken)
@@ -375,22 +373,6 @@ export default memo(
             payload: {
               storeKey: 'subscription',
               data: subscription,
-            },
-          })
-        projects &&
-          dispatch({
-            type: C.api.FETCH_SUCCESS,
-            payload: {
-              storeKey: 'myProjects',
-              data: projects,
-            },
-          })
-        teams &&
-          dispatch({
-            type: C.api.FETCH_SUCCESS,
-            payload: {
-              storeKey: 'myTeams',
-              data: teams,
             },
           })
         organizations &&

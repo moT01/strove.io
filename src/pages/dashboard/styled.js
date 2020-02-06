@@ -16,7 +16,7 @@ export const FullFadeIn = keyframes`
   }
 `
 
-export const EmailFormWrapper = styled.div`
+export const FormWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -486,4 +486,8 @@ export const CircleIcon = styled.div`
   border-radius: 50%;
   background: ${({ theme, active }) =>
     active ? theme.colors.c8 : theme.colors.c9};
+`
+
+export const StyledErrors = styled(Text)`
+  color: ${({ theme }) => theme.colors.c5};
 `
