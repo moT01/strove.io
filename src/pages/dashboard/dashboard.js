@@ -15,7 +15,6 @@ import {
   DELETE_TEAM,
   SET_ADMIN,
   LEAVE_TEAM,
-  MY_ORGANIZATIONS,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -156,7 +155,7 @@ const Dashboard = ({ history }) => {
   )
 
   useEffect(() => {
-    updateOrganizations()
+    updateOrganizations(dispatch)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -406,7 +405,6 @@ const Dashboard = ({ history }) => {
                                 <Projects
                                   projects={team.projects}
                                   history={history}
-                                  updateOrganizations={updateOrganizations}
                                 />
                                 {isOwner && (
                                   <StroveButton
