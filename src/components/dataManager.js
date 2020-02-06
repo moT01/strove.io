@@ -22,6 +22,7 @@ import {
   getWindowHref,
   redirectToEditor,
   getWindowSearchParams,
+  updateOrganizations,
 } from 'utils'
 import { selectors } from 'state'
 import { C } from 'state'
@@ -107,14 +108,7 @@ export default memo(
     }, [invitedByTeamId, token])
 
     useEffect(() => {
-      dispatch({
-        type: C.api.UPDATE_ITEM,
-        payload: {
-          storeKey: 'myProjects',
-          id,
-          data: { editorPort, machineId, additionalPorts, machineName },
-        },
-      })
+      dispatch(updateOrganizations)
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [machineName, machineId, editorPort])
@@ -178,18 +172,7 @@ export default memo(
         } else if (queuePosition === 0 && project?.machineId) {
           if (type === 'continueProject') {
             try {
-              dispatch({
-                type: C.api.UPDATE_ITEM,
-                payload: {
-                  storeKey: 'myProjects',
-                  id: project.id,
-                  data: {
-                    editorPort: project.editorPort,
-                    machineId: project.machineId,
-                    additionalPorts: project.additionalPorts,
-                  },
-                },
-              })
+              dispatch(updateOrganizations)
               dispatch(
                 actions.api.fetchSuccess({
                   storeKey: 'continueProject',
@@ -201,12 +184,7 @@ export default memo(
             }
           } else if (type === 'addProject') {
             dispatch(actions.incomingProject.removeIncomingProject())
-            dispatch(
-              actions.api.fetchSuccess({
-                storeKey: 'myProjects',
-                data: project,
-              })
-            )
+            dispatch(updateOrganizations)
           }
           redirectToEditor(dispatch, history)
         }
@@ -312,14 +290,7 @@ export default memo(
         setInterval(() => {
           let now = moment().format('X')
           if (now - then > 300) {
-            token &&
-              dispatch(
-                query({
-                  name: 'myProjects',
-                  dataSelector: data => data.myProjects.edges,
-                  query: MY_PROJECTS,
-                })
-              )
+            token && dispatch(updateOrganizations)
           }
           then = now
         }, 2000)
@@ -389,13 +360,7 @@ export default memo(
 
     useEffect(() => {
       if (token) {
-        dispatch(
-          query({
-            name: 'myProjects',
-            dataSelector: data => data.myProjects.edges,
-            query: MY_PROJECTS,
-          })
-        )
+        dispatch(updateOrganizations)
 
         if (history.location.pathname === '/') {
           history.push('/app/dashboard')
