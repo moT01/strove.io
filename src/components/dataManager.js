@@ -9,7 +9,6 @@ import {
   GITHUB_LOGIN,
   GITLAB_LOGIN,
   BITBUCKET_LOGIN,
-  MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
@@ -17,7 +16,6 @@ import {
 } from 'queries'
 import {
   mutation,
-  query,
   window,
   getWindowHref,
   redirectToEditor,
@@ -87,8 +85,6 @@ export default memo(
     const machineId = activeProjectData?.machineId
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
-    const additionalPorts = activeProjectData?.additionalPorts
-    const id = activeProjectData?.id
 
     useEffect(() => {
       if (invitedByTeamId && token) {
