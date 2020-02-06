@@ -737,8 +737,7 @@ const Dashboard = ({ history }) => {
         />
       </Modal>
       <Modal
-        width={isMobileOnly && '80vw'}
-        mindWidth="40vw"
+        mindWidth="80vw"
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={addMemberModal}
         onRequestClose={() => setAddMemberModal(false)}
@@ -800,7 +799,8 @@ const Dashboard = ({ history }) => {
       </Modal>
 
       <Modal
-        width={isMobileOnly ? '80vw' : '40vw'}
+        width={isMobileOnly ? '80vw' : '60vw'}
+        minWidth="60vw"
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={settingsModal}
         onRequestClose={closeSettingsModal}
