@@ -26,6 +26,14 @@ const CardInfoWrapper = styled.div`
   width: 100%;
 `
 
+const StripeCvcWrapper = styled(CardInfoWrapper)`
+  width: 50%;
+`
+
+const StripeExpiryWrapper = styled(CardInfoWrapper)`
+  width: 30%;
+`
+
 const StripeElementContainer = styled.div`
   width: 100%;
   margin: 5px 0px;
@@ -36,12 +44,12 @@ const StripeElementContainer = styled.div`
   border-style: solid;
 `
 
-const StripeCcvSontainer = styled(StripeElementContainer)`
-  width: 30%;
+const StripeCvcContainer = styled(StripeElementContainer)`
+  width: 100%;
 `
 
 const StripeExpiryContainer = styled(StripeElementContainer)`
-  width: 50%;
+  width: 100%;
 `
 
 const Text = styled.div`
@@ -58,6 +66,7 @@ const VerticalDivider = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
   width: 100%;
   height: 100%;
 `
@@ -94,8 +103,6 @@ const CheckoutForm = props => {
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
   const organizationId = props.organization?.organization?.id
-
-  console.log('Organization', props.organization?.organization?.id)
 
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
@@ -209,23 +216,28 @@ const CheckoutForm = props => {
 
   // Needs improvemnts look-wise, good luck Matthew :)
   return (
-    <div>
+    <div style={{ width: '350px' }}>
       {user?.email && !success && (
         <div className="checkout">
           <CardInfoWrapper>
-            <Text>Would you like to complete the purchase?</Text>
+            <Text>Card number</Text>
             {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
             <StripeElementContainer>
               <CardNumberElement style={cardStyle} onReady={handleReady} />
             </StripeElementContainer>
             <VerticalDivider>
-              <StripeExpiryContainer>
-                <CardExpiryElement style={cardStyle} />
-              </StripeExpiryContainer>
-
-              <StripeCcvSontainer>
-                <CardCVCElement style={cardStyle} />
-              </StripeCcvSontainer>
+              <StripeCvcWrapper>
+                <Text>Expiry date</Text>
+                <StripeExpiryContainer>
+                  <CardExpiryElement style={cardStyle} />
+                </StripeExpiryContainer>
+              </StripeCvcWrapper>
+              <StripeExpiryWrapper>
+                <Text>CVC</Text>
+                <StripeCvcContainer>
+                  <CardCVCElement style={cardStyle} />
+                </StripeCvcContainer>
+              </StripeExpiryWrapper>
             </VerticalDivider>
             <StroveButton
               isPrimary

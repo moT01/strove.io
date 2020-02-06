@@ -16,11 +16,26 @@ import {
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
 
+export const FadeInAnimation = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+`
+
+const SectionWrapper = styled(Wrapper)`
+  width: 100%;
+  align-items: flex-start;
+  animation: ${FadeInAnimation} 0.2s ease-out;
 `
 
 const PageWrapper = styled(Wrapper)`
@@ -90,11 +105,10 @@ const Payments = () => {
       value: organization,
       label: organization.name,
     }))
-  console.log(
-    'TCL: Payments -> organizationOptions',
-    organizationOptions,
-    organization
-  )
+  const subscriptionPlans = [
+    { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
+    { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
+  ]
 
   return (
     <>
@@ -102,33 +116,39 @@ const Payments = () => {
       <Header />
       <PageWrapper>
         <PaymentInfoColum>
-          <Title>1. Company info</Title>
-          <Text>Choose organization</Text>
-          <OrganizationSelect
-            value={organization}
-            onChange={organization => setOrganization(organization)}
-            options={organizationOptions}
-            theme={theme => ({
-              ...theme,
-              borderRadius: '2px',
-              colors: {
-                ...theme.colors,
-                primary: optionColor,
-                neutral5: optionColor,
-                neutral10: optionColor,
-                neutral20: optionColor,
-                neutral30: optionColor,
-                neutral40: optionColor,
-                neutral50: optionColor,
-                neutral60: '#0072ce',
-                neutral70: optionColor,
-                neutral80: '#0072ce',
-                neutral90: optionColor,
-              },
-            })}
-          />
-          <Title>2. Card info</Title>
-          <StripeCheckoutForm organization={organization.value} />
+          <SectionWrapper>
+            <Title>1. Company info</Title>
+            <Text>Choose organization</Text>
+            <OrganizationSelect
+              value={organization}
+              onChange={organization => setOrganization(organization)}
+              options={organizationOptions}
+              theme={theme => ({
+                ...theme,
+                borderRadius: '2px',
+                colors: {
+                  ...theme.colors,
+                  primary: optionColor,
+                  neutral5: optionColor,
+                  neutral10: optionColor,
+                  neutral20: optionColor,
+                  neutral30: optionColor,
+                  neutral40: optionColor,
+                  neutral50: optionColor,
+                  neutral60: '#0072ce',
+                  neutral70: optionColor,
+                  neutral80: '#0072ce',
+                  neutral90: optionColor,
+                },
+              })}
+            />
+          </SectionWrapper>
+          {!!organization.value && (
+            <SectionWrapper>
+              <Title>2. Card info</Title>
+              <StripeCheckoutForm organization={organization.value} />
+            </SectionWrapper>
+          )}
         </PaymentInfoColum>
         <PaymentSummarySection>
           <PaymentSummaryHeader></PaymentSummaryHeader>
