@@ -94,6 +94,8 @@ const CheckoutForm = props => {
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
 
+  console.log('Organization', props.organization?.organization?.id)
+
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
     dispatch(
@@ -133,7 +135,7 @@ const CheckoutForm = props => {
             mutation: CHANGE_PAYMENT_INFO,
             variables: {
               paymentMethod: setupIntent.payment_method,
-              // organizationId: ...
+              // organizationId: props.organization.id
             },
             dataSelector: data => data.changePaymentInfo,
             onSuccess: data => console.log(data),
@@ -223,6 +225,7 @@ const CheckoutForm = props => {
             </VerticalDivider>
             <StroveButton
               isPrimary
+              isDisabled={!props.organization?.organization?.id}
               fontSize="0.8rem"
               padding="1px 3px"
               minWidth="80px"
@@ -251,8 +254,8 @@ const CheckoutForm = props => {
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default () => (
+export default organization => (
   <Elements>
-    <FormWithStripe />
+    <FormWithStripe organization={organization} />
   </Elements>
 )

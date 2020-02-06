@@ -90,6 +90,11 @@ const Payments = () => {
       value: organization,
       label: organization.name,
     }))
+  console.log(
+    'TCL: Payments -> organizationOptions',
+    organizationOptions,
+    organization
+  )
 
   return (
     <>
@@ -123,7 +128,7 @@ const Payments = () => {
             })}
           />
           <Title>2. Card info</Title>
-          <StripeCheckoutForm />
+          <StripeCheckoutForm organization={organization.value} />
         </PaymentInfoColum>
         <PaymentSummarySection>
           <PaymentSummaryHeader></PaymentSummaryHeader>
