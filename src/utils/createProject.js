@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-boost'
 
-import { query, mutation, getRepoProvider } from 'utils'
+import { query, mutation, getRepoProvider, updateOrganizations } from 'utils'
 import { actions } from 'state'
 import {
   ADD_PROJECT,
@@ -145,14 +145,7 @@ const createProject = async ({
         variables: { repoLink, name, description, type, teamId },
         mutation: ADD_PROJECT,
         onSuccessDispatch: null,
-        onSuccess: () =>
-          dispatch(
-            query({
-              name: 'myOrganizations',
-              storeKey: 'myOrganizations',
-              query: MY_ORGANIZATIONS,
-            })
-          ),
+        onSuccess: () => dispatch(updateOrganizations),
         onError: error => {
           setModalContent('TryAgainLater', {
             repoLink,
