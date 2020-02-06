@@ -155,7 +155,7 @@ const Dashboard = ({ history }) => {
   )
 
   useEffect(() => {
-    updateOrganizations(dispatch)
+    dispatch(updateOrganizations)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -464,10 +464,10 @@ const Dashboard = ({ history }) => {
         mutation: CREATE_TEAM,
         variables: { name, organizationId: editTeam.organizationId },
         onSuccess: data => {
-          updateOrganizations(dispatch)
           setRenameTeamModal(false)
           updateExpandedTiles(data)
         },
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
@@ -503,9 +503,9 @@ const Dashboard = ({ history }) => {
             mutation: DELETE_TEAM,
             variables: { teamId: editTeam.id },
             onSuccess: () => {
-              updateOrganizations(dispatch)
               closeWarningModal()
             },
+            onSuccessDispatch: updateOrganizations,
           })
         )
       },
@@ -527,9 +527,9 @@ const Dashboard = ({ history }) => {
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
             onSuccess: () => {
-              updateOrganizations(dispatch)
               closeWarningModal()
             },
+            onSuccessDispatch: updateOrganizations,
           })
         ),
       buttonLabel: 'Remove',
@@ -560,10 +560,10 @@ const Dashboard = ({ history }) => {
               teamId: editTeam.id,
             },
             onSuccess: () => {
-              updateOrganizations(dispatch)
               setRenameTeamModal(false)
               closeWarningModal()
             },
+            onSuccessDispatch: updateOrganizations,
           })
         ),
     })
@@ -595,9 +595,9 @@ const Dashboard = ({ history }) => {
           mutation: ADD_MEMBER,
           variables: { memberEmail, teamId: editTeam.id },
           onSuccess: () => {
-            updateOrganizations(dispatch)
             setAddMemberModal(false)
           },
+          onSuccessDispatch: updateOrganizations,
         })
       )
     }
@@ -638,9 +638,9 @@ const Dashboard = ({ history }) => {
               newTeamLeaderId: newOwner.values,
             },
             onSuccess: () => {
-              updateOrganizations(dispatch)
               setTeamLeaderModal(false)
             },
+            onSuccessDispatch: updateOrganizations,
           })
         )
       },
@@ -680,9 +680,9 @@ const Dashboard = ({ history }) => {
         mutation: LEAVE_TEAM,
         variables: { teamId },
         onSuccess: () => {
-          updateOrganizations(dispatch)
           closeWarningModal()
         },
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
