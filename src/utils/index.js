@@ -14,6 +14,7 @@ import {
 import getRepoProvider from './getRepoProvider'
 import changeRepoLinkFromSshToHttps from './changeRepoLinkFromSshToHttps'
 import redirectToEditor from './redirectToEditor'
+import updateOrganizations from './updateOrganizations'
 
 export {
   query,
@@ -31,4 +32,5 @@ export {
   redirectToEditor,
   handleStopProject,
   getDomain,
+  updateOrganizations,
 }
