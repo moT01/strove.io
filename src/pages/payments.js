@@ -20,6 +20,7 @@ import {
   MY_ORGANIZATIONS,
   UPGRADE_SUBSCRIPTION,
   RENEW_SUBSCRIPTION,
+  REVERT_CANCEL,
 } from 'queries'
 import { mutation, query } from 'utils'
 
@@ -203,23 +204,45 @@ const Payments = () => {
                 maxWidth="150px"
                 margin="10px"
                 borderRadius="2px"
-                onClick={() =>
+                onClick={() => {
+                  console.log('TCL: Payments -> organization', organization)
                   dispatch(
                     mutation({
-                      name: 'renewSubscription',
-                      mutation: RENEW_SUBSCRIPTION,
+                      name: 'revertCancel',
+                      mutation: REVERT_CANCEL,
                       variables: {
                         organizationId: organization.value.id,
-                        plan: subscriptionPlan.value,
-                        quantity: quantity,
                       },
                       onSuccess: updateOrganizations(),
                     })
                   )
-                }
-                text="Renew subscription"
+                }}
+                text="Revert subscription cancel"
               />
             ) : (
+              //   <StroveButton
+              //   isPrimary
+              //   padding="5px"
+              //   minWidth="150px"
+              //   maxWidth="150px"
+              //   margin="10px"
+              //   borderRadius="2px"
+              //   onClick={() =>
+              //     dispatch(
+              //       mutation({
+              //         name: 'renewSubscription',
+              //         mutation: RENEW_SUBSCRIPTION,
+              //         variables: {
+              //           organizationId: organization.value.id,
+              //           plan: subscriptionPlan.value,
+              //           quantity: quantity,
+              //         },
+              //         onSuccess: updateOrganizations(),
+              //       })
+              //     )
+              //   }
+              //   text="Renew subscription"
+              // />
               <SectionWrapper>
                 <Title>2. Payment info</Title>
                 <StripeCheckoutForm
