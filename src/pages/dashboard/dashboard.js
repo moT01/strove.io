@@ -5,7 +5,7 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject, query } from 'utils'
+import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { useAnalytics } from 'hooks'
 import {
   ADD_MEMBER,
@@ -173,16 +173,6 @@ const Dashboard = ({ history }) => {
       newTiles[organizationId].visible = !oldValue
     }
     setExpandedTiles(newTiles)
-  }
-
-  const updateOrganizations = () => {
-    dispatch(
-      query({
-        name: 'myOrganizations',
-        storeKey: 'myOrganizations',
-        query: MY_ORGANIZATIONS,
-      })
-    )
   }
 
   const updateExpandedTiles = newTeam => {
@@ -476,7 +466,7 @@ const Dashboard = ({ history }) => {
         mutation: CREATE_TEAM,
         variables: { name, organizationId: editTeam.organizationId },
         onSuccess: data => {
-          updateOrganizations()
+          updateOrganizations(dispatch)
           setRenameTeamModal(false)
           updateExpandedTiles(data)
         },
@@ -515,7 +505,7 @@ const Dashboard = ({ history }) => {
             mutation: DELETE_TEAM,
             variables: { teamId: editTeam.id },
             onSuccess: () => {
-              updateOrganizations()
+              updateOrganizations(dispatch)
               closeWarningModal()
             },
           })
@@ -539,7 +529,7 @@ const Dashboard = ({ history }) => {
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
             onSuccess: () => {
-              updateOrganizations()
+              updateOrganizations(dispatch)
               closeWarningModal()
             },
           })
@@ -572,7 +562,7 @@ const Dashboard = ({ history }) => {
               teamId: editTeam.id,
             },
             onSuccess: () => {
-              updateOrganizations()
+              updateOrganizations(dispatch)
               setRenameTeamModal(false)
               closeWarningModal()
             },
@@ -607,7 +597,7 @@ const Dashboard = ({ history }) => {
           mutation: ADD_MEMBER,
           variables: { memberEmail, teamId: editTeam.id },
           onSuccess: () => {
-            updateOrganizations()
+            updateOrganizations(dispatch)
             setAddMemberModal(false)
           },
         })
@@ -650,7 +640,7 @@ const Dashboard = ({ history }) => {
               newTeamLeaderId: newOwner.values,
             },
             onSuccess: () => {
-              updateOrganizations()
+              updateOrganizations(dispatch)
               setTeamLeaderModal(false)
             },
           })
@@ -692,7 +682,7 @@ const Dashboard = ({ history }) => {
         mutation: LEAVE_TEAM,
         variables: { teamId },
         onSuccess: () => {
-          updateOrganizations()
+          updateOrganizations(dispatch)
           closeWarningModal()
         },
       })
