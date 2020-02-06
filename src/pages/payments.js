@@ -68,7 +68,13 @@ const PaymentSummarySection = styled(Wrapper)`
   border-style: solid;
 `
 
+const SubscriptionsSelect = styled(StyledSelect)`
+  margin: 2px;
+  width: 150px;
+`
+
 const PaymentSummaryHeader = styled(Wrapper)`
+  flex-direction: row;
   height: 50px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.c1};
@@ -98,6 +104,7 @@ const optionColor = 'rgba(185,185,185,0.65)'
 const Payments = () => {
   const user = useSelector(selectors.api.getUser)
   const [organization, setOrganization] = useState({})
+  const [subscriptionPlan, setSubscriptionPlan] = useState()
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
     .filter(organization => organization.owner.id === user.id)
@@ -151,7 +158,27 @@ const Payments = () => {
           )}
         </PaymentInfoColum>
         <PaymentSummarySection>
-          <PaymentSummaryHeader></PaymentSummaryHeader>
+          <PaymentSummaryHeader>
+            <SubscriptionsSelect
+              value={subscriptionPlan}
+              onChange={plan => setSubscriptionPlan(plan)}
+              options={subscriptionPlans}
+              placeholder="Choose plan"
+              styles={{
+                control: styles => ({
+                  ...styles,
+                  backgroundColor: '#0072ce',
+                  border: '1px solid #fff',
+                  borderRadius: '2px',
+                }),
+                menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
+                dropdownIndicator: styles => ({ styles, color: '#fff' }),
+                indicatorSeparator: styles => ({ styles, color: '#fff' }),
+                input: styles => ({ styles, color: '#fff' }),
+                placeholder: styles => ({ styles, color: '#fff' }),
+              }}
+            />
+          </PaymentSummaryHeader>
         </PaymentSummarySection>
       </PageWrapper>
     </>
