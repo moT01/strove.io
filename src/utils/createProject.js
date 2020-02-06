@@ -1,12 +1,11 @@
 import ApolloClient from 'apollo-boost'
 
-import { query, mutation, getRepoProvider, updateOrganizations } from 'utils'
+import { mutation, getRepoProvider, updateOrganizations } from 'utils'
 import { actions } from 'state'
 import {
   ADD_PROJECT,
   GET_REPO_INFO,
   GET_BITBUCKET_TOKEN,
-  MY_ORGANIZATIONS,
 } from 'queries'
 
 import stroveClient from 'client'
