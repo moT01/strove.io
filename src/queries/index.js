@@ -35,6 +35,7 @@ import DELETE_ORGANIZATION from './deleteOrganization'
 import TRANSFER_ORGANIZATION from './transferOrganization'
 import CANCEL_SUBSCRIPTION from './cancelSubscription'
 import UPGRADE_SUBSCRIPTION from './upgradeSubscription'
+import RENEW_SUBSCRIPTION from './renewSubscription'
 
 export {
   ADD_PROJECT,
@@ -74,4 +75,5 @@ export {
   TRANSFER_ORGANIZATION,
   CANCEL_SUBSCRIPTION,
   UPGRADE_SUBSCRIPTION,
+  RENEW_SUBSCRIPTION,
 }
