@@ -24,9 +24,9 @@ const Wrapper = styled.div`
 `
 
 const PageWrapper = styled(Wrapper)`
-  width: 100vw;
+  width: 80%;
   min-height: calc(100vh - 64px);
-  padding-top: 10px;
+  padding-top: 50px;
   flex-direction: row;
   align-items: flex-start;
 `
@@ -34,12 +34,12 @@ const PageWrapper = styled(Wrapper)`
 const PaymentInfoColum = styled(Wrapper)`
   align-items: flex-start;
   width: 60%;
-  padding: 40px;
+  padding: 0px 40px;
   margin: 0px 10px 0px 20px;
-  border-radius: 5px;
+  /* border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-width: 1px;
-  border-style: solid;
+  border-style: solid; */
 `
 
 const PaymentSummarySection = styled(Wrapper)`
@@ -74,6 +74,10 @@ const Text = styled.div`
   overflow: hidden;
 `
 
+const OrganizationSelect = styled(StyledSelect)`
+  width: 350px;
+`
+
 const optionColor = 'rgba(185,185,185,0.65)'
 
 const Payments = () => {
@@ -94,7 +98,8 @@ const Payments = () => {
       <PageWrapper>
         <PaymentInfoColum>
           <Title>1. Company info</Title>
-          <StyledSelect
+          <Text>Choose organization</Text>
+          <OrganizationSelect
             value={organization}
             onChange={organization => setOrganization(organization)}
             options={organizationOptions}
