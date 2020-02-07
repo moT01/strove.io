@@ -7,4 +7,5 @@ export default () =>
     name: 'myOrganizations',
     storeKey: 'myOrganizations',
     query: MY_ORGANIZATIONS,
+    fetchPolicy: 'network-only',
   })
