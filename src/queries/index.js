@@ -37,6 +37,7 @@ import CANCEL_SUBSCRIPTION from './cancelSubscription'
 import UPGRADE_SUBSCRIPTION from './upgradeSubscription'
 import RENEW_SUBSCRIPTION from './renewSubscription'
 import REVERT_CANCEL from './revertCancel'
+import DOWNGRADE_SUBSCRIPTION from './downagradeSubscription'
 
 export {
   ADD_PROJECT,
@@ -78,4 +79,5 @@ export {
   UPGRADE_SUBSCRIPTION,
   RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
+  DOWNGRADE_SUBSCRIPTION,
 }
