@@ -143,6 +143,7 @@ const Payments = () => {
 
   useEffect(() => {
     updateOrganizations()
+    organizationOptions.length === 1 && setOrganization(organizationOptions[0])
   }, [])
 
   return (
@@ -153,30 +154,36 @@ const Payments = () => {
         <PaymentInfoColum>
           <SectionWrapper>
             <Title>1. Company info</Title>
-            <Text>Choose organization</Text>
-            <OrganizationSelect
-              value={organization}
-              onChange={organization => setOrganization(organization)}
-              options={organizationOptions}
-              theme={theme => ({
-                ...theme,
-                borderRadius: '2px',
-                colors: {
-                  ...theme.colors,
-                  primary: optionColor,
-                  neutral5: optionColor,
-                  neutral10: optionColor,
-                  neutral20: optionColor,
-                  neutral30: optionColor,
-                  neutral40: optionColor,
-                  neutral50: optionColor,
-                  neutral60: '#0072ce',
-                  neutral70: optionColor,
-                  neutral80: '#0072ce',
-                  neutral90: optionColor,
-                },
-              })}
-            />
+            {organizationOptions.length === 1 ? (
+              <Text>{organizationOptions[0].label}</Text>
+            ) : (
+              <>
+                <Text>Choose organization</Text>
+                <OrganizationSelect
+                  value={organization}
+                  onChange={organization => setOrganization(organization)}
+                  options={organizationOptions}
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: '2px',
+                    colors: {
+                      ...theme.colors,
+                      primary: optionColor,
+                      neutral5: optionColor,
+                      neutral10: optionColor,
+                      neutral20: optionColor,
+                      neutral30: optionColor,
+                      neutral40: optionColor,
+                      neutral50: optionColor,
+                      neutral60: '#0072ce',
+                      neutral70: optionColor,
+                      neutral80: '#0072ce',
+                      neutral90: optionColor,
+                    },
+                  })}
+                />
+              </>
+            )}
           </SectionWrapper>
           {!!organization.value &&
             (organization.value.subscriptionStatus === 'active' ? (
