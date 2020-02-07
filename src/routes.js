@@ -1,6 +1,5 @@
 import React, { lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { NotFound, FromEmailInvitation, Payments } from 'pages'
 
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
