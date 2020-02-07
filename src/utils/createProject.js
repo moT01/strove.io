@@ -2,11 +2,7 @@ import ApolloClient from 'apollo-boost'
 
 import { mutation, getRepoProvider, updateOrganizations } from 'utils'
 import { actions } from 'state'
-import {
-  ADD_PROJECT,
-  GET_REPO_INFO,
-  GET_BITBUCKET_TOKEN,
-} from 'queries'
+import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
 
 import stroveClient from 'client'
 
@@ -143,8 +139,7 @@ const createProject = async ({
         name: 'addProject',
         variables: { repoLink, name, description, type, teamId },
         mutation: ADD_PROJECT,
-        onSuccessDispatch: null,
-        onSuccess: () => dispatch(updateOrganizations),
+        onSuccessDispatch: updateOrganizations,
         onError: error => {
           setModalContent('TryAgainLater', {
             repoLink,

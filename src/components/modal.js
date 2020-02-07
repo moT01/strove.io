@@ -17,7 +17,7 @@ const sizeProps = props =>
     ${props.minWidth && `min-width: ${props.minWidth}`}
   `
 
-export default memo(styled(Modal)`
+export default styled(Modal)`
   ${sizeProps};
   display: flex;
   flex-direction: column;
@@ -37,4 +37,4 @@ export default memo(styled(Modal)`
   :focus {
     outline: 0;
   }
-`)
+`

@@ -38,6 +38,6 @@ export const getQueuePosition = getApiData({
 })
 
 export const getCurrentProject = state =>
-  getApiData({ fields: 'myProjects', defaultValue: [] })(state).find(
+  getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
     item => item.machineId
   )
