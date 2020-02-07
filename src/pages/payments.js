@@ -21,6 +21,7 @@ import {
   UPGRADE_SUBSCRIPTION,
   RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
+  DOWNGRADE_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
 
@@ -117,7 +118,7 @@ const Payments = () => {
     value: process.env.REACT_APP_MONTHLY_PLAN,
     label: 'Monthly',
   })
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(organization?.team?.length || 1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
     .filter(organization => organization.owner.id === user.id)
@@ -142,6 +143,7 @@ const Payments = () => {
 
   useEffect(() => {
     updateOrganizations()
+    organizationOptions.length === 1 && setOrganization(organizationOptions[0])
   }, [])
 
   return (
@@ -152,30 +154,36 @@ const Payments = () => {
         <PaymentInfoColum>
           <SectionWrapper>
             <Title>1. Company info</Title>
-            <Text>Choose organization</Text>
-            <OrganizationSelect
-              value={organization}
-              onChange={organization => setOrganization(organization)}
-              options={organizationOptions}
-              theme={theme => ({
-                ...theme,
-                borderRadius: '2px',
-                colors: {
-                  ...theme.colors,
-                  primary: optionColor,
-                  neutral5: optionColor,
-                  neutral10: optionColor,
-                  neutral20: optionColor,
-                  neutral30: optionColor,
-                  neutral40: optionColor,
-                  neutral50: optionColor,
-                  neutral60: '#0072ce',
-                  neutral70: optionColor,
-                  neutral80: '#0072ce',
-                  neutral90: optionColor,
-                },
-              })}
-            />
+            {organizationOptions.length === 1 ? (
+              <Text>{organizationOptions[0].label}</Text>
+            ) : (
+              <>
+                <Text>Choose organization</Text>
+                <OrganizationSelect
+                  value={organization}
+                  onChange={organization => setOrganization(organization)}
+                  options={organizationOptions}
+                  theme={theme => ({
+                    ...theme,
+                    borderRadius: '2px',
+                    colors: {
+                      ...theme.colors,
+                      primary: optionColor,
+                      neutral5: optionColor,
+                      neutral10: optionColor,
+                      neutral20: optionColor,
+                      neutral30: optionColor,
+                      neutral40: optionColor,
+                      neutral50: optionColor,
+                      neutral60: '#0072ce',
+                      neutral70: optionColor,
+                      neutral80: '#0072ce',
+                      neutral90: optionColor,
+                    },
+                  })}
+                />
+              </>
+            )}
           </SectionWrapper>
           {!!organization.value &&
             (organization.value.subscriptionStatus === 'active' ? (
@@ -215,13 +223,37 @@ const Payments = () => {
                         name: 'upgradeSubscription',
                         mutation: UPGRADE_SUBSCRIPTION,
                         variables: {
-                          subscriptionId: organization.value.subscriptionId,
+                          organizationId: organization.value.id,
+                          quantity,
                         },
                         onSuccess: updateOrganizations(),
                       })
                     )
                   }}
                   text="Upgrade subscription"
+                />
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    console.log('TCL: Payments -> organization', organization)
+                    dispatch(
+                      mutation({
+                        name: 'downgradeSubscription',
+                        mutation: DOWNGRADE_SUBSCRIPTION,
+                        variables: {
+                          organizationId: organization.value.id,
+                          quantity,
+                        },
+                        onSuccess: updateOrganizations(),
+                      })
+                    )
+                  }}
+                  text="downgrade subscription"
                 />
               </>
             ) : organization.value.subscriptionStatus === 'canceled' ? (
@@ -305,11 +337,10 @@ const Payments = () => {
               }}
             />
           </PaymentSummaryHeader>
-          <Formik
+          {/* <Formik
             initialValues={{
-              quantity: 1,
+              quantity: organization.users.length,
             }}
-            // validate={validate}
             onSubmit={values => {
               console.log(
                 'Values',
@@ -331,7 +362,7 @@ const Payments = () => {
                 />
               </Form>
             )}
-          </Formik>
+          </Formik> */}
           {subscriptionPlan && (
             <>
               <Text>Order summary</Text>
