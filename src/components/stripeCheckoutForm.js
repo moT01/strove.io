@@ -9,9 +9,11 @@ import {
   CardCVCElement,
 } from 'react-stripe-elements'
 import { useSelector, useDispatch } from 'react-redux'
+import { Formik, Form, Field } from 'formik'
+import isEmail from 'validator/lib/isEmail'
 
 import { selectors } from 'state'
-import { mutation } from 'utils'
+import { mutation, query } from 'utils'
 import {
   STRIPE_SUBSCRIBE,
   STRIPE_CLIENT_SECRET,
@@ -96,9 +98,22 @@ const cardStyle = {
   },
 }
 
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
+
 const CheckoutForm = props => {
   console.log('TCL: props', props)
   const [cardNumber, setCardNumber] = useState()
+  const [userEmail, setUserEmail] = useState()
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
@@ -109,7 +124,7 @@ const CheckoutForm = props => {
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
     dispatch(
-      mutation({
+      query({
         name: 'clientSecret',
         query: STRIPE_CLIENT_SECRET,
         dataSelector: data => data.getClientSecret,
@@ -181,8 +196,6 @@ const CheckoutForm = props => {
           name: 'John Cena',
           email: 'mateusz@strove.io',
           organizationId,
-          // ^ this plan is should be replaced with the one customer chose
-          // both plans are stored in .env file
         },
         dataSelector: data => data.stripeSubscribe,
         onSuccess: data => handleResponse(data),
@@ -223,7 +236,6 @@ const CheckoutForm = props => {
         <div className="checkout">
           <CardInfoWrapper>
             <Text>Card number</Text>
-            {/* <CardElement onReady={handleReady} style={cardStyle} /> */}
             <StripeElementContainer>
               <CardNumberElement style={cardStyle} onReady={handleReady} />
             </StripeElementContainer>
@@ -241,18 +253,56 @@ const CheckoutForm = props => {
                 </StripeCvcContainer>
               </StripeExpiryWrapper>
             </VerticalDivider>
-            <StroveButton
-              isPrimary
-              isDisabled={!organizationId}
-              fontSize="0.8rem"
-              padding="1px 3px"
-              minWidth="80px"
-              maxWidth="80px"
-              margin="0px"
-              borderRadius="2px"
-              onClick={submit}
-              text="Purchase"
-            />
+
+            <Formik
+              initialValues={{
+                email: '',
+              }}
+              validate={validate}
+            >
+              {({ errors, touched, values }) => (
+                <>
+                  <Form>
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Your Email"
+                    ></Field>
+                  </Form>
+                  {props.editMode ? (
+                    <StroveButton
+                      isPrimary
+                      isDisabled={
+                        !organizationId || errors.email || !values.email
+                      }
+                      fontSize="0.8rem"
+                      padding="1px 3px"
+                      minWidth="80px"
+                      maxWidth="80px"
+                      margin="0px"
+                      borderRadius="2px"
+                      onClick={getSecret}
+                      text="Save info"
+                    />
+                  ) : (
+                    <StroveButton
+                      isPrimary
+                      isDisabled={
+                        !organizationId || errors.email || !values.email
+                      }
+                      fontSize="0.8rem"
+                      padding="1px 3px"
+                      minWidth="80px"
+                      maxWidth="80px"
+                      margin="0px"
+                      borderRadius="2px"
+                      onClick={submit}
+                      text="Purchase"
+                    />
+                  )}
+                </>
+              )}
+            </Formik>
           </CardInfoWrapper>
         </div>
       )}
@@ -272,12 +322,13 @@ const CheckoutForm = props => {
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default ({ organization, quantity, plan }) => (
+export default ({ organization, quantity, plan, editMode }) => (
   <Elements>
     <FormWithStripe
       organization={organization}
       quantity={quantity}
       plan={plan}
+      editMode={editMode}
     />
   </Elements>
 )

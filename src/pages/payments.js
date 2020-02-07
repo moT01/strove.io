@@ -113,6 +113,7 @@ const optionColor = 'rgba(185,185,185,0.65)'
 const Payments = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const [editMode, setEditMode] = useState()
   const [organization, setOrganization] = useState({})
   const [subscriptionPlan, setSubscriptionPlan] = useState({
     value: process.env.REACT_APP_MONTHLY_PLAN,
@@ -255,6 +256,26 @@ const Payments = () => {
                   }}
                   text="downgrade subscription"
                 />
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    setEditMode(true)
+                  }}
+                  text="Edit payment info"
+                />
+                {editMode && (
+                  <StripeCheckoutForm
+                    organization={organization.value}
+                    quantity={quantity}
+                    plan={subscriptionPlan.value}
+                    editMode={editMode}
+                  />
+                )}
               </>
             ) : organization.value.subscriptionStatus === 'canceled' ? (
               <StroveButton
@@ -309,6 +330,7 @@ const Payments = () => {
                   organization={organization.value}
                   quantity={quantity}
                   plan={subscriptionPlan.value}
+                  editMode={editMode}
                 />
               </SectionWrapper>
             ))}
