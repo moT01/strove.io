@@ -12,8 +12,8 @@ const LazyLoader = ({ children }) => (
   </Suspense>
 )
 
-export default lazy(WrappedComponent => props => (
+export default WrappedComponent => props => (
   <LazyLoader>
     <WrappedComponent {...props} />
   </LazyLoader>
-))
+)

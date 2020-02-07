@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import {
   Faq,
@@ -18,8 +18,8 @@ import {
 
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
-const Home = WithLazyLoader(() => import('pages/home'))
-const Dashboard = WithLazyLoader(() => import('pages/dashboard'))
+const Home = WithLazyLoader(lazy(() => import('pages/home')))
+const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
 
 const Strove = () => (
   <>
