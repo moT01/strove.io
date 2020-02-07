@@ -1,24 +1,27 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import {
-  Home,
-  Faq,
-  Embed,
-  NotFound,
-  Cookies,
-  PrivacyPolicy,
-  TermsAndConditions,
-  GoBackTo,
-  Login,
-  RunProject,
-  Pricing,
-  Editor,
-  FromEmailInvitation,
-  Dashboard,
-  Payments,
-} from 'pages'
 
-import { PrivateRoute, ScrollToTop } from 'components'
+import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
+
+const Home = WithLazyLoader(lazy(() => import('pages/home')))
+const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
+const Cookies = WithLazyLoader(lazy(() => import('pages/cookies')))
+const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
+const TermsAndConditions = WithLazyLoader(
+  lazy(() => import('pages/termsAndConditions'))
+)
+const Pricing = WithLazyLoader(lazy(() => import('pages/pricing')))
+const GoBackTo = WithLazyLoader(lazy(() => import('pages/fromEmbed/goBackTo')))
+const Login = WithLazyLoader(lazy(() => import('pages/fromEmbed/login')))
+const Embed = WithLazyLoader(lazy(() => import('pages/embed')))
+const RunProject = WithLazyLoader(lazy(() => import('pages/runProject')))
+const Editor = WithLazyLoader(lazy(() => import('pages/editor')))
+const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
+const Payments = WithLazyLoader(lazy(() => import('pages/payments')))
+const FromEmailInvitation = WithLazyLoader(
+  lazy(() => import('pages/fromEmailInvitation'))
+)
+const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (
   <>
