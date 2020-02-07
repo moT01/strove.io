@@ -118,7 +118,7 @@ const Payments = () => {
     value: process.env.REACT_APP_MONTHLY_PLAN,
     label: 'Monthly',
   })
-  const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(organization?.team?.length || 1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
     .filter(organization => organization.owner.id === user.id)
@@ -223,7 +223,7 @@ const Payments = () => {
                         name: 'upgradeSubscription',
                         mutation: UPGRADE_SUBSCRIPTION,
                         variables: {
-                          subscriptionId: organization.value.subscriptionId,
+                          organizationId: organization.value.id,
                           quantity,
                         },
                         onSuccess: updateOrganizations(),
@@ -246,7 +246,7 @@ const Payments = () => {
                         name: 'downgradeSubscription',
                         mutation: DOWNGRADE_SUBSCRIPTION,
                         variables: {
-                          subscriptionId: organization.value.subscriptionId,
+                          organizationId: organization.value.id,
                           quantity,
                         },
                         onSuccess: updateOrganizations(),
@@ -337,11 +337,10 @@ const Payments = () => {
               }}
             />
           </PaymentSummaryHeader>
-          <Formik
+          {/* <Formik
             initialValues={{
-              quantity: 1,
+              quantity: organization.users.length,
             }}
-            // validate={validate}
             onSubmit={values => {
               console.log(
                 'Values',
@@ -363,7 +362,7 @@ const Payments = () => {
                 />
               </Form>
             )}
-          </Formik>
+          </Formik> */}
           {subscriptionPlan && (
             <>
               <Text>Order summary</Text>
