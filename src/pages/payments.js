@@ -21,6 +21,7 @@ import {
   UPGRADE_SUBSCRIPTION,
   RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
+  DOWNGRADE_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
 
@@ -216,12 +217,36 @@ const Payments = () => {
                         mutation: UPGRADE_SUBSCRIPTION,
                         variables: {
                           subscriptionId: organization.value.subscriptionId,
+                          quantity,
                         },
                         onSuccess: updateOrganizations(),
                       })
                     )
                   }}
                   text="Upgrade subscription"
+                />
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    console.log('TCL: Payments -> organization', organization)
+                    dispatch(
+                      mutation({
+                        name: 'downgradeSubscription',
+                        mutation: DOWNGRADE_SUBSCRIPTION,
+                        variables: {
+                          subscriptionId: organization.value.subscriptionId,
+                          quantity,
+                        },
+                        onSuccess: updateOrganizations(),
+                      })
+                    )
+                  }}
+                  text="downgrade subscription"
                 />
               </>
             ) : organization.value.subscriptionStatus === 'canceled' ? (
