@@ -1,12 +1,8 @@
 import React, { lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import {
-  Embed,
   NotFound,
-  GoBackTo,
-  Login,
   RunProject,
-  Pricing,
   Editor,
   FromEmailInvitation,
   Payments,
@@ -22,13 +18,9 @@ const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
 const TermsAndConditions = WithLazyLoader(
   lazy(() => import('pages/termsAndConditions'))
 )
-const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
-const TermsAndConditions = WithLazyLoader(
-  lazy(() => import('pages/termsAndConditions'))
-)
 const Pricing = WithLazyLoader(lazy(() => import('pages/pricing')))
-const GoBackTo = WithLazyLoader(lazy(() => import('pages/goBackTo')))
-const Login = WithLazyLoader(lazy(() => import('pages/login')))
+const GoBackTo = WithLazyLoader(lazy(() => import('pages/fromEmbed/goBackTo')))
+const Login = WithLazyLoader(lazy(() => import('pages/fromEmbed/login')))
 const Embed = WithLazyLoader(lazy(() => import('pages/embed')))
 
 const Strove = () => (
