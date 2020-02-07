@@ -221,7 +221,7 @@ export const query = ({
         query,
         context,
         variables,
-        fetchPolicy,
+        fetchPolicy: 'network-only',
         errorPolicy,
       })
 
