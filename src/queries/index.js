@@ -39,6 +39,7 @@ import RENEW_SUBSCRIPTION from './renewSubscription'
 import REVERT_CANCEL from './revertCancel'
 import DOWNGRADE_SUBSCRIPTION from './downagradeSubscription'
 import CHANGE_PLAN from './changePlan'
+import GET_PAYMENT_INFO from './getPaymentInfo'
 
 export {
   ADD_PROJECT,
@@ -82,4 +83,5 @@ export {
   REVERT_CANCEL,
   DOWNGRADE_SUBSCRIPTION,
   CHANGE_PLAN,
+  GET_PAYMENT_INFO,
 }
