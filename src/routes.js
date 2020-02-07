@@ -20,6 +20,8 @@ const Home = WithLazyLoader(lazy(() => import('pages/home')))
 const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
 const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
 const Cookies = WithLazyLoader(lazy(() => import('pages/cookies')))
+const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
+const TermsAndConditions = WithLazyLoader(lazy(() => import('pages/termsAndConditions')))
 
 const Strove = () => (
   <>
