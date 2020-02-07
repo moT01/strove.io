@@ -1,10 +1,8 @@
 import React, { lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import {
-  Faq,
   Embed,
   NotFound,
-  Cookies,
   PrivacyPolicy,
   TermsAndConditions,
   GoBackTo,
@@ -20,6 +18,8 @@ import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
 const Home = WithLazyLoader(lazy(() => import('pages/home')))
 const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
+const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
+const Cookies = WithLazyLoader(lazy(() => import('pages/cookies')))
 
 const Strove = () => (
   <>
