@@ -23,6 +23,7 @@ import Cookies from './cookies'
 import WithTracker from './withTracker'
 import Footer from './footer'
 import OldUserModal from './oldUserModal'
+import WithLazyLoader from './withLazyLoader'
 
 export {
   SmallCloud,
@@ -52,4 +53,5 @@ export {
   Cookies,
   Footer,
   OldUserModal,
+  WithLazyLoader,
 }

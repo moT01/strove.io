@@ -16,10 +16,10 @@ import {
   Payments,
 } from 'pages'
 
-import { PrivateRoute, ScrollToTop, withLazyLoader } from 'components'
+import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
-const Home = withLazyLoader(() => import('pages/Home'))
-const Dashboard = withLazyLoader(() => import('pages/Dashboard'))
+const Home = WithLazyLoader(() => import('pages/home'))
+const Dashboard = WithLazyLoader(() => import('pages/dashboard'))
 
 const Strove = () => (
   <>
