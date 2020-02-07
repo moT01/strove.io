@@ -22,6 +22,8 @@ import {
   RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
   DOWNGRADE_SUBSCRIPTION,
+  CHANGE_PLAN,
+  GET_PAYMENT_INFO,
 } from 'queries'
 import { mutation, query } from 'utils'
 
@@ -254,7 +256,7 @@ const Payments = () => {
                       })
                     )
                   }}
-                  text="downgrade subscription"
+                  text="Downgrade subscription"
                 />
                 <StroveButton
                   isPrimary
@@ -267,6 +269,56 @@ const Payments = () => {
                     setEditMode(true)
                   }}
                   text="Edit payment info"
+                />
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    console.log(
+                      'New plan',
+                      organization.value.id,
+                      subscriptionPlan.value
+                    )
+                    dispatch(
+                      mutation({
+                        name: 'changePlan',
+                        mutation: CHANGE_PLAN,
+                        variables: {
+                          organizationId: organization.value.id,
+                          newPlan: subscriptionPlan.value,
+                          onSuccess: () => console.log('Change plan success'),
+                        },
+                      })
+                    )
+                  }}
+                  text="Change plan"
+                />
+
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    console.log('TCL: Payments -> organization', organization)
+                    dispatch(
+                      mutation({
+                        name: 'getPaymentInfo',
+                        mutation: GET_PAYMENT_INFO,
+                        variables: {
+                          organizationId: organization.value.id,
+                        },
+                        onSuccess: data => console.log('Payment info', data),
+                      })
+                    )
+                  }}
+                  text="Get payment info"
                 />
                 {editMode && (
                   <StripeCheckoutForm
