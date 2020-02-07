@@ -1,7 +1,7 @@
 import { useEffect, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { useSubscription } from '@apollo/react-hooks'
 import { withRouter } from 'react-router-dom'
 
@@ -104,7 +104,7 @@ export default memo(
     }, [invitedByTeamId, token])
 
     useEffect(() => {
-      dispatch(updateOrganizations)
+      dispatch(updateOrganizations())
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [machineName, machineId, editorPort])
@@ -168,7 +168,7 @@ export default memo(
         } else if (queuePosition === 0 && project?.machineId) {
           if (type === 'continueProject') {
             try {
-              dispatch(updateOrganizations)
+              dispatch(updateOrganizations())
               dispatch(
                 actions.api.fetchSuccess({
                   storeKey: 'continueProject',
@@ -180,7 +180,7 @@ export default memo(
             }
           } else if (type === 'addProject') {
             dispatch(actions.incomingProject.removeIncomingProject())
-            dispatch(updateOrganizations)
+            dispatch(updateOrganizations())
           }
           redirectToEditor(dispatch, history)
         }
@@ -282,11 +282,12 @@ export default memo(
       }
 
       const checkAwake = () => {
-        let then = moment().format('X')
+        let then = dayjs()
         setInterval(() => {
-          let now = moment().format('X')
-          if (now - then > 300) {
-            token && dispatch(updateOrganizations)
+          let now = dayjs()
+          /* 5 minutes */
+          if (now - then > 300000) {
+            token && dispatch(updateOrganizations())
           }
           then = now
         }, 2000)
@@ -356,7 +357,7 @@ export default memo(
 
     useEffect(() => {
       if (token) {
-        dispatch(updateOrganizations)
+        dispatch(updateOrganizations())
 
         if (history.location.pathname === '/') {
           history.push('/app/dashboard')
