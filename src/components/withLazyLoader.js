@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, lazy } from 'react'
 
 import FullScreenLoader from './fullScreenLoader'
 
-export default ({ children }) => (
+const LazyLoader = ({ children }) => (
   <Suspense
     fallback={
       <FullScreenLoader isFullScreen={false} color="#0072ce" height="15vh" />
@@ -11,3 +11,9 @@ export default ({ children }) => (
     {children}
   </Suspense>
 )
+
+export default lazy(WrappedComponent => props => (
+  <LazyLoader>
+    <WrappedComponent {...props} />
+  </LazyLoader>
+))
