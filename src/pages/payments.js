@@ -227,7 +227,7 @@ const Payments = () => {
                         mutation: UPGRADE_SUBSCRIPTION,
                         variables: {
                           organizationId: organization.value.id,
-                          quantity,
+                          quantity: 560,
                         },
                         onSuccess: updateOrganizations(),
                       })
@@ -250,7 +250,7 @@ const Payments = () => {
                         mutation: DOWNGRADE_SUBSCRIPTION,
                         variables: {
                           organizationId: organization.value.id,
-                          quantity,
+                          quantity: 300,
                         },
                         onSuccess: updateOrganizations(),
                       })
