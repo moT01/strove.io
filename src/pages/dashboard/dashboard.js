@@ -155,7 +155,7 @@ const Dashboard = ({ history }) => {
   )
 
   useEffect(() => {
-    dispatch(updateOrganizations)
+    dispatch(updateOrganizations())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
