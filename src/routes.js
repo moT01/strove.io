@@ -5,7 +5,6 @@ import { NotFound, FromEmailInvitation, Payments } from 'pages'
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
 const Home = WithLazyLoader(lazy(() => import('pages/home')))
-const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
 const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
 const Cookies = WithLazyLoader(lazy(() => import('pages/cookies')))
 const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
@@ -18,6 +17,12 @@ const Login = WithLazyLoader(lazy(() => import('pages/fromEmbed/login')))
 const Embed = WithLazyLoader(lazy(() => import('pages/embed')))
 const RunProject = WithLazyLoader(lazy(() => import('pages/runProject')))
 const Editor = WithLazyLoader(lazy(() => import('pages/editor')))
+const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
+const Payments = WithLazyLoader(lazy(() => import('pages/payments')))
+const FromEmailInvitation = WithLazyLoader(
+  lazy(() => import('pages/fromEmailInvitation'))
+)
+const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (
   <>
