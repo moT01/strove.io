@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import {
-  Home,
   Faq,
   Embed,
   NotFound,
@@ -14,11 +13,13 @@ import {
   Pricing,
   Editor,
   FromEmailInvitation,
-  Dashboard,
   Payments,
 } from 'pages'
 
-import { PrivateRoute, ScrollToTop } from 'components'
+import { PrivateRoute, ScrollToTop, withLazyLoader } from 'components'
+
+const Home = withLazyLoader(() => import('pages/Home'))
+const Dashboard = withLazyLoader(() => import('pages/Dashboard'))
 
 const Strove = () => (
   <>
