@@ -1,12 +1,6 @@
 import React, { lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import {
-  NotFound,
-  RunProject,
-  Editor,
-  FromEmailInvitation,
-  Payments,
-} from 'pages'
+import { NotFound, FromEmailInvitation, Payments } from 'pages'
 
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
@@ -22,6 +16,8 @@ const Pricing = WithLazyLoader(lazy(() => import('pages/pricing')))
 const GoBackTo = WithLazyLoader(lazy(() => import('pages/fromEmbed/goBackTo')))
 const Login = WithLazyLoader(lazy(() => import('pages/fromEmbed/login')))
 const Embed = WithLazyLoader(lazy(() => import('pages/embed')))
+const RunProject = WithLazyLoader(lazy(() => import('pages/runProject')))
+const Editor = WithLazyLoader(lazy(() => import('pages/editor')))
 
 const Strove = () => (
   <>
