@@ -410,7 +410,7 @@ const PricingPage = () => {
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
-  const user = useSelector(selectors.api.getUser)
+  const user = useSelector(selectors.getT)
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
 

@@ -56,7 +56,7 @@ const LinkWrapper = styled.div`
 `
 
 const DashboardLink = props => {
-  const token = useSelector(selectors.token)
+  const token = useSelector(selectors.getToken)
 
   return (
     <>
