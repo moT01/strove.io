@@ -208,10 +208,7 @@ const Dashboard = ({ history }) => {
                       organizationsObj[organization.id].owner.id === user.id
                     return (
                       <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                        <TeamTileHeader
-                          expanded={isExpanded}
-                          shouldTabsBeCollapsable
-                        >
+                        <TeamTileHeader expanded={isExpanded}>
                           <Divider>
                             <VerticalDivider columnOnMobile>
                               <Title>{team.name}</Title>
@@ -257,7 +254,7 @@ const Dashboard = ({ history }) => {
                                   />
                                 ))}
                             </VerticalDivider>
-                            {team.projects?.length > 1 && (
+                            {myOrganizations?.length > 1 && (
                               <IconWrapper
                                 onClick={() =>
                                   displayHandler({
