@@ -459,9 +459,9 @@ const Banner = () => {
               <StyledHeaderText>Save time</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              Even modern companies waste several days every time they onboard a
-              new programmer. This can be easily dealt with by letting
-              programmers access ready-in-seconds environment.
+              There's a lot of time and work needed to make code work on local
+              machines. Choosing cloud environment let's team do their actual
+              job from the get go.
             </StyledFeatureDescription>
           </StyledCell>
           <StyledCell>
@@ -482,9 +482,7 @@ const Banner = () => {
               <IconContainer>
                 <Icon type="cloud-sync" />
               </IconContainer>
-              <StyledHeaderText>
-                Easier code access and sharing
-              </StyledHeaderText>
+              <StyledHeaderText>Easier code access</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
               We believe that securely storing and running code is the future of
