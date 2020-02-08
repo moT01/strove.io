@@ -434,8 +434,7 @@ const Banner = () => {
           <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>
-                Strove improves programmers productivity by removing waste and
-                error-prone redundant repetitive tasks from their workflows.
+                Strove lets programmer focus on what's important, coding.
               </StyledH2>
             </LeftSectionWrapper>
           </SectionWrapper>
@@ -461,10 +460,8 @@ const Banner = () => {
             </StyledCellHeader>
             <StyledFeatureDescription>
               Even modern companies waste several days every time they onboard a
-              new programmer. Those days are spent on repetitive and redundant
-              programming environment setup. This source of waste can be easily
-              dealt with by letting programmers access ready-in-seconds
-              environment.
+              new programmer. This can be easily dealt with by letting
+              programmers access ready-in-seconds environment.
             </StyledFeatureDescription>
           </StyledCell>
           <StyledCell>
@@ -475,12 +472,9 @@ const Banner = () => {
               <StyledHeaderText>Debug less</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              Say goodbye to 'It works on my machine' issue. Editor runs within
-              Docker container ensuring consistent environment. The code will
-              work the same for all team members, no matter the machine or
-              operating system. Personal files, such as editor extensions are
-              protected from sharing ensuring programmers stay in control over
-              their favorite tools.
+              Say goodbye to 'It works on my machine' issue. The code will work
+              the same for all team members, no matter the machine or operating
+              system.
             </StyledFeatureDescription>
           </StyledCell>
           <StyledCell>
@@ -488,13 +482,13 @@ const Banner = () => {
               <IconContainer>
                 <Icon type="cloud-sync" />
               </IconContainer>
-              <StyledHeaderText>Keep your progress</StyledHeaderText>
+              <StyledHeaderText>
+                Easier code access and sharing
+              </StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              We believe that securely storing code for easy browser access is
-              the future of programming. In Strove, programmers can pick up
-              where they left in seconds, no matter if working on enterprise
-              projects or learning on university computers.
+              We believe that securely storing and running code is the future of
+              programming and we focus on making this as easy as possible
             </StyledFeatureDescription>
           </StyledCell>
         </StyledGrid>
