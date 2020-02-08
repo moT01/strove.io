@@ -42,7 +42,8 @@ const Layout = ({ children, browser }) => {
       browser.name !== 'chrome' &&
       browser.name !== 'firefox' &&
       browser.name !== 'opera' &&
-      browser.name !== 'safari'
+      browser.name !== 'safari' &&
+      !isMobile
     ) {
       setNoSupportModalVisible(true)
     }
