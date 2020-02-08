@@ -131,7 +131,9 @@ export const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: ${isMobileOnly ? '100%' : '80%'};
+  max-width: 1400px;
+
   animation: ${FullFadeIn} 0.5s ease-out;
 `
 
