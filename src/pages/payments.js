@@ -19,10 +19,8 @@ import StripeCheckoutForm from 'components/stripeCheckoutForm'
 import {
   CANCEL_SUBSCRIPTION,
   MY_ORGANIZATIONS,
-  UPGRADE_SUBSCRIPTION,
   RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
-  DOWNGRADE_SUBSCRIPTION,
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
 } from 'queries'
@@ -75,12 +73,15 @@ const PaymentInfoColum = styled(Wrapper)`
 `
 
 const PaymentSummarySection = styled(Wrapper)`
+  align-items: flex-start;
+  top: 15vh;
+  right: 10vw;
+  position: fixed;
   padding: 0;
-  height: 200px;
-  width: 40%;
+  width: 500px;
   margin: 0px 20px 0px 10px;
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c19};
+  border-radius: 2px;
+  border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
   border-style: solid;
 `
@@ -95,6 +96,15 @@ const PaymentSummaryHeader = styled(Wrapper)`
   height: 50px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.c1};
+  border: 1px solid ${({ theme }) => theme.colors.c1};
+  border-radius: 0;
+`
+
+const PaymentSummaryInfo = styled(Wrapper)`
+  height: 100%;
+  width: 100%;
+  align-items: flex-start;
+  padding: 20px;
 `
 
 const Title = styled.div`
@@ -112,6 +122,19 @@ const Text = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+`
+
+const BigText = styled(Text)`
+  margin: 10px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+`
+
+const WhiteText = styled(Text)`
+  color: ${({ theme }) => theme.colors.c2};
 `
 
 const OrganizationSelect = styled(StyledSelect)`
@@ -125,7 +148,6 @@ const Payments = () => {
   const user = useSelector(selectors.api.getUser)
   const [editMode, setEditMode] = useState()
   const [organization, setOrganization] = useState({})
-  console.log('TCL: Payments -> organization', organization)
   const [paymentInfo, setPaymentInfo] = useState()
   const [subscriptionPlan, setSubscriptionPlan] = useState({
     value: process.env.REACT_APP_MONTHLY_PLAN,
@@ -155,7 +177,6 @@ const Payments = () => {
   }
 
   const fetchPaymentInfo = organization => {
-    console.log('We fetchin')
     organization?.value &&
       dispatch(
         query({
@@ -166,19 +187,20 @@ const Payments = () => {
             organizationId: organization.value.id,
           },
           onSuccess: data => {
-            console.log('TCL: Payments -> data', data)
             setPaymentInfo(data)
           },
         })
       )
   }
-
   useEffect(() => {
     updateOrganizations()
     organizationOptions.length === 1 && setOrganization(organizationOptions[0])
   }, [])
 
-  useEffect(() => fetchPaymentInfo(organization), [organization?.value])
+  useEffect(() => {
+    fetchPaymentInfo(organization)
+    setQuantity(organization.value?.users.length)
+  }, [organization?.value])
 
   return (
     <>
@@ -187,9 +209,12 @@ const Payments = () => {
       <PageWrapper>
         <PaymentInfoColum>
           <SectionWrapper>
-            <Title>1. Company info</Title>
+            <Title>1. Company information</Title>
             {organizationOptions.length === 1 ? (
-              <Text>{organizationOptions[0].label}</Text>
+              <Text>
+                Organization name:
+                <BigText>{organizationOptions[0].label}</BigText>
+              </Text>
             ) : (
               <>
                 <Text>Choose organization</Text>
@@ -230,7 +255,8 @@ const Payments = () => {
           {!!organization.value &&
             (organization.value.subscriptionStatus === 'active' ? (
               <>
-                <Text>Your payment info</Text>
+                <Title>2. Payment information</Title>
+                <Text>Your current credit card:</Text>
                 <Text>
                   {paymentInfo && (
                     <PaymentIcon
@@ -261,7 +287,7 @@ const Payments = () => {
                   }
                   text="Cancel subscription"
                 />
-                <StroveButton
+                {/* <StroveButton
                   isPrimary
                   padding="5px"
                   minWidth="150px"
@@ -283,30 +309,7 @@ const Payments = () => {
                     )
                   }}
                   text="Upgrade subscription"
-                />
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    console.log('TCL: Payments -> organization', organization)
-                    dispatch(
-                      mutation({
-                        name: 'downgradeSubscription',
-                        mutation: DOWNGRADE_SUBSCRIPTION,
-                        variables: {
-                          organizationId: organization.value.id,
-                          quantity: 50,
-                        },
-                        onSuccess: updateOrganizations(),
-                      })
-                    )
-                  }}
-                  text="Downgrade subscription"
-                />
+                /> */}
                 <StroveButton
                   isPrimary
                   padding="5px"
@@ -318,56 +321,6 @@ const Payments = () => {
                     setEditMode(true)
                   }}
                   text="Edit payment info"
-                />
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    console.log(
-                      'New plan',
-                      organization.value.id,
-                      subscriptionPlan.value
-                    )
-                    dispatch(
-                      mutation({
-                        name: 'changePlan',
-                        mutation: CHANGE_PLAN,
-                        variables: {
-                          organizationId: organization.value.id,
-                          newPlan: subscriptionPlan.value,
-                          onSuccess: () => console.log('Change plan success'),
-                        },
-                      })
-                    )
-                  }}
-                  text="Change plan"
-                />
-
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    console.log('TCL: Payments -> organization', organization)
-                    dispatch(
-                      mutation({
-                        name: 'getPaymentInfo',
-                        mutation: GET_PAYMENT_INFO,
-                        variables: {
-                          organizationId: organization.value.id,
-                        },
-                        onSuccess: data => console.log('Payment info', data),
-                      })
-                    )
-                  }}
-                  text="Get payment info"
                 />
                 {editMode && (
                   <StripeCheckoutForm
@@ -426,7 +379,7 @@ const Payments = () => {
               //   text="Renew subscription"
               // />
               <SectionWrapper>
-                <Title>3. Payment info</Title>
+                <Title>2. Payment method</Title>
                 <StripeCheckoutForm
                   organization={organization.value}
                   quantity={quantity}
@@ -438,27 +391,31 @@ const Payments = () => {
         </PaymentInfoColum>
         <PaymentSummarySection>
           <PaymentSummaryHeader>
-            <SubscriptionsSelect
-              defaultValue={'Monthly'}
-              value={subscriptionPlan}
-              onChange={plan => setSubscriptionPlan(plan)}
-              options={subscriptionPlans}
-              placeholder="Choose plan"
-              styles={{
-                control: styles => ({
-                  ...styles,
-                  backgroundColor: '#0072ce',
-                  borderStyle: 'none',
-                }),
-                menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
-                dropdownIndicator: styles => ({ styles, color: '#fff' }),
-                indicatorSeparator: styles => ({ styles, color: '#fff' }),
-                input: styles => ({ styles, color: '#fff' }),
-                placeholder: styles => ({ styles, color: '#fff' }),
-                option: styles => ({ ...styles, color: '#fff' }),
-                singleValue: styles => ({ ...styles, color: '#fff' }),
-              }}
-            />
+            {organization.value?.subscriptionStatus === 'active' ? (
+              <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
+            ) : (
+              <SubscriptionsSelect
+                defaultValue={'Monthly'}
+                value={subscriptionPlan}
+                onChange={plan => setSubscriptionPlan(plan)}
+                options={subscriptionPlans}
+                placeholder="Choose plan"
+                styles={{
+                  control: styles => ({
+                    ...styles,
+                    backgroundColor: '#0072ce',
+                    borderStyle: 'none',
+                  }),
+                  menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
+                  dropdownIndicator: styles => ({ styles, color: '#fff' }),
+                  indicatorSeparator: styles => ({ styles, color: '#fff' }),
+                  input: styles => ({ styles, color: '#fff' }),
+                  placeholder: styles => ({ styles, color: '#fff' }),
+                  option: styles => ({ ...styles, color: '#fff' }),
+                  singleValue: styles => ({ ...styles, color: '#fff' }),
+                }}
+              />
+            )}
           </PaymentSummaryHeader>
           {/* <Formik
             initialValues={{
@@ -486,21 +443,58 @@ const Payments = () => {
               </Form>
             )}
           </Formik> */}
-          {subscriptionPlan && (
-            <>
-              <Text>Order summary</Text>
-              <Text>
-                {quantity} users x{' '}
-                {subscriptionPlan.label === 'Yearly'
-                  ? '$40 x 12 months'
-                  : '$50'}{' '}
-                ={' '}
-                {subscriptionPlan.label === 'Yearly'
-                  ? `$${quantity * 40 * 12}`
-                  : `$${quantity * 50}`}
-              </Text>
-            </>
-          )}
+          <PaymentSummaryInfo>
+            {subscriptionPlan && (
+              <>
+                <BigText>Order summary</BigText>
+                <Text>Members amount: {quantity}</Text>
+                <Text>
+                  Single member price:{' '}
+                  {subscriptionPlan.label === 'Yearly' ? '$40' : '$50'}
+                </Text>
+                <Text>
+                  Number of months:{' '}
+                  {subscriptionPlan.label === 'Yearly' ? '12' : '1'}
+                </Text>
+                <Text>
+                  {quantity} users x{' '}
+                  {subscriptionPlan.label === 'Yearly'
+                    ? '$40 x 12 months'
+                    : '$50'}{' '}
+                  ={' '}
+                  <BigText>
+                    {subscriptionPlan.label === 'Yearly'
+                      ? `$${quantity * 40 * 12}`
+                      : `$${quantity * 50}`}
+                  </BigText>
+                </Text>
+                <Text>Billed: {subscriptionPlan.label}</Text>
+              </>
+            )}
+            {organization.value?.subscriptionStatus === 'active' && (
+              <StroveButton
+                isPrimary
+                padding="5px"
+                minWidth="150px"
+                maxWidth="150px"
+                margin="10px"
+                borderRadius="2px"
+                onClick={() => {
+                  dispatch(
+                    mutation({
+                      name: 'changePlan',
+                      mutation: CHANGE_PLAN,
+                      variables: {
+                        organizationId: organization.value.id,
+                        newPlan: subscriptionPlan.value,
+                      },
+                    })
+                  )
+                }}
+                text="Change plan"
+              />
+            )}
+          </PaymentSummaryInfo>
         </PaymentSummarySection>
       </PageWrapper>
     </>
