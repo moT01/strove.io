@@ -485,8 +485,8 @@ const Banner = () => {
               <StyledHeaderText>Easier code access</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              We believe that securely storing and running code is the future of
-              programming and we focus on making this as easy as possible
+              We believe that storing and running code remotely is the future of
+              programming and we focus on making this as easy as possible.
             </StyledFeatureDescription>
           </StyledCell>
         </StyledGrid>
