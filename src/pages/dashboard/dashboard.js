@@ -15,6 +15,8 @@ import {
   DELETE_TEAM,
   SET_ADMIN,
   LEAVE_TEAM,
+  DOWNGRADE_SUBSCRIPTION,
+  UPGRADE_SUBSCRIPTION,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -525,6 +527,17 @@ const Dashboard = ({ history }) => {
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
             onSuccess: () => {
+              dispatch(
+                mutation({
+                  name: 'downgradeSubscription',
+                  mutation: DOWNGRADE_SUBSCRIPTION,
+                  variables: {
+                    organizationId: team.organizationId,
+                    quantity: 1,
+                  },
+                  onSuccess: () => updateOrganizations,
+                })
+              )
               closeWarningModal()
             },
             onSuccessDispatch: updateOrganizations,
