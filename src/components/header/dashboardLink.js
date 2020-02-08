@@ -56,11 +56,11 @@ const LinkWrapper = styled.div`
 `
 
 const DashboardLink = props => {
-  const user = useSelector(selectors.api.getUser)
+  const token = useSelector(selectors.token)
 
   return (
     <>
-      {user && !props.isEmbed && (
+      {token && !props.isEmbed && (
         <LinkWrapper {...props}>
           <StyledLink to="/app/dashboard" {...props}>
             {isMobileOnly ? (
