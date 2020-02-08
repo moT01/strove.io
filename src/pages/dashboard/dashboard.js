@@ -236,7 +236,7 @@ const Dashboard = ({ history }) => {
                                     minWidth="150px"
                                     maxWidth="150px"
                                     borderRadius="2px"
-                                    margin="0 0 0 10px"
+                                    margin="10px"
                                     text="Settings"
                                     onClick={() => {
                                       handleSettingsClick(team)
