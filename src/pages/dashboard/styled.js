@@ -131,10 +131,13 @@ export const TilesWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: ${isMobileOnly ? '100%' : '80%'};
-  max-width: 1400px;
-
+  width: 100%;
   animation: ${FullFadeIn} 0.5s ease-out;
+`
+
+export const DashboardWrapper = styled(TilesWrapper)`
+  width: ${isMobileOnly ? '100%' : '80%'};
+  max-width: 1200px;
 `
 
 export const Title = styled.div`

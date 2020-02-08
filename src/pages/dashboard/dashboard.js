@@ -33,7 +33,7 @@ import {
   StyledForm,
   PageWrapper,
   TeamTileWrapper,
-  TilesWrapper,
+  DashboardWrapper,
   Title,
   SectionTitle,
   TeamTile,
@@ -194,7 +194,7 @@ const Dashboard = ({ history }) => {
     {
       name: 'Teams',
       content: (
-        <TilesWrapper>
+        <DashboardWrapper>
           {myOrganizations.map(organization => (
             <>
               <OrganizationName>{organization.name}</OrganizationName>
@@ -440,7 +440,7 @@ const Dashboard = ({ history }) => {
               />
             </>
           ))}
-        </TilesWrapper>
+        </DashboardWrapper>
       ),
     },
     {
