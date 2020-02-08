@@ -117,6 +117,8 @@ const Payments = () => {
   const user = useSelector(selectors.api.getUser)
   const [editMode, setEditMode] = useState()
   const [organization, setOrganization] = useState({})
+  console.log('TCL: Payments -> organization', organization)
+  const [paymentInfo, setPaymentInfo] = useState()
   const [subscriptionPlan, setSubscriptionPlan] = useState({
     value: process.env.REACT_APP_MONTHLY_PLAN,
     label: 'Monthly',
@@ -145,6 +147,7 @@ const Payments = () => {
   }
 
   const fetchPaymentInfo = organization => {
+    console.log('We fetchin')
     organization?.value &&
       dispatch(
         query({
@@ -153,6 +156,10 @@ const Payments = () => {
           query: GET_PAYMENT_INFO,
           variables: {
             organizationId: organization.value.id,
+          },
+          onSuccess: data => {
+            console.log('TCL: Payments -> data', data)
+            setPaymentInfo(data)
           },
         })
       )
@@ -163,7 +170,7 @@ const Payments = () => {
     organizationOptions.length === 1 && setOrganization(organizationOptions[0])
   }, [])
 
-  useEffect(() => fetchPaymentInfo(), [organization])
+  useEffect(() => fetchPaymentInfo(organization), [organization?.value])
 
   return (
     <>
@@ -207,6 +214,9 @@ const Payments = () => {
           {!!organization.value &&
             (organization.value.subscriptionStatus === 'active' ? (
               <>
+                <Text>Your payment info</Text>
+                <Text>{paymentInfo?.card}</Text>
+                <Text>{paymentInfo?.last4}</Text>
                 <StroveButton
                   isPrimary
                   padding="5px"
