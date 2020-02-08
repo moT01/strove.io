@@ -34,7 +34,7 @@ const StyledModal = styled(Modal)`
 
 const Layout = ({ children, browser }) => {
   const [noSupportModalVisible, setNoSupportModalVisible] = useState(false)
-  const user = useSelector(selectors.api.getUser)
+  const token = useSelector(selectors.getToken)
 
   useEffect(() => {
     if (
@@ -55,7 +55,7 @@ const Layout = ({ children, browser }) => {
         {({ addProject }) => (
           <DataManager addProject={addProject}>
             <WithAddProject addProject={addProject}>
-              {user && (
+              {token && (
                 <StyledModal
                   isOpen={noSupportModalVisible}
                   onRequestClose={() => setNoSupportModalVisible(false)}
