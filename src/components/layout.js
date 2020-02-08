@@ -29,7 +29,7 @@ const MainContent = styled.main`
 `
 
 const StyledModal = styled(Modal)`
-  width: ${props => (props.isMobile ? '70vw' : '30vw')};
+  width: 30vw;
 `
 
 const Layout = ({ children, browser }) => {
@@ -61,7 +61,6 @@ const Layout = ({ children, browser }) => {
                   onRequestClose={() => setNoSupportModalVisible(false)}
                   contentLabel="Browser not supported"
                   ariaHideApp={false}
-                  isMobile={isMobile}
                 >
                   Your browser might not provide the best Strove.io user
                   experience. We recommend using Google Chrome, Mozilla Firefox,
