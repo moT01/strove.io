@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobile } from 'react-device-detect'
 import { Formik, Form, Field } from 'formik'
+import PaymentIcon from 'react-payment-icons'
 
 import { selectors } from 'state'
 import {
@@ -47,6 +48,11 @@ const SectionWrapper = styled(Wrapper)`
   width: 100%;
   align-items: flex-start;
   animation: ${FadeInAnimation} 0.2s ease-out;
+`
+
+const CompanyInfoWrapper = styled(Wrapper)`
+  width: 100%;
+  border: 1px solid red;
 `
 
 const PageWrapper = styled(Wrapper)`
@@ -104,6 +110,8 @@ const Text = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 `
 
 const OrganizationSelect = styled(StyledSelect)`
@@ -211,12 +219,27 @@ const Payments = () => {
               </>
             )}
           </SectionWrapper>
+          {/* May be added in the futuer. Displaying company address and such
+          {!!organization.value && (
+            <SectionWrapper>
+              <CompanyInfoWrapper>
+                <Text>Here goes your company info</Text>
+              </CompanyInfoWrapper>
+            </SectionWrapper>
+          )} */}
           {!!organization.value &&
             (organization.value.subscriptionStatus === 'active' ? (
               <>
                 <Text>Your payment info</Text>
-                <Text>{paymentInfo?.card}</Text>
-                <Text>{paymentInfo?.last4}</Text>
+                <Text>
+                  {paymentInfo && (
+                    <PaymentIcon
+                      id={paymentInfo.card}
+                      style={{ height: '1rem', margin: ' 0px 10px 0px 0px' }}
+                    />
+                  )}
+                  **** **** **** {paymentInfo?.last4}
+                </Text>
                 <StroveButton
                   isPrimary
                   padding="5px"
@@ -403,7 +426,7 @@ const Payments = () => {
               //   text="Renew subscription"
               // />
               <SectionWrapper>
-                <Title>2. Payment info</Title>
+                <Title>3. Payment info</Title>
                 <StripeCheckoutForm
                   organization={organization.value}
                   quantity={quantity}

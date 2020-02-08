@@ -10864,7 +10864,7 @@ react-document-title@^2.0.3:
     prop-types "^15.5.6"
     react-side-effect "^1.0.2"
 
-react-dom@^16.12.0, react-dom@^16.8.4:
+react-dom@^16.12.0, react-dom@^16.4.2, react-dom@^16.8.4:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
@@ -10976,6 +10976,15 @@ react-onclickoutside@^6.5.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.9.0.tgz#a54bc317ae8cf6131a5d78acea55a11067f37a1f"
   integrity sha512-8ltIY3bC7oGhj2nPAvWOGi+xGFybPNhJM0V1H8hY/whNcXgmDeaeoCMPPd8VatrpTsUWjb/vGzrmu6SrXVty3A==
+
+react-payment-icons@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/react-payment-icons/-/react-payment-icons-1.2.6.tgz#b9f732723b48066bcd76c2e28648f262292882a4"
+  integrity sha512-7KzCkTDWvs69fvUfA6ISPSCdjGhdl00mBEMMYUZZisNW1EnBBINVsI1WCVFfQZ7Jw5DjNwPpDMLgedBMgR3Npg==
+  dependencies:
+    prop-types "^15.6.2"
+    react "^16.4.2"
+    react-dom "^16.4.2"
 
 react-polyglot@^0.4.0:
   version "0.4.2"
@@ -11285,7 +11294,7 @@ react-waypoint@^8.1.0:
     prop-types "^15.0.0"
     react-is "^16.6.3"
 
-react@^16.12.0, react@^16.8.4:
+react@^16.12.0, react@^16.4.2, react@^16.8.4:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
