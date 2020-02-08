@@ -95,6 +95,11 @@ export const FormWrapper = styled.div`
   }
 `
 
+export const InviteFormWrapper = styled(FormWrapper)`
+  width: 80vw;
+  max-width: 700px;
+`
+
 export const StyledForm = styled(Form)`
   width: 100%;
 `

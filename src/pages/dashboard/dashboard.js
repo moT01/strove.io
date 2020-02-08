@@ -59,6 +59,7 @@ import {
   UserPhoto,
   OrganizationName,
   StyledErrors,
+  InviteFormWrapper,
 } from './styled'
 
 const validate = values => {
@@ -753,7 +754,7 @@ const Dashboard = ({ history }) => {
         >
           {({ errors, values }) => (
             <StyledForm>
-              <FormWrapper
+              <InviteFormWrapper
                 isInvite
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
@@ -786,7 +787,7 @@ const Dashboard = ({ history }) => {
                   text="Invite"
                   disabled={errors.email || !values.email}
                 />
-              </FormWrapper>
+              </InviteFormWrapper>
             </StyledForm>
           )}
         </Formik>
