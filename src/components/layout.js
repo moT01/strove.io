@@ -54,7 +54,7 @@ const Layout = ({ children, browser }) => {
         {({ addProject }) => (
           <DataManager addProject={addProject}>
             <WithAddProject addProject={addProject}>
-              {user ? (
+              {user && (
                 <StyledModal
                   isOpen={noSupportModalVisible}
                   onRequestClose={() => setNoSupportModalVisible(false)}
@@ -62,12 +62,10 @@ const Layout = ({ children, browser }) => {
                   ariaHideApp={false}
                   isMobile={isMobile}
                 >
-                  {isMobile
-                    ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
-                    : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
+                  Your browser might not provide the best Strove.io user
+                  experience. We recommend using Google Chrome, Mozilla Firefox,
+                  Safari or Opera.
                 </StyledModal>
-              ) : (
-                ''
               )}
 
               <GlobalStyles />
