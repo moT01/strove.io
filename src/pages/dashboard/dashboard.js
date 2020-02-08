@@ -35,7 +35,7 @@ import {
   StyledForm,
   PageWrapper,
   TeamTileWrapper,
-  TilesWrapper,
+  DashboardWrapper,
   Title,
   SectionTitle,
   TeamTile,
@@ -61,6 +61,7 @@ import {
   UserPhoto,
   OrganizationName,
   StyledErrors,
+  InviteFormWrapper,
 } from './styled'
 
 const validate = values => {
@@ -195,7 +196,7 @@ const Dashboard = ({ history }) => {
     {
       name: 'Teams',
       content: (
-        <TilesWrapper>
+        <DashboardWrapper>
           {myOrganizations.map(organization => (
             <>
               <OrganizationName>{organization.name}</OrganizationName>
@@ -209,10 +210,7 @@ const Dashboard = ({ history }) => {
                       organizationsObj[organization.id].owner.id === user.id
                     return (
                       <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                        <TeamTileHeader
-                          expanded={isExpanded}
-                          shouldTabsBeCollapsable
-                        >
+                        <TeamTileHeader expanded={isExpanded}>
                           <Divider>
                             <VerticalDivider columnOnMobile>
                               <Title>{team.name}</Title>
@@ -237,7 +235,7 @@ const Dashboard = ({ history }) => {
                                     minWidth="150px"
                                     maxWidth="150px"
                                     borderRadius="2px"
-                                    margin="0 0 0 10px"
+                                    margin="10px"
                                     text="Settings"
                                     onClick={() => {
                                       handleSettingsClick(team)
@@ -258,7 +256,7 @@ const Dashboard = ({ history }) => {
                                   />
                                 ))}
                             </VerticalDivider>
-                            {team.projects?.length > 1 && (
+                            {myOrganizations?.length > 1 && (
                               <IconWrapper
                                 onClick={() =>
                                   displayHandler({
@@ -444,7 +442,7 @@ const Dashboard = ({ history }) => {
               />
             </>
           ))}
-        </TilesWrapper>
+        </DashboardWrapper>
       ),
     },
     {
@@ -766,7 +764,7 @@ const Dashboard = ({ history }) => {
         >
           {({ errors, values }) => (
             <StyledForm>
-              <FormWrapper
+              <InviteFormWrapper
                 isInvite
                 disabled={errors.email || !values.email}
                 isMobile={isMobileOnly}
@@ -799,7 +797,7 @@ const Dashboard = ({ history }) => {
                   text="Invite"
                   disabled={errors.email || !values.email}
                 />
-              </FormWrapper>
+              </InviteFormWrapper>
             </StyledForm>
           )}
         </Formik>

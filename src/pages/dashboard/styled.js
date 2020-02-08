@@ -95,6 +95,11 @@ export const FormWrapper = styled.div`
   }
 `
 
+export const InviteFormWrapper = styled(FormWrapper)`
+  width: 80vw;
+  max-width: 700px;
+`
+
 export const StyledForm = styled(Form)`
   width: 100%;
 `
@@ -128,6 +133,11 @@ export const TilesWrapper = styled.div`
   align-items: center;
   width: 100%;
   animation: ${FullFadeIn} 0.5s ease-out;
+`
+
+export const DashboardWrapper = styled(TilesWrapper)`
+  width: ${isMobileOnly ? '100%' : '80%'};
+  max-width: 1200px;
 `
 
 export const Title = styled.div`
@@ -203,9 +213,9 @@ export const Text = styled.div`
 export const OrganizationName = styled(Text)`
   align-self: flex-start;
   color: ${({ theme }) => theme.colors.c25};
-  margin-top: 10px;
-  font-size: 1.8rem;
-  height: 1.8rem;
+  margin-top: 20px;
+  font-size: 1.6rem;
+  font-weight: 700;
 `
 
 export const ModalText = styled(Text)`
