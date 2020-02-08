@@ -332,10 +332,9 @@ const Banner = () => {
     <>
       <StyledSectionWrapper padding="20px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
-          <StyledH1>To create what's next</StyledH1>
+          <StyledH1>Cloud alternative for software development</StyledH1>
           <StyledProductDescription>
-            Get the advantage over teams with the best programming equipment for
-            a fraction of the cost
+            Manage team. Write, run and share code, all in one place
           </StyledProductDescription>
           <ButtonsWrapper mobile={isMobileOnly}>
             <StroveButton
@@ -414,8 +413,7 @@ const Banner = () => {
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH2>
             Strove brings powerful, ready in seconds, pre-configured cloud
-            servers to write, run, build, share and
-            secure software remotely
+            servers to write, run, build, share and secure software remotely
           </StyledH2>
         </SectionWrapper>
       </StyledSectionWrapper>
