@@ -144,10 +144,26 @@ const Payments = () => {
     )
   }
 
+  const fetchPaymentInfo = organization => {
+    organization?.value &&
+      dispatch(
+        query({
+          name: 'getPaymentInfo',
+          storeKey: 'getPaymentInfo',
+          query: GET_PAYMENT_INFO,
+          variables: {
+            organizationId: organization.value.id,
+          },
+        })
+      )
+  }
+
   useEffect(() => {
     updateOrganizations()
     organizationOptions.length === 1 && setOrganization(organizationOptions[0])
   }, [])
+
+  useEffect(() => fetchPaymentInfo(), [organization])
 
   return (
     <>
@@ -250,7 +266,7 @@ const Payments = () => {
                         mutation: DOWNGRADE_SUBSCRIPTION,
                         variables: {
                           organizationId: organization.value.id,
-                          quantity: 300,
+                          quantity: 50,
                         },
                         onSuccess: updateOrganizations(),
                       })
