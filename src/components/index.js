@@ -25,6 +25,7 @@ import Footer from './footer'
 import OldUserModal from './oldUserModal'
 import WithLazyLoader from './withLazyLoader'
 import FullScreenWrapper from './fullScreenWrapper'
+import MenuWrapper from './menuWrapper'
 
 export {
   SmallCloud,
@@ -56,4 +57,5 @@ export {
   OldUserModal,
   WithLazyLoader,
   FullScreenWrapper,
+  MenuWrapper,
 }

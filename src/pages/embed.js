@@ -8,16 +8,10 @@ import {
   PoweredBy,
   ExternalLink,
   FullScreenWrapper,
+  MenuWrapper,
 } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getRepoUrl } from 'utils'
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
-  position: relative;
-`
 
 const LoginText = styled.span`
   font-weight: 500;
