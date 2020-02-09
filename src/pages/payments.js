@@ -63,6 +63,8 @@ const PaymentInfoColumn = styled(Wrapper)`
 
 const PaymentSummaryWrapper = styled(Wrapper)`
   position: relative;
+  width: 100%;
+  align-items: flex-end;
 `
 
 const PaymentSummarySection = styled(Wrapper)`
@@ -72,7 +74,6 @@ const PaymentSummarySection = styled(Wrapper)`
   padding: 0;
   width: 100%;
   max-width: 400px;
-  margin: 0px 20px 0px 10px;
   border-radius: 2px;
   border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
