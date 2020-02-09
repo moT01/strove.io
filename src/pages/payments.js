@@ -61,10 +61,13 @@ const PaymentInfoColumn = styled(Wrapper)`
   max-width: 800px;
 `
 
+const PaymentSummaryWrapper = styled(Wrapper)`
+  position: relative;
+`
+
 const PaymentSummarySection = styled(Wrapper)`
   align-items: flex-start;
   top: 150px;
-  right: 0;
   position: fixed;
   padding: 0;
   width: 100%;
@@ -385,35 +388,36 @@ const Payments = () => {
               </SectionWrapper>
             ))}
         </PaymentInfoColumn>
-        <PaymentSummarySection>
-          <PaymentSummaryHeader>
-            {organization.value?.subscriptionStatus === 'active' ? (
-              <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
-            ) : (
-              <SubscriptionsSelect
-                defaultValue={'Monthly'}
-                value={subscriptionPlan}
-                onChange={plan => setSubscriptionPlan(plan)}
-                options={subscriptionPlans}
-                placeholder="Choose plan"
-                styles={{
-                  control: styles => ({
-                    ...styles,
-                    backgroundColor: '#0072ce',
-                    borderStyle: 'none',
-                  }),
-                  menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
-                  dropdownIndicator: styles => ({ styles, color: '#fff' }),
-                  indicatorSeparator: styles => ({ styles, color: '#fff' }),
-                  input: styles => ({ styles, color: '#fff' }),
-                  placeholder: styles => ({ styles, color: '#fff' }),
-                  option: styles => ({ ...styles, color: '#fff' }),
-                  singleValue: styles => ({ ...styles, color: '#fff' }),
-                }}
-              />
-            )}
-          </PaymentSummaryHeader>
-          {/* <Formik
+        <PaymentSummaryWrapper>
+          <PaymentSummarySection>
+            <PaymentSummaryHeader>
+              {organization.value?.subscriptionStatus === 'active' ? (
+                <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
+              ) : (
+                <SubscriptionsSelect
+                  defaultValue={'Monthly'}
+                  value={subscriptionPlan}
+                  onChange={plan => setSubscriptionPlan(plan)}
+                  options={subscriptionPlans}
+                  placeholder="Choose plan"
+                  styles={{
+                    control: styles => ({
+                      ...styles,
+                      backgroundColor: '#0072ce',
+                      borderStyle: 'none',
+                    }),
+                    menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
+                    dropdownIndicator: styles => ({ styles, color: '#fff' }),
+                    indicatorSeparator: styles => ({ styles, color: '#fff' }),
+                    input: styles => ({ styles, color: '#fff' }),
+                    placeholder: styles => ({ styles, color: '#fff' }),
+                    option: styles => ({ ...styles, color: '#fff' }),
+                    singleValue: styles => ({ ...styles, color: '#fff' }),
+                  }}
+                />
+              )}
+            </PaymentSummaryHeader>
+            {/* <Formik
             initialValues={{
               quantity: organization.users.length,
             }}
@@ -439,59 +443,60 @@ const Payments = () => {
               </Form>
             )}
           </Formik> */}
-          <PaymentSummaryInfo>
-            {subscriptionPlan && (
-              <>
-                <BigText>Order summary</BigText>
-                <Text>Members amount: {quantity}</Text>
-                <Text>
-                  Single member price:{' '}
-                  {subscriptionPlan.label === 'Yearly' ? '$40' : '$50'}
-                </Text>
-                <Text>
-                  Number of months:{' '}
-                  {subscriptionPlan.label === 'Yearly' ? '12' : '1'}
-                </Text>
-                <Text>
-                  {quantity} users x{' '}
-                  {subscriptionPlan.label === 'Yearly'
-                    ? '$40 x 12 months'
-                    : '$50'}{' '}
-                  ={' '}
-                  <BigText>
+            <PaymentSummaryInfo>
+              {subscriptionPlan && (
+                <>
+                  <BigText>Order summary</BigText>
+                  <Text>Members amount: {quantity}</Text>
+                  <Text>
+                    Single member price:{' '}
+                    {subscriptionPlan.label === 'Yearly' ? '$40' : '$50'}
+                  </Text>
+                  <Text>
+                    Number of months:{' '}
+                    {subscriptionPlan.label === 'Yearly' ? '12' : '1'}
+                  </Text>
+                  <Text>
+                    {quantity} users x{' '}
                     {subscriptionPlan.label === 'Yearly'
-                      ? `$${quantity * 40 * 12}`
-                      : `$${quantity * 50}`}
-                  </BigText>
-                </Text>
-                <Text>Billed: {subscriptionPlan.label}</Text>
-              </>
-            )}
-            {organization.value?.subscriptionStatus === 'active' && (
-              <StroveButton
-                isPrimary
-                padding="5px"
-                minWidth="150px"
-                maxWidth="150px"
-                margin="10px"
-                borderRadius="2px"
-                onClick={() => {
-                  dispatch(
-                    mutation({
-                      name: 'changePlan',
-                      mutation: CHANGE_PLAN,
-                      variables: {
-                        organizationId: organization.value.id,
-                        newPlan: subscriptionPlan.value,
-                      },
-                    })
-                  )
-                }}
-                text="Change plan"
-              />
-            )}
-          </PaymentSummaryInfo>
-        </PaymentSummarySection>
+                      ? '$40 x 12 months'
+                      : '$50'}{' '}
+                    ={' '}
+                    <BigText>
+                      {subscriptionPlan.label === 'Yearly'
+                        ? `$${quantity * 40 * 12}`
+                        : `$${quantity * 50}`}
+                    </BigText>
+                  </Text>
+                  <Text>Billed: {subscriptionPlan.label}</Text>
+                </>
+              )}
+              {organization.value?.subscriptionStatus === 'active' && (
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    dispatch(
+                      mutation({
+                        name: 'changePlan',
+                        mutation: CHANGE_PLAN,
+                        variables: {
+                          organizationId: organization.value.id,
+                          newPlan: subscriptionPlan.value,
+                        },
+                      })
+                    )
+                  }}
+                  text="Change plan"
+                />
+              )}
+            </PaymentSummaryInfo>
+          </PaymentSummarySection>
+        </PaymentSummaryWrapper>
       </PageWrapper>
     </>
   )
