@@ -10,15 +10,9 @@ import {
   PoweredBy,
   NoRepoUrlInfo,
   FullScreenWrapper,
+  MenuWrapper,
 } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
-  position: relative;
-`
 
 const LoginText = styled.span`
   font-weight: 500;
@@ -56,7 +50,7 @@ const Run = ({ addProject, history }) => {
 
   return (
     <FullScreenWrapper>
-      <MenuWrapper invert>
+      <MenuWrapper>
         {!repoUrl ? (
           <NoRepoUrlInfo />
         ) : (
