@@ -148,6 +148,11 @@ const OrganizationSelect = styled(StyledSelect)`
 
 const optionColor = 'rgba(185,185,185,0.65)'
 
+const subscriptionPlans = [
+  { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
+  { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
+]
+
 const Payments = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -166,10 +171,6 @@ const Payments = () => {
       value: organization,
       label: organization.name,
     }))
-  const subscriptionPlans = [
-    { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
-    { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
-  ]
 
   const updateOrganizations = () => {
     dispatch(
@@ -209,7 +210,7 @@ const Payments = () => {
 
   return (
     <>
-      <SEO title="Dashboard" />
+      <SEO title="Subscribe" />
       <Header />
       <PageWrapper>
         <PaymentInfoColum>
