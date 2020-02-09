@@ -4,19 +4,11 @@ import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { ExternalLink, FullScreenWrapper } from 'components'
+import { ExternalLink, FullScreenWrapper, MenuWrapper } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
 import { actions } from 'state'
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
-  position: relative;
-`
 
 const LoginText = styled.span`
   font-weight: 500;
@@ -58,7 +50,7 @@ const FromEmailInvitation = () => {
 
   return (
     <FullScreenWrapper>
-      <MenuWrapper invert>
+      <MenuWrapper>
         <InvitationTitle>
           You're invited to <b>{teamName}</b>
         </InvitationTitle>
