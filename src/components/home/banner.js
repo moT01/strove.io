@@ -13,8 +13,6 @@ import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { GetStarted, Logos } from 'components'
 import StroveButton from 'components/stroveButton.js'
-import Demo from 'assets/StroveDemo.mp4'
-import demoPreview from 'assets/demoPreview.png'
 
 const validate = values => {
   let errors = {}
@@ -439,8 +437,15 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <Video isMobile={isMobile} controls poster={demoPreview}>
-              <source src={Demo} type="video/mp4"></source>
+            <Video
+              isMobile={isMobile}
+              controls
+              poster={require('assets/demoPreview.png')}
+            >
+              <source
+                src={require('assets/StroveDemo.mp4')}
+                type="video/mp4"
+              ></source>
             </Video>
           </SectionWrapper>
         </SectionDivider>
