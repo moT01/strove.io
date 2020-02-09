@@ -9,6 +9,7 @@ import {
   AddProjectProvider,
   PoweredBy,
   NoRepoUrlInfo,
+  FullScreenWrapper,
 } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
 
@@ -22,14 +23,6 @@ const MenuWrapper = styled.div`
 const LoginText = styled.span`
   font-weight: 500;
   font-size: 20px;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
 `
 
 const StyledButton = styled(StroveButton)`
@@ -62,7 +55,7 @@ const Run = ({ addProject, history }) => {
   }
 
   return (
-    <Wrapper>
+    <FullScreenWrapper>
       <MenuWrapper invert>
         {!repoUrl ? (
           <NoRepoUrlInfo />
@@ -73,7 +66,7 @@ const Run = ({ addProject, history }) => {
         )}
         <PoweredBy />
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 
