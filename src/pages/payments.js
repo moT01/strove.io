@@ -75,10 +75,10 @@ const PaymentInfoColum = styled(Wrapper)`
 const PaymentSummarySection = styled(Wrapper)`
   align-items: flex-start;
   top: 15vh;
-  right: 10vw;
+  right: 0;
   position: fixed;
   padding: 0;
-  width: 500px;
+  max-width: 500px;
   margin: 0px 20px 0px 10px;
   border-radius: 2px;
   border-color: ${({ theme }) => theme.colors.c1};
