@@ -133,6 +133,11 @@ const BigText = styled(Text)`
   font-weight: 600;
 `
 
+const BoldText = styled(Text)`
+  font-weight: 600;
+  margin-left: 5px;
+`
+
 const WhiteText = styled(Text)`
   color: ${({ theme }) => theme.colors.c2};
 `
@@ -213,7 +218,7 @@ const Payments = () => {
             {organizationOptions.length === 1 ? (
               <Text>
                 Organization name:
-                <BigText margin="5px">{organizationOptions[0].label}</BigText>
+                <BoldText>{organizationOptions[0].label}</BoldText>
               </Text>
             ) : (
               <>
