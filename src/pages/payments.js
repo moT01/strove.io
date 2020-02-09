@@ -55,7 +55,7 @@ const PageWrapper = styled(Wrapper)`
   max-width: 1000px;
 `
 
-const PaymentInfoColum = styled(Wrapper)`
+const PaymentInfoColumn = styled(Wrapper)`
   align-items: flex-start;
   margin: 0px 10px 0px 20px;
   max-width: 800px;
@@ -203,7 +203,7 @@ const Payments = () => {
       <SEO title="Subscribe" />
       <Header />
       <PageWrapper>
-        <PaymentInfoColum>
+        <PaymentInfoColumn>
           <SectionWrapper>
             <Title>1. Company information</Title>
             {organizationOptions.length === 1 ? (
@@ -384,7 +384,7 @@ const Payments = () => {
                 />
               </SectionWrapper>
             ))}
-        </PaymentInfoColum>
+        </PaymentInfoColumn>
         <PaymentSummarySection>
           <PaymentSummaryHeader>
             {organization.value?.subscriptionStatus === 'active' ? (
