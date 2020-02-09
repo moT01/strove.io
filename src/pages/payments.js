@@ -48,22 +48,18 @@ const SectionWrapper = styled(Wrapper)`
   animation: ${FadeInAnimation} 0.2s ease-out;
 `
 
-const CompanyInfoWrapper = styled(Wrapper)`
-  width: 100%;
-  border: 1px solid red;
-`
-
 const PageWrapper = styled(Wrapper)`
   min-height: calc(100vh - 64px);
-  padding-top: 50px;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  width: 100vw;
 `
 
 const PaymentInfoColum = styled(Wrapper)`
   align-items: flex-start;
   padding: 0px 40px;
   margin: 0px 10px 0px 20px;
+  max-width: 800px;
   /* border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c19};
   border-width: 1px;
@@ -72,11 +68,12 @@ const PaymentInfoColum = styled(Wrapper)`
 
 const PaymentSummarySection = styled(Wrapper)`
   align-items: flex-start;
-  top: 15vh;
+  top: 150px;
   right: 0;
   position: fixed;
   padding: 0;
-  max-width: 500px;
+  width: 100%;
+  max-width: 400px;
   margin: 0px 20px 0px 10px;
   border-radius: 2px;
   border-color: ${({ theme }) => theme.colors.c1};
