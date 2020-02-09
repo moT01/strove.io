@@ -51,6 +51,8 @@ const PageWrapper = styled(Wrapper)`
   min-height: calc(100vh - 64px);
   flex-direction: row;
   width: 100vw;
+  padding: 0 40px;
+  max-width: 1000px;
 `
 
 const PaymentInfoColum = styled(Wrapper)`
