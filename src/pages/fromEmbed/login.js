@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { loginOptions } from 'consts'
-import { NoRepoUrlInfo, ExternalLink } from 'components'
+import { NoRepoUrlInfo, ExternalLink, FullScreenWrapper } from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
 const MenuWrapper = styled.div`
@@ -29,14 +29,6 @@ const Url = styled.span`
   font-weight: 600;
 `
 
-const Wrapper = styled.div`
-  display: flex;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-`
-
 const NoRedirectUrlInfo = styled.div`
   font-size: 18px;
   text-align: center;
@@ -54,7 +46,7 @@ const Login = () => {
   )
 
   return (
-    <Wrapper>
+    <FullScreenWrapper>
       <MenuWrapper>
         {loginProvider ? (
           <>
@@ -80,7 +72,7 @@ const Login = () => {
           <NoRepoUrlInfo />
         )}
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 
