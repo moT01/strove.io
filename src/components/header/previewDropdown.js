@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import { selectors } from 'state'
 import { Desktop } from 'components/svgs'
 
+import DropdownMenuWrapper from './dropdownMenuWrapper'
+
 const Text = styled.h3`
   font-size: 16px;
   color: ${({ theme }) => theme.colors.c2};
@@ -76,22 +78,6 @@ const DropdownWrapper = styled.div`
   display: flex;
   right: ${props => (props.isEmbed ? '-75px' : '-10px')};
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
-`
-
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: auto;
-  word-break: initial;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-style: solid;
-  background-color: ${({ theme }) => theme.colors.c2};
-  position: relative;
-  word-break: initial;
 `
 
 const OptionText = styled(Text)`
@@ -226,7 +212,7 @@ const PreviewDropdown = props => {
               </PreviewButton>
               <DropdownWrapper {...props}>
                 {isOpen && (
-                  <MenuWrapper>
+                  <DropdownMenuWrapper>
                     {ports.map((item, index, arr) => (
                       <Option
                         invert
@@ -246,7 +232,7 @@ const PreviewDropdown = props => {
                         </PreviewLink>
                       </Option>
                     ))}
-                  </MenuWrapper>
+                  </DropdownMenuWrapper>
                 )}
               </DropdownWrapper>
             </div>
