@@ -1,14 +1,14 @@
 import React, { Suspense } from 'react'
 
 import FullScreenLoader from './fullScreenLoader'
-import Wrapper from './fullScreenWrapper'
+import FullScreenWrapper from './fullScreenWrapper'
 
 export default WrappedComponent => props => (
   <Suspense
     fallback={
-      <Wrapper>
+      <FullScreenWrapper>
         <FullScreenLoader isFullScreen={false} color="#0072ce" height="15vh" />
-      </Wrapper>
+      </FullScreenWrapper>
     }
   >
     <WrappedComponent {...props} />
