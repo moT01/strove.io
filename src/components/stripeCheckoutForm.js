@@ -38,10 +38,10 @@ const StripeExpiryWrapper = styled(CardInfoWrapper)`
 
 const StripeElementContainer = styled.div`
   width: 100%;
-  margin: 5px 0px;
-  padding: 1px;
+  margin: 10px 0px;
+  padding: 8px;
   border-radius: 2px;
-  border-color: ${({ theme }) => theme.colors.c19};
+  border-color: ${({ theme }) => theme.colors.c9};
   border-width: 1px;
   border-style: solid;
 `
