@@ -86,12 +86,12 @@ const SubscriptionsSelect = styled(StyledSelect)`
 `
 
 const PaymentSummaryHeader = styled(Wrapper)`
-  flex-direction: row;
-  height: 50px;
+  flex-direction: column;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.c1};
   border: 1px solid ${({ theme }) => theme.colors.c1};
   border-radius: 0;
+  padding: 20px;
 `
 
 const PaymentSummaryInfo = styled(Wrapper)`
@@ -392,11 +392,12 @@ const Payments = () => {
         <PaymentSummaryWrapper>
           <PaymentSummarySection>
             <PaymentSummaryHeader>
+              <WhiteText>Strove subsctiption</WhiteText>
               {organization.value?.subscriptionStatus === 'active' ? (
                 <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
               ) : (
                 <SubscriptionsSelect
-                  defaultValue={'Monthly'}
+                  defaultValue="Monthly"
                   value={subscriptionPlan}
                   onChange={plan => setSubscriptionPlan(plan)}
                   options={subscriptionPlans}
