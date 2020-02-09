@@ -39,7 +39,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 `
 
 const SectionWrapper = styled(Wrapper)`
@@ -51,19 +50,13 @@ const SectionWrapper = styled(Wrapper)`
 const PageWrapper = styled(Wrapper)`
   min-height: calc(100vh - 64px);
   flex-direction: row;
-  align-items: center;
   width: 100vw;
 `
 
 const PaymentInfoColum = styled(Wrapper)`
   align-items: flex-start;
-  padding: 0px 40px;
   margin: 0px 10px 0px 20px;
   max-width: 800px;
-  /* border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c19};
-  border-width: 1px;
-  border-style: solid; */
 `
 
 const PaymentSummarySection = styled(Wrapper)`
