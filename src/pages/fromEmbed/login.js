@@ -2,16 +2,13 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { loginOptions } from 'consts'
-import { NoRepoUrlInfo, ExternalLink, FullScreenWrapper } from 'components'
+import {
+  NoRepoUrlInfo,
+  ExternalLink,
+  FullScreenWrapper,
+  MenuWrapper,
+} from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
-  position: relative;
-  word-break: initial;
-`
 
 const LoginText = styled.span`
   font-weight: 500;
