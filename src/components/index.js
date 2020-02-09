@@ -24,6 +24,7 @@ import WithTracker from './withTracker'
 import Footer from './footer'
 import OldUserModal from './oldUserModal'
 import WithLazyLoader from './withLazyLoader'
+import Wrapper from './wrapper'
 
 export {
   SmallCloud,
@@ -54,4 +55,5 @@ export {
   Footer,
   OldUserModal,
   WithLazyLoader,
+  Wrapper,
 }
