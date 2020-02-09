@@ -411,7 +411,7 @@ const PricingPage = () => {
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
-  const user = useSelector(selectors.getT)
+  const token = useSelector(selectors.getToken)
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
 
@@ -471,7 +471,7 @@ const PricingPage = () => {
             </PricingSection>
             <ButtonWrapper>
               <StroveButton
-                isLink={user?.token ? true : false}
+                isLink={!!token}
                 to="/app/payments"
                 text="Get started"
                 padding="15px"
@@ -567,7 +567,7 @@ const PricingPage = () => {
                         </button>
                       </EmailFormWrapper>
                       <TrialInfo>
-                        <li>Free 14-day Demo</li>
+                        <li>Free Demo</li>
                         <li>No credit card needed</li>
                         <li>No setup</li>
                       </TrialInfo>
