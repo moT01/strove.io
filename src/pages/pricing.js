@@ -395,6 +395,11 @@ const PricingHeader = styled(CardTitle)`
   line-height: 1.1;
 `
 
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 const validate = values => {
   let errors = {}
 
@@ -566,11 +571,15 @@ const PricingPage = () => {
                           Request demo
                         </button>
                       </EmailFormWrapper>
-                      <TrialInfo>
-                        <li>Free Demo</li>
-                        <li>No credit card needed</li>
-                        <li>No setup</li>
-                      </TrialInfo>
+
+                      <Center>
+                        <TrialInfo team>
+                          <li>Free Demo</li>
+                          <li>No credit card needed</li>
+                          <li>No setup</li>
+                        </TrialInfo>
+                      </Center>
+
                       {emailSent && (
                         <StyledEmailConfirmation>
                           Thank you, we'll get in touch soon!
