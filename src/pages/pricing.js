@@ -13,6 +13,7 @@ import {
   Header,
   StripeCheckoutForm,
   StroveButton,
+  TrialInfo,
 } from 'components'
 import { selectors } from 'state'
 
@@ -565,6 +566,11 @@ const PricingPage = () => {
                           Request demo
                         </button>
                       </EmailFormWrapper>
+                      <TrialInfo>
+                        <li>Free 14-day Demo</li>
+                        <li>No credit card needed</li>
+                        <li>No setup</li>
+                      </TrialInfo>
                       {emailSent && (
                         <StyledEmailConfirmation>
                           Thank you, we'll get in touch soon!

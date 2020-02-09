@@ -11,8 +11,7 @@ import { Formik, Form, Field } from 'formik'
 import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { GetStarted, Logos, TrialInfo } from 'components'
-import StroveButton from 'components/stroveButton.js'
+import { GetStarted, Logos, TrialInfo, StroveButton } from 'components'
 
 const validate = values => {
   let errors = {}
