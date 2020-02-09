@@ -26,6 +26,7 @@ import OldUserModal from './oldUserModal'
 import WithLazyLoader from './withLazyLoader'
 import FullScreenWrapper from './fullScreenWrapper'
 import MenuWrapper from './menuWrapper'
+import TrialInfo from './trialInfo'
 
 export {
   SmallCloud,
@@ -58,4 +59,5 @@ export {
   WithLazyLoader,
   FullScreenWrapper,
   MenuWrapper,
+  TrialInfo
 }

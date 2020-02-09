@@ -61,6 +61,7 @@ import {
   OrganizationName,
   StyledErrors,
   InviteFormWrapper,
+  TrialInfo
 } from './styled'
 
 const validate = values => {

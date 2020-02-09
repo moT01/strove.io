@@ -11,7 +11,7 @@ import { Formik, Form, Field } from 'formik'
 import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { GetStarted, Logos } from 'components'
+import { GetStarted, Logos, TrialInfo } from 'components'
 import StroveButton from 'components/stroveButton.js'
 
 const validate = values => {
@@ -345,6 +345,11 @@ const Banner = () => {
               letterSpacing="0.8px"
               onClick={() => setModalVisible(true)}
             />
+            <TrialInfo>
+              <li>Free demo</li>
+              <li>No credit card needed</li>
+              <li>No setup</li>
+            </TrialInfo>
             <StyledInfo>Or, if you're a corporate user:</StyledInfo>
             <Formik
               initialValues={{
