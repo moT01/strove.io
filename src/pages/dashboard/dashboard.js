@@ -16,7 +16,6 @@ import {
   SET_ADMIN,
   LEAVE_TEAM,
   DOWNGRADE_SUBSCRIPTION,
-  UPGRADE_SUBSCRIPTION,
 } from 'queries'
 import { selectors } from 'state'
 import {
