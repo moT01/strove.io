@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { ExternalLink } from 'components'
+import { ExternalLink, FullScreenWrapper } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
@@ -21,13 +21,6 @@ const MenuWrapper = styled.div`
 const LoginText = styled.span`
   font-weight: 500;
   font-size: 20px;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
 `
 
 const InvitationTitle = styled.div`
@@ -64,7 +57,7 @@ const FromEmailInvitation = () => {
   }
 
   return (
-    <Wrapper>
+    <FullScreenWrapper>
       <MenuWrapper invert>
         <InvitationTitle>
           You're invited to <b>{teamName}</b>
@@ -94,7 +87,7 @@ const FromEmailInvitation = () => {
           Your sign email is <b>{invitedEmail}</b>
         </InvitationDetails>
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 
