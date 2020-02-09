@@ -8,6 +8,8 @@ import { Icon } from 'antd'
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { persistor } from 'wrapper'
+
+import DropdownMenuWrapper from './dropdownMenuWrapper'
 import FullScreenLoader from '../fullScreenLoader'
 
 const FadeIn = keyframes`
@@ -64,21 +66,6 @@ const LoginButton = styled.button`
   > {
     vertical-align: bottom;
   }
-`
-
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: auto;
-  box-shadow: 0 12px 12px -15px ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-style: solid;
-  background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
-  position: relative;
 `
 
 const Option = styled.a`
@@ -211,7 +198,7 @@ const LoginDropdown = props => (
             <AuthText {...props}>Login</AuthText>
           </LoginButton>
           <DropdownWrapper hidden={!isOpen}>
-            <MenuWrapper>
+            <DropdownMenuWrapper>
               {loginOptions.map((item, index) => (
                 <Option
                   key={item.value}
@@ -222,7 +209,7 @@ const LoginDropdown = props => (
                   <OptionText>{item.label}</OptionText>
                 </Option>
               ))}
-            </MenuWrapper>
+            </DropdownMenuWrapper>
           </DropdownWrapper>
         </div>
       )}
@@ -256,7 +243,7 @@ const UserDropdown = props => {
               </StyledDropdown>
             </Wrapper>
             <DropdownWrapper hidden={!isOpen}>
-              <MenuWrapper>
+              <DropdownMenuWrapper>
                 <Option
                   isLast
                   onClick={() => {
@@ -269,7 +256,7 @@ const UserDropdown = props => {
                 >
                   <OptionText>Logout</OptionText>
                 </Option>
-              </MenuWrapper>
+              </DropdownMenuWrapper>
             </DropdownWrapper>
           </div>
         )}
