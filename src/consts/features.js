@@ -1,26 +1,26 @@
 export default [
   {
-    title: 'Run projects straight in the browser',
+    title: 'Collaborate straight from your browser',
     content: 'No setup needed',
     color: '#EB2F96',
     shadowColor: 'rgba(235,45,150,.12)',
     type: 'chrome',
   },
   {
-    title: 'Work with VSCode',
+    title: "Use world's most popular code editor - VSCode",
     content: 'You can even use your favorite extensions',
     color: '#0072ce',
     shadowColor: 'rgba(0, 114, 206, 0.12)',
   },
   {
-    title: 'Access your code anywhere',
+    title: 'All your software in one place',
     content: 'Log in to your account from any computer and code in the cloud',
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
     type: 'global',
   },
   {
-    title: 'Code in all major programming languages',
+    title: 'Use all major programming languages without setup',
     content:
       'You can even use a particular language version. Need Python 2.7.3 for chemistry? We got you covered!',
     color: '#722ED1',
@@ -28,7 +28,7 @@ export default [
     type: 'code',
   },
   {
-    title: "Don't lose time, one environment for the whole team",
+    title: 'Don\'t lose time, one environment for the whole team',
     content:
       'Once a project has been set up, any member can access it without needing to configure everything again',
     color: '#FAAD14',
