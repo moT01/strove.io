@@ -10,7 +10,6 @@ import { loginOptions } from 'consts'
 import { persistor } from 'wrapper'
 
 import DropdownMenuWrapper from './dropdownMenuWrapper'
-import FullScreenLoader from '../fullScreenLoader'
 
 const FadeIn = keyframes`
   0% {
@@ -265,7 +264,6 @@ const UserDropdown = props => {
 }
 
 const Auth = props => {
-  const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
   if (
@@ -274,7 +272,8 @@ const Auth = props => {
   ) {
     return null
   }
-  return !user.username && !isLoading ? (
+
+  return !user.username ? (
     <LoginDropdown {...props} />
   ) : (
     <UserDropdown user={user} {...props} />
