@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 
-import { NoRepoUrlInfo, PoweredBy, ExternalLink } from 'components'
+import {
+  NoRepoUrlInfo,
+  PoweredBy,
+  ExternalLink,
+  FullScreenWrapper,
+} from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getRepoUrl } from 'utils'
 
@@ -17,15 +22,6 @@ const MenuWrapper = styled.div`
 const LoginText = styled.span`
   font-weight: 500;
   font-size: 20px;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  word-break: initial;
 `
 
 const EmbedWrapper = () => {
@@ -59,7 +55,7 @@ const EmbedWrapper = () => {
   }
 
   return (
-    <Wrapper>
+    <FullScreenWrapper>
       <MenuWrapper>
         {repoUrl ? (
           <ExternalLink
@@ -75,7 +71,7 @@ const EmbedWrapper = () => {
         )}
         <PoweredBy />
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 
