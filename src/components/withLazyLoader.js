@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 
 import FullScreenLoader from './fullScreenLoader'
-import Wrapper from './wrapper'
+import Wrapper from './fullScreenWrapper'
 
 export default WrappedComponent => props => (
   <Suspense
