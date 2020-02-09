@@ -221,10 +221,9 @@ const UserDropdown = props => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
 
-  if (isLoading)
-    return (
-      <FullScreenLoader isFullscreen={false} height="30px" color="#ffffff" />
-    )
+  if (isLoading) {
+    return null
+  }
 
   return (
     <AuthWrapper>
