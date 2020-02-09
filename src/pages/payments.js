@@ -128,7 +128,7 @@ const Text = styled.div`
 `
 
 const BigText = styled(Text)`
-  margin: 10px 0;
+  margin: ${({ margin }) => margin || '10px 0'};
   font-size: 1.2rem;
   font-weight: 600;
 `
@@ -199,7 +199,7 @@ const Payments = () => {
 
   useEffect(() => {
     fetchPaymentInfo(organization)
-    setQuantity(organization.value?.users.length)
+    setQuantity(organization.value?.users?.length)
   }, [organization?.value])
 
   return (
@@ -213,7 +213,7 @@ const Payments = () => {
             {organizationOptions.length === 1 ? (
               <Text>
                 Organization name:
-                <BigText>{organizationOptions[0].label}</BigText>
+                <BigText margin="5px">{organizationOptions[0].label}</BigText>
               </Text>
             ) : (
               <>
