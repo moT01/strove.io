@@ -143,8 +143,8 @@ const OrganizationSelect = styled(StyledSelect)`
 const optionColor = 'rgba(185,185,185,0.65)'
 
 const subscriptionPlans = [
-  { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
-  { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
+  { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Paid monthly' },
+  { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Paid yearly' },
 ]
 
 const Payments = () => {
@@ -155,7 +155,7 @@ const Payments = () => {
   const [paymentInfo, setPaymentInfo] = useState()
   const [subscriptionPlan, setSubscriptionPlan] = useState({
     value: process.env.REACT_APP_MONTHLY_PLAN,
-    label: 'Monthly',
+    label: 'Paid monthly',
   })
   const [quantity, setQuantity] = useState(organization?.team?.length || 1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
@@ -392,12 +392,12 @@ const Payments = () => {
         <PaymentSummaryWrapper>
           <PaymentSummarySection>
             <PaymentSummaryHeader>
-              <WhiteText>Strove subsctiption</WhiteText>
+              <WhiteText>Strove subscription</WhiteText>
               {organization.value?.subscriptionStatus === 'active' ? (
                 <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
               ) : (
                 <SubscriptionsSelect
-                  defaultValue="Monthly"
+                  defaultValue="Paid Monthly"
                   value={subscriptionPlan}
                   onChange={plan => setSubscriptionPlan(plan)}
                   options={subscriptionPlans}
