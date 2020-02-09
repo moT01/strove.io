@@ -54,7 +54,6 @@ const CompanyInfoWrapper = styled(Wrapper)`
 `
 
 const PageWrapper = styled(Wrapper)`
-  width: 80%;
   min-height: calc(100vh - 64px);
   padding-top: 50px;
   flex-direction: row;
@@ -63,7 +62,6 @@ const PageWrapper = styled(Wrapper)`
 
 const PaymentInfoColum = styled(Wrapper)`
   align-items: flex-start;
-  width: 60%;
   padding: 0px 40px;
   margin: 0px 10px 0px 20px;
   /* border-radius: 5px;
