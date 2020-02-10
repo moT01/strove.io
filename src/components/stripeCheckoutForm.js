@@ -41,9 +41,7 @@ const StripeElementContainer = styled.div`
   margin: 10px 0px;
   padding: 8px;
   border-radius: 2px;
-  border-color: ${({ theme }) => theme.colors.c9};
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.colors.c9};
 `
 
 const StripeCvcContainer = styled(StripeElementContainer)`
@@ -98,6 +96,12 @@ const cardStyle = {
     color: 'red',
   },
 }
+
+const EmailField = styled(Field)`
+  padding: 8px;
+  border-radius: 2px;
+  border: 1px solid ${({ theme }) => theme.colors.c9};
+`
 
 const validate = values => {
   let errors = {}
@@ -261,14 +265,14 @@ const CheckoutForm = props => {
               }}
               validate={validate}
             >
-              {({ errors, touched, values }) => (
+              {({ errors, values }) => (
                 <>
                   <Form>
-                    <Field
+                    <EmailField
                       type="email"
                       name="email"
                       placeholder="Your Email"
-                    ></Field>
+                    ></EmailField>
                   </Form>
                   {props.editMode ? (
                     <StroveButton
