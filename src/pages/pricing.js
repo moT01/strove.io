@@ -220,7 +220,7 @@ const Button = styled.button`
   color: ${({ team, theme }) => (team ? theme.colors.c1 : theme.colors.c2)};
   border-radius: 4px;
   border-color: ${({ team, theme }) =>
-    team ? theme.colors.c2 : theme.colors.c1};
+    team ? theme.colors.c2 : theme.colors.c3};
   box-shadow: 0 11px 11px -15px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
 
@@ -254,7 +254,7 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   border-color: ${({ enterprise, theme }) =>
-    enterprise ? theme.colors.c3 : theme.colors.c1};
+    enterprise ? theme.colors.c3 : theme.colors.c3};
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
@@ -381,13 +381,13 @@ const CardTitle = styled(ImportantPricingInfo)`
 const Divider = styled.div`
   width: 100%;
   border-bottom: 1px solid
-    ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
+    ${({ blue, theme }) => (blue ? theme.colors.c3 : theme.colors.c2)};
 `
 
 const PricingHeader = styled(CardTitle)`
   padding: 60px 10px 20px;
   color: ${({ theme }) => theme.colors.c3};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c3};
   line-height: 1.1;
 `
 
