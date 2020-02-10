@@ -278,12 +278,12 @@ const CheckoutForm = props => {
                   {props.editMode ? (
                     <StroveButton
                       isPrimary
-                      isDisabled={
-                        !organizationId || errors.email || !values.email
-                      }
+                      isDisabled={!organizationId}
+                      fontSize="18px"
                       padding="10px"
-                      minWidth="250px"
-                      maxWidth="250px"
+                      fontWeight="600"
+                      minWidth="150px"
+                      maxWidth="150px"
                       margin="30px 0"
                       borderRadius="2px"
                       onClick={getSecret}
@@ -292,12 +292,12 @@ const CheckoutForm = props => {
                   ) : (
                     <StroveButton
                       isPrimary
-                      isDisabled={
-                        !organizationId || errors.email || !values.email
-                      }
+                      isDisabled={!organizationId}
+                      fontSize="18px"
                       padding="10px"
-                      minWidth="250px"
-                      maxWidth="250px"
+                      fontWeight="600"
+                      minWidth="150px"
+                      maxWidth="150px"
                       margin="30px 0"
                       borderRadius="2px"
                       onClick={submit}
