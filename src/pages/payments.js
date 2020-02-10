@@ -466,14 +466,16 @@ const Payments = () => {
                     Members <BoldText>{quantity}</BoldText>
                   </TextWithBorder>
                   <TextWithBorder>
-                    Single member price: ${subscriptionPlan.monthlyPrice}
+                    Single member price{' '}
+                    <BoldText>${subscriptionPlan.monthlyPrice}</BoldText>
                   </TextWithBorder>
                   <TextWithBorder>
-                    Number of months: {subscriptionPlan.monthsCount}
+                    Number of months{' '}
+                    <BoldText>{subscriptionPlan.monthsCount}</BoldText>
                   </TextWithBorder>
                   <Text>
                     ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
-                    {subscriptionPlan.monthsLabel} ={' '}
+                    {subscriptionPlan.monthsLabel}
                     <BoldText>
                       $
                       {quantity *
