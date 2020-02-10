@@ -281,9 +281,8 @@ const CheckoutForm = props => {
                       isDisabled={!organizationId}
                       fontSize="18px"
                       padding="10px"
-                      fontWeight="600"
-                      minWidth="150px"
-                      maxWidth="150px"
+                      minWidth="250px"
+                      maxWidth="250px"
                       margin="30px 0"
                       borderRadius="2px"
                       onClick={getSecret}
@@ -295,9 +294,8 @@ const CheckoutForm = props => {
                       isDisabled={!organizationId}
                       fontSize="18px"
                       padding="10px"
-                      fontWeight="600"
-                      minWidth="150px"
-                      maxWidth="150px"
+                      minWidth="250px"
+                      maxWidth="250px"
                       margin="30px 0"
                       borderRadius="2px"
                       onClick={submit}
