@@ -117,6 +117,8 @@ const Text = styled.div`
 const TextWithBorder = styled(Text)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.c22};
   width: 100%;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 `
 
 const BigText = styled(Text)`
