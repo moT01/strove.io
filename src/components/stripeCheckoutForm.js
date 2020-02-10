@@ -67,7 +67,6 @@ const VerticalDivider = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
   width: 100%;
   height: 100%;
 `
@@ -260,7 +259,7 @@ const CheckoutForm = props => {
               </StripeExpiryWrapper>
             </VerticalDivider>
 
-            <Text>Expiry date</Text>
+            <Text>Work email</Text>
             <Formik
               initialValues={{
                 email: '',
