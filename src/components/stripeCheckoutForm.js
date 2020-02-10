@@ -56,11 +56,12 @@ const StripeExpiryContainer = styled(StripeElementContainer)`
 
 const Text = styled.div`
   color: ${({ theme }) => theme.colors.c3};
-  font-size: 1rem;
+  font-size: 16px;
   margin: 0px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 600;
 `
 
 const VerticalDivider = styled.div`

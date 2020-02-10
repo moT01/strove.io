@@ -95,7 +95,7 @@ const PaymentSummaryInfo = styled(Wrapper)`
 `
 
 const Title = styled.div`
-  font-size: 1.4rem;
+  font-size: 22px;
   color: ${({ theme }) => theme.colors.c3};
   margin: 0 0 30px;
 `
