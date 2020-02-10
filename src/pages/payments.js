@@ -344,7 +344,6 @@ const Payments = () => {
                 margin="10px"
                 borderRadius="2px"
                 onClick={() => {
-                  console.log('TCL: Payments -> organization', organization)
                   dispatch(
                     mutation({
                       name: 'revertCancel',
@@ -482,7 +481,7 @@ const Payments = () => {
                   isPrimary
                   padding="5px"
                   minWidth="150px"
-                  maxWidth="150px"
+                  maxWidth="300px"
                   margin="10px"
                   borderRadius="2px"
                   onClick={() => {
@@ -492,12 +491,12 @@ const Payments = () => {
                         mutation: CHANGE_PLAN,
                         variables: {
                           organizationId: organization.value.id,
-                          newPlan: subscriptionPlan.value,
+                          newPlan: 'plan_GYjzUWz4PmzdMg',
                         },
                       })
                     )
                   }}
-                  text="Change plan"
+                  text="Upgrade to yearly plan"
                 />
               )}
             </PaymentSummaryInfo>
