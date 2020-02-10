@@ -423,8 +423,27 @@ const Payments = () => {
                     indicatorSeparator: styles => ({ styles, color: '#fff' }),
                     input: styles => ({ styles, color: '#fff' }),
                     placeholder: styles => ({ styles, color: '#fff' }),
-                    option: styles => ({ ...styles, color: '#fff' }),
-                    singleValue: styles => ({ ...styles, color: '#fff' }),
+                    option: styles => ({
+                      ...styles,
+                      color: '#fff',
+                      backgroundColor: '#0072ce',
+                      '&:hover': {
+                        backgroundColor: '#0072ce',
+                      },
+                      '&:active': {
+                        backgroundColor: '#0072ce',
+                      },
+                    }),
+                    singleValue: styles => ({
+                      ...styles,
+                      color: '#fff',
+                      '&:hover': {
+                        backgroundColor: '#0072ce',
+                      },
+                      '&:active': {
+                        backgroundColor: '#0072ce',
+                      },
+                    }),
                   }}
                 />
               )}
