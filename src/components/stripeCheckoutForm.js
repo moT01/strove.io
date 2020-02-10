@@ -275,11 +275,10 @@ const CheckoutForm = props => {
                       isDisabled={
                         !organizationId || errors.email || !values.email
                       }
-                      fontSize="0.8rem"
-                      padding="1px 3px"
-                      minWidth="80px"
-                      maxWidth="80px"
-                      margin="0px"
+                      padding="10px"
+                      minWidth="250px"
+                      maxWidth="250px"
+                      margin="30px 0"
                       borderRadius="2px"
                       onClick={getSecret}
                       text="Save info"
@@ -290,11 +289,10 @@ const CheckoutForm = props => {
                       isDisabled={
                         !organizationId || errors.email || !values.email
                       }
-                      fontSize="0.8rem"
-                      padding="1px 3px"
-                      minWidth="80px"
-                      maxWidth="80px"
-                      margin="0px"
+                      padding="10px"
+                      minWidth="250px"
+                      maxWidth="250px"
+                      margin="30px 0"
                       borderRadius="2px"
                       onClick={submit}
                       text="Purchase"
