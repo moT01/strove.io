@@ -122,10 +122,8 @@ const TextWithBorder = styled(Text)`
   justify-content: space-between;
 `
 
-const BigText = styled(Text)`
-  margin: ${({ margin }) => margin || '10px 0'};
-  font-size: 1.2rem;
-  font-weight: 600;
+const OrderPriceSum = styled(TextWithBorder)`
+  border: none;
 `
 
 const BoldText = styled(Text)`
@@ -473,7 +471,7 @@ const Payments = () => {
                     Number of months{' '}
                     <BoldText>{subscriptionPlan.monthsCount}</BoldText>
                   </TextWithBorder>
-                  <Text>
+                  <OrderPriceSum>
                     ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
                     {subscriptionPlan.monthsLabel}
                     <BoldText>
@@ -482,7 +480,7 @@ const Payments = () => {
                         subscriptionPlan.monthlyPrice *
                         subscriptionPlan.monthsCount}
                     </BoldText>
-                  </Text>
+                  </OrderPriceSum>
                 </>
               )}
               {organization.value?.subscriptionStatus === 'active' && (
