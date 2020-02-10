@@ -126,6 +126,11 @@ const Text = styled.div`
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 `
 
+const TextWithBorder = styled(Text)`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c22};
+  width: 100%;
+`
+
 const BigText = styled(Text)`
   margin: ${({ margin }) => margin || '10px 0'};
   font-size: 1.2rem;
@@ -464,18 +469,18 @@ const Payments = () => {
                     Number of months:{' '}
                     {subscriptionPlan.label === 'Yearly' ? '12' : '1'}
                   </Text>
-                  <Text>
-                    {quantity} users x{' '}
+                  <TextWithBorder>
                     {subscriptionPlan.label === 'Yearly'
                       ? '$40 x 12 months'
-                      : '$50'}{' '}
-                    ={' '}
-                    <BigText>
+                      : '$50'}
+                    {' x '}
+                    {quantity} users x ={' '}
+                    <BoldText>
                       {subscriptionPlan.label === 'Yearly'
                         ? `$${quantity * 40 * 12}`
                         : `$${quantity * 50}`}
-                    </BigText>
-                  </Text>
+                    </BoldText>
+                  </TextWithBorder>
                   <Text>Billed: {subscriptionPlan.label}</Text>
                 </>
               )}
