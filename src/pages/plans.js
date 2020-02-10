@@ -158,7 +158,7 @@ const subscriptionPlans = [
   },
 ]
 
-const Payments = () => {
+const Plans = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [editMode, setEditMode] = useState()
@@ -212,7 +212,7 @@ const Payments = () => {
 
   return (
     <>
-      <SEO title="Subscribe" />
+      <SEO title="Plans" />
       <Header />
       <PageWrapper>
         <PaymentInfoColumn>
@@ -534,4 +534,4 @@ const Payments = () => {
   )
 }
 
-export default memo(Payments)
+export default memo(Plans)

@@ -251,7 +251,7 @@ const UserDropdown = props => {
             </Wrapper>
             <DropdownWrapper hidden={!isOpen}>
               <DropdownMenuWrapper>
-                <LinkOption to="/app/payments">
+                <LinkOption to="/app/plans">
                   <OptionText>Settings</OptionText>
                 </LinkOption>
                 <Option
