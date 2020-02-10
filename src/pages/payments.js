@@ -119,6 +119,7 @@ const TextWithBorder = styled(Text)`
   width: 100%;
   padding-bottom: 15px;
   margin-bottom: 15px;
+  justify-content: space-between;
 `
 
 const BigText = styled(Text)`
@@ -461,7 +462,9 @@ const Payments = () => {
                   <TextWithBorder>
                     <b>Order summary</b>
                   </TextWithBorder>
-                  <TextWithBorder>Members: {quantity}</TextWithBorder>
+                  <TextWithBorder>
+                    Members <BoldText>{quantity}</BoldText>
+                  </TextWithBorder>
                   <TextWithBorder>
                     Single member price: ${subscriptionPlan.monthlyPrice}
                   </TextWithBorder>
