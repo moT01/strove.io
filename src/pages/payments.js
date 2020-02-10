@@ -428,7 +428,7 @@ const Payments = () => {
                       color: '#fff',
                       backgroundColor: '#0072ce',
                       '&:hover': {
-                        backgroundColor: '#0072ce',
+                        backgroundColor: '#0099de',
                       },
                       '&:active': {
                         backgroundColor: '#0072ce',
