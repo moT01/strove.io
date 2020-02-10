@@ -458,11 +458,17 @@ const Payments = () => {
             <PaymentSummaryInfo>
               {subscriptionPlan && (
                 <>
-                  <BigText>Order summary</BigText>
-                  <Text>Members: {quantity}</Text>
-                  <Text>Single member price: ${subscriptionPlan.monthlyPrice}</Text>
-                  <Text>Number of months: {subscriptionPlan.monthsCount}</Text>
                   <TextWithBorder>
+                    <b>Order summary</b>
+                  </TextWithBorder>
+                  <TextWithBorder>Members: {quantity}</TextWithBorder>
+                  <TextWithBorder>
+                    Single member price: ${subscriptionPlan.monthlyPrice}
+                  </TextWithBorder>
+                  <TextWithBorder>
+                    Number of months: {subscriptionPlan.monthsCount}
+                  </TextWithBorder>
+                  <Text>
                     ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
                     {subscriptionPlan.monthsLabel} ={' '}
                     <BoldText>
@@ -471,7 +477,7 @@ const Payments = () => {
                         subscriptionPlan.monthlyPrice *
                         subscriptionPlan.monthsCount}
                     </BoldText>
-                  </TextWithBorder>
+                  </Text>
                 </>
               )}
               {organization.value?.subscriptionStatus === 'active' && (
