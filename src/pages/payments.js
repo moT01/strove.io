@@ -145,11 +145,15 @@ const subscriptionPlans = [
     value: process.env.REACT_APP_MONTHLY_PLAN,
     monthsCount: 1,
     label: 'Monthly',
+    monthlyPrice: '50$',
+    monthsLabel: '1 month',
   },
   {
     value: process.env.REACT_APP_YEARLY_PLAN,
     monthsCount: 12,
     label: 'Yearly',
+    monthlyPrice: '40$',
+    monthsLabel: '12 months',
   },
 ]
 
@@ -454,20 +458,11 @@ const Payments = () => {
                 <>
                   <BigText>Order summary</BigText>
                   <Text>Members amount: {quantity}</Text>
-                  <Text>
-                    Single member price:{' '}
-                    {subscriptionPlan.label === 'Yearly' ? '$40' : '$50'}
-                  </Text>
-                  <Text>
-                    Number of months:{' '}
-                    {subscriptionPlan.label === 'Yearly' ? '12' : '1'}
-                  </Text>
+                  <Text>Single member price: {subscriptionPlan.price}</Text>
+                  <Text>Number of months: {subscriptionPlan.monthsCount}</Text>
                   <TextWithBorder>
-                    {subscriptionPlan.label === 'Yearly'
-                      ? '$40 x 12 months'
-                      : '$50'}
-                    {' x '}
-                    {quantity} users x ={' '}
+                    {subscriptionPlan.price} x {quantity} users x{' '}
+                    {subscriptionPlan.monthsLabel} ={' '}
                     <BoldText>
                       {subscriptionPlan.label === 'Yearly'
                         ? `$${quantity * 40 * 12}`
