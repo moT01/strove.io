@@ -286,14 +286,14 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-const Text = styled.div`
-  color: ${({ theme }) => theme.colors.c1};
-  font-size: 15px;
-  margin-bottom: 12px;
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-`
+// const Text = styled.div`
+//   color: ${({ theme }) => theme.colors.c1};
+//   font-size: 15px;
+//   margin-bottom: 12px;
+//   white-space: normal;
+//   text-overflow: wrap;
+//   overflow: visible;
+// `
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -359,11 +359,6 @@ const Price = styled(ImportantPricingInfo)`
 const PricingDetails = styled(ImportantPricingInfo)`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.c2};
-`
-
-const ButtonText = styled(ImportantPricingInfo)`
-  font-size: 16px;
-  cursor: pointer;
 `
 
 const PlanDesc = styled(Feature)`
