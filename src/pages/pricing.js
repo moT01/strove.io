@@ -253,12 +253,11 @@ const Card = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  border-color: ${({ enterprise, theme }) =>
-    enterprise ? theme.colors.c3 : theme.colors.c3};
+  border-color: ${({ enterprise, theme }) => theme.colors.c15};
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
-  box-shadow: 0 10px 10px -10px ${({ theme }) => theme.colors.c14};
+  box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22};
   width: 40%;
   margin: 0 20px;
   width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '40%')};
