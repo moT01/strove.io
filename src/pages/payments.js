@@ -80,8 +80,9 @@ const PaymentSummarySection = styled(Wrapper)`
   max-width: 400px;
   border-radius: 2px;
   border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
+  border-width: 1px solid ${({ theme }) => theme.colors.c1};
   border-style: solid;
+  box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
 const SubscriptionsSelect = styled(StyledSelect)`
@@ -395,7 +396,9 @@ const Payments = () => {
         <PaymentSummaryWrapper>
           <PaymentSummarySection>
             <PaymentSummaryHeader>
-              <WhiteText>Strove subscription</WhiteText>
+              <WhiteText>
+                <b>Strove subscription</b>
+              </WhiteText>
               {organization.value?.subscriptionStatus === 'active' ? (
                 <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
               ) : (
