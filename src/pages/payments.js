@@ -459,8 +459,8 @@ const Payments = () => {
               {subscriptionPlan && (
                 <>
                   <BigText>Order summary</BigText>
-                  <Text>Members amount: {quantity}</Text>
-                  <Text>Single member price: {subscriptionPlan.price}</Text>
+                  <Text>Members: {quantity}</Text>
+                  <Text>Single member price: ${subscriptionPlan.monthlyPrice}</Text>
                   <Text>Number of months: {subscriptionPlan.monthsCount}</Text>
                   <TextWithBorder>
                     ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
@@ -472,7 +472,6 @@ const Payments = () => {
                         subscriptionPlan.monthsCount}
                     </BoldText>
                   </TextWithBorder>
-                  <Text>Billed: {subscriptionPlan.label}</Text>
                 </>
               )}
               {organization.value?.subscriptionStatus === 'active' && (
