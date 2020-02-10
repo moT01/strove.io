@@ -416,6 +416,7 @@ const Payments = () => {
                       ...styles,
                       backgroundColor: '#0072ce',
                       borderStyle: 'none',
+                      boxShadow: 'none',
                     }),
                     menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
                     dropdownIndicator: styles => ({ styles, color: '#fff' }),
