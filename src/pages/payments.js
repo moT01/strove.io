@@ -1,18 +1,13 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
-import { isMobile } from 'react-device-detect'
-import { Formik, Form, Field } from 'formik'
 import PaymentIcon from 'react-payment-icons'
 
 import { selectors } from 'state'
 import {
-  GetStarted,
   StroveButton,
   SEO,
   Header,
-  Footer,
-  Modal,
 } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
