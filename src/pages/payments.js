@@ -4,11 +4,7 @@ import styled, { keyframes, css } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 
 import { selectors } from 'state'
-import {
-  StroveButton,
-  SEO,
-  Header,
-} from 'components'
+import { StroveButton, SEO, Header } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
 import {
@@ -74,9 +70,7 @@ const PaymentSummarySection = styled(Wrapper)`
   width: 100%;
   max-width: 400px;
   border-radius: 2px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px solid ${({ theme }) => theme.colors.c1};
-  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.colors.c15};
   box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
