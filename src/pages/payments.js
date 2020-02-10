@@ -461,7 +461,7 @@ const Payments = () => {
                   <Text>Single member price: {subscriptionPlan.price}</Text>
                   <Text>Number of months: {subscriptionPlan.monthsCount}</Text>
                   <TextWithBorder>
-                    {subscriptionPlan.monthlyPrice}$ x {quantity} users x{' '}
+                    ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
                     {subscriptionPlan.monthsLabel} ={' '}
                     <BoldText>
                       $
