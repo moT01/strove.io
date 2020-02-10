@@ -45,6 +45,7 @@ const SectionWrapper = styled(Wrapper)`
   width: 100%;
   align-items: flex-start;
   animation: ${FadeInAnimation} 0.2s ease-out;
+  margin-bottom: 30px;
 `
 
 const PageWrapper = styled(Wrapper)`
@@ -105,7 +106,7 @@ const PaymentSummaryInfo = styled(Wrapper)`
 const Title = styled.div`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.c3};
-  margin: 30px 0px;
+  margin: 0 0 30px;
 `
 
 const Text = styled.div`
