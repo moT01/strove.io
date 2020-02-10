@@ -98,6 +98,7 @@ const cardStyle = {
 }
 
 const EmailField = styled(Field)`
+  margin: 10px 0;
   padding: 8px;
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.colors.c9};
@@ -259,6 +260,7 @@ const CheckoutForm = props => {
               </StripeExpiryWrapper>
             </VerticalDivider>
 
+            <Text>Expiry date</Text>
             <Formik
               initialValues={{
                 email: '',
