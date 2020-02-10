@@ -59,6 +59,7 @@ const PaymentInfoColumn = styled(Wrapper)`
   align-items: flex-start;
   margin: 0px 10px 0px 20px;
   max-width: 800px;
+  margin-top: 100px;
 `
 
 const PaymentSummaryWrapper = styled(Wrapper)`
@@ -69,7 +70,7 @@ const PaymentSummaryWrapper = styled(Wrapper)`
 
 const PaymentSummarySection = styled(Wrapper)`
   align-items: flex-start;
-  top: 150px;
+  top: 164px;
   position: fixed;
   padding: 0;
   width: 100%;
