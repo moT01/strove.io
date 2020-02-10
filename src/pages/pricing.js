@@ -42,7 +42,8 @@ const CardsWrapper = styled.div`
 const EducationSectionWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 80%;
+  width: 100%;
+  max-width: 600px;
   flex-direction: column;
   align-items: center;
   margin: 20px 0;
@@ -257,7 +258,7 @@ const Card = styled.div`
   border-width: 1px;
   border-style: solid;
   padding: 50px 20px;
-  box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
+  box-shadow: 0 10px 10px -10px ${({ theme }) => theme.colors.c14};
   width: 40%;
   margin: 0 20px;
   width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '40%')};
