@@ -333,7 +333,7 @@ const PricingSection = styled.div`
 `
 
 const StyledText = styled.div`
-  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c3)};
   font-size: 15px;
   margin: 10px 0;
   text-align: justify;
@@ -349,7 +349,7 @@ const Feature = styled(StyledText)`
 const ImportantPricingInfo = styled.div`
   margin: 10px 0;
   font-size: 26px;
-  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c3)};
   font-weight: 500;
 `
 
@@ -371,7 +371,7 @@ const PlanDesc = styled(Feature)`
 `
 
 const CancelationInfo = styled(PlanDesc)`
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const CardTitle = styled(ImportantPricingInfo)`
@@ -386,7 +386,7 @@ const Divider = styled.div`
 
 const PricingHeader = styled(CardTitle)`
   padding: 60px 10px 20px;
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
   line-height: 1.1;
 `
