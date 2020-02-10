@@ -63,8 +63,8 @@ const PaymentSummaryWrapper = styled(Wrapper)`
 
 const PaymentSummarySection = styled(Wrapper)`
   align-items: flex-start;
-  top: 164px;
-  position: fixed;
+  top: 100px;
+  position: absolute;
   padding: 0;
   width: 100%;
   max-width: 400px;
