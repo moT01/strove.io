@@ -61,6 +61,8 @@ const PaymentInfoColumn = styled(Wrapper)`
   margin: 0px 10px 0px 20px;
   max-width: 800px;
   margin-top: 100px;
+  /* border: 1px solid ${({ theme }) => theme.colors.c15};
+  box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
 const PaymentSummaryWrapper = styled(Wrapper)`

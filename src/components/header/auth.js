@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from 'antd'
+import { Link } from 'react-router-dom'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
@@ -67,7 +68,7 @@ const LoginButton = styled.button`
   }
 `
 
-const Option = styled.a`
+const OptionStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -101,6 +102,14 @@ const Option = styled.a`
     fill: ${({ theme }) => theme.colors.c2};
     cursor: pointer;
   }
+`
+
+const Option = styled.a`
+  ${OptionStyles}
+`
+
+const LinkOption = styled(Link)`
+  ${OptionStyles}
 `
 
 const Inline = styled.div`
@@ -242,6 +251,9 @@ const UserDropdown = props => {
             </Wrapper>
             <DropdownWrapper hidden={!isOpen}>
               <DropdownMenuWrapper>
+                <LinkOption to="/app/payments">
+                  <OptionText>Settings</OptionText>
+                </LinkOption>
                 <Option
                   isLast
                   onClick={() => {

@@ -478,11 +478,9 @@ const PricingPage = () => {
                 margin="10px"
                 fontSize="1.4rem"
                 borderRadius="2px"
-                // onClick={() => handleAddMemberClick(team)}
               />
             </ButtonWrapper>
           </Card>
-          {/* <StripeCheckoutForm /> */}
           <Card enterprise team>
             <PricingSection>
               <PricingWrapper>
