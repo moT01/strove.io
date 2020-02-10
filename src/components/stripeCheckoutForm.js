@@ -84,7 +84,7 @@ const cardStyle = {
     fontSize: '16px',
     fontSmoothing: 'antialiased',
     ':-webkit-autofill': {
-      color: '#fce883',
+      color: '#0072ce',
     },
     '::placeholder': {
       color: 'rgba(185,185,185,0.65)',
@@ -94,8 +94,8 @@ const cardStyle = {
     },
   },
   invalid: {
-    iconColor: '#FFC7EE',
-    color: '#FFC7EE',
+    iconColor: 'red',
+    color: 'red',
   },
 }
 
