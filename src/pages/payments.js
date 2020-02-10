@@ -10,7 +10,6 @@ import StripeCheckoutForm from 'components/stripeCheckoutForm'
 import {
   CANCEL_SUBSCRIPTION,
   MY_ORGANIZATIONS,
-  RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
@@ -142,8 +141,16 @@ const OrganizationSelect = styled(StyledSelect)`
 const optionColor = 'rgba(185,185,185,0.65)'
 
 const subscriptionPlans = [
-  { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
-  { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
+  {
+    value: process.env.REACT_APP_MONTHLY_PLAN,
+    monthsCount: 1,
+    label: 'Monthly',
+  },
+  {
+    value: process.env.REACT_APP_YEARLY_PLAN,
+    monthsCount: 12,
+    label: 'Yearly',
+  },
 ]
 
 const Payments = () => {
@@ -152,10 +159,7 @@ const Payments = () => {
   const [editMode, setEditMode] = useState()
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
-  const [subscriptionPlan, setSubscriptionPlan] = useState({
-    value: process.env.REACT_APP_MONTHLY_PLAN,
-    label: 'Monthly',
-  })
+  const [subscriptionPlan, setSubscriptionPlan] = useState(subscriptionPlans[0])
   const [quantity, setQuantity] = useState(organization?.team?.length || 1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
