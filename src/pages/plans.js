@@ -1,25 +1,15 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
-import { isMobile } from 'react-device-detect'
-import { Formik, Form, Field } from 'formik'
 import PaymentIcon from 'react-payment-icons'
 
 import { selectors } from 'state'
-import {
-  GetStarted,
-  StroveButton,
-  SEO,
-  Header,
-  Footer,
-  Modal,
-} from 'components'
+import { StroveButton, SEO, Header } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
 import {
   CANCEL_SUBSCRIPTION,
   MY_ORGANIZATIONS,
-  RENEW_SUBSCRIPTION,
   REVERT_CANCEL,
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
@@ -73,15 +63,14 @@ const PaymentSummaryWrapper = styled(Wrapper)`
 
 const PaymentSummarySection = styled(Wrapper)`
   align-items: flex-start;
-  top: 164px;
-  position: fixed;
+  top: 100px;
+  position: absolute;
   padding: 0;
   width: 100%;
   max-width: 400px;
   border-radius: 2px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.colors.c15};
+  box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
 const SubscriptionsSelect = styled(StyledSelect)`
@@ -106,7 +95,7 @@ const PaymentSummaryInfo = styled(Wrapper)`
 `
 
 const Title = styled.div`
-  font-size: 1.4rem;
+  font-size: 22px;
   color: ${({ theme }) => theme.colors.c3};
   margin: 0 0 30px;
 `
@@ -125,10 +114,16 @@ const Text = styled.div`
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 `
 
-const BigText = styled(Text)`
-  margin: ${({ margin }) => margin || '10px 0'};
-  font-size: 1.2rem;
-  font-weight: 600;
+const TextWithBorder = styled(Text)`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c22};
+  width: 100%;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  justify-content: space-between;
+`
+
+const OrderPriceSum = styled(TextWithBorder)`
+  border: none;
 `
 
 const BoldText = styled(Text)`
@@ -147,20 +142,29 @@ const OrganizationSelect = styled(StyledSelect)`
 const optionColor = 'rgba(185,185,185,0.65)'
 
 const subscriptionPlans = [
-  { value: process.env.REACT_APP_MONTHLY_PLAN, label: 'Monthly' },
-  { value: process.env.REACT_APP_YEARLY_PLAN, label: 'Yearly' },
+  {
+    value: process.env.REACT_APP_MONTHLY_PLAN,
+    monthsCount: 1,
+    label: 'Monthly',
+    monthlyPrice: '50',
+    monthsLabel: '1 month',
+  },
+  {
+    value: process.env.REACT_APP_YEARLY_PLAN,
+    monthsCount: 12,
+    label: 'Yearly',
+    monthlyPrice: '40',
+    monthsLabel: '12 months',
+  },
 ]
 
-const Payments = () => {
+const Plans = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [editMode, setEditMode] = useState()
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
-  const [subscriptionPlan, setSubscriptionPlan] = useState({
-    value: process.env.REACT_APP_MONTHLY_PLAN,
-    label: 'Monthly',
-  })
+  const [subscriptionPlan, setSubscriptionPlan] = useState(subscriptionPlans[0])
   const [quantity, setQuantity] = useState(organization?.team?.length || 1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
@@ -208,7 +212,7 @@ const Payments = () => {
 
   return (
     <>
-      <SEO title="Subscribe" />
+      <SEO title="Plans" />
       <Header />
       <PageWrapper>
         <PaymentInfoColumn>
@@ -395,7 +399,9 @@ const Payments = () => {
         <PaymentSummaryWrapper>
           <PaymentSummarySection>
             <PaymentSummaryHeader>
-              <WhiteText>Strove subscription</WhiteText>
+              <WhiteText>
+                <b>Strove subscription</b>
+              </WhiteText>
               {organization.value?.subscriptionStatus === 'active' ? (
                 <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
               ) : (
@@ -410,14 +416,34 @@ const Payments = () => {
                       ...styles,
                       backgroundColor: '#0072ce',
                       borderStyle: 'none',
+                      boxShadow: 'none',
                     }),
                     menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
                     dropdownIndicator: styles => ({ styles, color: '#fff' }),
                     indicatorSeparator: styles => ({ styles, color: '#fff' }),
                     input: styles => ({ styles, color: '#fff' }),
                     placeholder: styles => ({ styles, color: '#fff' }),
-                    option: styles => ({ ...styles, color: '#fff' }),
-                    singleValue: styles => ({ ...styles, color: '#fff' }),
+                    option: styles => ({
+                      ...styles,
+                      color: '#fff',
+                      backgroundColor: '#0072ce',
+                      '&:hover': {
+                        backgroundColor: '#0099de',
+                      },
+                      '&:active': {
+                        backgroundColor: '#0072ce',
+                      },
+                    }),
+                    singleValue: styles => ({
+                      ...styles,
+                      color: '#fff',
+                      '&:hover': {
+                        backgroundColor: '#0072ce',
+                      },
+                      '&:active': {
+                        backgroundColor: '#0072ce',
+                      },
+                    }),
                   }}
                 />
               )}
@@ -451,29 +477,30 @@ const Payments = () => {
             <PaymentSummaryInfo>
               {subscriptionPlan && (
                 <>
-                  <BigText>Order summary</BigText>
-                  <Text>Members amount: {quantity}</Text>
-                  <Text>
-                    Single member price:{' '}
-                    {subscriptionPlan.label === 'Yearly' ? '$40' : '$50'}
-                  </Text>
-                  <Text>
-                    Number of months:{' '}
-                    {subscriptionPlan.label === 'Yearly' ? '12' : '1'}
-                  </Text>
-                  <Text>
-                    {quantity} users x{' '}
-                    {subscriptionPlan.label === 'Yearly'
-                      ? '$40 x 12 months'
-                      : '$50'}{' '}
-                    ={' '}
-                    <BigText>
-                      {subscriptionPlan.label === 'Yearly'
-                        ? `$${quantity * 40 * 12}`
-                        : `$${quantity * 50}`}
-                    </BigText>
-                  </Text>
-                  <Text>Billed: {subscriptionPlan.label}</Text>
+                  <TextWithBorder>
+                    <b>Order summary</b>
+                  </TextWithBorder>
+                  <TextWithBorder>
+                    Members <BoldText>{quantity}</BoldText>
+                  </TextWithBorder>
+                  <TextWithBorder>
+                    Single member price{' '}
+                    <BoldText>${subscriptionPlan.monthlyPrice}</BoldText>
+                  </TextWithBorder>
+                  <TextWithBorder>
+                    Number of months{' '}
+                    <BoldText>{subscriptionPlan.monthsCount}</BoldText>
+                  </TextWithBorder>
+                  <OrderPriceSum>
+                    ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
+                    {subscriptionPlan.monthsLabel}
+                    <BoldText>
+                      $
+                      {quantity *
+                        subscriptionPlan.monthlyPrice *
+                        subscriptionPlan.monthsCount}
+                    </BoldText>
+                  </OrderPriceSum>
                 </>
               )}
               {organization.value?.subscriptionStatus === 'active' && (
@@ -507,4 +534,4 @@ const Payments = () => {
   )
 }
 
-export default memo(Payments)
+export default memo(Plans)

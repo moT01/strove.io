@@ -41,9 +41,7 @@ const StripeElementContainer = styled.div`
   margin: 10px 0px;
   padding: 8px;
   border-radius: 2px;
-  border-color: ${({ theme }) => theme.colors.c9};
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid ${({ theme }) => theme.colors.c9};
 `
 
 const StripeCvcContainer = styled(StripeElementContainer)`
@@ -56,11 +54,12 @@ const StripeExpiryContainer = styled(StripeElementContainer)`
 
 const Text = styled.div`
   color: ${({ theme }) => theme.colors.c3};
-  font-size: 1rem;
+  font-size: 16px;
   margin: 0px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 600;
 `
 
 const VerticalDivider = styled.div`
@@ -68,7 +67,6 @@ const VerticalDivider = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
   width: 100%;
   height: 100%;
 `
@@ -83,7 +81,7 @@ const cardStyle = {
     fontSize: '16px',
     fontSmoothing: 'antialiased',
     ':-webkit-autofill': {
-      color: '#fce883',
+      color: '#0072ce',
     },
     '::placeholder': {
       color: 'rgba(185,185,185,0.65)',
@@ -93,10 +91,17 @@ const cardStyle = {
     },
   },
   invalid: {
-    iconColor: '#FFC7EE',
-    color: '#FFC7EE',
+    iconColor: 'red',
+    color: 'red',
   },
 }
+
+const EmailField = styled(Field)`
+  margin: 10px 0;
+  padding: 8px;
+  border-radius: 2px;
+  border: 1px solid ${({ theme }) => theme.colors.c9};
+`
 
 const validate = values => {
   let errors = {}
@@ -254,32 +259,31 @@ const CheckoutForm = props => {
               </StripeExpiryWrapper>
             </VerticalDivider>
 
+            <Text>Work email</Text>
             <Formik
               initialValues={{
                 email: '',
               }}
               validate={validate}
             >
-              {({ errors, touched, values }) => (
+              {({ errors, values }) => (
                 <>
                   <Form>
-                    <Field
+                    <EmailField
                       type="email"
                       name="email"
                       placeholder="Your Email"
-                    ></Field>
+                    ></EmailField>
                   </Form>
                   {props.editMode ? (
                     <StroveButton
                       isPrimary
-                      isDisabled={
-                        !organizationId || errors.email || !values.email
-                      }
-                      fontSize="0.8rem"
-                      padding="1px 3px"
-                      minWidth="80px"
-                      maxWidth="80px"
-                      margin="0px"
+                      isDisabled={!organizationId}
+                      fontSize="18px"
+                      padding="10px"
+                      minWidth="250px"
+                      maxWidth="250px"
+                      margin="30px 0"
                       borderRadius="2px"
                       onClick={getSecret}
                       text="Save info"
@@ -287,14 +291,12 @@ const CheckoutForm = props => {
                   ) : (
                     <StroveButton
                       isPrimary
-                      isDisabled={
-                        !organizationId || errors.email || !values.email
-                      }
-                      fontSize="0.8rem"
-                      padding="1px 3px"
-                      minWidth="80px"
-                      maxWidth="80px"
-                      margin="0px"
+                      isDisabled={!organizationId}
+                      fontSize="18px"
+                      padding="10px"
+                      minWidth="250px"
+                      maxWidth="250px"
+                      margin="30px 0"
                       borderRadius="2px"
                       onClick={submit}
                       text="Purchase"

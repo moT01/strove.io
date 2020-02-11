@@ -17,7 +17,7 @@ const Embed = WithLazyLoader(lazy(() => import('pages/embed')))
 const RunProject = WithLazyLoader(lazy(() => import('pages/runProject')))
 const Editor = WithLazyLoader(lazy(() => import('pages/editor')))
 const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
-const Payments = WithLazyLoader(lazy(() => import('pages/payments')))
+const Plans = WithLazyLoader(lazy(() => import('pages/plans')))
 const FromEmailInvitation = WithLazyLoader(
   lazy(() => import('pages/fromEmailInvitation'))
 )
@@ -40,7 +40,7 @@ const Strove = () => (
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
-      <PrivateRoute path="/app/payments" component={Payments} />
+      <PrivateRoute path="/app/plans" component={Plans} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
