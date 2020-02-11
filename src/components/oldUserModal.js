@@ -33,7 +33,7 @@ const OldUserModal = () => {
       width={isMobile ? '70vw' : '30vw'}
     >
       It seems your account has been created before important update and is
-      outdated. Please relog to update your account.
+      outdated. Please log in again to update your account.
       <StroveButton
         isPrimary
         padding="5px"
