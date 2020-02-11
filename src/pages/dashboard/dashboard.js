@@ -638,7 +638,6 @@ const Dashboard = ({ history }) => {
       ),
       buttonLabel: 'Set team leader',
       onSubmit: () => {
-        console.log('NewOwner', newOwner)
         dispatch(
           mutation({
             name: 'setAdmin',

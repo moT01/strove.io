@@ -2,9 +2,10 @@ import React, { memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
+import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
-import { StroveButton, SEO, Header } from 'components'
+import { StroveButton, SEO, Header, Modal } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
 import {
@@ -13,6 +14,7 @@ import {
   REVERT_CANCEL,
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
+  RENEW_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
 
@@ -122,6 +124,13 @@ const TextWithBorder = styled(Text)`
   justify-content: space-between;
 `
 
+const ModalText = styled(Text)`
+  white-space: normal;
+  text-overflow: wrap;
+  overflow: visible;
+  word-break: break-word;
+`
+
 const OrderPriceSum = styled(TextWithBorder)`
   border: none;
 `
@@ -133,6 +142,13 @@ const BoldText = styled(Text)`
 
 const WhiteText = styled(Text)`
   color: ${({ theme }) => theme.colors.c2};
+`
+
+const ModalButton = styled(StroveButton)`
+  animation: ${FadeInAnimation} 0.2s ease-out;
+  border-radius: 2px;
+  max-width: 150px;
+  padding: 5px;
 `
 
 const OrganizationSelect = styled(StyledSelect)`
@@ -158,12 +174,20 @@ const subscriptionPlans = [
   },
 ]
 
+const emptyWarningModalContent = {
+  visible: false,
+  content: null,
+  onSubmit: null,
+  buttonLabel: '',
+}
+
 const Plans = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [editMode, setEditMode] = useState()
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
+  const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [subscriptionPlan, setSubscriptionPlan] = useState(subscriptionPlans[0])
   const [quantity, setQuantity] = useState(organization?.team?.length || 1)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
@@ -173,6 +197,10 @@ const Plans = () => {
       value: organization,
       label: organization.name,
     }))
+
+  const closeWarningModal = () => {
+    setWarningModal(emptyWarningModalContent)
+  }
 
   const updateOrganizations = () => {
     dispatch(
@@ -340,51 +368,72 @@ const Plans = () => {
                 )}
               </>
             ) : organization.value.subscriptionStatus === 'canceled' ? (
-              <StroveButton
-                isPrimary
-                padding="5px"
-                minWidth="150px"
-                maxWidth="300px"
-                margin="10px"
-                borderRadius="2px"
-                onClick={() => {
-                  dispatch(
-                    mutation({
-                      name: 'revertCancel',
-                      mutation: REVERT_CANCEL,
-                      variables: {
-                        organizationId: organization.value.id,
-                      },
-                      onSuccess: updateOrganizations(),
-                    })
-                  )
-                }}
-                text="Revert subscription cancel"
-              />
+              <>
+                <Title>2. Subscription information</Title>
+                <Text>Subscription status: canceled</Text>
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="300px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() => {
+                    dispatch(
+                      mutation({
+                        name: 'revertCancel',
+                        mutation: REVERT_CANCEL,
+                        variables: {
+                          organizationId: organization.value.id,
+                        },
+                        onSuccess: updateOrganizations(),
+                      })
+                    )
+                  }}
+                  text="Revert subscription cancel"
+                />
+              </>
+            ) : organization.value.subscriptionStatus === 'inactive' ? (
+              <>
+                <Title>2. Payment information</Title>
+                <Text>Your subscription has ended.</Text>
+                <Text>
+                  You can renew the subscription with your previous card.
+                </Text>
+                <Text>
+                  {paymentInfo && (
+                    <PaymentIcon
+                      id={paymentInfo.card}
+                      style={{ height: '1rem', margin: ' 0px 10px 0px 0px' }}
+                    />
+                  )}
+                  **** **** **** {paymentInfo?.last4}
+                </Text>
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  minWidth="150px"
+                  maxWidth="150px"
+                  margin="10px"
+                  borderRadius="2px"
+                  onClick={() =>
+                    dispatch(
+                      mutation({
+                        name: 'renewSubscription',
+                        mutation: RENEW_SUBSCRIPTION,
+                        variables: {
+                          organizationId: organization.value.id,
+                          plan: subscriptionPlan.value,
+                          quantity: quantity,
+                        },
+                        onSuccess: updateOrganizations(),
+                      })
+                    )
+                  }
+                  text="Renew subscription"
+                />
+              </>
             ) : (
-              //   <StroveButton
-              //   isPrimary
-              //   padding="5px"
-              //   minWidth="150px"
-              //   maxWidth="150px"
-              //   margin="10px"
-              //   borderRadius="2px"
-              //   onClick={() =>
-              //     dispatch(
-              //       mutation({
-              //         name: 'renewSubscription',
-              //         mutation: RENEW_SUBSCRIPTION,
-              //         variables: {
-              //           organizationId: organization.value.id,
-              //           plan: subscriptionPlan.value,
-              //           quantity: quantity,
-              //         },
-              //         onSuccess: updateOrganizations(),
-              //       })
-              //     )
-              //   }
-              //   text="Renew subscription"
-              // />
               <SectionWrapper>
                 <Title>2. Payment method</Title>
                 <StripeCheckoutForm
@@ -512,16 +561,29 @@ const Plans = () => {
                   margin="10px"
                   borderRadius="2px"
                   onClick={() => {
-                    dispatch(
-                      mutation({
-                        name: 'changePlan',
-                        mutation: CHANGE_PLAN,
-                        variables: {
-                          organizationId: organization.value.id,
-                          newPlan: 'plan_GYjzUWz4PmzdMg',
-                        },
-                      })
-                    )
+                    setWarningModal({
+                      visible: true,
+                      content: (
+                        <ModalText>
+                          Are you sure you want to upgrade your subscription to
+                          yearly plan?
+                        </ModalText>
+                      ),
+                      buttonLabel: 'Upgrade',
+                      onSubmit: () => {
+                        dispatch(
+                          mutation({
+                            name: 'changePlan',
+                            mutation: CHANGE_PLAN,
+                            variables: {
+                              organizationId: organization.value.id,
+                              newPlan: 'plan_GYjzUWz4PmzdMg',
+                            },
+                            onSuccess: () => updateOrganizations(),
+                          })
+                        )
+                      },
+                    })
                   }}
                   text="Upgrade to yearly plan"
                 />
@@ -530,6 +592,32 @@ const Plans = () => {
           </PaymentSummarySection>
         </PaymentSummaryWrapper>
       </PageWrapper>
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '30vh' : '20vh'}
+        isOpen={warningModal.visible}
+        onRequestClose={() => setWarningModal(emptyWarningModalContent)}
+        contentLabel="Warning"
+        ariaHideApp={false}
+      >
+        {warningModal.content}
+        {warningModal.buttonLabel && (
+          <ModalButton
+            isPrimary
+            onClick={warningModal.onSubmit}
+            text={warningModal.buttonLabel}
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
+        <ModalButton
+          onClick={closeWarningModal}
+          text="Close"
+          padding="5px"
+          maxWidth="150px"
+        />
+      </Modal>
     </>
   )
 }
