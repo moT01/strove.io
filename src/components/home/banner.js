@@ -236,7 +236,7 @@ const StyledH1 = styled.h1`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.c3};
   font-weight: 700;
-  font-size: 50px;
+  font-size: 38px;
 `
 
 const StyledQueueAnim = styled(QueueAnim)`
@@ -327,7 +327,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding="50px">
+      <StyledSectionWrapper padding={isMobileOnly ? '20px' : '50px'}>
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Cloud alternative for software development</StyledH1>
           <StyledProductDescription>
@@ -409,13 +409,17 @@ const Banner = () => {
             </Formik>
           </ButtonsWrapper>
         </StyledQueueAnim>
-        <img
-          src={require('assets/illustration.png')}
-          style={{ margin: '0 0 0 40px' }}
-          alt="illustration"
-          width="50%"
-          height="50%"
-        />
+        {!isMobileOnly && (
+          <img
+            src={require('assets/illustration.png')}
+            style={{
+              margin: '0 0 0 40px',
+            }}
+            alt="illustration"
+            width="50%"
+            height="50%"
+          />
+        )}
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
