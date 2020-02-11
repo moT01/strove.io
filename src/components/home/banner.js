@@ -282,7 +282,6 @@ const StyledGrid = styled.div`
   display: grid;
   grid-gap: 10px;
   background-color: ${({ theme }) => theme.colors.c3};
-  padding: 20px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -292,9 +291,8 @@ const StyledGrid = styled.div`
 `
 
 const StyledCell = styled.div`
-  color: #fff;
-  border-radius: 5px;
-  padding: 20px;
+  color: ${({ theme }) => theme.colors.c2};
+  margin: 20px;
 `
 
 const IconContainer = styled.div`
