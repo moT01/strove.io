@@ -31,10 +31,9 @@ const OldUserModal = () => {
       contentLabel="Old user"
       ariaHideApp={false}
       width={isMobile ? '70vw' : '30vw'}
-      minWidth={isMobile ? '70vw' : '30vw'}
     >
       It seems your account has been created before important update and is
-      outdate. Please relog to update your account.
+      outdated. Please relog to update your account.
       <StroveButton
         isPrimary
         padding="5px"
