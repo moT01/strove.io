@@ -364,6 +364,7 @@ const Plans = () => {
                     quantity={quantity}
                     plan={subscriptionPlan.value}
                     editMode={editMode}
+                    setEditMode={setEditMode}
                   />
                 )}
               </>

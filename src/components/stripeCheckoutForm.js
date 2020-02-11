@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import {
-  CardElement,
   injectStripe,
   Elements,
   CardNumberElement,
@@ -116,7 +115,6 @@ const validate = values => {
 }
 
 const CheckoutForm = props => {
-  console.log('TCL: props', props)
   const [cardNumber, setCardNumber] = useState()
   const [userEmail, setUserEmail] = useState()
   const [error, setError] = useState(false)
@@ -124,7 +122,6 @@ const CheckoutForm = props => {
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
   const organizationId = props.organization?.id
-  console.log('TCL: organizationId', organizationId)
 
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
@@ -177,7 +174,6 @@ const CheckoutForm = props => {
 
   // This starts the flow for getting new subscription
   const submit = async event => {
-    console.log('TCL: event', event)
     const { paymentMethod, error } = await props.stripe.createPaymentMethod({
       type: 'card',
       card: cardNumber,
@@ -198,7 +194,7 @@ const CheckoutForm = props => {
         variables: {
           paymentMethod: paymentMethod.id,
           plan: props.plan,
-          name: 'John Cena',
+          name: user.name,
           email: 'mateusz@strove.io',
           organizationId,
         },
@@ -276,24 +272,38 @@ const CheckoutForm = props => {
                     ></EmailField>
                   </Form>
                   {props.editMode ? (
-                    <StroveButton
-                      isPrimary
-                      isDisabled={!organizationId}
-                      fontSize="18px"
-                      padding="10px"
-                      minWidth="250px"
-                      maxWidth="250px"
-                      margin="30px 0"
-                      borderRadius="2px"
-                      onClick={getSecret}
-                      text="Save info"
-                    />
+                    <VerticalDivider>
+                      <StroveButton
+                        isPrimary
+                        isDisabled={!organizationId}
+                        // fontSize="18px"
+                        padding="5px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="20px 10px"
+                        borderRadius="2px"
+                        onClick={getSecret}
+                        text="Save"
+                      />
+                      <StroveButton
+                        // isPrimary
+                        isDisabled={!organizationId}
+                        // fontSize="18px"
+                        padding="5px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="20px 10px"
+                        borderRadius="2px"
+                        onClick={() => props.setEditMode(false)}
+                        text="Cancel"
+                      />
+                    </VerticalDivider>
                   ) : (
                     <StroveButton
                       isPrimary
                       isDisabled={!organizationId}
                       fontSize="18px"
-                      padding="10px"
+                      padding="5px"
                       minWidth="250px"
                       maxWidth="250px"
                       margin="30px 0"
@@ -324,13 +334,14 @@ const CheckoutForm = props => {
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default ({ organization, quantity, plan, editMode }) => (
+export default ({ organization, quantity, plan, editMode, setEditMode }) => (
   <Elements>
     <FormWithStripe
       organization={organization}
       quantity={quantity}
       plan={plan}
       editMode={editMode}
+      setEditMode={setEditMode}
     />
   </Elements>
 )
