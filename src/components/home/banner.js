@@ -150,7 +150,7 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin: 20px;
+  margin: 20px 0;
   font-size: 34px;
 `
 
@@ -274,7 +274,7 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   min-height: ${({ isMobile }) => (isMobile ? '150px' : '100px')};
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 20px 20px 0;
   max-width: 800px;
 `
 
