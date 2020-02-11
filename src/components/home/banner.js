@@ -150,7 +150,7 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin: 20px;
+  margin: 20px 0;
   font-size: 34px;
 `
 
@@ -236,7 +236,7 @@ const StyledH1 = styled.h1`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.c3};
   font-weight: 700;
-  font-size: 50px;
+  font-size: 38px;
 `
 
 const StyledQueueAnim = styled(QueueAnim)`
@@ -274,7 +274,7 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   min-height: ${({ isMobile }) => (isMobile ? '150px' : '100px')};
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 20px 20px 0;
   max-width: 800px;
 `
 
@@ -282,7 +282,6 @@ const StyledGrid = styled.div`
   display: grid;
   grid-gap: 10px;
   background-color: ${({ theme }) => theme.colors.c3};
-  padding: 20px;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -292,9 +291,8 @@ const StyledGrid = styled.div`
 `
 
 const StyledCell = styled.div`
-  color: #fff;
-  border-radius: 5px;
-  padding: 20px;
+  color: ${({ theme }) => theme.colors.c2};
+  margin: 20px;
 `
 
 const IconContainer = styled.div`
@@ -327,7 +325,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding="20px">
+      <StyledSectionWrapper padding={isMobileOnly ? '20px' : '50px'}>
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Cloud alternative for software development</StyledH1>
           <StyledProductDescription>
@@ -367,7 +365,7 @@ const Banner = () => {
                 )
               }}
             >
-              {({ errors, touched, values }) => (
+              {({ errors, values }) => (
                 <StyledForm>
                   <EmailFormWrapper
                     disabled={errors.email || !values.email}
@@ -409,6 +407,17 @@ const Banner = () => {
             </Formik>
           </ButtonsWrapper>
         </StyledQueueAnim>
+        {!isMobileOnly && (
+          <img
+            src={require('assets/illustration.png')}
+            style={{
+              margin: '0 0 0 40px',
+            }}
+            alt="illustration"
+            width="50%"
+            height="50%"
+          />
+        )}
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
