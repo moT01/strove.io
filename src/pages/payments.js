@@ -340,7 +340,7 @@ const Payments = () => {
                 isPrimary
                 padding="5px"
                 minWidth="150px"
-                maxWidth="150px"
+                maxWidth="300px"
                 margin="10px"
                 borderRadius="2px"
                 onClick={() => {
