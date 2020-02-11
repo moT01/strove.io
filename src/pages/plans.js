@@ -318,18 +318,28 @@ const Plans = () => {
                     maxWidth="150px"
                     margin="10px"
                     borderRadius="2px"
-                    onClick={() =>
-                      dispatch(
-                        mutation({
-                          name: 'cancelSubscription',
-                          mutation: CANCEL_SUBSCRIPTION,
-                          variables: {
-                            organizationId: organization.value.id,
-                          },
-                          onSuccess: updateOrganizations(),
-                        })
-                      )
-                    }
+                    onClick={() => {
+                      setWarningModal({
+                        visible: true,
+                        content: (
+                          <ModalText>
+                            Are you sure you want to cancel your subscription?
+                          </ModalText>
+                        ),
+                        buttonLabel: 'Cancel subscription',
+                        onSubmit: () =>
+                          dispatch(
+                            mutation({
+                              name: 'cancelSubscription',
+                              mutation: CANCEL_SUBSCRIPTION,
+                              variables: {
+                                organizationId: organization.value.id,
+                              },
+                              onSuccess: updateOrganizations(),
+                            })
+                          ),
+                      })
+                    }}
                     text="Cancel subscription"
                   />
                   <StroveButton
@@ -378,7 +388,7 @@ const Plans = () => {
                       })
                     )
                   }}
-                  text="Revert subscription cancel"
+                  text="Resubscribe"
                 />
               </>
             ) : organization.value.subscriptionStatus === 'inactive' ? (
