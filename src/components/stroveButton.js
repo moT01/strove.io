@@ -89,61 +89,7 @@ const LinkButton = styled(Link)`
 `
 
 const Button = styled.button`
-  font-size: ${({ fontSize }) => fontSize || '14px'};
-  font-weight: ${props => (props.fontWeight ? props.fontWeight : '400')};
-  line-height: ${props => (props.lineHeight ? props.lineHeight : 'inherit')};
-  letter-spacing: ${props =>
-    props.letterSpacing ? props.letterSpacing : 'normal'};
-  height: ${props => (props.height ? props.height : 'auto')};
-  min-width: ${props => (props.minWidth ? props.minWidth : '70px')};
-  max-width: ${props => (props.maxWidth ? props.maxWidth : 'none')};
-  width: ${props => (props.width ? props.width : '100%')};
-  display: flex;
-  flex-direction: row;
-  margin: ${props => (props.margin ? props.margin : '5px')};
-  padding: ${props => (props.padding ? props.padding : '10px 30px')};
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: ${({ primary, theme, isDelete, isDashboard }) =>
-    (primary && theme.colors.c2) ||
-    (isDelete && theme.colors.c2) ||
-    (isDashboard && theme.colors.c2) ||
-    theme.colors.c1};
-  background-color: ${({ theme, primary, isDelete, isDashboard }) =>
-    (primary && theme.colors.c1) ||
-    (isDelete && theme.colors.c23) ||
-    (isDashboard && theme.colors.c21) ||
-    theme.colors.c2};
-  border-width: 1px;
-  border-style: solid;
-  border-radius: ${({ borderRadius }) => borderRadius || '5px'};
-  border-color: ${({ theme, isDelete, isDashboard }) =>
-    (isDelete && theme.colors.c23) ||
-    (isDashboard && theme.colors.c21) ||
-    theme.colors.c1};
-  box-shadow: 0 10px 10px -15px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
-  text-decoration: none;
-  transition: all 0.2s ease;
-  #animation: ${FadeIn} 0, 5s ease-out;
-  opacity: 0.9;
-  :focus {
-    outline: 0;
-  }
-  &:disabled {
-    opacity: 0.4;
-  }
-  ${props =>
-    !props.disabled &&
-    css`
-      #animation: ${ButtonFadeIn} 1s ease-out;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-        box-shadow: 0 12px 12px -13px ${({ theme, isDashboard, isDelete }) => (isDashboard && theme.colors.c21) || (isDelete && theme.colors.c23) || theme.colors.c1};
-        transform: translateY(-1px);
-      }
-    `}
+  ${sharedStyles}
 `
 
 const FormButton = styled.button`

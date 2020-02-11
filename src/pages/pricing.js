@@ -477,7 +477,7 @@ const PricingPage = () => {
                 maxWidth="250px"
                 margin="10px"
                 fontSize="1.4rem"
-                borderRadius="2px"
+                borderRadius="5px"
               />
             </ButtonWrapper>
           </Card>
