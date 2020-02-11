@@ -57,6 +57,14 @@ const PaymentInfoColumn = styled(Wrapper)`
   box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
+const VerticalDivider = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`
+
 const PaymentSummaryWrapper = styled(Wrapper)`
   position: relative;
   width: 100%;
@@ -302,62 +310,41 @@ const Plans = () => {
                   )}
                   **** **** **** {paymentInfo?.last4}
                 </Text>
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() =>
-                    dispatch(
-                      mutation({
-                        name: 'cancelSubscription',
-                        mutation: CANCEL_SUBSCRIPTION,
-                        variables: {
-                          organizationId: organization.value.id,
-                        },
-                        onSuccess: updateOrganizations(),
-                      })
-                    )
-                  }
-                  text="Cancel subscription"
-                />
-                {/* <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    console.log('TCL: Payments -> organization', organization)
-                    dispatch(
-                      mutation({
-                        name: 'upgradeSubscription',
-                        mutation: UPGRADE_SUBSCRIPTION,
-                        variables: {
-                          organizationId: organization.value.id,
-                          quantity: 560,
-                        },
-                        onSuccess: updateOrganizations(),
-                      })
-                    )
-                  }}
-                  text="Upgrade subscription"
-                /> */}
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    setEditMode(true)
-                  }}
-                  text="Edit payment info"
-                />
+                <VerticalDivider>
+                  <StroveButton
+                    isPrimary
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="150px"
+                    margin="10px"
+                    borderRadius="2px"
+                    onClick={() =>
+                      dispatch(
+                        mutation({
+                          name: 'cancelSubscription',
+                          mutation: CANCEL_SUBSCRIPTION,
+                          variables: {
+                            organizationId: organization.value.id,
+                          },
+                          onSuccess: updateOrganizations(),
+                        })
+                      )
+                    }
+                    text="Cancel subscription"
+                  />
+                  <StroveButton
+                    isPrimary
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="150px"
+                    margin="10px"
+                    borderRadius="2px"
+                    onClick={() => {
+                      setEditMode(true)
+                    }}
+                    text="Edit payment info"
+                  />
+                </VerticalDivider>
                 {editMode && (
                   <StripeCheckoutForm
                     organization={organization.value}
