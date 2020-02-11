@@ -259,10 +259,10 @@ const CheckoutForm = props => {
               </StripeExpiryWrapper>
             </VerticalDivider>
 
-            <Text>Work email</Text>
+            <Text>Work email (optional)</Text>
             <Formik
               initialValues={{
-                email: '',
+                email: user.email,
               }}
               validate={validate}
             >
