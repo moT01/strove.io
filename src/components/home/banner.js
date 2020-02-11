@@ -327,7 +327,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding="20px">
+      <StyledSectionWrapper padding="50px">
         <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Cloud alternative for software development</StyledH1>
           <StyledProductDescription>
@@ -367,7 +367,7 @@ const Banner = () => {
                 )
               }}
             >
-              {({ errors, touched, values }) => (
+              {({ errors, values }) => (
                 <StyledForm>
                   <EmailFormWrapper
                     disabled={errors.email || !values.email}
@@ -409,6 +409,13 @@ const Banner = () => {
             </Formik>
           </ButtonsWrapper>
         </StyledQueueAnim>
+        <img
+          src={require('assets/illustration.png')}
+          style={{ margin: '0 0 0 40px' }}
+          alt="illustration"
+          width="50%"
+          height="50%"
+        />
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
