@@ -100,7 +100,7 @@ const PaymentSummaryHeader = styled(Wrapper)`
 const PaymentSummaryInfo = styled(Wrapper)`
   height: 100%;
   width: 100%;
-  align-items: flex-start;
+  align-items: center;
   padding: 20px;
 `
 
