@@ -114,7 +114,7 @@ const EmailFormWrapper = styled.div`
 const StyledFormWrapper = styled.div`
   max-width: 480px;
   align-self: center;
-  margin: auto;
+  margin: 20px;
 `
 
 const StyledAnchor = styled.a`
@@ -269,6 +269,7 @@ const Technologies = () => {
                   </g>
                 </svg>
                 <StroveButton
+                  padding="0"
                   layout="form"
                   type="submit"
                   text="Subscribe to newsletter"
