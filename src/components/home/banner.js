@@ -239,7 +239,7 @@ const StyledH1 = styled.h1`
   font-size: 38px;
 `
 
-const StyledQueueAnim = styled(QueueAnim)`
+const StyledHeadingSection = styled.div`
   width: 60%;
   max-width: 520px;
   margin: auto 20px;
@@ -326,7 +326,7 @@ const Banner = () => {
   return (
     <>
       <StyledSectionWrapper padding={isMobileOnly ? '20px' : '50px'}>
-        <StyledQueueAnim type={isMobileOnly ? 'bottom' : 'right'}>
+        <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Cloud alternative for software development</StyledH1>
           <StyledProductDescription>
             Manage team. Write, run and share code, all in one place
@@ -406,7 +406,7 @@ const Banner = () => {
               )}
             </Formik>
           </ButtonsWrapper>
-        </StyledQueueAnim>
+        </StyledHeadingSection>
         {!isMobileOnly && (
           <img
             src={require('assets/illustration.png')}
