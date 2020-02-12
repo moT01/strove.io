@@ -197,7 +197,7 @@ const Dashboard = ({ history }) => {
       content: (
         <DashboardWrapper>
           {myOrganizations.map(organization => (
-            <>
+            <div key={organization.id}>
               <OrganizationName>{organization.name}</OrganizationName>
               {organization.teams &&
                 Object.values(organizationsObj[organization.id].teams).map(
@@ -439,7 +439,7 @@ const Dashboard = ({ history }) => {
                 }
                 text="Create new team"
               />
-            </>
+            </div>
           ))}
         </DashboardWrapper>
       ),
