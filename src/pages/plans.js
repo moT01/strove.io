@@ -57,12 +57,12 @@ const PaymentInfoColumn = styled(Wrapper)`
   box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
-const VerticalDivider = styled.div`
+const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 350px;
 `
 
 const PaymentSummaryWrapper = styled(Wrapper)`
@@ -310,7 +310,7 @@ const Plans = () => {
                   )}
                   **** **** **** {paymentInfo?.last4}
                 </Text>
-                <VerticalDivider>
+                <ButtonsWrapper>
                   <StroveButton
                     isPrimary
                     padding="5px"
@@ -354,7 +354,7 @@ const Plans = () => {
                     }}
                     text="Edit payment info"
                   />
-                </VerticalDivider>
+                </ButtonsWrapper>
                 {editMode && (
                   <StripeCheckoutForm
                     organization={organization.value}
