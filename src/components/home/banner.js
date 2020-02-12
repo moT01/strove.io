@@ -151,6 +151,8 @@ const EmailFormWrapper = styled.div`
 const StyledH2 = styled.h2`
   margin: 20px 0;
   font-size: 34px;
+  width: 100%;
+  text-align: center;
 `
 
 const Video = styled.video`
@@ -252,6 +254,7 @@ const StyledHeadingSection = styled.div`
 const StyledProductDescription = styled.h4`
   font-weight: 500;
   font-size: 22px;
+  text-align: center;
 `
 
 const StyledSmallText = styled.span`
