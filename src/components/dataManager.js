@@ -396,7 +396,6 @@ export default memo(
       if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
     return children
   })
 )

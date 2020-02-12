@@ -16,6 +16,7 @@ import {
   SET_ADMIN,
   LEAVE_TEAM,
   DOWNGRADE_SUBSCRIPTION,
+  UPGRADE_SUBSCRIPTION,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -197,110 +198,149 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <DashboardWrapper>
-          {expandedTiles && myOrganizations.map(organization => (
-            <TilesWrapper key={organization.id}>
-              <OrganizationName>{organization.name}</OrganizationName>
-              {organization.teams &&
-                Object.values(organizationsObj[organization.id].teams).map(
-                  team => {
-                    const isExpanded =
-                      expandedTiles[organization.id]?.teams[team.id]?.visible
-                    const isOwner = team.teamLeader?.id === user.id
-                    const isOrganizationOwner =
-                      organizationsObj[organization.id].owner.id === user.id
-                    return (
-                      <TeamTileWrapper key={team.id} expanded={isExpanded}>
-                        <TeamTileHeader expanded={isExpanded}>
-                          <Divider>
-                            <VerticalDivider columnOnMobile>
-                              <Title>{team.name}</Title>
+          {expandedTiles &&
+            myOrganizations.map(organization => (
+              <TilesWrapper key={organization.id}>
+                <OrganizationName>{organization.name}</OrganizationName>
+                {organization.teams &&
+                  Object.values(organizationsObj[organization.id].teams).map(
+                    team => {
+                      const isExpanded =
+                        expandedTiles[organization.id]?.teams[team.id]?.visible
+                      const isOwner = team.teamLeader?.id === user.id
+                      const isOrganizationOwner =
+                        organizationsObj[organization.id].owner.id === user.id
+                      return (
+                        <TeamTileWrapper key={team.id} expanded={isExpanded}>
+                          <TeamTileHeader expanded={isExpanded}>
+                            <Divider>
+                              <VerticalDivider columnOnMobile>
+                                <Title>{team.name}</Title>
+                                {isExpanded &&
+                                  (isOwner || isOrganizationOwner) && (
+                                    <StroveButton
+                                      isPrimary
+                                      padding="5px"
+                                      minWidth="150px"
+                                      maxWidth="150px"
+                                      margin="10px"
+                                      borderRadius="2px"
+                                      onClick={() => handleAddMemberClick(team)}
+                                      text="Add member"
+                                    />
+                                  )}
+                                {isExpanded &&
+                                  (isOwner || isOrganizationOwner ? (
+                                    <StroveButton
+                                      isDashboard
+                                      padding="5px"
+                                      minWidth="150px"
+                                      maxWidth="150px"
+                                      borderRadius="2px"
+                                      margin="10px"
+                                      text="Settings"
+                                      onClick={() => {
+                                        handleSettingsClick(team)
+                                      }}
+                                    />
+                                  ) : (
+                                    <StroveButton
+                                      isPrimary
+                                      padding="5px"
+                                      minWidth="150px"
+                                      maxWidth="150px"
+                                      borderRadius="2px"
+                                      onClick={() => {
+                                        setEditTeam(team)
+                                        handleLeaveClick(team)
+                                      }}
+                                      text="Leave"
+                                    />
+                                  ))}
+                              </VerticalDivider>
+                              {myOrganizations?.length > 1 && (
+                                <IconWrapper
+                                  onClick={() =>
+                                    displayHandler({
+                                      organizationId: organization.id,
+                                      teamId: team.id,
+                                    })
+                                  }
+                                >
+                                  <ExpandIcon
+                                    type="down"
+                                    expanded={isExpanded}
+                                  />
+                                </IconWrapper>
+                              )}
+                            </Divider>
+                          </TeamTileHeader>
+                          {isExpanded && (
+                            <TeamTile>
                               {isExpanded &&
-                                (isOwner || isOrganizationOwner) && (
-                                  <StroveButton
-                                    isPrimary
-                                    padding="5px"
-                                    minWidth="150px"
-                                    maxWidth="150px"
-                                    margin="10px"
-                                    borderRadius="2px"
-                                    onClick={() => handleAddMemberClick(team)}
-                                    text="Add member"
-                                  />
-                                )}
-                              {isExpanded &&
-                                (isOwner || isOrganizationOwner ? (
-                                  <StroveButton
-                                    isDashboard
-                                    padding="5px"
-                                    minWidth="150px"
-                                    maxWidth="150px"
-                                    borderRadius="2px"
-                                    margin="10px"
-                                    text="Settings"
-                                    onClick={() => {
-                                      handleSettingsClick(team)
-                                    }}
-                                  />
-                                ) : (
-                                  <StroveButton
-                                    isPrimary
-                                    padding="5px"
-                                    minWidth="150px"
-                                    maxWidth="150px"
-                                    borderRadius="2px"
-                                    onClick={() => {
-                                      setEditTeam(team)
-                                      handleLeaveClick(team)
-                                    }}
-                                    text="Leave"
-                                  />
-                                ))}
-                            </VerticalDivider>
-                            {myOrganizations?.length > 1 && (
-                              <IconWrapper
-                                onClick={() =>
-                                  displayHandler({
-                                    organizationId: organization.id,
-                                    teamId: team.id,
-                                  })
-                                }
-                              >
-                                <ExpandIcon type="down" expanded={isExpanded} />
-                              </IconWrapper>
-                            )}
-                          </Divider>
-                        </TeamTileHeader>
-                        {isExpanded && (
-                          <TeamTile>
-                            {isExpanded &&
-                              expandedTiles[organization.id].teams[team.id]
-                                .sections.members && (
-                                <TeamTileSection>
-                                  <RowWrapper>
-                                    <Divider>
-                                      <VerticalDivider>
-                                        <UserPhoto
-                                          src={
-                                            team.teamLeader?.photoUrl
-                                              ? team.teamLeader?.photoUrl
-                                              : StroveLogo
-                                          }
-                                        />
-                                        <Text>
-                                          {team.teamLeader?.name}
-                                          <InviteStatus>
-                                            Team leader
-                                          </InviteStatus>
-                                        </Text>
-                                      </VerticalDivider>
-                                    </Divider>
-                                  </RowWrapper>
-                                  {team?.users?.map(
-                                    member =>
-                                      member.name &&
-                                      member.id !== team.teamLeader?.id && (
+                                expandedTiles[organization.id].teams[team.id]
+                                  .sections.members && (
+                                  <TeamTileSection>
+                                    <RowWrapper>
+                                      <Divider>
+                                        <VerticalDivider>
+                                          <UserPhoto
+                                            src={
+                                              team.teamLeader?.photoUrl
+                                                ? team.teamLeader?.photoUrl
+                                                : StroveLogo
+                                            }
+                                          />
+                                          <Text>
+                                            {team.teamLeader?.name}
+                                            <InviteStatus>
+                                              Team leader
+                                            </InviteStatus>
+                                          </Text>
+                                        </VerticalDivider>
+                                      </Divider>
+                                    </RowWrapper>
+                                    {team?.users?.map(
+                                      member =>
+                                        member.name &&
+                                        member.id !== team.teamLeader?.id && (
+                                          <RowWrapper key={member.name}>
+                                            <Divider>
+                                              <VerticalDivider>
+                                                <UserPhoto
+                                                  src={
+                                                    member.photoUrl
+                                                      ? member.photoUrl
+                                                      : StroveLogo
+                                                  }
+                                                />
+                                                <Text>{member.name}</Text>
+                                              </VerticalDivider>
+                                              {isOwner && (
+                                                <StroveButton
+                                                  isDelete
+                                                  padding="5px"
+                                                  margin="0"
+                                                  minWidth="150px"
+                                                  maxWidth="150px"
+                                                  borderRadius="2px"
+                                                  text="Remove"
+                                                  onClick={() => {
+                                                    handleDeleteMemberClick({
+                                                      team,
+                                                      member,
+                                                    })
+                                                  }}
+                                                />
+                                              )}
+                                            </Divider>
+                                          </RowWrapper>
+                                        )
+                                    )}
+                                    {(isOwner || isOrganizationOwner) &&
+                                      team?.invited?.map(member => (
                                         <RowWrapper key={member.name}>
-                                          <Divider>
+                                          <Divider columnOnMobile>
                                             <VerticalDivider>
                                               <UserPhoto
                                                 src={
@@ -309,139 +349,104 @@ const Dashboard = ({ history }) => {
                                                     : StroveLogo
                                                 }
                                               />
-                                              <Text>{member.name}</Text>
+                                              <Text>
+                                                {member.name
+                                                  ? member.name
+                                                  : member.email}
+                                                <InviteStatus>
+                                                  Invite pending
+                                                </InviteStatus>
+                                              </Text>
                                             </VerticalDivider>
-                                            {isOwner && (
-                                              <StroveButton
-                                                isDelete
-                                                padding="5px"
-                                                margin="0"
-                                                minWidth="150px"
-                                                maxWidth="150px"
-                                                borderRadius="2px"
-                                                text="Remove"
-                                                onClick={() => {
-                                                  handleDeleteMemberClick({
-                                                    team,
-                                                    member,
-                                                  })
-                                                }}
-                                              />
-                                            )}
-                                          </Divider>
-                                        </RowWrapper>
-                                      )
-                                  )}
-                                  {(isOwner || isOrganizationOwner) &&
-                                    team?.invited?.map(member => (
-                                      <RowWrapper key={member.name}>
-                                        <Divider columnOnMobile>
-                                          <VerticalDivider>
-                                            <UserPhoto
-                                              src={
-                                                member.photoUrl
-                                                  ? member.photoUrl
-                                                  : StroveLogo
+                                            <StroveButton
+                                              isDelete
+                                              padding="5px"
+                                              margin="0"
+                                              minWidth="150px"
+                                              maxWidth="150px"
+                                              borderRadius="2px"
+                                              text="Cancel"
+                                              onClick={() =>
+                                                handleDeleteMemberClick({
+                                                  team,
+                                                  member,
+                                                })
                                               }
                                             />
-                                            <Text>
-                                              {member.name
-                                                ? member.name
-                                                : member.email}
-                                              <InviteStatus>
-                                                Invite pending
-                                              </InviteStatus>
-                                            </Text>
-                                          </VerticalDivider>
-                                          <StroveButton
-                                            isDelete
-                                            padding="5px"
-                                            margin="0"
-                                            minWidth="150px"
-                                            maxWidth="150px"
-                                            borderRadius="2px"
-                                            text="Cancel"
-                                            onClick={() =>
-                                              handleDeleteMemberClick({
-                                                team,
-                                                member,
-                                              })
-                                            }
-                                          />
-                                        </Divider>
-                                      </RowWrapper>
-                                    ))}
+                                          </Divider>
+                                        </RowWrapper>
+                                      ))}
+                                  </TeamTileSection>
+                                )}
+                              <TileSectionHeader isLast>
+                                <Divider>
+                                  <SectionTitle>Projects</SectionTitle>
+                                  {team.projects?.length > 1 && (
+                                    <IconWrapper
+                                      onClick={() =>
+                                        displayHandler({
+                                          organizationId: organization.id,
+                                          teamId: team.id,
+                                          section: 'projects',
+                                        })
+                                      }
+                                    >
+                                      <ExpandIcon
+                                        type="down"
+                                        expanded={
+                                          expandedTiles[organization.id].teams[
+                                            team.id
+                                          ].sections.projects
+                                        }
+                                        section
+                                      />
+                                    </IconWrapper>
+                                  )}
+                                </Divider>
+                              </TileSectionHeader>
+                              {expandedTiles[organization.id].teams[team.id]
+                                .sections.projects && (
+                                <TeamTileSection isLast>
+                                  <Projects
+                                    projects={team.projects}
+                                    history={history}
+                                  />
+                                  {isOwner && (
+                                    <StroveButton
+                                      isPrimary
+                                      padding="5px"
+                                      minWidth="150px"
+                                      maxWidth="150px"
+                                      margin="10px"
+                                      borderRadius="2px"
+                                      text="Add Project"
+                                      onClick={() => {
+                                        setTeamId(team.id)
+                                        setAddProjectModal(true)
+                                      }}
+                                    />
+                                  )}
                                 </TeamTileSection>
                               )}
-                            <TileSectionHeader isLast>
-                              <Divider>
-                                <SectionTitle>Projects</SectionTitle>
-                                {team.projects?.length > 1 && (
-                                  <IconWrapper
-                                    onClick={() =>
-                                      displayHandler({
-                                        organizationId: organization.id,
-                                        teamId: team.id,
-                                        section: 'projects',
-                                      })
-                                    }
-                                  >
-                                    <ExpandIcon
-                                      type="down"
-                                      expanded={
-                                        expandedTiles[organization.id].teams[
-                                          team.id
-                                        ].sections.projects
-                                      }
-                                      section
-                                    />
-                                  </IconWrapper>
-                                )}
-                              </Divider>
-                            </TileSectionHeader>
-                            {expandedTiles[organization.id].teams[team.id]
-                              .sections.projects && (
-                              <TeamTileSection isLast>
-                                <Projects
-                                  projects={team.projects}
-                                  history={history}
-                                />
-                                {isOwner && (
-                                  <StroveButton
-                                    isPrimary
-                                    padding="5px"
-                                    minWidth="150px"
-                                    maxWidth="150px"
-                                    margin="10px"
-                                    borderRadius="2px"
-                                    text="Add Project"
-                                    onClick={() => {
-                                      setTeamId(team.id)
-                                      setAddProjectModal(true)
-                                    }}
-                                  />
-                                )}
-                              </TeamTileSection>
-                            )}
-                          </TeamTile>
-                        )}
-                      </TeamTileWrapper>
-                    )
+                            </TeamTile>
+                          )}
+                        </TeamTileWrapper>
+                      )
+                    }
+                  )}
+                <StroveButton
+                  isPrimary
+                  padding="5px"
+                  margin="10px 0 40px"
+                  width="200px"
+                  borderRadius="2px"
+                  onClick={() =>
+                    handleCreateTeamClick({ organizationId: organization.id })
                   }
-                )}
-              <StroveButton
-                isPrimary
-                padding="5px"
-                margin="10px 0 40px"
-                width="200px"
-                borderRadius="2px"
-                onClick={() =>
-                  handleCreateTeamClick({ organizationId: organization.id })
-                }
-                text="Create new team"
-              />
-            </TilesWrapper>
-          ))}
+                  text="Create new team"
+                />
+              </TilesWrapper>
+            ))}
         </DashboardWrapper>
       ),
     },
@@ -581,7 +586,6 @@ const Dashboard = ({ history }) => {
 
   const handleAddMemberClick = team => {
     setEditTeam(team)
-    console.log('Team', team)
     setAddMemberModal(true)
   }
 
@@ -600,6 +604,31 @@ const Dashboard = ({ history }) => {
         ),
       })
     } else {
+      if (
+        organizationsObj[editTeam.organizationId]?.users?.findIndex(
+          user => user.email === memberEmail
+        ) === -1
+      ) {
+        console.log(
+          'Yeeeet',
+          editTeam,
+          'Yeeeter',
+          organizationsObj[editTeam.organizationId].users.length + 1,
+          'The yeeetest',
+          organizationsObj[editTeam.organizationId].users
+        )
+        dispatch(
+          mutation({
+            name: 'upgradeSubscription',
+            mutation: UPGRADE_SUBSCRIPTION,
+            variables: {
+              organizationId: editTeam.organizationId,
+              quantity:
+                organizationsObj[editTeam?.organizationId]?.users?.length + 1,
+            },
+          })
+        )
+      }
       dispatch(
         mutation({
           name: 'addMember',

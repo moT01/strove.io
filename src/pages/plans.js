@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
+import { useSubscription } from '@apollo/react-hooks'
 
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
@@ -15,8 +16,10 @@ import {
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
   RENEW_SUBSCRIPTION,
+  PAYMENT_STATUS_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
+import client from 'client'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -205,6 +208,22 @@ const Plans = () => {
       value: organization,
       label: organization.name,
     }))
+
+  const paymentStatusSubscription = useSubscription(
+    PAYMENT_STATUS_SUBSCRIPTION,
+    {
+      variables: { organizationId: 'muh dyck' },
+      client,
+      fetchPolicy: 'no-cache',
+      context: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
+        },
+      },
+      shouldResubscribe: true,
+    }
+  )
 
   const closeWarningModal = () => {
     setWarningModal(emptyWarningModalContent)
