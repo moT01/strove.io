@@ -51,14 +51,6 @@ const SectionWrapper = styled.div`
   max-width: 1200px;
 `
 
-const LeftSectionWrapper = styled(SectionWrapper)`
-  ${({ isMobile }) =>
-    !isMobile &&
-    css`
-      text-align: left;
-    `}
-`
-
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -432,7 +424,7 @@ const Banner = () => {
       >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
-            <LeftSectionWrapper isMobile={isMobile}>
+            <SectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
                   <StyledH2>Save time</StyledH2>
@@ -442,7 +434,7 @@ const Banner = () => {
                   from anywhere
                 </StyledProductDescription>
               </StyledCell>
-            </LeftSectionWrapper>
+            </SectionWrapper>
           </SectionWrapper>
           <SectionWrapper padding="20px 10px">
             <img
@@ -459,12 +451,12 @@ const Banner = () => {
       >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
-            <LeftSectionWrapper isMobile={isMobile}>
+            <SectionWrapper isMobile={isMobile}>
               <img
                 src={require('assets/dashboardPresentation.png')}
                 alt="dashboard presentation"
               />
-            </LeftSectionWrapper>
+            </SectionWrapper>
           </SectionWrapper>
           <SectionWrapper padding="20px 10px">
             <StyledCell>
