@@ -1,3 +1,10 @@
+const users = [
+  {
+    name: 'Ashley Patterson',
+    photoUrl: 'https://randomuser.me/api/portraits/women/82.jpg',
+  },
+]
+
 export default {
   api: {
     myOrganizations: {
@@ -6,30 +13,21 @@ export default {
         {
           id: '5e3470b45430d66477ca8d3b',
           name: 'Apollo Tech Inc',
-          owner: {
-            id: '5d963f095c058e0fe486d56d',
-            name: 'AdamZaczek',
-            __typename: 'User',
-          },
+          owner: users[0],
           users: null,
           teams: [
             {
               id: '5e39ce3e99c6bf1d491662dc',
-              name: 'Wise guys',
+              name: 'Apollo Backend V2',
               organizationId: '5e3470b45430d66477ca8d3b',
               projects: [
                 {
                   id: '5e3b3caf635dab435d9444f5',
-                  name: 'react-router',
+                  name: 'Apollo API',
                   userId: '5d963f095c058e0fe486d56d',
-                  user: {
-                    name: 'AdamZaczek',
-                    photoUrl:
-                      'https://avatars1.githubusercontent.com/u/14284341?v=4',
-                    __typename: 'User',
-                  },
-                  description: 'Declarative routing for React',
-                  isPrivate: true,
+                  user: users[0],
+                  description: 'V1 was finished in 1969 so let\s do V2,
+                  isPrivate: false,
                   createdAt: '1580940463504',
                   repoLink: 'https://github.com/reacttraining/react-router.git',
                   machineId: null,
@@ -50,12 +48,7 @@ export default {
                   id: '5e3c96b9b084836851f7c889',
                   name: 'freecodecamp-exercise-tracker',
                   userId: '5d963f095c058e0fe486d56d',
-                  user: {
-                    name: 'AdamZaczek',
-                    photoUrl:
-                      'https://avatars1.githubusercontent.com/u/14284341?v=4',
-                    __typename: 'User',
-                  },
+                  user: users[0],
                   description: 'freeCodeCamp - Challenge Exercise Tracker',
                   isPrivate: true,
                   createdAt: '1581029049513',
@@ -77,14 +70,8 @@ export default {
                   __typename: 'Project',
                 },
               ],
-              teamLeader: {
-                id: '5d963f095c058e0fe486d56d',
-                name: 'AdamZaczek',
-                photoUrl:
-                  'https://avatars1.githubusercontent.com/u/14284341?v=4',
-                __typename: 'User',
-              },
-              users: null,
+              teamLeader: users[0],
+              users,
               invited: null,
               __typename: 'Team',
             },
@@ -98,19 +85,5 @@ export default {
         },
       ],
     },
-    _persist: {
-      version: -1,
-      rehydrated: true,
-    },
-  },
-  incomingProject: {
-    isBeingAdded: false,
-    isBeingStarted: false,
-  },
-  latency: null,
-  feature: 'a',
-  _persist: {
-    version: -1,
-    rehydrated: true,
   },
 }
