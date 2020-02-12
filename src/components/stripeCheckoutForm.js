@@ -70,6 +70,10 @@ const VerticalDivider = styled.div`
   height: 100%;
 `
 
+const EmailForm = styled(Form)`
+  width: 100%;
+`
+
 const cardStyle = {
   base: {
     height: '200px',
@@ -98,6 +102,7 @@ const cardStyle = {
 const EmailField = styled(Field)`
   margin: 10px 0;
   padding: 8px;
+  width: 100%;
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.colors.c9};
 `
@@ -262,15 +267,15 @@ const CheckoutForm = props => {
               }}
               validate={validate}
             >
-              {({ errors, values }) => (
+              {() => (
                 <>
-                  <Form>
+                  <EmailForm>
                     <EmailField
                       type="email"
                       name="email"
                       placeholder="Your Email"
                     ></EmailField>
-                  </Form>
+                  </EmailForm>
                   {props.editMode ? (
                     <VerticalDivider>
                       <StroveButton
