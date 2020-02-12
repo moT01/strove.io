@@ -427,9 +427,6 @@ const Banner = () => {
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
-                  <IconContainer>
-                    <Icon type="clock-circle" />
-                  </IconContainer>
                   <StyledH2>Save time</StyledH2>
                 </StyledCellHeader>
                 <StyledProductDescription>
@@ -476,9 +473,6 @@ const Banner = () => {
           <SectionWrapper>
             <StyledCell>
               <StyledCellHeader>
-                <IconContainer>
-                  <Icon type="cloud-sync" />
-                </IconContainer>
                 <StyledH2>More effective collaboration</StyledH2>
               </StyledCellHeader>
               <StyledProductDescription>
@@ -487,44 +481,6 @@ const Banner = () => {
               </StyledProductDescription>
             </StyledCell>
             <StyledH2></StyledH2>
-          </SectionWrapper>
-        </SectionDivider>
-      </StyledSectionWrapper>
-      <StyledSectionWrapper
-        isSecondary
-        padding="50px 20px 50px"
-        background="black"
-      >
-        <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
-            <LeftSectionWrapper isMobile={isMobile}>
-              <StyledCell>
-                <StyledCellHeader>
-                  <IconContainer>
-                    <Icon type="clock-circle" />
-                  </IconContainer>
-                  <StyledH2>Spend less time debugging</StyledH2>
-                </StyledCellHeader>
-                <StyledProductDescription>
-                  Say goobye to 'It works on my machine issue' by having
-                  developers work on instances of the same cloud environment,
-                  making code work consistently no matter the device or
-                  operating system.
-                </StyledProductDescription>
-              </StyledCell>
-            </LeftSectionWrapper>
-          </SectionWrapper>
-          <SectionWrapper>
-            <Video
-              isMobile={isMobile}
-              controls
-              poster={require('assets/demoPreview.png')}
-            >
-              <source
-                src={require('assets/StroveDemo.mp4')}
-                type="video/mp4"
-              ></source>
-            </Video>
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
@@ -539,7 +495,7 @@ const Banner = () => {
               <IconContainer>
                 <Icon type="clock-circle" />
               </IconContainer>
-              <StyledHeaderText>Save time</StyledHeaderText>
+              <StyledHeaderText>Give focus a chance</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
               There's a lot of time and work needed to make code work on local
@@ -565,11 +521,11 @@ const Banner = () => {
               <IconContainer>
                 <Icon type="cloud-sync" />
               </IconContainer>
-              <StyledHeaderText>Easier code access</StyledHeaderText>
+              <StyledHeaderText>Development, organized</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              We believe that storing and running code remotely is the future of
-              programming and we focus on making this as easy as possible.
+              Unlike in the past, sharing the environment with anyone in the
+              team can be done with a single click.
             </StyledFeatureDescription>
           </StyledCell>
         </StyledGrid>
