@@ -446,12 +446,7 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <Video width="300" height="300" isMobile={isMobile} autoPlay muted>
-              <source
-                src={require('assets/StroveDemo.mp4')}
-                type="video/mp4"
-              ></source>
-            </Video>
+            <img src={require('assets/editorPresentation.png')} alt="presentation"/>
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
