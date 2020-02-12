@@ -197,7 +197,7 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <DashboardWrapper>
-          {myOrganizations.map(organization => (
+          {expandedTiles && myOrganizations.map(organization => (
             <TilesWrapper key={organization.id}>
               <OrganizationName>{organization.name}</OrganizationName>
               {organization.teams &&
