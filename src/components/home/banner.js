@@ -446,7 +446,10 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <img src={require('assets/editorPresentation.png')} alt="presentation"/>
+            <img
+              src={require('assets/editorPresentation.png')}
+              alt="editor presentation"
+            />
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
@@ -458,16 +461,10 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
-              <Video
-                isMobile={isMobile}
-                controls
-                poster={require('assets/demoPreview.png')}
-              >
-                <source
-                  src={require('assets/StroveDemo.mp4')}
-                  type="video/mp4"
-                ></source>
-              </Video>
+              <img
+                src={require('assets/dashboardPresentation.png')}
+                alt="dashboard presentation"
+              />
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
