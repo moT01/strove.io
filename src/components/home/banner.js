@@ -437,11 +437,7 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <Video
-              isMobile={isMobile}
-              controls
-              poster={require('assets/demoPreview.png')}
-            >
+            <Video width="300" height="300" isMobile={isMobile} autoPlay muted>
               <source
                 src={require('assets/StroveDemo.mp4')}
                 type="video/mp4"
