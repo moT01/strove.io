@@ -442,10 +442,18 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH2>
-                Save hours to days per developer by running code in seconds from
-                anywhere
-              </StyledH2>
+              <StyledCell>
+                <StyledCellHeader>
+                  <IconContainer>
+                    <Icon type="clock-circle" />
+                  </IconContainer>
+                  <StyledH2>Save time</StyledH2>
+                </StyledCellHeader>
+                <StyledProductDescription>
+                  Save hours to days per developer by running code in seconds
+                  from anywhere
+                </StyledProductDescription>
+              </StyledCell>
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
@@ -483,10 +491,19 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <StyledH2>
-              Spend less time organizing by managing permissions or sharing
-              environment with a single click
-            </StyledH2>
+            <StyledCell>
+              <StyledCellHeader>
+                <IconContainer>
+                  <Icon type="cloud-sync" />
+                </IconContainer>
+                <StyledH2>More effective collaboration</StyledH2>
+              </StyledCellHeader>
+              <StyledProductDescription>
+                Spend less time organizing by managing permissions or sharing
+                environment with a single click
+              </StyledProductDescription>
+            </StyledCell>
+            <StyledH2></StyledH2>
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
