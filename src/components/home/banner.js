@@ -443,7 +443,8 @@ const Banner = () => {
           <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>
-                Organize members in teams for secure and easy collaboration
+                Save hours to days per developer by running code in seconds from
+                anywhere
               </StyledH2>
             </LeftSectionWrapper>
           </SectionWrapper>
@@ -482,16 +483,14 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <StyledH2>
-              Let programmers focus on what's important, software.
-            </StyledH2>
+            <StyledH2>Have all your development under control</StyledH2>
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
         padding="50px 20px 50px"
-        background="black"
+        background="white"
       >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 40px">
