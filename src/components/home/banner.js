@@ -483,34 +483,10 @@ const Banner = () => {
             </LeftSectionWrapper>
           </SectionWrapper>
           <SectionWrapper>
-            <StyledH2>Have all your development under control</StyledH2>
-          </SectionWrapper>
-        </SectionDivider>
-      </StyledSectionWrapper>
-      <StyledSectionWrapper
-        isSecondary
-        padding="50px 20px 50px"
-        background="white"
-      >
-        <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
-            <LeftSectionWrapper isMobile={isMobile}>
-              <StyledH2>
-                Strove lets programmer focus on what's important, coding.
-              </StyledH2>
-            </LeftSectionWrapper>
-          </SectionWrapper>
-          <SectionWrapper>
-            <Video
-              isMobile={isMobile}
-              controls
-              poster={require('assets/demoPreview.png')}
-            >
-              <source
-                src={require('assets/StroveDemo.mp4')}
-                type="video/mp4"
-              ></source>
-            </Video>
+            <StyledH2>
+              Spend less time organizing by managing permissions or sharing
+              environment with a single click
+            </StyledH2>
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
