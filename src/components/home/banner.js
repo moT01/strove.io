@@ -443,6 +443,60 @@ const Banner = () => {
           <SectionWrapper isMobile={isMobile} padding="20px 40px">
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledH2>
+                Organize members in teams for secure and easy collaboration
+              </StyledH2>
+            </LeftSectionWrapper>
+          </SectionWrapper>
+          <SectionWrapper>
+            <Video
+              isMobile={isMobile}
+              controls
+              poster={require('assets/demoPreview.png')}
+            >
+              <source
+                src={require('assets/StroveDemo.mp4')}
+                type="video/mp4"
+              ></source>
+            </Video>
+          </SectionWrapper>
+        </SectionDivider>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper
+        isSecondary
+        padding="50px 20px 50px"
+        background="black"
+      >
+        <SectionDivider isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile} padding="20px 40px">
+            <LeftSectionWrapper isMobile={isMobile}>
+              <Video
+                isMobile={isMobile}
+                controls
+                poster={require('assets/demoPreview.png')}
+              >
+                <source
+                  src={require('assets/StroveDemo.mp4')}
+                  type="video/mp4"
+                ></source>
+              </Video>
+            </LeftSectionWrapper>
+          </SectionWrapper>
+          <SectionWrapper>
+            <StyledH2>
+              Let programmers focus on what's important, software.
+            </StyledH2>
+          </SectionWrapper>
+        </SectionDivider>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper
+        isSecondary
+        padding="50px 20px 50px"
+        background="black"
+      >
+        <SectionDivider isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile} padding="20px 40px">
+            <LeftSectionWrapper isMobile={isMobile}>
+              <StyledH2>
                 Strove lets programmer focus on what's important, coding.
               </StyledH2>
             </LeftSectionWrapper>
