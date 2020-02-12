@@ -56,7 +56,6 @@ const LeftSectionWrapper = styled(SectionWrapper)`
     !isMobile &&
     css`
       text-align: left;
-      max-width: 500px;
     `}
 `
 
@@ -432,7 +431,7 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
+          <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <LeftSectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
@@ -445,7 +444,7 @@ const Banner = () => {
               </StyledCell>
             </LeftSectionWrapper>
           </SectionWrapper>
-          <SectionWrapper>
+          <SectionWrapper padding="20px 10px">
             <img
               src={require('assets/editorPresentation.png')}
               alt="editor presentation"
@@ -459,7 +458,7 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
+          <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <LeftSectionWrapper isMobile={isMobile}>
               <img
                 src={require('assets/dashboardPresentation.png')}
@@ -467,7 +466,7 @@ const Banner = () => {
               />
             </LeftSectionWrapper>
           </SectionWrapper>
-          <SectionWrapper>
+          <SectionWrapper padding="20px 10px">
             <StyledCell>
               <StyledCellHeader>
                 <StyledH2>More effective collaboration</StyledH2>
