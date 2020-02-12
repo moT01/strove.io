@@ -49,6 +49,7 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 1200px;
+  padding: ${({ padding }) => padding || '0'};
 `
 
 const ButtonsWrapper = styled.div`
@@ -190,7 +191,7 @@ const StyledSectionWrapper = styled.section`
       color: ${theme.colors.c2};
     `}
 
-    padding: ${({ padding }) => padding};
+    padding: ${({ padding }) => padding || '0'};
     ${({ minHeight }) => css`
       min-height: ${minHeight};
     `};
