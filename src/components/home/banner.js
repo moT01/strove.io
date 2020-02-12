@@ -308,6 +308,12 @@ const StyledHeaderText = styled.div`
   text-align: left;
 `
 
+const Illustration = styled.img`
+  margin: 0 20px;
+  width: 50%;
+  height: 50%;
+`
+
 const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
@@ -406,7 +412,7 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledHeadingSection>
         {!isMobileOnly && (
-          <img
+          <Illustration
             src={require('assets/illustration.png')}
             style={{
               margin: '0 20px',

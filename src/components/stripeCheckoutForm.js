@@ -280,7 +280,6 @@ const CheckoutForm = props => {
                     <StroveButton
                       isPrimary
                       isDisabled={!organizationId}
-                      // fontSize="18px"
                       padding="5px"
                       minWidth="150px"
                       maxWidth="150px"
@@ -290,9 +289,7 @@ const CheckoutForm = props => {
                       text="Save"
                     />
                     <StroveButton
-                      // isPrimary
                       isDisabled={!organizationId}
-                      // fontSize="18px"
                       padding="5px"
                       minWidth="150px"
                       maxWidth="150px"
