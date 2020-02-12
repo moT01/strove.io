@@ -417,23 +417,6 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="50px 20px 0">
-        <SectionWrapper>
-          <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
-          <StyledH2>
-            Strove brings ready in seconds, pre-configured cloud servers to
-            write, run, build and manage software remotely
-          </StyledH2>
-        </SectionWrapper>
-      </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px">
-        <SectionWrapper isSecondary>
-          <Logos handleHoverIn={handleHoverIn} />
-          <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
-            <StyledSmallText>{technologyDescription}</StyledSmallText>
-          </StyledTechnologyDescriptionWrapper>
-        </SectionWrapper>
-      </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
         padding="50px 20px 50px"
@@ -552,6 +535,23 @@ const Banner = () => {
             </StyledFeatureDescription>
           </StyledCell>
         </StyledGrid>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="50px 20px 0">
+        <SectionWrapper>
+          <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
+          <StyledH2>
+            Strove brings ready in seconds, pre-configured cloud servers to
+            write, run, build and manage software remotely
+          </StyledH2>
+        </SectionWrapper>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="20px">
+        <SectionWrapper isSecondary>
+          <Logos handleHoverIn={handleHoverIn} />
+          <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
+            <StyledSmallText>{technologyDescription}</StyledSmallText>
+          </StyledTechnologyDescriptionWrapper>
+        </SectionWrapper>
       </StyledSectionWrapper>
       <StyledModal
         isOpen={isModalVisible}
