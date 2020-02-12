@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import QueueAnim from 'rc-queue-anim'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
@@ -240,7 +239,6 @@ const StyledH1 = styled.h1`
 `
 
 const StyledHeadingSection = styled.div`
-  width: 60%;
   max-width: 520px;
   margin: auto 20px;
   margin-bottom: auto;
@@ -411,7 +409,7 @@ const Banner = () => {
           <img
             src={require('assets/illustration.png')}
             style={{
-              margin: '0 0 0 40px',
+              margin: '0 20px',
             }}
             alt="illustration"
             width="50%"
