@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { isMobileOnly } from 'react-device-detect'
 
 export default styled.ul`
   font-size: 13px;
@@ -6,7 +7,7 @@ export default styled.ul`
   margin: 0;
   color: ${({ team }) => (team ? '#fff' : '#0072ce')};
   li {
-    display: inline-block;
+    display: ${isMobileOnly ? 'block' : 'inline-block'};
     margin-right: 8px;
     list-style: none;
     &:before {
