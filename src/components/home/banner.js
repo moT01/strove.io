@@ -418,6 +418,9 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary background="black">
+        <StyledH2>DevelopersFirst</StyledH2>
+      </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
         padding="50px 20px 50px"
