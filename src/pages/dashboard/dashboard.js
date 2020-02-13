@@ -409,6 +409,7 @@ const Dashboard = ({ history }) => {
                                 <TeamTileSection isLast>
                                   <Projects
                                     projects={team.projects}
+                                    organizatoinId={team.organizationId}
                                     history={history}
                                   />
                                   {isOwner && (
@@ -538,7 +539,9 @@ const Dashboard = ({ history }) => {
                   mutation: DOWNGRADE_SUBSCRIPTION,
                   variables: {
                     organizationId: team.organizationId,
-                    quantity: 1,
+                    quantity:
+                      organizationsObj[editTeam?.organizationId]?.users
+                        ?.length - 1,
                   },
                   onSuccess: () => updateOrganizations,
                 })
@@ -610,12 +613,8 @@ const Dashboard = ({ history }) => {
         ) === -1
       ) {
         console.log(
-          'Yeeeet',
-          editTeam,
-          'Yeeeter',
-          organizationsObj[editTeam.organizationId].users.length + 1,
-          'The yeeetest',
-          organizationsObj[editTeam.organizationId].users
+          'User is not in an organization. Dispatch upgradeSubscription',
+          organizationsObj[editTeam?.organizationId]?.users?.length + 3
         )
         dispatch(
           mutation({
@@ -624,22 +623,23 @@ const Dashboard = ({ history }) => {
             variables: {
               organizationId: editTeam.organizationId,
               quantity:
-                organizationsObj[editTeam?.organizationId]?.users?.length + 1,
+                organizationsObj[editTeam?.organizationId]?.users?.length + 3,
             },
+            onSuccess: () => console.log('Git'),
           })
         )
       }
-      dispatch(
-        mutation({
-          name: 'addMember',
-          mutation: ADD_MEMBER,
-          variables: { memberEmail, teamId: editTeam.id },
-          onSuccess: () => {
-            setAddMemberModal(false)
-          },
-          onSuccessDispatch: updateOrganizations,
-        })
-      )
+      // dispatch(
+      //   mutation({
+      //     name: 'addMember',
+      //     mutation: ADD_MEMBER,
+      //     variables: { memberEmail, teamId: editTeam.id },
+      //     onSuccess: () => {
+      //       setAddMemberModal(false)
+      //     },
+      //     onSuccessDispatch: updateOrganizations,
+      //   })
+      // )
     }
   }
 

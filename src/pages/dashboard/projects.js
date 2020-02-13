@@ -33,7 +33,7 @@ const sortByActiveProjects = projects =>
     return [...acc, element]
   }, []) || []
 
-const Projects = ({ history, projects, addProject }) => {
+const Projects = ({ history, projects, addProject, organizationId }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -183,6 +183,7 @@ const Projects = ({ history, projects, addProject }) => {
                               name: project.name,
                               teamId: project.teamId,
                               forkedFromId: project.id,
+                              organizationId,
                             })
                       }
                       text={
@@ -314,10 +315,15 @@ const Projects = ({ history, projects, addProject }) => {
   )
 }
 
-export default memo(({ history, projects }) => (
+export default memo(({ history, projects, organizationId }) => (
   <AddProjectProvider>
     {({ addProject }) => (
-      <Projects addProject={addProject} history={history} projects={projects} />
+      <Projects
+        addProject={addProject}
+        history={history}
+        projects={projects}
+        organizationId={organizationId}
+      />
     )}
   </AddProjectProvider>
 ))

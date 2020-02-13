@@ -13,6 +13,7 @@ import {
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
+  PAYMENT_STATUS_SUBSCRIPTION,
 } from 'queries'
 import {
   mutation,
@@ -396,6 +397,40 @@ export default memo(
       if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const paymentStatusSubscription = useSubscription(
+      PAYMENT_STATUS_SUBSCRIPTION,
+      {
+        variables: { userId: user.id },
+        client,
+        fetchPolicy: 'no-cache',
+        context: {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'User-Agent': 'node',
+          },
+        },
+        shouldResubscribe: true,
+      }
+    )
+
+    const {
+      paymentStatus,
+      paymentOrganizationId,
+      paymentType,
+    } = paymentStatusSubscription
+
+    useEffect(
+      () =>
+        console.log(
+          'Testing two',
+          paymentStatus,
+          paymentOrganizationId,
+          paymentType
+        ),
+      [paymentStatus]
+    )
+
     return children
   })
 )

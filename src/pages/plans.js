@@ -16,10 +16,8 @@ import {
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
   RENEW_SUBSCRIPTION,
-  PAYMENT_STATUS_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
-import client from 'client'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -208,22 +206,6 @@ const Plans = () => {
       value: organization,
       label: organization.name,
     }))
-
-  const paymentStatusSubscription = useSubscription(
-    PAYMENT_STATUS_SUBSCRIPTION,
-    {
-      variables: { organizationId: 'muh dyck' },
-      client,
-      fetchPolicy: 'no-cache',
-      context: {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'User-Agent': 'node',
-        },
-      },
-      shouldResubscribe: true,
-    }
-  )
 
   const closeWarningModal = () => {
     setWarningModal(emptyWarningModalContent)
