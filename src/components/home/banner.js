@@ -141,7 +141,7 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin: 20px 0;
+  margin: 0;
   font-size: 30px;
   width: 100%;
   text-align: center;
@@ -419,7 +419,12 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary background="black" padding="10px 0">
+      <StyledSectionWrapper isSecondary background="black" padding="20px 0px">
+        <IconContainer>
+          <Icon type="code-o" style={{ fontSize: '26px', color: '#08c' }} />
+        </IconContainer>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary background="black" padding="0">
         <StyledH2>Developers First</StyledH2>
       </StyledSectionWrapper>
       <StyledSectionWrapper
