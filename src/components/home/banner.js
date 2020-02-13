@@ -149,6 +149,13 @@ const StyledH2 = styled.h2`
   text-transform: uppercase;
 `
 
+const StyledLowercasedH2 = styled.h2`
+  margin: 0;
+  font-size: 32px;
+  width: 100%;
+  text-align: center;
+`
+
 const Video = styled.video`
   width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
@@ -528,10 +535,10 @@ const Banner = () => {
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
-          <StyledH2>
+          <StyledLowercasedH2>
             Strove brings ready in seconds, pre-configured cloud servers to
             write, run, build and manage software remotely
-          </StyledH2>
+          </StyledLowercasedH2>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px">
