@@ -143,7 +143,7 @@ const EmailFormWrapper = styled.div`
 
 const StyledH2 = styled.h2`
   margin: 0;
-  font-size: 30px;
+  font-size: 40px;
   width: 100%;
   text-align: center;
   text-transform: uppercase;
@@ -231,7 +231,7 @@ const StyledH1 = styled.h1`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.c3};
   font-weight: 700;
-  font-size: 38px;
+  font-size: 40px;
 `
 
 const StyledHeadingSection = styled.div`
@@ -428,11 +428,7 @@ const Banner = () => {
           <StyledH2>Developers First</StyledH2>
         </SectionDivider>
       </StyledSectionWrapper>
-      <StyledSectionWrapper
-        isSecondary
-        padding="20px"
-        background="black"
-      >
+      <StyledSectionWrapper isSecondary padding="20px" background="black">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SectionWrapper isMobile={isMobile}>
