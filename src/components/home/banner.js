@@ -49,15 +49,7 @@ const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 1200px;
-`
-
-const LeftSectionWrapper = styled(SectionWrapper)`
-  ${({ isMobile }) =>
-    !isMobile &&
-    css`
-      text-align: left;
-      max-width: 500px;
-    `}
+  padding: ${({ padding }) => padding || '0'};
 `
 
 const ButtonsWrapper = styled.div`
@@ -151,6 +143,8 @@ const EmailFormWrapper = styled.div`
 const StyledH2 = styled.h2`
   margin: 20px 0;
   font-size: 34px;
+  width: 100%;
+  text-align: center;
 `
 
 const Video = styled.video`
@@ -197,7 +191,7 @@ const StyledSectionWrapper = styled.section`
       color: ${theme.colors.c2};
     `}
 
-    padding: ${({ padding }) => padding};
+    padding: ${({ padding }) => padding || '0'};
     ${({ minHeight }) => css`
       min-height: ${minHeight};
     `};
@@ -252,6 +246,7 @@ const StyledHeadingSection = styled.div`
 const StyledProductDescription = styled.h4`
   font-weight: 500;
   font-size: 22px;
+  text-align: center;
 `
 
 const StyledSmallText = styled.span`
@@ -306,6 +301,12 @@ const IconContainer = styled.div`
 const StyledHeaderText = styled.div`
   margin: 0 10px 5px 10px;
   text-align: left;
+`
+
+const Illustration = styled.img`
+  margin: 0 20px;
+  width: 50%;
+  height: 50%;
 `
 
 const defaultTechnologyDescription =
@@ -406,7 +407,7 @@ const Banner = () => {
           </ButtonsWrapper>
         </StyledHeadingSection>
         {!isMobileOnly && (
-          <img
+          <Illustration
             src={require('assets/illustration.png')}
             style={{
               margin: '0 20px',
@@ -423,8 +424,8 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
-            <LeftSectionWrapper isMobile={isMobile}>
+          <SectionWrapper isMobile={isMobile} padding="20px 10px">
+            <SectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
                   <StyledH2>Save time</StyledH2>
@@ -434,15 +435,13 @@ const Banner = () => {
                   from anywhere
                 </StyledProductDescription>
               </StyledCell>
-            </LeftSectionWrapper>
+            </SectionWrapper>
           </SectionWrapper>
-          <SectionWrapper>
-            <Video width="300" height="300" isMobile={isMobile} autoPlay muted>
-              <source
-                src={require('assets/StroveDemo.mp4')}
-                type="video/mp4"
-              ></source>
-            </Video>
+          <SectionWrapper padding="20px 10px">
+            <img
+              src={require('assets/editorPresentation.png')}
+              alt="editor presentation"
+            />
           </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
@@ -452,21 +451,15 @@ const Banner = () => {
         background="black"
       >
         <SectionDivider isMobile={isMobile}>
-          <SectionWrapper isMobile={isMobile} padding="20px 40px">
-            <LeftSectionWrapper isMobile={isMobile}>
-              <Video
-                isMobile={isMobile}
-                controls
-                poster={require('assets/demoPreview.png')}
-              >
-                <source
-                  src={require('assets/StroveDemo.mp4')}
-                  type="video/mp4"
-                ></source>
-              </Video>
-            </LeftSectionWrapper>
+          <SectionWrapper isMobile={isMobile} padding="20px 10px">
+            <SectionWrapper isMobile={isMobile}>
+              <img
+                src={require('assets/dashboardPresentation.png')}
+                alt="dashboard presentation"
+              />
+            </SectionWrapper>
           </SectionWrapper>
-          <SectionWrapper>
+          <SectionWrapper padding="20px 10px">
             <StyledCell>
               <StyledCellHeader>
                 <StyledH2>More effective collaboration</StyledH2>

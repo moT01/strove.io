@@ -267,58 +267,53 @@ const CheckoutForm = props => {
               }}
               validate={validate}
             >
-              {() => (
-                <>
-                  <EmailForm>
-                    <EmailField
-                      type="email"
-                      name="email"
-                      placeholder="Your Email"
-                    ></EmailField>
-                  </EmailForm>
-                  {props.editMode ? (
-                    <VerticalDivider>
-                      <StroveButton
-                        isPrimary
-                        isDisabled={!organizationId}
-                        // fontSize="18px"
-                        padding="5px"
-                        minWidth="150px"
-                        maxWidth="150px"
-                        margin="20px 10px"
-                        borderRadius="2px"
-                        onClick={getSecret}
-                        text="Save"
-                      />
-                      <StroveButton
-                        // isPrimary
-                        isDisabled={!organizationId}
-                        // fontSize="18px"
-                        padding="5px"
-                        minWidth="150px"
-                        maxWidth="150px"
-                        margin="20px 10px"
-                        borderRadius="2px"
-                        onClick={() => props.setEditMode(false)}
-                        text="Cancel"
-                      />
-                    </VerticalDivider>
-                  ) : (
+              <>
+                <EmailForm>
+                  <EmailField
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                  ></EmailField>
+                </EmailForm>
+                {props.editMode ? (
+                  <VerticalDivider>
                     <StroveButton
                       isPrimary
                       isDisabled={!organizationId}
-                      fontSize="18px"
                       padding="5px"
-                      minWidth="250px"
-                      maxWidth="250px"
-                      margin="30px 0"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="20px 10px"
                       borderRadius="2px"
-                      onClick={submit}
-                      text="Purchase"
+                      onClick={getSecret}
+                      text="Save"
                     />
-                  )}
-                </>
-              )}
+                    <StroveButton
+                      isDisabled={!organizationId}
+                      padding="5px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="20px 10px"
+                      borderRadius="2px"
+                      onClick={() => props.setEditMode(false)}
+                      text="Cancel"
+                    />
+                  </VerticalDivider>
+                ) : (
+                  <StroveButton
+                    isPrimary
+                    isDisabled={!organizationId}
+                    fontSize="18px"
+                    padding="5px"
+                    minWidth="250px"
+                    maxWidth="250px"
+                    margin="30px 0"
+                    borderRadius="2px"
+                    onClick={submit}
+                    text="Purchase"
+                  />
+                )}
+              </>
             </Formik>
           </CardInfoWrapper>
         </div>
