@@ -35,7 +35,8 @@ const FadeIn = keyframes`
 
 const SectionDivider = styled.div`
   display: flex;
-  flex-direction: ${({ isMobile }) => (isMobile ? 'column' : 'row')};
+  flex-direction: ${({ isMobile, flexDirection }) =>
+    flexDirection || (isMobile ? 'column' : 'row')};
   align-items: center;
   height: 100%;
   width: 100%;
@@ -420,12 +421,12 @@ const Banner = () => {
         )}
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary background="black" padding="20px 0px">
-        <IconContainer>
-          <Icon type="code-o" style={{ fontSize: '26px', color: '#08c' }} />
-        </IconContainer>
-      </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary background="black" padding="0">
-        <StyledH2>Developers First</StyledH2>
+        <SectionDivider flexDirection="column">
+          <IconContainer>
+            <Icon type="code-o" style={{ fontSize: '26px', color: 'white' }} />
+          </IconContainer>
+          <StyledH2>Developers First</StyledH2>
+        </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
