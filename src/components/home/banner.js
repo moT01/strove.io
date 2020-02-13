@@ -142,9 +142,10 @@ const EmailFormWrapper = styled.div`
 
 const StyledH2 = styled.h2`
   margin: 20px 0;
-  font-size: 34px;
+  font-size: 30px;
   width: 100%;
   text-align: center;
+  text-transform: uppercase;
 `
 
 const Video = styled.video`
@@ -418,8 +419,8 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary background="black">
-        <StyledH2>DevelopersFirst</StyledH2>
+      <StyledSectionWrapper isSecondary background="black" padding="10px 0">
+        <StyledH2>Developers First</StyledH2>
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
