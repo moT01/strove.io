@@ -431,12 +431,12 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary background="black" padding="20px 0px">
+      <StyledSectionWrapper isSecondary background={theme.colors.c3} padding="20px 0px">
         <SectionDivider flexDirection="column">
           <IconContainer>
             <Icon type="code-o" style={{ fontSize: '26px', color: 'white' }} />
           </IconContainer>
-          <StyledH2>Developers First</StyledH2>
+          <StyledH2 color={theme.colors.c2}>Developers First</StyledH2>
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px" background="white">
@@ -447,7 +447,7 @@ const Banner = () => {
                 <StyledCellHeader>
                   <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
                 </StyledCellHeader>
-                <StyledProductDescription color={theme.colors.c3}>
+                <StyledProductDescription>
                   Save hours to days per developer by running code in seconds
                   from anywhere
                 </StyledProductDescription>
