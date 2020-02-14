@@ -147,6 +147,8 @@ const StyledH2 = styled.h2`
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+  color: ${({ color, theme }) => color || theme.colors.c26};
+
 `
 
 const StyledH3 = styled.h3`
@@ -256,6 +258,7 @@ const StyledProductDescription = styled.h4`
   font-weight: 500;
   font-size: 22px;
   text-align: center;
+  color: ${({ theme, color }) => color || theme.colors.c26};
 `
 
 const StyledSmallText = styled.span`
@@ -435,15 +438,15 @@ const Banner = () => {
           <StyledH2>Developers First</StyledH2>
         </SectionDivider>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px" background="black">
+      <StyledSectionWrapper isSecondary padding="20px" background="white">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
-                  <StyledH2>Save time</StyledH2>
+                  <StyledH2 color="white">Save time</StyledH2>
                 </StyledCellHeader>
-                <StyledProductDescription>
+                <StyledProductDescription color="white">
                   Save hours to days per developer by running code in seconds
                   from anywhere
                 </StyledProductDescription>
