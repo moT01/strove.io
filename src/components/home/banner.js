@@ -163,15 +163,17 @@ const Banner = () => {
         <SectionDivider flexDirection="column">
           <IconContainer>
             <Icon
-              type="code-o"
+              type="team"
               style={{ fontSize: '26px', color: theme.colors.c3 }}
             />
           </IconContainer>
-          <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
+          <StyledH3 color={theme.colors.c3}>
+            Toolkit for modern software organizations
+          </StyledH3>
           <StyledProductDescription color={theme.colors.c26}>
-            Strove is the platform made by programmers for programmers. We made
-            sure that Strove resembles local environment as closely as possible
-            while adding cloud-related productivity benefits on top of it.
+            Whether you’re creating a banking app, an e-commerce store, or a
+            crowdfunding platform, Strove will allow you to deliver your
+            features more efficiently and with less effort
           </StyledProductDescription>
         </SectionDivider>
       </StyledSectionWrapper>
