@@ -13,6 +13,7 @@ import {
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
+  PAYMENT_STATUS_SUBSCRIPTION,
 } from 'queries'
 import {
   mutation,
@@ -396,6 +397,49 @@ export default memo(
       if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const paymentStatusSubscription = useSubscription(
+      PAYMENT_STATUS_SUBSCRIPTION,
+      {
+        variables: { userId: user?.id },
+        client,
+        fetchPolicy: 'no-cache',
+        context: {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'User-Agent': 'node',
+          },
+        },
+        shouldResubscribe: true,
+      }
+    )
+
+    const paymentStatus = paymentStatusSubscription
+    const paymentData = paymentStatusSubscription.data
+    const paymentLoading = paymentStatusSubscription.Loading
+
+    useEffect(() => {
+      dispatch({
+        type: C.api.FETCH_START,
+        payload: {
+          storeKey: 'paymentStatus',
+          data: paymentStatus,
+        },
+      })
+      if (paymentStatus?.data?.paymentStatus?.status) {
+        const status = paymentData?.paymentStatus?.status
+        const organizationId = paymentData?.paymentStatus?.organizationId
+        const type = paymentData?.paymentStatus?.type
+        console.log('Testing two', paymentData, status, organizationId, type)
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'paymentStatus',
+            data: paymentStatus,
+          },
+        })
+      }
+    }, [paymentStatus])
 
     return children
   })

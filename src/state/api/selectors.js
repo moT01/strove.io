@@ -37,6 +37,15 @@ export const getQueuePosition = getApiData({
   fields: ['user', 'queuePosition'],
 })
 
+export const getPaymentStatus = getApiData({
+  fields: 'paymentStatus',
+  defaultValue: {},
+})
+
+export const getPaymentLoading = getLoading({
+  fields: 'paymentStatus',
+})
+
 export const getCurrentProject = state =>
   getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
     item => item.machineId

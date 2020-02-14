@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
+import { useSubscription } from '@apollo/react-hooks'
 
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'

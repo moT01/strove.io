@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import isEmail from 'validator/lib/isEmail'
 
-import { selectors } from 'state'
 import { mutation, query } from 'utils'
 import {
   STRIPE_SUBSCRIBE,
@@ -19,6 +18,7 @@ import {
   CHANGE_PAYMENT_INFO,
 } from 'queries'
 import StroveButton from 'components/stroveButton.js'
+import { selectors, C, actions } from 'state'
 
 const CardInfoWrapper = styled.div`
   display: flex;

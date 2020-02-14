@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import { PaymentStatusFragment } from './fragments/paymentStatus'
 
 export default gql`
-  subscription($organizationId: ID!) {
-    paymentStatus(organizationId: $organizationId) {
+  subscription($userId: ID!) {
+    paymentStatus(userId: $userId) {
       ...PaymentStatus
     }
   }

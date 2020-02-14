@@ -40,6 +40,8 @@ import REVERT_CANCEL from './revertCancel'
 import DOWNGRADE_SUBSCRIPTION from './downagradeSubscription'
 import CHANGE_PLAN from './changePlan'
 import GET_PAYMENT_INFO from './getPaymentInfo'
+import PAYMENT_STATUS_SUBSCRIPTION from './paymentStatusSubscription'
+import REMOVE_FROM_ORGANIZATION from './removeFromOrganizatoin'
 
 export {
   ADD_PROJECT,
@@ -84,4 +86,6 @@ export {
   DOWNGRADE_SUBSCRIPTION,
   CHANGE_PLAN,
   GET_PAYMENT_INFO,
+  PAYMENT_STATUS_SUBSCRIPTION,
+  REMOVE_FROM_ORGANIZATION,
 }
