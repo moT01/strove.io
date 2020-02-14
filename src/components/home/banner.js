@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import styled, { keyframes, css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
-import Modal from 'react-modal'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Field } from 'formik'
 
 import { theme } from 'consts'
 import { mutation } from 'utils'
@@ -13,7 +11,6 @@ import { SEND_EMAIL } from 'queries'
 import { GetStarted, Logos, TrialInfo, StroveButton } from 'components'
 
 import {
-  FadeIn,
   StyledModal,
   StyledCellHeader,
   StyledSectionWrapper,
