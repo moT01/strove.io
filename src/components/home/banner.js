@@ -506,8 +506,8 @@ const Banner = () => {
                   <StyledH2>More effective collaboration</StyledH2>
                 </StyledCellHeader>
                 <StyledProductDescription>
-                  Spend less time organizing by managing permissions or sharing
-                  environment with a single click
+                  Spend more time on what matters by reducing managing
+                  permissions or sharing environment to a single click
                 </StyledProductDescription>
               </StyledCell>
             </SmallSectionWrapper>
