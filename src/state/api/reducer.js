@@ -6,7 +6,7 @@ const initialState = {
   sendEmail: null,
   myProjects: { data: [] },
   subscription: { data: {} },
-  payment: { data: {} },
+  paymentStatus: { data: {} },
 }
 
 export default (state = initialState, action) => {

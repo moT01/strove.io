@@ -414,17 +414,32 @@ export default memo(
       }
     )
 
+    const paymentStatus = paymentStatusSubscription
     const paymentData = paymentStatusSubscription.data
     const paymentLoading = paymentStatusSubscription.Loading
 
     useEffect(() => {
-      if (paymentData?.paymentStatus?.status) {
+      dispatch({
+        type: C.api.FETCH_START,
+        payload: {
+          storeKey: 'paymentStatus',
+          data: paymentStatus,
+        },
+      })
+      if (paymentStatus?.data?.paymentStatus?.status) {
         const status = paymentData?.paymentStatus?.status
         const organizationId = paymentData?.paymentStatus?.organizationId
         const type = paymentData?.paymentStatus?.type
         console.log('Testing two', paymentData, status, organizationId, type)
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'paymentStatus',
+            data: paymentStatus,
+          },
+        })
       }
-    }, [paymentData])
+    }, [paymentStatus])
 
     return children
   })

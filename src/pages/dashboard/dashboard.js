@@ -28,7 +28,7 @@ import {
   Modal,
 } from 'components'
 import StroveLogo from 'images/strove.png'
-
+import FullScreenLoader from 'components/fullScreenLoader'
 import Projects from './projects'
 import {
   FormWrapper,
@@ -104,6 +104,7 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
+  const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
@@ -630,6 +631,8 @@ const Dashboard = ({ history }) => {
           })
         )
       }
+      if (paymentStatus?.loading) {
+      }
       // dispatch(
       //   mutation({
       //     name: 'addMember',
@@ -1044,6 +1047,9 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
       </StyledReactModal>
+      {paymentStatus?.loading && (
+        <FullScreenLoader type="processPayment" isFullScreen color="#0072ce" />
+      )}
     </div>
   )
 }
