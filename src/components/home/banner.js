@@ -53,6 +53,18 @@ const SectionWrapper = styled.div`
   padding: ${({ padding }) => padding || '0'};
 `
 
+const SmallSectionWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  max-width: 440px;
+  max-height: 440px;
+  padding: ${({ padding }) => padding || '0'};
+`
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -455,7 +467,7 @@ const Banner = () => {
       <StyledSectionWrapper isSecondary padding="20px" background="white">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
-            <SectionWrapper isMobile={isMobile}>
+            <SmallSectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
                   <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
@@ -465,7 +477,7 @@ const Banner = () => {
                   from anywhere
                 </StyledProductDescription>
               </StyledCell>
-            </SectionWrapper>
+            </SmallSectionWrapper>
           </SectionWrapper>
           <SectionWrapper padding="20px 10px">
             <img
@@ -489,7 +501,7 @@ const Banner = () => {
               />
             </SectionWrapper>
           </SectionWrapper>
-          <SectionWrapper padding="20px 10px">
+          <SmallSectionWrapper padding="20px 10px">
             <StyledCell>
               <StyledCellHeader>
                 <StyledH2>More effective collaboration</StyledH2>
@@ -500,7 +512,7 @@ const Banner = () => {
               </StyledProductDescription>
             </StyledCell>
             <StyledH2></StyledH2>
-          </SectionWrapper>
+          </SmallSectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper
