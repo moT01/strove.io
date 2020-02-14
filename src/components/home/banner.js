@@ -40,6 +40,7 @@ const SectionDivider = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
+  max-width: 1200px;
 `
 
 const SectionWrapper = styled.div`
@@ -205,7 +206,6 @@ const StyledSectionWrapper = styled.section`
     `}
   width: 100%;
   position: relative;
-  max-width: 1200;
 
   ${({ isSecondary, background, theme }) =>
     isSecondary &&
@@ -333,6 +333,7 @@ const Illustration = styled.img`
   margin: 0 20px;
   width: 50%;
   height: 50%;
+  max-width: 520px;
 `
 
 const defaultTechnologyDescription =
@@ -435,9 +436,6 @@ const Banner = () => {
         {!isMobileOnly && (
           <Illustration
             src={require('assets/illustration.png')}
-            style={{
-              margin: '0 20px',
-            }}
             alt="illustration"
             width="50%"
             height="50%"
