@@ -12,30 +12,10 @@ import { features } from 'consts'
 import { theme } from 'consts'
 
 import {
-  StyledModal,
-  StyledCellHeader,
   StyledSectionWrapper,
-  StyledIcon,
-  StyledHeadingSection,
-  StyledH1,
-  ButtonsWrapper,
   StyledProductDescription,
-  StyledInfo,
-  StyledForm,
-  EmailFormWrapper,
-  Illustration,
   SectionDivider,
-  IconContainer,
   StyledH3,
-  SectionWrapper,
-  SmallSectionWrapper,
-  StyledCell,
-  StyledH2,
-  StyledGrid,
-  StyledHeaderText,
-  StyledFeatureDescription,
-  StyledSmallText,
-  StyledTechnologyDescriptionWrapper,
 } from './styled'
 
 const { TweenOneGroup } = TweenOne
