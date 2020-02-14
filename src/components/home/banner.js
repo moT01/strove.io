@@ -444,9 +444,9 @@ const Banner = () => {
             <SectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
-                  <StyledH2 color="white">Save time</StyledH2>
+                  <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
                 </StyledCellHeader>
-                <StyledProductDescription color="white">
+                <StyledProductDescription color={theme.colors.c3}>
                   Save hours to days per developer by running code in seconds
                   from anywhere
                 </StyledProductDescription>
