@@ -501,18 +501,19 @@ const Banner = () => {
               />
             </SectionWrapper>
           </SectionWrapper>
-          <SmallSectionWrapper padding="20px 10px">
-            <StyledCell>
-              <StyledCellHeader>
-                <StyledH2>More effective collaboration</StyledH2>
-              </StyledCellHeader>
-              <StyledProductDescription>
-                Spend less time organizing by managing permissions or sharing
-                environment with a single click
-              </StyledProductDescription>
-            </StyledCell>
-            <StyledH2></StyledH2>
-          </SmallSectionWrapper>
+          <SectionWrapper>
+            <SmallSectionWrapper padding="20px 10px">
+              <StyledCell>
+                <StyledCellHeader>
+                  <StyledH2>More effective collaboration</StyledH2>
+                </StyledCellHeader>
+                <StyledProductDescription>
+                  Spend less time organizing by managing permissions or sharing
+                  environment with a single click
+                </StyledProductDescription>
+              </StyledCell>
+            </SmallSectionWrapper>
+          </SectionWrapper>
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper
