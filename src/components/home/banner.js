@@ -431,12 +431,19 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary background={theme.colors.c3} padding="20px 0px">
+      <StyledSectionWrapper
+        isSecondary
+        background={theme.colors.c2}
+        padding="20px 0px"
+      >
         <SectionDivider flexDirection="column">
           <IconContainer>
-            <Icon type="code-o" style={{ fontSize: '26px', color: 'white' }} />
+            <Icon
+              type="code-o"
+              style={{ fontSize: '26px', color: theme.colors.c3 }}
+            />
           </IconContainer>
-          <StyledH2 color={theme.colors.c2}>Developers First</StyledH2>
+          <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px" background="white">
