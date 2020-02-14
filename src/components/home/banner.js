@@ -155,7 +155,7 @@ const EmailFormWrapper = styled.div`
 
 const StyledH2 = styled.h2`
   margin: 0;
-  font-size: 40px;
+  font-size: 36px;
   width: 100%;
   text-align: center;
   text-transform: uppercase;
