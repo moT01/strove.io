@@ -105,7 +105,9 @@ const Dashboard = ({ history }) => {
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
+  const isPaymentLoading = useSelector(selectors.api.getPaymentLoading)
   const [stopModal, setStopModal] = useState(false)
+  const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
@@ -588,6 +590,22 @@ const Dashboard = ({ history }) => {
         ),
     })
 
+  useEffect(() => {
+    console.log('Beeeeeeeeeeeeep', paymentStatus)
+    paymentStatus?.data?.paymentStatus?.status === 'success' &&
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          onSuccess: () => {
+            setAddMemberModal(false)
+          },
+          onSuccessDispatch: updateOrganizations,
+        })
+      )
+  }, [paymentStatus])
+
   const handleAddMemberClick = team => {
     setEditTeam(team)
     setAddMemberModal(true)
@@ -613,10 +631,6 @@ const Dashboard = ({ history }) => {
           user => user.email === memberEmail
         ) === -1
       ) {
-        console.log(
-          'User is not in an organization. Dispatch upgradeSubscription',
-          organizationsObj[editTeam?.organizationId]?.subscriptionQuantity + 1
-        )
         dispatch(
           mutation({
             name: 'upgradeSubscription',
@@ -627,23 +641,12 @@ const Dashboard = ({ history }) => {
                 organizationsObj[editTeam?.organizationId]
                   ?.subscriptionQuantity + 1,
             },
-            onSuccess: () => console.log('Git'),
+            onSuccess: () => setAddMemberEmail(memberEmail),
           })
         )
       }
       if (paymentStatus?.loading) {
       }
-      // dispatch(
-      //   mutation({
-      //     name: 'addMember',
-      //     mutation: ADD_MEMBER,
-      //     variables: { memberEmail, teamId: editTeam.id },
-      //     onSuccess: () => {
-      //       setAddMemberModal(false)
-      //     },
-      //     onSuccessDispatch: updateOrganizations,
-      //   })
-      // )
     }
   }
 
@@ -1047,7 +1050,7 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
       </StyledReactModal>
-      {paymentStatus?.loading && (
+      {isPaymentLoading && (
         <FullScreenLoader type="processPayment" isFullScreen color="#0072ce" />
       )}
     </div>
