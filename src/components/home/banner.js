@@ -282,6 +282,7 @@ const StyledTechnologyDescriptionWrapper = styled.div`
   flex-direction: column;
   margin: 20px 20px 0;
   max-width: 800px;
+  color: ${({ color, theme }) => color || theme.colors.c2};
 `
 
 const StyledGrid = styled.div`
@@ -434,7 +435,7 @@ const Banner = () => {
       <StyledSectionWrapper
         isSecondary
         background={theme.colors.c2}
-        padding="20px 0px"
+        padding="20px 100px"
       >
         <SectionDivider flexDirection="column">
           <IconContainer>
@@ -444,6 +445,11 @@ const Banner = () => {
             />
           </IconContainer>
           <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
+          <StyledProductDescription color={theme.colors.c26}>
+            Strove is the platform made by programmers for programmers. We made
+            sure that Strove resembles local environment as closely as possible
+            while adding cloud-related productivity benefits on top of it.
+          </StyledProductDescription>
         </SectionDivider>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px" background="white">
