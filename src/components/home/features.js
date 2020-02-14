@@ -6,9 +6,37 @@ import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
-import { isMobileOnly } from 'react-device-detect'
+import { isMobileOnly, isMobile } from 'react-device-detect'
 
 import { features } from 'consts'
+import { theme } from 'consts'
+
+import {
+  StyledModal,
+  StyledCellHeader,
+  StyledSectionWrapper,
+  StyledIcon,
+  StyledHeadingSection,
+  StyledH1,
+  ButtonsWrapper,
+  StyledProductDescription,
+  StyledInfo,
+  StyledForm,
+  EmailFormWrapper,
+  Illustration,
+  SectionDivider,
+  IconContainer,
+  StyledH3,
+  SectionWrapper,
+  SmallSectionWrapper,
+  StyledCell,
+  StyledH2,
+  StyledGrid,
+  StyledHeaderText,
+  StyledFeatureDescription,
+  StyledSmallText,
+  StyledTechnologyDescriptionWrapper,
+} from './styled'
 
 const { TweenOneGroup } = TweenOne
 
@@ -196,6 +224,21 @@ const Features = () => {
 
   return (
     <StyledFeatureWrapper id="page1-wrapper">
+      <StyledSectionWrapper
+        isSecondary
+        background={theme.colors.c2}
+        padding={`20px ${isMobile ? '20px' : '25%'}`}
+      >
+        <SectionDivider flexDirection="column">
+          <StyledH3 color={theme.colors.c3}>
+            Built for modern enterprise
+          </StyledH3>
+          <StyledProductDescription color={theme.colors.c26}>
+            Strove helps businesses reduce management burden associated with
+            creating software
+          </StyledProductDescription>
+        </SectionDivider>
+      </StyledSectionWrapper>
       {!isMobileOnly && (
         <StyledParlax
           className="page1-bg"
