@@ -35,7 +35,8 @@ const FadeIn = keyframes`
 
 const SectionDivider = styled.div`
   display: flex;
-  flex-direction: ${({ isMobile }) => (isMobile ? 'column' : 'row')};
+  flex-direction: ${({ isMobile, flexDirection }) =>
+    flexDirection || (isMobile ? 'column' : 'row')};
   align-items: center;
   height: 100%;
   width: 100%;
@@ -141,10 +142,20 @@ const EmailFormWrapper = styled.div`
 `
 
 const StyledH2 = styled.h2`
-  margin: 20px 0;
-  font-size: 34px;
+  margin: 0;
+  font-size: 40px;
   width: 100%;
   text-align: center;
+  text-transform: uppercase;
+  color: ${({ color, theme }) => color || theme.colors.c2};
+`
+
+const StyledH3 = styled.h3`
+  margin: 0;
+  font-size: 32px;
+  width: 100%;
+  text-align: center;
+  color: ${({ color, theme }) => color || theme.colors.c26};
 `
 
 const Video = styled.video`
@@ -229,7 +240,7 @@ const StyledH1 = styled.h1`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.c3};
   font-weight: 700;
-  font-size: 38px;
+  font-size: 40px;
 `
 
 const StyledHeadingSection = styled.div`
@@ -247,6 +258,7 @@ const StyledProductDescription = styled.h4`
   font-weight: 500;
   font-size: 22px;
   text-align: center;
+  color: ${({ theme, color }) => color || theme.colors.c26};
 `
 
 const StyledSmallText = styled.span`
@@ -261,6 +273,7 @@ const StyledFeatureDescription = styled.div`
   margin-bottom: 20px;
   width: 100%;
   text-align: left;
+  color: ${({ color, theme }) => color || theme.colors.c26};
 `
 
 const StyledTechnologyDescriptionWrapper = styled.div`
@@ -418,17 +431,21 @@ const Banner = () => {
           />
         )}
       </StyledSectionWrapper>
-      <StyledSectionWrapper
-        isSecondary
-        padding="50px 20px 50px"
-        background="black"
-      >
+      <StyledSectionWrapper isSecondary background={theme.colors.c3} padding="20px 0px">
+        <SectionDivider flexDirection="column">
+          <IconContainer>
+            <Icon type="code-o" style={{ fontSize: '26px', color: 'white' }} />
+          </IconContainer>
+          <StyledH2 color={theme.colors.c2}>Developers First</StyledH2>
+        </SectionDivider>
+      </StyledSectionWrapper>
+      <StyledSectionWrapper isSecondary padding="20px" background="white">
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SectionWrapper isMobile={isMobile}>
               <StyledCell>
                 <StyledCellHeader>
-                  <StyledH2>Save time</StyledH2>
+                  <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
                 </StyledCellHeader>
                 <StyledProductDescription>
                   Save hours to days per developer by running code in seconds
@@ -522,10 +539,10 @@ const Banner = () => {
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
-          <StyledH2>
+          <StyledH3 color={theme.colors.c2}>
             Strove brings ready in seconds, pre-configured cloud servers to
             write, run, build and manage software remotely
-          </StyledH2>
+          </StyledH3>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px">
