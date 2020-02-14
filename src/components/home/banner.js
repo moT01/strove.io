@@ -12,6 +12,14 @@ import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { GetStarted, Logos, TrialInfo, StroveButton } from 'components'
 
+import {
+  FadeIn,
+  StyledModal,
+  StyledCellHeader,
+  StyledSectionWrapper,
+  StyledIcon,
+} from './styled'
+
 const validate = values => {
   let errors = {}
 
@@ -23,15 +31,6 @@ const validate = values => {
 
   return errors
 }
-
-const FadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
 
 const SectionDivider = styled.div`
   display: flex;
@@ -175,67 +174,6 @@ const Video = styled.video`
   width: ${props => (props.isMobile ? '90vw' : 'calc(100% - 40px)')};
   margin-top: ${props => (props.isMobile ? '5vh' : '0')};
   outline: none;
-`
-
-const StyledModal = styled(Modal)`
-  display: flex;
-  height: auto;
-  width: auto;
-  position: fixed;
-  animation: ${FadeIn} 0.2s ease-out;
-  :focus {
-    outline: 0;
-  }
-`
-
-const StyledCellHeader = styled.div`
-  margin-bottom: 5px;
-  font-size: 28px;
-  display: flex;
-`
-
-const StyledSectionWrapper = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${({ isSecondary }) =>
-    !isSecondary &&
-    css`
-      min-height: 85vh;
-    `}
-  width: 100%;
-  position: relative;
-
-  ${({ isSecondary, background, theme }) =>
-    isSecondary &&
-    css`
-      background: ${background || theme.colors.c1};
-      color: ${theme.colors.c2};
-    `}
-
-    padding: ${({ padding }) => padding || '0'};
-    ${({ minHeight }) => css`
-      min-height: ${minHeight};
-    `};
-
-    ${({ background }) =>
-      background &&
-      css`
-        background: ${background};
-      `}
-`
-
-const StyledIcon = styled(Icon)`
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.7vh;
-  color: ${({ theme }) => theme.colors.c1};
-  cursor: pointer;
-  :focus {
-    outline: none;
-  }
 `
 
 const StyledForm = styled(Form)`
