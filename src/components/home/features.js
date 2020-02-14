@@ -16,6 +16,7 @@ import {
   StyledProductDescription,
   SectionDivider,
   StyledH3,
+  IconContainer,
 } from './styled'
 
 const { TweenOneGroup } = TweenOne
@@ -216,6 +217,42 @@ const Features = () => {
           <StyledProductDescription color={theme.colors.c26}>
             Strove helps businesses reduce management burden associated with
             creating software
+          </StyledProductDescription>
+        </SectionDivider>
+      </StyledSectionWrapper>
+      {!isMobileOnly && (
+        <StyledParlax
+          className="page1-bg"
+          animation={{
+            translateY: 300,
+            ease: 'linear',
+            playScale: [0, 1.65],
+          }}
+          location="page1-wrapper"
+        >
+          <SmallCloud />
+          <MediumCloud />
+          <BigCloud />
+        </StyledParlax>
+      )}
+      <StyledFeature>{children}</StyledFeature>
+      <StyledSectionWrapper
+        isSecondary
+        background={theme.colors.c2}
+        padding={`20px ${isMobile ? '20px' : '25%'}`}
+      >
+        <SectionDivider flexDirection="column">
+          <IconContainer>
+            <Icon
+              type="code-o"
+              style={{ fontSize: '26px', color: theme.colors.c3 }}
+            />
+          </IconContainer>
+          <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
+          <StyledProductDescription color={theme.colors.c26}>
+            Strove is the platform made by programmers for programmers. We made
+            sure that Strove resembles local environment as closely as possible
+            while adding cloud-related productivity benefits on top of it.
           </StyledProductDescription>
         </SectionDivider>
       </StyledSectionWrapper>
