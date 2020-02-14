@@ -149,7 +149,7 @@ const StyledH2 = styled.h2`
   text-transform: uppercase;
 `
 
-const StyledLowercasedH2 = styled.h2`
+const StyledH3 = styled.h3`
   margin: 0;
   font-size: 32px;
   width: 100%;
@@ -535,10 +535,10 @@ const Banner = () => {
       <StyledSectionWrapper isSecondary padding="50px 20px 0">
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
-          <StyledLowercasedH2>
+          <StyledH3>
             Strove brings ready in seconds, pre-configured cloud servers to
             write, run, build and manage software remotely
-          </StyledLowercasedH2>
+          </StyledH3>
         </SectionWrapper>
       </StyledSectionWrapper>
       <StyledSectionWrapper isSecondary padding="20px">
