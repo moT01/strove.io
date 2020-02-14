@@ -435,7 +435,7 @@ const Banner = () => {
       <StyledSectionWrapper
         isSecondary
         background={theme.colors.c2}
-        padding="20px 100px"
+        padding={`20px ${isMobile ? '20px' : '25%'}`}
       >
         <SectionDivider flexDirection="column">
           <IconContainer>
