@@ -540,8 +540,8 @@ const Dashboard = ({ history }) => {
                   variables: {
                     organizationId: team.organizationId,
                     quantity:
-                      organizationsObj[editTeam?.organizationId]?.users
-                        ?.length - 1,
+                      organizationsObj[editTeam?.organizationId]
+                        ?.subscriptionQuantity - 1,
                   },
                   onSuccess: () => updateOrganizations,
                 })
@@ -614,7 +614,7 @@ const Dashboard = ({ history }) => {
       ) {
         console.log(
           'User is not in an organization. Dispatch upgradeSubscription',
-          organizationsObj[editTeam?.organizationId]?.users?.length + 3
+          organizationsObj[editTeam?.organizationId]?.subscriptionQuantity + 1
         )
         dispatch(
           mutation({
@@ -623,7 +623,8 @@ const Dashboard = ({ history }) => {
             variables: {
               organizationId: editTeam.organizationId,
               quantity:
-                organizationsObj[editTeam?.organizationId]?.users?.length + 3,
+                organizationsObj[editTeam?.organizationId]
+                  ?.subscriptionQuantity + 1,
             },
             onSuccess: () => console.log('Git'),
           })

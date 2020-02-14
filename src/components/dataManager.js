@@ -401,7 +401,7 @@ export default memo(
     const paymentStatusSubscription = useSubscription(
       PAYMENT_STATUS_SUBSCRIPTION,
       {
-        variables: { userId: user.id },
+        variables: { userId: user?.id },
         client,
         fetchPolicy: 'no-cache',
         context: {
@@ -414,22 +414,17 @@ export default memo(
       }
     )
 
-    const {
-      paymentStatus,
-      paymentOrganizationId,
-      paymentType,
-    } = paymentStatusSubscription
+    const paymentData = paymentStatusSubscription.data
+    const paymentLoading = paymentStatusSubscription.Loading
 
-    useEffect(
-      () =>
-        console.log(
-          'Testing two',
-          paymentStatus,
-          paymentOrganizationId,
-          paymentType
-        ),
-      [paymentStatus]
-    )
+    useEffect(() => {
+      if (paymentData?.paymentStatus?.status) {
+        const status = paymentData?.paymentStatus?.status
+        const organizationId = paymentData?.paymentStatus?.organizationId
+        const type = paymentData?.paymentStatus?.type
+        console.log('Testing two', paymentData, status, organizationId, type)
+      }
+    }, [paymentData])
 
     return children
   })
