@@ -147,8 +147,7 @@ const StyledH2 = styled.h2`
   width: 100%;
   text-align: center;
   text-transform: uppercase;
-  color: ${({ color, theme }) => color || theme.colors.c26};
-
+  color: ${({ color, theme }) => color || theme.colors.c2};
 `
 
 const StyledH3 = styled.h3`
@@ -156,6 +155,7 @@ const StyledH3 = styled.h3`
   font-size: 32px;
   width: 100%;
   text-align: center;
+  color: ${({ color, theme }) => color || theme.colors.c26};
 `
 
 const Video = styled.video`
@@ -273,6 +273,7 @@ const StyledFeatureDescription = styled.div`
   margin-bottom: 20px;
   width: 100%;
   text-align: left;
+  color: ${({ color, theme }) => color || theme.colors.c26};
 `
 
 const StyledTechnologyDescriptionWrapper = styled.div`
