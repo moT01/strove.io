@@ -7,6 +7,7 @@ import { enterpriseFeatures, devFeatures } from 'consts'
 import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
+import ForEnterprise from './forEnterprise'
 import Footer from '../footer'
 
 const StyledWrapper = styled.div`
@@ -24,7 +25,9 @@ const Home = () => {
   return (
     <StyledWrapper ref={ref}>
       <Banner />
+      <ForEnterprise />
       <Features features={enterpriseFeatures} />
+      <ForEnterprise />
       <Features features={devFeatures} />
       <Technologies />
       <Footer />

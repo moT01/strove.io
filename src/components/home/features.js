@@ -204,21 +204,6 @@ const Features = ({ features }) => {
 
   return (
     <StyledFeatureWrapper id="page1-wrapper">
-      <StyledSectionWrapper
-        isSecondary
-        background={theme.colors.c2}
-        padding={`20px ${isMobile ? '20px' : '25%'}`}
-      >
-        <SectionDivider flexDirection="column">
-          <StyledH3 color={theme.colors.c3}>
-            Built for modern enterprise
-          </StyledH3>
-          <StyledProductDescription color={theme.colors.c26}>
-            Strove helps businesses reduce management burden associated with
-            creating software
-          </StyledProductDescription>
-        </SectionDivider>
-      </StyledSectionWrapper>
       {!isMobileOnly && (
         <StyledParlax
           className="page1-bg"
