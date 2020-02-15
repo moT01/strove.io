@@ -167,7 +167,7 @@ const Banner = () => {
         <SectionDivider flexDirection="column">
           <IconContainer>
             <Icon
-              type="team"
+              type="laptop"
               style={{ fontSize: '26px', color: theme.colors.c3 }}
             />
           </IconContainer>
