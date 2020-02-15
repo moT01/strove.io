@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { isMobile } from 'react-device-detect'
+import { isMobileOnly } from 'react-device-detect'
 
 import { theme } from 'consts'
 
@@ -14,7 +14,8 @@ const ForEnterprise = () => (
   <StyledSectionWrapper
     isSecondary
     background={theme.colors.c2}
-    padding={`0 ${isMobile ? '20px' : '25%'} 0`}
+    padding={`0 ${isMobileOnly ? '20px' : '25%'} 0`}
+    isMobileOnly={isMobileOnly}
   >
     <SectionDivider flexDirection="column">
       <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>

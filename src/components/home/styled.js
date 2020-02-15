@@ -2,6 +2,7 @@ import styled, { keyframes, css } from 'styled-components/macro'
 import Modal from 'react-modal'
 import { Icon } from 'antd'
 import { Form } from 'formik'
+import { isMobile } from 'react-device-detect'
 
 export const FadeIn = keyframes`
   0% {
@@ -34,12 +35,14 @@ export const StyledSectionWrapper = styled.section`
   justify-content: center;
   align-items: center;
 
+
+  ${({ isMobileOnly }) => !isMobileOnly && 'width: 100%;'}
+
   ${({ isSecondary }) =>
     !isSecondary &&
     css`
       min-height: 85vh;
     `}
-  position: relative;
 
   ${({ isSecondary, background, theme }) =>
     isSecondary &&

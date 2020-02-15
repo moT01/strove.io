@@ -64,7 +64,10 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper padding={isMobileOnly ? '20px' : '50px'}>
+      <StyledSectionWrapper
+        padding={isMobileOnly ? '20px' : '50px'}
+        isMobileOnly={isMobileOnly}
+      >
         <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
           <StyledH1>Cloud alternative for software development</StyledH1>
           <StyledProductDescription>
@@ -159,6 +162,7 @@ const Banner = () => {
         isSecondary
         background={theme.colors.c2}
         padding={`20px ${isMobile ? '20px' : '25%'}`}
+        isMobileOnly={isMobileOnly}
       >
         <SectionDivider flexDirection="column">
           <IconContainer>
@@ -177,7 +181,12 @@ const Banner = () => {
           </StyledProductDescription>
         </SectionDivider>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px" background="white">
+      <StyledSectionWrapper
+        isSecondary
+        padding="20px"
+        background="white"
+        isMobileOnly={isMobileOnly}
+      >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SmallSectionWrapper isMobile={isMobile}>
@@ -204,6 +213,7 @@ const Banner = () => {
         isSecondary
         padding="50px 20px 50px"
         background="black"
+        isMobileOnly={isMobileOnly}
       >
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
@@ -233,6 +243,7 @@ const Banner = () => {
         isSecondary
         padding="0 20px 20px"
         background={theme.colors.c3}
+        isMobileOnly={isMobileOnly}
       >
         <StyledGrid>
           <StyledCell>
@@ -275,7 +286,11 @@ const Banner = () => {
           </StyledCell>
         </StyledGrid>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="50px 20px 0">
+      <StyledSectionWrapper
+        isSecondary
+        padding="50px 20px 0"
+        isMobileOnly={isMobileOnly}
+      >
         <SectionWrapper>
           <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
           <StyledH3 color={theme.colors.c2}>
@@ -284,7 +299,11 @@ const Banner = () => {
           </StyledH3>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledSectionWrapper isSecondary padding="20px">
+      <StyledSectionWrapper
+        isSecondary
+        padding="20px"
+        isMobileOnly={isMobileOnly}
+      >
         <SectionWrapper isSecondary>
           <Logos handleHoverIn={handleHoverIn} />
           <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
