@@ -281,13 +281,13 @@ export const StyledTechnologyDescriptionWrapper = styled.div`
 export const StyledGrid = styled.div`
   display: ${isMobile ? 'block' : 'grid'};
   grid-gap: 10px;
-  background-color: ${({ theme }) => theme.colors.c3};
+  background-color: ${({ theme }) => theme.colors.c27};
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  border-top: 1px solid white;
+  border-top: 1px solid ${({ theme }) => theme.colors.c1};
 `
 
 export const StyledCell = styled.div`
@@ -308,6 +308,7 @@ export const IconContainer = styled.div`
 export const StyledHeaderText = styled.div`
   margin: 0 10px 5px 10px;
   text-align: left;
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 export const Illustration = styled.img`

@@ -212,7 +212,7 @@ const Banner = () => {
       <StyledSectionWrapper
         isSecondary
         padding="50px 20px 50px"
-        background="black"
+        background={theme.colors.c27}
         isMobileOnly={isMobileOnly}
       >
         <SectionDivider isMobile={isMobile}>
@@ -228,10 +228,12 @@ const Banner = () => {
             <SmallSectionWrapper padding="20px 10px">
               <StyledCell>
                 <StyledCellHeader>
-                  <StyledH2>More effective collaboration</StyledH2>
+                  <StyledH2 color={theme.colors.c3}>
+                    More effective collaboration
+                  </StyledH2>
                 </StyledCellHeader>
                 <StyledProductDescription>
-                  Spend more time on what matters by reducing managing
+                  Spend more time on what  matters by reducing managing
                   permissions or sharing environment to a single click
                 </StyledProductDescription>
               </StyledCell>
@@ -242,7 +244,7 @@ const Banner = () => {
       <StyledSectionWrapper
         isSecondary
         padding="0 20px 20px"
-        background={theme.colors.c3}
+        background={theme.colors.c27}
         isMobileOnly={isMobileOnly}
       >
         <StyledGrid>
