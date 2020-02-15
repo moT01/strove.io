@@ -26,8 +26,6 @@ const Home = () => {
   return (
     <StyledWrapper ref={ref}>
       <Banner />
-      <ForEnterprise />
-      <Features features={enterpriseFeatures} />
       <ForDevelopers />
       <Features features={devFeatures} />
       <Technologies />

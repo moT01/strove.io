@@ -14,7 +14,7 @@ const ForEnterprise = () => (
   <StyledSectionWrapper
     isSecondary
     background={theme.colors.c2}
-    padding={`0 ${isMobileOnly ? '20px' : '25%'} 0`}
+    padding={`50px ${isMobileOnly ? '20px' : '25%'} 0`}
     isMobileOnly={isMobileOnly}
   >
     <SectionDivider flexDirection="column">
