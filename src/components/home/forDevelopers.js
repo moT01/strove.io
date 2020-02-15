@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { isMobileOnly } from 'react-device-detect'
+import { Icon } from 'antd'
 
 import { theme } from 'consts'
 
@@ -8,6 +9,7 @@ import {
   StyledProductDescription,
   SectionDivider,
   StyledH3,
+  IconContainer,
 } from './styled'
 
 const ForEnterprise = () => (
@@ -18,6 +20,12 @@ const ForEnterprise = () => (
     isMobileOnly={isMobileOnly}
   >
     <SectionDivider flexDirection="column">
+      <IconContainer>
+        <Icon
+          type="code"
+          style={{ fontSize: '26px', color: theme.colors.c3 }}
+        />
+      </IconContainer>
       <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
       <StyledProductDescription color={theme.colors.c26}>
         Strove is the platform made by programmers for programmers. We made sure
