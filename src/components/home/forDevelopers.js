@@ -10,17 +10,18 @@ import {
   StyledH3,
 } from './styled'
 
-const ForEnterprise = ({ features }) => (
+const ForEnterprise = () => (
   <StyledSectionWrapper
     isSecondary
     background={theme.colors.c2}
     padding={`20px ${isMobile ? '20px' : '25%'}`}
   >
     <SectionDivider flexDirection="column">
-      <StyledH3 color={theme.colors.c3}>Built for modern enterprise</StyledH3>
+      <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
       <StyledProductDescription color={theme.colors.c26}>
-        Strove helps businesses reduce management burden associated with
-        creating software
+        Strove is the platform made by programmers for programmers. We made sure
+        that Strove resembles local environment as closely as possible while
+        adding cloud-related productivity benefits on top of it.
       </StyledProductDescription>
     </SectionDivider>
   </StyledSectionWrapper>
