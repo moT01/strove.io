@@ -279,7 +279,7 @@ export const StyledTechnologyDescriptionWrapper = styled.div`
 `
 
 export const StyledGrid = styled.div`
-  display: grid;
+  display: ${isMobile ? 'block' : 'grid'};
   grid-gap: 10px;
   background-color: ${({ theme }) => theme.colors.c3};
   width: 100%;
