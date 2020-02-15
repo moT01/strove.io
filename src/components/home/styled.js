@@ -39,7 +39,6 @@ export const StyledSectionWrapper = styled.section`
     css`
       min-height: 85vh;
     `}
-  width: 100%;
   position: relative;
 
   ${({ isSecondary, background, theme }) =>
