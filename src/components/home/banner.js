@@ -254,7 +254,7 @@ const Banner = () => {
               <StyledHeaderText>Give focus a chance</StyledHeaderText>
             </StyledCellHeader>
             <StyledFeatureDescription>
-              There's a lot of time and work needed to make code work on local
+              A lot of time and work is needed to make code work on local
               machines. Choosing cloud environment lets team do their actual job
               from the get go.
             </StyledFeatureDescription>
