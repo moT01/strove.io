@@ -233,7 +233,7 @@ const Banner = () => {
                   </StyledH2>
                 </StyledCellHeader>
                 <StyledProductDescription>
-                  Spend more time on what  matters by reducing managing
+                  Spend more time on what matters by reducing managing
                   permissions or sharing environment to a single click
                 </StyledProductDescription>
               </StyledCell>
@@ -251,7 +251,7 @@ const Banner = () => {
           <StyledCell>
             <StyledCellHeader>
               <IconContainer>
-                <Icon type="clock-circle" />
+                <Icon type="clock-circle" style={{ color: theme.colors.c1 }} />
               </IconContainer>
               <StyledHeaderText>Give focus a chance</StyledHeaderText>
             </StyledCellHeader>
@@ -264,7 +264,7 @@ const Banner = () => {
           <StyledCell>
             <StyledCellHeader>
               <IconContainer>
-                <Icon type="bug" />
+                <Icon type="bug" style={{ color: theme.colors.c1 }} />
               </IconContainer>
               <StyledHeaderText>Debug less</StyledHeaderText>
             </StyledCellHeader>
@@ -277,7 +277,7 @@ const Banner = () => {
           <StyledCell>
             <StyledCellHeader>
               <IconContainer>
-                <Icon type="cloud-sync" />
+                <Icon type="cloud-sync" style={{ color: theme.colors.c1 }} />
               </IconContainer>
               <StyledHeaderText>Development, organized</StyledHeaderText>
             </StyledCellHeader>
