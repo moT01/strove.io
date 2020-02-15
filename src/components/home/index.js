@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { useAnalytics } from 'hooks'
+import { enterpriseFeatures, devFeatures } from 'consts'
 
 import Banner from './banner'
 import Features from './features'
@@ -23,7 +24,7 @@ const Home = () => {
   return (
     <StyledWrapper ref={ref}>
       <Banner />
-      <Features />
+      <Features features={devFeatures} />
       <Technologies />
       <Footer />
     </StyledWrapper>

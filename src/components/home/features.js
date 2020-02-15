@@ -8,7 +8,6 @@ import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 
-import { devFeatures } from 'consts'
 import { theme } from 'consts'
 
 import {
@@ -65,7 +64,7 @@ const pointPos = [
   { x: 50, y: 50, opacity: 0.2 },
 ]
 
-const Features = () => {
+const Features = ({ features }) => {
   const [hoverNum, setHoverNum] = useState()
   const onMouseOver = i => setHoverNum(i)
   const onMouseOut = () => setHoverNum(null)
@@ -93,7 +92,7 @@ const Features = () => {
   }
 
   let children = [[], [], []]
-  devFeatures.forEach((item, i) => {
+  features.forEach((item, i) => {
     const isHover = hoverNum === i
     const pointChild = [
       'point-0 left',
