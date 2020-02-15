@@ -8,6 +8,7 @@ import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
 import ForEnterprise from './forEnterprise'
+import ForDevelopers from './forDevelopers'
 import Footer from '../footer'
 
 const StyledWrapper = styled.div`
@@ -27,7 +28,7 @@ const Home = () => {
       <Banner />
       <ForEnterprise />
       <Features features={enterpriseFeatures} />
-      <ForEnterprise />
+      <ForDevelopers />
       <Features features={devFeatures} />
       <Technologies />
       <Footer />

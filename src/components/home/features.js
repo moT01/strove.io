@@ -6,17 +6,7 @@ import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
-import { isMobileOnly, isMobile } from 'react-device-detect'
-
-import { theme } from 'consts'
-
-import {
-  StyledSectionWrapper,
-  StyledProductDescription,
-  SectionDivider,
-  StyledH3,
-  IconContainer,
-} from './styled'
+import { isMobileOnly } from 'react-device-detect'
 
 const { TweenOneGroup } = TweenOne
 
@@ -204,22 +194,6 @@ const Features = ({ features }) => {
 
   return (
     <StyledFeatureWrapper id="page1-wrapper">
-      {!isMobileOnly && (
-        <StyledParlax
-          className="page1-bg"
-          animation={{
-            translateY: 300,
-            ease: 'linear',
-            playScale: [0, 1.65],
-          }}
-          location="page1-wrapper"
-        >
-          <SmallCloud />
-          <MediumCloud />
-          <BigCloud />
-        </StyledParlax>
-      )}
-      <StyledFeature>{children}</StyledFeature>
       {!isMobileOnly && (
         <StyledParlax
           className="page1-bg"
