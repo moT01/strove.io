@@ -206,8 +206,9 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                           onClick={() => {
                             handleStopClick(project.id)
                           }}
-                          text="Stop"
-                        />
+                        >
+                          <ProjectActionIcon type="pause-circle" />
+                        </StroveButton>
                       ) : (
                         <StroveButton
                           isDisabled={isDeleting || isContinuing || isStopping}
