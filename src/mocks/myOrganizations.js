@@ -2,9 +2,19 @@ const users = [
   {
     name: 'Ashley Patterson',
     photoUrl: 'https://randomuser.me/api/portraits/women/82.jpg',
+  }
+  {
+    name: 'Jason Park',
+    photoUrl: 'https://randomuser.me/api/portraits/men/90.jpg',
+  },
+  {
+    name: 'Daewon Song',
+    photoUrl: 'https://randomuser.me/api/portraits/men/55.jpg',
   },
 ]
 
+
+https://randomuser.me/api/portraits/men/55.jpg
 export default {
   api: {
     myOrganizations: {
@@ -22,11 +32,36 @@ export default {
               organizationId: '5e3470b45430d66477ca8d3b',
               projects: [
                 {
+                  id: '5e3c96b9b084836851f7c889',
+                  name: 'Apollo Notifications V2',
+                  userId: 'Deliver stuff like it\s a rocket going to Mars',
+                  user: users[1],
+                  description: 'Deliver stuff like it\s a rocket going to Mars',
+                  isPrivate: true,
+                  createdAt: '1581029049513',
+                  repoLink:
+                    'https://github.com/stroveio/freecodecamp-exercise-tracker.git',
+                  machineId: null,
+                  editorPort: null,
+                  additionalPorts: [
+                    [27017, null],
+                    [3000, null],
+                    [4000, null],
+                    [8000, null],
+                    [8080, null],
+                  ],
+                  machineName: null,
+                  isVisible: false,
+                  teamId: '5e39ce3e99c6bf1d491662dc',
+                  forkedFromId: null,
+                  __typename: 'Project',
+                },
+                {
                   id: '5e3b3caf635dab435d9444f5',
                   name: 'Apollo API',
                   userId: '5d963f095c058e0fe486d56d',
                   user: users[0],
-                  description: 'V1 was finished in 1969 so let\s do V2,
+                  description: 'V1 was finished in 1969 so let\s do V2',
                   isPrivate: false,
                   createdAt: '1580940463504',
                   repoLink: 'https://github.com/reacttraining/react-router.git',
@@ -46,10 +81,10 @@ export default {
                 },
                 {
                   id: '5e3c96b9b084836851f7c889',
-                  name: 'freecodecamp-exercise-tracker',
+                  name: 'Apollo Auth Middleware V2',
                   userId: '5d963f095c058e0fe486d56d',
-                  user: users[0],
-                  description: 'freeCodeCamp - Challenge Exercise Tracker',
+                  user: users[1],
+                  description: 'Help users join the program',
                   isPrivate: true,
                   createdAt: '1581029049513',
                   repoLink:
