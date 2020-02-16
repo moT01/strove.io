@@ -158,9 +158,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       </TextWrapper>
                     )}
                     <TextWrapper>
-                      <StyledIcon
-                        type={project.isVisible ? 'eye' : 'eye-invisible'}
-                      />
+                      <StyledIcon type={project.isVisible ? 'team' : 'user'} />
                       <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
                     </TextWrapper>
                   </InfoWrapper>
