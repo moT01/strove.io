@@ -190,7 +190,16 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       //     : 'Fork'
                       // }
                     >
-                      <ProjectActionIcon type="play-circle" />
+                      <ProjectActionIcon
+                        type={
+                          isOwner
+                            ? currentProjectId &&
+                              project.id === currentProjectId
+                              ? 'play-circle'
+                              : 'play-circle'
+                            : 'fork'
+                        }
+                      />
                     </StroveButton>
                     {isOwner &&
                       !project.forkedFromId &&
@@ -222,8 +231,9 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                             setModalVisible(true)
                             setProjectToDelete(project)
                           }}
-                          text="Delete"
-                        />
+                        >
+                          <ProjectActionIcon type="delete" />
+                        </StroveButton>
                       ))}
                     {isOwner && !project.forkedFromId && (
                       <StroveButton
