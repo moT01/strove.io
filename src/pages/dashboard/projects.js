@@ -249,7 +249,11 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                           )
                         }}
                         text={project.isVisible ? 'Hide' : 'Show'}
-                      />
+                      >
+                        <ProjectActionIcon
+                          type={project.isVisible ? 'lock' : 'share-alt'}
+                        />
+                      </StroveButton>
                     )}
                   </RightSection>
                 </VerticalDivider>
