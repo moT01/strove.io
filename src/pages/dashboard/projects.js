@@ -261,8 +261,10 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                             })
                           )
                         }}
-                        // text={project.isVisible ? 'Hide' : 'Show'}
                       >
+                        <IconDescription>
+                          {project.isVisible ? 'Hide' : 'Show'}
+                        </IconDescription>
                         <ProjectActionIcon
                           type={project.isVisible ? 'lock' : 'share-alt'}
                         />
