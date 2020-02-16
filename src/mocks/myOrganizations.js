@@ -11,6 +11,10 @@ const users = [
     name: 'Daewon Song',
     photoUrl: 'https://randomuser.me/api/portraits/men/55.jpg',
   },
+  {
+    name: 'Cho Black',
+    photoUrl: 'https://randomuser.me/api/portraits/women/50.jpg',
+  },
 ]
 
 export default [
@@ -57,14 +61,13 @@ export default [
             isPrivate: true,
             createdAt: '1581029049513',
             repoLink: 'https://github.com/apolloTechInc/NotificationsV2.git',
-            machineId: null,
-            editorPort: null,
+            machineId: 3000,
+            editorPort: 3000,
             additionalPorts: [
-              [27017, null],
-              [3000, null],
-              [4000, null],
-              [8000, null],
-              [8080, null],
+              [3000, 3000],
+              [4000, 3000],
+              [8000, 3000],
+              [8080, 3000],
             ],
             machineName: null,
             isVisible: false,
@@ -75,8 +78,8 @@ export default [
           {
             id: '5e3c96b9b084836851f7c889',
             name: 'Apollo Auth Middleware V2',
-            userId: '123',
-            user: users[0],
+            userId: '5d963f095c058e0fe486d56d',
+            user: users[3],
             description: 'Help users join the program',
             isPrivate: true,
             createdAt: '1581029049513',
