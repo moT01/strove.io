@@ -503,3 +503,8 @@ export const CircleIcon = styled.div`
 export const StyledErrors = styled(Text)`
   color: ${({ theme }) => theme.colors.c5};
 `
+
+export const ProjectActionIcon = styled(Icon)`
+  font-size: 20px;
+  line-height: 20px;
+`
