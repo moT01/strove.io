@@ -203,7 +203,7 @@ const Banner = () => {
           <SectionWrapper padding="20px 10px">
             <DemoImage
               shadowOpacity="0.3"
-              src={require('assets/editorPresentation.png')}
+              src={require('assets/editor.png')}
               alt="editor image"
             />
           </SectionWrapper>

@@ -325,6 +325,7 @@ export const StyledSectionIcon = styled(Icon)`
 
 export const DemoImage = styled.img`
   margin: 0;
-  max-width: 500px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, ${({ shadowOpacity }) => shadowOpacity});
+  max-width: 600px;
+  box-shadow: 0 5px 20px 0
+    rgba(0, 0, 0, ${({ shadowOpacity }) => shadowOpacity});
 `
