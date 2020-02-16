@@ -25,7 +25,7 @@ import {
   CircleIcon,
   StyledIcon,
   ProjectActionIcon,
-  IconDescription
+  IconDescription,
 } from './styled'
 
 const sortByActiveProjects = projects =>
@@ -183,13 +183,6 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                               organizationId,
                             })
                       }
-                      // text={
-                      //   isOwner
-                      //     ? currentProjectId && project.id === currentProjectId
-                      //       ? 'Continue'
-                      //       : 'Start'
-                      //     : 'Fork'
-                      // }
                     >
                       <IconDescription>
                         {isOwner
@@ -224,6 +217,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                             handleStopClick(project.id)
                           }}
                         >
+                          <IconDescription>Stop</IconDescription>
                           <ProjectActionIcon type="pause-circle" />
                         </StroveButton>
                       ) : (
@@ -240,6 +234,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                             setProjectToDelete(project)
                           }}
                         >
+                          <IconDescription>Delete</IconDescription>
                           <ProjectActionIcon type="delete" />
                         </StroveButton>
                       ))}
