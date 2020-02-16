@@ -322,3 +322,9 @@ export const StyledSectionIcon = styled(Icon)`
   font-size: 26px;
   color: ${({ theme }) => theme.colors.c1};
 `
+
+export const DemoImage = styled.img`
+  margin: 0;
+  max-width: 500px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, ${({ shadowOpacity }) => shadowOpacity});
+`

@@ -36,6 +36,7 @@ import {
   StyledSmallText,
   StyledTechnologyDescriptionWrapper,
   StyledSectionIcon,
+  DemoImage,
 } from './styled'
 
 const validate = values => {
@@ -200,9 +201,10 @@ const Banner = () => {
             </SmallSectionWrapper>
           </SectionWrapper>
           <SectionWrapper padding="20px 10px">
-            <img
+            <DemoImage
+              shadowOpacity="0.3"
               src={require('assets/editorPresentation.png')}
-              alt="editor presentation"
+              alt="editor image"
             />
           </SectionWrapper>
         </SectionDivider>
@@ -216,9 +218,10 @@ const Banner = () => {
         <SectionDivider isMobile={isMobile}>
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SectionWrapper isMobile={isMobile}>
-              <img
-                src={require('assets/dashboardPresentation.png')}
-                alt="dashboard presentation"
+              <DemoImage
+                shadowOpacity="0.1"
+                src={require('assets/teams.png')}
+                alt="teams image"
               />
             </SectionWrapper>
           </SectionWrapper>
