@@ -23,7 +23,7 @@ const ForEnterprise = () => (
       <IconContainer>
         <Icon
           type="code"
-          style={{ fontSize: '26px', color: theme.colors.c3 }}
+          style={{ fontSize: '26px', color: theme.colors.c1 }}
         />
       </IconContainer>
       <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>

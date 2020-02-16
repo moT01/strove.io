@@ -168,7 +168,7 @@ const Banner = () => {
           <IconContainer>
             <Icon
               type="laptop"
-              style={{ fontSize: '26px', color: theme.colors.c3 }}
+              style={{ fontSize: '26px', color: theme.colors.c1 }}
             />
           </IconContainer>
           <StyledH3 color={theme.colors.c3}>
