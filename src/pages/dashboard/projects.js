@@ -2,6 +2,7 @@ import React, { useState, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
+import { Icon } from 'antd'
 
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
@@ -167,7 +168,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       padding="3px 15px"
                       minWidth="150px"
                       maxWidth="150px"
-                      margin="0px 0px 5px 0px"
+                      margin="auto"
                       font-size="0.8rem"
                       onClick={() =>
                         isOwner
@@ -180,14 +181,16 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                               organizationId,
                             })
                       }
-                      text={
-                        isOwner
-                          ? currentProjectId && project.id === currentProjectId
-                            ? 'Continue'
-                            : 'Start'
-                          : 'Fork'
-                      }
-                    />
+                      // text={
+                      //   isOwner
+                      //     ? currentProjectId && project.id === currentProjectId
+                      //       ? 'Continue'
+                      //       : 'Start'
+                      //     : 'Fork'
+                      // }
+                    >
+                      <Icon type="play-circle" style={{ fontSize: '20px' }} />
+                    </StroveButton>
                     {isOwner &&
                       !project.forkedFromId &&
                       (currentProjectId && currentProjectId === project.id ? (
