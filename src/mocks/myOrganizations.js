@@ -79,7 +79,7 @@ export default [
             id: '5e3c96b9b084836851f7c889',
             name: 'Apollo Auth Middleware V2',
             userId: '5d963f095c058e0fe486d56d',
-            user: users[2],
+            user: users[3],
             description: 'Help users join the program',
             isPrivate: true,
             createdAt: '1581029049513',
