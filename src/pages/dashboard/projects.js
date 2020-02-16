@@ -25,6 +25,7 @@ import {
   CircleIcon,
   StyledIcon,
   ProjectActionIcon,
+  IconDescription
 } from './styled'
 
 const sortByActiveProjects = projects =>
@@ -190,6 +191,13 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       //     : 'Fork'
                       // }
                     >
+                      <IconDescription>
+                        {isOwner
+                          ? currentProjectId && project.id === currentProjectId
+                            ? 'Continue'
+                            : 'Start'
+                          : 'Fork'}
+                      </IconDescription>
                       <ProjectActionIcon
                         type={
                           isOwner

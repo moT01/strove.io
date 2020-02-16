@@ -508,3 +508,7 @@ export const ProjectActionIcon = styled(Icon)`
   font-size: 20px;
   line-height: 20px;
 `
+
+export const IconDescription = styled.div`
+  margin-right: 5px;
+`
