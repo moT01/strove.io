@@ -150,11 +150,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                     {project.description && (
                       <TextWrapper>
                         <StyledIcon type="edit" />
-                        <Text>
-                          {project.description
-                            ? project.description
-                            : 'This is the project description.. Tribute'}
-                        </Text>
+                        <Text>{project.description}</Text>
                       </TextWrapper>
                     )}
                     <TextWrapper>
