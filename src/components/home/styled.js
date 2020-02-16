@@ -238,7 +238,7 @@ export const StyledH1 = styled.h1`
 
 export const StyledHeadingSection = styled.div`
   max-width: 520px;
-  margin: auto 20px;
+  margin: auto 0;
   margin-bottom: auto;
   font-size: 20px;
 
