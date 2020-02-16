@@ -141,9 +141,10 @@ export const DashboardWrapper = styled(TilesWrapper)`
 `
 
 export const Title = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.c3};
   margin: 3px 3px 3px 0;
+  font-weight: 600;
 `
 
 export const SectionTitle = styled(Title)`
