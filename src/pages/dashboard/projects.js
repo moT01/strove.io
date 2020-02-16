@@ -130,7 +130,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       <Text>{project.user.name}</Text>
                     </TextWrapper>
 
-                    {currentProjectId && project.id === currentProjectId ? (
+                    {project.machineId ? (
                       <TextWrapper>
                         <CircleIcon active />
                         <Text>Active</Text>
