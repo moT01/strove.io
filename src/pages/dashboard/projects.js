@@ -24,6 +24,7 @@ import {
   TextWrapper,
   CircleIcon,
   StyledIcon,
+  ProjectActionIcon,
 } from './styled'
 
 const sortByActiveProjects = projects =>
@@ -168,7 +169,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       padding="3px 15px"
                       minWidth="150px"
                       maxWidth="150px"
-                      margin="auto"
+                      margin="0 0 5px"
                       font-size="0.8rem"
                       onClick={() =>
                         isOwner
@@ -189,7 +190,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                       //     : 'Fork'
                       // }
                     >
-                      <Icon type="play-circle" style={{ fontSize: '20px' }} />
+                      <ProjectActionIcon type="play-circle" />
                     </StroveButton>
                     {isOwner &&
                       !project.forkedFromId &&
