@@ -10,6 +10,7 @@ import {
   SectionDivider,
   StyledH3,
   IconContainer,
+  StyledSectionIcon,
 } from './styled'
 
 const ForEnterprise = () => (
@@ -21,10 +22,7 @@ const ForEnterprise = () => (
   >
     <SectionDivider flexDirection="column">
       <IconContainer>
-        <Icon
-          type="code"
-          style={{ fontSize: '26px', color: theme.colors.c1 }}
-        />
+        <StyledSectionIcon type="code" />
       </IconContainer>
       <StyledH3 color={theme.colors.c3}>Developers First</StyledH3>
       <StyledProductDescription color={theme.colors.c26}>

@@ -317,3 +317,8 @@ export const Illustration = styled.img`
   height: 50%;
   max-width: 520px;
 `
+
+export const StyledSectionIcon = styled(Icon)`
+  font-size: 26px;
+  color: ${({ theme }) => theme.colors.c1};
+`

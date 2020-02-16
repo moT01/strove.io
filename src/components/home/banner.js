@@ -35,6 +35,7 @@ import {
   StyledFeatureDescription,
   StyledSmallText,
   StyledTechnologyDescriptionWrapper,
+  StyledSectionIcon,
 } from './styled'
 
 const validate = values => {
@@ -166,10 +167,7 @@ const Banner = () => {
       >
         <SectionDivider flexDirection="column">
           <IconContainer>
-            <Icon
-              type="laptop"
-              style={{ fontSize: '26px', color: theme.colors.c1 }}
-            />
+            <StyledSectionIcon type="laptop" />
           </IconContainer>
           <StyledH3 color={theme.colors.c3}>
             Toolkit for modern software organizations
