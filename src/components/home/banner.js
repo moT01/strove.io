@@ -304,7 +304,7 @@ const Banner = () => {
       </StyledSectionWrapper>
       <StyledSectionWrapper
         isSecondary
-        padding="20px 0"
+        padding="20px 0 50px"
         isMobileOnly={isMobileOnly}
       >
         <SectionWrapper isSecondary>
