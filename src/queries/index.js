@@ -41,7 +41,7 @@ import DOWNGRADE_SUBSCRIPTION from './downagradeSubscription'
 import CHANGE_PLAN from './changePlan'
 import GET_PAYMENT_INFO from './getPaymentInfo'
 import PAYMENT_STATUS_SUBSCRIPTION from './paymentStatusSubscription'
-import REMOVE_FROM_ORGANIZATION from './removeFromOrganizatoin'
+import REMOVE_FROM_ORGANIZATION from './removeFromOrganization'
 
 export {
   ADD_PROJECT,

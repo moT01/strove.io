@@ -17,6 +17,7 @@ import {
   LEAVE_TEAM,
   DOWNGRADE_SUBSCRIPTION,
   UPGRADE_SUBSCRIPTION,
+  REMOVE_FROM_ORGANIZATION,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -529,12 +530,26 @@ const Dashboard = ({ history }) => {
           Are you sure you want to remove {member.name} from {team.name}?
         </ModalText>
       ),
-      onSubmit: () =>
+      onSubmit: () => {
+        console.log('Huzzah', member, 'Team', team)
         dispatch(
           mutation({
             name: 'removeMember',
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
+            // onSuccess: () => {
+            // },
+          })
+        )
+
+        dispatch(
+          mutation({
+            name: 'removeFromOrganization',
+            mutation: REMOVE_FROM_ORGANIZATION,
+            variables: {
+              organizationId: team.organizationId,
+              memberId: member.id,
+            },
             onSuccess: () => {
               dispatch(
                 mutation({
@@ -543,17 +558,18 @@ const Dashboard = ({ history }) => {
                   variables: {
                     organizationId: team.organizationId,
                     quantity:
-                      organizationsObj[editTeam?.organizationId]
+                      organizationsObj[team.organizationId]
                         ?.subscriptionQuantity - 1,
                   },
-                  onSuccess: () => updateOrganizations,
+                  onSuccessDispatch: updateOrganizations,
+                  onSuccess: () => console.log('Downgraded subscription'),
                 })
               )
-              closeWarningModal()
             },
-            onSuccessDispatch: updateOrganizations,
           })
-        ),
+        )
+        closeWarningModal()
+      },
       buttonLabel: 'Remove',
     })
   }
@@ -593,6 +609,7 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     console.log('Beeeeeeeeeeeeep', paymentStatus)
     paymentStatus?.data?.paymentStatus?.status === 'success' &&
+      editTeam &&
       dispatch(
         mutation({
           name: 'addMember',
@@ -615,6 +632,8 @@ const Dashboard = ({ history }) => {
     const users = editTeam.users
     const invited = editTeam.users
 
+    console.log('Yeeeeeeeet')
+
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
       (invited && invited.findIndex(user => user.email === memberEmail) !== -1)
@@ -629,8 +648,14 @@ const Dashboard = ({ history }) => {
       if (
         organizationsObj[editTeam.organizationId]?.users?.findIndex(
           user => user.email === memberEmail
-        ) === -1
+        ) === -1 ||
+        !organizationsObj[editTeam.organizationId].users
       ) {
+        console.log(
+          'Yeeeeeeter',
+          editTeam.organizationId,
+          organizationsObj[editTeam?.organizationId]?.subscriptionQuantity + 1
+        )
         dispatch(
           mutation({
             name: 'upgradeSubscription',

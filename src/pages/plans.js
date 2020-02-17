@@ -193,19 +193,34 @@ const emptyWarningModalContent = {
 const Plans = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const paymentStatus = useSelector(selectors.api.getPaymentStatus)
+  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const [editMode, setEditMode] = useState()
+  const [isPaying, setIsPaying] = useState(true)
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [subscriptionPlan, setSubscriptionPlan] = useState(subscriptionPlans[0])
   const [quantity, setQuantity] = useState(organization?.team?.length || 1)
-  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
     .filter(organization => organization.owner.id === user.id)
     .map(organization => ({
       value: organization,
       label: organization.name,
     }))
+
+  useEffect(() => {
+    if (paymentStatus?.data?.paymentStatus?.status === 'success') {
+      console.log('Beeeeeeeeeeeeep', paymentStatus)
+      setWarningModal({
+        visible: true,
+        content: (
+          <ModalText>Your subscription plan has been upgraded</ModalText>
+        ),
+      })
+      setIsPaying(false)
+    }
+  }, [paymentStatus])
 
   const closeWarningModal = () => {
     setWarningModal(emptyWarningModalContent)
@@ -243,8 +258,13 @@ const Plans = () => {
   }, [])
 
   useEffect(() => {
+    const planIndex = subscriptionPlans.findIndex(
+      plan => plan.value === organization.value?.subscriptionPlan
+    )
     fetchPaymentInfo(organization)
-    setQuantity(organization.value?.users?.length)
+    setQuantity(organization.value?.subscriptionQuantity)
+
+    setSubscriptionPlan(subscriptionPlans[planIndex !== -1 ? planIndex : 0])
   }, [organization?.value])
 
   return (
@@ -496,32 +516,6 @@ const Plans = () => {
                 />
               )}
             </PaymentSummaryHeader>
-            {/* <Formik
-            initialValues={{
-              quantity: organization.users.length,
-            }}
-            onSubmit={values => {
-              console.log(
-                'Values',
-                values,
-                'Subscription plan',
-                subscriptionPlan
-              )
-              setQuantity(values.quantity)
-            }}
-          >
-            {({ errors, touched, values }) => (
-              <Form>
-                <Field name="quantity"></Field>
-                <StroveButton
-                  layout="form"
-                  type="submit"
-                  text="Set quantity"
-                  // disabled={errors.quantity || !values.quantity}
-                />
-              </Form>
-            )}
-          </Formik> */}
             <PaymentSummaryInfo>
               {subscriptionPlan && (
                 <>
@@ -551,42 +545,50 @@ const Plans = () => {
                   </OrderPriceSum>
                 </>
               )}
-              {organization.value?.subscriptionStatus === 'active' && (
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="300px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    setWarningModal({
-                      visible: true,
-                      content: (
-                        <ModalText>
-                          Are you sure you want to upgrade your subscription to
-                          yearly plan?
-                        </ModalText>
-                      ),
-                      buttonLabel: 'Upgrade',
-                      onSubmit: () => {
-                        dispatch(
-                          mutation({
-                            name: 'changePlan',
-                            mutation: CHANGE_PLAN,
-                            variables: {
-                              organizationId: organization.value.id,
-                              newPlan: 'plan_GYjzUWz4PmzdMg',
-                            },
-                            onSuccess: () => updateOrganizations(),
-                          })
-                        )
-                      },
-                    })
-                  }}
-                  text="Upgrade to yearly plan"
-                />
-              )}
+              {organization.value?.subscriptionStatus === 'active' &&
+                organization.value?.subscriptionPlan ===
+                  subscriptionPlans[0].value && (
+                  <StroveButton
+                    isPrimary
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="300px"
+                    margin="10px"
+                    borderRadius="2px"
+                    onClick={() => {
+                      setWarningModal({
+                        visible: true,
+                        content: (
+                          <ModalText>
+                            Are you sure you want to upgrade your subscription
+                            to yearly plan?
+                          </ModalText>
+                        ),
+                        buttonLabel: 'Upgrade',
+                        onSubmit: () => {
+                          setIsPaying(true)
+                          console.log("Let's pay", isPaying)
+                          dispatch(
+                            mutation({
+                              name: 'changePlan',
+                              mutation: CHANGE_PLAN,
+                              variables: {
+                                organizationId: organization.value.id,
+                                newPlan: 'plan_GYjzUWz4PmzdMg',
+                              },
+                              onSuccess: () => {
+                                updateOrganizations()
+                                closeWarningModal()
+                                console.log('Payment successfull', isPaying)
+                              },
+                            })
+                          )
+                        },
+                      })
+                    }}
+                    text="Upgrade to yearly plan"
+                  />
+                )}
             </PaymentSummaryInfo>
           </PaymentSummarySection>
         </PaymentSummaryWrapper>
