@@ -18,6 +18,7 @@ const StyledFeatureTitle = styled.h3`
 const StyledFeatureContent = styled.p`
   color: rgb(105, 123, 140);
   font-size: 14px;
+  line-height: 1;
 `
 
 const StyledAnchor = styled.a`
