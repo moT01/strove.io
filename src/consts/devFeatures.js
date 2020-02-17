@@ -7,10 +7,11 @@ export default [
     type: 'chrome',
   },
   {
-    title: "Use world's most popular code editor - VSCode",
-    content: 'You can even use your favorite extensions',
-    color: '#0072ce',
-    shadowColor: 'rgba(0, 114, 206, 0.12)',
+    title: 'Share projects in seconds',
+    content: 'Working in a team is now easier than ever',
+    color: '#F5222D',
+    shadowColor: 'rgba(245,34,45,.12)',
+    type: 'appstore',
   },
   {
     title: 'All your software in one place',
@@ -35,14 +36,6 @@ export default [
     type: 'team',
   },
   {
-    title: 'Build fullstack apps',
-    content:
-      'and save battery, CPU and RAM. Expensive computations are done in the cloud',
-    color: '#F5222D',
-    shadowColor: 'rgba(245,34,45,.12)',
-    type: 'appstore',
-  },
-  {
     title: "It's open source",
     content: 'Contribute! Strove has been built with contributors in mind',
     href: 'https://github.com/stroveio/strove.io-client',
@@ -60,9 +53,15 @@ export default [
   {
     title: "Say goodbye to 'it works on my machine'",
     content:
-      'Thanks to docker based infrastructure every member of the team works on the same environment',
+      'Every member of the team works on the instance of the same environment',
     color: '#1890FF',
     shadowColor: 'rgba(24,144,255,.12)',
     type: 'desktop',
+  },
+  {
+    title: "Use world's most popular code editor - VSCode",
+    content: 'You can even use your favorite extensions',
+    color: '#0072ce',
+    shadowColor: 'rgba(0, 114, 206, 0.12)',
   },
 ]
