@@ -14,21 +14,20 @@ export default [
   },
   {
     title: 'All your software in one place',
-    content: 'Log in to your account from any computer and code in the cloud',
+    content: 'Access code anywhere, from any computer',
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
     type: 'global',
   },
   {
-    title: 'Use all major programming languages without setup',
-    content:
-      'You can even use a particular language version. Need Python 2.7.3 for chemistry? We got you covered!',
+    title: 'All major programming languages available without setup',
+    content: 'Need Python 2.7.3 for chemistry? We got you covered!',
     color: '#722ED1',
     shadowColor: 'rgba(114,46,209,.12)',
     type: 'code',
   },
   {
-    title: 'Don\'t lose time, one environment for the whole team',
+    title: "Don't lose time, one environment for the whole team",
     content:
       'Once a project has been set up, any member can access it without needing to configure everything again',
     color: '#FAAD14',
