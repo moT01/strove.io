@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import {
   injectStripe,
@@ -119,17 +119,62 @@ const validate = values => {
   return errors
 }
 
+const emptyWarningModalContent = {
+  visible: false,
+  content: null,
+  onSubmit: null,
+  buttonLabel: '',
+}
+
 const CheckoutForm = props => {
   const [cardNumber, setCardNumber] = useState()
   const [userEmail, setUserEmail] = useState()
+  const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
   const organizationId = props.organization?.id
 
+  useEffect(() => {
+    !!error &&
+      props.setWarningModal({
+        visible: true,
+        content: (
+          <Text>
+            {error.message} Please check your payment information and try again.
+          </Text>
+        ),
+        onSubmit: () => {
+          setIsProcessing(false)
+          setError(false)
+          props.setWarningModal(emptyWarningModalContent)
+        },
+        buttonLabel: 'Ok',
+        noClose: true,
+      })
+  }, [error])
+
+  useEffect(() => {
+    success &&
+      props.setWarningModal({
+        visible: true,
+        content: (
+          <Text>Your credit card information change has succeeded.</Text>
+        ),
+        onSubmit: () => {
+          setIsProcessing(false)
+          setSuccess(false)
+          props.setWarningModal(emptyWarningModalContent)
+        },
+        buttonLabel: 'Ok',
+        noClose: true,
+      })
+  }, [success])
+
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
+    setIsProcessing(true)
     dispatch(
       query({
         name: 'clientSecret',
@@ -155,7 +200,7 @@ const CheckoutForm = props => {
     )
 
     if (error) {
-      // Display error.message in your UI.
+      setError(error)
     } else {
       if (setupIntent.status === 'succeeded') {
         // The setup has succeeded. Display a success message. Send
@@ -170,7 +215,10 @@ const CheckoutForm = props => {
               organizationId,
             },
             dataSelector: data => data.changePaymentInfo,
-            onSuccess: () => props.setEditMode(false),
+            onSuccess: () => {
+              setIsProcessing(false)
+              props.setEditMode(false)
+            },
           })
         )
       }
@@ -188,7 +236,7 @@ const CheckoutForm = props => {
     })
 
     if (error) {
-      setError(true)
+      setError(error)
       return console.log('Error happened on paymentMethod creation!', error)
     }
 
@@ -280,6 +328,7 @@ const CheckoutForm = props => {
                 <StroveButton
                   isPrimary
                   isDisabled={!organizationId}
+                  isProcessing={isProcessing}
                   padding="5px"
                   minWidth="150px"
                   maxWidth="150px"
@@ -290,6 +339,7 @@ const CheckoutForm = props => {
                 />
                 <StroveButton
                   isDisabled={!organizationId}
+                  isProcessing={isProcessing}
                   padding="5px"
                   minWidth="150px"
                   maxWidth="150px"
@@ -303,6 +353,7 @@ const CheckoutForm = props => {
               <StroveButton
                 isPrimary
                 isDisabled={!organizationId}
+                isProcessing={isProcessing}
                 fontSize="18px"
                 padding="5px"
                 minWidth="250px"
@@ -318,7 +369,7 @@ const CheckoutForm = props => {
           </CardInfoWrapper>
         </div>
       )}
-      {error && (
+      {/* {error && (
         <div>
           <p>Could not process card data!</p>
         </div>
@@ -327,14 +378,21 @@ const CheckoutForm = props => {
         <div>
           <p>Subscribed successfully</p>
         </div>
-      )}
+      )} */}
     </div>
   )
 }
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default ({ organization, quantity, plan, editMode, setEditMode }) => (
+export default ({
+  organization,
+  quantity,
+  plan,
+  editMode,
+  setEditMode,
+  setWarningModal,
+}) => (
   <Elements>
     <FormWithStripe
       organization={organization}
@@ -342,6 +400,7 @@ export default ({ organization, quantity, plan, editMode, setEditMode }) => (
       plan={plan}
       editMode={editMode}
       setEditMode={setEditMode}
+      setWarningModal={setWarningModal}
     />
   </Elements>
 )

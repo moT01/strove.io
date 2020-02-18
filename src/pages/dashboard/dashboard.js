@@ -603,7 +603,47 @@ const Dashboard = ({ history }) => {
     })
 
   useEffect(() => {
-    console.log('Beeeeeeeeeeeeep', paymentStatus)
+    if (paymentStatus?.data?.paymentStatus?.status === 'success' && editTeam) {
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          onSuccess: () => {
+            setAddMemberModal(false)
+            closeWarningModal()
+          },
+          onSuccessDispatch: updateOrganizations,
+        })
+      )
+    }
+
+    if (paymentStatus?.data?.paymentStatus?.status === 'fail' && editTeam) {
+      setWarningModal({
+        visible: true,
+        content: (
+          <>
+            {' '}
+            <ModalText>
+              Your payment couldn't be processed. Please check your payment
+              information and try again
+            </ModalText>
+            <StroveButton
+              isLink
+              to="/app/plans"
+              text="Plans"
+              padding="15px"
+              minWidth="250px"
+              maxWidth="250px"
+              margin="10px"
+              fontSize="1.4rem"
+              borderRadius="5px"
+            />
+          </>
+        ),
+      })
+    }
+
     paymentStatus?.data?.paymentStatus?.status === 'success' &&
       editTeam &&
       dispatch(
@@ -1079,9 +1119,6 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
       </StyledReactModal>
-      {processingPayment && (
-        <FullScreenLoader type="processPayment" isFullScreen color="#0072ce" />
-      )}
     </div>
   )
 }

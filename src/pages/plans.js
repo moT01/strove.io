@@ -12,11 +12,11 @@ import {
   CANCEL_SUBSCRIPTION,
   MY_ORGANIZATIONS,
   REVERT_CANCEL,
-  CHANGE_PLAN,
   GET_PAYMENT_INFO,
   RENEW_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
+import FullScreenLoader from 'components/fullScreenLoader'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -210,7 +210,6 @@ const Plans = () => {
 
   useEffect(() => {
     if (paymentStatus?.data?.paymentStatus?.status === 'success' && isPaying) {
-      console.log('Beeeeeeeeeeeeep', paymentStatus, isPaying)
       setWarningModal({
         visible: true,
         content: (
@@ -613,12 +612,14 @@ const Plans = () => {
             maxWidth="150px"
           />
         )}
-        <ModalButton
-          onClick={closeWarningModal}
-          text="Close"
-          padding="5px"
-          maxWidth="150px"
-        />
+        {!warningModal.noClose && (
+          <ModalButton
+            onClick={closeWarningModal}
+            text="Close"
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
       </Modal>
     </>
   )
