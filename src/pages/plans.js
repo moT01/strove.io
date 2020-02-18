@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
-import { useSubscription } from '@apollo/react-hooks'
 
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
@@ -196,7 +195,7 @@ const Plans = () => {
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const [editMode, setEditMode] = useState()
-  const [isPaying, setIsPaying] = useState(true)
+  const [isPaying, setIsPaying] = useState(false)
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
@@ -210,8 +209,8 @@ const Plans = () => {
     }))
 
   useEffect(() => {
-    if (paymentStatus?.data?.paymentStatus?.status === 'success') {
-      console.log('Beeeeeeeeeeeeep', paymentStatus)
+    if (paymentStatus?.data?.paymentStatus?.status === 'success' && isPaying) {
+      console.log('Beeeeeeeeeeeeep', paymentStatus, isPaying)
       setWarningModal({
         visible: true,
         content: (
@@ -473,47 +472,48 @@ const Plans = () => {
               {organization.value?.subscriptionStatus === 'active' ? (
                 <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
               ) : (
-                <SubscriptionsSelect
-                  defaultValue="Monthly"
-                  value={subscriptionPlan}
-                  onChange={plan => setSubscriptionPlan(plan)}
-                  options={subscriptionPlans}
-                  placeholder="Choose plan"
-                  styles={{
-                    control: styles => ({
-                      ...styles,
-                      backgroundColor: '#0072ce',
-                      borderStyle: 'none',
-                      boxShadow: 'none',
-                    }),
-                    menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
-                    dropdownIndicator: styles => ({ styles, color: '#fff' }),
-                    indicatorSeparator: styles => ({ styles, color: '#fff' }),
-                    input: styles => ({ styles, color: '#fff' }),
-                    placeholder: styles => ({ styles, color: '#fff' }),
-                    option: styles => ({
-                      ...styles,
-                      color: '#fff',
-                      backgroundColor: '#0072ce',
-                      '&:hover': {
-                        backgroundColor: '#0099de',
-                      },
-                      '&:active': {
-                        backgroundColor: '#0072ce',
-                      },
-                    }),
-                    singleValue: styles => ({
-                      ...styles,
-                      color: '#fff',
-                      '&:hover': {
-                        backgroundColor: '#0072ce',
-                      },
-                      '&:active': {
-                        backgroundColor: '#0072ce',
-                      },
-                    }),
-                  }}
-                />
+                <WhiteText>{subscriptionPlan.label} plan</WhiteText>
+                // <SubscriptionsSelect
+                //   defaultValue="Monthly"
+                //   value={subscriptionPlan}
+                //   onChange={plan => setSubscriptionPlan(plan)}
+                //   options={subscriptionPlans}
+                //   placeholder="Choose plan"
+                //   styles={{
+                //     control: styles => ({
+                //       ...styles,
+                //       backgroundColor: '#0072ce',
+                //       borderStyle: 'none',
+                //       boxShadow: 'none',
+                //     }),
+                //     menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
+                //     dropdownIndicator: styles => ({ styles, color: '#fff' }),
+                //     indicatorSeparator: styles => ({ styles, color: '#fff' }),
+                //     input: styles => ({ styles, color: '#fff' }),
+                //     placeholder: styles => ({ styles, color: '#fff' }),
+                //     option: styles => ({
+                //       ...styles,
+                //       color: '#fff',
+                //       backgroundColor: '#0072ce',
+                //       '&:hover': {
+                //         backgroundColor: '#0099de',
+                //       },
+                //       '&:active': {
+                //         backgroundColor: '#0072ce',
+                //       },
+                //     }),
+                //     singleValue: styles => ({
+                //       ...styles,
+                //       color: '#fff',
+                //       '&:hover': {
+                //         backgroundColor: '#0072ce',
+                //       },
+                //       '&:active': {
+                //         backgroundColor: '#0072ce',
+                //       },
+                //     }),
+                //   }}
+                // />
               )}
             </PaymentSummaryHeader>
             <PaymentSummaryInfo>
@@ -545,7 +545,7 @@ const Plans = () => {
                   </OrderPriceSum>
                 </>
               )}
-              {organization.value?.subscriptionStatus === 'active' &&
+              {/* {organization.value?.subscriptionStatus === 'active' &&
                 organization.value?.subscriptionPlan ===
                   subscriptionPlans[0].value && (
                   <StroveButton
@@ -588,7 +588,7 @@ const Plans = () => {
                     }}
                     text="Upgrade to yearly plan"
                   />
-                )}
+                )} */}
             </PaymentSummaryInfo>
           </PaymentSummarySection>
         </PaymentSummaryWrapper>
