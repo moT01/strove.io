@@ -15,7 +15,14 @@ const StyledIframe = styled.iframe`
   opacity: ${({ loaderVisible }) => (loaderVisible ? 0 : 1)};
 `
 
-const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
+const Editor = ({
+  projectId,
+  machineName,
+  port,
+  onLoad,
+  isEmbed,
+  loaderVisible,
+}) => {
   const token = useSelector(selectors.getToken)
   const randomId = Math.random()
     .toString(36)
@@ -24,7 +31,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
   return (
     <>
       <Prompt
-        message={location =>
+        message={() =>
           `Are you sure you want to leave editor? This will stop your running processes.`
         }
       />
@@ -32,7 +39,7 @@ const Editor = ({ machineName, port, onLoad, isEmbed, loaderVisible }) => {
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
         onLoad={onLoad}
-        src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=Bearer ${token}`}
+        src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=Bearer ${token}&projectId=${projectId}`}
       />
     </>
   )
