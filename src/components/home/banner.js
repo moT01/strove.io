@@ -37,6 +37,7 @@ import {
   StyledTechnologyDescriptionWrapper,
   StyledSectionIcon,
   DemoImage,
+  BannerWrapper,
 } from './styled'
 
 const validate = values => {
@@ -66,7 +67,7 @@ const Banner = () => {
 
   return (
     <>
-      <StyledSectionWrapper
+      <BannerWrapper
         padding={isMobileOnly ? '20px' : '50px'}
         isMobileOnly={isMobileOnly}
       >
@@ -159,7 +160,7 @@ const Banner = () => {
             height="50%"
           />
         )}
-      </StyledSectionWrapper>
+      </BannerWrapper>
       <StyledSectionWrapper
         isSecondary
         background={theme.colors.c2}

@@ -63,6 +63,11 @@ export const StyledSectionWrapper = styled.section`
       `}
 `
 
+export const BannerWrapper = styled(StyledSectionWrapper)`
+  width: 100%;
+  max-width: 1400px;
+`
+
 export const StyledIcon = styled(Icon)`
   position: absolute;
   top: 15px;
