@@ -99,25 +99,25 @@ const cardStyle = {
   },
 }
 
-const EmailField = styled(Field)`
-  margin: 10px 0;
-  padding: 8px;
-  width: 100%;
-  border-radius: 2px;
-  border: 1px solid ${({ theme }) => theme.colors.c9};
-`
+// const EmailField = styled(Field)`
+//   margin: 10px 0;
+//   padding: 8px;
+//   width: 100%;
+//   border-radius: 2px;
+//   border: 1px solid ${({ theme }) => theme.colors.c9};
+// `
 
-const validate = values => {
-  let errors = {}
+// const validate = values => {
+//   let errors = {}
 
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
+//   if (!values.email) {
+//     errors.email = 'Required'
+//   } else if (!isEmail(values.email)) {
+//     errors.email = 'Invalid email address'
+//   }
 
-  return errors
-}
+//   return errors
+// }
 
 const emptyWarningModalContent = {
   visible: false,
@@ -141,9 +141,10 @@ const CheckoutForm = props => {
       props.setWarningModal({
         visible: true,
         content: (
-          <Text>
-            {error.message} Please check your payment information and try again.
-          </Text>
+          <>
+            <Text>{error.message}</Text>
+            {/* <Text>Please check your payment information and try again.</Text> */}
+          </>
         ),
         onSubmit: () => {
           setIsProcessing(false)
@@ -203,9 +204,6 @@ const CheckoutForm = props => {
       setError(error)
     } else {
       if (setupIntent.status === 'succeeded') {
-        // The setup has succeeded. Display a success message. Send
-        // setupIntent.payment_method to your server to save the card to a Customer
-        // !!! Add organizationId to mutation dispatch below !!!
         dispatch(
           mutation({
             name: 'changePaymentInfo',
@@ -225,7 +223,6 @@ const CheckoutForm = props => {
     }
   }
 
-  // This starts the flow for getting new subscription
   const submit = async event => {
     const { paymentMethod, error } = await props.stripe.createPaymentMethod({
       type: 'card',
@@ -237,7 +234,6 @@ const CheckoutForm = props => {
 
     if (error) {
       setError(error)
-      return console.log('Error happened on paymentMethod creation!', error)
     }
 
     dispatch(
@@ -264,10 +260,8 @@ const CheckoutForm = props => {
     if (status === 'requires_action') {
       props.stripe.confirmCardPayment(client_secret).then(function(result) {
         if (result.error) {
-          // Display error message in your UI.
-          // The card was declined (i.e. insufficient funds, card has expired, etc)
           console.log('Error on confirmCardPayment', result.error)
-          setError(true)
+          setError(error)
         } else {
           // Additional confirmation was successful
           setSuccess(true)
