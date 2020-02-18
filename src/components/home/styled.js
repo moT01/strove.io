@@ -66,6 +66,7 @@ export const StyledSectionWrapper = styled.section`
 export const BannerWrapper = styled(StyledSectionWrapper)`
   width: 100%;
   max-width: 1400px;
+  justify-content: space-between;
 `
 
 export const StyledIcon = styled(Icon)`
