@@ -65,7 +65,7 @@ export const StyledSectionWrapper = styled.section`
 
 export const BannerWrapper = styled(StyledSectionWrapper)`
   width: 100%;
-  max-width: 1400px;
+  max-width: 1300px;
   justify-content: ${({ isMobileOnly }) =>
     isMobileOnly ? 'center' : 'space-between'};
 `
