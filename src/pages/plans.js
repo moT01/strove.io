@@ -382,6 +382,7 @@ const Plans = () => {
                     plan={subscriptionPlan.value}
                     editMode={editMode}
                     setEditMode={setEditMode}
+                    setWarningModal={setWarningModal}
                   />
                 )}
               </>
