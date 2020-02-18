@@ -106,7 +106,6 @@ const Dashboard = ({ history }) => {
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
-  const isPaymentLoading = useSelector(selectors.api.getPaymentLoading)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
@@ -120,6 +119,7 @@ const Dashboard = ({ history }) => {
   const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
+  const [processingPayment, setProcessingPayment] = useState(false)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
@@ -531,14 +531,11 @@ const Dashboard = ({ history }) => {
         </ModalText>
       ),
       onSubmit: () => {
-        console.log('Huzzah', member, 'Team', team)
         dispatch(
           mutation({
             name: 'removeMember',
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
-            // onSuccess: () => {
-            // },
           })
         )
 
@@ -562,7 +559,6 @@ const Dashboard = ({ history }) => {
                         ?.subscriptionQuantity - 1,
                   },
                   onSuccessDispatch: updateOrganizations,
-                  onSuccess: () => console.log('Downgraded subscription'),
                 })
               )
             },
@@ -617,6 +613,7 @@ const Dashboard = ({ history }) => {
           variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
+            closeWarningModal()
           },
           onSuccessDispatch: updateOrganizations,
         })
@@ -631,8 +628,6 @@ const Dashboard = ({ history }) => {
   const addMember = ({ memberEmail }) => {
     const users = editTeam.users
     const invited = editTeam.users
-
-    console.log('Yeeeeeeeet')
 
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
@@ -651,11 +646,17 @@ const Dashboard = ({ history }) => {
         ) === -1 ||
         !organizationsObj[editTeam.organizationId].users
       ) {
-        console.log(
-          'Yeeeeeeter',
-          editTeam.organizationId,
-          organizationsObj[editTeam?.organizationId]?.subscriptionQuantity + 1
-        )
+        setWarningModal({
+          visible: true,
+          content: (
+            <FullScreenLoader
+              type="processPayment"
+              isFullScreen
+              color="#0072ce"
+            />
+          ),
+          noClose: true,
+        })
         dispatch(
           mutation({
             name: 'upgradeSubscription',
@@ -671,6 +672,7 @@ const Dashboard = ({ history }) => {
         )
       }
       if (paymentStatus?.loading) {
+        console.log('Payment status is loading')
       }
     }
   }
@@ -1039,7 +1041,7 @@ const Dashboard = ({ history }) => {
         mindWidth="40vw"
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={warningModal.visible}
-        onRequestClose={() => setWarningModal(emptyWarningModalContent)}
+        onRequestClose={() => !warningModal.noClose && closeWarningModal()}
         contentLabel="Warning"
         ariaHideApp={false}
       >
@@ -1053,12 +1055,14 @@ const Dashboard = ({ history }) => {
             maxWidth="150px"
           />
         )}
-        <ModalButton
-          onClick={closeWarningModal}
-          text="Close"
-          padding="5px"
-          maxWidth="150px"
-        />
+        {!warningModal.noClose && (
+          <ModalButton
+            onClick={closeWarningModal}
+            text="Close"
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
       </Modal>
 
       <StyledReactModal
@@ -1075,7 +1079,7 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
       </StyledReactModal>
-      {isPaymentLoading && (
+      {processingPayment && (
         <FullScreenLoader type="processPayment" isFullScreen color="#0072ce" />
       )}
     </div>
