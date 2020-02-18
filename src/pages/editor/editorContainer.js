@@ -92,6 +92,7 @@ const EditorWrapper = ({ history }) => {
           onLoad={setLoaderVisibleFalse}
           isEmbed={isEmbed}
           loaderVisible={loaderVisible}
+          projectId={projectId}
         />
       )}
     </>
