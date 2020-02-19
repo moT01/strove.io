@@ -42,6 +42,7 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
+// change to selector to check all organizations teams projects
 export const getCurrentProject = state =>
   getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
     item => item.machineId

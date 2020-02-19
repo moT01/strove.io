@@ -201,6 +201,7 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <DashboardWrapper>
+          <Text>{user.timeSpent}</Text>
           {expandedTiles &&
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>

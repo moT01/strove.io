@@ -23,16 +23,16 @@ const EditorWrapper = ({ history }) => {
 
   useEffect(() => {
     // This condition means project has been stopped
-    if (projectId && !machineId) {
-      dispatch(
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: { projectId },
-          onSuccessDispatch: null,
-        })
-      )
-    }
+    // if (projectId && !machineId) {
+    dispatch(
+      mutation({
+        name: 'continueProject',
+        mutation: CONTINUE_PROJECT,
+        variables: { projectId },
+        onSuccessDispatch: null,
+      })
+    )
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId, machineId])
 
