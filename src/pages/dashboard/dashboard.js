@@ -908,9 +908,8 @@ const Dashboard = ({ history }) => {
       </Modal>
 
       <Modal
-        width={isMobileOnly ? '80vw' : '60vw'}
-        minWidth="60vw"
-        height={isMobileOnly ? '40vh' : '20vh'}
+        width="300px"
+        // height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={settingsModal}
         onRequestClose={closeSettingsModal}
         contentLabel="Team settings"
@@ -926,7 +925,6 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          width="150px"
           onClick={handleRenameTeamClick}
           text="Rename team"
         />
@@ -935,7 +933,6 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          width="150px"
           onClick={handleSetAdminClick}
           text="Set team leader"
         />
@@ -944,7 +941,6 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
-          width="150px"
           onClick={handleDeleteTeamClick}
           text="Delete team"
         />
