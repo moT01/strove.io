@@ -162,7 +162,7 @@ const StroveButton = props => {
       mobile={isMobileOnly}
       {...props}
     >
-      {isLoading ? (
+      {isLoading || props.isProcessing ? (
         <FullScreenLoader
           isFullScreen={false}
           color="#ffffff"
@@ -174,7 +174,7 @@ const StroveButton = props => {
     </Button>
   ) : props.isLink ? (
     <LinkButton
-      disabled={isLoading || props.isDisabled}
+      disabled={isLoading || props.isDisabled || props.isProcessing}
       primary={props.isPrimary}
       mobile={isMobileOnly}
       onClick={event => {
@@ -188,7 +188,11 @@ const StroveButton = props => {
       }}
       {...props}
     >
-      {isLoading || isDeleting || isContinuing || isStopping ? (
+      {isLoading ||
+      isDeleting ||
+      isContinuing ||
+      isStopping ||
+      props.isProcessing ? (
         <FullScreenLoader
           isFullScreen={false}
           color="#ffffff"
@@ -200,7 +204,7 @@ const StroveButton = props => {
     </LinkButton>
   ) : (
     <Button
-      disabled={isLoading || props.isDisabled}
+      disabled={isLoading || props.isDisabled || props.isProcessing}
       primary={props.isPrimary}
       mobile={isMobileOnly}
       onClick={event => {
@@ -215,10 +219,14 @@ const StroveButton = props => {
       }}
       {...props}
     >
-      {isLoading || isDeleting || isContinuing || isStopping ? (
+      {isLoading ||
+      isDeleting ||
+      isContinuing ||
+      isStopping ||
+      props.isProcessing ? (
         <FullScreenLoader
           isFullScreen={false}
-          color="#ffffff"
+          color={props.isPrimary ? '#ffffff' : '#0072ce'}
           height="1.7rem"
         />
       ) : (

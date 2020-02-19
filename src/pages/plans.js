@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes, css } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
-import { useSubscription } from '@apollo/react-hooks'
 
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
@@ -13,11 +12,11 @@ import {
   CANCEL_SUBSCRIPTION,
   MY_ORGANIZATIONS,
   REVERT_CANCEL,
-  CHANGE_PLAN,
   GET_PAYMENT_INFO,
   RENEW_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
+import FullScreenLoader from 'components/fullScreenLoader'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -193,19 +192,33 @@ const emptyWarningModalContent = {
 const Plans = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
+  const paymentStatus = useSelector(selectors.api.getPaymentStatus)
+  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const [editMode, setEditMode] = useState()
+  const [isPaying, setIsPaying] = useState(false)
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [subscriptionPlan, setSubscriptionPlan] = useState(subscriptionPlans[0])
   const [quantity, setQuantity] = useState(organization?.team?.length || 1)
-  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const organizationOptions = myOrganizations
     .filter(organization => organization.owner.id === user.id)
     .map(organization => ({
       value: organization,
       label: organization.name,
     }))
+
+  useEffect(() => {
+    if (paymentStatus?.data?.paymentStatus?.status === 'success' && isPaying) {
+      setWarningModal({
+        visible: true,
+        content: (
+          <ModalText>Your subscription plan has been upgraded</ModalText>
+        ),
+      })
+      setIsPaying(false)
+    }
+  }, [paymentStatus])
 
   const closeWarningModal = () => {
     setWarningModal(emptyWarningModalContent)
@@ -243,8 +256,13 @@ const Plans = () => {
   }, [])
 
   useEffect(() => {
+    const planIndex = subscriptionPlans.findIndex(
+      plan => plan.value === organization.value?.subscriptionPlan
+    )
     fetchPaymentInfo(organization)
-    setQuantity(organization.value?.users?.length)
+    setQuantity(organization.value?.subscriptionQuantity)
+
+    setSubscriptionPlan(subscriptionPlans[planIndex !== -1 ? planIndex : 0])
   }, [organization?.value])
 
   return (
@@ -301,7 +319,7 @@ const Plans = () => {
             (organization.value.subscriptionStatus === 'active' ? (
               <>
                 <Title>2. Payment information</Title>
-                <Text>Your current credit card:</Text>
+                <Text>Your current card:</Text>
                 <Text>
                   {paymentInfo && (
                     <PaymentIcon
@@ -317,15 +335,22 @@ const Plans = () => {
                     padding="5px"
                     minWidth="150px"
                     maxWidth="150px"
+                    cxwkmw29
                     margin="10px"
                     borderRadius="2px"
                     onClick={() => {
                       setWarningModal({
                         visible: true,
                         content: (
-                          <ModalText>
-                            Are you sure you want to cancel your subscription?
-                          </ModalText>
+                          <>
+                            <ModalText>
+                              Are you sure you want to cancel your subscription?
+                            </ModalText>
+                            <Text>
+                              You subscription will remain active until the end
+                              of your billing period
+                            </Text>
+                          </>
                         ),
                         buttonLabel: 'Cancel subscription',
                         onSubmit: () =>
@@ -363,6 +388,7 @@ const Plans = () => {
                     plan={subscriptionPlan.value}
                     editMode={editMode}
                     setEditMode={setEditMode}
+                    setWarningModal={setWarningModal}
                   />
                 )}
               </>
@@ -397,7 +423,7 @@ const Plans = () => {
                 <Title>2. Payment information</Title>
                 <Text>Your subscription has ended.</Text>
                 <Text>
-                  You can renew the subscription with your previous card.
+                  You can renew the subscription with your most recent card.
                 </Text>
                 <Text>
                   {paymentInfo && (
@@ -453,75 +479,50 @@ const Plans = () => {
               {organization.value?.subscriptionStatus === 'active' ? (
                 <WhiteText>Current plan: {subscriptionPlan.label}</WhiteText>
               ) : (
-                <SubscriptionsSelect
-                  defaultValue="Monthly"
-                  value={subscriptionPlan}
-                  onChange={plan => setSubscriptionPlan(plan)}
-                  options={subscriptionPlans}
-                  placeholder="Choose plan"
-                  styles={{
-                    control: styles => ({
-                      ...styles,
-                      backgroundColor: '#0072ce',
-                      borderStyle: 'none',
-                      boxShadow: 'none',
-                    }),
-                    menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
-                    dropdownIndicator: styles => ({ styles, color: '#fff' }),
-                    indicatorSeparator: styles => ({ styles, color: '#fff' }),
-                    input: styles => ({ styles, color: '#fff' }),
-                    placeholder: styles => ({ styles, color: '#fff' }),
-                    option: styles => ({
-                      ...styles,
-                      color: '#fff',
-                      backgroundColor: '#0072ce',
-                      '&:hover': {
-                        backgroundColor: '#0099de',
-                      },
-                      '&:active': {
-                        backgroundColor: '#0072ce',
-                      },
-                    }),
-                    singleValue: styles => ({
-                      ...styles,
-                      color: '#fff',
-                      '&:hover': {
-                        backgroundColor: '#0072ce',
-                      },
-                      '&:active': {
-                        backgroundColor: '#0072ce',
-                      },
-                    }),
-                  }}
-                />
+                <WhiteText>{subscriptionPlan.label} plan</WhiteText>
+                // <SubscriptionsSelect
+                //   defaultValue="Monthly"
+                //   value={subscriptionPlan}
+                //   onChange={plan => setSubscriptionPlan(plan)}
+                //   options={subscriptionPlans}
+                //   placeholder="Choose plan"
+                //   styles={{
+                //     control: styles => ({
+                //       ...styles,
+                //       backgroundColor: '#0072ce',
+                //       borderStyle: 'none',
+                //       boxShadow: 'none',
+                //     }),
+                //     menu: styles => ({ ...styles, backgroundColor: '#0072ce' }),
+                //     dropdownIndicator: styles => ({ styles, color: '#fff' }),
+                //     indicatorSeparator: styles => ({ styles, color: '#fff' }),
+                //     input: styles => ({ styles, color: '#fff' }),
+                //     placeholder: styles => ({ styles, color: '#fff' }),
+                //     option: styles => ({
+                //       ...styles,
+                //       color: '#fff',
+                //       backgroundColor: '#0072ce',
+                //       '&:hover': {
+                //         backgroundColor: '#0099de',
+                //       },
+                //       '&:active': {
+                //         backgroundColor: '#0072ce',
+                //       },
+                //     }),
+                //     singleValue: styles => ({
+                //       ...styles,
+                //       color: '#fff',
+                //       '&:hover': {
+                //         backgroundColor: '#0072ce',
+                //       },
+                //       '&:active': {
+                //         backgroundColor: '#0072ce',
+                //       },
+                //     }),
+                //   }}
+                // />
               )}
             </PaymentSummaryHeader>
-            {/* <Formik
-            initialValues={{
-              quantity: organization.users.length,
-            }}
-            onSubmit={values => {
-              console.log(
-                'Values',
-                values,
-                'Subscription plan',
-                subscriptionPlan
-              )
-              setQuantity(values.quantity)
-            }}
-          >
-            {({ errors, touched, values }) => (
-              <Form>
-                <Field name="quantity"></Field>
-                <StroveButton
-                  layout="form"
-                  type="submit"
-                  text="Set quantity"
-                  // disabled={errors.quantity || !values.quantity}
-                />
-              </Form>
-            )}
-          </Formik> */}
             <PaymentSummaryInfo>
               {subscriptionPlan && (
                 <>
@@ -551,42 +552,50 @@ const Plans = () => {
                   </OrderPriceSum>
                 </>
               )}
-              {organization.value?.subscriptionStatus === 'active' && (
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="300px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() => {
-                    setWarningModal({
-                      visible: true,
-                      content: (
-                        <ModalText>
-                          Are you sure you want to upgrade your subscription to
-                          yearly plan?
-                        </ModalText>
-                      ),
-                      buttonLabel: 'Upgrade',
-                      onSubmit: () => {
-                        dispatch(
-                          mutation({
-                            name: 'changePlan',
-                            mutation: CHANGE_PLAN,
-                            variables: {
-                              organizationId: organization.value.id,
-                              newPlan: 'plan_GYjzUWz4PmzdMg',
-                            },
-                            onSuccess: () => updateOrganizations(),
-                          })
-                        )
-                      },
-                    })
-                  }}
-                  text="Upgrade to yearly plan"
-                />
-              )}
+              {/* {organization.value?.subscriptionStatus === 'active' &&
+                organization.value?.subscriptionPlan ===
+                  subscriptionPlans[0].value && (
+                  <StroveButton
+                    isPrimary
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="300px"
+                    margin="10px"
+                    borderRadius="2px"
+                    onClick={() => {
+                      setWarningModal({
+                        visible: true,
+                        content: (
+                          <ModalText>
+                            Are you sure you want to upgrade your subscription
+                            to yearly plan?
+                          </ModalText>
+                        ),
+                        buttonLabel: 'Upgrade',
+                        onSubmit: () => {
+                          setIsPaying(true)
+                          console.log("Let's pay", isPaying)
+                          dispatch(
+                            mutation({
+                              name: 'changePlan',
+                              mutation: CHANGE_PLAN,
+                              variables: {
+                                organizationId: organization.value.id,
+                                newPlan: 'plan_GYjzUWz4PmzdMg',
+                              },
+                              onSuccess: () => {
+                                updateOrganizations()
+                                closeWarningModal()
+                                console.log('Payment successfull', isPaying)
+                              },
+                            })
+                          )
+                        },
+                      })
+                    }}
+                    text="Upgrade to yearly plan"
+                  />
+                )} */}
             </PaymentSummaryInfo>
           </PaymentSummarySection>
         </PaymentSummaryWrapper>
@@ -610,12 +619,14 @@ const Plans = () => {
             maxWidth="150px"
           />
         )}
-        <ModalButton
-          onClick={closeWarningModal}
-          text="Close"
-          padding="5px"
-          maxWidth="150px"
-        />
+        {!warningModal.noClose && (
+          <ModalButton
+            onClick={closeWarningModal}
+            text="Close"
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
       </Modal>
     </>
   )

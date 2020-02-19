@@ -17,6 +17,7 @@ import {
   LEAVE_TEAM,
   DOWNGRADE_SUBSCRIPTION,
   UPGRADE_SUBSCRIPTION,
+  REMOVE_FROM_ORGANIZATION,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -104,7 +105,6 @@ const Dashboard = ({ history }) => {
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
-  const isPaymentLoading = useSelector(selectors.api.getPaymentLoading)
   const [stopModal, setStopModal] = useState(false)
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
@@ -118,6 +118,7 @@ const Dashboard = ({ history }) => {
   const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
+  const [processingPayment, setProcessingPayment] = useState(false)
   const currentProject = projects.find(item => item.machineId)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
@@ -528,12 +529,23 @@ const Dashboard = ({ history }) => {
           Are you sure you want to remove {member.name} from {team.name}?
         </ModalText>
       ),
-      onSubmit: () =>
+      onSubmit: () => {
         dispatch(
           mutation({
             name: 'removeMember',
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
+          })
+        )
+
+        dispatch(
+          mutation({
+            name: 'removeFromOrganization',
+            mutation: REMOVE_FROM_ORGANIZATION,
+            variables: {
+              organizationId: team.organizationId,
+              memberId: member.id,
+            },
             onSuccess: () => {
               dispatch(
                 mutation({
@@ -542,17 +554,17 @@ const Dashboard = ({ history }) => {
                   variables: {
                     organizationId: team.organizationId,
                     quantity:
-                      organizationsObj[editTeam?.organizationId]
+                      organizationsObj[team.organizationId]
                         ?.subscriptionQuantity - 1,
                   },
-                  onSuccess: () => updateOrganizations,
+                  onSuccessDispatch: updateOrganizations,
                 })
               )
-              closeWarningModal()
             },
-            onSuccessDispatch: updateOrganizations,
           })
-        ),
+        )
+        closeWarningModal()
+      },
       buttonLabel: 'Remove',
     })
   }
@@ -590,8 +602,7 @@ const Dashboard = ({ history }) => {
     })
 
   useEffect(() => {
-    console.log('Beeeeeeeeeeeeep', paymentStatus)
-    paymentStatus?.data?.paymentStatus?.status === 'success' &&
+    if (paymentStatus?.data?.paymentStatus?.status === 'success' && editTeam) {
       dispatch(
         mutation({
           name: 'addMember',
@@ -599,6 +610,49 @@ const Dashboard = ({ history }) => {
           variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
+            closeWarningModal()
+          },
+          onSuccessDispatch: updateOrganizations,
+        })
+      )
+    }
+
+    if (paymentStatus?.data?.paymentStatus?.status === 'fail' && editTeam) {
+      setWarningModal({
+        visible: true,
+        content: (
+          <>
+            {' '}
+            <ModalText>
+              Your payment couldn't be processed. Please check your payment
+              information and try again
+            </ModalText>
+            <StroveButton
+              isLink
+              to="/app/plans"
+              text="Plans"
+              padding="15px"
+              minWidth="250px"
+              maxWidth="250px"
+              margin="10px"
+              fontSize="1.4rem"
+              borderRadius="5px"
+            />
+          </>
+        ),
+      })
+    }
+
+    paymentStatus?.data?.paymentStatus?.status === 'success' &&
+      editTeam &&
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          onSuccess: () => {
+            setAddMemberModal(false)
+            closeWarningModal()
           },
           onSuccessDispatch: updateOrganizations,
         })
@@ -628,8 +682,20 @@ const Dashboard = ({ history }) => {
       if (
         organizationsObj[editTeam.organizationId]?.users?.findIndex(
           user => user.email === memberEmail
-        ) === -1
+        ) === -1 ||
+        !organizationsObj[editTeam.organizationId].users
       ) {
+        setWarningModal({
+          visible: true,
+          content: (
+            <FullScreenLoader
+              type="processPayment"
+              isFullScreen
+              color="#0072ce"
+            />
+          ),
+          noClose: true,
+        })
         dispatch(
           mutation({
             name: 'upgradeSubscription',
@@ -643,8 +709,6 @@ const Dashboard = ({ history }) => {
             onSuccess: () => setAddMemberEmail(memberEmail),
           })
         )
-      }
-      if (paymentStatus?.loading) {
       }
     }
   }
@@ -1013,7 +1077,7 @@ const Dashboard = ({ history }) => {
         mindWidth="40vw"
         height={isMobileOnly ? '30vh' : '20vh'}
         isOpen={warningModal.visible}
-        onRequestClose={() => setWarningModal(emptyWarningModalContent)}
+        onRequestClose={() => !warningModal.noClose && closeWarningModal()}
         contentLabel="Warning"
         ariaHideApp={false}
       >
@@ -1027,12 +1091,14 @@ const Dashboard = ({ history }) => {
             maxWidth="150px"
           />
         )}
-        <ModalButton
-          onClick={closeWarningModal}
-          text="Close"
-          padding="5px"
-          maxWidth="150px"
-        />
+        {!warningModal.noClose && (
+          <ModalButton
+            onClick={closeWarningModal}
+            text="Close"
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
       </Modal>
 
       <Modal
@@ -1049,9 +1115,6 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
       </Modal>
-      {isPaymentLoading && (
-        <FullScreenLoader type="processPayment" isFullScreen color="#0072ce" />
-      )}
     </div>
   )
 }

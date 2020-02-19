@@ -22,6 +22,7 @@ export const UserFragment = gql`
     siliskyToken
     token
     currentProjectId
+    timeSpent
     teams {
       ...Team
     }

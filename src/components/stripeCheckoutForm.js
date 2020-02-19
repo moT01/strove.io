@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import {
   injectStripe,
@@ -16,6 +16,7 @@ import {
   STRIPE_SUBSCRIBE,
   STRIPE_CLIENT_SECRET,
   CHANGE_PAYMENT_INFO,
+  RETRY_SUBSCRIPTION_PAYMENT,
 } from 'queries'
 import StroveButton from 'components/stroveButton.js'
 import { selectors, C, actions } from 'state'
@@ -70,6 +71,10 @@ const VerticalDivider = styled.div`
   height: 100%;
 `
 
+const SingleButtonWrapper = styled(VerticalDivider)`
+  justify-content: center;
+`
+
 const EmailForm = styled(Form)`
   width: 100%;
 `
@@ -99,37 +104,83 @@ const cardStyle = {
   },
 }
 
-const EmailField = styled(Field)`
-  margin: 10px 0;
-  padding: 8px;
-  width: 100%;
-  border-radius: 2px;
-  border: 1px solid ${({ theme }) => theme.colors.c9};
-`
+// const EmailField = styled(Field)`
+//   margin: 10px 0;
+//   padding: 8px;
+//   width: 100%;
+//   border-radius: 2px;
+//   border: 1px solid ${({ theme }) => theme.colors.c9};
+// `
 
-const validate = values => {
-  let errors = {}
+// const validate = values => {
+//   let errors = {}
 
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
+//   if (!values.email) {
+//     errors.email = 'Required'
+//   } else if (!isEmail(values.email)) {
+//     errors.email = 'Invalid email address'
+//   }
 
-  return errors
+//   return errors
+// }
+
+const emptyWarningModalContent = {
+  visible: false,
+  content: null,
+  onSubmit: null,
+  buttonLabel: '',
 }
 
 const CheckoutForm = props => {
   const [cardNumber, setCardNumber] = useState()
   const [userEmail, setUserEmail] = useState()
+  const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
   const organizationId = props.organization?.id
 
+  useEffect(() => {
+    !!error &&
+      props.setWarningModal({
+        visible: true,
+        content: (
+          <>
+            <Text>{error.message}</Text>
+            {/* <Text>Please check your payment information and try again.</Text> */}
+          </>
+        ),
+        onSubmit: () => {
+          setIsProcessing(false)
+          setError(false)
+          props.setWarningModal(emptyWarningModalContent)
+        },
+        buttonLabel: 'Ok',
+        noClose: true,
+      })
+  }, [error])
+
+  useEffect(() => {
+    success &&
+      props.setWarningModal({
+        visible: true,
+        content: (
+          <Text>Your credit card information change has succeeded.</Text>
+        ),
+        onSubmit: () => {
+          setIsProcessing(false)
+          setSuccess(false)
+          props.setWarningModal(emptyWarningModalContent)
+        },
+        buttonLabel: 'Ok',
+        noClose: true,
+      })
+  }, [success])
+
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
   const getSecret = async () => {
+    setIsProcessing(true)
     dispatch(
       query({
         name: 'clientSecret',
@@ -155,12 +206,9 @@ const CheckoutForm = props => {
     )
 
     if (error) {
-      // Display error.message in your UI.
+      setError(error)
     } else {
       if (setupIntent.status === 'succeeded') {
-        // The setup has succeeded. Display a success message. Send
-        // setupIntent.payment_method to your server to save the card to a Customer
-        // !!! Add organizationId to mutation dispatch below !!!
         dispatch(
           mutation({
             name: 'changePaymentInfo',
@@ -170,14 +218,16 @@ const CheckoutForm = props => {
               organizationId,
             },
             dataSelector: data => data.changePaymentInfo,
-            onSuccess: data => console.log(data),
+            onSuccess: () => {
+              setIsProcessing(false)
+              props.setEditMode(false)
+            },
           })
         )
       }
     }
   }
 
-  // This starts the flow for getting new subscription
   const submit = async event => {
     const { paymentMethod, error } = await props.stripe.createPaymentMethod({
       type: 'card',
@@ -188,8 +238,7 @@ const CheckoutForm = props => {
     })
 
     if (error) {
-      setError(true)
-      return console.log('Error happened on paymentMethod creation!', error)
+      setError(error)
     }
 
     dispatch(
@@ -200,7 +249,7 @@ const CheckoutForm = props => {
           paymentMethod: paymentMethod.id,
           plan: props.plan,
           name: user.name,
-          email: 'mateusz@strove.io',
+          email: user.email,
           organizationId,
         },
         dataSelector: data => data.stripeSubscribe,
@@ -216,10 +265,8 @@ const CheckoutForm = props => {
     if (status === 'requires_action') {
       props.stripe.confirmCardPayment(client_secret).then(function(result) {
         if (result.error) {
-          // Display error message in your UI.
-          // The card was declined (i.e. insufficient funds, card has expired, etc)
           console.log('Error on confirmCardPayment', result.error)
-          setError(true)
+          setError(error)
         } else {
           // Additional confirmation was successful
           setSuccess(true)
@@ -260,8 +307,8 @@ const CheckoutForm = props => {
               </StripeExpiryWrapper>
             </VerticalDivider>
 
-            <Text>Work email (optional)</Text>
-            <Formik
+            {/* <Text>Work email (optional)</Text> */}
+            {/* <Formik
               initialValues={{
                 email: user.email,
               }}
@@ -274,51 +321,81 @@ const CheckoutForm = props => {
                     name="email"
                     placeholder="Your Email"
                   ></EmailField>
-                </EmailForm>
-                {props.editMode ? (
-                  <VerticalDivider>
-                    <StroveButton
-                      isPrimary
-                      isDisabled={!organizationId}
-                      padding="5px"
-                      minWidth="150px"
-                      maxWidth="150px"
-                      margin="20px 10px"
-                      borderRadius="2px"
-                      onClick={getSecret}
-                      text="Save"
-                    />
-                    <StroveButton
-                      isDisabled={!organizationId}
-                      padding="5px"
-                      minWidth="150px"
-                      maxWidth="150px"
-                      margin="20px 10px"
-                      borderRadius="2px"
-                      onClick={() => props.setEditMode(false)}
-                      text="Cancel"
-                    />
-                  </VerticalDivider>
-                ) : (
+                </EmailForm> */}
+            {props.editMode ? (
+              <CardInfoWrapper>
+                <VerticalDivider>
                   <StroveButton
                     isPrimary
                     isDisabled={!organizationId}
-                    fontSize="18px"
+                    isProcessing={isProcessing}
                     padding="5px"
-                    minWidth="250px"
-                    maxWidth="250px"
-                    margin="30px 0"
+                    minWidth="150px"
+                    maxWidth="150px"
+                    margin="20px 10px"
                     borderRadius="2px"
-                    onClick={submit}
-                    text="Purchase"
+                    onClick={getSecret}
+                    text="Save"
                   />
+                  <StroveButton
+                    isDisabled={!organizationId}
+                    isProcessing={isProcessing}
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="150px"
+                    margin="20px 10px"
+                    borderRadius="2px"
+                    onClick={() => props.setEditMode(false)}
+                    text="Cancel"
+                  />
+                </VerticalDivider>
+
+                {!!error && (
+                  <SingleButtonWrapper>
+                    <StroveButton
+                      isPrimary
+                      isDisabled={!organizationId}
+                      isProcessing={isProcessing}
+                      padding="5px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="10px"
+                      borderRadius="2px"
+                      onClick={() =>
+                        dispatch(
+                          mutation({
+                            name: 'retrySubscriptionPayment',
+                            mutation: RETRY_SUBSCRIPTION_PAYMENT,
+                            variable: { organizationId: organizationId },
+                          })
+                        )
+                      }
+                      text="Retry payment"
+                    />
+                  </SingleButtonWrapper>
                 )}
-              </>
-            </Formik>
+              </CardInfoWrapper>
+            ) : (
+              <StroveButton
+                isPrimary
+                isDisabled={!organizationId}
+                isProcessing={isProcessing}
+                fontSize="18px"
+                padding="5px"
+                minWidth="250px"
+                maxWidth="250px"
+                margin="30px 0"
+                borderRadius="2px"
+                onClick={submit}
+                text="Purchase"
+              />
+            )}
+            {/* </>
+            </Formik> */}
           </CardInfoWrapper>
         </div>
       )}
-      {error && (
+      {/* {error && (
         <div>
           <p>Could not process card data!</p>
         </div>
@@ -327,14 +404,21 @@ const CheckoutForm = props => {
         <div>
           <p>Subscribed successfully</p>
         </div>
-      )}
+      )} */}
     </div>
   )
 }
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default ({ organization, quantity, plan, editMode, setEditMode }) => (
+export default ({
+  organization,
+  quantity,
+  plan,
+  editMode,
+  setEditMode,
+  setWarningModal,
+}) => (
   <Elements>
     <FormWithStripe
       organization={organization}
@@ -342,6 +426,7 @@ export default ({ organization, quantity, plan, editMode, setEditMode }) => (
       plan={plan}
       editMode={editMode}
       setEditMode={setEditMode}
+      setWarningModal={setWarningModal}
     />
   </Elements>
 )
