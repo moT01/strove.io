@@ -13,9 +13,6 @@ const AddProjectWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-bottom: 0;
-  height: auto;
-  width: auto;
   min-width: 50vw;
   max-width: 100vw;
 `
