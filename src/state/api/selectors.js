@@ -42,10 +42,6 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
-export const getPaymentLoading = getLoading({
-  fields: 'paymentStatus',
-})
-
 export const getCurrentProject = state =>
   getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
     item => item.machineId

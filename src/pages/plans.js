@@ -319,7 +319,7 @@ const Plans = () => {
             (organization.value.subscriptionStatus === 'active' ? (
               <>
                 <Title>2. Payment information</Title>
-                <Text>Your current credit card:</Text>
+                <Text>Your current card:</Text>
                 <Text>
                   {paymentInfo && (
                     <PaymentIcon
@@ -335,15 +335,22 @@ const Plans = () => {
                     padding="5px"
                     minWidth="150px"
                     maxWidth="150px"
+                    cxwkmw29
                     margin="10px"
                     borderRadius="2px"
                     onClick={() => {
                       setWarningModal({
                         visible: true,
                         content: (
-                          <ModalText>
-                            Are you sure you want to cancel your subscription?
-                          </ModalText>
+                          <>
+                            <ModalText>
+                              Are you sure you want to cancel your subscription?
+                            </ModalText>
+                            <Text>
+                              You subscription will remain active until the end
+                              of your billing period
+                            </Text>
+                          </>
                         ),
                         buttonLabel: 'Cancel subscription',
                         onSubmit: () =>
@@ -416,7 +423,7 @@ const Plans = () => {
                 <Title>2. Payment information</Title>
                 <Text>Your subscription has ended.</Text>
                 <Text>
-                  You can renew the subscription with your previous card.
+                  You can renew the subscription with your most recent card.
                 </Text>
                 <Text>
                   {paymentInfo && (

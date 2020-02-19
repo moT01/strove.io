@@ -711,9 +711,6 @@ const Dashboard = ({ history }) => {
           })
         )
       }
-      if (paymentStatus?.loading) {
-        console.log('Payment status is loading')
-      }
     }
   }
 
