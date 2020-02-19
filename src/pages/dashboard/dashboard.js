@@ -926,6 +926,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
+          width="150px"
           onClick={handleRenameTeamClick}
           text="Rename team"
         />
@@ -934,6 +935,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
+          width="150px"
           onClick={handleSetAdminClick}
           text="Set team leader"
         />
@@ -942,6 +944,7 @@ const Dashboard = ({ history }) => {
           borderRadius="2px"
           padding="5px"
           margin="0px 0px 5px 0px"
+          width="150px"
           onClick={handleDeleteTeamClick}
           text="Delete team"
         />
