@@ -71,6 +71,10 @@ const VerticalDivider = styled.div`
   height: 100%;
 `
 
+const SingleButtonWrapper = styled(VerticalDivider)`
+  justify-content: center;
+`
+
 const EmailForm = styled(Form)`
   width: 100%;
 `
@@ -319,31 +323,58 @@ const CheckoutForm = props => {
                   ></EmailField>
                 </EmailForm> */}
             {props.editMode ? (
-              <VerticalDivider>
-                <StroveButton
-                  isPrimary
-                  isDisabled={!organizationId}
-                  isProcessing={isProcessing}
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="20px 10px"
-                  borderRadius="2px"
-                  onClick={getSecret}
-                  text="Save"
-                />
-                <StroveButton
-                  isDisabled={!organizationId}
-                  isProcessing={isProcessing}
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="20px 10px"
-                  borderRadius="2px"
-                  onClick={() => props.setEditMode(false)}
-                  text="Cancel"
-                />
-              </VerticalDivider>
+              <CardInfoWrapper>
+                <VerticalDivider>
+                  <StroveButton
+                    isPrimary
+                    isDisabled={!organizationId}
+                    isProcessing={isProcessing}
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="150px"
+                    margin="20px 10px"
+                    borderRadius="2px"
+                    onClick={getSecret}
+                    text="Save"
+                  />
+                  <StroveButton
+                    isDisabled={!organizationId}
+                    isProcessing={isProcessing}
+                    padding="5px"
+                    minWidth="150px"
+                    maxWidth="150px"
+                    margin="20px 10px"
+                    borderRadius="2px"
+                    onClick={() => props.setEditMode(false)}
+                    text="Cancel"
+                  />
+                </VerticalDivider>
+
+                {!error && (
+                  <SingleButtonWrapper>
+                    <StroveButton
+                      isPrimary
+                      isDisabled={!organizationId}
+                      isProcessing={isProcessing}
+                      padding="5px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="10px"
+                      borderRadius="2px"
+                      onClick={() =>
+                        dispatch(
+                          mutation({
+                            name: 'retrySubscriptionPayment',
+                            mutation: RETRY_SUBSCRIPTION_PAYMENT,
+                            variable: { organizationId: organizationId },
+                          })
+                        )
+                      }
+                      text="Retry payment"
+                    />
+                  </SingleButtonWrapper>
+                )}
+              </CardInfoWrapper>
             ) : (
               <StroveButton
                 isPrimary
@@ -361,29 +392,6 @@ const CheckoutForm = props => {
             )}
             {/* </>
             </Formik> */}
-            {!!error && (
-              <StroveButton
-                isPrimary
-                isDisabled={!organizationId}
-                isProcessing={isProcessing}
-                fontSize="18px"
-                padding="5px"
-                minWidth="250px"
-                maxWidth="250px"
-                margin="30px 0"
-                borderRadius="2px"
-                onClick={() =>
-                  dispatch(
-                    mutation({
-                      name: 'retrySubscriptionPayment',
-                      mutation: RETRY_SUBSCRIPTION_PAYMENT,
-                      variable: { organizationId: organizationId },
-                    })
-                  )
-                }
-                text="Retry payment"
-              />
-            )}
           </CardInfoWrapper>
         </div>
       )}
