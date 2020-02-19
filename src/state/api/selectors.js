@@ -55,8 +55,9 @@ export const getCurrentProject = state => {
   let projects = []
   organizations.forEach(organization => {
     organization.teams.forEach(team => {
-      projects.push(team.projects)
+      projects.push(...team.projects)
     })
   })
-  projects.find(item => item.machineId)
+
+  return projects.find(project => project.machineId)
 }
