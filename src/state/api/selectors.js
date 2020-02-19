@@ -42,7 +42,20 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
-export const getCurrentProject = state =>
-  getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
-    item => item.machineId
-  )
+// export const getCurrentProject = state =>
+//   getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
+//     item => item.machineId
+//   )
+
+export const getCurrentProject = state => {
+  const organizations = getApiData({
+    fields: ['myOrganizations'],
+    defaultValue: [],
+  })(state)
+  let projects = []
+  organizations.forEach(organization => {
+    // projects = [...projects, organization.projects]​
+    projects.push(organization.projects)
+  })
+  projects.find(item => item.machineId)
+}
