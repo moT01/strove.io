@@ -42,6 +42,7 @@ import CHANGE_PLAN from './changePlan'
 import GET_PAYMENT_INFO from './getPaymentInfo'
 import PAYMENT_STATUS_SUBSCRIPTION from './paymentStatusSubscription'
 import REMOVE_FROM_ORGANIZATION from './removeFromOrganization'
+import RETRY_SUBSCRIPTION_PAYMENT from './retrySubscriptionPayment'
 
 export {
   ADD_PROJECT,
@@ -88,4 +89,5 @@ export {
   GET_PAYMENT_INFO,
   PAYMENT_STATUS_SUBSCRIPTION,
   REMOVE_FROM_ORGANIZATION,
+  RETRY_SUBSCRIPTION_PAYMENT,
 }

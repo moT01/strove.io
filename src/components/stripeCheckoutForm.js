@@ -16,6 +16,7 @@ import {
   STRIPE_SUBSCRIBE,
   STRIPE_CLIENT_SECRET,
   CHANGE_PAYMENT_INFO,
+  RETRY_SUBSCRIPTION_PAYMENT,
 } from 'queries'
 import StroveButton from 'components/stroveButton.js'
 import { selectors, C, actions } from 'state'
@@ -360,6 +361,29 @@ const CheckoutForm = props => {
             )}
             {/* </>
             </Formik> */}
+            {!!error && (
+              <StroveButton
+                isPrimary
+                isDisabled={!organizationId}
+                isProcessing={isProcessing}
+                fontSize="18px"
+                padding="5px"
+                minWidth="250px"
+                maxWidth="250px"
+                margin="30px 0"
+                borderRadius="2px"
+                onClick={() =>
+                  dispatch(
+                    mutation({
+                      name: 'retrySubscriptionPayment',
+                      mutation: RETRY_SUBSCRIPTION_PAYMENT,
+                      variable: { organizationId: organizationId },
+                    })
+                  )
+                }
+                text="Retry payment"
+              />
+            )}
           </CardInfoWrapper>
         </div>
       )}
