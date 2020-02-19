@@ -51,7 +51,6 @@ import {
   IconWrapper,
   ExpandIcon,
   StyledCloseIcon,
-  StyledReactModal,
   TeamTileHeader,
   TileSectionHeader,
   SettingWrapper,
@@ -1036,7 +1035,7 @@ const Dashboard = ({ history }) => {
         />
       </Modal>
 
-      <StyledReactModal
+      <Modal
         isOpen={addProjectModal}
         onRequestClose={closeAddProjectModal}
         ariaHideApp={false}
@@ -1049,7 +1048,7 @@ const Dashboard = ({ history }) => {
           />
         )}
         <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
-      </StyledReactModal>
+      </Modal>
       {isPaymentLoading && (
         <FullScreenLoader type="processPayment" isFullScreen color="#0072ce" />
       )}

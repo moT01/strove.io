@@ -18,7 +18,6 @@ const AddProjectWrapper = styled.div`
   border-width: 1px;
   border-style: solid;
   padding: 20px;
-  box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c1};
   margin-bottom: 0;
   height: auto;
   width: auto;
