@@ -12,11 +12,6 @@ const AddProjectWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-style: solid;
   padding: 20px;
   margin-bottom: 0;
   height: auto;
