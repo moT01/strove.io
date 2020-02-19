@@ -314,17 +314,6 @@ export const StyledCloseIcon = styled(Icon)`
   }
 `
 
-export const StyledReactModal = styled(ReactModal)`
-  display: flex;
-  height: auto;
-  width: auto;
-  position: fixed;
-  animation: ${FullFadeIn} 0.2s ease-out;
-  :focus {
-    outline: 0;
-  }
-`
-
 export const TeamTileHeader = styled(Tile)`
   width: 100%;
   margin: 0;
