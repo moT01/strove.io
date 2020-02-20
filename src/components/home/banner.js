@@ -84,6 +84,7 @@ const Banner = () => {
               fontWeight="bold"
               isPrimary
               text="Get started"
+              margin="0"
               letterSpacing="0.8px"
               onClick={() => setModalVisible(true)}
             />
