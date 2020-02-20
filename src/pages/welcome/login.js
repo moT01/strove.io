@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { isMobile } from 'react-device-detect'
 
 import { ExternalLink, FullScreenWrapper, MenuWrapper } from 'components'
 import { selectors } from 'state'
@@ -32,6 +33,13 @@ const InvitationDetails = styled.div`
   color: ${({ theme }) => theme.colors.c11};
   font-size: 18px;
   margin: 10px;
+`
+
+const Illustration = styled.img`
+  margin: 0 10px;
+  width: 50%;
+  height: 50%;
+  max-width: 520px;
 `
 
 const Login = () => {
@@ -68,6 +76,14 @@ const Login = () => {
           ))}
         </LoginWrapper>
       </MenuWrapper>
+      {!isMobile && (
+        <Illustration
+          src={require('assets/illustration.png')}
+          alt="illustration"
+          width="50%"
+          height="50%"
+        />
+      )}
     </FullScreenWrapper>
   )
 }
