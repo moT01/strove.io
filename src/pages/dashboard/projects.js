@@ -45,7 +45,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const currentProject = projects?.find(item => item.machineId)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   // This code filters other users' and already forked projects
   const displayedProjects = sortByActiveProjects(projects).map(project =>
@@ -59,6 +59,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
   const handleStartClick = ({ id, editorPort }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
+        console.log('TCL: handleStartClick -> id', id)
         dispatch(
           mutation({
             name: 'continueProject',

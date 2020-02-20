@@ -119,7 +119,7 @@ const Dashboard = ({ history }) => {
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [processingPayment, setProcessingPayment] = useState(false)
-  const currentProject = projects.find(item => item.machineId)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
   const organizationsObj =

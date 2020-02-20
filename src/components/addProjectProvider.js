@@ -39,7 +39,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
     selectors.incomingProject.getRepoLink
   )
   const addProjectError = useSelector(selectors.incomingProject.getError)
-  const currentProject = projects.find(item => item.machineId)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
@@ -76,6 +76,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
       if (existingProject.machineId) {
         return redirectToEditor(dispatch, history)
       } else {
+        console.log('TCL: addProject -> existingProject', existingProject)
         return dispatch(
           mutation({
             name: 'continueProject',
