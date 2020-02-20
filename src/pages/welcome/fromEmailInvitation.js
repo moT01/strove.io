@@ -17,6 +17,7 @@ import {
   InvitationDetails,
   Illustration,
   WelcomeWrapper,
+  SectionWrapper,
 } from './styled'
 
 const FromEmailInvitation = () => {
@@ -36,7 +37,7 @@ const FromEmailInvitation = () => {
   return (
     <FullScreenWrapper>
       <WelcomeWrapper>
-        <MenuWrapper>
+        <SectionWrapper>
           <InvitationTitle>
             You're invited to <b>{teamName}</b>
           </InvitationTitle>
@@ -64,7 +65,7 @@ const FromEmailInvitation = () => {
           <InvitationDetails>
             Your sign email is <b>{invitedEmail}</b>
           </InvitationDetails>
-        </MenuWrapper>
+        </SectionWrapper>
         {!isMobile && (
           <Illustration
             src={require('assets/illustration.png')}

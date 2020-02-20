@@ -26,7 +26,7 @@ export const InvitationDetails = styled.div`
 `
 
 export const Illustration = styled.img`
-  margin: 0 10px;
+  margin: 0 10px 0 0;
   max-width: 520px;
 `
 
@@ -35,7 +35,11 @@ export const WelcomeWrapper = styled.div`
   max-width: 1400px;
   background-color: ${({ theme }) => theme.colors.c2};
   z-index: 3;
-  position: relative;
   display: flex;
   flex-direction: ${isMobile ? 'column' : 'row'};
+`
+
+export const SectionWrapper = styled.div`
+  padding: 10px;
+  max-width: 520px;
 `
