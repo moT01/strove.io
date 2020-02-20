@@ -56,8 +56,6 @@ const Login = () => {
         <Illustration
           src={require('assets/illustration.png')}
           alt="illustration"
-          width="50%"
-          height="50%"
         />
       )}
     </FullScreenWrapper>

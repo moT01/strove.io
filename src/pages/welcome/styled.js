@@ -26,7 +26,5 @@ export const InvitationDetails = styled.div`
 
 export const Illustration = styled.img`
   margin: 0 10px;
-  width: 50%;
-  height: 50%;
   max-width: 520px;
 `

@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { isMobile } from 'react-device-detect'
 
 import { ExternalLink, FullScreenWrapper, MenuWrapper } from 'components'
 import { selectors } from 'state'
@@ -63,6 +63,12 @@ const FromEmailInvitation = () => {
           Your sign email is <b>{invitedEmail}</b>
         </InvitationDetails>
       </MenuWrapper>
+      {!isMobile && (
+        <Illustration
+          src={require('assets/illustration.png')}
+          alt="illustration"
+        />
+      )}
     </FullScreenWrapper>
   )
 }
