@@ -39,10 +39,10 @@ const Login = () => {
   const token = useSelector(selectors.getToken)
   const dispatch = useDispatch()
 
-//   const teamName = searchParams.get('teamName')
-//   const teamId = searchParams.get('teamId')
-//   const invitedEmail = searchParams.get('invitedEmail')
-//   const fromEmail = searchParams.get('fromEmail')
+  //   const teamName = searchParams.get('teamName')
+  //   const teamId = searchParams.get('teamId')
+  //   const invitedEmail = searchParams.get('invitedEmail')
+  //   const fromEmail = searchParams.get('fromEmail')
 
   if (token) {
     return <Redirect to="/app/dashboard" />
@@ -60,11 +60,7 @@ const Login = () => {
               key={loginOption.label}
               primary
               href={`${loginOption.href}`}
-              onClick={() =>
-                dispatch(
-                  actions.invitations.addInvitation({ teamId, teamName })
-                )
-              }
+              onClick={() => {}}
             >
               {loginOption.icon}
               <LoginText invert>Login with {loginOption.label}</LoginText>
