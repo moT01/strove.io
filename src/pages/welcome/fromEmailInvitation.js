@@ -10,29 +10,13 @@ import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
 import { actions } from 'state'
 
-const LoginText = styled.span`
-  font-weight: 500;
-  font-size: 20px;
-`
-
-const InvitationTitle = styled.div`
-  color: ${({ theme }) => theme.colors.c1};
-  font-size: 21px;
-  font-weight: 500;
-  margin-bottom: 20px;
-`
-
-const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const InvitationDetails = styled.div`
-  color: ${({ theme }) => theme.colors.c11};
-  font-size: 18px;
-  margin: 10px;
-`
+import {
+  LoginText,
+  InvitationTitle,
+  LoginWrapper,
+  InvitationDetails,
+  Illustration,
+} from './styled'
 
 const FromEmailInvitation = () => {
   const searchParams = getWindowSearchParams()
