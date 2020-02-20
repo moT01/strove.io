@@ -43,13 +43,6 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
-<<<<<<< HEAD
-// change to selector to check all organizations teams projects
-export const getCurrentProject = state =>
-  getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
-    item => item.machineId
-  )
-=======
 export const getCurrentProject = createSelector(
   getMyOrganizations,
   organizations => {
@@ -63,4 +56,3 @@ export const getCurrentProject = createSelector(
     return projects.find(project => project.machineId)
   }
 )
->>>>>>> stroveV2
