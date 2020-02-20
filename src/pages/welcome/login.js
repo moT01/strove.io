@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { isMobile } from 'react-device-detect'
@@ -11,36 +10,13 @@ import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
 import { actions } from 'state'
 
-const LoginText = styled.span`
-  font-weight: 500;
-  font-size: 20px;
-`
-
-const InvitationTitle = styled.div`
-  color: ${({ theme }) => theme.colors.c1};
-  font-size: 21px;
-  font-weight: 500;
-  margin-bottom: 20px;
-`
-
-const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const InvitationDetails = styled.div`
-  color: ${({ theme }) => theme.colors.c11};
-  font-size: 18px;
-  margin: 10px;
-`
-
-const Illustration = styled.img`
-  margin: 0 10px;
-  width: 50%;
-  height: 50%;
-  max-width: 520px;
-`
+import {
+  LoginText,
+  InvitationTitle,
+  LoginWrapper,
+  InvitationDetails,
+  Illustration,
+} from './styled'
 
 const Login = () => {
   const searchParams = getWindowSearchParams()
