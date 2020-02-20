@@ -29,7 +29,8 @@ export default styled(Modal)`
   border-style: solid;
   word-break: break-word;
   padding: 20px;
-  box-shadow: 0 15px 15px -15px ${({ theme }) => theme.colors.c22};
+  box-shadow: 0 5px 10px 0 rgba(174, 174, 186, 0.24),
+    0 8px 24px 0 rgba(174, 174, 186, 0.16);
   position: fixed;
   animation: ${FullFadeIn} 0.2s ease-out;
 
