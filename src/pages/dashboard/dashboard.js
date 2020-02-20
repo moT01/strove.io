@@ -909,9 +909,8 @@ const Dashboard = ({ history }) => {
       </Modal>
 
       <Modal
-        width={isMobileOnly ? '80vw' : '60vw'}
-        minWidth="60vw"
-        height={isMobileOnly ? '40vh' : '20vh'}
+        width="300px"
+        // height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={settingsModal}
         onRequestClose={closeSettingsModal}
         contentLabel="Team settings"

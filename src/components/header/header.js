@@ -8,7 +8,6 @@ import PreviewDropdown from './previewDropdown'
 import DashboardLink from './dashboardLink'
 import HomeLink from './homeLink'
 import DocsLink from './docsLink'
-import CopyLink from './copyLink'
 import PoweredByStroveLink from './poweredByStroveLink'
 import { getWindowPathName } from 'utils'
 
@@ -40,7 +39,7 @@ const HeaderWrapper = styled.div`
 const Header = () => {
   const isEmbed = getWindowPathName().includes('embed')
   const isEditor = getWindowPathName().includes('editor')
-  const tabs = [HomeLink, DashboardLink, PreviewDropdown, CopyLink, DocsLink]
+  const tabs = [HomeLink, DashboardLink, PreviewDropdown, DocsLink]
   const locProps = { isEmbed, isEditor, isMobileOnly }
 
   return (

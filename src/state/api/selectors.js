@@ -1,4 +1,5 @@
 import getOr from 'lodash/fp/getOr'
+import { createSelector } from 'reselect'
 
 export const getApiData = ({ fields, defaultValue = {} }) =>
   Array.isArray(fields)
@@ -42,8 +43,24 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
+<<<<<<< HEAD
 // change to selector to check all organizations teams projects
 export const getCurrentProject = state =>
   getApiData({ fields: ['user', 'projects'], defaultValue: [] })(state).find(
     item => item.machineId
   )
+=======
+export const getCurrentProject = createSelector(
+  getMyOrganizations,
+  organizations => {
+    let projects = []
+    organizations.forEach(organization => {
+      organization.teams.forEach(team => {
+        projects.push(...team.projects)
+      })
+    })
+
+    return projects.find(project => project.machineId)
+  }
+)
+>>>>>>> stroveV2

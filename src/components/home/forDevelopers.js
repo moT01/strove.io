@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { isMobileOnly } from 'react-device-detect'
-import { Icon } from 'antd'
 
 import { theme } from 'consts'
 

@@ -2,12 +2,11 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { useAnalytics } from 'hooks'
-import { enterpriseFeatures, devFeatures } from 'consts'
+import { devFeatures } from 'consts'
 
 import Banner from './banner'
 import Features from './features'
 import Technologies from './technologies'
-import ForEnterprise from './forEnterprise'
 import ForDevelopers from './forDevelopers'
 import Footer from '../footer'
 
