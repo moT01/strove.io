@@ -19,7 +19,7 @@ const Editor = WithLazyLoader(lazy(() => import('pages/editor')))
 const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
 const Plans = WithLazyLoader(lazy(() => import('pages/plans')))
 const FromEmailInvitation = WithLazyLoader(
-  lazy(() => import('pages/fromEmailInvitation'))
+  lazy(() => import('pages/welcome/fromEmailInvitation'))
 )
 const Login = WithLazyLoader(lazy(() => import('pages/welcome/login')))
 const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
