@@ -16,6 +16,7 @@ import {
   LoginWrapper,
   InvitationDetails,
   Illustration,
+  WelcomeWrapper
 } from './styled'
 
 const Login = () => {
@@ -34,6 +35,7 @@ const Login = () => {
 
   return (
     <FullScreenWrapper>
+      <WelcomeWrapper>
       <MenuWrapper>
         <InvitationTitle>
           Login or signup with one of the supported source control providers
@@ -58,6 +60,7 @@ const Login = () => {
           alt="illustration"
         />
       )}
+      </WelcomeWrapper>
     </FullScreenWrapper>
   )
 }
