@@ -8,7 +8,7 @@ import { Formik, Field } from 'formik'
 import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { GetStarted, Logos, TrialInfo, StroveButton } from 'components'
+import { GetStarted, Logos, TrialInfo, StroveButton, Modal } from 'components'
 
 import {
   StyledModal,
@@ -315,7 +315,7 @@ const Banner = () => {
           </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledModal
+      <Modal
         isOpen={isModalVisible}
         onRequestClose={closeModal}
         ariaHideApp={false}
@@ -325,7 +325,7 @@ const Banner = () => {
           <StyledIcon type="close" onClick={() => setModalVisible(false)} />
         )}
         <GetStarted closeModal={closeModal} />
-      </StyledModal>
+      </Modal>
     </>
   )
 }

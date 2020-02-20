@@ -15,9 +15,6 @@ const AddProjectWrapper = styled.div`
   padding: 20px;
   min-width: 50vw;
   max-width: 100vw;
-  background: white;
-  box-shadow: 0 5px 10px 0 rgba(174, 174, 186, 0.24),
-    0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
 
 const Title = styled.h3`
