@@ -16,7 +16,8 @@ import {
   LoginWrapper,
   InvitationDetails,
   Illustration,
-  WelcomeWrapper
+  WelcomeWrapper,
+  SectionWrapper,
 } from './styled'
 
 const Login = () => {
@@ -36,30 +37,30 @@ const Login = () => {
   return (
     <FullScreenWrapper>
       <WelcomeWrapper>
-      <MenuWrapper>
-        <InvitationTitle>
-          Login or signup with one of the supported source control providers
-        </InvitationTitle>
-        <LoginWrapper>
-          {loginOptions.map(loginOption => (
-            <ExternalLink
-              key={loginOption.label}
-              primary
-              href={`${loginOption.href}`}
-              onClick={() => {}}
-            >
-              {loginOption.icon}
-              <LoginText invert>Login with {loginOption.label}</LoginText>
-            </ExternalLink>
-          ))}
-        </LoginWrapper>
-      </MenuWrapper>
-      {!isMobile && (
-        <Illustration
-          src={require('assets/illustration.png')}
-          alt="illustration"
-        />
-      )}
+        <SectionWrapper>
+          <InvitationTitle>
+            Login or signup with one of the supported source control providers
+          </InvitationTitle>
+          <LoginWrapper>
+            {loginOptions.map(loginOption => (
+              <ExternalLink
+                key={loginOption.label}
+                primary
+                href={`${loginOption.href}`}
+                onClick={() => {}}
+              >
+                {loginOption.icon}
+                <LoginText invert>Login with {loginOption.label}</LoginText>
+              </ExternalLink>
+            ))}
+          </LoginWrapper>
+        </SectionWrapper>
+        {!isMobile && (
+          <Illustration
+            src={require('assets/illustration.png')}
+            alt="illustration"
+          />
+        )}
       </WelcomeWrapper>
     </FullScreenWrapper>
   )

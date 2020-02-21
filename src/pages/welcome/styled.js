@@ -42,4 +42,8 @@ export const WelcomeWrapper = styled.div`
 export const SectionWrapper = styled.div`
   padding: 10px;
   max-width: 520px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 `
