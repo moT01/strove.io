@@ -55,9 +55,7 @@ const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
 const Banner = ({ history }) => {
-  const [isModalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
-  const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
   const [technologyDescription, setTechnologyDescription] = useState(
     defaultTechnologyDescription
