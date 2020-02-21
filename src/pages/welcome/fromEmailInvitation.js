@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { isMobile } from 'react-device-detect'
 
-import { ExternalLink, FullScreenWrapper, MenuWrapper } from 'components'
+import { ExternalLink, FullScreenWrapper } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'

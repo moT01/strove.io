@@ -1,14 +1,11 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { isMobile } from 'react-device-detect'
 
-import { ExternalLink, FullScreenWrapper, MenuWrapper } from 'components'
+import { ExternalLink, FullScreenWrapper } from 'components'
 import { selectors } from 'state'
-import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
-import { actions } from 'state'
 
 import {
   LoginText,
@@ -42,7 +39,6 @@ const Login = () => {
                 key={loginOption.label}
                 primary
                 href={`${loginOption.href}`}
-                onClick={() => {}}
               >
                 {loginOption.icon}
                 <LoginText invert>Login with {loginOption.label}</LoginText>
