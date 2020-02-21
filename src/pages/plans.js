@@ -418,47 +418,47 @@ const Plans = () => {
                   text="Resubscribe"
                 />
               </>
-            ) : organization.value.subscriptionStatus === 'inactive' ? (
-              <>
-                <Title>2. Payment information</Title>
-                <Text>Your subscription has ended.</Text>
-                <Text>
-                  You can renew the subscription with your most recent card.
-                </Text>
-                <Text>
-                  {paymentInfo && (
-                    <PaymentIcon
-                      id={paymentInfo.card}
-                      style={{ height: '1rem', margin: ' 0px 10px 0px 0px' }}
-                    />
-                  )}
-                  **** **** **** {paymentInfo?.last4}
-                </Text>
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  minWidth="150px"
-                  maxWidth="150px"
-                  margin="10px"
-                  borderRadius="2px"
-                  onClick={() =>
-                    dispatch(
-                      mutation({
-                        name: 'renewSubscription',
-                        mutation: RENEW_SUBSCRIPTION,
-                        variables: {
-                          organizationId: organization.value.id,
-                          plan: subscriptionPlan.value,
-                          quantity: quantity,
-                        },
-                        onSuccess: updateOrganizations(),
-                      })
-                    )
-                  }
-                  text="Renew subscription"
-                />
-              </>
             ) : (
+              // ) : organization.value.subscriptionStatus === 'inactive' ? (
+              //   <>
+              //     <Title>2. Payment information</Title>
+              //     <Text>Your subscription has ended.</Text>
+              //     <Text>
+              //       You can renew the subscription with your most recent card.
+              //     </Text>
+              //     <Text>
+              //       {paymentInfo && (
+              //         <PaymentIcon
+              //           id={paymentInfo.card}
+              //           style={{ height: '1rem', margin: ' 0px 10px 0px 0px' }}
+              //         />
+              //       )}
+              //       **** **** **** {paymentInfo?.last4}
+              //     </Text>
+              //     <StroveButton
+              //       isPrimary
+              //       padding="5px"
+              //       minWidth="150px"
+              //       maxWidth="150px"
+              //       margin="10px"
+              //       borderRadius="2px"
+              //       onClick={() =>
+              //         dispatch(
+              //           mutation({
+              //             name: 'renewSubscription',
+              //             mutation: RENEW_SUBSCRIPTION,
+              //             variables: {
+              //               organizationId: organization.value.id,
+              //               plan: subscriptionPlan.value,
+              //               quantity: quantity,
+              //             },
+              //             onSuccess: updateOrganizations(),
+              //           })
+              //         )
+              //       }
+              //       text="Renew subscription"
+              //     />
+              //   </>
               <SectionWrapper>
                 <Title>2. Payment method</Title>
                 <StripeCheckoutForm
