@@ -4,6 +4,7 @@ import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
+import { withRouter } from 'react-router-dom'
 
 import { theme } from 'consts'
 import { mutation } from 'utils'
@@ -55,7 +56,7 @@ const validate = values => {
 const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
-const Banner = () => {
+const Banner = ({ history }) => {
   const [isModalVisible, setModalVisible] = useState(false)
   const dispatch = useDispatch()
   const closeModal = () => setModalVisible(false)
@@ -86,7 +87,7 @@ const Banner = () => {
               text="Get started"
               margin="0"
               letterSpacing="0.8px"
-              onClick={() => setModalVisible(true)}
+              onClick={() => history.push('/welcome/login')}
             />
             <TrialInfo>
               <li>Free demo</li>
@@ -330,4 +331,5 @@ const Banner = () => {
     </>
   )
 }
-export default Banner
+
+export default withRouter(Banner)
