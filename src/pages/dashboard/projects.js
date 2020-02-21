@@ -56,7 +56,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
       : project
   )
 
-  const handleStartClick = ({ id, editorPort }) => {
+  const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         console.log('TCL: handleStartClick -> id', id)
@@ -64,7 +64,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
           mutation({
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
-            variables: { projectId: id },
+            variables: { projectId: id, teamId },
             onSuccessDispatch: null,
           })
         )

@@ -36,7 +36,7 @@ const EditorWrapper = ({ history }) => {
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
-          variables: { projectId },
+          variables: { projectId, teamId: currentProject.teamId },
           onSuccessDispatch: null,
         })
       )
