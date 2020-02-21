@@ -8,7 +8,7 @@ export const LoginText = styled.span`
 
 export const InvitationTitle = styled.div`
   color: ${({ theme }) => theme.colors.c1};
-  font-size: 21px;
+  font-size: 30px;
   font-weight: 500;
   margin-bottom: 20px;
 `
