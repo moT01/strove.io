@@ -86,7 +86,7 @@ const Projects = ({
                       </ModalText>
                       <ModalText>
                         If you need more time to work on your amazing projects
-                        upgrade to pro plan.
+                        upgrade your subscription plan.
                       </ModalText>
                       <StroveButton
                         isLink
