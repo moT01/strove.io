@@ -9,12 +9,11 @@ import { withRouter } from 'react-router-dom'
 import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { Logos, TrialInfo, StroveButton, Modal } from 'components'
+import { Logos, TrialInfo, StroveButton } from 'components'
 
 import {
   StyledCellHeader,
   StyledSectionWrapper,
-  StyledIcon,
   StyledHeadingSection,
   StyledH1,
   ButtonsWrapper,
