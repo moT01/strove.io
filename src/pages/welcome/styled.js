@@ -13,6 +13,13 @@ export const InvitationTitle = styled.div`
   margin-bottom: 20px;
 `
 
+export const LoginTitle = styled.div`
+  color: ${({ theme }) => theme.colors.c3};
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+`
+
 export const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;

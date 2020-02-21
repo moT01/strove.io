@@ -12,7 +12,7 @@ import { actions } from 'state'
 
 import {
   LoginText,
-  InvitationTitle,
+  LoginTitle,
   LoginWrapper,
   InvitationDetails,
   Illustration,
@@ -21,14 +21,7 @@ import {
 } from './styled'
 
 const Login = () => {
-  const searchParams = getWindowSearchParams()
   const token = useSelector(selectors.getToken)
-  const dispatch = useDispatch()
-
-  //   const teamName = searchParams.get('teamName')
-  //   const teamId = searchParams.get('teamId')
-  //   const invitedEmail = searchParams.get('invitedEmail')
-  //   const fromEmail = searchParams.get('fromEmail')
 
   if (token) {
     return <Redirect to="/app/dashboard" />
@@ -38,7 +31,7 @@ const Login = () => {
     <FullScreenWrapper>
       <WelcomeWrapper>
         <SectionWrapper>
-          <InvitationTitle>First, login with Gitub or Gitlab</InvitationTitle>
+          <LoginTitle>First, login with Gitub or Gitlab</LoginTitle>
           <InvitationDetails>
             Just a quick login before you say goodbye to long environment setups
             for good.
