@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, memo } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
@@ -49,4 +49,4 @@ const Strove = () => (
   </>
 )
 
-export default Strove
+export default memo(Strove)
