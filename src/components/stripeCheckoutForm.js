@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components/macro'
 import {
   injectStripe,
@@ -411,22 +411,24 @@ const CheckoutForm = props => {
 
 const FormWithStripe = injectStripe(CheckoutForm)
 
-export default ({
-  organization,
-  quantity,
-  plan,
-  editMode,
-  setEditMode,
-  setWarningModal,
-}) => (
-  <Elements>
-    <FormWithStripe
-      organization={organization}
-      quantity={quantity}
-      plan={plan}
-      editMode={editMode}
-      setEditMode={setEditMode}
-      setWarningModal={setWarningModal}
-    />
-  </Elements>
+export default memo(
+  ({
+    organization,
+    quantity,
+    plan,
+    editMode,
+    setEditMode,
+    setWarningModal,
+  }) => (
+    <Elements>
+      <FormWithStripe
+        organization={organization}
+        quantity={quantity}
+        plan={plan}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        setWarningModal={setWarningModal}
+      />
+    </Elements>
+  )
 )
