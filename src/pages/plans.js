@@ -530,7 +530,14 @@ const Plans = () => {
                     <b>Order summary</b>
                   </TextWithBorder>
                   <TextWithBorder>
-                    Members <BoldText>{quantity}</BoldText>
+                    Members{' '}
+                    <BoldText>
+                      {organization.value?.subscriptionStatus === 'active'
+                        ? quantity
+                        : organization.value?.users
+                        ? organization.value?.users.length
+                        : 1}
+                    </BoldText>
                   </TextWithBorder>
                   <TextWithBorder>
                     Single member price{' '}
@@ -545,7 +552,11 @@ const Plans = () => {
                     {subscriptionPlan.monthsLabel}
                     <BoldText>
                       $
-                      {quantity *
+                      {(organization.value?.subscriptionStatus === 'active'
+                        ? quantity
+                        : organization.value?.users
+                        ? organization.value?.users.length
+                        : 1) *
                         subscriptionPlan.monthlyPrice *
                         subscriptionPlan.monthsCount}
                     </BoldText>
