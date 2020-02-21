@@ -18,6 +18,15 @@ const LoginText = styled.span`
   font-size: 20px;
 `
 
+const Wrapper = styled.div`
+  display: flex;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  word-break: initial;
+`
+
 const EmbedWrapper = () => {
   const token = useSelector(selectors.getToken)
 

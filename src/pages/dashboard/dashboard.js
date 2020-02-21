@@ -106,6 +106,7 @@ const Dashboard = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
+  const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
@@ -163,6 +164,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     dispatch(updateOrganizations())
+    convertToHours()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -201,7 +203,10 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <DashboardWrapper>
-          <Text>{user.timeSpent}</Text>
+          <Text>
+            You have spent {time.hours}h {time.minutes}m {time.seconds}s in the
+            editor
+          </Text>
           {expandedTiles &&
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
@@ -460,6 +465,16 @@ const Dashboard = ({ history }) => {
       content: <Projects projects={projects} history={history} />,
     },
   ]
+
+  const convertToHours = () => {
+    let seconds = Math.floor((user.timeSpent / 1000) % 60)
+    let minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
+    let hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
+
+    setTime({ hours, minutes, seconds })
+
+    console.log('Time', seconds, minutes, hours)
+  }
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
