@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
@@ -332,4 +332,4 @@ const Banner = ({ history }) => {
   )
 }
 
-export default withRouter(Banner)
+export default withRouter(memo(Banner))
