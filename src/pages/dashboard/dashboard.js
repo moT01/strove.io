@@ -420,6 +420,7 @@ const Dashboard = ({ history }) => {
                                     projects={team.projects}
                                     organizatoinId={team.organizationId}
                                     history={history}
+                                    setWarningModal={setWarningModal}
                                   />
                                   {isOwner && (
                                     <StroveButton

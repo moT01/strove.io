@@ -9,6 +9,7 @@ import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 import StroveLogo from 'images/strove.png'
+import client from 'client'
 
 import {
   TilesWrapper,
@@ -36,7 +37,13 @@ const sortByActiveProjects = projects =>
     return [...acc, element]
   }, []) || []
 
-const Projects = ({ history, projects, addProject, organizationId }) => {
+const Projects = ({
+  history,
+  projects,
+  addProject,
+  organizationId,
+  setWarningModal,
+}) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -66,6 +73,39 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
             mutation: CONTINUE_PROJECT,
             variables: { projectId: id, teamId },
             onSuccessDispatch: null,
+            onSuccess: data =>
+              console.log('Ladies and gentlemen, the data', data),
+            onError: error => {
+              if (error && user.timeSpent >= 72000000) {
+                setWarningModal({
+                  visible: true,
+                  content: (
+                    <>
+                      <ModalText>
+                        You have reached the monthly editor time for free users.
+                      </ModalText>
+                      <ModalText>
+                        If you need more time to work on your amazing projects
+                        upgrade to pro plan.
+                      </ModalText>
+                      <StroveButton
+                        isLink
+                        isPrimary
+                        to="/app/plans"
+                        text="Pricing"
+                        padding="5px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="10px"
+                        borderRadius="5px"
+                      />
+                    </>
+                  ),
+                })
+                console.log('Ladies and gentlemen, the error', error)
+              }
+            },
+            onSuccessError: error => console.log('Yet another errore', error),
           })
         )
       } else {
@@ -334,15 +374,18 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
   )
 }
 
-export default memo(({ history, projects, organizationId }) => (
-  <AddProjectProvider>
-    {({ addProject }) => (
-      <Projects
-        addProject={addProject}
-        history={history}
-        projects={projects}
-        organizationId={organizationId}
-      />
-    )}
-  </AddProjectProvider>
-))
+export default memo(
+  ({ history, projects, organizationId, setWarningModal }) => (
+    <AddProjectProvider>
+      {({ addProject }) => (
+        <Projects
+          addProject={addProject}
+          history={history}
+          projects={projects}
+          organizationId={organizationId}
+          setWarningModal={setWarningModal}
+        />
+      )}
+    </AddProjectProvider>
+  )
+)
