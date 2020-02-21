@@ -9,10 +9,9 @@ import { withRouter } from 'react-router-dom'
 import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { GetStarted, Logos, TrialInfo, StroveButton, Modal } from 'components'
+import { Logos, TrialInfo, StroveButton, Modal } from 'components'
 
 import {
-  StyledModal,
   StyledCellHeader,
   StyledSectionWrapper,
   StyledIcon,
@@ -317,17 +316,6 @@ const Banner = ({ history }) => {
           </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <Modal
-        isOpen={isModalVisible}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-        isMobile={isMobileOnly}
-      >
-        {!isMobile && (
-          <StyledIcon type="close" onClick={() => setModalVisible(false)} />
-        )}
-        <GetStarted closeModal={closeModal} />
-      </Modal>
     </>
   )
 }
