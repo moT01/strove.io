@@ -38,9 +38,11 @@ const Login = () => {
     <FullScreenWrapper>
       <WelcomeWrapper>
         <SectionWrapper>
-          <InvitationTitle>
-            Login or signup with one of the supported source control providers
-          </InvitationTitle>
+          <InvitationTitle>First, login with Gitub or Gitlab</InvitationTitle>
+          <InvitationDetails>
+            Just a quick login before you say goodbye to long environment setups
+            for good.
+          </InvitationDetails>
           <LoginWrapper>
             {loginOptions.map(loginOption => (
               <ExternalLink
