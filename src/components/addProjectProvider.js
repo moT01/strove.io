@@ -53,15 +53,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     let repoFromGitlab
     let repoFromBitbucket
 
-    console.log(
-      'Yeeeeeeeeeeeeeeeeeeeeeeet 2 ',
-      organization,
-      link,
-      name,
-      teamId,
-      forkedFromId
-    )
-
     if (link) {
       repoLink = link.trim().toLowerCase()
 

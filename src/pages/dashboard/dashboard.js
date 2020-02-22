@@ -474,8 +474,6 @@ const Dashboard = ({ history }) => {
     let hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
 
     setTime({ hours, minutes, seconds })
-
-    console.log('Time', seconds, minutes, hours)
   }
 
   const handleCreateTeamClick = ({ organizationId }) => {

@@ -79,7 +79,6 @@ const validateRepoLink = values => {
 }
 
 const GetStarted = ({ addProject, teamId, organization }) => {
-  console.log('TCL: GetStarted -> organization', organization)
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (

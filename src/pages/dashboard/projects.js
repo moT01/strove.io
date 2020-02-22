@@ -64,8 +64,6 @@ const Projects = ({
       : project
   )
 
-  console.log('yeeeeeeeeeeeeeeeeeeeeeet', organization)
-
   const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
@@ -103,10 +101,8 @@ const Projects = ({
                     </>
                   ),
                 })
-                console.log('Ladies and gentlemen, the error', error)
               }
             },
-            onSuccessError: error => console.log('Yet another errore', error),
           })
         )
       } else {
