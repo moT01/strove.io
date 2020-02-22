@@ -4,6 +4,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { useAnalytics } from 'hooks'
@@ -91,6 +92,30 @@ const validateTeamName = values => {
   return errors
 }
 
+const TimeBarContainer = styled.div`
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 40%;
+  height: 15px;
+  border: 1px solid #0072ce;
+  border-radius: 2px;
+  overflow: hidden;
+`
+
+const TimeBar = styled.div`
+  height: 100%;
+  width: ${({ time }) => (time / 72000000) * 100}%;
+  background-color: #0072ce;
+`
+
+const TimeText = styled(Text)`
+  color: ${({ theme }) => theme.colors.c1};
+  font-size: 12px;
+`
+
 const emptyWarningModalContent = {
   visible: false,
   content: null,
@@ -106,20 +131,21 @@ const Dashboard = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
+  const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [teamLeaderModal, setTeamLeaderModal] = useState(false)
-  const [teamId, setTeamId] = useState('')
+  // const [teamId, setTeamId] = useState('')
   const [editTeam, setEditTeam] = useState()
   const [editMode, setEditMode] = useState('')
   const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [processingPayment, setProcessingPayment] = useState(false)
-  const currentProject = projects.find(item => item.machineId)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
   const organizationsObj =
@@ -163,6 +189,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     dispatch(updateOrganizations())
+    convertToHours()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -205,6 +232,17 @@ const Dashboard = ({ history }) => {
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
+                {organization.owner.id === user.id && (
+                  <>
+                    <TimeBarContainer>
+                      <TimeBar time={user.timeSpent} />
+                    </TimeBarContainer>
+                    <TimeText>
+                      Time spent in editor: {time.hours}h {time.minutes}m{' '}
+                      {time.seconds}s / 20h
+                    </TimeText>
+                  </>
+                )}
                 {organization.teams &&
                   Object.values(organizationsObj[organization.id].teams).map(
                     team => {
@@ -412,8 +450,10 @@ const Dashboard = ({ history }) => {
                                 <TeamTileSection isLast>
                                   <Projects
                                     projects={team.projects}
-                                    organizatoinId={team.organizationId}
+                                    organization={organization}
                                     history={history}
+                                    setWarningModal={setWarningModal}
+                                    organizationsObj={organizationsObj}
                                   />
                                   {isOwner && (
                                     <StroveButton
@@ -425,7 +465,7 @@ const Dashboard = ({ history }) => {
                                       borderRadius="2px"
                                       text="Add Project"
                                       onClick={() => {
-                                        setTeamId(team.id)
+                                        setEditTeam(team)
                                         setAddProjectModal(true)
                                       }}
                                     />
@@ -459,6 +499,14 @@ const Dashboard = ({ history }) => {
       content: <Projects projects={projects} history={history} />,
     },
   ]
+
+  const convertToHours = () => {
+    let seconds = Math.floor((user.timeSpent / 1000) % 60)
+    let minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
+    let hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
+
+    setTime({ hours, minutes, seconds })
+  }
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
@@ -1111,7 +1159,11 @@ const Dashboard = ({ history }) => {
             onClick={() => setAddProjectModal(false)}
           />
         )}
-        <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
+        <GetStarted
+          closeModal={closeAddProjectModal}
+          teamId={editTeam?.id}
+          organization={organizationsObj[editTeam?.organizationId]}
+        />
       </Modal>
     </div>
   )

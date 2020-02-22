@@ -216,7 +216,7 @@ export const OrganizationName = styled(Text)`
   color: ${({ theme }) => theme.colors.c25};
   margin-top: 20px;
   font-size: 1.6rem;
-  height: 1.7rem;
+  height: 1.9rem;
   font-weight: 700;
 `
 

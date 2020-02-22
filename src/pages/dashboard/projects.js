@@ -9,6 +9,7 @@ import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 import StroveLogo from 'images/strove.png'
+import client from 'client'
 
 import {
   TilesWrapper,
@@ -36,7 +37,14 @@ const sortByActiveProjects = projects =>
     return [...acc, element]
   }, []) || []
 
-const Projects = ({ history, projects, addProject, organizationId }) => {
+const Projects = ({
+  history,
+  projects,
+  addProject,
+  organization,
+  setWarningModal,
+  organizationsObj,
+}) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
@@ -45,7 +53,7 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const currentProject = projects?.find(item => item.machineId)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   // This code filters other users' and already forked projects
   const displayedProjects = sortByActiveProjects(projects).map(project =>
@@ -56,15 +64,45 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
       : project
   )
 
-  const handleStartClick = ({ id, editorPort }) => {
+  const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(
           mutation({
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
-            variables: { projectId: id },
+            variables: { projectId: id, teamId },
             onSuccessDispatch: null,
+            onError: error => {
+              if (error && user.timeSpent >= 72000000) {
+                setWarningModal({
+                  visible: true,
+                  content: (
+                    <>
+                      <ModalText>
+                        You have exceeded the monthly editor time for free
+                        users.
+                      </ModalText>
+                      <ModalText>
+                        If you need more time to work on your amazing projects
+                        upgrade your subscription plan.
+                      </ModalText>
+                      <StroveButton
+                        isLink
+                        isPrimary
+                        to="/app/plans"
+                        text="Pricing"
+                        padding="5px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="10px"
+                        borderRadius="5px"
+                      />
+                    </>
+                  ),
+                })
+              }
+            },
           })
         )
       } else {
@@ -180,7 +218,6 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
                               name: project.name,
                               teamId: project.teamId,
                               forkedFromId: project.id,
-                              organizationId,
                             })
                       }
                     >
@@ -333,15 +370,19 @@ const Projects = ({ history, projects, addProject, organizationId }) => {
   )
 }
 
-export default memo(({ history, projects, organizationId }) => (
-  <AddProjectProvider>
-    {({ addProject }) => (
-      <Projects
-        addProject={addProject}
-        history={history}
-        projects={projects}
-        organizationId={organizationId}
-      />
-    )}
-  </AddProjectProvider>
-))
+export default memo(
+  ({ history, projects, organization, setWarningModal, organizationsObj }) => (
+    <AddProjectProvider organization={organization}>
+      {({ addProject }) => (
+        <Projects
+          addProject={addProject}
+          history={history}
+          projects={projects}
+          organization={organization}
+          setWarningModal={setWarningModal}
+          organizationsObj={organizationsObj}
+        />
+      )}
+    </AddProjectProvider>
+  )
+)
