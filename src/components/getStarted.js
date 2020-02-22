@@ -78,7 +78,8 @@ const validateRepoLink = values => {
   return errors
 }
 
-const GetStarted = ({ addProject, teamId }) => {
+const GetStarted = ({ addProject, teamId, organization }) => {
+  console.log('TCL: GetStarted -> organization', organization)
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (
@@ -137,8 +138,8 @@ const GetStarted = ({ addProject, teamId }) => {
   )
 }
 
-export default memo(({ teamId }) => (
-  <AddProjectProvider>
+export default memo(({ teamId, organization }) => (
+  <AddProjectProvider organization={organization}>
     {({ addProject }) => <GetStarted addProject={addProject} teamId={teamId} />}
   </AddProjectProvider>
 ))

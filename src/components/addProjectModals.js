@@ -415,6 +415,35 @@ const AddProjectModals = ({
       </Modal>
 
       <Modal
+        isOpen={modalContent === 'TimeExceeded'}
+        onRequestClose={closeModal}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '47vh' : '25vh'}
+      >
+        <ModalWrapper>
+          <Text>You have exceeded the monthly editor time for free users.</Text>
+
+          <Text>
+            If you need more time to work on your amazing projects upgrade your
+            subscription plan.
+          </Text>
+          <StroveButton
+            isLink
+            isPrimary
+            to="/app/plans"
+            text="Pricing"
+            padding="5px"
+            minWidth="150px"
+            maxWidth="150px"
+            margin="10px"
+            borderRadius="5px"
+          />
+        </ModalWrapper>
+      </Modal>
+
+      <Modal
         isOpen={modalContent === 'AnotherActiveProject'}
         onRequestClose={closeModal}
         contentLabel={modalContent}

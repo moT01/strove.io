@@ -22,7 +22,7 @@ const StyledModal = styled(Modal)`
   box-shadow: none;
 `
 
-const AddProjectProvider = ({ children, history, teamId }) => {
+const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const dispatch = useDispatch()
   const [modalContent, setModalContent] = useState()
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
@@ -43,6 +43,7 @@ const AddProjectProvider = ({ children, history, teamId }) => {
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
+  const timeExceeded = user.timeSpent >= 72000000
 
   const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
@@ -51,6 +52,15 @@ const AddProjectProvider = ({ children, history, teamId }) => {
     let repoFromGithub
     let repoFromGitlab
     let repoFromBitbucket
+
+    console.log(
+      'Yeeeeeeeeeeeeeeeeeeeeeeet 2 ',
+      organization,
+      link,
+      name,
+      teamId,
+      forkedFromId
+    )
 
     if (link) {
       repoLink = link.trim().toLowerCase()
@@ -76,12 +86,14 @@ const AddProjectProvider = ({ children, history, teamId }) => {
       if (existingProject.machineId) {
         return redirectToEditor(dispatch, history)
       } else {
-        console.log('TCL: addProject -> existingProject', existingProject)
         return dispatch(
           mutation({
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
-            variables: { projectId: existingProject?.id },
+            variables: {
+              projectId: existingProject?.id,
+              teamId: existingProject?.teamId,
+            },
             onSuccessDispatch: null,
           })
         )
@@ -106,6 +118,17 @@ const AddProjectProvider = ({ children, history, teamId }) => {
       setModalContent('LoginWithBitbucket')
     } else if (user && repoFromGithub && !githubToken) {
       setModalContent('AddGithubToLogin')
+    } else if (
+      user &&
+      timeExceeded &&
+      !incomingProjectRepoUrl &&
+      !(
+        organization.subscriptionStatus === 'active' ||
+        organization.subscriptionStatus === 'canceled'
+      )
+    ) {
+      setModalContent('TimeExceeded')
+      dispatch(actions.incomingProject.removeIncomingProject())
     } else if (user && repoFromGitlab && !gitlabToken) {
       setModalContent('AddGitlabToLogin')
     } else if (user && repoFromBitbucket && !bitbucketRefreshToken) {

@@ -113,7 +113,7 @@ const Dashboard = ({ history }) => {
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [teamLeaderModal, setTeamLeaderModal] = useState(false)
-  const [teamId, setTeamId] = useState('')
+  // const [teamId, setTeamId] = useState('')
   const [editTeam, setEditTeam] = useState()
   const [editMode, setEditMode] = useState('')
   const [leaderOptions, setLeaderOptions] = useState()
@@ -418,9 +418,10 @@ const Dashboard = ({ history }) => {
                                 <TeamTileSection isLast>
                                   <Projects
                                     projects={team.projects}
-                                    organizatoinId={team.organizationId}
+                                    organization={organization}
                                     history={history}
                                     setWarningModal={setWarningModal}
+                                    organizationsObj={organizationsObj}
                                   />
                                   {isOwner && (
                                     <StroveButton
@@ -432,7 +433,7 @@ const Dashboard = ({ history }) => {
                                       borderRadius="2px"
                                       text="Add Project"
                                       onClick={() => {
-                                        setTeamId(team.id)
+                                        setEditTeam(team)
                                         setAddProjectModal(true)
                                       }}
                                     />
@@ -1129,7 +1130,11 @@ const Dashboard = ({ history }) => {
             onClick={() => setAddProjectModal(false)}
           />
         )}
-        <GetStarted closeModal={closeAddProjectModal} teamId={teamId} />
+        <GetStarted
+          closeModal={closeAddProjectModal}
+          teamId={editTeam?.id}
+          organization={organizationsObj[editTeam?.organizationId]}
+        />
       </Modal>
     </div>
   )

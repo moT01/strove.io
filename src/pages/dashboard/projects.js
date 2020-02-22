@@ -41,8 +41,9 @@ const Projects = ({
   history,
   projects,
   addProject,
-  organizationId,
+  organization,
   setWarningModal,
+  organizationsObj,
 }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -63,18 +64,17 @@ const Projects = ({
       : project
   )
 
+  console.log('yeeeeeeeeeeeeeeeeeeeeeet', organization)
+
   const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
-        console.log('TCL: handleStartClick -> id', id)
         dispatch(
           mutation({
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
             variables: { projectId: id, teamId },
             onSuccessDispatch: null,
-            onSuccess: data =>
-              console.log('Ladies and gentlemen, the data', data),
             onError: error => {
               if (error && user.timeSpent >= 72000000) {
                 setWarningModal({
@@ -82,7 +82,8 @@ const Projects = ({
                   content: (
                     <>
                       <ModalText>
-                        You have reached the monthly editor time for free users.
+                        You have exceeded the monthly editor time for free
+                        users.
                       </ModalText>
                       <ModalText>
                         If you need more time to work on your amazing projects
@@ -221,7 +222,6 @@ const Projects = ({
                               name: project.name,
                               teamId: project.teamId,
                               forkedFromId: project.id,
-                              organizationId,
                             })
                       }
                     >
@@ -375,15 +375,16 @@ const Projects = ({
 }
 
 export default memo(
-  ({ history, projects, organizationId, setWarningModal }) => (
-    <AddProjectProvider>
+  ({ history, projects, organization, setWarningModal, organizationsObj }) => (
+    <AddProjectProvider organization={organization}>
       {({ addProject }) => (
         <Projects
           addProject={addProject}
           history={history}
           projects={projects}
-          organizationId={organizationId}
+          organization={organization}
           setWarningModal={setWarningModal}
+          organizationsObj={organizationsObj}
         />
       )}
     </AddProjectProvider>
