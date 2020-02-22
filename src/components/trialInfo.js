@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
 export default styled.ul`

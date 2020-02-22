@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
@@ -75,4 +75,4 @@ const DashboardLink = props => {
   )
 }
 
-export default DashboardLink
+export default memo(DashboardLink)

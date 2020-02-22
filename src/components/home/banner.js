@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
+import { withRouter } from 'react-router-dom'
 
 import { theme } from 'consts'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
-import { GetStarted, Logos, TrialInfo, StroveButton } from 'components'
+import { Logos, TrialInfo, StroveButton } from 'components'
 
 import {
-  StyledModal,
   StyledCellHeader,
   StyledSectionWrapper,
-  StyledIcon,
   StyledHeadingSection,
   StyledH1,
   ButtonsWrapper,
@@ -55,10 +54,8 @@ const validate = values => {
 const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
-const Banner = () => {
-  const [isModalVisible, setModalVisible] = useState(false)
+const Banner = ({ history }) => {
   const dispatch = useDispatch()
-  const closeModal = () => setModalVisible(false)
   const [emailSent, setEmailSent] = useState(false)
   const [technologyDescription, setTechnologyDescription] = useState(
     defaultTechnologyDescription
@@ -84,8 +81,9 @@ const Banner = () => {
               fontWeight="bold"
               isPrimary
               text="Get started"
+              margin="0"
               letterSpacing="0.8px"
-              onClick={() => setModalVisible(true)}
+              onClick={() => history.push('/welcome/login')}
             />
             <TrialInfo>
               <li>Free demo</li>
@@ -315,18 +313,8 @@ const Banner = () => {
           </StyledTechnologyDescriptionWrapper>
         </SectionWrapper>
       </StyledSectionWrapper>
-      <StyledModal
-        isOpen={isModalVisible}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-        isMobile={isMobileOnly}
-      >
-        {!isMobile && (
-          <StyledIcon type="close" onClick={() => setModalVisible(false)} />
-        )}
-        <GetStarted closeModal={closeModal} />
-      </StyledModal>
     </>
   )
 }
-export default Banner
+
+export default withRouter(memo(Banner))

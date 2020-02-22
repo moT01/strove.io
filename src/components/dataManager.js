@@ -217,12 +217,12 @@ export default memo(
         const origin = stateParams[2]
 
         if (shouldBeRedirected && origin) {
-          const decoredOrigin = decodeURIComponent(origin)
+          const decodedOrigin = decodeURIComponent(origin)
 
           // Gitlab login makes extremely messy redirect lik strove.io/&code
-          const originWithoutParams = decoredOrigin.includes('/&code')
-            ? decoredOrigin.split('/&code')[0]
-            : decoredOrigin
+          const originWithoutParams = decodedOrigin.includes('/&code')
+            ? decodedOrigin.split('/&code')[0]
+            : decodedOrigin
 
           const redirectAdress = originWithoutParams.includes('?')
             ? `${originWithoutParams}&code=${code}&state=${gitProvider}`

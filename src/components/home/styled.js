@@ -319,9 +319,7 @@ export const StyledHeaderText = styled.div`
 `
 
 export const Illustration = styled.img`
-  margin: 0 10px;
-  width: 50%;
-  height: 50%;
+  margin: 0 0 0 10px;
   max-width: 520px;
 `
 
