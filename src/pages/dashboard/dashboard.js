@@ -4,6 +4,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { useAnalytics } from 'hooks'
@@ -90,6 +91,30 @@ const validateTeamName = values => {
 
   return errors
 }
+
+const TimeBarContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 500px;
+  height: 25px;
+  border: 1px solid #0072ce;
+  border-radius: 2px;
+  overflow: hidden;
+`
+
+const TimeBar = styled.div`
+  height: 100%;
+  width: ${({ time }) => (time / 72000000) * 100}%;
+  background-color: #0072ce;
+`
+
+const TimeText = styled(Text)`
+  color: ${({ theme }) => theme.colors.c1};
+  font-size: 12px;
+`
 
 const emptyWarningModalContent = {
   visible: false,
@@ -203,14 +228,21 @@ const Dashboard = ({ history }) => {
       name: 'Teams',
       content: (
         <DashboardWrapper>
-          <Text>
-            You have spent {time.hours}h {time.minutes}m {time.seconds}s in the
-            editor
-          </Text>
           {expandedTiles &&
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
+                {organization.owner.id === user.id && (
+                  <>
+                    <TimeBarContainer>
+                      <TimeBar time={user.timeSpent} />
+                    </TimeBarContainer>
+                    <TimeText>
+                      Time spent in editor: {time.hours}h {time.minutes}m{' '}
+                      {time.seconds}s / 20h
+                    </TimeText>
+                  </>
+                )}
                 {organization.teams &&
                   Object.values(organizationsObj[organization.id].teams).map(
                     team => {
