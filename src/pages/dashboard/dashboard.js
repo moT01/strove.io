@@ -93,13 +93,13 @@ const validateTeamName = values => {
 }
 
 const TimeBarContainer = styled.div`
-  margin-top: 15px;
+  margin-top: 25px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 500px;
-  height: 25px;
+  width: 40%;
+  height: 15px;
   border: 1px solid #0072ce;
   border-radius: 2px;
   overflow: hidden;
