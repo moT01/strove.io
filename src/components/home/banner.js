@@ -11,6 +11,7 @@ import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import { Logos, TrialInfo, StroveButton } from 'components'
 
+import GetStarted from './getStarted'
 import {
   StyledCellHeader,
   StyledSectionWrapper,

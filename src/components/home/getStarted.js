@@ -1,6 +1,13 @@
 import React, { useState, memo } from 'react'
-
+import { isMobileOnly } from 'react-device-detect'
 import { withRouter } from 'react-router-dom'
+import { Formik, Field } from 'formik'
+import { useDispatch } from 'react-redux'
+import { mutation } from 'utils'
+import isEmail from 'validator/lib/isEmail'
+
+import { SEND_EMAIL } from 'queries'
+import { TrialInfo, StroveButton } from 'components'
 
 import {
   ButtonsWrapper,
@@ -8,6 +15,18 @@ import {
   StyledForm,
   EmailFormWrapper,
 } from './styled'
+
+const validate = values => {
+  let errors = {}
+
+  if (!values.email) {
+    errors.email = 'Required'
+  } else if (!isEmail(values.email)) {
+    errors.email = 'Invalid email address'
+  }
+
+  return errors
+}
 
 const GetStarted = ({ history }) => {
   const dispatch = useDispatch()
