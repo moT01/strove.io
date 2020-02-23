@@ -69,6 +69,7 @@ const StyledAnchor = styled.a`
 const StyledButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 
   @media (max-width: 767px) {
     flex-direction: column;
@@ -79,6 +80,7 @@ const StyledButtonWrapper = styled.div`
   width: 100%;
   max-width: 520px;
   padding: 20px;
+  margin: 100px 0;
 `
 
 const StyledFeatureWrapper = styled.div`
@@ -124,7 +126,7 @@ const Technologies = () => {
       <StyledCTAWrapper>
         <StyledButtonWrapper>
           <StyledH1>Choose a better way to get your ideas out there</StyledH1>
-          <GetStartedButton margin="100px 0" />
+          <GetStartedButton margin="20px 0" />
         </StyledButtonWrapper>
       </StyledCTAWrapper>
     </>
