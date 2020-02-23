@@ -158,12 +158,6 @@ const ButtonsWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: ${props =>
-    props.mobile === 'mobile'
-      ? '85%'
-      : props.mobile === 'tablet'
-      ? '60%'
-      : '45%'};
 `
 
 const Title = styled.h3`
