@@ -191,31 +191,6 @@ const Banner = () => {
           </StyledCell>
         </StyledGrid>
       </StyledSectionWrapper>
-      <StyledSectionWrapper
-        isSecondary
-        padding="50px 20px 0"
-        isMobileOnly={isMobileOnly}
-      >
-        <SectionWrapper>
-          <StyledSmallText isUpperCase>What is strove?</StyledSmallText>
-          <StyledH3 color={theme.colors.c2}>
-            Strove brings ready in seconds, pre-configured cloud servers to
-            write, run, build and manage software remotely
-          </StyledH3>
-        </SectionWrapper>
-      </StyledSectionWrapper>
-      <StyledSectionWrapper
-        isSecondary
-        padding="20px 0 50px"
-        isMobileOnly={isMobileOnly}
-      >
-        <SectionWrapper isSecondary>
-          <Logos handleHoverIn={handleHoverIn} />
-          <StyledTechnologyDescriptionWrapper isMobile={isMobileOnly}>
-            <StyledSmallText>{technologyDescription}</StyledSmallText>
-          </StyledTechnologyDescriptionWrapper>
-        </SectionWrapper>
-      </StyledSectionWrapper>
     </>
   )
 }
