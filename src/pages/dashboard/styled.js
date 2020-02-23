@@ -228,9 +228,10 @@ export const ModalText = styled(Text)`
 `
 
 export const WarningText = styled(ModalText)`
-  color: ${({ theme }) => theme.colors.c5};
-  margin-bottom: 5px;
+  color: ${({ theme }) => theme.colors.c26};
+  margin-bottom: 8px;
   word-break: break-word;
+  
 `
 
 export const VerticalDivider = styled.div`
