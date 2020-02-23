@@ -43,7 +43,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
-  const timeExceeded = user.timeSpent >= 72000000
+  const timeExceeded = user?.timeSpent >= 72000000
 
   const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
