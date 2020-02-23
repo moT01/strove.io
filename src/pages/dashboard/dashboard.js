@@ -963,15 +963,11 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <Title>Team settings</Title>
-        <WarningText>
-          This section contains dangerous settings. Be careful while working
-          with them.
-        </WarningText>
         <StroveButton
           isPrimary
           borderRadius="2px"
           padding="5px"
-          margin="0px 0px 5px 0px"
+          margin="0px 0px 10px 0px"
           onClick={handleRenameTeamClick}
           text="Rename team"
         />
@@ -979,7 +975,7 @@ const Dashboard = ({ history }) => {
           isPrimary
           borderRadius="2px"
           padding="5px"
-          margin="0px 0px 5px 0px"
+          margin="0px 0px 10px 0px"
           onClick={handleSetAdminClick}
           text="Set team leader"
         />
@@ -991,6 +987,9 @@ const Dashboard = ({ history }) => {
           onClick={handleDeleteTeamClick}
           text="Delete team"
         />
+        <WarningText>
+          Deleting a team can not be undone.
+        </WarningText>
 
         <ModalButton
           onClick={closeSettingsModal}
