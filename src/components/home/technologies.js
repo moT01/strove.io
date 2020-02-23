@@ -1,6 +1,5 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import styled, { css } from 'styled-components/macro'
-import { useDispatch } from 'react-redux'
 
 import GetStartedButton from './getStartedButton'
 import { StyledH1 } from './styled'
@@ -95,42 +94,37 @@ const StyledFeatureWrapper = styled.div`
   overflow: hidden;
 `
 
-const Technologies = () => {
-  const [emailSent, setEmailSent] = useState(false)
-  const dispatch = useDispatch()
-
-  return (
-    <>
-      <StyledFeatureWrapper>
-        <div>Obviously, this app is made with Strove as well</div>
-        <StyledButtonsWrapper>
-          <StyledAnchor
-            primary
-            href="https://github.com/stroveio/strove.io-client"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Check our source
-          </StyledAnchor>
-          or, even better
-          <StyledAnchor
-            primary
-            href="/#https://github.com/stroveio/strove.io-client"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Edit it in Strove
-          </StyledAnchor>
-        </StyledButtonsWrapper>
-      </StyledFeatureWrapper>
-      <StyledCTAWrapper>
-        <StyledButtonWrapper>
-          <StyledH1>Choose a better way to get your ideas out there</StyledH1>
-          <GetStartedButton margin="20px 0" />
-        </StyledButtonWrapper>
-      </StyledCTAWrapper>
-    </>
-  )
-}
+const Technologies = () => (
+  <>
+    <StyledFeatureWrapper>
+      <div>Obviously, this app is made with Strove as well</div>
+      <StyledButtonsWrapper>
+        <StyledAnchor
+          primary
+          href="https://github.com/stroveio/strove.io-client"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Check our source
+        </StyledAnchor>
+        or, even better
+        <StyledAnchor
+          primary
+          href="/#https://github.com/stroveio/strove.io-client"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Edit it in Strove
+        </StyledAnchor>
+      </StyledButtonsWrapper>
+    </StyledFeatureWrapper>
+    <StyledCTAWrapper>
+      <StyledButtonWrapper>
+        <StyledH1>Choose a better way to get your ideas out there</StyledH1>
+        <GetStartedButton margin="20px 0" />
+      </StyledButtonWrapper>
+    </StyledCTAWrapper>
+  </>
+)
 
 export default memo(Technologies)
