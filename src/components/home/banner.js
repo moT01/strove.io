@@ -1,15 +1,10 @@
 import React, { useState, memo } from 'react'
-import { useDispatch } from 'react-redux'
 import { Icon } from 'antd'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import isEmail from 'validator/lib/isEmail'
-import { Formik, Field } from 'formik'
-import { withRouter } from 'react-router-dom'
 
 import { theme } from 'consts'
-import { mutation } from 'utils'
-import { SEND_EMAIL } from 'queries'
-import { Logos, TrialInfo, StroveButton } from 'components'
+
+import { Logos } from 'components'
 
 import GetStarted from './getStarted'
 import {
@@ -17,11 +12,7 @@ import {
   StyledSectionWrapper,
   StyledHeadingSection,
   StyledH1,
-  ButtonsWrapper,
   StyledProductDescription,
-  StyledInfo,
-  StyledForm,
-  EmailFormWrapper,
   Illustration,
   SectionDivider,
   IconContainer,
@@ -40,24 +31,10 @@ import {
   BannerWrapper,
 } from './styled'
 
-const validate = values => {
-  let errors = {}
-
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
-
 const defaultTechnologyDescription =
   'Strove.io represents each environment as a Docker container built from a shared image. This lets you code in seconds, on any computer and forget that `it works on my machine` issue ever existed.'
 
-const Banner = ({ history }) => {
-  const dispatch = useDispatch()
-  const [emailSent, setEmailSent] = useState(false)
+const Banner = () => {
   const [technologyDescription, setTechnologyDescription] = useState(
     defaultTechnologyDescription
   )
@@ -74,82 +51,7 @@ const Banner = ({ history }) => {
           <StyledProductDescription>
             Manage team. Write, run and share code, all in one place
           </StyledProductDescription>
-          <ButtonsWrapper mobile={isMobileOnly}>
-            <StroveButton
-              height="56px"
-              width="100%"
-              fontSize="1.3rem"
-              fontWeight="bold"
-              isPrimary
-              text="Get started"
-              margin="0"
-              letterSpacing="0.8px"
-              onClick={() => history.push('/welcome/login')}
-            />
-            <TrialInfo>
-              <li>Free demo</li>
-              <li>No credit card needed</li>
-              <li>No setup</li>
-            </TrialInfo>
-            <StyledInfo>Or, if you're a corporate user:</StyledInfo>
-            <Formik
-              initialValues={{
-                email: '',
-              }}
-              validate={validate}
-              onSubmit={values => {
-                dispatch(
-                  mutation({
-                    name: 'sendEmail',
-                    context: null,
-                    mutation: SEND_EMAIL,
-                    variables: { email: values.email, isDemo: true },
-                    onSuccess: () => setEmailSent(true),
-                  })
-                )
-              }}
-            >
-              {({ errors, values }) => (
-                <StyledForm>
-                  <EmailFormWrapper
-                    disabled={errors.email || !values.email}
-                    isMobile={isMobileOnly}
-                  >
-                    <Field
-                      type="email"
-                      name="email"
-                      placeholder="Your Email"
-                    ></Field>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <g
-                        fill="none"
-                        fillRule="evenodd"
-                        stroke="#9CA2B4"
-                        strokeWidth="2"
-                      >
-                        <path d="M2 4h20v16H2z"></path>
-                        <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                      </g>
-                    </svg>
-                    <StroveButton
-                      type="submit"
-                      layout="form"
-                      text="Request demo"
-                      disabled={errors.email || !values.email}
-                    />
-                  </EmailFormWrapper>
-                  {emailSent && (
-                    <StyledInfo>Thank you, we'll get in touch soon!</StyledInfo>
-                  )}
-                </StyledForm>
-              )}
-            </Formik>
-          </ButtonsWrapper>
+          <GetStarted />
         </StyledHeadingSection>
         {!isMobileOnly && (
           <Illustration
@@ -318,4 +220,4 @@ const Banner = ({ history }) => {
   )
 }
 
-export default withRouter(memo(Banner))
+export default memo(Banner)
