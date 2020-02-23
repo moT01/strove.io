@@ -124,7 +124,7 @@ const Banner = () => (
               </StyledCellHeader>
               <StyledProductDescription>
                 Spend more time on what matters by reducing managing permissions
-                or sharing environment to a single click
+                and sharing environment to a single click
               </StyledProductDescription>
             </StyledCell>
           </SmallSectionWrapper>
