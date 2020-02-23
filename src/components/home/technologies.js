@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
 
 import GetStartedButton from './getStartedButton'
+import { StyledH1 } from './styled'
 
 const StyledCTAWrapper = styled.div`
   width: 100vw;
@@ -121,6 +122,7 @@ const Technologies = () => {
       </StyledFeatureWrapper>
       <StyledCTAWrapper>
         <StyledButtonWrapper>
+          <StyledH1>Choose a better way to get your ideas out there</StyledH1>
           <GetStartedButton margin="100px 0" />
         </StyledButtonWrapper>
       </StyledCTAWrapper>

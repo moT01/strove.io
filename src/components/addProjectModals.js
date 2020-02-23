@@ -327,7 +327,6 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Github account.
-            You are logged in with a Gitlab account
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
@@ -354,7 +353,6 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Gitlab account.
-            You are logged in with a Github account
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
@@ -381,7 +379,7 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Bitbucket
-            account. You are logged in with a Github account
+            account.
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
