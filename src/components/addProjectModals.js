@@ -153,6 +153,7 @@ const StyledLink = styled(Link)`
       }
     `}
 `
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;

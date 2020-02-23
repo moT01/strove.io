@@ -78,6 +78,7 @@ const StyledButtonsWrapper = styled.div`
 const StyledButtonWrapper = styled.div`
   width: 100%;
   max-width: 520px;
+  padding: 20px;
 `
 
 const StyledFeatureWrapper = styled.div`
