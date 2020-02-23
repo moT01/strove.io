@@ -1,12 +1,13 @@
 import React, { useState, memo } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
-import isEmail from 'validator/lib/isEmail'
 
 import GetStartedButton from './getStartedButton'
 
-const StyledButtonWrapper = styled.div`
+const StyledCTAWrapper = styled.div`
   width: 100vw;
+  display: flex;
+  justify-content: center;
   align-self: center;
   margin-top: 20px;
   background: ${({ theme }) => theme.colors.c27};
@@ -73,7 +74,10 @@ const StyledButtonsWrapper = styled.div`
   }
 `
 
-const StyledMadeWithStrove = styled.div``
+const StyledButtonWrapper = styled.div`
+  width: 100%;
+  max-width: 520px;
+`
 
 const StyledFeatureWrapper = styled.div`
   width: 100vw;
@@ -94,9 +98,7 @@ const Technologies = () => {
   return (
     <>
       <StyledFeatureWrapper>
-        <StyledMadeWithStrove>
-          Obviously, this app is made with Strove as well
-        </StyledMadeWithStrove>
+        <div>Obviously, this app is made with Strove as well</div>
         <StyledButtonsWrapper>
           <StyledAnchor
             primary
@@ -113,13 +115,15 @@ const Technologies = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            Start editing
+            Edit it in Strove
           </StyledAnchor>
         </StyledButtonsWrapper>
       </StyledFeatureWrapper>
-      <StyledButtonWrapper>
-        <GetStartedButton margin="100px 0" />
-      </StyledButtonWrapper>
+      <StyledCTAWrapper>
+        <StyledButtonWrapper>
+          <GetStartedButton margin="100px 0" />
+        </StyledButtonWrapper>
+      </StyledCTAWrapper>
     </>
   )
 }
