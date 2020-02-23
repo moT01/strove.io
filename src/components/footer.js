@@ -10,7 +10,6 @@ const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 18vh;
   background-color: ${({ theme }) => theme.colors.c1};
   @media (max-width: 767px) {
     height: auto;
@@ -20,7 +19,7 @@ const FooterWrapper = styled.div`
 
 const ColumnWrapper = styled(FooterWrapper)`
   justify-content: space-around;
-  width: 80%;
+  padding: 30px;
   height: auto;
   align-items: flex-start;
   @media (max-width: 767px) {
@@ -39,7 +38,7 @@ const ColumnTitle = styled.h3`
   font-size: 1.3rem;
   font-weight: 300;
   color: ${({ theme }) => theme.colors.c2};
-  margin: 5px 0 5px 0;
+  margin: 10px 0;
 `
 
 const StyledLink = styled(Link)`
@@ -50,7 +49,7 @@ const StyledLink = styled(Link)`
 const LinkText = styled.h3`
   font-size: 0.9rem;
   font-weight: 200;
-  margin: 0 0 6px 0;
+  margin: 0 0 10px 0;
   cursor: pointer;
 `
 
