@@ -87,7 +87,7 @@ const createProject = async ({
             fetchPolicy: 'no-cache',
           })
 
-          const token = access_token?.data?.getbitBucketToken
+          const token = '12' // access_token?.data?.getbitBucketToken
 
           /* Todo: This endpoint does not allow 10+ results. Investigate other ways to do it. */
           if (token) {
