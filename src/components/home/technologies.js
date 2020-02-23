@@ -8,6 +8,7 @@ import { Formik, Form, Field } from 'formik'
 import { mutation } from 'utils'
 import { SEND_EMAIL } from 'queries'
 import StroveButton from 'components/stroveButton.js'
+import GetStartedButton from './getStartedButton'
 
 const validate = values => {
   let errors = {}
@@ -111,10 +112,10 @@ const EmailFormWrapper = styled.div`
   }
 `
 
-const StyledFormWrapper = styled.div`
-  max-width: 480px;
+const StyledButtonWrapper = styled.div`
+  max-width: 520px;
   align-self: center;
-  margin: 20px;
+  margin: 20px 0;
 `
 
 const StyledAnchor = styled.a`
@@ -222,65 +223,9 @@ const Technologies = () => {
           </StyledAnchor>
         </StyledButtonsWrapper>
       </StyledFeatureWrapper>
-      <StyledFormWrapper>
-        <StyledH6>Be up to date with new deals and features!</StyledH6>
-        <Formik
-          initialValues={{
-            email: '',
-          }}
-          validate={validate}
-          onSubmit={values => {
-            dispatch(
-              mutation({
-                name: 'sendEmail',
-                context: null,
-                mutation: SEND_EMAIL,
-                variables: { email: values.email, isNewsletter: true },
-                onSuccess: () => setEmailSent(true),
-              })
-            )
-          }}
-        >
-          {({ errors, touched, values }) => (
-            <Form>
-              <EmailFormWrapper
-                disabled={errors.email || !values.email}
-                isMobile={isMobileOnly}
-              >
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                ></Field>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#9CA2B4"
-                    strokeWidth="2"
-                  >
-                    <path d="M2 4h20v16H2z"></path>
-                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                  </g>
-                </svg>
-                <StroveButton
-                  padding="0"
-                  layout="form"
-                  type="submit"
-                  text="Subscribe to newsletter"
-                  disabled={errors.email || !values.email}
-                />
-              </EmailFormWrapper>
-              {emailSent && <StyledH6>Thank you!</StyledH6>}
-            </Form>
-          )}
-        </Formik>
-      </StyledFormWrapper>
+      <StyledButtonWrapper>
+        <GetStartedButton margin="100px 0" />
+      </StyledButtonWrapper>
     </>
   )
 }
