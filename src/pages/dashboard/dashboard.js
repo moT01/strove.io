@@ -593,20 +593,21 @@ const Dashboard = ({ history }) => {
               memberId: member.id,
             },
             onSuccess: () => {
-              organizationsObj[team.organizationId].status === 'active' &&
-                dispatch(
-                  mutation({
-                    name: 'downgradeSubscription',
-                    mutation: DOWNGRADE_SUBSCRIPTION,
-                    variables: {
-                      organizationId: team.organizationId,
-                      quantity:
-                        organizationsObj[team.organizationId]
-                          ?.subscriptionQuantity - 1,
-                    },
-                    onSuccessDispatch: updateOrganizations,
-                  })
-                )
+              organizationsObj[team.organizationId].status === 'active'
+                ? dispatch(
+                    mutation({
+                      name: 'downgradeSubscription',
+                      mutation: DOWNGRADE_SUBSCRIPTION,
+                      variables: {
+                        organizationId: team.organizationId,
+                        quantity:
+                          organizationsObj[team.organizationId]
+                            ?.subscriptionQuantity - 1,
+                      },
+                      onSuccessDispatch: updateOrganizations,
+                    })
+                  )
+                : dispatch(updateOrganizations())
             },
           })
         )

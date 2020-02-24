@@ -88,6 +88,7 @@ export default memo(
     const machineName = activeProjectData?.machineName
 
     useEffect(() => {
+      console.log('Beeeeeeeeeep', invitedByTeamId, token)
       if (invitedByTeamId && token) {
         dispatch(
           mutation({
