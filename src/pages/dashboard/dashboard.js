@@ -593,6 +593,7 @@ const Dashboard = ({ history }) => {
               memberId: member.id,
             },
             onSuccess: () => {
+              organizationsObj[editTeam.organizationId].status === 'active' &&
               dispatch(
                 mutation({
                   name: 'downgradeSubscription',
