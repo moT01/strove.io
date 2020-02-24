@@ -8,8 +8,6 @@ import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
-import { features } from 'consts'
-
 const { TweenOneGroup } = TweenOne
 
 const StyledFeatureTitle = styled.h3`
@@ -20,6 +18,7 @@ const StyledFeatureTitle = styled.h3`
 const StyledFeatureContent = styled.p`
   color: rgb(105, 123, 140);
   font-size: 14px;
+  line-height: 1;
 `
 
 const StyledAnchor = styled.a`
@@ -56,7 +55,7 @@ const pointPos = [
   { x: 50, y: 50, opacity: 0.2 },
 ]
 
-const Features = () => {
+const Features = ({ features }) => {
   const [hoverNum, setHoverNum] = useState()
   const onMouseOver = i => setHoverNum(i)
   const onMouseOut = () => setHoverNum(null)
@@ -152,9 +151,7 @@ const Features = () => {
             onMouseEnter={() => {
               onMouseOver(i)
             }}
-            onMouseLeave={() => {
-              onMouseOut()
-            }}
+            onMouseLeave={onMouseOut}
           >
             <StyledAnchor
               rel="noopener noreferrer"
@@ -174,9 +171,7 @@ const Features = () => {
             onMouseEnter={() => {
               onMouseOver(i)
             }}
-            onMouseLeave={() => {
-              onMouseOut()
-            }}
+            onMouseLeave={onMouseOut}
           >
             {child}
           </div>

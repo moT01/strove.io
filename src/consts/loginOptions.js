@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { getWindowHref } from 'utils'
-import { Github, Bitbucket, Gitlab } from 'components/svgs'
+import { Github, Gitlab /* Bitbucket */ } from 'components/svgs'
 
 const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
-const REACT_APP_BITBUCKET_CLIENT_ID = process.env.REACT_APP_BITBUCKET_CLIENT_ID
+// const REACT_APP_BITBUCKET_CLIENT_ID = process.env.REACT_APP_BITBUCKET_CLIENT_ID
 const REACT_APP_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 const REACT_APP_IS_OPENSOURCE = process.env.REACT_APP_IS_OPENSOURCE
 const REACT_APP_STROVE_URL = process.env.REACT_APP_STROVE_URL
@@ -25,13 +25,13 @@ export default [
     embedHref: `https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_CLIENT_ID}&scope=user,user:email,public_repo&state=github,true,${REACT_APP_STROVE_URL}fromEmbed/goBackTo/`,
     icon: <Github />,
   },
-  {
-    value: 'bitbucket',
-    label: 'Bitbucket',
-    href: `https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,${REACT_APP_IS_OPENSOURCE},${address}`,
-    embedHref: `https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,true,${REACT_APP_STROVE_URL}fromEmbed/goBackTo/`,
-    icon: <Bitbucket />,
-  },
+  // {
+  //   value: 'bitbucket',
+  //   label: 'Bitbucket',
+  //   href: `https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,${REACT_APP_IS_OPENSOURCE},${address}`,
+  //   embedHref: `https://bitbucket.org/site/oauth2/authorize?client_id=${REACT_APP_BITBUCKET_CLIENT_ID}&response_type=code&state=bitbucket,true,${REACT_APP_STROVE_URL}fromEmbed/goBackTo/`,
+  //   icon: <Bitbucket />,
+  // },
   {
     value: 'gitlab',
     label: 'Gitlab',

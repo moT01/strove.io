@@ -1,7 +1,7 @@
 import { useEffect, memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { useSubscription } from '@apollo/react-hooks'
 import { withRouter } from 'react-router-dom'
 
@@ -9,12 +9,20 @@ import {
   GITHUB_LOGIN,
   GITLAB_LOGIN,
   BITBUCKET_LOGIN,
-  MY_PROJECTS,
   ACTIVE_PROJECT,
   START_PROJECT,
   LOGIN_SUBSCRIPTION,
+  ACCEPT_TEAM_INVITATION,
+  PAYMENT_STATUS_SUBSCRIPTION,
 } from 'queries'
-import { mutation, query, window, getWindowHref, redirectToEditor } from 'utils'
+import {
+  mutation,
+  window,
+  getWindowHref,
+  redirectToEditor,
+  getWindowSearchParams,
+  updateOrganizations,
+} from 'utils'
 import { selectors } from 'state'
 import { C } from 'state'
 import { actions } from 'state'
@@ -37,7 +45,7 @@ export default memo(
   withRouter(({ children, addProject, history }) => {
     const dispatch = useDispatch()
     const user = useSelector(selectors.api.getUser)
-    const token = user?.siliskyToken
+    const token = useSelector(selectors.getToken)
     const currentProject = useSelector(selectors.api.getCurrentProject)
     const incomingProjectLink = useSelector(
       selectors.incomingProject.getRepoLink
@@ -54,6 +62,8 @@ export default memo(
     const isProjectBeingStarted = useSelector(
       selectors.incomingProject.isProjectBeingStarted
     )
+
+    const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
 
     if (!localStorage.getItem('deviceId'))
       localStorage.setItem('deviceId', generateDeviceID())
@@ -76,18 +86,26 @@ export default memo(
     const machineId = activeProjectData?.machineId
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
-    const additionalPorts = activeProjectData?.additionalPorts
-    const id = activeProjectData?.id
 
     useEffect(() => {
-      dispatch({
-        type: C.api.UPDATE_ITEM,
-        payload: {
-          storeKey: 'myProjects',
-          id,
-          data: { editorPort, machineId, additionalPorts, machineName },
-        },
-      })
+      if (invitedByTeamId && token) {
+        dispatch(
+          mutation({
+            name: 'acceptTeamInvitation',
+            dataSelector: data => data,
+            variables: {
+              teamId: invitedByTeamId,
+            },
+            mutation: ACCEPT_TEAM_INVITATION,
+            onSuccessDispatch: () => actions.invitations.acceptInvitation(),
+          })
+        )
+      }
+      /* eslint-disable-next-line */
+    }, [invitedByTeamId, token])
+
+    useEffect(() => {
+      dispatch(updateOrganizations())
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [machineName, machineId, editorPort])
@@ -151,18 +169,7 @@ export default memo(
         } else if (queuePosition === 0 && project?.machineId) {
           if (type === 'continueProject') {
             try {
-              dispatch({
-                type: C.api.UPDATE_ITEM,
-                payload: {
-                  storeKey: 'myProjects',
-                  id: project.id,
-                  data: {
-                    editorPort: project.editorPort,
-                    machineId: project.machineId,
-                    additionalPorts: project.additionalPorts,
-                  },
-                },
-              })
+              dispatch(updateOrganizations())
               dispatch(
                 actions.api.fetchSuccess({
                   storeKey: 'continueProject',
@@ -174,12 +181,7 @@ export default memo(
             }
           } else if (type === 'addProject') {
             dispatch(actions.incomingProject.removeIncomingProject())
-            dispatch(
-              actions.api.fetchSuccess({
-                storeKey: 'myProjects',
-                data: project,
-              })
-            )
+            dispatch(updateOrganizations())
           }
           redirectToEditor(dispatch, history)
         }
@@ -215,12 +217,12 @@ export default memo(
         const origin = stateParams[2]
 
         if (shouldBeRedirected && origin) {
-          const decoredOrigin = decodeURIComponent(origin)
+          const decodedOrigin = decodeURIComponent(origin)
 
           // Gitlab login makes extremely messy redirect lik strove.io/&code
-          const originWithoutParams = decoredOrigin.includes('/&code')
-            ? decoredOrigin.split('/&code')[0]
-            : decoredOrigin
+          const originWithoutParams = decodedOrigin.includes('/&code')
+            ? decodedOrigin.split('/&code')[0]
+            : decodedOrigin
 
           const redirectAdress = originWithoutParams.includes('?')
             ? `${originWithoutParams}&code=${code}&state=${gitProvider}`
@@ -281,18 +283,12 @@ export default memo(
       }
 
       const checkAwake = () => {
-        let then = moment().format('X')
+        let then = dayjs()
         setInterval(() => {
-          let now = moment().format('X')
-          if (now - then > 300) {
-            token &&
-              dispatch(
-                query({
-                  name: 'myProjects',
-                  dataSelector: data => data.myProjects.edges,
-                  query: MY_PROJECTS,
-                })
-              )
+          let now = dayjs()
+          /* 5 minutes */
+          if (now - then > 300000) {
+            token && dispatch(updateOrganizations())
           }
           then = now
         }, 2000)
@@ -326,8 +322,13 @@ export default memo(
         )
       }
       if (loginData?.userLogin) {
-        const { siliskyToken, subscription, projects } = loginData?.userLogin
-        localStorage.setItem('token', siliskyToken)
+        const {
+          token,
+          siliskyToken,
+          subscription,
+          organizations,
+        } = loginData?.userLogin
+        localStorage.setItem('token', token || siliskyToken)
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {
@@ -343,12 +344,12 @@ export default memo(
               data: subscription,
             },
           })
-        projects &&
+        organizations &&
           dispatch({
             type: C.api.FETCH_SUCCESS,
             payload: {
-              storeKey: 'myProjects',
-              data: projects,
+              storeKey: 'myOrganizations',
+              data: organizations,
             },
           })
       }
@@ -357,13 +358,7 @@ export default memo(
 
     useEffect(() => {
       if (token) {
-        dispatch(
-          query({
-            name: 'myProjects',
-            dataSelector: data => data.myProjects.edges,
-            query: MY_PROJECTS,
-          })
-        )
+        dispatch(updateOrganizations())
 
         if (history.location.pathname === '/') {
           history.push('/app/dashboard')
@@ -390,18 +385,60 @@ export default memo(
         ev.preventDefault()
 
         if (navigator?.sendBeacon && user) {
-          console.log(
-            'process.env.REACT_APP_STROVE_ENDPOINT',
-            process.env.REACT_APP_STROVE_ENDPOINT
-          )
           navigator.sendBeacon(
             `${process.env.REACT_APP_STROVE_ENDPOINT}/beacon`,
             JSON.stringify({ token: localStorage.getItem('token') })
           )
         }
       })
+
+      const searchParams = getWindowSearchParams()
+      const feature = searchParams?.get('feature') || ''
+      if (feature) dispatch(actions.feature.displayFeature(feature))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const paymentStatusSubscription = useSubscription(
+      PAYMENT_STATUS_SUBSCRIPTION,
+      {
+        variables: { userId: user?.id },
+        client,
+        fetchPolicy: 'no-cache',
+        context: {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'User-Agent': 'node',
+          },
+        },
+        shouldResubscribe: true,
+      }
+    )
+
+    const paymentStatus = paymentStatusSubscription
+    const paymentData = paymentStatusSubscription.data
+
+    useEffect(() => {
+      dispatch({
+        type: C.api.FETCH_START,
+        payload: {
+          storeKey: 'paymentStatus',
+          data: paymentStatus,
+        },
+      })
+      if (paymentStatus?.data?.paymentStatus?.status) {
+        const status = paymentData?.paymentStatus?.status
+        const organizationId = paymentData?.paymentStatus?.organizationId
+        const type = paymentData?.paymentStatus?.type
+
+        dispatch({
+          type: C.api.FETCH_SUCCESS,
+          payload: {
+            storeKey: 'paymentStatus',
+            data: paymentStatus,
+          },
+        })
+      }
+    }, [paymentStatus])
 
     return children
   })

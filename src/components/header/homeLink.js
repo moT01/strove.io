@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled, { keyframes } from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 import { isMobileOnly } from 'react-device-detect'
+import { useSelector } from 'react-redux'
 
+import { selectors } from 'state'
 import strove from 'images/stroveReversed.png'
 
 const FadeIn = keyframes`
@@ -53,17 +55,23 @@ const LinkText = styled.div`
   }
 `
 
-const HomeLink = props =>
-  !props.isEmbed && (
-    <LinkWrapper {...props}>
-      <StyledLink to="/" {...props}>
-        {isMobileOnly ? (
-          <StyledImage src={strove} {...props} />
-        ) : (
-          <LinkText {...props}>Strove</LinkText>
-        )}
-      </StyledLink>
-    </LinkWrapper>
-  )
+const HomeLink = props => {
+  const token = useSelector(selectors.getToken)
 
-export default HomeLink
+  return (
+    !props.isEmbed &&
+    !token && (
+      <LinkWrapper {...props}>
+        <StyledLink to="/" {...props}>
+          {isMobileOnly ? (
+            <StyledImage src={strove} {...props} />
+          ) : (
+            <LinkText {...props}>Strove</LinkText>
+          )}
+        </StyledLink>
+      </LinkWrapper>
+    )
+  )
+}
+
+export default memo(HomeLink)

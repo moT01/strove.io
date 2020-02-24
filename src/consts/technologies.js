@@ -33,6 +33,6 @@ export default [
     component: <Github {...defaultProps} />,
     name: 'Github',
     description:
-      'Github, Gitlab and Bitbucket integration provide state-of-the-art version control support allowing companies use their source control provider of choice.',
+      'Github or Gitlab integration provide state-of-the-art version control support allowing companies use their source control provider of choice.',
   },
 ]

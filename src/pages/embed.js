@@ -3,19 +3,15 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { Redirect } from 'react-router-dom'
 
-import { NoRepoUrlInfo, PoweredBy, ExternalLink } from 'components'
+import {
+  NoRepoUrlInfo,
+  PoweredBy,
+  ExternalLink,
+  FullScreenWrapper,
+  MenuWrapper,
+} from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams, getRepoUrl } from 'utils'
-
-const getToken = selectors.api.getUserField('siliskyToken')
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
-  position: relative;
-`
 
 const LoginText = styled.span`
   font-weight: 500;
@@ -32,7 +28,7 @@ const Wrapper = styled.div`
 `
 
 const EmbedWrapper = () => {
-  const token = useSelector(getToken)
+  const token = useSelector(selectors.getToken)
 
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
@@ -62,8 +58,8 @@ const EmbedWrapper = () => {
   }
 
   return (
-    <Wrapper>
-      <MenuWrapper invert>
+    <FullScreenWrapper>
+      <MenuWrapper>
         {repoUrl ? (
           <ExternalLink
             primary
@@ -71,14 +67,14 @@ const EmbedWrapper = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <LoginText invert>Login to start coding</LoginText>
+            <LoginText>Login to start coding</LoginText>
           </ExternalLink>
         ) : (
           <NoRepoUrlInfo />
         )}
         <PoweredBy />
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 

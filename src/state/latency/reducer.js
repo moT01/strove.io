@@ -2,19 +2,26 @@ import * as C from './consts'
 
 const initialState = null
 
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default (state = initialState, { payload, type }) => {
+  switch (type) {
     case C.LATENCY_MEASURE_START: {
       return {
         ...state,
-        timeStart: action.payload,
+        timeStart: payload,
       }
     }
 
     case C.LATENCY_MEASURE_END: {
       return {
         ...state,
-        latency: action.payload - state.timeStart,
+        latency: Math.round(payload - state.timeStart),
+      }
+    }
+
+    case C.FULL_LATENCY_MEASUREMENT: {
+      return {
+        ...state,
+        latency: Math.round(payload),
       }
     }
 

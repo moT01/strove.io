@@ -10,6 +10,7 @@ import {
   WithAddProject,
   DataManager,
   Cookies,
+  OldUserModal,
 } from 'components'
 import { selectors } from 'state'
 import Modal from './modal'
@@ -28,12 +29,12 @@ const MainContent = styled.main`
 `
 
 const StyledModal = styled(Modal)`
-  width: ${props => (props.isMobile ? '70vw' : '30vw')};
+  width: 30vw;
 `
 
 const Layout = ({ children, browser }) => {
   const [noSupportModalVisible, setNoSupportModalVisible] = useState(false)
-  const user = useSelector(selectors.api.getUser)
+  const token = useSelector(selectors.getToken)
 
   useEffect(() => {
     if (
@@ -41,7 +42,8 @@ const Layout = ({ children, browser }) => {
       browser.name !== 'chrome' &&
       browser.name !== 'firefox' &&
       browser.name !== 'opera' &&
-      browser.name !== 'safari'
+      browser.name !== 'safari' &&
+      !isMobile
     ) {
       setNoSupportModalVisible(true)
     }
@@ -53,21 +55,19 @@ const Layout = ({ children, browser }) => {
         {({ addProject }) => (
           <DataManager addProject={addProject}>
             <WithAddProject addProject={addProject}>
-              {user ? (
+              {token && (
                 <StyledModal
                   isOpen={noSupportModalVisible}
                   onRequestClose={() => setNoSupportModalVisible(false)}
                   contentLabel="Browser not supported"
                   ariaHideApp={false}
-                  isMobile={isMobile}
                 >
-                  {isMobile
-                    ? 'You seem to be using a mobile device. This might not provide the best Strove.io user experience. We recommend using Strove.io on a computer.'
-                    : 'Your browser might not provide the best Strove.io user experience. We recommend using Google Chrome, Mozilla Firefox, Safari or Opera.'}
+                  Your browser might not provide the best Strove.io user
+                  experience. We recommend using Google Chrome, Mozilla Firefox,
+                  Safari or Opera.
                 </StyledModal>
-              ) : (
-                ''
               )}
+
               <GlobalStyles />
               <MainContent>{children}</MainContent>
               <Cookies />
@@ -75,6 +75,7 @@ const Layout = ({ children, browser }) => {
           </DataManager>
         )}
       </AddProjectProvider>
+      <OldUserModal />
     </ThemeProvider>
   )
 }

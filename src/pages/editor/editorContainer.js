@@ -1,45 +1,48 @@
 import React, { useState, useEffect, memo, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import dayjs from 'dayjs'
 import { withRouter } from 'react-router-dom'
 
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
-import { actions } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
 import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
 import Editor from './editor'
-
-const getUserToken = selectors.api.getApiData({
-  fields: ['user', 'siliskyToken'],
-  defaultValue: null,
-})
 
 const EditorWrapper = ({ history }) => {
   const dispatch = useDispatch()
 
   const currentProject = useSelector(selectors.api.getCurrentProject)
+  console.log('TCL: EditorWrapper -> currentProject', currentProject)
   const projectId = currentProject && currentProject.id
+  console.log('TCL: EditorWrapper -> projectId', projectId)
   const machineId = currentProject && currentProject.machineId
   const machineName = currentProject && currentProject.machineName
   const port = currentProject && currentProject.editorPort
   const isEmbed = getWindowPathName().includes('embed')
 
-  const token = useSelector(getUserToken)
+  const token = useSelector(selectors.getToken)
   const [loaderVisible, setLoaderVisible] = useState(true)
 
   useEffect(() => {
     // This condition means project has been stopped
-    if (projectId && !machineId) {
+    // if (projectId && !machineId) {
+    if (!!projectId) {
+      console.log(
+        'TCL: EditorWrapper -> projectId useEffect',
+        projectId,
+        !!projectId
+      )
       dispatch(
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
-          variables: { projectId },
+          variables: { projectId, teamId: currentProject.teamId },
           onSuccessDispatch: null,
         })
       )
     }
+
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId, machineId])
 
@@ -50,8 +53,6 @@ const EditorWrapper = ({ history }) => {
           name: 'resetCron',
           mutation: RESET_CRON,
           variables: { projectId },
-          onLoadingDispatch: () => actions.latency.latencyMeasureStart(dayjs()),
-          onSuccessDispatch: () => actions.latency.latencyMeasureEnd(dayjs()),
         })
       )
     projectId && resetCron()
@@ -101,6 +102,7 @@ const EditorWrapper = ({ history }) => {
           onLoad={setLoaderVisibleFalse}
           isEmbed={isEmbed}
           loaderVisible={loaderVisible}
+          projectId={projectId}
         />
       )}
     </>

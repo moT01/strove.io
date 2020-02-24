@@ -1,13 +1,21 @@
 import React, { useState, memo } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobileOnly, isTablet } from 'react-device-detect'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import isEmail from 'validator/lib/isEmail'
 
 import { SEND_EMAIL } from 'queries'
 import { mutation } from 'utils'
-import { SEO, Modal, Header } from 'components'
+import {
+  SEO,
+  Modal,
+  Header,
+  StripeCheckoutForm,
+  StroveButton,
+  TrialInfo,
+} from 'components'
+import { selectors } from 'state'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -34,7 +42,8 @@ const CardsWrapper = styled.div`
 const EducationSectionWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 80%;
+  width: 100%;
+  max-width: 600px;
   flex-direction: column;
   align-items: center;
   margin: 20px 0;
@@ -200,7 +209,7 @@ const Button = styled.button`
   height: auto;
   width: ${({ team }) => (team ? '40%' : '75%')};
   margin: 15px 0 5px;
-  padding: 0.5vh;
+  padding: 5px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -211,8 +220,8 @@ const Button = styled.button`
   color: ${({ team, theme }) => (team ? theme.colors.c1 : theme.colors.c2)};
   border-radius: 4px;
   border-color: ${({ team, theme }) =>
-    team ? theme.colors.c2 : theme.colors.c1};
-  box-shadow: 0 1.1vh 1.1vh -1.5vh ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+    team ? theme.colors.c2 : theme.colors.c3};
+  box-shadow: 0 11px 11px -15px ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
   transition: all 0.2s ease;
 
   &:disabled {
@@ -244,12 +253,9 @@ const Card = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  border-color: ${({ enterprise, theme }) =>
-    enterprise ? theme.colors.c3 : theme.colors.c1};
-  border-width: 1px;
-  border-style: solid;
   padding: 50px 20px;
-  box-shadow: 0 10px 30px -10px ${({ theme }) => theme.colors.c14};
+  border-width: 1px solid ${({ theme }) => theme.colors.c15};
+  box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22};
   width: 40%;
   margin: 0 20px;
   width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '40%')};
@@ -278,14 +284,14 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-const Text = styled.div`
-  color: ${({ theme }) => theme.colors.c1};
-  font-size: 15px;
-  margin-bottom: 12px;
-  white-space: normal;
-  text-overflow: wrap;
-  overflow: visible;
-`
+// const Text = styled.div`
+//   color: ${({ theme }) => theme.colors.c1};
+//   font-size: 15px;
+//   margin-bottom: 12px;
+//   white-space: normal;
+//   text-overflow: wrap;
+//   overflow: visible;
+// `
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -324,7 +330,7 @@ const PricingSection = styled.div`
 `
 
 const StyledText = styled.div`
-  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c3)};
   font-size: 15px;
   margin: 10px 0;
   text-align: justify;
@@ -340,7 +346,7 @@ const Feature = styled(StyledText)`
 const ImportantPricingInfo = styled.div`
   margin: 10px 0;
   font-size: 26px;
-  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c1)};
+  color: ${({ team, theme }) => (team ? theme.colors.c2 : theme.colors.c3)};
   font-weight: 500;
 `
 
@@ -353,11 +359,6 @@ const PricingDetails = styled(ImportantPricingInfo)`
   color: ${({ theme }) => theme.colors.c2};
 `
 
-const ButtonText = styled(ImportantPricingInfo)`
-  font-size: 16px;
-  cursor: pointer;
-`
-
 const PlanDesc = styled(Feature)`
   font-size: 15px;
 
@@ -367,7 +368,7 @@ const PlanDesc = styled(Feature)`
 `
 
 const CancelationInfo = styled(PlanDesc)`
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
 `
 
 const CardTitle = styled(ImportantPricingInfo)`
@@ -377,14 +378,19 @@ const CardTitle = styled(ImportantPricingInfo)`
 const Divider = styled.div`
   width: 100%;
   border-bottom: 1px solid
-    ${({ blue, theme }) => (blue ? theme.colors.c1 : theme.colors.c2)};
+    ${({ blue, theme }) => (blue ? theme.colors.c3 : theme.colors.c2)};
 `
 
 const PricingHeader = styled(CardTitle)`
   padding: 60px 10px 20px;
-  color: ${({ theme }) => theme.colors.c1};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.c3};
   line-height: 1.1;
+`
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 const validate = values => {
@@ -403,6 +409,7 @@ const PricingPage = () => {
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
+  const token = useSelector(selectors.getToken)
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
 
@@ -418,8 +425,9 @@ const PricingPage = () => {
         zIndex={99}
       >
         <ModalWrapper>
-          <CardTitle>Congratulations!</CardTitle>
-          <Text>Your purchase has been successfully completed.</Text>
+          {/* <CardTitle>Congratulations!</CardTitle>
+          <Text>Your purchase has been successfully completed.</Text> */}
+          <StripeCheckoutForm />
           <ButtonsWrapper mobile={device}>
             <Button onClick={() => setModalVisible(false)}>Close</Button>
           </ButtonsWrapper>
@@ -460,9 +468,17 @@ const PricingPage = () => {
               </PricingWrapper>
             </PricingSection>
             <ButtonWrapper>
-              <Button team>
-                <ButtonText>Get started</ButtonText>
-              </Button>
+              <StroveButton
+                isLink={!!token}
+                to="/app/plans"
+                text="Get started"
+                padding="15px"
+                minWidth="250px"
+                maxWidth="250px"
+                margin="10px"
+                fontSize="1.4rem"
+                borderRadius="5px"
+              />
             </ButtonWrapper>
           </Card>
           <Card enterprise team>
@@ -546,6 +562,15 @@ const PricingPage = () => {
                           Request demo
                         </button>
                       </EmailFormWrapper>
+
+                      <Center>
+                        <TrialInfo team>
+                          <li>Free Demo</li>
+                          <li>No credit card needed</li>
+                          <li>No setup</li>
+                        </TrialInfo>
+                      </Center>
+
                       {emailSent && (
                         <StyledEmailConfirmation>
                           Thank you, we'll get in touch soon!

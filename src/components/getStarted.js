@@ -12,16 +12,7 @@ const AddProjectWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-style: solid;
   padding: 20px;
-  box-shadow: 0 1.5vh 1.5vh -1.5vh ${({ theme }) => theme.colors.c1};
-  margin-bottom: 0;
-  height: auto;
-  width: auto;
   min-width: 50vw;
   max-width: 100vw;
 `
@@ -29,7 +20,7 @@ const AddProjectWrapper = styled.div`
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
   color: ${({ theme }) => theme.colors.c1};
-  margin: 0.3vh 0.3vh 0.3vh 0;
+  margin: 3px 3px 3px 0;
   text-align: center;
 `
 
@@ -40,10 +31,10 @@ const GithubLinkInput = styled.input`
   color: ${({ theme }) => theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-align: center;
   font-size: 1rem;
-  padding: 0.5vh 0;
+  padding: 5px 0;
 
   :focus {
     outline: none;
@@ -57,7 +48,7 @@ const GithubLinkForm = styled.form`
   align-items: center;
   width: 100%;
   height: 100%;
-  margin: 2vh 0 0;
+  margin: 20px 0 0;
 `
 
 const StyledErrors = styled.span`
@@ -87,17 +78,16 @@ const validateRepoLink = values => {
   return errors
 }
 
-const GetStarted = ({ addProject }) => {
+const GetStarted = ({ addProject, teamId, organization }) => {
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
-      <Title mobile={isMobile}>
-        Add project from Github, Gitlab or Bitbucket
-      </Title>
+      <Title mobile={isMobile}>Add project from Github or Gitlab</Title>
       <Formik
         onSubmit={(values, actions) => {
-          values.repoLink.trim() && addProject({ link: values.repoLink })
+          values.repoLink.trim() &&
+            addProject({ link: values.repoLink, teamId })
           actions.setSubmitting(false)
         }}
         validate={validateRepoLink}
@@ -141,13 +131,14 @@ const GetStarted = ({ addProject }) => {
         handleClose={setAddProjectModalOpen}
         isOpen={addProjectModalOpen}
         addProject={addProject}
+        teamId={teamId}
       />
     </AddProjectWrapper>
   )
 }
 
-export default memo(() => (
-  <AddProjectProvider>
-    {({ addProject }) => <GetStarted addProject={addProject} />}
+export default memo(({ teamId, organization }) => (
+  <AddProjectProvider organization={organization}>
+    {({ addProject }) => <GetStarted addProject={addProject} teamId={teamId} />}
   </AddProjectProvider>
 ))

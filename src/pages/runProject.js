@@ -4,29 +4,19 @@ import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { selectors } from 'state'
-import { StroveButton, AddProjectProvider, PoweredBy, NoRepoUrlInfo } from 'components'
+import {
+  StroveButton,
+  AddProjectProvider,
+  PoweredBy,
+  NoRepoUrlInfo,
+  FullScreenWrapper,
+  MenuWrapper,
+} from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
-
-const getToken = selectors.api.getUserField('siliskyToken')
-
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
-  position: relative;
-`
 
 const LoginText = styled.span`
   font-weight: 500;
   font-size: 20px;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
 `
 
 const StyledButton = styled(StroveButton)`
@@ -41,7 +31,8 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject, history }) => {
-  const token = useSelector(getToken)
+  const myTeams = useSelector(selectors.api.getMyTeams)
+  const token = useSelector(selectors.getToken)
 
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
@@ -54,22 +45,22 @@ const Run = ({ addProject, history }) => {
   }
 
   const onClick = () => {
-    addProject({ link: repoUrl })
+    addProject({ link: repoUrl, teamId: myTeams[0].id })
   }
 
   return (
-    <Wrapper>
-      <MenuWrapper invert>
+    <FullScreenWrapper>
+      <MenuWrapper>
         {!repoUrl ? (
-          <NoRepoUrlInfo/>
-        ) :(
+          <NoRepoUrlInfo />
+        ) : (
           <StyledButton isPrimary onClick={onClick}>
             <LoginText invert>Run with Strove</LoginText>
           </StyledButton>
         )}
         <PoweredBy />
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 
@@ -78,8 +69,10 @@ const Run = ({ addProject, history }) => {
   For example, to open strove website use:
   https://strove.io/embed/runProject/?repoUrl=https://github.com/stroveio/strove.io
 */
-export default memo(withRouter(({ history }) => (
-  <AddProjectProvider>
-    {({ addProject }) => <Run addProject={addProject} history={history} />}
-  </AddProjectProvider>
-)))
+export default memo(
+  withRouter(({ history }) => (
+    <AddProjectProvider>
+      {({ addProject }) => <Run addProject={addProject} history={history} />}
+    </AddProjectProvider>
+  ))
+)

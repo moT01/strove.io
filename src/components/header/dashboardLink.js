@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
@@ -56,12 +56,12 @@ const LinkWrapper = styled.div`
 `
 
 const DashboardLink = props => {
-  const user = useSelector(selectors.api.getUser)
+  const token = useSelector(selectors.getToken)
 
   return (
     <>
-      {user && !props.isEmbed && (
-        <LinkWrapper mobile={isMobileOnly} {...props}>
+      {token && !props.isEmbed && (
+        <LinkWrapper {...props}>
           <StyledLink to="/app/dashboard" {...props}>
             {isMobileOnly ? (
               <StyledDashboardIcon {...props} />
@@ -75,4 +75,4 @@ const DashboardLink = props => {
   )
 }
 
-export default DashboardLink
+export default memo(DashboardLink)

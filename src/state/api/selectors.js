@@ -1,4 +1,5 @@
 import getOr from 'lodash/fp/getOr'
+import { createSelector } from 'reselect'
 
 export const getApiData = ({ fields, defaultValue = {} }) =>
   Array.isArray(fields)
@@ -23,11 +24,36 @@ export const getUserProjects = getApiData({
   defaultValue: [],
 })
 
+export const getMyTeams = getApiData({
+  fields: 'myTeams',
+  defaultValue: [],
+})
+
+export const getMyOrganizations = getApiData({
+  fields: 'myOrganizations',
+  defaultValue: [],
+})
+
 export const getQueuePosition = getApiData({
   fields: ['user', 'queuePosition'],
 })
 
-export const getCurrentProject = state =>
-  getApiData({ fields: 'myProjects', defaultValue: [] })(state).find(
-    item => item.machineId
-  )
+export const getPaymentStatus = getApiData({
+  fields: 'paymentStatus',
+  defaultValue: {},
+})
+
+export const getCurrentProject = createSelector(
+  getMyOrganizations,
+  organizations => {
+    let projects = []
+    organizations.forEach(organization => {
+      organization.teams.forEach(team => {
+        if (Array.isArray(team.projects)) {
+          projects = [...projects, ...team.projects]
+        }
+      })
+    })
+    return projects.find(project => project.machineId)
+  }
+)

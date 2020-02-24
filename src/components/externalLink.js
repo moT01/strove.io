@@ -24,7 +24,7 @@ export default styled.a`
   height: 60px;
   width: 300px;
   margin: 5px;
-  padding: 0.5vh;
+  padding: 5px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -37,7 +37,7 @@ export default styled.a`
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -66,7 +66,7 @@ export default styled.a`
       &:hover {
         opacity: 1;
         transform: translateY(-1px);
-        box-shadow: 0 1.1vh 1.1vh -1.2vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 11px 11px -12px ${({ theme }) => theme.colors.c1};
       }
     `}
 `

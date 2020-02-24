@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-boost'
 
-import { mutation, getRepoProvider } from 'utils'
+import { mutation, getRepoProvider, updateOrganizations } from 'utils'
 import { actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO, GET_BITBUCKET_TOKEN } from 'queries'
 
@@ -16,6 +16,8 @@ const createProject = async ({
   user,
   setModalContent,
   name,
+  teamId,
+  forkedFromId,
 }) => {
   let repoData = null
   const customName = name
@@ -78,14 +80,14 @@ const createProject = async ({
             query: GET_BITBUCKET_TOKEN,
             context: {
               headers: {
-                Authorization: `Bearer ${user.siliskyToken}`,
+                Authorization: `Bearer ${user.token || user.siliskyToken}`,
                 'User-Agent': 'node',
               },
             },
             fetchPolicy: 'no-cache',
           })
 
-          const token = access_token?.data?.getbitBucketToken
+          const token = '12' // access_token?.data?.getbitBucketToken
 
           /* Todo: This endpoint does not allow 10+ results. Investigate other ways to do it. */
           if (token) {
@@ -129,17 +131,24 @@ const createProject = async ({
         : document.location.href
 
     /* ToDo: Make this scallable and work with other sites as well */
-    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : 'standard'
+    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
 
     const { description, name /* add language and color */ } = repoData
     dispatch(
       mutation({
         name: 'addProject',
-        variables: { repoLink, name, description, type },
+        variables: { repoLink, name, description, type, teamId },
         mutation: ADD_PROJECT,
-        onSuccessDispatch: null,
+        onSuccessDispatch: updateOrganizations,
         onError: error => {
-          setModalContent('TryAgainLater')
+          setModalContent('TryAgainLater', {
+            repoLink,
+            name,
+            description,
+            type,
+            teamId,
+            forkedFromId,
+          })
           dispatch(actions.api.fetchError({ storeKey: 'myProjects', error }))
           dispatch(actions.incomingProject.catchIncomingError({ error }))
         },

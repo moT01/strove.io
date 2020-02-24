@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import { selectors } from 'state'
 import { Desktop } from 'components/svgs'
 
+import DropdownMenuWrapper from './dropdownMenuWrapper'
+
 const Text = styled.h3`
   font-size: 16px;
   color: ${({ theme }) => theme.colors.c2};
@@ -102,6 +104,7 @@ const OptionText = styled(Text)`
     color: ${({ theme }) => theme.colors.c2};
     transition: color 0.1s;
     text-decoration: none;
+    cursor: pointer;
   }
 `
 
@@ -111,20 +114,19 @@ const Option = styled.a`
   justify-content: flex-start;
   align-items: center;
   padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  margin: ${props => (props.isLast ? `0` : `0 0 2px`)};
   width: auto;
   height: 32px;
   font-size: 16px;
   border-bottom-left-radius: ${props => props.isLast && '3px'};
   border-bottom-right-radius: ${props => props.isLast && '3px'};
-  z-index: 4;
   text-decoration: none;
   font-weight: 300;
   min-width: ${props => (props.isEmbed ? '0' : '150px')};
   svg {
     fill: ${({ theme, invert }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
+    width: 22px;
     height: auto;
     margin-right: 5px;
   }
@@ -226,7 +228,7 @@ const PreviewDropdown = props => {
               </PreviewButton>
               <DropdownWrapper {...props}>
                 {isOpen && (
-                  <MenuWrapper>
+                  <DropdownMenuWrapper>
                     {ports.map((item, index, arr) => (
                       <Option
                         invert
@@ -246,7 +248,7 @@ const PreviewDropdown = props => {
                         </PreviewLink>
                       </Option>
                     ))}
-                  </MenuWrapper>
+                  </DropdownMenuWrapper>
                 )}
               </DropdownWrapper>
             </div>

@@ -157,7 +157,7 @@ export default createGlobalStyle`
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    margin-bottom: 1.45rem;
+    margin-bottom: 0;
   }
   h1,
   h2,
@@ -307,9 +307,6 @@ export default createGlobalStyle`
   }
   th {
     font-weight: bold;
-  }
-  li {
-    margin-bottom: calc(1.45rem / 2);
   }
   ol li {
     padding-left: 0;

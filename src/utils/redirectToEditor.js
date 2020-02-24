@@ -2,7 +2,6 @@ import { actions } from 'state'
 
 import { getWindowPathName, getWindowSearchParams } from './windowUtils'
 
-/* NO_GATSBY_TODO Pass history */
 export default (dispatch, history) => {
   dispatch(actions.incomingProject.removeIncomingProject())
   const path = getWindowPathName()

@@ -4,7 +4,6 @@ import SEO from './seo'
 import AddProjectModals from './addProjectModals'
 import AddProjectProvider from './addProjectProvider'
 import FullScreenLoader from './fullScreenLoader'
-import Dashboard from './dashboard'
 import GetStarted from './getStarted'
 import Layout from './layout'
 import Logos from './logos.js'
@@ -19,7 +18,15 @@ import NoRepoUrlInfo from './NoRepoUrlInfo'
 import PoweredBy from './poweredBy'
 import ExternalLink from './externalLink'
 import ScrollToTop from './scrollToTop'
+import StripeCheckoutForm from './stripeCheckoutForm'
 import Cookies from './cookies'
+import WithTracker from './withTracker'
+import Footer from './footer'
+import OldUserModal from './oldUserModal'
+import WithLazyLoader from './withLazyLoader'
+import FullScreenWrapper from './fullScreenWrapper'
+import MenuWrapper from './menuWrapper'
+import TrialInfo from './trialInfo'
 
 export {
   SmallCloud,
@@ -30,7 +37,6 @@ export {
   AddProjectModals,
   AddProjectProvider,
   FullScreenLoader,
-  Dashboard,
   GetStarted,
   Layout,
   Logos,
@@ -39,11 +45,19 @@ export {
   GlobalStyles,
   DataManager,
   WithAddProject,
+  WithTracker,
   Home,
   StroveButton,
   NoRepoUrlInfo,
   PoweredBy,
   ExternalLink,
   ScrollToTop,
+  StripeCheckoutForm,
   Cookies,
+  Footer,
+  OldUserModal,
+  WithLazyLoader,
+  FullScreenWrapper,
+  MenuWrapper,
+  TrialInfo
 }

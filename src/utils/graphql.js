@@ -1,4 +1,5 @@
-import { C } from 'state/'
+import ReactGA from 'react-ga'
+import { C, actions } from 'state'
 
 import defaultClient from 'client'
 
@@ -13,7 +14,7 @@ import defaultClient from 'client'
  * @param {string} objectParam.context - Mutation context
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy, defaults to all
  * @param {string} objectParam.mutation - Actual mutation
- * @param {function} objectParam.onSuccess - Function called with the result after mutation succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
+ * @param {function} objectParam.onSuccess - Function called with the result after mutation succeeds. Example: user => localStorage.setItem('token', user.token)
  * @param {function} objectParam.onError - Function called with the error after mutation fails. Example: () => localStorage.removeItem('token')
  * @param {function} objectParam.onSuccessDispatch - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
  * @param {function} objectParam.onSuccessError - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
@@ -56,6 +57,8 @@ export const mutation = ({
       })
     }
 
+    const requestStartTime = performance.now()
+
     try {
       const { data } = await client.mutate({
         mutation,
@@ -66,6 +69,21 @@ export const mutation = ({
       })
 
       const result = dataSelector(data)
+
+      if (result) {
+        const requestEndTime = performance.now()
+        const requestTime = requestEndTime - requestStartTime
+        if (name === 'resetCron') {
+          dispatch(actions.latency.fullLatencyMeasurement(requestTime))
+        }
+        ReactGA.timing({
+          category: 'Request Performace',
+          variable: name,
+          value: requestTime,
+        })
+
+        console.log('Request Performace', requestTime)
+      }
 
       if (onSuccess) {
         if (Array.isArray(onSuccess)) {
@@ -88,8 +106,22 @@ export const mutation = ({
         })
       }
 
-      return dataSelector(data)
-    } catch (error) {
+      const requestHandlingEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Handling Performance',
+        variable: name,
+        value: requestHandlingEndTime - requestStartTime,
+      })
+
+      console.log(
+        'Request Handling Performace',
+        requestHandlingEndTime - requestStartTime,
+        name
+      )
+
+      return result
+    } catch (errorObj) {
+      const error = errorObj.toString()
       console.log('Error', error)
       onError && onError(error)
 
@@ -106,6 +138,20 @@ export const mutation = ({
           payload: { error, storeKey },
         })
       }
+
+      const requestEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Error Performance',
+        variable: name,
+        value: requestEndTime - requestStartTime,
+      })
+
+      console.log(
+        'Request Error Performace',
+        requestEndTime - requestStartTime,
+        name
+      )
+
       return null
     }
   }
@@ -123,7 +169,7 @@ export const mutation = ({
  * @param {string} objectParam.errorPolicy - Mutation fetchPolicy, defaults to cache-first
  * @param {string} objectParam.errorPolicy - Mutation errorPolicy, defaults to all
  * @param {string} objectParam.query - Actual query
- * @param {function} objectParam.onSuccess - Function called with the result after query succeeds. Example: user => localStorage.setItem('token', user.siliskyToken)
+ * @param {function} objectParam.onSuccess - Function called with the result after query succeeds. Example: user => localStorage.setItem('token', user.token)
  * @param {function} objectParam.onError - Function called with the error after query fails. Example: () => localStorage.removeItem('token')
  * @param {function} objectParam.onSuccessDispatch - Function called with the result - returns action dispatch. Example: user => ({ type: "USER_LOGIN_SUCCESS", payload: user })
  * @param {function} objectParam.onErrorDispatch - Function called with the error - returns action dispatch. Example: error => ({ type: "USER_LOGIN_ERROR", payload: error })
@@ -168,16 +214,33 @@ export const query = ({
       })
     }
 
+    const requestStartTime = performance.now()
+
     try {
       const { data } = await client.query({
         query,
         context,
         variables,
-        fetchPolicy,
+        fetchPolicy: 'network-only',
         errorPolicy,
       })
 
       const result = dataSelector(data)
+
+      if (result) {
+        const requestEndTime = performance.now()
+        const requestTime = requestEndTime - requestStartTime
+        if (name === 'resetCron') {
+          dispatch(actions.latency.fullLatencyMeasurement(requestTime))
+        }
+        ReactGA.timing({
+          category: 'Request Performace',
+          variable: name,
+          value: requestTime,
+        })
+
+        console.log('Request Performace', requestTime)
+      }
 
       if (onSuccess) {
         if (Array.isArray(onSuccess)) {
@@ -200,8 +263,21 @@ export const query = ({
         })
       }
 
+      const requestHandlingEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Handling Performance',
+        variable: name,
+        value: requestHandlingEndTime - requestStartTime,
+      })
+      console.log(
+        'Request Handling Performace',
+        requestHandlingEndTime - requestStartTime,
+        name
+      )
+
       return result
-    } catch (error) {
+    } catch (errorObj) {
+      const error = errorObj.toString()
       console.log('fetch error: ', error)
 
       onError && onError(error)
@@ -218,6 +294,20 @@ export const query = ({
           payload: { error, storeKey },
         })
       }
+
+      const requestEndTime = performance.now()
+      ReactGA.timing({
+        category: 'Request Error Performance',
+        variable: name,
+        value: requestEndTime - requestStartTime,
+      })
+
+      console.log(
+        'Request Error Performace',
+        requestEndTime - requestStartTime,
+        name
+      )
+
       return null
     }
   }

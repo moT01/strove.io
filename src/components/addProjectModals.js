@@ -72,7 +72,7 @@ const StyledAnchor = styled.a`
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -81,7 +81,7 @@ const StyledAnchor = styled.a`
   svg {
     fill: ${({ invert, theme }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
-    width: 2.2vh;
+    width: 22px;
     height: auto;
     margin-left: 5px;
   }
@@ -102,7 +102,7 @@ const StyledAnchor = styled.a`
       &:hover {
         opacity: 1;
         transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme }) => theme.colors.c1};
       }
     `}
 `
@@ -127,7 +127,7 @@ const StyledLink = styled(Link)`
     primary ? theme.colors.c2 : theme.colors.c1};
   border-radius: 5px;
   border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 10px 10px -15px ${({ theme }) => theme.colors.c1};
   text-decoration: none;
   transition: all 0.2s ease;
   animation: ${FadeIn} 0.5s ease-out;
@@ -149,21 +149,16 @@ const StyledLink = styled(Link)`
       &:hover {
         opacity: 1;
         transform: translateY(-3px);
-        box-shadow: 0 1.2vh 1.2vh -1.3vh ${({ theme }) => theme.colors.c1};
+        box-shadow: 0 12px 12px -13px ${({ theme }) => theme.colors.c1};
       }
     `}
 `
+
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: ${props =>
-    props.mobile === 'mobile'
-      ? '85%'
-      : props.mobile === 'tablet'
-      ? '60%'
-      : '45%'};
 `
 
 const Title = styled.h3`
@@ -327,7 +322,6 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Github account.
-            You are logged in with a Gitlab account
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
@@ -354,7 +348,6 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Gitlab account.
-            You are logged in with a Github account
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
@@ -381,7 +374,7 @@ const AddProjectModals = ({
         <ModalWrapper>
           <Text>
             To clone this repository you have to log in with a Bitbucket
-            account. You are logged in with a Github account
+            account.
           </Text>
           <ButtonsWrapper mobile={device}>
             <StyledAnchor
@@ -411,6 +404,35 @@ const AddProjectModals = ({
             {projectsLimit} projects. To increase the limit you can upgrade your
             account my mailing us at contact@strove.io.
           </Text>
+        </ModalWrapper>
+      </Modal>
+
+      <Modal
+        isOpen={modalContent === 'TimeExceeded'}
+        onRequestClose={closeModal}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '47vh' : '25vh'}
+      >
+        <ModalWrapper>
+          <Text>You have exceeded the monthly editor time for free users.</Text>
+
+          <Text>
+            If you need more time to work on your amazing projects upgrade your
+            subscription plan.
+          </Text>
+          <StroveButton
+            isLink
+            isPrimary
+            to="/app/plans"
+            text="Pricing"
+            padding="5px"
+            minWidth="150px"
+            maxWidth="150px"
+            margin="10px"
+            borderRadius="5px"
+          />
         </ModalWrapper>
       </Modal>
 

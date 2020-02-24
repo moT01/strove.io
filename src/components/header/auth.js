@@ -1,14 +1,16 @@
 import React, { memo } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled, { keyframes, css } from 'styled-components/macro'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from 'antd'
+import { Link } from 'react-router-dom'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { persistor } from 'wrapper'
-import FullScreenLoader from '../fullScreenLoader'
+
+import DropdownMenuWrapper from './dropdownMenuWrapper'
 
 const FadeIn = keyframes`
   0% {
@@ -66,28 +68,13 @@ const LoginButton = styled.button`
   }
 `
 
-const MenuWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: auto;
-  box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c2};
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-style: solid;
-  background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
-  position: relative;
-`
-
-const Option = styled.a`
+const OptionStyles = css`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding: 3px;
-  margin: ${props => (props.isLast ? `0` : `0 0 0.2vh`)};
+  margin: ${props => (props.isLast ? `0` : `0 0 2px`)};
   width: auto;
   height: 32px;
   font-size: 16px;
@@ -99,8 +86,8 @@ const Option = styled.a`
   color: ${({ theme }) => theme.colors.c1};
 
   svg {
-    fill: ${({ theme }) => theme.colors.c2};
-    width: 2.2vh;
+    fill: ${({ theme }) => theme.colors.c1};
+    width: 22px;
     height: auto;
     margin-right: 5px;
   }
@@ -115,6 +102,14 @@ const Option = styled.a`
     fill: ${({ theme }) => theme.colors.c2};
     cursor: pointer;
   }
+`
+
+const Option = styled.a`
+  ${OptionStyles}
+`
+
+const LinkOption = styled(Link)`
+  ${OptionStyles}
 `
 
 const Inline = styled.div`
@@ -211,7 +206,7 @@ const LoginDropdown = props => (
             <AuthText {...props}>Login</AuthText>
           </LoginButton>
           <DropdownWrapper hidden={!isOpen}>
-            <MenuWrapper>
+            <DropdownMenuWrapper>
               {loginOptions.map((item, index) => (
                 <Option
                   key={item.value}
@@ -222,7 +217,7 @@ const LoginDropdown = props => (
                   <OptionText>{item.label}</OptionText>
                 </Option>
               ))}
-            </MenuWrapper>
+            </DropdownMenuWrapper>
           </DropdownWrapper>
         </div>
       )}
@@ -234,10 +229,9 @@ const UserDropdown = props => {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectors.api.getLoading('user'))
 
-  if (isLoading)
-    return (
-      <FullScreenLoader isFullscreen={false} height="3vh" color="#ffffff" />
-    )
+  if (isLoading) {
+    return null
+  }
 
   return (
     <AuthWrapper>
@@ -256,7 +250,10 @@ const UserDropdown = props => {
               </StyledDropdown>
             </Wrapper>
             <DropdownWrapper hidden={!isOpen}>
-              <MenuWrapper>
+              <DropdownMenuWrapper>
+                <LinkOption to="/app/plans">
+                  <OptionText>Settings</OptionText>
+                </LinkOption>
                 <Option
                   isLast
                   onClick={() => {
@@ -269,7 +266,7 @@ const UserDropdown = props => {
                 >
                   <OptionText>Logout</OptionText>
                 </Option>
-              </MenuWrapper>
+              </DropdownMenuWrapper>
             </DropdownWrapper>
           </div>
         )}
@@ -279,7 +276,6 @@ const UserDropdown = props => {
 }
 
 const Auth = props => {
-  const isLoading = useSelector(selectors.api.getLoading('user'))
   const user = useSelector(getUserData)
 
   if (
@@ -288,7 +284,8 @@ const Auth = props => {
   ) {
     return null
   }
-  return !user.username && !isLoading ? (
+
+  return !user.username ? (
     <LoginDropdown {...props} />
   ) : (
     <UserDropdown user={user} {...props} />

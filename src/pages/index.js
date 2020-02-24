@@ -9,7 +9,9 @@ import { GoBackTo, Login } from './fromEmbed'
 import RunProject from './runProject'
 import Pricing from './pricing'
 import Editor from './editor'
-import FromEmailInvitation from './fromEmailInvitation'
+import FromEmailInvitation from './welcome/fromEmailInvitation'
+import Dashboard from './dashboard'
+import Payments from './plans'
 
 export {
   Home,
@@ -25,4 +27,6 @@ export {
   Pricing,
   Editor,
   FromEmailInvitation,
+  Dashboard,
+  Payments,
 }

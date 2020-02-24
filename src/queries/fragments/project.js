@@ -4,6 +4,11 @@ export const ProjectFragment = gql`
   fragment Project on Project {
     id
     name
+    userId
+    user {
+      name
+      photoUrl
+    }
     description
     isPrivate
     createdAt
@@ -12,5 +17,8 @@ export const ProjectFragment = gql`
     editorPort
     additionalPorts
     machineName
+    isVisible
+    teamId
+    forkedFromId
   }
 `

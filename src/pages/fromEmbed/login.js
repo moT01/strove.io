@@ -2,17 +2,22 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { loginOptions } from 'consts'
-import { NoRepoUrlInfo, ExternalLink } from 'components'
+import {
+  NoRepoUrlInfo,
+  ExternalLink,
+  FullScreenWrapper,
+  MenuWrapper,
+} from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
-const MenuWrapper = styled.div`
-  padding: 20px;
-  background-color: ${({ theme, invert }) =>
-    invert ? theme.colors.c2 : theme.colors.c1};
-  z-index: 3;
-  position: relative;
-  word-break: initial;
-`
+// const MenuWrapper = styled.div`
+//   padding: 20px;
+//   background-color: ${({ theme, invert }) =>
+//     invert ? theme.colors.c2 : theme.colors.c1};
+//   z-index: 3;
+//   position: relative;
+//   word-break: initial;
+// `
 
 const LoginText = styled.span`
   font-weight: 500;
@@ -28,14 +33,6 @@ const RedirectInfoWrapper = styled.div`
 const Url = styled.span`
   font-style: italic;
   font-weight: 600;
-`
-
-const Wrapper = styled.div`
-  display: flex;
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
 `
 
 const NoRedirectUrlInfo = styled.div`
@@ -55,8 +52,8 @@ const Login = () => {
   )
 
   return (
-    <Wrapper>
-      <MenuWrapper invert>
+    <FullScreenWrapper>
+      <MenuWrapper>
         {loginProvider ? (
           <>
             <ExternalLink
@@ -64,7 +61,7 @@ const Login = () => {
               href={`${loginProvider.embedHref}?goBackTo=${goBackTo}&repoUrl=${repoUrl}`}
             >
               {loginProvider.icon}
-              <LoginText invert>Login with {loginProvider.label}</LoginText>
+              <LoginText>Login with {loginProvider.label}</LoginText>
             </ExternalLink>
             {goBackTo ? (
               <RedirectInfoWrapper>
@@ -81,7 +78,7 @@ const Login = () => {
           <NoRepoUrlInfo />
         )}
       </MenuWrapper>
-    </Wrapper>
+    </FullScreenWrapper>
   )
 }
 
