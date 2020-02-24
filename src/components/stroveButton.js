@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import ReactGA from 'react-ga'
 
 import { FullScreenLoader } from 'components'
@@ -202,6 +202,31 @@ const StroveButton = props => {
         props.text || props.children
       )}
     </LinkButton>
+  ) : props.isGetStarted ? (
+    <Button
+      height="56px"
+      width="100%"
+      fontSize="1.3rem"
+      fontWeight="bold"
+      primary={props.isPrimary}
+      letterSpacing="0.8px"
+      onClick={() => props.history.push('/welcome/login')}
+      {...props}
+    >
+      {isLoading ||
+      isDeleting ||
+      isContinuing ||
+      isStopping ||
+      props.isProcessing ? (
+        <FullScreenLoader
+          isFullScreen={false}
+          color={props.isPrimary ? '#ffffff' : '#0072ce'}
+          height="1.7rem"
+        />
+      ) : (
+        props.text || props.children
+      )}
+    </Button>
   ) : (
     <Button
       disabled={isLoading || props.isDisabled || props.isProcessing}
@@ -236,4 +261,4 @@ const StroveButton = props => {
   )
 }
 
-export default memo(StroveButton)
+export default withRouter(memo(StroveButton))

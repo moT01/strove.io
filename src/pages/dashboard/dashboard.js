@@ -144,7 +144,6 @@ const Dashboard = ({ history }) => {
   const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
-  const [processingPayment, setProcessingPayment] = useState(false)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
@@ -987,9 +986,7 @@ const Dashboard = ({ history }) => {
           onClick={handleDeleteTeamClick}
           text="Delete team"
         />
-        <WarningText>
-          Deleting a team can not be undone.
-        </WarningText>
+        <WarningText>Deleting a team can not be undone.</WarningText>
 
         <ModalButton
           onClick={closeSettingsModal}
