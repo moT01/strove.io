@@ -88,7 +88,6 @@ export default memo(
     const machineName = activeProjectData?.machineName
 
     useEffect(() => {
-      console.log('Beeeeeeeeeep', invitedByTeamId, token)
       if (invitedByTeamId && token) {
         dispatch(
           mutation({
@@ -98,8 +97,10 @@ export default memo(
               teamId: invitedByTeamId,
             },
             mutation: ACCEPT_TEAM_INVITATION,
-            onSuccess: () => console.log('Successfull team invitation accept'),
-            onSuccessDispatch: () => actions.invitations.acceptInvitation(),
+            onSuccessDispatch: () => {
+              actions.invitations.acceptInvitation()
+              updateOrganizations()
+            },
           })
         )
       }
