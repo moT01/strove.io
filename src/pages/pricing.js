@@ -469,8 +469,7 @@ const PricingPage = () => {
             </PricingSection>
             <ButtonWrapper>
               <StroveButton
-                isLink={!!token}
-                to="/app/plans"
+                isGetStarted
                 text="Get started"
                 padding="15px"
                 minWidth="250px"

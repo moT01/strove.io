@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import styled, { css } from 'styled-components/macro'
 
-import GetStartedButton from './getStartedButton'
+import { StroveButton } from 'components'
 import { StyledH1 } from './styled'
 
 const StyledCTAWrapper = styled.div`
@@ -121,7 +121,13 @@ const Technologies = () => (
     <StyledCTAWrapper>
       <StyledButtonWrapper>
         <StyledH1>Choose a better way to get your ideas out there</StyledH1>
-        <GetStartedButton margin="20px 0" />
+        <StroveButton
+          isGetStarted
+          isPrimary
+          margin="20px 0"
+          text="Get started"
+          fontWeight="bold"
+        />
       </StyledButtonWrapper>
     </StyledCTAWrapper>
   </>

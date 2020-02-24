@@ -92,29 +92,29 @@ const validateTeamName = values => {
   return errors
 }
 
-const TimeBarContainer = styled.div`
-  margin-top: 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 40%;
-  height: 15px;
-  border: 1px solid #0072ce;
-  border-radius: 2px;
-  overflow: hidden;
-`
+// const TimeBarContainer = styled.div`
+//   margin-top: 25px;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: center;
+//   width: 40%;
+//   height: 15px;
+//   border: 1px solid #0072ce;
+//   border-radius: 2px;
+//   overflow: hidden;
+// `
 
-const TimeBar = styled.div`
-  height: 100%;
-  width: ${({ time }) => (time / 72000000) * 100}%;
-  background-color: #0072ce;
-`
+// const TimeBar = styled.div`
+//   height: 100%;
+//   width: ${({ time }) => (time / 72000000) * 100}%;
+//   background-color: #0072ce;
+// `
 
-const TimeText = styled(Text)`
-  color: ${({ theme }) => theme.colors.c1};
-  font-size: 12px;
-`
+// const TimeText = styled(Text)`
+//   color: ${({ theme }) => theme.colors.c1};
+//   font-size: 12px;
+// `
 
 const emptyWarningModalContent = {
   visible: false,
@@ -131,20 +131,18 @@ const Dashboard = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
-  const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
+  // const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [teamLeaderModal, setTeamLeaderModal] = useState(false)
-  // const [teamId, setTeamId] = useState('')
   const [editTeam, setEditTeam] = useState()
   const [editMode, setEditMode] = useState('')
   const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
-  const [processingPayment, setProcessingPayment] = useState(false)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
@@ -189,7 +187,7 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     dispatch(updateOrganizations())
-    convertToHours()
+    // convertToHours()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -500,13 +498,13 @@ const Dashboard = ({ history }) => {
     },
   ]
 
-  const convertToHours = () => {
-    let seconds = Math.floor((user.timeSpent / 1000) % 60)
-    let minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
-    let hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
+  // const convertToHours = () => {
+  //   let seconds = Math.floor((user.timeSpent / 1000) % 60)
+  //   let minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
+  //   let hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
 
-    setTime({ hours, minutes, seconds })
-  }
+  //   setTime({ hours, minutes, seconds })
+  // }
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
@@ -704,7 +702,7 @@ const Dashboard = ({ history }) => {
           },
           onSuccessDispatch: updateOrganizations,
         })
-      )
+      ) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paymentStatus])
 
   const handleAddMemberClick = team => {
@@ -715,6 +713,8 @@ const Dashboard = ({ history }) => {
   const addMember = ({ memberEmail }) => {
     const users = editTeam.users
     const invited = editTeam.users
+    const subscriptionStatus =
+      organizationsObj[editTeam.organizationId].subscriptionStatus
 
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
@@ -733,30 +733,45 @@ const Dashboard = ({ history }) => {
         ) === -1 ||
         !organizationsObj[editTeam.organizationId].users
       ) {
-        setWarningModal({
-          visible: true,
-          content: (
-            <FullScreenLoader
-              type="processPayment"
-              isFullScreen
-              color="#0072ce"
-            />
-          ),
-          noClose: true,
-        })
-        dispatch(
-          mutation({
-            name: 'upgradeSubscription',
-            mutation: UPGRADE_SUBSCRIPTION,
-            variables: {
-              organizationId: editTeam.organizationId,
-              quantity:
-                organizationsObj[editTeam?.organizationId]
-                  ?.subscriptionQuantity + 1,
-            },
-            onSuccess: () => setAddMemberEmail(memberEmail),
+        if (subscriptionStatus === 'active') {
+          setWarningModal({
+            visible: true,
+            content: (
+              <FullScreenLoader
+                type="processPayment"
+                isFullScreen
+                color="#0072ce"
+              />
+            ),
+            noClose: true,
           })
-        )
+          dispatch(
+            mutation({
+              name: 'upgradeSubscription',
+              mutation: UPGRADE_SUBSCRIPTION,
+              variables: {
+                organizationId: editTeam.organizationId,
+                quantity:
+                  organizationsObj[editTeam?.organizationId]
+                    ?.subscriptionQuantity + 1,
+              },
+              onSuccess: () => setAddMemberEmail(memberEmail),
+            })
+          )
+        } else if (subscriptionStatus === 'inactive') {
+          dispatch(
+            mutation({
+              name: 'addMember',
+              mutation: ADD_MEMBER,
+              variables: { memberEmail, teamId: editTeam.id },
+              onSuccess: () => {
+                setAddMemberModal(false)
+                closeWarningModal()
+              },
+              onSuccessDispatch: updateOrganizations,
+            })
+          )
+        }
       }
     }
   }
@@ -987,9 +1002,7 @@ const Dashboard = ({ history }) => {
           onClick={handleDeleteTeamClick}
           text="Delete team"
         />
-        <WarningText>
-          Deleting a team can not be undone.
-        </WarningText>
+        <WarningText>Deleting a team can not be undone.</WarningText>
 
         <ModalButton
           onClick={closeSettingsModal}

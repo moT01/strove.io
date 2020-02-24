@@ -27,6 +27,7 @@ import WithLazyLoader from './withLazyLoader'
 import FullScreenWrapper from './fullScreenWrapper'
 import MenuWrapper from './menuWrapper'
 import TrialInfo from './trialInfo'
+import GetStartedButton from './getStartedButton'
 
 export {
   SmallCloud,
@@ -59,5 +60,6 @@ export {
   WithLazyLoader,
   FullScreenWrapper,
   MenuWrapper,
-  TrialInfo
+  TrialInfo,
+  GetStartedButton,
 }

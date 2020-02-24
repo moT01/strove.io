@@ -35,6 +35,8 @@ const GetStarted = ({ history }) => {
   return (
     <ButtonsWrapper mobile={isMobileOnly}>
       <StroveButton
+        isGetStarted
+        isPrimary
         height="56px"
         width="100%"
         fontSize="1.3rem"
