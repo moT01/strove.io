@@ -98,6 +98,7 @@ export default memo(
               teamId: invitedByTeamId,
             },
             mutation: ACCEPT_TEAM_INVITATION,
+            onSuccess: () => console.log('Successfull team invitation accept'),
             onSuccessDispatch: () => actions.invitations.acceptInvitation(),
           })
         )
