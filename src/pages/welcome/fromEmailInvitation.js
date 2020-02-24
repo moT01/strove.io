@@ -31,6 +31,7 @@ const FromEmailInvitation = () => {
   const fromEmail = searchParams.get('fromEmail')
 
   if (token) {
+    dispatch(actions.invitations.addInvitation({ teamId, teamName }))
     return <Redirect to="/app/dashboard" />
   }
 
