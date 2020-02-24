@@ -713,6 +713,8 @@ const Dashboard = ({ history }) => {
   const addMember = ({ memberEmail }) => {
     const users = editTeam.users
     const invited = editTeam.users
+    const subscriptionStatus =
+      organizationsObj[editTeam.organizationId].subscriptionStatus
 
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
@@ -731,30 +733,45 @@ const Dashboard = ({ history }) => {
         ) === -1 ||
         !organizationsObj[editTeam.organizationId].users
       ) {
-        setWarningModal({
-          visible: true,
-          content: (
-            <FullScreenLoader
-              type="processPayment"
-              isFullScreen
-              color="#0072ce"
-            />
-          ),
-          noClose: true,
-        })
-        dispatch(
-          mutation({
-            name: 'upgradeSubscription',
-            mutation: UPGRADE_SUBSCRIPTION,
-            variables: {
-              organizationId: editTeam.organizationId,
-              quantity:
-                organizationsObj[editTeam?.organizationId]
-                  ?.subscriptionQuantity + 1,
-            },
-            onSuccess: () => setAddMemberEmail(memberEmail),
+        if (subscriptionStatus === 'active') {
+          setWarningModal({
+            visible: true,
+            content: (
+              <FullScreenLoader
+                type="processPayment"
+                isFullScreen
+                color="#0072ce"
+              />
+            ),
+            noClose: true,
           })
-        )
+          dispatch(
+            mutation({
+              name: 'upgradeSubscription',
+              mutation: UPGRADE_SUBSCRIPTION,
+              variables: {
+                organizationId: editTeam.organizationId,
+                quantity:
+                  organizationsObj[editTeam?.organizationId]
+                    ?.subscriptionQuantity + 1,
+              },
+              onSuccess: () => setAddMemberEmail(memberEmail),
+            })
+          )
+        } else if (subscriptionStatus === 'inactive') {
+          dispatch(
+            mutation({
+              name: 'addMember',
+              mutation: ADD_MEMBER,
+              variables: { memberEmail, teamId: editTeam.id },
+              onSuccess: () => {
+                setAddMemberModal(false)
+                closeWarningModal()
+              },
+              onSuccessDispatch: updateOrganizations,
+            })
+          )
+        }
       }
     }
   }
