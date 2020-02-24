@@ -207,7 +207,6 @@ const StroveButton = props => {
       height="56px"
       width="100%"
       fontSize="1.3rem"
-      fontWeight="bold"
       primary={props.isPrimary}
       letterSpacing="0.8px"
       onClick={() => props.history.push('/welcome/login')}

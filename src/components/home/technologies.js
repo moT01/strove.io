@@ -121,8 +121,13 @@ const Technologies = () => (
     <StyledCTAWrapper>
       <StyledButtonWrapper>
         <StyledH1>Choose a better way to get your ideas out there</StyledH1>
-        <StroveButton isGetStarted isPrimary margin="20px 0" 
-      text="Get started"/>
+        <StroveButton
+          isGetStarted
+          isPrimary
+          margin="20px 0"
+          text="Get started"
+          fontWeight="bold"
+        />
       </StyledButtonWrapper>
     </StyledCTAWrapper>
   </>

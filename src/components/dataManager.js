@@ -438,6 +438,7 @@ export default memo(
           },
         })
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paymentStatus])
 
     return children
