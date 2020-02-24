@@ -54,6 +54,6 @@ export const getCurrentProject = createSelector(
         }
       })
     })
-    return projects.find(project => project.machineId)
+    return projects.find(project => project?.machineId)
   }
 )
