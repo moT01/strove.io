@@ -31,7 +31,7 @@ import {
 
 const sortByActiveProjects = projects =>
   projects?.reduce((acc, element) => {
-    if (element.machineId) {
+    if (element?.machineId) {
       return [element, ...acc]
     }
     return [...acc, element]
