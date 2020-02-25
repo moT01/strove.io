@@ -75,41 +75,41 @@ const createProject = async ({
           }
           break
         }
-        case 'bitbucket': {
-          const access_token = await stroveClient.query({
-            query: GET_BITBUCKET_TOKEN,
-            context: {
-              headers: {
-                Authorization: `Bearer ${user.token || user.siliskyToken}`,
-                'User-Agent': 'node',
-              },
-            },
-            fetchPolicy: 'no-cache',
-          })
+        // case 'bitbucket': {
+        //   const access_token = await stroveClient.query({
+        //     query: GET_BITBUCKET_TOKEN,
+        //     context: {
+        //       headers: {
+        //         Authorization: `Bearer ${user.token || user.siliskyToken}`,
+        //         'User-Agent': 'node',
+        //       },
+        //     },
+        //     fetchPolicy: 'no-cache',
+        //   })
 
-          const token = '12' // access_token?.data?.getbitBucketToken
+        //   const token = '12' // access_token?.data?.getbitBucketToken
 
-          /* Todo: This endpoint does not allow 10+ results. Investigate other ways to do it. */
-          if (token) {
-            const { values } = await fetch(
-              `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                method: 'GET',
-              }
-            ).then(res => res.json())
+        //   /* Todo: This endpoint does not allow 10+ results. Investigate other ways to do it. */
+        //   if (token) {
+        //     const { values } = await fetch(
+        //       `https://api.bitbucket.org/2.0/users/${user.bitbucketName}/repositories`,
+        //       {
+        //         headers: {
+        //           Authorization: `Bearer ${token}`,
+        //           'Content-Type': 'application/x-www-form-urlencoded',
+        //         },
+        //         method: 'GET',
+        //       }
+        //     ).then(res => res.json())
 
-            repoData = values.find(
-              repo => repo.name.toLowerCase() === name.toLowerCase()
-            )
+        //     repoData = values.find(
+        //       repo => repo.name.toLowerCase() === name.toLowerCase()
+        //     )
 
-            if (!repoData) setModalContent('UnableToClone')
-          }
-          break
-        }
+        //     if (!repoData) setModalContent('UnableToClone')
+        //   }
+        //   break
+        // }
         default:
           break
       }

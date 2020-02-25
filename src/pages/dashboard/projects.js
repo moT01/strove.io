@@ -2,14 +2,12 @@ import React, { useState, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
-import { Icon } from 'antd'
 
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 import StroveLogo from 'images/strove.png'
-import client from 'client'
 
 import {
   TilesWrapper,

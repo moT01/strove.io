@@ -99,9 +99,8 @@ export default memo(
             mutation: ACCEPT_TEAM_INVITATION,
             onSuccess: () => dispatch(updateOrganizations()),
             onSuccessDispatch: () => {
-              actions.invitations.acceptInvitation()}
-              
-            ,
+              actions.invitations.acceptInvitation()
+            },
           })
         )
       }
@@ -419,7 +418,6 @@ export default memo(
     )
 
     const paymentStatus = paymentStatusSubscription
-    const paymentData = paymentStatusSubscription.data
 
     useEffect(() => {
       dispatch({
@@ -430,10 +428,6 @@ export default memo(
         },
       })
       if (paymentStatus?.data?.paymentStatus?.status) {
-        const status = paymentData?.paymentStatus?.status
-        const organizationId = paymentData?.paymentStatus?.organizationId
-        const type = paymentData?.paymentStatus?.type
-
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {
