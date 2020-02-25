@@ -2,7 +2,6 @@ import styled, { keyframes, css } from 'styled-components/macro'
 import { Icon } from 'antd'
 import { isMobileOnly } from 'react-device-detect'
 import { Form } from 'formik'
-import ReactModal from 'react-modal'
 import Select from 'react-select'
 
 import { StroveButton } from 'components'

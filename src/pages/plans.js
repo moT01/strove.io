@@ -81,11 +81,6 @@ const PaymentSummarySection = styled(Wrapper)`
   box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
 `
 
-const SubscriptionsSelect = styled(StyledSelect)`
-  margin: 2px;
-  width: 150px;
-`
-
 const PaymentSummaryHeader = styled(Wrapper)`
   flex-direction: column;
   width: 100%;
@@ -216,6 +211,7 @@ const Plans = () => {
       })
       setIsPaying(false)
     }
+    /* eslint-disable-next-line */
   }, [paymentStatus])
 
   const closeWarningModal = () => {
@@ -248,9 +244,11 @@ const Plans = () => {
         })
       )
   }
+
   useEffect(() => {
     updateOrganizations()
     organizationOptions.length === 1 && setOrganization(organizationOptions[0])
+    /* eslint-disable-next-line */
   }, [])
 
   useEffect(() => {
@@ -261,6 +259,7 @@ const Plans = () => {
     setQuantity(organization.value?.subscriptionQuantity)
 
     setSubscriptionPlan(subscriptionPlans[planIndex !== -1 ? planIndex : 0])
+    /* eslint-disable-next-line */
   }, [organization?.value])
 
   return (
