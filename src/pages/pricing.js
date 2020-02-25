@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { isMobileOnly, isTablet } from 'react-device-detect'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import isEmail from 'validator/lib/isEmail'
 
@@ -15,7 +15,6 @@ import {
   StroveButton,
   TrialInfo,
 } from 'components'
-import { selectors } from 'state'
 
 const ButtonFadeIn = keyframes`
   0% {
@@ -409,7 +408,6 @@ const PricingPage = () => {
   const [emailSent, setEmailSent] = useState(false)
   const dispatch = useDispatch()
   const [modalVisible, setModalVisible] = useState(false)
-  const token = useSelector(selectors.getToken)
 
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
 

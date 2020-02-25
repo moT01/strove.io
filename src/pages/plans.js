@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
 
@@ -13,10 +13,8 @@ import {
   MY_ORGANIZATIONS,
   REVERT_CANCEL,
   GET_PAYMENT_INFO,
-  RENEW_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
-import FullScreenLoader from 'components/fullScreenLoader'
 
 export const FadeInAnimation = keyframes`
   0% {
