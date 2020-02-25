@@ -67,8 +67,6 @@ export const getCurrentProject = createSelector(
   getActiveProjects,
   getUserId,
   (projects, userId) => {
-    console.log('TCL: projects', projects)
-    console.log('TCL: userId', userId)
     return projects.find(project => project?.userId === userId)
   }
 )

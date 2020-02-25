@@ -37,11 +37,18 @@ const sortByActiveProjects = projects =>
     return [...acc, element]
   }, []) || []
 
-const Projects = ({ history, projects, addProject, setWarningModal }) => {
+const Projects = ({
+  history,
+  projects,
+  addProject,
+  setWarningModal,
+  isOwner,
+}) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
   const [isModalVisible, setModalVisible] = useState(false)
   const [stopModal, setStopModal] = useState(false)
+  const [showUsersProjects, setShowUsersProjects] = useState(false)
   const [projectToDelete, setProjectToDelete] = useState()
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
@@ -56,6 +63,10 @@ const Projects = ({ history, projects, addProject, setWarningModal }) => {
       ? project.userId === user.id && project
       : project
   )
+
+  const usersProjects = projects.filter(project => project.userId !== user.id)
+
+  const isLeader = isOwner
 
   const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -306,6 +317,112 @@ const Projects = ({ history, projects, addProject, setWarningModal }) => {
             )
           )
         })}
+        {isLeader &&
+          usersProjects?.map((project, index) => {
+            return (
+              <ProjectsTile key={project.id}>
+                <VerticalDivider columnOnMobile>
+                  <InfoWrapper>
+                    <ProjectTitle>{project.name}</ProjectTitle>
+                    <TextWrapper>
+                      <UserPhoto src={project?.user?.photoUrl || StroveLogo} />
+                      <Text>{project.user.name}</Text>
+                    </TextWrapper>
+
+                    {project.machineId ? (
+                      <TextWrapper>
+                        <CircleIcon active />
+                        <Text>Active</Text>
+                      </TextWrapper>
+                    ) : (
+                      <TextWrapper>
+                        <CircleIcon />
+                        <Text>Inactive</Text>
+                      </TextWrapper>
+                    )}
+                    <TextWrapper>
+                      <StyledIcon type="calendar" />
+                      <Text>
+                        {dayjs(+project.createdAt).format('DD/MM/YYYY')}
+                      </Text>
+                    </TextWrapper>
+                    {project.description && (
+                      <TextWrapper>
+                        <StyledIcon type="edit" />
+                        <Text>{project.description}</Text>
+                      </TextWrapper>
+                    )}
+                    <TextWrapper>
+                      <StyledIcon type={project.isVisible ? 'team' : 'user'} />
+                      <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
+                    </TextWrapper>
+                  </InfoWrapper>
+                  <RightSection>
+                    <StroveButton
+                      to="/app/editor/"
+                      isDisabled={isDeleting || isContinuing || isStopping}
+                      isPrimary
+                      borderRadius="2px"
+                      padding="3px 15px"
+                      minWidth="150px"
+                      maxWidth="150px"
+                      margin="0 0 5px"
+                      font-size="0.8rem"
+                      onClick={() =>
+                        isOwner
+                          ? handleStartClick(project)
+                          : addProject({
+                              link: project.repoLink,
+                              name: project.name,
+                              teamId: project.teamId,
+                              forkedFromId: project.id,
+                            })
+                      }
+                    >
+                      <IconDescription>Fork</IconDescription>
+                      <ProjectActionIcon type={'fork'} />
+                    </StroveButton>
+                    {isOwner &&
+                      !project.forkedFromId &&
+                      (currentProjectId && currentProjectId === project.id ? (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="3px 15px"
+                          borderRadius="2px"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          onClick={() => {
+                            handleStopClick(project.id)
+                          }}
+                        >
+                          <IconDescription>Stop</IconDescription>
+                          <ProjectActionIcon type="pause-circle" />
+                        </StroveButton>
+                      ) : (
+                        <StroveButton
+                          isDisabled={isDeleting || isContinuing || isStopping}
+                          padding="3px 15px"
+                          borderRadius="2px"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          onClick={() => {
+                            setModalVisible(true)
+                            setProjectToDelete(project)
+                          }}
+                        >
+                          <IconDescription>Delete</IconDescription>
+                          <ProjectActionIcon type="delete" />
+                        </StroveButton>
+                      ))}
+                  </RightSection>
+                </VerticalDivider>
+              </ProjectsTile>
+            )
+          })}
       </TilesWrapper>
 
       <Modal
@@ -364,7 +481,14 @@ const Projects = ({ history, projects, addProject, setWarningModal }) => {
 }
 
 export default memo(
-  ({ history, projects, organization, setWarningModal, organizationsObj }) => (
+  ({
+    history,
+    projects,
+    organization,
+    setWarningModal,
+    organizationsObj,
+    isOwner,
+  }) => (
     <AddProjectProvider organization={organization}>
       {({ addProject }) => (
         <Projects
@@ -374,6 +498,7 @@ export default memo(
           organization={organization}
           setWarningModal={setWarningModal}
           organizationsObj={organizationsObj}
+          isOwner={isOwner}
         />
       )}
     </AddProjectProvider>
