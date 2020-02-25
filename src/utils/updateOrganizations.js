@@ -2,7 +2,7 @@ import { MY_ORGANIZATIONS } from 'queries'
 
 import { query } from './graphql'
 
-export default () => async dispatch =>
+export default () => dispatch =>
   localStorage.getItem('token')
     ? dispatch(
         query({
