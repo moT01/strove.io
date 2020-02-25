@@ -8,8 +8,7 @@ import {
   CardCVCElement,
 } from 'react-stripe-elements'
 import { useSelector, useDispatch } from 'react-redux'
-import { Formik, Form, Field } from 'formik'
-import isEmail from 'validator/lib/isEmail'
+import { Form } from 'formik'
 
 import { mutation, query } from 'utils'
 import {
@@ -104,26 +103,6 @@ const cardStyle = {
   },
 }
 
-// const EmailField = styled(Field)`
-//   margin: 10px 0;
-//   padding: 8px;
-//   width: 100%;
-//   border-radius: 2px;
-//   border: 1px solid ${({ theme }) => theme.colors.c9};
-// `
-
-// const validate = values => {
-//   let errors = {}
-
-//   if (!values.email) {
-//     errors.email = 'Required'
-//   } else if (!isEmail(values.email)) {
-//     errors.email = 'Invalid email address'
-//   }
-
-//   return errors
-// }
-
 const emptyWarningModalContent = {
   visible: false,
   content: null,
@@ -148,7 +127,6 @@ const CheckoutForm = props => {
         content: (
           <>
             <Text>{error.message}</Text>
-            {/* <Text>Please check your payment information and try again.</Text> */}
           </>
         ),
         onSubmit: () => {
