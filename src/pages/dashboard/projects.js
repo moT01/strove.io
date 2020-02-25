@@ -317,112 +317,139 @@ const Projects = ({
             )
           )
         })}
-        {isLeader &&
-          usersProjects?.map((project, index) => {
-            return (
-              <ProjectsTile key={project.id}>
-                <VerticalDivider columnOnMobile>
-                  <InfoWrapper>
-                    <ProjectTitle>{project.name}</ProjectTitle>
-                    <TextWrapper>
-                      <UserPhoto src={project?.user?.photoUrl || StroveLogo} />
-                      <Text>{project.user.name}</Text>
-                    </TextWrapper>
 
-                    {project.machineId ? (
-                      <TextWrapper>
-                        <CircleIcon active />
-                        <Text>Active</Text>
-                      </TextWrapper>
-                    ) : (
-                      <TextWrapper>
-                        <CircleIcon />
-                        <Text>Inactive</Text>
-                      </TextWrapper>
-                    )}
-                    <TextWrapper>
-                      <StyledIcon type="calendar" />
-                      <Text>
-                        {dayjs(+project.createdAt).format('DD/MM/YYYY')}
-                      </Text>
-                    </TextWrapper>
-                    {project.description && (
-                      <TextWrapper>
-                        <StyledIcon type="edit" />
-                        <Text>{project.description}</Text>
-                      </TextWrapper>
-                    )}
-                    <TextWrapper>
-                      <StyledIcon type={project.isVisible ? 'team' : 'user'} />
-                      <Text>{project.isVisible ? 'Public' : 'Private'}</Text>
-                    </TextWrapper>
-                  </InfoWrapper>
-                  <RightSection>
-                    <StroveButton
-                      to="/app/editor/"
-                      isDisabled={isDeleting || isContinuing || isStopping}
-                      isPrimary
-                      borderRadius="2px"
-                      padding="3px 15px"
-                      minWidth="150px"
-                      maxWidth="150px"
-                      margin="0 0 5px"
-                      font-size="0.8rem"
-                      onClick={() =>
-                        isOwner
-                          ? handleStartClick(project)
-                          : addProject({
-                              link: project.repoLink,
-                              name: project.name,
-                              teamId: project.teamId,
-                              forkedFromId: project.id,
-                            })
-                      }
-                    >
-                      <IconDescription>Fork</IconDescription>
-                      <ProjectActionIcon type={'fork'} />
-                    </StroveButton>
-                    {isOwner &&
-                      !project.forkedFromId &&
-                      (currentProjectId && currentProjectId === project.id ? (
+        {isLeader && usersProjects.length !== 0 && (
+          <>
+            <StroveButton
+              text={"Users' projects"}
+              padding="2px 15px"
+              borderRadius="2px"
+              margin="5px 0"
+              font-size="8px"
+              width="100%"
+              onClick={() => {
+                setShowUsersProjects(!showUsersProjects)
+              }}
+            />
+            {showUsersProjects &&
+              usersProjects?.map((project, index) => {
+                return (
+                  <ProjectsTile key={project.id}>
+                    <VerticalDivider columnOnMobile>
+                      <InfoWrapper>
+                        <ProjectTitle>{project.name}</ProjectTitle>
+                        <TextWrapper>
+                          <UserPhoto
+                            src={project?.user?.photoUrl || StroveLogo}
+                          />
+                          <Text>{project.user.name}</Text>
+                        </TextWrapper>
+
+                        {project.machineId ? (
+                          <TextWrapper>
+                            <CircleIcon active />
+                            <Text>Active</Text>
+                          </TextWrapper>
+                        ) : (
+                          <TextWrapper>
+                            <CircleIcon />
+                            <Text>Inactive</Text>
+                          </TextWrapper>
+                        )}
+                        <TextWrapper>
+                          <StyledIcon type="calendar" />
+                          <Text>
+                            {dayjs(+project.createdAt).format('DD/MM/YYYY')}
+                          </Text>
+                        </TextWrapper>
+                        {project.description && (
+                          <TextWrapper>
+                            <StyledIcon type="edit" />
+                            <Text>{project.description}</Text>
+                          </TextWrapper>
+                        )}
+                        <TextWrapper>
+                          <StyledIcon
+                            type={project.isVisible ? 'team' : 'user'}
+                          />
+                          <Text>
+                            {project.isVisible ? 'Public' : 'Private'}
+                          </Text>
+                        </TextWrapper>
+                      </InfoWrapper>
+                      <RightSection>
                         <StroveButton
+                          to="/app/editor/"
                           isDisabled={isDeleting || isContinuing || isStopping}
-                          padding="3px 15px"
+                          isPrimary
                           borderRadius="2px"
+                          padding="3px 15px"
                           minWidth="150px"
                           maxWidth="150px"
-                          margin="0px 0px 5px 0px"
+                          margin="0 0 5px"
                           font-size="0.8rem"
-                          onClick={() => {
-                            handleStopClick(project.id)
-                          }}
+                          onClick={() =>
+                            isOwner
+                              ? handleStartClick(project)
+                              : addProject({
+                                  link: project.repoLink,
+                                  name: project.name,
+                                  teamId: project.teamId,
+                                  forkedFromId: project.id,
+                                })
+                          }
                         >
-                          <IconDescription>Stop</IconDescription>
-                          <ProjectActionIcon type="pause-circle" />
+                          <IconDescription>Fork</IconDescription>
+                          <ProjectActionIcon type={'fork'} />
                         </StroveButton>
-                      ) : (
-                        <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
-                          padding="3px 15px"
-                          borderRadius="2px"
-                          margin="0px 0px 5px 0px"
-                          font-size="0.8rem"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          onClick={() => {
-                            setModalVisible(true)
-                            setProjectToDelete(project)
-                          }}
-                        >
-                          <IconDescription>Delete</IconDescription>
-                          <ProjectActionIcon type="delete" />
-                        </StroveButton>
-                      ))}
-                  </RightSection>
-                </VerticalDivider>
-              </ProjectsTile>
-            )
-          })}
+                        {isOwner &&
+                          !project.forkedFromId &&
+                          (currentProjectId &&
+                          currentProjectId === project.id ? (
+                            <StroveButton
+                              isDisabled={
+                                isDeleting || isContinuing || isStopping
+                              }
+                              padding="3px 15px"
+                              borderRadius="2px"
+                              minWidth="150px"
+                              maxWidth="150px"
+                              margin="0px 0px 5px 0px"
+                              font-size="0.8rem"
+                              onClick={() => {
+                                handleStopClick(project.id)
+                              }}
+                            >
+                              <IconDescription>Stop</IconDescription>
+                              <ProjectActionIcon type="pause-circle" />
+                            </StroveButton>
+                          ) : (
+                            <StroveButton
+                              isDisabled={
+                                isDeleting || isContinuing || isStopping
+                              }
+                              padding="3px 15px"
+                              borderRadius="2px"
+                              margin="0px 0px 5px 0px"
+                              font-size="0.8rem"
+                              minWidth="150px"
+                              maxWidth="150px"
+                              onClick={() => {
+                                setModalVisible(true)
+                                setProjectToDelete(project)
+                              }}
+                            >
+                              <IconDescription>Delete</IconDescription>
+                              <ProjectActionIcon type="delete" />
+                            </StroveButton>
+                          ))}
+                      </RightSection>
+                    </VerticalDivider>
+                  </ProjectsTile>
+                )
+              })}
+          </>
+        )}
       </TilesWrapper>
 
       <Modal
