@@ -74,10 +74,6 @@ const SingleButtonWrapper = styled(VerticalDivider)`
   justify-content: center;
 `
 
-const EmailForm = styled(Form)`
-  width: 100%;
-`
-
 const cardStyle = {
   base: {
     height: '200px',
@@ -284,22 +280,6 @@ const CheckoutForm = props => {
                 </StripeCvcContainer>
               </StripeExpiryWrapper>
             </VerticalDivider>
-
-            {/* <Text>Work email (optional)</Text> */}
-            {/* <Formik
-              initialValues={{
-                email: user.email,
-              }}
-              validate={validate}
-            >
-              <>
-                <EmailForm>
-                  <EmailField
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                  ></EmailField>
-                </EmailForm> */}
             {props.editMode ? (
               <CardInfoWrapper>
                 <VerticalDivider>
@@ -368,21 +348,9 @@ const CheckoutForm = props => {
                 text="Purchase"
               />
             )}
-            {/* </>
-            </Formik> */}
           </CardInfoWrapper>
         </div>
       )}
-      {/* {error && (
-        <div>
-          <p>Could not process card data!</p>
-        </div>
-      )}
-      {success && (
-        <div>
-          <p>Subscribed successfully</p>
-        </div>
-      )} */}
     </div>
   )
 }
