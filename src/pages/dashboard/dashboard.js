@@ -163,7 +163,7 @@ const Dashboard = ({ history }) => {
         },
       }
     }, {})
-  const [expandedTiles, setExpandedTiles] = useState(() =>
+  const [expandedTiles, setExpandedTiles] = useState(
     myOrganizations.reduce((organizations, organization) => {
       return {
         ...organizations,
