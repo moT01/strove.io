@@ -401,23 +401,18 @@ export default memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const paymentStatusSubscription = useSubscription(
-      PAYMENT_STATUS_SUBSCRIPTION,
-      {
-        variables: { userId: user?.id },
-        client,
-        fetchPolicy: 'no-cache',
-        context: {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'User-Agent': 'node',
-          },
+    const paymentStatus = useSubscription(PAYMENT_STATUS_SUBSCRIPTION, {
+      variables: { userId: user?.id },
+      client,
+      fetchPolicy: 'no-cache',
+      context: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
         },
-        shouldResubscribe: true,
-      }
-    )
-
-    const paymentStatus = paymentStatusSubscription
+      },
+      shouldResubscribe: true,
+    })
 
     useEffect(() => {
       dispatch({
