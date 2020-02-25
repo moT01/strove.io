@@ -8,7 +8,6 @@ import {
   CardCVCElement,
 } from 'react-stripe-elements'
 import { useSelector, useDispatch } from 'react-redux'
-import { Form } from 'formik'
 
 import { mutation, query } from 'utils'
 import {
@@ -18,7 +17,7 @@ import {
   RETRY_SUBSCRIPTION_PAYMENT,
 } from 'queries'
 import StroveButton from 'components/stroveButton.js'
-import { selectors, C, actions } from 'state'
+import { selectors } from 'state'
 
 const CardInfoWrapper = styled.div`
   display: flex;
@@ -108,7 +107,6 @@ const emptyWarningModalContent = {
 
 const CheckoutForm = props => {
   const [cardNumber, setCardNumber] = useState()
-  const [userEmail, setUserEmail] = useState()
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -117,22 +115,20 @@ const CheckoutForm = props => {
   const organizationId = props.organization?.id
 
   useEffect(() => {
+    const { setWarningModal } = this.props
     !!error &&
-      props.setWarningModal({
+      setWarningModal({
         visible: true,
-        content: (
-          <>
-            <Text>{error.message}</Text>
-          </>
-        ),
+        content: <Text>{error.message}</Text>,
         onSubmit: () => {
           setIsProcessing(false)
           setError(false)
-          props.setWarningModal(emptyWarningModalContent)
+          setWarningModal(emptyWarningModalContent)
         },
         buttonLabel: 'Ok',
         noClose: true,
       })
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [error])
 
   useEffect(() => {
@@ -150,6 +146,7 @@ const CheckoutForm = props => {
         buttonLabel: 'Ok',
         noClose: true,
       })
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [success])
 
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
