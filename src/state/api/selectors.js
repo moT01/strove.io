@@ -38,12 +38,17 @@ export const getQueuePosition = getApiData({
   fields: ['user', 'queuePosition'],
 })
 
+export const getUserId = getApiData({
+  fields: ['user', 'id'],
+  defaultValue: null,
+})
+
 export const getPaymentStatus = getApiData({
   fields: 'paymentStatus',
   defaultValue: {},
 })
 
-export const getCurrentProject = createSelector(
+export const getActiveProjects = createSelector(
   getMyOrganizations,
   organizations => {
     let projects = []
@@ -54,6 +59,16 @@ export const getCurrentProject = createSelector(
         }
       })
     })
-    return projects.find(project => project?.machineId)
+    return projects.filter(project => project?.machineId)
+  }
+)
+
+export const getCurrentProject = createSelector(
+  getActiveProjects,
+  getUserId,
+  (projects, userId) => {
+    console.log('TCL: projects', projects)
+    console.log('TCL: userId', userId)
+    return projects.find(project => project?.userId === userId)
   }
 )
