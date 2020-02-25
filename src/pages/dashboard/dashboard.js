@@ -144,7 +144,6 @@ const Dashboard = ({ history }) => {
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const currentProject = useSelector(selectors.api.getCurrentProject)
-  console.log('TCL: Dashboard -> currentProject', currentProject)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
   const organizationsObj =
@@ -453,6 +452,7 @@ const Dashboard = ({ history }) => {
                                     history={history}
                                     setWarningModal={setWarningModal}
                                     organizationsObj={organizationsObj}
+                                    isOwner={isOwner}
                                   />
                                   {isOwner && (
                                     <StroveButton
