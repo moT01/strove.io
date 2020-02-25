@@ -4,7 +4,6 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { useAnalytics } from 'hooks'
