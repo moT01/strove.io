@@ -317,7 +317,22 @@ const Projects = ({
             )
           )
         })}
+        <StroveButton
+          text={
+            showUsersProjects ? "Hide users' projects" : "Show users' projects"
+          }
+          padding="3px 15px"
+          borderRadius="2px"
+          margin="0px 0px 5px 0px"
+          font-size="0.8rem"
+          minWidth="150px"
+          maxWidth="150px"
+          onClick={() => {
+            setShowUsersProjects(!showUsersProjects)
+          }}
+        />
         {isLeader &&
+          showUsersProjects &&
           usersProjects?.map((project, index) => {
             return (
               <ProjectsTile key={project.id}>
