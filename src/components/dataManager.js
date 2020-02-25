@@ -97,10 +97,10 @@ export default memo(
               teamId: invitedByTeamId,
             },
             mutation: ACCEPT_TEAM_INVITATION,
-            onSuccessDispatch: () => {
-              actions.invitations.acceptInvitation()
-              updateOrganizations()
-            },
+            onSuccessDispatch: [() => 
+              actions.invitations.acceptInvitation(),
+              updateOrganizations()]
+            ,
           })
         )
       }
