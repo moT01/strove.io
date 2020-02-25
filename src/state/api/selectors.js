@@ -15,7 +15,7 @@ export const getMessage = dataKey => getOr('', ['api', dataKey, 'message'])
 export const getCode = dataKey => getOr(null, ['api', dataKey, 'code'])
 
 export const getUserField = dataKey => state =>
-  state ?.api ?.user ?.data ?.[dataKey]
+  state?.api?.user?.data?.[dataKey]
 
 export const getUser = getApiData({ fields: 'user', defaultValue: null })
 
@@ -38,14 +38,17 @@ export const getQueuePosition = getApiData({
   fields: ['user', 'queuePosition'],
 })
 
-export const getuserId = getApiData({ fields: ['user', 'id'], defaultValue: null })
+export const getUserId = getApiData({
+  fields: ['user', 'id'],
+  defaultValue: null,
+})
 
 export const getPaymentStatus = getApiData({
   fields: 'paymentStatus',
   defaultValue: {},
 })
 
-export const getCurrentProject = createSelector(
+export const getActiveProjects = createSelector(
   getMyOrganizations,
   organizations => {
     let projects = []
@@ -56,6 +59,16 @@ export const getCurrentProject = createSelector(
         }
       })
     })
-    return projects.find(project => project ?.machineId)
+    return projects.filter(project => project?.machineId)
+  }
+)
+
+export const getCurrentProject = createSelector(
+  getActiveProjects,
+  getUserId,
+  (projects, userId) => {
+    console.log('TCL: projects', projects)
+    console.log('TCL: userId', userId)
+    return projects.find(project => project?.userId === userId)
   }
 )
