@@ -195,6 +195,8 @@ const Dashboard = ({ history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => console.log('Expanded tiles', expandedTiles), [expandedTiles])
+
   const displayHandler = ({ organizationId, teamId, section }) => {
     let newTiles = { ...expandedTiles }
     if (section) {
@@ -234,11 +236,6 @@ const Dashboard = ({ history }) => {
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
-                {/* {console.log(
-                  'TCL: Dashboard -> organization.id',
-                  organization.id,
-                  expandedTiles[organization.id]
-                )} */}
                 {/* {organization.owner.id === user.id && (
                   <>
                     <TimeBarContainer>
@@ -1193,4 +1190,4 @@ const Dashboard = ({ history }) => {
   )
 }
 
-export default memo(withRouter(Dashboard))
+export default withRouter(Dashboard)
