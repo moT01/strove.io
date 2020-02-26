@@ -13,6 +13,7 @@ import {
   MenuWrapper,
 } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
+import { TeamTileSection } from './dashboard/styled'
 
 const LoginText = styled.span`
   font-weight: 500;
@@ -31,9 +32,14 @@ const StyledButton = styled(StroveButton)`
 `
 
 const Run = ({ addProject, history }) => {
-  const myTeams = useSelector(selectors.api.getMyTeams)
+  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const token = useSelector(selectors.getToken)
-
+  const lastOrganization = myOrganizations[myOrganizations.length - 1]
+  console.log('TCL: Run -> lastOrganization', lastOrganization)
+  const lastTeam = lastOrganization.teams[lastOrganization.teams.length - 1]
+  console.log('TCL: Run -> lastTeam', lastTeam)
+  const teamId = lastTeam.id
+  console.log('TCL: Run -> teamId', teamId)
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
   /* Specify the route a user should be redirected to */
@@ -45,7 +51,8 @@ const Run = ({ addProject, history }) => {
   }
 
   const onClick = () => {
-    addProject({ link: repoUrl, teamId: myTeams[0].id })
+    console.log('Yeeeeeeeeeeehaw, link and team id', repoUrl, teamId)
+    addProject({ link: repoUrl, teamId })
   }
 
   return (
