@@ -164,6 +164,8 @@ const Dashboard = ({ history }) => {
     }, {})
   const [expandedTiles, setExpandedTiles] = useState(
     myOrganizations.reduce((organizations, organization) => {
+      console.log('TCL: Dashboard -> organization', organization)
+      console.log('TCL: Dashboard -> organizations', organizations)
       return {
         ...organizations,
         [organization.id]: {
@@ -232,6 +234,11 @@ const Dashboard = ({ history }) => {
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
+                {console.log(
+                  'TCL: Dashboard -> organization.id',
+                  organization.id,
+                  expandedTiles[organization.id]
+                )}
                 {/* {organization.owner.id === user.id && (
                   <>
                     <TimeBarContainer>
