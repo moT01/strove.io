@@ -1,11 +1,10 @@
 import { MY_ORGANIZATIONS } from 'queries'
-import { useDispatch } from 'react-redux'
 
 import { query } from './graphql'
 
-export default ({ onSuccess = () => null }) =>
+export default ({ onSuccess = () => null }) => dispatch =>
   localStorage.getItem('token')
-    ? useDispatch(
+    ? dispatch(
         query({
           name: 'myOrganizations',
           storeKey: 'myOrganizations',
