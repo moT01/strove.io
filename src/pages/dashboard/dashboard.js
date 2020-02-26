@@ -190,6 +190,7 @@ const Dashboard = ({ history }) => {
   console.log('TCL: Dashboard -> expandedTiles', expandedTiles)
 
   console.log('TCL: Dashboard -> organizationsObj', organizationsObj)
+
   useEffect(() => {
     dispatch(
       updateOrganizations({
