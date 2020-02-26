@@ -53,11 +53,12 @@ export const getActiveProjects = createSelector(
   organizations => {
     let projects = []
     organizations.forEach(organization => {
-      organization.teams.forEach(team => {
-        if (Array.isArray(team.projects)) {
-          projects = [...projects, ...team.projects]
-        }
-      })
+      organization.teams &&
+        organization.teams.forEach(team => {
+          if (Array.isArray(team.projects)) {
+            projects = [...projects, ...team.projects]
+          }
+        })
     })
     return projects.filter(project => project?.machineId)
   }
