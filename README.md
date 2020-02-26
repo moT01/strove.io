@@ -3,8 +3,6 @@
 ## [Strove.io](https://www.strove.io/) - move programming to the cloud [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Remote%20programming%20to%20servers%20ready%20in%20secons%20.%20Use%20any%20Linux%20available%20programming%20language%20from%20any%20computer.%20%20&url=https://strove.io&hashtags=serverless,cloud,programming,vscode,developers)
 
 </div>
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8fba023a-b05c-4825-a4cd-adecb3a87468/deploy-status)](https://app.netlify.com/sites/strove/deploys)
 <img alt="GitHub stars" src="https://img.shields.io/github/stars/stroveio/strove.io-client?style=social">
 
 Strove brings powerful, ready in seconds, pre-configured cloud
