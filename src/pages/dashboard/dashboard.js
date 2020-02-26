@@ -740,7 +740,7 @@ const Dashboard = ({ history }) => {
             closeWarningModal()
             dispatch(updateOrganizations())
           },
-          onSuccessDispatch: updateOrganizations,
+          // onSuccessDispatch: updateOrganizations,
         })
       )
     }
@@ -782,7 +782,7 @@ const Dashboard = ({ history }) => {
             setAddMemberModal(false)
             closeWarningModal()
           },
-          onSuccessDispatch: updateOrganizations,
+          // onSuccessDispatch: updateOrganizations,
         })
       ) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paymentStatus])
