@@ -2,7 +2,7 @@ import { MY_ORGANIZATIONS } from 'queries'
 
 import { query } from './graphql'
 
-export default (onSuccess = () => null) => dispatch =>
+export default (dispatch, { onSuccess = () => null }) =>
   localStorage.getItem('token')
     ? dispatch(
         query({
