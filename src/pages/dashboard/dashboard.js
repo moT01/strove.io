@@ -198,34 +198,36 @@ const Dashboard = ({ history }) => {
         query: MY_ORGANIZATIONS,
         fetchPolicy: 'network-only',
         onSuccess: data =>
-          data.reduce((organizations, organization) => {
-            console.log(
-              'TCL: Dashboard -> organization after organization update',
-              organization
-            )
-            console.log(
-              'TCL: Dashboard -> organizations after organization update',
-              organizations
-            )
-            return {
-              ...organizations,
-              [organization.id]: {
-                visible: true,
-                teams: organization.teams?.reduce((teams, team) => {
-                  return {
-                    ...teams,
-                    [team.id]: {
-                      visible: true,
-                      sections: {
-                        members: true,
-                        projects: true,
+          setExpandedTiles(
+            data.reduce((organizations, organization) => {
+              console.log(
+                'TCL: Dashboard -> organization after organization update',
+                organization
+              )
+              console.log(
+                'TCL: Dashboard -> organizations after organization update',
+                organizations
+              )
+              return {
+                ...organizations,
+                [organization.id]: {
+                  visible: true,
+                  teams: organization.teams?.reduce((teams, team) => {
+                    return {
+                      ...teams,
+                      [team.id]: {
+                        visible: true,
+                        sections: {
+                          members: true,
+                          projects: true,
+                        },
                       },
-                    },
-                  }
-                }, {}),
-              },
-            }
-          }, {}),
+                    }
+                  }, {}),
+                },
+              }
+            }, {})
+          ),
       })
     )
     // convertToHours()
