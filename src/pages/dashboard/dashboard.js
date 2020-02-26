@@ -193,39 +193,38 @@ const Dashboard = ({ history }) => {
 
   useEffect(() => {
     dispatch(
-      updateOrganizations({
-        onSuccess: data =>
-          setExpandedTiles(
-            data.reduce((organizations, organization) => {
-              console.log(
-                'TCL: Dashboard -> organization after organization update',
-                organization
-              )
-              console.log(
-                'TCL: Dashboard -> organizations after organization update',
-                organizations
-              )
-              return {
-                ...organizations,
-                [organization.id]: {
-                  visible: true,
-                  teams: organization.teams?.reduce((teams, team) => {
-                    return {
-                      ...teams,
-                      [team.id]: {
-                        visible: true,
-                        sections: {
-                          members: true,
-                          projects: true,
-                        },
+      updateOrganizations(data =>
+        setExpandedTiles(
+          data.reduce((organizations, organization) => {
+            console.log(
+              'TCL: Dashboard -> organization after organization update',
+              organization
+            )
+            console.log(
+              'TCL: Dashboard -> organizations after organization update',
+              organizations
+            )
+            return {
+              ...organizations,
+              [organization.id]: {
+                visible: true,
+                teams: organization.teams?.reduce((teams, team) => {
+                  return {
+                    ...teams,
+                    [team.id]: {
+                      visible: true,
+                      sections: {
+                        members: true,
+                        projects: true,
                       },
-                    }
-                  }, {}),
-                },
-              }
-            }, {})
-          ),
-      })
+                    },
+                  }
+                }, {}),
+              },
+            }
+          }, {})
+        )
+      )
     )
     // dispatch(
     //   query({
