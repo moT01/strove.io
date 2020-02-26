@@ -10,7 +10,7 @@ export default ({ onSuccess }) => dispatch =>
           storeKey: 'myOrganizations',
           query: MY_ORGANIZATIONS,
           fetchPolicy: 'network-only',
-          onSuccess: onSuccess(),
+          onSuccess: data => onSuccess(data),
         })
       )
     : undefined
