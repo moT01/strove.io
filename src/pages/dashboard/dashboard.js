@@ -193,7 +193,7 @@ const Dashboard = ({ history }) => {
     dispatch(updateOrganizations())
     // convertToHours()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [myOrganizations])
 
   useEffect(() => console.log('Expanded tiles', expandedTiles), [expandedTiles])
 
