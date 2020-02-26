@@ -849,8 +849,9 @@ const Dashboard = ({ history }) => {
               onSuccess: () => {
                 setAddMemberModal(false)
                 closeWarningModal()
+                dispatch(updateOrganizations())
               },
-              onSuccessDispatch: updateOrganizations,
+              // onSuccessDispatch: updateOrganizations,
             })
           )
         }
