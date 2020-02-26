@@ -247,6 +247,9 @@ export default memo(
                   storeKey: 'user',
                   name: 'githubAuth',
                   context: null,
+                  onSuccess: () =>
+                    !window.location.href.includes('embed') &&
+                    history.push('/app/dashboard'),
                 })
               )
             }
@@ -261,6 +264,9 @@ export default memo(
                   storeKey: 'user',
                   name: 'gitlabAuth',
                   context: null,
+                  onSuccess: () =>
+                    !window.location.href.toLowerCase().includes('embed') &&
+                    history.push('/app/dashboard'),
                 })
               )
             }
@@ -275,6 +281,9 @@ export default memo(
                   storeKey: 'user',
                   name: 'bitbucketAuth',
                   context: null,
+                  onSuccess: () =>
+                    !window.location.href.toLowerCase().includes('embed') &&
+                    history.push('/app/dashboard'),
                 })
               )
             }
