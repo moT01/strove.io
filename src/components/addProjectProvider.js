@@ -46,6 +46,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const timeExceeded = user?.timeSpent >= 72000000
 
   const addProject = async ({ link, name, teamId, forkedFromId }) => {
+    console.log('TCL: addProject -> teamId', teamId)
+    console.log('TCL: addProject -> link', link)
     let repoLink
     let repoProvider
 
@@ -75,8 +77,10 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     if (existingProject && !currentProject) {
       if (existingProject.machineId) {
+        console.log('TCL: addProject -> existingProject', existingProject)
         return redirectToEditor(dispatch, history)
       } else {
+        console.log('TCL: addProject -> NOT existingProject')
         return dispatch(
           mutation({
             name: 'continueProject',

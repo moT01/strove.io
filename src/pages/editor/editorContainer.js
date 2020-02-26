@@ -26,7 +26,7 @@ const EditorWrapper = ({ history }) => {
   useEffect(() => {
     // This condition means project has been stopped
     // if (projectId && !machineId) {
-    if (!!projectId) {
+    if (!!projectId && !machineId) {
       console.log(
         'TCL: EditorWrapper -> projectId useEffect',
         projectId,
