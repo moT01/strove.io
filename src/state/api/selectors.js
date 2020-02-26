@@ -55,7 +55,7 @@ export const getActiveProjects = createSelector(
     organizations.forEach(organization => {
       organization.teams &&
         organization.teams.forEach(team => {
-          if (Array.isArray(team.projects)) {
+          if (Array.isArray(team?.projects)) {
             projects = [...projects, ...team.projects]
           }
         })
