@@ -234,11 +234,11 @@ const Dashboard = ({ history }) => {
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
-                {console.log(
+                {/* {console.log(
                   'TCL: Dashboard -> organization.id',
                   organization.id,
                   expandedTiles[organization.id]
-                )}
+                )} */}
                 {/* {organization.owner.id === user.id && (
                   <>
                     <TimeBarContainer>
