@@ -41,7 +41,6 @@ const GetStarted = ({ history }) => {
         width="100%"
         fontSize="1.3rem"
         fontWeight="bold"
-        isPrimary
         text="Get started"
         margin="0"
         letterSpacing="0.8px"

@@ -29,6 +29,7 @@ const OldUserModal = () => {
     if (user?.token && user?.organizations && isOldUser) {
       setIsOldUser(false)
     }
+    /* eslint-disable-next-line */
   }, [user])
 
   return (

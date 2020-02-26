@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import styled, { keyframes, css } from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
 
@@ -13,10 +13,8 @@ import {
   MY_ORGANIZATIONS,
   REVERT_CANCEL,
   GET_PAYMENT_INFO,
-  RENEW_SUBSCRIPTION,
 } from 'queries'
 import { mutation, query } from 'utils'
-import FullScreenLoader from 'components/fullScreenLoader'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -81,11 +79,6 @@ const PaymentSummarySection = styled(Wrapper)`
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.colors.c15};
   box-shadow: 0 1px 5px ${({ theme }) => theme.colors.c22}; */
-`
-
-const SubscriptionsSelect = styled(StyledSelect)`
-  margin: 2px;
-  width: 150px;
 `
 
 const PaymentSummaryHeader = styled(Wrapper)`
@@ -218,6 +211,7 @@ const Plans = () => {
       })
       setIsPaying(false)
     }
+    /* eslint-disable-next-line */
   }, [paymentStatus])
 
   const closeWarningModal = () => {
@@ -250,9 +244,11 @@ const Plans = () => {
         })
       )
   }
+
   useEffect(() => {
     updateOrganizations()
     organizationOptions.length === 1 && setOrganization(organizationOptions[0])
+    /* eslint-disable-next-line */
   }, [])
 
   useEffect(() => {
@@ -263,6 +259,7 @@ const Plans = () => {
     setQuantity(organization.value?.subscriptionQuantity)
 
     setSubscriptionPlan(subscriptionPlans[planIndex !== -1 ? planIndex : 0])
+    /* eslint-disable-next-line */
   }, [organization?.value])
 
   return (

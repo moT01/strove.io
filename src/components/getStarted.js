@@ -78,7 +78,7 @@ const validateRepoLink = values => {
   return errors
 }
 
-const GetStarted = ({ addProject, teamId, organization }) => {
+const GetStarted = ({ addProject, teamId }) => {
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
 
   return (

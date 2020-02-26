@@ -99,9 +99,8 @@ export default memo(
             mutation: ACCEPT_TEAM_INVITATION,
             onSuccess: () => dispatch(updateOrganizations()),
             onSuccessDispatch: () => {
-              actions.invitations.acceptInvitation()}
-              
-            ,
+              actions.invitations.acceptInvitation()
+            },
           })
         )
       }
@@ -248,6 +247,9 @@ export default memo(
                   storeKey: 'user',
                   name: 'githubAuth',
                   context: null,
+                  onSuccess: () =>
+                    !window.location.href.includes('embed') &&
+                    history.push('/app/dashboard'),
                 })
               )
             }
@@ -262,6 +264,9 @@ export default memo(
                   storeKey: 'user',
                   name: 'gitlabAuth',
                   context: null,
+                  onSuccess: () =>
+                    !window.location.href.toLowerCase().includes('embed') &&
+                    history.push('/app/dashboard'),
                 })
               )
             }
@@ -276,6 +281,9 @@ export default memo(
                   storeKey: 'user',
                   name: 'bitbucketAuth',
                   context: null,
+                  onSuccess: () =>
+                    !window.location.href.toLowerCase().includes('embed') &&
+                    history.push('/app/dashboard'),
                 })
               )
             }
@@ -402,24 +410,18 @@ export default memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const paymentStatusSubscription = useSubscription(
-      PAYMENT_STATUS_SUBSCRIPTION,
-      {
-        variables: { userId: user?.id },
-        client,
-        fetchPolicy: 'no-cache',
-        context: {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'User-Agent': 'node',
-          },
+    const paymentStatus = useSubscription(PAYMENT_STATUS_SUBSCRIPTION, {
+      variables: { userId: user?.id },
+      client,
+      fetchPolicy: 'no-cache',
+      context: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
         },
-        shouldResubscribe: true,
-      }
-    )
-
-    const paymentStatus = paymentStatusSubscription
-    const paymentData = paymentStatusSubscription.data
+      },
+      shouldResubscribe: true,
+    })
 
     useEffect(() => {
       dispatch({
@@ -430,10 +432,6 @@ export default memo(
         },
       })
       if (paymentStatus?.data?.paymentStatus?.status) {
-        const status = paymentData?.paymentStatus?.status
-        const organizationId = paymentData?.paymentStatus?.organizationId
-        const type = paymentData?.paymentStatus?.type
-
         dispatch({
           type: C.api.FETCH_SUCCESS,
           payload: {

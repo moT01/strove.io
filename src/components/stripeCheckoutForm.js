@@ -8,8 +8,6 @@ import {
   CardCVCElement,
 } from 'react-stripe-elements'
 import { useSelector, useDispatch } from 'react-redux'
-import { Formik, Form, Field } from 'formik'
-import isEmail from 'validator/lib/isEmail'
 
 import { mutation, query } from 'utils'
 import {
@@ -19,7 +17,7 @@ import {
   RETRY_SUBSCRIPTION_PAYMENT,
 } from 'queries'
 import StroveButton from 'components/stroveButton.js'
-import { selectors, C, actions } from 'state'
+import { selectors } from 'state'
 
 const CardInfoWrapper = styled.div`
   display: flex;
@@ -75,10 +73,6 @@ const SingleButtonWrapper = styled(VerticalDivider)`
   justify-content: center;
 `
 
-const EmailForm = styled(Form)`
-  width: 100%;
-`
-
 const cardStyle = {
   base: {
     height: '200px',
@@ -104,26 +98,6 @@ const cardStyle = {
   },
 }
 
-// const EmailField = styled(Field)`
-//   margin: 10px 0;
-//   padding: 8px;
-//   width: 100%;
-//   border-radius: 2px;
-//   border: 1px solid ${({ theme }) => theme.colors.c9};
-// `
-
-// const validate = values => {
-//   let errors = {}
-
-//   if (!values.email) {
-//     errors.email = 'Required'
-//   } else if (!isEmail(values.email)) {
-//     errors.email = 'Invalid email address'
-//   }
-
-//   return errors
-// }
-
 const emptyWarningModalContent = {
   visible: false,
   content: null,
@@ -133,7 +107,6 @@ const emptyWarningModalContent = {
 
 const CheckoutForm = props => {
   const [cardNumber, setCardNumber] = useState()
-  const [userEmail, setUserEmail] = useState()
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -142,23 +115,20 @@ const CheckoutForm = props => {
   const organizationId = props.organization?.id
 
   useEffect(() => {
+    const { setWarningModal } = this.props
     !!error &&
-      props.setWarningModal({
+      setWarningModal({
         visible: true,
-        content: (
-          <>
-            <Text>{error.message}</Text>
-            {/* <Text>Please check your payment information and try again.</Text> */}
-          </>
-        ),
+        content: <Text>{error.message}</Text>,
         onSubmit: () => {
           setIsProcessing(false)
           setError(false)
-          props.setWarningModal(emptyWarningModalContent)
+          setWarningModal(emptyWarningModalContent)
         },
         buttonLabel: 'Ok',
         noClose: true,
       })
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [error])
 
   useEffect(() => {
@@ -176,6 +146,7 @@ const CheckoutForm = props => {
         buttonLabel: 'Ok',
         noClose: true,
       })
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [success])
 
   // This starts the flow for paymentInfo change or adding new paymentInfo without interacting with subscription
@@ -306,22 +277,6 @@ const CheckoutForm = props => {
                 </StripeCvcContainer>
               </StripeExpiryWrapper>
             </VerticalDivider>
-
-            {/* <Text>Work email (optional)</Text> */}
-            {/* <Formik
-              initialValues={{
-                email: user.email,
-              }}
-              validate={validate}
-            >
-              <>
-                <EmailForm>
-                  <EmailField
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                  ></EmailField>
-                </EmailForm> */}
             {props.editMode ? (
               <CardInfoWrapper>
                 <VerticalDivider>
@@ -390,21 +345,9 @@ const CheckoutForm = props => {
                 text="Purchase"
               />
             )}
-            {/* </>
-            </Formik> */}
           </CardInfoWrapper>
         </div>
       )}
-      {/* {error && (
-        <div>
-          <p>Could not process card data!</p>
-        </div>
-      )}
-      {success && (
-        <div>
-          <p>Subscribed successfully</p>
-        </div>
-      )} */}
     </div>
   )
 }
