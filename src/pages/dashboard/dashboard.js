@@ -151,12 +151,12 @@ const Dashboard = ({ history }) => {
     myOrganizations.reduce((organizations, organization) => {
       return {
         ...organizations,
-        [organization.id]: {
+        [organization?.id]: {
           ...organization,
           teams: organization.teams?.reduce((teams, team) => {
             return {
               ...teams,
-              [team.id]: team,
+              [team?.id]: team,
             }
           }, {}),
         },
@@ -168,12 +168,12 @@ const Dashboard = ({ history }) => {
       console.log('TCL: Dashboard -> organizations', organizations)
       return {
         ...organizations,
-        [organization.id]: {
+        [organization?.id]: {
           visible: true,
           teams: organization.teams?.reduce((teams, team) => {
             return {
               ...teams,
-              [team.id]: {
+              [team?.id]: {
                 visible: true,
                 sections: {
                   members: true,
