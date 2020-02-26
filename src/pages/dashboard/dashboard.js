@@ -226,47 +226,6 @@ const Dashboard = ({ history }) => {
         )
       )
     )
-    // dispatch(
-    //   query({
-    //     name: 'myOrganizations',
-    //     storeKey: 'myOrganizations',
-    //     query: MY_ORGANIZATIONS,
-    //     fetchPolicy: 'network-only',
-    //     onSuccess: data =>
-    //       setExpandedTiles(
-    //         data.reduce((organizations, organization) => {
-    //           console.log(
-    //             'TCL: Dashboard -> organization after organization update',
-    //             organization
-    //           )
-    //           console.log(
-    //             'TCL: Dashboard -> organizations after organization update',
-    //             organizations
-    //           )
-    //           return {
-    //             ...organizations,
-    //             [organization.id]: {
-    //               visible: true,
-    //               teams: organization.teams?.reduce((teams, team) => {
-    //                 return {
-    //                   ...teams,
-    //                   [team.id]: {
-    //                     visible: true,
-    //                     sections: {
-    //                       members: true,
-    //                       projects: true,
-    //                     },
-    //                   },
-    //                 }
-    //               }, {}),
-    //             },
-    //           }
-    //         }, {})
-    //       ),
-    //   })
-    // )
-    // convertToHours()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myOrganizations])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
@@ -738,9 +697,9 @@ const Dashboard = ({ history }) => {
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
-            dispatch(updateOrganizations())
+            // dispatch(updateOrganizations())
           },
-          // onSuccessDispatch: updateOrganizations,
+          onSuccessDispatch: updateOrganizations,
         })
       )
     }
@@ -781,8 +740,9 @@ const Dashboard = ({ history }) => {
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
+            // dispatch(updateOrganizations())
           },
-          // onSuccessDispatch: updateOrganizations,
+          onSuccessDispatch: updateOrganizations,
         })
       ) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paymentStatus])
@@ -849,9 +809,9 @@ const Dashboard = ({ history }) => {
               onSuccess: () => {
                 setAddMemberModal(false)
                 closeWarningModal()
-                dispatch(updateOrganizations())
+                // dispatch(updateOrganizations())
               },
-              // onSuccessDispatch: updateOrganizations,
+              onSuccessDispatch: updateOrganizations,
             })
           )
         }
@@ -894,6 +854,7 @@ const Dashboard = ({ history }) => {
             },
             onSuccess: () => {
               setTeamLeaderModal(false)
+              // dispatch(updateOrganizations())
             },
             onSuccessDispatch: updateOrganizations,
           })
