@@ -2,7 +2,7 @@ import { MY_ORGANIZATIONS } from 'queries'
 
 import { query } from './graphql'
 
-export default () => dispatch =>
+export default ({ onSuccess }) => dispatch =>
   localStorage.getItem('token')
     ? dispatch(
         query({
@@ -10,6 +10,7 @@ export default () => dispatch =>
           storeKey: 'myOrganizations',
           query: MY_ORGANIZATIONS,
           fetchPolicy: 'network-only',
+          onSuccess: onSuccess(),
         })
       )
     : undefined
