@@ -162,7 +162,7 @@ const Dashboard = ({ history }) => {
         },
       }
     }, {})
-  const [expandedTiles, setExpandedTiles] = useState(
+  const [expandedTiles, setExpandedTiles] = useState(() =>
     myOrganizations.reduce((organizations, organization) => {
       console.log('TCL: Dashboard -> organization', organization)
       console.log('TCL: Dashboard -> organizations', organizations)
@@ -1190,4 +1190,4 @@ const Dashboard = ({ history }) => {
   )
 }
 
-export default withRouter(Dashboard)
+export default memo(withRouter(Dashboard))
