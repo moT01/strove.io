@@ -5,7 +5,7 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject, updateOrganizations } from 'utils'
+import { mutation, handleStopProject, updateOrganizations, query } from 'utils'
 import { useAnalytics } from 'hooks'
 import {
   ADD_MEMBER,
@@ -18,6 +18,7 @@ import {
   DOWNGRADE_SUBSCRIPTION,
   UPGRADE_SUBSCRIPTION,
   REMOVE_FROM_ORGANIZATION,
+  MY_ORGANIZATIONS,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -190,12 +191,46 @@ const Dashboard = ({ history }) => {
 
   console.log('TCL: Dashboard -> organizationsObj', organizationsObj)
   useEffect(() => {
-    dispatch(updateOrganizations())
+    dispatch(
+      query({
+        name: 'myOrganizations',
+        storeKey: 'myOrganizations',
+        query: MY_ORGANIZATIONS,
+        fetchPolicy: 'network-only',
+        onSuccess: data =>
+          data.reduce((organizations, organization) => {
+            console.log(
+              'TCL: Dashboard -> organization after organization update',
+              organization
+            )
+            console.log(
+              'TCL: Dashboard -> organizations after organization update',
+              organizations
+            )
+            return {
+              ...organizations,
+              [organization.id]: {
+                visible: true,
+                teams: organization.teams?.reduce((teams, team) => {
+                  return {
+                    ...teams,
+                    [team.id]: {
+                      visible: true,
+                      sections: {
+                        members: true,
+                        projects: true,
+                      },
+                    },
+                  }
+                }, {}),
+              },
+            }
+          }, {}),
+      })
+    )
     // convertToHours()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myOrganizations])
-
-  useEffect(() => console.log('Expanded tiles', expandedTiles), [expandedTiles])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
     let newTiles = { ...expandedTiles }
