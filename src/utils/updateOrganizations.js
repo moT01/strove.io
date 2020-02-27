@@ -4,7 +4,9 @@ import { query } from './graphql'
 
 export default ({ onSuccess = () => null } = {}) => dispatch => {
   const token = localStorage.getItem('token')
+  console.log('TCL: onSuccess', onSuccess)
   if (token) {
+    console.log('TCL: onSuccess', onSuccess)
     dispatch(
       query({
         context: {
