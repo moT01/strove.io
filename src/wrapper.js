@@ -11,19 +11,12 @@ import { StripeProvider } from 'react-stripe-elements'
 
 import { Layout } from 'components'
 import client from './client'
-import rootReducer from './state'
-
-const createStore = reduxCreateStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
-
-export const persistor = persistStore(createStore)
+import store, { persistor } from './store'
 
 export default ({ children }) => (
   <Router>
     <ApolloProvider client={client}>
-      <Provider store={createStore}>
+      <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <StripeProvider apiKey={process.env.REACT_APP_STRIPE_KEY}>
             <Layout>{children}</Layout>
