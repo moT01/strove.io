@@ -36,6 +36,7 @@ const LoaderWrapper = styled.div`
   align-items: center;
   height: ${props => (props.isFullScreen ? '100vh' : props.height)};
   width: ${props => (props.isFullScreen ? '100vw' : props.height)};
+  z-index: 15;
 `
 
 const LoaderContainer = styled(SmallLoaderWrapper)`

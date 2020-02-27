@@ -12,9 +12,7 @@ const EditorWrapper = ({ history }) => {
   const dispatch = useDispatch()
 
   const currentProject = useSelector(selectors.api.getCurrentProject)
-  console.log('TCL: EditorWrapper -> currentProject', currentProject)
   const projectId = currentProject && currentProject.id
-  console.log('TCL: EditorWrapper -> projectId', projectId)
   const machineId = currentProject && currentProject.machineId
   const machineName = currentProject && currentProject.machineName
   const port = currentProject && currentProject.editorPort
@@ -27,11 +25,6 @@ const EditorWrapper = ({ history }) => {
     // This condition means project has been stopped
     // if (projectId && !machineId) {
     if (!!projectId && !machineId) {
-      console.log(
-        'TCL: EditorWrapper -> projectId useEffect',
-        projectId,
-        !!projectId
-      )
       dispatch(
         mutation({
           name: 'continueProject',
