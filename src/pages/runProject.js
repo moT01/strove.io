@@ -13,7 +13,6 @@ import {
   MenuWrapper,
 } from 'components'
 import { getRepoUrl, getWindowSearchParams } from 'utils'
-import { TeamTileSection } from './dashboard/styled'
 
 const LoginText = styled.span`
   font-weight: 500;

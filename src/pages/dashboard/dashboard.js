@@ -798,6 +798,30 @@ const Dashboard = ({ history }) => {
                     ?.subscriptionQuantity + 1,
               },
               onSuccess: () => setAddMemberEmail(memberEmail),
+              onError: () =>
+                setWarningModal({
+                  visible: true,
+                  content: (
+                    <>
+                      <ModalText>Your payment couldn't be processed.</ModalText>
+                      <ModalText>
+                        Please make sure your payment information is correct and
+                        try again.
+                      </ModalText>
+                      <StroveButton
+                        isLink
+                        to="/app/plans"
+                        text="Settings"
+                        isPrimary
+                        minWidth="150px"
+                        maxWidth="150px"
+                        borderRadius="2px"
+                        padding="5px"
+                        margin="10px 0px"
+                      />
+                    </>
+                  ),
+                }),
             })
           )
         } else if (subscriptionStatus === 'inactive') {
