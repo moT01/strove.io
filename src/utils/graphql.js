@@ -36,6 +36,7 @@ export const mutation = ({
     },
   },
   errorPolicy = 'all',
+  fetchPolicy ='no-cache',
   mutation,
   onLoading,
   onSuccess,
@@ -73,7 +74,7 @@ export const mutation = ({
         mutation,
         context,
         variables,
-        fetchPolicy: 'no-cache',
+        fetchPolicy,
         errorPolicy,
       })
 
@@ -196,7 +197,7 @@ export const query = ({
       'User-Agent': 'node',
     },
   },
-  fetchPolicy = 'no-cache',
+  fetchPolicy = 'network-only',
   errorPolicy = 'all',
   query,
   onLoading,
@@ -235,7 +236,7 @@ export const query = ({
         query,
         context,
         variables,
-        fetchPolicy: 'network-only',
+        fetchPolicy,
         errorPolicy,
       })
 
