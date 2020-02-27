@@ -51,6 +51,9 @@ const Projects = ({
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
+  const isProjectBeingAdded = useSelector(
+    selectors.incomingProject.isProjectBeingAdded
+  )
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   // This code filters other users' and already forked projects
@@ -204,7 +207,12 @@ const Projects = ({
                   <RightSection>
                     <StroveButton
                       to="/app/editor/"
-                      isDisabled={isDeleting || isContinuing || isStopping}
+                      isDisabled={
+                        isDeleting ||
+                        isContinuing ||
+                        isStopping ||
+                        isProjectBeingAdded
+                      }
                       isPrimary
                       borderRadius="2px"
                       padding="3px 15px"

@@ -165,8 +165,6 @@ const Dashboard = ({ history }) => {
     }, {})
   const [expandedTiles, setExpandedTiles] = useState(() =>
     myOrganizations.reduce((organizations, organization) => {
-      console.log('TCL: Dashboard -> organization', organization)
-      console.log('TCL: Dashboard -> organizations', organizations)
       return {
         ...organizations,
         [organization.id]: {
@@ -187,44 +185,34 @@ const Dashboard = ({ history }) => {
       }
     }, {})
   )
-  console.log('TCL: Dashboard -> expandedTiles', expandedTiles)
-
-  console.log('TCL: Dashboard -> organizationsObj', organizationsObj)
 
   useEffect(() => {
     dispatch(
-      updateOrganizations(data =>
-        setExpandedTiles(
-          data.reduce((organizations, organization) => {
-            console.log(
-              'TCL: Dashboard -> organization after organization update',
-              organization
-            )
-            console.log(
-              'TCL: Dashboard -> organizations after organization update',
-              organizations
-            )
-            return {
-              ...organizations,
-              [organization.id]: {
-                visible: true,
-                teams: organization.teams?.reduce((teams, team) => {
-                  return {
-                    ...teams,
-                    [team.id]: {
-                      visible: true,
-                      sections: {
-                        members: true,
-                        projects: true,
+      updateOrganizations({
+        onSuccess: data =>
+          setExpandedTiles(
+            data.reduce((organizations, organization) => {
+              return {
+                ...organizations,
+                [organization.id]: {
+                  visible: true,
+                  teams: organization.teams?.reduce((teams, team) => {
+                    return {
+                      ...teams,
+                      [team.id]: {
+                        visible: true,
+                        sections: {
+                          members: true,
+                          projects: true,
+                        },
                       },
-                    },
-                  }
-                }, {}),
-              },
-            }
-          }, {})
-        )
-      )
+                    }
+                  }, {}),
+                },
+              }
+            }, {})
+          ),
+      })
     )
   }, [myOrganizations])
 
@@ -697,7 +685,6 @@ const Dashboard = ({ history }) => {
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
-            // dispatch(updateOrganizations())
           },
           onSuccessDispatch: updateOrganizations,
         })
@@ -740,7 +727,6 @@ const Dashboard = ({ history }) => {
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
-            // dispatch(updateOrganizations())
           },
           onSuccessDispatch: updateOrganizations,
         })
@@ -798,6 +784,30 @@ const Dashboard = ({ history }) => {
                     ?.subscriptionQuantity + 1,
               },
               onSuccess: () => setAddMemberEmail(memberEmail),
+              onError: () =>
+                setWarningModal({
+                  visible: true,
+                  content: (
+                    <>
+                      <ModalText>Your payment couldn't be processed.</ModalText>
+                      <ModalText>
+                        Please make sure your payment information is correct and
+                        try again.
+                      </ModalText>
+                      <StroveButton
+                        isLink
+                        to="/app/plans"
+                        text="Settings"
+                        isPrimary
+                        minWidth="150px"
+                        maxWidth="150px"
+                        borderRadius="2px"
+                        padding="5px"
+                        margin="10px 0px"
+                      />
+                    </>
+                  ),
+                }),
             })
           )
         } else if (subscriptionStatus === 'inactive') {
@@ -809,7 +819,6 @@ const Dashboard = ({ history }) => {
               onSuccess: () => {
                 setAddMemberModal(false)
                 closeWarningModal()
-                // dispatch(updateOrganizations())
               },
               onSuccessDispatch: updateOrganizations,
             })
@@ -854,7 +863,6 @@ const Dashboard = ({ history }) => {
             },
             onSuccess: () => {
               setTeamLeaderModal(false)
-              // dispatch(updateOrganizations())
             },
             onSuccessDispatch: updateOrganizations,
           })
