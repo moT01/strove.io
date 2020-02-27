@@ -33,9 +33,12 @@ const StyledButton = styled(StroveButton)`
 
 const Run = ({ addProject, history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
+  const user = useSelector(selectors.api.getUser)
   const token = useSelector(selectors.getToken)
-  const lastOrganization = myOrganizations[myOrganizations.length - 1]
-  const lastTeam = lastOrganization.teams[lastOrganization.teams.length - 1]
+  const ownOrganization = myOrganizations?.filter(
+    organization => organization?.owner?.id === user?.id
+  )[0]
+  const lastTeam = ownOrganization.teams[ownOrganization.teams.length - 1]
   const teamId = lastTeam.id
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
