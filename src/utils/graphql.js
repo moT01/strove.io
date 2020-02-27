@@ -1,7 +1,11 @@
 import ReactGA from 'react-ga'
 import { C, actions } from 'state'
+import store from 'store'
+import { selectors } from 'state'
 
 import defaultClient from 'client'
+
+const getLoading = selectors.api.getLoading
 
 /**
  * Gracefully handle mutations. Handles all the async aspects of querying, automatically dispatches redux
@@ -43,6 +47,12 @@ export const mutation = ({
   client = defaultClient,
 }) => {
   return async dispatch => {
+
+
+    console.log('storeKey', storeKey, 'getLoading(storeKey)', getLoading(storeKey)(store.getState()))
+    if (getLoading(storeKey)(store.getState())) {
+      return dispatch({ type: 'SKIPPING_REPEATED_QUERY' })
+    }
     onLoading && onLoading(storeKey)
     if (onLoadingDispatch) {
       if (Array.isArray(onLoadingDispatch)) {
@@ -200,6 +210,11 @@ export const query = ({
   client = defaultClient,
 }) => {
   return async dispatch => {
+
+    console.log('storeKey', storeKey, 'getLoading(storeKey)', getLoading(storeKey)(store.getState()))
+    if (getLoading(storeKey)(store.getState())) {
+      return dispatch({ type: 'SKIPPING_REPEATED_QUERY' })
+    }
     onLoading && onLoading(storeKey)
     if (onLoadingDispatch) {
       if (Array.isArray(onLoadingDispatch)) {
