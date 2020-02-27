@@ -48,7 +48,8 @@ export const mutation = ({
 }) => {
   return async dispatch => {
     if (getLoading(storeKey)(store.getState())) {
-      return dispatch({ type: 'SKIPPING_REPEATED_QUERY', payload: { name, storeKey } })
+      dispatch({ type: C.api.SKIPPING_REPEATED_QUERY, payload: { name, storeKey } })
+      return null
     }
 
     onLoading && onLoading(storeKey)
@@ -209,9 +210,10 @@ export const query = ({
 }) => {
   return async dispatch => {
     if (getLoading(storeKey)(store.getState())) {
-      return dispatch({ type: 'SKIPPING_REPEATED_QUERY', payload: { name, storeKey } })
+      dispatch({ type: C.api.SKIPPING_REPEATED_QUERY, payload: { name, storeKey } })
+      return null
     }
-    
+
     onLoading && onLoading(storeKey)
     if (onLoadingDispatch) {
       if (Array.isArray(onLoadingDispatch)) {
