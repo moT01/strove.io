@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
@@ -51,6 +51,9 @@ const Projects = ({
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
+  const continueProjectError = useSelector(
+    selectors.api.getError('continueProject')
+  )
   const isProjectBeingAdded = useSelector(
     selectors.incomingProject.isProjectBeingAdded
   )
@@ -65,6 +68,36 @@ const Projects = ({
       : project
   )
 
+  useEffect(() => {
+    if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+      setWarningModal({
+        visible: true,
+        content: (
+          <>
+            <ModalText>
+              You have exceeded the monthly editor time for free users.
+            </ModalText>
+            <ModalText>
+              If you need more time to work on your amazing projects upgrade
+              your subscription plan.
+            </ModalText>
+            <StroveButton
+              isLink
+              isPrimary
+              to="/app/plans"
+              text="Pricing"
+              padding="5px"
+              minWidth="150px"
+              maxWidth="150px"
+              margin="10px"
+              borderRadius="5px"
+            />
+          </>
+        ),
+      })
+    }
+  }, [continueProjectError])
+
   const usersProjects = projects.filter(project => project.userId !== user.id)
 
   const isLeader = isOwner
@@ -72,6 +105,7 @@ const Projects = ({
   const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
+        console.log(continueProjectError)
         dispatch(
           mutation({
             name: 'continueProject',
@@ -79,33 +113,10 @@ const Projects = ({
             variables: { projectId: id, teamId },
             onSuccessDispatch: null,
             onError: error => {
-              if (error && user.timeSpent >= 72000000) {
-                setWarningModal({
-                  visible: true,
-                  content: (
-                    <>
-                      <ModalText>
-                        You have exceeded the monthly editor time for free
-                        users.
-                      </ModalText>
-                      <ModalText>
-                        If you need more time to work on your amazing projects
-                        upgrade your subscription plan.
-                      </ModalText>
-                      <StroveButton
-                        isLink
-                        isPrimary
-                        to="/app/plans"
-                        text="Pricing"
-                        padding="5px"
-                        minWidth="150px"
-                        maxWidth="150px"
-                        margin="10px"
-                        borderRadius="5px"
-                      />
-                    </>
-                  ),
-                })
+              if (
+                error &&
+                continueProjectError === 'USER_SESSION_TIME_DEPLETED'
+              ) {
               }
             },
           })
