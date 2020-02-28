@@ -2,9 +2,8 @@ import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { isMobile } from 'react-device-detect'
 
-import { ExternalLink, FullScreenWrapper } from 'components'
+import { ExternalLink } from 'components'
 import { selectors } from 'state'
 import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
@@ -16,9 +15,6 @@ import {
   InvitationTitle,
   LoginWrapper,
   InvitationDetails,
-  Illustration,
-  WelcomeWrapper,
-  SectionWrapper,
 } from './styled'
 
 const FromEmailInvitation = () => {
