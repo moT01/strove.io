@@ -10,6 +10,7 @@ import { getWindowSearchParams } from 'utils'
 import { loginOptions } from 'consts'
 import { actions } from 'state'
 
+import OnboardingContainer from './onboardingContainer'
 import {
   LoginText,
   InvitationTitle,
@@ -36,45 +37,37 @@ const FromEmailInvitation = () => {
   }
 
   return (
-    <FullScreenWrapper>
-      <WelcomeWrapper>
-        <SectionWrapper>
-          <InvitationTitle>
-            You're invited to <b>{teamName}</b>
-          </InvitationTitle>
-          <InvitationDetails>
-            {fromEmail} has invited you to join the Strove team{' '}
-            <b>{teamName}</b>. Login to start collaborating!
-          </InvitationDetails>
-          <LoginWrapper>
-            {loginOptions.map(loginOption => (
-              <ExternalLink
-                key={loginOption.label}
-                primary
-                href={`${loginOption.href}`}
-                onClick={() =>
-                  dispatch(
-                    actions.invitations.addInvitation({ teamId, teamName })
-                  )
-                }
-              >
-                {loginOption.icon}
-                <LoginText invert>Login with {loginOption.label}</LoginText>
-              </ExternalLink>
-            ))}
-          </LoginWrapper>
-          <InvitationDetails>
-            Your sign email is <b>{invitedEmail}</b>
-          </InvitationDetails>
-        </SectionWrapper>
-        {!isMobile && (
-          <Illustration
-            src={require('assets/illustration.png')}
-            alt="illustration"
-          />
-        )}
-      </WelcomeWrapper>
-    </FullScreenWrapper>
+    <OnboardingContainer>
+      <>
+        <InvitationTitle>
+          You're invited to <b>{teamName}</b>
+        </InvitationTitle>
+        <InvitationDetails>
+          {fromEmail} has invited you to join the Strove team <b>{teamName}</b>.
+          Login to start collaborating!
+        </InvitationDetails>
+        <LoginWrapper>
+          {loginOptions.map(loginOption => (
+            <ExternalLink
+              key={loginOption.label}
+              primary
+              href={`${loginOption.href}`}
+              onClick={() =>
+                dispatch(
+                  actions.invitations.addInvitation({ teamId, teamName })
+                )
+              }
+            >
+              {loginOption.icon}
+              <LoginText invert>Login with {loginOption.label}</LoginText>
+            </ExternalLink>
+          ))}
+        </LoginWrapper>
+        <InvitationDetails>
+          Your sign email is <b>{invitedEmail}</b>
+        </InvitationDetails>
+      </>
+    </OnboardingContainer>
   )
 }
 
