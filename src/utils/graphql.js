@@ -36,7 +36,7 @@ export const mutation = ({
     },
   },
   errorPolicy = 'all',
-  fetchPolicy ='no-cache',
+  fetchPolicy = 'no-cache',
   mutation,
   onLoading,
   onSuccess,
@@ -49,7 +49,10 @@ export const mutation = ({
 }) => {
   return async dispatch => {
     if (getLoading(storeKey)(store.getState())) {
-      dispatch({ type: C.api.SKIPPING_REPEATED_QUERY, payload: { name, storeKey } })
+      dispatch({
+        type: C.api.SKIPPING_REPEATED_QUERY,
+        payload: { name, storeKey },
+      })
       return null
     }
 
@@ -70,13 +73,17 @@ export const mutation = ({
     const requestStartTime = performance.now()
 
     try {
-      const { data } = await client.mutate({
+      const { data, errors } = await client.mutate({
         mutation,
         context,
         variables,
         fetchPolicy,
         errorPolicy,
       })
+
+      if (errors) {
+        throw errors
+      }
 
       const result = dataSelector(data)
 
@@ -131,38 +138,73 @@ export const mutation = ({
 
       return result
     } catch (errorObj) {
-      const error = errorObj.toString()
-      console.log('Error', error)
-      onError && onError(error)
+      if (Array.isArray(errorObj)) {
+        const error = errorObj[0].extensions.code
+        console.log('Error', error)
+        onError && onError(error)
 
-      if (onErrorDispatch) {
-        if (Array.isArray(onErrorDispatch)) {
-          onErrorDispatch.forEach(action => dispatch(action(error)))
+        if (onErrorDispatch) {
+          if (Array.isArray(onErrorDispatch)) {
+            onErrorDispatch.forEach(action => dispatch(action(error)))
+          } else {
+            dispatch(onErrorDispatch(error))
+          }
         } else {
-          dispatch(onErrorDispatch(error))
+          dispatch({
+            type: C.api.FETCH_ERROR,
+            storeKey,
+            payload: { error, storeKey },
+          })
         }
-      } else {
-        dispatch({
-          type: C.api.FETCH_ERROR,
-          storeKey,
-          payload: { error, storeKey },
+
+        const requestEndTime = performance.now()
+        ReactGA.timing({
+          category: 'Request Error Performance',
+          variable: name,
+          value: requestEndTime - requestStartTime,
         })
+
+        console.log(
+          'Request Error Performace',
+          requestEndTime - requestStartTime,
+          name
+        )
+
+        return null
+      } else {
+        const error = errorObj.toString()
+        console.log('Error', error)
+        onError && onError(error)
+
+        if (onErrorDispatch) {
+          if (Array.isArray(onErrorDispatch)) {
+            onErrorDispatch.forEach(action => dispatch(action(error)))
+          } else {
+            dispatch(onErrorDispatch(error))
+          }
+        } else {
+          dispatch({
+            type: C.api.FETCH_ERROR,
+            storeKey,
+            payload: { error, storeKey },
+          })
+        }
+
+        const requestEndTime = performance.now()
+        ReactGA.timing({
+          category: 'Request Error Performance',
+          variable: name,
+          value: requestEndTime - requestStartTime,
+        })
+
+        console.log(
+          'Request Error Performace',
+          requestEndTime - requestStartTime,
+          name
+        )
+
+        return null
       }
-
-      const requestEndTime = performance.now()
-      ReactGA.timing({
-        category: 'Request Error Performance',
-        variable: name,
-        value: requestEndTime - requestStartTime,
-      })
-
-      console.log(
-        'Request Error Performace',
-        requestEndTime - requestStartTime,
-        name
-      )
-
-      return null
     }
   }
 }
@@ -211,7 +253,10 @@ export const query = ({
 }) => {
   return async dispatch => {
     if (getLoading(storeKey)(store.getState())) {
-      dispatch({ type: C.api.SKIPPING_REPEATED_QUERY, payload: { name, storeKey } })
+      dispatch({
+        type: C.api.SKIPPING_REPEATED_QUERY,
+        payload: { name, storeKey },
+      })
       return null
     }
 

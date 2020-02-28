@@ -23,6 +23,7 @@ const createProject = async ({
   const customName = name
   try {
     if (repoLink) {
+      console.log('We are creating a project now')
       const query = GET_REPO_INFO
       const repoProvider = getRepoProvider(repoLink)
       const repoUrlParts = repoLink.split('/')

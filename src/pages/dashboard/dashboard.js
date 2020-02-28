@@ -5,7 +5,7 @@ import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject, updateOrganizations, query } from 'utils'
+import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { useAnalytics } from 'hooks'
 import {
   ADD_MEMBER,
@@ -18,7 +18,6 @@ import {
   DOWNGRADE_SUBSCRIPTION,
   UPGRADE_SUBSCRIPTION,
   REMOVE_FROM_ORGANIZATION,
-  MY_ORGANIZATIONS,
 } from 'queries'
 import { selectors } from 'state'
 import {
@@ -213,6 +212,7 @@ const Dashboard = ({ history }) => {
           ),
       })
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myOrganizations])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
