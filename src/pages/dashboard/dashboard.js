@@ -129,7 +129,6 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
-  // console.log('TCL: Dashboard -> myOrganizations', myOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
   // const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
