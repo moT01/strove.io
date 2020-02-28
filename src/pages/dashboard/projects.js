@@ -96,6 +96,7 @@ const Projects = ({
         ),
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [continueProjectError])
 
   const usersProjects = projects.filter(project => project.userId !== user.id)
@@ -105,20 +106,12 @@ const Projects = ({
   const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
-        console.log(continueProjectError)
         dispatch(
           mutation({
             name: 'continueProject',
             mutation: CONTINUE_PROJECT,
             variables: { projectId: id, teamId },
             onSuccessDispatch: null,
-            onError: error => {
-              if (
-                error &&
-                continueProjectError === 'USER_SESSION_TIME_DEPLETED'
-              ) {
-              }
-            },
           })
         )
       } else {
