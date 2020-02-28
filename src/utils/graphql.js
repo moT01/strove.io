@@ -88,7 +88,6 @@ export const mutation = ({
       const result = dataSelector(data)
 
       if (result) {
-        console.log('We are inside result')
         const requestEndTime = performance.now()
         const requestTime = requestEndTime - requestStartTime
         if (name === 'resetCron') {
