@@ -14,6 +14,7 @@ import {
   InvitationTitle,
   LoginWrapper,
   InvitationDetails,
+  FormWrapper,
 } from './styled'
 
 const OrganizationName = () => {
@@ -23,6 +24,9 @@ const OrganizationName = () => {
         <InvitationTitle>
           What's the name of your company or team?
         </InvitationTitle>
+        <FormWrapper>
+          <input></input>
+        </FormWrapper>
       </>
     </OnboardingContainer>
   )
