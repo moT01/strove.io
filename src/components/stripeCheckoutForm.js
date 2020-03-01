@@ -214,16 +214,15 @@ const CheckoutForm = props => {
 
     dispatch(
       mutation({
-        name: 'stripeSubscription',
+        name: 'stripeSubscribe',
         mutation: STRIPE_SUBSCRIBE,
         variables: {
-          paymentMethod: paymentMethod.id,
+          paymentMethod: paymentMethod?.id,
           plan: props.plan,
           name: user.name,
           email: user.email,
           organizationId,
         },
-        dataSelector: data => data.stripeSubscribe,
         onSuccess: data => handleResponse(data),
       })
     )
