@@ -1,16 +1,10 @@
-import React, { memo, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import React, { memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Formik } from 'formik'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
-import { loginOptions } from 'consts'
-import { actions } from 'state'
 import { RENAME_ORGANIZATION } from 'queries'
-import { Formik } from 'formik'
-import isEmail from 'validator/lib/isEmail'
-
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
@@ -66,16 +60,17 @@ const OrganizationName = () => {
                 name="name"
                 placeholder="Microsoft Corp"
               ></FormField>
+              <StroveButton
+                margin="20px 0"
+                isPrimary
+                text="Next"
+                isGetStarted
+                disabled={errors.name}
+                navigateTo="/pricing"
+              />
             </StyledForm>
           )}
         </Formik>
-        <StroveButton
-          margin="20px 0"
-          isPrimary
-          text="Next"
-          isGetStarted
-          navigateTo="/pricing"
-        />
       </>
     </OnboardingContainer>
   )
