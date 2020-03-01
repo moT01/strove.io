@@ -161,3 +161,7 @@ export const SkipForNow = styled.div`
   cursor: pointer;
   margin-top: 30px;
 `
+
+export const TextToLeft = styled.div`
+  text-align: left;
+`

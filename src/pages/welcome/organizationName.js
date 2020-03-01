@@ -8,13 +8,7 @@ import { RENAME_ORGANIZATION } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import {
-  Title,
-  FormField,
-  StyledForm,
-  StyledFormWrapper,
-  SkipForNow,
-} from './styled'
+import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validate = values => {
   let errors = {}
@@ -73,7 +67,7 @@ const OrganizationName = ({ history }) => {
                   disabled={errors.name || !values.name}
                   navigateTo="/pricing"
                 />
-                {errors.name && <div>{errors.name}</div>}
+                {errors.name && <TextToLeft>{errors.name}</TextToLeft>}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/pricing')}>
                 Skip for now
