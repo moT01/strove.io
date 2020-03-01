@@ -7,7 +7,7 @@ import { selectors } from 'state'
 import { loginOptions } from 'consts'
 
 import OnboardingContainer from './onboardingContainer'
-import { LoginText, Title, InvitationDetails } from './styled'
+import { LoginText, Title, InvitationDetails, Info } from './styled'
 
 const Login = () => {
   const token = useSelector(selectors.getToken)
@@ -20,10 +20,10 @@ const Login = () => {
     <OnboardingContainer>
       <>
         <Title>First, login with Gitub or Gitlab</Title>
-        <InvitationDetails>
+        <Info>
           Just a quick login before you say goodbye to long environment setups
           for good.
-        </InvitationDetails>
+        </Info>
         {loginOptions.map(loginOption => (
           <ExternalLink
             key={loginOption.label}

@@ -42,6 +42,7 @@ const FromEmailInvitation = () => {
             key={loginOption.label}
             primary
             href={`${loginOption.href}`}
+            width="100%"
             onClick={() =>
               dispatch(actions.invitations.addInvitation({ teamId, teamName }))
             }

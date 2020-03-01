@@ -19,6 +19,13 @@ export const InvitationDetails = styled.div`
   color: ${({ theme }) => theme.colors.c11};
   font-size: 18px;
   text-align: left;
+  margin: 20px 0;
+`
+
+export const Info = styled.div`
+  color: ${({ theme }) => theme.colors.c11};
+  font-size: 18px;
+  text-align: left;
   margin: 0 0 20px;
 `
 
