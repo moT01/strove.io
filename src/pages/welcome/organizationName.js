@@ -14,15 +14,23 @@ import isEmail from 'validator/lib/isEmail'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import {
-  LoginText,
-  InvitationTitle,
-  LoginWrapper,
-  InvitationDetails,
-  FormWrapper,
-  FormField,
-  StyledForm,
-} from './styled'
+import { InvitationTitle, FormField, StyledForm } from './styled'
+
+const validate = values => {
+  let errors = {}
+
+  if (!values.name) {
+    errors.name = 'Name cannot be empty'
+  }
+
+  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
+
+  if (!regex.test(values.name)) {
+    errors.name = 'Name should only contain letters and numbers'
+  }
+
+  return errors
+}
 
 const OrganizationName = () => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
@@ -37,11 +45,11 @@ const OrganizationName = () => {
           initialValues={{
             name: '',
           }}
+          validate={validate}
           onSubmit={values => {
             dispatch(
               mutation({
                 name: 'renameOrganization',
-                context: null,
                 mutation: RENAME_ORGANIZATION,
                 variables: {
                   newName: values.name,
