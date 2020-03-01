@@ -65,7 +65,7 @@ const OrganizationName = () => {
                 isPrimary
                 text="Next"
                 isGetStarted
-                disabled={errors.name}
+                disabled={errors.name || !values.name}
                 navigateTo="/pricing"
               />
             </StyledForm>
