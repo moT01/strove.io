@@ -13,6 +13,7 @@ import {
   FormField,
   StyledForm,
   StyledFormWrapper,
+  SkipForNow,
 } from './styled'
 
 const validate = values => {
@@ -31,7 +32,7 @@ const validate = values => {
   return errors
 }
 
-const OrganizationName = () => {
+const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
   return (
@@ -76,6 +77,9 @@ const OrganizationName = () => {
                 />
                 {errors.name && <div>{errors.name}</div>}
               </StyledForm>
+              <SkipForNow onClick={() => history.push('/pricing')}>
+                Skip for now
+              </SkipForNow>
             </StyledFormWrapper>
           )}
         </Formik>

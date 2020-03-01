@@ -158,3 +158,9 @@ export const StyledFormWrapper = styled.div`
   padding: 20px;
   max-width: 800px;
 `
+
+export const SkipForNow = styled.div`
+  color: ${({ theme }) => theme.colors.c1};
+  cursor: pointer;
+  margin-top: 30px;
+`
