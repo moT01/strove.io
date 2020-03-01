@@ -14,8 +14,6 @@ const validate = values => {
   const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
   let errors = {}
 
-  console.log(values, errors)
-
   if (!values.organization?.profile_name) {
     errors.organization = 'Name is empty'
   }
@@ -30,8 +28,6 @@ const validate = values => {
   ) {
     errors.organization = 'Name is too short'
   }
-
-  console.log(values, errors, values.organization?.profile_name?.length)
 
   return errors
 }
