@@ -8,7 +8,12 @@ import { RENAME_ORGANIZATION } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { InvitationTitle, FormField, StyledForm } from './styled'
+import {
+  InvitationTitle,
+  FormField,
+  StyledForm,
+  StyledFormWrapper,
+} from './styled'
 
 const validate = values => {
   let errors = {}
@@ -54,21 +59,24 @@ const OrganizationName = () => {
           }}
         >
           {({ errors, values }) => (
-            <StyledForm>
-              <FormField
-                type="name"
-                name="name"
-                placeholder="Microsoft Corp"
-              ></FormField>
-              <StroveButton
-                margin="20px 0"
-                isPrimary
-                text="Next"
-                isGetStarted
-                disabled={errors.name || !values.name}
-                navigateTo="/pricing"
-              />
-            </StyledForm>
+            <StyledFormWrapper>
+              <StyledForm>
+                <FormField
+                  type="name"
+                  name="name"
+                  placeholder="Microsoft Corp"
+                ></FormField>
+                <StroveButton
+                  margin="20px 0 10px"
+                  isPrimary
+                  text="Next"
+                  isGetStarted
+                  disabled={errors.name || !values.name}
+                  navigateTo="/pricing"
+                />
+                {errors.name && <div>{errors.name}</div>}
+              </StyledForm>
+            </StyledFormWrapper>
           )}
         </Formik>
       </>

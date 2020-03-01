@@ -151,3 +151,10 @@ export const FormField = styled(Field)`
   box-shadow: 0 2px 4px 0 rgba(174, 174, 186, 0.24),
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
+
+export const StyledFormWrapper = styled.div`
+  margin: 10px 0;
+  width: 100%;
+  padding: 20px;
+  max-width: 800px;
+`
