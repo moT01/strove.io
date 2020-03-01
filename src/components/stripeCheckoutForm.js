@@ -119,7 +119,7 @@ const CheckoutForm = props => {
     !!error &&
       setWarningModal({
         visible: true,
-        content: <Text>{error.message}</Text>,
+        content: <Text>{error.message || 'Something went wrong'}</Text>,
         onSubmit: () => {
           setIsProcessing(false)
           setError(false)
