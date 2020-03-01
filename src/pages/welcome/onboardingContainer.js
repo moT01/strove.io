@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect'
 
 import { FullScreenWrapper } from 'components'
 
-import { Illustration, WelcomeWrapper, SectionWrapper } from './styled'
+import { Illustration, WelcomeWrapper, SectionWrapper, ImageContainer } from './styled'
 
 const OnboardingContainer = ({ children }) => {
   return (
@@ -12,10 +12,12 @@ const OnboardingContainer = ({ children }) => {
       <WelcomeWrapper>
         <SectionWrapper>{children}</SectionWrapper>
         {!isMobile && (
-          <Illustration
-            src={require('assets/illustration.png')}
-            alt="illustration"
-          />
+          <ImageContainer>
+            <Illustration
+              src={require('assets/illustration.png')}
+              alt="illustration"
+            />
+          </ImageContainer>
         )}
       </WelcomeWrapper>
     </FullScreenWrapper>

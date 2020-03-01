@@ -7,6 +7,14 @@ export const LoginText = styled.span`
   font-size: 20px;
 `
 
+export const ImageContainer = styled.div`
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
 export const Title = styled.div`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 28px;
