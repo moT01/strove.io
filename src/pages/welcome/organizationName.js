@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { ExternalLink } from 'components'
+import { StroveButton } from 'components'
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { actions } from 'state'
@@ -57,6 +57,7 @@ const OrganizationName = () => {
             </StyledForm>
           )}
         </Formik>
+        <StroveButton margin="20px 0" isPrimary text="Next" isGetStarted />
       </>
     </OnboardingContainer>
   )
