@@ -60,7 +60,7 @@ const OrganizationName = ({ history }) => {
           }}
         >
           {({ errors, values }) => (
-            <StyledFormWrapper>
+            <>
               <StyledForm>
                 <FormField
                   type="name"
@@ -80,7 +80,7 @@ const OrganizationName = ({ history }) => {
               <SkipForNow onClick={() => history.push('/pricing')}>
                 Skip for now
               </SkipForNow>
-            </StyledFormWrapper>
+            </>
           )}
         </Formik>
       </>
