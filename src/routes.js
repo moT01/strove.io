@@ -22,9 +22,9 @@ const FromEmailInvitation = WithLazyLoader(
   lazy(() => import('pages/welcome/fromEmailInvitation'))
 )
 const Login = WithLazyLoader(lazy(() => import('pages/welcome/login')))
-const OrganizationName = WithLazyLoader(
-  lazy(() => import('pages/welcome/organizationName'))
-)
+// const OrganizationName = WithLazyLoader(
+//   lazy(() => import('pages/welcome/organizationName'))
+// )
 const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (
@@ -46,7 +46,7 @@ const Strove = () => (
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
       <PrivateRoute path="/app/plans" component={Plans} />
       <Route path="/welcome/login" component={Login} />
-      <Route path="/welcome/organizationName" component={OrganizationName} />
+      {/* <Route path="/welcome/organizationName" component={OrganizationName} /> */}
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
