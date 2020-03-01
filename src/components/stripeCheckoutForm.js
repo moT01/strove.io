@@ -108,7 +108,7 @@ const emptyWarningModalContent = {
 const CheckoutForm = props => {
   const [cardNumber, setCardNumber] = useState()
   const [isProcessing, setIsProcessing] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState()
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
@@ -213,7 +213,7 @@ const CheckoutForm = props => {
     }
 
     if (!paymentMethod) {
-      setError('No payment method')
+      setError({ message: 'No payment method' })
     }
 
     dispatch(
