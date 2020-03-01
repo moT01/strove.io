@@ -212,6 +212,10 @@ const CheckoutForm = props => {
       setError(error)
     }
 
+    if (!paymentMethod) {
+      setError('No payment method')
+    }
+
     dispatch(
       mutation({
         name: 'stripeSubscribe',
