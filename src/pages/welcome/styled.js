@@ -15,18 +15,11 @@ export const Title = styled.div`
   text-align: left;
 `
 
-export const LoginTitle = styled.div`
-  color: ${({ theme }) => theme.colors.c3};
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 20px;
-`
-
 export const InvitationDetails = styled.div`
   color: ${({ theme }) => theme.colors.c11};
   font-size: 18px;
   text-align: left;
-  margin: 10px 0;
+  margin: 0 0 20px;
 `
 
 export const Illustration = styled.img`
