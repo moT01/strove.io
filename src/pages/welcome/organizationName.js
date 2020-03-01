@@ -8,19 +8,20 @@ import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { actions } from 'state'
 import { RENAME_ORGANIZATION } from 'queries'
-import { Formik, Form } from 'formik'
+import { Formik } from 'formik'
 import isEmail from 'validator/lib/isEmail'
 
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import FormField from './formField'
 import {
   LoginText,
   InvitationTitle,
   LoginWrapper,
   InvitationDetails,
   FormWrapper,
+  FormField,
+  StyledForm,
 } from './styled'
 
 const OrganizationName = () => {
@@ -47,13 +48,13 @@ const OrganizationName = () => {
           }}
         >
           {({ errors, values }) => (
-            <Form>
+            <StyledForm>
               <FormField
                 type="name"
                 name="name"
                 placeholder="Microsoft Corp"
               ></FormField>
-            </Form>
+            </StyledForm>
           )}
         </Formik>
       </>
