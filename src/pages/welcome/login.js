@@ -7,7 +7,7 @@ import { selectors } from 'state'
 import { loginOptions } from 'consts'
 
 import OnboardingContainer from './onboardingContainer'
-import { LoginText, Title, InvitationDetails, Info } from './styled'
+import { LoginText, Title, Info } from './styled'
 
 const Login = () => {
   const token = useSelector(selectors.getToken)

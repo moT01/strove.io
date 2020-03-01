@@ -11,17 +11,25 @@ import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validate = values => {
+  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
   let errors = {}
 
-  if (!values['organization[profile_name]']) {
-    errors['organization[profile_name]'] = 'Name is empty'
+  console.log(values.organization?.profile_name, values)
+
+  if (!values.organization?.profile_name) {
+    errors.organization.profile_name = 'Name is empty'
   }
 
-  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
-
-  if (!regex.test(values['organization[profile_name]'])) {
-    errors['organization[profile_name]'] =
+  if (!regex.test(values.organization?.profile_name)) {
+    errors.organization.profile_name =
       'Name should only contain letters and numbers'
+  }
+
+  if (
+    values.organization?.profile_name &&
+    !values.organization.profile_name.length < 4
+  ) {
+    errors.organization.profile_name = 'Name is too short'
   }
 
   return errors
@@ -45,7 +53,7 @@ const OrganizationName = ({ history }) => {
                 name: 'renameOrganization',
                 mutation: RENAME_ORGANIZATION,
                 variables: {
-                  newName: values['organization[profile_name]'],
+                  newName: values.organization?.profile_name,
                   organizationId: myOrganizations[0]?.id,
                 },
               })
@@ -66,15 +74,13 @@ const OrganizationName = ({ history }) => {
                   text="Next"
                   isGetStarted
                   disabled={
-                    errors['organization[profile_name]'] ||
-                    !values['organization[profile_name]']
+                    errors.organization?.profile_name ||
+                    !values.organization?.profile_name
                   }
                   navigateTo="/pricing"
                 />
-                {errors['organization[profile_name]'] && (
-                  <TextToLeft>
-                    {errors['organization[profile_name]']}
-                  </TextToLeft>
+                {errors.organization?.profile_name && (
+                  <TextToLeft>{errors.organization?.profile_name}</TextToLeft>
                 )}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/pricing')}>
