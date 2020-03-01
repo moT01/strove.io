@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components'
-import { isMobileOnly } from 'react-device-detect'
+import styled from 'styled-components'
 
 export default styled.input`
   color: ${({ theme }) => theme.colors.c12};
