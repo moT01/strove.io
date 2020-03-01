@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { Field } from 'formik'
 
-export default styled.input`
+export default styled(Field)`
   color: ${({ theme }) => theme.colors.c12};
   width: 100%;
   height: 56px;
