@@ -108,18 +108,18 @@ const emptyWarningModalContent = {
 const CheckoutForm = props => {
   const [cardNumber, setCardNumber] = useState()
   const [isProcessing, setIsProcessing] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState()
   const [success, setSuccess] = useState(false)
   const user = useSelector(selectors.api.getUser)
   const dispatch = useDispatch()
   const organizationId = props.organization?.id
 
   useEffect(() => {
-    const { setWarningModal } = this.props
+    const { setWarningModal } = props
     !!error &&
       setWarningModal({
         visible: true,
-        content: <Text>{error.message}</Text>,
+        content: <Text>{error.message || 'Something went wrong'}</Text>,
         onSubmit: () => {
           setIsProcessing(false)
           setError(false)
@@ -212,18 +212,21 @@ const CheckoutForm = props => {
       setError(error)
     }
 
+    if (!paymentMethod) {
+      setError({ message: 'No payment method' })
+    }
+
     dispatch(
       mutation({
-        name: 'stripeSubscription',
+        name: 'stripeSubscribe',
         mutation: STRIPE_SUBSCRIBE,
         variables: {
-          paymentMethod: paymentMethod.id,
+          paymentMethod: paymentMethod?.id,
           plan: props.plan,
           name: user.name,
           email: user.email,
           organizationId,
         },
-        dataSelector: data => data.stripeSubscribe,
         onSuccess: data => handleResponse(data),
       })
     )
