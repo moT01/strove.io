@@ -1,4 +1,7 @@
-export const FormWrapper = styled.div`
+import styled, { css } from 'styled-components'
+import { isMobileOnly } from 'react-device-detect'
+
+export default styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -37,12 +40,8 @@ export const FormWrapper = styled.div`
     color: ${({ theme }) => theme.colors.c12};
     outline: 0;
     background: ${({ theme }) => theme.colors.c2};
-    width: calc(100% - 156px);
     height: 56px;
-    padding: 0;
-    padding-left: 64px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
     line-height: 36px;
     font-size: 17px;
     font-weight: normal;

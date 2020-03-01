@@ -9,6 +9,7 @@ import { loginOptions } from 'consts'
 import { actions } from 'state'
 
 import OnboardingContainer from './onboardingContainer'
+import FormField from './formField'
 import {
   LoginText,
   InvitationTitle,
@@ -24,9 +25,7 @@ const OrganizationName = () => {
         <InvitationTitle>
           What's the name of your company or team?
         </InvitationTitle>
-        <FormWrapper>
-          <input></input>
-        </FormWrapper>
+        <FormField />
       </>
     </OnboardingContainer>
   )
