@@ -25,6 +25,7 @@ import {
 } from './styled'
 
 const OrganizationName = () => {
+  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
   return (
     <OnboardingContainer>
@@ -39,10 +40,13 @@ const OrganizationName = () => {
           onSubmit={values => {
             dispatch(
               mutation({
-                name: 'sendEmail',
+                name: 'renameOrganization',
                 context: null,
                 mutation: RENAME_ORGANIZATION,
-                variables: { newName: values.name },
+                variables: {
+                  newName: values.name,
+                  organizationId: myOrganizations[0]?.id,
+                },
               })
             )
           }}
