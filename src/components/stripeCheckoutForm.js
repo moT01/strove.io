@@ -115,7 +115,7 @@ const CheckoutForm = props => {
   const organizationId = props.organization?.id
 
   useEffect(() => {
-    const { setWarningModal } = this.props
+    const { setWarningModal } = props
     !!error &&
       setWarningModal({
         visible: true,
