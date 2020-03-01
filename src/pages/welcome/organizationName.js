@@ -57,7 +57,13 @@ const OrganizationName = () => {
             </StyledForm>
           )}
         </Formik>
-        <StroveButton margin="20px 0" isPrimary text="Next" isGetStarted />
+        <StroveButton
+          margin="20px 0"
+          isPrimary
+          text="Next"
+          isGetStarted
+          navigateTo="/pricing"
+        />
       </>
     </OnboardingContainer>
   )
