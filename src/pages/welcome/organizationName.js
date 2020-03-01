@@ -55,9 +55,9 @@ const OrganizationName = ({ history }) => {
             <>
               <StyledForm>
                 <FormField
-                  type="name"
+                  type="text"
                   name="name"
-                  placeholder="Microsoft Corp"
+                  placeholder="Your company or team name"
                 ></FormField>
                 <StroveButton
                   margin="20px 0 10px"
