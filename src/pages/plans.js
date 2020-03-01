@@ -584,7 +584,6 @@ const Plans = () => {
                         buttonLabel: 'Upgrade',
                         onSubmit: () => {
                           setIsPaying(true)
-                          console.log("Let's pay", isPaying)
                           dispatch(
                             mutation({
                               name: 'changePlan',
@@ -596,7 +595,6 @@ const Plans = () => {
                               onSuccess: () => {
                                 updateOrganizations()
                                 closeWarningModal()
-                                console.log('Payment successfull', isPaying)
                               },
                             })
                           )
