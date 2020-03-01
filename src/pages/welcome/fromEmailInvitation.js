@@ -10,12 +10,7 @@ import { loginOptions } from 'consts'
 import { actions } from 'state'
 
 import OnboardingContainer from './onboardingContainer'
-import {
-  LoginText,
-  InvitationTitle,
-  LoginWrapper,
-  InvitationDetails,
-} from './styled'
+import { LoginText, Title, InvitationDetails } from './styled'
 
 const FromEmailInvitation = () => {
   const searchParams = getWindowSearchParams()
@@ -35,30 +30,26 @@ const FromEmailInvitation = () => {
   return (
     <OnboardingContainer>
       <>
-        <InvitationTitle>
+        <Title>
           You're invited to <b>{teamName}</b>
-        </InvitationTitle>
+        </Title>
         <InvitationDetails>
           {fromEmail} has invited you to join the Strove team <b>{teamName}</b>.
           Login to start collaborating!
         </InvitationDetails>
-        <LoginWrapper>
-          {loginOptions.map(loginOption => (
-            <ExternalLink
-              key={loginOption.label}
-              primary
-              href={`${loginOption.href}`}
-              onClick={() =>
-                dispatch(
-                  actions.invitations.addInvitation({ teamId, teamName })
-                )
-              }
-            >
-              {loginOption.icon}
-              <LoginText invert>Login with {loginOption.label}</LoginText>
-            </ExternalLink>
-          ))}
-        </LoginWrapper>
+        {loginOptions.map(loginOption => (
+          <ExternalLink
+            key={loginOption.label}
+            primary
+            href={`${loginOption.href}`}
+            onClick={() =>
+              dispatch(actions.invitations.addInvitation({ teamId, teamName }))
+            }
+          >
+            {loginOption.icon}
+            <LoginText invert>Login with {loginOption.label}</LoginText>
+          </ExternalLink>
+        ))}
         <InvitationDetails>
           Your sign email is <b>{invitedEmail}</b>
         </InvitationDetails>

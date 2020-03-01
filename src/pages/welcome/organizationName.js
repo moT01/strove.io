@@ -9,7 +9,7 @@ import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
 import {
-  InvitationTitle,
+  Title,
   FormField,
   StyledForm,
   StyledFormWrapper,
@@ -38,9 +38,7 @@ const OrganizationName = ({ history }) => {
   return (
     <OnboardingContainer>
       <>
-        <InvitationTitle>
-          What's the name of your company or team?
-        </InvitationTitle>
+        <Title>What's the name of your company or team?</Title>
         <Formik
           initialValues={{
             name: '',

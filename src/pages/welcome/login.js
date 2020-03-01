@@ -7,12 +7,7 @@ import { selectors } from 'state'
 import { loginOptions } from 'consts'
 
 import OnboardingContainer from './onboardingContainer'
-import {
-  LoginText,
-  LoginTitle,
-  LoginWrapper,
-  InvitationDetails,
-} from './styled'
+import { LoginText, LoginTitle, InvitationDetails } from './styled'
 
 const Login = () => {
   const token = useSelector(selectors.getToken)
@@ -29,18 +24,17 @@ const Login = () => {
           Just a quick login before you say goodbye to long environment setups
           for good.
         </InvitationDetails>
-        <LoginWrapper>
-          {loginOptions.map(loginOption => (
-            <ExternalLink
-              key={loginOption.label}
-              primary
-              href={`${loginOption.href}`}
-            >
-              {loginOption.icon}
-              <LoginText invert>Login with {loginOption.label}</LoginText>
-            </ExternalLink>
-          ))}
-        </LoginWrapper>
+        {loginOptions.map(loginOption => (
+          <ExternalLink
+            key={loginOption.label}
+            primary
+            href={`${loginOption.href}`}
+            width="100%"
+          >
+            {loginOption.icon}
+            <LoginText invert>Login with {loginOption.label}</LoginText>
+          </ExternalLink>
+        ))}
       </>
     </OnboardingContainer>
   )

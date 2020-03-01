@@ -22,7 +22,7 @@ export default styled.a`
   display: flex;
   flex-direction: row;
   height: 60px;
-  width: 300px;
+  width: ${({ width }) => width || '300px'};
   margin: 5px;
   padding: 5px;
   align-items: center;

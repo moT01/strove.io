@@ -7,11 +7,12 @@ export const LoginText = styled.span`
   font-size: 20px;
 `
 
-export const InvitationTitle = styled.div`
+export const Title = styled.div`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 28px;
   font-weight: 500;
   margin-bottom: 20px;
+  text-align: left;
 `
 
 export const LoginTitle = styled.div`
@@ -21,16 +22,11 @@ export const LoginTitle = styled.div`
   margin-bottom: 20px;
 `
 
-export const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
 export const InvitationDetails = styled.div`
   color: ${({ theme }) => theme.colors.c11};
   font-size: 18px;
-  margin: 10px;
+  text-align: left;
+  margin: 10px 0;
 `
 
 export const Illustration = styled.img`
@@ -48,10 +44,10 @@ export const WelcomeWrapper = styled.div`
 `
 
 export const SectionWrapper = styled.div`
-  padding: 20px;
+  padding: 40px;
   max-width: 520px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
 `
