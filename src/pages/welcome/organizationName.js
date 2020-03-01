@@ -13,14 +13,15 @@ import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 const validate = values => {
   let errors = {}
 
-  if (!values.name) {
-    errors.name = 'Name cannot be empty'
+  if (!values['organization[profile_name]']) {
+    errors['organization[profile_name]'] = 'Name is empty'
   }
 
   const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
 
-  if (!regex.test(values.name)) {
-    errors.name = 'Name should only contain letters and numbers'
+  if (!regex.test(values['organization[profile_name]'])) {
+    errors['organization[profile_name]'] =
+      'Name should only contain letters and numbers'
   }
 
   return errors
@@ -44,7 +45,7 @@ const OrganizationName = ({ history }) => {
                 name: 'renameOrganization',
                 mutation: RENAME_ORGANIZATION,
                 variables: {
-                  newName: values.name,
+                  newName: values['organization[profile_name]'],
                   organizationId: myOrganizations[0]?.id,
                 },
               })
@@ -56,7 +57,7 @@ const OrganizationName = ({ history }) => {
               <StyledForm>
                 <FormField
                   type="text"
-                  name="name"
+                  name="organization[profile_name]"
                   placeholder="Your company or team name"
                 ></FormField>
                 <StroveButton
@@ -64,10 +65,17 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   text="Next"
                   isGetStarted
-                  disabled={errors.name || !values.name}
+                  disabled={
+                    errors['organization[profile_name]'] ||
+                    !values['organization[profile_name]']
+                  }
                   navigateTo="/pricing"
                 />
-                {errors.name && <TextToLeft>{errors.name}</TextToLeft>}
+                {errors['organization[profile_name]'] && (
+                  <TextToLeft>
+                    {errors['organization[profile_name]']}
+                  </TextToLeft>
+                )}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/pricing')}>
                 Skip for now
