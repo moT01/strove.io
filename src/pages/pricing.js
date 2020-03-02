@@ -283,15 +283,6 @@ const ModalWrapper = styled.div`
   height: 100%;
 `
 
-// const Text = styled.div`
-//   color: ${({ theme }) => theme.colors.c1};
-//   font-size: 15px;
-//   margin-bottom: 12px;
-//   white-space: normal;
-//   text-overflow: wrap;
-//   overflow: visible;
-// `
-
 const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -559,23 +550,22 @@ const PricingPage = () => {
                           Request demo
                         </button>
                       </EmailFormWrapper>
-
-                      <Center>
-                        <TrialInfo team>
-                          <li>Free Demo</li>
-                          <li>No credit card needed</li>
-                          <li>No setup</li>
-                        </TrialInfo>
-                      </Center>
-
-                      {emailSent && (
-                        <StyledEmailConfirmation>
-                          Thank you, we'll get in touch soon!
-                        </StyledEmailConfirmation>
-                      )}
                     </Form>
                   )}
                 </Formik>
+                <Center>
+                  <TrialInfo team>
+                    <li>Free Demo</li>
+                    <li>No credit card needed</li>
+                    <li>No setup</li>
+                  </TrialInfo>
+                </Center>
+
+                {emailSent && (
+                  <StyledEmailConfirmation>
+                    Thank you, we'll get in touch soon!
+                  </StyledEmailConfirmation>
+                )}
               </PricingWrapper>
             </PricingSection>
           </Card>

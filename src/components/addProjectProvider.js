@@ -44,8 +44,18 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
   const timeExceeded = user?.timeSpent >= 72000000
+  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
 
-  const addProject = async ({ link, name, teamId, forkedFromId }) => {
+  /* TODO: Find a reasonable way to approach this */
+  const organizationWithProject = organization || myOrganizations?.[0]
+  const teamIdWithProject = teamId || myOrganizations?.[0]?.teams?.[0]?.id
+
+  const addProject = async ({
+    link,
+    name,
+    teamId = teamIdWithProject,
+    forkedFromId,
+  }) => {
     let repoLink
     let repoProvider
 
@@ -74,21 +84,17 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
     if (existingProject && !currentProject) {
-      if (existingProject.machineId) {
-        return redirectToEditor(dispatch, history)
-      } else {
-        return dispatch(
-          mutation({
-            name: 'continueProject',
-            mutation: CONTINUE_PROJECT,
-            variables: {
-              projectId: existingProject?.id,
-              teamId: existingProject?.teamId,
-            },
-            onSuccessDispatch: null,
-          })
-        )
-      }
+      return dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: {
+            projectId: existingProject?.id,
+            teamId: existingProject?.teamId,
+          },
+          onSuccessDispatch: null,
+        })
+      )
     }
 
     dispatch(
@@ -114,8 +120,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       timeExceeded &&
       !incomingProjectRepoUrl &&
       !(
-        organization.subscriptionStatus === 'active' ||
-        organization.subscriptionStatus === 'canceled'
+        organizationWithProject.subscriptionStatus === 'active' ||
+        organizationWithProject.subscriptionStatus === 'canceled'
       )
     ) {
       setModalContent('TimeExceeded')
@@ -149,7 +155,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         user,
         setModalContent,
         name,
-        teamId,
+        teamId: teamIdWithProject,
         forkedFromId,
       })
     }
