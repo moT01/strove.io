@@ -201,6 +201,7 @@ const Plans = () => {
       label: organization.name,
     }))
 
+
   useEffect(() => {
     if (paymentStatus?.data?.paymentStatus?.status === 'success' && isPaying) {
       setWarningModal({
@@ -547,7 +548,11 @@ const Plans = () => {
                     <BoldText>{subscriptionPlan.monthsCount}</BoldText>
                   </TextWithBorder>
                   <OrderPriceSum>
-                    ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
+                    ${subscriptionPlan.monthlyPrice} x {organization.value?.subscriptionStatus === 'active'
+                        ? quantity
+                        : organization.value?.users
+                        ? organization.value?.users.length
+                        : 1} users x{' '}
                     {subscriptionPlan.monthsLabel}
                     <BoldText>
                       $
