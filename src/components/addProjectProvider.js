@@ -81,12 +81,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       project => project.repoLink === `${repoLink}.git`
     )
 
-    const theSameIncomingProject = repoLink === incomingProjectRepoUrl
-
     if (existingProject && !currentProject) {
-      if (existingProject.machineId) {
-        return redirectToEditor(dispatch, history)
-      } else {
         return dispatch(
           mutation({
             name: 'continueProject',
