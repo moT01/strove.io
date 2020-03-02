@@ -159,7 +159,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         user,
         setModalContent,
         name,
-        teamId,
+        teamId: teamIdWithProject,
         forkedFromId,
       })
     }
