@@ -82,18 +82,17 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     )
 
     if (existingProject && !currentProject) {
-        return dispatch(
-          mutation({
-            name: 'continueProject',
-            mutation: CONTINUE_PROJECT,
-            variables: {
-              projectId: existingProject?.id,
-              teamId: existingProject?.teamId,
-            },
-            onSuccessDispatch: null,
-          })
-        )
-      }
+      return dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: {
+            projectId: existingProject?.id,
+            teamId: existingProject?.teamId,
+          },
+          onSuccessDispatch: null,
+        })
+      )
     }
 
     dispatch(
