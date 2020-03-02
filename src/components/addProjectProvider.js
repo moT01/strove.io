@@ -44,8 +44,18 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
   const timeExceeded = user?.timeSpent >= 72000000
+  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
 
-  const addProject = async ({ link, name, teamId, forkedFromId }) => {
+  /* TODO: Find a reasonable way to approach this */
+  const organizationWithProject = organization || myOrganizations?[0]
+  const teamWithProject = teamId || myOrganizations?[0]?.teams[0]
+
+  const addProject = async ({
+    link,
+    name,
+    teamId = teamWithProject,
+    forkedFromId,
+  }) => {
     let repoLink
     let repoProvider
 
@@ -114,8 +124,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       timeExceeded &&
       !incomingProjectRepoUrl &&
       !(
-        organization.subscriptionStatus === 'active' ||
-        organization.subscriptionStatus === 'canceled'
+        organizationWithProject.subscriptionStatus === 'active' ||
+        organizationWithProject.subscriptionStatus === 'canceled'
       )
     ) {
       setModalContent('TimeExceeded')
