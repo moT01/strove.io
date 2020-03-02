@@ -47,8 +47,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
 
   /* TODO: Find a reasonable way to approach this */
-  const organizationWithProject = organization || myOrganizations?[0]
-  const teamWithProject = teamId || myOrganizations?[0]?.teams[0]
+  const organizationWithProject = organization || myOrganizations?.[0]
+  const teamWithProject = teamId || myOrganizations?.[0]?.teams?.[0]
 
   const addProject = async ({
     link,
