@@ -48,12 +48,12 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
   /* TODO: Find a reasonable way to approach this */
   const organizationWithProject = organization || myOrganizations?.[0]
-  const teamWithProject = teamId || myOrganizations?.[0]?.teams?.[0]
+  const teamIdWithProject = teamId || myOrganizations?.[0]?.teams?.[0]?.id
 
   const addProject = async ({
     link,
     name,
-    teamId = teamWithProject,
+    teamId = teamIdWithProject,
     forkedFromId,
   }) => {
     let repoLink
