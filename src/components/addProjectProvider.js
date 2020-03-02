@@ -81,6 +81,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       project => project.repoLink === `${repoLink}.git`
     )
 
+    const theSameIncomingProject = repoLink === incomingProjectRepoUrl
+
     if (existingProject && !currentProject) {
       return dispatch(
         mutation({
