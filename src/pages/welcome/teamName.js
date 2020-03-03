@@ -14,25 +14,25 @@ const validate = values => {
   const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
   let errors = {}
 
-  if (!values.organization?.profile_name) {
-    errors.organization = 'Name is empty'
+  if (!values.team?.profile_name) {
+    errors.team = 'Name is empty'
   }
 
-  if (!regex.test(values.organization?.profile_name)) {
-    errors.organization = 'Name should only contain letters and numbers'
+  if (!regex.test(values.team?.profile_name)) {
+    errors.team = 'Name should only contain letters and numbers'
   }
 
   if (
-    values.organization?.profile_name &&
-    values.organization?.profile_name?.length < 4
+    values.team?.profile_name &&
+    values.team?.profile_name?.length < 4
   ) {
-    errors.organization = 'Name is too short'
+    errors.team = 'Name is too short'
   }
 
   return errors
 }
 
-const OrganizationName = ({ history }) => {
+const TeamName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
   return (
@@ -50,8 +50,8 @@ const OrganizationName = ({ history }) => {
                 name: 'renameOrganization',
                 mutation: RENAME_ORGANIZATION,
                 variables: {
-                  newName: values.organization?.profile_name,
-                  organizationId: myOrganizations[0]?.id,
+                  newName: values.team?.profile_name,
+                  teamId: myOrganizations[0]?.id,
                 },
               })
             )
@@ -62,7 +62,7 @@ const OrganizationName = ({ history }) => {
               <StyledForm>
                 <FormField
                   type="text"
-                  name="organization[profile_name]"
+                  name="team[profile_name]"
                   placeholder="Your company or team name"
                 ></FormField>
                 <StroveButton
@@ -71,12 +71,12 @@ const OrganizationName = ({ history }) => {
                   text="Next"
                   isGetStarted
                   disabled={
-                    errors?.organization || !values.organization?.profile_name
+                    errors?.team || !values.team?.profile_name
                   }
                   navigateTo="/pricing"
                 />
-                {errors?.organization && (
-                  <TextToLeft>{errors?.organization}</TextToLeft>
+                {errors?.team && (
+                  <TextToLeft>{errors?.team}</TextToLeft>
                 )}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/pricing')}>
@@ -90,4 +90,4 @@ const OrganizationName = ({ history }) => {
   )
 }
 
-export default memo(OrganizationName)
+export default memo(TeamName)
