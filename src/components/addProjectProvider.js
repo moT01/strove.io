@@ -8,7 +8,6 @@ import {
   getRepoProvider,
   changeRepoLinkFromSshToHttps,
   mutation,
-  redirectToEditor,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
