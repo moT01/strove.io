@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
-import { RENAME_ORGANIZATION } from 'queries'
+import { ADD_MEMBER } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
@@ -38,7 +38,7 @@ const OrganizationName = ({ history }) => {
   return (
     <OnboardingContainer>
       <>
-        <Title>What's the name of your company or organization?</Title>
+        <Title>Who else is working on your team?</Title>
         <Formik
           initialValues={{
             name: '',
@@ -48,7 +48,7 @@ const OrganizationName = ({ history }) => {
             dispatch(
               mutation({
                 name: 'renameOrganization',
-                mutation: RENAME_ORGANIZATION,
+                mutation: ADD_MEMBER,
                 variables: {
                   newName: values.organization?.profile_name,
                   organizationId: myOrganizations[0]?.id,
