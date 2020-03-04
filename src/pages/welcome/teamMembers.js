@@ -35,53 +35,6 @@ const validate = values => {
   return errors
 }
 
-const ContentWrapper = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: scroll;
-`
-
-const ControlsWrapper = styled(ContentWrapper)`
-  height: 20%;
-  overflow-y: hidden;
-`
-
-const StyledErrors = styled.span`
-  color: ${({ theme }) => theme.colors.c5};
-`
-
-const StyledInput = styled.input`
-  width: 80%;
-  border-width: 1px;
-  border-style: solid;
-  color: ${({ theme }) => theme.colors.c1};
-  border-radius: 5px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
-  text-align: left;
-  font-size: 1rem;
-  padding: 0.5vh 0;
-  :focus {
-    outline: none;
-  }
-`
-
-const Text = styled.p`
-  width: 80%;
-  color: ${({ theme }) => theme.colors.c1};
-  text-align: left;
-  font-size: 1rem;
-  padding: 0.5vh 0;
-  margin: 0px;
-  :focus {
-    outline: none;
-  }
-`
-
 const SectionTitle = styled.h2`
   align-self: flex-start;
   color: ${({ theme }) => theme.colors.c1};
@@ -108,16 +61,6 @@ const EnvsWrapper = styled(Setting)`
   align-items: flex-start;
 `
 
-const HorizontalDivider = styled.div`
-  width: 100%;
-  height: 0px;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-top-style: solid;
-  opacity: 0.4;
-  margin: 15px 0px;
-`
-
 const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -130,7 +73,6 @@ const EnvButtonsWrapper = styled(ColumnWrapper)`
 `
 
 const TableWrapper = styled(ColumnWrapper)`
-  width: 80%;
   justify-content: flex-start;
   align-items: flex-start;
 `
@@ -161,23 +103,6 @@ const TableRow = styled.div`
   width: 100%;
 `
 
-const TableCell = styled.div`
-  display: flex;
-  flex-direction: row;
-  color: ${({ theme }) => theme.colors.c1};
-  height: 100%;
-  width: ${props => (props.isRight ? '70%' : '30%')};
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  border-style: ${props => (props.isFirst ? 'solid' : 'none')}
-    ${props => (props.isRight ? 'solid' : 'none')} solid solid;
-  font-size: 1rem;
-  text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow-x: scroll;
-`
-
 const StyledField = styled(Field)`
   display: flex;
   flex-direction: row;
@@ -193,18 +118,6 @@ const StyledField = styled(Field)`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow-x: scroll;
-`
-
-const DropdownWrapper = styled.div`
-  width: 80%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  color: ${({ theme }) => theme.colors.c1};
-`
-
-const StyledSelect = styled(Select)`
-  width: ${props => (props.isLang ? '40%' : '10%')};
 `
 
 const RemoveButton = styled.button`
@@ -274,7 +187,6 @@ const validatePort = values => {
 }
 
 const OrganizationName = ({ history }) => {
-  const [editMode, setEditMode] = useState(null)
 
   const [envVariables, setEnvVariables] = useState([
     { name: 'Var one', value: 'random string' },
@@ -362,7 +274,6 @@ const OrganizationName = ({ history }) => {
                             width="100%"
                             height="2rem"
                             padding="0.3rem"
-                            onClick={() => setEditMode(null)}
                           />
                         </EnvButtonsWrapper>
                       </>
