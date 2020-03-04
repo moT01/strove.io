@@ -26,6 +26,9 @@ const OrganizationName = WithLazyLoader(
   lazy(() => import('pages/welcome/organizationName'))
 )
 const TeamName = WithLazyLoader(lazy(() => import('pages/welcome/teamName')))
+const HelloThere = WithLazyLoader(
+  lazy(() => import('pages/welcome/helloThere'))
+)
 const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (
@@ -49,6 +52,7 @@ const Strove = () => (
       <Route path="/welcome/login" component={Login} />
       <Route path="/welcome/organizationName" component={OrganizationName} />
       <Route path="/welcome/teamName" component={TeamName} />
+      <Route path="/welcome/helloThere" component={HelloThere} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
