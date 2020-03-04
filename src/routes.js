@@ -25,6 +25,10 @@ const Login = WithLazyLoader(lazy(() => import('pages/welcome/login')))
 // const OrganizationName = WithLazyLoader(
 //   lazy(() => import('pages/welcome/organizationName'))
 // )
+
+// const TeamName = WithLazyLoader(
+//   lazy(() => import('pages/welcome/teamName'))
+// )
 const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (

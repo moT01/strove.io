@@ -38,7 +38,7 @@ const OrganizationName = ({ history }) => {
   return (
     <OnboardingContainer>
       <>
-        <Title>What's the name of your company or team?</Title>
+        <Title>What's the name of your company or organization?</Title>
         <Formik
           initialValues={{
             name: '',
@@ -73,13 +73,13 @@ const OrganizationName = ({ history }) => {
                   disabled={
                     errors?.organization || !values.organization?.profile_name
                   }
-                  navigateTo="/pricing"
+                  navigateTo="/welcome/teamName"
                 />
                 {errors?.organization && (
                   <TextToLeft>{errors?.organization}</TextToLeft>
                 )}
               </StyledForm>
-              <SkipForNow onClick={() => history.push('/pricing')}>
+              <SkipForNow onClick={() => history.push('/welcome/teamName')}>
                 Skip for now
               </SkipForNow>
             </>

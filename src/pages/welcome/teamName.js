@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
-import { RENAME_ORGANIZATION } from 'queries'
+import { RENAME_TEAM } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
@@ -14,18 +14,15 @@ const validate = values => {
   const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
   let errors = {}
 
-  if (!values.team?.profile_name) {
+  if (!values.team?.team_name) {
     errors.team = 'Name is empty'
   }
 
-  if (!regex.test(values.team?.profile_name)) {
+  if (!regex.test(values.team?.team_name)) {
     errors.team = 'Name should only contain letters and numbers'
   }
 
-  if (
-    values.team?.profile_name &&
-    values.team?.profile_name?.length < 4
-  ) {
+  if (values.team?.team_name && values.team?.team_name?.length < 4) {
     errors.team = 'Name is too short'
   }
 
@@ -38,7 +35,7 @@ const TeamName = ({ history }) => {
   return (
     <OnboardingContainer>
       <>
-        <Title>What's the name of your company or team?</Title>
+        <Title>What's the name of your team?</Title>
         <Formik
           initialValues={{
             name: '',
@@ -47,11 +44,11 @@ const TeamName = ({ history }) => {
           onSubmit={values => {
             dispatch(
               mutation({
-                name: 'renameOrganization',
-                mutation: RENAME_ORGANIZATION,
+                name: 'renameTeam',
+                mutation: RENAME_TEAM,
                 variables: {
-                  newName: values.team?.profile_name,
-                  teamId: myOrganizations[0]?.id,
+                  newName: values.team?.team_name,
+                  teamId: myOrganizations[0]?.teams[0]?.id,
                 },
               })
             )
@@ -62,7 +59,7 @@ const TeamName = ({ history }) => {
               <StyledForm>
                 <FormField
                   type="text"
-                  name="team[profile_name]"
+                  name="team[team_name]"
                   placeholder="Your company or team name"
                 ></FormField>
                 <StroveButton
@@ -70,14 +67,10 @@ const TeamName = ({ history }) => {
                   isPrimary
                   text="Next"
                   isGetStarted
-                  disabled={
-                    errors?.team || !values.team?.profile_name
-                  }
+                  disabled={errors?.team || !values.team?.team_name}
                   navigateTo="/pricing"
                 />
-                {errors?.team && (
-                  <TextToLeft>{errors?.team}</TextToLeft>
-                )}
+                {errors?.team && <TextToLeft>{errors?.team}</TextToLeft>}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/pricing')}>
                 Skip for now
