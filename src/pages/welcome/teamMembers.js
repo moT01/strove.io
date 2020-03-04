@@ -47,11 +47,11 @@ const OrganizationName = ({ history }) => {
           onSubmit={values => {
             dispatch(
               mutation({
-                name: 'renameOrganization',
+                name: 'addMember',
                 mutation: ADD_MEMBER,
                 variables: {
-                  newName: values.organization?.profile_name,
-                  organizationId: myOrganizations[0]?.id,
+                  memberEmails: [],
+                  teamId: myOrganizations[0]?.teams[0]?.id,
                 },
               })
             )
