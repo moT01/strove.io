@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Formik, Field, FieldArray } from 'formik'
 import Select from 'react-select'
@@ -74,6 +74,7 @@ const EnvButtonsWrapper = styled(ColumnWrapper)`
 const TableWrapper = styled(ColumnWrapper)`
   justify-content: flex-start;
   align-items: flex-start;
+  width: 100%;
 `
 
 const SettingWrapper = styled.div`
@@ -107,11 +108,9 @@ const StyledField = styled(Field)`
   flex-direction: row;
   color: ${({ theme }) => theme.colors.c1};
   height: 100%;
-  width: ${props => (props.isRight ? '70%' : '30%')};
+  width: 100%;
   border-color: ${({ theme }) => theme.colors.c1};
   border-width: 1px;
-  border-style: ${props => (props.isFirst ? 'solid' : 'none')}
-    ${props => (props.isRight ? 'solid' : 'none')} solid solid;
   font-size: 1rem;
   text-align: center;
   white-space: nowrap;
@@ -220,11 +219,6 @@ const OrganizationName = ({ history }) => {
                             {values.envs.map((env, index) => (
                               <TableRow key={index}>
                                 <StyledField
-                                  isFirst={index === 0}
-                                  name={`envs.${index}.name`}
-                                />
-                                <StyledField
-                                  isRight
                                   isFirst={index === 0}
                                   name={`envs.${index}.value`}
                                 />
