@@ -57,7 +57,7 @@ const Setting = styled.div`
   padding: 5px;
 `
 
-const EnvsWrapper = styled(Setting)`
+const emailsWrapper = styled(Setting)`
   align-items: flex-start;
 `
 
@@ -106,25 +106,27 @@ const TableRow = styled.div`
 const AddButton = styled.button`
   height: 30px;
   text-align: center;
-  box-shadow: inset 0px 1px 0px 0px #9acc85;
-  background: linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
-  background-color: #74ad5a;
-  border: 1px solid #3b6e22;
-  display: inline-block;
+  align-self: flex-end;
+  /* box-shadow: inset 0px 1px 0px 0px #9acc85;
+  background: linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%); */
+  /* background-color: #74ad5a; */
+  /* border: 1px solid #3b6e22; */
   cursor: pointer;
-  color: #ffffff;
-  font-family: Arial;
+  /* color: #ffffff; */
+  /* font-family: Arial; */
   font-size: 13px;
   font-weight: bold;
   text-decoration: none;
-  :hover {
+  background: none;
+  border: none;
+  /* :hover {
     background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
     background-color: #68a54b;
-  }
-  :active {
+  } */
+  /* :active {
     position: relative;
     top: 1px;
-  }
+  } */
 `
 
 const validatePort = values => {
@@ -148,34 +150,33 @@ const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
-  const handleEnvSubmit = envs => {
-    console.log(envs)
+  const handleemailsubmit = emails => {
+    console.log(emails)
   }
 
   return (
     <OnboardingContainer>
       <>
         <Title>Who else is working on your team?</Title>
-        <SectionTitle>Environment variables</SectionTitle>
         <SettingWrapper>
           <Formik
-            initialValues={{ envs: ['', ''] }}
+            initialValues={{ emails: ['', ''] }}
             validate={validatePort}
             render={({ values }) => (
               <StyledForm>
-                <EnvsWrapper>
+                <emailsWrapper>
                   <FieldArray
-                    name="envs"
+                    name="emails"
                     render={arrayHelpers => (
                       <>
                         <TableWrapper>
                           <Table>
-                            {values.envs.map((env, index) => (
+                            {values.emails.map((env, index) => (
                               <TableRow key={index}>
                                 <FormField
                                   type="email"
                                   placeholder="name@example.com"
-                                  name={`envs.${index}.value`}
+                                  name={`emails.${index}.value`}
                                 />
                               </TableRow>
                             ))}
@@ -192,7 +193,7 @@ const OrganizationName = ({ history }) => {
                       </>
                     )}
                   />
-                </EnvsWrapper>
+                </emailsWrapper>
                 <EnvButtonsWrapper>
                   <StroveButton
                     isPrimary
@@ -202,8 +203,8 @@ const OrganizationName = ({ history }) => {
                     height="2rem"
                     padding="0.3rem"
                     onClick={() =>
-                      handleEnvSubmit(
-                        values.envs.filter(
+                      handleemailsubmit(
+                        values.emails.filter(
                           env => env.value !== '' && env.name !== ''
                         )
                       )
