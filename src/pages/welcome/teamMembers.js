@@ -100,21 +100,7 @@ const TableRow = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-`
-
-const StyledField = styled(Field)`
-  display: flex;
-  flex-direction: row;
-  color: ${({ theme }) => theme.colors.c1};
-  height: 100%;
-  width: 100%;
-  border-color: ${({ theme }) => theme.colors.c1};
-  border-width: 1px;
-  font-size: 1rem;
-  text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow-x: scroll;
+  margin: 0 0 10px;
 `
 
 const RemoveButton = styled.button`
