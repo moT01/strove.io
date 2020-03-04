@@ -8,15 +8,26 @@ import { RENAME_ORGANIZATION } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
+import {
+  Title,
+  FormField,
+  StyledForm,
+  SkipForNow,
+  TextToLeft,
+  Details,
+} from './styled'
 
 const HelloThere = ({ history }) => {
   const dispatch = useDispatch()
   return (
     <OnboardingContainer>
       <>
-        <Title>Hello there!</Title>
-        <Title>Strove is an alternative for local software development</Title>
+        <div>
+          <Title>Hello there!</Title>
+          <Details>
+            Strove is an alternative for local software development
+          </Details>
+        </div>
         <SkipForNow onClick={() => history.push('/app/dashboard')}>
           Go to my dashboard
         </SkipForNow>
