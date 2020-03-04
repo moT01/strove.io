@@ -60,7 +60,7 @@ const TeamName = ({ history }) => {
                 <FormField
                   type="text"
                   name="team[team_name]"
-                  placeholder="Your company or team name"
+                  placeholder="Your team name"
                 ></FormField>
                 <StroveButton
                   margin="20px 0 10px"

@@ -63,7 +63,7 @@ const OrganizationName = ({ history }) => {
                 <FormField
                   type="text"
                   name="organization[profile_name]"
-                  placeholder="Your company or team name"
+                  placeholder="Your company or organization name"
                 ></FormField>
                 <StroveButton
                   margin="20px 0 10px"
