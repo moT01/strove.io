@@ -131,8 +131,6 @@ const validatePort = values => {
 }
 
 const OrganizationName = ({ history }) => {
-  const [envVariables, setEnvVariables] = useState(['', ''])
-
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
@@ -146,7 +144,7 @@ const OrganizationName = ({ history }) => {
         <Title>Who else is working on your team?</Title>
         <SettingWrapper>
           <Formik
-            initialValues={{ emails: ['', ''] }}
+            initialValues={{ emails: ['', '', ''] }}
             validate={validatePort}
             render={({ values }) => (
               <StyledForm>
@@ -163,6 +161,7 @@ const OrganizationName = ({ history }) => {
                                   type="email"
                                   placeholder="name@example.com"
                                   name={`emails.${index}.value`}
+                                  noValidate
                                 />
                               </TableRow>
                             ))}
