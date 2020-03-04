@@ -182,27 +182,22 @@ const OrganizationName = ({ history }) => {
                 </emailsWrapper>
                 <EnvButtonsWrapper>
                   <StroveButton
+                    margin="20px 0 10px"
                     isPrimary
-                    type="submit"
-                    text="Save"
-                    width="100%"
-                    height="2rem"
-                    padding="0.3rem"
-                    onClick={() =>
-                      handleSubmit(values.emails.filter(email => email.value))
-                    }
-                  />
-                  <StroveButton
-                    type="submit"
-                    text="Cancel"
-                    width="100%"
-                    height="2rem"
-                    padding="0.3rem"
+                    text="Add Teammates"
+                    isGetStarted
+                    // disabled={
+                    //   errors?.organization || !values.organization?.profile_name
+                    // }
+                    navigateTo="/welcome/teamName"
                   />
                 </EnvButtonsWrapper>
               </StyledForm>
             )}
           />
+          <SkipForNow onClick={() => history.push('/welcome/teamName')}>
+            Skip for now
+          </SkipForNow>
         </SettingWrapper>
       </>
     </OnboardingContainer>
