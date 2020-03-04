@@ -1,6 +1,9 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Formik } from 'formik'
+import styled, { keyframes } from 'styled-components'
+import { isMobileOnly, isMobile } from 'react-device-detect'
+import { Formik, Field, FieldArray } from 'formik'
+import Select from 'react-select'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -32,59 +35,344 @@ const validate = values => {
   return errors
 }
 
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-y: scroll;
+`
+
+const ControlsWrapper = styled(ContentWrapper)`
+  height: 20%;
+  overflow-y: hidden;
+`
+
+const StyledErrors = styled.span`
+  color: ${({ theme }) => theme.colors.c5};
+`
+
+const StyledInput = styled.input`
+  width: 80%;
+  border-width: 1px;
+  border-style: solid;
+  color: ${({ theme }) => theme.colors.c1};
+  border-radius: 5px;
+  border-color: ${({ theme }) => theme.colors.c1};
+  box-shadow: 0 1vh 1vh -1.5vh ${({ theme }) => theme.colors.c1};
+  text-align: left;
+  font-size: 1rem;
+  padding: 0.5vh 0;
+  :focus {
+    outline: none;
+  }
+`
+
+const Text = styled.p`
+  width: 80%;
+  color: ${({ theme }) => theme.colors.c1};
+  text-align: left;
+  font-size: 1rem;
+  padding: 0.5vh 0;
+  margin: 0px;
+  :focus {
+    outline: none;
+  }
+`
+
+const SectionTitle = styled.h2`
+  align-self: flex-start;
+  color: ${({ theme }) => theme.colors.c1};
+  text-align: left;
+  font-size: 1rem;
+  padding: 0.5vh 0;
+  margin: 0px;
+  :focus {
+    outline: none;
+  }
+`
+
+const Setting = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+`
+
+const EnvsWrapper = styled(Setting)`
+  align-items: flex-start;
+`
+
+const HorizontalDivider = styled.div`
+  width: 100%;
+  height: 0px;
+  border-color: ${({ theme }) => theme.colors.c1};
+  border-width: 1px;
+  border-top-style: solid;
+  opacity: 0.4;
+  margin: 15px 0px;
+`
+
+const ColumnWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const EnvButtonsWrapper = styled(ColumnWrapper)`
+  width: 20%;
+  justify-content: flex-start;
+  align-items: center;
+`
+
+const TableWrapper = styled(ColumnWrapper)`
+  width: 80%;
+  justify-content: flex-start;
+  align-items: flex-start;
+`
+
+const SettingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2vh 0 0;
+`
+
+const Table = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+`
+
+const TableRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 35px;
+  width: 100%;
+`
+
+const TableCell = styled.div`
+  display: flex;
+  flex-direction: row;
+  color: ${({ theme }) => theme.colors.c1};
+  height: 100%;
+  width: ${props => (props.isRight ? '70%' : '30%')};
+  border-color: ${({ theme }) => theme.colors.c1};
+  border-width: 1px;
+  border-style: ${props => (props.isFirst ? 'solid' : 'none')}
+    ${props => (props.isRight ? 'solid' : 'none')} solid solid;
+  font-size: 1rem;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: scroll;
+`
+
+const StyledField = styled(Field)`
+  display: flex;
+  flex-direction: row;
+  color: ${({ theme }) => theme.colors.c1};
+  height: 100%;
+  width: ${props => (props.isRight ? '70%' : '30%')};
+  border-color: ${({ theme }) => theme.colors.c1};
+  border-width: 1px;
+  border-style: ${props => (props.isFirst ? 'solid' : 'none')}
+    ${props => (props.isRight ? 'solid' : 'none')} solid solid;
+  font-size: 1rem;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: scroll;
+`
+
+const DropdownWrapper = styled.div`
+  width: 80%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.c1};
+`
+
+const StyledSelect = styled(Select)`
+  width: ${props => (props.isLang ? '40%' : '10%')};
+`
+
+const RemoveButton = styled.button`
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  box-shadow: inset 0px 1px 0px 0px #cf866c;
+  background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+  background-color: #d0451b;
+  border-radius: 100%;
+  border: 1px solid #942911;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 13px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #854629;
+  :hover {
+    background: linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+    background-color: #bc3315;
+  }
+  :active {
+    position: relative;
+    top: 1px;
+  }
+`
+
+const AddButton = styled.button`
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  box-shadow: inset 0px 1px 0px 0px #9acc85;
+  background: linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+  background-color: #74ad5a;
+  border: 1px solid #3b6e22;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  :hover {
+    background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
+    background-color: #68a54b;
+  }
+  :active {
+    position: relative;
+    top: 1px;
+  }
+`
+
+const validatePort = values => {
+  let errors = {}
+  const port = values.port
+
+  if (!port) {
+    errors.port = 'This field is required. Please provide the information'
+    return errors
+  } else if (!/[0-9]{4}/g.test(port)) {
+    errors.port = 'Invalid port format'
+    return errors
+  }
+
+  return errors
+}
+
 const OrganizationName = ({ history }) => {
+  const [editMode, setEditMode] = useState(null)
+
+  const [envVariables, setEnvVariables] = useState([
+    { name: 'Var one', value: 'random string' },
+    { name: 'What is love?', value: `Baby don't hurt me` },
+  ])
+
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
+
+  const handleEnvSubmit = envs => {
+    console.log(envs)
+  }
+
   return (
     <OnboardingContainer>
       <>
         <Title>Who else is working on your team?</Title>
-        <Formik
-          initialValues={{
-            name: '',
-          }}
-          validate={validate}
-          onSubmit={values => {
-            dispatch(
-              mutation({
-                name: 'addMember',
-                mutation: ADD_MEMBER,
-                variables: {
-                  memberEmails: [],
-                  teamId: myOrganizations[0]?.teams[0]?.id,
-                },
-              })
-            )
-          }}
-        >
-          {({ errors, values }) => (
-            <>
+        <SectionTitle>Environment variables</SectionTitle>
+        <SettingWrapper>
+          <Formik
+            initialValues={{
+              envs: envVariables,
+            }}
+            validate={validatePort}
+            render={({ values }) => (
               <StyledForm>
-                <FormField
-                  type="text"
-                  name="organization[profile_name]"
-                  placeholder="Your company or organization name"
-                ></FormField>
-                <StroveButton
-                  margin="20px 0 10px"
-                  isPrimary
-                  text="Next"
-                  isGetStarted
-                  disabled={
-                    errors?.organization || !values.organization?.profile_name
-                  }
-                  navigateTo="/welcome/teamName"
-                />
-                {errors?.organization && (
-                  <TextToLeft>{errors?.organization}</TextToLeft>
-                )}
+                <EnvsWrapper>
+                  <FieldArray
+                    name="envs"
+                    render={arrayHelpers => (
+                      <>
+                        <TableWrapper>
+                          <Table>
+                            {values.envs.map((env, index) => (
+                              <TableRow key={index}>
+                                <StyledField
+                                  isFirst={index === 0}
+                                  name={`envs.${index}.name`}
+                                />
+                                <StyledField
+                                  isRight
+                                  isFirst={index === 0}
+                                  name={`envs.${index}.value`}
+                                />
+                                <RemoveButton
+                                  type="button"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  -
+                                </RemoveButton>
+                              </TableRow>
+                            ))}
+                          </Table>
+                          <AddButton
+                            type="button"
+                            onClick={() => {
+                              // values.envs[values.envs.length - 1].name !== '' &&
+                              //   values.envs[values.envs.length - 1].value !==
+                              //     '' &&
+                              arrayHelpers.push({ name: '', value: '' })
+                            }}
+                          >
+                            +
+                          </AddButton>
+                        </TableWrapper>
+                        <EnvButtonsWrapper>
+                          <StroveButton
+                            isPrimary
+                            type="submit"
+                            text="Save"
+                            width="100%"
+                            height="2rem"
+                            padding="0.3rem"
+                            onClick={() =>
+                              handleEnvSubmit(
+                                values.envs.filter(
+                                  env => env.value !== '' && env.name !== ''
+                                )
+                              )
+                            }
+                          />
+                          <StroveButton
+                            type="submit"
+                            text="Cancel"
+                            width="100%"
+                            height="2rem"
+                            padding="0.3rem"
+                            onClick={() => setEditMode(null)}
+                          />
+                        </EnvButtonsWrapper>
+                      </>
+                    )}
+                  />
+                </EnvsWrapper>
               </StyledForm>
-              <SkipForNow onClick={() => history.push('/welcome/teamName')}>
-                Skip for now
-              </SkipForNow>
-            </>
-          )}
-        </Formik>
+            )}
+          />
+        </SettingWrapper>
       </>
     </OnboardingContainer>
   )

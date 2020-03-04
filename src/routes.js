@@ -26,6 +26,9 @@ const OrganizationName = WithLazyLoader(
   lazy(() => import('pages/welcome/organizationName'))
 )
 const TeamName = WithLazyLoader(lazy(() => import('pages/welcome/teamName')))
+const TeamMembers = WithLazyLoader(
+  lazy(() => import('pages/welcome/teamMembers'))
+)
 const HelloThere = WithLazyLoader(
   lazy(() => import('pages/welcome/helloThere'))
 )
@@ -52,6 +55,7 @@ const Strove = () => (
       <Route path="/welcome/login" component={Login} />
       <Route path="/welcome/organizationName" component={OrganizationName} />
       <Route path="/welcome/teamName" component={TeamName} />
+      <Route path="/welcome/teamMembers" component={TeamMembers} />
       <Route path="/welcome/helloThere" component={HelloThere} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
