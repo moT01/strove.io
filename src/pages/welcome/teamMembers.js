@@ -99,7 +99,6 @@ const TableRow = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  height: 35px;
   width: 100%;
 `
 
@@ -218,16 +217,11 @@ const OrganizationName = ({ history }) => {
                           <Table>
                             {values.envs.map((env, index) => (
                               <TableRow key={index}>
-                                <StyledField
-                                  isFirst={index === 0}
+                                <FormField
+                                  type="email"
+                                  placeholder="name@example.com"
                                   name={`envs.${index}.value`}
                                 />
-                                <RemoveButton
-                                  type="button"
-                                  onClick={() => arrayHelpers.remove(index)}
-                                >
-                                  -
-                                </RemoveButton>
                               </TableRow>
                             ))}
                           </Table>
