@@ -393,6 +393,10 @@ const Plans = () => {
               <>
                 <Title>2. Subscription information</Title>
                 <Text>Subscription status: canceled</Text>
+                <Text>
+                  Your subscription will be active until the ned of your billing
+                  period.
+                </Text>
                 <StroveButton
                   isPrimary
                   padding="5px"
