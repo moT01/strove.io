@@ -107,26 +107,12 @@ const AddButton = styled.button`
   height: 30px;
   text-align: center;
   align-self: flex-end;
-  /* box-shadow: inset 0px 1px 0px 0px #9acc85;
-  background: linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%); */
-  /* background-color: #74ad5a; */
-  /* border: 1px solid #3b6e22; */
   cursor: pointer;
-  /* color: #ffffff; */
-  /* font-family: Arial; */
   font-size: 13px;
   font-weight: bold;
   text-decoration: none;
   background: none;
   border: none;
-  /* :hover {
-    background: linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-    background-color: #68a54b;
-  } */
-  /* :active {
-    position: relative;
-    top: 1px;
-  } */
 `
 
 const validatePort = values => {
@@ -150,7 +136,7 @@ const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
-  const handleemailsubmit = emails => {
+  const handleSubmit = emails => {
     console.log(emails)
   }
 
@@ -203,11 +189,7 @@ const OrganizationName = ({ history }) => {
                     height="2rem"
                     padding="0.3rem"
                     onClick={() =>
-                      handleemailsubmit(
-                        values.emails.filter(
-                          env => env.value !== '' && env.name !== ''
-                        )
-                      )
+                      handleSubmit(values.emails.filter(email => email.value))
                     }
                   />
                   <StroveButton
