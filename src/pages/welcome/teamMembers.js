@@ -67,7 +67,6 @@ const ColumnWrapper = styled.div`
 `
 
 const EnvButtonsWrapper = styled(ColumnWrapper)`
-  width: 20%;
   justify-content: flex-start;
   align-items: center;
 `
@@ -147,7 +146,6 @@ const RemoveButton = styled.button`
 `
 
 const AddButton = styled.button`
-  width: 30px;
   height: 30px;
   text-align: center;
   box-shadow: inset 0px 1px 0px 0px #9acc85;
@@ -187,7 +185,6 @@ const validatePort = values => {
 }
 
 const OrganizationName = ({ history }) => {
-
   const [envVariables, setEnvVariables] = useState([
     { name: 'Var one', value: 'random string' },
     { name: 'What is love?', value: `Baby don't hurt me` },
@@ -249,37 +246,37 @@ const OrganizationName = ({ history }) => {
                               arrayHelpers.push({ name: '', value: '' })
                             }}
                           >
-                            +
+                            + Add another
                           </AddButton>
                         </TableWrapper>
-                        <EnvButtonsWrapper>
-                          <StroveButton
-                            isPrimary
-                            type="submit"
-                            text="Save"
-                            width="100%"
-                            height="2rem"
-                            padding="0.3rem"
-                            onClick={() =>
-                              handleEnvSubmit(
-                                values.envs.filter(
-                                  env => env.value !== '' && env.name !== ''
-                                )
-                              )
-                            }
-                          />
-                          <StroveButton
-                            type="submit"
-                            text="Cancel"
-                            width="100%"
-                            height="2rem"
-                            padding="0.3rem"
-                          />
-                        </EnvButtonsWrapper>
                       </>
                     )}
                   />
                 </EnvsWrapper>
+                <EnvButtonsWrapper>
+                  <StroveButton
+                    isPrimary
+                    type="submit"
+                    text="Save"
+                    width="100%"
+                    height="2rem"
+                    padding="0.3rem"
+                    onClick={() =>
+                      handleEnvSubmit(
+                        values.envs.filter(
+                          env => env.value !== '' && env.name !== ''
+                        )
+                      )
+                    }
+                  />
+                  <StroveButton
+                    type="submit"
+                    text="Cancel"
+                    width="100%"
+                    height="2rem"
+                    padding="0.3rem"
+                  />
+                </EnvButtonsWrapper>
               </StyledForm>
             )}
           />
