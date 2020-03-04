@@ -35,18 +35,6 @@ const validate = values => {
   return errors
 }
 
-const SectionTitle = styled.h2`
-  align-self: flex-start;
-  color: ${({ theme }) => theme.colors.c1};
-  text-align: left;
-  font-size: 1rem;
-  padding: 0.5vh 0;
-  margin: 0px;
-  :focus {
-    outline: none;
-  }
-`
-
 const EmailsWrapper = styled.div`
   align-items: flex-start;
   display: flex;
