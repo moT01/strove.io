@@ -47,7 +47,8 @@ const SectionTitle = styled.h2`
   }
 `
 
-const Setting = styled.div`
+const EmailsWrapper = styled.div`
+  align-items: flex-start;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -55,10 +56,6 @@ const Setting = styled.div`
   width: 100%;
   margin: 5px 0;
   padding: 5px;
-`
-
-const emailsWrapper = styled(Setting)`
-  align-items: flex-start;
 `
 
 const ColumnWrapper = styled.div`
@@ -148,7 +145,7 @@ const OrganizationName = ({ history }) => {
             validate={validatePort}
             render={({ values }) => (
               <StyledForm>
-                <emailsWrapper>
+                <EmailsWrapper>
                   <FieldArray
                     name="emails"
                     render={arrayHelpers => (
@@ -178,7 +175,7 @@ const OrganizationName = ({ history }) => {
                       </>
                     )}
                   />
-                </emailsWrapper>
+                </EmailsWrapper>
                 <EnvButtonsWrapper>
                   <StroveButton
                     margin="20px 0 10px"
