@@ -16,7 +16,7 @@ const GoBackTo = () => {
     if (localStorage.getItem('token') && goBackTo) {
       window.location.replace(goBackTo)
     }
-  }, 1000)
+  }, 100)
 
   return <FullScreenLoader type="redirecting" isFullScreen color="#0072ce" />
 }
