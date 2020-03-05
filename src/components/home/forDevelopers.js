@@ -27,7 +27,7 @@ const ForEnterprise = () => (
       <StyledProductDescription color={theme.colors.c26}>
         Strove is the platform made by programmers for programmers. We made sure
         that Strove resembles local environment as closely as possible while
-        adding cloud-related productivity benefits on top of it.
+        adding cloud-related productivity benefits on top of it
       </StyledProductDescription>
     </SectionDivider>
   </StyledSectionWrapper>

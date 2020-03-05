@@ -34,7 +34,7 @@ const Banner = () => (
       isMobileOnly={isMobileOnly}
     >
       <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
-        <StyledH1>Cloud alternative for software development</StyledH1>
+        <StyledH1>Cloud alternative for local software development</StyledH1>
         <StyledProductDescription>
           Manage team. Write, run and share code, all in one place
         </StyledProductDescription>

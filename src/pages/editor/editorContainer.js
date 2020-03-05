@@ -5,7 +5,12 @@ import { withRouter } from 'react-router-dom'
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
-import { mutation, getWindowPathName, getWindowSearchParams } from 'utils'
+import {
+  mutation,
+  getWindowPathName,
+  getWindowSearchParams,
+  updateOrganizations,
+} from 'utils'
 import Editor from './editor'
 
 const EditorWrapper = ({ history }) => {
@@ -30,7 +35,7 @@ const EditorWrapper = ({ history }) => {
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId, teamId: currentProject.teamId },
-          onSuccessDispatch: null,
+          onSuccessDispatch: updateOrganizations,
         })
       )
     }

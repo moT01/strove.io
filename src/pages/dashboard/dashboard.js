@@ -680,7 +680,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
@@ -722,7 +722,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
@@ -814,7 +814,7 @@ const Dashboard = ({ history }) => {
             mutation({
               name: 'addMember',
               mutation: ADD_MEMBER,
-              variables: { memberEmail, teamId: editTeam.id },
+              variables: { memberEmails: [memberEmail], teamId: editTeam.id },
               onSuccess: () => {
                 setAddMemberModal(false)
                 closeWarningModal()
