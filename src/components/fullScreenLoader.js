@@ -83,7 +83,11 @@ const Loader = ({ type = 'addProject', ...props }) => {
       'Starting virtual machine',
     ],
     openProject: ['Launching editor'],
-    continueProject: ['Reserving resources', 'Starting virtual machine'],
+    continueProject: [
+      'Checking permissions',
+      'Reserving resources',
+      'Starting virtual machine',
+    ],
     redirecting: ['Redirecting back to origin site...'],
     processPayment: ['Processing payment'],
   }
