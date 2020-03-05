@@ -48,23 +48,22 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
-console.log('is it on?')
+export const getProjects = createSelector(getMyOrganizations, organizations => {
+  let projects = []
+  organizations.forEach(organization => {
+    organization.teams &&
+      organization.teams.forEach(team => {
+        if (Array.isArray(team?.projects)) {
+          projects = [...projects, ...team.projects]
+        }
+      })
+  })
+  return projects
+})
 
-export const getActiveProjects = createSelector(
-  getMyOrganizations,
-  organizations => {
-    let projects = []
-    organizations.forEach(organization => {
-      organization.teams &&
-        organization.teams.forEach(team => {
-          if (Array.isArray(team?.projects)) {
-            projects = [...projects, ...team.projects]
-          }
-        })
-    })
-    return projects.filter(project => project?.machineId)
-  }
-)
+export const getActiveProjects = createSelector(getProjects, projects => {
+  return projects.filter(project => project?.machineId)
+})
 
 export const getCurrentProject = createSelector(
   getActiveProjects,
