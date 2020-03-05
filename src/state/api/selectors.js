@@ -61,6 +61,14 @@ export const getProjects = createSelector(getMyOrganizations, organizations => {
   return projects
 })
 
+export const getMyProjects = createSelector(
+  getProjects,
+  getUserId,
+  (projects, userId) => {
+    return projects.filter(project => project?.userId === userId)
+  }
+)
+
 export const getActiveProjects = createSelector(getProjects, projects => {
   return projects.filter(project => project?.machineId)
 })

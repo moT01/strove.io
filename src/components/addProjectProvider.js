@@ -30,7 +30,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const user = useSelector(selectors.api.getUser)
-  const projects = useSelector(selectors.api.getProjects)
+  const projects = useSelector(selectors.api.getMyProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
