@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Formik, Field, FieldArray } from 'formik'
 import Select from 'react-select'
+import isEmail from 'validator/lib/isEmail'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -15,22 +16,22 @@ import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validate = values => {
   const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
-  let errors = {}
 
-  if (!values.organization?.profile_name) {
-    errors.organization = 'Name is empty'
+  if (!values.emails?.any(email => !!email.value.length)) {
+    errors.emails = 'No emails'
   }
+  const errors = values.map(value => {})
 
-  if (!regex.test(values.organization?.profile_name)) {
-    errors.organization = 'Name should only contain letters and numbers'
-  }
+  // if (!regex.test(values.organization?.profile_name)) {
+  //   errors.emails = 'Name should only contain letters and numbers'
+  // }
 
-  if (
-    values.organization?.profile_name &&
-    values.organization?.profile_name?.length < 4
-  ) {
-    errors.organization = 'Name is too short'
-  }
+  // if (
+  //   values.organization?.profile_name &&
+  //   values.organization?.profile_name?.length < 4
+  // ) {
+  //   errors.emails = 'Name is too short'
+  // }
 
   return errors
 }
