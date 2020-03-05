@@ -82,19 +82,7 @@ const StyledButtonWrapper = styled.div`
   margin: 100px 0;
 `
 
-const StyledFeatureWrapper = styled.div`
-  width: 100vw;
-  padding: 0 20px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-self: center;
-  align-items: center;
-  overflow: hidden;
-`
-
-const Technologies = () => (
+const CTA = () => (
   <>
     <StyledCTAWrapper>
       <StyledButtonWrapper>
@@ -111,4 +99,4 @@ const Technologies = () => (
   </>
 )
 
-export default memo(Technologies)
+export default memo(CTA)

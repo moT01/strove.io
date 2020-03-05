@@ -6,7 +6,7 @@ import { devFeatures } from 'consts'
 
 import Banner from './banner'
 import Features from './features'
-import Technologies from './technologies'
+import Technologies from './CTA'
 import ForDevelopers from './forDevelopers'
 import Footer from '../footer'
 
