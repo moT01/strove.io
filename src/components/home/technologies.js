@@ -96,28 +96,6 @@ const StyledFeatureWrapper = styled.div`
 
 const Technologies = () => (
   <>
-    <StyledFeatureWrapper>
-      <div>Obviously, this app is made with Strove as well</div>
-      <StyledButtonsWrapper>
-        <StyledAnchor
-          primary
-          href="https://github.com/stroveio/strove.io-client"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Check our source
-        </StyledAnchor>
-        or, even better
-        <StyledAnchor
-          primary
-          href="/#https://github.com/stroveio/strove.io-client"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Edit it in Strove
-        </StyledAnchor>
-      </StyledButtonsWrapper>
-    </StyledFeatureWrapper>
     <StyledCTAWrapper>
       <StyledButtonWrapper>
         <StyledH1>Choose a better way to get your ideas out there</StyledH1>
