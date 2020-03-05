@@ -84,7 +84,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     if (
       (existingProject && !currentProject) ||
-      existingProject === currentProject
+      (existingProject && existingProject === currentProject)
     ) {
       return dispatch(
         mutation({
