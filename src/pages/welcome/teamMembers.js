@@ -100,21 +100,6 @@ const AddButton = styled.button`
   border: none;
 `
 
-const validatePort = values => {
-  let errors = {}
-  const port = values.port
-
-  if (!port) {
-    errors.port = 'This field is required. Please provide the information'
-    return errors
-  } else if (!/[0-9]{4}/g.test(port)) {
-    errors.port = 'Invalid port format'
-    return errors
-  }
-
-  return errors
-}
-
 const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
@@ -130,10 +115,11 @@ const OrganizationName = ({ history }) => {
         <SettingWrapper>
           <Formik
             initialValues={{ emails: ['', '', ''] }}
-            validate={validatePort}
-            render={({ values }) => (
+            validate={validate}
+            render={({ values, errors }) => (
               <StyledForm>
                 <EmailsWrapper>
+                  {console.log('errors', errors)}
                   <FieldArray
                     name="emails"
                     render={arrayHelpers => (
@@ -170,9 +156,9 @@ const OrganizationName = ({ history }) => {
                     isPrimary
                     text="Add Teammates"
                     isGetStarted
-                    // disabled={
-                    //   errors?.organization || !values.organization?.profile_name
-                    // }
+                    disabled={
+                      errors?.emails || !values.organization?.profile_name
+                    }
                     navigateTo="/welcome/teamName"
                   />
                 </EnvButtonsWrapper>
