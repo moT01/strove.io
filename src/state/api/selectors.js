@@ -48,6 +48,8 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
+console.log('is it on?')
+
 export const getActiveProjects = createSelector(
   getMyOrganizations,
   organizations => {
