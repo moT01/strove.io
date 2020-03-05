@@ -15,25 +15,14 @@ import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validate = values => {
-  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
+  const errors = values.emails.map(value => {
+    if (!isEmail(value.value)) {
+      return 'Invalid email'
+    }
+    return null
+  })
 
-  if (!values.emails?.any(email => !!email.value.length)) {
-    errors.emails = 'No emails'
-  }
-  const errors = values.map(value => {})
-
-  // if (!regex.test(values.organization?.profile_name)) {
-  //   errors.emails = 'Name should only contain letters and numbers'
-  // }
-
-  // if (
-  //   values.organization?.profile_name &&
-  //   values.organization?.profile_name?.length < 4
-  // ) {
-  //   errors.emails = 'Name is too short'
-  // }
-
-  return errors
+  return { emails: errors }
 }
 
 const EmailsWrapper = styled.div`
@@ -123,6 +112,7 @@ const OrganizationName = ({ history }) => {
                   {console.log('errors', errors)}
                   <FieldArray
                     name="emails"
+                    validateOnChange
                     render={arrayHelpers => (
                       <>
                         <TableWrapper>
