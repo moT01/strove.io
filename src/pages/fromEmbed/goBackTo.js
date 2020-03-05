@@ -8,8 +8,6 @@ const GoBackTo = () => {
   const searchParams = getWindowSearchParams()
   const goBackTo = searchParams.get('goBackTo')
 
-  console.log(goBackTo)
-
   /*
     Redirect logged in users
     Redirect should only happen once logged in state is saved to localStorage.
