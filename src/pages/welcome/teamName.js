@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
-import { RENAME_ORGANIZATION } from 'queries'
+import { RENAME_TEAM } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
@@ -14,31 +14,28 @@ const validate = values => {
   const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
   let errors = {}
 
-  if (!values.organization?.profile_name) {
-    errors.organization = 'Name is empty'
+  if (!values.team?.team_name) {
+    errors.team = 'Name is empty'
   }
 
-  if (!regex.test(values.organization?.profile_name)) {
-    errors.organization = 'Name should only contain letters and numbers'
+  if (!regex.test(values.team?.team_name)) {
+    errors.team = 'Name should only contain letters and numbers'
   }
 
-  if (
-    values.organization?.profile_name &&
-    values.organization?.profile_name?.length < 4
-  ) {
-    errors.organization = 'Name is too short'
+  if (values.team?.team_name && values.team?.team_name?.length < 4) {
+    errors.team = 'Name is too short'
   }
 
   return errors
 }
 
-const OrganizationName = ({ history }) => {
+const TeamName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
   return (
     <OnboardingContainer>
       <>
-        <Title>What's the name of your company or organization?</Title>
+        <Title>What's the name of your team?</Title>
         <Formik
           initialValues={{
             name: '',
@@ -47,11 +44,11 @@ const OrganizationName = ({ history }) => {
           onSubmit={values => {
             dispatch(
               mutation({
-                name: 'renameOrganization',
-                mutation: RENAME_ORGANIZATION,
+                name: 'renameTeam',
+                mutation: RENAME_TEAM,
                 variables: {
-                  newName: values.organization?.profile_name,
-                  organizationId: myOrganizations[0]?.id,
+                  newName: values.team?.team_name,
+                  teamId: myOrganizations[0]?.teams[0]?.id,
                 },
               })
             )
@@ -62,24 +59,20 @@ const OrganizationName = ({ history }) => {
               <StyledForm>
                 <FormField
                   type="text"
-                  name="organization[profile_name]"
-                  placeholder="Your company or organization name"
+                  name="team[team_name]"
+                  placeholder="Your team name"
                 ></FormField>
                 <StroveButton
                   margin="20px 0 10px"
                   isPrimary
                   text="Next"
                   isGetStarted
-                  disabled={
-                    errors?.organization || !values.organization?.profile_name
-                  }
-                  navigateTo="/welcome/teamName"
+                  disabled={errors?.team || !values.team?.team_name}
+                  navigateTo="/pricing"
                 />
-                {errors?.organization && (
-                  <TextToLeft>{errors?.organization}</TextToLeft>
-                )}
+                {errors?.team && <TextToLeft>{errors?.team}</TextToLeft>}
               </StyledForm>
-              <SkipForNow onClick={() => history.push('/welcome/teamName')}>
+              <SkipForNow onClick={() => history.push('/pricing')}>
                 Skip for now
               </SkipForNow>
             </>
@@ -90,4 +83,4 @@ const OrganizationName = ({ history }) => {
   )
 }
 
-export default memo(OrganizationName)
+export default memo(TeamName)

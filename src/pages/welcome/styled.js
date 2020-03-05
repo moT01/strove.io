@@ -23,7 +23,7 @@ export const Title = styled.div`
   text-align: left;
 `
 
-export const InvitationDetails = styled.div`
+export const Details = styled.div`
   color: ${({ theme }) => theme.colors.c11};
   font-size: 18px;
   text-align: left;

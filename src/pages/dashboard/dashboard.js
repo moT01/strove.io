@@ -254,7 +254,7 @@ const Dashboard = ({ history }) => {
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
-                {/* {organization.owner.id === user.id && (
+                {/* {organization.owner.id === user.id && organization.subscriptionStatus === 'inactive' && user?.timeSpent >= 65800000 (
                   <>
                     <TimeBarContainer>
                       <TimeBar time={user.timeSpent} />
@@ -680,10 +680,18 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
-            closeWarningModal()
+            setWarningModal({
+              visible: true,
+              content: (
+                <ModalText>
+                  🎉 We have sent an invitation email to {addMemberEmail} and
+                  upgraded your subscription. 🎉
+                </ModalText>
+              ),
+            })
           },
           onSuccessDispatch: updateOrganizations,
         })
@@ -722,7 +730,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmail: addMemberEmail, teamId: editTeam.id },
+          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
@@ -742,11 +750,12 @@ const Dashboard = ({ history }) => {
     const invited = editTeam.users
     const subscriptionStatus =
       organizationsObj[editTeam.organizationId].subscriptionStatus
-
+    console.log('A click', subscriptionStatus)
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
       (invited && invited.findIndex(user => user.email === memberEmail) !== -1)
     ) {
+      console.log('User is in organization already')
       setWarningModal({
         visible: true,
         content: (
@@ -760,7 +769,9 @@ const Dashboard = ({ history }) => {
         ) === -1 ||
         !organizationsObj[editTeam.organizationId].users
       ) {
+        console.log('Add user')
         if (subscriptionStatus === 'active') {
+          console.log('Paying customer')
           setWarningModal({
             visible: true,
             content: (
@@ -772,6 +783,7 @@ const Dashboard = ({ history }) => {
             ),
             noClose: true,
           })
+          console.log('Update subscription')
           dispatch(
             mutation({
               name: 'upgradeSubscription',
@@ -782,7 +794,7 @@ const Dashboard = ({ history }) => {
                   organizationsObj[editTeam?.organizationId]
                     ?.subscriptionQuantity + 1,
               },
-              onSuccess: () => setAddMemberEmail(memberEmail),
+              onSuccess: () => setAddMemberEmail([memberEmail]),
               onError: () =>
                 setWarningModal({
                   visible: true,
@@ -810,11 +822,12 @@ const Dashboard = ({ history }) => {
             })
           )
         } else if (subscriptionStatus === 'inactive') {
+          console.log('Free user')
           dispatch(
             mutation({
               name: 'addMember',
               mutation: ADD_MEMBER,
-              variables: { memberEmail, teamId: editTeam.id },
+              variables: { memberEmails: [memberEmail], teamId: editTeam.id },
               onSuccess: () => {
                 setAddMemberModal(false)
                 closeWarningModal()
@@ -824,6 +837,7 @@ const Dashboard = ({ history }) => {
           )
         }
       }
+      console.log('Nothing happened')
     }
   }
 

@@ -393,6 +393,10 @@ const Plans = () => {
               <>
                 <Title>2. Subscription information</Title>
                 <Text>Subscription status: canceled</Text>
+                <Text>
+                  Your subscription will be active until the ned of your billing
+                  period.
+                </Text>
                 <StroveButton
                   isPrimary
                   padding="5px"
@@ -534,7 +538,7 @@ const Plans = () => {
                       {organization.value?.subscriptionStatus === 'active'
                         ? quantity
                         : organization.value?.users
-                        ? organization.value?.users.length
+                        ? organization.value?.users.length + 1
                         : 1}
                     </BoldText>
                   </TextWithBorder>
@@ -547,14 +551,19 @@ const Plans = () => {
                     <BoldText>{subscriptionPlan.monthsCount}</BoldText>
                   </TextWithBorder>
                   <OrderPriceSum>
-                    ${subscriptionPlan.monthlyPrice} x {quantity} users x{' '}
-                    {subscriptionPlan.monthsLabel}
+                    ${subscriptionPlan.monthlyPrice} x{' '}
+                    {organization.value?.subscriptionStatus === 'active'
+                      ? quantity
+                      : organization.value?.users
+                      ? organization.value?.users.length + 1
+                      : 1}{' '}
+                    users x {subscriptionPlan.monthsLabel}
                     <BoldText>
                       $
                       {(organization.value?.subscriptionStatus === 'active'
                         ? quantity
                         : organization.value?.users
-                        ? organization.value?.users.length
+                        ? organization.value?.users.length + 1
                         : 1) *
                         subscriptionPlan.monthlyPrice *
                         subscriptionPlan.monthsCount}
