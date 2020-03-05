@@ -37,8 +37,8 @@ const Run = ({ addProject, history }) => {
   const ownOrganization = myOrganizations?.filter(
     organization => organization?.owner?.id === user?.id
   )[0]
-  const lastTeam = ownOrganization.teams[ownOrganization.teams.length - 1]
-  const teamId = lastTeam.id
+  const lastTeam = ownOrganization?.teams[ownOrganization.teams.length - 1]
+  const teamId = lastTeam?.id
   const searchParams = getWindowSearchParams()
   const repoUrl = getRepoUrl()
   /* Specify the route a user should be redirected to */

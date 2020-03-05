@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import { TeamFragment } from './fragments/team'
 
 export default gql`
-  mutation AddMember($memberEmail: String!, $teamId: ID!) {
-    addMember(memberEmail: $memberEmail, teamId: $teamId) {
+  mutation AddMember($memberEmails: [String!], $teamId: ID!) {
+    addMember(memberEmails: $memberEmails, teamId: $teamId) {
       ...Team
     }
   }

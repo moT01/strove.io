@@ -2,9 +2,12 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
+import { useSelector } from 'react-redux'
 
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
+import { selectors } from 'state'
+import FullScreenLoader from 'components/fullScreenLoader'
 
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
@@ -58,45 +61,74 @@ const validateProjectName = values => {
   return errors
 }
 
-const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => (
-  <Modal
-    width={isMobileOnly ? '60vw' : '30vw'}
-    height={isMobileOnly ? '40vh' : '20vh'}
-    isOpen={isOpen}
-    onRequestClose={handleClose}
-    contentLabel="Name project"
-    ariaHideApp={false}
-  >
-    <Title mobile={isMobileOnly}>Add project's name</Title>
-    <Formik
-      onSubmit={(values, actions) => {
-        handleClose()
-        addProject({ name: values.projectName.trim(), teamId })
-        actions.setSubmitting(false)
-      }}
-      validate={validateProjectName}
-      render={props => (
-        <GithubLinkForm onSubmit={props.handleSubmit}>
-          <GithubLinkInput
-            autoComplete="off"
-            type="text"
-            onChange={props.handleChange}
-            onBlur={props.handleBlur}
-            value={props.values.projectName}
-            name="projectName"
-            placeholder="Name"
+const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
+  const isLoading = useSelector(selectors.api.getLoading('myProjects'))
+  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
+  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
+  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
+  const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
+  const queuePosition = useSelector(selectors.api.getQueuePosition)
+
+  return (
+    <>
+      <Modal
+        width={isMobileOnly ? '60vw' : '30vw'}
+        height={isMobileOnly ? '40vh' : '20vh'}
+        isOpen={isOpen}
+        onRequestClose={handleClose}
+        contentLabel="Name project"
+        ariaHideApp={false}
+      >
+        <Title mobile={isMobileOnly}>Add project's name</Title>
+        <Formik
+          onSubmit={(values, actions) => {
+            // handleClose()
+            addProject({ name: values.projectName.trim(), teamId })
+            actions.setSubmitting(false)
+          }}
+          validate={validateProjectName}
+          render={props => (
+            <GithubLinkForm onSubmit={props.handleSubmit}>
+              <GithubLinkInput
+                autoComplete="off"
+                type="text"
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.projectName}
+                name="projectName"
+                placeholder="Name"
+              />
+              <StroveButton
+                isDisabled={
+                  !props.values.projectName || props.errors.projectName
+                }
+                isPrimary
+                text="Create project"
+                width="auto"
+              ></StroveButton>
+              <StyledErrors>{props.errors.projectName}</StyledErrors>
+            </GithubLinkForm>
+          )}
+        />
+        {isContinuing && (
+          <FullScreenLoader
+            type="continueProject"
+            isFullScreen
+            color="#0072ce"
+            queuePosition={queuePosition}
           />
-          <StroveButton
-            isDisabled={!props.values.projectName || props.errors.projectName}
-            isPrimary
-            text="Create project"
-            width="auto"
-          ></StroveButton>
-          <StyledErrors>{props.errors.projectName}</StyledErrors>
-        </GithubLinkForm>
-      )}
-    />
-  </Modal>
-)
+        )}
+        {isAdding && (
+          <FullScreenLoader
+            type="addProject"
+            isFullScreen
+            color="#0072ce"
+            queuePosition={queuePosition}
+          />
+        )}
+      </Modal>
+    </>
+  )
+}
 
 export default memo(AddEmptyProjectModal)
