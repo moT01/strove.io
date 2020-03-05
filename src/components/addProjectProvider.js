@@ -82,7 +82,10 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
-    if (existingProject && !currentProject) {
+    if (
+      (existingProject && !currentProject) ||
+      existingProject === currentProject
+    ) {
       return dispatch(
         mutation({
           name: 'continueProject',
