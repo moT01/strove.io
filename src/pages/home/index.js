@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
+import { SEO, Header } from 'components'
 
 import { useAnalytics } from 'hooks'
 import { devFeatures } from 'consts'
@@ -8,7 +9,7 @@ import Banner from './banner'
 import Features from './features'
 import Technologies from './CTA'
 import ForDevelopers from './forDevelopers'
-import Footer from '../footer'
+import Footer from '../../components/footer'
 
 const StyledWrapper = styled.div`
   width: 100vw;
@@ -23,13 +24,17 @@ const Home = () => {
   const ref = useAnalytics()
 
   return (
-    <StyledWrapper ref={ref}>
-      <Banner />
-      <ForDevelopers />
-      <Features features={devFeatures} />
-      <Technologies />
-      <Footer />
-    </StyledWrapper>
+    <>
+      <SEO title="Strove" />
+      <Header />
+      <StyledWrapper ref={ref}>
+        <Banner />
+        <ForDevelopers />
+        <Features features={devFeatures} />
+        <Technologies />
+        <Footer />
+      </StyledWrapper>
+    </>
   )
 }
 
