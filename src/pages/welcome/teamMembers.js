@@ -145,21 +145,6 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   type="submit"
                   text="Add Teammates"
-                  onClick={() => {
-                    dispatch(
-                      mutation({
-                        name: 'addMember',
-                        mutation: ADD_MEMBER,
-                        variables: {
-                          memberEmails: values.emails,
-                          teamId: myOrganizations[0]?.teams[0]?.id,
-                        },
-                        onSuccess: () => {
-                          history.push('/welcome/teamName')
-                        },
-                      })
-                    )
-                  }}
                   // disabled={
                   //   errors?.emails || !values.organization?.profile_name
                   // }
