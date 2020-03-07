@@ -58,11 +58,9 @@ export default memo(
     const isProjectBeingAdded = useSelector(
       selectors.incomingProject.isProjectBeingAdded
     )
-
     const isProjectBeingStarted = useSelector(
       selectors.incomingProject.isProjectBeingStarted
     )
-
     const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
 
     if (!localStorage.getItem('deviceId'))
@@ -86,6 +84,14 @@ export default memo(
     const machineId = activeProjectData?.machineId
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
+    const isOnboarded = user?.isOnboarded
+
+
+    useEffect(() => {
+      if (!isOnboarded) {
+        history.push('/welcome/organizationName')
+      }
+    }, [isOnboarded])
 
     useEffect(() => {
       if (invitedByTeamId && token) {
