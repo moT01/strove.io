@@ -83,10 +83,6 @@ const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
-  const handleSubmit = emails => {
-    console.log(emails)
-  }
-
   return (
     <OnboardingContainer>
       <>
