@@ -79,7 +79,8 @@
     "styled-normalize": "^8.0.6",
     "subscriptions-transport-ws": "^0.9.16",
     "tti-polyfill": "^0.2.2",
-    "validator": "^11.1.0"
+    "validator": "^11.1.0",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
