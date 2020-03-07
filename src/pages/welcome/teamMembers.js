@@ -91,12 +91,13 @@ const OrganizationName = ({ history }) => {
           initialValues={{ emails: ['', '', ''] }}
           // validate={validate}
           onSubmit={values => {
+            console.log(values.emails.map(email => email.value))
             dispatch(
               mutation({
                 name: 'addMember',
                 mutation: ADD_MEMBER,
                 variables: {
-                  memberEmails: values.emails,
+                  memberEmails: values.emails.map(email => email.value),
                   teamId: myOrganizations[0]?.teams[0]?.id,
                 },
                 onSuccess: () => {
