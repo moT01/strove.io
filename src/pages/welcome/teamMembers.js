@@ -12,18 +12,18 @@ import { ADD_MEMBER } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
+import { Title, FormField, StyledForm, SkipForNow } from './styled'
 
-const validate = values => {
-  const errors = values.emails.map(value => {
-    if (!isEmail(value.value)) {
-      return 'Invalid email'
-    }
-    return ''
-  })
+// const validate = values => {
+//   const errors = values.emails.map(value => {
+//     if (!isEmail(value.value)) {
+//       return 'Invalid email'
+//     }
+//     return ''
+//   })
 
-  return { emails: errors }
-}
+//   return { emails: errors }
+// }
 
 const EmailsWrapper = styled.div`
   align-items: flex-start;
@@ -133,11 +133,24 @@ const OrganizationName = ({ history }) => {
                   margin="20px 0 10px"
                   isPrimary
                   text="Add Teammates"
-                  isGetStarted
-                  disabled={
-                    errors?.emails || !values.organization?.profile_name
-                  }
-                  navigateTo="/welcome/teamName"
+                  onClick={() => {
+                    dispatch(
+                      mutation({
+                        name: 'addMember',
+                        mutation: ADD_MEMBER,
+                        variables: {
+                          memberEmails: values.emails,
+                          teamId: myOrganizations[0]?.teams[0]?.id,
+                        },
+                        onSuccess: () => {
+                          history.push('/welcome/teamName')
+                        },
+                      })
+                    )
+                  }}
+                  // disabled={
+                  //   errors?.emails || !values.organization?.profile_name
+                  // }
                 />
               </EnvButtonsWrapper>
               {/* {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>} */}
