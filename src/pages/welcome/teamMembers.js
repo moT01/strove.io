@@ -90,27 +90,26 @@ const OrganizationName = ({ history }) => {
         <Formik
           initialValues={{ emails: ['', '', ''] }}
           // validate={validate}
+          onSubmit={values => {
+            dispatch(
+              mutation({
+                name: 'addMember',
+                mutation: ADD_MEMBER,
+                variables: {
+                  memberEmails: values.emails,
+                  teamId: myOrganizations[0]?.teams[0]?.id,
+                },
+                onSuccess: () => {
+                  history.push('/welcome/teamName')
+                },
+              })
+            )
+          }}
           render={({ values, errors }) => (
             <StyledForm>
               <EmailsWrapper>
                 <FieldArray
                   name="emails"
-                  validateOnChange
-                  onSubmit={values => {
-                    dispatch(
-                      mutation({
-                        name: 'addMember',
-                        mutation: ADD_MEMBER,
-                        variables: {
-                          memberEmails: values.emails,
-                          teamId: myOrganizations[0]?.teams[0]?.id,
-                        },
-                        onSuccess: () => {
-                          history.push('/welcome/teamName')
-                        },
-                      })
-                    )
-                  }}
                   render={arrayHelpers => (
                     <>
                       <TableWrapper>
