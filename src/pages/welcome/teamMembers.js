@@ -32,8 +32,6 @@ const EmailsWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 5px 0;
-  padding: 5px;
 `
 
 const ColumnWrapper = styled.div`
