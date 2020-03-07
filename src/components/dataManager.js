@@ -86,9 +86,11 @@ export default memo(
     const machineName = activeProjectData?.machineName
     const isOnboarded = user?.isOnboarded
 
+    const notEmbed = !window.location.href.toLowerCase().includes('embed')
+
 
     useEffect(() => {
-      if (!isOnboarded) {
+      if (!isOnboarded && notEmbed) {
         history.push('/welcome/organizationName')
       }
     }, [isOnboarded])
@@ -255,7 +257,7 @@ export default memo(
                   name: 'githubAuth',
                   context: null,
                   onSuccess: () =>
-                    !window.location.href.includes('embed') &&
+                  notEmbed &&
                     history.push('/app/dashboard'),
                 })
               )
@@ -272,7 +274,7 @@ export default memo(
                   name: 'gitlabAuth',
                   context: null,
                   onSuccess: () =>
-                    !window.location.href.toLowerCase().includes('embed') &&
+                  notEmbed &&
                     history.push('/app/dashboard'),
                 })
               )
@@ -289,7 +291,7 @@ export default memo(
                   name: 'bitbucketAuth',
                   context: null,
                   onSuccess: () =>
-                    !window.location.href.toLowerCase().includes('embed') &&
+                  notEmbed &&
                     history.push('/app/dashboard'),
                 })
               )
