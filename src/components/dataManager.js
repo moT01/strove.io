@@ -85,9 +85,7 @@ export default memo(
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
     const isOnboarded = user?.isOnboarded
-
     const notEmbed = !window.location.href.toLowerCase().includes('embed')
-
 
     useEffect(() => {
       if (!isOnboarded && notEmbed) {
