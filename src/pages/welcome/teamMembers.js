@@ -52,15 +52,6 @@ const TableWrapper = styled(ColumnWrapper)`
   width: 100%;
 `
 
-const SettingWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 2vh 0 0;
-`
-
 const Table = styled.div`
   display: flex;
   flex-direction: column;
@@ -102,64 +93,62 @@ const OrganizationName = ({ history }) => {
     <OnboardingContainer>
       <>
         <Title>Who else is working on your team?</Title>
-        <SettingWrapper>
-          <Formik
-            initialValues={{ emails: ['', '', ''] }}
-            validate={validate}
-            render={({ values, errors }) => (
-              <StyledForm>
-                <EmailsWrapper>
-                  {console.log('errors', errors)}
-                  <FieldArray
-                    name="emails"
-                    validateOnChange
-                    render={arrayHelpers => (
-                      <>
-                        <TableWrapper>
-                          <Table>
-                            {values.emails.map((env, index) => (
-                              <TableRow key={index}>
-                                <FormField
-                                  type="email"
-                                  placeholder="name@example.com"
-                                  name={`emails.${index}.value`}
-                                  noValidate
-                                />
-                              </TableRow>
-                            ))}
-                          </Table>
-                          <AddButton
-                            type="button"
-                            onClick={() => {
-                              arrayHelpers.push('')
-                            }}
-                          >
-                            + Add another
-                          </AddButton>
-                        </TableWrapper>
-                      </>
-                    )}
-                  />
-                </EmailsWrapper>
-                <EnvButtonsWrapper>
-                  <StroveButton
-                    margin="20px 0 10px"
-                    isPrimary
-                    text="Add Teammates"
-                    isGetStarted
-                    disabled={
-                      errors?.emails || !values.organization?.profile_name
-                    }
-                    navigateTo="/welcome/teamName"
-                  />
-                </EnvButtonsWrapper>
-              </StyledForm>
-            )}
-          />
-          <SkipForNow onClick={() => history.push('/welcome/teamName')}>
-            Skip for now
-          </SkipForNow>
-        </SettingWrapper>
+        <Formik
+          initialValues={{ emails: ['', '', ''] }}
+          validate={validate}
+          render={({ values, errors }) => (
+            <StyledForm>
+              <EmailsWrapper>
+                {console.log('errors', errors)}
+                <FieldArray
+                  name="emails"
+                  validateOnChange
+                  render={arrayHelpers => (
+                    <>
+                      <TableWrapper>
+                        <Table>
+                          {values.emails.map((env, index) => (
+                            <TableRow key={index}>
+                              <FormField
+                                type="email"
+                                placeholder="name@example.com"
+                                name={`emails.${index}.value`}
+                                noValidate
+                              />
+                            </TableRow>
+                          ))}
+                        </Table>
+                        <AddButton
+                          type="button"
+                          onClick={() => {
+                            arrayHelpers.push('')
+                          }}
+                        >
+                          + Add another
+                        </AddButton>
+                      </TableWrapper>
+                    </>
+                  )}
+                />
+              </EmailsWrapper>
+              <EnvButtonsWrapper>
+                <StroveButton
+                  margin="20px 0 10px"
+                  isPrimary
+                  text="Add Teammates"
+                  isGetStarted
+                  disabled={
+                    errors?.emails || !values.organization?.profile_name
+                  }
+                  navigateTo="/welcome/teamName"
+                />
+              </EnvButtonsWrapper>
+            </StyledForm>
+          )}
+        />
+        <SkipForNow onClick={() => history.push('/welcome/teamName')}>
+          Skip for now
+        </SkipForNow>
       </>
     </OnboardingContainer>
   )
