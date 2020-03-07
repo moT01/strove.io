@@ -19,7 +19,7 @@ const validate = values => {
     if (!isEmail(value.value)) {
       return 'Invalid email'
     }
-    return null
+    return ''
   })
 
   return { emails: errors }
@@ -93,11 +93,10 @@ const OrganizationName = ({ history }) => {
         <Title>Who else is working on your team?</Title>
         <Formik
           initialValues={{ emails: ['', '', ''] }}
-          validate={validate}
+          // validate={validate}
           render={({ values, errors }) => (
             <StyledForm>
               <EmailsWrapper>
-                {console.log('errors', errors)}
                 <FieldArray
                   name="emails"
                   validateOnChange
@@ -141,6 +140,7 @@ const OrganizationName = ({ history }) => {
                   navigateTo="/welcome/teamName"
                 />
               </EnvButtonsWrapper>
+              {/* {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>} */}
             </StyledForm>
           )}
         />
