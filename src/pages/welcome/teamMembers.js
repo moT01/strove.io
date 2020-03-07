@@ -100,6 +100,21 @@ const OrganizationName = ({ history }) => {
                 <FieldArray
                   name="emails"
                   validateOnChange
+                  onSubmit={values => {
+                    dispatch(
+                      mutation({
+                        name: 'addMember',
+                        mutation: ADD_MEMBER,
+                        variables: {
+                          memberEmails: values.emails,
+                          teamId: myOrganizations[0]?.teams[0]?.id,
+                        },
+                        onSuccess: () => {
+                          history.push('/welcome/teamName')
+                        },
+                      })
+                    )
+                  }}
                   render={arrayHelpers => (
                     <>
                       <TableWrapper>
@@ -132,6 +147,7 @@ const OrganizationName = ({ history }) => {
                 <StroveButton
                   margin="20px 0 10px"
                   isPrimary
+                  type="submit"
                   text="Add Teammates"
                   onClick={() => {
                     dispatch(

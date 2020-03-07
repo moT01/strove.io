@@ -50,6 +50,7 @@ const TeamName = ({ history }) => {
                   newName: values.team?.team_name,
                   teamId: myOrganizations[0]?.teams[0]?.id,
                 },
+                onSuccess: () => history.push('/welcome/teamMembers'),
               })
             )
           }}
@@ -63,12 +64,12 @@ const TeamName = ({ history }) => {
                   placeholder="Your team name"
                 ></FormField>
                 <StroveButton
+                  type="submit"
                   margin="20px 0 10px"
                   isPrimary
                   text="Next"
                   isGetStarted
                   disabled={errors?.team || !values.team?.team_name}
-                  navigateTo="/pricing"
                 />
                 {errors?.team && <TextToLeft>{errors?.team}</TextToLeft>}
               </StyledForm>
