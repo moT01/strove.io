@@ -41,7 +41,7 @@ const OrganizationName = ({ history }) => {
         <Title>What's the name of your company or organization?</Title>
         <Formik
           initialValues={{
-            name: '',
+            organization: { profile_name: '' },
           }}
           validate={validate}
           onSubmit={values => {
@@ -60,6 +60,8 @@ const OrganizationName = ({ history }) => {
           {({ errors, values }) => (
             <>
               <StyledForm>
+
+                {console.log('errors', errors)}
                 <FormField
                   type="text"
                   name="organization[profile_name]"
