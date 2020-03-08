@@ -1,9 +1,7 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled, { keyframes } from 'styled-components/macro'
-import { isMobileOnly, isMobile } from 'react-device-detect'
-import { Formik, Field, FieldArray } from 'formik'
-import Select from 'react-select'
+import styled from 'styled-components/macro'
+import { Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 
 import { StroveButton } from 'components'
@@ -14,27 +12,16 @@ import { mutation } from 'utils'
 import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow } from './styled'
 
-// const validate = values => {
-//   const errors = values.emails.map(value => {
-//     if (!isEmail(value.value)) {
-//       return 'Invalid email'
-//     }
-//     return ''
-//   })
-
-//   return { emails: errors }
-// }
-
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
     .of(
       Yup.object().shape({
-        email: Yup.string().email()
+        email: Yup.string().email(),
       })
     )
     .required('Must have friends')
     .min(3, 'Minimum of 3 friends'),
-});
+})
 
 const EmailsWrapper = styled.div`
   align-items: flex-start;

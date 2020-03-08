@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled, { css } from 'styled-components/macro'
+import styled from 'styled-components/macro'
 
 import { StroveButton } from 'components'
 import { StyledH1 } from './styled'
@@ -21,20 +21,18 @@ const StyledButtonWrapper = styled.div`
 `
 
 const CTA = () => (
-  <>
-    <StyledCTAWrapper>
-      <StyledButtonWrapper>
-        <StyledH1>Choose a better way to get your ideas out there</StyledH1>
-        <StroveButton
-          isGetStarted
-          isPrimary
-          margin="20px 0"
-          text="Get started"
-          fontWeight="bold"
-        />
-      </StyledButtonWrapper>
-    </StyledCTAWrapper>
-  </>
+  <StyledCTAWrapper>
+    <StyledButtonWrapper>
+      <StyledH1>Choose a better way to get your ideas out there</StyledH1>
+      <StroveButton
+        isGetStarted
+        isPrimary
+        margin="20px 0"
+        text="Get started"
+        fontWeight="bold"
+      />
+    </StyledButtonWrapper>
+  </StyledCTAWrapper>
 )
 
 export default memo(CTA)
