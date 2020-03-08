@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2'
 import storage from 'redux-persist/lib/storage'
+import { REHYDRATE } from 'redux-persist'
 
 import api from './api'
 import incomingProject from './incomingProject'
@@ -26,6 +27,10 @@ const persistInvitationConfig = {
   storage,
 }
 
+const getToken =
+  api.selectors.getUserField('token') ||
+  api.selectors.getUserField('siliskyToken')
+
 export const selectors = {
   api: api.selectors,
   incomingProject: incomingProject.selectors,
@@ -33,9 +38,7 @@ export const selectors = {
   feature: feature.selectors,
   invitations: invitations.selectors,
   // ToDo Remove siliskyToken later on
-  getToken:
-    api.selectors.getUserField('token') ||
-    api.selectors.getUserField('siliskyToken'),
+  getToken,
 }
 export const actions = {
   api: api.actions,
@@ -64,6 +67,14 @@ const appReducer = combineReducers({
 export default persistReducer(rootConfig, (state, action) => {
   if (action.type === api.C.LOGOUT) {
     state = undefined
+  }
+
+  const token = getToken(state)
+
+  console.log(state)
+
+  if (token && action.type === REHYDRATE) {
+    return state
   }
 
   return appReducer(state, action)
