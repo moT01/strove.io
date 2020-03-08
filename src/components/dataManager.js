@@ -84,7 +84,7 @@ export default memo(
     const machineId = activeProjectData?.machineId
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
-    const isOnboarded = user?.isOnboarded
+    // const isOnboarded = user?.isOnboarded
     const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
     // useEffect(() => {
