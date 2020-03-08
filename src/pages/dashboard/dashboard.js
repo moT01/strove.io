@@ -750,12 +750,10 @@ const Dashboard = ({ history }) => {
     const invited = editTeam.users
     const subscriptionStatus =
       organizationsObj[editTeam.organizationId].subscriptionStatus
-    console.log('A click', subscriptionStatus)
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
       (invited && invited.findIndex(user => user.email === memberEmail) !== -1)
     ) {
-      console.log('User is in organization already')
       setWarningModal({
         visible: true,
         content: (
@@ -769,9 +767,7 @@ const Dashboard = ({ history }) => {
         ) === -1 ||
         !organizationsObj[editTeam.organizationId].users
       ) {
-        console.log('Add user')
         if (subscriptionStatus === 'active') {
-          console.log('Paying customer')
           setWarningModal({
             visible: true,
             content: (
@@ -783,7 +779,6 @@ const Dashboard = ({ history }) => {
             ),
             noClose: true,
           })
-          console.log('Update subscription')
           dispatch(
             mutation({
               name: 'upgradeSubscription',
@@ -822,7 +817,6 @@ const Dashboard = ({ history }) => {
             })
           )
         } else if (subscriptionStatus === 'inactive') {
-          console.log('Free user')
           dispatch(
             mutation({
               name: 'addMember',
@@ -837,7 +831,6 @@ const Dashboard = ({ history }) => {
           )
         }
       }
-      console.log('Nothing happened')
     }
   }
 
