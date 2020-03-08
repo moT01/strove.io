@@ -91,7 +91,7 @@ export default memo(
       if (!isOnboarded && notEmbed && token) {
         history.push('/welcome/organizationName')
       }
-    }, [isOnboarded])
+    }, [isOnboarded, token, notEmbed])
 
     useEffect(() => {
       if (invitedByTeamId && token) {
