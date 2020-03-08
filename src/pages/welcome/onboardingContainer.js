@@ -13,7 +13,6 @@ import {
 
 const OnboardingContainer = ({ children }) => {
   const [isImageLoaded, setImageLoading] = useState(false)
-  console.log('isImageLoaded', isImageLoaded)
   return (
     <FullScreenWrapper>
       {isImageLoaded && <SectionWrapper>{children}</SectionWrapper>}

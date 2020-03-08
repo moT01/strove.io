@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
       .min(4, 'Name is too short')
       .max(50, 'Name is too long')
       .required('Required'),
-  })
+  }),
 })
 
 const TeamName = ({ history }) => {
@@ -64,9 +64,11 @@ const TeamName = ({ history }) => {
                   isGetStarted
                   disabled={errors?.team?.team_name || !values.team?.team_name}
                 />
-                {errors?.nam && <TextToLeft>{errors?.team?.team_name}</TextToLeft>}
+                {errors?.nam && (
+                  <TextToLeft>{errors?.team?.team_name}</TextToLeft>
+                )}
               </StyledForm>
-              <SkipForNow onClick={() => history.push('/app/dahsboard')}>
+              <SkipForNow onClick={() => history.push('/app/dashboard')}>
                 Skip for now
               </SkipForNow>
             </>
