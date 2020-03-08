@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Formik, Field, FieldArray } from 'formik'
 import Select from 'react-select'
-import isEmail from 'validator/lib/isEmail'
+import * as Yup from 'yup'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -24,6 +24,17 @@ import { Title, FormField, StyledForm, SkipForNow } from './styled'
 
 //   return { emails: errors }
 // }
+
+const validationSchema = Yup.object().shape({
+  emails: Yup.array()
+    .of(
+      Yup.object().shape({
+        email: Yup.string().email()
+      })
+    )
+    .required('Must have friends')
+    .min(3, 'Minimum of 3 friends'),
+});
 
 const EmailsWrapper = styled.div`
   align-items: flex-start;
@@ -89,7 +100,7 @@ const OrganizationName = ({ history }) => {
         <Title>Who else is working on your team?</Title>
         <Formik
           initialValues={{ emails: ['', '', ''] }}
-          // validate={validate}
+          validationSchema={validationSchema}
           onSubmit={values => {
             console.log(values.emails.map(email => email.value))
             dispatch(
