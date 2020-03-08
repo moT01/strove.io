@@ -88,7 +88,7 @@ export default memo(
     const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
     useEffect(() => {
-      if (!isOnboarded && notEmbed) {
+      if (!isOnboarded && notEmbed && token) {
         history.push('/welcome/organizationName')
       }
     }, [isOnboarded])
