@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -11,8 +11,6 @@ import { mutation } from 'utils'
 import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
-
-
 const validationSchema = Yup.object().shape({
   organization: Yup.object().shape({
     profile_name: Yup.string()
@@ -21,7 +19,6 @@ const validationSchema = Yup.object().shape({
       .required('Required'),
   })
 })
-
 
 const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)

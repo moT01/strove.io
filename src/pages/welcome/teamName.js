@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
+import * as Yup from 'yup'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -10,24 +11,14 @@ import { mutation } from 'utils'
 import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
-const validate = values => {
-  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
-  let errors = {}
-
-  if (!values.team?.team_name) {
-    errors.team = 'Name is empty'
-  }
-
-  if (!regex.test(values.team?.team_name)) {
-    errors.team = 'Name should only contain letters and numbers'
-  }
-
-  if (values.team?.team_name && values.team?.team_name?.length < 4) {
-    errors.team = 'Name is too short'
-  }
-
-  return errors
-}
+const validationSchema = Yup.object().shape({
+  team: Yup.object().shape({
+    team_name: Yup.string()
+      .min(4, 'Name is too short')
+      .max(50, 'Name is too long')
+      .required('Required'),
+  })
+})
 
 const TeamName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
@@ -40,7 +31,7 @@ const TeamName = ({ history }) => {
           initialValues={{
             name: '',
           }}
-          validate={validate}
+          validationSchema={validationSchema}
           onSubmit={values => {
             dispatch(
               mutation({
@@ -69,9 +60,9 @@ const TeamName = ({ history }) => {
                   isPrimary
                   text="Next"
                   isGetStarted
-                  disabled={errors?.team || !values.team?.team_name}
+                  disabled={errors?.team?.team_name || !values.team?.team_name}
                 />
-                {errors?.team && <TextToLeft>{errors?.team}</TextToLeft>}
+                {errors?.nam && <TextToLeft>{errors?.team?.team_name}</TextToLeft>}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/pricing')}>
                 Skip for now
