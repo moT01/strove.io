@@ -42,6 +42,7 @@ const OrganizationName = ({ history }) => {
                   newName: values.organization?.profile_name,
                   organizationId: myOrganizations[0]?.id,
                 },
+                onSuccess: () => history.push('/welcome/teamName'),
               })
             )
           }}
@@ -58,12 +59,10 @@ const OrganizationName = ({ history }) => {
                   margin="20px 0 10px"
                   isPrimary
                   text="Next"
-                  isGetStarted
                   disabled={
                     errors?.organization?.profile_name ||
                     !values.organization?.profile_name
                   }
-                  navigateTo="/welcome/teamName"
                 />
                 {errors?.organization && (
                   <TextToLeft>{errors?.organization?.profile_name}</TextToLeft>
