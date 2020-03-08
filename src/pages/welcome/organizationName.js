@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { withRouter } from 'react-router-dom'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -80,4 +81,4 @@ const OrganizationName = ({ history }) => {
   )
 }
 
-export default memo(OrganizationName)
+export default memo(withRouter(OrganizationName))
