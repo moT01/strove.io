@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { withRouter } from 'react-router-dom'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -65,7 +66,7 @@ const TeamName = ({ history }) => {
                 />
                 {errors?.nam && <TextToLeft>{errors?.team?.team_name}</TextToLeft>}
               </StyledForm>
-              <SkipForNow onClick={() => history.push('/pricing')}>
+              <SkipForNow onClick={() => history.push('/app/dahsboard')}>
                 Skip for now
               </SkipForNow>
             </>
@@ -76,4 +77,4 @@ const TeamName = ({ history }) => {
   )
 }
 
-export default memo(TeamName)
+export default memo(withRouter(TeamName))
