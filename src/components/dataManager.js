@@ -87,11 +87,12 @@ export default memo(
     const isOnboarded = user?.isOnboarded
     const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
-    useEffect(() => {
-      if (!isOnboarded && notEmbed && token) {
-        history.push('/welcome/organizationName')
-      }
-    }, [isOnboarded, token, notEmbed])
+    // useEffect(() => {
+    //   if (!isOnboarded && notEmbed && token) {
+    //     history.push('/welcome/organizationName')
+    //   }
+    //   /* eslint-disable-next-line */
+    // }, [isOnboarded, token, notEmbed])
 
     useEffect(() => {
       if (invitedByTeamId && token) {
@@ -253,9 +254,7 @@ export default memo(
                   storeKey: 'user',
                   name: 'githubAuth',
                   context: null,
-                  onSuccess: () =>
-                  notEmbed &&
-                    history.push('/app/dashboard'),
+                  onSuccess: () => notEmbed && history.push('/app/dashboard'),
                 })
               )
             }
@@ -270,9 +269,7 @@ export default memo(
                   storeKey: 'user',
                   name: 'gitlabAuth',
                   context: null,
-                  onSuccess: () =>
-                  notEmbed &&
-                    history.push('/app/dashboard'),
+                  onSuccess: () => notEmbed && history.push('/app/dashboard'),
                 })
               )
             }
@@ -287,9 +284,7 @@ export default memo(
                   storeKey: 'user',
                   name: 'bitbucketAuth',
                   context: null,
-                  onSuccess: () =>
-                  notEmbed &&
-                    history.push('/app/dashboard'),
+                  onSuccess: () => notEmbed && history.push('/app/dashboard'),
                 })
               )
             }
