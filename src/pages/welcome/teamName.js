@@ -24,6 +24,7 @@ const validationSchema = Yup.object().shape({
 const TeamName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
+  console.log('teamId', myOrganizations[0]?.teams[0]?.id)
   return (
     <OnboardingContainer>
       <>
@@ -43,7 +44,7 @@ const TeamName = ({ history }) => {
                   teamId: myOrganizations[0]?.teams[0]?.id,
                 },
                 onSuccessDispatch: updateOrganizations,
-                onSuccess: () => history.push('/welcome/teamMembers'),
+                // onSuccess: () => history.push('/welcome/teamMembers'),
               })
             )
           }}
@@ -51,6 +52,7 @@ const TeamName = ({ history }) => {
           {({ errors, values }) => (
             <>
               <StyledForm>
+                {console.log('teamName', values.team?.team_name)}
                 <FormField
                   type="text"
                   name="team[team_name]"
@@ -61,7 +63,7 @@ const TeamName = ({ history }) => {
                   margin="20px 0 10px"
                   isPrimary
                   text="Next"
-                  isGetStarted
+                  // isGetStarted
                   disabled={errors?.team?.team_name || !values.team?.team_name}
                 />
                 {errors?.nam && (
