@@ -71,8 +71,6 @@ export default persistReducer(rootConfig, (state, action) => {
 
   const token = getToken(state)
 
-  console.log(state)
-
   if (token && action.type === REHYDRATE) {
     return state
   }

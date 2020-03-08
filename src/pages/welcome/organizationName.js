@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
       .min(4, 'Name is too short')
       .max(50, 'Name is too long')
       .required('Required'),
-  })
+  }),
 })
 
 const OrganizationName = ({ history }) => {
@@ -49,8 +49,6 @@ const OrganizationName = ({ history }) => {
           {({ errors, values }) => (
             <>
               <StyledForm>
-
-                {console.log('errors', errors)}
                 <FormField
                   type="text"
                   name="organization[profile_name]"
@@ -62,7 +60,8 @@ const OrganizationName = ({ history }) => {
                   text="Next"
                   isGetStarted
                   disabled={
-                    errors?.organization?.profile_name || !values.organization?.profile_name
+                    errors?.organization?.profile_name ||
+                    !values.organization?.profile_name
                   }
                   navigateTo="/welcome/teamName"
                 />

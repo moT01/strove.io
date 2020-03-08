@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { isMobile } from 'react-device-detect'
 
 import { FullScreenWrapper } from 'components'
 
-import { Illustration, WelcomeWrapper, SectionWrapper, ImageContainer } from './styled'
+import {
+  Illustration,
+  WelcomeWrapper,
+  SectionWrapper,
+  ImageContainer,
+} from './styled'
 
 const OnboardingContainer = ({ children }) => {
+  const [isImageLoaded, setImageLoading] = useState(false)
+  console.log('isImageLoaded', isImageLoaded)
   return (
     <FullScreenWrapper>
+      {isImageLoaded && <SectionWrapper>{children}</SectionWrapper>}
       <WelcomeWrapper>
-        <SectionWrapper>{children}</SectionWrapper>
         {!isMobile && (
           <ImageContainer>
             <Illustration
+              onLoad={() => setImageLoading(true)}
               src={require('assets/illustration.png')}
               alt="illustration"
             />
