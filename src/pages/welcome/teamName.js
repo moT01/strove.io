@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { StroveButton } from 'components'
 import { selectors } from 'state'
 import { RENAME_TEAM } from 'queries'
-import { mutation } from 'utils'
+import { mutation, updateOrganizations } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
@@ -41,6 +41,7 @@ const TeamName = ({ history }) => {
                   newName: values.team?.team_name,
                   teamId: myOrganizations[0]?.teams[0]?.id,
                 },
+                onSuccessDispatch: updateOrganizations,
                 onSuccess: () => history.push('/welcome/teamMembers'),
               })
             )
