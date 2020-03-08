@@ -52,7 +52,6 @@ const TeamName = ({ history }) => {
           {({ errors, values }) => (
             <>
               <StyledForm>
-                {console.log('teamName', values.team?.team_name)}
                 <FormField
                   type="text"
                   name="team[team_name]"

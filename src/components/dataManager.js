@@ -103,7 +103,6 @@ export default memo(
               teamId: invitedByTeamId,
             },
             mutation: ACCEPT_TEAM_INVITATION,
-            // onSuccess: () => dispatch(updateOrganizations()),
             onSuccessDispatch: () => [
               actions.invitations.acceptInvitation(),
               updateOrganizations,
