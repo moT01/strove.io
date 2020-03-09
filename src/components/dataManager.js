@@ -84,15 +84,14 @@ export default memo(
     const machineId = activeProjectData?.machineId
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
-    // const isOnboarded = user?.isOnboarded
+    const isOnboarded = user?.isOnboarded
     const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
-    // useEffect(() => {
-    //   if (!isOnboarded && notEmbed && token) {
-    //     history.push('/welcome/organizationName')
-    //   }
-    //   /* eslint-disable-next-line */
-    // }, [isOnboarded, token, notEmbed])
+    useEffect(() => {
+      if (!isOnboarded && notEmbed && token) {
+        history.push('/welcome/organizationName')
+      }
+    }, [isOnboarded, token, notEmbed, history])
 
     useEffect(() => {
       if (invitedByTeamId && token) {
