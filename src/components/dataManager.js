@@ -58,11 +58,9 @@ export default memo(
     const isProjectBeingAdded = useSelector(
       selectors.incomingProject.isProjectBeingAdded
     )
-
     const isProjectBeingStarted = useSelector(
       selectors.incomingProject.isProjectBeingStarted
     )
-
     const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
 
     if (!localStorage.getItem('deviceId'))
@@ -86,6 +84,15 @@ export default memo(
     const machineId = activeProjectData?.machineId
     const editorPort = activeProjectData?.editorPort
     const machineName = activeProjectData?.machineName
+    // const isOnboarded = user?.isOnboarded
+    const notEmbed = !window.location.href.toLowerCase().includes('embed')
+
+    // useEffect(() => {
+    //   if (!isOnboarded && notEmbed && token) {
+    //     history.push('/welcome/organizationName')
+    //   }
+    //   /* eslint-disable-next-line */
+    // }, [isOnboarded, token, notEmbed])
 
     useEffect(() => {
       if (invitedByTeamId && token) {
@@ -97,7 +104,6 @@ export default memo(
               teamId: invitedByTeamId,
             },
             mutation: ACCEPT_TEAM_INVITATION,
-            // onSuccess: () => dispatch(updateOrganizations()),
             onSuccessDispatch: () => [
               actions.invitations.acceptInvitation(),
               updateOrganizations,
@@ -248,9 +254,7 @@ export default memo(
                   storeKey: 'user',
                   name: 'githubAuth',
                   context: null,
-                  onSuccess: () =>
-                    !window.location.href.includes('embed') &&
-                    history.push('/app/dashboard'),
+                  onSuccess: () => notEmbed && history.push('/app/dashboard'),
                 })
               )
             }
@@ -265,9 +269,7 @@ export default memo(
                   storeKey: 'user',
                   name: 'gitlabAuth',
                   context: null,
-                  onSuccess: () =>
-                    !window.location.href.toLowerCase().includes('embed') &&
-                    history.push('/app/dashboard'),
+                  onSuccess: () => notEmbed && history.push('/app/dashboard'),
                 })
               )
             }
@@ -282,9 +284,7 @@ export default memo(
                   storeKey: 'user',
                   name: 'bitbucketAuth',
                   context: null,
-                  onSuccess: () =>
-                    !window.location.href.toLowerCase().includes('embed') &&
-                    history.push('/app/dashboard'),
+                  onSuccess: () => notEmbed && history.push('/app/dashboard'),
                 })
               )
             }

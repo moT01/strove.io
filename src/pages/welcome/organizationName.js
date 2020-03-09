@@ -1,6 +1,8 @@
 import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from 'formik'
+import * as Yup from 'yup'
+import { withRouter } from 'react-router-dom'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -10,27 +12,14 @@ import { mutation } from 'utils'
 import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
-const validate = values => {
-  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
-  let errors = {}
-
-  if (!values.organization?.profile_name) {
-    errors.organization = 'Name is empty'
-  }
-
-  if (!regex.test(values.organization?.profile_name)) {
-    errors.organization = 'Name should only contain letters and numbers'
-  }
-
-  if (
-    values.organization?.profile_name &&
-    values.organization?.profile_name?.length < 4
-  ) {
-    errors.organization = 'Name is too short'
-  }
-
-  return errors
-}
+const validationSchema = Yup.object().shape({
+  organization: Yup.object().shape({
+    profile_name: Yup.string()
+      .min(4, 'Name is too short')
+      .max(50, 'Name is too long')
+      .required('Required'),
+  }),
+})
 
 const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
@@ -41,9 +30,9 @@ const OrganizationName = ({ history }) => {
         <Title>What's the name of your company or organization?</Title>
         <Formik
           initialValues={{
-            name: '',
+            organization: { profile_name: '' },
           }}
-          validate={validate}
+          validationSchema={validationSchema}
           onSubmit={values => {
             dispatch(
               mutation({
@@ -53,6 +42,7 @@ const OrganizationName = ({ history }) => {
                   newName: values.organization?.profile_name,
                   organizationId: myOrganizations[0]?.id,
                 },
+                onSuccess: () => history.push('/welcome/teamName'),
               })
             )
           }}
@@ -69,14 +59,13 @@ const OrganizationName = ({ history }) => {
                   margin="20px 0 10px"
                   isPrimary
                   text="Next"
-                  isGetStarted
                   disabled={
-                    errors?.organization || !values.organization?.profile_name
+                    errors?.organization?.profile_name ||
+                    !values.organization?.profile_name
                   }
-                  navigateTo="/welcome/teamName"
                 />
                 {errors?.organization && (
-                  <TextToLeft>{errors?.organization}</TextToLeft>
+                  <TextToLeft>{errors?.organization?.profile_name}</TextToLeft>
                 )}
               </StyledForm>
               <SkipForNow onClick={() => history.push('/welcome/teamName')}>
@@ -90,4 +79,4 @@ const OrganizationName = ({ history }) => {
   )
 }
 
-export default memo(OrganizationName)
+export default memo(withRouter(OrganizationName))

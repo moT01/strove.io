@@ -23,6 +23,7 @@ export const UserFragment = gql`
     token
     currentProjectId
     timeSpent
+    isOnboarded
     teams {
       ...Team
     }
