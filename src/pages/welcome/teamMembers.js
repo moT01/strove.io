@@ -108,7 +108,6 @@ const OrganizationName = ({ history }) => {
             <StyledForm>
               <EmailsWrapper>
                 <FieldArray
-                  name="emails"
                   render={arrayHelpers => (
                     <>
                       <TableWrapper>
@@ -118,7 +117,7 @@ const OrganizationName = ({ history }) => {
                               <FormField
                                 type="email"
                                 placeholder="name@example.com"
-                                name={`emails.${index}.value`}
+                                name={`emails[${index}]`}
                                 noValidate
                               />
                             </TableRow>
