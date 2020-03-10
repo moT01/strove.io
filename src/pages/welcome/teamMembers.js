@@ -14,14 +14,9 @@ import { Title, FormField, StyledForm, SkipForNow } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
-    .of(
-      Yup.string()
-          .min(4, 'too short')
-          .required('Required'), // these constraints take precedence
-        
-    )
-    .required('Must have friends') // these constraints are shown if and only if inner constraints are satisfied
-    .min(3, 'Minimum of 3 friends'),
+    .of(Yup.string().email())
+    .required('No emails to invite')
+    .min(3, 'No emails to invite'),
 })
 
 const EmailsWrapper = styled.div`
