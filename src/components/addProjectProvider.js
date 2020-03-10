@@ -30,7 +30,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const user = useSelector(selectors.api.getUser)
-  const projects = useSelector(selectors.api.getUserProjects)
+  const projects = useSelector(selectors.api.getMyProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
   const bitbucketRefreshToken = user?.bitbucketRefreshToken
@@ -82,7 +82,10 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
-    if (existingProject && !currentProject) {
+    if (
+      (existingProject && !currentProject) ||
+      (existingProject && existingProject === currentProject)
+    ) {
       return dispatch(
         mutation({
           name: 'continueProject',

@@ -1,9 +1,8 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled, { keyframes } from 'styled-components/macro'
-import { isMobileOnly, isMobile } from 'react-device-detect'
-import { Formik, Field, FieldArray } from 'formik'
-import Select from 'react-select'
+import styled from 'styled-components/macro'
+import { Formik, FieldArray } from 'formik'
+import * as Yup from 'yup'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
@@ -11,29 +10,18 @@ import { ADD_MEMBER } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
+import { Title, FormField, StyledForm, SkipForNow } from './styled'
 
-const validate = values => {
-  const regex = new RegExp(/^[a-zA-Z0-9_]+$/)
-  let errors = {}
-
-  if (!values.organization?.profile_name) {
-    errors.organization = 'Name is empty'
-  }
-
-  if (!regex.test(values.organization?.profile_name)) {
-    errors.organization = 'Name should only contain letters and numbers'
-  }
-
-  if (
-    values.organization?.profile_name &&
-    values.organization?.profile_name?.length < 4
-  ) {
-    errors.organization = 'Name is too short'
-  }
-
-  return errors
-}
+const validationSchema = Yup.object().shape({
+  emails: Yup.array()
+    .of(
+      Yup.object().shape({
+        email: Yup.string().email(),
+      })
+    )
+    .required('Must have friends')
+    .min(3, 'Minimum of 3 friends'),
+})
 
 const EmailsWrapper = styled.div`
   align-items: flex-start;
@@ -42,8 +30,6 @@ const EmailsWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 5px 0;
-  padding: 5px;
 `
 
 const ColumnWrapper = styled.div`
@@ -60,15 +46,6 @@ const TableWrapper = styled(ColumnWrapper)`
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-`
-
-const SettingWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 2vh 0 0;
 `
 
 const Table = styled.div`
@@ -100,89 +77,84 @@ const AddButton = styled.button`
   border: none;
 `
 
-const validatePort = values => {
-  let errors = {}
-  const port = values.port
-
-  if (!port) {
-    errors.port = 'This field is required. Please provide the information'
-    return errors
-  } else if (!/[0-9]{4}/g.test(port)) {
-    errors.port = 'Invalid port format'
-    return errors
-  }
-
-  return errors
-}
-
 const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
-
-  const handleSubmit = emails => {
-    console.log(emails)
-  }
 
   return (
     <OnboardingContainer>
       <>
         <Title>Who else is working on your team?</Title>
-        <SettingWrapper>
-          <Formik
-            initialValues={{ emails: ['', '', ''] }}
-            validate={validatePort}
-            render={({ values }) => (
-              <StyledForm>
-                <EmailsWrapper>
-                  <FieldArray
-                    name="emails"
-                    render={arrayHelpers => (
-                      <>
-                        <TableWrapper>
-                          <Table>
-                            {values.emails.map((env, index) => (
-                              <TableRow key={index}>
-                                <FormField
-                                  type="email"
-                                  placeholder="name@example.com"
-                                  name={`emails.${index}.value`}
-                                  noValidate
-                                />
-                              </TableRow>
-                            ))}
-                          </Table>
-                          <AddButton
-                            type="button"
-                            onClick={() => {
-                              arrayHelpers.push('')
-                            }}
-                          >
-                            + Add another
-                          </AddButton>
-                        </TableWrapper>
-                      </>
-                    )}
-                  />
-                </EmailsWrapper>
-                <EnvButtonsWrapper>
-                  <StroveButton
-                    margin="20px 0 10px"
-                    isPrimary
-                    text="Add Teammates"
-                    isGetStarted
-                    // disabled={
-                    //   errors?.organization || !values.organization?.profile_name
-                    // }
-                    navigateTo="/welcome/teamName"
-                  />
-                </EnvButtonsWrapper>
-              </StyledForm>
-            )}
-          />
-          <SkipForNow onClick={() => history.push('/welcome/teamName')}>
-            Skip for now
-          </SkipForNow>
-        </SettingWrapper>
+        <Formik
+          initialValues={{ emails: ['', '', ''] }}
+          validationSchema={validationSchema}
+          onSubmit={values => {
+            console.log(values.emails.map(email => email.value))
+            dispatch(
+              mutation({
+                name: 'addMember',
+                mutation: ADD_MEMBER,
+                variables: {
+                  memberEmails: values.emails.map(email => email.value),
+                  teamId: myOrganizations[0]?.teams[0]?.id,
+                },
+                onSuccess: () => {
+                  history.push('/welcome/teamName')
+                },
+              })
+            )
+          }}
+          render={({ values, errors }) => (
+            <StyledForm>
+              <EmailsWrapper>
+                <FieldArray
+                  name="emails"
+                  render={arrayHelpers => (
+                    <>
+                      <TableWrapper>
+                        <Table>
+                          {values.emails.map((env, index) => (
+                            <TableRow key={index}>
+                              <FormField
+                                type="email"
+                                placeholder="name@example.com"
+                                name={`emails.${index}.value`}
+                                noValidate
+                              />
+                            </TableRow>
+                          ))}
+                        </Table>
+                        <AddButton
+                          type="button"
+                          onClick={() => {
+                            arrayHelpers.push('')
+                          }}
+                        >
+                          + Add another
+                        </AddButton>
+                      </TableWrapper>
+                    </>
+                  )}
+                />
+              </EmailsWrapper>
+              <EnvButtonsWrapper>
+                <StroveButton
+                  margin="20px 0 10px"
+                  isPrimary
+                  type="submit"
+                  text="Add Teammates"
+                  // disabled={
+                  //   errors?.emails || !values.organization?.profile_name
+                  // }
+                />
+              </EnvButtonsWrapper>
+              {/* {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>} */}
+            </StyledForm>
+          )}
+        />
+        <SkipForNow onClick={() => history.push('/welcome/teamName')}>
+          Skip for now
+        </SkipForNow>
       </>
     </OnboardingContainer>
   )
