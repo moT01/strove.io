@@ -33,7 +33,7 @@ const BigCloud = styled.div`
     height: 11vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 55vh;
+    top: 15vh;
     animation: ${AnimateCloud} 70s linear infinite;
     z-index: -1;
   }
@@ -69,7 +69,7 @@ const MediumCloud = styled.div`
     height: 9vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: -15vh;
+    top: -35vh;
     animation: ${AnimateMediumCloud} 57s linear infinite;
     z-index: -1;
   }
@@ -105,7 +105,7 @@ const SmallCloud = styled.div`
     height: 7vh;
     background: rgb(214, 230, 255);
     border-radius: 75px;
-    top: 6vh;
+    top: -60vh;
     animation: ${AnimateSmallCloud} 40s linear infinite;
     z-index: -1;
   }
