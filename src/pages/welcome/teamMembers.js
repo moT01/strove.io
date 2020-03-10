@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
   emails: Yup.array()
     .of(Yup.string().email())
     .required('No emails to invite')
-    .min(3, 'No emails to invite'),
+    .min(1, 'No emails to invite'),
 })
 
 const EmailsWrapper = styled.div`
