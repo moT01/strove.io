@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { memo, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { SET_ONBOARDED } from 'queries'
 import { StroveButton } from 'components'
@@ -14,7 +14,15 @@ const HelloThere = ({ history }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('onboarded')
+    dispatch(
+      mutation({
+        name: 'setOnboarded',
+        mutation: SET_ONBOARDED,
+        variables: {
+          isOnboarded: true,
+        },
+      })
+    )
   }, [])
 
   return (
