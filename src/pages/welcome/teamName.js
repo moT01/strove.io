@@ -68,7 +68,7 @@ const TeamName = ({ history }) => {
                   <TextToLeft>{errors?.team?.team_name}</TextToLeft>
                 )}
               </StyledForm>
-              <SkipForNow onClick={() => history.push('/app/dashboard')}>
+              <SkipForNow onClick={() => history.push('/welcome/teamMembers')}>
                 Skip for now
               </SkipForNow>
             </>
