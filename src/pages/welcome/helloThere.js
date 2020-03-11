@@ -44,7 +44,7 @@ const HelloThere = ({ history }) => {
           margin="20px 0 10px"
           isPrimary
           isGetStarted
-          navigateTo="/app/dashboarrd"
+          navigateTo="/app/dashboard"
           text="See your Dashboard in Strove"
         />
       </>
