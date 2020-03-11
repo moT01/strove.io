@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { StroveButton } from 'components'
 import { selectors } from 'state'
 import { ADD_MEMBER } from 'queries'
-import { mutation } from 'utils'
+import { mutation, updateOrganizations } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
 import { Title, FormField, StyledForm, SkipForNow } from './styled'
@@ -94,6 +94,7 @@ const OrganizationName = ({ history }) => {
                   memberEmails: values.emails.map(email => email.value),
                   teamId: myOrganizations[0]?.teams[0]?.id,
                 },
+                onSuccessDispatch: updateOrganizations,
                 onSuccess: () => {
                   history.push('/welcome/teamName')
                 },
@@ -149,7 +150,7 @@ const OrganizationName = ({ history }) => {
             </StyledForm>
           )}
         />
-        <SkipForNow onClick={() => history.push('/welcome/teamName')}>
+        <SkipForNow onClick={() => history.push('/app/daahboard')}>
           Skip for now
         </SkipForNow>
       </>
