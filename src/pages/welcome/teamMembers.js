@@ -96,7 +96,7 @@ const OrganizationName = ({ history }) => {
                 },
                 onSuccessDispatch: updateOrganizations,
                 onSuccess: () => {
-                  history.push('/welcome/teamName')
+                  history.push('/welcome/helloThere')
                 },
               })
             )
@@ -150,7 +150,7 @@ const OrganizationName = ({ history }) => {
             </StyledForm>
           )}
         />
-        <SkipForNow onClick={() => history.push('/app/daahboard')}>
+        <SkipForNow onClick={() => history.push('/welcome/helloThere')}>
           Skip for now
         </SkipForNow>
       </>
