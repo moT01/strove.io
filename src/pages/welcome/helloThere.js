@@ -24,11 +24,13 @@ const HelloThere = ({ history }) => {
         <div>
           <Title>Hello there!</Title>
           <Details>
-            Strove is an alternative for local software development
+            Strove is a cloud alternative for local software development. We
+            will redirect you to your Dashboard. It brings together people and
+            projects so your team can move forward and get things done.
           </Details>
         </div>
         <SkipForNow onClick={() => history.push('/app/dashboard')}>
-          Go to my dashboard
+          Go to my Dashboard
         </SkipForNow>
       </>
     </OnboardingContainer>
