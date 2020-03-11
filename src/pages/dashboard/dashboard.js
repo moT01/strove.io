@@ -687,8 +687,8 @@ const Dashboard = ({ history }) => {
               visible: true,
               content: (
                 <ModalText>
-                  🎉 We have sent an invitation email to {addMemberEmail} and
-                  upgraded your subscription. 🎉
+                   <span role="img" aria-label="confetti">🎉</span> We have sent an invitation email to {addMemberEmail} and
+                  upgraded your subscription. <span role="img" aria-label="confetti">🎉</span>
                 </ModalText>
               ),
             })

@@ -1,11 +1,9 @@
 /* eslint-disable */
 import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Formik } from 'formik'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
-import { RENAME_ORGANIZATION } from 'queries'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
