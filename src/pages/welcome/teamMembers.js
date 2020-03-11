@@ -14,13 +14,9 @@ import { Title, FormField, StyledForm, SkipForNow } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
-    .of(
-      Yup.object().shape({
-        email: Yup.string().email(),
-      })
-    )
-    .required('Must have friends')
-    .min(3, 'Minimum of 3 friends'),
+    .of(Yup.string().email())
+    .required('No emails to invite')
+    .min(1, 'No emails to invite'),
 })
 
 const EmailsWrapper = styled.div`
@@ -107,6 +103,7 @@ const OrganizationName = ({ history }) => {
           render={({ values, errors }) => (
             <StyledForm>
               <EmailsWrapper>
+                {console.log('errors', errors)}
                 <FieldArray
                   name="emails"
                   render={arrayHelpers => (
@@ -118,7 +115,7 @@ const OrganizationName = ({ history }) => {
                               <FormField
                                 type="email"
                                 placeholder="name@example.com"
-                                name={`emails.${index}.value`}
+                                name={`emails[${index}]`}
                                 noValidate
                               />
                             </TableRow>
