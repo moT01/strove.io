@@ -4,11 +4,10 @@ import { useDispatch } from 'react-redux'
 
 import { SET_ONBOARDED } from 'queries'
 import { StroveButton } from 'components'
-import { selectors } from 'state'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, SkipForNow, Details } from './styled'
+import { Title, Details } from './styled'
 
 const HelloThere = ({ history }) => {
   const dispatch = useDispatch()
@@ -40,8 +39,7 @@ const HelloThere = ({ history }) => {
           </Details>
         </div>
         <StroveButton
-          type="submit"
-          margin="20px 0 10px"
+          margin="20px 0"
           isPrimary
           isGetStarted
           navigateTo="/app/dashboard"
