@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { StroveButton } from 'components'
@@ -7,17 +7,15 @@ import { selectors } from 'state'
 import { mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import {
-  Title,
-  FormField,
-  StyledForm,
-  SkipForNow,
-  TextToLeft,
-  Details,
-} from './styled'
+import { Title, SkipForNow, Details } from './styled'
 
 const HelloThere = ({ history }) => {
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log('onboarded')
+  }, [])
+
   return (
     <OnboardingContainer>
       <>
