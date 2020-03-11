@@ -2,6 +2,7 @@
 import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { SET_ONBOARDED } from 'queries'
 import { StroveButton } from 'components'
 import { selectors } from 'state'
 import { mutation } from 'utils'
