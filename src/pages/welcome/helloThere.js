@@ -39,9 +39,14 @@ const HelloThere = ({ history }) => {
             and projects so your team can move forward and get things done.
           </Details>
         </div>
-        <SkipForNow onClick={() => history.push('/app/dashboard')}>
-          Go to my Dashboard
-        </SkipForNow>
+        <StroveButton
+          type="submit"
+          margin="20px 0 10px"
+          isPrimary
+          isGetStarted
+          navigateTo="/app/dashboarrd"
+          text="See your Dashboard in Strove"
+        />
       </>
     </OnboardingContainer>
   )
