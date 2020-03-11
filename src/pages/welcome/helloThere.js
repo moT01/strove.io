@@ -22,6 +22,10 @@ const HelloThere = ({ history }) => {
         <div>
           <Title>Hello there!</Title>
           <Details>
+            Now you're ready to use Strove - a cloud alternative to local
+            software development.
+          </Details>
+          <Details>
             We will redirect you to your Dashboard. It brings together people
             and projects so your team can move forward and get things done.
           </Details>
