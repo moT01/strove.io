@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { memo, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -9,7 +8,7 @@ import { mutation } from 'utils'
 import OnboardingContainer from './onboardingContainer'
 import { Title, Details } from './styled'
 
-const HelloThere = ({ history }) => {
+const HelloThere = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
