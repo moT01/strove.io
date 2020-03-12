@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
 const Home = WithLazyLoader(lazy(() => import('pages/home')))
-const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
+// const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
 const Cookies = WithLazyLoader(lazy(() => import('pages/cookies')))
 const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
 const TermsAndConditions = WithLazyLoader(
@@ -39,7 +39,7 @@ const Strove = () => (
     <ScrollToTop />
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/faq" component={Faq} />
+      {/* <Route path="/faq" component={Faq} /> */}
       <Route path="/cookies" component={Cookies} />
       <Route path="/privacyPolicy" component={PrivacyPolicy} />
       <Route path="/termsAndConditions" component={TermsAndConditions} />
