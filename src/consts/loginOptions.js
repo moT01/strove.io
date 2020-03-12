@@ -35,7 +35,7 @@ export default [
   {
     value: 'gitlab',
     label: 'Gitlab',
-    href: `https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,${REACT_APP_IS_OPENSOURCE},${address}`,
+    href: `https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,${REACT_APP_IS_OPENSOURCE},${address}`,
     embedHref: `https://gitlab.com/oauth/authorize?client_id=${REACT_APP_GITLAB_CLIENT_ID}&REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}&response_type=code&state=gitlab,true,${REACT_APP_STROVE_URL}fromEmbed/goBackTo/`,
     icon: <Gitlab />,
   },
