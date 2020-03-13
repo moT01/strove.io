@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { StyledH3 } from './styled'
-import { FccLogo, UlLogo } from 'components/svgs'
+import { FccLogo, UlLogo, UlManagementLogo } from 'components/svgs'
 import { theme } from 'consts'
 
 const StyledWrapper = styled.div`
@@ -31,7 +31,8 @@ const TrustedBy = () => (
     <StyledH3 color={theme.colors.c3}>Trusted by</StyledH3>
     <LogosWrapper>
       <FccLogo />
-      <UlLogo />
+      {/* <UlLogo /> */}
+      <UlManagementLogo />
     </LogosWrapper>
   </StyledWrapper>
 )
