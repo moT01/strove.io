@@ -10,6 +10,7 @@ import Cog from './cog'
 import Copy from './copy'
 import FccLogo from './fccLogo'
 import UlLogo from './ulLogo'
+import UlManagementLogo from './ulManagementLogo'
 
 export {
   VSCode,
@@ -24,4 +25,5 @@ export {
   Copy,
   FccLogo,
   UlLogo,
+  UlManagementLogo,
 }
