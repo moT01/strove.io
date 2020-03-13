@@ -10,6 +10,7 @@ import Features from './features'
 import Technologies from './CTA'
 import ForDevelopers from './forDevelopers'
 import Footer from '../../components/footer'
+import TrustedBy from './trustedBy'
 
 const StyledWrapper = styled.div`
   width: 100vw;
@@ -31,6 +32,7 @@ const Home = () => {
         <Banner />
         <ForDevelopers />
         <Features features={devFeatures} />
+        <TrustedBy />
         <Technologies />
         <Footer />
       </StyledWrapper>

@@ -8,6 +8,8 @@ import Dashboard from './dashboard'
 import Desktop from './desktop'
 import Cog from './cog'
 import Copy from './copy'
+import FccLogo from './fccLogo'
+import UlLogo from './ulLogo'
 
 export {
   VSCode,
@@ -20,4 +22,6 @@ export {
   Desktop,
   Cog,
   Copy,
+  FccLogo,
+  UlLogo,
 }

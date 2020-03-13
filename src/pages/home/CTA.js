@@ -10,7 +10,7 @@ const StyledCTAWrapper = styled.div`
   justify-content: center;
   align-self: center;
   margin-top: 20px;
-  background: ${({ theme }) => theme.colors.c27};
+  background: ${({ theme }) => theme.colors.c2};
 `
 
 const StyledButtonWrapper = styled.div`
