@@ -23,6 +23,7 @@ const LogosWrapper = styled(StyledWrapper)`
   justify-content: space-between;
   width: 40%;
   padding: 10px;
+  margin-top: 20px;
 `
 
 const TrustedBy = () => (
