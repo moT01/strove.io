@@ -15,6 +15,7 @@ const StyledWrapper = styled.div`
   margin-top: 20px;
   background: ${({ theme }) => theme.colors.c27};
   padding: 50px;
+  margin: 0;
 `
 
 const LogosWrapper = styled(StyledWrapper)`
