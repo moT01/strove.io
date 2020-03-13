@@ -1,7 +1,7 @@
-import { useEffect, memo } from 'react'
+import { useEffect } from 'react'
 import { getWindowHref } from 'utils'
 
-export default memo(({ children, addProject }) => {
+export default ({ children, addProject }) => {
   useEffect(() => {
     const repoUrl =
       getWindowHref()?.match(/#(.*)/) && getWindowHref().match(/#(.*)/)[1]
@@ -13,4 +13,4 @@ export default memo(({ children, addProject }) => {
   }, [])
 
   return children
-})
+}
