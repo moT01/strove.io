@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
 const LogosWrapper = styled(StyledWrapper)`
   flex-direction: row;
   justify-content: space-between;
-  width: 40%;
+  width: 50%;
   padding: 10px;
   margin-top: 20px;
 `

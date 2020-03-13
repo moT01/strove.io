@@ -3,8 +3,8 @@ import React from 'react'
 const UlLogo = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="190"
-    height="85"
+    width="270"
+    height="125"
     viewBox="0 0 190 85"
     version="1.1"
     id="svg9873"
