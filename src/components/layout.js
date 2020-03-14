@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
