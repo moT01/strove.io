@@ -203,4 +203,4 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   )
 }
 
-export default memo(withRouter(AddProjectProvider))
+export default withRouter(AddProjectProvider)
