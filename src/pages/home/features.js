@@ -215,4 +215,4 @@ const Features = ({ features }) => {
   )
 }
 
-export default memo(Features)
+export default Features
