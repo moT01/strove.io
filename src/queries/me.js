@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { UserFragment } from './fragments/project'
+import { UserFragment } from './fragments/user'
 
 // Query to github graph api
 export default gql`
