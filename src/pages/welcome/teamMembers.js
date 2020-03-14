@@ -10,7 +10,7 @@ import { ADD_MEMBER } from 'queries'
 import { mutation, updateOrganizations } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow } from './styled'
+import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
@@ -141,12 +141,12 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   type="submit"
                   text="Add Teammates"
-                  // disabled={
-                  //   errors?.emails || !values.organization?.profile_name
-                  // }
+                  disabled={
+                    errors?.emails || !values.organization?.profile_name
+                  }
                 />
               </EnvButtonsWrapper>
-              {/* {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>} */}
+              {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>}
             </StyledForm>
           )}
         />
