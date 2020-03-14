@@ -85,10 +85,11 @@ export default withRouter(({ children, addProject, history }) => {
   const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
   useEffect(() => {
-    if (!isOnboarded && notEmbed && token) {
+    console.log('orgs', user?.organizations)
+    if (/* !isOnboarded && */ notEmbed && user?.myOrganizations?.length === 1) {
       history.push('/welcome/organizationName')
     }
-  }, [isOnboarded, token, notEmbed, history])
+  }, [isOnboarded, user, notEmbed, history])
 
   useEffect(() => {
     if (invitedByTeamId && token) {
