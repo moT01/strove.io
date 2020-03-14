@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { withRouter } from 'react-router-dom'
@@ -203,4 +203,4 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   )
 }
 
-export default withRouter(AddProjectProvider)
+export default memo(withRouter(AddProjectProvider))

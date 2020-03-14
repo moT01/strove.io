@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 
 import { isMobile } from 'react-device-detect'
 
@@ -35,4 +35,4 @@ const OnboardingContainer = ({ children }) => {
   Memoize this component will only add additional overhead
   https://twitter.com/aweary/status/1230594484347396097
 */
-export default OnboardingContainer
+export default memo(OnboardingContainer)
