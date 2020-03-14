@@ -44,6 +44,7 @@ import PAYMENT_STATUS_SUBSCRIPTION from './paymentStatusSubscription'
 import REMOVE_FROM_ORGANIZATION from './removeFromOrganization'
 import RETRY_SUBSCRIPTION_PAYMENT from './retrySubscriptionPayment'
 import SET_ONBOARDED from './setOnboarded'
+import ME from './me'
 
 export {
   ADD_PROJECT,
@@ -92,4 +93,5 @@ export {
   REMOVE_FROM_ORGANIZATION,
   RETRY_SUBSCRIPTION_PAYMENT,
   SET_ONBOARDED,
+  ME,
 }

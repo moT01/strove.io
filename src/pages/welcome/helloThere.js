@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { SET_ONBOARDED } from 'queries'
+import { SET_ONBOARDED, ME } from 'queries'
 import { StroveButton } from 'components'
 import { mutation } from 'utils'
 
@@ -19,6 +19,11 @@ const HelloThere = () => {
         variables: {
           isOnboarded: true,
         },
+        onSuccessDispatch: () =>
+          mutation({
+            name: 'me',
+            storeKey: 'user',
+          }),
       })
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
