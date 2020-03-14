@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import styled from 'styled-components/macro'
 import DetectBrowser from 'react-detect-browser'
 import { isMobile } from 'react-device-detect'
@@ -80,8 +80,8 @@ const Layout = ({ children, browser }) => {
   )
 }
 
-export default ({ children }) => (
+export default memo(({ children }) => (
   <DetectBrowser>
     {({ browser }) => <Layout browser={browser}>{children}</Layout>}
   </DetectBrowser>
-)
+))

@@ -51,8 +51,6 @@ const Projects = ({
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
-  const queuePosition = useSelector(selectors.api.getQueuePosition)
   const continueProjectError = useSelector(
     selectors.api.getError('continueProject')
   )

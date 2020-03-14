@@ -10,7 +10,7 @@ import { ADD_MEMBER } from 'queries'
 import { mutation, updateOrganizations } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow } from './styled'
+import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
@@ -85,7 +85,6 @@ const OrganizationName = ({ history }) => {
           initialValues={{ emails: ['', '', ''] }}
           validationSchema={validationSchema}
           onSubmit={values => {
-            console.log(values.emails.map(email => email.value))
             dispatch(
               mutation({
                 name: 'addMember',
@@ -104,7 +103,6 @@ const OrganizationName = ({ history }) => {
           render={({ values, errors }) => (
             <StyledForm>
               <EmailsWrapper>
-                {console.log('errors', errors)}
                 <FieldArray
                   name="emails"
                   render={arrayHelpers => (
@@ -141,12 +139,12 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   type="submit"
                   text="Add Teammates"
-                  // disabled={
-                  //   errors?.emails || !values.organization?.profile_name
-                  // }
+                  disabled={
+                    errors?.emails || !values?.emails.some(email => email)
+                  }
                 />
               </EnvButtonsWrapper>
-              {/* {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>} */}
+              {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
             </StyledForm>
           )}
         />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { Parallax } from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
@@ -215,4 +215,4 @@ const Features = ({ features }) => {
   )
 }
 
-export default Features
+export default memo(Features)
