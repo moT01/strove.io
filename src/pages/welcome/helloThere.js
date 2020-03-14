@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { SET_ONBOARDED, ME } from 'queries'
 import { StroveButton } from 'components'
-import { mutation } from 'utils'
+import { query, mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
 import { Title, Details } from './styled'
@@ -20,9 +20,9 @@ const HelloThere = () => {
           isOnboarded: true,
         },
         onSuccessDispatch: () =>
-          mutation({
+          query({
             name: 'me',
-            mutation: ME,
+            query: ME,
             storeKey: 'user',
           }),
       })
