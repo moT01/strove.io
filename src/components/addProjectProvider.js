@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 import { withRouter } from 'react-router-dom'
