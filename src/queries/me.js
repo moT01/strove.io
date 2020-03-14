@@ -5,7 +5,7 @@ import { UserFragment } from './fragments/user'
 export default gql`
   query GetMe {
     me {
-      ...UserFragment
+      ...User
     }
   }
 
