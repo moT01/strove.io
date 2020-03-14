@@ -104,7 +104,6 @@ const OrganizationName = ({ history }) => {
           render={({ values, errors }) => (
             <StyledForm>
               <EmailsWrapper>
-                {console.log('errors', errors)}
                 <FieldArray
                   name="emails"
                   render={arrayHelpers => (
@@ -141,7 +140,9 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   type="submit"
                   text="Add Teammates"
-                  disabled={errors?.emails}
+                  disabled={
+                    errors?.emails || !values?.emails.some(email => email)
+                  }
                 />
               </EnvButtonsWrapper>
               {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
