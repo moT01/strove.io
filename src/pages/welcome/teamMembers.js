@@ -85,7 +85,6 @@ const OrganizationName = ({ history }) => {
           initialValues={{ emails: ['', '', ''] }}
           validationSchema={validationSchema}
           onSubmit={values => {
-            console.log(values.emails.map(email => email.value))
             dispatch(
               mutation({
                 name: 'addMember',

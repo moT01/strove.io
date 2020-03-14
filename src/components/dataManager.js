@@ -85,7 +85,6 @@ export default withRouter(({ children, addProject, history }) => {
   const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
   useEffect(() => {
-    console.log('isOnboarded', isOnboarded)
     if (!isOnboarded && notEmbed && user?.organizations?.length === 1) {
       history.push('/welcome/organizationName')
     }
