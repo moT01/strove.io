@@ -22,6 +22,7 @@ const HelloThere = () => {
         onSuccessDispatch: () =>
           mutation({
             name: 'me',
+            mutation: ME,
             storeKey: 'user',
           }),
       })
