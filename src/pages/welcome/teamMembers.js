@@ -141,12 +141,10 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   type="submit"
                   text="Add Teammates"
-                  disabled={
-                    errors?.emails || !values.organization?.profile_name
-                  }
+                  disabled={errors?.emails}
                 />
               </EnvButtonsWrapper>
-              {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>}
+              {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
             </StyledForm>
           )}
         />
