@@ -62,9 +62,6 @@ const validateProjectName = values => {
 }
 
 const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
-  const isLoading = useSelector(selectors.api.getLoading('myProjects'))
-  const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
-  const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const queuePosition = useSelector(selectors.api.getQueuePosition)
@@ -82,7 +79,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
         <Title mobile={isMobileOnly}>Add project's name</Title>
         <Formik
           onSubmit={(values, actions) => {
-            // handleClose()
             addProject({ name: values.projectName.trim(), teamId })
             actions.setSubmitting(false)
           }}
