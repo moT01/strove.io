@@ -90,6 +90,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
     ],
     redirecting: ['Redirecting back to origin site...'],
     processPayment: ['Processing payment'],
+    loadingEditor: ['Loading editor']
   }
 
   useInterval(
