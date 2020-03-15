@@ -5,6 +5,8 @@ import { Prompt } from 'react-router-dom'
 
 import { selectors } from 'state'
 
+import LoadingEditorInfo from './loadingEditorInfo'
+
 const StyledIframe = styled.iframe`
   display: block;
   background: ${({ theme }) => theme.colors.c3};
