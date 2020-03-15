@@ -7,7 +7,7 @@ const LoadingEditorInfo = () => {
   const [showLoadingMessage, setShowLoadingMessage] = useState(true)
   useInterval(
     () => setShowLoadingMessage(false),
-    showLoadingMessage ? 300 : null
+    showLoadingMessage ? 3000 : null
   )
 
   if (showLoadingMessage)
