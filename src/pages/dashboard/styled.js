@@ -501,7 +501,7 @@ export const IconDescription = styled.div`
   margin-right: 5px;
 `
 
-const TimeBarContainer = styled.div`
+export const TimeBarContainer = styled.div`
   margin-top: 25px;
   display: flex;
   flex-direction: row;
@@ -514,13 +514,13 @@ const TimeBarContainer = styled.div`
   overflow: hidden;
 `
 
-const TimeBar = styled.div`
+export const TimeBar = styled.div`
   height: 100%;
   width: ${({ time }) => (time / 72000000) * 100}%;
   background-color: #0072ce;
 `
 
-const TimeText = styled(Text)`
+export const TimeText = styled(Text)`
   color: ${({ theme }) => theme.colors.c1};
   font-size: 12px;
 `

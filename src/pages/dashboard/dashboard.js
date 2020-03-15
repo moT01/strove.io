@@ -63,6 +63,9 @@ import {
   StyledErrors,
   InviteFormWrapper,
   TilesWrapper,
+  TimeBarContainer,
+  TimeBar,
+  TimeText,
 } from './styled'
 
 const validate = values => {
@@ -233,7 +236,7 @@ const Dashboard = ({ history }) => {
                 {organization.owner.id === user.id &&
                   organization.subscriptionStatus === 'inactive' &&
                   user?.timeSpent >=
-                    65800000(
+                    65800000 && (
                       <>
                         <TimeBarContainer>
                           <TimeBar time={user.timeSpent} />
