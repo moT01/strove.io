@@ -37,6 +37,7 @@ const Editor = ({
           `Are you sure you want to leave editor? This will stop your running processes.`
         }
       />
+      <LoadingEditorInfo />
       <StyledIframe
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
