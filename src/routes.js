@@ -53,10 +53,13 @@ const Strove = () => (
       <PrivateRoute path="/app/dashboard" component={Dashboard} />
       <PrivateRoute path="/app/plans" component={Plans} />
       <Route path="/welcome/login" component={Login} />
-      <Route path="/welcome/organizationName" component={OrganizationName} />
-      <Route path="/welcome/teamName" component={TeamName} />
-      <Route path="/welcome/teamMembers" component={TeamMembers} />
-      <Route path="/welcome/helloThere" component={HelloThere} />
+      <PrivateRoute
+        path="/welcome/organizationName"
+        component={OrganizationName}
+      />
+      <PrivateRoute path="/welcome/teamName" component={TeamName} />
+      <PrivateRoute path="/welcome/teamMembers" component={TeamMembers} />
+      <PrivateRoute path="/welcome/helloThere" component={HelloThere} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />
     </Switch>
