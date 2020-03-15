@@ -1,10 +1,15 @@
-import React, { memo } from 'react'
-import { useSelector } from 'react-redux'
+import React, { memo, useState } from 'react'
 
-import { selectors } from 'state'
+import { useInterval } from 'hooks'
 import FullScreenLoader from 'components/fullScreenLoader'
 
 const LoadingEditorInfo = () => {
+  const [showLoadingMessage, setShowLoadingMessage] = useState(true)
+  useInterval(
+    () => setShowLoadingMessage(false),
+    showLoadingMessage ? 300 : null
+  )
+
   if (showLoadingMessage)
     return (
       <FullScreenLoader type="loadingEditor" isFullScreen color="#0072ce" />
