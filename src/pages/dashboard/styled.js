@@ -500,3 +500,27 @@ export const ProjectActionIcon = styled(Icon)`
 export const IconDescription = styled.div`
   margin-right: 5px;
 `
+
+const TimeBarContainer = styled.div`
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 40%;
+  height: 15px;
+  border: 1px solid #0072ce;
+  border-radius: 2px;
+  overflow: hidden;
+`
+
+const TimeBar = styled.div`
+  height: 100%;
+  width: ${({ time }) => (time / 72000000) * 100}%;
+  background-color: #0072ce;
+`
+
+const TimeText = styled(Text)`
+  color: ${({ theme }) => theme.colors.c1};
+  font-size: 12px;
+`

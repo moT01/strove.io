@@ -91,30 +91,6 @@ const validateTeamName = values => {
   return errors
 }
 
-// const TimeBarContainer = styled.div`
-//   margin-top: 25px;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: flex-start;
-//   align-items: center;
-//   width: 40%;
-//   height: 15px;
-//   border: 1px solid #0072ce;
-//   border-radius: 2px;
-//   overflow: hidden;
-// `
-
-// const TimeBar = styled.div`
-//   height: 100%;
-//   width: ${({ time }) => (time / 72000000) * 100}%;
-//   background-color: #0072ce;
-// `
-
-// const TimeText = styled(Text)`
-//   color: ${({ theme }) => theme.colors.c1};
-//   font-size: 12px;
-// `
-
 const emptyWarningModalContent = {
   visible: false,
   content: null,
@@ -130,7 +106,7 @@ const Dashboard = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
-  // const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
+  const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
@@ -254,17 +230,20 @@ const Dashboard = ({ history }) => {
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
                 <OrganizationName>{organization.name}</OrganizationName>
-                {/* {organization.owner.id === user.id && organization.subscriptionStatus === 'inactive' && user?.timeSpent >= 65800000 (
-                  <>
-                    <TimeBarContainer>
-                      <TimeBar time={user.timeSpent} />
-                    </TimeBarContainer>
-                    <TimeText>
-                      Time spent in editor: {time.hours}h {time.minutes}m{' '}
-                      {time.seconds}s / 20h
-                    </TimeText>
-                  </>
-                )} */}
+                {organization.owner.id === user.id &&
+                  organization.subscriptionStatus === 'inactive' &&
+                  user?.timeSpent >=
+                    65800000(
+                      <>
+                        <TimeBarContainer>
+                          <TimeBar time={user.timeSpent} />
+                        </TimeBarContainer>
+                        <TimeText>
+                          Time spent in editor: {time.hours}h {time.minutes}m{' '}
+                          {time.seconds}s / 20h
+                        </TimeText>
+                      </>
+                    )}
                 {organization.teams &&
                   Object.values(organizationsObj[organization.id].teams).map(
                     team => {
@@ -523,14 +502,6 @@ const Dashboard = ({ history }) => {
     },
   ]
 
-  // const convertToHours = () => {
-  //   let seconds = Math.floor((user.timeSpent / 1000) % 60)
-  //   let minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
-  //   let hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
-
-  //   setTime({ hours, minutes, seconds })
-  // }
-
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
     setEditTeam({ organizationId })
@@ -687,8 +658,14 @@ const Dashboard = ({ history }) => {
               visible: true,
               content: (
                 <ModalText>
-                   <span role="img" aria-label="confetti">🎉</span> We have sent an invitation email to {addMemberEmail} and
-                  upgraded your subscription. <span role="img" aria-label="confetti">🎉</span>
+                  <span role="img" aria-label="confetti">
+                    🎉
+                  </span>{' '}
+                  We have sent an invitation email to {addMemberEmail} and
+                  upgraded your subscription.{' '}
+                  <span role="img" aria-label="confetti">
+                    🎉
+                  </span>
                 </ModalText>
               ),
             })
