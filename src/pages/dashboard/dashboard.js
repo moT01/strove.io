@@ -66,6 +66,7 @@ import {
   TimeBarContainer,
   TimeBar,
   TimeText,
+  NameWrapper,
 } from './styled'
 
 const validate = values => {
@@ -232,12 +233,12 @@ const Dashboard = ({ history }) => {
           {expandedTiles &&
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
-                <OrganizationName>{organization.name}</OrganizationName>
-                {organization.owner.id === user.id &&
-                  organization.subscriptionStatus === 'inactive' &&
-                  user?.timeSpent >=
-                    65800000 && (
-                      <>
+                <NameWrapper>
+                  <OrganizationName>{organization.name}</OrganizationName>
+                  {organization.owner.id === user.id &&
+                    organization.subscriptionStatus === 'inactive' &&
+                    user?.timeSpent >= 65800 && (
+                      <div>
                         <TimeBarContainer>
                           <TimeBar time={user.timeSpent} />
                         </TimeBarContainer>
@@ -245,8 +246,9 @@ const Dashboard = ({ history }) => {
                           Time spent in editor: {time.hours}h {time.minutes}m{' '}
                           {time.seconds}s / 20h
                         </TimeText>
-                      </>
+                      </div>
                     )}
+                </NameWrapper>
                 {organization.teams &&
                   Object.values(organizationsObj[organization.id].teams).map(
                     team => {
