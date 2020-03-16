@@ -235,9 +235,9 @@ const Dashboard = ({ history }) => {
               <TilesWrapper key={organization.id}>
                 <NameWrapper>
                   <OrganizationName>{organization.name}</OrganizationName>
-                  {organization.owner.id === user.id &&
+                  {/* organization.owner.id === user.id &&
                     organization.subscriptionStatus === 'inactive' &&
-                    user?.timeSpent >= 65800000 && (
+                    user?.timeSpent >= 65800 && (
                       <div>
                         <TimeBarContainer>
                           <TimeBar time={user.timeSpent} />
@@ -247,7 +247,7 @@ const Dashboard = ({ history }) => {
                           {time.seconds}s / 20h
                         </TimeText>
                       </div>
-                    )}
+                    ) */}
                 </NameWrapper>
                 {organization.teams &&
                   Object.values(organizationsObj[organization.id].teams).map(
