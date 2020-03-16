@@ -747,17 +747,17 @@ const Dashboard = ({ history }) => {
 
   const addMember = ({ memberEmail }) => {
     const users = editTeam.users
-    const invited = editTeam.invited
     const isOwner =
       organizationsObj[editTeam.organizationId]?.owner?.email === memberEmail
     const isTeamLeader = editTeam.teamLeader === memberEmail
     const subscriptionStatus =
       organizationsObj[editTeam.organizationId].subscriptionStatus
     if (
-      invited &&
-      invited.findIndex(user => user.email === memberEmail) !== -1
+      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
+      users.findIndex(user => user.email === memberEmail) !== -1 ||
+      isOwner ||
+      isTeamLeader
     ) {
-      console.log(invited)
       setWarningModal({
         visible: true,
         content: (
@@ -765,15 +765,6 @@ const Dashboard = ({ history }) => {
             This user has already been invited to {editTeam.name}
           </ModalText>
         ),
-      })
-    } else if (
-      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      isOwner ||
-      isTeamLeader
-    ) {
-      setWarningModal({
-        visible: true,
-        content: <ModalText>This user is already in {editTeam.name}</ModalText>,
       })
     } else {
       if (
