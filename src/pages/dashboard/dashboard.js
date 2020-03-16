@@ -747,15 +747,17 @@ const Dashboard = ({ history }) => {
 
   const addMember = ({ memberEmail }) => {
     const users = editTeam.users
-    const invited = editTeam.users
+    const invited = editTeam.invited
     const isOwner =
       organizationsObj[editTeam.organizationId]?.owner?.email === memberEmail
+    const isTeamLeader = editTeam.teamLeader === memberEmail
     const subscriptionStatus =
       organizationsObj[editTeam.organizationId].subscriptionStatus
     if (
       invited &&
       invited.findIndex(user => user.email === memberEmail) !== -1
     ) {
+      console.log(invited)
       setWarningModal({
         visible: true,
         content: (
@@ -766,7 +768,8 @@ const Dashboard = ({ history }) => {
       })
     } else if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      isOwner
+      isOwner ||
+      isTeamLeader
     ) {
       setWarningModal({
         visible: true,
