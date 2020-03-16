@@ -237,7 +237,7 @@ const Dashboard = ({ history }) => {
                   <OrganizationName>{organization.name}</OrganizationName>
                   {organization.owner.id === user.id &&
                     organization.subscriptionStatus === 'inactive' &&
-                    user?.timeSpent >= 65800 && (
+                    user?.timeSpent >= 65800000 && (
                       <div>
                         <TimeBarContainer>
                           <TimeBar time={user.timeSpent} />
