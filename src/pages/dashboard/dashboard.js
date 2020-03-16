@@ -753,16 +753,24 @@ const Dashboard = ({ history }) => {
     const subscriptionStatus =
       organizationsObj[editTeam.organizationId].subscriptionStatus
     if (
-      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      (invited &&
-        invited.findIndex(user => user.email === memberEmail) !== -1) ||
-      isOwner
+      invited &&
+      invited.findIndex(user => user.email === memberEmail) !== -1
     ) {
       setWarningModal({
         visible: true,
         content: (
-          <ModalText>This user has already been invited to your team</ModalText>
+          <ModalText>
+            This user has already been invited to {editTeam.name}
+          </ModalText>
         ),
+      })
+    } else if (
+      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
+      isOwner
+    ) {
+      setWarningModal({
+        visible: true,
+        content: <ModalText>This user is already in {editTeam.name}</ModalText>,
       })
     } else {
       if (
