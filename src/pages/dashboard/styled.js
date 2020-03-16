@@ -224,6 +224,7 @@ export const ModalText = styled(Text)`
   text-overflow: wrap;
   overflow: visible;
   word-break: break-word;
+  margin: 15px;
 `
 
 export const WarningText = styled(ModalText)`

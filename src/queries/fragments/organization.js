@@ -8,6 +8,7 @@ export const OrganizationFragment = gql`
     owner {
       id
       name
+      email
     }
     users {
       id

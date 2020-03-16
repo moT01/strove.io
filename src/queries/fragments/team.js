@@ -13,6 +13,7 @@ export const TeamFragment = gql`
       id
       name
       photoUrl
+      email
     }
     users {
       name
