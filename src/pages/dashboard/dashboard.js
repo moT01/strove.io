@@ -748,11 +748,15 @@ const Dashboard = ({ history }) => {
   const addMember = ({ memberEmail }) => {
     const users = editTeam.users
     const invited = editTeam.users
+    const isOwner =
+      organizationsObj[editTeam.organizationId]?.owner?.email === memberEmail
     const subscriptionStatus =
       organizationsObj[editTeam.organizationId].subscriptionStatus
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      (invited && invited.findIndex(user => user.email === memberEmail) !== -1)
+      (invited &&
+        invited.findIndex(user => user.email === memberEmail) !== -1) ||
+      isOwner
     ) {
       setWarningModal({
         visible: true,
