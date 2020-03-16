@@ -5,6 +5,8 @@ import { Prompt } from 'react-router-dom'
 
 import { selectors } from 'state'
 
+import LoadingEditorInfo from './loadingEditorInfo'
+
 const StyledIframe = styled.iframe`
   display: block;
   background: ${({ theme }) => theme.colors.c3};
@@ -35,6 +37,7 @@ const Editor = ({
           `Are you sure you want to leave editor? This will stop your running processes.`
         }
       />
+      <LoadingEditorInfo />
       <StyledIframe
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}

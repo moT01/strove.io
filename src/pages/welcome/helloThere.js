@@ -1,37 +1,56 @@
-/* eslint-disable */
-import React, { memo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Formik } from 'formik'
+import React, { memo, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { SET_ONBOARDED, ME } from 'queries'
 import { StroveButton } from 'components'
-import { selectors } from 'state'
-import { RENAME_ORGANIZATION } from 'queries'
-import { mutation } from 'utils'
+import { query, mutation } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import {
-  Title,
-  FormField,
-  StyledForm,
-  SkipForNow,
-  TextToLeft,
-  Details,
-} from './styled'
+import { Title, Details } from './styled'
 
-const HelloThere = ({ history }) => {
+const HelloThere = () => {
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(
+      mutation({
+        name: 'setOnboarded',
+        mutation: SET_ONBOARDED,
+        variables: {
+          isOnboarded: true,
+        },
+        onSuccessDispatch: () =>
+          query({
+            name: 'me',
+            query: ME,
+            storeKey: 'user',
+          }),
+      })
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <OnboardingContainer>
       <>
         <div>
           <Title>Hello there!</Title>
           <Details>
-            Strove is an alternative for local software development
+            Now you're ready to use Strove - a cloud alternative to local
+            software development.
+          </Details>
+          <Details>
+            We will redirect you to your Dashboard. It brings together people
+            and projects so your team can move forward and get things done.
           </Details>
         </div>
-        <SkipForNow onClick={() => history.push('/app/dashboard')}>
-          Go to my dashboard
-        </SkipForNow>
+        <StroveButton
+          margin="20px 0"
+          isPrimary
+          isGetStarted
+          navigateTo="/app/dashboard"
+          text="See your Dashboard in Strove"
+        />
       </>
     </OnboardingContainer>
   )

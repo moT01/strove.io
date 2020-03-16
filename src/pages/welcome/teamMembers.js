@@ -7,20 +7,16 @@ import * as Yup from 'yup'
 import { StroveButton } from 'components'
 import { selectors } from 'state'
 import { ADD_MEMBER } from 'queries'
-import { mutation } from 'utils'
+import { mutation, updateOrganizations } from 'utils'
 
 import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow } from './styled'
+import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
-    .of(
-      Yup.object().shape({
-        email: Yup.string().email(),
-      })
-    )
-    .required('Must have friends')
-    .min(3, 'Minimum of 3 friends'),
+    .of(Yup.string().email())
+    .required('No emails to invite')
+    .min(1, 'No emails to invite'),
 })
 
 const EmailsWrapper = styled.div`
@@ -89,7 +85,6 @@ const OrganizationName = ({ history }) => {
           initialValues={{ emails: ['', '', ''] }}
           validationSchema={validationSchema}
           onSubmit={values => {
-            console.log(values.emails.map(email => email.value))
             dispatch(
               mutation({
                 name: 'addMember',
@@ -98,8 +93,9 @@ const OrganizationName = ({ history }) => {
                   memberEmails: values.emails.map(email => email.value),
                   teamId: myOrganizations[0]?.teams[0]?.id,
                 },
+                onSuccessDispatch: updateOrganizations,
                 onSuccess: () => {
-                  history.push('/welcome/teamName')
+                  history.push('/welcome/helloThere')
                 },
               })
             )
@@ -118,7 +114,7 @@ const OrganizationName = ({ history }) => {
                               <FormField
                                 type="email"
                                 placeholder="name@example.com"
-                                name={`emails.${index}.value`}
+                                name={`emails[${index}]`}
                                 noValidate
                               />
                             </TableRow>
@@ -143,16 +139,16 @@ const OrganizationName = ({ history }) => {
                   isPrimary
                   type="submit"
                   text="Add Teammates"
-                  // disabled={
-                  //   errors?.emails || !values.organization?.profile_name
-                  // }
+                  disabled={
+                    errors?.emails || !values?.emails.some(email => email)
+                  }
                 />
               </EnvButtonsWrapper>
-              {/* {errors?.emails && <TextToLeft>{errors?.emails}</TextToLeft>} */}
+              {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
             </StyledForm>
           )}
         />
-        <SkipForNow onClick={() => history.push('/welcome/teamName')}>
+        <SkipForNow onClick={() => history.push('/welcome/helloThere')}>
           Skip for now
         </SkipForNow>
       </>

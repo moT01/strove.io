@@ -213,7 +213,6 @@ export const Text = styled.div`
 export const OrganizationName = styled(Text)`
   align-self: flex-start;
   color: ${({ theme }) => theme.colors.c25};
-  margin-top: 20px;
   font-size: 1.6rem;
   height: 1.9rem;
   font-weight: 700;
@@ -500,4 +499,35 @@ export const ProjectActionIcon = styled(Icon)`
 
 export const IconDescription = styled.div`
   margin-right: 5px;
+`
+
+export const TimeBarContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 15px;
+  border: 1px solid #0072ce;
+  border-radius: 2px;
+  overflow: hidden;
+`
+
+export const TimeBar = styled.div`
+  height: 100%;
+  width: ${({ time }) => (time / 72000000) * 100}%;
+  background-color: #0072ce;
+`
+
+export const TimeText = styled(Text)`
+  color: ${({ theme }) => theme.colors.c3};
+  font-size: 12px;
+  margin: 0;
+`
+
+export const NameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
 `
