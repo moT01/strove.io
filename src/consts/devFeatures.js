@@ -21,8 +21,8 @@ export default [
     type: 'global',
   },
   {
-    title: 'All major programming languages available without setup',
-    content: 'Need Python 2.7.3 for chemistry? We got you covered!',
+    title: 'All major programming languages available',
+    content: 'Need Python, Java, C#? We got you covered!',
     color: '#722ED1',
     shadowColor: 'rgba(114,46,209,.12)',
     type: 'code',
