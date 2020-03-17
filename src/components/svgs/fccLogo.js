@@ -5,7 +5,6 @@ const FccLogo = props => (
     xmlns="http://www.w3.org/2000/svg"
     width="315"
     height="36"
-    viewBox="64 64 896 896"
     preserveAspectRatio="xMidYMid meet"
     version="1.1"
     viewBox="0 0 2100 240"
