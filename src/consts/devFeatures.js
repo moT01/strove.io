@@ -28,9 +28,8 @@ export default [
     type: 'code',
   },
   {
-    title: "Don't lose time, one environment for the whole team",
-    content:
-      'Once a project has been set up, any member can access it without needing to configure everything again',
+    title: 'One environment for the whole team',
+    content: 'Any member can access it projects using tthe same environment',
     color: '#FAAD14',
     shadowColor: 'rgba(250,173,20,.12)',
     type: 'team',
