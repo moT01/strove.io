@@ -14,7 +14,7 @@ export default [
     type: 'appstore',
   },
   {
-    title: 'All your software in one place',
+    title: 'Remote first',
     content: 'Access code anywhere, from any computer',
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
