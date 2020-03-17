@@ -63,9 +63,9 @@ import {
   StyledErrors,
   InviteFormWrapper,
   TilesWrapper,
-  TimeBarContainer,
-  TimeBar,
-  TimeText,
+  // TimeBarContainer,
+  // TimeBar,
+  // TimeText,
   NameWrapper,
 } from './styled'
 
