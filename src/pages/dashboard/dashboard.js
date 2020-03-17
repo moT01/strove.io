@@ -63,9 +63,9 @@ import {
   StyledErrors,
   InviteFormWrapper,
   TilesWrapper,
-  TimeBarContainer,
-  TimeBar,
-  TimeText,
+  // TimeBarContainer,
+  // TimeBar,
+  // TimeText,
   NameWrapper,
 } from './styled'
 
@@ -110,7 +110,7 @@ const Dashboard = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const [stopModal, setStopModal] = useState(false)
-  const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
+  // const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
   const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)

@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 
 import { StyledH3 } from './styled'
-import { FccLogo, UlLogo, UlManagementLogo } from 'components/svgs'
+import { FccLogo, UlManagementLogo } from 'components/svgs'
 import { theme } from 'consts'
 
 const StyledWrapper = styled.div`

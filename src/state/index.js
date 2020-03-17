@@ -27,9 +27,12 @@ const persistInvitationConfig = {
   storage,
 }
 
-const getToken =
-  api.selectors.getUserField('token') ||
-  api.selectors.getUserField('siliskyToken')
+const getToken = state => {
+  return (
+    api.selectors.getUserField('token')(state) ||
+    api.selectors.getUserField('siliskyToken')(state)
+  )
+}
 
 export const selectors = {
   api: api.selectors,
