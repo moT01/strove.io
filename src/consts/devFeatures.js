@@ -1,7 +1,7 @@
 export default [
   {
-    title: 'Collaborate straight from your browser',
-    content: 'No setup needed',
+    title: 'A browser is all you need',
+    content: 'No futher setup required',
     color: '#EB2F96',
     shadowColor: 'rgba(235,45,150,.12)',
     type: 'chrome',
