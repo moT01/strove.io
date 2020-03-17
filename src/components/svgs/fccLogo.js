@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const FccLogo = props => (
   <svg
@@ -73,4 +73,4 @@ const FccLogo = props => (
   </svg>
 )
 
-export default FccLogo
+export default memo(FccLogo)
