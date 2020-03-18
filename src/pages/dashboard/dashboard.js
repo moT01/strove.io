@@ -736,7 +736,6 @@ const Dashboard = ({ history }) => {
       organizationsObj[editTeam.organizationId].subscriptionStatus
     if (
       (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      users.findIndex(user => user.email === memberEmail) !== -1 ||
       isOwner ||
       isTeamLeader
     ) {
