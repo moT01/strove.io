@@ -74,7 +74,7 @@ const AddButton = styled.button`
   border: none;
 `
 
-const TeamMembers = ({ history }) => {
+const OrganizationName = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
@@ -157,4 +157,4 @@ const TeamMembers = ({ history }) => {
   )
 }
 
-export default memo(withRouter(TeamMembers))
+export default memo(withRouter(OrganizationName))
