@@ -5,7 +5,7 @@ import { Formik, FieldArray } from 'formik'
 import { withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import { StroveButton } from 'components'
+import { StroveButton, InviteMembersForm } from 'components'
 import { selectors } from 'state'
 import { ADD_MEMBER } from 'queries'
 import { mutation, updateOrganizations } from 'utils'
