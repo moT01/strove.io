@@ -10,7 +10,7 @@ import { selectors } from 'state'
 import { ADD_MEMBER } from 'queries'
 import { mutation, updateOrganizations } from 'utils'
 
-import { FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
+import { FormField, StyledForm, TextToLeft } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
@@ -103,30 +103,28 @@ const InviteMembersForm = ({ history }) => {
             <FieldArray
               name="emails"
               render={arrayHelpers => (
-                <>
-                  <TableWrapper>
-                    <Table>
-                      {values.emails.map((env, index) => (
-                        <TableRow key={index}>
-                          <FormField
-                            type="email"
-                            placeholder="name@example.com"
-                            name={`emails[${index}]`}
-                            noValidate
-                          />
-                        </TableRow>
-                      ))}
-                    </Table>
-                    <AddButton
-                      type="button"
-                      onClick={() => {
-                        arrayHelpers.push('')
-                      }}
-                    >
-                      + Add another
-                    </AddButton>
-                  </TableWrapper>
-                </>
+                <TableWrapper>
+                  <Table>
+                    {values.emails.map((env, index) => (
+                      <TableRow key={index}>
+                        <FormField
+                          type="email"
+                          placeholder="name@example.com"
+                          name={`emails[${index}]`}
+                          noValidate
+                        />
+                      </TableRow>
+                    ))}
+                  </Table>
+                  <AddButton
+                    type="button"
+                    onClick={() => {
+                      arrayHelpers.push('')
+                    }}
+                  >
+                    + Add another
+                  </AddButton>
+                </TableWrapper>
               )}
             />
           </EmailsWrapper>
