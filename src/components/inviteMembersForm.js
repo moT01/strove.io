@@ -10,8 +10,7 @@ import { selectors } from 'state'
 import { ADD_MEMBER } from 'queries'
 import { mutation, updateOrganizations } from 'utils'
 
-import OnboardingContainer from './onboardingContainer'
-import { Title, FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
+import { FormField, StyledForm, SkipForNow, TextToLeft } from './styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
@@ -74,7 +73,7 @@ const AddButton = styled.button`
   border: none;
 `
 
-const InviteMembers = ({ history }) => {
+const InviteMembersForm = ({ history }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
@@ -147,4 +146,4 @@ const InviteMembers = ({ history }) => {
   )
 }
 
-export default memo(withRouter(InviteMembers))
+export default memo(withRouter(InviteMembersForm))
