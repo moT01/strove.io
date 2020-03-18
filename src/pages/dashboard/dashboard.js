@@ -462,7 +462,6 @@ const Dashboard = ({ history }) => {
                                     organizationsObj={organizationsObj}
                                     isOwner={isOwner}
                                   />
-                                  {isOwner && (
                                     <StroveButton
                                       isPrimary
                                       padding="5px"
@@ -476,7 +475,6 @@ const Dashboard = ({ history }) => {
                                         setAddProjectModal(true)
                                       }}
                                     />
-                                  )}
                                 </TeamTileSection>
                               )}
                             </TeamTile>
