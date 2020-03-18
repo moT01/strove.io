@@ -87,7 +87,9 @@ const InviteMembersForm = ({ history }) => {
             name: 'addMember',
             mutation: ADD_MEMBER,
             variables: {
-              memberEmails: values.emails.map(email => email.value),
+              memberEmails: [
+                ...new Set(values.emails.map(email => email.value)),
+              ],
               teamId: myOrganizations[0]?.teams[0]?.id,
             },
             onSuccessDispatch: updateOrganizations,
