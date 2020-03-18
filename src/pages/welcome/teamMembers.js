@@ -82,73 +82,7 @@ const TeamMembers = ({ history }) => {
     <OnboardingContainer>
       <>
         <Title>Who else is working on your team?</Title>
-        <Formik
-          initialValues={{ emails: ['', '', ''] }}
-          validationSchema={validationSchema}
-          onSubmit={values => {
-            dispatch(
-              mutation({
-                name: 'addMember',
-                mutation: ADD_MEMBER,
-                variables: {
-                  memberEmails: values.emails.map(email => email.value),
-                  teamId: myOrganizations[0]?.teams[0]?.id,
-                },
-                onSuccessDispatch: updateOrganizations,
-                onSuccess: () => {
-                  history.push('/welcome/helloThere')
-                },
-              })
-            )
-          }}
-          render={({ values, errors }) => (
-            <StyledForm>
-              <EmailsWrapper>
-                <FieldArray
-                  name="emails"
-                  render={arrayHelpers => (
-                    <>
-                      <TableWrapper>
-                        <Table>
-                          {values.emails.map((env, index) => (
-                            <TableRow key={index}>
-                              <FormField
-                                type="email"
-                                placeholder="name@example.com"
-                                name={`emails[${index}]`}
-                                noValidate
-                              />
-                            </TableRow>
-                          ))}
-                        </Table>
-                        <AddButton
-                          type="button"
-                          onClick={() => {
-                            arrayHelpers.push('')
-                          }}
-                        >
-                          + Add another
-                        </AddButton>
-                      </TableWrapper>
-                    </>
-                  )}
-                />
-              </EmailsWrapper>
-              <EnvButtonsWrapper>
-                <StroveButton
-                  margin="20px 0 10px"
-                  isPrimary
-                  type="submit"
-                  text="Add Teammates"
-                  disabled={
-                    errors?.emails || !values?.emails.some(email => email)
-                  }
-                />
-              </EnvButtonsWrapper>
-              {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
-            </StyledForm>
-          )}
-        />
+        <InviteMembersForm />
         <SkipForNow onClick={() => history.push('/welcome/helloThere')}>
           Skip for now
         </SkipForNow>
