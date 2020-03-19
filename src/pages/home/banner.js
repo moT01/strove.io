@@ -80,6 +80,41 @@ const Banner = () => (
           <SmallSectionWrapper isMobile={isMobile}>
             <StyledCell>
               <StyledCellHeader>
+                <StyledH2 color={theme.colors.c3}>Before</StyledH2>
+              </StyledCellHeader>
+              <StyledProductDescription>
+                Save hours to days per developer by running code in seconds from
+                anywhere
+              </StyledProductDescription>
+            </StyledCell>
+          </SmallSectionWrapper>
+        </SectionWrapper>
+        <SectionWrapper isMobile={isMobile} padding="20px 10px">
+          <SmallSectionWrapper isMobile={isMobile}>
+            <StyledCell>
+              <StyledCellHeader>
+                <StyledH2 color={theme.colors.c3}>After</StyledH2>
+              </StyledCellHeader>
+              <StyledProductDescription>
+                Save hours to days per developer by running code in seconds from
+                anywhere
+              </StyledProductDescription>
+            </StyledCell>
+          </SmallSectionWrapper>
+        </SectionWrapper>
+      </SectionDivider>
+    </StyledSectionWrapper>
+    <StyledSectionWrapper
+      isSecondary
+      padding="20px"
+      background="white"
+      isMobileOnly={isMobileOnly}
+    >
+      <SectionDivider isMobile={isMobile}>
+        <SectionWrapper isMobile={isMobile} padding="20px 10px">
+          <SmallSectionWrapper isMobile={isMobile}>
+            <StyledCell>
+              <StyledCellHeader>
                 <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
               </StyledCellHeader>
               <StyledProductDescription>
