@@ -45,22 +45,34 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const timeExceeded = user?.timeSpent >= 72000000
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
 
-  /* TODO: Find a reasonable way to approach this */
-  const organizationWithProject = organization || myOrganizations?.[0]
-  const teamIdWithProject = teamId || myOrganizations?.[0]?.teams?.[0]?.id
+  /* Check if new project is embedded */
+  const originDomain =
+    window.location !== window.parent.location
+      ? document.referrer
+      : document.location.href
 
-  const addProject = async ({
-    link,
-    name,
-    teamId = teamIdWithProject,
-    forkedFromId,
-  }) => {
+  const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
     let repoProvider
+
+    /* ToDo: Make this scallable and work with other sites as well */
+    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
+
+    /* TODO: Find a reasonable way to approach this */
+    const organizationWithProject = organization || myOrganizations?.[0]
+    const teamIdWithProject = type
+      ? myOrganizations?.[0]?.teams?.[0]?.id
+      : teamId
 
     let repoFromGithub
     let repoFromGitlab
     let repoFromBitbucket
+    console.log(
+      'Weronika rozwiązuje problemy wszystkie',
+      teamIdWithProject,
+      type,
+      teamId
+    )
 
     if (link) {
       repoLink = link.trim().toLowerCase()
@@ -104,7 +116,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         repoLink,
         repoProvider,
         name,
-        teamId,
+        teamId: teamIdWithProject,
         forkedFromId,
       })
     )
@@ -150,7 +162,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     ) {
       setModalContent('AnotherActiveProject')
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
-    } else if (!theSameIncomingProject) {
+    } else if (!theSameIncomingProject && teamId) {
       createProject({
         repoLink,
         dispatch,
@@ -159,6 +171,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         name,
         teamId: teamIdWithProject,
         forkedFromId,
+        type,
       })
     }
   }

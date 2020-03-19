@@ -18,6 +18,7 @@ const createProject = async ({
   name,
   teamId,
   forkedFromId,
+  type,
 }) => {
   let repoData = null
   const customName = name
@@ -124,14 +125,14 @@ const createProject = async ({
       repoData = { name: customName, description: '' }
     }
 
-    /* Check if new project is embedded */
-    const originDomain =
-      window.location !== window.parent.location
-        ? document.referrer
-        : document.location.href
+    // /* Check if new project is embedded */
+    // const originDomain =
+    //   window.location !== window.parent.location
+    //     ? document.referrer
+    //     : document.location.href
 
-    /* ToDo: Make this scallable and work with other sites as well */
-    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
+    // /* ToDo: Make this scallable and work with other sites as well */
+    // const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
 
     const { description, name /* add language and color */ } = repoData
     dispatch(
