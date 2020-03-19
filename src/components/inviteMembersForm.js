@@ -173,7 +173,7 @@ export const FormField = styled(Field)`
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
 
-const InviteMembersForm = ({ history }) => {
+const InviteMembersForm = ({ history, limit }) => {
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const dispatch = useDispatch()
 
@@ -221,7 +221,9 @@ const InviteMembersForm = ({ history }) => {
                   <AddButton
                     type="button"
                     onClick={() => {
-                      arrayHelpers.push('')
+                      if (values?.emails?.length < limit) {
+                        arrayHelpers.push('')
+                      }
                     }}
                   >
                     + Add another

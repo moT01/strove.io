@@ -954,13 +954,12 @@ const Dashboard = ({ history }) => {
       </Modal>
       <Modal
         mindWidth="80vw"
-        height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={addMemberModal}
         onRequestClose={() => setAddMemberModal(false)}
         contentLabel="Add member"
         ariaHideApp={false}
       >
-        <InviteMembersForm />
+        <InviteMembersForm limit={5} />
         <ModalButton
           onClick={() => setAddMemberModal(false)}
           text="Close"
