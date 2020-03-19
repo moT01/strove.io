@@ -84,14 +84,8 @@ const Banner = () => (
               </StyledCellHeader>
               <StyledProductDescription>
                 Programmers try everything to solve{' '}
-                <b>it works on my machine'</b> and <b>work from home</b>{' '}
-                problems
+                <b>it works on my machine</b> and <b>work from home</b> problems
               </StyledProductDescription>
-              <DemoImage
-                shadowOpacity="0.3"
-                src={require('assets/editor.png')}
-                alt="editor image"
-              />
               <StyledProductDescription>
                 Virtual machines
               </StyledProductDescription>
@@ -100,7 +94,7 @@ const Banner = () => (
               </StyledProductDescription>
               <StyledProductDescription>Devops teams</StyledProductDescription>
               <StyledProductDescription>
-                Leased computers
+                Leasing computers
               </StyledProductDescription>
             </StyledCell>
           </SmallSectionWrapper>
