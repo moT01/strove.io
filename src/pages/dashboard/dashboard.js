@@ -27,6 +27,7 @@ import {
   Header,
   Footer,
   Modal,
+  InviteMembersForm,
 } from 'components'
 import StroveLogo from 'images/strove.png'
 import FullScreenLoader from 'components/fullScreenLoader'
@@ -462,19 +463,19 @@ const Dashboard = ({ history }) => {
                                     organizationsObj={organizationsObj}
                                     isOwner={isOwner}
                                   />
-                                    <StroveButton
-                                      isPrimary
-                                      padding="5px"
-                                      minWidth="150px"
-                                      maxWidth="150px"
-                                      margin="10px"
-                                      borderRadius="2px"
-                                      text="Add Project"
-                                      onClick={() => {
-                                        setEditTeam(team)
-                                        setAddProjectModal(true)
-                                      }}
-                                    />
+                                  <StroveButton
+                                    isPrimary
+                                    padding="5px"
+                                    minWidth="150px"
+                                    maxWidth="150px"
+                                    margin="10px"
+                                    borderRadius="2px"
+                                    text="Add Project"
+                                    onClick={() => {
+                                      setEditTeam(team)
+                                      setAddProjectModal(true)
+                                    }}
+                                  />
                                 </TeamTileSection>
                               )}
                             </TeamTile>
@@ -959,52 +960,7 @@ const Dashboard = ({ history }) => {
         contentLabel="Add member"
         ariaHideApp={false}
       >
-        <Formik
-          initialValues={{
-            email: '',
-          }}
-          validate={validate}
-          onSubmit={values => addMember({ memberEmail: values.email })}
-        >
-          {({ errors, values }) => (
-            <StyledForm>
-              <InviteFormWrapper
-                isInvite
-                disabled={errors.email || !values.email}
-                isMobile={isMobileOnly}
-              >
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder="Member email"
-                ></Field>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#9CA2B4"
-                    strokeWidth="2"
-                  >
-                    <path d="M2 4h20v16H2z"></path>
-                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                  </g>
-                </svg>
-                <StroveButton
-                  isPrimary
-                  type="submit"
-                  layout="form"
-                  text="Invite"
-                  disabled={errors.email || !values.email}
-                />
-              </InviteFormWrapper>
-            </StyledForm>
-          )}
-        </Formik>
+        <InviteMembersForm />
         <ModalButton
           onClick={() => setAddMemberModal(false)}
           text="Close"
