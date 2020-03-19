@@ -87,6 +87,11 @@ const Banner = () => (
                 <b>it works on my machine'</b> and <b>work from home</b>{' '}
                 problems
               </StyledProductDescription>
+              <DemoImage
+                shadowOpacity="0.3"
+                src={require('assets/editor.png')}
+                alt="editor image"
+              />
               <StyledProductDescription>
                 Virtual machines
               </StyledProductDescription>

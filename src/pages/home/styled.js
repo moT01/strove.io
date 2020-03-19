@@ -111,7 +111,6 @@ export const SmallSectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 440px;
-  max-height: 440px;
   padding: ${({ padding }) => padding || '0'};
 `
 
