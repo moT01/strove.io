@@ -68,6 +68,7 @@ import {
   // TimeBar,
   // TimeText,
   NameWrapper,
+  InviteWrapper,
 } from './styled'
 
 const validate = values => {
@@ -953,13 +954,15 @@ const Dashboard = ({ history }) => {
         />
       </Modal>
       <Modal
-        mindWidth="80vw"
+        minWidth="320px"
         isOpen={addMemberModal}
         onRequestClose={() => setAddMemberModal(false)}
         contentLabel="Add member"
         ariaHideApp={false}
       >
-        <InviteMembersForm limit={5} />
+        <InviteWrapper>
+          <InviteMembersForm limit={5} />
+        </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
           text="Close"
