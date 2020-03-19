@@ -83,8 +83,19 @@ const Banner = () => (
                 <StyledH2 color={theme.colors.c3}>Before</StyledH2>
               </StyledCellHeader>
               <StyledProductDescription>
-                Save hours to days per developer by running code in seconds from
-                anywhere
+                Programmers try everything to solve{' '}
+                <b>it works on my machine'</b> and <b>work from home</b>{' '}
+                problems
+              </StyledProductDescription>
+              <StyledProductDescription>
+                Virtual machines
+              </StyledProductDescription>
+              <StyledProductDescription>
+                Docker containers
+              </StyledProductDescription>
+              <StyledProductDescription>Devops teams</StyledProductDescription>
+              <StyledProductDescription>
+                Leased computers
               </StyledProductDescription>
             </StyledCell>
           </SmallSectionWrapper>
