@@ -218,16 +218,18 @@ const InviteMembersForm = ({ history, limit }) => {
                       </TableRow>
                     ))}
                   </Table>
-                  <AddButton
-                    type="button"
-                    onClick={() => {
-                      if (values?.emails?.length < limit) {
-                        arrayHelpers.push('')
-                      }
-                    }}
-                  >
-                    + Add another
-                  </AddButton>
+                  {(!limit || values?.emails?.length < limit) && (
+                    <AddButton
+                      type="button"
+                      onClick={() => {
+                        if (values?.emails?.length < limit) {
+                          arrayHelpers.push('')
+                        }
+                      }}
+                    >
+                      + Add another
+                    </AddButton>
+                  )}
                 </TableWrapper>
               )}
             />
