@@ -43,7 +43,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
   const timeExceeded = user?.timeSpent >= 72000000
-  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
   /* Check if new project is embedded */
@@ -60,20 +59,14 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
 
     /* TODO: Find a reasonable way to approach this */
-    const organizationWithProject = organization || myOrganizations?.[0]
+    const organizationWithProject = organization || ownedOrganizations?.[0]
     const teamIdWithProject = type
-      ? myOrganizations?.[0]?.teams?.[0]?.id
+      ? ownedOrganizations?.[0]?.teams?.[0]?.id
       : teamId
 
     let repoFromGithub
     let repoFromGitlab
     let repoFromBitbucket
-    console.log(
-      'Weronika rozwiązuje problemy wszystkie',
-      teamIdWithProject,
-      type,
-      teamId
-    )
 
     if (link) {
       repoLink = link.trim().toLowerCase()
