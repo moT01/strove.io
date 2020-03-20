@@ -38,7 +38,7 @@ const StyledEditorLink = styled(StyledStandardLink)`
   font-weight: 300;
 `
 
-const StyledLink = ({ theme, isEditor, ...props }) => {
+const StyledLink = ({ theme, isEditor, isEmbed, isMobileOnly, ...props }) => {
   if (isEditor) {
     return <StyledEditorLink {...props} />
   }
