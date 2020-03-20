@@ -87,6 +87,7 @@ const Banner = () => (
                 <StyledHeaderText>Give focus a chance</StyledHeaderText>
                 <IconContainer>
                   <img
+                    decoding="async"
                     alt="docker"
                     src={require('assets/docker.png')}
                     style={{
@@ -99,6 +100,7 @@ const Banner = () => (
                 <StyledHeaderText>Give focus a chance</StyledHeaderText>
                 <IconContainer>
                   <img
+                    decoding="async"
                     alt="docker"
                     src={require('assets/vm.png')}
                     style={{
@@ -111,6 +113,7 @@ const Banner = () => (
                 <StyledHeaderText>Give focus a chance</StyledHeaderText>
                 <IconContainer>
                   <img
+                    decoding="async"
                     alt="docker"
                     src={require('assets/people.png')}
                     style={{
