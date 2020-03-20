@@ -88,7 +88,7 @@ const OptionStyles = css`
   svg {
     fill: ${({ theme }) => theme.colors.c1};
     width: 22px;
-    height: auto;
+    height: 100%;
     margin-right: 5px;
   }
 
