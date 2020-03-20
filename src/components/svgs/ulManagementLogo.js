@@ -10,7 +10,7 @@ const UlManagementLogo = props => (
     width="256px"
     height="125px"
     viewBox="0 0 512 253"
-    enable-background="new 0 0 512 253"
+    enableBackground="new 0 0 512 253"
   >
     {' '}
     <image
