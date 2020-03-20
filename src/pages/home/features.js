@@ -136,7 +136,7 @@ const Features = ({ features }) => {
               }}
             />
           ) : (
-            <VSCode width="38px" height="auto" fill={item.color} />
+            <VSCode width="38px" height="100%" fill={item.color} />
           )}
         </div>
         <StyledFeatureTitle>{item.title}</StyledFeatureTitle>
