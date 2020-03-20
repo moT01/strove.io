@@ -38,6 +38,7 @@ const StyledEditorLink = styled(StyledStandardLink)`
   font-weight: 300;
 `
 
+// https://stackoverflow.com/questions/49834251/how-to-extend-styled-component-without-passing-props-to-underlying-dom-element
 const StyledLink = ({ theme, isEditor, isEmbed, isMobileOnly, ...props }) => {
   if (isEditor) {
     return <StyledEditorLink {...props} />
