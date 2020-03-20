@@ -95,6 +95,18 @@ const Banner = () => (
                   />
                 </IconContainer>
               </StyledCellHeader>
+              <StyledCellHeader>
+                <StyledHeaderText>Give focus a chance</StyledHeaderText>
+                <IconContainer>
+                  <img
+                    alt="docker"
+                    src={require('assets/vm.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </StyledCellHeader>
               <StyledProductDescription>
                 Programmers try everything to solve{' '}
                 <b>it works on my machine</b> and <b>work from home</b> problems
