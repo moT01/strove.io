@@ -83,6 +83,10 @@ const Banner = () => (
               <StyledCellHeader>
                 <StyledH2 color={theme.colors.c3}>Before</StyledH2>
               </StyledCellHeader>
+              <StyledHeaderText>
+                Common <b>it works on my machine</b> and <b>work from home</b>{' '}
+                problems are a lot of work
+              </StyledHeaderText>
               <StyledCellHeader>
                 <StyledHeaderText>Virtual machines</StyledHeaderText>
                 <IconContainer>
