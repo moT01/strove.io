@@ -728,6 +728,7 @@ const Dashboard = ({ history }) => {
   }
 
   const addMember = ({ memberEmail }) => {
+    console.log("TCL: addMember -> memberEmail", memberEmail)
     const users = editTeam.users
     const isOwner =
       organizationsObj[editTeam.organizationId]?.owner?.email === memberEmail
@@ -961,7 +962,7 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <InviteWrapper>
-          <InviteMembersForm limit={5} teamId={editTeam.id}/>
+          <InviteMembersForm limit={5} teamId={editTeam?.id} addMember={addMember}/>
         </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}

@@ -173,7 +173,7 @@ export const FormField = styled(Field)`
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
 
-const InviteMembersForm = ({ history, limit, teamId }) => {
+const InviteMembersForm = ({ history, limit, teamId, addMember }) => {
   const dispatch = useDispatch()
 
   return (
@@ -181,22 +181,26 @@ const InviteMembersForm = ({ history, limit, teamId }) => {
       initialValues={{ emails: ['', '', ''] }}
       validationSchema={validationSchema}
       onSubmit={values => {
-        dispatch(
-          mutation({
-            name: 'addMember',
-            mutation: ADD_MEMBER,
-            variables: {
-              memberEmails: [
-                ...new Set(values.emails.map(email => email.value)),
-              ],
-              teamId,
-            },
-            onSuccessDispatch: updateOrganizations,
-            onSuccess: () => {
-              history.push('/welcome/helloThere')
-            },
-          })
-        )
+        const emailsArray = [...new Set(values.emails.map(email => email))]
+
+        console.log('TCL: InviteMembersForm -> values', values)
+        console.log('TCL: InviteMembersForm -> values', values.emails)
+        console.log('TCL: InviteMembersForm -> emailsArray', emailsArray)
+        // dispatch(
+        //   mutation({
+        //     name: 'addMember',
+        //     mutation: ADD_MEMBER,
+        //     variables: {
+        //       memberEmails: [...emailsArray],
+        //       teamId,
+        //     },
+        //     onSuccessDispatch: updateOrganizations,
+        //     onSuccess: () => {
+        //       history.push('/welcome/helloThere')
+        //     },
+        //   })
+        // )
+        addMember({ memberEmail: [...emailsArray] })
       }}
       render={({ values, errors }) => (
         <StyledForm>
