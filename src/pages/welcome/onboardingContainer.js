@@ -20,6 +20,7 @@ const OnboardingContainer = ({ children }) => {
         {!isMobile && (
           <ImageContainer>
             <Illustration
+              decoding="async"
               onLoad={() => setImageLoading(true)}
               src={require('assets/illustration.png')}
               alt="illustration"

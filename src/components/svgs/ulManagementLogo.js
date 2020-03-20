@@ -14,6 +14,7 @@ const UlManagementLogo = props => (
   >
     {' '}
     <image
+      decoding="async"
       id="image0"
       width="512"
       height="253"

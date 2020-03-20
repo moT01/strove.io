@@ -42,6 +42,7 @@ const Banner = () => (
       </StyledHeadingSection>
       {!isMobileOnly && (
         <Illustration
+          decoding="async"
           src={require('assets/illustration.png')}
           alt="illustration"
           width="50%"
@@ -136,6 +137,7 @@ const Banner = () => (
         </SectionWrapper>
         <SectionWrapper padding="20px 10px">
           <DemoImage
+            decoding="async"
             shadowOpacity="0.3"
             src={require('assets/editor.png')}
             alt="editor image"
@@ -153,6 +155,7 @@ const Banner = () => (
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
           <SectionWrapper isMobile={isMobile}>
             <DemoImage
+              decoding="async"
               shadowOpacity="0.1"
               src={require('assets/teams.png')}
               alt="teams image"
