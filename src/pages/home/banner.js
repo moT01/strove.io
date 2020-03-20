@@ -148,10 +148,9 @@ const Banner = () => (
               <StyledCellHeader>
                 <StyledH2 color={theme.colors.c3}>After</StyledH2>
               </StyledCellHeader>
-              <StyledProductDescription>
-                Save hours to days per developer by running code in seconds from
-                anywhere
-              </StyledProductDescription>
+              <StyledHeaderText>
+                Strove simplifies coding and managing programmer teams
+              </StyledHeaderText>
             </StyledCell>
           </SmallSectionWrapper>
         </SectionWrapper>
