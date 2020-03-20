@@ -84,20 +84,7 @@ const Banner = () => (
                 <StyledH2 color={theme.colors.c3}>Before</StyledH2>
               </StyledCellHeader>
               <StyledCellHeader>
-                <StyledHeaderText>Give focus a chance</StyledHeaderText>
-                <IconContainer>
-                  <img
-                    decoding="async"
-                    alt="docker"
-                    src={require('assets/docker.png')}
-                    style={{
-                      color: theme.colors.c1,
-                    }}
-                  />
-                </IconContainer>
-              </StyledCellHeader>
-              <StyledCellHeader>
-                <StyledHeaderText>Give focus a chance</StyledHeaderText>
+                <StyledHeaderText>Virtual machines</StyledHeaderText>
                 <IconContainer>
                   <img
                     decoding="async"
@@ -110,7 +97,20 @@ const Banner = () => (
                 </IconContainer>
               </StyledCellHeader>
               <StyledCellHeader>
-                <StyledHeaderText>Give focus a chance</StyledHeaderText>
+                <StyledHeaderText>Docker containers</StyledHeaderText>
+                <IconContainer>
+                  <img
+                    decoding="async"
+                    alt="docker"
+                    src={require('assets/docker.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </StyledCellHeader>
+              <StyledCellHeader>
+                <StyledHeaderText>Devops teams</StyledHeaderText>
                 <IconContainer>
                   <img
                     decoding="async"
@@ -123,7 +123,7 @@ const Banner = () => (
                 </IconContainer>
               </StyledCellHeader>
               <StyledCellHeader>
-                <StyledHeaderText>Give focus a chance</StyledHeaderText>
+                <StyledHeaderText>Leasing computers</StyledHeaderText>
                 <IconContainer>
                   <img
                     decoding="async"
@@ -135,20 +135,6 @@ const Banner = () => (
                   />
                 </IconContainer>
               </StyledCellHeader>
-              <StyledProductDescription>
-                Programmers try everything to solve{' '}
-                <b>it works on my machine</b> and <b>work from home</b> problems
-              </StyledProductDescription>
-              <StyledProductDescription>
-                Virtual machines
-              </StyledProductDescription>
-              <StyledProductDescription>
-                Docker containers
-              </StyledProductDescription>
-              <StyledProductDescription>Devops teams</StyledProductDescription>
-              <StyledProductDescription>
-                Leasing computers
-              </StyledProductDescription>
             </StyledCell>
           </SmallSectionWrapper>
         </SectionWrapper>
