@@ -173,8 +173,7 @@ export const FormField = styled(Field)`
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
 
-const InviteMembersForm = ({ history, limit }) => {
-  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
+const InviteMembersForm = ({ history, limit, teamId }) => {
   const dispatch = useDispatch()
 
   return (
@@ -190,7 +189,7 @@ const InviteMembersForm = ({ history, limit }) => {
               memberEmails: [
                 ...new Set(values.emails.map(email => email.value)),
               ],
-              teamId: myOrganizations[0]?.teams[0]?.id,
+              teamId,
             },
             onSuccessDispatch: updateOrganizations,
             onSuccess: () => {

@@ -961,7 +961,7 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <InviteWrapper>
-          <InviteMembersForm limit={5} />
+          <InviteMembersForm limit={5} teamId={editTeam.id}/>
         </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
