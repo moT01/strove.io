@@ -83,6 +83,18 @@ const Banner = () => (
               <StyledCellHeader>
                 <StyledH2 color={theme.colors.c3}>Before</StyledH2>
               </StyledCellHeader>
+              <StyledCellHeader>
+                <StyledHeaderText>Give focus a chance</StyledHeaderText>
+                <IconContainer>
+                  <img
+                    alt="docker"
+                    src={require('assets/docker.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </StyledCellHeader>
               <StyledProductDescription>
                 Programmers try everything to solve{' '}
                 <b>it works on my machine</b> and <b>work from home</b> problems

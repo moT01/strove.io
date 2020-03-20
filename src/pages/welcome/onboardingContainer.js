@@ -32,8 +32,4 @@ const OnboardingContainer = ({ children }) => {
   )
 }
 
-/*
-  Memoize this component will only add additional overhead
-  https://twitter.com/aweary/status/1230594484347396097
-*/
 export default memo(OnboardingContainer)
