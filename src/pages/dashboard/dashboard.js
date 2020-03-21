@@ -656,7 +656,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
+          variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             setWarningModal({
@@ -666,8 +666,8 @@ const Dashboard = ({ history }) => {
                   <span role="img" aria-label="confetti">
                     🎉
                   </span>{' '}
-                  We have sent an invitation email to {addMemberEmail} and
-                  upgraded your subscription.{' '}
+                  We have sent the invitation emails and upgraded your
+                  subscription.{' '}
                   <span role="img" aria-label="confetti">
                     🎉
                   </span>
@@ -712,7 +712,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
+          variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
@@ -735,92 +735,83 @@ const Dashboard = ({ history }) => {
       editedOrganization?.owner?.email,
       editTeam?.teamLeader?.email,
     ]
-    console.log('TCL: addMember -> users', users)
     const usersToInvite = memberEmails.filter(
       email => users?.findIndex(user => user === email) === -1
     )
-    console.log('TCL: addMember -> usersToInvite', usersToInvite)
-
+    const subscriptionQuantity =
+      organizationsObj[editTeam?.organizationId]?.subscriptionQuantity
     const subscriptionStatus = editedOrganization.subscriptionStatus
+
     if (usersToInvite.length === 0) {
       setWarningModal({
         visible: true,
         content: (
           <ModalText>
-            Those users have already been invited to {editTeam.name}
+            Those users have already been invited to {editTeam.name}.
           </ModalText>
         ),
       })
     } else {
-      if (
-        organizationsObj[editTeam.organizationId]?.users?.findIndex(
-          user => user.email === memberEmails[0]
-        ) === -1 ||
-        !organizationsObj[editTeam.organizationId].users
-      ) {
-        if (subscriptionStatus === 'active') {
-          setWarningModal({
-            visible: true,
-            content: (
-              <FullScreenLoader
-                type="processPayment"
-                isFullScreen
-                color="#0072ce"
-              />
-            ),
-            noClose: true,
+      if (subscriptionStatus === 'active') {
+        setWarningModal({
+          visible: true,
+          content: (
+            <FullScreenLoader
+              type="processPayment"
+              isFullScreen
+              color="#0072ce"
+            />
+          ),
+          noClose: true,
+        })
+        dispatch(
+          mutation({
+            name: 'upgradeSubscription',
+            mutation: UPGRADE_SUBSCRIPTION,
+            variables: {
+              organizationId: editTeam.organizationId,
+              quantity: subscriptionQuantity + usersToInvite.length,
+            },
+            onSuccess: () => setAddMemberEmail(usersToInvite),
+            onError: () =>
+              setWarningModal({
+                visible: true,
+                content: (
+                  <>
+                    <ModalText>Your payment couldn't be processed.</ModalText>
+                    <ModalText>
+                      Please make sure your payment information is correct and
+                      try again.
+                    </ModalText>
+                    <StroveButton
+                      isLink
+                      to="/app/plans"
+                      text="Settings"
+                      isPrimary
+                      minWidth="150px"
+                      maxWidth="150px"
+                      borderRadius="2px"
+                      padding="5px"
+                      margin="10px 0px"
+                    />
+                  </>
+                ),
+              }),
           })
-          dispatch(
-            mutation({
-              name: 'upgradeSubscription',
-              mutation: UPGRADE_SUBSCRIPTION,
-              variables: {
-                organizationId: editTeam.organizationId,
-                quantity:
-                  organizationsObj[editTeam?.organizationId]
-                    ?.subscriptionQuantity + usersToInvite.length,
-              },
-              onSuccess: () => setAddMemberEmail(memberEmails),
-              onError: () =>
-                setWarningModal({
-                  visible: true,
-                  content: (
-                    <>
-                      <ModalText>Your payment couldn't be processed.</ModalText>
-                      <ModalText>
-                        Please make sure your payment information is correct and
-                        try again.
-                      </ModalText>
-                      <StroveButton
-                        isLink
-                        to="/app/plans"
-                        text="Settings"
-                        isPrimary
-                        minWidth="150px"
-                        maxWidth="150px"
-                        borderRadius="2px"
-                        padding="5px"
-                        margin="10px 0px"
-                      />
-                    </>
-                  ),
-                }),
-            })
-          )
-        } else if (subscriptionStatus === 'inactive') {
-          dispatch(
-            mutation({
-              name: 'addMember',
-              mutation: ADD_MEMBER,
-              variables: { memberEmails, teamId: editTeam.id },
-              onSuccess: () => {
-                setAddMemberModal(false)
-                closeWarningModal()
-              },
-              onSuccessDispatch: updateOrganizations,
-            })
-          )
-        }
+        )
+      } else if (subscriptionStatus === 'inactive') {
+        dispatch(
+          mutation({
+            name: 'addMember',
+            mutation: ADD_MEMBER,
+            variables: { usersToInvite, teamId: editTeam.id },
+            onSuccess: () => {
+              setAddMemberModal(false)
+              closeWarningModal()
+            },
+            onSuccessDispatch: updateOrganizations,
+          })
+        )
       }
     }
   }
