@@ -181,7 +181,7 @@ const InviteMembersForm = ({ history, limit, teamId, addMember }) => {
       initialValues={{ emails: ['', '', ''] }}
       validationSchema={validationSchema}
       onSubmit={values => {
-        const emailsArray = [...new Set(values.emails.map(email => email))]
+        const emailsArray = [...new Set(values.emails.filter(email => email))]
 
         console.log('TCL: InviteMembersForm -> values', values)
         console.log('TCL: InviteMembersForm -> values', values.emails)
