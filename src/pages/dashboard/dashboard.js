@@ -1,7 +1,6 @@
 import React, { useState, memo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 

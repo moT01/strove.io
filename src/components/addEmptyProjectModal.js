@@ -113,7 +113,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
         />
         {isContinuing && (
           <FullScreenLoader
-            type="continueProject"
             isFullScreen
             color="#0072ce"
             queuePosition={queuePosition}
@@ -122,7 +121,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
         )}
         {isAdding && (
           <FullScreenLoader
-            type="addProject"
             isFullScreen
             color="#0072ce"
             queuePosition={queuePosition}
