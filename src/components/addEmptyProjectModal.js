@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
@@ -72,7 +72,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
         width={isMobileOnly ? '60vw' : '30vw'}
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={isOpen}
-        onRequestClose={handleClose}
+        onRequestClose={() => handleClose(false)}
         contentLabel="Name project"
         ariaHideApp={false}
       >
