@@ -59,7 +59,7 @@ const Banner = () => (
     >
       <SectionDivider flexDirection="column">
         <IconContainer>
-          <StyledSectionIcon type="laptop" />
+          <StyledSectionIcon type="global" />
         </IconContainer>
         <StyledH3 color={theme.colors.c3}>
           Toolkit for modern software organizations

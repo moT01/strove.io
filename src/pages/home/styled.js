@@ -331,8 +331,8 @@ export const StyledHeaderText = styled.div`
 `
 
 export const StyledBeforeText = styled.div`
-  margin: 0 10px 5px 10px;
   text-align: right;
+  margin: auto;
   color: ${({ theme }) => theme.colors.c3};
 `
 
