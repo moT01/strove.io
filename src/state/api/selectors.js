@@ -48,6 +48,13 @@ export const getPaymentStatus = getApiData({
   defaultValue: {},
 })
 
+export const getOwnedOrganizations = createSelector(
+  getMyOrganizations,
+  getUserId,
+  (organizations, userId) =>
+    organizations.filter(organization => organization.owner.id === userId)
+)
+
 export const getProjects = createSelector(getMyOrganizations, organizations => {
   let projects = []
   organizations.forEach(organization => {

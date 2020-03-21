@@ -43,20 +43,26 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   const projectsLimit = 20
   const timeExceeded = user?.timeSpent >= 72000000
-  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
+  const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
-  /* TODO: Find a reasonable way to approach this */
-  const organizationWithProject = organization || myOrganizations?.[0]
-  const teamIdWithProject = teamId || myOrganizations?.[0]?.teams?.[0]?.id
+  /* Check if new project is embedded */
+  const originDomain =
+    window.location !== window.parent.location
+      ? document.referrer
+      : document.location.href
 
-  const addProject = async ({
-    link,
-    name,
-    teamId = teamIdWithProject,
-    forkedFromId,
-  }) => {
+  const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
     let repoProvider
+
+    /* ToDo: Make this scallable and work with other sites as well */
+    const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
+
+    /* TODO: Find a reasonable way to approach this */
+    const organizationWithProject = organization || ownedOrganizations?.[0]
+    const teamIdWithProject = type
+      ? ownedOrganizations?.[0]?.teams?.[0]?.id
+      : teamId
 
     let repoFromGithub
     let repoFromGitlab
@@ -104,7 +110,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         repoLink,
         repoProvider,
         name,
-        teamId,
+        teamId: teamIdWithProject,
         forkedFromId,
       })
     )
@@ -150,7 +156,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     ) {
       setModalContent('AnotherActiveProject')
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
-    } else if (!theSameIncomingProject) {
+    } else if (!theSameIncomingProject && teamId) {
       createProject({
         repoLink,
         dispatch,
@@ -159,6 +165,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         name,
         teamId: teamIdWithProject,
         forkedFromId,
+        type,
       })
     }
   }
