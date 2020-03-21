@@ -1,15 +1,12 @@
 import React, { memo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import styled, { css } from 'styled-components/macro'
 import { Formik, FieldArray, Field, Form } from 'formik'
-import { withRouter } from 'react-router-dom'
 import * as Yup from 'yup'
 import { isMobileOnly } from 'react-device-detect'
 
 import { StroveButton } from 'components'
 import { selectors } from 'state'
-import { ADD_MEMBER } from 'queries'
-import { mutation, updateOrganizations } from 'utils'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
@@ -173,9 +170,7 @@ export const FormField = styled(Field)`
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
 
-const InviteMembersForm = ({ history, limit, addMember }) => {
-  const dispatch = useDispatch()
-
+const InviteMembersForm = ({ limit, addMember }) => {
   return (
     <Formik
       initialValues={{ emails: ['', '', ''] }}
@@ -235,4 +230,4 @@ const InviteMembersForm = ({ history, limit, addMember }) => {
   )
 }
 
-export default memo(withRouter(InviteMembersForm))
+export default memo(InviteMembersForm)
