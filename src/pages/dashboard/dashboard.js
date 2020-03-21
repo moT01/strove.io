@@ -117,6 +117,15 @@ const Dashboard = ({ history }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
+
+  const setEditedOrganization = ({ team }) =>
+    dispatch(
+      actions.editedOrganization.setEditedOrganization(
+        { organization: organizationsObj[team.organizationId] },
+        team
+      )
+    )
+
   const organizationsObj =
     myOrganizations &&
     myOrganizations.reduce((organizations, organization) => {
@@ -756,12 +765,12 @@ const Dashboard = ({ history }) => {
   }, [paymentStatus])
 
   const handleAddMemberClick = team => {
-    setEditTeam(team)
+    setEditedOrganization({ team })
     setAddMemberModal(true)
   }
 
   const addMember = ({ memberEmails }) => {
-    const editedOrganization = organizationsObj[editTeam.organizationId]
+    // const editedOrganization = organizationsObj[editTeam.organizationId]
     const users = [
       ...(editTeam?.users?.map(user => user.email) || []),
       ...(editTeam?.invited?.map(user => user.email) || []),
@@ -771,8 +780,7 @@ const Dashboard = ({ history }) => {
     const usersToInvite = memberEmails.filter(
       email => users?.findIndex(user => user === email) === -1
     )
-    const subscriptionQuantity =
-      organizationsObj[editTeam?.organizationId]?.subscriptionQuantity
+    const subscriptionQuantity = editedOrganization?.subscriptionQuantity
     const subscriptionStatus = editedOrganization.subscriptionStatus
 
     if (usersToInvite.length === 0) {
@@ -802,7 +810,7 @@ const Dashboard = ({ history }) => {
             name: 'upgradeSubscription',
             mutation: UPGRADE_SUBSCRIPTION,
             variables: {
-              organizationId: editTeam.organizationId,
+              organizationId: editedOrganization.id,
               quantity: subscriptionQuantity + usersToInvite.length,
             },
             onSuccess: () => setAddMemberEmail(usersToInvite),
