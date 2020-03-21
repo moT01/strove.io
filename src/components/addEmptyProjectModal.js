@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
@@ -66,6 +66,11 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const queuePosition = useSelector(selectors.api.getQueuePosition)
 
+  useEffect(() => {
+    console.log('TCL: AddEmptyProjectModal -> isContinuing', isContinuing)
+    console.log('TCL: AddEmptyProjectModal -> isAdding', isAdding)
+  }, [isContinuing, isAdding])
+
   return (
     <>
       <Modal
@@ -112,6 +117,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
             isFullScreen
             color="#0072ce"
             queuePosition={queuePosition}
+            type="continueProject"
           />
         )}
         {isAdding && (
@@ -120,6 +126,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
             isFullScreen
             color="#0072ce"
             queuePosition={queuePosition}
+            type="emptyProject"
           />
         )}
       </Modal>
