@@ -1,7 +1,6 @@
 import React, { useState, memo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import isEmail from 'validator/lib/isEmail'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
@@ -19,7 +18,7 @@ import {
   UPGRADE_SUBSCRIPTION,
   REMOVE_FROM_ORGANIZATION,
 } from 'queries'
-import { selectors } from 'state'
+import { selectors, actions, C } from 'state'
 import {
   GetStarted,
   StroveButton,
@@ -98,6 +97,10 @@ const Dashboard = ({ history }) => {
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
+  const editedOrganization = useSelector(
+    selectors.editedOrganization.getEditedOrganization
+  )
+  const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
   const [stopModal, setStopModal] = useState(false)
   // const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
   const [addMemberEmail, setAddMemberEmail] = useState(false)
@@ -277,6 +280,17 @@ const Dashboard = ({ history }) => {
                                       text="Settings"
                                       onClick={() => {
                                         handleSettingsClick(team)
+                                        dispatch(
+                                          actions.editedOrganization.setEditedOrganization(
+                                            {
+                                              organization:
+                                                organizationsObj[
+                                                  team.organizationId
+                                                ],
+                                              team,
+                                            }
+                                          )
+                                        )
                                       }}
                                     />
                                   ) : (
@@ -287,7 +301,17 @@ const Dashboard = ({ history }) => {
                                       maxWidth="150px"
                                       borderRadius="2px"
                                       onClick={() => {
-                                        setEditTeam(team)
+                                        dispatch(
+                                          actions.editedOrganization.setEditedOrganization(
+                                            {
+                                              organization:
+                                                organizationsObj[
+                                                  team.organizationId
+                                                ],
+                                            },
+                                            team
+                                          )
+                                        )
                                         handleLeaveClick(team)
                                       }}
                                       text="Leave"
@@ -460,7 +484,22 @@ const Dashboard = ({ history }) => {
                                     borderRadius="2px"
                                     text="Add Project"
                                     onClick={() => {
-                                      setEditTeam(team)
+                                      // setEditTeam(team)
+                                      console.log(
+                                        'TCL: Dashboard -> team',
+                                        team
+                                      )
+                                      dispatch(
+                                        actions.editedOrganization.setEditedOrganization(
+                                          {
+                                            organization:
+                                              organizationsObj[
+                                                team.organizationId
+                                              ],
+                                            team,
+                                          }
+                                        )
+                                      )
                                       setAddProjectModal(true)
                                     }}
                                   />
@@ -496,7 +535,11 @@ const Dashboard = ({ history }) => {
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
-    setEditTeam({ organizationId })
+    dispatch(
+      actions.editedOrganization.setEditedOrganization({
+        organization: organizationsObj[organizationId],
+      })
+    )
     setRenameTeamModal(true)
   }
 
@@ -505,7 +548,7 @@ const Dashboard = ({ history }) => {
       mutation({
         name: 'createTeam',
         mutation: CREATE_TEAM,
-        variables: { name, organizationId: editTeam.organizationId },
+        variables: { name, organizationId: editedOrganization.id },
         onSuccess: data => {
           setRenameTeamModal(false)
           updateExpandedTiles(data)
@@ -1023,7 +1066,10 @@ const Dashboard = ({ history }) => {
             if (editMode === 'Rename team') {
               renameTeam({ newName: values.name, teamId: editTeam.id })
             } else {
-              createTeam({ name: values.name, organizationId: editTeam.id })
+              createTeam({
+                name: values.name,
+                organizationId: editedOrganization.id,
+              })
             }
           }}
         >
@@ -1164,7 +1210,7 @@ const Dashboard = ({ history }) => {
         )}
         <GetStarted
           closeModal={closeAddProjectModal}
-          teamId={editTeam?.id}
+          teamId={editedTeam?.id}
           organization={organizationsObj[editTeam?.organizationId]}
         />
       </Modal>

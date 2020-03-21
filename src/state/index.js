@@ -9,6 +9,7 @@ import incomingProject from './incomingProject'
 import invitations from './invitations'
 import latency from './latency'
 import feature from './feature'
+import editedOrganization from './editedOrganization'
 
 const rootConfig = {
   key: 'root',
@@ -40,6 +41,8 @@ export const selectors = {
   latency: latency.selectors,
   feature: feature.selectors,
   invitations: invitations.selectors,
+  editedOrganization: editedOrganization.selectors,
+
   // ToDo Remove siliskyToken later on
   getToken,
 }
@@ -49,6 +52,7 @@ export const actions = {
   latency: latency.actions,
   feature: feature.actions,
   invitations: invitations.actions,
+  editedOrganization: editedOrganization.actions,
 }
 
 export const C = {
@@ -57,6 +61,7 @@ export const C = {
   latency: latency.C,
   feature: feature.C,
   invitations: invitations.C,
+  editedOrganization: editedOrganization.C,
 }
 
 const appReducer = combineReducers({
@@ -65,6 +70,7 @@ const appReducer = combineReducers({
   incomingProject: incomingProject.reducer,
   latency: latency.reducer,
   feature: feature.reducer,
+  editedOrganization: editedOrganization.reducer,
 })
 
 export default persistReducer(rootConfig, (state, action) => {
