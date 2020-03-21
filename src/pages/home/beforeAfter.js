@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { isMobileOnly, isMobile } from 'react-device-detect'
+import { Icon } from 'antd'
 
 import { theme } from 'consts'
 
@@ -77,13 +78,9 @@ const BeforeAfter = () => (
               <BeforeItem>
                 <StyledBeforeText>Leasing computers</StyledBeforeText>
                 <IconContainer>
-                  <img
-                    decoding="async"
-                    alt="docker"
-                    src={require('assets/macbooks.png')}
-                    style={{
-                      color: theme.colors.c1,
-                    }}
+                  <Icon
+                    type="laptop"
+                    style={{ color: theme.colors.c3, fontSize: 40 }}
                   />
                 </IconContainer>
               </BeforeItem>
