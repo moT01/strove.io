@@ -66,11 +66,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const queuePosition = useSelector(selectors.api.getQueuePosition)
 
-  useEffect(() => {
-    console.log('TCL: AddEmptyProjectModal -> isContinuing', isContinuing)
-    console.log('TCL: AddEmptyProjectModal -> isAdding', isAdding)
-  }, [isContinuing, isAdding])
-
   return (
     <>
       <Modal
