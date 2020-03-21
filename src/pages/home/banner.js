@@ -5,7 +5,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import { theme } from 'consts'
 
 import GetStarted from './getStarted'
-import BeforeAfter from './beforeAfter'
+// import BeforeAfter from './beforeAfter'
 import {
   StyledCellHeader,
   StyledSectionWrapper,
@@ -71,7 +71,7 @@ const Banner = () => (
         </StyledProductDescription>
       </SectionDivider>
     </StyledSectionWrapper>
-    <BeforeAfter />
+    {/* <BeforeAfter /> */}
     <StyledSectionWrapper
       isSecondary
       padding="20px"

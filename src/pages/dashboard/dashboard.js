@@ -805,7 +805,7 @@ const Dashboard = ({ history }) => {
           mutation({
             name: 'addMember',
             mutation: ADD_MEMBER,
-            variables: { usersToInvite, teamId: editTeam.id },
+            variables: { memberEmails: usersToInvite, teamId: editTeam.id },
             onSuccess: () => {
               setAddMemberModal(false)
               closeWarningModal()
