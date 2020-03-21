@@ -727,31 +727,36 @@ const Dashboard = ({ history }) => {
     setAddMemberModal(true)
   }
 
-  const addMember = ({ memberEmail }) => {
-    console.log("TCL: addMember -> memberEmail", memberEmail)
+  const addMember = ({ memberEmails }) => {
     const users = editTeam.users
+    const editedOrganization = organizationsObj[editTeam.organizationId]
+    const usersToInvite = memberEmails.filter(
+      email =>
+        users?.findIndex(user => user.email === email) === -1 &&
+        editedOrganization?.owner?.email !== email &&
+        editTeam.teamLeader !== email
+    )
     const isOwner =
-      organizationsObj[editTeam.organizationId]?.owner?.email === memberEmail
-    const isTeamLeader = editTeam.teamLeader === memberEmail
-    const subscriptionStatus =
-      organizationsObj[editTeam.organizationId].subscriptionStatus
-    if (
-      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      isOwner ||
-      isTeamLeader
-    ) {
+      memberEmails.filter(
+        email =>
+          organizationsObj[editTeam.organizationId]?.owner?.email === email
+      ).length === 0
+    const isTeamLeader =
+      memberEmails.filter(email => editTeam.teamLeader === email).length === 0
+    const subscriptionStatus = editedOrganization.subscriptionStatus
+    if (usersToInvite.length === 0) {
       setWarningModal({
         visible: true,
         content: (
           <ModalText>
-            This user has already been invited to {editTeam.name}
+            Those users have already been invited to {editTeam.name}
           </ModalText>
         ),
       })
     } else {
       if (
         organizationsObj[editTeam.organizationId]?.users?.findIndex(
-          user => user.email === memberEmail
+          user => user.email === memberEmails[0]
         ) === -1 ||
         !organizationsObj[editTeam.organizationId].users
       ) {
@@ -775,9 +780,9 @@ const Dashboard = ({ history }) => {
                 organizationId: editTeam.organizationId,
                 quantity:
                   organizationsObj[editTeam?.organizationId]
-                    ?.subscriptionQuantity + 1,
+                    ?.subscriptionQuantity + usersToInvite.length,
               },
-              onSuccess: () => setAddMemberEmail([memberEmail]),
+              onSuccess: () => setAddMemberEmail(memberEmails),
               onError: () =>
                 setWarningModal({
                   visible: true,
@@ -809,7 +814,7 @@ const Dashboard = ({ history }) => {
             mutation({
               name: 'addMember',
               mutation: ADD_MEMBER,
-              variables: { memberEmails: [memberEmail], teamId: editTeam.id },
+              variables: { memberEmails, teamId: editTeam.id },
               onSuccess: () => {
                 setAddMemberModal(false)
                 closeWarningModal()
@@ -962,7 +967,11 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <InviteWrapper>
-          <InviteMembersForm limit={5} teamId={editTeam?.id} addMember={addMember}/>
+          <InviteMembersForm
+            limit={5}
+            teamId={editTeam?.id}
+            addMember={addMember}
+          />
         </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}

@@ -200,7 +200,7 @@ const InviteMembersForm = ({ history, limit, teamId, addMember }) => {
         //     },
         //   })
         // )
-        addMember({ memberEmail: [...emailsArray] })
+        addMember({ memberEmails: [...emailsArray] })
       }}
       render={({ values, errors }) => (
         <StyledForm>
