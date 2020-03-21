@@ -27,6 +27,7 @@ import {
   Header,
   Footer,
   Modal,
+  InviteMembersForm,
 } from 'components'
 import StroveLogo from 'images/strove.png'
 import FullScreenLoader from 'components/fullScreenLoader'
@@ -67,6 +68,7 @@ import {
   // TimeBar,
   // TimeText,
   NameWrapper,
+  InviteWrapper,
 } from './styled'
 
 const validate = values => {
@@ -462,19 +464,19 @@ const Dashboard = ({ history }) => {
                                     organizationsObj={organizationsObj}
                                     isOwner={isOwner}
                                   />
-                                    <StroveButton
-                                      isPrimary
-                                      padding="5px"
-                                      minWidth="150px"
-                                      maxWidth="150px"
-                                      margin="10px"
-                                      borderRadius="2px"
-                                      text="Add Project"
-                                      onClick={() => {
-                                        setEditTeam(team)
-                                        setAddProjectModal(true)
-                                      }}
-                                    />
+                                  <StroveButton
+                                    isPrimary
+                                    padding="5px"
+                                    minWidth="150px"
+                                    maxWidth="150px"
+                                    margin="10px"
+                                    borderRadius="2px"
+                                    text="Add Project"
+                                    onClick={() => {
+                                      setEditTeam(team)
+                                      setAddProjectModal(true)
+                                    }}
+                                  />
                                 </TeamTileSection>
                               )}
                             </TeamTile>
@@ -571,7 +573,8 @@ const Dashboard = ({ history }) => {
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to remove {member.name} from {team.name}?
+          Are you sure you want to remove {member.name || member.email} from{' '}
+          {team.name}?
         </ModalText>
       ),
       onSubmit: () => {
@@ -654,7 +657,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
+          variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             setWarningModal({
@@ -664,8 +667,8 @@ const Dashboard = ({ history }) => {
                   <span role="img" aria-label="confetti">
                     🎉
                   </span>{' '}
-                  We have sent an invitation email to {addMemberEmail} and
-                  upgraded your subscription.{' '}
+                  We have sent the invitation emails and upgraded your
+                  subscription.{' '}
                   <span role="img" aria-label="confetti">
                     🎉
                   </span>
@@ -710,7 +713,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
-          variables: { memberEmails: [addMemberEmail], teamId: editTeam.id },
+          variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
             closeWarningModal()
@@ -725,96 +728,91 @@ const Dashboard = ({ history }) => {
     setAddMemberModal(true)
   }
 
-  const addMember = ({ memberEmail }) => {
-    const users = editTeam.users
-    const isOwner =
-      organizationsObj[editTeam.organizationId]?.owner?.email === memberEmail
-    const isTeamLeader = editTeam.teamLeader === memberEmail
-    const subscriptionStatus =
-      organizationsObj[editTeam.organizationId].subscriptionStatus
-    if (
-      (users && users.findIndex(user => user.email === memberEmail) !== -1) ||
-      isOwner ||
-      isTeamLeader
-    ) {
+  const addMember = ({ memberEmails }) => {
+    const editedOrganization = organizationsObj[editTeam.organizationId]
+    const users = [
+      ...(editTeam?.users?.map(user => user.email) || []),
+      ...(editTeam?.invited?.map(user => user.email) || []),
+      editedOrganization?.owner?.email,
+      editTeam?.teamLeader?.email,
+    ]
+    const usersToInvite = memberEmails.filter(
+      email => users?.findIndex(user => user === email) === -1
+    )
+    const subscriptionQuantity =
+      organizationsObj[editTeam?.organizationId]?.subscriptionQuantity
+    const subscriptionStatus = editedOrganization.subscriptionStatus
+
+    if (usersToInvite.length === 0) {
       setWarningModal({
         visible: true,
         content: (
           <ModalText>
-            This user has already been invited to {editTeam.name}
+            Those users have already been invited to {editTeam.name}.
           </ModalText>
         ),
       })
     } else {
-      if (
-        organizationsObj[editTeam.organizationId]?.users?.findIndex(
-          user => user.email === memberEmail
-        ) === -1 ||
-        !organizationsObj[editTeam.organizationId].users
-      ) {
-        if (subscriptionStatus === 'active') {
-          setWarningModal({
-            visible: true,
-            content: (
-              <FullScreenLoader
-                type="processPayment"
-                isFullScreen
-                color="#0072ce"
-              />
-            ),
-            noClose: true,
+      if (subscriptionStatus === 'active') {
+        setWarningModal({
+          visible: true,
+          content: (
+            <FullScreenLoader
+              type="processPayment"
+              isFullScreen
+              color="#0072ce"
+            />
+          ),
+          noClose: true,
+        })
+        dispatch(
+          mutation({
+            name: 'upgradeSubscription',
+            mutation: UPGRADE_SUBSCRIPTION,
+            variables: {
+              organizationId: editTeam.organizationId,
+              quantity: subscriptionQuantity + usersToInvite.length,
+            },
+            onSuccess: () => setAddMemberEmail(usersToInvite),
+            onError: () =>
+              setWarningModal({
+                visible: true,
+                content: (
+                  <>
+                    <ModalText>Your payment couldn't be processed.</ModalText>
+                    <ModalText>
+                      Please make sure your payment information is correct and
+                      try again.
+                    </ModalText>
+                    <StroveButton
+                      isLink
+                      to="/app/plans"
+                      text="Settings"
+                      isPrimary
+                      minWidth="150px"
+                      maxWidth="150px"
+                      borderRadius="2px"
+                      padding="5px"
+                      margin="10px 0px"
+                    />
+                  </>
+                ),
+              }),
           })
-          dispatch(
-            mutation({
-              name: 'upgradeSubscription',
-              mutation: UPGRADE_SUBSCRIPTION,
-              variables: {
-                organizationId: editTeam.organizationId,
-                quantity:
-                  organizationsObj[editTeam?.organizationId]
-                    ?.subscriptionQuantity + 1,
-              },
-              onSuccess: () => setAddMemberEmail([memberEmail]),
-              onError: () =>
-                setWarningModal({
-                  visible: true,
-                  content: (
-                    <>
-                      <ModalText>Your payment couldn't be processed.</ModalText>
-                      <ModalText>
-                        Please make sure your payment information is correct and
-                        try again.
-                      </ModalText>
-                      <StroveButton
-                        isLink
-                        to="/app/plans"
-                        text="Settings"
-                        isPrimary
-                        minWidth="150px"
-                        maxWidth="150px"
-                        borderRadius="2px"
-                        padding="5px"
-                        margin="10px 0px"
-                      />
-                    </>
-                  ),
-                }),
-            })
-          )
-        } else if (subscriptionStatus === 'inactive') {
-          dispatch(
-            mutation({
-              name: 'addMember',
-              mutation: ADD_MEMBER,
-              variables: { memberEmails: [memberEmail], teamId: editTeam.id },
-              onSuccess: () => {
-                setAddMemberModal(false)
-                closeWarningModal()
-              },
-              onSuccessDispatch: updateOrganizations,
-            })
-          )
-        }
+        )
+      } else if (subscriptionStatus === 'inactive') {
+        dispatch(
+          mutation({
+            name: 'addMember',
+            mutation: ADD_MEMBER,
+            variables: { usersToInvite, teamId: editTeam.id },
+            onSuccess: () => {
+              setAddMemberModal(false)
+              closeWarningModal()
+            },
+            onSuccessDispatch: updateOrganizations,
+          })
+        )
       }
     }
   }
@@ -952,59 +950,19 @@ const Dashboard = ({ history }) => {
         />
       </Modal>
       <Modal
-        mindWidth="80vw"
-        height={isMobileOnly ? '40vh' : '20vh'}
+        minWidth="320px"
         isOpen={addMemberModal}
         onRequestClose={() => setAddMemberModal(false)}
         contentLabel="Add member"
         ariaHideApp={false}
       >
-        <Formik
-          initialValues={{
-            email: '',
-          }}
-          validate={validate}
-          onSubmit={values => addMember({ memberEmail: values.email })}
-        >
-          {({ errors, values }) => (
-            <StyledForm>
-              <InviteFormWrapper
-                isInvite
-                disabled={errors.email || !values.email}
-                isMobile={isMobileOnly}
-              >
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder="Member email"
-                ></Field>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    fill="none"
-                    fillRule="evenodd"
-                    stroke="#9CA2B4"
-                    strokeWidth="2"
-                  >
-                    <path d="M2 4h20v16H2z"></path>
-                    <path d="M2 7.9l9.9 3.899 9.899-3.9"></path>
-                  </g>
-                </svg>
-                <StroveButton
-                  isPrimary
-                  type="submit"
-                  layout="form"
-                  text="Invite"
-                  disabled={errors.email || !values.email}
-                />
-              </InviteFormWrapper>
-            </StyledForm>
-          )}
-        </Formik>
+        <InviteWrapper>
+          <InviteMembersForm
+            limit={5}
+            teamId={editTeam?.id}
+            addMember={addMember}
+          />
+        </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
           text="Close"

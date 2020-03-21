@@ -531,3 +531,7 @@ export const NameWrapper = styled.div`
   width: 100%;
   margin-top: 20px;
 `
+
+export const InviteWrapper = styled.div`
+  width: 320px;
+`
