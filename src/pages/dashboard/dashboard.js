@@ -644,6 +644,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
+          allowRepeated: true,
           variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
@@ -700,6 +701,7 @@ const Dashboard = ({ history }) => {
         mutation({
           name: 'addMember',
           mutation: ADD_MEMBER,
+          allowRepeated: true,
           variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
           onSuccess: () => {
             setAddMemberModal(false)
@@ -792,6 +794,7 @@ const Dashboard = ({ history }) => {
           mutation({
             name: 'addMember',
             mutation: ADD_MEMBER,
+            allowRepeated: true,
             variables: { memberEmails: usersToInvite, teamId: editTeam.id },
             onSuccess: () => {
               setAddMemberModal(false)
