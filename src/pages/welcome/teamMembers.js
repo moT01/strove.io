@@ -9,13 +9,11 @@ import { Title, SkipForNow } from './styled'
 const TeamMembers = ({ history }) => {
   return (
     <OnboardingContainer>
-      <>
-        <Title>Who else is working on your team?</Title>
-        <InviteMembersForm />
-        <SkipForNow onClick={() => history.push('/welcome/helloThere')}>
-          Skip for now
-        </SkipForNow>
-      </>
+      <Title>Who else is working on your team?</Title>
+      <InviteMembersForm />
+      <SkipForNow onClick={() => history.push('/welcome/helloThere')}>
+        Skip for now
+      </SkipForNow>
     </OnboardingContainer>
   )
 }
