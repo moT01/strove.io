@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
+import { isMobileOnly } from 'react-device-detect'
 
 import { StyledH3 } from './styled'
 import { FccLogo, UlManagementLogo } from 'components/svgs'
@@ -21,7 +22,7 @@ const StyledWrapper = styled.div`
 const LogosWrapper = styled(StyledWrapper)`
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
+  width: ${isMobileOnly ? '100%' : '50%'};
   padding: 10px;
   margin-top: 20px;
 `
@@ -31,7 +32,6 @@ const TrustedBy = () => (
     <StyledH3 color={theme.colors.c3}>Trusted by</StyledH3>
     <LogosWrapper>
       <FccLogo />
-      {/* <UlLogo /> */}
       <UlManagementLogo />
     </LogosWrapper>
   </StyledWrapper>
