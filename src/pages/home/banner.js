@@ -65,9 +65,9 @@ const Banner = () => (
           Toolkit for modern software organizations
         </StyledH3>
         <StyledProductDescription color={theme.colors.c26}>
-          Whether you’re creating a banking app, an e-commerce store, or a
-          crowdfunding platform, Strove will allow you to deliver your features
-          more efficiently and with less effort
+          Whether you’re doing a banking app, an e-commerce store, or coding
+          workshops, Strove will allow you and your team to work using only a
+          browser
         </StyledProductDescription>
       </SectionDivider>
     </StyledSectionWrapper>
