@@ -46,6 +46,11 @@ import RETRY_SUBSCRIPTION_PAYMENT from './retrySubscriptionPayment'
 import SET_ONBOARDED from './setOnboarded'
 import ME from './me'
 
+// addUserToCollaboration(projectId: ID!, userId: ID!): Boolean!
+// removeUserFromCollaboration(projectId: ID!, userId: ID!): Boolean!
+// startCollaborationProject(projectId: ID!, teamId: ID!): Boolean!
+// stopCollaborationProject(projectId: ID!): Boolean!
+
 export {
   ADD_PROJECT,
   GITHUB_LOGIN,
