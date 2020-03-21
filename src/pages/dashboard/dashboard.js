@@ -728,21 +728,19 @@ const Dashboard = ({ history }) => {
   }
 
   const addMember = ({ memberEmails }) => {
-    const users = editTeam.users
     const editedOrganization = organizationsObj[editTeam.organizationId]
+    const users = [
+      ...(editTeam?.users?.map(user => user.email) || []),
+      ...(editTeam?.invited?.map(user => user.email) || []),
+      editedOrganization?.owner?.email,
+      editTeam?.teamLeader?.email,
+    ]
+    console.log('TCL: addMember -> users', users)
     const usersToInvite = memberEmails.filter(
-      email =>
-        users?.findIndex(user => user.email === email) === -1 &&
-        editedOrganization?.owner?.email !== email &&
-        editTeam.teamLeader !== email
+      email => users?.findIndex(user => user === email) === -1
     )
-    const isOwner =
-      memberEmails.filter(
-        email =>
-          organizationsObj[editTeam.organizationId]?.owner?.email === email
-      ).length === 0
-    const isTeamLeader =
-      memberEmails.filter(email => editTeam.teamLeader === email).length === 0
+    console.log('TCL: addMember -> usersToInvite', usersToInvite)
+
     const subscriptionStatus = editedOrganization.subscriptionStatus
     if (usersToInvite.length === 0) {
       setWarningModal({
