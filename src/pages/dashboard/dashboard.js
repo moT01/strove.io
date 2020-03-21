@@ -573,7 +573,8 @@ const Dashboard = ({ history }) => {
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to remove {member.name} from {team.name}?
+          Are you sure you want to remove {member.name || member.email} from{' '}
+          {team.name}?
         </ModalText>
       ),
       onSubmit: () => {
