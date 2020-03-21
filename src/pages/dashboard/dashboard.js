@@ -62,7 +62,6 @@ import {
   UserPhoto,
   OrganizationName,
   StyledErrors,
-  InviteFormWrapper,
   TilesWrapper,
   // TimeBarContainer,
   // TimeBar,
@@ -70,18 +69,6 @@ import {
   NameWrapper,
   InviteWrapper,
 } from './styled'
-
-const validate = values => {
-  let errors = {}
-
-  if (!values.email) {
-    errors.email = 'Required'
-  } else if (!isEmail(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-
-  return errors
-}
 
 const validateTeamName = values => {
   let errors = {}
