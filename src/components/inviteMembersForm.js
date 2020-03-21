@@ -1,12 +1,10 @@
 import React, { memo } from 'react'
-import { useDispatch } from 'react-redux'
 import styled, { css } from 'styled-components/macro'
 import { Formik, FieldArray, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { isMobileOnly } from 'react-device-detect'
 
 import { StroveButton } from 'components'
-import { selectors } from 'state'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
