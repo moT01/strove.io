@@ -102,6 +102,11 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
                 text="Create project"
                 width="auto"
               ></StroveButton>
+              <StroveButton
+                text="Cancel"
+                width="auto"
+                onClick={() => handleClose(false)}
+              ></StroveButton>
               <StyledErrors>{props.errors.projectName}</StyledErrors>
             </GithubLinkForm>
           )}
