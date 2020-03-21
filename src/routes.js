@@ -58,7 +58,7 @@ const Strove = () => (
         component={OrganizationName}
       />
       <PrivateRoute path="/welcome/teamName" component={TeamName} />
-      <PrivateRoute path="/welcome/teamMembers" component={TeamMembers} />
+      <Route path="/welcome/teamMembers" component={TeamMembers} />
       <PrivateRoute path="/welcome/helloThere" component={HelloThere} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
       <Route component={NotFound} />

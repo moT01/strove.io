@@ -27,6 +27,7 @@ import WithLazyLoader from './withLazyLoader'
 import FullScreenWrapper from './fullScreenWrapper'
 import MenuWrapper from './menuWrapper'
 import TrialInfo from './trialInfo'
+import InviteMembersForm from './inviteMembersForm'
 
 export {
   SmallCloud,
@@ -60,4 +61,5 @@ export {
   FullScreenWrapper,
   MenuWrapper,
   TrialInfo,
+  InviteMembersForm,
 }

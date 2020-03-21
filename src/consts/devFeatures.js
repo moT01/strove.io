@@ -1,7 +1,7 @@
 export default [
   {
-    title: 'Collaborate straight from your browser',
-    content: 'No setup needed',
+    title: 'A browser is all you need',
+    content: 'No futher setup required',
     color: '#EB2F96',
     shadowColor: 'rgba(235,45,150,.12)',
     type: 'chrome',
@@ -14,23 +14,22 @@ export default [
     type: 'appstore',
   },
   {
-    title: 'All your software in one place',
+    title: 'Remote first',
     content: 'Access code anywhere, from any computer',
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
     type: 'global',
   },
   {
-    title: 'All major programming languages available without setup',
-    content: 'Need Python 2.7.3 for chemistry? We got you covered!',
+    title: 'All major programming languages available',
+    content: 'Need Python, Java, C#? We got you covered!',
     color: '#722ED1',
     shadowColor: 'rgba(114,46,209,.12)',
     type: 'code',
   },
   {
-    title: "Don't lose time, one environment for the whole team",
-    content:
-      'Once a project has been set up, any member can access it without needing to configure everything again',
+    title: 'One environment for the whole team',
+    content: 'Any member can access it projects using tthe same environment',
     color: '#FAAD14',
     shadowColor: 'rgba(250,173,20,.12)',
     type: 'team',
