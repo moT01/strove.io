@@ -72,7 +72,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
         width={isMobileOnly ? '60vw' : '30vw'}
         height={isMobileOnly ? '40vh' : '20vh'}
         isOpen={isOpen}
-        onRequestClose={() => handleClose(false)}
+        onRequestClose={handleClose}
         contentLabel="Name project"
         ariaHideApp={false}
       >
@@ -105,7 +105,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
               <StroveButton
                 text="Cancel"
                 width="auto"
-                onClick={() => handleClose(false)}
+                onClick={handleClose}
               ></StroveButton>
               <StyledErrors>{props.errors.projectName}</StyledErrors>
             </GithubLinkForm>
