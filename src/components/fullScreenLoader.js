@@ -82,6 +82,11 @@ const Loader = ({ type = 'addProject', ...props }) => {
       'Reserving resources',
       'Starting virtual machine',
     ],
+    emptyProject: [
+      'Checking permissions',
+      'Reserving resources',
+      'Starting virtual machine',
+    ],
     openProject: ['Launching editor'],
     continueProject: [
       'Checking permissions',
@@ -90,7 +95,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
     ],
     redirecting: ['Redirecting back to origin site...'],
     processPayment: ['Processing payment'],
-    loadingEditor: ['Loading editor']
+    loadingEditor: ['Loading editor'],
   }
 
   useInterval(

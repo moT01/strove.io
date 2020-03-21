@@ -123,6 +123,7 @@ const createProject = async ({
 
     if (!repoData && !repoLink) {
       repoData = { name: customName, description: '' }
+      dispatch(actions.incomingProject.setProjectIsBeingAdded())
     }
 
     const { description, name /* add language and color */ } = repoData
