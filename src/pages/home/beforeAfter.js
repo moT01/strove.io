@@ -4,7 +4,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import { theme } from 'consts'
 
 import {
-  StyledCellHeader,
+  BeforeItem,
   StyledSectionWrapper,
   SectionDivider,
   IconContainer,
@@ -12,7 +12,8 @@ import {
   SmallSectionWrapper,
   StyledCell,
   StyledH2,
-  StyledHeaderText,
+  StyledBeforeText,
+  BeforeContainer,
 } from './styled'
 
 const BeforeAfter = () => (
@@ -26,77 +27,79 @@ const BeforeAfter = () => (
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
         <SmallSectionWrapper isMobile={isMobile}>
           <StyledCell>
-            <StyledCellHeader>
+            <BeforeItem>
               <StyledH2 color={theme.colors.c3}>Before</StyledH2>
-            </StyledCellHeader>
-            <StyledHeaderText>
+            </BeforeItem>
+            {/* <StyledBeforeText>
               Common <b>it works on my machine</b> and <b>work from home</b>{' '}
               problems are a lot of work
-            </StyledHeaderText>
-            <StyledCellHeader>
-              <StyledHeaderText>Virtual machines</StyledHeaderText>
-              <IconContainer>
-                <img
-                  decoding="async"
-                  alt="docker"
-                  src={require('assets/vm.png')}
-                  style={{
-                    color: theme.colors.c1,
-                  }}
-                />
-              </IconContainer>
-            </StyledCellHeader>
-            <StyledCellHeader>
-              <StyledHeaderText>Docker containers</StyledHeaderText>
-              <IconContainer>
-                <img
-                  decoding="async"
-                  alt="docker"
-                  src={require('assets/docker.png')}
-                  style={{
-                    color: theme.colors.c1,
-                  }}
-                />
-              </IconContainer>
-            </StyledCellHeader>
-            <StyledCellHeader>
-              <StyledHeaderText>Devops teams</StyledHeaderText>
-              <IconContainer>
-                <img
-                  decoding="async"
-                  alt="docker"
-                  src={require('assets/people.png')}
-                  style={{
-                    color: theme.colors.c1,
-                  }}
-                />
-              </IconContainer>
-            </StyledCellHeader>
-            <StyledCellHeader>
-              <StyledHeaderText>Leasing computers</StyledHeaderText>
-              <IconContainer>
-                <img
-                  decoding="async"
-                  alt="docker"
-                  src={require('assets/macbooks.png')}
-                  style={{
-                    color: theme.colors.c1,
-                  }}
-                />
-              </IconContainer>
-            </StyledCellHeader>
+            </StyledBeforeText> */}
+            <BeforeContainer>
+              <BeforeItem>
+                <StyledBeforeText>Virtual machines</StyledBeforeText>
+                <IconContainer>
+                  <img
+                    decoding="async"
+                    alt="docker"
+                    src={require('assets/vm.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </BeforeItem>
+              <BeforeItem>
+                <StyledBeforeText>Docker containers</StyledBeforeText>
+                <IconContainer>
+                  <img
+                    decoding="async"
+                    alt="docker"
+                    src={require('assets/docker.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </BeforeItem>
+              <BeforeItem>
+                <StyledBeforeText>Devops teams</StyledBeforeText>
+                <IconContainer>
+                  <img
+                    decoding="async"
+                    alt="docker"
+                    src={require('assets/people.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </BeforeItem>
+              <BeforeItem>
+                <StyledBeforeText>Leasing computers</StyledBeforeText>
+                <IconContainer>
+                  <img
+                    decoding="async"
+                    alt="docker"
+                    src={require('assets/macbooks.png')}
+                    style={{
+                      color: theme.colors.c1,
+                    }}
+                  />
+                </IconContainer>
+              </BeforeItem>
+            </BeforeContainer>
           </StyledCell>
         </SmallSectionWrapper>
       </SectionWrapper>
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
         <SmallSectionWrapper isMobile={isMobile}>
           <StyledCell>
-            <StyledCellHeader>
+            <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
-            </StyledCellHeader>
-            <StyledHeaderText>
+            </BeforeItem>
+            <StyledBeforeText>
               Strove simplifies coding and managing programmer teams
-            </StyledHeaderText>
+            </StyledBeforeText>
           </StyledCell>
         </SmallSectionWrapper>
       </SectionWrapper>

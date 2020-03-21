@@ -30,6 +30,19 @@ export const StyledCellHeader = styled.div`
   display: flex;
 `
 
+export const BeforeItem = styled.div`
+  margin: 10px 0;
+  font-size: 28px;
+  display: flex;
+  justify-content: flex-end;
+`
+
+export const BeforeContainer = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+`
+
 export const StyledSectionWrapper = styled.section`
   display: flex;
   justify-content: center;
@@ -314,6 +327,12 @@ export const IconContainer = styled.div`
 export const StyledHeaderText = styled.div`
   margin: 0 10px 5px 10px;
   text-align: left;
+  color: ${({ theme }) => theme.colors.c3};
+`
+
+export const StyledBeforeText = styled.div`
+  margin: 0 10px 5px 10px;
+  text-align: right;
   color: ${({ theme }) => theme.colors.c3};
 `
 
