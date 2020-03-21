@@ -80,6 +80,7 @@ const validateRepoLink = values => {
 
 const GetStarted = ({ addProject, teamId }) => {
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
+  const handleClose = () => setAddProjectModalOpen(false)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
@@ -128,7 +129,7 @@ const GetStarted = ({ addProject, teamId }) => {
         minWidth="200px"
       />
       <AddEmptyProjectModal
-        handleClose={setAddProjectModalOpen}
+        handleClose={handleClose}
         isOpen={addProjectModalOpen}
         addProject={addProject}
         teamId={teamId}

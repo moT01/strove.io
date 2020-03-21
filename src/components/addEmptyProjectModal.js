@@ -102,6 +102,11 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
                 text="Create project"
                 width="auto"
               ></StroveButton>
+              <StroveButton
+                text="Cancel"
+                width="auto"
+                onClick={handleClose}
+              ></StroveButton>
               <StyledErrors>{props.errors.projectName}</StyledErrors>
             </GithubLinkForm>
           )}
@@ -112,6 +117,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
             isFullScreen
             color="#0072ce"
             queuePosition={queuePosition}
+            type="continueProject"
           />
         )}
         {isAdding && (
@@ -120,6 +126,7 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
             isFullScreen
             color="#0072ce"
             queuePosition={queuePosition}
+            type="emptyProject"
           />
         )}
       </Modal>
