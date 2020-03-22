@@ -59,7 +59,6 @@ const LinkText = styled.div`
   font-weight: ${props => (props.isEditor ? '300' : '600')};
   margin: 0;
   cursor: pointer;
-
   :hover {
     color: ${({ theme }) => theme.colors.c3};
     svg {
