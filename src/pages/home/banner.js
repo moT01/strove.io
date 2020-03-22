@@ -37,8 +37,8 @@ const Banner = () => (
       <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
         <StyledH1>Remote alternative for local software development</StyledH1>
         <StyledProductDescription>
-          Strove is your ready for coding, office or classroom. Manage team.
-          Write, run and share code, all in one place
+          Strove moves coding, from office or classroom, to the cloud. Manage
+          team. Write, run and share code, all in one place.
         </StyledProductDescription>
         <GetStarted />
       </StyledHeadingSection>
