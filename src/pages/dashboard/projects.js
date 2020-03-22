@@ -133,7 +133,8 @@ const Projects = ({
     }
   }
 
-  const handleJoinLiveshareClick = ({ id, teamId, editorPort }) => {
+  const handleJoinLiveshareClick = ({ id, teamId }) => {
+    const editorPort = currentProject?.editorPort
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(
