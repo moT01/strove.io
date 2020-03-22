@@ -25,9 +25,22 @@ export const StyledModal = styled(Modal)`
 `
 
 export const StyledCellHeader = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 28px;
   display: flex;
+`
+
+export const BeforeItem = styled.div`
+  margin: 10px 0;
+  font-size: 28px;
+  display: flex;
+  justify-content: flex-end;
+`
+
+export const BeforeContainer = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 `
 
 export const StyledSectionWrapper = styled.section`
@@ -111,7 +124,6 @@ export const SmallSectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 440px;
-  max-height: 440px;
   padding: ${({ padding }) => padding || '0'};
 `
 
@@ -213,7 +225,7 @@ export const StyledH2 = styled.h2`
 `
 
 export const StyledH3 = styled.h3`
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 32px;
   width: 100%;
   text-align: center;
@@ -315,6 +327,12 @@ export const IconContainer = styled.div`
 export const StyledHeaderText = styled.div`
   margin: 0 10px 5px 10px;
   text-align: left;
+  color: ${({ theme }) => theme.colors.c3};
+`
+
+export const StyledBeforeText = styled.div`
+  text-align: right;
+  margin: auto;
   color: ${({ theme }) => theme.colors.c3};
 `
 

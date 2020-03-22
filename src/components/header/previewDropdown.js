@@ -80,22 +80,6 @@ const DropdownWrapper = styled.div`
   display: ${({ display }) => (display ? 'visible' : 'hidden')};
 `
 
-// const MenuWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   width: auto;
-//   box-shadow: 0 1.2vh 1.2vh -1.5vh ${({ theme }) => theme.colors.c1};
-//   border-radius: 5px;
-//   border-width: 1px;
-//   border-color: ${({ theme }) => theme.colors.c1};
-//   border-style: solid;
-//   background-color: ${({ theme }) => theme.colors.c2};
-//   z-index: 3;
-//   position: relative;
-//   word-break: initial;
-// `
-
 const OptionText = styled(Text)`
   color: ${({ theme }) => theme.colors.c1};
   font-weight: 300;

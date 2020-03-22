@@ -17,7 +17,7 @@ const StyledFeatureTitle = styled.h3`
 
 const StyledFeatureContent = styled.p`
   color: rgb(105, 123, 140);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
 `
 
@@ -136,7 +136,7 @@ const Features = ({ features }) => {
               }}
             />
           ) : (
-            <VSCode width="38px" height="auto" fill={item.color} />
+            <VSCode width="38px" height="100%" fill={item.color} />
           )}
         </div>
         <StyledFeatureTitle>{item.title}</StyledFeatureTitle>

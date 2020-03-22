@@ -6,7 +6,7 @@ import { Docker, Github, Google, VSCode } from 'components/svgs'
 const defaultProps = {
   style: { fill: theme.colors.c14 },
   width: '100%',
-  length: 'auto',
+  length: '100%',
   height: '100%',
 }
 

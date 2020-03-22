@@ -16,7 +16,6 @@ const SectionWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
   overflow-x: hidden;
   background-color: inherit;
 `

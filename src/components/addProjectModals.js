@@ -82,7 +82,7 @@ const StyledAnchor = styled.a`
     fill: ${({ invert, theme }) =>
       !invert ? theme.colors.c2 : theme.colors.c1};
     width: 22px;
-    height: auto;
+    height: 100%;
     margin-left: 5px;
   }
 

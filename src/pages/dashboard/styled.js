@@ -167,11 +167,6 @@ const Tile = styled.div`
   margin: 15px;
   width: 50%;
   transition: all 0.2s;
-
-  /* @media (max-width: 1365px) {
-    width: 80vw;
-    height: auto;
-  } */
 `
 
 export const TeamTile = styled(Tile)`
