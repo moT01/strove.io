@@ -209,50 +209,55 @@ const Projects = ({
                     </TextWrapper>
                   </InfoWrapper>
                   <RightSection>
-                    <StroveButton
-                      to="/app/editor/"
-                      isDisabled={
-                        isDeleting ||
-                        isContinuing ||
-                        isStopping ||
-                        isProjectBeingAdded
-                      }
-                      isPrimary
-                      borderRadius="2px"
-                      padding="3px 15px"
-                      minWidth="150px"
-                      maxWidth="150px"
-                      margin="0 0 5px"
-                      font-size="0.8rem"
-                      onClick={() =>
-                        isOwner
-                          ? handleStartClick(project)
-                          : addProject({
-                              link: project.repoLink,
-                              name: project.name,
-                              teamId: project.teamId,
-                              forkedFromId: project.id,
-                            })
-                      }
-                    >
-                      <IconDescription>
-                        {isOwner
-                          ? currentProjectId && project.id === currentProjectId
-                            ? 'Continue'
-                            : 'Start'
-                          : 'Fork'}
-                      </IconDescription>
-                      <ProjectActionIcon
-                        type={
+                    {/* TODO: Display this section once forks work properly */}
+                    {isOwner && (
+                      <StroveButton
+                        to="/app/editor/"
+                        isDisabled={
+                          isDeleting ||
+                          isContinuing ||
+                          isStopping ||
+                          isProjectBeingAdded
+                        }
+                        isPrimary
+                        borderRadius="2px"
+                        padding="3px 15px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="0 0 5px"
+                        font-size="0.8rem"
+                        onClick={() =>
                           isOwner
+                            ? handleStartClick(project)
+                            : addProject({
+                                link: project.repoLink,
+                                name: project.name,
+                                teamId: project.teamId,
+                                forkedFromId: project.id,
+                              })
+                        }
+                      >
+                        <IconDescription>
+                          {isOwner
                             ? currentProjectId &&
                               project.id === currentProjectId
-                              ? 'play-circle'
-                              : 'play-circle'
-                            : 'fork'
-                        }
-                      />
-                    </StroveButton>
+                              ? 'Continue'
+                              : 'Start'
+                            : 'Fork'}
+                        </IconDescription>
+                        <ProjectActionIcon
+                          type={
+                            isOwner
+                              ? currentProjectId &&
+                                project.id === currentProjectId
+                                ? 'play-circle'
+                                : 'play-circle'
+                              : 'fork'
+                          }
+                        />
+                      </StroveButton>
+                    )}
+
                     {isOwner &&
                       !project.forkedFromId &&
                       (currentProjectId && currentProjectId === project.id ? (
@@ -387,7 +392,7 @@ const Projects = ({
                         </TextWrapper>
                       </InfoWrapper>
                       <RightSection>
-                        <StroveButton
+                        {/* <StroveButton
                           to="/app/editor/"
                           isDisabled={isDisabled}
                           isPrimary
@@ -410,8 +415,8 @@ const Projects = ({
                         >
                           <IconDescription>Fork</IconDescription>
                           <ProjectActionIcon type="fork" />
-                        </StroveButton>
-                        {isOwner &&
+                        </StroveButton> */}
+                        {/* {isOwner &&
                           !project.forkedFromId &&
                           (currentProjectId &&
                           currentProjectId === project.id ? (
@@ -447,7 +452,7 @@ const Projects = ({
                               <IconDescription>Delete</IconDescription>
                               <ProjectActionIcon type="delete" />
                             </StroveButton>
-                          ))}
+                          ))} */}
                       </RightSection>
                     </VerticalDivider>
                   </ProjectsTile>
