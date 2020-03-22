@@ -24,7 +24,7 @@ const Editor = ({
   onLoad,
   isEmbed,
   loaderVisible,
-  teamId
+  teamId,
 }) => {
   const token = useSelector(selectors.getToken)
   const randomId = Math.random()
@@ -43,7 +43,7 @@ const Editor = ({
         isEmbed={isEmbed}
         loaderVisible={loaderVisible}
         onLoad={onLoad}
-        src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=Bearer ${token}&projectId=${projectId}`}
+        src={`${process.env.REACT_APP_STROVE_URL}vm/${machineName}/${port}/?r=${randomId}&folder=/home/strove/project&token=Bearer ${token}&projectId=${projectId}&teamId=${teamId}`}
       />
     </>
   )
