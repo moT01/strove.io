@@ -17,10 +17,11 @@ const EditorWrapper = ({ history }) => {
   const dispatch = useDispatch()
 
   const currentProject = useSelector(selectors.api.getCurrentProject)
-  const projectId = currentProject && currentProject.id
-  const machineId = currentProject && currentProject.machineId
-  const machineName = currentProject && currentProject.machineName
-  const port = currentProject && currentProject.editorPort
+  const projectId = currentProject?.id
+  const machineId = currentProject?.machineId
+  const machineName = currentProject?.machineName
+  const port = currentProject?.editorPort
+  const teamId = currentProject?.teamId
   const isEmbed = getWindowPathName().includes('embed')
 
   const token = useSelector(selectors.getToken)
@@ -101,7 +102,7 @@ const EditorWrapper = ({ history }) => {
           isEmbed={isEmbed}
           loaderVisible={loaderVisible}
           projectId={projectId}
-          // teamId={teamId}
+          teamId={teamId}
         />
       )}
     </>
