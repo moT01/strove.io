@@ -804,7 +804,7 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <InviteWrapper>
-          <InviteMembersForm limit={5} setAddMemberModal={setAddMemberModal} />
+          <InviteMembersForm limit={5} onSuccess={setAddMemberModal} />
         </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
