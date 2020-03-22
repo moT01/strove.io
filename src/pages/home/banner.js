@@ -68,7 +68,7 @@ const Banner = () => (
         <StyledProductDescription color={theme.colors.c26}>
           Strove is a place where your team comes together to collaborate, code
           can be changed and run on remote servers using a browser and 'it works
-          on my machine' issue does not exist
+          on my machine' issue does not exist.
         </StyledProductDescription>
         {/* <StyledProductDescription color={theme.colors.c26}>
           Whether you’re doing a banking app, an e-commerce store, or coding
