@@ -225,7 +225,7 @@ export const StyledH2 = styled.h2`
 `
 
 export const StyledH3 = styled.h3`
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 32px;
   width: 100%;
   text-align: center;
