@@ -35,9 +35,10 @@ const Banner = () => (
       isMobileOnly={isMobileOnly}
     >
       <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
-        <StyledH1>Cloud alternative for local software development</StyledH1>
+        <StyledH1>Remote alternative for local software development</StyledH1>
         <StyledProductDescription>
-          Manage team. Write, run and share code, all in one place
+          Strove is your ready for coding, office or classroom. Manage team.
+          Write, run and share code, all in one place
         </StyledProductDescription>
         <GetStarted />
       </StyledHeadingSection>
@@ -65,10 +66,15 @@ const Banner = () => (
           Toolkit for modern software organizations
         </StyledH3>
         <StyledProductDescription color={theme.colors.c26}>
+          Strove is a place where your team comes together to collaborate, code
+          can be changed and run on remote servers using a browser and 'it works
+          on my machine' issue does not exist.
+        </StyledProductDescription>
+        {/* <StyledProductDescription color={theme.colors.c26}>
           Whether you’re doing a banking app, an e-commerce store, or coding
           workshops, Strove will allow you and your team to work using only a
           browser
-        </StyledProductDescription>
+        </StyledProductDescription> */}
       </SectionDivider>
     </StyledSectionWrapper>
     {/* <BeforeAfter /> */}

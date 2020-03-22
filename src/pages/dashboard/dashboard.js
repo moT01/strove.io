@@ -408,7 +408,7 @@ const Dashboard = ({ history }) => {
                                     )}
                                     {(isOwner || isOrganizationOwner) &&
                                       team?.invited?.map(member => (
-                                        <RowWrapper key={member.name}>
+                                        <RowWrapper key={member.email}>
                                           <Divider columnOnMobile>
                                             <VerticalDivider>
                                               <UserPhoto

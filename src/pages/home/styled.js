@@ -25,7 +25,7 @@ export const StyledModal = styled(Modal)`
 `
 
 export const StyledCellHeader = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   font-size: 28px;
   display: flex;
 `
@@ -225,7 +225,7 @@ export const StyledH2 = styled.h2`
 `
 
 export const StyledH3 = styled.h3`
-  margin: 0;
+  margin: 0 0 10px;
   font-size: 32px;
   width: 100%;
   text-align: center;
