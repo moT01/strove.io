@@ -133,6 +133,17 @@ const Projects = ({
     }
   }
 
+  const handleJoinLiveshareClick = ({ id }) => {
+    dispatch(
+      mutation({
+        name: 'startCollaborationProject',
+        mutation: START_COLLABORATION_PROJECT,
+        variables: { projectId: id, userId: user.id },
+        onSuccessDispatch: null,
+      })
+    )
+  }
+
   const handleDeleteClick = id => {
     dispatch(
       mutation({
@@ -411,6 +422,27 @@ const Projects = ({
                           <IconDescription>Fork</IconDescription>
                           <ProjectActionIcon type="fork" />
                         </StroveButton>
+                        {project.editorPort && (
+                          <StroveButton
+                            to="/app/editor/"
+                            isDisabled={isDisabled}
+                            isPrimary
+                            borderRadius="2px"
+                            padding="3px 15px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            margin="0 0 5px"
+                            font-size="0.8rem"
+                            onClick={() =>
+                              handleJoinLiveshareClick({
+                                id: project.id,
+                              })
+                            }
+                          >
+                            <IconDescription>Join liveshare</IconDescription>
+                            <ProjectActionIcon type="video-camera-outlined" />
+                          </StroveButton>
+                        )}
                         {isOwner &&
                           !project.forkedFromId &&
                           (currentProjectId &&
