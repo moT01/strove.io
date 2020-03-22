@@ -37,7 +37,8 @@ const Banner = () => (
       <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
         <StyledH1>Cloud alternative for local software development</StyledH1>
         <StyledProductDescription>
-          Manage team. Write, run and share code, all in one place
+          Your remote, ready for programming, office or classroom. Manage team.
+          Write, run and share code, all in one place
         </StyledProductDescription>
         <GetStarted />
       </StyledHeadingSection>
