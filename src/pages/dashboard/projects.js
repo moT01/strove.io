@@ -331,12 +331,11 @@ const Projects = ({
         {isLeader && usersProjects.length !== 0 && (
           <>
             <StroveButton
-              text={"Users' projects"}
+              text="Teams' private projects"
               padding="2px 15px"
               borderRadius="2px"
               margin="5px 0"
-              font-size="8px"
-              width="100%"
+              width="300px"
               onClick={() => {
                 setShowUsersProjects(!showUsersProjects)
               }}
