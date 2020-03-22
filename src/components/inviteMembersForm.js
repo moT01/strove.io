@@ -181,7 +181,7 @@ const emptyWarningModalContent = {
   buttonLabel: '',
 }
 
-const InviteMembersForm = ({ limit, setAddMemberModal }) => {
+const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
   const dispatch = useDispatch()
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const editedOrganization = useSelector(
@@ -203,7 +203,7 @@ const InviteMembersForm = ({ limit, setAddMemberModal }) => {
           allowRepeated: true,
           variables: { memberEmails: addMemberEmail, teamId: editedTeam.id },
           onSuccess: () => {
-            setAddMemberModal && setAddMemberModal(false)
+            onSuccess()
             setWarningModal({
               visible: true,
               content: (
@@ -263,7 +263,7 @@ const InviteMembersForm = ({ limit, setAddMemberModal }) => {
           allowRepeated: true,
           variables: { memberEmails: addMemberEmail, teamId: editedTeam.id },
           onSuccess: () => {
-            setAddMemberModal && setAddMemberModal(false)
+            onSuccess()
             closeWarningModal()
           },
           onSuccessDispatch: [
@@ -356,7 +356,7 @@ const InviteMembersForm = ({ limit, setAddMemberModal }) => {
             allowRepeated: true,
             variables: { memberEmails: usersToInvite, teamId: editedTeam.id },
             onSuccess: () => {
-              setAddMemberModal && setAddMemberModal(false)
+              onSuccess()
               closeWarningModal()
             },
             onSuccessDispatch: [
