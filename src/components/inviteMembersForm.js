@@ -1,10 +1,16 @@
-import React, { memo } from 'react'
+import React, { useState, memo, useEffect } from 'react'
 import styled, { css } from 'styled-components/macro'
 import { Formik, FieldArray, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { isMobileOnly } from 'react-device-detect'
 
-import { StroveButton } from 'components'
+import { useSelector, useDispatch } from 'react-redux'
+import { ADD_MEMBER, UPGRADE_SUBSCRIPTION } from 'queries'
+import { selectors, actions } from 'state'
+import FullScreenLoader from 'components/fullScreenLoader'
+import { StroveButton, Modal } from 'components'
+import { mutation, updateOrganizations } from 'utils'
+import { ModalButton, ModalText } from 'pages/dashboard/styled'
 
 const validationSchema = Yup.object().shape({
   emails: Yup.array()
@@ -168,63 +174,288 @@ export const FormField = styled(Field)`
     0 8px 24px 0 rgba(174, 174, 186, 0.16);
 `
 
-const InviteMembersForm = ({ limit, addMember }) => {
-  return (
-    <Formik
-      initialValues={{ emails: ['', '', ''] }}
-      validationSchema={validationSchema}
-      onSubmit={values => {
-        const emailsArray = [...new Set(values.emails.filter(email => email))]
-        addMember({ memberEmails: [...emailsArray] })
-      }}
-      render={({ values, errors }) => (
-        <StyledForm>
-          <EmailsWrapper>
-            <FieldArray
-              name="emails"
-              render={arrayHelpers => (
-                <TableWrapper>
-                  <Table>
-                    {values.emails.map((env, index) => (
-                      <TableRow key={index}>
-                        <FormField
-                          type="email"
-                          placeholder="name@example.com"
-                          name={`emails[${index}]`}
-                          noValidate
-                        />
-                      </TableRow>
-                    ))}
-                  </Table>
-                  {(!limit || values?.emails?.length < limit) && (
-                    <AddButton
-                      type="button"
-                      onClick={() => {
-                        if (values?.emails?.length < limit) {
-                          arrayHelpers.push('')
-                        }
-                      }}
-                    >
-                      + Add another
-                    </AddButton>
-                  )}
-                </TableWrapper>
-              )}
-            />
-          </EmailsWrapper>
-          <EnvButtonsWrapper>
+const emptyWarningModalContent = {
+  visible: false,
+  content: null,
+  onSubmit: null,
+  buttonLabel: '',
+}
+
+const InviteMembersForm = ({ limit, setAddMemberModal }) => {
+  const dispatch = useDispatch()
+  const paymentStatus = useSelector(selectors.api.getPaymentStatus)
+  const editedOrganization = useSelector(
+    selectors.editedOrganization.getEditedOrganization
+  )
+  const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
+  const [addMemberEmail, setAddMemberEmail] = useState(false)
+  const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
+
+  useEffect(() => {
+    if (
+      paymentStatus?.data?.paymentStatus?.status === 'success' &&
+      editedTeam
+    ) {
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          allowRepeated: true,
+          variables: { memberEmails: addMemberEmail, teamId: editedTeam.id },
+          onSuccess: () => {
+            setAddMemberModal && setAddMemberModal(false)
+            setWarningModal({
+              visible: true,
+              content: (
+                <ModalText>
+                  <span role="img" aria-label="confetti">
+                    🎉
+                  </span>{' '}
+                  We have sent the invitation emails and upgraded your
+                  subscription.{' '}
+                  <span role="img" aria-label="confetti">
+                    🎉
+                  </span>
+                </ModalText>
+              ),
+            })
+          },
+          onSuccessDispatch: [
+            updateOrganizations,
+            actions.editedOrganization.resetEditedOrganization,
+          ],
+        })
+      )
+    }
+
+    if (paymentStatus?.data?.paymentStatus?.status === 'fail' && editedTeam) {
+      setWarningModal({
+        visible: true,
+        content: (
+          <>
+            {' '}
+            <ModalText>
+              Your payment couldn't be processed. Please check your payment
+              information and try again
+            </ModalText>
             <StroveButton
-              margin="20px 0 10px"
-              isPrimary
-              type="submit"
-              text="Add Teammates"
-              disabled={errors?.emails || !values?.emails.some(email => email)}
+              isLink
+              to="/app/plans"
+              text="Plans"
+              padding="15px"
+              minWidth="250px"
+              maxWidth="250px"
+              margin="10px"
+              fontSize="1.4rem"
+              borderRadius="5px"
             />
-          </EnvButtonsWrapper>
-          {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
-        </StyledForm>
-      )}
-    />
+          </>
+        ),
+      })
+    }
+
+    paymentStatus?.data?.paymentStatus?.status === 'success' &&
+      editedTeam &&
+      dispatch(
+        mutation({
+          name: 'addMember',
+          mutation: ADD_MEMBER,
+          allowRepeated: true,
+          variables: { memberEmails: addMemberEmail, teamId: editedTeam.id },
+          onSuccess: () => {
+            setAddMemberModal && setAddMemberModal(false)
+            closeWarningModal()
+          },
+          onSuccessDispatch: [
+            updateOrganizations,
+            actions.editedOrganization.resetEditedOrganization,
+          ],
+        })
+      ) // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paymentStatus])
+
+  const closeWarningModal = () => {
+    setWarningModal(emptyWarningModalContent)
+  }
+
+  const addMember = ({ memberEmails, setAddMemberModal }) => {
+    const users = [
+      ...(editedTeam?.users?.map(user => user.email) || []),
+      ...(editedTeam?.invited?.map(user => user.email) || []),
+      editedOrganization?.owner?.email,
+      editedTeam?.teamLeader?.email,
+    ]
+    const usersToInvite = memberEmails.filter(
+      email => users?.findIndex(user => user === email) === -1
+    )
+    const subscriptionQuantity = editedOrganization?.subscriptionQuantity
+    const subscriptionStatus = editedOrganization.subscriptionStatus
+
+    if (usersToInvite.length === 0) {
+      setWarningModal({
+        visible: true,
+        content: (
+          <ModalText>
+            Those users have already been invited to {editedTeam.name}.
+          </ModalText>
+        ),
+      })
+    } else {
+      if (subscriptionStatus === 'active') {
+        setWarningModal({
+          visible: true,
+          content: (
+            <FullScreenLoader
+              type="processPayment"
+              isFullScreen
+              color="#0072ce"
+            />
+          ),
+          noClose: true,
+        })
+        dispatch(
+          mutation({
+            name: 'upgradeSubscription',
+            mutation: UPGRADE_SUBSCRIPTION,
+            variables: {
+              organizationId: editedOrganization.id,
+              quantity: subscriptionQuantity + usersToInvite.length,
+            },
+            onSuccess: () => setAddMemberEmail(usersToInvite),
+            onError: () =>
+              setWarningModal({
+                visible: true,
+                content: (
+                  <>
+                    <ModalText>Your payment couldn't be processed.</ModalText>
+                    <ModalText>
+                      Please make sure your payment information is correct and
+                      try again.
+                    </ModalText>
+                    <StroveButton
+                      isLink
+                      to="/app/plans"
+                      text="Settings"
+                      isPrimary
+                      minWidth="150px"
+                      maxWidth="150px"
+                      borderRadius="2px"
+                      padding="5px"
+                      margin="10px 0px"
+                    />
+                  </>
+                ),
+              }),
+          })
+        )
+      } else if (subscriptionStatus === 'inactive') {
+        dispatch(
+          mutation({
+            name: 'addMember',
+            mutation: ADD_MEMBER,
+            allowRepeated: true,
+            variables: { memberEmails: usersToInvite, teamId: editedTeam.id },
+            onSuccess: () => {
+              setAddMemberModal && setAddMemberModal(false)
+              closeWarningModal()
+            },
+            onSuccessDispatch: [
+              updateOrganizations,
+              actions.editedOrganization.resetEditedOrganization,
+            ],
+          })
+        )
+      }
+    }
+  }
+  return (
+    <>
+      <Formik
+        initialValues={{ emails: ['', '', ''] }}
+        validationSchema={validationSchema}
+        onSubmit={values => {
+          const emailsArray = [...new Set(values.emails.filter(email => email))]
+          addMember({ memberEmails: [...emailsArray] })
+        }}
+        render={({ values, errors }) => (
+          <StyledForm>
+            <EmailsWrapper>
+              <FieldArray
+                name="emails"
+                render={arrayHelpers => (
+                  <TableWrapper>
+                    <Table>
+                      {values.emails.map((env, index) => (
+                        <TableRow key={index}>
+                          <FormField
+                            type="email"
+                            placeholder="name@example.com"
+                            name={`emails[${index}]`}
+                            noValidate
+                          />
+                        </TableRow>
+                      ))}
+                    </Table>
+                    {(!limit || values?.emails?.length < limit) && (
+                      <AddButton
+                        type="button"
+                        onClick={() => {
+                          if (values?.emails?.length < limit) {
+                            arrayHelpers.push('')
+                          }
+                        }}
+                      >
+                        + Add another
+                      </AddButton>
+                    )}
+                  </TableWrapper>
+                )}
+              />
+            </EmailsWrapper>
+            <EnvButtonsWrapper>
+              <StroveButton
+                margin="20px 0 10px"
+                isPrimary
+                type="submit"
+                text="Add Teammates"
+                disabled={
+                  errors?.emails || !values?.emails.some(email => email)
+                }
+              />
+            </EnvButtonsWrapper>
+            {errors?.emails && <TextToLeft>Invalid email</TextToLeft>}
+          </StyledForm>
+        )}
+      />
+      <Modal
+        width={isMobileOnly && '80vw'}
+        mindWidth="40vw"
+        height={isMobileOnly ? '30vh' : '20vh'}
+        isOpen={warningModal.visible}
+        onRequestClose={() => !warningModal.noClose && closeWarningModal()}
+        contentLabel="Warning"
+        ariaHideApp={false}
+      >
+        {warningModal.content}
+        {warningModal.buttonLabel && (
+          <ModalButton
+            isPrimary
+            onClick={warningModal.onSubmit}
+            text={warningModal.buttonLabel}
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
+        {!warningModal.noClose && (
+          <ModalButton
+            onClick={closeWarningModal}
+            text="Close"
+            padding="5px"
+            maxWidth="150px"
+          />
+        )}
+      </Modal>
+    </>
   )
 }
 

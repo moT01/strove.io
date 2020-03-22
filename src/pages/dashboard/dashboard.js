@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom'
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
 import { useAnalytics } from 'hooks'
 import {
-  ADD_MEMBER,
   CREATE_TEAM,
   RENAME_TEAM,
   REMOVE_MEMBER,
@@ -15,10 +14,9 @@ import {
   SET_ADMIN,
   LEAVE_TEAM,
   DOWNGRADE_SUBSCRIPTION,
-  UPGRADE_SUBSCRIPTION,
   REMOVE_FROM_ORGANIZATION,
 } from 'queries'
-import { selectors, actions, C } from 'state'
+import { selectors, actions } from 'state'
 import {
   GetStarted,
   StroveButton,
@@ -29,7 +27,6 @@ import {
   InviteMembersForm,
 } from 'components'
 import StroveLogo from 'images/strove.png'
-import FullScreenLoader from 'components/fullScreenLoader'
 import Projects from './projects'
 import {
   FormWrapper,
@@ -109,7 +106,6 @@ const Dashboard = ({ history }) => {
   const [addProjectModal, setAddProjectModal] = useState(false)
   const [settingsModal, setSettingsModal] = useState(false)
   const [teamLeaderModal, setTeamLeaderModal] = useState(false)
-  const [editTeam, setEditTeam] = useState()
   const [editMode, setEditMode] = useState('')
   const [leaderOptions, setLeaderOptions] = useState()
   const [newOwnerSelect, setNewOwnerSelect] = useState('')
@@ -118,13 +114,14 @@ const Dashboard = ({ history }) => {
   const currentProjectId = currentProject?.id
   const createTeamError = useSelector(selectors.api.getError('createTeam'))
 
-  const setEditedOrganization = ({ team }) =>
+  const setEditedOrganization = ({ team }) => {
     dispatch(
-      actions.editedOrganization.setEditedOrganization(
-        { organization: organizationsObj[team.organizationId] },
-        team
-      )
+      actions.editedOrganization.setEditedOrganization({
+        organization: organizationsObj[team.organizationId],
+        team,
+      })
     )
+  }
 
   const organizationsObj =
     myOrganizations &&
@@ -310,17 +307,7 @@ const Dashboard = ({ history }) => {
                                       maxWidth="150px"
                                       borderRadius="2px"
                                       onClick={() => {
-                                        dispatch(
-                                          actions.editedOrganization.setEditedOrganization(
-                                            {
-                                              organization:
-                                                organizationsObj[
-                                                  team.organizationId
-                                                ],
-                                            },
-                                            team
-                                          )
-                                        )
+                                        setEditedOrganization({ team })
                                         handleLeaveClick(team)
                                       }}
                                       text="Leave"
@@ -493,22 +480,7 @@ const Dashboard = ({ history }) => {
                                     borderRadius="2px"
                                     text="Add Project"
                                     onClick={() => {
-                                      // setEditTeam(team)
-                                      console.log(
-                                        'TCL: Dashboard -> team',
-                                        team
-                                      )
-                                      dispatch(
-                                        actions.editedOrganization.setEditedOrganization(
-                                          {
-                                            organization:
-                                              organizationsObj[
-                                                team.organizationId
-                                              ],
-                                            team,
-                                          }
-                                        )
-                                      )
+                                      setEditedOrganization({ team })
                                       setAddProjectModal(true)
                                     }}
                                   />
@@ -544,11 +516,9 @@ const Dashboard = ({ history }) => {
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
-    dispatch(
-      actions.editedOrganization.setEditedOrganization({
-        organization: organizationsObj[organizationId],
-      })
-    )
+    setEditedOrganization({
+      organization: organizationsObj[organizationId],
+    })
     setRenameTeamModal(true)
   }
 
@@ -573,7 +543,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           Deleting the team will cause deleting all of the team projects. Are
-          you sure you want to delete {editTeam.name}?
+          you sure you want to delete {editedTeam.name}?
         </ModalText>
       ),
       buttonLabel: 'Delete',
@@ -587,7 +557,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           This operation is irreversible. Are you absolutely sure you want to
-          delete {editTeam.name}?
+          delete {editedTeam.name}?
         </ModalText>
       ),
       buttonLabel: 'Delete',
@@ -596,7 +566,7 @@ const Dashboard = ({ history }) => {
           mutation({
             name: 'deleteTeam',
             mutation: DELETE_TEAM,
-            variables: { teamId: editTeam.id },
+            variables: { teamId: editedTeam.id },
             onSuccess: () => {
               closeWarningModal()
             },
@@ -668,7 +638,7 @@ const Dashboard = ({ history }) => {
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to rename {editTeam.name} to {newName}?
+          Are you sure you want to rename {editedTeam.name} to {newName}?
         </ModalText>
       ),
       buttonLabel: 'Rename',
@@ -679,7 +649,7 @@ const Dashboard = ({ history }) => {
             mutation: RENAME_TEAM,
             variables: {
               newName,
-              teamId: editTeam.id,
+              teamId: editedTeam.id,
             },
             onSuccess: () => {
               setRenameTeamModal(false)
@@ -690,179 +660,16 @@ const Dashboard = ({ history }) => {
         ),
     })
 
-  useEffect(() => {
-    if (paymentStatus?.data?.paymentStatus?.status === 'success' && editTeam) {
-      dispatch(
-        mutation({
-          name: 'addMember',
-          mutation: ADD_MEMBER,
-          allowRepeated: true,
-          variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
-          onSuccess: () => {
-            setAddMemberModal(false)
-            setWarningModal({
-              visible: true,
-              content: (
-                <ModalText>
-                  <span role="img" aria-label="confetti">
-                    🎉
-                  </span>{' '}
-                  We have sent the invitation emails and upgraded your
-                  subscription.{' '}
-                  <span role="img" aria-label="confetti">
-                    🎉
-                  </span>
-                </ModalText>
-              ),
-            })
-          },
-          onSuccessDispatch: updateOrganizations,
-        })
-      )
-    }
-
-    if (paymentStatus?.data?.paymentStatus?.status === 'fail' && editTeam) {
-      setWarningModal({
-        visible: true,
-        content: (
-          <>
-            {' '}
-            <ModalText>
-              Your payment couldn't be processed. Please check your payment
-              information and try again
-            </ModalText>
-            <StroveButton
-              isLink
-              to="/app/plans"
-              text="Plans"
-              padding="15px"
-              minWidth="250px"
-              maxWidth="250px"
-              margin="10px"
-              fontSize="1.4rem"
-              borderRadius="5px"
-            />
-          </>
-        ),
-      })
-    }
-
-    paymentStatus?.data?.paymentStatus?.status === 'success' &&
-      editTeam &&
-      dispatch(
-        mutation({
-          name: 'addMember',
-          mutation: ADD_MEMBER,
-          allowRepeated: true,
-          variables: { memberEmails: addMemberEmail, teamId: editTeam.id },
-          onSuccess: () => {
-            setAddMemberModal(false)
-            closeWarningModal()
-          },
-          onSuccessDispatch: updateOrganizations,
-        })
-      ) // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentStatus])
-
   const handleAddMemberClick = team => {
     setEditedOrganization({ team })
     setAddMemberModal(true)
   }
 
-  const addMember = ({ memberEmails }) => {
-    // const editedOrganization = organizationsObj[editTeam.organizationId]
-    const users = [
-      ...(editedTeam?.users?.map(user => user.email) || []),
-      ...(editedTeam?.invited?.map(user => user.email) || []),
-      editedOrganization?.owner?.email,
-      editedTeam?.teamLeader?.email,
-    ]
-    const usersToInvite = memberEmails.filter(
-      email => users?.findIndex(user => user === email) === -1
-    )
-    const subscriptionQuantity = editedOrganization?.subscriptionQuantity
-    const subscriptionStatus = editedOrganization.subscriptionStatus
-
-    if (usersToInvite.length === 0) {
-      setWarningModal({
-        visible: true,
-        content: (
-          <ModalText>
-            Those users have already been invited to {editedTeam.name}.
-          </ModalText>
-        ),
-      })
-    } else {
-      if (subscriptionStatus === 'active') {
-        setWarningModal({
-          visible: true,
-          content: (
-            <FullScreenLoader
-              type="processPayment"
-              isFullScreen
-              color="#0072ce"
-            />
-          ),
-          noClose: true,
-        })
-        dispatch(
-          mutation({
-            name: 'upgradeSubscription',
-            mutation: UPGRADE_SUBSCRIPTION,
-            variables: {
-              organizationId: editedOrganization.id,
-              quantity: subscriptionQuantity + usersToInvite.length,
-            },
-            onSuccess: () => setAddMemberEmail(usersToInvite),
-            onError: () =>
-              setWarningModal({
-                visible: true,
-                content: (
-                  <>
-                    <ModalText>Your payment couldn't be processed.</ModalText>
-                    <ModalText>
-                      Please make sure your payment information is correct and
-                      try again.
-                    </ModalText>
-                    <StroveButton
-                      isLink
-                      to="/app/plans"
-                      text="Settings"
-                      isPrimary
-                      minWidth="150px"
-                      maxWidth="150px"
-                      borderRadius="2px"
-                      padding="5px"
-                      margin="10px 0px"
-                    />
-                  </>
-                ),
-              }),
-          })
-        )
-      } else if (subscriptionStatus === 'inactive') {
-        dispatch(
-          mutation({
-            name: 'addMember',
-            mutation: ADD_MEMBER,
-            allowRepeated: true,
-            variables: { memberEmails: usersToInvite, teamId: editTeam.id },
-            onSuccess: () => {
-              setAddMemberModal(false)
-              closeWarningModal()
-            },
-            onSuccessDispatch: updateOrganizations,
-          })
-        )
-      }
-    }
-  }
-
   const handleSetAdminClick = () => {
     setTeamLeaderModal(true)
     setLeaderOptions(() => {
-      if (editTeam.users) {
-        return editTeam.users.map(user => ({
+      if (editedTeam.users) {
+        return editedTeam.users.map(user => ({
           values: user.id,
           label: user.name,
         }))
@@ -878,7 +685,7 @@ const Dashboard = ({ history }) => {
       content: (
         <ModalText>
           Are you sure you want to set {newOwner.label} to be team leader of{' '}
-          {editTeam.name}
+          {editedTeam.name}
         </ModalText>
       ),
       buttonLabel: 'Set team leader',
@@ -888,7 +695,7 @@ const Dashboard = ({ history }) => {
             name: 'setAdmin',
             mutation: SET_ADMIN,
             variables: {
-              teamId: editTeam.id,
+              teamId: editedTeam.id,
               newTeamLeaderId: newOwner.values,
             },
             onSuccess: () => {
@@ -904,7 +711,7 @@ const Dashboard = ({ history }) => {
   const handleNewOwnerSelect = newOwner => setNewOwnerSelect(newOwner)
 
   const handleSettingsClick = team => {
-    setEditTeam(team)
+    setEditedOrganization({ team })
     setSettingsModal(true)
   }
 
@@ -913,13 +720,12 @@ const Dashboard = ({ history }) => {
   }
 
   const handleLeaveClick = team => {
-    setEditTeam(team)
+    setEditedOrganization({ team })
     setWarningModal({
       visible: true,
       content: (
         <ModalText>
-          Are you sure you want to leave team{' '}
-          {organizationsObj[team.organizationId].teams[team.id].name}?
+          Are you sure you want to leave team {editedOrganization.name}?
         </ModalText>
       ),
       onSubmit: () => handleLeaveTeam({ teamId: team.id }),
@@ -946,7 +752,7 @@ const Dashboard = ({ history }) => {
   }
 
   const closeSettingsModal = () => {
-    setEditTeam(null)
+    dispatch(actions.editedOrganization.resetEditedOrganization)
     setSettingsModal(false)
   }
 
@@ -998,11 +804,7 @@ const Dashboard = ({ history }) => {
         ariaHideApp={false}
       >
         <InviteWrapper>
-          <InviteMembersForm
-            limit={5}
-            teamId={editTeam?.id}
-            addMember={addMember}
-          />
+          <InviteMembersForm limit={5} setAddMemberModal={setAddMemberModal} />
         </InviteWrapper>
         <ModalButton
           onClick={() => setAddMemberModal(false)}
@@ -1072,7 +874,7 @@ const Dashboard = ({ history }) => {
           validate={validateTeamName}
           onSubmit={values => {
             if (editMode === 'Rename team') {
-              renameTeam({ newName: values.name, teamId: editTeam.id })
+              renameTeam({ newName: values.name, teamId: editedTeam.id })
             } else {
               createTeam({
                 name: values.name,
@@ -1219,7 +1021,7 @@ const Dashboard = ({ history }) => {
         <GetStarted
           closeModal={closeAddProjectModal}
           teamId={editedTeam?.id}
-          organization={organizationsObj[editTeam?.organizationId]}
+          organization={editedOrganization}
         />
       </Modal>
     </div>
