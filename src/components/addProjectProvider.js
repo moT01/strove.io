@@ -29,6 +29,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
+  const isJoiningLiveshare = useSelector(
+    selectors.api.getLoading('startCollaborationProject')
+  )
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getMyProjects)
   const githubToken = user?.githubToken
@@ -201,6 +204,14 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       {isAdding && (
         <FullScreenLoader
           type="addProject"
+          isFullScreen
+          color="#0072ce"
+          queuePosition={queuePosition}
+        />
+      )}
+      {isJoiningLiveshare && (
+        <FullScreenLoader
+        type="addingCollaborationProject"
           isFullScreen
           color="#0072ce"
           queuePosition={queuePosition}
