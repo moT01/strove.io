@@ -772,10 +772,10 @@ const Dashboard = ({ history }) => {
   const addMember = ({ memberEmails }) => {
     // const editedOrganization = organizationsObj[editTeam.organizationId]
     const users = [
-      ...(editTeam?.users?.map(user => user.email) || []),
-      ...(editTeam?.invited?.map(user => user.email) || []),
+      ...(editedTeam?.users?.map(user => user.email) || []),
+      ...(editedTeam?.invited?.map(user => user.email) || []),
       editedOrganization?.owner?.email,
-      editTeam?.teamLeader?.email,
+      editedTeam?.teamLeader?.email,
     ]
     const usersToInvite = memberEmails.filter(
       email => users?.findIndex(user => user === email) === -1
@@ -788,7 +788,7 @@ const Dashboard = ({ history }) => {
         visible: true,
         content: (
           <ModalText>
-            Those users have already been invited to {editTeam.name}.
+            Those users have already been invited to {editedTeam.name}.
           </ModalText>
         ),
       })
