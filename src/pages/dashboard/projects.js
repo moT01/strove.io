@@ -139,7 +139,6 @@ const Projects = ({
         name: 'startCollaborationProject',
         mutation: START_COLLABORATION_PROJECT,
         variables: { projectId: id, teamId },
-        onSuccessDispatch: null,
       })
     )
   }
