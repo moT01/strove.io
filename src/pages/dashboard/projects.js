@@ -133,12 +133,12 @@ const Projects = ({
     }
   }
 
-  const handleJoinLiveshareClick = ({ id }) => {
+  const handleJoinLiveshareClick = ({ id, teamId }) => {
     dispatch(
       mutation({
         name: 'startCollaborationProject',
         mutation: START_COLLABORATION_PROJECT,
-        variables: { projectId: id, userId: user.id },
+        variables: { projectId: id, teamId },
         onSuccessDispatch: null,
       })
     )
@@ -436,6 +436,7 @@ const Projects = ({
                             onClick={() =>
                               handleJoinLiveshareClick({
                                 id: project.id,
+                                teamId: project.teamId,
                               })
                             }
                           >
