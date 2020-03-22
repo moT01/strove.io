@@ -133,14 +133,28 @@ const Projects = ({
     }
   }
 
-  const handleJoinLiveshareClick = ({ id, teamId }) => {
-    dispatch(
-      mutation({
-        name: 'startCollaborationProject',
-        mutation: START_COLLABORATION_PROJECT,
-        variables: { projectId: id, teamId },
-      })
-    )
+  const handleJoinLiveshareClick = ({ id, teamId, editorPort }) => {
+    if (!currentProjectId || currentProjectId === id) {
+      if (!editorPort) {
+        dispatch(
+          mutation({
+            name: 'startCollaborationProject',
+            mutation: START_COLLABORATION_PROJECT,
+            variables: { projectId: id, teamId },
+          })
+        )
+      } else {
+        dispatch(
+          actions.api.fetchSuccess({
+            data: { currentProjectId: id },
+            storeKey: 'user',
+          })
+        )
+        history.push('/app/editor/')
+      }
+    } else {
+      setStopModal(true)
+    }
   }
 
   const handleDeleteClick = id => {
@@ -432,12 +446,7 @@ const Projects = ({
                             maxWidth="150px"
                             margin="0 0 5px"
                             font-size="0.8rem"
-                            onClick={() =>
-                              handleJoinLiveshareClick({
-                                id: project.id,
-                                teamId: project.teamId,
-                              })
-                            }
+                            onClick={() => handleJoinLiveshareClick(project)}
                           >
                             <IconDescription>Join liveshare</IconDescription>
                             <ProjectActionIcon type="video-camera-outlined" />
