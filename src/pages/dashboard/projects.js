@@ -108,7 +108,8 @@ const Projects = ({
 
   const usersProjects = projects.filter(project => project.userId !== user.id)
 
-  const handleStartClick = ({ id, editorPort, teamId }) => {
+  const handleStartClick = ({ id, teamId }) => {
+    const editorPort = currentProject?.editorPort
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
         dispatch(

@@ -24,6 +24,7 @@ const Editor = ({
   onLoad,
   isEmbed,
   loaderVisible,
+  teamId
 }) => {
   const token = useSelector(selectors.getToken)
   const randomId = Math.random()

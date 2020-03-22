@@ -101,6 +101,7 @@ const EditorWrapper = ({ history }) => {
           isEmbed={isEmbed}
           loaderVisible={loaderVisible}
           projectId={projectId}
+          // teamId={teamId}
         />
       )}
     </>
