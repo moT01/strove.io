@@ -27,25 +27,12 @@ const LinkWrapper = styled.div`
   animation: ${FadeIn} 0.3s ease-out;
 `
 
-const StyledStandardLink = styled(Link)`
+const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.colors.c2};
   text-decoration: none;
   display: flex;
-  font-weight: 600;
+  font-weight: ${props => (props.isEditor ? '300' : '600')};
 `
-
-const StyledEditorLink = styled(StyledStandardLink)`
-  font-weight: 300;
-`
-
-// https://stackoverflow.com/questions/49834251/how-to-extend-styled-component-without-passing-props-to-underlying-dom-element
-const StyledLink = ({ theme, isEditor, isEmbed, isMobileOnly, ...props }) => {
-  if (isEditor) {
-    return <StyledEditorLink {...props} />
-  }
-
-  return <StyledStandardLink {...props} />
-}
 
 const LinkText = styled.div`
   color: ${({ theme }) => theme.colors.c2};
