@@ -38,7 +38,7 @@ export const Info = styled.div`
 `
 
 export const Illustration = styled.img`
-  margint: 0 0 0 10px;
+  margin: 0 0 0 10px;
   max-width: 520px;
 `
 
@@ -46,7 +46,6 @@ export const WelcomeWrapper = styled.div`
   padding: 20px;
   max-width: 1400px;
   background-color: ${({ theme }) => theme.colors.c2};
-  z-index: 3;
   display: flex;
   flex-direction: ${isMobileOnly ? 'column' : 'row'};
 `
