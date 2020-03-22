@@ -162,12 +162,7 @@ const Projects = ({
   return (
     <>
       <TilesWrapper>
-        {/* {projects && (
-          <ProjectTitle>
-            Projects count: {projects.length}/{projectsLimit}
-          </ProjectTitle>
-        )} */}
-        {displayedProjects?.map((project, index) => {
+        {displayedProjects?.map(project => {
           const isOwner = project.userId === user.id
           return (
             (project.isVisible || isOwner) && (
@@ -409,7 +404,7 @@ const Projects = ({
                           }
                         >
                           <IconDescription>Fork</IconDescription>
-                          <ProjectActionIcon type={'fork'} />
+                          <ProjectActionIcon type="fork" />
                         </StroveButton>
                         {isOwner &&
                           !project.forkedFromId &&
