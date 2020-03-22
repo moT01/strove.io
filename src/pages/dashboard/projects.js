@@ -4,7 +4,12 @@ import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
 import { mutation, handleStopProject, updateOrganizations } from 'utils'
-import { DELETE_PROJECT, CONTINUE_PROJECT, SET_VISIBILITY } from 'queries'
+import {
+  DELETE_PROJECT,
+  CONTINUE_PROJECT,
+  SET_VISIBILITY,
+  START_COLLABORATION_PROJECT,
+} from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 import StroveLogo from 'images/strove.png'
@@ -68,6 +73,8 @@ const Projects = ({
       : project
   )
 
+  const isDisabled = isDeleting || isContinuing || isStopping
+
   useEffect(() => {
     if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
       setWarningModal({
@@ -100,8 +107,6 @@ const Projects = ({
   }, [continueProjectError])
 
   const usersProjects = projects.filter(project => project.userId !== user.id)
-
-  const isLeader = isOwner
 
   const handleStartClick = ({ id, editorPort, teamId }) => {
     if (!currentProjectId || currentProjectId === id) {
@@ -252,7 +257,7 @@ const Projects = ({
                       !project.forkedFromId &&
                       (currentProjectId && currentProjectId === project.id ? (
                         <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
+                          isDisabled={isDisabled}
                           padding="3px 15px"
                           borderRadius="2px"
                           minWidth="150px"
@@ -268,7 +273,7 @@ const Projects = ({
                         </StroveButton>
                       ) : (
                         <StroveButton
-                          isDisabled={isDeleting || isContinuing || isStopping}
+                          isDisabled={isDisabled}
                           padding="3px 15px"
                           borderRadius="2px"
                           margin="0px 0px 5px 0px"
@@ -286,7 +291,7 @@ const Projects = ({
                       ))}
                     {isOwner && !project.forkedFromId && (
                       <StroveButton
-                        isDisabled={isDeleting || isContinuing || isStopping}
+                        isDisabled={isDisabled}
                         padding="3px 15px"
                         borderRadius="2px"
                         margin="0px 0px 5px 0px"
@@ -323,7 +328,7 @@ const Projects = ({
           )
         })}
 
-        {isLeader && usersProjects.length !== 0 && (
+        {isOwner && usersProjects.length !== 0 && (
           <>
             <StroveButton
               text="Teams' private projects"
@@ -384,7 +389,7 @@ const Projects = ({
                       <RightSection>
                         <StroveButton
                           to="/app/editor/"
-                          isDisabled={isDeleting || isContinuing || isStopping}
+                          isDisabled={isDisabled}
                           isPrimary
                           borderRadius="2px"
                           padding="3px 15px"
@@ -411,9 +416,7 @@ const Projects = ({
                           (currentProjectId &&
                           currentProjectId === project.id ? (
                             <StroveButton
-                              isDisabled={
-                                isDeleting || isContinuing || isStopping
-                              }
+                              isDisabled={isDisabled}
                               padding="3px 15px"
                               borderRadius="2px"
                               minWidth="150px"
@@ -429,9 +432,7 @@ const Projects = ({
                             </StroveButton>
                           ) : (
                             <StroveButton
-                              isDisabled={
-                                isDeleting || isContinuing || isStopping
-                              }
+                              isDisabled={isDisabled}
                               padding="3px 15px"
                               borderRadius="2px"
                               margin="0px 0px 5px 0px"
