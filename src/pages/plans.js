@@ -184,22 +184,21 @@ const emptyWarningModalContent = {
 
 const Plans = () => {
   const dispatch = useDispatch()
-  const user = useSelector(selectors.api.getUser)
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
-  const myOrganizations = useSelector(selectors.api.getMyOrganizations)
+  const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
   const [editMode, setEditMode] = useState()
   const [isPaying, setIsPaying] = useState(false)
   const [organization, setOrganization] = useState({})
   const [paymentInfo, setPaymentInfo] = useState()
   const [warningModal, setWarningModal] = useState(emptyWarningModalContent)
   const [subscriptionPlan, setSubscriptionPlan] = useState(subscriptionPlans[0])
-  const [quantity, setQuantity] = useState(organization?.team?.length || 1)
-  const organizationOptions = myOrganizations
-    .filter(organization => organization.owner.id === user.id)
-    .map(organization => ({
-      value: organization,
-      label: organization.name,
-    }))
+  const [quantity, setQuantity] = useState(
+    organization?.subscriptionQuantity || 1
+  )
+  const organizationOptions = ownedOrganizations.map(organization => ({
+    value: organization,
+    label: organization.name,
+  }))
 
   useEffect(() => {
     if (paymentStatus?.data?.paymentStatus?.status === 'success' && isPaying) {
@@ -257,6 +256,9 @@ const Plans = () => {
     )
     fetchPaymentInfo(organization)
     setQuantity(organization.value?.subscriptionQuantity)
+    console.log("Plans -> organization", organization)
+    console.log("Plans -> organization.value?.subscriptionQuantity", organization.value?.subscriptionQuantity)
+    console.log("Plans -> organization.value?.subscriptionQuantity", quantity)
 
     setSubscriptionPlan(subscriptionPlans[planIndex !== -1 ? planIndex : 0])
     /* eslint-disable-next-line */
