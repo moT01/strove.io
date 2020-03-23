@@ -65,13 +65,10 @@ const Projects = ({
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   // This code filters other users' and already forked projects
-  const displayedProjects = sortByActiveProjects(projects).map(project =>
-    projects
-      .filter(project => project.userId === user.id)
-      .findIndex(x => x.name === project.name) !== -1
-      ? project.userId === user.id && project
-      : project
-  )
+  const displayedProjects = sortByActiveProjects(projects)
+  // .map(project =>
+  //   projects.filter(project => project.userId === user.id).findIndex(x => x.name === project.name) !== -1 ? project.userId === user.id && project : project
+  // )
 
   const isDisabled = isDeleting || isContinuing || isStopping
 
@@ -352,6 +349,23 @@ const Projects = ({
                         />
                       </StroveButton>
                     )}
+                    {project.editorPort && (
+                      <StroveButton
+                        to="/app/editor/"
+                        isDisabled={isDisabled}
+                        isPrimary
+                        borderRadius="2px"
+                        padding="3px 15px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="0 0 5px"
+                        font-size="0.8rem"
+                        onClick={() => handleJoinLiveshareClick(project)}
+                      >
+                        <IconDescription>Join liveshare</IconDescription>
+                        <ProjectActionIcon type="video-camera-outlined" />
+                      </StroveButton>
+                    )}
                   </RightSection>
                 </VerticalDivider>
               </ProjectsTile>
@@ -418,7 +432,7 @@ const Projects = ({
                         </TextWrapper>
                       </InfoWrapper>
                       <RightSection>
-                        {/* <StroveButton
+                        <StroveButton
                           to="/app/editor/"
                           isDisabled={isDisabled}
                           isPrimary
@@ -458,7 +472,7 @@ const Projects = ({
                             <IconDescription>Join liveshare</IconDescription>
                             <ProjectActionIcon type="video-camera-outlined" />
                           </StroveButton>
-                        )}*/}
+                        )}
                         {/* {isOwner &&
                           !project.forkedFromId &&
                           (currentProjectId &&
