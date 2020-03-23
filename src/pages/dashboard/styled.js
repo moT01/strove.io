@@ -4,7 +4,8 @@ import { isMobileOnly } from 'react-device-detect'
 import { Form } from 'formik'
 import Select from 'react-select'
 
-import { StroveButton } from 'components'
+/* This breaks in prod for some reason */
+import StroveButton from '../../components/stroveButton.js'
 
 export const FullFadeIn = keyframes`
   0% {
