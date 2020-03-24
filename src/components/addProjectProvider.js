@@ -32,6 +32,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const isJoiningLiveshare = useSelector(
     selectors.incomingProject.getIsLiveshare
   )
+
+  console.log('isJoiningLiveshare', isJoiningLiveshare)
   const isStartingCollaborationProject = useSelector(
     selectors.api.getLoading('startCollaborationProject')
   )

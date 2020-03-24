@@ -293,6 +293,24 @@ const Projects = ({
                       </StroveButton>
                     )}
 
+                    {project.editorPort && !isProjectOwner && (
+                      <StroveButton
+                        to="/app/editor/"
+                        isDisabled={isDisabled}
+                        isPrimary
+                        borderRadius="2px"
+                        padding="3px 15px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="0 0 5px"
+                        font-size="0.8rem"
+                        onClick={() => handleJoinLiveshareClick(project)}
+                      >
+                        <IconDescription>Join liveshare</IconDescription>
+                        <ProjectActionIcon type="video-camera-fill" />
+                      </StroveButton>
+                    )}
+
                     {isProjectOwner &&
                       !project.forkedFromId &&
                       (currentProjectId && currentProjectId === project.id ? (
@@ -389,23 +407,6 @@ const Projects = ({
                           />
                         </StroveButton>
                       )}
-                    {project.editorPort && !isProjectOwner && (
-                      <StroveButton
-                        to="/app/editor/"
-                        isDisabled={isDisabled}
-                        isPrimary
-                        borderRadius="2px"
-                        padding="3px 15px"
-                        minWidth="150px"
-                        maxWidth="150px"
-                        margin="0 0 5px"
-                        font-size="0.8rem"
-                        onClick={() => handleJoinLiveshareClick(project)}
-                      >
-                        <IconDescription>Join liveshare</IconDescription>
-                        <ProjectActionIcon type="video-camera-fill" />
-                      </StroveButton>
-                    )}
                   </RightSection>
                 </VerticalDivider>
               </ProjectsTile>
@@ -472,6 +473,23 @@ const Projects = ({
                         </TextWrapper>
                       </InfoWrapper>
                       <RightSection>
+                        {project.editorPort && (
+                          <StroveButton
+                            to="/app/editor/"
+                            isDisabled={isDisabled}
+                            isPrimary
+                            borderRadius="2px"
+                            padding="3px 15px"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            margin="0 0 5px"
+                            font-size="0.8rem"
+                            onClick={() => handleJoinLiveshareClick(project)}
+                          >
+                            <IconDescription>Join liveshare</IconDescription>
+                            <ProjectActionIcon type="video-camera-outlined" />
+                          </StroveButton>
+                        )}
                         <StroveButton
                           to="/app/editor/"
                           isDisabled={isDisabled}
@@ -494,23 +512,6 @@ const Projects = ({
                           <IconDescription>Fork</IconDescription>
                           <ProjectActionIcon type="fork" />
                         </StroveButton>
-                        {project.editorPort && (
-                          <StroveButton
-                            to="/app/editor/"
-                            isDisabled={isDisabled}
-                            isPrimary
-                            borderRadius="2px"
-                            padding="3px 15px"
-                            minWidth="150px"
-                            maxWidth="150px"
-                            margin="0 0 5px"
-                            font-size="0.8rem"
-                            onClick={() => handleJoinLiveshareClick(project)}
-                          >
-                            <IconDescription>Join liveshare</IconDescription>
-                            <ProjectActionIcon type="video-camera-outlined" />
-                          </StroveButton>
-                        )}
                         {(isOwner || isOrganizationOwner) && (
                           <StroveButton
                             isDisabled={isDisabled}
