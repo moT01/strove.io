@@ -92,8 +92,6 @@ export const getCurrentTeam = createSelector(
   getCurrentProject,
   getMyTeams,
   (project, teams) => {
-    console.log('TCL: teams', teams)
-    console.log('TCL: project', project)
     return teams.find(team => team.id === project.teamId)
   }
 )

@@ -882,7 +882,6 @@ const Dashboard = ({ history }) => {
           }}
           validate={validateTeamName}
           onSubmit={values => {
-            console.log('Stuff', editedOrganization)
             if (editMode === 'Rename team') {
               renameTeam({ newName: values.name, teamId: editedTeam.id })
             } else {

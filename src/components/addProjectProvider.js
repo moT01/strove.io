@@ -33,7 +33,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     selectors.incomingProject.getIsLiveshare
   )
 
-  console.log('isJoiningLiveshare', isJoiningLiveshare)
   const isStartingCollaborationProject = useSelector(
     selectors.api.getLoading('startCollaborationProject')
   )
@@ -101,7 +100,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       (existingProject && !currentProject) ||
       (existingProject && existingProject === currentProject)
     ) {
-      console.log('Continue project dispatched')
       return dispatch(
         mutation({
           name: 'continueProject',
