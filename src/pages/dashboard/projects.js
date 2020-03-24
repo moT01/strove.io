@@ -158,27 +158,13 @@ const Projects = ({
   }
 
   const handleStopLiveshareClick = ({ project }) => {
-    if (!currentProjectId || currentProjectId === project.id) {
-      if (!currentProject.editorPort) {
-        dispatch(
-          mutation({
-            name: 'stopCollaborationProject',
-            mutation: STOP_COLLABORATION_PROJECT,
-            variables: { projectId: project.id },
-          })
-        )
-      } else {
-        dispatch(
-          actions.api.fetchSuccess({
-            data: { currentProjectId: project.id },
-            storeKey: 'user',
-          })
-        )
-        history.push('/app/editor/')
-      }
-    } else {
-      setStopModal(true)
-    }
+    dispatch(
+      mutation({
+        name: 'stopCollaborationProject',
+        mutation: STOP_COLLABORATION_PROJECT,
+        variables: { projectId: project.id },
+      })
+    )
   }
 
   const handleDeleteClick = id => {
@@ -319,7 +305,9 @@ const Projects = ({
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
                           onClick={() => {
-                            handleStopClick(project.id)
+                            project.startedCollaborationFromId
+                              ? handleStopLiveshareClick({ project })
+                              : handleStopClick(project.id)
                           }}
                         >
                           <IconDescription>Stop</IconDescription>
