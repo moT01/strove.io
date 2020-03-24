@@ -516,7 +516,11 @@ const Dashboard = ({ history }) => {
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
-    dispatch(actions.editedOrganization.setEditedOrganization({organziation: organizationsObj[organizationId]}))
+    dispatch(
+      actions.editedOrganization.setEditedOrganization({
+        organization: organizationsObj[organizationId],
+      })
+    )
     setRenameTeamModal(true)
   }
 
@@ -530,7 +534,7 @@ const Dashboard = ({ history }) => {
           setRenameTeamModal(false)
           updateExpandedTiles(data)
         },
-        onSuccessDispatch: updateOrganizations,
+        onSuccessDispatch: [updateOrganizations, actions.editedOrganization.resetEditedOrganization],
       })
     )
   }
@@ -872,6 +876,7 @@ const Dashboard = ({ history }) => {
           }}
           validate={validateTeamName}
           onSubmit={values => {
+            console.log('Stuff', editedOrganization)
             if (editMode === 'Rename team') {
               renameTeam({ newName: values.name, teamId: editedTeam.id })
             } else {
