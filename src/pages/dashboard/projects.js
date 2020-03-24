@@ -157,7 +157,13 @@ const Projects = ({
         name: 'stopCollaborationProject',
         mutation: STOP_COLLABORATION_PROJECT,
         variables: { projectId: project.id },
-        onSuccessDispatch: updateOrganizations,
+        onSuccessDispatch: [
+          updateOrganizations,
+          () => ({
+            type: actions.api.C.FETCH_SUCCESS,
+            storeKey: 'stopCollaborationProject',
+          }),
+        ],
       })
     )
   }
