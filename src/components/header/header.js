@@ -49,7 +49,7 @@ const Header = () => {
         {tabs.map((Component, i) => (
           <Component {...locProps} key={i} />
         ))}
-        <ActiveUsers />
+        {isEditor && <ActiveUsers />}
       </HeaderWrapper>
       <LatencyIndicator {...locProps} />
       <PoweredByStroveLink />
