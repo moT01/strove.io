@@ -394,7 +394,7 @@ const Projects = ({
                         onClick={() => handleJoinLiveshareClick(project)}
                       >
                         <IconDescription>Join liveshare</IconDescription>
-                        <ProjectActionIcon type="video-camera-outlined" />
+                        <ProjectActionIcon type="video-camera-fill" />
                       </StroveButton>
                     )}
                   </RightSection>
