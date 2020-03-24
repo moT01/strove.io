@@ -47,6 +47,7 @@ const Projects = ({
   addProject,
   setWarningModal,
   isOwner,
+  isOrganizationOwner,
 }) => {
   const dispatch = useDispatch()
   const user = useSelector(selectors.api.getUser)
@@ -202,7 +203,6 @@ const Projects = ({
     <>
       <TilesWrapper>
         {displayedProjects?.map(project => {
-          console.log('TCL: project', project)
           const isProjectOwner = project.userId === user.id
           return (
             (project.isVisible || isProjectOwner) && (
@@ -331,6 +331,28 @@ const Projects = ({
                           <ProjectActionIcon type="delete" />
                         </StroveButton>
                       ))}
+                      {!isProjectOwner && <StroveButton
+                          to="/app/editor/"
+                          isDisabled={isDisabled}
+                          isPrimary
+                          borderRadius="2px"
+                          padding="3px 15px"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          margin="0 0 5px"
+                          font-size="0.8rem"
+                          onClick={() =>
+                            addProject({
+                              link: project.repoLink,
+                              name: project.name,
+                              teamId: project.teamId,
+                              forkedFromId: project.id,
+                            })
+                          }
+                        >
+                          <IconDescription>Fork</IconDescription>
+                          <ProjectActionIcon type="fork" />
+                        </StroveButton>}
                     {isProjectOwner &&
                       !project.forkedFromId &&
                       !project.startedCollaborationFromId && (
@@ -389,7 +411,7 @@ const Projects = ({
           )
         })}
 
-        {isOwner && usersProjects.length !== 0 && (
+        {(isOwner || isOrganizationOwner) && usersProjects.length !== 0 && (
           <>
             <StroveButton
               text="Teams' private projects"
@@ -487,43 +509,24 @@ const Projects = ({
                             <ProjectActionIcon type="video-camera-outlined" />
                           </StroveButton>
                         )}
-                        {/* {isOwner &&
-                          !project.forkedFromId &&
-                          (currentProjectId &&
-                          currentProjectId === project.id ? (
-                            <StroveButton
-                              isDisabled={isDisabled}
-                              padding="3px 15px"
-                              borderRadius="2px"
-                              minWidth="150px"
-                              maxWidth="150px"
-                              margin="0px 0px 5px 0px"
-                              font-size="0.8rem"
-                              onClick={() => {
-                                handleStopClick(project.id)
-                              }}
-                            >
-                              <IconDescription>Stop</IconDescription>
-                              <ProjectActionIcon type="pause-circle" />
-                            </StroveButton>
-                          ) : (
-                            <StroveButton
-                              isDisabled={isDisabled}
-                              padding="3px 15px"
-                              borderRadius="2px"
-                              margin="0px 0px 5px 0px"
-                              font-size="0.8rem"
-                              minWidth="150px"
-                              maxWidth="150px"
-                              onClick={() => {
-                                setModalVisible(true)
-                                setProjectToDelete(project)
-                              }}
-                            >
-                              <IconDescription>Delete</IconDescription>
-                              <ProjectActionIcon type="delete" />
-                            </StroveButton>
-                          ))} */}
+                        {(isOwner || isOrganizationOwner) && (
+                          <StroveButton
+                            isDisabled={isDisabled}
+                            padding="3px 15px"
+                            borderRadius="2px"
+                            margin="0px 0px 5px 0px"
+                            font-size="0.8rem"
+                            minWidth="150px"
+                            maxWidth="150px"
+                            onClick={() => {
+                              setModalVisible(true)
+                              setProjectToDelete(project)
+                            }}
+                          >
+                            <IconDescription>Delete</IconDescription>
+                            <ProjectActionIcon type="delete" />
+                          </StroveButton>
+                        )}
                       </RightSection>
                     </VerticalDivider>
                   </ProjectsTile>
@@ -596,6 +599,7 @@ export default memo(
     setWarningModal,
     organizationsObj,
     isOwner,
+    isOrganizationOwner,
   }) => (
     <AddProjectProvider organization={organization}>
       {({ addProject }) => (
@@ -607,6 +611,7 @@ export default memo(
           setWarningModal={setWarningModal}
           organizationsObj={organizationsObj}
           isOwner={isOwner}
+          isOrganizationOwner={isOrganizationOwner}
         />
       )}
     </AddProjectProvider>

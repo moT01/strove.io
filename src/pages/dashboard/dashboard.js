@@ -477,6 +477,7 @@ const Dashboard = ({ history }) => {
                                       setWarningModal={setWarningModal}
                                       organizationsObj={organizationsObj}
                                       isOwner={isOwner}
+                                      isOrganizationOwner={isOrganizationOwner}
                                     />
                                     <StroveButton
                                       isPrimary
