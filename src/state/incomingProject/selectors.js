@@ -8,6 +8,8 @@ export const getRepoLink = getOr(null, ['incomingProject', 'repoLink'])
 
 export const getRepoName = getOr(null, ['incomingProject', 'name'])
 
+export const getIsLiveshare = getOr(null, ['incomingProject', 'isLiveshare'])
+
 export const isProjectBeingStarted = getOr(false, [
   'incomingProject',
   'isBeingStarted',
