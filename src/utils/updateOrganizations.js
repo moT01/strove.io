@@ -18,6 +18,7 @@ export default ({ onSuccess = () => null } = {}) => dispatch => {
         query: MY_ORGANIZATIONS,
         fetchPolicy: 'network-only',
         onSuccess: data => onSuccess(data),
+        allowRepeated: false,
       })
     )
   }
