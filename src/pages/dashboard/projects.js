@@ -164,6 +164,7 @@ const Projects = ({
         name: 'stopCollaborationProject',
         mutation: STOP_COLLABORATION_PROJECT,
         variables: { projectId: project.id },
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
@@ -331,28 +332,30 @@ const Projects = ({
                           <ProjectActionIcon type="delete" />
                         </StroveButton>
                       ))}
-                      {!isProjectOwner && <StroveButton
-                          to="/app/editor/"
-                          isDisabled={isDisabled}
-                          isPrimary
-                          borderRadius="2px"
-                          padding="3px 15px"
-                          minWidth="150px"
-                          maxWidth="150px"
-                          margin="0 0 5px"
-                          font-size="0.8rem"
-                          onClick={() =>
-                            addProject({
-                              link: project.repoLink,
-                              name: project.name,
-                              teamId: project.teamId,
-                              forkedFromId: project.id,
-                            })
-                          }
-                        >
-                          <IconDescription>Fork</IconDescription>
-                          <ProjectActionIcon type="fork" />
-                        </StroveButton>}
+                    {!isProjectOwner && (
+                      <StroveButton
+                        to="/app/editor/"
+                        isDisabled={isDisabled}
+                        isPrimary
+                        borderRadius="2px"
+                        padding="3px 15px"
+                        minWidth="150px"
+                        maxWidth="150px"
+                        margin="0 0 5px"
+                        font-size="0.8rem"
+                        onClick={() =>
+                          addProject({
+                            link: project.repoLink,
+                            name: project.name,
+                            teamId: project.teamId,
+                            forkedFromId: project.id,
+                          })
+                        }
+                      >
+                        <IconDescription>Fork</IconDescription>
+                        <ProjectActionIcon type="fork" />
+                      </StroveButton>
+                    )}
                     {isProjectOwner &&
                       !project.forkedFromId &&
                       !project.startedCollaborationFromId && (
