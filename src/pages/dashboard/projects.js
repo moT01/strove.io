@@ -399,7 +399,7 @@ const Projects = ({
                           }}
                         >
                           <IconDescription>
-                            {project.isVisible ? 'Hide' : 'Show'}
+                            {project.isVisible ? 'Make private' : 'Make public'}
                           </IconDescription>
                           <ProjectActionIcon
                             type={project.isVisible ? 'lock' : 'share-alt'}
