@@ -267,20 +267,29 @@ const Dashboard = ({ history }) => {
                               <Divider>
                                 <VerticalDivider columnOnMobile>
                                   <Title>{team.name}</Title>
-                                  {isExpanded &&
-                                    (isOwner || isOrganizationOwner) && (
-                                      <StroveButton
-                                        isPrimary
-                                        padding="5px"
-                                        width="150px"
-                                        margin="10px"
-                                        borderRadius="2px"
-                                        onClick={() =>
-                                          handleAddMemberClick(team)
-                                        }
-                                        text="Add member"
-                                      />
-                                    )}
+                                  <StroveButton
+                                    isPrimary
+                                    padding="5px"
+                                    width="150px"
+                                    margin="10px"
+                                    borderRadius="2px"
+                                    text="Add Project"
+                                    onClick={() => {
+                                      setEditedOrganization({ team })
+                                      setAddProjectModal(true)
+                                    }}
+                                  />
+                                  {(isOwner || isOrganizationOwner) && (
+                                    <StroveButton
+                                      isPrimary
+                                      padding="5px"
+                                      width="150px"
+                                      margin="10px"
+                                      borderRadius="2px"
+                                      onClick={() => handleAddMemberClick(team)}
+                                      text="Add member"
+                                    />
+                                  )}
 
                                   <StroveButton
                                     isPrimary
@@ -296,45 +305,42 @@ const Dashboard = ({ history }) => {
                                     text="Add new team"
                                   />
 
-                                  {isExpanded &&
-                                    (isOwner || isOrganizationOwner ? (
-                                      <StroveButton
-                                        isDashboard
-                                        padding="5px"
-                                        minWidth="150px"
-                                        maxWidth="150px"
-                                        borderRadius="2px"
-                                        margin="10px"
-                                        text="Settings"
-                                        onClick={() => {
-                                          handleSettingsClick(team)
-                                          dispatch(
-                                            actions.editedOrganization.setEditedOrganization(
-                                              {
-                                                organization:
-                                                  organizationsObj[
-                                                    team.organizationId
-                                                  ],
-                                                team,
-                                              }
-                                            )
+                                  {isOwner || isOrganizationOwner ? (
+                                    <StroveButton
+                                      isDashboard
+                                      padding="5px"
+                                      width="150px"
+                                      borderRadius="2px"
+                                      margin="10px"
+                                      text="Settings"
+                                      onClick={() => {
+                                        handleSettingsClick(team)
+                                        dispatch(
+                                          actions.editedOrganization.setEditedOrganization(
+                                            {
+                                              organization:
+                                                organizationsObj[
+                                                  team.organizationId
+                                                ],
+                                              team,
+                                            }
                                           )
-                                        }}
-                                      />
-                                    ) : (
-                                      <StroveButton
-                                        isPrimary
-                                        padding="5px"
-                                        minWidth="150px"
-                                        maxWidth="150px"
-                                        borderRadius="2px"
-                                        onClick={() => {
-                                          setEditedOrganization({ team })
-                                          handleLeaveClick(team)
-                                        }}
-                                        text="Leave"
-                                      />
-                                    ))}
+                                        )
+                                      }}
+                                    />
+                                  ) : (
+                                    <StroveButton
+                                      isPrimary
+                                      padding="5px"
+                                      width="150px"
+                                      borderRadius="2px"
+                                      onClick={() => {
+                                        setEditedOrganization({ team })
+                                        handleLeaveClick(team)
+                                      }}
+                                      text="Leave"
+                                    />
+                                  )}
                                 </VerticalDivider>
                                 {myOrganizations?.length > 1 && (
                                   <IconWrapper
@@ -492,19 +498,6 @@ const Dashboard = ({ history }) => {
                                       organizationsObj={organizationsObj}
                                       isOwner={isOwner}
                                       isOrganizationOwner={isOrganizationOwner}
-                                    />
-                                    <StroveButton
-                                      isPrimary
-                                      padding="5px"
-                                      minWidth="150px"
-                                      maxWidth="150px"
-                                      margin="10px"
-                                      borderRadius="2px"
-                                      text="Add Project"
-                                      onClick={() => {
-                                        setEditedOrganization({ team })
-                                        setAddProjectModal(true)
-                                      }}
                                     />
                                   </TeamTileSection>
                                 )}
