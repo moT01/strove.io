@@ -24,7 +24,6 @@ export default (state = initialState, action) => {
     }
 
     case C.SET_PROJECT_IS_BEING_STARTED: {
-      const { isLiveshare } = action
       return {
         ...state,
         isBeingStarted: true,
