@@ -9,6 +9,7 @@ import DashboardLink from './dashboardLink'
 import HomeLink from './homeLink'
 import DocsLink from './docsLink'
 import PoweredByStroveLink from './poweredByStroveLink'
+import ActiveUsers from './activeUsers'
 import { getWindowPathName } from 'utils'
 
 const HeaderSection = styled.div`
@@ -48,6 +49,7 @@ const Header = () => {
         {tabs.map((Component, i) => (
           <Component {...locProps} key={i} />
         ))}
+        <ActiveUsers />
       </HeaderWrapper>
       <LatencyIndicator {...locProps} />
       <PoweredByStroveLink />
