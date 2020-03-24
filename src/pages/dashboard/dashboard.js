@@ -516,9 +516,7 @@ const Dashboard = ({ history }) => {
 
   const handleCreateTeamClick = ({ organizationId }) => {
     setEditMode('Create team')
-    setEditedOrganization({
-      organization: organizationsObj[organizationId],
-    })
+    dispatch(actions.editedOrganization.setEditedOrganization({organziation: organizationsObj[organizationId]}))
     setRenameTeamModal(true)
   }
 
@@ -532,7 +530,7 @@ const Dashboard = ({ history }) => {
           setRenameTeamModal(false)
           updateExpandedTiles(data)
         },
-        onSuccessDispatch: updateOrganizations,
+        onSuccessDispatch: [updateOrganizations, actions.editedOrganization.resetEditedOrganization],
       })
     )
   }
