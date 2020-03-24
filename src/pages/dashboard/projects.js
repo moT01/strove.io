@@ -108,7 +108,6 @@ const Projects = ({
   const usersProjects = projects.filter(project => project.userId !== user.id)
 
   const handleStartClick = ({ id, teamId }) => {
-    const currentEditorPort = currentProject?.editorPort
     if (!currentProjectId) {
       return dispatch(
         mutation({
@@ -127,11 +126,9 @@ const Projects = ({
   }
 
   const handleJoinLiveshareClick = ({ id, teamId }) => {
-    const editorPort = currentProject?.editorPort
     const startedCollaborationFromId =
       currentProject?.startedCollaborationFromId
 
-    const currentEditorPort = currentProject?.editorPort
     if (!currentProjectId) {
       dispatch(
         actions.incomingProject.setProjectIsBeingAdded({
