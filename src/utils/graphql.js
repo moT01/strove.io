@@ -46,7 +46,7 @@ export const mutation = ({
   onErrorDispatch,
   dataSelector = data => data[name],
   client = defaultClient,
-  allowRepeated = false,
+  allowRepeated = true,
 }) => {
   return async dispatch => {
     if (getLoading(name)(store.getState()) && !allowRepeated) {
@@ -251,7 +251,7 @@ export const query = ({
   onErrorDispatch,
   dataSelector = data => data[name],
   client = defaultClient,
-  allowRepeated = false,
+  allowRepeated = true,
 }) => {
   return async dispatch => {
     if (getLoading(name)(store.getState()) && !allowRepeated) {
