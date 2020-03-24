@@ -530,7 +530,7 @@ const Dashboard = ({ history }) => {
           setRenameTeamModal(false)
           updateExpandedTiles(data)
         },
-        onSuccessDispatch: [updateOrganizations, actions.editedOrganization.resetEditedOrganization],
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
