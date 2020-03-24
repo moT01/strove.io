@@ -6,9 +6,8 @@ import { useSelector } from 'react-redux'
 import { selectors } from 'state'
 
 const UserPhoto = styled.img`
-  width: 15px;
-  height: 15px;
-  border-radius: 1px;
+  width: ${isMobileOnly ? '15px' : '20px'};
+  height: ${isMobileOnly ? '15px' : '20px'};
   margin: 0;
 `
 
@@ -21,8 +20,7 @@ const UserPhotoContainer = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 300px;
-  height: 15px;
+  height: 100%;
   justify-content: flex-start;
   align-items: center;
 `
