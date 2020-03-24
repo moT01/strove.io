@@ -109,53 +109,43 @@ const Projects = ({
 
   const handleStartClick = ({ id, teamId }) => {
     const currentEditorPort = currentProject?.editorPort
-    if (!currentProjectId || currentProjectId === id) {
-      if (!currentEditorPort) {
-        dispatch(
-          mutation({
-            name: 'continueProject',
-            mutation: CONTINUE_PROJECT,
-            variables: { projectId: id, teamId },
-            onSuccessDispatch: null,
-          })
-        )
-      } else {
-        dispatch(
-          actions.api.fetchSuccess({
-            data: { currentProjectId: id },
-            storeKey: 'user',
-          })
-        )
-        history.push('/app/editor/')
-      }
-    } else {
-      setStopModal(true)
+    if (!currentProjectId) {
+      return dispatch(
+        mutation({
+          name: 'continueProject',
+          mutation: CONTINUE_PROJECT,
+          variables: { projectId: id, teamId },
+          onSuccessDispatch: null,
+        })
+      )
     }
+
+    if (currentProjectId === id) {
+      return history.push('/app/editor/')
+    }
+    return setStopModal(true)
   }
 
   const handleJoinLiveshareClick = ({ id, teamId }) => {
     const editorPort = currentProject?.editorPort
-    if (!currentProjectId || currentProjectId === id) {
-      if (!editorPort) {
-        dispatch(
-          mutation({
-            name: 'startCollaborationProject',
-            mutation: START_COLLABORATION_PROJECT,
-            variables: { projectId: id, teamId },
-          })
-        )
-      } else {
-        dispatch(
-          actions.api.fetchSuccess({
-            data: { currentProjectId: id },
-            storeKey: 'user',
-          })
-        )
-        history.push('/app/editor/')
-      }
-    } else {
-      setStopModal(true)
+    const startedCollaborationFromId =
+      currentProject?.startedCollaborationFromId
+
+    const currentEditorPort = currentProject?.editorPort
+    if (!currentProjectId) {
+      return dispatch(
+        mutation({
+          name: 'startCollaborationProject',
+          mutation: START_COLLABORATION_PROJECT,
+          variables: { projectId: id, teamId },
+        })
+      )
     }
+
+    if (currentProjectId === id || startedCollaborationFromId === id) {
+      return history.push('/app/editor/')
+    }
+    return setStopModal(true)
   }
 
   const handleStopLiveshareClick = ({ project }) => {
