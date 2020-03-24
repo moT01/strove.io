@@ -140,6 +140,9 @@ const StroveButton = props => {
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
+  const isStoppingLiveshare = useSelector(
+    selectors.api.getLoading('stopCollaborationProject')
+  )
 
   return props.layout === 'form' && !isMobileOnly ? (
     <FormButton mobile={isMobileOnly} {...props}>
@@ -174,7 +177,12 @@ const StroveButton = props => {
     </Button>
   ) : props.isLink ? (
     <LinkButton
-      disabled={isLoading || props.isDisabled || props.isProcessing}
+      disabled={
+        isLoading ||
+        props.isDisabled ||
+        props.isProcessing ||
+        isStoppingLiveshare
+      }
       primary={props.isPrimary}
       mobile={isMobileOnly}
       onClick={event => {
@@ -192,6 +200,7 @@ const StroveButton = props => {
       isDeleting ||
       isContinuing ||
       isStopping ||
+      isStoppingLiveshare ||
       props.isProcessing ? (
         <FullScreenLoader
           isFullScreen={false}
@@ -228,7 +237,12 @@ const StroveButton = props => {
     </Button>
   ) : (
     <Button
-      disabled={isLoading || props.isDisabled || props.isProcessing}
+      disabled={
+        isLoading ||
+        props.isDisabled ||
+        props.isProcessing ||
+        isStoppingLiveshare
+      }
       primary={props.isPrimary}
       mobile={isMobileOnly}
       onClick={event => {
@@ -247,6 +261,7 @@ const StroveButton = props => {
       isDeleting ||
       isContinuing ||
       isStopping ||
+      isStoppingLiveshare ||
       props.isProcessing ? (
         <FullScreenLoader
           isFullScreen={false}

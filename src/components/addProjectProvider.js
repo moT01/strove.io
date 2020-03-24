@@ -44,7 +44,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
-  const projectsLimit = 20
+  /* Decide what to do about the projects limit */
+  const projectsLimit = 2000000
   const timeExceeded = user?.timeSpent >= 72000000
   const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
