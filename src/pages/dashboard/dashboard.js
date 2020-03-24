@@ -93,14 +93,12 @@ const Dashboard = ({ history }) => {
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
-  const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const editedOrganization = useSelector(
     selectors.editedOrganization.getEditedOrganization
   )
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
   const [stopModal, setStopModal] = useState(false)
   // const [time, setTime] = useState({ hours: '0', minutes: '0', seconds: '' })
-  const [addMemberEmail, setAddMemberEmail] = useState(false)
   const [addMemberModal, setAddMemberModal] = useState(false)
   const [renameTeamModal, setRenameTeamModal] = useState(false)
   const [addProjectModal, setAddProjectModal] = useState(false)
