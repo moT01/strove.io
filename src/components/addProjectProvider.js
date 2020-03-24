@@ -95,6 +95,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       (existingProject && !currentProject) ||
       (existingProject && existingProject === currentProject)
     ) {
+      console.log('Continue project dispatched')
       return dispatch(
         mutation({
           name: 'continueProject',
@@ -211,7 +212,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       )}
       {isJoiningLiveshare && (
         <FullScreenLoader
-        type="addingCollaborationProject"
+          type="addingCollaborationProject"
           isFullScreen
           color="#0072ce"
           queuePosition={queuePosition}
