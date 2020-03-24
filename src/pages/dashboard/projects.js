@@ -216,6 +216,7 @@ const Projects = ({
     <>
       <TilesWrapper>
         {displayedProjects?.map(project => {
+          console.log('TCL: project', project)
           const isProjectOwner = project.userId === user.id
           return (
             (project.isVisible || isProjectOwner) && (
@@ -342,38 +343,40 @@ const Projects = ({
                           <ProjectActionIcon type="delete" />
                         </StroveButton>
                       ))}
-                    {isProjectOwner && !project.forkedFromId && (
-                      <StroveButton
-                        isDisabled={isDisabled}
-                        padding="3px 15px"
-                        borderRadius="2px"
-                        margin="0px 0px 5px 0px"
-                        font-size="0.8rem"
-                        minWidth="150px"
-                        maxWidth="150px"
-                        onClick={() => {
-                          dispatch(
-                            mutation({
-                              name: 'setVisibility',
-                              mutation: SET_VISIBILITY,
-                              variables: {
-                                projectId: project.id,
-                                isVisible: !project.isVisible,
-                              },
-                              dataSelector: data => data,
-                              onSuccessDispatch: updateOrganizations,
-                            })
-                          )
-                        }}
-                      >
-                        <IconDescription>
-                          {project.isVisible ? 'Hide' : 'Show'}
-                        </IconDescription>
-                        <ProjectActionIcon
-                          type={project.isVisible ? 'lock' : 'share-alt'}
-                        />
-                      </StroveButton>
-                    )}
+                    {isProjectOwner &&
+                      !project.forkedFromId &&
+                      !project.startedCollaborationFromId && (
+                        <StroveButton
+                          isDisabled={isDisabled}
+                          padding="3px 15px"
+                          borderRadius="2px"
+                          margin="0px 0px 5px 0px"
+                          font-size="0.8rem"
+                          minWidth="150px"
+                          maxWidth="150px"
+                          onClick={() => {
+                            dispatch(
+                              mutation({
+                                name: 'setVisibility',
+                                mutation: SET_VISIBILITY,
+                                variables: {
+                                  projectId: project.id,
+                                  isVisible: !project.isVisible,
+                                },
+                                dataSelector: data => data,
+                                onSuccessDispatch: updateOrganizations,
+                              })
+                            )
+                          }}
+                        >
+                          <IconDescription>
+                            {project.isVisible ? 'Hide' : 'Show'}
+                          </IconDescription>
+                          <ProjectActionIcon
+                            type={project.isVisible ? 'lock' : 'share-alt'}
+                          />
+                        </StroveButton>
+                      )}
                     {project.editorPort && !isProjectOwner && (
                       <StroveButton
                         to="/app/editor/"
