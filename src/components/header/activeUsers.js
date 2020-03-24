@@ -15,6 +15,7 @@ const UserPhotoContainer = styled.div`
   height: 100%;
   width: auto;
   margin-left: 2px;
+  max-width: 300px;
 `
 
 const Wrapper = styled.div`
@@ -35,7 +36,7 @@ const ActiveUsers = () => {
   return (
     <Wrapper>
       {activeUsers?.map(user => (
-        <UserPhotoContainer key={user.name}>
+        <UserPhotoContainer key={user.name} title={user.name}>
           <UserPhoto src={user.photoUrl} />
         </UserPhotoContainer>
       ))}
