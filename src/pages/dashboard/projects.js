@@ -9,6 +9,7 @@ import {
   CONTINUE_PROJECT,
   SET_VISIBILITY,
   START_COLLABORATION_PROJECT,
+  STOP_COLLABORATION_PROJECT,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
@@ -106,10 +107,9 @@ const Projects = ({
   const usersProjects = projects.filter(project => project.userId !== user.id)
 
   const handleStartClick = ({ id, teamId }) => {
-    const editorPort = currentProject?.editorPort
+    const currentEditorPort = currentProject?.editorPort
     if (!currentProjectId || currentProjectId === id) {
-      if (!editorPort) {
-        console.log('Console log in projects dispatched')
+      if (!currentEditorPort) {
         dispatch(
           mutation({
             name: 'continueProject',
@@ -147,6 +147,30 @@ const Projects = ({
         dispatch(
           actions.api.fetchSuccess({
             data: { currentProjectId: id },
+            storeKey: 'user',
+          })
+        )
+        history.push('/app/editor/')
+      }
+    } else {
+      setStopModal(true)
+    }
+  }
+
+  const handleStopLiveshareClick = ({ project }) => {
+    if (!currentProjectId || currentProjectId === project.id) {
+      if (!currentProject.editorPort) {
+        dispatch(
+          mutation({
+            name: 'stopCollaborationProject',
+            mutation: STOP_COLLABORATION_PROJECT,
+            variables: { projectId: project.id },
+          })
+        )
+      } else {
+        dispatch(
+          actions.api.fetchSuccess({
+            data: { currentProjectId: project.id },
             storeKey: 'user',
           })
         )
@@ -251,7 +275,7 @@ const Projects = ({
                         margin="0 0 5px"
                         font-size="0.8rem"
                         onClick={() =>
-                          isOwner
+                          isProjectOwner
                             ? handleStartClick(project)
                             : addProject({
                                 link: project.repoLink,
@@ -350,7 +374,7 @@ const Projects = ({
                         />
                       </StroveButton>
                     )}
-                    {project.editorPort && (
+                    {project.editorPort && !isProjectOwner && (
                       <StroveButton
                         to="/app/editor/"
                         isDisabled={isDisabled}
