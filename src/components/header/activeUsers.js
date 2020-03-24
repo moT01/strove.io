@@ -9,6 +9,7 @@ const UserPhoto = styled.img`
   width: 20px;
   height: 20px;
   margin: 0 3px 0 0;
+  cursor: help;
 `
 
 const UserPhotoContainer = styled.div`

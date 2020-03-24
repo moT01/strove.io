@@ -9,8 +9,9 @@ export const addIncomingProject = ({ repoLink, repoProvider, name }) => ({
   },
 })
 
-export const setProjectIsBeingAdded = () => ({
+export const setProjectIsBeingAdded = ({ isLiveshare = false } = {}) => ({
   type: C.SET_PROJECT_IS_BEING_ADDED,
+  isLiveshare,
 })
 
 export const setProjectIsBeingStarted = () => ({

@@ -133,6 +133,9 @@ const Projects = ({
 
     const currentEditorPort = currentProject?.editorPort
     if (!currentProjectId) {
+      dispatch(
+        actions.incomingProject.setProjectIsBeingAdded({ isLiveshare: true })
+      )
       return dispatch(
         mutation({
           name: 'startCollaborationProject',
