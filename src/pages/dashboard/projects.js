@@ -234,7 +234,7 @@ const Projects = ({
                   </InfoWrapper>
                   <RightSection>
                     {/* TODO: Display this section once forks work properly */}
-                    {!isProjectOwner && (
+                    {isProjectOwner && (
                       <StroveButton
                         to="/app/editor/"
                         isDisabled={
