@@ -35,7 +35,7 @@ const Banner = () => (
       isMobileOnly={isMobileOnly}
     >
       <StyledHeadingSection type={isMobileOnly ? 'bottom' : 'right'}>
-        <StyledH1>Remote alternative for local software development</StyledH1>
+        <StyledH1>Remote alternative for local softwagre development</StyledH1>
         <StyledProductDescription>
           Strove moves coding, from office or classroom, to the browser. Manage
           team. Write, run and share code, all in one place.
@@ -158,8 +158,8 @@ const Banner = () => (
           </StyledCellHeader>
           <StyledFeatureDescription>
             A lot of time and work is needed to make code work on local
-            machines. Choosing cloud environment lets team do their actual job
-            from the get go.
+            machines. Choosing a cloud environment lets the team do their actual
+            job from the get-go.
           </StyledFeatureDescription>
         </StyledCell>
         <StyledCell>
