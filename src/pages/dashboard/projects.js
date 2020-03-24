@@ -109,6 +109,7 @@ const Projects = ({
     const editorPort = currentProject?.editorPort
     if (!currentProjectId || currentProjectId === id) {
       if (!editorPort) {
+        console.log('Console log in projects dispatched')
         dispatch(
           mutation({
             name: 'continueProject',
