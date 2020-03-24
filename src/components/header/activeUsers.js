@@ -1,14 +1,14 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-import { isMobileOnly } from 'react-device-detect'
+// import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'
 
 const UserPhoto = styled.img`
-  width: ${isMobileOnly ? '15px' : '20px'};
-  height: ${isMobileOnly ? '15px' : '20px'};
-  margin: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0 3px 0 0;
 `
 
 const UserPhotoContainer = styled.div`
