@@ -455,6 +455,10 @@ export const ProjectsTile = styled.div`
       opacity: 1;
     }
   }
+
+  :last-of-type {
+    border: none;
+  }
 `
 
 export const InfoWrapper = styled(FlexWrapper)`
