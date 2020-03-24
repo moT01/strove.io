@@ -402,7 +402,7 @@ const Projects = ({
                             {project.isVisible ? 'Make private' : 'Make public'}
                           </IconDescription>
                           <ProjectActionIcon
-                            type={project.isVisible ? 'lock' : 'share-alt'}
+                            type={project.isVisible ? 'user' : 'team'}
                           />
                         </StroveButton>
                       )}
