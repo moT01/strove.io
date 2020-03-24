@@ -272,8 +272,7 @@ const Dashboard = ({ history }) => {
                                       <StroveButton
                                         isPrimary
                                         padding="5px"
-                                        minWidth="150px"
-                                        maxWidth="150px"
+                                        width="150px"
                                         margin="10px"
                                         borderRadius="2px"
                                         onClick={() =>
@@ -282,6 +281,21 @@ const Dashboard = ({ history }) => {
                                         text="Add member"
                                       />
                                     )}
+
+                                  <StroveButton
+                                    isPrimary
+                                    padding="5px"
+                                    margin="10px"
+                                    width="150px"
+                                    borderRadius="2px"
+                                    onClick={() =>
+                                      handleCreateTeamClick({
+                                        organizationId: organization.id,
+                                      })
+                                    }
+                                    text="Add new team"
+                                  />
+
                                   {isExpanded &&
                                     (isOwner || isOrganizationOwner ? (
                                       <StroveButton
@@ -501,17 +515,6 @@ const Dashboard = ({ history }) => {
                       )
                     }
                   )}
-                <StroveButton
-                  isPrimary
-                  padding="5px"
-                  margin="10px 0 40px"
-                  width="200px"
-                  borderRadius="2px"
-                  onClick={() =>
-                    handleCreateTeamClick({ organizationId: organization.id })
-                  }
-                  text="Create new team"
-                />
               </TilesWrapper>
             ))}
         </DashboardWrapper>
