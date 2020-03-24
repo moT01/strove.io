@@ -15,18 +15,19 @@ export default (state = initialState, action) => {
     }
 
     case C.SET_PROJECT_IS_BEING_ADDED: {
+      const { isLiveshare } = action
       return {
         ...state,
         isBeingAdded: true,
+        isLiveshare,
       }
     }
 
     case C.SET_PROJECT_IS_BEING_STARTED: {
-      const { isLiveshare } = action.payload
+      const { isLiveshare } = action
       return {
         ...state,
         isBeingStarted: true,
-        isLiveshare
       }
     }
 
