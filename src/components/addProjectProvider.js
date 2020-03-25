@@ -34,7 +34,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   )
 
   const isStartingCollaborationProject = useSelector(
-    selectors.api.getLoading('startCollaborationProject')
+    selectors.api.getLoading('startLiveShare')
   )
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getMyProjects)

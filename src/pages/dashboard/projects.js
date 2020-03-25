@@ -8,7 +8,7 @@ import {
   DELETE_PROJECT,
   CONTINUE_PROJECT,
   SET_VISIBILITY,
-  START_COLLABORATION_PROJECT,
+  STAR_LIVE_SHARE,
   STOP_LIVE_SHARE,
 } from 'queries'
 import { selectors, actions, C } from 'state'
@@ -137,8 +137,8 @@ const Projects = ({
       )
       return dispatch(
         mutation({
-          name: 'startCollaborationProject',
-          mutation: START_COLLABORATION_PROJECT,
+          name: 'startLiveShare',
+          mutation: STAR_LIVE_SHARE,
           variables: { projectId: id, teamId },
         })
       )

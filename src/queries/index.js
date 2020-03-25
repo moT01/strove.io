@@ -47,7 +47,7 @@ import SET_ONBOARDED from './setOnboarded'
 import ME from './me'
 import ADD_USER_TO_COLLABORATION from './addUserToCollaboration'
 import REMOVE_USER_FROM_COLLABORATION from './removeUserFromCollaboration'
-import START_COLLABORATION_PROJECT from './startCollaborationProject'
+import STAR_LIVE_SHARE from './startLiveShare'
 import STOP_LIVE_SHARE from './stopLiveShare'
 
 export {
@@ -100,6 +100,6 @@ export {
   ME,
   ADD_USER_TO_COLLABORATION,
   REMOVE_USER_FROM_COLLABORATION,
-  START_COLLABORATION_PROJECT,
+  STAR_LIVE_SHARE,
   STOP_LIVE_SHARE,
 }
