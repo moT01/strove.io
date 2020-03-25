@@ -89,7 +89,6 @@ export default withRouter(({ children, addProject, history }) => {
       type: C.currentProject.SET_CURRENT_PROJECT,
       data: activeProject,
     })
-    console.log('The active project in data manager', activeProject)
   }, [activeProjectData])
 
   useEffect(() => {

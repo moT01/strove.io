@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import styled from 'styled-components/macro'
 // import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
@@ -37,7 +37,9 @@ const ActiveUsers = () => {
   const originalProject = projects.find(
     project => project?.id === currentProject?.startedCollaborationFromId
   )
-  const activeUsers = originalProject?.workingUsers
+  const activeUsers = activeProjectFromSubscription
+    ? currentProject.workingUsers
+    : originalProject?.workingUsers
 
   return (
     <Wrapper>
