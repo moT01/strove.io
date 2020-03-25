@@ -5,9 +5,9 @@ const initialState = null
 export default (state = initialState, action) => {
   switch (action.type) {
     case C.SET_CURRENT_PROJECT: {
-      const { project } = action.payload
+      const { data } = action
       return {
-        project,
+        data,
       }
     }
 

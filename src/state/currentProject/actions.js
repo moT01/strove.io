@@ -1,12 +1,10 @@
 import * as C from './consts'
 
-export const setEditedOrganization = ({ project }) => ({
+export const setCurrentProject = ({ project }) => ({
   type: C.SET_CURRENT_PROJECT,
-  payload: {
-    project,
-  },
+  data: project,
 })
 
-export const resetEditedOrganization = () => ({
+export const resetCurrentProject = () => ({
   type: C.RESET_CURRENT_PROJECT,
 })
