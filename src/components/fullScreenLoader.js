@@ -96,6 +96,11 @@ const Loader = ({ type = 'addProject', ...props }) => {
     redirecting: ['Redirecting back to origin site...'],
     processPayment: ['Processing payment'],
     loadingEditor: ['Loading editor'],
+    addingCollaborationProject: [
+      'Checking permissions',
+      'Reserving resources',
+      'Joining liveshare',
+    ],
   }
 
   useInterval(

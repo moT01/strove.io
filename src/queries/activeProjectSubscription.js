@@ -5,6 +5,10 @@ export default gql`
   subscription($email: String!) {
     activeProject(email: $email) {
       ...Project
+      workingUsers {
+        name
+        photoUrl
+      }
     }
   }
   ${ProjectFragment}

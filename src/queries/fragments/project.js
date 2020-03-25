@@ -20,5 +20,10 @@ export const ProjectFragment = gql`
     isVisible
     teamId
     forkedFromId
+    startedCollaborationFromId
+    workingUsers {
+      name
+      photoUrl
+    }
   }
 `

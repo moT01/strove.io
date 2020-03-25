@@ -29,6 +29,13 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
+  const isJoiningLiveshare = useSelector(
+    selectors.incomingProject.getIsLiveshare
+  )
+
+  const isStartingCollaborationProject = useSelector(
+    selectors.api.getLoading('startLiveShare')
+  )
   const user = useSelector(selectors.api.getUser)
   const projects = useSelector(selectors.api.getMyProjects)
   const githubToken = user?.githubToken
@@ -41,7 +48,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
-  const projectsLimit = 20
+  /* Decide what to do about the projects limit */
+  const projectsLimit = 2000000
   const timeExceeded = user?.timeSpent >= 72000000
   const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
@@ -200,7 +208,17 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       )}
       {isAdding && (
         <FullScreenLoader
-          type="addProject"
+          type={
+            isJoiningLiveshare ? 'addingCollaborationProject' : 'addProject'
+          }
+          isFullScreen
+          color="#0072ce"
+          queuePosition={queuePosition}
+        />
+      )}
+      {isStartingCollaborationProject && (
+        <FullScreenLoader
+          type="addingCollaborationProject"
           isFullScreen
           color="#0072ce"
           queuePosition={queuePosition}

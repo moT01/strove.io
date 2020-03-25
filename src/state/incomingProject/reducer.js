@@ -15,9 +15,11 @@ export default (state = initialState, action) => {
     }
 
     case C.SET_PROJECT_IS_BEING_ADDED: {
+      const { isLiveshare } = action
       return {
         ...state,
         isBeingAdded: true,
+        isLiveshare,
       }
     }
 
@@ -40,6 +42,7 @@ export default (state = initialState, action) => {
     case REHYDRATE: {
       return {
         ...state,
+        isLiveshare: false,
         isBeingAdded: false,
         isBeingStarted: false,
       }
