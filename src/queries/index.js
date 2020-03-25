@@ -48,7 +48,7 @@ import ME from './me'
 import ADD_USER_TO_COLLABORATION from './addUserToCollaboration'
 import REMOVE_USER_FROM_COLLABORATION from './removeUserFromCollaboration'
 import START_COLLABORATION_PROJECT from './startCollaborationProject'
-import STOP_COLLABORATION_PROJECT from './stopCollaborationProject'
+import STOP_LIVE_SHARE from './stopLiveShare'
 
 export {
   ADD_PROJECT,
@@ -101,5 +101,5 @@ export {
   ADD_USER_TO_COLLABORATION,
   REMOVE_USER_FROM_COLLABORATION,
   START_COLLABORATION_PROJECT,
-  STOP_COLLABORATION_PROJECT,
+  STOP_LIVE_SHARE,
 }

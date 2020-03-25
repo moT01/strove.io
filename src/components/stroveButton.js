@@ -141,7 +141,7 @@ const StroveButton = props => {
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
   const isStoppingLiveshare = useSelector(
-    selectors.api.getLoading('stopCollaborationProject')
+    selectors.api.getLoading('stopLiveShare')
   )
 
   return props.layout === 'form' && !isMobileOnly ? (

@@ -9,7 +9,7 @@ import {
   CONTINUE_PROJECT,
   SET_VISIBILITY,
   START_COLLABORATION_PROJECT,
-  STOP_COLLABORATION_PROJECT,
+  STOP_LIVE_SHARE,
 } from 'queries'
 import { selectors, actions, C } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
@@ -153,14 +153,14 @@ const Projects = ({
   const handleStopLiveshareClick = ({ project }) => {
     dispatch(
       mutation({
-        name: 'stopCollaborationProject',
-        mutation: STOP_COLLABORATION_PROJECT,
+        name: 'stopLiveShare',
+        mutation: STOP_LIVE_SHARE,
         variables: { projectId: project.id },
         onSuccessDispatch: [
           updateOrganizations,
           () => ({
             type: actions.api.C.FETCH_SUCCESS,
-            storeKey: 'stopCollaborationProject',
+            storeKey: 'stopLiveShare',
           }),
         ],
       })
