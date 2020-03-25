@@ -85,6 +85,16 @@ export default withRouter(({ children, addProject, history }) => {
   const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
   useEffect(() => {
+    dispatch({
+      type: C.currentProject.SET_CURRENT_PROJECT,
+      payload: {
+        data: activeProject,
+      },
+    })
+    console.log('The active project in data manager', activeProject)
+  }, [activeProjectData])
+
+  useEffect(() => {
     if (!isOnboarded && notEmbed && user?.organizations?.length === 1) {
       history.push('/welcome/organizationName')
     }

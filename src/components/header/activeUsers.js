@@ -28,12 +28,14 @@ const Wrapper = styled.div`
 `
 
 const ActiveUsers = () => {
-  const currentProject = useSelector(selectors.api.getCurrentProject)
+  const currentProject = useSelector(selectors.currentProject.getCurrentProject)
+  console.log('TCL: ActiveUsers -> currentProject', currentProject)
   const projects = useSelector(selectors.api.getProjects)
   const originalProject = projects.find(
     project => project?.id === currentProject?.startedCollaborationFromId
   )
   const activeUsers = originalProject?.workingUsers
+
   return (
     <Wrapper>
       {activeUsers?.map(user => (
