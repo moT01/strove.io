@@ -93,7 +93,7 @@ const Banner = () => (
               </StyledCellHeader>
               <StyledProductDescription>
                 Save hours to days per developer by running code in seconds from
-                anywhere
+                anywhere.
               </StyledProductDescription>
             </StyledCell>
           </SmallSectionWrapper>
