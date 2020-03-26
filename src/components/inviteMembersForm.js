@@ -280,17 +280,22 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
   }
 
   const addMember = ({ memberEmails, setAddMemberModal }) => {
+    console.log('TCL: addMember -> memberEmails', memberEmails)
     const users = [
       ...(editedTeam?.users?.map(user => user.email) || []),
       ...(editedTeam?.invited?.map(user => user.email) || []),
       editedOrganization?.owner?.email,
       editedTeam?.teamLeader?.email,
     ]
+    console.log('TCL: addMember -> users', users)
     const usersToInvite = memberEmails.filter(
       email => users?.findIndex(user => user === email) === -1
     )
+    console.log('TCL: addMember -> usersToInvite', usersToInvite)
     const subscriptionQuantity = editedOrganization?.subscriptionQuantity
+    console.log('TCL: addMember -> subscriptionQuantity', subscriptionQuantity)
     const subscriptionStatus = editedOrganization.subscriptionStatus
+    console.log('TCL: addMember -> subscriptionStatus', subscriptionStatus)
 
     if (usersToInvite.length === 0) {
       setWarningModal({
