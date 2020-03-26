@@ -196,6 +196,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
       paymentStatus?.data?.paymentStatus?.status === 'success' &&
       editedTeam
     ) {
+      console.log('Premature addProject')
       dispatch(
         mutation({
           name: 'addMember',
@@ -375,6 +376,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
         validationSchema={validationSchema}
         onSubmit={values => {
           const emailsArray = [...new Set(values.emails.filter(email => email))]
+          console.log('I am doing stuff')
           addMember({ memberEmails: [...emailsArray] })
         }}
         render={({ values, errors }) => (
