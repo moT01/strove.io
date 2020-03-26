@@ -358,7 +358,7 @@ const Plans = () => {
                               variables: {
                                 organizationId: organization.value.id,
                               },
-                              onSuccess: updateOrganizations(),
+                              onSuccessDispatch: updateOrganizations,
                             })
                           ),
                       })
@@ -381,7 +381,7 @@ const Plans = () => {
                 {editMode && (
                   <StripeCheckoutForm
                     organization={organization.value}
-                    quantity={quantity}
+                    quantity={quantity} 
                     plan={subscriptionPlan.value}
                     editMode={editMode}
                     setEditMode={setEditMode}
@@ -412,7 +412,7 @@ const Plans = () => {
                         variables: {
                           organizationId: organization.value.id,
                         },
-                        onSuccess: updateOrganizations(),
+                        onSuccessDispatch: updateOrganizations,
                       })
                     )
                   }}
