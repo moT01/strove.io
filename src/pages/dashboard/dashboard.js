@@ -229,9 +229,10 @@ const Dashboard = ({ history }) => {
           {expandedTiles &&
             myOrganizations.map(organization => (
               <TilesWrapper key={organization.id}>
-                <NameWrapper>
-                  <OrganizationName>{organization.name}</OrganizationName>
-                  {/* organization.owner.id === user.id &&
+                <VerticalDivider margin="20px 0px">
+                  <NameWrapper>
+                    <OrganizationName>{organization.name}</OrganizationName>
+                    {/* organization.owner.id === user.id &&
                     organization.subscriptionStatus === 'inactive' &&
                     user?.timeSpent >= 65800 && (
                       <div>
@@ -244,7 +245,23 @@ const Dashboard = ({ history }) => {
                         </TimeText>
                       </div>
                     ) */}
-                </NameWrapper>
+                  </NameWrapper>
+
+                  <StroveButton
+                    isPrimary
+                    padding="5px"
+                    margin="10px"
+                    width="150px"
+                    margin="0px"
+                    borderRadius="2px"
+                    onClick={() =>
+                      handleCreateTeamClick({
+                        organizationId: organization.id,
+                      })
+                    }
+                    text="Add new team"
+                  />
+                </VerticalDivider>
                 {organization.teams &&
                   Object.values(organizationsObj[organization.id].teams).map(
                     team => {
@@ -288,20 +305,6 @@ const Dashboard = ({ history }) => {
                                       text="Add member"
                                     />
                                   )}
-
-                                  <StroveButton
-                                    isPrimary
-                                    padding="5px"
-                                    margin="10px"
-                                    width="150px"
-                                    borderRadius="2px"
-                                    onClick={() =>
-                                      handleCreateTeamClick({
-                                        organizationId: organization.id,
-                                      })
-                                    }
-                                    text="Add new team"
-                                  />
 
                                   {isOwner || isOrganizationOwner ? (
                                     <StroveButton

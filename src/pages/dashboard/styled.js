@@ -120,10 +120,10 @@ export const PageWrapper = styled(Wrapper)`
 `
 
 export const TeamTileWrapper = styled(Wrapper)`
-  margin: 20px 0px;
+  margin: 0px 0px 30px 0px;
   transition: all 0.2s;
   width: 100%;
-  height: ${({ expanded }) => (expanded ? 'auto' : '2.5rem')};
+  height: auto;
 `
 
 export const TilesWrapper = styled.div`
@@ -212,6 +212,7 @@ export const OrganizationName = styled(Text)`
   font-size: 1.6rem;
   height: 1.9rem;
   font-weight: 700;
+  margin: 0px;
 `
 
 export const ModalText = styled(Text)`
@@ -233,6 +234,7 @@ export const VerticalDivider = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin: ${({ margin }) => (margin ? margin : '0')};
   width: 100%;
   height: 100%;
   flex-direction: ${({ columnOnMobile }) =>
@@ -529,7 +531,7 @@ export const NameWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-top: 20px;
+  margin: 0px;
 `
 
 export const InviteWrapper = styled.div`

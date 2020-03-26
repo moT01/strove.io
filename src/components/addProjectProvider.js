@@ -44,6 +44,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const incomingProjectRepoUrl = useSelector(
     selectors.incomingProject.getRepoLink
   )
+  const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const currentProjectId = currentProject?.id
@@ -97,8 +98,12 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
     if (
-      (existingProject && !currentProject) ||
-      (existingProject && existingProject === currentProject)
+      (existingProject &&
+        !currentProject &&
+        existingProject.teamId === editedTeam.id) ||
+      (existingProject &&
+        existingProject === currentProject &&
+        existingProject.teamId === editedTeam.id)
     ) {
       return dispatch(
         mutation({
