@@ -589,6 +589,23 @@ const Dashboard = ({ history }) => {
   }
 
   const handleDeleteMemberClick = ({ member, team }) => {
+    // TODO Add possibility for leader to remove a user from all teams and organization with one click
+    const allTeamsInOrganization = Object.values(
+      organizationsObj[team.organizationId].teams
+    )
+    const allUsers = allTeamsInOrganization.reduce(
+      (usersArr, x) => [
+        ...usersArr,
+        ...(x.users || []),
+        ...(x.invited || []),
+        x.teamLeader,
+      ],
+      []
+    )
+    const memberTeamsCount = allUsers.filter(user => user.id === member.id)
+      .length
+    const shouldRemoveFromOrganization = memberTeamsCount < 2
+
     setWarningModal({
       visible: true,
       content: (
@@ -603,37 +620,41 @@ const Dashboard = ({ history }) => {
             name: 'removeMember',
             mutation: REMOVE_MEMBER,
             variables: { teamId: team.id, memberId: member.id },
+            onSuccess: () => {
+              if (shouldRemoveFromOrganization) {
+                dispatch(
+                  mutation({
+                    name: 'removeFromOrganization',
+                    mutation: REMOVE_FROM_ORGANIZATION,
+                    variables: {
+                      organizationId: team.organizationId,
+                      memberId: member.id,
+                    },
+                    onSuccess: () => {
+                      organizationsObj[team.organizationId]
+                        .subscriptionStatus === 'active'
+                        ? dispatch(
+                            mutation({
+                              name: 'downgradeSubscription',
+                              mutation: DOWNGRADE_SUBSCRIPTION,
+                              variables: {
+                                organizationId: team.organizationId,
+                                quantity:
+                                  organizationsObj[team.organizationId]
+                                    ?.subscriptionQuantity - 1,
+                              },
+                              onSuccessDispatch: updateOrganizations,
+                            })
+                          )
+                        : dispatch(updateOrganizations())
+                    },
+                  })
+                )
+              }
+            },
           })
         )
 
-        dispatch(
-          mutation({
-            name: 'removeFromOrganization',
-            mutation: REMOVE_FROM_ORGANIZATION,
-            variables: {
-              organizationId: team.organizationId,
-              memberId: member.id,
-            },
-            onSuccess: () => {
-              organizationsObj[team.organizationId].subscriptionStatus ===
-              'active'
-                ? dispatch(
-                    mutation({
-                      name: 'downgradeSubscription',
-                      mutation: DOWNGRADE_SUBSCRIPTION,
-                      variables: {
-                        organizationId: team.organizationId,
-                        quantity:
-                          organizationsObj[team.organizationId]
-                            ?.subscriptionQuantity - 1,
-                      },
-                      onSuccessDispatch: updateOrganizations,
-                    })
-                  )
-                : dispatch(updateOrganizations())
-            },
-          })
-        )
         closeWarningModal()
       },
       buttonLabel: 'Remove',
