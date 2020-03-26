@@ -196,7 +196,6 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
       paymentStatus?.data?.paymentStatus?.status === 'success' &&
       editedTeam
     ) {
-      console.log('Premature addProject')
       dispatch(
         mutation({
           name: 'addMember',
@@ -254,25 +253,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
         ),
       })
     }
-
-    paymentStatus?.data?.paymentStatus?.status === 'success' &&
-      editedTeam &&
-      dispatch(
-        mutation({
-          name: 'addMember',
-          mutation: ADD_MEMBER,
-          allowRepeated: true,
-          variables: { memberEmails: addMemberEmail, teamId: editedTeam.id },
-          onSuccess: () => {
-            onSuccess()
-            closeWarningModal()
-          },
-          onSuccessDispatch: [
-            updateOrganizations,
-            actions.editedOrganization.resetEditedOrganization,
-          ],
-        })
-      ) // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paymentStatus])
 
   const closeWarningModal = () => {
