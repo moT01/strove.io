@@ -17,7 +17,6 @@ import {
 } from 'queries'
 import {
   mutation,
-  window,
   getWindowHref,
   redirectToEditor,
   getWindowSearchParams,
