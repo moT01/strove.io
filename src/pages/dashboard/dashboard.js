@@ -589,7 +589,7 @@ const Dashboard = ({ history }) => {
   }
 
   const handleDeleteMemberClick = ({ member, team }) => {
-    // TODO Add possibility for leader to remove a user from all teams and organization with one click
+    // Check if user should be deleted from organization
     const allTeamsInOrganization = Object.values(
       organizationsObj[team.organizationId].teams
     )
@@ -605,6 +605,7 @@ const Dashboard = ({ history }) => {
     const memberTeamsCount = allUsers.filter(user => user.id === member.id)
       .length
     const shouldRemoveFromOrganization = memberTeamsCount < 2
+    // TODO Add possibility for leader to remove a user from all teams and organization with one click
 
     setWarningModal({
       visible: true,
@@ -646,10 +647,12 @@ const Dashboard = ({ history }) => {
                               onSuccessDispatch: updateOrganizations,
                             })
                           )
-                        : dispatch(updateOrganizations())
+                        : dispatch(updateOrganizations)
                     },
                   })
                 )
+              } else {
+                dispatch(updateOrganizations)
               }
             },
           })
