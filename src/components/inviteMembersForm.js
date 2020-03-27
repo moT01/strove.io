@@ -265,10 +265,6 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
       ...(editedOrganization?.users?.map(user => user.email) || []),
       editedOrganization.owner.email,
     ]
-    console.log(
-      'TCL: addMember -> usersInOrganization',
-      usersInOrganization.length
-    )
     const users = [
       ...(editedTeam?.users?.map(user => user.email) || []),
       ...(editedTeam?.invited?.map(user => user.email) || []),
@@ -278,17 +274,11 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
     const usersToInvite = memberEmails.filter(
       email => users?.findIndex(user => user === email) === -1
     )
-    console.log('TCL: addMember -> usersToInvite', usersToInvite.length)
     const subscriptionQuantity = editedOrganization?.subscriptionQuantity
     const subscriptionStatus = editedOrganization.subscriptionStatus
     const upgradeQuantity = memberEmails.filter(
       email => usersInOrganization?.findIndex(user => user === email) === -1
     ).length
-    console.log('TCL: addMember -> upgradeQuantity', upgradeQuantity)
-    console.log(
-      'TCL: addMember -> upgradeQuantity',
-      upgradeQuantity + usersInOrganization.length
-    )
 
     if (usersToInvite.length === 0) {
       setWarningModal({
