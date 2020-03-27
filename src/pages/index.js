@@ -12,6 +12,7 @@ import Editor from './editor'
 import FromEmailInvitation from './welcome/fromEmailInvitation'
 import Dashboard from './dashboard'
 import Payments from './plans'
+import Blog from './blog'
 
 export {
   Home,
@@ -29,4 +30,5 @@ export {
   FromEmailInvitation,
   Dashboard,
   Payments,
+  Blog,
 }
