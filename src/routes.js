@@ -32,6 +32,8 @@ const TeamMembers = WithLazyLoader(
 const HelloThere = WithLazyLoader(
   lazy(() => import('pages/welcome/helloThere'))
 )
+const FirstPost = WithLazyLoader(lazy(() => import('pages/blog/firstPost')))
+
 const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (
@@ -61,6 +63,7 @@ const Strove = () => (
       <Route path="/welcome/teamMembers" component={TeamMembers} />
       <PrivateRoute path="/welcome/helloThere" component={HelloThere} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
+      <Route path="/blog/firstPost" component={FirstPost} />
       <Route component={NotFound} />
     </Switch>
   </>
