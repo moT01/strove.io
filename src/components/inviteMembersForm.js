@@ -261,22 +261,34 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
   }
 
   const addMember = ({ memberEmails, setAddMemberModal }) => {
-    console.log('TCL: addMember -> memberEmails', memberEmails)
+    const usersInOrganization = [
+      ...(editedOrganization?.users?.map(user => user.email) || []),
+      editedOrganization.owner.email,
+    ]
+    console.log(
+      'TCL: addMember -> usersInOrganization',
+      usersInOrganization.length
+    )
     const users = [
       ...(editedTeam?.users?.map(user => user.email) || []),
       ...(editedTeam?.invited?.map(user => user.email) || []),
       editedOrganization?.owner?.email,
       editedTeam?.teamLeader?.email,
     ]
-    console.log('TCL: addMember -> users', users)
     const usersToInvite = memberEmails.filter(
       email => users?.findIndex(user => user === email) === -1
     )
-    console.log('TCL: addMember -> usersToInvite', usersToInvite)
+    console.log('TCL: addMember -> usersToInvite', usersToInvite.length)
     const subscriptionQuantity = editedOrganization?.subscriptionQuantity
-    console.log('TCL: addMember -> subscriptionQuantity', subscriptionQuantity)
     const subscriptionStatus = editedOrganization.subscriptionStatus
-    console.log('TCL: addMember -> subscriptionStatus', subscriptionStatus)
+    const upgradeQuantity = memberEmails.filter(
+      email => usersInOrganization?.findIndex(user => user === email) === -1
+    ).length
+    console.log('TCL: addMember -> upgradeQuantity', upgradeQuantity)
+    console.log(
+      'TCL: addMember -> upgradeQuantity',
+      upgradeQuantity + usersInOrganization.length
+    )
 
     if (usersToInvite.length === 0) {
       setWarningModal({
@@ -288,7 +300,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
         ),
       })
     } else {
-      if (subscriptionStatus === 'active') {
+      if (subscriptionStatus === 'active' && upgradeQuantity !== 0) {
         setWarningModal({
           visible: true,
           content: (
@@ -306,7 +318,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
             mutation: UPGRADE_SUBSCRIPTION,
             variables: {
               organizationId: editedOrganization.id,
-              quantity: subscriptionQuantity + usersToInvite.length,
+              quantity: usersInOrganization.length + upgradeQuantity,
             },
             onSuccess: () => setAddMemberEmail(usersToInvite),
             onError: () =>
@@ -335,7 +347,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
               }),
           })
         )
-      } else if (subscriptionStatus === 'inactive') {
+      } else if (subscriptionStatus === 'inactive' || upgradeQuantity === 0) {
         dispatch(
           mutation({
             name: 'addMember',
