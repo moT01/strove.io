@@ -23,12 +23,21 @@ const StyledH1 = styled.h1`
   letter-spacing: 0.6px;
 `
 
+const DateTime = styled.div`
+  font-size: 0.83255rem;
+  line-height: 1.75rem;
+  display: block;
+  margin-bottom: 1.75rem;
+  margin-top: -1.4rem;
+`
+
 const Legal = () => (
   <>
     <SEO title="Strove blog | Remote classes" />
     <Header />
     <TextWell>
       <StyledH1>Teaching code online</StyledH1>
+      <DateTime>March 30, 2020 • ☕️ 5 min read</DateTime>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
       veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
