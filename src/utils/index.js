@@ -1,7 +1,6 @@
 import { query, mutation } from './graphql'
 import createProject from './createProject'
 import handleStopProject from './stopProject'
-import window from './window'
 import getBitbucketToken from './getBitbucketToken'
 import getRepoInfo from './getRepoInfo'
 import {
@@ -20,7 +19,6 @@ export {
   query,
   mutation,
   createProject,
-  window,
   getBitbucketToken,
   getRepoInfo,
   getWindowPathName,
