@@ -31,20 +31,20 @@ const DateTime = styled.div`
   margin-top: -1.4rem;
 `
 
-const Legal = () => (
+const Post = () => (
   <>
     <SEO title="Strove blog | Remote classes" />
     <Header />
     <TextWell>
-      <StyledH1>Teaching code online</StyledH1>
+      <StyledH1>Coding code online</StyledH1>
       <DateTime>March 30, 2020 • ☕️ 5 min read</DateTime>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
+      Before we decided to reach out to educators, we paid a visit to University
+      of Lodz to do a three workshops for different groups. I myself am a
+      graduate but it felt competely different, visiting the same classes as a
+      teacher that time. I felt excited and anxious at the same time; My
+      promotor from a few years ago introduced me her students, and then my job
+      became observing and paying attention to every single detail while trying
+      to make sure everyone was kind of able to keep it. It wasn't easy. 
       <br />
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
@@ -52,4 +52,4 @@ const Legal = () => (
   </>
 )
 
-export default memo(Legal)
+export default memo(Post)
