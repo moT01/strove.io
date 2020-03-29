@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
-import { actions } from 'state'
 import {
   mutation,
   getWindowPathName,
@@ -36,10 +35,7 @@ const EditorWrapper = ({ history }) => {
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId, teamId: currentProject.teamId },
-          onSuccessDispatch: [
-            updateOrganizations,
-            () => actions.api.fetchSuccess({ storeKey: 'continueProject' }),
-          ],
+          onSuccessDispatch: updateOrganizations,
         })
       )
     }
