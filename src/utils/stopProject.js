@@ -1,5 +1,5 @@
-import { query, mutation, updateOrganizations } from 'utils'
-import { STOP_PROJECT, MY_PROJECTS, MY_ORGANIZATIONS } from 'queries'
+import { mutation, updateOrganizations } from 'utils'
+import { STOP_PROJECT } from 'queries'
 
 const handleStopProject = ({ id, dispatch }) => {
   dispatch(
