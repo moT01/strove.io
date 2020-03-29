@@ -18,14 +18,6 @@ const handleStopProject = ({ id, dispatch }) => {
           })
         )
       },
-      onSuccessDispatch: [
-        () =>
-          actions.api.fetchSuccess({
-            data: { currentProjectId: null },
-            storeKey: 'user',
-          }),
-        () => actions.api.fetchSuccess({ storeKey: 'stopProject' }),
-      ],
     })
   )
   dispatch(
