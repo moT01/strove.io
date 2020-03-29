@@ -87,9 +87,10 @@ export const SmallSectionWrapper = styled.div`
   padding: ${({ padding }) => padding || '0'};
 `
 
-export const BeforeAfterSection = styled(SmallSectionWrapper)`
+export const BeforeAfterSection = styled(StyledSectionWrapper)`
   height: 500px;
   justify-content: flex-start;
+  align-items: stretch;
 `
 
 export const BannerWrapper = styled(StyledSectionWrapper)`
@@ -317,6 +318,7 @@ export const StyledGrid = styled.div`
 export const StyledCell = styled.div`
   color: ${({ theme }) => theme.colors.c2};
   margin: 20px;
+  height: 100%;
 `
 
 export const IconContainer = styled.div`

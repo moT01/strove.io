@@ -19,7 +19,7 @@ import {
 } from './styled'
 
 const BeforeAfter = () => (
-  <StyledSectionWrapper
+  <BeforeAfterSection
     isSecondary
     padding="20px"
     background="white"
@@ -27,7 +27,7 @@ const BeforeAfter = () => (
   >
     <SectionDivider isMobile={isMobile}>
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
-        <BeforeAfterSection isMobile={isMobile}>
+        <SmallSectionWrapper isMobile={isMobile}>
           <StyledCell>
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>Before</StyledH2>
@@ -87,19 +87,19 @@ const BeforeAfter = () => (
               </BeforeItem>
             </BeforeContainer>
           </StyledCell>
-        </BeforeAfterSection>
+        </SmallSectionWrapper>
       </SectionWrapper>
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
-        <BeforeAfterSection isMobile={isMobile}>
+        <SmallSectionWrapper isMobile={isMobile}>
           <StyledCell>
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
             </BeforeItem>
           </StyledCell>
-        </BeforeAfterSection>
+        </SmallSectionWrapper>
       </SectionWrapper>
     </SectionDivider>
-  </StyledSectionWrapper>
+  </BeforeAfterSection>
 )
 
 export default memo(BeforeAfter)
