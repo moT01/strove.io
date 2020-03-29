@@ -36,7 +36,7 @@ const Post = () => (
     <SEO title="Strove blog | Remote classes" />
     <Header />
     <TextWell>
-      <StyledH1>Coding code online</StyledH1>
+      <StyledH1>First post</StyledH1>
       <DateTime>March 30, 2020 • ☕️ 5 min read</DateTime>
       Is there a character that could even possibly EVEN TOUCH Madara Uchiha?
       Let alone defeat him. And I'm not talking about Edo Tensei Uchiha Madara.
