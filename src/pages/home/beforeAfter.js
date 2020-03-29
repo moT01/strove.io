@@ -6,7 +6,6 @@ import { theme } from 'consts'
 
 import {
   BeforeItem,
-  StyledSectionWrapper,
   SectionDivider,
   IconContainer,
   SectionWrapper,
