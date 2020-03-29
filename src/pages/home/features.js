@@ -2,7 +2,6 @@ import React, { useState, memo } from 'react'
 import { Parallax } from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
-import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
@@ -204,11 +203,7 @@ const Features = ({ features }) => {
             playScale: [0, 1.65],
           }}
           location="page1-wrapper"
-        >
-          <SmallCloud />
-          <MediumCloud />
-          <BigCloud />
-        </StyledParlax>
+        ></StyledParlax>
       )}
       <StyledFeature>{children}</StyledFeature>
     </StyledFeatureWrapper>
