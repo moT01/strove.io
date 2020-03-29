@@ -19,7 +19,6 @@ const StyledCTAWrapper = styled.div`
     height: 100%;
     max-width: 800px;
     max-height: 400px;
-    background: ${({ theme }) => theme.colors.c2};
     background-repeat: no-repeat;
     background-image: url(${require('../../assets/map.png')});
     opacity: 0.1;
