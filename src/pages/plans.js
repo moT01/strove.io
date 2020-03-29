@@ -14,7 +14,7 @@ import {
   REVERT_CANCEL,
   GET_PAYMENT_INFO,
 } from 'queries'
-import { mutation, query } from 'utils'
+import { mutation, query, updateOrganizations } from 'utils'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -216,16 +216,6 @@ const Plans = () => {
 
   const closeWarningModal = () => {
     setWarningModal(emptyWarningModalContent)
-  }
-
-  const updateOrganizations = () => {
-    dispatch(
-      query({
-        name: 'myOrganizations',
-        storeKey: 'myOrganizations',
-        query: MY_ORGANIZATIONS,
-      })
-    )
   }
 
   const fetchPaymentInfo = organization => {
