@@ -32,10 +32,6 @@ const BeforeAfter = () => (
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>Before</StyledH2>
             </BeforeItem>
-            {/* <StyledBeforeText>
-              Common <b>it works on my machine</b> and <b>work from home</b>{' '}
-              problems are a lot of work
-            </StyledBeforeText> */}
             <BeforeContainer>
               <BeforeItem>
                 <StyledBeforeText>Virtual machines</StyledBeforeText>
@@ -95,6 +91,7 @@ const BeforeAfter = () => (
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
             </BeforeItem>
+            <BeforeContainer></BeforeContainer>
           </StyledCell>
         </SmallSectionWrapper>
       </SectionWrapper>
