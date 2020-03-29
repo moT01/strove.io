@@ -1,5 +1,4 @@
 import React, { useState, memo } from 'react'
-import { Parallax } from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 import { Icon } from 'antd'
@@ -39,10 +38,6 @@ const StyledFeatureWrapper = styled.div`
 
 const StyledFeature = styled.div`
   width: 80vw;
-`
-
-const StyledParlax = styled(Parallax)`
-  top: -30vh;
 `
 
 const pointPos = [
@@ -194,17 +189,6 @@ const Features = ({ features }) => {
 
   return (
     <StyledFeatureWrapper id="page1-wrapper">
-      {!isMobileOnly && (
-        <StyledParlax
-          className="page1-bg"
-          animation={{
-            translateY: 300,
-            ease: 'linear',
-            playScale: [0, 1.65],
-          }}
-          location="page1-wrapper"
-        ></StyledParlax>
-      )}
       <StyledFeature>{children}</StyledFeature>
     </StyledFeatureWrapper>
   )
