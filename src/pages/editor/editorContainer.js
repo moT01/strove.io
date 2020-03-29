@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { Header, FullScreenLoader, SEO } from 'components'
 import { selectors } from 'state'
 import { CONTINUE_PROJECT, RESET_CRON } from 'queries'
+import { actions } from 'state'
 import {
   mutation,
   getWindowPathName,
@@ -29,19 +30,19 @@ const EditorWrapper = ({ history }) => {
 
   useEffect(() => {
     // This condition means project has been stopped
-    // if (projectId && !machineId) {
     if (!!projectId && !machineId) {
       dispatch(
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId, teamId: currentProject.teamId },
-          onSuccessDispatch: updateOrganizations,
+          onSuccessDispatch: [
+            updateOrganizations,
+            () => actions.api.fetchSuccess({ storeKey: 'continueProject' }),
+          ],
         })
       )
     }
-
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId, machineId])
 
