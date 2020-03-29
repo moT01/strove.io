@@ -114,7 +114,6 @@ const Projects = ({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId: id, teamId },
-          onSuccessDispatch: null,
         })
       )
     }
@@ -156,13 +155,7 @@ const Projects = ({
         name: 'stopLiveShare',
         mutation: STOP_LIVE_SHARE,
         variables: { projectId: project.id },
-        onSuccessDispatch: [
-          updateOrganizations,
-          () => ({
-            type: actions.api.C.FETCH_SUCCESS,
-            storeKey: 'stopLiveShare',
-          }),
-        ],
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
@@ -177,14 +170,7 @@ const Projects = ({
         onSuccess: () => {
           setProjectToDelete(null)
         },
-        onSuccessDispatch: [
-          () => ({
-            type: C.api.REMOVE_ITEM,
-            payload: { storeKey: 'myProjects', id },
-          }),
-          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
-          updateOrganizations,
-        ],
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
