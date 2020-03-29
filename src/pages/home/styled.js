@@ -88,9 +88,7 @@ export const SmallSectionWrapper = styled.div`
 `
 
 export const BeforeAfterSection = styled(StyledSectionWrapper)`
-  height: 500px;
-  justify-content: flex-start;
-  align-items: stretch;
+  height: ${({ isMobileOnly }) => (isMobileOnly ? '100%' : '500px')};
 `
 
 export const BannerWrapper = styled(StyledSectionWrapper)`
