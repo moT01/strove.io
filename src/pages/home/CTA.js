@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
+import Map from '../../assets/map.png'
 
 import { StroveButton } from 'components'
 import { StyledH1 } from './styled'
@@ -10,7 +11,11 @@ const StyledCTAWrapper = styled.div`
   justify-content: center;
   align-self: center;
   margin-top: 20px;
-  background: ${({ theme }) => theme.colors.c2};
+  background: ${({ theme }) => theme.colors.c3};
+    background-repeat: no-repeat;
+  background-size: 300px 100px;
+  /* background-image: url(${process.env.PUBLIC_URL + '/assets/map.png'}); */
+    background-image: url(${Map});
 `
 
 const StyledButtonWrapper = styled.div`
