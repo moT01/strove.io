@@ -312,17 +312,17 @@ export const query = ({
         }
       }
 
+      dispatch({
+        type: C.api.FETCH_SUCCESS,
+        payload: { storeKey, data: result },
+      })
+
       if (onSuccessDispatch) {
         if (Array.isArray(onSuccessDispatch)) {
           onSuccessDispatch.forEach(action => dispatch(action(result)))
         } else {
           dispatch(onSuccessDispatch(result))
         }
-      } else {
-        dispatch({
-          type: C.api.FETCH_SUCCESS,
-          payload: { storeKey, data: result },
-        })
       }
 
       const requestHandlingEndTime = performance.now()
