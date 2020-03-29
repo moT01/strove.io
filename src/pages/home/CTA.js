@@ -15,8 +15,10 @@ const StyledCTAWrapper = styled.div`
     content: '';
     position: absolute;
     cursor: pointer;
-    width: 800px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 400px;
     background: ${({ theme }) => theme.colors.c2};
     background-repeat: no-repeat;
     background-image: url(${require('../../assets/map.png')});
