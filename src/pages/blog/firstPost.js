@@ -38,15 +38,16 @@ const Post = () => (
     <TextWell>
       <StyledH1>Coding code online</StyledH1>
       <DateTime>March 30, 2020 • ☕️ 5 min read</DateTime>
-      Before we decided to reach out to educators, I and my cofounder Peter paid a visit to University
-      of Lodz to do a series of three coding workshops. I myself am a graduate
-      but visiting the same classes as a teacher was a competely new experience.
-      I felt excited and anxious at the same time; My promotor from a few years
-      ago introduced me to her students, and then my job became observing and
-      paying attention to every single detail while trying to make sure everyone
-      was kind of able to keep it. It wasn't easy.
-      <br />
-      
+      Is there a character that could even possibly EVEN TOUCH Madara Uchiha?
+      Let alone defeat him. And I'm not talking about Edo Tensei Uchiha Madara.
+      I'm not talking about Gedou Rinne Tensei Uchiha Madara either. Hell, I'm
+      not even talking about Juubi Jinchuuriki Gedou Rinne Tensei Uchiha Madara
+      with the Eternal Mangekyou Sharingan and Rinnegan doujutsus (with the
+      rikodou abilities and being capable of both Amateratsu and Tsukuyomi
+      genjutsu), equipped with his Gunbai, a perfect Susano'o, control of the
+      juubi and Gedou Mazou, with Hashirama Senju's DNA implanted in him so he
+      has mokuton kekkei genkai and can perform yin yang release ninjutsu while
+      being an expert in kenjutsu and taijutsu.
       <Link to="/">Go back to the homepage</Link>
     </TextWell>
     <Footer />
