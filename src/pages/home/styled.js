@@ -76,6 +76,22 @@ export const StyledSectionWrapper = styled.section`
       `}
 `
 
+export const SmallSectionWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  max-width: 440px;
+  padding: ${({ padding }) => padding || '0'};
+`
+
+export const BeforeAfterSection = styled(SmallSectionWrapper)`
+  height: 500px;
+  justify-content: flex-start;
+`
+
 export const BannerWrapper = styled(StyledSectionWrapper)`
   width: 100%;
   max-width: 1300px;
@@ -113,17 +129,6 @@ export const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 1200px;
-  padding: ${({ padding }) => padding || '0'};
-`
-
-export const SmallSectionWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  max-width: 440px;
   padding: ${({ padding }) => padding || '0'};
 `
 

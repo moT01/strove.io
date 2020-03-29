@@ -15,6 +15,7 @@ import {
   StyledH2,
   StyledBeforeText,
   BeforeContainer,
+  BeforeAfterSection,
 } from './styled'
 
 const BeforeAfter = () => (
@@ -26,7 +27,7 @@ const BeforeAfter = () => (
   >
     <SectionDivider isMobile={isMobile}>
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
-        <SmallSectionWrapper isMobile={isMobile}>
+        <BeforeAfterSection isMobile={isMobile}>
           <StyledCell>
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>Before</StyledH2>
@@ -86,19 +87,16 @@ const BeforeAfter = () => (
               </BeforeItem>
             </BeforeContainer>
           </StyledCell>
-        </SmallSectionWrapper>
+        </BeforeAfterSection>
       </SectionWrapper>
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
-        <SmallSectionWrapper isMobile={isMobile}>
+        <BeforeAfterSection isMobile={isMobile}>
           <StyledCell>
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
             </BeforeItem>
-            <StyledBeforeText>
-              Strove simplifies coding and managing programmer teams
-            </StyledBeforeText>
           </StyledCell>
-        </SmallSectionWrapper>
+        </BeforeAfterSection>
       </SectionWrapper>
     </SectionDivider>
   </StyledSectionWrapper>
