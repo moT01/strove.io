@@ -77,7 +77,7 @@ const Banner = () => (
         </StyledProductDescription> */}
       </SectionDivider>
     </StyledSectionWrapper>
-    <BeforeAfter />
+    {/* <BeforeAfter /> */}
     <StyledSectionWrapper
       isSecondary
       padding="20px"
