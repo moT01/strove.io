@@ -11,7 +11,7 @@ const StyledCTAWrapper = styled.div`
   align-self: center;
   margin-top: 20px;
 
-  ::before {
+  ::after {
     content: '';
     position: absolute;
     width: 100%;

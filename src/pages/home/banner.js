@@ -57,6 +57,8 @@ const Banner = () => (
       background={theme.colors.c2}
       padding={`20px ${isMobile ? '20px' : '25%'}`}
       isMobileOnly={isMobileOnly}
+      withMap
+      minHeight="500px"
     >
       <SectionDivider flexDirection="column">
         <IconContainer>

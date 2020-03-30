@@ -75,6 +75,22 @@ export const StyledSectionWrapper = styled.section`
       css`
         background: ${background};
       `}
+
+      ${({ withMap }) =>
+        withMap &&
+        css`
+          ::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 400px;
+            background-repeat: no-repeat;
+            background-image: url(${require('../../assets/map.png')});
+            opacity: 0.1;
+          }
+        `}
 `
 
 export const SmallSectionWrapper = styled.div`
