@@ -85,6 +85,14 @@ const Banner = () => (
       isMobileOnly={isMobileOnly}
     >
       <SectionDivider isMobile={isMobile}>
+        <SectionWrapper padding="20px 10px">
+          <DemoImage
+            decoding="async"
+            shadowOpacity="0.3"
+            src={require('assets/editor.png')}
+            alt="editor image"
+          />
+        </SectionWrapper>
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
           <SmallSectionWrapper isMobile={isMobile}>
             <StyledCell>
@@ -98,14 +106,6 @@ const Banner = () => (
             </StyledCell>
           </SmallSectionWrapper>
         </SectionWrapper>
-        <SectionWrapper padding="20px 10px">
-          <DemoImage
-            decoding="async"
-            shadowOpacity="0.3"
-            src={require('assets/editor.png')}
-            alt="editor image"
-          />
-        </SectionWrapper>
       </SectionDivider>
     </StyledSectionWrapper>
     <StyledSectionWrapper
@@ -115,16 +115,6 @@ const Banner = () => (
       isMobileOnly={isMobileOnly}
     >
       <SectionDivider isMobile={isMobile}>
-        <SectionWrapper isMobile={isMobile} padding="20px 10px">
-          <SectionWrapper isMobile={isMobile}>
-            <DemoImage
-              decoding="async"
-              shadowOpacity="0.1"
-              src={require('assets/teams.png')}
-              alt="teams image"
-            />
-          </SectionWrapper>
-        </SectionWrapper>
         <SectionWrapper>
           <SmallSectionWrapper padding="20px 10px">
             <StyledCell>
@@ -139,6 +129,16 @@ const Banner = () => (
               </StyledProductDescription>
             </StyledCell>
           </SmallSectionWrapper>
+        </SectionWrapper>
+        <SectionWrapper isMobile={isMobile} padding="20px 10px">
+          <SectionWrapper isMobile={isMobile}>
+            <DemoImage
+              decoding="async"
+              shadowOpacity="0.1"
+              src={require('assets/teams.png')}
+              alt="teams image"
+            />
+          </SectionWrapper>
         </SectionWrapper>
       </SectionDivider>
     </StyledSectionWrapper>

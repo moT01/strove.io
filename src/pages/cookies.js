@@ -27,7 +27,7 @@ const StyledH1 = styled.h1`
   letter-spacing: 0.6px;
 `
 
-const Legal = () => (
+const Cookies = () => (
   <>
     <SEO title="Cookies" />
     <Header />
@@ -119,4 +119,4 @@ const Legal = () => (
   </>
 )
 
-export default memo(Legal)
+export default memo(Cookies)
