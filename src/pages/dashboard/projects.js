@@ -11,7 +11,7 @@ import {
   STAR_LIVE_SHARE,
   STOP_LIVE_SHARE,
 } from 'queries'
-import { selectors, actions, C } from 'state'
+import { selectors, actions } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 import StroveLogo from 'images/strove.png'
 

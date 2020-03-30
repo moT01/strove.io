@@ -8,12 +8,7 @@ import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
-import {
-  CANCEL_SUBSCRIPTION,
-  MY_ORGANIZATIONS,
-  REVERT_CANCEL,
-  GET_PAYMENT_INFO,
-} from 'queries'
+import { CANCEL_SUBSCRIPTION, REVERT_CANCEL, GET_PAYMENT_INFO } from 'queries'
 import { mutation, query, updateOrganizations } from 'utils'
 
 export const FadeInAnimation = keyframes`

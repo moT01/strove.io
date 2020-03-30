@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 // import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
