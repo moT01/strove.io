@@ -109,6 +109,7 @@ const Projects = ({
 
   const handleStartClick = ({ id, teamId }) => {
     if (!currentProjectId) {
+      dispatch(actions.incomingProject.setProjectIsBeingAdded())
       return dispatch(
         mutation({
           name: 'continueProject',
