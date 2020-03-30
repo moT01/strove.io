@@ -5,7 +5,7 @@ import { isMobileOnly, isMobile } from 'react-device-detect'
 import { theme } from 'consts'
 
 import GetStarted from './getStarted'
-import BeforeAfter from './beforeAfter'
+// import BeforeAfter from './beforeAfter'
 import {
   StyledCellHeader,
   StyledSectionWrapper,
