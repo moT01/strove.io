@@ -88,6 +88,7 @@ export default withRouter(({ children, addProject, history }) => {
       type: C.currentProject.SET_CURRENT_PROJECT,
       data: activeProject,
     })
+    // eslint-disable-next-line
   }, [activeProjectData])
 
   useEffect(() => {
