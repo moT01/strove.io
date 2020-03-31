@@ -250,7 +250,6 @@ const Dashboard = ({ history }) => {
                   <StroveButton
                     isPrimary
                     padding="5px"
-                    margin="10px"
                     width="150px"
                     margin="0px"
                     borderRadius="2px"
