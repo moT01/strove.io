@@ -1,38 +1,2084 @@
 /*!--------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *--------------------------------------------------------*/
-"use strict";var define,AMDLoader,CSSLoaderPlugin,NLSLoaderPlugin,_amdLoaderGlobal=this,_commonjsGlobal="object"==typeof global?global:{};!function(e){e.global=_amdLoaderGlobal;var t=function(){function t(){this._detected=!1,this._isWindows=!1,this._isNode=!1,this._isElectronRenderer=!1,this._isWebWorker=!1}return Object.defineProperty(t.prototype,"isWindows",{get:function(){return this._detect(),this._isWindows},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"isNode",{get:function(){return this._detect(),this._isNode},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"isElectronRenderer",{get:function(){return this._detect(),this._isElectronRenderer},enumerable:!0,configurable:!0}),Object.defineProperty(t.prototype,"isWebWorker",{get:function(){return this._detect(),this._isWebWorker},enumerable:!0,configurable:!0}),t.prototype._detect=function(){this._detected||(this._detected=!0,this._isWindows=t._isWindows(),this._isNode="undefined"!=typeof module&&!!module.exports,
-this._isElectronRenderer="undefined"!=typeof process&&void 0!==process.versions&&void 0!==process.versions.electron&&"renderer"===process.type,this._isWebWorker="function"==typeof e.global.importScripts)},t._isWindows=function(){return!!("undefined"!=typeof navigator&&navigator.userAgent&&navigator.userAgent.indexOf("Windows")>=0)||"undefined"!=typeof process&&"win32"===process.platform},t}();e.Environment=t}(AMDLoader||(AMDLoader={})),function(e){var t=function(e,t,n){this.type=e,this.detail=t,this.timestamp=n};e.LoaderEvent=t;var n=function(){function n(e){this._events=[new t(1,"",e)]}return n.prototype.record=function(n,r){this._events.push(new t(n,r,e.Utilities.getHighPerformanceTimestamp()))},n.prototype.getEvents=function(){return this._events},n}();e.LoaderEventRecorder=n;var r=function(){function e(){}return e.prototype.record=function(e,t){},e.prototype.getEvents=function(){return[]},e.INSTANCE=new e,e}();e.NullLoaderEventRecorder=r}(AMDLoader||(AMDLoader={})),function(e){var t=function(){
-function t(){}return t.fileUriToFilePath=function(e,t){if(t=decodeURI(t).replace(/%23/g,"#"),e){if(/^file:\/\/\//.test(t))return t.substr(8);if(/^file:\/\//.test(t))return t.substr(5)}else if(/^file:\/\//.test(t))return t.substr(7);return t},t.startsWith=function(e,t){return e.length>=t.length&&e.substr(0,t.length)===t},t.endsWith=function(e,t){return e.length>=t.length&&e.substr(e.length-t.length)===t},t.containsQueryString=function(e){return/^[^\#]*\?/gi.test(e)},t.isAbsolutePath=function(e){return/^((http:\/\/)|(https:\/\/)|(file:\/\/)|(\/))/.test(e)},t.forEachProperty=function(e,t){if(e){var n=void 0;for(n in e)e.hasOwnProperty(n)&&t(n,e[n])}},t.isEmpty=function(e){var n=!0;return t.forEachProperty(e,(function(){n=!1})),n},t.recursiveClone=function(e){if(!e||"object"!=typeof e)return e;var n=Array.isArray(e)?[]:{};return t.forEachProperty(e,(function(e,r){n[e]=r&&"object"==typeof r?t.recursiveClone(r):r})),n},t.generateAnonymousModule=function(){return"===anonymous"+t.NEXT_ANONYMOUS_ID+++"==="},
-t.isAnonymousModule=function(e){return t.startsWith(e,"===anonymous")},t.getHighPerformanceTimestamp=function(){return this.PERFORMANCE_NOW_PROBED||(this.PERFORMANCE_NOW_PROBED=!0,this.HAS_PERFORMANCE_NOW=e.global.performance&&"function"==typeof e.global.performance.now),this.HAS_PERFORMANCE_NOW?e.global.performance.now():Date.now()},t.NEXT_ANONYMOUS_ID=1,t.PERFORMANCE_NOW_PROBED=!1,t.HAS_PERFORMANCE_NOW=!1,t}();e.Utilities=t}(AMDLoader||(AMDLoader={})),function(e){function t(e){if(e instanceof Error)return e;var t=new Error(e.message||String(e)||"Unknown Error");return e.stack&&(t.stack=e.stack),t}e.ensureError=t;var n=function(){function n(){}return n.validateConfigurationOptions=function(n){if("string"!=typeof(n=n||{}).baseUrl&&(n.baseUrl=""),"boolean"!=typeof n.isBuild&&(n.isBuild=!1),"object"!=typeof n.paths&&(n.paths={}),"object"!=typeof n.config&&(n.config={}),void 0===n.catchError&&(n.catchError=!1),void 0===n.recordStats&&(n.recordStats=!1),"string"!=typeof n.urlArgs&&(n.urlArgs=""),
-"function"!=typeof n.onError&&(n.onError=function(e){return"loading"===e.phase?(console.error('Loading "'+e.moduleId+'" failed'),console.error(e),console.error("Here are the modules that depend on it:"),void console.error(e.neededBy)):"factory"===e.phase?(console.error('The factory method of "'+e.moduleId+'" has thrown an exception'),void console.error(e)):void 0}),Array.isArray(n.ignoreDuplicateModules)||(n.ignoreDuplicateModules=[]),n.baseUrl.length>0&&(e.Utilities.endsWith(n.baseUrl,"/")||(n.baseUrl+="/")),"string"!=typeof n.cspNonce&&(n.cspNonce=""),Array.isArray(n.nodeModules)||(n.nodeModules=[]),n.nodeCachedData&&"object"==typeof n.nodeCachedData&&("string"!=typeof n.nodeCachedData.seed&&(n.nodeCachedData.seed="seed"),("number"!=typeof n.nodeCachedData.writeDelay||n.nodeCachedData.writeDelay<0)&&(n.nodeCachedData.writeDelay=7e3),!n.nodeCachedData.path||"string"!=typeof n.nodeCachedData.path)){var r=t(new Error("INVALID cached data configuration, 'path' MUST be set"));r.phase="configuration",
-n.onError(r),n.nodeCachedData=void 0}return n},n.mergeConfigurationOptions=function(t,r){void 0===t&&(t=null),void 0===r&&(r=null);var o=e.Utilities.recursiveClone(r||{});return e.Utilities.forEachProperty(t,(function(t,n){"ignoreDuplicateModules"===t&&void 0!==o.ignoreDuplicateModules?o.ignoreDuplicateModules=o.ignoreDuplicateModules.concat(n):"paths"===t&&void 0!==o.paths?e.Utilities.forEachProperty(n,(function(e,t){return o.paths[e]=t})):"config"===t&&void 0!==o.config?e.Utilities.forEachProperty(n,(function(e,t){return o.config[e]=t})):o[t]=e.Utilities.recursiveClone(n)})),n.validateConfigurationOptions(o)},n}();e.ConfigurationOptionsUtil=n;var r=function(){function t(e,t){if(this._env=e,this.options=n.mergeConfigurationOptions(t),this._createIgnoreDuplicateModulesMap(),this._createNodeModulesMap(),this._createSortedPathsRules(),""===this.options.baseUrl){if(this.options.nodeRequire&&this.options.nodeRequire.main&&this.options.nodeRequire.main.filename&&this._env.isNode){
-var r=this.options.nodeRequire.main.filename,o=Math.max(r.lastIndexOf("/"),r.lastIndexOf("\\"));this.options.baseUrl=r.substring(0,o+1)}if(this.options.nodeMain&&this._env.isNode){r=this.options.nodeMain,o=Math.max(r.lastIndexOf("/"),r.lastIndexOf("\\"));this.options.baseUrl=r.substring(0,o+1)}}}return t.prototype._createIgnoreDuplicateModulesMap=function(){this.ignoreDuplicateModulesMap={};for(var e=0;e<this.options.ignoreDuplicateModules.length;e++)this.ignoreDuplicateModulesMap[this.options.ignoreDuplicateModules[e]]=!0},t.prototype._createNodeModulesMap=function(){this.nodeModulesMap=Object.create(null);for(var e=0,t=this.options.nodeModules;e<t.length;e++){var n=t[e];this.nodeModulesMap[n]=!0}},t.prototype._createSortedPathsRules=function(){var t=this;this.sortedPathsRules=[],e.Utilities.forEachProperty(this.options.paths,(function(e,n){Array.isArray(n)?t.sortedPathsRules.push({from:e,to:n}):t.sortedPathsRules.push({from:e,to:[n]})})),this.sortedPathsRules.sort((function(e,t){
-return t.from.length-e.from.length}))},t.prototype.cloneAndMerge=function(e){return new t(this._env,n.mergeConfigurationOptions(e,this.options))},t.prototype.getOptionsLiteral=function(){return this.options},t.prototype._applyPaths=function(t){for(var n,r=0,o=this.sortedPathsRules.length;r<o;r++)if(n=this.sortedPathsRules[r],e.Utilities.startsWith(t,n.from)){for(var i=[],s=0,a=n.to.length;s<a;s++)i.push(n.to[s]+t.substr(n.from.length));return i}return[t]},t.prototype._addUrlArgsToUrl=function(t){return e.Utilities.containsQueryString(t)?t+"&"+this.options.urlArgs:t+"?"+this.options.urlArgs},t.prototype._addUrlArgsIfNecessaryToUrl=function(e){return this.options.urlArgs?this._addUrlArgsToUrl(e):e},t.prototype._addUrlArgsIfNecessaryToUrls=function(e){if(this.options.urlArgs)for(var t=0,n=e.length;t<n;t++)e[t]=this._addUrlArgsToUrl(e[t]);return e},t.prototype.moduleIdToPaths=function(t){if(!0===this.nodeModulesMap[t])return this.isBuild()?["empty:"]:["node|"+t];var n,r=t
-;if(e.Utilities.endsWith(r,".js")||e.Utilities.isAbsolutePath(r))e.Utilities.endsWith(r,".js")||e.Utilities.containsQueryString(r)||(r+=".js"),n=[r];else for(var o=0,i=(n=this._applyPaths(r)).length;o<i;o++)this.isBuild()&&"empty:"===n[o]||(e.Utilities.isAbsolutePath(n[o])||(n[o]=this.options.baseUrl+n[o]),e.Utilities.endsWith(n[o],".js")||e.Utilities.containsQueryString(n[o])||(n[o]=n[o]+".js"));return this._addUrlArgsIfNecessaryToUrls(n)},t.prototype.requireToUrl=function(t){var n=t;return e.Utilities.isAbsolutePath(n)||(n=this._applyPaths(n)[0],e.Utilities.isAbsolutePath(n)||(n=this.options.baseUrl+n)),this._addUrlArgsIfNecessaryToUrl(n)},t.prototype.isBuild=function(){return this.options.isBuild},t.prototype.isDuplicateMessageIgnoredFor=function(e){return this.ignoreDuplicateModulesMap.hasOwnProperty(e)},t.prototype.getConfigForModule=function(e){if(this.options.config)return this.options.config[e]},t.prototype.shouldCatchError=function(){return this.options.catchError},
-t.prototype.shouldRecordStats=function(){return this.options.recordStats},t.prototype.onError=function(e){this.options.onError(e)},t}();e.Configuration=r}(AMDLoader||(AMDLoader={})),function(e){var t=function(){function e(e){this._env=e,this._scriptLoader=null,this._callbackMap={}}return e.prototype.load=function(e,t,i,s){var a=this;this._scriptLoader||(this._scriptLoader=this._env.isWebWorker?new r:this._env.isNode?new o(this._env):new n);var u={callback:i,errorback:s};this._callbackMap.hasOwnProperty(t)?this._callbackMap[t].push(u):(this._callbackMap[t]=[u],this._scriptLoader.load(e,t,(function(){return a.triggerCallback(t)}),(function(e){return a.triggerErrorback(t,e)})))},e.prototype.triggerCallback=function(e){var t=this._callbackMap[e];delete this._callbackMap[e];for(var n=0;n<t.length;n++)t[n].callback()},e.prototype.triggerErrorback=function(e,t){var n=this._callbackMap[e];delete this._callbackMap[e];for(var r=0;r<n.length;r++)n[r].errorback(t)},e}(),n=function(){function e(){}
-return e.prototype.attachListeners=function(e,t,n){var r=function(){e.removeEventListener("load",o),e.removeEventListener("error",i)},o=function(e){r(),t()},i=function(e){r(),n(e)};e.addEventListener("load",o),e.addEventListener("error",i)},e.prototype.load=function(e,t,n,r){var o=document.createElement("script");o.setAttribute("async","async"),o.setAttribute("type","text/javascript"),this.attachListeners(o,n,r),o.setAttribute("src",t);var i=e.getConfig().getOptionsLiteral().cspNonce;i&&o.setAttribute("nonce",i),document.getElementsByTagName("head")[0].appendChild(o)},e}(),r=function(){function e(){}return e.prototype.load=function(e,t,n,r){try{importScripts(t),n()}catch(e){r(e)}},e}(),o=function(){function t(e){this._env=e,this._didInitialize=!1,this._didPatchNodeRequire=!1}return t.prototype._init=function(e){this._didInitialize||(this._didInitialize=!0,this._fs=e("fs"),this._vm=e("vm"),this._path=e("path"),this._crypto=e("crypto"))},t.prototype._initNodeRequire=function(e,t){
-var n=t.getConfig().getOptionsLiteral().nodeCachedData;if(n&&!this._didPatchNodeRequire){this._didPatchNodeRequire=!0;var r=this,o=e("module");o.prototype._compile=function(e,i){var s,a=o.wrap(e.replace(/^#!.*/,"")),u=t.getRecorder(),d=r._getCachedDataPath(n,i),l={filename:i};try{var c=r._fs.readFileSync(d);s=c.slice(0,16),l.cachedData=c.slice(16),u.record(60,d)}catch(e){u.record(61,d)}var h=new r._vm.Script(a,l),f=h.runInThisContext(l),p=r._path.dirname(i),_=function(e){var t=e.constructor,n=function(t){try{return e.require(t)}finally{}};return n.resolve=function(n){return t._resolveFilename(n,e)},n.main=process.mainModule,n.extensions=t._extensions,n.cache=t._cache,n}(this),g=[this.exports,_,this,i,p,process,_commonjsGlobal,Buffer],v=f.apply(this.exports,g);return r._handleCachedData(h,a,d,!l.cachedData,t),r._verifyCachedData(h,a,d,s),v}}},t.prototype.load=function(n,r,o,i){var s=this,a=n.getConfig().getOptionsLiteral(),u=a.nodeRequire||e.global.nodeRequire,d=a.nodeInstrumenter||function(e){return e}
-;this._init(u),this._initNodeRequire(u,n);var l=n.getRecorder();if(/^node\|/.test(r)){var c=r.split("|"),h=null;try{h=u(c[1])}catch(e){return void i(e)}n.enqueueDefineAnonymousModule([],(function(){return h})),o()}else{r=e.Utilities.fileUriToFilePath(this._env.isWindows,r);var f=this._path.normalize(r),p=this._getElectronRendererScriptPathOrUri(f),_=Boolean(a.nodeCachedData),g=_?this._getCachedDataPath(a.nodeCachedData,r):void 0;this._readSourceAndCachedData(f,g,l,(function(e,r,a,u){if(e)i(e);else{var l;l=r.charCodeAt(0)===t._BOM?t._PREFIX+r.substring(1)+t._SUFFIX:t._PREFIX+r+t._SUFFIX,l=d(l,f);var c={filename:p,cachedData:a},h=s._createAndEvalScript(n,l,c,o,i);s._handleCachedData(h,l,g,_&&!a,n),s._verifyCachedData(h,l,g,u)}}))}},t.prototype._createAndEvalScript=function(t,n,r,o,i){var s=t.getRecorder();s.record(31,r.filename);var a=new this._vm.Script(n,r),u=a.runInThisContext(r),d=t.getGlobalAMDDefineFunc(),l=!1,c=function(){return l=!0,d.apply(null,arguments)};return c.amd=d.amd,
-u.call(e.global,t.getGlobalAMDRequireFunc(),c,r.filename,this._path.dirname(r.filename)),s.record(32,r.filename),l?o():i(new Error("Didn't receive define call in "+r.filename+"!")),a},t.prototype._getElectronRendererScriptPathOrUri=function(e){if(!this._env.isElectronRenderer)return e;var t=e.match(/^([a-z])\:(.*)/i);return t?"file:///"+(t[1].toUpperCase()+":"+t[2]).replace(/\\/g,"/"):"file://"+e},t.prototype._getCachedDataPath=function(e,t){var n=this._crypto.createHash("md5").update(t,"utf8").update(e.seed,"utf8").digest("hex"),r=this._path.basename(t).replace(/\.js$/,"");return this._path.join(e.path,r+"-"+n+".code")},t.prototype._handleCachedData=function(e,t,n,r,o){var i=this;e.cachedDataRejected?this._fs.unlink(n,(function(r){o.getRecorder().record(62,n),i._createAndWriteCachedData(e,t,n,o),r&&o.getConfig().onError(r)})):r&&this._createAndWriteCachedData(e,t,n,o)},t.prototype._createAndWriteCachedData=function(e,t,n,r){
-var o=this,i=Math.ceil(r.getConfig().getOptionsLiteral().nodeCachedData.writeDelay*(1+Math.random())),s=-1,a=0,u=void 0,d=function(){setTimeout((function(){u||(u=o._crypto.createHash("md5").update(t,"utf8").digest());var i=e.createCachedData();0===i.length||i.length===s||a>=5||(s=i.length,o._fs.writeFile(n,Buffer.concat([u,i]),(function(e){e&&r.getConfig().onError(e),r.getRecorder().record(63,n),d()})))}),i*Math.pow(4,a++))};d()},t.prototype._readSourceAndCachedData=function(e,t,n,r){if(t){var o=void 0,i=void 0,s=void 0,a=2,u=function(e){e?r(e):0==--a&&r(void 0,o,i,s)};this._fs.readFile(e,{encoding:"utf8"},(function(e,t){o=t,u(e)})),this._fs.readFile(t,(function(e,r){!e&&r&&r.length>0?(s=r.slice(0,16),i=r.slice(16),n.record(60,t)):n.record(61,t),u()}))}else this._fs.readFile(e,{encoding:"utf8"},r)},t.prototype._verifyCachedData=function(e,t,n,r){var o=this;r&&(e.cachedDataRejected||setTimeout((function(){var e=o._crypto.createHash("md5").update(t,"utf8").digest()
-;r.equals(e)||(console.warn("FAILED TO VERIFY CACHED DATA. Deleting '"+n+"' now, but a RESTART IS REQUIRED"),o._fs.unlink(n,(function(e){return console.error("FAILED to unlink: '"+n+"'",e)})))}),Math.ceil(5e3*(1+Math.random()))))},t._BOM=65279,t._PREFIX="(function (require, define, __filename, __dirname) { ",t._SUFFIX="\n});",t}();e.createScriptLoader=function(e){return new t(e)}}(AMDLoader||(AMDLoader={})),function(e){var t=function(){function t(e){var t=e.lastIndexOf("/");this.fromModulePath=-1!==t?e.substr(0,t+1):""}return t._normalizeModuleId=function(e){var t,n=e;for(t=/\/\.\//;t.test(n);)n=n.replace(t,"/");for(n=n.replace(/^\.\//g,""),t=/\/(([^\/])|([^\/][^\/\.])|([^\/\.][^\/])|([^\/][^\/][^\/]+))\/\.\.\//;t.test(n);)n=n.replace(t,"/");return n=n.replace(/^(([^\/])|([^\/][^\/\.])|([^\/\.][^\/])|([^\/][^\/][^\/]+))\/\.\.\//,"")},t.prototype.resolveModule=function(n){var r=n
-;return e.Utilities.isAbsolutePath(r)||(e.Utilities.startsWith(r,"./")||e.Utilities.startsWith(r,"../"))&&(r=t._normalizeModuleId(this.fromModulePath+r)),r},t.ROOT=new t(""),t}();e.ModuleIdResolver=t;var n=function(){function t(e,t,n,r,o,i){this.id=e,this.strId=t,this.dependencies=n,this._callback=r,this._errorback=o,this.moduleIdResolver=i,this.exports={},this.error=null,this.exportsPassedIn=!1,this.unresolvedDependenciesCount=this.dependencies.length,this._isComplete=!1}return t._safeInvokeFunction=function(t,n){try{return{returnedValue:t.apply(e.global,n),producedError:null}}catch(e){return{returnedValue:null,producedError:e}}},t._invokeFactory=function(t,n,r,o){return t.isBuild()&&!e.Utilities.isAnonymousModule(n)?{returnedValue:null,producedError:null}:t.shouldCatchError()?this._safeInvokeFunction(r,o):{returnedValue:r.apply(e.global,o),producedError:null}},t.prototype.complete=function(n,r,o){this._isComplete=!0;var i=null;if(this._callback)if("function"==typeof this._callback){n.record(21,this.strId)
-;var s=t._invokeFactory(r,this.strId,this._callback,o);i=s.producedError,n.record(22,this.strId),i||void 0===s.returnedValue||this.exportsPassedIn&&!e.Utilities.isEmpty(this.exports)||(this.exports=s.returnedValue)}else this.exports=this._callback;if(i){var a=e.ensureError(i);a.phase="factory",a.moduleId=this.strId,this.error=a,r.onError(a)}this.dependencies=null,this._callback=null,this._errorback=null,this.moduleIdResolver=null},t.prototype.onDependencyError=function(e){return this._isComplete=!0,this.error=e,!!this._errorback&&(this._errorback(e),!0)},t.prototype.isComplete=function(){return this._isComplete},t}();e.Module=n;var r=function(){function e(){this._nextId=0,this._strModuleIdToIntModuleId=new Map,this._intModuleIdToStrModuleId=[],this.getModuleId("exports"),this.getModuleId("module"),this.getModuleId("require")}return e.prototype.getMaxModuleId=function(){return this._nextId},e.prototype.getModuleId=function(e){var t=this._strModuleIdToIntModuleId.get(e);return void 0===t&&(t=this._nextId++,
-this._strModuleIdToIntModuleId.set(e,t),this._intModuleIdToStrModuleId[t]=e),t},e.prototype.getStrModuleId=function(e){return this._intModuleIdToStrModuleId[e]},e}(),o=function(){function e(e){this.id=e}return e.EXPORTS=new e(0),e.MODULE=new e(1),e.REQUIRE=new e(2),e}();e.RegularDependency=o;var i=function(e,t,n){this.id=e,this.pluginId=t,this.pluginParam=n};e.PluginDependency=i;var s=function(){function s(t,n,o,i,s){void 0===s&&(s=0),this._env=t,this._scriptLoader=n,this._loaderAvailableTimestamp=s,this._defineFunc=o,this._requireFunc=i,this._moduleIdProvider=new r,this._config=new e.Configuration(this._env),this._modules2=[],this._knownModules2=[],this._inverseDependencies2=[],this._inversePluginDependencies2=new Map,this._currentAnnonymousDefineCall=null,this._recorder=null,this._buildInfoPath=[],this._buildInfoDefineStack=[],this._buildInfoDependencies=[]}return s.prototype.reset=function(){return new s(this._env,this._scriptLoader,this._defineFunc,this._requireFunc,this._loaderAvailableTimestamp)},
-s.prototype.getGlobalAMDDefineFunc=function(){return this._defineFunc},s.prototype.getGlobalAMDRequireFunc=function(){return this._requireFunc},s._findRelevantLocationInStack=function(e,t){for(var n=function(e){return e.replace(/\\/g,"/")},r=n(e),o=t.split(/\n/),i=0;i<o.length;i++){var s=o[i].match(/(.*):(\d+):(\d+)\)?$/);if(s){var a=s[1],u=s[2],d=s[3],l=Math.max(a.lastIndexOf(" ")+1,a.lastIndexOf("(")+1);if((a=n(a=a.substr(l)))===r){var c={line:parseInt(u,10),col:parseInt(d,10)};return 1===c.line&&(c.col-="(function (require, define, __filename, __dirname) { ".length),c}}}throw new Error("Could not correlate define call site for needle "+e)},s.prototype.getBuildInfo=function(){if(!this._config.isBuild())return null;for(var e=[],t=0,n=0,r=this._modules2.length;n<r;n++){var o=this._modules2[n];if(o){var i=this._buildInfoPath[o.id]||null,a=this._buildInfoDefineStack[o.id]||null,u=this._buildInfoDependencies[o.id];e[t++]={id:o.strId,path:i,defineLocation:i&&a?s._findRelevantLocationInStack(i,a):null,
-dependencies:u,shim:null,exports:o.exports}}}return e},s.prototype.getRecorder=function(){return this._recorder||(this._config.shouldRecordStats()?this._recorder=new e.LoaderEventRecorder(this._loaderAvailableTimestamp):this._recorder=e.NullLoaderEventRecorder.INSTANCE),this._recorder},s.prototype.getLoaderEvents=function(){return this.getRecorder().getEvents()},s.prototype.enqueueDefineAnonymousModule=function(e,t){if(null!==this._currentAnnonymousDefineCall)throw new Error("Can only have one anonymous define call per script file");var n=null;this._config.isBuild()&&(n=new Error("StackLocation").stack||null),this._currentAnnonymousDefineCall={stack:n,dependencies:e,callback:t}},s.prototype.defineModule=function(e,r,o,i,s,a){var u=this;void 0===a&&(a=new t(e));var d=this._moduleIdProvider.getModuleId(e);if(this._modules2[d])this._config.isDuplicateMessageIgnoredFor(e)||console.warn("Duplicate definition of module '"+e+"'");else{var l=new n(d,e,this._normalizeDependencies(r,a),o,i,a);this._modules2[d]=l,
-this._config.isBuild()&&(this._buildInfoDefineStack[d]=s,this._buildInfoDependencies[d]=(l.dependencies||[]).map((function(e){return u._moduleIdProvider.getStrModuleId(e.id)}))),this._resolve(l)}},s.prototype._normalizeDependency=function(e,t){if("exports"===e)return o.EXPORTS;if("module"===e)return o.MODULE;if("require"===e)return o.REQUIRE;var n=e.indexOf("!");if(n>=0){var r=t.resolveModule(e.substr(0,n)),s=t.resolveModule(e.substr(n+1)),a=this._moduleIdProvider.getModuleId(r+"!"+s),u=this._moduleIdProvider.getModuleId(r);return new i(a,u,s)}return new o(this._moduleIdProvider.getModuleId(t.resolveModule(e)))},s.prototype._normalizeDependencies=function(e,t){for(var n=[],r=0,o=0,i=e.length;o<i;o++)n[r++]=this._normalizeDependency(e[o],t);return n},s.prototype._relativeRequire=function(t,n,r,o){if("string"==typeof n)return this.synchronousRequire(n,t);this.defineModule(e.Utilities.generateAnonymousModule(),n,r,o,null,t)},s.prototype.synchronousRequire=function(e,n){void 0===n&&(n=new t(e))
-;var r=this._normalizeDependency(e,n),o=this._modules2[r.id];if(!o)throw new Error("Check dependency list! Synchronous require cannot resolve module '"+e+"'. This is the first mention of this module!");if(!o.isComplete())throw new Error("Check dependency list! Synchronous require cannot resolve module '"+e+"'. This module has not been resolved completely yet.");if(o.error)throw o.error;return o.exports},s.prototype.configure=function(t,n){var r=this._config.shouldRecordStats();this._config=n?new e.Configuration(this._env,t):this._config.cloneAndMerge(t),this._config.shouldRecordStats()&&!r&&(this._recorder=null)},s.prototype.getConfig=function(){return this._config},s.prototype._onLoad=function(e){if(null!==this._currentAnnonymousDefineCall){var t=this._currentAnnonymousDefineCall;this._currentAnnonymousDefineCall=null,this.defineModule(this._moduleIdProvider.getStrModuleId(e),t.dependencies,t.callback,null,t.stack)}},s.prototype._createLoadError=function(t,n){
-var r=this,o=this._moduleIdProvider.getStrModuleId(t),i=(this._inverseDependencies2[t]||[]).map((function(e){return r._moduleIdProvider.getStrModuleId(e)})),s=e.ensureError(n);return s.phase="loading",s.moduleId=o,s.neededBy=i,s},s.prototype._onLoadError=function(e,t){var r=this._createLoadError(e,t);this._modules2[e]||(this._modules2[e]=new n(e,this._moduleIdProvider.getStrModuleId(e),[],(function(){}),(function(){}),null));for(var o=[],i=0,s=this._moduleIdProvider.getMaxModuleId();i<s;i++)o[i]=!1;var a=!1,u=[];for(u.push(e),o[e]=!0;u.length>0;){var d=u.shift(),l=this._modules2[d];l&&(a=l.onDependencyError(r)||a);var c=this._inverseDependencies2[d];if(c)for(i=0,s=c.length;i<s;i++){var h=c[i];o[h]||(u.push(h),o[h]=!0)}}a||this._config.onError(r)},s.prototype._hasDependencyPath=function(e,t){var n=this._modules2[e];if(!n)return!1;for(var r=[],o=0,i=this._moduleIdProvider.getMaxModuleId();o<i;o++)r[o]=!1;var s=[];for(s.push(n),r[e]=!0;s.length>0;){var a=s.shift().dependencies;if(a)for(o=0,i=a.length;o<i;o++){
-var u=a[o];if(u.id===t)return!0;var d=this._modules2[u.id];d&&!r[u.id]&&(r[u.id]=!0,s.push(d))}}return!1},s.prototype._findCyclePath=function(e,t,n){if(e===t||50===n)return[e];var r=this._modules2[e];if(!r)return null;var o=r.dependencies;if(o)for(var i=0,s=o.length;i<s;i++){var a=this._findCyclePath(o[i].id,t,n+1);if(null!==a)return a.push(e),a}return null},s.prototype._createRequire=function(t){var n=this,r=function(e,r,o){return n._relativeRequire(t,e,r,o)};return r.toUrl=function(e){return n._config.requireToUrl(t.resolveModule(e))},r.getStats=function(){return n.getLoaderEvents()},r.__$__nodeRequire=e.global.nodeRequire,r},s.prototype._loadModule=function(e){var t=this;if(!this._modules2[e]&&!this._knownModules2[e]){this._knownModules2[e]=!0;var n=this._moduleIdProvider.getStrModuleId(e),r=this._config.moduleIdToPaths(n);this._env.isNode&&(-1===n.indexOf("/")||/^@[^\/]+\/[^\/]+$/.test(n))&&r.push("node|"+n);var o=-1,i=function(n){if(++o>=r.length)t._onLoadError(e,n);else{var s=r[o],a=t.getRecorder()
-;if(t._config.isBuild()&&"empty:"===s)return t._buildInfoPath[e]=s,t.defineModule(t._moduleIdProvider.getStrModuleId(e),[],null,null,null),void t._onLoad(e);a.record(10,s),t._scriptLoader.load(t,s,(function(){t._config.isBuild()&&(t._buildInfoPath[e]=s),a.record(11,s),t._onLoad(e)}),(function(e){a.record(12,s),i(e)}))}};i(null)}},s.prototype._loadPluginDependency=function(e,n){var r=this;if(!this._modules2[n.id]&&!this._knownModules2[n.id]){this._knownModules2[n.id]=!0;var o=function(e){r.defineModule(r._moduleIdProvider.getStrModuleId(n.id),[],e,null,null)};o.error=function(e){r._config.onError(r._createLoadError(n.id,e))},e.load(n.pluginParam,this._createRequire(t.ROOT),o,this._config.getOptionsLiteral())}},s.prototype._resolve=function(e){var t=this,n=e.dependencies;if(n)for(var r=0,s=n.length;r<s;r++){var a=n[r];if(a!==o.EXPORTS)if(a!==o.MODULE)if(a!==o.REQUIRE){var u=this._modules2[a.id];if(u&&u.isComplete()){if(u.error)return void e.onDependencyError(u.error);e.unresolvedDependenciesCount--
-}else if(this._hasDependencyPath(a.id,e.id)){console.warn("There is a dependency cycle between '"+this._moduleIdProvider.getStrModuleId(a.id)+"' and '"+this._moduleIdProvider.getStrModuleId(e.id)+"'. The cyclic path follows:");var d=this._findCyclePath(a.id,e.id,0)||[];d.reverse(),d.push(a.id),console.warn(d.map((function(e){return t._moduleIdProvider.getStrModuleId(e)})).join(" => \n")),e.unresolvedDependenciesCount--}else if(this._inverseDependencies2[a.id]=this._inverseDependencies2[a.id]||[],this._inverseDependencies2[a.id].push(e.id),a instanceof i){var l=this._modules2[a.pluginId];if(l&&l.isComplete()){this._loadPluginDependency(l.exports,a);continue}var c=this._inversePluginDependencies2.get(a.pluginId);c||(c=[],this._inversePluginDependencies2.set(a.pluginId,c)),c.push(a),this._loadModule(a.pluginId)}else this._loadModule(a.id)}else e.unresolvedDependenciesCount--;else e.unresolvedDependenciesCount--;else e.exportsPassedIn=!0,e.unresolvedDependenciesCount--}
-0===e.unresolvedDependenciesCount&&this._onModuleComplete(e)},s.prototype._onModuleComplete=function(e){var t=this,n=this.getRecorder();if(!e.isComplete()){var r=e.dependencies,i=[];if(r)for(var s=0,a=r.length;s<a;s++){var u=r[s];if(u!==o.EXPORTS)if(u!==o.MODULE)if(u!==o.REQUIRE){var d=this._modules2[u.id];i[s]=d?d.exports:null}else i[s]=this._createRequire(e.moduleIdResolver);else i[s]={id:e.strId,config:function(){return t._config.getConfigForModule(e.strId)}};else i[s]=e.exports}e.complete(n,this._config,i);var l=this._inverseDependencies2[e.id];if(this._inverseDependencies2[e.id]=null,l)for(s=0,a=l.length;s<a;s++){var c=l[s],h=this._modules2[c];h.unresolvedDependenciesCount--,0===h.unresolvedDependenciesCount&&this._onModuleComplete(h)}var f=this._inversePluginDependencies2.get(e.id);if(f){this._inversePluginDependencies2.delete(e.id);for(s=0,a=f.length;s<a;s++)this._loadPluginDependency(e.exports,f[s])}}},s}();e.ModuleManager=s}(AMDLoader||(AMDLoader={})),function(e){
-var t=new e.Environment,n=null,r=function(e,t,r){"string"!=typeof e&&(r=t,t=e,e=null),"object"==typeof t&&Array.isArray(t)||(r=t,t=null),t||(t=["require","exports","module"]),e?n.defineModule(e,t,r,null,null):n.enqueueDefineAnonymousModule(t,r)};r.amd={jQuery:!0};var o=function(e,t){void 0===t&&(t=!1),n.configure(e,t)},i=function(){if(1===arguments.length){if(arguments[0]instanceof Object&&!Array.isArray(arguments[0]))return void o(arguments[0]);if("string"==typeof arguments[0])return n.synchronousRequire(arguments[0])}if(2!==arguments.length&&3!==arguments.length||!Array.isArray(arguments[0]))throw new Error("Unrecognized require call");n.defineModule(e.Utilities.generateAnonymousModule(),arguments[0],arguments[1],arguments[2],null)};function s(){if(void 0!==e.global.require||"undefined"!=typeof require){var o=e.global.require||require;if("function"==typeof o&&"function"==typeof o.resolve){var s=function(e){n.getRecorder().record(33,e);try{return o(e)}finally{n.getRecorder().record(34,e)}}
-;e.global.nodeRequire=s,i.nodeRequire=s,i.__$__nodeRequire=s}}t.isNode&&!t.isElectronRenderer?(module.exports=i,require=i):(t.isElectronRenderer||(e.global.define=r),e.global.require=i)}i.config=o,i.getConfig=function(){return n.getConfig().getOptionsLiteral()},i.reset=function(){n=n.reset()},i.getBuildInfo=function(){return n.getBuildInfo()},i.getStats=function(){return n.getLoaderEvents()},i.define=function(){return r.apply(null,arguments)},e.init=s,"function"==typeof e.global.define&&e.global.define.amd||(n=new e.ModuleManager(t,e.createScriptLoader(t),r,i,e.Utilities.getHighPerformanceTimestamp()),void 0!==e.global.require&&"function"!=typeof e.global.require&&i.config(e.global.require),(define=function(){return r.apply(null,arguments)}).amd=r.amd,"undefined"==typeof doNotInitLoader&&s())}(AMDLoader||(AMDLoader={})),function(e){var t=function(){function e(){this._pendingLoads=0}return e.prototype.attachListeners=function(e,t,n,r){var o=function(){t.removeEventListener("load",i),
-t.removeEventListener("error",s)},i=function(e){o(),n()},s=function(e){o(),r(e)};t.addEventListener("load",i),t.addEventListener("error",s)},e.prototype._onLoad=function(e,t){this._pendingLoads--,t()},e.prototype._onLoadError=function(e,t,n){this._pendingLoads--,t(n)},e.prototype._insertLinkNode=function(e){this._pendingLoads++;var t=document.head||document.getElementsByTagName("head")[0],n=t.getElementsByTagName("link")||document.head.getElementsByTagName("script");n.length>0?t.insertBefore(e,n[n.length-1]):t.appendChild(e)},e.prototype.createLinkTag=function(e,t,n,r){var o=this,i=document.createElement("link");i.setAttribute("rel","stylesheet"),i.setAttribute("type","text/css"),i.setAttribute("data-name",e);return this.attachListeners(e,i,(function(){return o._onLoad(e,n)}),(function(t){return o._onLoadError(e,r,t)})),i.setAttribute("href",t),i},e.prototype._linkTagExists=function(e,t){var n,r,o,i,s=document.getElementsByTagName("link");for(n=0,r=s.length;n<r;n++)if(o=s[n].getAttribute("data-name"),
-i=s[n].getAttribute("href"),o===e||i===t)return!0;return!1},e.prototype.load=function(e,t,n,r){if(this._linkTagExists(e,t))n();else{var o=this.createLinkTag(e,t,n,r);this._insertLinkNode(o)}},e}(),n=function(){function e(){this._cssLoader=new t}return e.prototype.load=function(e,t,n){var r=t.toUrl(e+".css");this._cssLoader.load(e,r,(function(e){n({})}),(function(e){"function"==typeof n.error&&n.error("Could not find "+r+" or it was empty")}))},e}();e.CSSPlugin=n,define("vs/css",new n)}(CSSLoaderPlugin||(CSSLoaderPlugin={})),function(e){var t=function(){function e(){this._detected=!1,this._isPseudo=!1}return Object.defineProperty(e.prototype,"isPseudo",{get:function(){return this._detect(),this._isPseudo},enumerable:!0,configurable:!0}),e.prototype._detect=function(){this._detected||(this._detected=!0,this._isPseudo="undefined"!=typeof document&&document.location&&document.location.hash.indexOf("pseudo=true")>=0)},e}();function n(e,t,n){var r;return r=0===t.length?e:e.replace(/\{(\d+)\}/g,(function(e,n){
-var r=n[0],o=t[r],i=e;return"string"==typeof o?i=o:"number"!=typeof o&&"boolean"!=typeof o&&null!=o||(i=String(o)),i})),n.isPseudo&&(r="［"+r.replace(/[aouei]/g,"$&$&")+"］"),r}function r(e,t,r){for(var o=[],i=3;i<arguments.length;i++)o[i-3]=arguments[i];return n(r,o,e)}function o(e,t){return function(r,o){var i=Array.prototype.slice.call(arguments,2);return n(e[r],i,t)}}var i=function(){function e(e){var t=this;this._env=e,this.localize=function(e,n){for(var o=[],i=2;i<arguments.length;i++)o[i-2]=arguments[i];return r.apply(void 0,[t._env,e,n].concat(o))}}return e.prototype.setPseudoTranslation=function(e){this._env._isPseudo=e},e.prototype.create=function(e,t){return{localize:o(t[e],this._env)}},e.prototype.load=function(t,n,r,i){var s=this;if(i=i||{},t&&0!==t.length){var a=i["vs/nls"]||{},u=a.availableLanguages?function(e,t){var n=e[t];return n||((n=e["*"])||null)}(a.availableLanguages,t):null,d=".nls";null!==u&&u!==e.DEFAULT_TAG&&(d=d+"."+u);var l=function(e){
-Array.isArray(e)?e.localize=o(e,s._env):e.localize=o(e[t],s._env),r(e)};"function"==typeof a.loadBundle?a.loadBundle(t,u,(function(e,r){e?n([t+".nls"],l):l(r)})):n([t+d],l)}else r({localize:this.localize})},e.DEFAULT_TAG="i-default",e}();e.NLSPlugin=i,define("vs/nls",new i(new t))}(NLSLoaderPlugin||(NLSLoaderPlugin={}));
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+'use strict';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ * Please make sure to make edits in the .ts file at https://github.com/Microsoft/vscode-loader/
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *--------------------------------------------------------------------------------------------*/
+var _amdLoaderGlobal = this;
+var _commonjsGlobal = typeof global === 'object' ? global : {};
+var AMDLoader;
+(function (AMDLoader) {
+    AMDLoader.global = _amdLoaderGlobal;
+    var Environment = /** @class */ (function () {
+        function Environment() {
+            this._detected = false;
+            this._isWindows = false;
+            this._isNode = false;
+            this._isElectronRenderer = false;
+            this._isWebWorker = false;
+        }
+        Object.defineProperty(Environment.prototype, "isWindows", {
+            get: function () {
+                this._detect();
+                return this._isWindows;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Environment.prototype, "isNode", {
+            get: function () {
+                this._detect();
+                return this._isNode;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Environment.prototype, "isElectronRenderer", {
+            get: function () {
+                this._detect();
+                return this._isElectronRenderer;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Environment.prototype, "isWebWorker", {
+            get: function () {
+                this._detect();
+                return this._isWebWorker;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Environment.prototype._detect = function () {
+            if (this._detected) {
+                return;
+            }
+            this._detected = true;
+            this._isWindows = Environment._isWindows();
+            this._isNode = (typeof module !== 'undefined' && !!module.exports);
+            this._isElectronRenderer = (typeof process !== 'undefined' && typeof process.versions !== 'undefined' && typeof process.versions.electron !== 'undefined' && process.type === 'renderer');
+            this._isWebWorker = (typeof AMDLoader.global.importScripts === 'function');
+        };
+        Environment._isWindows = function () {
+            if (typeof navigator !== 'undefined') {
+                if (navigator.userAgent && navigator.userAgent.indexOf('Windows') >= 0) {
+                    return true;
+                }
+            }
+            if (typeof process !== 'undefined') {
+                return (process.platform === 'win32');
+            }
+            return false;
+        };
+        return Environment;
+    }());
+    AMDLoader.Environment = Environment;
+})(AMDLoader || (AMDLoader = {}));
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+var AMDLoader;
+(function (AMDLoader) {
+    var LoaderEvent = /** @class */ (function () {
+        function LoaderEvent(type, detail, timestamp) {
+            this.type = type;
+            this.detail = detail;
+            this.timestamp = timestamp;
+        }
+        return LoaderEvent;
+    }());
+    AMDLoader.LoaderEvent = LoaderEvent;
+    var LoaderEventRecorder = /** @class */ (function () {
+        function LoaderEventRecorder(loaderAvailableTimestamp) {
+            this._events = [new LoaderEvent(1 /* LoaderAvailable */, '', loaderAvailableTimestamp)];
+        }
+        LoaderEventRecorder.prototype.record = function (type, detail) {
+            this._events.push(new LoaderEvent(type, detail, AMDLoader.Utilities.getHighPerformanceTimestamp()));
+        };
+        LoaderEventRecorder.prototype.getEvents = function () {
+            return this._events;
+        };
+        return LoaderEventRecorder;
+    }());
+    AMDLoader.LoaderEventRecorder = LoaderEventRecorder;
+    var NullLoaderEventRecorder = /** @class */ (function () {
+        function NullLoaderEventRecorder() {
+        }
+        NullLoaderEventRecorder.prototype.record = function (type, detail) {
+            // Nothing to do
+        };
+        NullLoaderEventRecorder.prototype.getEvents = function () {
+            return [];
+        };
+        NullLoaderEventRecorder.INSTANCE = new NullLoaderEventRecorder();
+        return NullLoaderEventRecorder;
+    }());
+    AMDLoader.NullLoaderEventRecorder = NullLoaderEventRecorder;
+})(AMDLoader || (AMDLoader = {}));
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+var AMDLoader;
+(function (AMDLoader) {
+    var Utilities = /** @class */ (function () {
+        function Utilities() {
+        }
+        /**
+         * This method does not take care of / vs \
+         */
+        Utilities.fileUriToFilePath = function (isWindows, uri) {
+            uri = decodeURI(uri).replace(/%23/g, '#');
+            if (isWindows) {
+                if (/^file:\/\/\//.test(uri)) {
+                    // This is a URI without a hostname => return only the path segment
+                    return uri.substr(8);
+                }
+                if (/^file:\/\//.test(uri)) {
+                    return uri.substr(5);
+                }
+            }
+            else {
+                if (/^file:\/\//.test(uri)) {
+                    return uri.substr(7);
+                }
+            }
+            // Not sure...
+            return uri;
+        };
+        Utilities.startsWith = function (haystack, needle) {
+            return haystack.length >= needle.length && haystack.substr(0, needle.length) === needle;
+        };
+        Utilities.endsWith = function (haystack, needle) {
+            return haystack.length >= needle.length && haystack.substr(haystack.length - needle.length) === needle;
+        };
+        // only check for "?" before "#" to ensure that there is a real Query-String
+        Utilities.containsQueryString = function (url) {
+            return /^[^\#]*\?/gi.test(url);
+        };
+        /**
+         * Does `url` start with http:// or https:// or file:// or / ?
+         */
+        Utilities.isAbsolutePath = function (url) {
+            return /^((http:\/\/)|(https:\/\/)|(file:\/\/)|(\/))/.test(url);
+        };
+        Utilities.forEachProperty = function (obj, callback) {
+            if (obj) {
+                var key = void 0;
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        callback(key, obj[key]);
+                    }
+                }
+            }
+        };
+        Utilities.isEmpty = function (obj) {
+            var isEmpty = true;
+            Utilities.forEachProperty(obj, function () {
+                isEmpty = false;
+            });
+            return isEmpty;
+        };
+        Utilities.recursiveClone = function (obj) {
+            if (!obj || typeof obj !== 'object') {
+                return obj;
+            }
+            var result = Array.isArray(obj) ? [] : {};
+            Utilities.forEachProperty(obj, function (key, value) {
+                if (value && typeof value === 'object') {
+                    result[key] = Utilities.recursiveClone(value);
+                }
+                else {
+                    result[key] = value;
+                }
+            });
+            return result;
+        };
+        Utilities.generateAnonymousModule = function () {
+            return '===anonymous' + (Utilities.NEXT_ANONYMOUS_ID++) + '===';
+        };
+        Utilities.isAnonymousModule = function (id) {
+            return Utilities.startsWith(id, '===anonymous');
+        };
+        Utilities.getHighPerformanceTimestamp = function () {
+            if (!this.PERFORMANCE_NOW_PROBED) {
+                this.PERFORMANCE_NOW_PROBED = true;
+                this.HAS_PERFORMANCE_NOW = (AMDLoader.global.performance && typeof AMDLoader.global.performance.now === 'function');
+            }
+            return (this.HAS_PERFORMANCE_NOW ? AMDLoader.global.performance.now() : Date.now());
+        };
+        Utilities.NEXT_ANONYMOUS_ID = 1;
+        Utilities.PERFORMANCE_NOW_PROBED = false;
+        Utilities.HAS_PERFORMANCE_NOW = false;
+        return Utilities;
+    }());
+    AMDLoader.Utilities = Utilities;
+})(AMDLoader || (AMDLoader = {}));
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+var AMDLoader;
+(function (AMDLoader) {
+    function ensureError(err) {
+        if (err instanceof Error) {
+            return err;
+        }
+        var result = new Error(err.message || String(err) || 'Unknown Error');
+        if (err.stack) {
+            result.stack = err.stack;
+        }
+        return result;
+    }
+    AMDLoader.ensureError = ensureError;
+    ;
+    var ConfigurationOptionsUtil = /** @class */ (function () {
+        function ConfigurationOptionsUtil() {
+        }
+        /**
+         * Ensure configuration options make sense
+         */
+        ConfigurationOptionsUtil.validateConfigurationOptions = function (options) {
+            function defaultOnError(err) {
+                if (err.phase === 'loading') {
+                    console.error('Loading "' + err.moduleId + '" failed');
+                    console.error(err);
+                    console.error('Here are the modules that depend on it:');
+                    console.error(err.neededBy);
+                    return;
+                }
+                if (err.phase === 'factory') {
+                    console.error('The factory method of "' + err.moduleId + '" has thrown an exception');
+                    console.error(err);
+                    return;
+                }
+            }
+            options = options || {};
+            if (typeof options.baseUrl !== 'string') {
+                options.baseUrl = '';
+            }
+            if (typeof options.isBuild !== 'boolean') {
+                options.isBuild = false;
+            }
+            if (typeof options.paths !== 'object') {
+                options.paths = {};
+            }
+            if (typeof options.config !== 'object') {
+                options.config = {};
+            }
+            if (typeof options.catchError === 'undefined') {
+                options.catchError = false;
+            }
+            if (typeof options.recordStats === 'undefined') {
+                options.recordStats = false;
+            }
+            if (typeof options.urlArgs !== 'string') {
+                options.urlArgs = '';
+            }
+            if (typeof options.onError !== 'function') {
+                options.onError = defaultOnError;
+            }
+            if (!Array.isArray(options.ignoreDuplicateModules)) {
+                options.ignoreDuplicateModules = [];
+            }
+            if (options.baseUrl.length > 0) {
+                if (!AMDLoader.Utilities.endsWith(options.baseUrl, '/')) {
+                    options.baseUrl += '/';
+                }
+            }
+            if (typeof options.cspNonce !== 'string') {
+                options.cspNonce = '';
+            }
+            if (!Array.isArray(options.nodeModules)) {
+                options.nodeModules = [];
+            }
+            if (options.nodeCachedData && typeof options.nodeCachedData === 'object') {
+                if (typeof options.nodeCachedData.seed !== 'string') {
+                    options.nodeCachedData.seed = 'seed';
+                }
+                if (typeof options.nodeCachedData.writeDelay !== 'number' || options.nodeCachedData.writeDelay < 0) {
+                    options.nodeCachedData.writeDelay = 1000 * 7;
+                }
+                if (!options.nodeCachedData.path || typeof options.nodeCachedData.path !== 'string') {
+                    var err = ensureError(new Error('INVALID cached data configuration, \'path\' MUST be set'));
+                    err.phase = 'configuration';
+                    options.onError(err);
+                    options.nodeCachedData = undefined;
+                }
+            }
+            return options;
+        };
+        ConfigurationOptionsUtil.mergeConfigurationOptions = function (overwrite, base) {
+            if (overwrite === void 0) { overwrite = null; }
+            if (base === void 0) { base = null; }
+            var result = AMDLoader.Utilities.recursiveClone(base || {});
+            // Merge known properties and overwrite the unknown ones
+            AMDLoader.Utilities.forEachProperty(overwrite, function (key, value) {
+                if (key === 'ignoreDuplicateModules' && typeof result.ignoreDuplicateModules !== 'undefined') {
+                    result.ignoreDuplicateModules = result.ignoreDuplicateModules.concat(value);
+                }
+                else if (key === 'paths' && typeof result.paths !== 'undefined') {
+                    AMDLoader.Utilities.forEachProperty(value, function (key2, value2) { return result.paths[key2] = value2; });
+                }
+                else if (key === 'config' && typeof result.config !== 'undefined') {
+                    AMDLoader.Utilities.forEachProperty(value, function (key2, value2) { return result.config[key2] = value2; });
+                }
+                else {
+                    result[key] = AMDLoader.Utilities.recursiveClone(value);
+                }
+            });
+            return ConfigurationOptionsUtil.validateConfigurationOptions(result);
+        };
+        return ConfigurationOptionsUtil;
+    }());
+    AMDLoader.ConfigurationOptionsUtil = ConfigurationOptionsUtil;
+    var Configuration = /** @class */ (function () {
+        function Configuration(env, options) {
+            this._env = env;
+            this.options = ConfigurationOptionsUtil.mergeConfigurationOptions(options);
+            this._createIgnoreDuplicateModulesMap();
+            this._createNodeModulesMap();
+            this._createSortedPathsRules();
+            if (this.options.baseUrl === '') {
+                if (this.options.nodeRequire && this.options.nodeRequire.main && this.options.nodeRequire.main.filename && this._env.isNode) {
+                    var nodeMain = this.options.nodeRequire.main.filename;
+                    var dirnameIndex = Math.max(nodeMain.lastIndexOf('/'), nodeMain.lastIndexOf('\\'));
+                    this.options.baseUrl = nodeMain.substring(0, dirnameIndex + 1);
+                }
+                if (this.options.nodeMain && this._env.isNode) {
+                    var nodeMain = this.options.nodeMain;
+                    var dirnameIndex = Math.max(nodeMain.lastIndexOf('/'), nodeMain.lastIndexOf('\\'));
+                    this.options.baseUrl = nodeMain.substring(0, dirnameIndex + 1);
+                }
+            }
+        }
+        Configuration.prototype._createIgnoreDuplicateModulesMap = function () {
+            // Build a map out of the ignoreDuplicateModules array
+            this.ignoreDuplicateModulesMap = {};
+            for (var i = 0; i < this.options.ignoreDuplicateModules.length; i++) {
+                this.ignoreDuplicateModulesMap[this.options.ignoreDuplicateModules[i]] = true;
+            }
+        };
+        Configuration.prototype._createNodeModulesMap = function () {
+            // Build a map out of nodeModules array
+            this.nodeModulesMap = Object.create(null);
+            for (var _i = 0, _a = this.options.nodeModules; _i < _a.length; _i++) {
+                var nodeModule = _a[_i];
+                this.nodeModulesMap[nodeModule] = true;
+            }
+        };
+        Configuration.prototype._createSortedPathsRules = function () {
+            var _this = this;
+            // Create an array our of the paths rules, sorted descending by length to
+            // result in a more specific -> less specific order
+            this.sortedPathsRules = [];
+            AMDLoader.Utilities.forEachProperty(this.options.paths, function (from, to) {
+                if (!Array.isArray(to)) {
+                    _this.sortedPathsRules.push({
+                        from: from,
+                        to: [to]
+                    });
+                }
+                else {
+                    _this.sortedPathsRules.push({
+                        from: from,
+                        to: to
+                    });
+                }
+            });
+            this.sortedPathsRules.sort(function (a, b) {
+                return b.from.length - a.from.length;
+            });
+        };
+        /**
+         * Clone current configuration and overwrite options selectively.
+         * @param options The selective options to overwrite with.
+         * @result A new configuration
+         */
+        Configuration.prototype.cloneAndMerge = function (options) {
+            return new Configuration(this._env, ConfigurationOptionsUtil.mergeConfigurationOptions(options, this.options));
+        };
+        /**
+         * Get current options bag. Useful for passing it forward to plugins.
+         */
+        Configuration.prototype.getOptionsLiteral = function () {
+            return this.options;
+        };
+        Configuration.prototype._applyPaths = function (moduleId) {
+            var pathRule;
+            for (var i = 0, len = this.sortedPathsRules.length; i < len; i++) {
+                pathRule = this.sortedPathsRules[i];
+                if (AMDLoader.Utilities.startsWith(moduleId, pathRule.from)) {
+                    var result = [];
+                    for (var j = 0, lenJ = pathRule.to.length; j < lenJ; j++) {
+                        result.push(pathRule.to[j] + moduleId.substr(pathRule.from.length));
+                    }
+                    return result;
+                }
+            }
+            return [moduleId];
+        };
+        Configuration.prototype._addUrlArgsToUrl = function (url) {
+            if (AMDLoader.Utilities.containsQueryString(url)) {
+                return url + '&' + this.options.urlArgs;
+            }
+            else {
+                return url + '?' + this.options.urlArgs;
+            }
+        };
+        Configuration.prototype._addUrlArgsIfNecessaryToUrl = function (url) {
+            if (this.options.urlArgs) {
+                return this._addUrlArgsToUrl(url);
+            }
+            return url;
+        };
+        Configuration.prototype._addUrlArgsIfNecessaryToUrls = function (urls) {
+            if (this.options.urlArgs) {
+                for (var i = 0, len = urls.length; i < len; i++) {
+                    urls[i] = this._addUrlArgsToUrl(urls[i]);
+                }
+            }
+            return urls;
+        };
+        /**
+         * Transform a module id to a location. Appends .js to module ids
+         */
+        Configuration.prototype.moduleIdToPaths = function (moduleId) {
+            if (this.nodeModulesMap[moduleId] === true) {
+                // This is a node module...
+                if (this.isBuild()) {
+                    // ...and we are at build time, drop it
+                    return ['empty:'];
+                }
+                else {
+                    // ...and at runtime we create a `shortcut`-path
+                    return ['node|' + moduleId];
+                }
+            }
+            var result = moduleId;
+            var results;
+            if (!AMDLoader.Utilities.endsWith(result, '.js') && !AMDLoader.Utilities.isAbsolutePath(result)) {
+                results = this._applyPaths(result);
+                for (var i = 0, len = results.length; i < len; i++) {
+                    if (this.isBuild() && results[i] === 'empty:') {
+                        continue;
+                    }
+                    if (!AMDLoader.Utilities.isAbsolutePath(results[i])) {
+                        results[i] = this.options.baseUrl + results[i];
+                    }
+                    if (!AMDLoader.Utilities.endsWith(results[i], '.js') && !AMDLoader.Utilities.containsQueryString(results[i])) {
+                        results[i] = results[i] + '.js';
+                    }
+                }
+            }
+            else {
+                if (!AMDLoader.Utilities.endsWith(result, '.js') && !AMDLoader.Utilities.containsQueryString(result)) {
+                    result = result + '.js';
+                }
+                results = [result];
+            }
+            return this._addUrlArgsIfNecessaryToUrls(results);
+        };
+        /**
+         * Transform a module id or url to a location.
+         */
+        Configuration.prototype.requireToUrl = function (url) {
+            var result = url;
+            if (!AMDLoader.Utilities.isAbsolutePath(result)) {
+                result = this._applyPaths(result)[0];
+                if (!AMDLoader.Utilities.isAbsolutePath(result)) {
+                    result = this.options.baseUrl + result;
+                }
+            }
+            return this._addUrlArgsIfNecessaryToUrl(result);
+        };
+        /**
+         * Flag to indicate if current execution is as part of a build.
+         */
+        Configuration.prototype.isBuild = function () {
+            return this.options.isBuild;
+        };
+        /**
+         * Test if module `moduleId` is expected to be defined multiple times
+         */
+        Configuration.prototype.isDuplicateMessageIgnoredFor = function (moduleId) {
+            return this.ignoreDuplicateModulesMap.hasOwnProperty(moduleId);
+        };
+        /**
+         * Get the configuration settings for the provided module id
+         */
+        Configuration.prototype.getConfigForModule = function (moduleId) {
+            if (this.options.config) {
+                return this.options.config[moduleId];
+            }
+        };
+        /**
+         * Should errors be caught when executing module factories?
+         */
+        Configuration.prototype.shouldCatchError = function () {
+            return this.options.catchError;
+        };
+        /**
+         * Should statistics be recorded?
+         */
+        Configuration.prototype.shouldRecordStats = function () {
+            return this.options.recordStats;
+        };
+        /**
+         * Forward an error to the error handler.
+         */
+        Configuration.prototype.onError = function (err) {
+            this.options.onError(err);
+        };
+        return Configuration;
+    }());
+    AMDLoader.Configuration = Configuration;
+})(AMDLoader || (AMDLoader = {}));
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+var AMDLoader;
+(function (AMDLoader) {
+    /**
+     * Load `scriptSrc` only once (avoid multiple <script> tags)
+     */
+    var OnlyOnceScriptLoader = /** @class */ (function () {
+        function OnlyOnceScriptLoader(env) {
+            this._env = env;
+            this._scriptLoader = null;
+            this._callbackMap = {};
+        }
+        OnlyOnceScriptLoader.prototype.load = function (moduleManager, scriptSrc, callback, errorback) {
+            var _this = this;
+            if (!this._scriptLoader) {
+                this._scriptLoader = (this._env.isWebWorker
+                    ? new WorkerScriptLoader()
+                    : this._env.isNode
+                        ? new NodeScriptLoader(this._env)
+                        : new BrowserScriptLoader());
+            }
+            var scriptCallbacks = {
+                callback: callback,
+                errorback: errorback
+            };
+            if (this._callbackMap.hasOwnProperty(scriptSrc)) {
+                this._callbackMap[scriptSrc].push(scriptCallbacks);
+                return;
+            }
+            this._callbackMap[scriptSrc] = [scriptCallbacks];
+            this._scriptLoader.load(moduleManager, scriptSrc, function () { return _this.triggerCallback(scriptSrc); }, function (err) { return _this.triggerErrorback(scriptSrc, err); });
+        };
+        OnlyOnceScriptLoader.prototype.triggerCallback = function (scriptSrc) {
+            var scriptCallbacks = this._callbackMap[scriptSrc];
+            delete this._callbackMap[scriptSrc];
+            for (var i = 0; i < scriptCallbacks.length; i++) {
+                scriptCallbacks[i].callback();
+            }
+        };
+        OnlyOnceScriptLoader.prototype.triggerErrorback = function (scriptSrc, err) {
+            var scriptCallbacks = this._callbackMap[scriptSrc];
+            delete this._callbackMap[scriptSrc];
+            for (var i = 0; i < scriptCallbacks.length; i++) {
+                scriptCallbacks[i].errorback(err);
+            }
+        };
+        return OnlyOnceScriptLoader;
+    }());
+    var BrowserScriptLoader = /** @class */ (function () {
+        function BrowserScriptLoader() {
+        }
+        /**
+         * Attach load / error listeners to a script element and remove them when either one has fired.
+         * Implemented for browssers supporting HTML5 standard 'load' and 'error' events.
+         */
+        BrowserScriptLoader.prototype.attachListeners = function (script, callback, errorback) {
+            var unbind = function () {
+                script.removeEventListener('load', loadEventListener);
+                script.removeEventListener('error', errorEventListener);
+            };
+            var loadEventListener = function (e) {
+                unbind();
+                callback();
+            };
+            var errorEventListener = function (e) {
+                unbind();
+                errorback(e);
+            };
+            script.addEventListener('load', loadEventListener);
+            script.addEventListener('error', errorEventListener);
+        };
+        BrowserScriptLoader.prototype.load = function (moduleManager, scriptSrc, callback, errorback) {
+            var script = document.createElement('script');
+            script.setAttribute('async', 'async');
+            script.setAttribute('type', 'text/javascript');
+            this.attachListeners(script, callback, errorback);
+            script.setAttribute('src', scriptSrc);
+            // Propagate CSP nonce to dynamically created script tag.
+            var cspNonce = moduleManager.getConfig().getOptionsLiteral().cspNonce;
+            if (cspNonce) {
+                script.setAttribute('nonce', cspNonce);
+            }
+            document.getElementsByTagName('head')[0].appendChild(script);
+        };
+        return BrowserScriptLoader;
+    }());
+    var WorkerScriptLoader = /** @class */ (function () {
+        function WorkerScriptLoader() {
+        }
+        WorkerScriptLoader.prototype.load = function (moduleManager, scriptSrc, callback, errorback) {
+            try {
+                importScripts(scriptSrc);
+                callback();
+            }
+            catch (e) {
+                errorback(e);
+            }
+        };
+        return WorkerScriptLoader;
+    }());
+    var NodeScriptLoader = /** @class */ (function () {
+        function NodeScriptLoader(env) {
+            this._env = env;
+            this._didInitialize = false;
+            this._didPatchNodeRequire = false;
+        }
+        NodeScriptLoader.prototype._init = function (nodeRequire) {
+            if (this._didInitialize) {
+                return;
+            }
+            this._didInitialize = true;
+            // capture node modules
+            this._fs = nodeRequire('fs');
+            this._vm = nodeRequire('vm');
+            this._path = nodeRequire('path');
+            this._crypto = nodeRequire('crypto');
+        };
+        // patch require-function of nodejs such that we can manually create a script
+        // from cached data. this is done by overriding the `Module._compile` function
+        NodeScriptLoader.prototype._initNodeRequire = function (nodeRequire, moduleManager) {
+            // It is important to check for `nodeCachedData` first and then set `_didPatchNodeRequire`.
+            // That's because `nodeCachedData` is set _after_ calling this for the first time...
+            var nodeCachedData = moduleManager.getConfig().getOptionsLiteral().nodeCachedData;
+            if (!nodeCachedData) {
+                return;
+            }
+            if (this._didPatchNodeRequire) {
+                return;
+            }
+            this._didPatchNodeRequire = true;
+            var that = this;
+            var Module = nodeRequire('module');
+            function makeRequireFunction(mod) {
+                var Module = mod.constructor;
+                var require = function require(path) {
+                    try {
+                        return mod.require(path);
+                    }
+                    finally {
+                        // nothing
+                    }
+                };
+                require.resolve = function resolve(request) {
+                    return Module._resolveFilename(request, mod);
+                };
+                require.main = process.mainModule;
+                require.extensions = Module._extensions;
+                require.cache = Module._cache;
+                return require;
+            }
+            Module.prototype._compile = function (content, filename) {
+                // remove shebang and create wrapper function
+                var scriptSource = Module.wrap(content.replace(/^#!.*/, ''));
+                // create script
+                var recorder = moduleManager.getRecorder();
+                var cachedDataPath = that._getCachedDataPath(nodeCachedData, filename);
+                var options = { filename: filename };
+                var hashData;
+                try {
+                    var data = that._fs.readFileSync(cachedDataPath);
+                    hashData = data.slice(0, 16);
+                    options.cachedData = data.slice(16);
+                    recorder.record(60 /* CachedDataFound */, cachedDataPath);
+                }
+                catch (_e) {
+                    recorder.record(61 /* CachedDataMissed */, cachedDataPath);
+                }
+                var script = new that._vm.Script(scriptSource, options);
+                var compileWrapper = script.runInThisContext(options);
+                // run script
+                var dirname = that._path.dirname(filename);
+                var require = makeRequireFunction(this);
+                var args = [this.exports, require, this, filename, dirname, process, _commonjsGlobal, Buffer];
+                var result = compileWrapper.apply(this.exports, args);
+                // cached data aftermath
+                that._handleCachedData(script, scriptSource, cachedDataPath, !options.cachedData, moduleManager);
+                that._verifyCachedData(script, scriptSource, cachedDataPath, hashData, moduleManager);
+                return result;
+            };
+        };
+        NodeScriptLoader.prototype.load = function (moduleManager, scriptSrc, callback, errorback) {
+            var _this = this;
+            var opts = moduleManager.getConfig().getOptionsLiteral();
+            var nodeRequire = (opts.nodeRequire || AMDLoader.global.nodeRequire);
+            var nodeInstrumenter = (opts.nodeInstrumenter || function (c) { return c; });
+            this._init(nodeRequire);
+            this._initNodeRequire(nodeRequire, moduleManager);
+            var recorder = moduleManager.getRecorder();
+            if (/^node\|/.test(scriptSrc)) {
+                var pieces = scriptSrc.split('|');
+                var moduleExports_1 = null;
+                try {
+                    moduleExports_1 = nodeRequire(pieces[1]);
+                }
+                catch (err) {
+                    errorback(err);
+                    return;
+                }
+                moduleManager.enqueueDefineAnonymousModule([], function () { return moduleExports_1; });
+                callback();
+            }
+            else {
+                scriptSrc = AMDLoader.Utilities.fileUriToFilePath(this._env.isWindows, scriptSrc);
+                var normalizedScriptSrc_1 = this._path.normalize(scriptSrc);
+                var vmScriptPathOrUri_1 = this._getElectronRendererScriptPathOrUri(normalizedScriptSrc_1);
+                var wantsCachedData_1 = Boolean(opts.nodeCachedData);
+                var cachedDataPath_1 = wantsCachedData_1 ? this._getCachedDataPath(opts.nodeCachedData, scriptSrc) : undefined;
+                this._readSourceAndCachedData(normalizedScriptSrc_1, cachedDataPath_1, recorder, function (err, data, cachedData, hashData) {
+                    if (err) {
+                        errorback(err);
+                        return;
+                    }
+                    var scriptSource;
+                    if (data.charCodeAt(0) === NodeScriptLoader._BOM) {
+                        scriptSource = NodeScriptLoader._PREFIX + data.substring(1) + NodeScriptLoader._SUFFIX;
+                    }
+                    else {
+                        scriptSource = NodeScriptLoader._PREFIX + data + NodeScriptLoader._SUFFIX;
+                    }
+                    scriptSource = nodeInstrumenter(scriptSource, normalizedScriptSrc_1);
+                    var scriptOpts = { filename: vmScriptPathOrUri_1, cachedData: cachedData };
+                    var script = _this._createAndEvalScript(moduleManager, scriptSource, scriptOpts, callback, errorback);
+                    _this._handleCachedData(script, scriptSource, cachedDataPath_1, wantsCachedData_1 && !cachedData, moduleManager);
+                    _this._verifyCachedData(script, scriptSource, cachedDataPath_1, hashData, moduleManager);
+                });
+            }
+        };
+        NodeScriptLoader.prototype._createAndEvalScript = function (moduleManager, contents, options, callback, errorback) {
+            var recorder = moduleManager.getRecorder();
+            recorder.record(31 /* NodeBeginEvaluatingScript */, options.filename);
+            var script = new this._vm.Script(contents, options);
+            var ret = script.runInThisContext(options);
+            var globalDefineFunc = moduleManager.getGlobalAMDDefineFunc();
+            var receivedDefineCall = false;
+            var localDefineFunc = function () {
+                receivedDefineCall = true;
+                return globalDefineFunc.apply(null, arguments);
+            };
+            localDefineFunc.amd = globalDefineFunc.amd;
+            ret.call(AMDLoader.global, moduleManager.getGlobalAMDRequireFunc(), localDefineFunc, options.filename, this._path.dirname(options.filename));
+            recorder.record(32 /* NodeEndEvaluatingScript */, options.filename);
+            if (receivedDefineCall) {
+                callback();
+            }
+            else {
+                errorback(new Error("Didn't receive define call in " + options.filename + "!"));
+            }
+            return script;
+        };
+        NodeScriptLoader.prototype._getElectronRendererScriptPathOrUri = function (path) {
+            if (!this._env.isElectronRenderer) {
+                return path;
+            }
+            var driveLetterMatch = path.match(/^([a-z])\:(.*)/i);
+            if (driveLetterMatch) {
+                // windows
+                return "file:///" + (driveLetterMatch[1].toUpperCase() + ':' + driveLetterMatch[2]).replace(/\\/g, '/');
+            }
+            else {
+                // nix
+                return "file://" + path;
+            }
+        };
+        NodeScriptLoader.prototype._getCachedDataPath = function (config, filename) {
+            var hash = this._crypto.createHash('md5').update(filename, 'utf8').update(config.seed, 'utf8').digest('hex');
+            var basename = this._path.basename(filename).replace(/\.js$/, '');
+            return this._path.join(config.path, basename + "-" + hash + ".code");
+        };
+        NodeScriptLoader.prototype._handleCachedData = function (script, scriptSource, cachedDataPath, createCachedData, moduleManager) {
+            var _this = this;
+            if (script.cachedDataRejected) {
+                // cached data got rejected -> delete and re-create
+                this._fs.unlink(cachedDataPath, function (err) {
+                    moduleManager.getRecorder().record(62 /* CachedDataRejected */, cachedDataPath);
+                    _this._createAndWriteCachedData(script, scriptSource, cachedDataPath, moduleManager);
+                    if (err) {
+                        moduleManager.getConfig().onError(err);
+                    }
+                });
+            }
+            else if (createCachedData) {
+                // no cached data, but wanted
+                this._createAndWriteCachedData(script, scriptSource, cachedDataPath, moduleManager);
+            }
+        };
+        // Cached data format: | SOURCE_HASH | V8_CACHED_DATA |
+        // -SOURCE_HASH is the md5 hash of the JS source (always 16 bytes)
+        // -V8_CACHED_DATA is what v8 produces
+        NodeScriptLoader.prototype._createAndWriteCachedData = function (script, scriptSource, cachedDataPath, moduleManager) {
+            var _this = this;
+            var timeout = Math.ceil(moduleManager.getConfig().getOptionsLiteral().nodeCachedData.writeDelay * (1 + Math.random()));
+            var lastSize = -1;
+            var iteration = 0;
+            var hashData = undefined;
+            var createLoop = function () {
+                setTimeout(function () {
+                    if (!hashData) {
+                        hashData = _this._crypto.createHash('md5').update(scriptSource, 'utf8').digest();
+                    }
+                    var cachedData = script.createCachedData();
+                    if (cachedData.length === 0 || cachedData.length === lastSize || iteration >= 5) {
+                        return;
+                    }
+                    lastSize = cachedData.length;
+                    _this._fs.writeFile(cachedDataPath, Buffer.concat([hashData, cachedData]), function (err) {
+                        if (err) {
+                            moduleManager.getConfig().onError(err);
+                        }
+                        moduleManager.getRecorder().record(63 /* CachedDataCreated */, cachedDataPath);
+                        createLoop();
+                    });
+                }, timeout * (Math.pow(4, iteration++)));
+            };
+            // with some delay (`timeout`) create cached data
+            // and repeat that (with backoff delay) until the
+            // data seems to be not changing anymore
+            createLoop();
+        };
+        NodeScriptLoader.prototype._readSourceAndCachedData = function (sourcePath, cachedDataPath, recorder, callback) {
+            if (!cachedDataPath) {
+                // no cached data case
+                this._fs.readFile(sourcePath, { encoding: 'utf8' }, callback);
+            }
+            else {
+                // cached data case: read both files in parallel
+                var source_1 = undefined;
+                var cachedData_1 = undefined;
+                var hashData_1 = undefined;
+                var steps_1 = 2;
+                var step_1 = function (err) {
+                    if (err) {
+                        callback(err);
+                    }
+                    else if (--steps_1 === 0) {
+                        callback(undefined, source_1, cachedData_1, hashData_1);
+                    }
+                };
+                this._fs.readFile(sourcePath, { encoding: 'utf8' }, function (err, data) {
+                    source_1 = data;
+                    step_1(err);
+                });
+                this._fs.readFile(cachedDataPath, function (err, data) {
+                    if (!err && data && data.length > 0) {
+                        hashData_1 = data.slice(0, 16);
+                        cachedData_1 = data.slice(16);
+                        recorder.record(60 /* CachedDataFound */, cachedDataPath);
+                    }
+                    else {
+                        recorder.record(61 /* CachedDataMissed */, cachedDataPath);
+                    }
+                    step_1(); // ignored: cached data is optional
+                });
+            }
+        };
+        NodeScriptLoader.prototype._verifyCachedData = function (script, scriptSource, cachedDataPath, hashData, moduleManager) {
+            var _this = this;
+            if (!hashData) {
+                // nothing to do
+                return;
+            }
+            if (script.cachedDataRejected) {
+                // invalid anyways
+                return;
+            }
+            setTimeout(function () {
+                // check source hash - the contract is that file paths change when file content
+                // change (e.g use the commit or version id as cache path). this check is
+                // for violations of this contract.
+                var hashDataNow = _this._crypto.createHash('md5').update(scriptSource, 'utf8').digest();
+                if (!hashData.equals(hashDataNow)) {
+                    moduleManager.getConfig().onError(new Error("FAILED TO VERIFY CACHED DATA, deleting stale '" + cachedDataPath + "' now, but a RESTART IS REQUIRED"));
+                    _this._fs.unlink(cachedDataPath, function (err) {
+                        if (err) {
+                            moduleManager.getConfig().onError(err);
+                        }
+                    });
+                }
+            }, Math.ceil(5000 * (1 + Math.random())));
+        };
+        NodeScriptLoader._BOM = 0xFEFF;
+        NodeScriptLoader._PREFIX = '(function (require, define, __filename, __dirname) { ';
+        NodeScriptLoader._SUFFIX = '\n});';
+        return NodeScriptLoader;
+    }());
+    function createScriptLoader(env) {
+        return new OnlyOnceScriptLoader(env);
+    }
+    AMDLoader.createScriptLoader = createScriptLoader;
+})(AMDLoader || (AMDLoader = {}));
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+var AMDLoader;
+(function (AMDLoader) {
+    // ------------------------------------------------------------------------
+    // ModuleIdResolver
+    var ModuleIdResolver = /** @class */ (function () {
+        function ModuleIdResolver(fromModuleId) {
+            var lastSlash = fromModuleId.lastIndexOf('/');
+            if (lastSlash !== -1) {
+                this.fromModulePath = fromModuleId.substr(0, lastSlash + 1);
+            }
+            else {
+                this.fromModulePath = '';
+            }
+        }
+        /**
+         * Normalize 'a/../name' to 'name', etc.
+         */
+        ModuleIdResolver._normalizeModuleId = function (moduleId) {
+            var r = moduleId, pattern;
+            // replace /./ => /
+            pattern = /\/\.\//;
+            while (pattern.test(r)) {
+                r = r.replace(pattern, '/');
+            }
+            // replace ^./ => nothing
+            r = r.replace(/^\.\//g, '');
+            // replace /aa/../ => / (BUT IGNORE /../../)
+            pattern = /\/(([^\/])|([^\/][^\/\.])|([^\/\.][^\/])|([^\/][^\/][^\/]+))\/\.\.\//;
+            while (pattern.test(r)) {
+                r = r.replace(pattern, '/');
+            }
+            // replace ^aa/../ => nothing (BUT IGNORE ../../)
+            r = r.replace(/^(([^\/])|([^\/][^\/\.])|([^\/\.][^\/])|([^\/][^\/][^\/]+))\/\.\.\//, '');
+            return r;
+        };
+        /**
+         * Resolve relative module ids
+         */
+        ModuleIdResolver.prototype.resolveModule = function (moduleId) {
+            var result = moduleId;
+            if (!AMDLoader.Utilities.isAbsolutePath(result)) {
+                if (AMDLoader.Utilities.startsWith(result, './') || AMDLoader.Utilities.startsWith(result, '../')) {
+                    result = ModuleIdResolver._normalizeModuleId(this.fromModulePath + result);
+                }
+            }
+            return result;
+        };
+        ModuleIdResolver.ROOT = new ModuleIdResolver('');
+        return ModuleIdResolver;
+    }());
+    AMDLoader.ModuleIdResolver = ModuleIdResolver;
+    // ------------------------------------------------------------------------
+    // Module
+    var Module = /** @class */ (function () {
+        function Module(id, strId, dependencies, callback, errorback, moduleIdResolver) {
+            this.id = id;
+            this.strId = strId;
+            this.dependencies = dependencies;
+            this._callback = callback;
+            this._errorback = errorback;
+            this.moduleIdResolver = moduleIdResolver;
+            this.exports = {};
+            this.error = null;
+            this.exportsPassedIn = false;
+            this.unresolvedDependenciesCount = this.dependencies.length;
+            this._isComplete = false;
+        }
+        Module._safeInvokeFunction = function (callback, args) {
+            try {
+                return {
+                    returnedValue: callback.apply(AMDLoader.global, args),
+                    producedError: null
+                };
+            }
+            catch (e) {
+                return {
+                    returnedValue: null,
+                    producedError: e
+                };
+            }
+        };
+        Module._invokeFactory = function (config, strModuleId, callback, dependenciesValues) {
+            if (config.isBuild() && !AMDLoader.Utilities.isAnonymousModule(strModuleId)) {
+                return {
+                    returnedValue: null,
+                    producedError: null
+                };
+            }
+            if (config.shouldCatchError()) {
+                return this._safeInvokeFunction(callback, dependenciesValues);
+            }
+            return {
+                returnedValue: callback.apply(AMDLoader.global, dependenciesValues),
+                producedError: null
+            };
+        };
+        Module.prototype.complete = function (recorder, config, dependenciesValues) {
+            this._isComplete = true;
+            var producedError = null;
+            if (this._callback) {
+                if (typeof this._callback === 'function') {
+                    recorder.record(21 /* BeginInvokeFactory */, this.strId);
+                    var r = Module._invokeFactory(config, this.strId, this._callback, dependenciesValues);
+                    producedError = r.producedError;
+                    recorder.record(22 /* EndInvokeFactory */, this.strId);
+                    if (!producedError && typeof r.returnedValue !== 'undefined' && (!this.exportsPassedIn || AMDLoader.Utilities.isEmpty(this.exports))) {
+                        this.exports = r.returnedValue;
+                    }
+                }
+                else {
+                    this.exports = this._callback;
+                }
+            }
+            if (producedError) {
+                var err = AMDLoader.ensureError(producedError);
+                err.phase = 'factory';
+                err.moduleId = this.strId;
+                this.error = err;
+                config.onError(err);
+            }
+            this.dependencies = null;
+            this._callback = null;
+            this._errorback = null;
+            this.moduleIdResolver = null;
+        };
+        /**
+         * One of the direct dependencies or a transitive dependency has failed to load.
+         */
+        Module.prototype.onDependencyError = function (err) {
+            this._isComplete = true;
+            this.error = err;
+            if (this._errorback) {
+                this._errorback(err);
+                return true;
+            }
+            return false;
+        };
+        /**
+         * Is the current module complete?
+         */
+        Module.prototype.isComplete = function () {
+            return this._isComplete;
+        };
+        return Module;
+    }());
+    AMDLoader.Module = Module;
+    var ModuleIdProvider = /** @class */ (function () {
+        function ModuleIdProvider() {
+            this._nextId = 0;
+            this._strModuleIdToIntModuleId = new Map();
+            this._intModuleIdToStrModuleId = [];
+            // Ensure values 0, 1, 2 are assigned accordingly with ModuleId
+            this.getModuleId('exports');
+            this.getModuleId('module');
+            this.getModuleId('require');
+        }
+        ModuleIdProvider.prototype.getMaxModuleId = function () {
+            return this._nextId;
+        };
+        ModuleIdProvider.prototype.getModuleId = function (strModuleId) {
+            var id = this._strModuleIdToIntModuleId.get(strModuleId);
+            if (typeof id === 'undefined') {
+                id = this._nextId++;
+                this._strModuleIdToIntModuleId.set(strModuleId, id);
+                this._intModuleIdToStrModuleId[id] = strModuleId;
+            }
+            return id;
+        };
+        ModuleIdProvider.prototype.getStrModuleId = function (moduleId) {
+            return this._intModuleIdToStrModuleId[moduleId];
+        };
+        return ModuleIdProvider;
+    }());
+    var RegularDependency = /** @class */ (function () {
+        function RegularDependency(id) {
+            this.id = id;
+        }
+        RegularDependency.EXPORTS = new RegularDependency(0 /* EXPORTS */);
+        RegularDependency.MODULE = new RegularDependency(1 /* MODULE */);
+        RegularDependency.REQUIRE = new RegularDependency(2 /* REQUIRE */);
+        return RegularDependency;
+    }());
+    AMDLoader.RegularDependency = RegularDependency;
+    var PluginDependency = /** @class */ (function () {
+        function PluginDependency(id, pluginId, pluginParam) {
+            this.id = id;
+            this.pluginId = pluginId;
+            this.pluginParam = pluginParam;
+        }
+        return PluginDependency;
+    }());
+    AMDLoader.PluginDependency = PluginDependency;
+    var ModuleManager = /** @class */ (function () {
+        function ModuleManager(env, scriptLoader, defineFunc, requireFunc, loaderAvailableTimestamp) {
+            if (loaderAvailableTimestamp === void 0) { loaderAvailableTimestamp = 0; }
+            this._env = env;
+            this._scriptLoader = scriptLoader;
+            this._loaderAvailableTimestamp = loaderAvailableTimestamp;
+            this._defineFunc = defineFunc;
+            this._requireFunc = requireFunc;
+            this._moduleIdProvider = new ModuleIdProvider();
+            this._config = new AMDLoader.Configuration(this._env);
+            this._modules2 = [];
+            this._knownModules2 = [];
+            this._inverseDependencies2 = [];
+            this._inversePluginDependencies2 = new Map();
+            this._currentAnnonymousDefineCall = null;
+            this._recorder = null;
+            this._buildInfoPath = [];
+            this._buildInfoDefineStack = [];
+            this._buildInfoDependencies = [];
+        }
+        ModuleManager.prototype.reset = function () {
+            return new ModuleManager(this._env, this._scriptLoader, this._defineFunc, this._requireFunc, this._loaderAvailableTimestamp);
+        };
+        ModuleManager.prototype.getGlobalAMDDefineFunc = function () {
+            return this._defineFunc;
+        };
+        ModuleManager.prototype.getGlobalAMDRequireFunc = function () {
+            return this._requireFunc;
+        };
+        ModuleManager._findRelevantLocationInStack = function (needle, stack) {
+            var normalize = function (str) { return str.replace(/\\/g, '/'); };
+            var normalizedPath = normalize(needle);
+            var stackPieces = stack.split(/\n/);
+            for (var i = 0; i < stackPieces.length; i++) {
+                var m = stackPieces[i].match(/(.*):(\d+):(\d+)\)?$/);
+                if (m) {
+                    var stackPath = m[1];
+                    var stackLine = m[2];
+                    var stackColumn = m[3];
+                    var trimPathOffset = Math.max(stackPath.lastIndexOf(' ') + 1, stackPath.lastIndexOf('(') + 1);
+                    stackPath = stackPath.substr(trimPathOffset);
+                    stackPath = normalize(stackPath);
+                    if (stackPath === normalizedPath) {
+                        var r = {
+                            line: parseInt(stackLine, 10),
+                            col: parseInt(stackColumn, 10)
+                        };
+                        if (r.line === 1) {
+                            r.col -= '(function (require, define, __filename, __dirname) { '.length;
+                        }
+                        return r;
+                    }
+                }
+            }
+            throw new Error('Could not correlate define call site for needle ' + needle);
+        };
+        ModuleManager.prototype.getBuildInfo = function () {
+            if (!this._config.isBuild()) {
+                return null;
+            }
+            var result = [], resultLen = 0;
+            for (var i = 0, len = this._modules2.length; i < len; i++) {
+                var m = this._modules2[i];
+                if (!m) {
+                    continue;
+                }
+                var location_1 = this._buildInfoPath[m.id] || null;
+                var defineStack = this._buildInfoDefineStack[m.id] || null;
+                var dependencies = this._buildInfoDependencies[m.id];
+                result[resultLen++] = {
+                    id: m.strId,
+                    path: location_1,
+                    defineLocation: (location_1 && defineStack ? ModuleManager._findRelevantLocationInStack(location_1, defineStack) : null),
+                    dependencies: dependencies,
+                    shim: null,
+                    exports: m.exports
+                };
+            }
+            return result;
+        };
+        ModuleManager.prototype.getRecorder = function () {
+            if (!this._recorder) {
+                if (this._config.shouldRecordStats()) {
+                    this._recorder = new AMDLoader.LoaderEventRecorder(this._loaderAvailableTimestamp);
+                }
+                else {
+                    this._recorder = AMDLoader.NullLoaderEventRecorder.INSTANCE;
+                }
+            }
+            return this._recorder;
+        };
+        ModuleManager.prototype.getLoaderEvents = function () {
+            return this.getRecorder().getEvents();
+        };
+        /**
+         * Defines an anonymous module (without an id). Its name will be resolved as we receive a callback from the scriptLoader.
+         * @param dependecies @see defineModule
+         * @param callback @see defineModule
+         */
+        ModuleManager.prototype.enqueueDefineAnonymousModule = function (dependencies, callback) {
+            if (this._currentAnnonymousDefineCall !== null) {
+                throw new Error('Can only have one anonymous define call per script file');
+            }
+            var stack = null;
+            if (this._config.isBuild()) {
+                stack = new Error('StackLocation').stack || null;
+            }
+            this._currentAnnonymousDefineCall = {
+                stack: stack,
+                dependencies: dependencies,
+                callback: callback
+            };
+        };
+        /**
+         * Creates a module and stores it in _modules. The manager will immediately begin resolving its dependencies.
+         * @param strModuleId An unique and absolute id of the module. This must not collide with another module's id
+         * @param dependencies An array with the dependencies of the module. Special keys are: "require", "exports" and "module"
+         * @param callback if callback is a function, it will be called with the resolved dependencies. if callback is an object, it will be considered as the exports of the module.
+         */
+        ModuleManager.prototype.defineModule = function (strModuleId, dependencies, callback, errorback, stack, moduleIdResolver) {
+            var _this = this;
+            if (moduleIdResolver === void 0) { moduleIdResolver = new ModuleIdResolver(strModuleId); }
+            var moduleId = this._moduleIdProvider.getModuleId(strModuleId);
+            if (this._modules2[moduleId]) {
+                if (!this._config.isDuplicateMessageIgnoredFor(strModuleId)) {
+                    console.warn('Duplicate definition of module \'' + strModuleId + '\'');
+                }
+                // Super important! Completely ignore duplicate module definition
+                return;
+            }
+            var m = new Module(moduleId, strModuleId, this._normalizeDependencies(dependencies, moduleIdResolver), callback, errorback, moduleIdResolver);
+            this._modules2[moduleId] = m;
+            if (this._config.isBuild()) {
+                this._buildInfoDefineStack[moduleId] = stack;
+                this._buildInfoDependencies[moduleId] = (m.dependencies || []).map(function (dep) { return _this._moduleIdProvider.getStrModuleId(dep.id); });
+            }
+            // Resolving of dependencies is immediate (not in a timeout). If there's a need to support a packer that concatenates in an
+            // unordered manner, in order to finish processing the file, execute the following method in a timeout
+            this._resolve(m);
+        };
+        ModuleManager.prototype._normalizeDependency = function (dependency, moduleIdResolver) {
+            if (dependency === 'exports') {
+                return RegularDependency.EXPORTS;
+            }
+            if (dependency === 'module') {
+                return RegularDependency.MODULE;
+            }
+            if (dependency === 'require') {
+                return RegularDependency.REQUIRE;
+            }
+            // Normalize dependency and then request it from the manager
+            var bangIndex = dependency.indexOf('!');
+            if (bangIndex >= 0) {
+                var strPluginId = moduleIdResolver.resolveModule(dependency.substr(0, bangIndex));
+                var pluginParam = moduleIdResolver.resolveModule(dependency.substr(bangIndex + 1));
+                var dependencyId = this._moduleIdProvider.getModuleId(strPluginId + '!' + pluginParam);
+                var pluginId = this._moduleIdProvider.getModuleId(strPluginId);
+                return new PluginDependency(dependencyId, pluginId, pluginParam);
+            }
+            return new RegularDependency(this._moduleIdProvider.getModuleId(moduleIdResolver.resolveModule(dependency)));
+        };
+        ModuleManager.prototype._normalizeDependencies = function (dependencies, moduleIdResolver) {
+            var result = [], resultLen = 0;
+            for (var i = 0, len = dependencies.length; i < len; i++) {
+                result[resultLen++] = this._normalizeDependency(dependencies[i], moduleIdResolver);
+            }
+            return result;
+        };
+        ModuleManager.prototype._relativeRequire = function (moduleIdResolver, dependencies, callback, errorback) {
+            if (typeof dependencies === 'string') {
+                return this.synchronousRequire(dependencies, moduleIdResolver);
+            }
+            this.defineModule(AMDLoader.Utilities.generateAnonymousModule(), dependencies, callback, errorback, null, moduleIdResolver);
+        };
+        /**
+         * Require synchronously a module by its absolute id. If the module is not loaded, an exception will be thrown.
+         * @param id The unique and absolute id of the required module
+         * @return The exports of module 'id'
+         */
+        ModuleManager.prototype.synchronousRequire = function (_strModuleId, moduleIdResolver) {
+            if (moduleIdResolver === void 0) { moduleIdResolver = new ModuleIdResolver(_strModuleId); }
+            var dependency = this._normalizeDependency(_strModuleId, moduleIdResolver);
+            var m = this._modules2[dependency.id];
+            if (!m) {
+                throw new Error('Check dependency list! Synchronous require cannot resolve module \'' + _strModuleId + '\'. This is the first mention of this module!');
+            }
+            if (!m.isComplete()) {
+                throw new Error('Check dependency list! Synchronous require cannot resolve module \'' + _strModuleId + '\'. This module has not been resolved completely yet.');
+            }
+            if (m.error) {
+                throw m.error;
+            }
+            return m.exports;
+        };
+        ModuleManager.prototype.configure = function (params, shouldOverwrite) {
+            var oldShouldRecordStats = this._config.shouldRecordStats();
+            if (shouldOverwrite) {
+                this._config = new AMDLoader.Configuration(this._env, params);
+            }
+            else {
+                this._config = this._config.cloneAndMerge(params);
+            }
+            if (this._config.shouldRecordStats() && !oldShouldRecordStats) {
+                this._recorder = null;
+            }
+        };
+        ModuleManager.prototype.getConfig = function () {
+            return this._config;
+        };
+        /**
+         * Callback from the scriptLoader when a module has been loaded.
+         * This means its code is available and has been executed.
+         */
+        ModuleManager.prototype._onLoad = function (moduleId) {
+            if (this._currentAnnonymousDefineCall !== null) {
+                var defineCall = this._currentAnnonymousDefineCall;
+                this._currentAnnonymousDefineCall = null;
+                // Hit an anonymous define call
+                this.defineModule(this._moduleIdProvider.getStrModuleId(moduleId), defineCall.dependencies, defineCall.callback, null, defineCall.stack);
+            }
+        };
+        ModuleManager.prototype._createLoadError = function (moduleId, _err) {
+            var _this = this;
+            var strModuleId = this._moduleIdProvider.getStrModuleId(moduleId);
+            var neededBy = (this._inverseDependencies2[moduleId] || []).map(function (intModuleId) { return _this._moduleIdProvider.getStrModuleId(intModuleId); });
+            var err = AMDLoader.ensureError(_err);
+            err.phase = 'loading';
+            err.moduleId = strModuleId;
+            err.neededBy = neededBy;
+            return err;
+        };
+        /**
+         * Callback from the scriptLoader when a module hasn't been loaded.
+         * This means that the script was not found (e.g. 404) or there was an error in the script.
+         */
+        ModuleManager.prototype._onLoadError = function (moduleId, err) {
+            var error = this._createLoadError(moduleId, err);
+            if (!this._modules2[moduleId]) {
+                this._modules2[moduleId] = new Module(moduleId, this._moduleIdProvider.getStrModuleId(moduleId), [], function () { }, function () { }, null);
+            }
+            // Find any 'local' error handlers, walk the entire chain of inverse dependencies if necessary.
+            var seenModuleId = [];
+            for (var i = 0, len = this._moduleIdProvider.getMaxModuleId(); i < len; i++) {
+                seenModuleId[i] = false;
+            }
+            var someoneNotified = false;
+            var queue = [];
+            queue.push(moduleId);
+            seenModuleId[moduleId] = true;
+            while (queue.length > 0) {
+                var queueElement = queue.shift();
+                var m = this._modules2[queueElement];
+                if (m) {
+                    someoneNotified = m.onDependencyError(error) || someoneNotified;
+                }
+                var inverseDeps = this._inverseDependencies2[queueElement];
+                if (inverseDeps) {
+                    for (var i = 0, len = inverseDeps.length; i < len; i++) {
+                        var inverseDep = inverseDeps[i];
+                        if (!seenModuleId[inverseDep]) {
+                            queue.push(inverseDep);
+                            seenModuleId[inverseDep] = true;
+                        }
+                    }
+                }
+            }
+            if (!someoneNotified) {
+                this._config.onError(error);
+            }
+        };
+        /**
+         * Walks (recursively) the dependencies of 'from' in search of 'to'.
+         * Returns true if there is such a path or false otherwise.
+         * @param from Module id to start at
+         * @param to Module id to look for
+         */
+        ModuleManager.prototype._hasDependencyPath = function (fromId, toId) {
+            var from = this._modules2[fromId];
+            if (!from) {
+                return false;
+            }
+            var inQueue = [];
+            for (var i = 0, len = this._moduleIdProvider.getMaxModuleId(); i < len; i++) {
+                inQueue[i] = false;
+            }
+            var queue = [];
+            // Insert 'from' in queue
+            queue.push(from);
+            inQueue[fromId] = true;
+            while (queue.length > 0) {
+                // Pop first inserted element of queue
+                var element = queue.shift();
+                var dependencies = element.dependencies;
+                if (dependencies) {
+                    // Walk the element's dependencies
+                    for (var i = 0, len = dependencies.length; i < len; i++) {
+                        var dependency = dependencies[i];
+                        if (dependency.id === toId) {
+                            // There is a path to 'to'
+                            return true;
+                        }
+                        var dependencyModule = this._modules2[dependency.id];
+                        if (dependencyModule && !inQueue[dependency.id]) {
+                            // Insert 'dependency' in queue
+                            inQueue[dependency.id] = true;
+                            queue.push(dependencyModule);
+                        }
+                    }
+                }
+            }
+            // There is no path to 'to'
+            return false;
+        };
+        /**
+         * Walks (recursively) the dependencies of 'from' in search of 'to'.
+         * Returns cycle as array.
+         * @param from Module id to start at
+         * @param to Module id to look for
+         */
+        ModuleManager.prototype._findCyclePath = function (fromId, toId, depth) {
+            if (fromId === toId || depth === 50) {
+                return [fromId];
+            }
+            var from = this._modules2[fromId];
+            if (!from) {
+                return null;
+            }
+            // Walk the element's dependencies
+            var dependencies = from.dependencies;
+            if (dependencies) {
+                for (var i = 0, len = dependencies.length; i < len; i++) {
+                    var path = this._findCyclePath(dependencies[i].id, toId, depth + 1);
+                    if (path !== null) {
+                        path.push(fromId);
+                        return path;
+                    }
+                }
+            }
+            return null;
+        };
+        /**
+         * Create the local 'require' that is passed into modules
+         */
+        ModuleManager.prototype._createRequire = function (moduleIdResolver) {
+            var _this = this;
+            var result = (function (dependencies, callback, errorback) {
+                return _this._relativeRequire(moduleIdResolver, dependencies, callback, errorback);
+            });
+            result.toUrl = function (id) {
+                return _this._config.requireToUrl(moduleIdResolver.resolveModule(id));
+            };
+            result.getStats = function () {
+                return _this.getLoaderEvents();
+            };
+            result.__$__nodeRequire = AMDLoader.global.nodeRequire;
+            return result;
+        };
+        ModuleManager.prototype._loadModule = function (moduleId) {
+            var _this = this;
+            if (this._modules2[moduleId] || this._knownModules2[moduleId]) {
+                // known module
+                return;
+            }
+            this._knownModules2[moduleId] = true;
+            var strModuleId = this._moduleIdProvider.getStrModuleId(moduleId);
+            var paths = this._config.moduleIdToPaths(strModuleId);
+            var scopedPackageRegex = /^@[^\/]+\/[^\/]+$/; // matches @scope/package-name
+            if (this._env.isNode && (strModuleId.indexOf('/') === -1 || scopedPackageRegex.test(strModuleId))) {
+                paths.push('node|' + strModuleId);
+            }
+            var lastPathIndex = -1;
+            var loadNextPath = function (err) {
+                lastPathIndex++;
+                if (lastPathIndex >= paths.length) {
+                    // No more paths to try
+                    _this._onLoadError(moduleId, err);
+                }
+                else {
+                    var currentPath_1 = paths[lastPathIndex];
+                    var recorder_1 = _this.getRecorder();
+                    if (_this._config.isBuild() && currentPath_1 === 'empty:') {
+                        _this._buildInfoPath[moduleId] = currentPath_1;
+                        _this.defineModule(_this._moduleIdProvider.getStrModuleId(moduleId), [], null, null, null);
+                        _this._onLoad(moduleId);
+                        return;
+                    }
+                    recorder_1.record(10 /* BeginLoadingScript */, currentPath_1);
+                    _this._scriptLoader.load(_this, currentPath_1, function () {
+                        if (_this._config.isBuild()) {
+                            _this._buildInfoPath[moduleId] = currentPath_1;
+                        }
+                        recorder_1.record(11 /* EndLoadingScriptOK */, currentPath_1);
+                        _this._onLoad(moduleId);
+                    }, function (err) {
+                        recorder_1.record(12 /* EndLoadingScriptError */, currentPath_1);
+                        loadNextPath(err);
+                    });
+                }
+            };
+            loadNextPath(null);
+        };
+        /**
+         * Resolve a plugin dependency with the plugin loaded & complete
+         * @param module The module that has this dependency
+         * @param pluginDependency The semi-normalized dependency that appears in the module. e.g. 'vs/css!./mycssfile'. Only the plugin part (before !) is normalized
+         * @param plugin The plugin (what the plugin exports)
+         */
+        ModuleManager.prototype._loadPluginDependency = function (plugin, pluginDependency) {
+            var _this = this;
+            if (this._modules2[pluginDependency.id] || this._knownModules2[pluginDependency.id]) {
+                // known module
+                return;
+            }
+            this._knownModules2[pluginDependency.id] = true;
+            // Delegate the loading of the resource to the plugin
+            var load = (function (value) {
+                _this.defineModule(_this._moduleIdProvider.getStrModuleId(pluginDependency.id), [], value, null, null);
+            });
+            load.error = function (err) {
+                _this._config.onError(_this._createLoadError(pluginDependency.id, err));
+            };
+            plugin.load(pluginDependency.pluginParam, this._createRequire(ModuleIdResolver.ROOT), load, this._config.getOptionsLiteral());
+        };
+        /**
+         * Examine the dependencies of module 'module' and resolve them as needed.
+         */
+        ModuleManager.prototype._resolve = function (module) {
+            var _this = this;
+            var dependencies = module.dependencies;
+            if (dependencies) {
+                for (var i = 0, len = dependencies.length; i < len; i++) {
+                    var dependency = dependencies[i];
+                    if (dependency === RegularDependency.EXPORTS) {
+                        module.exportsPassedIn = true;
+                        module.unresolvedDependenciesCount--;
+                        continue;
+                    }
+                    if (dependency === RegularDependency.MODULE) {
+                        module.unresolvedDependenciesCount--;
+                        continue;
+                    }
+                    if (dependency === RegularDependency.REQUIRE) {
+                        module.unresolvedDependenciesCount--;
+                        continue;
+                    }
+                    var dependencyModule = this._modules2[dependency.id];
+                    if (dependencyModule && dependencyModule.isComplete()) {
+                        if (dependencyModule.error) {
+                            module.onDependencyError(dependencyModule.error);
+                            return;
+                        }
+                        module.unresolvedDependenciesCount--;
+                        continue;
+                    }
+                    if (this._hasDependencyPath(dependency.id, module.id)) {
+                        console.warn('There is a dependency cycle between \'' + this._moduleIdProvider.getStrModuleId(dependency.id) + '\' and \'' + this._moduleIdProvider.getStrModuleId(module.id) + '\'. The cyclic path follows:');
+                        var cyclePath = this._findCyclePath(dependency.id, module.id, 0) || [];
+                        cyclePath.reverse();
+                        cyclePath.push(dependency.id);
+                        console.warn(cyclePath.map(function (id) { return _this._moduleIdProvider.getStrModuleId(id); }).join(' => \n'));
+                        // Break the cycle
+                        module.unresolvedDependenciesCount--;
+                        continue;
+                    }
+                    // record inverse dependency
+                    this._inverseDependencies2[dependency.id] = this._inverseDependencies2[dependency.id] || [];
+                    this._inverseDependencies2[dependency.id].push(module.id);
+                    if (dependency instanceof PluginDependency) {
+                        var plugin = this._modules2[dependency.pluginId];
+                        if (plugin && plugin.isComplete()) {
+                            this._loadPluginDependency(plugin.exports, dependency);
+                            continue;
+                        }
+                        // Record dependency for when the plugin gets loaded
+                        var inversePluginDeps = this._inversePluginDependencies2.get(dependency.pluginId);
+                        if (!inversePluginDeps) {
+                            inversePluginDeps = [];
+                            this._inversePluginDependencies2.set(dependency.pluginId, inversePluginDeps);
+                        }
+                        inversePluginDeps.push(dependency);
+                        this._loadModule(dependency.pluginId);
+                        continue;
+                    }
+                    this._loadModule(dependency.id);
+                }
+            }
+            if (module.unresolvedDependenciesCount === 0) {
+                this._onModuleComplete(module);
+            }
+        };
+        ModuleManager.prototype._onModuleComplete = function (module) {
+            var _this = this;
+            var recorder = this.getRecorder();
+            if (module.isComplete()) {
+                // already done
+                return;
+            }
+            var dependencies = module.dependencies;
+            var dependenciesValues = [];
+            if (dependencies) {
+                for (var i = 0, len = dependencies.length; i < len; i++) {
+                    var dependency = dependencies[i];
+                    if (dependency === RegularDependency.EXPORTS) {
+                        dependenciesValues[i] = module.exports;
+                        continue;
+                    }
+                    if (dependency === RegularDependency.MODULE) {
+                        dependenciesValues[i] = {
+                            id: module.strId,
+                            config: function () {
+                                return _this._config.getConfigForModule(module.strId);
+                            }
+                        };
+                        continue;
+                    }
+                    if (dependency === RegularDependency.REQUIRE) {
+                        dependenciesValues[i] = this._createRequire(module.moduleIdResolver);
+                        continue;
+                    }
+                    var dependencyModule = this._modules2[dependency.id];
+                    if (dependencyModule) {
+                        dependenciesValues[i] = dependencyModule.exports;
+                        continue;
+                    }
+                    dependenciesValues[i] = null;
+                }
+            }
+            module.complete(recorder, this._config, dependenciesValues);
+            // Fetch and clear inverse dependencies
+            var inverseDeps = this._inverseDependencies2[module.id];
+            this._inverseDependencies2[module.id] = null;
+            if (inverseDeps) {
+                // Resolve one inverse dependency at a time, always
+                // on the lookout for a completed module.
+                for (var i = 0, len = inverseDeps.length; i < len; i++) {
+                    var inverseDependencyId = inverseDeps[i];
+                    var inverseDependency = this._modules2[inverseDependencyId];
+                    inverseDependency.unresolvedDependenciesCount--;
+                    if (inverseDependency.unresolvedDependenciesCount === 0) {
+                        this._onModuleComplete(inverseDependency);
+                    }
+                }
+            }
+            var inversePluginDeps = this._inversePluginDependencies2.get(module.id);
+            if (inversePluginDeps) {
+                // This module is used as a plugin at least once
+                // Fetch and clear these inverse plugin dependencies
+                this._inversePluginDependencies2.delete(module.id);
+                // Resolve plugin dependencies one at a time
+                for (var i = 0, len = inversePluginDeps.length; i < len; i++) {
+                    this._loadPluginDependency(module.exports, inversePluginDeps[i]);
+                }
+            }
+        };
+        return ModuleManager;
+    }());
+    AMDLoader.ModuleManager = ModuleManager;
+})(AMDLoader || (AMDLoader = {}));
+var define;
+var AMDLoader;
+(function (AMDLoader) {
+    var env = new AMDLoader.Environment();
+    var moduleManager = null;
+    var DefineFunc = function (id, dependencies, callback) {
+        if (typeof id !== 'string') {
+            callback = dependencies;
+            dependencies = id;
+            id = null;
+        }
+        if (typeof dependencies !== 'object' || !Array.isArray(dependencies)) {
+            callback = dependencies;
+            dependencies = null;
+        }
+        if (!dependencies) {
+            dependencies = ['require', 'exports', 'module'];
+        }
+        if (id) {
+            moduleManager.defineModule(id, dependencies, callback, null, null);
+        }
+        else {
+            moduleManager.enqueueDefineAnonymousModule(dependencies, callback);
+        }
+    };
+    DefineFunc.amd = {
+        jQuery: true
+    };
+    var _requireFunc_config = function (params, shouldOverwrite) {
+        if (shouldOverwrite === void 0) { shouldOverwrite = false; }
+        moduleManager.configure(params, shouldOverwrite);
+    };
+    var RequireFunc = function () {
+        if (arguments.length === 1) {
+            if ((arguments[0] instanceof Object) && !Array.isArray(arguments[0])) {
+                _requireFunc_config(arguments[0]);
+                return;
+            }
+            if (typeof arguments[0] === 'string') {
+                return moduleManager.synchronousRequire(arguments[0]);
+            }
+        }
+        if (arguments.length === 2 || arguments.length === 3) {
+            if (Array.isArray(arguments[0])) {
+                moduleManager.defineModule(AMDLoader.Utilities.generateAnonymousModule(), arguments[0], arguments[1], arguments[2], null);
+                return;
+            }
+        }
+        throw new Error('Unrecognized require call');
+    };
+    RequireFunc.config = _requireFunc_config;
+    RequireFunc.getConfig = function () {
+        return moduleManager.getConfig().getOptionsLiteral();
+    };
+    RequireFunc.reset = function () {
+        moduleManager = moduleManager.reset();
+    };
+    RequireFunc.getBuildInfo = function () {
+        return moduleManager.getBuildInfo();
+    };
+    RequireFunc.getStats = function () {
+        return moduleManager.getLoaderEvents();
+    };
+    RequireFunc.define = function () {
+        return DefineFunc.apply(null, arguments);
+    };
+    function init() {
+        if (typeof AMDLoader.global.require !== 'undefined' || typeof require !== 'undefined') {
+            var _nodeRequire_1 = (AMDLoader.global.require || require);
+            if (typeof _nodeRequire_1 === 'function' && typeof _nodeRequire_1.resolve === 'function') {
+                // re-expose node's require function
+                var nodeRequire = function (what) {
+                    moduleManager.getRecorder().record(33 /* NodeBeginNativeRequire */, what);
+                    try {
+                        return _nodeRequire_1(what);
+                    }
+                    finally {
+                        moduleManager.getRecorder().record(34 /* NodeEndNativeRequire */, what);
+                    }
+                };
+                AMDLoader.global.nodeRequire = nodeRequire;
+                RequireFunc.nodeRequire = nodeRequire;
+                RequireFunc.__$__nodeRequire = nodeRequire;
+            }
+        }
+        if (env.isNode && !env.isElectronRenderer) {
+            module.exports = RequireFunc;
+            require = RequireFunc;
+        }
+        else {
+            if (!env.isElectronRenderer) {
+                AMDLoader.global.define = DefineFunc;
+            }
+            AMDLoader.global.require = RequireFunc;
+        }
+    }
+    AMDLoader.init = init;
+    if (typeof AMDLoader.global.define !== 'function' || !AMDLoader.global.define.amd) {
+        moduleManager = new AMDLoader.ModuleManager(env, AMDLoader.createScriptLoader(env), DefineFunc, RequireFunc, AMDLoader.Utilities.getHighPerformanceTimestamp());
+        // The global variable require can configure the loader
+        if (typeof AMDLoader.global.require !== 'undefined' && typeof AMDLoader.global.require !== 'function') {
+            RequireFunc.config(AMDLoader.global.require);
+        }
+        // This define is for the local closure defined in node in the case that the loader is concatenated
+        define = function () {
+            return DefineFunc.apply(null, arguments);
+        };
+        define.amd = DefineFunc.amd;
+        if (typeof doNotInitLoader === 'undefined') {
+            init();
+        }
+    }
+})(AMDLoader || (AMDLoader = {}));
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ * Please make sure to make edits in the .ts file at https://github.com/Microsoft/vscode-loader/
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *--------------------------------------------------------------------------------------------*/
+'use strict';
+var CSSLoaderPlugin;
+(function (CSSLoaderPlugin) {
+    /**
+     * Known issue:
+     * - In IE there is no way to know if the CSS file loaded successfully or not.
+     */
+    var BrowserCSSLoader = /** @class */ (function () {
+        function BrowserCSSLoader() {
+            this._pendingLoads = 0;
+        }
+        BrowserCSSLoader.prototype.attachListeners = function (name, linkNode, callback, errorback) {
+            var unbind = function () {
+                linkNode.removeEventListener('load', loadEventListener);
+                linkNode.removeEventListener('error', errorEventListener);
+            };
+            var loadEventListener = function (e) {
+                unbind();
+                callback();
+            };
+            var errorEventListener = function (e) {
+                unbind();
+                errorback(e);
+            };
+            linkNode.addEventListener('load', loadEventListener);
+            linkNode.addEventListener('error', errorEventListener);
+        };
+        BrowserCSSLoader.prototype._onLoad = function (name, callback) {
+            this._pendingLoads--;
+            callback();
+        };
+        BrowserCSSLoader.prototype._onLoadError = function (name, errorback, err) {
+            this._pendingLoads--;
+            errorback(err);
+        };
+        BrowserCSSLoader.prototype._insertLinkNode = function (linkNode) {
+            this._pendingLoads++;
+            var head = document.head || document.getElementsByTagName('head')[0];
+            var other = head.getElementsByTagName('link') || document.head.getElementsByTagName('script');
+            if (other.length > 0) {
+                head.insertBefore(linkNode, other[other.length - 1]);
+            }
+            else {
+                head.appendChild(linkNode);
+            }
+        };
+        BrowserCSSLoader.prototype.createLinkTag = function (name, cssUrl, externalCallback, externalErrorback) {
+            var _this = this;
+            var linkNode = document.createElement('link');
+            linkNode.setAttribute('rel', 'stylesheet');
+            linkNode.setAttribute('type', 'text/css');
+            linkNode.setAttribute('data-name', name);
+            var callback = function () { return _this._onLoad(name, externalCallback); };
+            var errorback = function (err) { return _this._onLoadError(name, externalErrorback, err); };
+            this.attachListeners(name, linkNode, callback, errorback);
+            linkNode.setAttribute('href', cssUrl);
+            return linkNode;
+        };
+        BrowserCSSLoader.prototype._linkTagExists = function (name, cssUrl) {
+            var i, len, nameAttr, hrefAttr, links = document.getElementsByTagName('link');
+            for (i = 0, len = links.length; i < len; i++) {
+                nameAttr = links[i].getAttribute('data-name');
+                hrefAttr = links[i].getAttribute('href');
+                if (nameAttr === name || hrefAttr === cssUrl) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        BrowserCSSLoader.prototype.load = function (name, cssUrl, externalCallback, externalErrorback) {
+            if (this._linkTagExists(name, cssUrl)) {
+                externalCallback();
+                return;
+            }
+            var linkNode = this.createLinkTag(name, cssUrl, externalCallback, externalErrorback);
+            this._insertLinkNode(linkNode);
+        };
+        return BrowserCSSLoader;
+    }());
+    // ------------------------------ Finally, the plugin
+    var CSSPlugin = /** @class */ (function () {
+        function CSSPlugin() {
+            this._cssLoader = new BrowserCSSLoader();
+        }
+        CSSPlugin.prototype.load = function (name, req, load) {
+            var cssUrl = req.toUrl(name + '.css');
+            this._cssLoader.load(name, cssUrl, function (contents) {
+                load({});
+            }, function (err) {
+                if (typeof load.error === 'function') {
+                    load.error('Could not find ' + cssUrl + ' or it was empty');
+                }
+            });
+        };
+        return CSSPlugin;
+    }());
+    CSSLoaderPlugin.CSSPlugin = CSSPlugin;
+    define('vs/css', new CSSPlugin());
+})(CSSLoaderPlugin || (CSSLoaderPlugin = {}));
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ * Please make sure to make edits in the .ts file at https://github.com/Microsoft/vscode-loader/
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *---------------------------------------------------------------------------------------------
+ *--------------------------------------------------------------------------------------------*/
+'use strict';
+var NLSLoaderPlugin;
+(function (NLSLoaderPlugin) {
+    var Environment = /** @class */ (function () {
+        function Environment() {
+            this._detected = false;
+            this._isPseudo = false;
+        }
+        Object.defineProperty(Environment.prototype, "isPseudo", {
+            get: function () {
+                this._detect();
+                return this._isPseudo;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Environment.prototype._detect = function () {
+            if (this._detected) {
+                return;
+            }
+            this._detected = true;
+            this._isPseudo = (typeof document !== 'undefined' && document.location && document.location.hash.indexOf('pseudo=true') >= 0);
+        };
+        return Environment;
+    }());
+    function _format(message, args, env) {
+        var result;
+        if (args.length === 0) {
+            result = message;
+        }
+        else {
+            result = message.replace(/\{(\d+)\}/g, function (match, rest) {
+                var index = rest[0];
+                var arg = args[index];
+                var result = match;
+                if (typeof arg === 'string') {
+                    result = arg;
+                }
+                else if (typeof arg === 'number' || typeof arg === 'boolean' || arg === void 0 || arg === null) {
+                    result = String(arg);
+                }
+                return result;
+            });
+        }
+        if (env.isPseudo) {
+            // FF3B and FF3D is the Unicode zenkaku representation for [ and ]
+            result = '\uFF3B' + result.replace(/[aouei]/g, '$&$&') + '\uFF3D';
+        }
+        return result;
+    }
+    function findLanguageForModule(config, name) {
+        var result = config[name];
+        if (result)
+            return result;
+        result = config['*'];
+        if (result)
+            return result;
+        return null;
+    }
+    function localize(env, data, message) {
+        var args = [];
+        for (var _i = 3; _i < arguments.length; _i++) {
+            args[_i - 3] = arguments[_i];
+        }
+        return _format(message, args, env);
+    }
+    function createScopedLocalize(scope, env) {
+        return function (idx, defaultValue) {
+            var restArgs = Array.prototype.slice.call(arguments, 2);
+            return _format(scope[idx], restArgs, env);
+        };
+    }
+    var NLSPlugin = /** @class */ (function () {
+        function NLSPlugin(env) {
+            var _this = this;
+            this._env = env;
+            this.localize = function (data, message) {
+                var args = [];
+                for (var _i = 2; _i < arguments.length; _i++) {
+                    args[_i - 2] = arguments[_i];
+                }
+                return localize.apply(void 0, [_this._env, data, message].concat(args));
+            };
+        }
+        NLSPlugin.prototype.setPseudoTranslation = function (value) {
+            this._env._isPseudo = value;
+        };
+        NLSPlugin.prototype.create = function (key, data) {
+            return {
+                localize: createScopedLocalize(data[key], this._env)
+            };
+        };
+        NLSPlugin.prototype.load = function (name, req, load, config) {
+            var _this = this;
+            config = config || {};
+            if (!name || name.length === 0) {
+                load({
+                    localize: this.localize
+                });
+            }
+            else {
+                var pluginConfig = config['vs/nls'] || {};
+                var language = pluginConfig.availableLanguages ? findLanguageForModule(pluginConfig.availableLanguages, name) : null;
+                var suffix = '.nls';
+                if (language !== null && language !== NLSPlugin.DEFAULT_TAG) {
+                    suffix = suffix + '.' + language;
+                }
+                var messagesLoaded_1 = function (messages) {
+                    if (Array.isArray(messages)) {
+                        messages.localize = createScopedLocalize(messages, _this._env);
+                    }
+                    else {
+                        messages.localize = createScopedLocalize(messages[name], _this._env);
+                    }
+                    load(messages);
+                };
+                if (typeof pluginConfig.loadBundle === 'function') {
+                    pluginConfig.loadBundle(name, language, function (err, messages) {
+                        // We have an error. Load the English default strings to not fail
+                        if (err) {
+                            req([name + '.nls'], messagesLoaded_1);
+                        }
+                        else {
+                            messagesLoaded_1(messages);
+                        }
+                    });
+                }
+                else {
+                    req([name + suffix], messagesLoaded_1);
+                }
+            }
+        };
+        NLSPlugin.DEFAULT_TAG = 'i-default';
+        return NLSPlugin;
+    }());
+    NLSLoaderPlugin.NLSPlugin = NLSPlugin;
+    define('vs/nls', new NLSPlugin(new Environment()));
+})(NLSLoaderPlugin || (NLSLoaderPlugin = {}));
+
 //# sourceMappingURL=loader.js.map
