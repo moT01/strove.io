@@ -42,7 +42,6 @@
     "lodash": "^4.17.11",
     "netlify-cms": "^2.9.7",
     "rc-queue-anim": "^1.6.12",
-    "rc-scroll-anim": "^2.5.8",
     "rc-tween-one": "1.5.5",
     "react": "^16.13.0",
     "react-accessible-accordion": "^3.0.0",

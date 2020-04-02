@@ -11142,7 +11142,7 @@ quickselect@^1.0.1:
   resolved "https://registry.yarnpkg.com/quickselect/-/quickselect-1.1.1.tgz#852e412ce418f237ad5b660d70cffac647ae94c2"
   integrity sha512-qN0Gqdw4c4KGPsBOQafj6yj/PA6c/L63f6CaZ/DCF/xF4Esu3jVmKLUDYxghFx8Kb/O7y9tI7x2RjTSXwdK1iQ==
 
-raf@3.x, raf@^3.4.0, raf@^3.4.1, raf@~3.4.0:
+raf@^3.4.0, raf@^3.4.1, raf@~3.4.0:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.1.tgz#0742e99a4a6552f445d73e3ee0328af0ff1ede39"
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
@@ -11455,18 +11455,6 @@ rc-resize-observer@^0.1.0:
     rc-util "^4.13.0"
     resize-observer-polyfill "^1.5.1"
 
-rc-scroll-anim@^2.5.8:
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/rc-scroll-anim/-/rc-scroll-anim-2.7.4.tgz#d268528b0de1cf9fb5c1b4691f8235ab552424d2"
-  integrity sha512-pm+4TEwDTZDxPfO6Hz5GhVcXLE+6qhftOBS3zLUiqcHbo1sWvjWFYAyGC8/V4lfe+8BaThPqEUWvi/fNLY91fg==
-  dependencies:
-    babel-runtime "6.x"
-    prop-types "^15.6.0"
-    raf "3.x"
-    rc-tween-one "^2.4.0"
-    react-lifecycles-compat "^3.0.4"
-    tween-functions "1.x"
-
 rc-select@~9.2.0:
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/rc-select/-/rc-select-9.2.1.tgz#0fbf47a933c36e1e6ef76c88fab32f58029e6a01"
@@ -11638,7 +11626,7 @@ rc-tween-one@1.5.5:
     style-utils "~0.1.13"
     tween-functions "~1.2.0"
 
-rc-tween-one@^2.4.0, rc-tween-one@^2.5.0:
+rc-tween-one@^2.5.0:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/rc-tween-one/-/rc-tween-one-2.6.8.tgz#75edf141af491a28b18812dc419efa6b0238e2a7"
   integrity sha512-xb0gNGVq3LNMqT/VCvlEVlW4FQhvbe5LrcoMwGAn6LNcBZR6qzh3Ip8oIhx3iN4Lex2mKJ9HN9vopuxzSZRZGA==
@@ -14322,7 +14310,7 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-tween-functions@1.x, tween-functions@~1.2.0:
+tween-functions@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/tween-functions/-/tween-functions-1.2.0.tgz#1ae3a50e7c60bb3def774eac707acbca73bbc3ff"
   integrity sha1-GuOlDnxguz3vd06scHrLynO7w/8=
