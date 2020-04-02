@@ -1,4 +1,4 @@
-import React, { lazy, memo } from 'react'
+import React, { lazy, memo, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
@@ -37,7 +37,7 @@ const HelloThere = WithLazyLoader(
 const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
 
 const Strove = () => (
-  <>
+  <Suspense fallback={<></>}>
     <ScrollToTop />
     <Switch>
       <Route exact path="/" component={Home} />
@@ -66,7 +66,7 @@ const Strove = () => (
       {/* <Route path="/blog/firstPost" component={FirstPost} /> */}
       <Route component={NotFound} />
     </Switch>
-  </>
+  </Suspense>
 )
 
 export default memo(Strove)
