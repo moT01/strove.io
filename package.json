@@ -34,7 +34,6 @@
     "copy-to-clipboard": "^3.2.0",
     "dayjs": "^1.8.15",
     "detect-browser": "^4.6.0",
-    "dotenv": "^8.0.0",
     "downshift": "^3.2.10",
     "formik": "^1.5.7",
     "graphql": "^14.5.8",
