@@ -3,38 +3,35 @@ import { Switch, Route } from 'react-router-dom'
 
 import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
 
-const Home = WithLazyLoader(lazy(() => import('pages/home')))
-// const Faq = WithLazyLoader(lazy(() => import('pages/faq')))
-const Cookies = WithLazyLoader(lazy(() => import('pages/cookies')))
-const PrivacyPolicy = WithLazyLoader(lazy(() => import('pages/privacyPolicy')))
-const TermsAndConditions = WithLazyLoader(
-  lazy(() => import('pages/termsAndConditions'))
-)
-const Pricing = WithLazyLoader(lazy(() => import('pages/pricing')))
-const GoBackTo = WithLazyLoader(lazy(() => import('pages/fromEmbed/goBackTo')))
-const EmbedLogin = WithLazyLoader(lazy(() => import('pages/fromEmbed/login')))
-const Embed = WithLazyLoader(lazy(() => import('pages/embed')))
-const RunProject = WithLazyLoader(lazy(() => import('pages/runProject')))
-const Editor = WithLazyLoader(lazy(() => import('pages/editor')))
-const Dashboard = WithLazyLoader(lazy(() => import('pages/dashboard')))
-const Plans = WithLazyLoader(lazy(() => import('pages/plans')))
-const FromEmailInvitation = WithLazyLoader(
-  lazy(() => import('pages/welcome/fromEmailInvitation'))
-)
-const Login = WithLazyLoader(lazy(() => import('pages/welcome/login')))
-const OrganizationName = WithLazyLoader(
-  lazy(() => import('pages/welcome/organizationName'))
-)
-const TeamName = WithLazyLoader(lazy(() => import('pages/welcome/teamName')))
-const TeamMembers = WithLazyLoader(
-  lazy(() => import('pages/welcome/teamMembers'))
-)
-const HelloThere = WithLazyLoader(
-  lazy(() => import('pages/welcome/helloThere'))
-)
-// const FirstPost = WithLazyLoader(lazy(() => import('pages/blog/firstPost')))
+const Home = lazy(() => import('pages/home'))
+// const Faq = lazy(() => import('pages/faq')))
+const Cookies = lazy(() => import('pages/cookies'))
+const PrivacyPolicy = lazy(() => import('pages/privacyPolicy'))
+const TermsAndConditions = lazy(() => import('pages/termsAndConditions'))
 
-const NotFound = WithLazyLoader(lazy(() => import('pages/notFound')))
+const Pricing = lazy(() => import('pages/pricing'))
+const GoBackTo = lazy(() => import('pages/fromEmbed/goBackTo'))
+const EmbedLogin = lazy(() => import('pages/fromEmbed/login'))
+const Embed = lazy(() => import('pages/embed'))
+const RunProject = lazy(() => import('pages/runProject'))
+const Editor = lazy(() => import('pages/editor'))
+const Dashboard = lazy(() => import('pages/dashboard'))
+const Plans = lazy(() => import('pages/plans'))
+const FromEmailInvitation = lazy(() =>
+  import('pages/welcome/fromEmailInvitation')
+)
+
+const Login = lazy(() => import('pages/welcome/login'))
+const OrganizationName = lazy(() => import('pages/welcome/organizationName'))
+
+const TeamName = lazy(() => import('pages/welcome/teamName'))
+const TeamMembers = lazy(() => import('pages/welcome/teamMembers'))
+
+const HelloThere = lazy(() => import('pages/welcome/helloThere'))
+
+// const FirstPost = lazy(() => import('pages/blog/firstPost')))
+
+const NotFound = lazy(() => import('pages/notFound'))
 
 const Strove = () => (
   <Suspense fallback={<></>}>
