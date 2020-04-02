@@ -1,8 +1,6 @@
 import React, { useState, memo } from 'react'
-import { Parallax } from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
-import { SmallCloud, MediumCloud, BigCloud } from 'components'
 import { Icon } from 'antd'
 import { VSCode } from 'components/svgs'
 import styled from 'styled-components/macro'
@@ -40,10 +38,6 @@ const StyledFeatureWrapper = styled.div`
 
 const StyledFeature = styled.div`
   width: 80vw;
-`
-
-const StyledParlax = styled(Parallax)`
-  top: -30vh;
 `
 
 const pointPos = [
@@ -195,21 +189,6 @@ const Features = ({ features }) => {
 
   return (
     <StyledFeatureWrapper id="page1-wrapper">
-      {!isMobileOnly && (
-        <StyledParlax
-          className="page1-bg"
-          animation={{
-            translateY: 300,
-            ease: 'linear',
-            playScale: [0, 1.65],
-          }}
-          location="page1-wrapper"
-        >
-          <SmallCloud />
-          <MediumCloud />
-          <BigCloud />
-        </StyledParlax>
-      )}
       <StyledFeature>{children}</StyledFeature>
     </StyledFeatureWrapper>
   )

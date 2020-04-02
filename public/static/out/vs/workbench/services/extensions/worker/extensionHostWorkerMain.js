@@ -2,5 +2,21 @@
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/!function(){let e=self.MonacoEnvironment,r=e&&e.baseUrl?e.baseUrl:"../../../../../";"function"==typeof self.define&&self.define.amd||importScripts(r+"vs/loader.js"),require.config({baseUrl:r,catchError:!0}),require(["vs/workbench/services/extensions/worker/extensionHostWorker"],()=>{},e=>console.error(e))}();
+ *--------------------------------------------------------------------------------------------*/
+(function () {
+    let MonacoEnvironment = self.MonacoEnvironment;
+    let monacoBaseUrl = MonacoEnvironment && MonacoEnvironment.baseUrl ? MonacoEnvironment.baseUrl : '../../../../../';
+    if (typeof self.define !== 'function' || !self.define.amd) {
+        importScripts(monacoBaseUrl + 'vs/loader.js');
+    }
+    require.config({
+        baseUrl: monacoBaseUrl,
+        catchError: true,
+        paths: {
+            '@coder/node-browser': `../node_modules/@coder/node-browser/out/client/client.js`,
+            '@coder/requirefs': `../node_modules/@coder/requirefs/out/requirefs.js`,
+        }
+    });
+    require(['vs/workbench/services/extensions/worker/extensionHostWorker'], () => { }, err => console.error(err));
+})();
 //# sourceMappingURL=extensionHostWorkerMain.js.map

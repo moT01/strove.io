@@ -10,7 +10,18 @@ const StyledCTAWrapper = styled.div`
   justify-content: center;
   align-self: center;
   margin-top: 20px;
-  background: ${({ theme }) => theme.colors.c2};
+
+  ::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    max-height: 400px;
+    background-repeat: no-repeat;
+    background-image: url(${require('../../assets/map.png')});
+    opacity: 0.1;
+  }
 `
 
 const StyledButtonWrapper = styled.div`

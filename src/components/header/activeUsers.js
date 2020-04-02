@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-// import { isMobileOnly } from 'react-device-detect'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'

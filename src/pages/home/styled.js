@@ -38,9 +38,10 @@ export const BeforeItem = styled.div`
 `
 
 export const BeforeContainer = styled.div`
-  justify-content: center;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
+  height: 300px;
 `
 
 export const StyledSectionWrapper = styled.section`
@@ -74,6 +75,21 @@ export const StyledSectionWrapper = styled.section`
       css`
         background: ${background};
       `}
+`
+
+export const SmallSectionWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  max-width: 440px;
+  padding: ${({ padding }) => padding || '0'};
+`
+
+export const BeforeAfterSection = styled(StyledSectionWrapper)`
+  height: ${({ isMobileOnly }) => (isMobileOnly ? '100%' : '500px')};
 `
 
 export const BannerWrapper = styled(StyledSectionWrapper)`
@@ -113,17 +129,6 @@ export const SectionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 1200px;
-  padding: ${({ padding }) => padding || '0'};
-`
-
-export const SmallSectionWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  max-width: 440px;
   padding: ${({ padding }) => padding || '0'};
 `
 
@@ -312,6 +317,7 @@ export const StyledGrid = styled.div`
 export const StyledCell = styled.div`
   color: ${({ theme }) => theme.colors.c2};
   margin: 20px;
+  height: 100%;
 `
 
 export const IconContainer = styled.div`
