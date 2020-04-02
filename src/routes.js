@@ -1,10 +1,10 @@
 import React, { lazy, memo, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import { PrivateRoute, ScrollToTop, WithLazyLoader } from 'components'
+import { PrivateRoute, ScrollToTop } from 'components'
 
 const Home = lazy(() => import('pages/home'))
-// const Faq = lazy(() => import('pages/faq')))
+// const Faq = lazy(() => import('pages/faq'))
 const Cookies = lazy(() => import('pages/cookies'))
 const PrivacyPolicy = lazy(() => import('pages/privacyPolicy'))
 const TermsAndConditions = lazy(() => import('pages/termsAndConditions'))
@@ -34,7 +34,7 @@ const HelloThere = lazy(() => import('pages/welcome/helloThere'))
 const NotFound = lazy(() => import('pages/notFound'))
 
 const Strove = () => (
-  <Suspense fallback={<></>}>
+  <Suspense fallback={<div></div>}>
     <ScrollToTop />
     <Switch>
       <Route exact path="/" component={Home} />
