@@ -91,30 +91,31 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       repoLink = ''
     }
 
-    const existingProject = projects.find(
+    const allExistingProjects = projects.filter(
       project => project.repoLink === `${repoLink}.git`
+    )
+    const existingProject = allExistingProjects.find(
+      project => project.teamId === editedTeam.id
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
-    if (
-      (existingProject &&
-        !currentProject &&
-        existingProject.teamId === editedTeam.id) ||
-      (existingProject &&
-        existingProject === currentProject &&
-        existingProject.teamId === editedTeam.id)
-    ) {
-      return dispatch(
-        mutation({
-          name: 'continueProject',
-          mutation: CONTINUE_PROJECT,
-          variables: {
-            projectId: existingProject?.id,
-            teamId: existingProject?.teamId,
-          },
-        })
-      )
+    if (existingProject) {
+      if (
+        !currentProject ||
+        existingProject?.repoLink === currentProject?.repoLink
+      ) {
+        return dispatch(
+          mutation({
+            name: 'continueProject',
+            mutation: CONTINUE_PROJECT,
+            variables: {
+              projectId: existingProject?.id,
+              teamId: existingProject?.teamId,
+            },
+          })
+        )
+      }
     }
 
     dispatch(
