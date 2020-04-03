@@ -1,6 +1,5 @@
-import { query, mutation } from 'utils'
-import { STOP_PROJECT, MY_PROJECTS, MY_ORGANIZATIONS } from 'queries'
-import { actions } from 'state'
+import { mutation, updateOrganizations } from 'utils'
+import { STOP_PROJECT } from 'queries'
 
 const handleStopProject = ({ id, dispatch }) => {
   dispatch(
@@ -9,30 +8,7 @@ const handleStopProject = ({ id, dispatch }) => {
       mutation: STOP_PROJECT,
       dataSelector: data => data,
       variables: { projectId: id },
-      onSuccess: () => {
-        dispatch(
-          query({
-            name: 'myOrganizations',
-            storeKey: 'myOrganizations',
-            query: MY_ORGANIZATIONS,
-          })
-        )
-      },
-      onSuccessDispatch: [
-        () =>
-          actions.api.fetchSuccess({
-            data: { currentProjectId: null },
-            storeKey: 'user',
-          }),
-        () => actions.api.fetchSuccess({ storeKey: 'stopProject' }),
-      ],
-    })
-  )
-  dispatch(
-    query({
-      name: 'myProjects',
-      dataSelector: data => data.myProjects.edges,
-      query: MY_PROJECTS,
+      onSuccessDispatch: updateOrganizations,
     })
   )
 }

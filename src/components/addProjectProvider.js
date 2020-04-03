@@ -113,7 +113,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
             projectId: existingProject?.id,
             teamId: existingProject?.teamId,
           },
-          onSuccessDispatch: null,
         })
       )
     }

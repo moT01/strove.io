@@ -88,7 +88,7 @@ export default withRouter(({ children, addProject, history }) => {
       type: C.currentProject.SET_CURRENT_PROJECT,
       data: activeProject,
     })
-    // eslint-disable-next-line
+    /* eslint-disable-next-line */
   }, [activeProjectData])
 
   useEffect(() => {
@@ -107,10 +107,7 @@ export default withRouter(({ children, addProject, history }) => {
             teamId: invitedByTeamId,
           },
           mutation: ACCEPT_TEAM_INVITATION,
-          onSuccessDispatch: () => [
-            actions.invitations.acceptInvitation(),
-            updateOrganizations,
-          ],
+          onSuccessDispatch: () => [updateOrganizations],
         })
       )
     }

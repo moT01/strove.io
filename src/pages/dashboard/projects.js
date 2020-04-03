@@ -11,7 +11,7 @@ import {
   STAR_LIVE_SHARE,
   STOP_LIVE_SHARE,
 } from 'queries'
-import { selectors, actions, C } from 'state'
+import { selectors, actions } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
 import StroveLogo from 'images/strove.png'
 
@@ -109,12 +109,12 @@ const Projects = ({
 
   const handleStartClick = ({ id, teamId }) => {
     if (!currentProjectId) {
+      dispatch(actions.incomingProject.setProjectIsBeingAdded())
       return dispatch(
         mutation({
           name: 'continueProject',
           mutation: CONTINUE_PROJECT,
           variables: { projectId: id, teamId },
-          onSuccessDispatch: null,
         })
       )
     }
@@ -156,13 +156,7 @@ const Projects = ({
         name: 'stopLiveShare',
         mutation: STOP_LIVE_SHARE,
         variables: { projectId: project.id },
-        onSuccessDispatch: [
-          updateOrganizations,
-          () => ({
-            type: actions.api.C.FETCH_SUCCESS,
-            storeKey: 'stopLiveShare',
-          }),
-        ],
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }
@@ -177,14 +171,7 @@ const Projects = ({
         onSuccess: () => {
           setProjectToDelete(null)
         },
-        onSuccessDispatch: [
-          () => ({
-            type: C.api.REMOVE_ITEM,
-            payload: { storeKey: 'myProjects', id },
-          }),
-          () => actions.api.fetchSuccess({ storeKey: 'deleteProject' }),
-          updateOrganizations,
-        ],
+        onSuccessDispatch: updateOrganizations,
       })
     )
   }

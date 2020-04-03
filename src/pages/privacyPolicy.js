@@ -33,7 +33,7 @@ const Legal = () => (
     <Header />
     <TextWell>
       <StyledH1>Privacy Policy</StyledH1>
-      <h6>Last Edited on 2020-01–05</h6>
+      <h6>Last Edited on 2020-04–02</h6>
       <p>
         his privacy policy has been compiled to better serve those who are
         concerned with how their 'Personally Identifiable Information' (PII) is

@@ -8,13 +8,8 @@ import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
-import {
-  CANCEL_SUBSCRIPTION,
-  MY_ORGANIZATIONS,
-  REVERT_CANCEL,
-  GET_PAYMENT_INFO,
-} from 'queries'
-import { mutation, query } from 'utils'
+import { CANCEL_SUBSCRIPTION, REVERT_CANCEL, GET_PAYMENT_INFO } from 'queries'
+import { mutation, query, updateOrganizations } from 'utils'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -216,16 +211,6 @@ const Plans = () => {
 
   const closeWarningModal = () => {
     setWarningModal(emptyWarningModalContent)
-  }
-
-  const updateOrganizations = () => {
-    dispatch(
-      query({
-        name: 'myOrganizations',
-        storeKey: 'myOrganizations',
-        query: MY_ORGANIZATIONS,
-      })
-    )
   }
 
   const fetchPaymentInfo = organization => {

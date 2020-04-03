@@ -33,7 +33,7 @@ const Legal = () => (
     <Header />
     <TextWell>
       <StyledH1>Terms and Conditions</StyledH1>
-      <h6>Last Edited on 2020-01–05</h6>
+      <h6>Last Edited on 2020-04–05</h6>
       <p>
         These Terms and Conditions govern your relationship with
         https://strove.io website the "Service" and the creation service therein

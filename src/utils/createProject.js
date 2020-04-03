@@ -142,7 +142,6 @@ const createProject = async ({
             teamId,
             forkedFromId,
           })
-          dispatch(actions.api.fetchError({ storeKey: 'myProjects', error }))
           dispatch(actions.incomingProject.catchIncomingError({ error }))
         },
       })
