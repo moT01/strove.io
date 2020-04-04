@@ -8,7 +8,7 @@ import {
   DELETE_PROJECT,
   CONTINUE_PROJECT,
   SET_VISIBILITY,
-  STAR_LIVE_SHARE,
+  START_LIVE_SHARE,
   STOP_LIVE_SHARE,
 } from 'queries'
 import { selectors, actions } from 'state'
@@ -109,7 +109,7 @@ const Projects = ({
 
   const handleStartClick = ({ id, teamId }) => {
     if (!currentProjectId) {
-      dispatch(actions.incomingProject.setProjectIsBeingAdded())
+      dispatch(actions.incomingProject.setProjectIsBeingStarted())
       return dispatch(
         mutation({
           name: 'continueProject',
@@ -138,7 +138,7 @@ const Projects = ({
       return dispatch(
         mutation({
           name: 'startLiveShare',
-          mutation: STAR_LIVE_SHARE,
+          mutation: START_LIVE_SHARE,
           variables: { projectId: id, teamId },
         })
       )
