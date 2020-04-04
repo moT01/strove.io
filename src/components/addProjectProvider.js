@@ -27,7 +27,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const isLoading = useSelector(selectors.api.getLoading('myProjects'))
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
-  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
+  const isContinuing = useSelector(
+    selectors.incomingProject.isProjectBeingStarted
+  )
   const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
   const isJoiningLiveshare = useSelector(
     selectors.incomingProject.getIsLiveshare
@@ -101,10 +103,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
     if (existingProject) {
-      if (
-        !currentProject ||
-        existingProject?.repoLink === currentProject?.repoLink
-      ) {
+      if (!currentProject) {
+        dispatch(actions.incomingProject.setProjectIsBeingStarted())
         return dispatch(
           mutation({
             name: 'continueProject',
@@ -115,6 +115,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
             },
           })
         )
+      } else if (existingProject?.repoLink === currentProject?.repoLink) {
+        return history.push('/app/editor/')
       }
     }
 
