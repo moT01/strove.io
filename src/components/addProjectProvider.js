@@ -65,13 +65,10 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       ? document.referrer
       : document.location.href
 
-  if (
-    continueProjectError === 'USER_SESSION_TIME_DEPLETED' ||
-    incomingProjectError.message === 'USER_SESSION_TIME_DEPLETED'
-  ) {
+  if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
     dispatch(actions.incomingProject.removeIncomingProject())
     if (!modalContent) {
-      setModalContent('SessionTimeDepleted')
+      setModalContent('TimeExceeded')
     }
   }
 

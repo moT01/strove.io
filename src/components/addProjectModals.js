@@ -417,11 +417,7 @@ const AddProjectModals = ({
       >
         <ModalWrapper>
           <Text>You have exceeded the monthly editor time for free users.</Text>
-
-          <Text>
-            If you need more time to work on your amazing projects upgrade your
-            subscription plan.
-          </Text>
+          <Text>If you need more time, upgrade your subscription plan.</Text>
           <StroveButton
             isLink
             isPrimary
@@ -478,39 +474,7 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-
-      <Modal
-        isOpen={modalContent === 'SessionTimeDepleted'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-        height={isMobileOnly ? '47vh' : '25vh'}
-      >
-        <ModalWrapper>
-          <Text>You have exceeded the monthly editor time for free users.</Text>
-          <Text>
-            If you need more time to work on your amazing projects upgrade your
-            subscription plan.
-          </Text>
-          <ButtonsWrapper mobile={device}>
-            <StyledLink
-              to="/app/dashboard"
-              primary
-              primary
-              onClick={() => setModalContent('')}
-              text="Pricing"
-              padding="5px"
-              minWidth="150px"
-              maxWidth="150px"
-              margin="10px"
-              borderRadius="5px"
-            >
-              Plans
-            </StyledLink>
-          </ButtonsWrapper>
-        </ModalWrapper>
-      </Modal>
+      {console.log('modalContent')}
 
       <Modal
         isOpen={modalContent?.includes('TryAgainLater')}
