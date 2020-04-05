@@ -49,6 +49,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
   const addProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = useSelector(selectors.api.getCurrentProject)
+  const continueProjectError = useSelector(
+    selectors.api.getError('continueProject')
+  )
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   /* Decide what to do about the projects limit */
@@ -130,7 +133,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       })
     )
 
-    if (!user && repoFromGithub) {
+    if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+      setModalContent('SessionTimeDepleted')
+    } else if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
       setModalContent('LoginWithGitlab')

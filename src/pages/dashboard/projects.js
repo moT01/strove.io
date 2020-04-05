@@ -74,36 +74,36 @@ const Projects = ({
 
   const isDisabled = isDeleting || isContinuing || isStopping
 
-  useEffect(() => {
-    if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
-      setWarningModal({
-        visible: true,
-        content: (
-          <>
-            <ModalText>
-              You have exceeded the monthly editor time for free users.
-            </ModalText>
-            <ModalText>
-              If you need more time to work on your amazing projects upgrade
-              your subscription plan.
-            </ModalText>
-            <StroveButton
-              isLink
-              isPrimary
-              to="/app/plans"
-              text="Pricing"
-              padding="5px"
-              minWidth="150px"
-              maxWidth="150px"
-              margin="10px"
-              borderRadius="5px"
-            />
-          </>
-        ),
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [continueProjectError])
+  // useEffect(() => {
+  //   if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+  //     setWarningModal({
+  //       visible: true,
+  //       content: (
+  //         <>
+  //           <ModalText>
+  //             You have exceeded the monthly editor time for free users.
+  //           </ModalText>
+  //           <ModalText>
+  //             If you need more time to work on your amazing projects upgrade
+  //             your subscription plan.
+  //           </ModalText>
+  //           <StroveButton
+  //             isLink
+  //             isPrimary
+  //             to="/app/plans"
+  //             text="Pricing"
+  //             padding="5px"
+  //             minWidth="150px"
+  //             maxWidth="150px"
+  //             margin="10px"
+  //             borderRadius="5px"
+  //           />
+  //         </>
+  //       ),
+  //     })
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [continueProjectError])
 
   const usersProjects = projects.filter(project => project.userId !== user.id)
 
