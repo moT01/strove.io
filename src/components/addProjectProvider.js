@@ -65,9 +65,14 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       ? document.referrer
       : document.location.href
 
-  if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+  if (
+    continueProjectError === 'USER_SESSION_TIME_DEPLETED' ||
+    incomingProjectError.message === 'USER_SESSION_TIME_DEPLETED'
+  ) {
     dispatch(actions.incomingProject.removeIncomingProject())
-    setModalContent('SessionTimeDepleted')
+    if (!modalContent) {
+      setModalContent('SessionTimeDepleted')
+    }
   }
 
   const addProject = async ({ link, name, teamId, forkedFromId }) => {

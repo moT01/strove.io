@@ -494,17 +494,20 @@ const AddProjectModals = ({
             subscription plan.
           </Text>
           <ButtonsWrapper mobile={device}>
-            <StroveButton
-              isLink
-              isPrimary
-              to="/app/plans"
+            <StyledLink
+              to="/app/dashboard"
+              primary
+              primary
+              onClick={() => setModalContent('')}
               text="Pricing"
               padding="5px"
               minWidth="150px"
               maxWidth="150px"
               margin="10px"
               borderRadius="5px"
-            />
+            >
+              Plans
+            </StyledLink>
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
