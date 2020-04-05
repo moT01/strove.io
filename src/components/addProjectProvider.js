@@ -110,7 +110,13 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       project => project.repoLink === `${repoLink}.git`
     )
     const existingProject = allExistingProjects.find(
-      project => project.teamId === editedTeam.id
+      project =>
+        project.teamId === editedTeam?.id ||
+        /* This should not be necessary for for some reason,
+        edited team is sometimes not initialized before this place is called
+        ToDo: Find a reason why this doesnt work and fix actions/selectors.
+        */
+        project.teamId === teamIdWithProject
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
