@@ -66,6 +66,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       : document.location.href
 
   if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+    dispatch(
+      actions.api.updateItem({ storeKey: 'continueProject', error: null })
+    )
     dispatch(actions.incomingProject.removeIncomingProject())
     if (!modalContent) {
       setModalContent('TimeExceeded')
