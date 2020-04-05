@@ -422,7 +422,7 @@ const AddProjectModals = ({
             isLink
             isPrimary
             to="/app/plans"
-            onlick={closeModal}
+            onClick={closeModal}
             text="Pricing"
             padding="5px"
             minWidth="150px"
