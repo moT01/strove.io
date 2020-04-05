@@ -34,7 +34,7 @@ const ButtonFadeIn = keyframes`
   }
 `
 const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
   margin-bottom: 12px;
   white-space: normal;
@@ -475,6 +475,37 @@ const AddProjectModals = ({
               </StyledLink>
             )}
             <StroveButton onClick={closeModal} text="Close" />
+          </ButtonsWrapper>
+        </ModalWrapper>
+      </Modal>
+
+      <Modal
+        isOpen={true}
+        // isOpen={modalContent === 'SessionTimeDepleted'}
+        onRequestClose={closeModal}
+        contentLabel={modalContent}
+        ariaHideApp={false}
+        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
+        height={isMobileOnly ? '47vh' : '25vh'}
+      >
+        <ModalWrapper>
+          <Text>You have exceeded the monthly editor time for free users.</Text>
+          <Text>
+            If you need more time to work on your amazing projects upgrade your
+            subscription plan.
+          </Text>
+          <ButtonsWrapper mobile={device}>
+            <StroveButton
+              isLink
+              isPrimary
+              to="/app/plans"
+              text="Pricing"
+              padding="5px"
+              minWidth="150px"
+              maxWidth="150px"
+              margin="10px"
+              borderRadius="5px"
+            />
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
