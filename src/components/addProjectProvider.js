@@ -47,7 +47,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     selectors.incomingProject.getRepoLink
   )
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
-  const addProjectError = useSelector(selectors.incomingProject.getError)
+  const incomingProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = useSelector(selectors.api.getCurrentProject)
   const continueProjectError = useSelector(
     selectors.api.getError('continueProject')
@@ -163,12 +163,12 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       setModalContent('AddBitbucketToLogin')
       // ToDo: Handle gitlab and bitbucket unresolved repo errors
     } else if (
-      addProjectError &&
-      addProjectError.message &&
-      addProjectError.message.includes('Could not resolve to a Repository')
+      incomingProjectError &&
+      incomingProjectError.message &&
+      incomingProjectError.message.includes('Could not resolve to a Repository')
     ) {
       setModalContent('AddEmptyProject')
-    } else if (addProjectError) {
+    } else if (incomingProjectError) {
       setModalContent('SomethingWentWrong')
     } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
