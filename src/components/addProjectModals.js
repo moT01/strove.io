@@ -475,7 +475,6 @@ const AddProjectModals = ({
           </ButtonsWrapper>
         </ModalWrapper>
       </Modal>
-      {console.log('modalContent')}
 
       <Modal
         isOpen={modalContent?.includes('TryAgainLater')}

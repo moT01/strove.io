@@ -134,14 +134,11 @@ const createProject = async ({
         mutation: ADD_PROJECT,
         onSuccessDispatch: updateOrganizations,
         onError: error => {
-          setModalContent('TryAgainLater', {
-            repoLink,
-            name,
-            description,
-            type,
-            teamId,
-            forkedFromId,
-          })
+          setModalContent(
+            error === 'USER_SESSION_TIME_DEPLETED'
+              ? 'TimeExceeded'
+              : 'TryAgainLater'
+          )
           dispatch(actions.incomingProject.catchIncomingError(error))
         },
       })
@@ -149,7 +146,6 @@ const createProject = async ({
   } catch (error) {
     console.log('fetch error: ', error)
     dispatch(actions.incomingProject.catchIncomingError(error))
-    setModalContent('TryAgainLater')
   }
 }
 export default createProject
