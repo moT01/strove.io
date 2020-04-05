@@ -65,6 +65,11 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       ? document.referrer
       : document.location.href
 
+  if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+    dispatch(actions.incomingProject.removeIncomingProject())
+    setModalContent('SessionTimeDepleted')
+  }
+
   const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
     let repoProvider
@@ -133,9 +138,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       })
     )
 
-    if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
-      setModalContent('SessionTimeDepleted')
-    } else if (!user && repoFromGithub) {
+    if (!user && repoFromGithub) {
       setModalContent('LoginWithGithub')
     } else if (!user && repoFromGitlab) {
       setModalContent('LoginWithGitlab')

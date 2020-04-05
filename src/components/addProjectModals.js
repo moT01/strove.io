@@ -480,8 +480,7 @@ const AddProjectModals = ({
       </Modal>
 
       <Modal
-        isOpen={true}
-        // isOpen={modalContent === 'SessionTimeDepleted'}
+        isOpen={modalContent === 'SessionTimeDepleted'}
         onRequestClose={closeModal}
         contentLabel={modalContent}
         ariaHideApp={false}
