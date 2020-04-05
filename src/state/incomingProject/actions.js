@@ -17,9 +17,9 @@ export const setProjectIsBeingAdded = ({ isLiveshare = false } = {}) => ({
 export const setProjectIsBeingStarted = () => ({
   type: C.SET_PROJECT_IS_BEING_STARTED,
 })
-export const catchIncomingError = ({ error }) => ({
+export const catchIncomingError = error => ({
   type: C.CATCH_INCOMING_ERROR,
-  payload: { error },
+  error,
 })
 
 export const removeIncomingProject = () => ({ type: C.REMOVE_INCOMING_PROJECT })

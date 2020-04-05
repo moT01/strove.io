@@ -51,7 +51,7 @@ const createProject = async ({
               repoData = data.repository
             } catch (error) {
               console.log('error', error)
-              dispatch(actions.incomingProject.catchIncomingError({ error }))
+              dispatch(actions.incomingProject.catchIncomingError(error))
               setModalContent('UnableToClone')
             }
           }
@@ -70,7 +70,7 @@ const createProject = async ({
               )
               repoData = await res.json()
             } catch (error) {
-              dispatch(actions.incomingProject.catchIncomingError({ error }))
+              dispatch(actions.incomingProject.catchIncomingError(error))
               setModalContent('TryAgainLaterButGitlabIsToBlame')
             }
           }
@@ -142,13 +142,13 @@ const createProject = async ({
             teamId,
             forkedFromId,
           })
-          dispatch(actions.incomingProject.catchIncomingError({ error }))
+          dispatch(actions.incomingProject.catchIncomingError(error))
         },
       })
     )
   } catch (error) {
     console.log('fetch error: ', error)
-    dispatch(actions.incomingProject.catchIncomingError({ error }))
+    dispatch(actions.incomingProject.catchIncomingError(error))
     setModalContent('TryAgainLater')
   }
 }

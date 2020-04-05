@@ -35,8 +35,7 @@ export default (state = initialState, action) => {
     }
 
     case C.CATCH_INCOMING_ERROR: {
-      const { error } = action.payload
-      return { error }
+      return { error: action }
     }
 
     case REHYDRATE: {
