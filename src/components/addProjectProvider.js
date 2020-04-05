@@ -47,8 +47,11 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     selectors.incomingProject.getRepoLink
   )
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
-  const addProjectError = useSelector(selectors.incomingProject.getError)
+  const incomingProjectError = useSelector(selectors.incomingProject.getError)
   const currentProject = useSelector(selectors.api.getCurrentProject)
+  const continueProjectError = useSelector(
+    selectors.api.getError('continueProject')
+  )
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   /* Decide what to do about the projects limit */
@@ -61,6 +64,16 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     window.location !== window.parent.location
       ? document.referrer
       : document.location.href
+
+  if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+    dispatch(
+      actions.api.updateItem({ storeKey: 'continueProject', error: null })
+    )
+    dispatch(actions.incomingProject.removeIncomingProject())
+    if (!modalContent) {
+      setModalContent('TimeExceeded')
+    }
+  }
 
   const addProject = async ({ link, name, teamId, forkedFromId }) => {
     let repoLink
@@ -97,7 +110,13 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       project => project.repoLink === `${repoLink}.git`
     )
     const existingProject = allExistingProjects.find(
-      project => project.teamId === editedTeam.id
+      project =>
+        project.teamId === editedTeam?.id ||
+        /* This should not be necessary for for some reason,
+        edited team is sometimes not initialized before this place is called
+        ToDo: Find a reason why this doesnt work and fix actions/selectors.
+        */
+        project.teamId === teamIdWithProject
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
@@ -155,12 +174,12 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       setModalContent('AddBitbucketToLogin')
       // ToDo: Handle gitlab and bitbucket unresolved repo errors
     } else if (
-      addProjectError &&
-      addProjectError.message &&
-      addProjectError.message.includes('Could not resolve to a Repository')
+      incomingProjectError &&
+      incomingProjectError.message &&
+      incomingProjectError.message.includes('Could not resolve to a Repository')
     ) {
       setModalContent('AddEmptyProject')
-    } else if (addProjectError) {
+    } else if (incomingProjectError) {
       setModalContent('SomethingWentWrong')
     } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')

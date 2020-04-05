@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react'
+import React, { useState, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
@@ -58,9 +58,6 @@ const Projects = ({
   const isDeleting = useSelector(selectors.api.getLoading('deleteProject'))
   const isStopping = useSelector(selectors.api.getLoading('stopProject'))
   const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const continueProjectError = useSelector(
-    selectors.api.getError('continueProject')
-  )
   const isProjectBeingAdded = useSelector(
     selectors.incomingProject.isProjectBeingAdded
   )
@@ -68,43 +65,8 @@ const Projects = ({
   const currentProjectId = currentProject?.id
   // This code filters other users' and already forked projects
   const displayedProjects = sortByActiveProjects(projects)
-  // .map(project =>
-  //   projects.filter(project => project.userId === user.id).findIndex(x => x.name === project.name) !== -1 ? project.userId === user.id && project : project
-  // )
 
   const isDisabled = isDeleting || isContinuing || isStopping
-
-  useEffect(() => {
-    if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
-      dispatch(actions.incomingProject.removeIncomingProject())
-      setWarningModal({
-        visible: true,
-        content: (
-          <>
-            <ModalText>
-              You have exceeded the monthly editor time for free users.
-            </ModalText>
-            <ModalText>
-              If you need more time to work on your amazing projects upgrade
-              your subscription plan.
-            </ModalText>
-            <StroveButton
-              isLink
-              isPrimary
-              to="/app/plans"
-              text="Pricing"
-              padding="5px"
-              minWidth="150px"
-              maxWidth="150px"
-              margin="10px"
-              borderRadius="5px"
-            />
-          </>
-        ),
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [continueProjectError])
 
   const usersProjects = projects.filter(project => project.userId !== user.id)
 

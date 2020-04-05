@@ -44,7 +44,6 @@ const Run = ({ addProject, history }) => {
   const goBackTo = searchParams.get('goBackTo') || ''
 
   const setEditedOrganization = ({ team }) => {
-    console.log('TCL: setEditedOrganization -> team', team)
     dispatch(
       actions.editedOrganization.setEditedOrganization({
         organization: myOrganizations[team.organizationId],

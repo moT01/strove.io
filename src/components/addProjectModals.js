@@ -34,7 +34,7 @@ const ButtonFadeIn = keyframes`
   }
 `
 const Text = styled.p`
-  color: ${({ theme }) => theme.colors.c1};
+  color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
   margin-bottom: 12px;
   white-space: normal;
@@ -417,15 +417,12 @@ const AddProjectModals = ({
       >
         <ModalWrapper>
           <Text>You have exceeded the monthly editor time for free users.</Text>
-
-          <Text>
-            If you need more time to work on your amazing projects upgrade your
-            subscription plan.
-          </Text>
+          <Text>If you need more time, upgrade your subscription plan.</Text>
           <StroveButton
             isLink
             isPrimary
             to="/app/plans"
+            onClick={closeModal}
             text="Pricing"
             padding="5px"
             minWidth="150px"

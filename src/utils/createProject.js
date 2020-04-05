@@ -51,7 +51,7 @@ const createProject = async ({
               repoData = data.repository
             } catch (error) {
               console.log('error', error)
-              dispatch(actions.incomingProject.catchIncomingError({ error }))
+              dispatch(actions.incomingProject.catchIncomingError(error))
               setModalContent('UnableToClone')
             }
           }
@@ -70,7 +70,7 @@ const createProject = async ({
               )
               repoData = await res.json()
             } catch (error) {
-              dispatch(actions.incomingProject.catchIncomingError({ error }))
+              dispatch(actions.incomingProject.catchIncomingError(error))
               setModalContent('TryAgainLaterButGitlabIsToBlame')
             }
           }
@@ -134,22 +134,18 @@ const createProject = async ({
         mutation: ADD_PROJECT,
         onSuccessDispatch: updateOrganizations,
         onError: error => {
-          setModalContent('TryAgainLater', {
-            repoLink,
-            name,
-            description,
-            type,
-            teamId,
-            forkedFromId,
-          })
-          dispatch(actions.incomingProject.catchIncomingError({ error }))
+          setModalContent(
+            error === 'USER_SESSION_TIME_DEPLETED'
+              ? 'TimeExceeded'
+              : 'TryAgainLater'
+          )
+          dispatch(actions.incomingProject.catchIncomingError(error))
         },
       })
     )
   } catch (error) {
     console.log('fetch error: ', error)
-    dispatch(actions.incomingProject.catchIncomingError({ error }))
-    setModalContent('TryAgainLater')
+    dispatch(actions.incomingProject.catchIncomingError(error))
   }
 }
 export default createProject
