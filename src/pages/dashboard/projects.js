@@ -76,6 +76,7 @@ const Projects = ({
 
   useEffect(() => {
     if (continueProjectError === 'USER_SESSION_TIME_DEPLETED') {
+      dispatch(actions.incomingProject.removeIncomingProject())
       setWarningModal({
         visible: true,
         content: (
