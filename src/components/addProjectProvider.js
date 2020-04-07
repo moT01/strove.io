@@ -85,7 +85,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     /* TODO: Find a reasonable way to approach this */
     const organizationWithProject = organization || ownedOrganizations?.[0]
     const teamIdWithProject = type
-      ? ownedOrganizations?.[0]?.teams?.[0]?.id
+      ? ownedOrganizations?.[0]?.teams?.[
+          ownedOrganizations?.[0]?.teams?.length - 1
+        ]?.id
       : teamId
 
     let repoFromGithub
@@ -110,13 +112,12 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       project => project.repoLink === `${repoLink}.git`
     )
     const existingProject = allExistingProjects.find(
-      project =>
-        project.teamId === editedTeam?.id ||
-        /* This should not be necessary for for some reason,
+      project => project.teamId === editedTeam?.id
+      /* This should not be necessary for for some reason,
         edited team is sometimes not initialized before this place is called
         ToDo: Find a reason why this doesnt work and fix actions/selectors.
         */
-        project.teamId === teamIdWithProject
+      // project.teamId === teamIdWithProject
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
