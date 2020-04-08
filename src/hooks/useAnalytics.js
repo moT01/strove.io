@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import ReactGA from 'react-ga'
+import { isEdge, browserVersion } from 'react-device-detect'
 
 export default () => {
   const ref = useRef(null)
@@ -57,9 +58,11 @@ export default () => {
       })
     }
 
-    const perfObserver = new PerformanceObserver(measurePerformance)
-    /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
-    perfObserver.observe({ entryTypes: ['paint', 'navigation'] })
+    if (!isEdge ||  browserVersion > 79) {
+      const perfObserver = new PerformanceObserver(measurePerformance)
+      /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
+      perfObserver.observe({ entryTypes: ['paint', 'navigation'] })
+    }
   }, [])
 
   return ref
