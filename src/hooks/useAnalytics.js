@@ -60,8 +60,9 @@ export default () => {
 
     /*
       PerformanceObserver is supported since Edge 79+
+      Also, browserVersion is a string so +browserVersion check is needed.
     */
-    if (!isEdge || browserVersion > 79) {
+    if (!isEdge || +browserVersion > 79) {
       const perfObserver = new PerformanceObserver(measurePerformance)
       /* https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming */
       perfObserver.observe({ entryTypes: ['paint', 'navigation'] })
