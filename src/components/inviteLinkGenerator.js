@@ -6,9 +6,6 @@ import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
-import { StyledSelect } from 'pages/dashboard/styled'
-import StripeCheckoutForm from 'components/stripeCheckoutForm'
-import { CANCEL_SUBSCRIPTION, REVERT_CANCEL, GET_PAYMENT_INFO } from 'queries'
 import { mutation, query, updateOrganizations } from 'utils'
 
 export const FadeInAnimation = keyframes`
@@ -33,19 +30,6 @@ const SectionWrapper = styled(Wrapper)`
   margin-bottom: 30px;
 `
 
-const PageWrapper = styled(Wrapper)`
-  min-height: calc(100vh - 64px);
-  flex-direction: column;
-  width: 100vw;
-  padding: 0 40px;
-  max-width: 1000px;
-`
-
-const PlansWrapper = styled(PageWrapper)`
-  flex-direction: row;
-  width: 100%;
-`
-
 const LinkGeneratorWrapper = styled(Wrapper)`
   width: 100%;
   padding: 20px;
@@ -54,15 +38,52 @@ const LinkGeneratorWrapper = styled(Wrapper)`
   align-items: center;
 `
 
+const StyledInput = styled.input`
+  width: 60%;
+`
+
+const Text = styled.div`
+  color: ${({ theme }) => theme.colors.c3};
+  font-size: 1rem;
+  margin: 0px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+`
+
 const InviteLinkGenerator = () => {
-    const isImmortalGodKing = true
+  const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
+  const isImmortalGodKing = true
+
+  const handleClick = () => {
+    console.log('The team', editedTeam)
+  }
+
   return (
-    <div>
+    <>
       {isImmortalGodKing && (
-        <LinkGeneratorWrapper>
-          <Text>I am the destiny</Text>
-        </LinkGeneratorWrapper>
+        <SectionWrapper>
+          <LinkGeneratorWrapper>
+            <Text>I am the destiny</Text>
+            <StyledInput
+              value={editedTeam ? `${editedTeam.name}` : 'Generate invite link'}
+              readOnly
+            ></StyledInput>
+            <StroveButton
+              isPrimary
+              onClick={handleClick}
+              text="Generate link"
+            ></StroveButton>
+          </LinkGeneratorWrapper>
+        </SectionWrapper>
       )}
-    </div>
+    </>
   )
 }
+
+export default memo(InviteLinkGenerator)
