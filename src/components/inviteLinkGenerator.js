@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components/macro'
 import PaymentIcon from 'react-payment-icons'
 import { isMobileOnly } from 'react-device-detect'
+import copyToClipboard from 'copy-to-clipboard'
 
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
@@ -40,6 +41,10 @@ const LinkGeneratorWrapper = styled(Wrapper)`
 
 const StyledInput = styled.input`
   width: 60%;
+  margin: 5px;
+  :focus {
+    outline: none;
+  }
 `
 
 const Text = styled.div`
@@ -59,9 +64,17 @@ const Text = styled.div`
 const InviteLinkGenerator = () => {
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
   const isImmortalGodKing = true
+  const [linkCopied, setLinkCopied] = useState(false)
 
-  const handleClick = () => {
+  const generateLink = () => {
     console.log('The team', editedTeam)
+  }
+
+  const copyLink = () => {
+    if (!linkCopied) {
+      copyToClipboard(editedTeam?.name)
+      setLinkCopied(true)
+    }
   }
 
   return (
@@ -72,11 +85,16 @@ const InviteLinkGenerator = () => {
             <Text>I am the destiny</Text>
             <StyledInput
               value={editedTeam ? `${editedTeam.name}` : 'Generate invite link'}
+              onFocus={copyLink}
               readOnly
             ></StyledInput>
             <StroveButton
               isPrimary
-              onClick={handleClick}
+              width="150px"
+              margin="0px"
+              borderRadius="2px"
+              padding="3px"
+              onClick={generateLink}
               text="Generate link"
             ></StroveButton>
           </LinkGeneratorWrapper>
