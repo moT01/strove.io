@@ -8,6 +8,7 @@ import copyToClipboard from 'copy-to-clipboard'
 import { selectors } from 'state'
 import { StroveButton, SEO, Header, Modal } from 'components'
 import { mutation, query, updateOrganizations } from 'utils'
+import { Copy } from 'components/svgs'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -39,12 +40,26 @@ const LinkGeneratorWrapper = styled(Wrapper)`
   align-items: center;
 `
 
+const InputContainer = styled(Wrapper)`
+  flex-direction: row;
+  height: 30px;
+  max-width: 300px;
+  justify-content: flex-start;
+`
+
 const StyledInput = styled.input`
+  height: 30px;
   width: 60%;
   margin: 5px;
   :focus {
     outline: none;
   }
+`
+
+const StyledCopyIcon = styled(Copy)`
+  height: ${props => (props.isEditor ? '16px' : '25px')};
+  width: ${props => (props.isEditor ? '16px' : '25px')};
+  fill: ${({ theme }) => theme.colors.c2};
 `
 
 const Text = styled.div`
@@ -62,8 +77,11 @@ const Text = styled.div`
 `
 
 const InviteLinkGenerator = () => {
+  const isOpenSource = process.env.REACT_APP_IS_OPENSOURCE
+  const user = useSelector(selectors.api.getUser)
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
-  const isImmortalGodKing = true
+  const isImmortalGodKing =
+    isOpenSource && user?.stroveKey === process.env.REAC_APP_ADMIN_KEY
   const [linkCopied, setLinkCopied] = useState(false)
 
   const generateLink = () => {
@@ -83,11 +101,18 @@ const InviteLinkGenerator = () => {
         <SectionWrapper>
           <LinkGeneratorWrapper>
             <Text>I am the destiny</Text>
-            <StyledInput
-              value={editedTeam ? `${editedTeam.name}` : 'Generate invite link'}
-              onFocus={copyLink}
-              readOnly
-            ></StyledInput>
+            <InputContainer>
+              <StyledInput
+                value={
+                  editedTeam ? `${editedTeam.name}` : 'Generate invite link'
+                }
+                onFocus={copyLink}
+                readOnly
+              />
+              <StroveButton layout="form" height="26px" padding="0px">
+                <StyledCopyIcon />
+              </StroveButton>
+            </InputContainer>
             <StroveButton
               isPrimary
               width="150px"

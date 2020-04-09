@@ -161,7 +161,7 @@ const StroveButton = props => {
       primary
       fontWeight="700"
       fontSize="20px"
-      height="56px"
+      height={props.height ? props.height : '56px'}
       mobile={isMobileOnly}
       {...props}
     >
