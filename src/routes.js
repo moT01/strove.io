@@ -20,6 +20,7 @@ const Plans = lazy(() => import('pages/plans'))
 const FromEmailInvitation = lazy(() =>
   import('pages/welcome/fromEmailInvitation')
 )
+const GuestLink = lazy(() => import('pages/welcome/guestLink'))
 
 const Login = lazy(() => import('pages/welcome/login'))
 const OrganizationName = lazy(() => import('pages/welcome/organizationName'))
@@ -60,6 +61,7 @@ const Strove = () => (
       <Route path="/welcome/teamMembers" component={TeamMembers} />
       <PrivateRoute path="/welcome/helloThere" component={HelloThere} />
       <Route path="/fromEmailInvitation" component={FromEmailInvitation} />
+      <Route path="/guestLink" component={GuestLink} />
       {/* <Route path="/blog/firstPost" component={FirstPost} /> */}
       <Route component={NotFound} />
     </Switch>

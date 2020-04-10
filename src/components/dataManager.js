@@ -14,6 +14,7 @@ import {
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
   PAYMENT_STATUS_SUBSCRIPTION,
+  GUEST_LOGIN,
 } from 'queries'
 import {
   mutation,
@@ -58,6 +59,10 @@ export default withRouter(({ children, addProject, history }) => {
     selectors.incomingProject.isProjectBeingStarted
   )
   const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
+  const isGuest = useSelector(selectors.guestInvitation.isGuest)
+  console.log('TCL: isGuest', isGuest)
+  const guestId = useSelector(selectors.guestInvitation.guestId)
+  console.log('TCL: guestId', guestId)
 
   if (!localStorage.getItem('deviceId'))
     localStorage.setItem('deviceId', generateDeviceID())
@@ -96,6 +101,23 @@ export default withRouter(({ children, addProject, history }) => {
       history.push('/welcome/organizationName')
     }
   }, [isOnboarded, user, notEmbed, history])
+
+  useEffect(() => {
+    if (isGuest && !token) {
+      console.log('TCL: isGuest', isGuest)
+      dispatch(
+        mutation({
+          name: 'guestLogin',
+          mutation: GUEST_LOGIN,
+          context: null,
+          variables: {
+            deviceId,
+            guestId,
+          },
+        })
+      )
+    }
+  }, [isGuest])
 
   useEffect(() => {
     if (invitedByTeamId && token) {
@@ -326,6 +348,7 @@ export default withRouter(({ children, addProject, history }) => {
   const loginError = loginSubscription?.error
 
   useEffect(() => {
+    console.log('My name is Jeff', loginData)
     if (loginError) {
       dispatch(
         actions.api.fetchError({
@@ -335,6 +358,7 @@ export default withRouter(({ children, addProject, history }) => {
       )
     }
     if (loginData?.userLogin) {
+      console.log('My name is also Jefferson')
       const {
         token,
         siliskyToken,

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation DeleteGuestLink($deviceId: String!, $guestId: String!) {
-    DeleteGuestLink(deviceId: $deviceId, guestId: $guestId)
+  mutation GuestLogin($deviceId: String!, $guestId: String!) {
+    guestLogin(deviceId: $deviceId, guestId: $guestId)
   }
 `
