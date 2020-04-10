@@ -20,6 +20,7 @@ export const TeamFragment = gql`
       photoUrl
       id
       email
+      type
     }
     invited {
       name
