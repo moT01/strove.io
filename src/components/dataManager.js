@@ -60,9 +60,7 @@ export default withRouter(({ children, addProject, history }) => {
   )
   const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
   const isGuest = useSelector(selectors.guestInvitation.isGuest)
-  console.log('TCL: isGuest', isGuest)
   const guestId = useSelector(selectors.guestInvitation.guestId)
-  console.log('TCL: guestId', guestId)
 
   if (!localStorage.getItem('deviceId'))
     localStorage.setItem('deviceId', generateDeviceID())
@@ -104,7 +102,6 @@ export default withRouter(({ children, addProject, history }) => {
 
   useEffect(() => {
     if (isGuest && !token) {
-      console.log('TCL: isGuest', isGuest)
       dispatch(
         mutation({
           name: 'guestLogin',
