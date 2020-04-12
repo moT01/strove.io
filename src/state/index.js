@@ -30,11 +30,6 @@ const persistInvitationConfig = {
   storage,
 }
 
-// const persistGuestInvitationConfig = {
-//   key: 'guestInvitation',
-//   storage,
-// }
-
 const getToken = state => {
   return (
     api.selectors.getUserField('token')(state) ||
