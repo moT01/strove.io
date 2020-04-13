@@ -41,7 +41,6 @@ export const BeforeContainer = styled.div`
   justify-content: space-between;
   display: flex;
   flex-direction: column;
-  height: 300px;
 `
 
 export const StyledSectionWrapper = styled.section`
