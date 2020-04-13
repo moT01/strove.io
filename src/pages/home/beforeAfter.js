@@ -15,6 +15,7 @@ import {
   StyledBeforeText,
   BeforeContainer,
   BeforeAfterSection,
+  DemoImage,
 } from './styled'
 
 const BeforeAfter = () => (
@@ -90,7 +91,14 @@ const BeforeAfter = () => (
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
             </BeforeItem>
-            <BeforeContainer></BeforeContainer>
+            <BeforeContainer>
+              <DemoImage
+                decoding="async"
+                shadowOpacity="0.1"
+                src={require('assets/liveshare.png')}
+                alt="teams image"
+              />
+            </BeforeContainer>
           </StyledCell>
         </SmallSectionWrapper>
       </SectionWrapper>
