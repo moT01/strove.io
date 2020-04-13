@@ -19,7 +19,7 @@ import {
   StyledSectionWrapper,
 } from './styled'
 
-const BeforeAfter = () => (
+const Before = () => (
   <BeforeAfterSection
     isSecondary
     padding="20px"
@@ -107,7 +107,7 @@ const BeforeAfter = () => (
   </BeforeAfterSection>
 )
 
-const Before = () => (
+const BeforeAfter = () => (
   <StyledSectionWrapper
     isSecondary
     padding="20px"
@@ -175,6 +175,9 @@ const Before = () => (
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
           <SectionWrapper isMobile={isMobile}>
+            <BeforeItem>
+              <StyledH2 color={theme.colors.c3}>After</StyledH2>
+            </BeforeItem>
             <DemoImage
               decoding="async"
               shadowOpacity="0.1"
@@ -188,4 +191,4 @@ const Before = () => (
   </StyledSectionWrapper>
 )
 
-export default memo(Before)
+export default memo(BeforeAfter)
