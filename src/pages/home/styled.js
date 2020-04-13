@@ -87,10 +87,6 @@ export const SmallSectionWrapper = styled.div`
   padding: ${({ padding }) => padding || '0'};
 `
 
-export const BeforeAfterSection = styled(StyledSectionWrapper)`
-  height: ${({ isMobileOnly }) => (isMobileOnly ? '100%' : '500px')};
-`
-
 export const BannerWrapper = styled(StyledSectionWrapper)`
   width: 100%;
   max-width: 1300px;
