@@ -2,12 +2,9 @@ import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobileOnly } from 'react-device-detect'
-import { useSelector } from 'react-redux'
 
 import Modal from './modal'
 import StroveButton from 'components/stroveButton.js'
-import { selectors } from 'state'
-import FullScreenLoader from 'components/fullScreenLoader'
 
 const Title = styled.h3`
   font-size: ${props => (props.mobile ? '1rem' : '1.4rem')};
@@ -62,10 +59,6 @@ const validateProjectName = values => {
 }
 
 const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
-  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
-  const queuePosition = useSelector(selectors.api.getQueuePosition)
-
   return (
     <>
       <Modal
@@ -111,22 +104,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
             </GithubLinkForm>
           )}
         />
-        {isContinuing && (
-          <FullScreenLoader
-            isFullScreen
-            color="#0072ce"
-            queuePosition={queuePosition}
-            type="continueProject"
-          />
-        )}
-        {isAdding && (
-          <FullScreenLoader
-            isFullScreen
-            color="#0072ce"
-            queuePosition={queuePosition}
-            type="emptyProject"
-          />
-        )}
       </Modal>
     </>
   )
