@@ -86,58 +86,66 @@ const GetStarted = ({ addProject, teamId }) => {
   const handleClose = () => setAddProjectModalOpen(false)
   const currentProject = useSelector(selectors.api.getCurrentProject)
 
+  console.log('currentProject', currentProject)
+
   return (
     <AddProjectWrapper mobile={isMobile}>
-      <Title mobile={isMobile}>Add project from Github or Gitlab</Title>
-      <Formik
-        onSubmit={(values, actions) => {
-          values.repoLink.trim() &&
-            addProject({ link: values.repoLink, teamId })
-          actions.setSubmitting(false)
-        }}
-        validate={validateRepoLink}
-        render={props => (
-          <GithubLinkForm onSubmit={props.handleSubmit}>
-            <GithubLinkInput
-              autoComplete="off"
-              type="text"
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.repoLink}
-              name="repoLink"
-              placeholder={
-                isMobile
-                  ? 'Paste repo link here'
-                  : 'https://github.com/evil-corp/worldDomination'
-              }
-            />
-            <StroveButton
-              isDisabled={!props.values.repoLink || props.errors.repoLink}
-              isPrimary
-              type="submit"
-              text="Clone project"
-              width="30%"
-              minWidth="200px"
-            />
+      {currentProject ? (
+        <Title mobile={isMobile}>Stop your current poject before adding a new one</Title>
+      ) : (
+        <>
+          <Title mobile={isMobile}>Add project from Github or Gitlab</Title>
+          <Formik
+            onSubmit={(values, actions) => {
+              values.repoLink.trim() &&
+                addProject({ link: values.repoLink, teamId })
+              actions.setSubmitting(false)
+            }}
+            validate={validateRepoLink}
+            render={props => (
+              <GithubLinkForm onSubmit={props.handleSubmit}>
+                <GithubLinkInput
+                  autoComplete="off"
+                  type="text"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.repoLink}
+                  name="repoLink"
+                  placeholder={
+                    isMobile
+                      ? 'Paste repo link here'
+                      : 'https://github.com/evil-corp/worldDomination'
+                  }
+                />
+                <StroveButton
+                  isDisabled={!props.values.repoLink || props.errors.repoLink}
+                  isPrimary
+                  type="submit"
+                  text="Clone project"
+                  width="30%"
+                  minWidth="200px"
+                />
 
-            <StyledErrors>{props.errors.repoLink}</StyledErrors>
-          </GithubLinkForm>
-        )}
-      />
-      Don't have a link? Want to clone private repository?
-      <StroveButton
-        isPrimary
-        onClick={() => setAddProjectModalOpen(true)}
-        text="Create empty project"
-        width="30%"
-        minWidth="200px"
-      />
-      <AddEmptyProjectModal
-        handleClose={handleClose}
-        isOpen={addProjectModalOpen}
-        addProject={addProject}
-        teamId={teamId}
-      />
+                <StyledErrors>{props.errors.repoLink}</StyledErrors>
+              </GithubLinkForm>
+            )}
+          />
+          Don't have a link? Want to clone private repository?
+          <StroveButton
+            isPrimary
+            onClick={() => setAddProjectModalOpen(true)}
+            text="Create empty project"
+            width="30%"
+            minWidth="200px"
+          />
+          <AddEmptyProjectModal
+            handleClose={handleClose}
+            isOpen={addProjectModalOpen}
+            addProject={addProject}
+            teamId={teamId}
+          />
+        </>
+      )}
     </AddProjectWrapper>
   )
 }
