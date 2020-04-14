@@ -62,7 +62,7 @@ const validateProjectName = values => {
 }
 
 const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
-  const currentProject = useSelector(selectors.currentProject)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
 
   return (
     <>
