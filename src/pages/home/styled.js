@@ -41,7 +41,6 @@ export const BeforeContainer = styled.div`
   justify-content: space-between;
   display: flex;
   flex-direction: column;
-  height: 300px;
 `
 
 export const StyledSectionWrapper = styled.section`
@@ -86,10 +85,6 @@ export const SmallSectionWrapper = styled.div`
   align-items: center;
   max-width: 440px;
   padding: ${({ padding }) => padding || '0'};
-`
-
-export const BeforeAfterSection = styled(StyledSectionWrapper)`
-  height: ${({ isMobileOnly }) => (isMobileOnly ? '100%' : '500px')};
 `
 
 export const BannerWrapper = styled(StyledSectionWrapper)`
