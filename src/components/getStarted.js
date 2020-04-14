@@ -58,6 +58,10 @@ const StyledErrors = styled.span`
   color: ${({ theme }) => theme.colors.c5};
 `
 
+const StyledActiveProjectInfo = styled.div`
+  font-size: 20px;
+`
+
 const validateRepoLink = values => {
   let errors = {}
   const repoLink = values.repoLink
@@ -91,7 +95,9 @@ const GetStarted = ({ addProject, teamId }) => {
   return (
     <AddProjectWrapper mobile={isMobile}>
       {currentProject ? (
-        <Title mobile={isMobile}>Stop your current poject before adding a new one</Title>
+        <StyledActiveProjectInfo>
+          Stop your current poject before adding a new one
+        </StyledActiveProjectInfo>
       ) : (
         <>
           <Title mobile={isMobile}>Add project from Github or Gitlab</Title>
