@@ -14,7 +14,7 @@ const TeamMembers = ({ history }) => {
   dispatch(
     actions.editedOrganization.setEditedOrganization({
       organization: ownedOrganizations[0],
-      team: ownedOrganizations[0].teams[0],
+      team: ownedOrganizations[0]?.teams[0],
     })
   )
   return (
