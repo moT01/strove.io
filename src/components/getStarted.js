@@ -2,6 +2,9 @@ import React, { useState, memo } from 'react'
 import styled from 'styled-components/macro'
 import { Formik } from 'formik'
 import { isMobile } from 'react-device-detect'
+import { useSelector } from 'react-redux'
+
+import { selectors } from 'state'
 
 import AddProjectProvider from './addProjectProvider'
 import AddEmptyProjectModal from './addEmptyProjectModal'
@@ -81,6 +84,7 @@ const validateRepoLink = values => {
 const GetStarted = ({ addProject, teamId }) => {
   const [addProjectModalOpen, setAddProjectModalOpen] = useState(false)
   const handleClose = () => setAddProjectModalOpen(false)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
 
   return (
     <AddProjectWrapper mobile={isMobile}>
