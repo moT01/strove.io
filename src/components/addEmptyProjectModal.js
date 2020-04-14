@@ -62,9 +62,7 @@ const validateProjectName = values => {
 }
 
 const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
-  const isContinuing = useSelector(selectors.api.getLoading('continueProject'))
-  const isAdding = useSelector(selectors.incomingProject.isProjectBeingAdded)
-  const queuePosition = useSelector(selectors.api.getQueuePosition)
+  const currentProject = useSelector(selectors.currentProject)
 
   return (
     <>
@@ -111,22 +109,6 @@ const AddEmptyProjectModal = ({ handleClose, isOpen, addProject, teamId }) => {
             </GithubLinkForm>
           )}
         />
-        {isContinuing && (
-          <FullScreenLoader
-            isFullScreen
-            color="#0072ce"
-            queuePosition={queuePosition}
-            type="continueProject"
-          />
-        )}
-        {isAdding && (
-          <FullScreenLoader
-            isFullScreen
-            color="#0072ce"
-            queuePosition={queuePosition}
-            type="emptyProject"
-          />
-        )}
       </Modal>
     </>
   )
