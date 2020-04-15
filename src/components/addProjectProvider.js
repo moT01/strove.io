@@ -56,7 +56,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const queuePosition = useSelector(selectors.api.getQueuePosition)
   /* Decide what to do about the projects limit */
   const projectsLimit = 2000000
-  const timeExceeded = user?.timeSpent >= 72000000
+  // ToDO: Bring this back to reasonable value once we have a good time spent indicator
+  const timeExceeded = user?.timeSpent >= 7200000000
   const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
   /* Check if new project is embedded */
