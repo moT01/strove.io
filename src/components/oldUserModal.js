@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectors } from 'state'
 import Modal from './modal'
 import StroveButton from './stroveButton'
-import { persistor } from 'store'
+import { persistor } from '../App'
 
 const OldUserModal = () => {
   const dispatch = useDispatch()

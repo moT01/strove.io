@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -7,7 +7,7 @@ import { StripeProvider } from 'react-stripe-elements'
 
 import { Layout } from 'components'
 import client from './client'
-import store, { persistor } from './store'
+import store, { persistor } from './App'
 
 export default ({ children }) => (
   <Router>
