@@ -15,6 +15,10 @@ export const OrganizationFragment = gql`
       name
       email
     }
+    guests {
+      id
+      name
+    }
     teams {
       ...Team
     }
