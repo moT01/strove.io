@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -56,9 +56,10 @@ const Run = ({ addProject, history }) => {
     // If user is logged in, redirect to the embed project run
     history.push(`/embed/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
   }
+  // eslint-disable-next-line
+  useEffect(() => setEditedOrganization({ team: lastTeam }), [])
 
   const onClick = () => {
-    setEditedOrganization({ team: lastTeam })
     addProject({ link: repoUrl, teamId })
   }
 
