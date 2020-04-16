@@ -43,7 +43,7 @@ There are several problems programmers face make this project important in our e
 
 Similarly to Youtube, Strove can be used in any site. Live demo using fullstack hackathon stater:
 
-### [Example embeded strove project](https://priceless-raman-a750f4.netlify.com/hackathon-starter-strove/)
+### [Example embeded strove project](https://embed.strove.io/hackathon-starter-strove/)
 
 More on how to use use Strove in [this docs link](https://docs.strove.io/embedding-strove)
 
