@@ -10,15 +10,6 @@ import {
 } from 'components'
 import { getRepoProvider, getWindowSearchParams, getDomain } from 'utils'
 
-// const MenuWrapper = styled.div`
-//   padding: 20px;
-//   background-color: ${({ theme, invert }) =>
-//     invert ? theme.colors.c2 : theme.colors.c1};
-//   z-index: 3;
-//   position: relative;
-//   word-break: initial;
-// `
-
 const LoginText = styled.span`
   font-weight: 500;
   font-size: 20px;

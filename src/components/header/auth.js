@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
-import { persistor } from 'store'
+import { persistor } from '../../wrapper'
 
 import DropdownMenuWrapper from './dropdownMenuWrapper'
 
