@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { persistor } from '../../wrapper'
+import StroveLogo from 'images/strove.png'
 
 import DropdownMenuWrapper from './dropdownMenuWrapper'
 
@@ -244,7 +245,10 @@ const UserDropdown = props => {
                   <Text {...props}> {props.user.username}</Text>
                 )}
                 <Inline {...props}>
-                  <UserPhoto src={props.user.userphoto} />
+                  <UserPhoto
+                    src={props.user.photo ? props.user.userphoto : StroveLogo}
+                  />
+
                   <StyledAntdIcon type="caret-down" />
                 </Inline>
               </StyledDropdown>
