@@ -12,7 +12,7 @@ import { GUEST_LOGIN } from 'queries'
 import OnboardingContainer from './onboardingContainer'
 import { Title, Details } from './styled'
 
-const FromEmailInvitation = () => {
+const FromEmailInvitation = ({history}) => {
   const searchParams = getWindowSearchParams()
   const token = useSelector(selectors.getToken)
   const dispatch = useDispatch()
@@ -40,6 +40,7 @@ const FromEmailInvitation = () => {
         name: 'guestLogin',
         mutation: GUEST_LOGIN,
         context: null,
+        onSuccess: () => history.push('/app/dashboard'),
         variables: {
           deviceId,
           guestId,
