@@ -589,6 +589,7 @@ const Dashboard = ({ history }) => {
   }
 
   const handleDeleteMemberClick = ({ member, team }) => {
+    console.log('TCL: handleDeleteMemberClick -> team', team)
     setWarningModal({
       visible: true,
       content: (
@@ -608,6 +609,7 @@ const Dashboard = ({ history }) => {
                 memberId: member.id,
               },
               onSuccessDispatch: updateOrganizations,
+              onSuccess: closeWarningModal,
             })
           )
         } else {
