@@ -247,7 +247,9 @@ const UserDropdown = props => {
                 )}
                 <Inline {...props}>
                   <UserPhoto
-                    src={props.user.photo ? props.user.userphoto : StroveLogo}
+                    src={
+                      props.user.userphoto ? props.user.userphoto : StroveLogo
+                    }
                   />
 
                   <StyledAntdIcon type="caret-down" />
