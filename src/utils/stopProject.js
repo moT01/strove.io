@@ -3,7 +3,7 @@ import { STOP_PROJECT, STOP_LIVE_SHARE } from 'queries'
 import store from 'store'
 import { selectors } from 'state'
 
-const handleStopProject = ({ id } = {}) => {
+const handleStopProject = ({ id, onSuccess } = {}) => {
   const state = store.getState()
   const dispatch = store.dispatch
   const currentProject = selectors.api.getCurrentProject(state)
@@ -17,6 +17,7 @@ const handleStopProject = ({ id } = {}) => {
         mutation: STOP_LIVE_SHARE,
         variables: { projectId },
         onSuccessDispatch: updateOrganizations,
+        onSuccess
       })
     )
   }

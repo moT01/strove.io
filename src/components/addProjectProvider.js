@@ -191,7 +191,19 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       currentProjectId &&
       currentProject?.machineId !== existingProject?.machineId
     ) {
-      handleStopProject()
+      handleStopProject({
+        onSuccess: () =>
+          createProject({
+            repoLink,
+            dispatch,
+            user,
+            setModalContent,
+            name,
+            teamId: teamIdWithProject,
+            forkedFromId,
+            type,
+          }),
+      })
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
     } else if (!theSameIncomingProject && teamId) {
       createProject({
