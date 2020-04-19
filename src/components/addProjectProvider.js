@@ -119,6 +119,19 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
+    console.log(
+      'theSameIncomingProject',
+      theSameIncomingProject,
+      'repoLink',
+      repoLink,
+      'incomingProjectRepoUrl',
+      incomingProjectRepoUrl,
+      'existingProject',
+      existingProject,
+      'teamId',
+      teamId
+    )
+
     if (existingProject) {
       if (!currentProject) {
         dispatch(actions.incomingProject.setProjectIsBeingStarted())
@@ -199,7 +212,11 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
             type,
           }),
       })
-      dispatch(actions.incomingProject.setProjectIsBeingStarted())
+      /*
+        AddProjectProvider is called 2 times for some reason.
+        !theSameIncomingProject prevents double crateProject cal.
+        ToDO: Figure out if we can make addProject called only once.
+      */
     } else if (!theSameIncomingProject && teamId) {
       createProject({
         repoLink,
