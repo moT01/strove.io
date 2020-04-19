@@ -55,7 +55,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   )
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
-  /* Decide what to do about the projects limit */
+  /* ToDO: Decide what to do about the projects limit */
   const projectsLimit = 2000000
   // ToDO: Bring this back to reasonable value once we have a good time spent indicator
   const timeExceeded = user?.timeSpent >= 7200000000

@@ -24,11 +24,6 @@ export const getUserProjects = getApiData({
   defaultValue: [],
 })
 
-export const getMyTeams = getApiData({
-  fields: 'myTeams',
-  defaultValue: [],
-})
-
 export const getMyOrganizations = getApiData({
   fields: 'myOrganizations',
   defaultValue: [],
