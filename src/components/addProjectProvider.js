@@ -61,6 +61,8 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const timeExceeded = user?.timeSpent >= 7200000000
   const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
+  console.log('editedTeam', editedTeam)
+
   /* Check if new project is embedded */
   const originDomain =
     window.location !== window.parent.location
