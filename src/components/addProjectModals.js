@@ -433,49 +433,6 @@ const AddProjectModals = ({
       </Modal>
 
       <Modal
-        isOpen={modalContent === 'AnotherActiveProject'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
-        width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
-        height={isMobileOnly ? '47vh' : '25vh'}
-      >
-        <ModalWrapper>
-          {isEmbed ? (
-            <Text>
-              Before starting new project you have to stop your currently
-              running project. That means you may lose all unsaved progress. Are
-              you sure you want to stop your active project?
-            </Text>
-          ) : (
-            <Text>
-              One of your projects is currently active. You have to stop it
-              before adding a new one. You can do that in your dashboard.
-            </Text>
-          )}
-          <ButtonsWrapper mobile={device}>
-            {isEmbed ? (
-              <StroveButton
-                primary
-                onClick={() => {
-                  handleStopProject()
-                  closeModal()
-                }}
-                text="Confirm"
-                padding="10px"
-                maxWidth="150px"
-              />
-            ) : (
-              <StyledLink to="/app/dashboard" primary onClick={closeModal}>
-                Ok
-              </StyledLink>
-            )}
-            <StroveButton onClick={closeModal} text="Close" />
-          </ButtonsWrapper>
-        </ModalWrapper>
-      </Modal>
-
-      <Modal
         isOpen={modalContent?.includes('TryAgainLater')}
         onRequestClose={closeModal}
         contentLabel={modalContent}
