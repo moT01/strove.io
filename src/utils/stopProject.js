@@ -7,13 +7,14 @@ const handleStopProject = ({ id, isLiveshare = false }) => {
   const state = store.getState()
   const dispatch = store.dispatch
   const currentProject = selectors.api.getCurrentProject(state)
+  const projectId = id || currentProject?.id
 
   if (isLiveshare) {
     return dispatch(
       mutation({
         name: 'stopLiveShare',
         mutation: STOP_LIVE_SHARE,
-        variables: { projectId: currentProject.id },
+        variables: { projectId },
         onSuccessDispatch: updateOrganizations,
       })
     )
@@ -24,7 +25,7 @@ const handleStopProject = ({ id, isLiveshare = false }) => {
       name: 'stopProject',
       mutation: STOP_PROJECT,
       dataSelector: data => data,
-      variables: { projectId: id || currentProject?.id },
+      variables: { projectId },
       onSuccessDispatch: updateOrganizations,
     })
   )
