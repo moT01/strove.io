@@ -86,11 +86,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     /* TODO: Find a reasonable way to approach this */
     const organizationWithProject = organization || ownedOrganizations?.[0]
-    const teamIdWithProject = type
-      ? ownedOrganizations?.[0]?.teams?.[
-          ownedOrganizations?.[0]?.teams?.length - 1
-        ]?.id
-      : teamId
+    const teamIdWithProject = teamId || editedTeam?.id
 
     let repoFromGithub
     let repoFromGitlab
@@ -217,7 +213,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         !theSameIncomingProject prevents double crateProject cal.
         ToDO: Figure out if we can make addProject called only once.
       */
-    } else if (!theSameIncomingProject && teamId) {
+    } else if (!theSameIncomingProject && teamIdWithProject) {
       createProject({
         repoLink,
         dispatch,
