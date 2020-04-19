@@ -269,7 +269,7 @@ const Projects = ({
                           font-size="0.8rem"
                           onClick={() => {
                             project.startedCollaborationFromId
-                              ? handleStopLiveshareClick({ project })
+                              ? handleStopProject({ isLiveshare: true })
                               : handleStopProject()
                           }}
                         >
