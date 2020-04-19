@@ -3,10 +3,11 @@ import { STOP_PROJECT, STOP_LIVE_SHARE } from 'queries'
 import store from 'store'
 import { selectors } from 'state'
 
-const handleStopProject = ({ id, isLiveshare = false }) => {
+const handleStopProject = ({ id }) => {
   const state = store.getState()
   const dispatch = store.dispatch
   const currentProject = selectors.api.getCurrentProject(state)
+  const isLiveshare = currentProject.startedCollaborationFromId
   const projectId = id || currentProject?.id
 
   if (isLiveshare) {

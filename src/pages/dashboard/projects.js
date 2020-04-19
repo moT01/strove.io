@@ -256,11 +256,7 @@ const Projects = ({
                           maxWidth="150px"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
-                          onClick={() => {
-                            project.startedCollaborationFromId
-                              ? handleStopProject({ isLiveshare: true })
-                              : handleStopProject()
-                          }}
+                          onClick={handleStopProject}
                         >
                           <IconDescription>Stop</IconDescription>
                           <ProjectActionIcon type="pause-circle" />
