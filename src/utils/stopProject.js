@@ -12,7 +12,7 @@ const handleStopProject = ({ id, dispatch }) => {
       name: 'stopProject',
       mutation: STOP_PROJECT,
       dataSelector: data => data,
-      variables: { projectId: id },
+      variables: { projectId: id || currentProject?.id },
       onSuccessDispatch: updateOrganizations,
     })
   )
