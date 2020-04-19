@@ -113,7 +113,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       project => project.teamId === editedTeam?.id
     )
 
-    const theSameIncomingProject = repoLink === incomingProjectRepoUr
+    const theSameIncomingProject = repoLink === incomingProjectRepoUrl
 
     if (existingProject) {
       if (!currentProject) {
