@@ -9,7 +9,7 @@ import Modal from './modal'
 import { Github, Gitlab, Bitbucket } from 'components/svgs'
 import { actions } from 'state'
 import StroveButton from 'components/stroveButton.js'
-import { getWindowPathName, handleStopProject } from 'utils'
+import { getWindowPathName } from 'utils'
 
 const REACT_APP_GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID
 const REACT_APP_GITLAB_CLIENT_ID = process.env.REACT_APP_GITLAB_CLIENT_ID
@@ -217,7 +217,6 @@ const AddProjectModals = ({
     setModalContent(null)
     dispatch(actions.incomingProject.removeIncomingProject())
   }
-  const isEmbed = getWindowPathName().includes('embed')
 
   const sharedModalProps = {
     onRequestClose: closeModal,
