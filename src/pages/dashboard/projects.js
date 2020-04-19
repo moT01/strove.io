@@ -113,17 +113,6 @@ const Projects = ({
     return setStopModal(true)
   }
 
-  const handleStopLiveshareClick = ({ project }) => {
-    dispatch(
-      mutation({
-        name: 'stopLiveShare',
-        mutation: STOP_LIVE_SHARE,
-        variables: { projectId: project.id },
-        onSuccessDispatch: updateOrganizations,
-      })
-    )
-  }
-
   const handleDeleteClick = id => {
     dispatch(
       mutation({
