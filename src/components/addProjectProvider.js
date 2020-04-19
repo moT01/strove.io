@@ -218,7 +218,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       />
       <StyledModal
         isOpen={
-          ((isLoading && !isAdding) || isDeleting || isStopping) &&
+          ((isLoading && !isAdding) || isDeleting) &&
           !window.location.href.includes('editor')
         }
         contentLabel="Loading"
@@ -247,6 +247,14 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       {isStartingCollaborationProject && (
         <FullScreenLoader
           type="addingCollaborationProject"
+          isFullScreen
+          color="#0072ce"
+          queuePosition={queuePosition}
+        />
+      )}
+      {isStopping && (
+        <FullScreenLoader
+          type="stoppingProject"
           isFullScreen
           color="#0072ce"
           queuePosition={queuePosition}

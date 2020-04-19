@@ -101,6 +101,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
       'Reserving resources',
       'Joining liveshare',
     ],
+    stoppingProject: ['Stopping current project'],
   }
 
   useInterval(
