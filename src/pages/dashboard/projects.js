@@ -139,10 +139,6 @@ const Projects = ({
     )
   }
 
-  const handleStopClick = id => {
-    handleStopProject({ id })
-  }
-
   const closeModal = () => {
     setProjectToDelete(null)
     setModalVisible(false)
@@ -274,7 +270,7 @@ const Projects = ({
                           onClick={() => {
                             project.startedCollaborationFromId
                               ? handleStopLiveshareClick({ project })
-                              : handleStopClick(project.id)
+                              : handleStopProject()
                           }}
                         >
                           <IconDescription>Stop</IconDescription>
@@ -504,7 +500,7 @@ const Projects = ({
         <ModalButton
           isPrimary
           onClick={() => {
-            handleStopClick(currentProjectId)
+            handleStopProject()
             setStopModal(false)
           }}
           text="Confirm"
