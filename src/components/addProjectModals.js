@@ -210,7 +210,6 @@ const AddProjectModals = ({
   setModalContent,
   projectsLimit,
   addProject,
-  currentProjectId,
 }) => {
   const device = isMobileOnly ? 'mobile' : isTablet ? 'tablet' : 'computer'
   const dispatch = useDispatch()
