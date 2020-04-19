@@ -727,7 +727,7 @@ const Dashboard = ({ history }) => {
   }
 
   const handleStopClick = id => {
-    handleStopProject({ id, dispatch })
+    handleStopProject({ id })
   }
 
   const handleLeaveClick = team => {

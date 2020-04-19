@@ -140,7 +140,7 @@ const Projects = ({
   }
 
   const handleStopClick = id => {
-    handleStopProject({ id, dispatch })
+    handleStopProject({ id })
   }
 
   const closeModal = () => {

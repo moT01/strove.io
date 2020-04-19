@@ -459,7 +459,7 @@ const AddProjectModals = ({
               <StroveButton
                 primary
                 onClick={() => {
-                  handleStopProject({ id: currentProjectId, dispatch })
+                  handleStopProject()
                   closeModal()
                 }}
                 text="Confirm"
