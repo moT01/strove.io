@@ -219,6 +219,12 @@ const AddProjectModals = ({
   }
   const isEmbed = getWindowPathName().includes('embed')
 
+  const sharedModalProps = {
+    onRequestClose: closeModal,
+    contentLabel: modalContent,
+    ariaHideApp: false,
+  }
+
   return (
     <>
       <AddEmptyProjectModal
@@ -234,11 +240,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'LoginWithGithub'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height="30vh"
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -260,11 +264,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'LoginWithGitlab'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height="30vh"
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -286,11 +288,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'LoginWithBitbucket'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height="30vh"
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -312,11 +312,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'AddGithubToLogin'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '37vh' : '20vh'}
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -338,11 +336,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'AddGitlabToLogin'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '37vh' : '20vh'}
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -364,11 +360,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'AddBitbucketToLogin'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '37vh' : '20vh'}
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -391,11 +385,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'ProjectsLimitExceeded'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '47vh' : '25vh'}
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>
@@ -408,11 +400,9 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent === 'TimeExceeded'}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '47vh' : '25vh'}
+        {...sharedModalProps}
       >
         <ModalWrapper>
           <Text>You have exceeded the monthly editor time for free users.</Text>
@@ -434,9 +424,6 @@ const AddProjectModals = ({
 
       <Modal
         isOpen={modalContent?.includes('TryAgainLater')}
-        onRequestClose={closeModal}
-        contentLabel={modalContent}
-        ariaHideApp={false}
         width={isMobileOnly ? '70vw' : isTablet ? '50vw' : '30vw'}
         height={isMobileOnly ? '33vh' : '20vh'}
       >
