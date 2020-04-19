@@ -126,15 +126,8 @@ const createProject = async ({
       dispatch(actions.incomingProject.setProjectIsBeingAdded())
     }
 
-    const { description, name /* add language and color */ } = repoData
+    const { description, name } = repoData
 
-    console.log('{ repoLink, name, description, type, teamId }', {
-      repoLink,
-      name,
-      description,
-      type,
-      teamId,
-    })
     dispatch(
       mutation({
         name: 'addProject',
