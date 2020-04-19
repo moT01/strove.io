@@ -77,7 +77,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     }
   }
 
-  const addProject = async ({ link, name, teamId, forkedFromId }) => {
+  const addProject = ({ link, name, teamId, forkedFromId }) => {
     let repoLink
     let repoProvider
 
