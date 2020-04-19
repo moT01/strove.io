@@ -17,7 +17,7 @@ const handleStopProject = ({ id, onSuccess } = {}) => {
         mutation: STOP_LIVE_SHARE,
         variables: { projectId },
         onSuccessDispatch: updateOrganizations,
-        onSuccess
+        onSuccess,
       })
     )
   }
@@ -29,6 +29,7 @@ const handleStopProject = ({ id, onSuccess } = {}) => {
       dataSelector: data => data,
       variables: { projectId },
       onSuccessDispatch: updateOrganizations,
+      onSuccess,
     })
   )
 }
