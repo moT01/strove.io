@@ -178,6 +178,9 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
       dispatch(actions.incomingProject.removeIncomingProject())
+      /*
+        Check if user is not has a project running and if it's not the same one. 
+      */
     } else if (
       currentProjectId &&
       currentProject?.machineId !== existingProject?.machineId
