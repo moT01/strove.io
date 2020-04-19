@@ -8,6 +8,7 @@ import {
   getRepoProvider,
   changeRepoLinkFromSshToHttps,
   mutation,
+  handleStopProject,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
@@ -190,7 +191,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       currentProjectId &&
       currentProject?.machineId !== existingProject?.machineId
     ) {
-      setModalContent('AnotherActiveProject')
+      handleStopProject()
       dispatch(actions.incomingProject.setProjectIsBeingStarted())
     } else if (!theSameIncomingProject && teamId) {
       createProject({

@@ -3,7 +3,7 @@ import { STOP_PROJECT, STOP_LIVE_SHARE } from 'queries'
 import store from 'store'
 import { selectors } from 'state'
 
-const handleStopProject = ({ id }) => {
+const handleStopProject = ({ id } = {}) => {
   const state = store.getState()
   const dispatch = store.dispatch
   const currentProject = selectors.api.getCurrentProject(state)
