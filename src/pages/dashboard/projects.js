@@ -44,7 +44,6 @@ const Projects = ({
   history,
   projects,
   addProject,
-  setWarningModal,
   isOwner,
   isOrganizationOwner,
 }) => {
