@@ -7,4 +7,5 @@ export const getEditedOrganization = state =>
   getOwnedOrganizations(state)?.[0]
 
 export const getEditedTeam = state =>
-  getOr(null, ['editedOrganization', 'team'])(state)  || getOwnedOrganizations(state)[0]?.teams?.[0]
+  getOr(null, ['editedOrganization', 'team'])(state) ||
+  getOwnedOrganizations(state)[0]?.teams?.[0]
