@@ -1,9 +1,9 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { selectors, actions } from 'state'
+import { selectors } from 'state'
 import {
   StroveButton,
   AddProjectProvider,
@@ -33,7 +33,6 @@ const StyledButton = styled(StroveButton)`
 const Run = ({ addProject, history }) => {
   const myOrganizations = useSelector(selectors.api.getOwnedOrganizations)
   const token = useSelector(selectors.getToken)
-  const dispatch = useDispatch()
   const ownOrganization = myOrganizations?.[0]
   const lastTeam = ownOrganization?.teams[ownOrganization.teams.length - 1]
   const teamId = lastTeam?.id

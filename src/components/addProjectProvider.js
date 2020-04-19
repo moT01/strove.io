@@ -61,8 +61,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   const timeExceeded = user?.timeSpent >= 7200000000
   const ownedOrganizations = useSelector(selectors.api.getOwnedOrganizations)
 
-  console.log('editedTeam', editedTeam)
-
   /* Check if new project is embedded */
   const originDomain =
     window.location !== window.parent.location
@@ -117,11 +115,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     )
     const existingProject = allExistingProjects.find(
       project => project.teamId === editedTeam?.id
-      /* This should not be necessary for for some reason,
-        edited team is sometimes not initialized before this place is called
-        ToDo: Find a reason why this doesnt work and fix actions/selectors.
-        */
-      // project.teamId === teamIdWithProject
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
