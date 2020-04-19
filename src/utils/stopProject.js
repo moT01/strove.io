@@ -3,9 +3,12 @@ import { STOP_PROJECT } from 'queries'
 import store from 'store'
 import { selectors } from 'state'
 
-const handleStopProject = ({ id, dispatch }) => {
+const handleStopProject = ({ id }) => {
   const state = store.getState()
+  const dispatch = store.dispatch
   const currentProject = selectors.api.getCurrentProject(state)
+
+  console.log('currentProject', currentProject)
 
   dispatch(
     mutation({
