@@ -1,9 +1,9 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components/macro'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { selectors, actions } from 'state'
+import { selectors } from 'state'
 import {
   StroveButton,
   AddProjectProvider,
@@ -32,9 +32,7 @@ const StyledButton = styled(StroveButton)`
 
 const Run = ({ addProject, history }) => {
   const myOrganizations = useSelector(selectors.api.getOwnedOrganizations)
-  // const user = useSelector(selectors.api.getUser)
   const token = useSelector(selectors.getToken)
-  const dispatch = useDispatch()
   const ownOrganization = myOrganizations?.[0]
   const lastTeam = ownOrganization?.teams[ownOrganization.teams.length - 1]
   const teamId = lastTeam?.id
@@ -43,21 +41,10 @@ const Run = ({ addProject, history }) => {
   /* Specify the route a user should be redirected to */
   const goBackTo = searchParams.get('goBackTo') || ''
 
-  const setEditedOrganization = ({ team }) => {
-    dispatch(
-      actions.editedOrganization.setEditedOrganization({
-        organization: myOrganizations[team.organizationId],
-        team,
-      })
-    )
-  }
-
   if (!token) {
     // If user is logged in, redirect to the embed project run
     history.push(`/embed/?repoUrl=${repoUrl}&goBackTo=${goBackTo}`)
   }
-  // eslint-disable-next-line
-  useEffect(() => setEditedOrganization({ team: lastTeam }), [])
 
   const onClick = () => {
     addProject({ link: repoUrl, teamId })

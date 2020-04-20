@@ -1,8 +1,11 @@
 import getOr from 'lodash/fp/getOr'
 
-export const getEditedOrganization = getOr(null, [
-  'editedOrganization',
-  'organization',
-])
+import { getOwnedOrganizations } from '../api/selectors'
 
-export const getEditedTeam = getOr(null, ['editedOrganization', 'team'])
+export const getEditedOrganization = state =>
+  getOr(null, ['editedOrganization', 'organization'])(state) ||
+  getOwnedOrganizations(state)?.[0]
+
+export const getEditedTeam = state =>
+  getOr(null, ['editedOrganization', 'team'])(state) ||
+  getOwnedOrganizations(state)[0]?.teams?.[0]

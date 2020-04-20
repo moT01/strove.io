@@ -24,11 +24,6 @@ export const getUserProjects = getApiData({
   defaultValue: [],
 })
 
-export const getMyTeams = getApiData({
-  fields: 'myTeams',
-  defaultValue: [],
-})
-
 export const getMyOrganizations = getApiData({
   fields: 'myOrganizations',
   defaultValue: [],
@@ -85,13 +80,5 @@ export const getCurrentProject = createSelector(
   getUserId,
   (projects, userId) => {
     return projects.find(project => project?.userId === userId)
-  }
-)
-
-export const getCurrentTeam = createSelector(
-  getCurrentProject,
-  getMyTeams,
-  (project, teams) => {
-    return teams.find(team => team.id === project.teamId)
   }
 )

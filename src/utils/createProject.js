@@ -126,7 +126,8 @@ const createProject = async ({
       dispatch(actions.incomingProject.setProjectIsBeingAdded())
     }
 
-    const { description, name /* add language and color */ } = repoData
+    const { description, name } = repoData
+
     dispatch(
       mutation({
         name: 'addProject',

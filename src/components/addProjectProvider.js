@@ -8,6 +8,7 @@ import {
   getRepoProvider,
   changeRepoLinkFromSshToHttps,
   mutation,
+  handleStopProject,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
@@ -54,7 +55,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
   )
   const currentProjectId = currentProject?.id
   const queuePosition = useSelector(selectors.api.getQueuePosition)
-  /* Decide what to do about the projects limit */
+  /* ToDO: Decide what to do about the projects limit */
   const projectsLimit = 2000000
   // ToDO: Bring this back to reasonable value once we have a good time spent indicator
   const timeExceeded = user?.timeSpent >= 7200000000
@@ -76,7 +77,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     }
   }
 
-  const addProject = async ({ link, name, teamId, forkedFromId }) => {
+  const addProject = ({ link, name, teamId, forkedFromId }) => {
     let repoLink
     let repoProvider
 
@@ -85,11 +86,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     /* TODO: Find a reasonable way to approach this */
     const organizationWithProject = organization || ownedOrganizations?.[0]
-    const teamIdWithProject = type
-      ? ownedOrganizations?.[0]?.teams?.[
-          ownedOrganizations?.[0]?.teams?.length - 1
-        ]?.id
-      : teamId
+    const teamIdWithProject = teamId || editedTeam?.id
 
     let repoFromGithub
     let repoFromGitlab
@@ -114,11 +111,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     )
     const existingProject = allExistingProjects.find(
       project => project.teamId === editedTeam?.id
-      /* This should not be necessary for for some reason,
-        edited team is sometimes not initialized before this place is called
-        ToDo: Find a reason why this doesnt work and fix actions/selectors.
-        */
-      // project.teamId === teamIdWithProject
     )
 
     const theSameIncomingProject = repoLink === incomingProjectRepoUrl
@@ -186,13 +178,32 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     } else if (projects && projects.length >= projectsLimit) {
       setModalContent('ProjectsLimitExceeded')
       dispatch(actions.incomingProject.removeIncomingProject())
+      /*
+        Check if user is not has a project running and if it's not the same one. 
+      */
     } else if (
       currentProjectId &&
       currentProject?.machineId !== existingProject?.machineId
     ) {
-      setModalContent('AnotherActiveProject')
-      dispatch(actions.incomingProject.setProjectIsBeingStarted())
-    } else if (!theSameIncomingProject && teamId) {
+      handleStopProject({
+        onSuccess: () =>
+          createProject({
+            repoLink,
+            dispatch,
+            user,
+            setModalContent,
+            name,
+            teamId: teamIdWithProject,
+            forkedFromId,
+            type,
+          }),
+      })
+      /*
+        AddProjectProvider is called 2 times for some reason.
+        !theSameIncomingProject prevents double crateProject cal.
+        ToDO: Figure out if we can make addProject called only once.
+      */
+    } else if (!theSameIncomingProject && teamIdWithProject) {
       createProject({
         repoLink,
         dispatch,
@@ -218,7 +229,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       />
       <StyledModal
         isOpen={
-          ((isLoading && !isAdding) || isDeleting || isStopping) &&
+          ((isLoading && !isAdding) || isDeleting) &&
           !window.location.href.includes('editor')
         }
         contentLabel="Loading"
@@ -247,6 +258,14 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       {isStartingCollaborationProject && (
         <FullScreenLoader
           type="addingCollaborationProject"
+          isFullScreen
+          color="#0072ce"
+          queuePosition={queuePosition}
+        />
+      )}
+      {isStopping && (
+        <FullScreenLoader
+          type="stoppingProject"
           isFullScreen
           color="#0072ce"
           queuePosition={queuePosition}
