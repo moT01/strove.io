@@ -9,7 +9,6 @@ import {
   CONTINUE_PROJECT,
   SET_VISIBILITY,
   START_LIVE_SHARE,
-  STOP_LIVE_SHARE,
 } from 'queries'
 import { selectors, actions } from 'state'
 import { Modal, StroveButton, AddProjectProvider } from 'components'
@@ -45,7 +44,6 @@ const Projects = ({
   history,
   projects,
   addProject,
-  setWarningModal,
   isOwner,
   isOrganizationOwner,
 }) => {
@@ -113,17 +111,6 @@ const Projects = ({
     return setStopModal(true)
   }
 
-  const handleStopLiveshareClick = ({ project }) => {
-    dispatch(
-      mutation({
-        name: 'stopLiveShare',
-        mutation: STOP_LIVE_SHARE,
-        variables: { projectId: project.id },
-        onSuccessDispatch: updateOrganizations,
-      })
-    )
-  }
-
   const handleDeleteClick = id => {
     dispatch(
       mutation({
@@ -137,10 +124,6 @@ const Projects = ({
         onSuccessDispatch: updateOrganizations,
       })
     )
-  }
-
-  const handleStopClick = id => {
-    handleStopProject({ id, dispatch })
   }
 
   const closeModal = () => {
@@ -271,11 +254,7 @@ const Projects = ({
                           maxWidth="150px"
                           margin="0px 0px 5px 0px"
                           font-size="0.8rem"
-                          onClick={() => {
-                            project.startedCollaborationFromId
-                              ? handleStopLiveshareClick({ project })
-                              : handleStopClick(project.id)
-                          }}
+                          onClick={handleStopProject}
                         >
                           <IconDescription>Stop</IconDescription>
                           <ProjectActionIcon type="pause-circle" />
@@ -504,7 +483,7 @@ const Projects = ({
         <ModalButton
           isPrimary
           onClick={() => {
-            handleStopClick(currentProjectId)
+            handleStopProject()
             setStopModal(false)
           }}
           text="Confirm"

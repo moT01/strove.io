@@ -90,8 +90,6 @@ const GetStarted = ({ addProject, teamId }) => {
   const handleClose = () => setAddProjectModalOpen(false)
   const currentProject = useSelector(selectors.api.getCurrentProject)
 
-  console.log('currentProject', currentProject)
-
   return (
     <AddProjectWrapper mobile={isMobile}>
       {currentProject ? (
