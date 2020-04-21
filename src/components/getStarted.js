@@ -132,6 +132,7 @@ const GetStarted = ({ addProject, teamId }) => {
                   type="submit"
                   text="Clone project"
                   width="30%"
+                  margin="15px 0 0"
                   minWidth="200px"
                 />
 
