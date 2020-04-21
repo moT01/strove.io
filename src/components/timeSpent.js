@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectors } from 'state'
+import { useInterval } from 'utils'
 
 export const TimeBarContainer = styled.div`
   display: flex;
@@ -29,6 +30,12 @@ export const TimeText = styled(Text)`
 
 const TimeSpent = ({ organization }) => {
   const user = useSelector(selectors.api.getUser)
+  const [additionalTimeSpent, setAdditionalTimeSpent] = useState(0)
+  const oneMinute = 60000
+  useInterval(
+    () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
+    oneMinute
+  )
 
   if (
     organization.owner.id === user.id &&
