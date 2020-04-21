@@ -3,7 +3,17 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectors } from 'state'
-import { useInterval } from 'utils'
+import { useInterval } from 'hooks'
+
+export const Text = styled.div`
+  color: ${({ theme }) => theme.colors.c3};
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-bottom: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
 
 export const TimeBarContainer = styled.div`
   display: flex;
