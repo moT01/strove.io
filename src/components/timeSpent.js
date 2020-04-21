@@ -36,6 +36,9 @@ const TimeSpent = ({ organization }) => {
     () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
     oneMinute
   )
+  const seconds = Math.floor((user.timeSpent / 1000) % 60)
+  const minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
+  const hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
 
   if (
     organization.owner.id === user.id &&
