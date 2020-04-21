@@ -37,7 +37,7 @@ const TrustedBy = () => (
         decoding="async"
         alt="logoOfLodz"
         height="80px"
-        src={require('assets/logoLodz.jpg')}
+        src={require('assets/logoOfLodz.png')}
       />
     </LogosWrapper>
   </StyledWrapper>
