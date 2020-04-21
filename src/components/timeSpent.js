@@ -35,7 +35,7 @@ const TimeBar = styled.div`
 const TimeText = styled(Text)`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 12px;
-  margin: 0;
+  margin: 5px 0 0;
   line-height: 15px;
 `
 
