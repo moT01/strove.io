@@ -59,9 +59,6 @@ import {
   OrganizationName,
   StyledErrors,
   TilesWrapper,
-  // TimeBarContainer,
-  // TimeBar,
-  // TimeText,
   NameWrapper,
   InviteWrapper,
 } from './styled'
