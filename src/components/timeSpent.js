@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 import { selectors } from 'state'
 import { useInterval } from 'hooks'
 
-export const Text = styled.div`
+const Text = styled.div`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 1rem;
   margin-left: 10px;
@@ -15,7 +15,7 @@ export const Text = styled.div`
   overflow: hidden;
 `
 
-export const TimeBarContainer = styled.div`
+const TimeBarContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -26,16 +26,21 @@ export const TimeBarContainer = styled.div`
   overflow: hidden;
 `
 
-export const TimeBar = styled.div`
+const TimeBar = styled.div`
   height: 100%;
   width: ${({ time }) => (time / 72000000) * 100}%;
   background-color: #0072ce;
 `
 
-export const TimeText = styled(Text)`
+const TimeText = styled(Text)`
   color: ${({ theme }) => theme.colors.c3};
   font-size: 12px;
   margin: 0;
+  line-height: 15px;
+`
+
+const Container = styled.div`
+  margin: 0 20px;
 `
 
 const TimeSpent = ({ organization }) => {
@@ -62,14 +67,14 @@ const TimeSpent = ({ organization }) => {
     timeSpent >= 65800
   ) {
     return (
-      <div>
+      <Container>
         <TimeBarContainer>
           <TimeBar time={user.timeSpent} />
         </TimeBarContainer>
         <TimeText>
           Time spent in editor: {hours}h {minutes}m {seconds}s / 20h
         </TimeText>
-      </div>
+      </Container>
     )
   }
   return null
