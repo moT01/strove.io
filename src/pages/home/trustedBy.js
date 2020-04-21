@@ -31,14 +31,15 @@ const TrustedBy = () => (
   <StyledWrapper>
     <StyledH3 color={theme.colors.c3}>Trusted by</StyledH3>
     <LogosWrapper>
-      <FccLogo />
-      <UlManagementLogo />
       <img
         decoding="async"
         alt="logoOfLodz"
         height="80px"
         src={require('assets/logoOfLodz.png')}
+        style={{ marginRight: '20px' }}
       />
+      <FccLogo />
+      <UlManagementLogo />
     </LogosWrapper>
   </StyledWrapper>
 )
