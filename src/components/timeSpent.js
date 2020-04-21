@@ -67,7 +67,7 @@ const TimeSpent = ({ organization }) => {
     timeSpent >= 65800
   ) {
     return (
-      <Container>
+      <Container title="To make Strove available for many, free version has limited montly usage">
         <TimeBarContainer>
           <TimeBar time={user.timeSpent} />
         </TimeBarContainer>
