@@ -9,6 +9,7 @@ import {
   changeRepoLinkFromSshToHttps,
   mutation,
   handleStopProject,
+  getWindowPathName,
 } from 'utils'
 import { CONTINUE_PROJECT } from 'queries'
 import { actions, selectors } from 'state'
@@ -83,6 +84,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
 
     /* ToDo: Make this scallable and work with other sites as well */
     const type = originDomain.includes('freecodecamp.org') ? 'fcc' : undefined
+    const isEmbed = getWindowPathName().includes('embed')
 
     /* TODO: Find a reasonable way to approach this */
     const organizationWithProject = organization || ownedOrganizations?.[0]
@@ -129,7 +131,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
           })
         )
       } else if (existingProject?.repoLink === currentProject?.repoLink) {
-        return history.push('/app/editor/')
+        return history.push(isEmbed ? '/embed/editor' : '/app/editor/')
       }
     }
 
