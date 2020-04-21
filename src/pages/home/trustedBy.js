@@ -34,12 +34,11 @@ const TrustedBy = () => (
       <FccLogo />
       <UlManagementLogo />
       <img
-                  decoding="async"
-                  alt="docker"
-                  width="80px"
-                  height="80px"
-                  src={require('assets/logoLodz.png')}
-                />
+        decoding="async"
+        alt="logo"
+        height="80px"
+        src={require('assets/logoLodz.jpg')}
+      />
     </LogosWrapper>
   </StyledWrapper>
 )
