@@ -36,15 +36,20 @@ const TimeSpent = ({ organization }) => {
     () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
     oneMinute
   )
-  const timeSpent = user.timeSpent + additionalTimeSpent
-  const seconds = Math.floor((user.timeSpent / 1000) % 60)
-  const minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
-  const hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
+
+  useEffect(() => {
+    setAdditionalTimeSpent(0)
+  }, [organization])
+
+  const timeSpent = (user?.timeSpent || 0) + additionalTimeSpent
+  const seconds = Math.floor((timeSpent / 1000) % 60)
+  const minutes = Math.floor((timeSpent / (1000 * 60)) % 60)
+  const hours = Math.floor((timeSpent / (1000 * 60 * 60)) % 24)
 
   if (
     organization.owner.id === user.id &&
     organization.subscriptionStatus === 'inactive' &&
-    user?.timeSpent >= 65800
+    timeSpent >= 65800
   ) {
     return (
       <div>
