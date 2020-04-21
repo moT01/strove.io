@@ -70,7 +70,7 @@ const TimeSpent = ({ organization }) => {
     return (
       <Container title="To make Strove available for many, free version has limited montly usage">
         <TimeBarContainer>
-          <TimeBar time={user.timeSpent} />
+          <TimeBar time={timeSpent} />
         </TimeBarContainer>
         <TimeText>
           Time spent in editor: {hours}h {minutes}m {seconds}s / 20h
