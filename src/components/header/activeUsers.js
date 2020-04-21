@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 import { useSelector } from 'react-redux'
 
 import { selectors } from 'state'
+import StroveLogo from 'images/stroveReversed.png'
 
 const UserPhoto = styled.img`
   width: 20px;
@@ -44,7 +45,7 @@ const ActiveUsers = () => {
     <Wrapper>
       {activeUsers?.map(user => (
         <UserPhotoContainer key={user.name} title={user.name}>
-          <UserPhoto src={user.photoUrl} />
+          <UserPhoto src={user.photoUrl ? user.photoUrl : StroveLogo} />
         </UserPhotoContainer>
       ))}
     </Wrapper>
