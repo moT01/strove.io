@@ -17,7 +17,6 @@ const createProject = async ({
   setModalContent,
   name,
   teamId,
-  forkedFromId,
   type,
 }) => {
   let repoData = null
