@@ -78,9 +78,9 @@ const Loader = ({ type = 'addProject', ...props }) => {
   const allMessages = {
     addProject: [
       'Checking permissions',
-      'Cloning repository - this can take a moment',
+      'Cloning repository',
       'Reserving resources',
-      'Starting virtual machine',
+      'Starting virtual machine - this can take a moment',
     ],
     emptyProject: [
       'Checking permissions',
