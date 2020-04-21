@@ -62,6 +62,11 @@ const StyledActiveProjectInfo = styled.div`
   font-size: 20px;
 `
 
+const PrivateRepoSuggestion = styled.div`
+  font-size: 16px;
+  margin: 5px;
+`
+
 const validateRepoLink = values => {
   let errors = {}
   const repoLink = values.repoLink
@@ -134,7 +139,9 @@ const GetStarted = ({ addProject, teamId }) => {
               </GithubLinkForm>
             )}
           />
-          Don't have a link? Want to clone private repository?
+          <PrivateRepoSuggestion>
+            Don't have a link? Want to clone private repository?
+          </PrivateRepoSuggestion>
           <StroveButton
             isPrimary
             onClick={() => setAddProjectModalOpen(true)}
