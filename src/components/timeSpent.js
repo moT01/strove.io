@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components/macro'
 
 import { selectors } from 'state'
-import { TimeBarContainer, TimeBar, TimeText } from './styled'
 
 export const TimeBarContainer = styled.div`
   display: flex;
