@@ -21,7 +21,7 @@ const TimeBarContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   height: 15px;
-  border: 1px solid #0072ce;
+  border: 1px solid ${({ theme }) => theme.colors.c21};
   border-radius: 2px;
   overflow: hidden;
 `
@@ -29,7 +29,7 @@ const TimeBarContainer = styled.div`
 const TimeBar = styled.div`
   height: 100%;
   width: ${({ time }) => (time / 72000000) * 100}%;
-  background-color: #0072ce;
+  background-color: ${({ theme }) => theme.colors.c21};
 `
 
 const TimeText = styled(Text)`
