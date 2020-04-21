@@ -35,7 +35,7 @@ const TrustedBy = () => (
       <UlManagementLogo />
       <img
         decoding="async"
-        alt="logo"
+        alt="logoOfLodz"
         height="80px"
         src={require('assets/logoLodz.jpg')}
       />
