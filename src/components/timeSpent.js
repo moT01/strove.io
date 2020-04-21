@@ -41,6 +41,7 @@ const TimeText = styled(Text)`
 
 const Container = styled.div`
   margin: 0 20px;
+  cursor: help;
 `
 
 const TimeSpent = ({ organization }) => {
