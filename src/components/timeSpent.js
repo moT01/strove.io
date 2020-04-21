@@ -36,6 +36,7 @@ const TimeSpent = ({ organization }) => {
     () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
     oneMinute
   )
+  const timeSpent = user.timeSpent + additionalTimeSpent
   const seconds = Math.floor((user.timeSpent / 1000) % 60)
   const minutes = Math.floor((user.timeSpent / (1000 * 60)) % 60)
   const hours = Math.floor((user.timeSpent / (1000 * 60 * 60)) % 24)
@@ -51,8 +52,7 @@ const TimeSpent = ({ organization }) => {
           <TimeBar time={user.timeSpent} />
         </TimeBarContainer>
         <TimeText>
-          Time spent in editor: {time.hours}h {time.minutes}m {time.seconds}s /
-          20h
+          Time spent in editor: {hours}h {minutes}m {seconds}s / 20h
         </TimeText>
       </div>
     )
