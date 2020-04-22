@@ -117,6 +117,7 @@ const createProject = async ({
 
     if (repoLink && !repoData && !customName) {
       setModalContent('UnableToClone')
+      dispatch(actions.incomingProject.removeIncomingProject())
       return null
     }
 
