@@ -78,9 +78,9 @@ const Loader = ({ type = 'addProject', ...props }) => {
   const allMessages = {
     addProject: [
       'Checking permissions',
-      'Cloning repository - this can take a moment',
+      'Cloning repository',
       'Reserving resources',
-      'Starting virtual machine',
+      'Starting virtual machine - this can take a moment',
     ],
     emptyProject: [
       'Checking permissions',
@@ -91,7 +91,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
     continueProject: [
       'Checking permissions',
       'Reserving resources',
-      'Starting virtual machine',
+      'Starting virtual machine - this can take a moment',
     ],
     redirecting: ['Redirecting back to origin site...'],
     processPayment: ['Processing payment'],
@@ -99,7 +99,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
     addingCollaborationProject: [
       'Checking permissions',
       'Reserving resources',
-      'Joining liveshare',
+      'Joining liveshare - this can take a moment',
     ],
     stoppingProject: ['Stopping current project'],
   }

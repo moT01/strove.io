@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
-import { getWindowPathName } from 'utils'
 
 import { selectors } from 'state'
 import { Dashboard } from 'components/svgs'
@@ -58,11 +57,10 @@ const LinkWrapper = styled.div`
 
 const DashboardLink = props => {
   const token = useSelector(selectors.getToken)
-  const isEmbed = getWindowPathName().includes('/embed')
 
   return (
     <>
-      {token && !isEmbed && (
+      {token && !props.isEmbed && (
         <LinkWrapper {...props}>
           <StyledLink to="/app/dashboard" {...props}>
             {isMobileOnly ? (

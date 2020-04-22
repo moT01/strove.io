@@ -78,7 +78,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     }
   }
 
-  const addProject = ({ link, name, teamId, forkedFromId }) => {
+  const addProject = ({ link, name, teamId }) => {
     let repoLink
     let repoProvider
 
@@ -141,7 +141,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         repoProvider,
         name,
         teamId: teamIdWithProject,
-        forkedFromId,
       })
     )
 
@@ -196,7 +195,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
             setModalContent,
             name,
             teamId: teamIdWithProject,
-            forkedFromId,
             type,
           }),
       })
@@ -213,7 +211,6 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
         setModalContent,
         name,
         teamId: teamIdWithProject,
-        forkedFromId,
         type,
       })
     }
