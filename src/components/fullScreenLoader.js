@@ -106,7 +106,7 @@ const Loader = ({ type = 'addProject', ...props }) => {
 
   useInterval(
     () => setCounter(counter + 1),
-    counter !== allMessages[type].length - 1 ? 1500 : null
+    counter !== allMessages[type].length - 1 ? 3000 : null
   )
 
   if (props.isFullScreen) {
