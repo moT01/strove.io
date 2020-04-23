@@ -28,6 +28,7 @@ import FullScreenWrapper from './fullScreenWrapper'
 import MenuWrapper from './menuWrapper'
 import TrialInfo from './trialInfo'
 import InviteMembersForm from './inviteMembersForm'
+import TimeSpent from './timeSpent'
 
 export {
   SmallCloud,
@@ -62,4 +63,5 @@ export {
   MenuWrapper,
   TrialInfo,
   InviteMembersForm,
+  TimeSpent,
 }
