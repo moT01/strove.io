@@ -97,7 +97,6 @@ const EditorWrapper = ({ history }) => {
           port={port}
           onLoad={setLoaderVisibleFalse}
           isEmbed={isEmbed}
-          loaderVisible={loaderVisible}
           projectId={projectId}
           teamId={teamId}
         />

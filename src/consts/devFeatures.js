@@ -29,7 +29,7 @@ export default [
   },
   {
     title: 'One environment for the whole team',
-    content: 'Any member can access it projects using tthe same environment',
+    content: 'Any member can access projects using the same environment',
     color: '#FAAD14',
     shadowColor: 'rgba(250,173,20,.12)',
     type: 'team',

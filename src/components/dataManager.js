@@ -414,8 +414,7 @@ export default withRouter(({ children, addProject, history }) => {
     ) {
       addProject({ link: incomingProjectLink })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incomingProjectLink, isProjectBeingAdded, token])
+  }, [incomingProjectLink, isProjectBeingAdded, token, isProjectBeingStarted, addProject])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
