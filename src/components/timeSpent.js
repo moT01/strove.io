@@ -47,10 +47,11 @@ const Container = styled.div`
 const TimeSpent = ({ organization }) => {
   const user = useSelector(selectors.api.getUser)
   const [additionalTimeSpent, setAdditionalTimeSpent] = useState(0)
+  const currentProject = useSelector(selectors.api.getCurrentProject)
   const oneMinute = 60000
   useInterval(
     () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
-    oneMinute
+    currentProject ? oneMinute : null
   )
 
   useEffect(() => {
