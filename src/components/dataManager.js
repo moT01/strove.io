@@ -14,7 +14,6 @@ import {
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
   PAYMENT_STATUS_SUBSCRIPTION,
-  GUEST_LOGIN,
 } from 'queries'
 import {
   mutation,
@@ -59,8 +58,6 @@ export default withRouter(({ children, addProject, history }) => {
     selectors.incomingProject.isProjectBeingStarted
   )
   const invitedByTeamId = useSelector(selectors.invitations.invitedByTeamId)
-  const isGuest = useSelector(selectors.guestInvitation.isGuest)
-  const guestId = useSelector(selectors.guestInvitation.guestId)
 
   if (!localStorage.getItem('deviceId'))
     localStorage.setItem('deviceId', generateDeviceID())
@@ -414,7 +411,13 @@ export default withRouter(({ children, addProject, history }) => {
     ) {
       addProject({ link: incomingProjectLink })
     }
-  }, [incomingProjectLink, isProjectBeingAdded, token, isProjectBeingStarted, addProject])
+  }, [
+    incomingProjectLink,
+    isProjectBeingAdded,
+    token,
+    isProjectBeingStarted,
+    addProject,
+  ])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {

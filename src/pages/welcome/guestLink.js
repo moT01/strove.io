@@ -12,26 +12,20 @@ import { GUEST_LOGIN } from 'queries'
 import OnboardingContainer from './onboardingContainer'
 import { Title, Details } from './styled'
 
-const FromEmailInvitation = ({history}) => {
+const FromEmailInvitation = ({ history }) => {
   const searchParams = getWindowSearchParams()
   const token = useSelector(selectors.getToken)
   const dispatch = useDispatch()
   const isGuest = window.location.href.includes('guestLink') && !token
 
   const deviceId = localStorage.getItem('deviceId')
-  console.log('TCL: FromEmailInvitation -> token', token)
-  console.log(
-    "TCL: FromEmailInvitation -> window.location.href.toLowerCase().includes('guestLink')",
-    window.location.href.toLowerCase().includes('guestLink')
-  )
   const guestId = searchParams.get('id')
-  console.log('TCL: FromEmailInvitation -> guestId', guestId)
-  console.log('TCL: FromEmailInvitation -> isGuest', isGuest)
 
   useEffect(() => {
     if (isGuest) {
       dispatch(actions.guestInvitation.addGuestInvitation({ isGuest, guestId }))
     }
+    //eslint-disable-next-line
   }, [isGuest])
 
   const handleClick = () => {

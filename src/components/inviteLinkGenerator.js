@@ -1,12 +1,11 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled, { keyframes } from 'styled-components/macro'
-import { isMobileOnly } from 'react-device-detect'
 import copyToClipboard from 'copy-to-clipboard'
 
 import { selectors } from 'state'
 import { StroveButton } from 'components'
-import { mutation, query, updateOrganizations } from 'utils'
+import { mutation } from 'utils'
 import { Copy } from 'components/svgs'
 import { CREATE_GUEST_LINK } from 'queries'
 
