@@ -23,7 +23,7 @@ const BeforeAfter = () => (
   <StyledSectionWrapper
     isSecondary
     padding="20px"
-    background="white"
+    background={theme.colors.c27}
     isMobileOnly={isMobileOnly}
   >
     <SectionDivider isMobile={isMobile}>
