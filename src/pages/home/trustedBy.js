@@ -9,7 +9,7 @@ import { theme } from 'consts'
 const StyledWrapper = styled.div`
   width: 100vw;
   display: flex;
-  flex-direction: ${isMobileOnly ? 'column' : 'row'};
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: center;
@@ -20,7 +20,7 @@ const StyledWrapper = styled.div`
 `
 
 const LogosWrapper = styled(StyledWrapper)`
-  flex-direction: row;
+  flex-direction: ${isMobileOnly ? 'column' : 'row'};
   justify-content: space-between;
   width: ${isMobileOnly ? '100%' : '50%'};
   padding: 10px;
