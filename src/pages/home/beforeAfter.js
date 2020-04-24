@@ -30,7 +30,7 @@ const BeforeAfter = () => (
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
         <SmallSectionWrapper isMobile={isMobile}>
           <BeforeItem>
-            <StyledH2 color={theme.colors.c3}>Before</StyledH2>
+            <StyledH2 color={theme.colors.c3}>Alternative for</StyledH2>
           </BeforeItem>
           <BeforeContainer>
             <BeforeItem>
@@ -87,9 +87,9 @@ const BeforeAfter = () => (
       <SectionWrapper isMobile={isMobile} padding="20px 10px">
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
           <SectionWrapper isMobile={isMobile}>
-            <BeforeItem>
+            {/* <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
-            </BeforeItem>
+            </BeforeItem> */}
             {/* <DemoImage
               decoding="async"
               shadowOpacity="0.1"
@@ -98,6 +98,7 @@ const BeforeAfter = () => (
             /> */}
             <StyledVideo
               controls
+              loop
               autoPlay
               preload="none"
               controls={false}

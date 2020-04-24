@@ -14,7 +14,7 @@ export const FadeIn = keyframes`
 `
 
 export const StyledVideo = styled.video`
-  max-width: 440px;
+  max-width: 520px;
 `
 
 export const StyledModal = styled(Modal)`
