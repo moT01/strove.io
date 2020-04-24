@@ -22,7 +22,7 @@ const StyledWrapper = styled.div`
 const LogosWrapper = styled(StyledWrapper)`
   flex-direction: ${isMobileOnly ? 'column' : 'row'};
   justify-content: space-between;
-  width: ${isMobileOnly ? '100%' : '50%'};
+  width: ${isMobileOnly ? 'auto' : '50%'};
   padding: 10px;
   margin-top: 20px;
 `
