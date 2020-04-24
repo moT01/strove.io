@@ -99,6 +99,7 @@ const BeforeAfter = () => (
               controls
               autoPlay
               preload="none"
+              controls={false}
               src={require('assets/featuresSlides.mp4')}
             >
               Your browser does not support video.
