@@ -28,7 +28,11 @@ import FullScreenWrapper from './fullScreenWrapper'
 import MenuWrapper from './menuWrapper'
 import TrialInfo from './trialInfo'
 import InviteMembersForm from './inviteMembersForm'
+<<<<<<< HEAD
 import InviteLinkGenerator from './inviteLinkGenerator'
+=======
+import TimeSpent from './timeSpent'
+>>>>>>> master
 
 export {
   SmallCloud,
@@ -63,5 +67,9 @@ export {
   MenuWrapper,
   TrialInfo,
   InviteMembersForm,
+<<<<<<< HEAD
   InviteLinkGenerator,
+=======
+  TimeSpent,
+>>>>>>> master
 }

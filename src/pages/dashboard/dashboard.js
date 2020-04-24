@@ -26,6 +26,7 @@ import {
   Footer,
   Modal,
   InviteMembersForm,
+  TimeSpent,
 } from 'components'
 import StroveLogo from 'images/strove.png'
 import Projects from './projects'
@@ -60,9 +61,6 @@ import {
   OrganizationName,
   StyledErrors,
   TilesWrapper,
-  // TimeBarContainer,
-  // TimeBar,
-  // TimeText,
   NameWrapper,
   InviteWrapper,
 } from './styled'
@@ -231,19 +229,7 @@ const Dashboard = ({ history }) => {
                 <VerticalDivider margin="20px 0px">
                   <NameWrapper>
                     <OrganizationName>{organization.name}</OrganizationName>
-                    {/* organization.owner.id === user.id &&
-                    organization.subscriptionStatus === 'inactive' &&
-                    user?.timeSpent >= 65800 && (
-                      <div>
-                        <TimeBarContainer>
-                          <TimeBar time={user.timeSpent} />
-                        </TimeBarContainer>
-                        <TimeText>
-                          Time spent in editor: {time.hours}h {time.minutes}m{' '}
-                          {time.seconds}s / 20h
-                        </TimeText>
-                      </div>
-                    ) */}
+                    <TimeSpent organization={organization} />
                   </NameWrapper>
 
                   <StroveButton
