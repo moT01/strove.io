@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
 import { StyledH3 } from './styled'
@@ -15,16 +15,25 @@ const StyledWrapper = styled.div`
   align-self: center;
   margin-top: 20px;
   background: ${({ theme }) => theme.colors.c27};
-  padding: 50px;
+  padding: ${isMobileOnly ? '20px' : '50px'};
   margin: 0;
 `
 
 const LogosWrapper = styled(StyledWrapper)`
-  flex-direction: row;
+  flex-direction: ${isMobileOnly ? 'column' : 'row'};
   justify-content: space-between;
-  width: ${isMobileOnly ? '100%' : '50%'};
+  width: ${isMobileOnly ? 'auto' : '50%'};
   padding: 10px;
   margin-top: 20px;
+
+  ${isMobileOnly &&
+    css`
+      * {
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+      }
+    `}
 `
 
 const TrustedBy = () => (
