@@ -14,8 +14,9 @@ export const FadeIn = keyframes`
 `
 
 export const StyledVideo = styled.video`
-  max-width: 520px;
-`
+  max-width: ${isMobile ? '100%' : '600px'}; 600px;
+
+ `
 
 export const StyledModal = styled(Modal)`
   display: flex;
