@@ -9,7 +9,7 @@ import { theme } from 'consts'
 const StyledWrapper = styled.div`
   width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${isMobileOnly ? 'column' : 'row'};
   justify-content: center;
   align-items: center;
   align-self: center;
