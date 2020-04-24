@@ -95,7 +95,7 @@ const InviteLinkGenerator = () => {
   const [guestInviteLink, setGuestInviteLink] = useState()
   const dispatch = useDispatch()
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
-  const isImmortalGodKing = user?.stroveKey === process.env.REACT_APP_ADMIN_KEY
+  const isStroveAdmin = user?.stroveKey === process.env.REACT_APP_ADMIN_KEY
   const [linkCopied, setLinkCopied] = useState(false)
 
   const generateLink = () => {
@@ -122,7 +122,7 @@ const InviteLinkGenerator = () => {
 
   return (
     <>
-      {isImmortalGodKing && (
+      {isStroveAdmin && (
         <SectionWrapper>
           <LinkGeneratorWrapper>
             <HorizontalContainer>

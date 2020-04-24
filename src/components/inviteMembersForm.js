@@ -182,6 +182,8 @@ const emptyWarningModalContent = {
 }
 
 const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
+  const user = useSelector(selectors.api.getUser)
+  const isStroveAdmin = user?.stroveKey === process.env.REACT_APP_ADMIN_KEY
   const dispatch = useDispatch()
   const paymentStatus = useSelector(selectors.api.getPaymentStatus)
   const editedOrganization = useSelector(
@@ -427,7 +429,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
           </StyledForm>
         )}
       />
-      <InviteLinkGenerator />
+      {isStroveAdmin && <InviteLinkGenerator />}
       <Modal
         width={isMobileOnly && '80vw'}
         mindWidth="40vw"
