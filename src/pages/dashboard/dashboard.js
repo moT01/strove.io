@@ -573,7 +573,6 @@ const Dashboard = ({ history }) => {
   }
 
   const handleDeleteMemberClick = ({ member, team }) => {
-    console.log('TCL: handleDeleteMemberClick -> team', team)
     setWarningModal({
       visible: true,
       content: (

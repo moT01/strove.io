@@ -73,10 +73,6 @@ export const C = {
 }
 
 const appReducer = combineReducers({
-  // guestInvitation: persistReducer(
-  //   persistGuestInvitationConfig,
-  //   guestInvitation.reducer
-  // ),
   invitations: persistReducer(persistInvitationConfig, invitations.reducer),
   api: persistReducer(persistConfig, api.reducer),
   incomingProject: incomingProject.reducer,
