@@ -97,25 +97,6 @@ export default withRouter(({ children, addProject, history }) => {
     }
   }, [isOnboarded, user, notEmbed, history])
 
-  // useEffect(() => {
-  //   console.log('TCL: isGuest', isGuest)
-  //   console.log('TCL: token', token)
-  //   if (!isGuest && !token) {
-  //     console.log('TCL: isGuest dispatching mutation', isGuest, guestId)
-  //     dispatch(
-  //       mutation({
-  //         name: 'guestLogin',
-  //         mutation: GUEST_LOGIN,
-  //         context: null,
-  //         variables: {
-  //           deviceId,
-  //           guestId,
-  //         },
-  //       })
-  //     )
-  //   }
-  // }, [isGuest])
-
   useEffect(() => {
     if (invitedByTeamId && token) {
       dispatch(
