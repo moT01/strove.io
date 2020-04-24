@@ -16,6 +16,7 @@ import {
   BeforeContainer,
   DemoImage,
   StyledSectionWrapper,
+  StyledVideo,
 } from './styled'
 
 const BeforeAfter = () => (
@@ -95,7 +96,7 @@ const BeforeAfter = () => (
               src={require('assets/liveshare.png')}
               alt="teams image"
             /> */}
-            <video
+            <StyledVideo
               controls
               autoPlay
               preload="none"
@@ -103,7 +104,7 @@ const BeforeAfter = () => (
               src={require('assets/featuresSlides.mp4')}
             >
               Your browser does not support video.
-            </video>
+            </StyledVideo>
           </SectionWrapper>
         </SectionWrapper>
       </SectionWrapper>
