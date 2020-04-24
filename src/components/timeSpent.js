@@ -58,7 +58,7 @@ const TimeSpent = ({ organization }) => {
     setAdditionalTimeSpent(0)
   }, [organization])
 
-  const timeSpent = 8640000 //(user?.timeSpent || 0) + additionalTimeSpent
+  const timeSpent = (user?.timeSpent || 0) + additionalTimeSpent
   const seconds = Math.floor((timeSpent / 1000) % 60)
   const minutes = Math.floor((timeSpent / (1000 * 60)) % 60)
   const hours = Math.floor((timeSpent / (1000 * 60 * 60)) % 24)
