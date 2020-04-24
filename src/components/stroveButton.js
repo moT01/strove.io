@@ -93,12 +93,15 @@ const Button = styled.button`
 `
 
 const FormButton = styled.button`
-  width: 156px;
-  height: 56px;
+  display: ${({ svgContent }) => (svgContent ? 'flex' : 'block')};
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: ${({ width }) => (width ? width : '156px')};
+  height: ${({ height }) => (height ? height : '56px')};
   color: ${({ theme }) => theme.colors.c2};
   background: ${({ theme }) => theme.colors.c1};
   text-transform: uppercase;
-  display: block;
   text-align: center;
   padding: 0;
   border: 0;
@@ -159,9 +162,11 @@ const StroveButton = props => {
   ) : props.layout === 'form' && isMobileOnly ? (
     <Button
       primary
+      svgContent={props.svgContent}
       fontWeight="700"
       fontSize="20px"
-      height="56px"
+      width={props.width}
+      height={props.height}
       mobile={isMobileOnly}
       {...props}
     >

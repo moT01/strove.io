@@ -28,6 +28,7 @@ import FullScreenWrapper from './fullScreenWrapper'
 import MenuWrapper from './menuWrapper'
 import TrialInfo from './trialInfo'
 import InviteMembersForm from './inviteMembersForm'
+import InviteLinkGenerator from './inviteLinkGenerator'
 import TimeSpent from './timeSpent'
 
 export {
@@ -63,5 +64,6 @@ export {
   MenuWrapper,
   TrialInfo,
   InviteMembersForm,
+  InviteLinkGenerator,
   TimeSpent,
 }

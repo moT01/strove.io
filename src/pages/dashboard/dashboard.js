@@ -15,6 +15,7 @@ import {
   LEAVE_TEAM,
   DOWNGRADE_SUBSCRIPTION,
   REMOVE_FROM_ORGANIZATION,
+  REMOVE_GUEST,
 } from 'queries'
 import { selectors, actions } from 'state'
 import {
@@ -581,43 +582,58 @@ const Dashboard = ({ history }) => {
         </ModalText>
       ),
       onSubmit: () => {
-        dispatch(
-          mutation({
-            name: 'removeMember',
-            mutation: REMOVE_MEMBER,
-            variables: { teamId: team.id, memberId: member.id },
-          })
-        )
+        if (member.type === 'Guest') {
+          dispatch(
+            mutation({
+              name: 'removeGuest',
+              mutation: REMOVE_GUEST,
+              variables: {
+                teamId: team.id,
+                memberId: member.id,
+              },
+              onSuccessDispatch: updateOrganizations,
+              onSuccess: closeWarningModal,
+            })
+          )
+        } else {
+          dispatch(
+            mutation({
+              name: 'removeMember',
+              mutation: REMOVE_MEMBER,
+              variables: { teamId: team.id, memberId: member.id },
+            })
+          )
 
-        dispatch(
-          mutation({
-            name: 'removeFromOrganization',
-            mutation: REMOVE_FROM_ORGANIZATION,
-            variables: {
-              organizationId: team.organizationId,
-              memberId: member.id,
-            },
-            onSuccess: () => {
-              organizationsObj[team.organizationId].subscriptionStatus ===
-              'active'
-                ? dispatch(
-                    mutation({
-                      name: 'downgradeSubscription',
-                      mutation: DOWNGRADE_SUBSCRIPTION,
-                      variables: {
-                        organizationId: team.organizationId,
-                        quantity:
-                          organizationsObj[team.organizationId]
-                            ?.subscriptionQuantity - 1,
-                      },
-                      onSuccessDispatch: updateOrganizations,
-                    })
-                  )
-                : dispatch(updateOrganizations())
-            },
-          })
-        )
-        closeWarningModal()
+          dispatch(
+            mutation({
+              name: 'removeFromOrganization',
+              mutation: REMOVE_FROM_ORGANIZATION,
+              variables: {
+                organizationId: team.organizationId,
+                memberId: member.id,
+              },
+              onSuccess: () => {
+                organizationsObj[team.organizationId].subscriptionStatus ===
+                'active'
+                  ? dispatch(
+                      mutation({
+                        name: 'downgradeSubscription',
+                        mutation: DOWNGRADE_SUBSCRIPTION,
+                        variables: {
+                          organizationId: team.organizationId,
+                          quantity:
+                            organizationsObj[team.organizationId]
+                              ?.subscriptionQuantity - 1,
+                        },
+                        onSuccessDispatch: updateOrganizations,
+                      })
+                    )
+                  : dispatch(updateOrganizations())
+              },
+            })
+          )
+          closeWarningModal()
+        }
       },
       buttonLabel: 'Remove',
     })

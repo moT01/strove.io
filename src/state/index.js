@@ -11,6 +11,7 @@ import latency from './latency'
 import feature from './feature'
 import editedOrganization from './editedOrganization'
 import currentProject from './currentProject'
+import guestInvitation from './guestInvitation'
 
 const rootConfig = {
   key: 'root',
@@ -44,6 +45,7 @@ export const selectors = {
   invitations: invitations.selectors,
   editedOrganization: editedOrganization.selectors,
   currentProject: currentProject.selectors,
+  guestInvitation: guestInvitation.selectors,
 
   // ToDo Remove siliskyToken later on
   getToken,
@@ -56,6 +58,7 @@ export const actions = {
   invitations: invitations.actions,
   editedOrganization: editedOrganization.actions,
   currentProject: currentProject.actions,
+  guestInvitation: guestInvitation.actions,
 }
 
 export const C = {
@@ -66,6 +69,7 @@ export const C = {
   invitations: invitations.C,
   editedOrganization: editedOrganization.C,
   currentProject: currentProject.C,
+  guestInvitation: guestInvitation.C,
 }
 
 const appReducer = combineReducers({

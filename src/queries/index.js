@@ -49,6 +49,10 @@ import ADD_USER_TO_COLLABORATION from './addUserToCollaboration'
 import REMOVE_USER_FROM_COLLABORATION from './removeUserFromCollaboration'
 import START_LIVE_SHARE from './startLiveShare'
 import STOP_LIVE_SHARE from './stopLiveShare'
+import CREATE_GUEST_LINK from './createGuestLink'
+import DELETE_GUEST_LINK from './deleteGuestLink'
+import REMOVE_GUEST from './removeGuest'
+import GUEST_LOGIN from './guestLogin'
 
 export {
   ADD_PROJECT,
@@ -102,4 +106,8 @@ export {
   REMOVE_USER_FROM_COLLABORATION,
   START_LIVE_SHARE,
   STOP_LIVE_SHARE,
+  CREATE_GUEST_LINK,
+  DELETE_GUEST_LINK,
+  REMOVE_GUEST,
+  GUEST_LOGIN,
 }

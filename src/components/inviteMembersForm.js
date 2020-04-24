@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ADD_MEMBER, UPGRADE_SUBSCRIPTION } from 'queries'
 import { selectors, actions } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
-import { StroveButton, Modal } from 'components'
+import { StroveButton, Modal, InviteLinkGenerator } from 'components'
 import { mutation, updateOrganizations } from 'utils'
 import { ModalButton, ModalText } from 'pages/dashboard/styled'
 
@@ -427,6 +427,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
           </StyledForm>
         )}
       />
+      <InviteLinkGenerator />
       <Modal
         width={isMobileOnly && '80vw'}
         mindWidth="40vw"

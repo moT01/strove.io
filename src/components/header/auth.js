@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { persistor } from '../../wrapper'
+import StroveLogo from 'images/stroveReversed.png'
 
 import DropdownMenuWrapper from './dropdownMenuWrapper'
 
@@ -116,7 +117,7 @@ const Inline = styled.div`
   display: flex;
   width: ${props => (props.isEditor ? '18px' : '40px')};
   height: ${props => (props.isEditor ? '18px' : '40px')};
-  margin-left: 4px;
+  margin: 0px 4px;
   background: ${({ theme }) => theme.colors.c1};
 `
 
@@ -195,6 +196,7 @@ const getUserData = createSelector(
 const StyledAntdIcon = styled(Icon)`
   align-items: center;
   display: flex;
+  margin: 0px 4px;
 `
 
 const LoginDropdown = props => (
@@ -244,7 +246,12 @@ const UserDropdown = props => {
                   <Text {...props}> {props.user.username}</Text>
                 )}
                 <Inline {...props}>
-                  <UserPhoto src={props.user.userphoto} />
+                  <UserPhoto
+                    src={
+                      props.user.userphoto ? props.user.userphoto : StroveLogo
+                    }
+                  />
+
                   <StyledAntdIcon type="caret-down" />
                 </Inline>
               </StyledDropdown>

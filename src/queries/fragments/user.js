@@ -24,6 +24,8 @@ export const UserFragment = gql`
     currentProjectId
     timeSpent
     isOnboarded
+    stroveKey
+    type
     teams {
       ...Team
     }

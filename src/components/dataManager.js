@@ -390,7 +390,13 @@ export default withRouter(({ children, addProject, history }) => {
     ) {
       addProject({ link: incomingProjectLink })
     }
-  }, [incomingProjectLink, isProjectBeingAdded, token, isProjectBeingStarted, addProject])
+  }, [
+    incomingProjectLink,
+    isProjectBeingAdded,
+    token,
+    isProjectBeingStarted,
+    addProject,
+  ])
 
   useEffect(() => {
     window.addEventListener('beforeunload', ev => {
