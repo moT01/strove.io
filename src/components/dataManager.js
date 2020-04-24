@@ -326,7 +326,6 @@ export default withRouter(({ children, addProject, history }) => {
   const loginError = loginSubscription?.error
 
   useEffect(() => {
-    console.log('My name is Jeff', loginData)
     if (loginError) {
       dispatch(
         actions.api.fetchError({
@@ -336,7 +335,6 @@ export default withRouter(({ children, addProject, history }) => {
       )
     }
     if (loginData?.userLogin) {
-      console.log('My name is also Jefferson')
       const {
         token,
         siliskyToken,
