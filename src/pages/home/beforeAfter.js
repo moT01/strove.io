@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Icon } from 'antd'
+// import featuresSlides from 'assets/featuresSlides.mp4'
 
 import { theme } from 'consts'
 
@@ -88,11 +89,17 @@ const BeforeAfter = () => (
             <BeforeItem>
               <StyledH2 color={theme.colors.c3}>After</StyledH2>
             </BeforeItem>
-            <DemoImage
+            {/* <DemoImage
               decoding="async"
               shadowOpacity="0.1"
               src={require('assets/liveshare.png')}
               alt="teams image"
+            /> */}
+            <video
+              controls
+              autoPlay
+              preload="none"
+              src={require('assets/featuresSlides.mp4')}
             />
           </SectionWrapper>
         </SectionWrapper>
