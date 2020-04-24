@@ -15,7 +15,7 @@ const StyledWrapper = styled.div`
   align-self: center;
   margin-top: 20px;
   background: ${({ theme }) => theme.colors.c27};
-  padding: 50px;
+  padding: ${isMobileOnly ? '20px' : '50px'};
   margin: 0;
 `
 
