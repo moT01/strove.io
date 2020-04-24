@@ -49,8 +49,8 @@ const Strove = () => (
       <Route path="/embed/runProject" component={RunProject} />
       <Route path="/embed/editor" component={Editor} />
       <PrivateRoute path="/app/editor" component={Editor} />
-      <PrivateRoute path={['/app', '/app/dashboard']} component={Dashboard} />
       <PrivateRoute path="/app/plans" component={Plans} />
+      <PrivateRoute path={['/app', '/app/dashboard']} component={Dashboard} />
       <Route path="/welcome/login" component={Login} />
       <PrivateRoute
         path="/welcome/organizationName"
