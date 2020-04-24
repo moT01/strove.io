@@ -100,7 +100,9 @@ const BeforeAfter = () => (
               autoPlay
               preload="none"
               src={require('assets/featuresSlides.mp4')}
-            />
+            >
+              Your browser does not support video.
+            </video>
           </SectionWrapper>
         </SectionWrapper>
       </SectionWrapper>
