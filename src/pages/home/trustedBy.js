@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 import { isMobileOnly } from 'react-device-detect'
 
 import { StyledH3 } from './styled'
@@ -25,6 +25,13 @@ const LogosWrapper = styled(StyledWrapper)`
   width: ${isMobileOnly ? 'auto' : '50%'};
   padding: 10px;
   margin-top: 20px;
+
+  ${isMobileOnly &&
+    css`
+      * {
+        margin: 10px 0;
+      }
+    `}
 `
 
 const TrustedBy = () => (
