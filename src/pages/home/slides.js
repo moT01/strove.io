@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Icon } from 'antd'
-// import { useInterval } from 'hooks'
+import { useInterval } from 'hooks'
 
 import { theme } from 'consts'
 
@@ -18,8 +18,26 @@ import {
   StyledVideo,
 } from './styled'
 
-const BeforeAfter = () => {
+const SaveTime = () => (
+  <SmallSectionWrapper isMobile={isMobile}>
+    <StyledCell>
+      <StyledCellHeader>
+        <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
+      </StyledCellHeader>
+      <StyledProductDescription>
+        Save hours to days per developer by running code in seconds from
+        anywhere.
+      </StyledProductDescription>
+    </StyledCell>
+  </SmallSectionWrapper>
+)
+
+const Slides = () => {
   const [canPlayVideo, setCanPlayVideo] = useState(false)
+  useInterval(
+    () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
+    currentProject ? null : 3000
+  )
   return (
     <StyledSectionWrapper
       isSecondary
@@ -106,4 +124,4 @@ const BeforeAfter = () => {
   )
 }
 
-export default memo(BeforeAfter)
+export default memo(Slides)
