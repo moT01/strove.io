@@ -1,36 +1,20 @@
-import React, { memo, useState, useCallback } from 'react'
+import React, { memo, useState, useCallback, useRef } from 'react'
 import { isMobileOnly, isMobile } from 'react-device-detect'
-import { Icon } from 'antd'
 import { useInterval } from 'hooks'
 
 import { theme } from 'consts'
 
 import {
-  BeforeItem,
   SectionDivider,
-  IconContainer,
   SectionWrapper,
   SmallSectionWrapper,
   StyledH2,
-  StyledBeforeText,
-  BeforeContainer,
   StyledSectionWrapper,
   StyledVideo,
   StyledCell,
   StyledCellHeader,
   StyledProductDescription,
 } from './styled'
-
-const SlideCopy = ({ header, body }) => (
-  <SmallSectionWrapper isMobile={isMobile}>
-    <StyledCell>
-      <StyledCellHeader>
-        <StyledH2 color={theme.colors.c3}>{header}</StyledH2>
-      </StyledCellHeader>
-      <StyledProductDescription>{body}</StyledProductDescription>
-    </StyledCell>
-  </SmallSectionWrapper>
-)
 
 const slidesContent = [
   {
@@ -49,9 +33,21 @@ const slidesContent = [
   },
 ]
 
-const SlidesVideo = memo(({ setCanPlayVideo }) => (
+const SlideCopy = memo(({ header, body }) => (
+  <SmallSectionWrapper isMobile={isMobile}>
+    <StyledCell>
+      <StyledCellHeader>
+        <StyledH2 color={theme.colors.c3}>{header}</StyledH2>
+      </StyledCellHeader>
+      <StyledProductDescription>{body}</StyledProductDescription>
+    </StyledCell>
+  </SmallSectionWrapper>
+))
+
+const SlidesVideo = memo(({ setCanPlayVideo, ref }) => (
   <StyledVideo
     loop
+    ref={ref}
     autoPlay
     preload="none"
     controls={false}
@@ -65,6 +61,7 @@ const SlidesVideo = memo(({ setCanPlayVideo }) => (
 const Slides = () => {
   const [canPlayVideo, setCanPlayVideo] = useState(false)
   const [slideIndex, setSlideIndex] = useState(0)
+  const videEl = useRef(null)
   useInterval(
     () => setSlideIndex(slideIndex > 1 ? 0 : slideIndex + 1),
     canPlayVideo ? 3000 : null
@@ -87,6 +84,7 @@ const Slides = () => {
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SectionWrapper isMobile={isMobile}>
               <SlidesVideo
+                ref={videEl}
                 setCanPlayVideo={useCallback(() => {
                   setCanPlayVideo(true)
                 }, [])}
