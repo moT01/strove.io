@@ -18,6 +18,10 @@ import {
 
 const slidesContent = [
   {
+    header: 'The best liveshare out there',
+    body: 'Enjoy coding together, remotely',
+  },
+  {
     header: 'Save time',
     body:
       'Save hours to days per developer by running code in seconds from anywhere.',
@@ -25,11 +29,7 @@ const slidesContent = [
   {
     header: 'More effective collaboration',
     body:
-      'Spend more time on what matters by reducing managing permissions and sharing the environment to a single click.',
-  },
-  {
-    header: 'The best liveshare out there',
-    body: 'Enjoy coding together, remotely',
+      'Reduce managing permissions and sharing the environment to a single click.',
   },
 ]
 
