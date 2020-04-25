@@ -18,25 +18,23 @@ import {
   StyledVideo,
 } from './styled'
 
-const SaveTime = () => (
+const SaveTime = ({ header, body }) => (
   <SmallSectionWrapper isMobile={isMobile}>
     <StyledCell>
       <StyledCellHeader>
-        <StyledH2 color={theme.colors.c3}>Save time</StyledH2>
+        <StyledH2 color={theme.colors.c3}>{header}</StyledH2>
       </StyledCellHeader>
-      <StyledProductDescription>
-        Save hours to days per developer by running code in seconds from
-        anywhere.
-      </StyledProductDescription>
+      <StyledProductDescription>{body}</StyledProductDescription>
     </StyledCell>
   </SmallSectionWrapper>
 )
 
 const Slides = () => {
   const [canPlayVideo, setCanPlayVideo] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0)
   useInterval(
     () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
-    currentProject ? null : 3000
+    canPlayVideo ? 3000 : null
   )
   return (
     <StyledSectionWrapper
