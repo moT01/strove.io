@@ -33,9 +33,20 @@ const SlideCopy = ({ header, body }) => (
 )
 
 const slidesContent = [
-  { header: '123', body: 'abc' },
-  { header: '456', body: 'abc2' },
-  { header: '789', body: 'abc3' },
+  {
+    header: 'Save time',
+    body:
+      'Save hours to days per developer by running code in seconds from anywhere.',
+  },
+  {
+    header: 'More effective collaboration',
+    body:
+      'Spend more time on what matters by reducing managing permissions and sharing the environment to a single click.',
+  },
+  {
+    header: 'The best liveshare out there',
+    body: 'Enjoy coding together, remotely',
+  },
 ]
 
 const Slides = () => {
