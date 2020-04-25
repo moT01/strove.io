@@ -66,7 +66,7 @@ const Projects = ({
 
   const isDisabled = isDeleting || isContinuing || isStopping
 
-  const usersProjects = projects.filter(project => project.userId !== user.id)
+  const usersProjects = projects?.filter(project => project.userId !== user.id)
 
   const handleStartClick = ({ id, teamId }) => {
     if (!currentProjectId) {

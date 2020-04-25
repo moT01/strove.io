@@ -41,6 +41,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
     selectors.api.getLoading('startLiveShare')
   )
   const user = useSelector(selectors.api.getUser)
+  const isStroveAdmin = user?.stroveKey === process.env.REACT_APP_ADMIN_KEY
   const projects = useSelector(selectors.api.getMyProjects)
   const githubToken = user?.githubToken
   const gitlabToken = user?.gitlabToken
@@ -154,6 +155,7 @@ const AddProjectProvider = ({ children, history, teamId, organization }) => {
       setModalContent('AddGithubToLogin')
     } else if (
       user &&
+      !isStroveAdmin &&
       timeExceeded &&
       !incomingProjectRepoUrl &&
       !(

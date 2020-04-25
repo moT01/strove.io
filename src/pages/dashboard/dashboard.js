@@ -91,6 +91,7 @@ const Dashboard = ({ history }) => {
   const dispatch = useDispatch()
   const projects = useSelector(selectors.api.getUserProjects)
   const user = useSelector(selectors.api.getUser)
+  const isStroveAdmin = user?.stroveKey === process.env.REACT_APP_ADMIN_KEY
   const myOrganizations = useSelector(selectors.api.getMyOrganizations)
   const editedOrganization = useSelector(
     selectors.editedOrganization.getEditedOrganization
@@ -229,7 +230,9 @@ const Dashboard = ({ history }) => {
                 <VerticalDivider margin="20px 0px">
                   <NameWrapper>
                     <OrganizationName>{organization.name}</OrganizationName>
-                    <TimeSpent organization={organization} />
+                    {!isStroveAdmin && (
+                      <TimeSpent organization={organization} />
+                    )}
                   </NameWrapper>
 
                   <StroveButton
