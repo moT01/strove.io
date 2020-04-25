@@ -29,10 +29,38 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 60vw;
+  width: 40vw;
+  height: 200px;
   border: 1px solid ${({ theme }) => theme.colors.c1};
   border-radius: 2px;
   background: ${({ theme }) => theme.colors.c2};
+`
+
+const VerticalLine = styled.div`
+  height: 35%;
+  width: 1px;
+  border-left: 1px solid ${({ theme }) => theme.colors.c1};
+`
+
+const VerticalDivider = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+`
+
+const HorizontalWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`
+
+const SectionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Text = styled.div`
@@ -90,7 +118,15 @@ const LoginModal = ({ loginModal, closeModal }) => {
       ariaHideApp={false}
     >
       <Wrapper>
-        <OptionText>Hi</OptionText>
+        <HorizontalWrapper>
+          <OptionText>Hi</OptionText>
+          <VerticalDivider>
+            <VerticalLine></VerticalLine>
+            <Text>Or</Text>
+            <VerticalLine></VerticalLine>
+          </VerticalDivider>
+          <OptionText>Hello</OptionText>
+        </HorizontalWrapper>
       </Wrapper>
     </StyledModal>
   )
