@@ -199,6 +199,10 @@ const StyledAntdIcon = styled(Icon)`
   margin: 0px 4px;
 `
 
+const MailIcon = styled(StyledAntdIcon)`
+  margin: 0;
+`
+
 const LoginDropdown = props => (
   <AuthWrapper>
     <Downshift>
@@ -209,16 +213,16 @@ const LoginDropdown = props => (
           </LoginButton>
           <DropdownWrapper hidden={!isOpen}>
             <DropdownMenuWrapper>
-              {loginOptions.map((item, index) => (
-                <Option
-                  key={item.value}
-                  href={item.href}
-                  isLast={index === loginOptions.length - 1 ? true : false}
-                >
+              {loginOptions.map(item => (
+                <Option key={item.value} href={item.href}>
                   {item.icon}
                   <OptionText>{item.label}</OptionText>
                 </Option>
               ))}
+              <LinkOption to="/emailAuth" isLast>
+                <MailIcon type="mail" style={{ width: '24px' }}></MailIcon>
+                <OptionText>Email</OptionText>
+              </LinkOption>
             </DropdownMenuWrapper>
           </DropdownWrapper>
         </div>
