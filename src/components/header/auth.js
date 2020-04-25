@@ -220,7 +220,7 @@ const LoginDropdown = props => (
                 </Option>
               ))}
               <LinkOption to="/emailAuth" isLast>
-                <MailIcon type="mail" style={{ width: '24px' }}></MailIcon>
+                <MailIcon type="mail" style={{ width: '29px' }}></MailIcon>
                 <OptionText>Email</OptionText>
               </LinkOption>
             </DropdownMenuWrapper>
