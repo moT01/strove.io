@@ -16,6 +16,9 @@ import {
   BeforeContainer,
   StyledSectionWrapper,
   StyledVideo,
+  StyledCell,
+  StyledCellHeader,
+  StyledProductDescription
 } from './styled'
 
 const SlideCopy = ({ header, body }) => (
@@ -39,7 +42,7 @@ const Slides = () => {
   const [canPlayVideo, setCanPlayVideo] = useState(false)
   const [slideIndex, setSlideIndex] = useState(0)
   useInterval(
-    () => setAdditionalTimeSpent(additionalTimeSpent + oneMinute),
+    () => setSlideIndex(slideIndex > 2 ? 0 : slideIndex + 1),
     canPlayVideo ? 3000 : null
   )
   return (
