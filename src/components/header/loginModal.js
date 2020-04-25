@@ -72,11 +72,15 @@ const StyledModal = styled(Modal)`
   :focus {
     outline: 0;
   }
+  :overlay {
+    background-color: rgba(255, 255, 255, 0);
+  }
 `
 
 const LoginModal = ({ loginModal, closeModal }) => {
   return (
     <StyledModal
+      style={{ overlay: { backgroundColor: 'rgba(255, 255, 255, 0)' } }}
       width={isMobileOnly && '80vw'}
       mindWidth="40vw"
       height={isMobileOnly ? '30vh' : '20vh'}
