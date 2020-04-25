@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useCallback } from 'react'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Icon } from 'antd'
 import { useInterval } from 'hooks'
@@ -49,6 +49,19 @@ const slidesContent = [
   },
 ]
 
+const SlidesVideo = memo(({ setCanPlayVideo }) => (
+  <StyledVideo
+    loop
+    autoPlay
+    preload="none"
+    controls={false}
+    onCanPlay={setCanPlayVideo(true)}
+    src={require('assets/featuresSlides.mp4')}
+  >
+    Your browser does not support video.
+  </StyledVideo>
+))
+
 const Slides = () => {
   const [canPlayVideo, setCanPlayVideo] = useState(false)
   const [slideIndex, setSlideIndex] = useState(0)
@@ -73,16 +86,11 @@ const Slides = () => {
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
             <SectionWrapper isMobile={isMobile}>
-              <StyledVideo
-                loop
-                autoPlay
-                preload="none"
-                controls={false}
-                onCanPlay={() => setCanPlayVideo(true)}
-                src={require('assets/featuresSlides.mp4')}
-              >
-                Your browser does not support video.
-              </StyledVideo>
+              <SlidesVideo
+                setCanPlayVideo={useCallback(() => {
+                  setCanPlayVideo(true)
+                }, [])}
+              />
             </SectionWrapper>
           </SectionWrapper>
         </SectionWrapper>
