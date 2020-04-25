@@ -18,7 +18,7 @@ import {
   StyledVideo,
 } from './styled'
 
-const SaveTime = ({ header, body }) => (
+const SlideCopy = ({ header, body }) => (
   <SmallSectionWrapper isMobile={isMobile}>
     <StyledCell>
       <StyledCellHeader>
@@ -28,6 +28,12 @@ const SaveTime = ({ header, body }) => (
     </StyledCell>
   </SmallSectionWrapper>
 )
+
+const slidesContent = [
+  { header: '123', body: 'abc' },
+  { header: '456', body: 'abc2' },
+  { header: '789', body: 'abc3' },
+]
 
 const Slides = () => {
   const [canPlayVideo, setCanPlayVideo] = useState(false)
@@ -45,61 +51,10 @@ const Slides = () => {
     >
       <SectionDivider isMobile={isMobile}>
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
-          <SmallSectionWrapper isMobile={isMobile}>
-            <BeforeItem>
-              <StyledH2 color={theme.colors.c3}>Alternative for</StyledH2>
-            </BeforeItem>
-            <BeforeContainer>
-              <BeforeItem>
-                <StyledBeforeText>Virtual machines</StyledBeforeText>
-                <IconContainer>
-                  <img
-                    decoding="async"
-                    alt="docker"
-                    src={require('assets/vm.png')}
-                    style={{
-                      color: theme.colors.c1,
-                    }}
-                  />
-                </IconContainer>
-              </BeforeItem>
-              <BeforeItem>
-                <StyledBeforeText>Docker containers</StyledBeforeText>
-                <IconContainer>
-                  <img
-                    decoding="async"
-                    alt="docker"
-                    src={require('assets/docker.png')}
-                    style={{
-                      color: theme.colors.c1,
-                    }}
-                  />
-                </IconContainer>
-              </BeforeItem>
-              <BeforeItem>
-                <StyledBeforeText>Devops teams</StyledBeforeText>
-                <IconContainer>
-                  <img
-                    decoding="async"
-                    alt="docker"
-                    src={require('assets/people.png')}
-                    style={{
-                      color: theme.colors.c1,
-                    }}
-                  />
-                </IconContainer>
-              </BeforeItem>
-              <BeforeItem>
-                <StyledBeforeText>Leasing computers</StyledBeforeText>
-                <IconContainer>
-                  <Icon
-                    type="laptop"
-                    style={{ color: theme.colors.c3, fontSize: 40 }}
-                  />
-                </IconContainer>
-              </BeforeItem>
-            </BeforeContainer>
-          </SmallSectionWrapper>
+          <SlideCopy
+            header={slidesContent[slideIndex].header}
+            body={slidesContent[slideIndex].body}
+          />
         </SectionWrapper>
         <SectionWrapper isMobile={isMobile} padding="20px 10px">
           <SectionWrapper isMobile={isMobile} padding="20px 10px">
