@@ -1,15 +1,18 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import styled, { keyframes, css } from 'styled-components/macro'
 import { createSelector } from 'reselect'
 import Downshift from 'downshift'
 import { useDispatch, useSelector } from 'react-redux'
 import { Icon } from 'antd'
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal'
+import { isMobileOnly } from 'react-device-detect'
 
 import { selectors } from 'state'
 import { loginOptions } from 'consts'
 import { persistor } from '../../wrapper'
 import StroveLogo from 'images/stroveReversed.png'
+import LoginModal from './loginModal'
 
 import DropdownMenuWrapper from './dropdownMenuWrapper'
 
@@ -203,33 +206,45 @@ const MailIcon = styled(StyledAntdIcon)`
   margin: 0;
 `
 
-const LoginDropdown = props => (
-  <AuthWrapper>
-    <Downshift>
-      {({ getToggleButtonProps, isOpen }) => (
-        <div>
-          <LoginButton {...getToggleButtonProps({})}>
-            <AuthText {...props}>Login</AuthText>
-          </LoginButton>
-          <DropdownWrapper hidden={!isOpen}>
-            <DropdownMenuWrapper>
-              {loginOptions.map(item => (
-                <Option key={item.value} href={item.href}>
-                  {item.icon}
-                  <OptionText>{item.label}</OptionText>
-                </Option>
-              ))}
-              <LinkOption to="/emailAuth" isLast>
-                <MailIcon type="mail" style={{ width: '29px' }}></MailIcon>
-                <OptionText>Email</OptionText>
-              </LinkOption>
-            </DropdownMenuWrapper>
-          </DropdownWrapper>
-        </div>
-      )}
-    </Downshift>
-  </AuthWrapper>
-)
+const LoginDropdown = props => {
+  const [loginModal, setLoginModal] = useState(false)
+
+  const closeModal = () => setLoginModal(false)
+
+  return (
+    <>
+      <LoginButton onClick={() => setLoginModal(true)}>
+        <AuthText>Login</AuthText>
+      </LoginButton>
+      {/* <AuthWrapper>
+        <Downshift>
+          {({ getToggleButtonProps, isOpen }) => (
+            <div>
+              <LoginButton {...getToggleButtonProps({})}>
+                <AuthText {...props}>Login</AuthText>
+              </LoginButton>
+              <DropdownWrapper hidden={!isOpen}>
+                <DropdownMenuWrapper>
+                  {loginOptions.map(item => (
+                    <Option key={item.value} href={item.href}>
+                      {item.icon}
+                      <OptionText>{item.label}</OptionText>
+                    </Option>
+                  ))}
+                  <LinkOption to="/emailAuth" isLast>
+                    <MailIcon type="mail" style={{ width: '29px' }}></MailIcon>
+                    <OptionText>Email</OptionText>
+                  </LinkOption>
+                </DropdownMenuWrapper>
+              </DropdownWrapper>
+            </div>
+          )}
+        </Downshift>
+      </AuthWrapper> */}
+      <LoginModal loginModal={loginModal} closeModal={closeModal} />
+    </>
+  )
+}
 
 const UserDropdown = props => {
   const dispatch = useDispatch()
