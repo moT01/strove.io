@@ -91,11 +91,9 @@ const Text = styled.div`
 `
 
 const InviteLinkGenerator = () => {
-  const user = useSelector(selectors.api.getUser)
   const [guestInviteLink, setGuestInviteLink] = useState()
   const dispatch = useDispatch()
   const editedTeam = useSelector(selectors.editedOrganization.getEditedTeam)
-  const isStroveAdmin = user?.stroveKey === process.env.REACT_APP_ADMIN_KEY
   const [linkCopied, setLinkCopied] = useState(false)
 
   const generateLink = () => {
@@ -122,43 +120,41 @@ const InviteLinkGenerator = () => {
 
   return (
     <>
-      {isStroveAdmin && (
-        <SectionWrapper>
-          <LinkGeneratorWrapper>
-            <HorizontalContainer>
-              <HorizontalLine />
-              <Text>Or</Text>
-              <HorizontalLine />
-            </HorizontalContainer>
-            <StroveButton
-              isPrimary
-              width="150px"
-              margin="0px"
-              borderRadius="2px"
-              padding="2px"
-              onClick={generateLink}
-              text="Generate link"
+      <SectionWrapper>
+        <LinkGeneratorWrapper>
+          <HorizontalContainer>
+            <HorizontalLine />
+            <Text>Or</Text>
+            <HorizontalLine />
+          </HorizontalContainer>
+          <StroveButton
+            isPrimary
+            width="150px"
+            margin="0px"
+            borderRadius="2px"
+            padding="2px"
+            onClick={generateLink}
+            text="Generate link"
+          />
+          <InputContainer>
+            <StyledInput
+              value={guestInviteLink}
+              placeholder="Generate invitation link"
+              readOnly
             />
-            <InputContainer>
-              <StyledInput
-                value={guestInviteLink}
-                placeholder="Generate invitation link"
-                readOnly
-              />
-              <StroveButton
-                layout="form"
-                height="30px"
-                width="40px"
-                padding="0px"
-                onClick={copyLink}
-                svgContent
-              >
-                <StyledCopyIcon />
-              </StroveButton>
-            </InputContainer>
-          </LinkGeneratorWrapper>
-        </SectionWrapper>
-      )}
+            <StroveButton
+              layout="form"
+              height="30px"
+              width="40px"
+              padding="0px"
+              onClick={copyLink}
+              svgContent
+            >
+              <StyledCopyIcon />
+            </StroveButton>
+          </InputContainer>
+        </LinkGeneratorWrapper>
+      </SectionWrapper>
     </>
   )
 }
