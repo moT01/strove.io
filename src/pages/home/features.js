@@ -9,19 +9,21 @@ import { isMobileOnly } from 'react-device-detect'
 const { TweenOneGroup } = TweenOne
 
 const StyledFeatureTitle = styled.h3`
-  color: rgb(105, 123, 140);
-  font-size: 16px;
+  color: ${({ theme }) => theme.colors.c26};
+  font-size: 18px;
+  margin: 8px auto;
+  font-weight: 700;
 `
 
 const StyledFeatureContent = styled.p`
-  color: rgb(105, 123, 140);
+  color: ${({ theme }) => theme.colors.c26};
   font-size: 16px;
   line-height: 1;
 `
 
 const StyledAnchor = styled.a`
   text-decoration: none;
-  color: rgb(105, 123, 140);
+  color: ${({ theme }) => theme.colors.c26};
 `
 
 const StyledFeatureWrapper = styled.div`

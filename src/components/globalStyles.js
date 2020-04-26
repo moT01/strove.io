@@ -375,11 +375,6 @@ export default createGlobalStyle`
   .page1-box-wrapper li .page1-box:hover .page1-image {
     transform: translateY(-5px);
   }
-  .page1-box-wrapper li .page1-box h3 {
-    font-size: 16px;
-    margin: 8px auto;
-    font-weight: 700;
-  }
   .page1-point-wrapper {
     position: absolute;
     width: 0;
