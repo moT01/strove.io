@@ -1,10 +1,23 @@
 export default [
   {
+    title: "World's most popular IDE - VSCode",
+    content: 'You can even use your favorite extensions',
+    color: '#0072ce',
+    shadowColor: 'rgba(0, 114, 206, 0.12)',
+  },
+  {
     title: 'A browser is all you need',
     content: 'No futher setup required',
     color: '#EB2F96',
     shadowColor: 'rgba(235,45,150,.12)',
     type: 'chrome',
+  },
+  {
+    title: 'Over 20 programming languages',
+    content: 'Need Python, Java, C#? We got you covered!',
+    color: '#722ED1',
+    shadowColor: 'rgba(114,46,209,.12)',
+    type: 'code',
   },
   {
     title: 'Share projects in seconds',
@@ -19,13 +32,6 @@ export default [
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
     type: 'global',
-  },
-  {
-    title: 'All major programming languages available',
-    content: 'Need Python, Java, C#? We got you covered!',
-    color: '#722ED1',
-    shadowColor: 'rgba(114,46,209,.12)',
-    type: 'code',
   },
   {
     title: 'One environment for the whole team',
@@ -43,7 +49,7 @@ export default [
     type: 'github',
   },
   {
-    title: 'Push straight to GitHub or Gitlab',
+    title: 'Push to GitHub or Gitlab',
     content: 'Strove is made with seamless git experience in mind',
     color: '#1AC44D',
     shadowColor: 'rgba(26,196,77,.12)',
@@ -56,11 +62,5 @@ export default [
     color: '#1890FF',
     shadowColor: 'rgba(24,144,255,.12)',
     type: 'desktop',
-  },
-  {
-    title: "Use world's most popular code editor - VSCode",
-    content: 'You can even use your favorite extensions',
-    color: '#0072ce',
-    shadowColor: 'rgba(0, 114, 206, 0.12)',
   },
 ]

@@ -6,7 +6,7 @@ import { theme } from 'consts'
 
 import GetStarted from './getStarted'
 // import BeforeAfter from './beforeAfter'
-import Slides from './slides'
+// import Slides from './slides'
 import {
   StyledCellHeader,
   StyledSectionWrapper,
@@ -78,7 +78,7 @@ const Banner = () => (
         </StyledProductDescription> */}
       </SectionDivider>
     </StyledSectionWrapper>
-    <Slides />
+    {/* <Slides /> */}
     <StyledSectionWrapper
       isSecondary
       padding="20px"
