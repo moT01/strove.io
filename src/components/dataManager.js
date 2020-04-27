@@ -23,9 +23,7 @@ import {
   getWindowSearchParams,
   updateOrganizations,
 } from 'utils'
-import { selectors } from 'state'
-import { C } from 'state'
-import { actions } from 'state'
+import { selectors, C, actions } from 'state'
 
 import client from 'client'
 
@@ -107,6 +105,23 @@ export default withRouter(({ children, addProject, history }) => {
     })
     /* eslint-disable-next-line */
   }, [activeProjectData])
+
+  useEffect(() => {
+    console.log('Yeeet', organizationUpdateSubscription)
+    organizationUpdateSubscription?.data &&
+      user.id &&
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: `myOrganizations`,
+          data:
+            organizationUpdateSubscription.data.organizationUpdate.organization,
+          id:
+            organizationUpdateSubscription.data.organizationUpdate.organization
+              .id,
+        },
+      }) /* eslint-disable-next-line */
+  }, [organizationUpdateSubscription?.data])
 
   useEffect(() => {
     if (!isOnboarded && notEmbed && user?.organizations?.length === 1) {

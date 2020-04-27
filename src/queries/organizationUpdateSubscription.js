@@ -3,8 +3,10 @@ import { OrganizationFragment } from './fragments/organization'
 
 export default gql`
   subscription($userId: ID!) {
-    organizationUpdate(userdId: $userId) {
-      ...organization
+    organizationUpdate(userId: $userId) {
+      organization {
+        ...Organization
+      }
     }
   }
   ${OrganizationFragment}
