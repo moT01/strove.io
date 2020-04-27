@@ -36,7 +36,6 @@ const Column = styled.div`
 
 const ColumnTitle = styled.h3`
   font-size: 1.3rem;
-  font-weight: 300;
   color: ${({ theme }) => theme.colors.c2};
   margin: 10px 0;
 `
@@ -48,9 +47,9 @@ const StyledLink = styled(Link)`
 
 const LinkText = styled.h3`
   font-size: 0.9rem;
-  font-weight: 200;
   margin: 0 0 10px 0;
   cursor: pointer;
+  font-weight: 400;
 `
 
 const StyledAnchor = styled.a`
