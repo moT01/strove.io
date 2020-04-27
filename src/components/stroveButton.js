@@ -92,6 +92,10 @@ const Button = styled.button`
   ${sharedStyles}
 `
 
+const AnchorButton = styled.a`
+  ${sharedStyles}
+`
+
 const FormButton = styled.button`
   display: ${({ svgContent }) => (svgContent ? 'flex' : 'block')};
   justify-content: center;
@@ -240,6 +244,30 @@ const StroveButton = props => {
         props.text || props.children
       )}
     </Button>
+  ) : props.isATag ? (
+    <AnchorButton
+      height="56px"
+      width="100%"
+      fontSize="1.3rem"
+      primary={props.isPrimary}
+      letterSpacing="0.8px"
+      onClick={() => props.history.push(props.navigateTo || '/welcome/login')}
+      {...props}
+    >
+      {isLoading ||
+      isDeleting ||
+      isContinuing ||
+      isStopping ||
+      props.isProcessing ? (
+        <FullScreenLoader
+          isFullScreen={false}
+          color={props.isPrimary ? '#ffffff' : '#0072ce'}
+          height="1.7rem"
+        />
+      ) : (
+        props.text || props.children
+      )}
+    </AnchorButton>
   ) : (
     <Button
       disabled={

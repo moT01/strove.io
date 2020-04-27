@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 `
 
 const VerticalLine = styled.div`
-  height: 35%;
+  height: 85%;
   width: 1px;
   border-left: 1px solid ${({ theme }) => theme.colors.c1};
 `
@@ -48,6 +48,7 @@ const VerticalDivider = styled.div`
   align-items: center;
   justify-content: center;
   height: 90%;
+  width: 2%;
 `
 
 const HorizontalWrapper = styled.div`
@@ -55,12 +56,15 @@ const HorizontalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
 `
 
 const SectionWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 49%;
 `
 
 const Text = styled.div`
@@ -69,26 +73,10 @@ const Text = styled.div`
   font-weight: ${props => (props.isEditor ? '300' : '600')};
   line-height: 1;
   padding: 6px;
-  :hover {
+  /* :hover {
     color: ${({ theme }) => theme.colors.c3};
     cursor: pointer;
-  }
-`
-
-const AuthText = styled(Text)`
-  border: 1px solid white;
-  border-radius: 6px;
-  border-width: 1px;
-  :hover {
-    cursor: pointer;
-    border-color: black;
-  }
-`
-
-const OptionText = styled(Text)`
-  :hover {
-    color: ${({ theme }) => theme.colors.c2};
-  }
+  } */
 `
 
 const StyledModal = styled(Modal)`
@@ -119,13 +107,19 @@ const LoginModal = ({ loginModal, closeModal }) => {
     >
       <Wrapper>
         <HorizontalWrapper>
-          <OptionText>Hi</OptionText>
+          <SectionWrapper>
+            <Text>Hi</Text>
+            <Text>Hi</Text>
+            <Text>Hi</Text>
+          </SectionWrapper>
           <VerticalDivider>
             <VerticalLine></VerticalLine>
-            <Text>Or</Text>
-            <VerticalLine></VerticalLine>
           </VerticalDivider>
-          <OptionText>Hello</OptionText>
+          <SectionWrapper>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+            <Text>Hello</Text>
+          </SectionWrapper>
         </HorizontalWrapper>
       </Wrapper>
     </StyledModal>
