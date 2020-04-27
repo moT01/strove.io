@@ -53,6 +53,7 @@ import CREATE_GUEST_LINK from './createGuestLink'
 import DELETE_GUEST_LINK from './deleteGuestLink'
 import REMOVE_GUEST from './removeGuest'
 import GUEST_LOGIN from './guestLogin'
+import ORGANIZATION_UPDATE_SUBSCRIPTION from './organizationUpdateSubscription'
 
 export {
   ADD_PROJECT,
@@ -110,4 +111,5 @@ export {
   DELETE_GUEST_LINK,
   REMOVE_GUEST,
   GUEST_LOGIN,
+  ORGANIZATION_UPDATE_SUBSCRIPTION,
 }

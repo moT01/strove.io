@@ -14,6 +14,7 @@ import {
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
   PAYMENT_STATUS_SUBSCRIPTION,
+  ORGANIZATION_UPDATE_SUBSCRIPTION,
 } from 'queries'
 import {
   mutation,
@@ -62,6 +63,22 @@ export default withRouter(({ children, addProject, history }) => {
   if (!localStorage.getItem('deviceId'))
     localStorage.setItem('deviceId', generateDeviceID())
   const deviceId = localStorage.getItem('deviceId')
+
+  const organizationUpdateSubscription = useSubscription(
+    ORGANIZATION_UPDATE_SUBSCRIPTION,
+    {
+      variables: { userId: user?.id },
+      client,
+      fetchPolicy: 'no-cache',
+      context: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
+        },
+      },
+      shouldResubscribe: true,
+    }
+  )
 
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     variables: { email: user?.email || 'null' },
