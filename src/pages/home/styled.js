@@ -13,6 +13,11 @@ export const FadeIn = keyframes`
   }
 `
 
+export const StyledVideo = styled.video`
+  max-width: ${isMobile ? '100%' : '600px'}; 600px;
+
+ `
+
 export const StyledModal = styled(Modal)`
   display: flex;
   height: auto;

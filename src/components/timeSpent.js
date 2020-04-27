@@ -62,6 +62,7 @@ const TimeSpent = ({ organization }) => {
   const seconds = Math.floor((timeSpent / 1000) % 60)
   const minutes = Math.floor((timeSpent / (1000 * 60)) % 60)
   const hours = Math.floor((timeSpent / (1000 * 60 * 60)) % 24)
+  const days = Math.floor(timeSpent / (1000 * 60 * 60 * 24))
 
   if (
     organization.owner.id === user.id &&
@@ -74,7 +75,8 @@ const TimeSpent = ({ organization }) => {
           <TimeBar time={timeSpent} />
         </TimeBarContainer>
         <TimeText>
-          Time spent in editor: {hours}h {minutes}m {seconds}s / 20h
+          Time spent in editor: {days ? `${days}d` : ''} {hours}h {minutes}m{' '}
+          {seconds}s / 20h
         </TimeText>
       </Container>
     )
