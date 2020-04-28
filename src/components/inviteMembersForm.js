@@ -9,7 +9,7 @@ import { ADD_MEMBER, UPGRADE_SUBSCRIPTION } from 'queries'
 import { selectors, actions } from 'state'
 import FullScreenLoader from 'components/fullScreenLoader'
 import { StroveButton, Modal, InviteLinkGenerator } from 'components'
-import { mutation, updateOrganizations } from 'utils'
+import { mutation } from 'utils'
 import { ModalButton, ModalText } from 'pages/dashboard/styled'
 
 const validationSchema = Yup.object().shape({
@@ -222,10 +222,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
               ),
             })
           },
-          onSuccessDispatch: [
-            updateOrganizations,
-            actions.editedOrganization.resetEditedOrganization,
-          ],
+          onSuccessDispatch: actions.editedOrganization.resetEditedOrganization,
         })
       )
     }
@@ -268,10 +265,7 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
             onSuccess()
             closeWarningModal()
           },
-          onSuccessDispatch: [
-            updateOrganizations,
-            actions.editedOrganization.resetEditedOrganization,
-          ],
+          onSuccessDispatch: actions.editedOrganization.resetEditedOrganization,
         })
       ) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paymentStatus])
@@ -361,10 +355,8 @@ const InviteMembersForm = ({ limit, onSuccess, setAddMemberModal }) => {
               onSuccess()
               closeWarningModal()
             },
-            onSuccessDispatch: [
-              updateOrganizations,
+            onSuccessDispatch:
               actions.editedOrganization.resetEditedOrganization,
-            ],
           })
         )
       }
