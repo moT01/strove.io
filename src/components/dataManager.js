@@ -139,18 +139,11 @@ export default withRouter(({ children, addProject, history }) => {
             teamId: invitedByTeamId,
           },
           mutation: ACCEPT_TEAM_INVITATION,
-          onSuccessDispatch: () => [updateOrganizations],
         })
       )
     }
     /* eslint-disable-next-line */
   }, [invitedByTeamId, token])
-
-  useEffect(() => {
-    dispatch(updateOrganizations())
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [machineName, machineId, editorPort])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
     variables: { email: user?.email || 'null' },
@@ -211,7 +204,6 @@ export default withRouter(({ children, addProject, history }) => {
       } else if (queuePosition === 0 && project?.machineId) {
         if (type === 'continueProject') {
           try {
-            dispatch(updateOrganizations())
             dispatch(
               actions.api.fetchSuccess({
                 storeKey: 'continueProject',
@@ -223,7 +215,6 @@ export default withRouter(({ children, addProject, history }) => {
           }
         } else if (type === 'addProject') {
           dispatch(actions.incomingProject.removeIncomingProject())
-          dispatch(updateOrganizations())
         }
         redirectToEditor(dispatch, history)
       }
@@ -326,7 +317,7 @@ export default withRouter(({ children, addProject, history }) => {
           break
       }
     }
-
+    // checkAwake might be redundant at this point
     const checkAwake = () => {
       let then = dayjs()
       setInterval(() => {
@@ -402,12 +393,8 @@ export default withRouter(({ children, addProject, history }) => {
   }, [loginData, loginError])
 
   useEffect(() => {
-    if (token) {
-      dispatch(updateOrganizations())
-
-      if (history.location.pathname === '/') {
-        history.push('/app/dashboard')
-      }
+    if (token && history.location.pathname === '/') {
+      history.push('/app/dashboard')
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
