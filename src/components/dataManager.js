@@ -92,9 +92,6 @@ export default withRouter(({ children, addProject, history }) => {
   })
 
   const activeProjectData = activeProject?.data?.activeProject
-  const machineId = activeProjectData?.machineId
-  const editorPort = activeProjectData?.editorPort
-  const machineName = activeProjectData?.machineName
   const isOnboarded = user?.isOnboarded
   const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
@@ -107,7 +104,6 @@ export default withRouter(({ children, addProject, history }) => {
   }, [activeProjectData])
 
   useEffect(() => {
-    console.log('Yeeet', organizationUpdateSubscription)
     organizationUpdateSubscription?.data &&
       user.id &&
       dispatch({
