@@ -9,7 +9,7 @@ import { StroveButton, SEO, Header, Modal } from 'components'
 import { StyledSelect } from 'pages/dashboard/styled'
 import StripeCheckoutForm from 'components/stripeCheckoutForm'
 import { CANCEL_SUBSCRIPTION, REVERT_CANCEL, GET_PAYMENT_INFO } from 'queries'
-import { mutation, query, updateOrganizations } from 'utils'
+import { mutation, query } from 'utils'
 
 export const FadeInAnimation = keyframes`
   0% {
@@ -231,7 +231,6 @@ const Plans = () => {
   }
 
   useEffect(() => {
-    updateOrganizations()
     organizationOptions.length === 1 && setOrganization(organizationOptions[0])
     /* eslint-disable-next-line */
   }, [])
@@ -343,7 +342,6 @@ const Plans = () => {
                               variables: {
                                 organizationId: organization.value.id,
                               },
-                              onSuccess: updateOrganizations(),
                             })
                           ),
                       })
@@ -397,7 +395,6 @@ const Plans = () => {
                         variables: {
                           organizationId: organization.value.id,
                         },
-                        onSuccess: updateOrganizations(),
                       })
                     )
                   }}
@@ -438,7 +435,6 @@ const Plans = () => {
               //               plan: subscriptionPlan.value,
               //               quantity: quantity,
               //             },
-              //             onSuccess: updateOrganizations(),
               //           })
               //         )
               //       }
@@ -587,7 +583,6 @@ const Plans = () => {
                                 newPlan: 'plan_GYjzUWz4PmzdMg',
                               },
                               onSuccess: () => {
-                                updateOrganizations()
                                 closeWarningModal()
                               },
                             })

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly } from 'react-device-detect'
 import dayjs from 'dayjs'
 
-import { mutation, handleStopProject, updateOrganizations } from 'utils'
+import { mutation, handleStopProject } from 'utils'
 import {
   DELETE_PROJECT,
   CONTINUE_PROJECT,
@@ -121,7 +121,6 @@ const Projects = ({
         onSuccess: () => {
           setProjectToDelete(null)
         },
-        onSuccessDispatch: updateOrganizations,
       })
     )
   }
@@ -322,7 +321,6 @@ const Projects = ({
                                   isVisible: !project.isVisible,
                                 },
                                 dataSelector: data => data,
-                                onSuccessDispatch: updateOrganizations,
                               })
                             )
                           }}

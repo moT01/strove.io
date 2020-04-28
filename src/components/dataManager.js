@@ -317,7 +317,7 @@ export default withRouter(({ children, addProject, history }) => {
           break
       }
     }
-    // checkAwake might be redundant at this point
+
     const checkAwake = () => {
       let then = dayjs()
       setInterval(() => {
