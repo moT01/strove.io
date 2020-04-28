@@ -314,6 +314,13 @@ export default withRouter(({ children, addProject, history }) => {
       }
     }
 
+    if (token) {
+      dispatch(updateOrganizations())
+      if (history.location.pathname === '/') {
+        history.push('/app/dashboard')
+      }
+    }
+
     const checkAwake = () => {
       let then = dayjs()
       setInterval(() => {
@@ -387,14 +394,6 @@ export default withRouter(({ children, addProject, history }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginData, loginError])
-
-  useEffect(() => {
-    if (token && history.location.pathname === '/') {
-      history.push('/app/dashboard')
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token])
 
   useEffect(() => {
     if (
