@@ -1,4 +1,4 @@
-import { mutation, updateOrganizations } from 'utils'
+import { mutation } from 'utils'
 import { STOP_PROJECT, STOP_LIVE_SHARE } from 'queries'
 import store from 'store'
 import { selectors } from 'state'
@@ -16,7 +16,6 @@ const handleStopProject = ({ id, onSuccess } = {}) => {
         name: 'stopLiveShare',
         mutation: STOP_LIVE_SHARE,
         variables: { projectId },
-        onSuccessDispatch: updateOrganizations,
         onSuccess,
       })
     )
@@ -28,7 +27,6 @@ const handleStopProject = ({ id, onSuccess } = {}) => {
       mutation: STOP_PROJECT,
       dataSelector: data => data,
       variables: { projectId },
-      onSuccessDispatch: updateOrganizations,
       onSuccess,
     })
   )
