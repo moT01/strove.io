@@ -1,10 +1,10 @@
-import React, { useState, memo, useEffect } from 'react'
+import React, { useState, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { isMobileOnly, isMobile } from 'react-device-detect'
 import { Formik, Field } from 'formik'
 import { withRouter } from 'react-router-dom'
 
-import { mutation, handleStopProject, updateOrganizations } from 'utils'
+import { mutation, handleStopProject } from 'utils'
 import { useAnalytics } from 'hooks'
 import {
   CREATE_TEAM,
@@ -157,37 +157,6 @@ const Dashboard = ({ history }) => {
       }
     }, {})
   )
-
-  useEffect(() => {
-    dispatch(
-      updateOrganizations({
-        onSuccess: data =>
-          setExpandedTiles(
-            data.reduce((organizations, organization) => {
-              return {
-                ...organizations,
-                [organization.id]: {
-                  visible: true,
-                  teams: organization.teams?.reduce((teams, team) => {
-                    return {
-                      ...teams,
-                      [team.id]: {
-                        visible: true,
-                        sections: {
-                          members: true,
-                          projects: true,
-                        },
-                      },
-                    }
-                  }, {}),
-                },
-              }
-            }, {})
-          ),
-      })
-    )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myOrganizations])
 
   const displayHandler = ({ organizationId, teamId, section }) => {
     let newTiles = { ...expandedTiles }
@@ -527,10 +496,7 @@ const Dashboard = ({ history }) => {
           setRenameTeamModal(false)
           updateExpandedTiles(data)
         },
-        onSuccessDispatch: [
-          updateOrganizations,
-          actions.editedOrganization.resetEditedOrganization,
-        ],
+        onSuccessDispatch: actions.editedOrganization.resetEditedOrganization,
       })
     )
   }
@@ -568,7 +534,6 @@ const Dashboard = ({ history }) => {
             onSuccess: () => {
               closeWarningModal()
             },
-            onSuccessDispatch: updateOrganizations,
           })
         )
       },
@@ -594,7 +559,6 @@ const Dashboard = ({ history }) => {
                 teamId: team.id,
                 memberId: member.id,
               },
-              onSuccessDispatch: updateOrganizations,
               onSuccess: closeWarningModal,
             })
           )
@@ -617,21 +581,19 @@ const Dashboard = ({ history }) => {
               },
               onSuccess: () => {
                 organizationsObj[team.organizationId].subscriptionStatus ===
-                'active'
-                  ? dispatch(
-                      mutation({
-                        name: 'downgradeSubscription',
-                        mutation: DOWNGRADE_SUBSCRIPTION,
-                        variables: {
-                          organizationId: team.organizationId,
-                          quantity:
-                            organizationsObj[team.organizationId]
-                              ?.subscriptionQuantity - 1,
-                        },
-                        onSuccessDispatch: updateOrganizations,
-                      })
-                    )
-                  : dispatch(updateOrganizations())
+                  'active' &&
+                  dispatch(
+                    mutation({
+                      name: 'downgradeSubscription',
+                      mutation: DOWNGRADE_SUBSCRIPTION,
+                      variables: {
+                        organizationId: team.organizationId,
+                        quantity:
+                          organizationsObj[team.organizationId]
+                            ?.subscriptionQuantity - 1,
+                      },
+                    })
+                  )
               },
             })
           )
@@ -669,7 +631,6 @@ const Dashboard = ({ history }) => {
               setRenameTeamModal(false)
               closeWarningModal()
             },
-            onSuccessDispatch: updateOrganizations,
           })
         ),
     })
@@ -715,7 +676,6 @@ const Dashboard = ({ history }) => {
             onSuccess: () => {
               setTeamLeaderModal(false)
             },
-            onSuccessDispatch: updateOrganizations,
           })
         )
       },
@@ -752,7 +712,6 @@ const Dashboard = ({ history }) => {
         onSuccess: () => {
           closeWarningModal()
         },
-        onSuccessDispatch: updateOrganizations,
       })
     )
   }

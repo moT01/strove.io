@@ -14,6 +14,7 @@ import {
   LOGIN_SUBSCRIPTION,
   ACCEPT_TEAM_INVITATION,
   PAYMENT_STATUS_SUBSCRIPTION,
+  ORGANIZATION_UPDATE_SUBSCRIPTION,
 } from 'queries'
 import {
   mutation,
@@ -22,9 +23,7 @@ import {
   getWindowSearchParams,
   updateOrganizations,
 } from 'utils'
-import { selectors } from 'state'
-import { C } from 'state'
-import { actions } from 'state'
+import { selectors, C, actions } from 'state'
 
 import client from 'client'
 
@@ -63,6 +62,22 @@ export default withRouter(({ children, addProject, history }) => {
     localStorage.setItem('deviceId', generateDeviceID())
   const deviceId = localStorage.getItem('deviceId')
 
+  const organizationUpdateSubscription = useSubscription(
+    ORGANIZATION_UPDATE_SUBSCRIPTION,
+    {
+      variables: { userId: user?.id },
+      client,
+      fetchPolicy: 'no-cache',
+      context: {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'User-Agent': 'node',
+        },
+      },
+      shouldResubscribe: true,
+    }
+  )
+
   const activeProject = useSubscription(ACTIVE_PROJECT, {
     variables: { email: user?.email || 'null' },
     client,
@@ -77,9 +92,6 @@ export default withRouter(({ children, addProject, history }) => {
   })
 
   const activeProjectData = activeProject?.data?.activeProject
-  const machineId = activeProjectData?.machineId
-  const editorPort = activeProjectData?.editorPort
-  const machineName = activeProjectData?.machineName
   const isOnboarded = user?.isOnboarded
   const notEmbed = !window.location.href.toLowerCase().includes('embed')
 
@@ -90,6 +102,22 @@ export default withRouter(({ children, addProject, history }) => {
     })
     /* eslint-disable-next-line */
   }, [activeProjectData])
+
+  useEffect(() => {
+    organizationUpdateSubscription?.data &&
+      user.id &&
+      dispatch({
+        type: C.api.UPDATE_ITEM,
+        payload: {
+          storeKey: `myOrganizations`,
+          data:
+            organizationUpdateSubscription.data.organizationUpdate.organization,
+          id:
+            organizationUpdateSubscription.data.organizationUpdate.organization
+              .id,
+        },
+      }) /* eslint-disable-next-line */
+  }, [organizationUpdateSubscription?.data])
 
   useEffect(() => {
     if (!isOnboarded && notEmbed && user?.organizations?.length === 1) {
@@ -107,18 +135,11 @@ export default withRouter(({ children, addProject, history }) => {
             teamId: invitedByTeamId,
           },
           mutation: ACCEPT_TEAM_INVITATION,
-          onSuccessDispatch: () => [updateOrganizations],
         })
       )
     }
     /* eslint-disable-next-line */
   }, [invitedByTeamId, token])
-
-  useEffect(() => {
-    dispatch(updateOrganizations())
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [machineName, machineId, editorPort])
 
   const startProjectSubscription = useSubscription(START_PROJECT, {
     variables: { email: user?.email || 'null' },
@@ -179,7 +200,6 @@ export default withRouter(({ children, addProject, history }) => {
       } else if (queuePosition === 0 && project?.machineId) {
         if (type === 'continueProject') {
           try {
-            dispatch(updateOrganizations())
             dispatch(
               actions.api.fetchSuccess({
                 storeKey: 'continueProject',
@@ -191,7 +211,6 @@ export default withRouter(({ children, addProject, history }) => {
           }
         } else if (type === 'addProject') {
           dispatch(actions.incomingProject.removeIncomingProject())
-          dispatch(updateOrganizations())
         }
         redirectToEditor(dispatch, history)
       }
@@ -295,6 +314,13 @@ export default withRouter(({ children, addProject, history }) => {
       }
     }
 
+    if (token) {
+      dispatch(updateOrganizations())
+      if (history.location.pathname === '/') {
+        history.push('/app/dashboard')
+      }
+    }
+
     const checkAwake = () => {
       let then = dayjs()
       setInterval(() => {
@@ -368,18 +394,6 @@ export default withRouter(({ children, addProject, history }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginData, loginError])
-
-  useEffect(() => {
-    if (token) {
-      dispatch(updateOrganizations())
-
-      if (history.location.pathname === '/') {
-        history.push('/app/dashboard')
-      }
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token])
 
   useEffect(() => {
     if (

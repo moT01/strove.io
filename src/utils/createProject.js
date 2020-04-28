@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-boost'
 
-import { mutation, getRepoProvider, updateOrganizations } from 'utils'
+import { mutation, getRepoProvider } from 'utils'
 import { actions } from 'state'
 import { ADD_PROJECT, GET_REPO_INFO /* GET_BITBUCKET_TOKEN */ } from 'queries'
 
@@ -133,7 +133,6 @@ const createProject = async ({
         name: 'addProject',
         variables: { repoLink, name, description, type, teamId },
         mutation: ADD_PROJECT,
-        onSuccessDispatch: updateOrganizations,
         onError: error => {
           setModalContent(
             error === 'USER_SESSION_TIME_DEPLETED'
